@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
-import { Tooltip } from 'antd';
+import { Input, Space, Tooltip } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
 import CourseBadge from '../CourseBadge';
@@ -17,6 +17,12 @@ const CoursesModal = ({
   title, courses, modalVisible, setModalVisible,
 }: Props) => {
   const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
+  const [filter, setFilter] = useState('');
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: inputValue } = e.target;
+    setFilter(inputValue);
+  };
 
   const applySortFn = sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel;
 
@@ -33,27 +39,41 @@ const CoursesModal = ({
       onCancel={() => setModalVisible(false)}
       footer={null}
     >
-      <S.SortBtnWrapper>
+      <S.FilterBarWrapper>
+        <Space direction="vertical">
+          <Input
+            placeholder="Filter avaliable courses"
+            onChange={handleSearch}
+            style={{ width: 500 }}
+          />
+        </Space>
+
         <Tooltip title="Sort by Alphabet">
           <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
         </Tooltip>
         <Tooltip title="Sort by Course Level">
           <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
         </Tooltip>
-      </S.SortBtnWrapper>
+      </S.FilterBarWrapper>
+
       <S.CourseList>
-        {courses.sort(applySortFn).map((course) => (
-          <CourseBadge
-            courseCode={course.courseCode}
-            title={course.title}
-            uoc={course.UOC}
-            plannedFor={course.plannedFor}
-            isUnplanned={course.isUnplanned}
-            isMultiterm={course.isMultiterm}
-            isDoubleCounted={course.isDoubleCounted}
-            isOverCounted={course.isOverCounted}
-          />
-        ))}
+        {courses
+          .filter((course) => String(course.courseCode).toLowerCase()
+            .concat(course.title.toLowerCase())
+            .includes(filter.toLowerCase()))
+          .sort(applySortFn)
+          .map((course) => (
+            <CourseBadge
+              courseCode={course.courseCode}
+              title={course.title}
+              uoc={course.UOC}
+              plannedFor={course.plannedFor}
+              isUnplanned={course.isUnplanned}
+              isMultiterm={course.isMultiterm}
+              isDoubleCounted={course.isDoubleCounted}
+              isOverCounted={course.isOverCounted}
+            />
+          ))}
       </S.CourseList>
     </S.CourseModal>
   );

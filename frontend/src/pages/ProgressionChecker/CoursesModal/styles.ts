@@ -38,7 +38,7 @@ const CourseList = styled.div`
   overflow-x: hidden;
 `;
 
-const SortBtnWrapper = styled.div`
+const FilterBarWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -57,5 +57,5 @@ export default {
   Instruction,
   CourseModal,
   CourseList,
-  SortBtnWrapper,
+  FilterBarWrapper,
 };
