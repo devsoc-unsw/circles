@@ -59,7 +59,6 @@ def test_user_has_taken_add_course():
 def test_user_has_taken_user_1():
     user = User(USERS["user1"])
     assert user.has_taken_course("COMP1511")
-    assert user.has_taken_course("COMP1511")
 
 
 def test_user_has_taken_fail():

@@ -19,7 +19,9 @@ def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs
     return None
 
 def get_core_courses(program: str, specialisations: list[str]):
-    req = requests.get(f"http://127.0.0.1:8000/programs/getStructure/{program}/{'+'.join(specialisations)}").json()
+    from server.routers.programs import get_structure
+    
+    req = get_structure(program, "+".join(specialisations))
     return sum(
             (
                 sum((

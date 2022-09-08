@@ -281,6 +281,7 @@ class CoresCondition(Condition):
     """ Handles Core Course conditions such as L1 CORES """
 
     def __init__(self):
+        """ the subset of courses in CORES that must be completed """
         self.category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
@@ -292,7 +293,7 @@ class CoresCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         res = user.completed_core(self.category)
-        return res, [] if res else [f'you have not completed your {self.category} cores']
+        return res, ([] if res else [f'you have not completed your {self.category} cores'])
 
     def __str__(self) -> str:
         return json.dumps({

@@ -250,7 +250,7 @@ def get_structure(
     structure: dict[str, StructureContainer] = {}
     structure = add_specialisations(structure, spec)
     structure, uoc = add_program_code_details(structure, programCode)
-    structure = add_geneds_to_structure(structure, programCode, spec)
+    structure = add_geneds_to_structure(structure, programCode)
     apply_manual_fixes(structure, programCode)
 
     return {
@@ -405,7 +405,7 @@ def add_program_code_details(structure: dict[str, StructureContainer], programCo
     structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
-def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str, spec: Optional[str]) -> dict[str, StructureContainer]:
+def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
     """
         Insert geneds of the given programCode into the structure
         provided

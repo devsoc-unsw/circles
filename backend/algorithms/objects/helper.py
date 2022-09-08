@@ -10,8 +10,6 @@ class Logic(Enum):
     """ Logic Keywords """
     AND = "&&"
     OR = "||"
-    def __eq__(self, other):
-        return self.__class__ is other.__class__ and other.value == self.value
 
 
 def is_course(text) -> bool:
