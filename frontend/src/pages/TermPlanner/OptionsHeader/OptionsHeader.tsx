@@ -26,11 +26,10 @@ type Props = {
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme, token } = useSelector((state: RootState) => state.settings);
   const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
-
   const iconStyles = {
     fontSize: '20px',
     color: '#323739',
@@ -83,7 +82,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         >
           <div>
             <Tooltip title="Save">
-              <S.OptionButton onClick={() => migrateLocalStorageData()}>
+              <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
                 <SaveFilled style={iconStyles} />
               </S.OptionButton>
             </Tooltip>

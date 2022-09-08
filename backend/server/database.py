@@ -200,3 +200,4 @@ def overwrite_all():
 def optionally_create_new_data():
     with suppress(errors.CollectionInvalid):
         create_dynamic_db()
+

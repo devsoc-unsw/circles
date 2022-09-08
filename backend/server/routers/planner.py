@@ -6,6 +6,11 @@ from algorithms.objects.user import User
 from server.routers.courses import get_course
 from server.routers.model import ValidCoursesState, PlannerData, LocalStorage, CONDITIONS, CACHED_HANDBOOK_NOTE
 from server.database import usersDB
+from server.config import DUMMY_TOKEN
+from bson.objectid import ObjectId
+import pydantic 
+pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
+
 
 def fix_planner_data(plannerData: PlannerData):
     """ fixes the planner data to add missing UOC info """
@@ -80,9 +85,9 @@ async def validate_term_planner(plannerData: PlannerData):
 
 @router.post("/saveLocalStorage/")
 def save_local_storage(localStorage: LocalStorage):
-    #TODO: replace this with a real implementation
-    print(localStorage)
-    token = localStorage.token
+    #TODO: replace dummy token 
+    #token = localStorage.token
+    token = DUMMY_TOKEN
     degree = {}
     degree['programCode'] = localStorage.programCode
     degree['programName'] = localStorage.programName
@@ -98,9 +103,8 @@ def save_local_storage(localStorage: LocalStorage):
 
     data = usersDB['tokens'].find_one({'token': token})
     if data is not None:
-        print(data)
         objectID = data['objectId']
-        usersDB['users'].update_one({'_id': objectID}, {'$set': {'degree': degree, 'planner': planner}})
+        usersDB['users'].update_one({'_id': ObjectId(objectID)}, {'$set': {'degree': degree, 'planner': planner}})
     else:
         objectID = usersDB['users'].insert_one({'degree': degree, 'planner': planner}).inserted_id
         usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})

@@ -4,12 +4,17 @@
 import React, { useState, useEffect } from 'react';
 // import axiosRequest from "config/axios";
 import jwt_decode from 'jwt-decode';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from 'config/store';
+import { setToken } from 'reducers/settingsSlice';
 
 // import MetaTags from "react-meta-tags";
 import "./index.less";
 
 const Auth = () => {
-  const [userObject, setUserObject] = useState({})
+  const [userObject, setUserObject] = useState({});
+  const { settings } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
 
   // const requestLogin = async (c) => {
   //   const [data, err] = await axiosRequest("get", `/courses/getCourse/${c}`);
@@ -28,12 +33,17 @@ const Auth = () => {
   // };
 
   const handleCallbackResponse = (response: any) => {
-    const jwt = response.credential;
+
+    const jwt = response.credential as string;
+    dispatch(setToken(jwt));
     // Should not decode jwt yourself - just for testing
+
+    console.log(settings);
     console.log(jwt_decode(jwt));
     console.log("callBackResponse with jwt: ", jwt);
     setUserObject(jwt_decode(jwt));
 
+    
     return 0;
   }
 

@@ -5,7 +5,7 @@ Configure the FastAPI server
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from server.routers import courses, planner, programs, specialisations, auth
+from server.routers import courses, planner, programs, specialisations, auth, user
 
 app = FastAPI()
 
@@ -42,6 +42,7 @@ app.include_router(courses.router)
 app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(auth.router)
+app.include_router(user.router)
 
 
 @app.get("/")

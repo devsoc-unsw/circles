@@ -7,3 +7,5 @@ CLIENT_ID = "1017197944285-i4ov50aak72667j31tuieffd8o2vd5md.apps.googleuserconte
 FINAL_DATA_PATH = "./data/final_data/"
 
 ARCHIVED_DATA_PATH = "./data/final_data/archive/processed/"
+
+DUMMY_TOKEN = "token"

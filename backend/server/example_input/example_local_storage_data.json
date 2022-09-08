@@ -17,8 +17,10 @@
         },
         "programName": "Computer Science",
         "unplanned": [],
+        "startYear": 2020,
         "numYears": 3,
-        "isSummerEnabled": true
+        "isSummerEnabled": true,
+        "token": ""
     },
     "simple_year": {
         "programCode": "3707",
@@ -47,7 +49,9 @@
         },
         "programName": "Computer Science",
         "unplanned": ["COMP6447"],
+        "startYear": 2020,
         "numYears": 3,
-        "isSummerEnabled": false
+        "isSummerEnabled": false,
+        "token": ""
     }
 }
