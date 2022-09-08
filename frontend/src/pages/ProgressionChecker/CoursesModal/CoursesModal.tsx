@@ -20,8 +20,7 @@ const CoursesModal = ({
   const [filter, setFilter] = useState('');
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value: inputValue } = e.target;
-    setFilter(inputValue);
+    setFilter(e.target.value);
   };
 
   const applySortFn = sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel;
@@ -40,13 +39,11 @@ const CoursesModal = ({
       footer={null}
     >
       <S.FilterBarWrapper>
-        <Space direction="vertical">
-          <Input
-            placeholder="Filter avaliable courses"
-            onChange={handleSearch}
-            style={{ width: 500 }}
-          />
-        </Space>
+        <Input
+          placeholder="Filter avaliable courses"
+          onChange={handleSearch}
+          style={{ width: 500 }}
+        />
 
         <Tooltip title="Sort by Alphabet">
           <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />

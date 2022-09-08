@@ -11,12 +11,14 @@ const ModalHeader = styled.div`
 
 const ModalTitle = styled(Title)`
   margin: 0 !important;
+  color: ${({ theme }) => theme.text} !important;
 `;
 
 const Instruction = styled.p`
   margin-top: 10px;
   margin-bottom: 0px;
   font-size: 18px;
+  color: ${({ theme }) => theme.text};
 `;
 
 const CourseModal = styled(Modal)`
