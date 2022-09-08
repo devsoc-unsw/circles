@@ -6,14 +6,18 @@
 """
 
 import copy
+from itertools import chain
 import json
 from typing import Literal, Optional, Tuple
 import re
-from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE
+from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
 
 with open(CACHED_EQUIVALENTS_FILE, "r", encoding="utf8") as f:
     CACHED_EQUIVALENTS: dict[str, dict[str, Literal[1]]] = json.load(f)
+
+with open(CACHED_EXCLUSIONS_FILE, "r", encoding="utf8") as f:
+    CACHED_EXCLUSIONS: dict[str, dict[str, Literal[1]]] = json.load(f)
 
 class User:
     """ A user and their data which will be used to determine if they can take a course """
@@ -25,6 +29,7 @@ class User:
         self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
+        self.core_courses: list[str] = []
 
         # Data was provided
         if data is not None:
@@ -73,7 +78,8 @@ class User:
 
     def has_taken_course(self, course: str):
         """ Determines if the user has taken this course """
-        return course in self.courses or any(c in self.courses for c in (CACHED_EQUIVALENTS.get(course) or []))
+        return any(c in self.courses and (self.courses[c][1] or 50) >= 50 for c in chain([course], (CACHED_EQUIVALENTS.get(course) or [])))
+    
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """
@@ -110,6 +116,8 @@ class User:
             self.courses = copy.deepcopy(data["courses"])
         if "year" in data.keys():
             self.year = copy.deepcopy(data["year"])
+        if "core_courses" in data.keys():
+            self.core_courses = copy.deepcopy(data["core_courses"])
 
     def get_grade(self, course: str):
         """
@@ -140,8 +148,22 @@ class User:
             if category.match_definition(course)
         )
 
-    def pop_course(self, course: str) -> Tuple[int, int | None]:
+    def completed_core(self, category: Category = AnyCategory()):
+        """ Checks that the user has completed all core courses matching a category """
+        has_done = {
+            course: False for course in self.core_courses
+            if category.match_definition(course)
+        }
+        for course in has_done:
+            if self.has_taken_course(course):
+                has_done[course] = True
+                for exclusion in CACHED_EXCLUSIONS.get(course, {}).keys():
+                    if exclusion in has_done:
+                        has_done[exclusion] = True
+        return all(has_done.values())
+
+    def pop_course(self, course: str) -> Tuple[int, Optional[int]]:
         """
-            removes a course from done courses and returns its uoc and mark
+            Removes a course from done courses and returns its uoc and mark
         """
         return self.courses.pop(course)

@@ -11,6 +11,18 @@
         },
         "year": 3
     },
+    "user1_no_marks": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, null],
+            "COMP1521": [6, null]
+        },
+        "year": 3
+    },
     "user2": {
         "program": "3778",
         "specialisations": {
@@ -21,6 +33,10 @@
             "MATH1131": [6, null],
             "MATH1081": [6, null]
         },
+        "core_courses": {
+            "MATH1131": [6, null],
+            "MATH1141": [6, null]
+        },
         "year": 1
     },
     "user3": {
@@ -29,7 +45,11 @@
             "COMPA1": 1
         },
         "courses": {},
-        "year": 1
+        "year": 1,
+        "core_courses": {
+            "COMP1531": [6, 57],
+            "COMP1521": [6, 57]
+        }
     },
     "user4": {
         "program": "3778",
@@ -52,10 +72,14 @@
             "COMPA1": 1
         },
         "courses": {
-            "COMP1511": 52,
-            "MATH1131": 50,
-            "MATH1081": 65,
-            "COMP1521": 60
+            "COMP1511": [52, null],
+            "MATH1131": [50, null],
+            "MATH1081": [65, null],
+            "COMP1521": [60, null]
+        },
+        "core_courses": {
+            "COMP1511": [52, null],
+            "COMP2521": [52, null]
         },
         "year": 1
     },
@@ -74,5 +98,49 @@
             "COMP1511": [6, 84]
         },
         "year": 3
+    },
+    "empty_user": {
+    },
+    "user_no_courses": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {},
+        "year": 1
+    },
+    "user_one_course": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, 100]
+        },
+        "year": 1
+    },
+    "user_fail_comp1511": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, 49]
+        },
+        "year": 1
+    },
+    "user_bare_pass_comp1511": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, 50]
+        },
+        "year": 1
     }
 }

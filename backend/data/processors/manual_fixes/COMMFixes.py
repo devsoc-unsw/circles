@@ -288,8 +288,8 @@ def COMM_3900(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "COMM6000 && 108UOC",
-        "handbook_note": "You must have completed all First Year core"
+        "processed": "COMM6000 && 108UOC && CORES in L1",
+        "handbook_note": "Students must be in good academic standing."
     }
 
 

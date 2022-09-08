@@ -128,6 +128,9 @@ def format_curriculum(curriculum_structure, currcontainer):
         # If course info is in this container level, it will be in the 'relationship'key
         if "relationship" in item and item["relationship"] != []:
             for course in item["relationship"]:
+                if "container" in item and item["container"] != []:
+                    # whats a fork bomb
+                    format_curriculum(curriculum_structure, item["container"])
                 item = {}
                 item["academic_item_code"] = course.get("academic_item_code")
                 item["academic_item_credit_points"] = course.get(
