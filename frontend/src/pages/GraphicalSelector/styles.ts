@@ -36,8 +36,8 @@ const ToolsWrapper = styled.div`
   height: 0%;
   display: flex;
   align-items: flex-end;
-  margin-bottom: 3px;
-  margin-left: 4px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 `;
 export default {
   Wrapper,
