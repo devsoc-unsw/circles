@@ -75,7 +75,7 @@ const CoursesSection = ({
     );
   }
 
-  return <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+  return <Empty className="text" description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
 };
 
 export default CoursesSection;

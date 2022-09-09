@@ -54,6 +54,11 @@ const persistMigrations: MigrationManifest = {
     }));
     return newState;
   },
+  4: (oldState) => {
+    const newState = { ...oldState };
+    newState.degree.specs = (newState.degree.specs as string[]).map((spec) => (spec.includes('-') ? spec.split('-')[1] : spec));
+    return newState;
+  },
 };
 
 /**
@@ -63,7 +68,7 @@ const persistMigrations: MigrationManifest = {
  * and alongside it, provide a migration function to translate the old state structure
  * to the new one.
  */
-export const persistVersion = 3;
+export const persistVersion = 4;
 
 const persistMigrate = createMigrate(persistMigrations);
 
