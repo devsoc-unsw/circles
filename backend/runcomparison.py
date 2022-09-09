@@ -25,12 +25,12 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
-def check_in_fixes(cname: str, ls: list) -> None:
+def check_in_fixes(cname: str, ls: list, error: str) -> None:
     """ mutates the list given to add the course name if it is in manual fixes"""
     with suppress(FileNotFoundError):
-        with open(f"data/processors/manual_fixes/{cname[0:4]}fixes.py", "r", encoding="utf8") as file:
+        with open(f"data/processors/manual_fixes/{cname[0:4]}Fixes.py", "r", encoding="utf8") as file:
             if f"CONDITIONS[\"{cname}\"]" in file.read():
-                ls.append(cname)
+                ls.append((cname, error))
 
 
 def main():
@@ -54,28 +54,28 @@ def main():
     courses_in_manual = []
 
     print("removed:")
-    for removed in all_target - all_source:
-        check_in_fixes(removed, courses_in_manual)
+    for removed in sorted(all_target - all_source):
+        check_in_fixes(removed, courses_in_manual, "\t\t- removed")
         print(f"\t- {removed}")
 
     print("added:")
-    for added in all_source - all_target:
-        check_in_fixes(added, courses_in_manual)
+    for added in sorted(all_source - all_target):
+        check_in_fixes(added, courses_in_manual, f"\t\t- added: \"{source_courses[added]['raw_requirements']}\"")
         print(f"\t- {added}")
 
     print("changed:")
-    for coursename in all_source.intersection(all_target):
+    for coursename in sorted(all_source.intersection(all_target)):
         target_course = target_courses[coursename]["raw_requirements"]
         source_course = source_courses[coursename]["raw_requirements"]
         if target_course != source_course:
             print()
             print(f"\t{coursename}:")
-            check_in_fixes(coursename, courses_in_manual)
-            print(f"\t\t - from: \"{source_course}\"")
-            print(f"\t\t - to: \"{target_course}\"")
+            check_in_fixes(coursename, courses_in_manual, f"\t\t- from:  \"{target_course}\"\n\t\t- to:    \"{source_course}\"")
+            print(f"\t\t - from:  \"{target_course}\"")
+            print(f"\t\t - to:    \"{source_course}\"")
     print("inFixes:")
-    for added in courses_in_manual:
-        print(f"\t- {added}")
+    for added, error in sorted(courses_in_manual):
+        print(f"\t- {added}: \n{error}")
 
 if __name__ == "__main__":
     main()

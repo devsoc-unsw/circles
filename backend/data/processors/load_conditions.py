@@ -36,7 +36,7 @@ def cache_conditions_pkl_file():
     Input: None
     Returns: None
     """
-    all_objects: Dict[str, Optional[CompositeCondition]]= construct_conditions_objects()
+    all_objects: Dict[str, Optional[CompositeCondition]] = construct_conditions_objects()
 
     # Dump the dictionary as a pickle file
     with open(CONDITIONS_PICKLE_FILE, "wb") as f_out:

@@ -26,10 +26,10 @@ const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <ErrorBoundary>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-          <GlobalStyles />
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <Suspense fallback={<PageLoading />}>
+        <ErrorBoundary>
           <Router>
             <Routes>
               <Route path="/degree-wizard" element={<DegreeWizard />} />
@@ -40,9 +40,9 @@ const App = () => {
               <Route path="*" element={<Page404 />} />
             </Routes>
           </Router>
-        </ThemeProvider>
-      </ErrorBoundary>
-    </Suspense>
+        </ErrorBoundary>
+      </Suspense>
+    </ThemeProvider>
   );
 };
 
