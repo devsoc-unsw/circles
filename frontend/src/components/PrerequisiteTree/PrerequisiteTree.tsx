@@ -113,10 +113,10 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
       // render graph
       if (!graph) {
-        if (graphData.children.length !== 0) {
-          generateTreeGraph(graphData);
-        } else {
+        if (graphData.children.length === 0) {
           <p>No prerequisite visualisation is needed for this course</p>;
+        } else {
+          generateTreeGraph(graphData);
         }
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
@@ -130,6 +130,8 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
   return (
     <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
       {loading && <Spinner text="Loading tree..." />}
+      {!loading && (graph?.getNodes.length === 1)
+      && <p> No prerequisite visualisation is needed for this course </p> }
     </S.PrereqTreeContainer>
   );
 };
