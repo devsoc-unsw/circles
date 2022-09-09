@@ -247,7 +247,6 @@ const ProgressionChecker = () => {
                     <TableView
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       notes={structure[group].content[subgroup].notes}
                       showNotes={group === 'Rules'}
                       type={structure[group].content[subgroup].type}
@@ -258,7 +257,6 @@ const ProgressionChecker = () => {
                     <GridView
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                       notes={structure[group].content[subgroup].notes}
                       showNotes={group === 'Rules'}
                       type={structure[group].content[subgroup].type}

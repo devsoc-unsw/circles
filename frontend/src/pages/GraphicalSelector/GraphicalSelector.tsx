@@ -19,6 +19,10 @@ import GRAPH_STYLE from './config';
 import S from './styles';
 import handleNodeData from './utils';
 
+const HIGHER_ZOOM_RATIO = 0.5;
+const LOWER_ZOOM_RATIO = 0.1;
+const ZOOM_LIMIT = 1;
+
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
@@ -207,10 +211,9 @@ const GraphicalSelector = () => {
     if (!graph) return;
     const zoom = graph.getZoom();
     let zoomRatio;
-    if (zoom >= 1) {
-      zoomRatio = 0.5;
-    } else {
-      zoomRatio = 0.1;
+    if (zoom >= ZOOM_LIMIT) zoomRatio = HIGHER_ZOOM_RATIO;
+    else {
+      zoomRatio = LOWER_ZOOM_RATIO;
     }
     graph.zoomTo(zoom + zoomRatio);
   };
@@ -218,14 +221,12 @@ const GraphicalSelector = () => {
     if (!graph) return;
     let zoomRatio;
     const zoom = graph.getZoom();
-    if (zoom >= 1) {
-      zoomRatio = 0.5;
-    } else {
-      zoomRatio = 0.1;
+    if (zoom >= ZOOM_LIMIT) zoomRatio = HIGHER_ZOOM_RATIO;
+    else {
+      zoomRatio = LOWER_ZOOM_RATIO;
     }
     graph.zoomTo(zoom - zoomRatio);
   };
-
   return (
     <PageTemplate>
       <S.Wrapper>
