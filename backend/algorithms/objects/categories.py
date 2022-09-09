@@ -40,8 +40,6 @@ class CompositeCategory(Category):
     def __init__(self, logic: Logic = Logic.AND):
         self.categories: list[Category] = []
         self.logic = logic
-        self.child = False
-        self.isWrapAnd = False
 
     def add_category(self, category: Category):
         """ Adds a category object """
@@ -50,12 +48,6 @@ class CompositeCategory(Category):
     def set_logic(self, logic: Logic):
         """ AND or OR """
         self.logic = logic
-
-    def is_child(self, child: bool):
-        self.child = child
-    
-    def set_isWrapAnd(self, isWrap: bool):
-        self.isWrapAnd = isWrap
 
     def match_definition(self, course: str) -> bool:
         if self.logic == Logic.AND:

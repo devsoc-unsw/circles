@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
@@ -55,7 +54,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
   const handleContextMenu = (e: React.MouseEvent) => {
     if (!isDragDisabled) contextMenu.show(e);
   };
-  {/*
+
   const stripExtraParenthesis = (warning: string): string => {
     if (warning[0] !== '(' || warning[warning.length - 1] !== ')') {
       return warning;
@@ -73,9 +72,8 @@ const DraggableCourse = ({ code, index, term }: Props) => {
       }
     }
     return stripExtraParenthesis(warning.slice(1, warning.length - 1));
-    
   };
-  */}
+
   return (
     <>
       <Suspense fallback={<Spinner text="Loading Course..." />}>
@@ -149,7 +147,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
         <ReactTooltip id={code} place="bottom">
           {isLegacy ? 'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
             : !isOffered ? 'The course is not offered in this term.'
-              : warningMessage.length !== 0 ? warningMessage.join('\n')
+              : warningMessage.length !== 0 ? stripExtraParenthesis(warningMessage.join('\n'))
                 // eslint-disable-next-line react/no-danger
                 : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
           {!isAccurate ? ' The course info may be inaccurate.' : ''}
