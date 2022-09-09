@@ -207,25 +207,21 @@ const GraphicalSelector = () => {
     }
   };
 
+  function getZoomRatio() {
+    if (!graph) return 0;
+    const zoom = graph.getZoom();
+    if (zoom >= ZOOM_LIMIT) return HIGHER_ZOOM_RATIO;
+    return LOWER_ZOOM_RATIO;
+  }
   const zoomIn = () => {
     if (!graph) return;
     const zoom = graph.getZoom();
-    let zoomRatio;
-    if (zoom >= ZOOM_LIMIT) zoomRatio = HIGHER_ZOOM_RATIO;
-    else {
-      zoomRatio = LOWER_ZOOM_RATIO;
-    }
-    graph.zoomTo(zoom + zoomRatio);
+    graph.zoomTo(zoom + getZoomRatio());
   };
   const zoomOut = () => {
     if (!graph) return;
-    let zoomRatio;
     const zoom = graph.getZoom();
-    if (zoom >= ZOOM_LIMIT) zoomRatio = HIGHER_ZOOM_RATIO;
-    else {
-      zoomRatio = LOWER_ZOOM_RATIO;
-    }
-    graph.zoomTo(zoom - zoomRatio);
+    graph.zoomTo(zoom - getZoomRatio());
   };
   return (
     <PageTemplate>
