@@ -13,10 +13,10 @@ const GraphPlaygroundWrapper = styled.div`
   border: #C2C2C2 solid 1px;
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex: 5;
   position: relative;
+  flex-direction: column-reverse;
+  align-items: flex-start;
 `;
 
 const SidebarWrapper = styled.div`
@@ -32,9 +32,17 @@ const SearchBarWrapper = styled.div`
   right: 20px;
 `;
 
+const ToolsWrapper = styled.div`
+  height: 0%;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 3px;
+  margin-left: 4px;
+`;
 export default {
   Wrapper,
   GraphPlaygroundWrapper,
   SidebarWrapper,
   SearchBarWrapper,
+  ToolsWrapper,
 };
