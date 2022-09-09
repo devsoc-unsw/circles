@@ -187,7 +187,7 @@ def test_validateTermPlanner_past_term_suppress_warnings():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": ['((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses. Your WAM in all courses has not been recorded)))'],
+            "warnings": ['((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses.  Your WAM in all courses has not been recorded)))'],
             "supressed": True
         }
     }
