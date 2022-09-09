@@ -30,6 +30,7 @@ def fix_conditions():
     CONDITIONS["COMP3901"] = COMP_3901_2(CONDITIONS["COMP3901"])
     CONDITIONS["COMP3902"] = COMP_3901_2(CONDITIONS["COMP3902"])
     CONDITIONS["COMP4141"][PROCESSED] = COMP_4141()
+    CONDITIONS["COMP4920"][PROCESSED] = COMP_4920()
     CONDITIONS["COMP4951"] = COMP_4951(CONDITIONS["COMP4951"])
     CONDITIONS["COMP4952"][PROCESSED] = COMP_4952()
     CONDITIONS["COMP4953"][PROCESSED] = COMP_4953()
@@ -114,8 +115,8 @@ def COMP_3901_2(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "80WAM in (COMP || SENG || BINF)",
-        "handbook_note": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+        "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
+        "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     }
 
 
@@ -125,6 +126,13 @@ def COMP_4141():
     "processed": "MATH1081, && COMP1927 || COMP2521"
     """
     return "MATH1081 && (COMP1927 || COMP2521)"
+
+def COMP_4920():
+    """
+        "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
+        "processed": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
+    """
+    return "(COMP2511 || COMP2911) && 96UOC && COMP?1"
 
 def COMP_4951(conditions):
     """

@@ -536,8 +536,12 @@
     ],
     "F Medicine": [
         "ANAT",
+        "DIET",
+        "EXPT",
         "GENM",
+        "HDAT",
         "HESC",
+        "HLTH",
         "MDCN",
         "MFAC",
         "NEUR",
@@ -545,8 +549,11 @@
         "PATH",
         "PHAR",
         "PHCM",
+        "PHRM",
         "PHSL",
+        "PSCY",
         "SOMS",
+        "SWCH",
         "VISN",
         "YMED"
     ],
@@ -591,6 +598,7 @@
         "ADAD",
         "DART",
         "DDES",
+        "FADA",
         "SART",
         "SDES",
         "SOMA"
@@ -608,6 +616,7 @@
     ],
     "S Medical": [
         "ANAT",
+        "HDAT",
         "NEUR",
         "PATH",
         "PHAR",
@@ -714,6 +723,13 @@
         "DATA",
         "MATH"
     ],
+    "S Health": [
+        "DIET",
+        "EXPT",
+        "HESC",
+        "HLTH",
+        "PHRM"
+    ],
     "S Global": [
         "DPBS",
         "DPDE",
@@ -760,9 +776,6 @@
         "GENY",
         "REGZ"
     ],
-    "S Health": [
-        "HESC"
-    ],
     "S Marketing": [
         "MARK"
     ],
@@ -778,6 +791,10 @@
     "S Optometry": [
         "OPTM",
         "VISN"
+    ],
+    "S Clinical": [
+        "PSCY",
+        "SWCH"
     ],
     "S Psychology": [
         "PSYC"

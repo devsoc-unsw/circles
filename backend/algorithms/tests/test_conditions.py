@@ -486,3 +486,26 @@ def test_complex_composite_condition():
     user.add_courses({"COMP5555" : (6, 100)})
     assert not deep_program_cond.beneficial(user, {"COMP5555": (6, 100)})
     assert not deep_program_cond.beneficial(user, {"MATH1141": (6, 100)})
+
+def test_core_courses_no_courses():
+    user = User(USERS["user3"]) # user has only 1521 and 1531 as core
+    comp_program_cond = create_condition(["(" ,"CORES" , "in" , "L2", ")"])
+    assert comp_program_cond.validate(user)[0] # no level 2 cores
+    comp_program_cond = create_condition(["(" ,"CORES" , "in" , "L1", ")"])
+    assert comp_program_cond.validate(user)[0] is False
+    user.add_courses({
+        "COMP1531": [6, None],
+        "COMP1521": [6, None],
+    })
+    # valid as user is completed their cores
+    assert comp_program_cond.validate(user)[0]
+
+def test_exclusions_cores():
+    user = User(USERS["user2"]) # user has only 1131 and 1141 as core
+    comp_program_cond = create_condition(["(" ,"CORES", ")"])
+    assert comp_program_cond.validate(user)[0] # did 1131, doesnt need 1141
+
+def test_subset_of_cores():
+    user = User(USERS["user5"])
+    comp_program_cond = create_condition(["(" ,"CORES", "in", "L1", ")"])
+    assert comp_program_cond.validate(user)[0] # doesnt need to do 2521

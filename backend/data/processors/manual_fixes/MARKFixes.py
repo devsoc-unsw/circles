@@ -60,7 +60,7 @@ def MARK_2101():
 
 def MARK_3054(conditions):
     """
-    "original": "Pre-requisite: ECON1203 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
+    "original": "ECON1203 or COMM1190 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
 
     "processed": "ECON1203 || MARK2052",
 
@@ -69,7 +69,7 @@ def MARK_3054(conditions):
     """
     return {
         "original": conditions["original"],
-        "processed": "ECON1203 || MARK2052",
+        "processed": "ECON1203 || COMM1190 || MARK2052",
         "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     }
 
@@ -92,15 +92,11 @@ def MARK_3085(conditions):
 
 def MARK_3087_3088_3089(conditions):
     """
-    "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-
-    "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609."
-
-    "handbook_note": <br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
+    "original": "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
     """
     return {
         "original": conditions["original"],
-        "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
+        "processed": "ECON1203 || COMM1190 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM3050 || COMM2501 || INFS2605 || INFS2609",
         "handbook_note": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     }
 

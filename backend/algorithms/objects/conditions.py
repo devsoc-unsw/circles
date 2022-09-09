@@ -156,7 +156,8 @@ class UOCCondition(Condition):
         # SENG - course codes starting with SENG
         # L4 - level 4 courses
         # L2 MATH - level 2 courses starting with MATH
-        # CORE - core courses
+        # CORES - core courses
+        # L2 CORES - level 2 core courses
         # And more...
         self.category: Category = AnyCategory()
 
@@ -279,6 +280,31 @@ class GradeCondition(Condition):
     def __str__(self) -> str:
         return json.dumps({
             'grade': self.grade,
+            'category': str(self.category)
+        })
+
+
+class CoresCondition(Condition):
+    """ Handles Core Course conditions such as L1 CORES """
+
+    def __init__(self):
+        """ the subset of courses in CORES that must be completed """
+        self.category = AnyCategory()
+
+    def set_category(self, category_classobj: Category):
+        """ Set own category to the one given """
+        self.category = category_classobj
+
+    def is_path_to(self, course: str) -> bool:
+        return self.category.match_definition(course)
+
+    def validate(self, user: User) -> tuple[bool, list[str]]:
+        res = user.completed_core(self.category)
+        return res, ([] if res else [f'you have not completed your {self.category} cores'])
+
+    def __str__(self) -> str:
+        return json.dumps({
+            'cores': None,
             'category': str(self.category)
         })
 
