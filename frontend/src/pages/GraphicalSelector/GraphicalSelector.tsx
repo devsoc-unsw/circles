@@ -213,16 +213,19 @@ const GraphicalSelector = () => {
     if (zoom >= ZOOM_LIMIT) return HIGHER_ZOOM_RATIO;
     return LOWER_ZOOM_RATIO;
   }
+
   const zoomIn = () => {
     if (!graph) return;
     const zoom = graph.getZoom();
     graph.zoomTo(zoom + getZoomRatio());
   };
+
   const zoomOut = () => {
     if (!graph) return;
     const zoom = graph.getZoom();
     graph.zoomTo(zoom - getZoomRatio());
   };
+
   return (
     <PageTemplate>
       <S.Wrapper>
