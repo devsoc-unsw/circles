@@ -449,7 +449,7 @@ class CompositeCondition(Condition):
         else:
             satisfied = any(unlocked)   
             joined = ' OR '.join(sum(all_warnings,[]))
-            warning = ['(' + joined + ')'] if self.child else [joined]
+            warning = ['(' + joined + 'or)'] if self.child else [joined]
             return satisfied, (wam_warning if satisfied else warning)
 
     def is_path_to(self, course: str) -> bool:
