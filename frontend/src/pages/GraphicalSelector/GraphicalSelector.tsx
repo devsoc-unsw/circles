@@ -14,6 +14,7 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
 import CourseInfo from './CourseInfo/CourseInfo';
+import HowToUse from './CourseInfo/HowToUse';
 import S from './styles';
 import handleNodeData from './utils';
 
@@ -230,7 +231,9 @@ const GraphicalSelector = () => {
             Hide Graph
           </Button>
           <div style={{ overflowY: 'auto', height: '100%' }}>
-            {course ? <div><CourseInfo courseCode={course.code} key={course.code} /></div> : 'No course selected'}
+            {course
+              ? <div><CourseInfo courseCode={course.code} key={course.code} /></div>
+              : <HowToUse />}
           </div>
         </S.SidebarWrapper>
       </S.Wrapper>
