@@ -31,6 +31,7 @@ const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plo
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
+  console.log(planner);
   const degree = useSelector((state: RootState) => state.degree);
 
   const [termsOffered, setTermsOffered] = useState<Term[]>([]);
@@ -71,7 +72,24 @@ const TermPlanner = () => {
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
+    console.log(planner.years);
+    // if (planner.courses[course].isMultiterm) {
+    //   planner.years.forEach((ele, c) => {
+    //     Object.entries(ele).forEach(([key, val]) => {
+    //       console.log(ele, key, val, c);
+    //       val.forEach((i, ind) => {
+    //         if (course === i) {
+    //           console.log(key, ind);
+    //           if (key === 'T2') {
+    //             planner.years[c].T1.splice(ind, 1);
+    //           }
+    //         }
+    //       });
+    //     });
+    //   });
+    // }
     const terms = planner.courses[course].termsOffered;
+    console.log(terms);
     setTermsOffered(terms);
     setIsDragging(true);
   };
