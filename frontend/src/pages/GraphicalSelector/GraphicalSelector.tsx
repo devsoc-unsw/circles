@@ -228,6 +228,24 @@ const GraphicalSelector = () => {
     <PageTemplate>
       <S.Wrapper>
         <S.GraphPlaygroundWrapper ref={ref}>
+          <S.ToolsWrapper>
+            <Tooltip placement="bottomLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
+              <Switch
+                defaultChecked={showUnlockedOnly}
+                onChange={toggleShowLockedCourses}
+                checkedChildren={<LockOutlined />}
+                unCheckedChildren={<UnlockOutlined />}
+              />
+            </Tooltip>
+            <Button
+              onClick={handleShowAllCoursesGraph}
+            >
+              Show Graph
+            </Button>
+            <Button onClick={handleHideGraph}>
+              Hide Graph
+            </Button>
+          </S.ToolsWrapper>
           {loading
             ? <Spinner text="Loading graph..." />
             : (
