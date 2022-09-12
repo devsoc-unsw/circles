@@ -33,10 +33,8 @@ const SearchBarWrapper = styled.div`
 `;
 
 const ToolsWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  align-items: center;
+  gap: 10px;
 `;
 export default {
   Wrapper,
