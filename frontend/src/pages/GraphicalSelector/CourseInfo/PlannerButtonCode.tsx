@@ -11,9 +11,10 @@ import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
 interface PlannerButtonCodeProps {
   course: Course;
+  onChange?: () => void;
 }
 
-const PlannerButtonCode: FunctionComponent<PlannerButtonCodeProps> = ({ course }) => {
+const PlannerButtonCode: FunctionComponent<PlannerButtonCodeProps> = ({ course, onChange }) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -54,6 +55,7 @@ const PlannerButtonCode: FunctionComponent<PlannerButtonCodeProps> = ({ course }
     };
     dispatch(addToUnplanned({ courseCode: course.code, courseData }));
     addCourseToPlannerTimeout(true);
+    onChange?.();
   };
 
   const removeFromPlanner = async () => {
@@ -61,6 +63,7 @@ const PlannerButtonCode: FunctionComponent<PlannerButtonCodeProps> = ({ course }
       const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${id}`, JSON.stringify(prepareUserPayload(degree, planner)));
       addCourseToPlannerTimeout(false);
       dispatch(removeCourses(res.data.courses));
+      onChange?.();
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at removeFromPlanner', e);

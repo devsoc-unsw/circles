@@ -237,6 +237,7 @@ const GraphicalSelector = () => {
                   courseCode={course.code}
                   key={course.code}
                   onCourseClick={(code) => focusCourse(code)}
+                  onCourseAdd={() => { console.log('refreshing'); console.log(graph); graph?.render(); handleHideGraph(); handleShowAllCoursesGraph(); }}
                 />
               )
               : <HowToUse />}

@@ -27,6 +27,7 @@ const { Title, Text } = Typography;
 interface CourseInfoProps {
   courseCode: string;
   onCourseClick?: (code: string) => void;
+  onCourseAdd?: () => void;
 }
 
 const S = {
@@ -62,7 +63,7 @@ type CourseUserInfo = {
   unlocked: CoursesUnlockedWhenTaken;
 };
 
-const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseClick }) => {
+const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseClick, onCourseAdd }) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -102,7 +103,7 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseCl
   return (
     <S.Wrapper>
       <Title level={2} className="text">{courseCode} - {course.title}</Title>
-      <PlannerButtonCode course={course} />
+      <PlannerButtonCode course={course} onChange={onCourseAdd} />
       <S.TermWrapper>
         <Text strong>Terms: </Text>
         {course.terms.length
