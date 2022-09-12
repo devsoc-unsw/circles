@@ -24,6 +24,7 @@ const SidebarWrapper = styled.div`
   border: #C2C2C2 solid 1px;
   padding: 10px;
   flex: 2;
+  overflow-y: auto;
 `;
 
 const SearchBarWrapper = styled.div`

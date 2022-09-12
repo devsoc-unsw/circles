@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import React, {
   FunctionComponent,
+  MouseEventHandler,
   useEffect,
   useState,
 } from 'react';
@@ -25,6 +26,7 @@ const { Title, Text } = Typography;
 
 interface CourseInfoProps {
   courseCode: string;
+  onCourseClick?: (code: string) => void;
 }
 
 const S = {
@@ -60,7 +62,7 @@ type CourseUserInfo = {
   unlocked: CoursesUnlockedWhenTaken;
 };
 
-const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode }) => {
+const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseClick }) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -136,7 +138,9 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode }) => {
             pathFrom
               .filter((code) => Object.keys(planner.courses).includes(code))
               .map((code) => (
-                <GraphicalCourseTag key={code} name={code} />
+                onCourseClick
+                  ? <GraphicalCourseTag key={code} name={code} onClick={() => { onCourseClick(code); }} />
+                  : <GraphicalCourseTag key={code} name={code} />
               ))
           ) : 'None'}
         </p>
@@ -145,7 +149,9 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode }) => {
         <p>
           {unlocked.direct_unlock && unlocked.direct_unlock.length > 0 ? (
             unlocked.direct_unlock.map((code) => (
-              <GraphicalCourseTag key={code} name={code} />
+              onCourseClick
+                ? <GraphicalCourseTag key={code} name={code} onClick={() => { onCourseClick(code); }} />
+                : <GraphicalCourseTag key={code} name={code} />
             ))
           ) : 'None'}
         </p>
@@ -154,7 +160,9 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode }) => {
         <p>
           {unlocked.indirect_unlock && unlocked.indirect_unlock.length > 0 ? (
             unlocked.indirect_unlock.map((code) => (
-              <GraphicalCourseTag key={code} name={code} />
+              onCourseClick
+                ? <GraphicalCourseTag key={code} name={code} onClick={() => { onCourseClick(code); }} />
+                : <GraphicalCourseTag key={code} name={code} />
             ))
           ) : 'None'}
         </p>

@@ -230,9 +230,15 @@ const GraphicalSelector = () => {
           <Button onClick={handleHideGraph}>
             Hide Graph
           </Button>
-          <div style={{ overflowY: 'auto', height: '100%' }}>
+          <div>
             {course
-              ? <div><CourseInfo courseCode={course.code} key={course.code} /></div>
+              ? (
+                <CourseInfo
+                  courseCode={course.code}
+                  key={course.code}
+                  onCourseClick={(code) => focusCourse(code)}
+                />
+              )
               : <HowToUse />}
           </div>
         </S.SidebarWrapper>
