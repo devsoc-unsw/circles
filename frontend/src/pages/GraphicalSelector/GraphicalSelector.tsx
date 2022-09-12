@@ -207,12 +207,10 @@ const GraphicalSelector = () => {
     }
   };
 
-  function getZoomRatio() {
+  const getZoomRatio = () => {
     if (!graph) return 0;
-    const zoom = graph.getZoom();
-    if (zoom >= ZOOM_LIMIT) return HIGHER_ZOOM_RATIO;
-    return LOWER_ZOOM_RATIO;
-  }
+    return graph.getZoom() >= ZOOM_LIMIT ? HIGHER_ZOOM_RATIO : LOWER_ZOOM_RATIO;
+  };
 
   const zoomIn = () => {
     if (!graph) return;
