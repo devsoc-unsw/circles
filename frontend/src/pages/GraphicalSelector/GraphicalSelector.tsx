@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
+import {
+  LockOutlined, UnlockOutlined, ZoomInOutlined,
+  ZoomOutOutlined,
+} from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
@@ -15,6 +18,10 @@ import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
 import S from './styles';
 import handleNodeData from './utils';
+
+const HIGHER_ZOOM_RATIO = 0.5;
+const LOWER_ZOOM_RATIO = 0.1;
+const ZOOM_LIMIT = 1;
 
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
@@ -200,6 +207,23 @@ const GraphicalSelector = () => {
     }
   };
 
+  const getZoomRatio = () => {
+    if (!graph) return 0;
+    return graph.getZoom() >= ZOOM_LIMIT ? HIGHER_ZOOM_RATIO : LOWER_ZOOM_RATIO;
+  };
+
+  const zoomIn = () => {
+    if (!graph) return;
+    const zoom = graph.getZoom();
+    graph.zoomTo(zoom + getZoomRatio());
+  };
+
+  const zoomOut = () => {
+    if (!graph) return;
+    const zoom = graph.getZoom();
+    graph.zoomTo(zoom - getZoomRatio());
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
@@ -231,6 +255,23 @@ const GraphicalSelector = () => {
             )}
         </S.GraphPlaygroundWrapper>
         <S.SidebarWrapper>
+          <Tooltip placement="topLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
+            <Switch
+              defaultChecked={showUnlockedOnly}
+              style={{ alignSelf: 'flex-end' }}
+              onChange={toggleShowLockedCourses}
+              checkedChildren={<LockOutlined />}
+              unCheckedChildren={<UnlockOutlined />}
+            />
+          </Tooltip>
+          <ZoomInOutlined onClick={zoomIn} />
+          <ZoomOutOutlined onClick={zoomOut} />
+          <Button onClick={handleShowAllCoursesGraph}>
+            Show Graph
+          </Button>
+          <Button onClick={handleHideGraph}>
+            Hide Graph
+          </Button>
           <div>
             {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
           </div>
