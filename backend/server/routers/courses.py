@@ -15,7 +15,7 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
-from server.routers.utility import map_suppressed_errors
+from server.routers.utility import get_core_courses, map_suppressed_errors
 
 
 router = APIRouter(
@@ -59,6 +59,7 @@ def fix_user_data(userData: dict):
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
+    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"].keys()))
     return userData
 
 

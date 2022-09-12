@@ -15,7 +15,7 @@ Assumes that `/backend` is the current working directory.
 from typing import List
 
 
-LIVE_YEAR: int = 2022
+LIVE_YEAR: int = 2023
 
 # The years for which we have archived
 ARCHIVED_YEARS: List[int] = [2019, 2020, 2021, 2022]

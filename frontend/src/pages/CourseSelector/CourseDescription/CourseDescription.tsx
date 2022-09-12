@@ -138,7 +138,7 @@ const CourseDescription = () => {
       title: 'UNSW Handbook',
       content: course.study_level ? (
         <a
-          href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}
+          href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2023/${course.code}/`}
           target="_blank"
           rel="noreferrer"
         >

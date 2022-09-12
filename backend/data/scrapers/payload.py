@@ -24,6 +24,7 @@ def create_payload(size, content_type, year = LIVE_YEAR):
     # Might get passed None as default value by the calling function
     if year is None:
         year = LIVE_YEAR
+    
     return {
         "query": {
             "bool": {
