@@ -3,10 +3,12 @@ import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
+  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SaveFilled,
+  SettingFilled, WarningFilled,
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
+import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
 import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
@@ -24,11 +26,10 @@ type Props = {
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme, token } = useSelector((state: RootState) => state.settings);
   const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
-
   const iconStyles = {
     fontSize: '20px',
     color: '#323739',
@@ -67,6 +68,22 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             <Tooltip title="Export">
               <S.OptionButton>
                 <DownloadOutlined style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+          </div>
+        </Tippy>
+        <Tippy
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme}
+          zIndex={1}
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Save">
+              <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
+                <SaveFilled style={iconStyles} />
               </S.OptionButton>
             </Tooltip>
           </div>

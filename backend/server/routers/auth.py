@@ -10,6 +10,7 @@ from google.oauth2 import id_token # type: ignore
 from time import time
 
 from server.config import CLIENT_ID
+from server.database import usersDB
 
 router = APIRouter(
     prefix="/auth",
@@ -129,3 +130,5 @@ def validate_user_exists(token: dict[str, str]) -> bool:
     """
     # TODO: should actually check inside of the  database once created
     return token["sub"] not in [None, ""]
+
+

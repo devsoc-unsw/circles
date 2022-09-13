@@ -1,7 +1,8 @@
-import getMostRecentPastTerm, { MostRecentTerm } from 'utils/getMostRecentPastTerm';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
+import { CoursesForValidationPayload } from './prepareCoursesForValidationPayload';
 
 type TermPlan = {
   // key = course code, value = [UOC, mark]
@@ -10,21 +11,24 @@ type TermPlan = {
 
 type YearPlan = TermPlan[];
 
-export type CoursesForValidationPayload = {
-  programCode: string
-  year: number
-  specialisations: string[]
-  plan: YearPlan[]
-  mostRecentPastTerm: MostRecentTerm
+type LocalStorageData = CoursesForValidationPayload & {
+  programName: string
+  startYear: number
+  numYears: number
+  unplanned: string[]
+  isSummerEnabled: boolean
+  token: string
 };
 
-const prepareCoursesForValidationPayload = (
+const prepareLocalStorageData = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
-  showWarnings: boolean,
-): CoursesForValidationPayload => {
-  const { years, startYear, courses } = planner;
-  const { programCode, specs } = degree;
+  token: string,
+): LocalStorageData => {
+  const {
+    years, startYear, courses, unplanned, numYears, isSummerEnabled,
+  } = planner;
+  const { programCode, programName, specs } = degree;
 
   const plan: YearPlan[] = [];
   years.forEach((year) => {
@@ -44,8 +48,14 @@ const prepareCoursesForValidationPayload = (
     specialisations: specs,
     year: 1,
     plan,
-    mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
+    mostRecentPastTerm: getMostRecentPastTerm(startYear) ?? { Y: 0, T: 0 },
+    programName,
+    unplanned,
+    startYear,
+    numYears,
+    isSummerEnabled,
+    token,
   };
 };
 
-export default prepareCoursesForValidationPayload;
+export default prepareLocalStorageData;
