@@ -44,7 +44,6 @@ const CoursesModal = ({
           onChange={handleSearch}
           style={{ width: 500 }}
         />
-
         <Tooltip title="Sort by Alphabet">
           <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
         </Tooltip>
@@ -52,7 +51,6 @@ const CoursesModal = ({
           <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
         </Tooltip>
       </S.FilterBarWrapper>
-
       <S.CourseList>
         {courses
           .filter((course) => String(course.courseCode).toLowerCase()
