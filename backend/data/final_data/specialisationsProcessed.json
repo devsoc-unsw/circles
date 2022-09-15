@@ -16,14 +16,6 @@
         "curriculum": [
             {
                 "courses": {},
-                "title": "Tax Practitioners Board Requirements",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {},
                 "title": "CAANZ/CPA Accreditation Requirements",
                 "credits_to_complete": 0,
                 "core": false,
@@ -32,11 +24,37 @@
             },
             {
                 "courses": {
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "COMM1140": "Financial Management",
+                    "ACCT3995": "Fraud Examination Fundamentals",
+                    "ACCT3610": "Business Analysis and Valuation",
+                    "ACCT3708": "Auditing and Assurance Services",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "TABL2741": "Business Entities",
+                    "COMM2222": "Industry Experience Program",
+                    "ACCT3583": "Management Accounting 2",
+                    "ACCT3625": "ESG Reporting and Enterprise Value Creation",
+                    "ACTL2111": "Financial Mathematics for Actuaries",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "ACCT3601": "Global Financial Reporting and Analysis",
+                    "FINS3626": "International Corporate Governance",
+                    "ACCT3672": "Accounting Analytics for Business Decision Making"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "with at least 12 UOC being at Level 3 (i.e. ACCT3XXX). Please Note: - Students with a major in Accounting and Finance may count FINS3626 towards the Accounting major AND the Finance major. - Students completing a Bachelor of Actuarial Studies can count ACTL2111 in both the Actuarial Studies program and accounting major. - Students enrolled in 4733 Commerce/Law cannot take TABL2741 from the below elective list. - Students may count ONE (6 UOC) of COMM2222, COMM2233, COMM3020, COMM3030, COMM3101, COMM3202 or TABL3033 towards their Accounting major. - Students planning on studying Honours in Accounting should complete ACCT2507 Introduction to Accounting Research."
+            },
+            {
+                "courses": {
                     "ACCT2511": "Financial Accounting Fundamentals",
                     "ACCT2542": "Corporate Financial Reporting and Analysis",
-                    "ACCT2522": "Management Accounting for Decision Analysis"
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "ACCT2522": "Management Accounting for Decision Analysis",
+                    "COMM1140": "Financial Management"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 30,
@@ -45,30 +63,12 @@
                 "notes": ""
             },
             {
-                "courses": {
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "FINS3626": "International Corporate Governance",
-                    "ACCT3625": "ESG Reporting and Enterprise Value Creation",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "ACCT3610": "Business Analysis and Valuation",
-                    "ACCT3995": "Fraud Examination Fundamentals",
-                    "ACCT3583": "Management Accounting 2",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "ACTL2111": "Financial Mathematics for Actuaries",
-                    "ACCT3672": "Accounting Analytics for Business Decision Making",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM2233": "Industry Consulting Project",
-                    "ACCT3708": "Auditing and Assurance Services",
-                    "TABL2741": "Business Entities",
-                    "ACCT3601": "Global Financial Reporting and Analysis"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 18,
+                "courses": {},
+                "title": "Tax Practitioners Board Requirements",
+                "credits_to_complete": 0,
                 "core": false,
                 "levels": [],
-                "notes": "with at least 12 UOC being at Level 3 (i.e. ACCT3XXX). Please Note: - Students with a major in Accounting and Finance may count FINS3626 towards the Accounting major AND the Finance major. - Students completing a Bachelor of Actuarial Studies can count ACTL2111 in both the Actuarial Studies program and accounting major. - Students enrolled in 4733 Commerce/Law cannot take TABL2741 from the below elective list. - Students may count ONE (6 UOC) of COMM2222, COMM2233, COMM3020, COMM3030, COMM3101, COMM3202 or TABL3033 towards their Accounting major. - Students planning on studying Honours in Accounting should complete ACCT2507 Introduction to Accounting Research."
+                "notes": ""
             }
         ]
     },
@@ -101,21 +101,65 @@
             },
             {
                 "courses": {
+                    "TABL2741": "Business Entities",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "ACCT2522": "Management Accounting for Decision Analysis",
                     "ACCT2542": "Corporate Financial Reporting and Analysis",
                     "ACCT3672": "Accounting Analytics for Business Decision Making",
                     "ACCT3708": "Auditing and Assurance Services",
+                    "ACCT3995": "Fraud Examination Fundamentals",
                     "ACCT3601": "Global Financial Reporting and Analysis",
                     "ACCT3583": "Management Accounting 2",
-                    "ACCT3995": "Fraud Examination Fundamentals",
-                    "ACCT3610": "Business Analysis and Valuation",
                     "ACCT3625": "ESG Reporting and Enterprise Value Creation",
-                    "TABL2741": "Business Entities",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "ACCT2522": "Management Accounting for Decision Analysis"
+                    "ACCT3610": "Business Analysis and Valuation"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
                 "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "ACTLE1": {
+        "programs": [
+            "3587",
+            "3586"
+        ],
+        "name": "Actuarial Risk Management and Analytics",
+        "type": "major",
+        "UOC": 48,
+        "code": "ACTLE1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "RISK2002": "Risk Analytics",
+                    "RISK3003": "Risk Decision Analytics",
+                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "ACTL4305": "Actuarial Data Analytic Applications",
+                    "ACTL4001": "Actuarial Theory and Practice A",
+                    "ACTL3182": "Asset-Liability and Derivative Models",
+                    "ACTL3162": "General Insurance Techniques",
+                    "ACTL4002": "Actuarial Theory and Practice B",
+                    "ACTL3301": "Quantitative Risk Management",
+                    "ACTL3191": "Superannuation and Retirement Benefits"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 36,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "RISK2001": "Fundamentals of Risk and Risk Management",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -446,10 +490,13 @@
     "ASIAB2": {
         "programs": [
             "3558",
+            "3325",
+            "3409",
             "3543",
-            "3341",
+            "4830",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Asian Studies",
         "type": "minor",
@@ -459,12 +506,36 @@
         "curriculum": [
             {
                 "courses": {
+                    "ARTS2662": "Korea at a Glance",
+                    "ARTS2363": "Chinese Philosophy",
+                    "ARTS2815": "Politics and Security in the Indo-Pacific",
+                    "ARTS2455": "Gender in China",
+                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
+                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS2212": "Southeast Asia",
+                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
+                    "ARTS2211": "East Asia",
+                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
+                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
+                    "ARTS2909": "Gender in South Asia and Southeast Asia",
+                    "ARTS2213": "Asian Popular Culture"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3639": "Japan in Popular Culture",
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
                     "ARTS3216": "Chinese Media and Communication",
                     "ARTS3217": "History of Modern China: Contested Visions",
-                    "ARTS3220": "Architecture and Urbanism in Asia",
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS3639": "Japan in Popular Culture",
-                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies"
+                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
+                    "ARTS3220": "Architecture and Urbanism in Asia"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -486,40 +557,18 @@
                     1
                 ],
                 "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
-                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
-                    "ARTS2213": "Asian Popular Culture",
-                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
-                    "ARTS2815": "Politics and Security in the Indo-Pacific",
-                    "ARTS2662": "Korea at a Glance",
-                    "ARTS2909": "Gender in South Asia and Southeast Asia",
-                    "ARTS2211": "East Asia",
-                    "ARTS2455": "Gender in China",
-                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
-                    "ARTS2363": "Chinese Philosophy",
-                    "ARTS2212": "Southeast Asia",
-                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
             }
         ]
     },
     "ATSIC2": {
         "programs": [
-            "3543",
             "3325",
-            "3341",
+            "3409",
+            "3543",
+            "4830",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Indigenous Studies",
         "type": "minor",
@@ -529,9 +578,25 @@
         "curriculum": [
             {
                 "courses": {
-                    "ATSI2003": "Indigenous Material Culture-Objects and Their Journey",
+                    "ATSI3005": "Race, Colonialism and Whiteness",
+                    "ATSI3003": "Indigenous Cultural Heritage and the Environment",
+                    "ATSI3002": "Gendered Identities in Indigenous Australia",
+                    "ARTS3241": "Environmental Justice",
+                    "ATSI3017": "Indigenous Histories and the Colonial World"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ATSI2011": "Indigenous Australian Political History",
                     "ATSI2004": "Popular Culture of Indigenous Australia",
+                    "ATSI2003": "Indigenous Material Culture-Objects and Their Journey",
                     "ATSI2014": "Indigenous People and Policy"
                 },
                 "title": "Level 2 Prescribed Electives",
@@ -552,95 +617,6 @@
                 "core": true,
                 "levels": [
                     1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ATSI3003": "Indigenous Cultural Heritage and the Environment",
-                    "ATSI3017": "Indigenous Histories and the Colonial World",
-                    "ARTS3241": "Environmental Justice",
-                    "ATSI3005": "Race, Colonialism and Whiteness",
-                    "ATSI3002": "Gendered Identities in Indigenous Australia"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "AUSTB2": {
-        "programs": [
-            "3543",
-            "3341",
-            "3444",
-            "3409"
-        ],
-        "name": "Australian Studies",
-        "type": "minor",
-        "UOC": 36,
-        "code": "AUSTB2",
-        "course_constraints": [
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Australian Studies can be combined with a major in History as preparation for a double first teaching specialisation."
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ARTS2031": "Australian Literature",
-                    "ARTS2845": "Sex, Human Rights and Justice",
-                    "GEOS2711": "Australian Climate and Vegetation",
-                    "PLAN2122": "History, Heritage and the Built Environment",
-                    "BEES6601": "An Introduction to the Sydney Environment",
-                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
-                    "ATSI2012": "Contemporary Issues in Indigenous Politics",
-                    "ARTS2873": "Doing Fieldwork",
-                    "ARTS2870": "Citizens, Action and Dissent",
-                    "ARTS2271": "Inventing Modern Australia: 1900 to Now",
-                    "ATSI2004": "Popular Culture of Indigenous Australia",
-                    "ARTS2062": "Australian Cinema",
-                    "ARTS2822": "Decolonising Research Methods"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1190": "Sydney: History, Landscapes, People",
-                    "ARTS1211": "Australia's Asian Context"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3814": "Australian Foreign Policy",
-                    "ARTS3131": "Australian Drama",
-                    "ARTS3292": "Migrants and Refugees in Australia and the World",
-                    "ATSI3017": "Indigenous Histories and the Colonial World",
-                    "ARTS3874": "Culture and Human Rights"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
                 ],
                 "notes": ""
             }
@@ -1503,39 +1479,6 @@
             },
             {
                 "courses": {
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "MATH1081": "Discrete Mathematics",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "PSYC1001": "Psychology 1A",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "ENGG1300": "Engineering Mechanics",
-                    "PHYS1231": "Higher Physics 1B",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "SOLA1070": "Sustainable Energy"
-                },
-                "title": "Recommended Free Elective List ",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "PHYS1121 or PHYS1131": [
                         "Physics 1A",
                         "Higher Physics 1A"
@@ -1923,103 +1866,17 @@
             }
         ]
     },
-    "CHINE2": {
-        "programs": [
-            "3502",
-            "3558",
-            "3543",
-            "3325",
-            "3554",
-            "3341",
-            "3444",
-            "3409"
-        ],
-        "name": "Chinese Studies",
-        "type": "minor",
-        "UOC": 36,
-        "code": "CHINE2",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {},
-                "title": "Chinese 1 Commencement",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {},
-                "title": "Chinese 3 Commencement",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2465": "Classical Chinese Language and Culture",
-                    "ARTS2455": "Gender in China",
-                    "ARTS2453": "Chinese Cinema",
-                    "ARTS2463": "Nationalism, Identity and Ethnicity in China",
-                    "ARTS2457": "China Imagined and Perceived",
-                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
-                    "ARTS3217": "History of Modern China: Contested Visions",
-                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
-                    "ARTS3216": "Chinese Media and Communication",
-                    "ARTS2213": "Asian Popular Culture"
-                },
-                "title": "Contextual Course List",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3452": "Chinese 7",
-                    "ARTS3458": "Re-Visioning China and Chinese Studies",
-                    "ARTS3456": "Classical Chinese Literature",
-                    "ARTS3462": "Artistic Representations of China and the Diaspora",
-                    "ARTS3454": "Chinese English Interpreting",
-                    "ARTS3455": "Modern and Contemporary Chinese Literature",
-                    "ARTS3463": "City and Chinese Culture",
-                    "ARTS3460": "Chinese English Translation",
-                    "ARTS3453": "Chinese 8"
-                },
-                "title": "Professional Course List",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {},
-                "title": "Chinese 4 Commencement",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {},
-                "title": "Chinese 2 Commencement",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
     "CHINF2": {
         "programs": [
             "3502",
             "3558",
             "3325",
+            "3409",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Advanced Chinese Studies",
         "type": "minor",
@@ -2029,40 +1886,13 @@
         "curriculum": [
             {
                 "courses": {
+                    "ARTS3452": "Chinese 7",
                     "ARTS3453": "Chinese 8",
-                    "ARTS3452": "Chinese 7"
-                },
-                "title": "Chinese 7 Commencement",
-                "credits_to_complete": 36,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3453": "Chinese 8",
-                    "ARTS3450": "Chinese 5",
                     "ARTS3451": "Chinese 6",
-                    "ARTS3452": "Chinese 7"
+                    "ARTS3450": "Chinese 5"
                 },
                 "title": "Chinese 5 Commencement",
                 "credits_to_complete": 36,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3460": "Chinese English Translation",
-                    "ARTS3462": "Artistic Representations of China and the Diaspora",
-                    "ARTS3463": "City and Chinese Culture",
-                    "ARTS3455": "Modern and Contemporary Chinese Literature",
-                    "ARTS3458": "Re-Visioning China and Chinese Studies",
-                    "ARTS3456": "Classical Chinese Literature",
-                    "ARTS3454": "Chinese English Interpreting"
-                },
-                "title": "Professional Course List",
-                "credits_to_complete": 0,
                 "core": false,
                 "levels": [],
                 "notes": ""
@@ -2078,25 +1908,6 @@
                 "notes": ""
             },
             {
-                "courses": {
-                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
-                    "ARTS2457": "China Imagined and Perceived",
-                    "ARTS2453": "Chinese Cinema",
-                    "ARTS2465": "Classical Chinese Language and Culture",
-                    "ARTS3216": "Chinese Media and Communication",
-                    "ARTS2463": "Nationalism, Identity and Ethnicity in China",
-                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
-                    "ARTS3217": "History of Modern China: Contested Visions",
-                    "ARTS2455": "Gender in China",
-                    "ARTS2213": "Asian Popular Culture"
-                },
-                "title": "Contextual Course List",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
                 "courses": {},
                 "title": "Expert Commencement",
                 "credits_to_complete": 36,
@@ -2106,12 +1917,58 @@
             },
             {
                 "courses": {
-                    "ARTS3453": "Chinese 8",
+                    "ARTS3456": "Classical Chinese Literature",
+                    "ARTS3455": "Modern and Contemporary Chinese Literature",
+                    "ARTS3460": "Chinese English Translation",
+                    "ARTS3458": "Re-Visioning China and Chinese Studies",
+                    "ARTS3463": "City and Chinese Culture",
+                    "ARTS3454": "Chinese English Interpreting",
+                    "ARTS3462": "Artistic Representations of China and the Diaspora"
+                },
+                "title": "Professional Course List",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ARTS3452": "Chinese 7",
-                    "ARTS3451": "Chinese 6"
+                    "ARTS3451": "Chinese 6",
+                    "ARTS3453": "Chinese 8"
                 },
                 "title": "Chinese 6 Commencement",
                 "credits_to_complete": 36,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3453": "Chinese 8",
+                    "ARTS3452": "Chinese 7"
+                },
+                "title": "Chinese 7 Commencement",
+                "credits_to_complete": 36,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3216": "Chinese Media and Communication",
+                    "ARTS2457": "China Imagined and Perceived",
+                    "ARTS2213": "Asian Popular Culture",
+                    "ARTS3217": "History of Modern China: Contested Visions",
+                    "ARTS2465": "Classical Chinese Language and Culture",
+                    "ARTS2463": "Nationalism, Identity and Ethnicity in China",
+                    "ARTS2453": "Chinese Cinema",
+                    "ARTS2455": "Gender in China",
+                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
+                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers"
+                },
+                "title": "Contextual Course List",
+                "credits_to_complete": 0,
                 "core": false,
                 "levels": [],
                 "notes": ""
@@ -2181,25 +2038,10 @@
         "curriculum": [
             {
                 "courses": {
-                    "MARK3054 or MGMT3730 or ECON3210 or RISK3003": [
-                        "Marketing Analytics and Big Data",
-                        "Human Capital Analytics",
-                        "Big Data Econometrics",
-                        "Risk Decision Analytics"
-                    ]
-                },
-                "title": "Modelling 2",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "RISK2002 or ECON2209 or ECON2206": [
-                        "Risk Analytics",
+                    "ECON2209 or ECON2206 or RISK2002": [
                         "Business Forecasting",
-                        "Introductory Econometrics "
+                        "Introductory Econometrics ",
+                        "Risk Analytics"
                     ]
                 },
                 "title": "Modelling 1",
@@ -2210,8 +2052,53 @@
             },
             {
                 "courses": {
-                    "COMM2822": "Introduction to Databases for Business Analytics",
+                    "COMM3501": "Quantitative Business Analytics",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "ECON3206": "Financial Econometrics",
+                    "INFS3830": "Social Media and Analytics",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "ECON3123": "Organisational Economics",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3900": "Capstone Project",
+                    "FINS3646": "Toolkit for Finance",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "MARK3087": "Customer Analytics",
+                    "ECON2206": "Introductory Econometrics ",
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "COMM3500": "Analytics Industry Project",
+                    "INFS3873": "Business Analytics Methods",
+                    "MGMT3730": "Human Capital Analytics",
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "RISK2001": "Fundamentals of Risk and Risk Management",
+                    "ECON2209": "Business Forecasting",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "MGMT2726": "Business Ethics and Sustainability",
+                    "MGMT3001": "Business and Corporate Strategy",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM2244": "Future of Work Project",
+                    "ECON3210": "Big Data Econometrics",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "INFS2822": "Programming for Data Analytics",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "MGMT2002": "Managing Business Communication",
+                    "RISK3003": "Risk Decision Analytics",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "RISK2002": "Risk Analytics"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "COMM3050": "Data Use and Misuse",
+                    "COMM2822": "Introduction to Databases for Business Analytics",
                     "COMM2501": "Data Visualisation and Communication",
                     "COMM1190": "Data, Insights and Decisions"
                 },
@@ -2223,44 +2110,9 @@
             },
             {
                 "courses": {
-                    "ECON3206": "Financial Econometrics",
-                    "MARK3087": "Customer Analytics",
-                    "MGMT2726": "Business Ethics and Sustainability",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "ECON3123": "Organisational Economics",
-                    "INFS3873": "Business Analytics Methods",
-                    "ECON3210": "Big Data Econometrics",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3900": "Capstone Project",
-                    "MGMT3730": "Human Capital Analytics",
-                    "ECON2206": "Introductory Econometrics ",
-                    "MGMT3001": "Business and Corporate Strategy",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM2233": "Industry Consulting Project",
-                    "FINS3646": "Toolkit for Finance",
-                    "INFS2608": "Database Management & Big Data Infrastructures",
-                    "INFS2822": "Programming for Data Analytics",
-                    "COMM3501": "Quantitative Business Analytics",
-                    "ECON2209": "Business Forecasting",
-                    "INFS3830": "Social Media and Analytics",
-                    "ECON2112": "Game Theory and Business Strategy",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "MGMT2002": "Managing Business Communication",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "MARK3085": "Digital Marketing and Web Analytics",
-                    "RISK2002": "Risk Analytics",
-                    "FINS3645": "Financial Market Data Design and Analysis",
-                    "COMM3500": "Analytics Industry Project",
-                    "COMM2244": "Future of Work Project",
-                    "RISK3003": "Risk Decision Analytics",
-                    "RISK2001": "Fundamentals of Risk and Risk Management",
-                    "MARK3054": "Marketing Analytics and Big Data",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "INFS3603": "Introduction to Business Analytics"
+                    "COMM3501": "Quantitative Business Analytics"
                 },
-                "title": "Prescribed Electives",
+                "title": "Capstone",
                 "credits_to_complete": 6,
                 "core": false,
                 "levels": [],
@@ -2268,9 +2120,14 @@
             },
             {
                 "courses": {
-                    "COMM3501": "Quantitative Business Analytics"
+                    "MGMT3730 or ECON3210 or RISK3003 or MARK3054": [
+                        "Human Capital Analytics",
+                        "Big Data Econometrics",
+                        "Risk Decision Analytics",
+                        "Marketing Analytics and Big Data"
+                    ]
                 },
-                "title": "Capstone",
+                "title": "Modelling 2",
                 "credits_to_complete": 6,
                 "core": false,
                 "levels": [],
@@ -3065,6 +2922,108 @@
             }
         ]
     },
+    "COMPZ1": {
+        "programs": [
+            "3959"
+        ],
+        "name": "Computational Data Science",
+        "type": "major",
+        "UOC": 66,
+        "code": "COMPZ1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "COMP2521": "Data Structures and Algorithms"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP9417": "Machine Learning and Data Mining",
+                    "COMP9313": "Big Data Management",
+                    "COMP3121": "Algorithms and Programming Techniques"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP1511": "Programming Fundamentals",
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1081": "Discrete Mathematics"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON1102": "Macroeconomics 1",
+                    "MATH3161": "Optimization",
+                    "COMP6441": "Security Engineering and Cyber Security",
+                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
+                    "MATH2011": "Several Variable Calculus",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "COMP6714": "Information Retrieval and Web Search",
+                    "COMP6771": "Advanced C++ Programming",
+                    "MATH3871": "Bayesian Inference and Computation",
+                    "ECON3206": "Financial Econometrics",
+                    "MARK2012": "Marketing Fundamentals",
+                    "ECON3123": "Organisational Economics",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "COMP3411": "Artificial Intelligence",
+                    "MATH3821": "Statistical Modelling and Computing",
+                    "ECON2206": "Introductory Econometrics ",
+                    "MATH2931": "Higher Linear Models",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "ECON2107": "Modern Labour Markets: Theory and Policy",
+                    "COMP9319": "Web Data Compression and Search",
+                    "ECON3107": "Economics of Finance",
+                    "COMP9315": "Database Systems Implementation",
+                    "MATH5836": "Data Mining and its Business Applications",
+                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
+                    "ECON2101": "Microeconomics 2",
+                    "COMP4418": "Knowledge Representation and Reasoning",
+                    "MATH2871": "Data Management for Statistical Analysis",
+                    "INFS1602": "Digital Transformation in Business",
+                    "ECON2111": "Introduction to Economic Development",
+                    "COMP4121": "Advanced Algorithms",
+                    "ECON3208": "Applied Econometric Methods",
+                    "COMP9318": "Data Warehousing and Data Mining",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                    "ECON2103": "Business and Government",
+                    "MATH2831": "Linear Models",
+                    "MATH2111": "Higher Several Variable Calculus",
+                    "MATH3411": "Information, Codes and Ciphers",
+                    "ECON2209": "Business Forecasting",
+                    "COMP6841": "Extended Security Engineering and Cyber Security"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
     "CVENAH": {
         "programs": [
             "3707"
@@ -3411,6 +3370,17 @@
         "curriculum": [
             {
                 "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "ECON1202": "Quantitative Analysis for Business and Economics"
+                },
+                "title": "Compulsory Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Actl should take COMM1900 instead of COMM1100. Students in Actl should take ECON1101. All other students should complete COMM1100."
+            },
+            {
+                "courses": {
                     "ECON2112": "Game Theory and Business Strategy",
                     "ECON2101": "Microeconomics 2"
                 },
@@ -3422,19 +3392,19 @@
             },
             {
                 "courses": {
-                    "COMM3900": "Capstone Project",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3020": "Global Business Practicum",
-                    "ACTL3191": "Superannuation and Retirement Benefits",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM2244": "Future of Work Project",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "COMM2233": "Industry Consulting Project",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
                     "ECON2": "any level 2 Economics courses",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3900": "Capstone Project",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "COMM2222": "Industry Experience Program",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "COMM2244": "Future of Work Project",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM3030": "Social Entrepreneurship Practicum",
                     "ECON3": "any level 3 Economics courses"
                 },
                 "title": "Prescribed Electives",
@@ -3442,17 +3412,6 @@
                 "core": false,
                 "levels": [],
                 "notes": "with at least 18 UOC of Level 3 Economics courses."
-            },
-            {
-                "courses": {
-                    "COMM1100": "Business Decision Making",
-                    "ECON1202": "Quantitative Analysis for Business and Economics"
-                },
-                "title": "Compulsory Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": "Students in Comm/Actl should take COMM1900 instead of COMM1100. Students in Actl should take ECON1101. All other students should complete COMM1100."
             }
         ]
     },
@@ -3521,6 +3480,98 @@
             }
         ]
     },
+    "ECONL1": {
+        "programs": [
+            "3959"
+        ],
+        "name": "Business Data Science",
+        "type": "major",
+        "UOC": 72,
+        "code": "ECONL1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ECON3208": "Applied Econometric Methods",
+                    "ECON3210": "Big Data Econometrics"
+                },
+                "title": "Level 3 Flexible Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": "If students would like to complete both courses they will only be required to complete an additional 24 UOC of prescribed electives from the list below to satisfy major requirements."
+            },
+            {
+                "courses": {
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "ECON2209": "Business Forecasting",
+                    "MATH2831 or ECON2206": [
+                        "Linear Models",
+                        "Introductory Econometrics "
+                    ]
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON1101": "Microeconomics 1",
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ]
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON3107": "Economics of Finance",
+                    "ECON3206": "Financial Econometrics",
+                    "ECON1102": "Macroeconomics 1",
+                    "ECON2107": "Modern Labour Markets: Theory and Policy",
+                    "COMP9417": "Machine Learning and Data Mining",
+                    "ECON2111": "Introduction to Economic Development",
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "ECON2103": "Business and Government",
+                    "ECON2101": "Microeconomics 2",
+                    "COMP9313": "Big Data Management",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH2871": "Data Management for Statistical Analysis",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                    "MARK2012": "Marketing Fundamentals",
+                    "MATH3871": "Bayesian Inference and Computation",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "ECON2102": "Macroeconomics 2",
+                    "MATH2011": "Several Variable Calculus",
+                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 30,
+                "core": false,
+                "levels": [],
+                "notes": "subject to whether both ECON3208 and ECON3210 are taken as Level 3 Flexible Core Courses. At least three of the elective courses must be at level 3 or above (3XXX). Additionally, at least 3 of the electives must be selected from Business School subject areas ACTL, ECON, INFS, MARK and MGMT. A Level 3 Business course will fulfill both of these requirements."
+            }
+        ]
+    },
     "ECONO1": {
         "programs": [
             "3502",
@@ -3544,35 +3595,8 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMM1100": "Business Decision Making",
-                    "ECON1101": "Microeconomics 1"
-                },
-                "title": "Flexible Level 1 Core",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "MATH1141": "Higher Mathematics 1A",
-                    "ECON1202": "Quantitative Analysis for Business and Economics",
-                    "MATH1131": "Mathematics 1A"
-                },
-                "title": "Quantitative Core",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON2112": "Game Theory and Business Strategy",
-                    "ECON2101": "Microeconomics 2"
+                    "ECON2101": "Microeconomics 2",
+                    "ECON2112": "Game Theory and Business Strategy"
                 },
                 "title": "Flexible Level 2 Core",
                 "credits_to_complete": 6,
@@ -3581,30 +3605,6 @@
                     2
                 ],
                 "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON3": "any level 3 Economics courses",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "COMM2233": "Industry Consulting Project",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM3900": "Capstone Project",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM2244": "Future of Work Project",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "FINS3655": "Behavioural Finance",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems"
-                },
-                "title": "Level 3 Prescribed Elective",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": "including at least 6 UOC of Level 3 Economics courses."
             },
             {
                 "courses": {
@@ -3619,6 +3619,57 @@
                     2
                 ],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "ECON1101": "Microeconomics 1"
+                },
+                "title": "Flexible Level 1 Core",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "ECON1202": "Quantitative Analysis for Business and Economics",
+                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A"
+                },
+                "title": "Quantitative Core",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON3": "any level 3 Economics courses",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "COMM2244": "Future of Work Project",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM3900": "Capstone Project",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3020": "Global Business Practicum",
+                    "FINS3655": "Behavioural Finance",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM2222": "Industry Experience Program"
+                },
+                "title": "Level 3 Prescribed Elective",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": "including at least 6 UOC of Level 3 Economics courses."
             }
         ]
     },
@@ -4217,11 +4268,13 @@
     },
     "ENVPE2": {
         "programs": [
-            "3543",
             "3325",
-            "3341",
+            "3409",
+            "3543",
+            "4830",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Environmental Humanities",
         "type": "minor",
@@ -4236,37 +4289,22 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS3241": "Environmental Justice"
+                    "ARTS1240": "Environment and Society",
+                    "ARTS1241": "Environmental Advocacy and Activism"
                 },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 6,
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
                 "core": true,
                 "levels": [
-                    3
+                    1
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "ARTS2248": "Disasters and Society",
-                    "ARTS2249": "Environmental Philosophy",
-                    "ARTS2244": "The Animal: Worker, Wild, Extinct?",
-                    "ARTS2243": "Waste and Society",
-                    "ARTS2240": "Environment, Sustainability and Development"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3242": "Environmental History",
+                    "ARTS3243": "Remaking Nature: The Politics of Biotechnology",
                     "ARTS3245": "Urban Environments",
-                    "ARTS3243": "Remaking Nature: The Politics of Biotechnology"
+                    "ARTS3242": "Environmental History"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 6,
@@ -4290,14 +4328,29 @@
             },
             {
                 "courses": {
-                    "ARTS1241": "Environmental Advocacy and Activism",
-                    "ARTS1240": "Environment and Society"
+                    "ARTS2244": "The Animal: Worker, Wild, Extinct?",
+                    "ARTS2249": "Environmental Philosophy",
+                    "ARTS2240": "Environment, Sustainability and Development",
+                    "ARTS2248": "Disasters and Society",
+                    "ARTS2243": "Waste and Society"
                 },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3241": "Environmental Justice"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 6,
                 "core": true,
                 "levels": [
-                    1
+                    3
                 ],
                 "notes": ""
             }
@@ -4306,10 +4359,13 @@
     "EUROC2": {
         "programs": [
             "3558",
+            "3325",
+            "3409",
             "3543",
-            "3341",
+            "4830",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "European Studies",
         "type": "minor",
@@ -4337,21 +4393,21 @@
             },
             {
                 "courses": {
-                    "ARTS2487": "French Popular Culture",
-                    "ARTS3780": "Contemporary Germany: History, Politics, Society",
-                    "ARTS3290": "Visions and Voices of Empire",
-                    "ARTS2283": "Classical Greece",
-                    "ARTS2282": "Rome",
                     "ARTS2272": "The European World, 1500-1800",
-                    "ARTS3576": "The Making of Modern Spain",
+                    "ARTS2487": "French Popular Culture",
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
                     "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
-                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
+                    "ARTS3576": "The Making of Modern Spain",
+                    "ARTS3780": "Contemporary Germany: History, Politics, Society",
+                    "ARTS2282": "Rome",
+                    "ARTS2283": "Classical Greece",
                     "ARTS2542": "Gods, Heroines and Heroes in Greek Myth",
-                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
+                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
                     "ARTS2781": "Britain, Europe and the World Since 1945: From Empire to Brexit",
-                    "ARTS2482": "French Cinema and Society",
+                    "ARTS3290": "Visions and Voices of Empire",
                     "ARTS3574": "Fantasy, Love, and Violence in Spanish and Latin American Cinema",
-                    "ARTS3786": "Confronting the Past in Contemporary Europe"
+                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
+                    "ARTS2482": "French Cinema and Society"
                 },
                 "title": "Level 2 and 3 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -4363,27 +4419,27 @@
             },
             {
                 "courses": {
-                    "ARTS3780": "Contemporary Germany: History, Politics, Society",
-                    "ARTS3786": "Confronting the Past in Contemporary Europe"
-                },
-                "title": "Level 3 Courses",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1782": "Contemporary Europe in Crisis: Power and Culture",
-                    "ARTS1780": "Concepts of Europe"
+                    "ARTS1780": "Concepts of Europe",
+                    "ARTS1782": "Contemporary Europe in Crisis: Power and Culture"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 12,
                 "core": true,
                 "levels": [
                     1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
+                    "ARTS3780": "Contemporary Germany: History, Politics, Society"
+                },
+                "title": "Level 3 Courses",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
                 ],
                 "notes": ""
             }
@@ -4423,60 +4479,60 @@
         "curriculum": [
             {
                 "courses": {
-                    "FINS3616": "International Business Finance",
-                    "FINS2618": "Capital Markets and Institutions",
-                    "FINS2615": "Intermediate Business Finance",
-                    "COMM1180": "Value Creation",
-                    "FINS2624": "Portfolio Management"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [],
-                "notes": "Students in 3543 Bachelor of Economics should take COMM1140 and ECON1102 instead of COMM1180. All other students, including Comm/Econ, should complete COMM1180."
-            },
-            {
-                "courses": {
-                    "FINS3650": "International Banking",
-                    "ACTL2111": "Financial Mathematics for Actuaries",
                     "FINS3641": "Security Analysis and Valuation",
-                    "FINS3623": "Venture Capital",
-                    "FINS3626": "International Corporate Governance",
-                    "FINS3636": "Interest Rate Risk Management",
-                    "FINS3633": "Real Estate Finance",
-                    "FINS3640": "Investment Management Modeling",
-                    "FINS3630": "Bank Financial Management",
-                    "FINS2643": "Wealth Management and Client Engagement",
-                    "FINS3637": "Wealth Management Advice and Ethics",
-                    "FINS3635": "Options, Futures and Risk Management",
-                    "FINS3655": "Behavioural Finance",
-                    "FINS3625": "Applied Corporate Finance",
                     "FINS2622": "Asia-Pacific Capital Markets",
-                    "FINS3666": "Trading and Market Making",
+                    "FINS3630": "Bank Financial Management",
                     "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
+                    "FINS2643": "Wealth Management and Client Engagement",
+                    "FINS3650": "International Banking",
+                    "FINS3655": "Behavioural Finance",
+                    "FINS3623": "Venture Capital",
+                    "FINS3636": "Interest Rate Risk Management",
                     "FINS3644": "Sustainable and Responsible Investing",
-                    "FINS3645": "Financial Market Data Design and Analysis",
-                    "FINS3648": "Banking, Finance and Technology",
-                    "FINS3646": "Toolkit for Finance",
-                    "FINS3647": "Bitcoin and Decentralised Finance",
-                    "COMM2244": "Future of Work Project",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM2233": "Industry Consulting Project",
+                    "FINS3637": "Wealth Management Advice and Ethics",
+                    "ACTL2111": "Financial Mathematics for Actuaries",
+                    "FINS3625": "Applied Corporate Finance",
+                    "FINS3666": "Trading and Market Making",
+                    "FINS3640": "Investment Management Modeling",
+                    "FINS3626": "International Corporate Governance",
+                    "FINS3633": "Real Estate Finance",
+                    "FINS3635": "Options, Futures and Risk Management",
                     "COMM3020": "Global Business Practicum",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
                     "COMM2222": "Industry Experience Program",
+                    "COMM2244": "Future of Work Project",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3900": "Capstone Project",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM2233": "Industry Consulting Project",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
                     "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "COMM3900": "Capstone Project"
+                    "FINS3648": "Banking, Finance and Technology",
+                    "FINS3647": "Bitcoin and Decentralised Finance",
+                    "FINS3646": "Toolkit for Finance",
+                    "FINS3645": "Financial Market Data Design and Analysis"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
                 "core": false,
                 "levels": [],
                 "notes": "At least two (2) of the elective courses must be at level 3 (i.e. FINS3XXX). This is regardless of whether you are doing a single major or taking Finance as a second major."
+            },
+            {
+                "courses": {
+                    "COMM1180": "Value Creation",
+                    "FINS2618": "Capital Markets and Institutions",
+                    "FINS2615": "Intermediate Business Finance",
+                    "FINS2624": "Portfolio Management",
+                    "FINS3616": "International Business Finance"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Students in 3543 Bachelor of Economics should take COMM1140 and ECON1102 instead of COMM1180. All other students, including Comm/Econ, should complete COMM1180."
             }
         ]
     },
@@ -4560,33 +4616,33 @@
             {
                 "courses": {
                     "FINS3640": "Investment Management Modeling",
-                    "COMM2222": "Industry Experience Program",
-                    "FINS3630": "Bank Financial Management",
-                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "COMM2233": "Industry Consulting Project",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "FINS2622": "Asia-Pacific Capital Markets",
-                    "FINS2643": "Wealth Management and Client Engagement",
-                    "FINS3625": "Applied Corporate Finance",
-                    "COMM2244": "Future of Work Project",
                     "COMM3030": "Social Entrepreneurship Practicum",
-                    "FINS3633": "Real Estate Finance",
-                    "FINS2624": "Portfolio Management",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
                     "FINS3650": "International Banking",
-                    "FINS3666": "Trading and Market Making",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
-                    "FINS3655": "Behavioural Finance",
-                    "FINS3637": "Wealth Management Advice and Ethics",
-                    "FINS3623": "Venture Capital",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "COMM3900": "Capstone Project",
                     "FINS3636": "Interest Rate Risk Management",
+                    "FINS3625": "Applied Corporate Finance",
+                    "FINS3655": "Behavioural Finance",
+                    "COMM2222": "Industry Experience Program",
+                    "FINS3633": "Real Estate Finance",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "FINS3666": "Trading and Market Making",
                     "COMM3101": "Industry Experience Placement 1",
+                    "COMM2244": "Future of Work Project",
+                    "FINS3630": "Bank Financial Management",
+                    "FINS2624": "Portfolio Management",
+                    "COMM3900": "Capstone Project",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3020": "Global Business Practicum",
                     "FINS3641": "Security Analysis and Valuation",
-                    "FINS3635": "Options, Futures and Risk Management"
+                    "FINS2622": "Asia-Pacific Capital Markets",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "FINS3637": "Wealth Management Advice and Ethics",
+                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "FINS3635": "Options, Futures and Risk Management",
+                    "FINS2643": "Wealth Management and Client Engagement",
+                    "FINS3623": "Venture Capital"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 6,
@@ -4596,18 +4652,18 @@
             },
             {
                 "courses": {
-                    "FINS3646": "Toolkit for Finance",
-                    "FINS3647": "Bitcoin and Decentralised Finance",
-                    "FINS3645": "Financial Market Data Design and Analysis",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "FINS3648": "Banking, Finance and Technology",
-                    "FINS2618": "Capital Markets and Institutions",
-                    "FINS3630 or FINS2615 or FINS3623 or FINS2624": [
-                        "Bank Financial Management",
+                    "FINS2624 or FINS2615 or FINS3630 or FINS3623": [
+                        "Portfolio Management",
                         "Intermediate Business Finance",
-                        "Venture Capital",
-                        "Portfolio Management"
-                    ]
+                        "Bank Financial Management",
+                        "Venture Capital"
+                    ],
+                    "COMM1190": "Data, Insights and Decisions",
+                    "FINS2618": "Capital Markets and Institutions",
+                    "FINS3646": "Toolkit for Finance",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "FINS3648": "Banking, Finance and Technology",
+                    "FINS3647": "Bitcoin and Decentralised Finance"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 42,
@@ -4771,12 +4827,14 @@
         "programs": [
             "3502",
             "3558",
-            "3543",
             "3325",
+            "3409",
+            "3543",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "French Studies",
         "type": "minor",
@@ -4791,17 +4849,23 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS3786": "Confronting the Past in Contemporary Europe",
-                    "ARTS2482": "French Cinema and Society",
-                    "ARTS2488": "French Gastronomy and Society",
-                    "ARTS2485": "Exploring French Linguistics",
-                    "ARTS3490": "Advanced French Conversation",
-                    "ARTS2487": "French Popular Culture",
-                    "ARTS2486": "The French Speaking World"
+                    "ARTS3480": "French 5",
+                    "ARTS3481": "French 6"
                 },
-                "title": "Upper-Level Prescribed Electives",
+                "title": "Advanced Language Core Courses",
                 "credits_to_complete": 6,
-                "core": false,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2480": "French 3",
+                    "ARTS2481": "French 4"
+                },
+                "title": "Intermediate Language Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
@@ -4818,33 +4882,27 @@
             },
             {
                 "courses": {
-                    "ARTS3482": "French for Thought",
-                    "ARTS3483": "French with a Purpose"
+                    "ARTS2486": "The French Speaking World",
+                    "ARTS2482": "French Cinema and Society",
+                    "ARTS2485": "Exploring French Linguistics",
+                    "ARTS2487": "French Popular Culture",
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
+                    "ARTS2488": "French Gastronomy and Society",
+                    "ARTS3490": "Advanced French Conversation"
+                },
+                "title": "Upper-Level Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3483": "French with a Purpose",
+                    "ARTS3482": "French for Thought"
                 },
                 "title": "Professional Language Core Courses",
                 "credits_to_complete": 6,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3481": "French 6",
-                    "ARTS3480": "French 5"
-                },
-                "title": "Advanced Language Core Courses",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2481": "French 4",
-                    "ARTS2480": "French 3"
-                },
-                "title": "Intermediate Language Core Courses",
-                "credits_to_complete": 12,
                 "core": true,
                 "levels": [],
                 "notes": ""
@@ -4856,10 +4914,12 @@
             "3502",
             "3558",
             "3325",
+            "3409",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Advanced French Studies",
         "type": "minor",
@@ -4869,12 +4929,23 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS2486": "The French Speaking World",
-                    "ARTS2487": "French Popular Culture",
-                    "ARTS2488": "French Gastronomy and Society",
+                    "ARTS3481": "French 6",
+                    "ARTS3480": "French 5"
+                },
+                "title": "Advanced Language Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ARTS2482": "French Cinema and Society",
                     "ARTS3786": "Confronting the Past in Contemporary Europe",
-                    "ARTS2485": "Exploring French Linguistics"
+                    "ARTS2485": "Exploring French Linguistics",
+                    "ARTS2486": "The French Speaking World",
+                    "ARTS2487": "French Popular Culture",
+                    "ARTS2488": "French Gastronomy and Society"
                 },
                 "title": "French Contextual Studies Electives",
                 "credits_to_complete": 12,
@@ -4884,10 +4955,10 @@
             },
             {
                 "courses": {
-                    "ARTS3490": "Advanced French Conversation",
                     "ARTS3484": "On Love and Friendship in French Texts and Films",
-                    "ARTS3487": "Key French Texts",
                     "ARTS3491": "French Gastronomy and Society",
+                    "ARTS3487": "Key French Texts",
+                    "ARTS3490": "Advanced French Conversation",
                     "ARTS3488": "French Discourse Studies"
                 },
                 "title": "French Professional Studies Electives",
@@ -4898,19 +4969,8 @@
             },
             {
                 "courses": {
-                    "ARTS3480": "French 5",
-                    "ARTS3481": "French 6"
-                },
-                "title": "Advanced Language Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3483": "French with a Purpose",
-                    "ARTS3482": "French for Thought"
+                    "ARTS3482": "French for Thought",
+                    "ARTS3483": "French with a Purpose"
                 },
                 "title": "Professional Language Core Courses",
                 "credits_to_complete": 12,
@@ -5195,12 +5255,14 @@
         "programs": [
             "3502",
             "3558",
-            "3543",
             "3325",
+            "3409",
+            "3543",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "German Studies",
         "type": "minor",
@@ -5219,6 +5281,17 @@
         "curriculum": [
             {
                 "courses": {
+                    "ARTS2510": "German 3",
+                    "ARTS2511": "German 4"
+                },
+                "title": "Intermediate Language Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ARTS1511": "German 2",
                     "ARTS1510": "German 1"
                 },
@@ -5230,9 +5303,20 @@
             },
             {
                 "courses": {
+                    "ARTS3511": "German 6",
+                    "ARTS3510": "German 5"
+                },
+                "title": "Advanced Language Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
-                    "ARTS3786": "Confronting the Past in Contemporary Europe",
                     "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
                     "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation"
                 },
                 "title": "Upper-Level Prescribed Electives",
@@ -5243,32 +5327,10 @@
             },
             {
                 "courses": {
-                    "ARTS2511": "German 4",
-                    "ARTS2510": "German 3"
-                },
-                "title": "Intermediate Language Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "ARTS3780": "Contemporary Germany: History, Politics, Society"
                 },
                 "title": "Upper-Level Core Course",
                 "credits_to_complete": 0,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3511": "German 6",
-                    "ARTS3510": "German 5"
-                },
-                "title": "Advanced Language Core Courses",
-                "credits_to_complete": 6,
                 "core": true,
                 "levels": [],
                 "notes": ""
@@ -5405,10 +5467,13 @@
     "HISTD2": {
         "programs": [
             "3558",
+            "3325",
+            "3409",
             "3543",
-            "3341",
+            "4830",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "History",
         "type": "minor",
@@ -5423,35 +5488,10 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS3786": "Confronting the Past in Contemporary Europe",
-                    "ATSI3017": "Indigenous Histories and the Colonial World",
-                    "ARTS3220": "Architecture and Urbanism in Asia",
-                    "ARTS3780": "Contemporary Germany: History, Politics, Society",
-                    "ARTS3900": "Feminist and Queer Theory: Histories and Debates",
-                    "ARTS3217": "History of Modern China: Contested Visions",
-                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
-                    "ARTS3270": "Reflecting on Histories and Historians: Capstone",
-                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
-                    "ARTS3290": "Visions and Voices of Empire",
-                    "ARTS3289": "Documentary Film and History",
-                    "ARTS3292": "Migrants and Refugees in Australia and the World",
-                    "ARTS3283": "Roman Emperors: From Augustus to Nero"
-                },
-                "title": "Level 3 Courses",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1900": "Gendered Worlds: Introduction to Gender Studies",
-                    "ARTS1190": "Sydney: History, Landscapes, People",
                     "ARTS1270": "Global History: Exploring the First Globalization, 15th-19th Century",
-                    "ARTS1271": "History of the Present: The World since 1900"
+                    "ARTS1271": "History of the Present: The World since 1900",
+                    "ARTS1190": "Sydney: History, Landscapes, People",
+                    "ARTS1900": "Gendered Worlds: Introduction to Gender Studies"
                 },
                 "title": "Level 1 Courses",
                 "credits_to_complete": 12,
@@ -5463,34 +5503,59 @@
             },
             {
                 "courses": {
-                    "ARTS2900": "Global Feminisms: Competing Visions, Varying Histories",
-                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
-                    "ARTS2283": "Classical Greece",
-                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
-                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
-                    "ARTS2213": "Asian Popular Culture",
-                    "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
-                    "ARTS2282": "Rome",
-                    "ARTS2906": "History of Sexuality",
-                    "ARTS2272": "The European World, 1500-1800",
-                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
-                    "ARTS2211": "East Asia",
                     "ARTS2457": "China Imagined and Perceived",
-                    "ARTS2781": "Britain, Europe and the World Since 1945: From Empire to Brexit",
-                    "ARTS2212": "Southeast Asia",
-                    "ARTS2662": "Korea at a Glance",
-                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
-                    "ARTS2909": "Gender in South Asia and Southeast Asia",
+                    "ARTS2900": "Global Feminisms: Competing Visions, Varying Histories",
+                    "ARTS2282": "Rome",
                     "ARTS2150": "A House Divided: The Making of Modern America",
-                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS2283": "Classical Greece",
+                    "ARTS2781": "Britain, Europe and the World Since 1945: From Empire to Brexit",
+                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
                     "ARTS2904": "Dressed to Kill: Dress and Identity in History",
-                    "ARTS2271": "Inventing Modern Australia: 1900 to Now"
+                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS2909": "Gender in South Asia and Southeast Asia",
+                    "ARTS2213": "Asian Popular Culture",
+                    "ARTS2271": "Inventing Modern Australia: 1900 to Now",
+                    "ARTS2906": "History of Sexuality",
+                    "ARTS2211": "East Asia",
+                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
+                    "ARTS2212": "Southeast Asia",
+                    "ARTS2272": "The European World, 1500-1800",
+                    "ARTS2662": "Korea at a Glance",
+                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
+                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
+                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
+                    "ARTS2785": "Europe's Age of Catastrophe, 1914-1945"
                 },
                 "title": "Level 2 Courses",
                 "credits_to_complete": 12,
                 "core": false,
                 "levels": [
                     2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
+                    "ARTS3220": "Architecture and Urbanism in Asia",
+                    "ARTS3900": "Feminist and Queer Theory: Histories and Debates",
+                    "ATSI3017": "Indigenous Histories and the Colonial World",
+                    "ARTS3780": "Contemporary Germany: History, Politics, Society",
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
+                    "ARTS3292": "Migrants and Refugees in Australia and the World",
+                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
+                    "ARTS3283": "Roman Emperors: From Augustus to Nero",
+                    "ARTS3270": "Reflecting on History and Historians",
+                    "ARTS3290": "Visions and Voices of Empire",
+                    "ARTS3289": "Documentary Film and History",
+                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
+                    "ARTS3217": "History of Modern China: Contested Visions"
+                },
+                "title": "Level 3 Courses",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [
+                    3
                 ],
                 "notes": ""
             }
@@ -5500,12 +5565,12 @@
         "programs": [
             "3502",
             "3558",
+            "3325",
+            "3409",
             "3543",
             "3587",
-            "3325",
             "3554",
-            "3586",
-            "3409"
+            "3586"
         ],
         "name": "International Business",
         "type": "major",
@@ -5515,11 +5580,11 @@
         "curriculum": [
             {
                 "courses": {
-                    "MGMT2102": "Managing Across Cultures",
                     "MGMT2101": "International Business and Multinational Operations",
-                    "MGMT3101": "International Business Strategy",
+                    "COMM1150": "Global Business Environments",
                     "MGMT3102": "Asia-Pacific Business",
-                    "COMM1150": "Global Business Environments"
+                    "MGMT3101": "International Business Strategy",
+                    "MGMT2102": "Managing Across Cultures"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 30,
@@ -5530,26 +5595,26 @@
             {
                 "courses": {
                     "COMM3020": "Global Business Practicum",
-                    "MARK3081": "Distribution Strategy and Retail Channels",
-                    "COMM3900": "Capstone Project",
-                    "MGMT2726": "Business Ethics and Sustainability",
-                    "MARK2053": "Marketing Communications and Promotions Management",
-                    "INFS2702": "Supply Chain and Logistics Design ",
-                    "MGMT3702": "International Human Resource Management",
-                    "MGMT2106": "Comparative Management Systems",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "MGMT2010": "Innovation and Entrepreneurship",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "MGMT3721": "Negotiation Skills",
                     "COMM2233": "Industry Consulting Project",
-                    "MGMT2002": "Managing Business Communication",
-                    "COMM2244": "Future of Work Project",
-                    "INFS1602": "Digital Transformation in Business",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3101": "Industry Experience Placement 1",
+                    "MGMT3702": "International Human Resource Management",
                     "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "MARK2071": "International and Global Marketing"
+                    "COMM3202": "Industry Experience Placement 2",
+                    "MARK3081": "Distribution Strategy and Retail Channels",
+                    "MGMT2002": "Managing Business Communication",
+                    "MGMT2726": "Business Ethics and Sustainability",
+                    "INFS1602": "Digital Transformation in Business",
+                    "MGMT2106": "Comparative Management Systems",
+                    "MARK2071": "International and Global Marketing",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3900": "Capstone Project",
+                    "MARK2053": "Marketing Communications and Promotions Management",
+                    "COMM2222": "Industry Experience Program",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM2244": "Future of Work Project",
+                    "INFS2702": "Supply Chain and Logistics Design ",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "MGMT2010": "Innovation and Entrepreneurship",
+                    "MGMT3721": "Negotiation Skills"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
@@ -5563,13 +5628,13 @@
         "programs": [
             "3502",
             "3558",
+            "3325",
+            "3409",
             "3543",
             "3587",
-            "3325",
             "3554",
-            "3341",
             "3586",
-            "3409"
+            "3341"
         ],
         "name": "International Business",
         "type": "minor",
@@ -5696,12 +5761,14 @@
         "programs": [
             "3502",
             "3558",
-            "3543",
             "3325",
+            "3409",
+            "3543",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Japanese Studies",
         "type": "minor",
@@ -5716,10 +5783,10 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS3634": "Contemporary Japanese Literature",
                     "ARTS3643": "Advanced Writing in Japanese",
+                    "ARTS3638": "Learning Japanese through Manga and Anime",
                     "ARTS3641": "Commercial Japanese",
-                    "ARTS3638": "Learning Japanese through Manga and Anime"
+                    "ARTS3634": "Contemporary Japanese Literature"
                 },
                 "title": "Professional Language Elective Courses",
                 "credits_to_complete": 0,
@@ -5729,19 +5796,8 @@
             },
             {
                 "courses": {
-                    "ARTS2631": "Japanese 4",
-                    "ARTS2630": "Japanese 3"
-                },
-                "title": "Intermediate Language Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1630": "Japanese 1",
-                    "ARTS1631": "Japanese 2"
+                    "ARTS1631": "Japanese 2",
+                    "ARTS1630": "Japanese 1"
                 },
                 "title": "Introductory Language Core Courses",
                 "credits_to_complete": 12,
@@ -5762,11 +5818,22 @@
             },
             {
                 "courses": {
-                    "ARTS3639": "Japan in Popular Culture",
+                    "ARTS2631": "Japanese 4",
+                    "ARTS2630": "Japanese 3"
+                },
+                "title": "Intermediate Language Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
+                    "ARTS3639": "Japan in Popular Culture",
                     "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
-                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets"
+                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS2908": "Sex and Power in Early Modern China and Japan"
                 },
                 "title": "Japanese Contextual Studies Electives",
                 "credits_to_complete": 12,
@@ -5781,10 +5848,12 @@
             "3502",
             "3558",
             "3325",
+            "3409",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Advanced Japanese Studies",
         "type": "minor",
@@ -5810,24 +5879,21 @@
             },
             {
                 "courses": {
-                    "ARTS3639": "Japan in Popular Culture",
-                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
-                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS2908": "Sex and Power in Early Modern China and Japan"
+                    "ARTS3632": "Japanese 7",
+                    "ARTS3633": "Japanese 8"
                 },
-                "title": "Contextual Studies Electives",
+                "title": "Professional Language Core Courses",
                 "credits_to_complete": 12,
-                "core": false,
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
                     "ARTS3641": "Commercial Japanese",
+                    "ARTS3643": "Advanced Writing in Japanese",
                     "ARTS3634": "Contemporary Japanese Literature",
-                    "ARTS3638": "Learning Japanese through Manga and Anime",
-                    "ARTS3643": "Advanced Writing in Japanese"
+                    "ARTS3638": "Learning Japanese through Manga and Anime"
                 },
                 "title": "Professional Language Elective Courses",
                 "credits_to_complete": 0,
@@ -5837,12 +5903,15 @@
             },
             {
                 "courses": {
-                    "ARTS3632": "Japanese 7",
-                    "ARTS3633": "Japanese 8"
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
+                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
+                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS3639": "Japan in Popular Culture",
+                    "ARTS2908": "Sex and Power in Early Modern China and Japan"
                 },
-                "title": "Professional Language Core Courses",
+                "title": "Contextual Studies Electives",
                 "credits_to_complete": 12,
-                "core": true,
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -5852,12 +5921,14 @@
         "programs": [
             "3502",
             "3558",
-            "3543",
             "3325",
+            "3409",
+            "3543",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Korean Studies",
         "type": "minor",
@@ -5872,11 +5943,22 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS2213": "Asian Popular Culture",
-                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
-                    "ARTS2211": "East Asia",
+                    "ARTS2660": "Korean 3",
+                    "ARTS2661": "Korean 4"
+                },
+                "title": "Intermediate Language Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ARTS2662": "Korea at a Glance",
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict"
+                    "ARTS2213": "Asian Popular Culture",
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
+                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
+                    "ARTS2211": "East Asia"
                 },
                 "title": "Contextual Studies Courses",
                 "credits_to_complete": 12,
@@ -5886,8 +5968,8 @@
             },
             {
                 "courses": {
-                    "ARTS1661": "Korean 2",
-                    "ARTS1660": "Korean 1"
+                    "ARTS1660": "Korean 1",
+                    "ARTS1661": "Korean 2"
                 },
                 "title": "Introductory Language Core Courses",
                 "credits_to_complete": 12,
@@ -5897,22 +5979,8 @@
             },
             {
                 "courses": {
-                    "ARTS3667": "Insights into Korean as a Second Language",
-                    "ARTS3663": "Professional Korean",
-                    "ARTS3664": "Korean Translation",
-                    "ARTS3665": "Korean Interpreting",
-                    "ARTS3662": "Korean Popular Culture and Language"
-                },
-                "title": "Professional Language Elective Courses",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3660": "Korean 5",
-                    "ARTS3661": "Korean 6"
+                    "ARTS3661": "Korean 6",
+                    "ARTS3660": "Korean 5"
                 },
                 "title": "Advanced Language Core Courses",
                 "credits_to_complete": 0,
@@ -5922,12 +5990,15 @@
             },
             {
                 "courses": {
-                    "ARTS2660": "Korean 3",
-                    "ARTS2661": "Korean 4"
+                    "ARTS3665": "Korean Interpreting",
+                    "ARTS3664": "Korean Translation",
+                    "ARTS3667": "Insights into Korean as a Second Language",
+                    "ARTS3663": "Professional Korean",
+                    "ARTS3662": "Korean Popular Culture and Language"
                 },
-                "title": "Intermediate Language Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
+                "title": "Professional Language Elective Courses",
+                "credits_to_complete": 0,
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -5938,10 +6009,12 @@
             "3502",
             "3558",
             "3325",
+            "3409",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Advanced Korean Studies",
         "type": "minor",
@@ -5956,20 +6029,6 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS2662": "Korea at a Glance",
-                    "ARTS2213": "Asian Popular Culture",
-                    "ARTS2211": "East Asia",
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission"
-                },
-                "title": "Contextual Studies Courses",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "ARTS3660": "Korean 5",
                     "ARTS3661": "Korean 6"
                 },
@@ -5981,14 +6040,28 @@
             },
             {
                 "courses": {
+                    "ARTS3664": "Korean Translation",
                     "ARTS3662": "Korean Popular Culture and Language",
                     "ARTS3667": "Insights into Korean as a Second Language",
-                    "ARTS3664": "Korean Translation",
                     "ARTS3665": "Korean Interpreting",
                     "ARTS3663": "Professional Korean"
                 },
                 "title": "Professional Language Elective Courses",
                 "credits_to_complete": 24,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2211": "East Asia",
+                    "ARTS2662": "Korea at a Glance",
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
+                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
+                    "ARTS2213": "Asian Popular Culture"
+                },
+                "title": "Contextual Studies Courses",
+                "credits_to_complete": 6,
                 "core": false,
                 "levels": [],
                 "notes": ""
@@ -6163,12 +6236,12 @@
             "3502",
             "3558",
             "3435",
+            "3325",
+            "3409",
             "3543",
             "3587",
-            "3325",
             "3554",
-            "3586",
-            "3409"
+            "3586"
         ],
         "name": "Marketing",
         "type": "major",
@@ -6187,45 +6260,45 @@
         "curriculum": [
             {
                 "courses": {
-                    "MARK3092": "Brand Management",
-                    "MARK2060": "Event Management and Marketing",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "MARK3089": "Pricing Analytics",
-                    "COMM2222": "Industry Experience Program",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "MARK2051": "Consumer Behaviour",
-                    "MARK3081": "Distribution Strategy and Retail Channels",
-                    "COMM3020": "Global Business Practicum",
-                    "MARK2055": "Service Marketing and Management",
-                    "MARK2071": "International and Global Marketing",
-                    "COMM2233": "Industry Consulting Project",
-                    "MARK3088": "Product Analytics",
-                    "MARK2053": "Marketing Communications and Promotions Management",
-                    "MARK3085": "Digital Marketing and Web Analytics",
-                    "MARK3091": "New Product and New Service Development"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MARK3087": "Customer Analytics",
+                    "MARK2012": "Marketing Fundamentals",
+                    "MARK3054": "Marketing Analytics and Big Data",
                     "MARK2085": "Consumer Centric Innovation",
                     "MARK2052": "Marketing Research",
-                    "COMM1100": "Business Decision Making",
-                    "MARK2012": "Marketing Fundamentals",
-                    "MARK3054": "Marketing Analytics and Big Data"
+                    "MARK3087": "Customer Analytics",
+                    "COMM1100": "Business Decision Making"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 36,
                 "core": true,
                 "levels": [],
                 "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
+            },
+            {
+                "courses": {
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM2222": "Industry Experience Program",
+                    "MARK2053": "Marketing Communications and Promotions Management",
+                    "MARK3081": "Distribution Strategy and Retail Channels",
+                    "MARK3092": "Brand Management",
+                    "MARK2071": "International and Global Marketing",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "MARK3088": "Product Analytics",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "COMM3020": "Global Business Practicum",
+                    "MARK2060": "Event Management and Marketing",
+                    "MARK3089": "Pricing Analytics",
+                    "MARK2051": "Consumer Behaviour",
+                    "MARK3091": "New Product and New Service Development",
+                    "MARK2055": "Service Marketing and Management",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3101": "Industry Experience Placement 1"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -6233,13 +6306,13 @@
         "programs": [
             "3502",
             "3558",
-            "3543",
             "3325",
+            "3409",
+            "3543",
             "3554",
-            "3341",
             "3586",
-            "3778",
-            "3409"
+            "3341",
+            "3778"
         ],
         "name": "Marketing",
         "type": "minor",
@@ -6249,21 +6322,21 @@
         "curriculum": [
             {
                 "courses": {
-                    "MARK3081": "Distribution Strategy and Retail Channels",
                     "MARK3054": "Marketing Analytics and Big Data",
-                    "MARK2085": "Consumer Centric Innovation",
-                    "MARK3091": "New Product and New Service Development",
-                    "MARK2055": "Service Marketing and Management",
-                    "MARK3088": "Product Analytics",
-                    "MARK3087": "Customer Analytics",
+                    "MARK2051": "Consumer Behaviour",
                     "MARK2053": "Marketing Communications and Promotions Management",
-                    "MARK2052": "Marketing Research",
-                    "MARK3092": "Brand Management",
-                    "MARK3089": "Pricing Analytics",
                     "MARK2071": "International and Global Marketing",
+                    "MARK2055": "Service Marketing and Management",
+                    "MARK2052": "Marketing Research",
                     "MARK2060": "Event Management and Marketing",
+                    "MARK2085": "Consumer Centric Innovation",
+                    "MARK3088": "Product Analytics",
+                    "MARK3092": "Brand Management",
                     "MARK3085": "Digital Marketing and Web Analytics",
-                    "MARK2051": "Consumer Behaviour"
+                    "MARK3091": "New Product and New Service Development",
+                    "MARK3087": "Customer Analytics",
+                    "MARK3089": "Pricing Analytics",
+                    "MARK3081": "Distribution Strategy and Retail Channels"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
@@ -6273,14 +6346,149 @@
             },
             {
                 "courses": {
-                    "COMM1100": "Business Decision Making",
-                    "MARK2012": "Marketing Fundamentals"
+                    "MARK2012": "Marketing Fundamentals",
+                    "COMM1100": "Business Decision Making"
                 },
                 "title": "Core Course",
                 "credits_to_complete": 12,
                 "core": true,
                 "levels": [],
                 "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
+            }
+        ]
+    },
+    "MATHA1": {
+        "programs": [
+            "3956"
+        ],
+        "name": "Applied Mathematics",
+        "type": "major",
+        "UOC": 90,
+        "code": "MATHA1",
+        "course_constraints": [
+            {
+                "title": "Recommended Level 2 Electives",
+                "description": "Students in this major are recommended to include at least 6 UOC from the following among their electives: MATH2241 Intro to Atmos & Oceans (6 UOC)"
+            },
+            {
+                "title": "Recommended Level 1 Electives",
+                "description": "These courses are not required but are recommended as good complementary Level 1 electives for this major. Students interested in physical sciences or theoretical oceanography, meterology or fluid dynamics, both of: PHYS1121 Physics 1A (6 UOC) PHYS1221 Physics 1B (6 UOC) Students interest in social or biological sciences, at least 12 UOC (i.e. both level I courses from the subject area) from: Biology BABS1201 Molecules, Cells and Genes (6 UOC) BIOS1101 Evolutionary & Functional Biol (6 UOC) Psychology PSYC1001 Psychology 1A (6 UOC) PSYC1011 Psychology 1B (6 UOC) Chemistry CHEM1011 Essentials of Chemistry 1A (6 UOC) CHEM1021 Essentials of Chemistry 1B (6 UOC) Students interested in computational methods or computer science: COMP1511 Introduction to Programming (6 UOC)"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH3051": "Applied Real and Functional Analysis",
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "MATH3121": "Mathematical Methods and Partial Differential Equations",
+                    "MATH3261": "Fluids, Oceans and Climate",
+                    "MATH3101": "Computational Mathematics for Science and Engineering",
+                    "MATH3361": "Stochastic Differential Equations: Theory, Applications, and Numerical Methods",
+                    "MATH6781": "Biomathematics",
+                    "MATH3191": "Mathematical Optimization for Data Science",
+                    "MATH3161": "Optimization",
+                    "MATH3311": "Computational Mathematics for Finance",
+                    "MATH3371": "Numerical Linear Algebra",
+                    "MATH3201": "Dynamical Systems and Chaos",
+                    "MATH3171": "Linear and Discrete Optimization Modelling"
+                },
+                "title": "Level 3 Core ",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG1811": "Computing for Engineers",
+                    "COMP1": "any level 1 Computer Science course"
+                },
+                "title": "Level 1 Computer Science Elective",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH3": "any level 3 Mathematics course"
+                },
+                "title": "Level 3 Prescribed Electives ",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1241": "Higher Mathematics 1B",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH1141": "Higher Mathematics 1A"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH2601": "Higher Linear Algebra",
+                    "MATH2901": "Higher Theory of Statistics",
+                    "MATH2621": "Higher Complex Analysis",
+                    "MATH2221": "Higher Theory and Applications of Differential Equations",
+                    "MATH2301": "Mathematical Computing",
+                    "MATH2111": "Higher Several Variable Calculus"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "MATHAH": {
+        "programs": [
+            "3956",
+            "3962",
+            "4500"
+        ],
+        "name": "Applied Mathematics",
+        "type": "honours",
+        "UOC": 48,
+        "code": "MATHAH",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH4001": "Mathematics and Statistics Honours Thesis"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH5": "any level 5 Mathematics course"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Note: Courses must be approved by the Head of School or nominee and taken with the advice of the Honours thesis supervisor."
             }
         ]
     },
@@ -6452,6 +6660,118 @@
                 "levels": [
                     1
                 ],
+                "notes": ""
+            }
+        ]
+    },
+    "MATHE1": {
+        "programs": [
+            "3959",
+            "3587",
+            "3586"
+        ],
+        "name": "Quantitative Data Science",
+        "type": "major",
+        "UOC": 66,
+        "code": "MATHE1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH3871": "Bayesian Inference and Computation",
+                    "MATH3821": "Statistical Modelling and Computing"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH2871": "Data Management for Statistical Analysis",
+                    "MATH2831": "Linear Models",
+                    "MATH2801 or MATH2901": [
+                        "Theory of Statistics",
+                        "Higher Theory of Statistics"
+                    ]
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1231": "Mathematics 1B"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON2111": "Introduction to Economic Development",
+                    "COMP3411": "Artificial Intelligence",
+                    "MATH5836": "Data Mining and its Business Applications",
+                    "ECON3206": "Financial Econometrics",
+                    "MATH3911": "Higher Statistical Inference",
+                    "COMP4121": "Advanced Algorithms",
+                    "ECON3123": "Organisational Economics",
+                    "COMP4418": "Knowledge Representation and Reasoning",
+                    "COMP9313": "Big Data Management",
+                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
+                    "MARK2012": "Marketing Fundamentals",
+                    "COMP9417": "Machine Learning and Data Mining",
+                    "COMP6771": "Advanced C++ Programming",
+                    "ECON3107": "Economics of Finance",
+                    "ECON2102": "Macroeconomics 2",
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "MATH2011": "Several Variable Calculus",
+                    "MATH3901": "Higher Probability and Stochastic Processes",
+                    "ECON3208": "Applied Econometric Methods",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "MATH3811": "Statistical Inference",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "ECON2107": "Modern Labour Markets: Theory and Policy",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "ECON2209": "Business Forecasting",
+                    "COMP9319": "Web Data Compression and Search",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "ECON2103": "Business and Government",
+                    "MATH3411": "Information, Codes and Ciphers",
+                    "MATH3856": "Introduction to Data and Machine Learning ",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH3161": "Optimization",
+                    "ECON1102": "Macroeconomics 1",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
+                    "ECON2101": "Microeconomics 2",
+                    "MATH2111": "Higher Several Variable Calculus",
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "ECON2206": "Introductory Econometrics ",
+                    "COMP9315": "Database Systems Implementation",
+                    "INFS1602": "Digital Transformation in Business",
+                    "COMP6441": "Security Engineering and Cyber Security",
+                    "MATH3801": "Probability and Stochastic Processes",
+                    "ECON3121": "Industrial Organisation"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 24,
+                "core": false,
+                "levels": [],
                 "notes": ""
             }
         ]
@@ -6657,6 +6977,122 @@
             }
         ]
     },
+    "MATHP1": {
+        "programs": [
+            "3956"
+        ],
+        "name": "Pure Mathematics",
+        "type": "major",
+        "UOC": 90,
+        "code": "MATHP1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH2601": "Higher Linear Algebra",
+                    "MATH2111": "Higher Several Variable Calculus",
+                    "MATH2621": "Higher Complex Analysis",
+                    "MATH2901": "Higher Theory of Statistics",
+                    "MATH2701": "Abstract Algebra and Fundamental Analysis",
+                    "MATH2221": "Higher Theory and Applications of Differential Equations"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG1811": "Computing for Engineers",
+                    "COMP1": "any level 1 Computer Science course"
+                },
+                "title": "Level 1 Computer Science Elective",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH3701": "Higher Topology and Differential Geometry",
+                    "MATH3611": "Higher Analysis",
+                    "MATH3711": "Higher Algebra"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1241": "Higher Mathematics 1B"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH3": "any level 3 Mathematics course"
+                },
+                "title": "Level 3 Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "MATHPH": {
+        "programs": [
+            "3956",
+            "3962",
+            "4500"
+        ],
+        "name": "Pure Mathematics",
+        "type": "honours",
+        "UOC": 48,
+        "code": "MATHPH",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH4001": "Mathematics and Statistics Honours Thesis"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH5": "any level 5 Mathematics course"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Note: Courses must be approved by the Head of School or nominee and taken with the advice of the Honours thesis supervisor."
+            }
+        ]
+    },
     "MATHT1": {
         "programs": [
             "3970",
@@ -6738,6 +7174,131 @@
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "MATHTH": {
+        "programs": [
+            "3956",
+            "3962",
+            "4500"
+        ],
+        "name": "Statistics",
+        "type": "honours",
+        "UOC": 48,
+        "code": "MATHTH",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH4001": "Mathematics and Statistics Honours Thesis"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH5": "any level 5 Mathematics course"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Note: Courses must be approved by the Head of School or nominee and taken with the advice of the honours thesis supervisor."
+            }
+        ]
+    },
+    "MATHU1": {
+        "programs": [
+            "3956"
+        ],
+        "name": "Advanced Statistics",
+        "type": "major",
+        "UOC": 84,
+        "code": "MATHU1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ENGG1811": "Computing for Engineers",
+                    "COMP1": "any level 1 Computer Science course"
+                },
+                "title": "Level 1 Computer Science Elective",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH3871 or MATH3831 or MATH3851 or MATH3856 or MATH3841": [
+                        "Bayesian Inference and Computation",
+                        "Statistical Methods in Social and Market Research",
+                        "Experimental Design and Categorical Data",
+                        "Introduction to Data and Machine Learning ",
+                        "Statistical Analysis of Dependent Data"
+                    ],
+                    "MATH3901": "Higher Probability and Stochastic Processes",
+                    "MATH3911": "Higher Statistical Inference",
+                    "MATH3821": "Statistical Modelling and Computing"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH3": "any level 3 Mathematics course"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH1241": "Higher Mathematics 1B"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH2221 or MATH2621": [
+                        "Higher Theory and Applications of Differential Equations",
+                        "Higher Complex Analysis"
+                    ],
+                    "MATH2111": "Higher Several Variable Calculus",
+                    "MATH2931": "Higher Linear Models",
+                    "MATH2601": "Higher Linear Algebra",
+                    "MATH2901": "Higher Theory of Statistics"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 30,
                 "core": true,
                 "levels": [
                     2
@@ -7122,12 +7683,12 @@
             "3502",
             "3558",
             "3435",
+            "3325",
+            "3409",
             "3543",
             "3587",
-            "3325",
             "3554",
-            "3586",
-            "3409"
+            "3586"
         ],
         "name": "Human Resource Management",
         "type": "major",
@@ -7137,9 +7698,9 @@
         "curriculum": [
             {
                 "courses": {
-                    "MGMT2004": "Managing Organisational Behaviour",
                     "MGMT2718": "Human Resource Management",
-                    "MGMT3701": "Regulating Work and Employment"
+                    "MGMT3701": "Regulating Work and Employment",
+                    "MGMT2004": "Managing Organisational Behaviour"
                 },
                 "title": "Core Courses (MGMT)",
                 "credits_to_complete": 18,
@@ -7149,9 +7710,9 @@
             },
             {
                 "courses": {
-                    "COMM1170": "Organisational Resources",
+                    "COMM1900": "Organisations in Their Environment",
                     "COMM1100": "Business Decision Making",
-                    "COMM1900": "Organisations in Their Environment"
+                    "COMM1170": "Organisational Resources"
                 },
                 "title": "Core Course (COMM)",
                 "credits_to_complete": 0,
@@ -7172,22 +7733,22 @@
             },
             {
                 "courses": {
-                    "COMM2233": "Industry Consulting Project",
-                    "COMM2244": "Future of Work Project",
-                    "COMM3900": "Capstone Project",
-                    "COMM2222": "Industry Experience Program",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "MGMT3721": "Negotiation Skills",
-                    "MGMT2725": "Career Management",
+                    "MGMT3728": "Managing Pay and Performance",
                     "MGMT3729": "Managing Training and Development",
-                    "MGMT3702": "International Human Resource Management",
                     "MGMT2705": "Industrial Relations",
-                    "MGMT3728": "Managing Pay and Performance"
+                    "MGMT2725": "Career Management",
+                    "MGMT3721": "Negotiation Skills",
+                    "MGMT3702": "International Human Resource Management",
+                    "COMM3900": "Capstone Project",
+                    "COMM2233": "Industry Consulting Project",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM2244": "Future of Work Project",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 0,
@@ -7200,13 +7761,13 @@
     "MGMTH2": {
         "programs": [
             "3502",
+            "3325",
+            "3409",
             "3543",
             "3587",
-            "3325",
             "3554",
-            "3341",
             "3586",
-            "3409"
+            "3341"
         ],
         "name": "Human Resource Management",
         "type": "minor",
@@ -7255,17 +7816,86 @@
         "programs": [
             "3502",
             "3558",
+            "3325",
+            "3409",
             "3543",
             "3587",
-            "3325",
             "3554",
-            "3586",
-            "3409"
+            "3586"
         ],
         "name": "Innovation, Strategy and Entrepreneurship",
         "type": "major",
         "UOC": 48,
         "code": "MGMTJ1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMM1120": "Collaboration and Innovation in Business"
+                },
+                "title": "Gateway Core Course",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3900": "Capstone Project",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "MGMT3721": "Negotiation Skills",
+                    "COMM3020": "Global Business Practicum",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "MGMT2721": "Managing People",
+                    "MGMT2726": "Business Ethics and Sustainability",
+                    "TABL2712": "Business Ethics and the Law",
+                    "COMM2244": "Future of Work Project",
+                    "MARK2012": "Marketing Fundamentals",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "BEIL0007": "Sustainable Design Thinking",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM2222": "Industry Experience Program",
+                    "DESN3000": "Strategic Design Innovation",
+                    "DART2190": "Creative Experimentation",
+                    "COMM1000": "Creating Social Change: From Innovation to Impact",
+                    "PSYC1028": "Psychology of Human Centred Design"
+                },
+                "title": "Elective Courses",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "with at least 12 UOC at level 3. Please note: Students may count ONE (6 UOC) of COMM2222, COMM2233, COMM2244, COMM3020, COMM3030, COMM3101, COMM3202, COMM3900 or ACTL3192 towards their Innovation, Strategy and Entrepreneurship major."
+            },
+            {
+                "courses": {
+                    "MGMT3001": "Business and Corporate Strategy",
+                    "COMM1040": "Entrepreneurial Ecosystems",
+                    "MGMT2010": "Innovation and Entrepreneurship",
+                    "MGMT2001": "Managing Innovation and Organisational Change"
+                },
+                "title": "Specialisation Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "MGMTJ2": {
+        "programs": [
+            "3502",
+            "3558",
+            "3543",
+            "3587",
+            "3554",
+            "3586"
+        ],
+        "name": "Innovation, Strategy and Entrepreneurship",
+        "type": "minor",
+        "UOC": 30,
+        "code": "MGMTJ2",
         "course_constraints": [],
         "curriculum": [
             {
@@ -7290,35 +7920,6 @@
                 "core": true,
                 "levels": [],
                 "notes": ""
-            },
-            {
-                "courses": {
-                    "COMM1000": "Creating Social Change: From Innovation to Impact",
-                    "COMM3020": "Global Business Practicum",
-                    "MARK2012": "Marketing Fundamentals",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "BEIL0007": "Sustainable Design Thinking",
-                    "MGMT2726": "Business Ethics and Sustainability",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "MGMT3721": "Negotiation Skills",
-                    "COMM2244": "Future of Work Project",
-                    "DESN3000": "Strategic Design Innovation",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "COMM2233": "Industry Consulting Project",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "DART2190": "Creative Experimentation",
-                    "COMM3900": "Capstone Project",
-                    "MGMT2721": "Managing People",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "TABL2712": "Business Ethics and the Law",
-                    "COMM2222": "Industry Experience Program"
-                },
-                "title": "Elective Courses",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": "with at least 12 UOC at level 3. Please note: Students may count ONE (6 UOC) of COMM2222, COMM2233, COMM2244, COMM3020, COMM3030, COMM3101, COMM3202, COMM3900 or ACTL3192 towards their Innovation, Strategy and Entrepreneurship major."
             }
         ]
     },
@@ -8970,12 +9571,15 @@
     },
     "PSYCM2": {
         "programs": [
+            "3325",
             "3970",
+            "3409",
             "3543",
-            "3341",
+            "4830",
             "3962",
-            "3778",
-            "3409"
+            "4825",
+            "3341",
+            "3778"
         ],
         "name": "Psychology",
         "type": "minor",
@@ -9064,16 +9668,6 @@
             },
             {
                 "courses": {
-                    "any course": "1"
-                },
-                "title": "Free Elective",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "MATH1141 or MATH1131": [
                         "Higher Mathematics 1A",
                         "Mathematics 1A"
@@ -9141,11 +9735,13 @@
     },
     "SOCAD2": {
         "programs": [
-            "3543",
             "3325",
-            "3341",
+            "3409",
+            "3543",
+            "4830",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Sociology and Anthropology",
         "type": "minor",
@@ -9160,27 +9756,27 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS2876": "Understanding the Self",
-                    "ARTS2874": "Culture and Emotion",
-                    "ARTS2870": "Citizens, Action and Dissent",
-                    "ARTS2877": "Technologies, Culture, Society",
-                    "ARTS2822": "Decolonising Research Methods"
+                    "ARTS3870": "Social Perspectives, Critical Questions"
                 },
-                "title": "Level 2 Prescribed Electives",
+                "title": "Level 3 Core Courses",
                 "credits_to_complete": 6,
-                "core": false,
+                "core": true,
                 "levels": [
-                    2
+                    3
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "ARTS2871": "Power and Powerlessness"
+                    "ARTS2874": "Culture and Emotion",
+                    "ARTS2877": "Technologies, Culture, Society",
+                    "ARTS2822": "Decolonising Research Methods",
+                    "ARTS2870": "Citizens, Action and Dissent",
+                    "ARTS2876": "Understanding the Self"
                 },
-                "title": "Level 2 Core Courses",
+                "title": "Level 2 Prescribed Electives",
                 "credits_to_complete": 6,
-                "core": true,
+                "core": false,
                 "levels": [
                     2
                 ],
@@ -9202,9 +9798,9 @@
             {
                 "courses": {
                     "ARTS3874": "Culture and Human Rights",
-                    "ARTS3886": "Understanding Crisis",
+                    "ARTS3885": "Violence, Resistance, Change",
                     "ARTS3872": "Media, Culture and Power",
-                    "ARTS3885": "Violence, Resistance, Change"
+                    "ARTS3886": "Understanding Crisis"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 6,
@@ -9216,13 +9812,13 @@
             },
             {
                 "courses": {
-                    "ARTS3870": "Social Perspectives, Critical Questions"
+                    "ARTS2871": "Power and Powerlessness"
                 },
-                "title": "Level 3 Core Courses",
+                "title": "Level 2 Core Courses",
                 "credits_to_complete": 6,
                 "core": true,
                 "levels": [
-                    3
+                    2
                 ],
                 "notes": ""
             }
@@ -9533,12 +10129,14 @@
         "programs": [
             "3502",
             "3558",
-            "3543",
             "3325",
+            "3409",
+            "3543",
+            "4830",
             "3554",
-            "3341",
+            "4825",
             "3444",
-            "3409"
+            "3341"
         ],
         "name": "Spanish Studies",
         "type": "minor",
@@ -9553,9 +10151,30 @@
         "curriculum": [
             {
                 "courses": {
-                    "ARTS3576": "The Making of Modern Spain",
+                    "ARTS1570": "Spanish 1",
+                    "ARTS1571": "Spanish 2"
+                },
+                "title": "Introductory Language Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3574": "Fantasy, Love, and Violence in Spanish and Latin American Cinema"
+                },
+                "title": "Upper-Level Core Course",
+                "credits_to_complete": 0,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3577": "Spanish for Entrepreneurs",
                     "ARTS3786": "Confronting the Past in Contemporary Europe",
-                    "ARTS3577": "Spanish for Entrepreneurs"
+                    "ARTS3576": "The Making of Modern Spain"
                 },
                 "title": "Upper-Level Prescribed Electives",
                 "credits_to_complete": 0,
@@ -9580,27 +10199,6 @@
                     "ARTS2571": "Spanish 4"
                 },
                 "title": "Intermediate Language Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3574": "Fantasy, Love, and Violence in Spanish and Latin American Cinema"
-                },
-                "title": "Upper-Level Core Course",
-                "credits_to_complete": 0,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1571": "Spanish 2",
-                    "ARTS1570": "Spanish 1"
-                },
-                "title": "Introductory Language Core Courses",
                 "credits_to_complete": 12,
                 "core": true,
                 "levels": [],
@@ -9671,32 +10269,33 @@
         "curriculum": [
             {
                 "courses": {
+                    "TABL2756": "International Business Tax",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "TABL2751": "Business Taxation",
                     "TABL3752": "Capital Gains Tax",
+                    "TABL3757": "Corporate Tax Strategy",
+                    "TABL2793": "People and the Environmental Challenge",
+                    "TABL3755": "Taxation of Business Entities",
+                    "TABL4722": "Special Topic in Taxation",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3303": "Industry-Research Integrated Learning",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3202": "Industry Experience Placement 2",
                     "COMM2233": "Industry Consulting Project",
                     "COMM3101": "Industry Experience Placement 1",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "TABL3755": "Taxation of Business Entities",
-                    "TABL2756": "International Business Tax",
-                    "COMM3020": "Global Business Practicum",
-                    "TABL2793": "People and the Environmental Challenge",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "TABL2741": "Business Entities",
-                    "TABL3757": "Corporate Tax Strategy",
-                    "TABL4722": "Special Topic in Taxation",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3202": "Industry Experience Placement 2"
+                    "COMM2222": "Industry Experience Program"
                 },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 30,
+                "title": "Taxation Course List for Commerce/Law (4733) Students",
+                "credits_to_complete": 48,
                 "core": false,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "TABL2751": "Business Taxation",
+                    "COMM1150": "Global Business Environments",
                     "TABL2710": "Business and the Law",
-                    "COMM1150": "Global Business Environments"
+                    "TABL2751": "Business Taxation"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 18,
@@ -9706,24 +10305,70 @@
             },
             {
                 "courses": {
-                    "TABL4722": "Special Topic in Taxation",
-                    "COMM2222": "Industry Experience Program",
-                    "TABL3757": "Corporate Tax Strategy",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3303": "Industry-Research Integrated Learning",
-                    "COMM2233": "Industry Consulting Project",
-                    "TABL2793": "People and the Environmental Challenge",
-                    "COMM3020": "Global Business Practicum",
-                    "TABL2751": "Business Taxation",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "TABL2756": "International Business Tax",
                     "COMM3101": "Industry Experience Placement 1",
                     "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "TABL2756": "International Business Tax",
+                    "TABL3752": "Capital Gains Tax",
+                    "TABL4722": "Special Topic in Taxation",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3020": "Global Business Practicum",
+                    "TABL2741": "Business Entities",
                     "TABL3755": "Taxation of Business Entities",
-                    "TABL3752": "Capital Gains Tax"
+                    "COMM3202": "Industry Experience Placement 2",
+                    "TABL2793": "People and the Environmental Challenge",
+                    "COMM2233": "Industry Consulting Project",
+                    "TABL3757": "Corporate Tax Strategy"
                 },
-                "title": "Taxation Course List for Commerce/Law (4733) Students",
-                "credits_to_complete": 48,
+                "title": "Prescribed Electives",
+                "credits_to_complete": 30,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "TABLC2": {
+        "programs": [
+            "3502",
+            "3554"
+        ],
+        "name": "Taxation",
+        "type": "minor",
+        "UOC": 30,
+        "code": "TABLC2",
+        "course_constraints": [
+            {
+                "title": "Minimum Level 2 and 3 UOC",
+                "description": "Students must complete a minimum of 18 UOC of the following courses. any level 2 course any level 3 course"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "TABL2710": "Business and the Law",
+                    "COMM1150": "Global Business Environments",
+                    "TABL2751": "Business Taxation"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "TABL3755": "Taxation of Business Entities",
+                    "TABL3757": "Corporate Tax Strategy",
+                    "TABL2741": "Business Entities",
+                    "TABL3752": "Capital Gains Tax",
+                    "TABL2793": "People and the Environmental Challenge",
+                    "TABL4722": "Special Topic in Taxation",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "TABL2756": "International Business Tax"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 12,
                 "core": false,
                 "levels": [],
                 "notes": ""
@@ -10006,93 +10651,6 @@
                 "title": "Core Courses",
                 "credits_to_complete": 36,
                 "core": true,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
-    "MGMTJ2": {
-        "programs": [
-            "3502",
-            "3558",
-            "3543",
-            "3587",
-            "3554",
-            "3586"
-        ],
-        "name": "Innovation, Strategy and Entrepreneurship",
-        "type": "minor",
-        "UOC": 30,
-        "code": "MGMTJ2",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "COMM1120": "Collaboration and Innovation in Business"
-                },
-                "title": "Gateway Core Course",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MGMT3001": "Business and Corporate Strategy",
-                    "COMM1040": "Entrepreneurial Ecosystems",
-                    "MGMT2001": "Managing Innovation and Organisational Change",
-                    "MGMT2010": "Innovation and Entrepreneurship"
-                },
-                "title": "Specialisation Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
-    "TABLC2": {
-        "programs": [
-            "3502",
-            "3554"
-        ],
-        "name": "Taxation",
-        "type": "minor",
-        "UOC": 30,
-        "code": "TABLC2",
-        "course_constraints": [
-            {
-                "title": "Minimum Level 2 and 3 UOC",
-                "description": "Students must complete a minimum of 18 UOC of the following courses. any level 2 course any level 3 course"
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "TABL2751": "Business Taxation",
-                    "TABL2710": "Business and the Law",
-                    "COMM1150": "Global Business Environments"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "TABL3757": "Corporate Tax Strategy",
-                    "TABL3752": "Capital Gains Tax",
-                    "TABL2756": "International Business Tax",
-                    "TABL2741": "Business Entities",
-                    "TABL2793": "People and the Environmental Challenge",
-                    "TABL4722": "Special Topic in Taxation",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "TABL3755": "Taxation of Business Entities"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
                 "levels": [],
                 "notes": ""
             }

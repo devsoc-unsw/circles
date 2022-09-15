@@ -19,6 +19,7 @@ from algorithms.objects.categories import (
 )
 from algorithms.objects.conditions import (
     CompositeCondition,
+    CoresCondition,
     CoreqCoursesCondition,
     CourseCondition,
     CourseExclusionCondition,
@@ -90,6 +91,8 @@ def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=to
                 # (COND1 || COND2 && COND3) or similar combinations is undefined
                 print("WARNING: Found an undefined logic combination. Skipping.")
                 return None, index - 1
+            if token == category.logic.value:
+                continue
             if token == ")":
                 # We've reached the end of the condition
                 return category, index - 1
@@ -102,7 +105,7 @@ def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=to
                 category.add_category(sub_category)
             # skip the tokens used in the sub-category
             # should only be more than one if the sub-category is a composite
-            [next(token_iter) for _ in range(sub_index + 1)]
+            [next(token_iter) for _ in range(sub_index)]
 
     if re.match(r"^[A-Z]{4}$", tokens[0], flags=re.IGNORECASE):
         # Course type
@@ -217,7 +220,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
-            cond: UOCCondition | WAMCondition | GradeCondition
+            cond: UOCCondition | WAMCondition | GradeCondition | CoresCondition
             if is_uoc(token):
                 # Condition for UOC requirement
                 cond = UOCCondition(get_uoc(token))
@@ -227,6 +230,9 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
             elif is_grade(token):
                 # Condition for GRADE requirement (mark in a single course)
                 cond = GradeCondition(get_grade(token))
+            elif token == "CORES":
+                # Condition for Core Course completion requirement
+                cond = CoresCondition()
             else:
                 # Unmatched token. Error
                 return None, index + 1
@@ -236,7 +242,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
                 next(item)  # Skip "in" keyword
 
                 # Get the category of the condition
-                category, sub_index = create_category(tokens[index + 2 :])
+                category, sub_index = create_category(tokens[index + 2:])
 
                 if category is None:
                     # Error. Return None.

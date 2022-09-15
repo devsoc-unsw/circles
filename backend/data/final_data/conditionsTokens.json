@@ -168,6 +168,17 @@
         ")",
         ")"
     ],
+    "ACTL2131": [
+        "(",
+        "ACTL1101",
+        "&&",
+        "(",
+        "MATH1251",
+        "||",
+        "MATH1241",
+        ")",
+        ")"
+    ],
     "ACTL3141": [
         "(",
         "(",
@@ -328,6 +339,10 @@
         "4520",
         ")"
     ],
+    "ACTL4010": [
+        "(",
+        ")"
+    ],
     "ACTL4011": [
         "(",
         ")"
@@ -347,15 +362,19 @@
     ],
     "ADAD3000": [
         "(",
-        "SART3800",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "SART3800,",
+        "SDES2116,",
+        "SOMA3616,",
+        "DART3203,",
+        "DDES2102,",
+        "DART3100",
         "||",
-        "SDES2116",
-        "||",
-        "SOMA3616",
-        "||",
-        "DART3203",
-        "||",
-        "DDES2102",
+        "DART3310",
         ")"
     ],
     "ADAD4001": [
@@ -688,17 +707,11 @@
     ],
     "ARCH1302": [
         "(",
-        "ARCH1202",
-        "||",
-        "ARCH1203",
-        "&&",
         "ARCH1311",
         ")"
     ],
     "ARCH1311": [
         "(",
-        "ARCH1202",
-        "||",
         "ARCH1203",
         ")"
     ],
@@ -949,54 +962,41 @@
     "ARTS2020": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2022": [
         "(",
+        "24UOC",
         ")"
     ],
     "ARTS2031": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2033": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2034": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2035": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2036": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2040": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2041": [
@@ -1009,114 +1009,92 @@
     "ARTS2042": [
         "(",
         "24UOC",
+        ")"
+    ],
+    "ARTS2050": [
+        "(",
+        "12UOC",
         "in",
         "L1",
+        "&&",
+        "an",
+        "Arts,",
+        "Design",
+        "&&",
+        "Architecture",
+        "program",
         ")"
     ],
     "ARTS2061": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2062": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2063": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2064": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2065": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         "&&",
-        "ARTS1060",
-        "||",
-        "ARTS1062",
-        "||",
-        "ARTS1063",
-        "||",
         "ARTS1064",
         ")"
     ],
     "ARTS2066": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2068": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2120": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2121": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2122": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2123": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2125": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2126": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2127": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2128": [
@@ -1136,8 +1114,6 @@
     "ARTS2150": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2210": [
@@ -1150,22 +1126,16 @@
     "ARTS2211": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2212": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2213": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2240": [
@@ -1185,50 +1155,36 @@
     "ARTS2243": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2244": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2248": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2249": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2270": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2271": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2272": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2278": [
@@ -1248,8 +1204,6 @@
     "ARTS2282": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2283": [
@@ -1262,8 +1216,6 @@
     "ARTS2285": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2360": [
@@ -1283,8 +1235,6 @@
     "ARTS2362": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2363": [
@@ -1301,15 +1251,11 @@
     "ARTS2374": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2375": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2382": [
@@ -1336,8 +1282,6 @@
     "ARTS2389": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2450": [
@@ -1367,8 +1311,6 @@
     "ARTS2457": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2458": [
@@ -1426,8 +1368,6 @@
     "ARTS2482": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2485": [
@@ -1447,8 +1387,6 @@
     "ARTS2487": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2488": [
@@ -1498,8 +1436,6 @@
     "ARTS2633": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2660": [
@@ -1568,6 +1504,11 @@
         "L1",
         ")"
     ],
+    "ARTS2720": [
+        "(",
+        "24UOC",
+        ")"
+    ],
     "ARTS2750": [
         "(",
         "24UOC",
@@ -1578,8 +1519,6 @@
     "ARTS2751": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2752": [
@@ -1613,8 +1552,6 @@
     "ARTS2785": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2788": [
@@ -1706,8 +1643,6 @@
     "ARTS2852": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         "&&",
         "a",
         "Politics,",
@@ -1718,13 +1653,9 @@
         "a",
         "Politics",
         "&&",
-        "IR",
-        "major",
-        "||",
-        "a",
-        "Development",
-        "Studies",
-        "major",
+        "International",
+        "Relations",
+        "specialisation",
         ")"
     ],
     "ARTS2870": [
@@ -1779,36 +1710,26 @@
     "ARTS2900": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2904": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2906": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2908": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS2909": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS3013": [
@@ -1826,38 +1747,24 @@
         "the",
         "following",
         "declared",
-        "streams,",
-        "Music",
-        "||",
-        "TPS.",
+        "specialisation,",
+        "Theatre",
+        "&&",
+        "Performance",
+        "Studies.",
         "||",
         "96UOC",
         "&&",
         "a",
-        "Music",
-        "single/dual",
-        "degree.",
+        "Bachelor",
+        "of",
+        "Music.",
         "65WAM",
         ")"
     ],
     "ARTS3015": [
         "(",
         "48UOC",
-        "&&",
-        "MDIA#",
-        "||",
-        "a",
-        "Creative",
-        "Writing,",
-        "English,",
-        "FIlm",
-        "Studies",
-        "||",
-        "MCT",
-        "major",
-        "||",
-        "minor.",
-        "65WAM",
         ")"
     ],
     "ARTS3022": [
@@ -1876,7 +1783,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Creative",
         "Writing",
         "||",
@@ -1899,7 +1806,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Creative",
         "Writing",
         "||",
@@ -1922,7 +1829,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Creative",
         "Writing",
         "||",
@@ -1931,9 +1838,23 @@
     ],
     "ARTS3026": [
         "(",
-        "24UOC",
+        "48UOC",
+        "&&",
+        "6UOC",
         "in",
         "L1",
+        "&&",
+        "6UOC",
+        "in",
+        "L2",
+        "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisation,",
+        "Creative",
+        "Writing",
         ")"
     ],
     "ARTS3030": [
@@ -1967,7 +1888,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
         ")"
     ],
@@ -1987,7 +1908,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
         ")"
     ],
@@ -2027,7 +1948,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
         ")"
     ],
@@ -2047,7 +1968,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
         ")"
     ],
@@ -2067,13 +1988,8 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
-        "||",
-        "Media,",
-        "Culture",
-        "&&",
-        "Technology",
         ")"
     ],
     "ARTS3050": [
@@ -2092,7 +2008,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
         ")"
     ],
@@ -2112,12 +2028,11 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "English",
         ")"
     ],
     "ARTS3060": [
-        "(",
         "(",
         "48UOC",
         "&&",
@@ -2133,32 +2048,12 @@
         "of",
         "the",
         "following",
-        "streams,",
-        "Film",
+        "specialisations,",
+        "Cinema",
         "Studies",
         "||",
-        "MCT",
-        ")",
-        "||",
-        "(",
-        "ARTS1060",
-        "||",
-        "ARTS1090",
-        ")",
-        ",",
-        "6UOC",
-        "in",
-        "L2",
         "Film",
         "Studies",
-        "electives",
-        "&&",
-        "a",
-        "Media",
-        "single",
-        "||",
-        "double",
-        "degree",
         ")"
     ],
     "ARTS3061": [
@@ -2169,26 +2064,7 @@
         "||",
         "ARTS1064",
         "&&",
-        "ARTS2065.",
-        "||",
-        "66UOC",
-        "&&",
-        "(",
-        "4510",
-        "||",
-        "3454",
-        "||",
-        "3438",
-        "||",
-        "3453",
-        ")",
-        "(",
-        "Screen",
-        "&&",
-        "Sound",
-        "Production",
-        ")",
-        "program",
+        "ARTS2065",
         ")"
     ],
     "ARTS3062": [
@@ -2207,7 +2083,10 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
+        "Cinema",
+        "Studies",
+        "||",
         "Film",
         "Studies",
         ")"
@@ -2300,11 +2179,12 @@
         "of",
         "the",
         "following",
-        "streams,",
-        "Film",
+        "specialisations,",
+        "Cinema",
         "Studies",
         "||",
-        "MCT",
+        "Film",
+        "Studies",
         ")"
     ],
     "ARTS3122": [
@@ -2319,12 +2199,15 @@
         "in",
         "L2",
         "in",
+        "one",
+        "of",
         "the",
+        "following",
+        "specialisations,",
         "Theatre",
         "&&",
         "Performance",
         "Studies",
-        "Stream",
         ")"
     ],
     "ARTS3123": [
@@ -2343,10 +2226,7 @@
         "of",
         "the",
         "following",
-        "streams,",
-        "Dance",
-        "Studies",
-        "||",
+        "specialisations,",
         "Theatre",
         "&&",
         "Performance",
@@ -2369,7 +2249,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Theatre",
         "&&",
         "Performance",
@@ -2381,40 +2261,33 @@
         "48UOC",
         "&&",
         "6UOC",
+        "from",
         "in",
         "L1",
         "&&",
         "6UOC",
+        "from",
         "in",
         "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "specialisations,",
-        "MCT",
-        "or",
         "Theatre",
         "&&",
         "Performance",
-        "Studies.",
+        "courses.",
         "||",
-        "66UOC",
+        "48UOC",
         "&&",
-        "(",
-        "4510",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Screen",
+        "Production",
         "||",
-        "3454",
-        "||",
-        "3438",
-        "||",
-        "3453",
-        ")",
-        "(",
-        "S&SP",
-        ")",
-        "program",
+        "Screen",
+        "&&",
+        "Sound",
+        "Production",
+        "courses",
         ")"
     ],
     "ARTS3130": [
@@ -2492,7 +2365,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Theatre",
         "&&",
         "Performance",
@@ -2543,8 +2416,18 @@
         "in",
         "L2",
         "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
         "Asian",
-        "Studies.",
+        "Studies",
+        "||",
+        "(",
+        "3447",
+        ")",
+        ".",
         "||",
         "48UOC",
         "&&",
@@ -2553,49 +2436,10 @@
         "Chinese",
         "Studies",
         "language",
-        "courses.",
-        "||",
-        "48UOC",
-        "&&",
-        "(",
-        "3447",
-        ")",
+        "courses",
         ")"
     ],
     "ARTS3217": [
-        "(",
-        "48UOC",
-        "&&",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "Asian",
-        "Studies",
-        "||",
-        "History.",
-        "||",
-        "48UOC",
-        "incuding",
-        "12UOC",
-        "in",
-        "Chinese",
-        "Studies",
-        "language",
-        "courses.Or",
-        "48UOC",
-        "&&",
-        "(",
-        "3447",
-        ")",
-        ")"
-    ],
-    "ARTS3218": [
-        "(",
         "(",
         "48UOC",
         "&&",
@@ -2611,14 +2455,53 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
+        "Asian",
+        "Studies,",
+        "History",
+        "||",
+        "(",
+        "3447",
+        ")",
+        ".",
+        "||",
+        "48UOC",
+        "&&",
+        "12UOC",
+        "in",
+        "Chinese",
+        "Studies",
+        "language",
+        "courses",
+        ")"
+    ],
+    "ARTS3218": [
+        "(",
+        "48UOC",
+        "&&",
+        "6UOC",
+        "in",
+        "L1",
+        "&&",
+        "6UOC",
+        "in",
+        "L2",
+        "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
         "Asian",
         "Studies,",
         "Gender",
-        "Studies",
-        "||",
+        "Studies,",
         "History",
+        "||",
+        "(",
+        "3447",
         ")",
+        ".",
         "||",
         "48UOC",
         "&&",
@@ -2646,14 +2529,11 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Asian",
-        "Studies",
+        "Studies,",
+        "History",
         "||",
-        "History.",
-        "||",
-        "48UOC",
-        "&&",
         "(",
         "3447",
         ")",
@@ -2676,34 +2556,28 @@
         "48UOC",
         "&&",
         "6UOC",
-        "at",
-        "lv",
-        "1",
+        "in",
+        "L1",
         "&&",
         "6UOC",
-        "at",
-        "lv",
-        "2",
+        "in",
+        "L2",
         "in",
         "one",
         "of",
         "the",
         "following",
-        "streams,",
-        "Development",
-        "Studies,",
+        "specialisations,",
         "Environmental",
         "Humanities,",
         "Geographical",
+        "Studies,",
+        "Indigenous",
         "Studies",
         "||",
-        "Global",
-        "Development.",
-        "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "(",
+        "3447",
+        ")",
         ")"
     ],
     "ARTS3242": [
@@ -2722,16 +2596,12 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Environmental",
         "Humanities,",
         "Geographical",
         "Studies",
         "||",
-        "History.",
-        "||",
-        "48UOC",
-        "&&",
         "(",
         "3447",
         ")",
@@ -2753,9 +2623,12 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Environmental",
         "Humanities",
+        "||",
+        "Geographical",
+        "Studies",
         ")"
     ],
     "ARTS3245": [
@@ -2774,25 +2647,35 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Environmental",
-        "Humanities",
-        "||",
+        "Humanities,",
         "Geographical",
         "Studies",
+        "||",
+        "(",
+        "3447",
+        ")",
         ")"
     ],
     "ARTS3270": [
         "(",
-        "72UOC",
+        "48UOC",
         "&&",
-        "ARTS1270",
+        "6UOC",
+        "in",
+        "L1",
         "&&",
-        "a",
+        "6UOC",
+        "in",
+        "L2",
+        "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
         "History",
-        "major",
-        "||",
-        "minor",
         ")"
     ],
     "ARTS3283": [
@@ -2811,7 +2694,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "History",
         ")"
     ],
@@ -2831,7 +2714,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "History",
         ")"
     ],
@@ -2851,7 +2734,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "History",
         ")"
     ],
@@ -2871,21 +2754,21 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Australian",
-        "Studies",
-        "||",
-        "History.",
-        "||",
-        "48UOC",
-        "&&",
+        "Studies,",
+        "History,",
         "(",
         "3447",
         ")",
+        "||",
+        "Policy,",
+        "Power",
+        "&&",
+        "Government",
         ")"
     ],
     "ARTS3295": [
-        "(",
         "(",
         "48UOC",
         "&&",
@@ -2901,12 +2784,15 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "European",
-        "Studies",
-        "||",
+        "Studies,",
         "History",
+        "||",
+        "(",
+        "3447",
         ")",
+        ".",
         "||",
         "48UOC",
         "&&",
@@ -2944,13 +2830,22 @@
     ],
     "ARTS3360": [
         "(",
-        "72UOC",
+        "48UOC",
         "&&",
-        "a",
+        "6UOC",
+        "in",
+        "L1",
+        "&&",
+        "6UOC",
+        "in",
+        "L2",
+        "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
         "Philosophy",
-        "major",
-        "||",
-        "minor",
         ")"
     ],
     "ARTS3368": [
@@ -2969,7 +2864,7 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Philosophy",
         ")"
     ],
@@ -3057,67 +2952,82 @@
     ],
     "ARTS3454": [
         "(",
-        "ARTS2452",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "ARTS3451,",
+        "ARTS3452,",
+        "ARTS3453,",
+        "ARTS3455,",
+        "ARTS3456,",
+        "ARTS3458,",
+        "ARTS2452,",
+        "ARTS3460,",
+        "ARTS3462",
         "||",
-        "ARTS3451",
-        "||",
-        "ARTS3452",
-        "||",
-        "ARTS3453",
-        "or",
-        "language",
-        "placement",
-        "approval",
+        "ARTS3463.",
         ")"
     ],
     "ARTS3455": [
         "(",
-        "ARTS2452",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "ARTS3451,",
+        "ARTS3452,",
+        "ARTS3453,",
+        "ARTS3454,",
+        "ARTS3456,",
+        "ARTS3458,",
+        "ARTS2452,",
+        "ARTS3460,",
+        "ARTS3462",
         "||",
-        "ARTS3451",
-        "||",
-        "ARTS3452",
-        "||",
-        "ARTS3453",
-        "||",
-        "ARTS3454",
+        "ARTS3463.",
         ")"
     ],
     "ARTS3456": [
         "(",
-        "ARTS2452",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "ARTS3451,",
+        "ARTS3452,",
+        "ARTS3453,",
+        "ARTS3454,",
+        "ARTS3455,",
+        "ARTS3458,",
+        "ARTS2452,",
+        "ARTS3460,",
+        "ARTS3462",
         "||",
-        "ARTS3451",
-        "||",
-        "ARTS3452",
-        "||",
-        "ARTS3453",
-        "||",
-        "ARTS3454",
-        "or",
-        "language",
-        "placement",
-        "approval",
+        "ARTS3463.",
         ")"
     ],
     "ARTS3458": [
         "(",
-        "(",
-        "72UOC",
+        "48UOC",
         "&&",
-        "ARTS3453,",
-        "ARTS2452",
+        "ARTS3453",
         "||",
-        "ARTS3454",
+        "a",
+        "Chinese",
+        "Professional",
+        "elective",
         "&&",
         "an",
         "Advanced",
         "Chinese",
         "Studies",
-        "major/minor",
-        ")",
+        "major/minor.",
         "||",
-        "72UOC",
+        "48UOC",
         "&&",
         "ARTS2451",
         "||",
@@ -3131,43 +3041,61 @@
     ],
     "ARTS3460": [
         "(",
-        "ARTS3451",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "ARTS3451,",
+        "ARTS3452,",
+        "ARTS3453,",
+        "ARTS3454,",
+        "ARTS3455,",
+        "ARTS3456,",
+        "ARTS3458,",
+        "ARTS3462",
         "||",
-        "ARTS3452",
-        "||",
-        "ARTS3453",
-        "||",
-        "ARTS3454",
+        "ARTS3463.",
         ")"
     ],
     "ARTS3462": [
         "(",
-        "ARTS2452",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "ARTS3451,",
+        "ARTS3452,",
+        "ARTS3453,",
+        "ARTS3454,",
+        "ARTS3455,",
+        "ARTS3456,",
+        "ARTS3458,",
+        "ARTS2452,",
+        "ARTS3460",
         "||",
-        "ARTS3451",
-        "||",
-        "ARTS3452",
-        "||",
-        "ARTS3453",
-        "||",
-        "ARTS3454",
-        "||",
-        "ARTS3463",
+        "ARTS3463.",
         ")"
     ],
     "ARTS3463": [
         "(",
-        "ARTS2452",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "ARTS3451,",
+        "ARTS3452,",
+        "ARTS3453,",
+        "ARTS3454,",
+        "ARTS3455,",
+        "ARTS3456,",
+        "ARTS3458,",
+        "ARTS2452,",
+        "ARTS3460",
         "||",
-        "ARTS3451",
-        "||",
-        "ARTS3452",
-        "||",
-        "ARTS3453",
-        "||",
-        "ARTS3454",
-        "||",
-        "ARTS3462",
+        "ARTS3462.",
         ")"
     ],
     "ARTS3480": [
@@ -3272,8 +3200,6 @@
     "ARTS3576": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "ARTS3577": [
@@ -3342,6 +3268,13 @@
         "ARTS3632",
         ")"
     ],
+    "ARTS3639": [
+        "(",
+        "24UOC",
+        "in",
+        "L1",
+        ")"
+    ],
     "ARTS3640": [
         "(",
         "24UOC",
@@ -3372,62 +3305,26 @@
     "ARTS3662": [
         "(",
         "ARTS3661",
-        "||",
-        "ARTS3663",
-        "||",
-        "ARTS3664",
-        "||",
-        "ARTS3665",
         ")"
     ],
     "ARTS3663": [
         "(",
         "ARTS3661",
-        "||",
-        "ARTS3662",
-        "||",
-        "ARTS3664",
-        "||",
-        "ARTS3665",
         ")"
     ],
     "ARTS3664": [
         "(",
         "ARTS3661",
-        "||",
-        "ARTS3662",
-        "||",
-        "ARTS3663",
-        "||",
-        "ARTS3665",
         ")"
     ],
     "ARTS3665": [
         "(",
         "ARTS3661",
-        "||",
-        "ARTS3662",
-        "||",
-        "ARTS3663",
-        "||",
-        "ARTS3664",
-        "||",
-        "langauage",
-        "placement",
-        "approval",
         ")"
     ],
     "ARTS3667": [
         "(",
         "ARTS3661",
-        "||",
-        "ARTS3662",
-        "||",
-        "ARTS3663",
-        "||",
-        "ARTS3664",
-        "||",
-        "ARTS3665",
         ")"
     ],
     "ARTS3690": [
@@ -3470,6 +3367,47 @@
         "Linguistics",
         ")"
     ],
+    "ARTS3750": [
+        "(",
+        "48UOC",
+        "&&",
+        "6UOC",
+        "in",
+        "L1",
+        "&&",
+        "6UOC",
+        "in",
+        "L2",
+        "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
+        "Geographical",
+        "Studies,",
+        "Global",
+        "Development",
+        "||",
+        "(",
+        "3447",
+        ")",
+        ")"
+    ],
+    "ARTS3751": [
+        "(",
+        "60UOC",
+        "&&",
+        "a",
+        "Global",
+        "Development",
+        "major",
+        "||",
+        "Development",
+        "Studies",
+        "major",
+        ")"
+    ],
     "ARTS3755": [
         "(",
         "48UOC",
@@ -3487,18 +3425,12 @@
         "the",
         "following",
         "specialisations,",
-        "Development",
-        "Studies,",
-        "Geographical",
-        "Studies",
-        "||",
         "Global",
-        "Development.",
+        "Development",
         "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "(",
+        "3447",
+        ")",
         ")"
     ],
     "ARTS3756": [
@@ -3518,18 +3450,14 @@
         "the",
         "following",
         "specialisations,",
-        "Development",
-        "Studies,",
         "Geographical",
-        "Studies",
-        "||",
+        "Studies,",
         "Global",
-        "Development.",
+        "Development",
         "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "(",
+        "3447",
+        ")",
         ")"
     ],
     "ARTS3757": [
@@ -3606,8 +3534,19 @@
         "in",
         "L2",
         "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
         "European",
-        "Studies.",
+        "Studies,",
+        "History",
+        "||",
+        "(",
+        "3447",
+        ")",
+        ".",
         "||",
         "48UOC",
         "&&",
@@ -3616,13 +3555,7 @@
         "German",
         "Studies",
         "language",
-        "courses.",
-        "||",
-        "48UOC",
-        "&&",
-        "(",
-        "3447",
-        ")",
+        "courses",
         ")"
     ],
     "ARTS3783": [
@@ -3642,19 +3575,20 @@
         "the",
         "following",
         "specialisations,",
+        "(",
+        "3447",
+        ")",
+        ",",
         "Politics",
         "&&",
         "International",
-        "Relations.",
+        "Relations",
         "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "Security",
+        "Studies",
         ")"
     ],
     "ARTS3786": [
-        "(",
         "(",
         "48UOC",
         "&&",
@@ -3666,25 +3600,30 @@
         "in",
         "L2",
         "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
         "European",
-        "Studies",
-        "||",
+        "Studies,",
         "History",
+        "||",
+        "(",
+        "3447",
         ")",
+        ".",
         "||",
         "48UOC",
         "&&",
         "12UOC",
         "in",
-        "German",
-        "Studies",
-        "language",
-        "courses.",
+        "German,",
+        "French",
         "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "Spanish",
+        "language",
+        "courses",
         ")"
     ],
     "ARTS3787": [
@@ -3702,7 +3641,6 @@
     ],
     "ARTS3789": [
         "(",
-        "(",
         "48UOC",
         "&&",
         "6UOC",
@@ -3717,17 +3655,14 @@
         "of",
         "the",
         "following",
-        "streams",
-        ")",
+        "specialisations,",
         "European",
         "Studies",
-        "||",
-        "History",
         ")"
     ],
     "ARTS3810": [
         "(",
-        "72UOC",
+        "60UOC",
         "&&",
         "an",
         "International",
@@ -3739,6 +3674,8 @@
         "International",
         "Relations",
         "major",
+        "||",
+        "minor",
         ")"
     ],
     "ARTS3812": [
@@ -3758,18 +3695,17 @@
         "the",
         "following",
         "specialisations,",
-        "Development",
-        "Studies",
+        "International",
+        "Political",
+        "Economy,",
+        "(",
+        "3447",
+        ")",
         "||",
         "Politics",
         "&&",
         "International",
-        "Relations.",
-        "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "Relations",
         ")"
     ],
     "ARTS3814": [
@@ -3788,21 +3724,49 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Australian",
         "Studies,",
-        "International",
-        "Relations,",
-        "Politics",
-        "||",
+        "Policy,",
+        "Power",
+        "&&",
+        "Government,",
         "Politics",
         "&&",
         "International",
         "Relations",
+        "||",
+        "Security",
+        "Studies",
         ")"
     ],
     "ARTS3818": [
         "(",
+        "48UOC",
+        "&&",
+        "6UOC",
+        "in",
+        "L1",
+        "&&",
+        "6UOC",
+        "in",
+        "L2",
+        "in",
+        "one",
+        "of",
+        "the",
+        "following",
+        "specialisations,",
+        "International",
+        "Political",
+        "Economy,",
+        "Politics",
+        "&&",
+        "International",
+        "Relations",
+        "||",
+        "Security",
+        "Studies",
         ")"
     ],
     "ARTS3819": [
@@ -3822,15 +3786,17 @@
         "the",
         "following",
         "specialisations,",
+        "(",
+        "3447",
+        ")",
+        ",",
         "Politics",
         "&&",
         "International",
-        "Relations.",
+        "Relations",
         "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "Security",
+        "Studies",
         ")"
     ],
     "ARTS3820": [
@@ -3919,15 +3885,21 @@
         "the",
         "following",
         "specialisations,",
+        "International",
+        "Political",
+        "Economy,",
         "Politics",
         "&&",
         "International",
         "Relations",
+        "||",
+        "Security",
+        "Studies",
         ")"
     ],
     "ARTS3870": [
         "(",
-        "72UOC",
+        "60UOC",
         "&&",
         "a",
         "Sociology",
@@ -3935,7 +3907,6 @@
         "Anthropology",
         "major",
         "||",
-        "extended",
         "minor",
         ")"
     ],
@@ -4030,12 +4001,13 @@
         "specialisations,",
         "Australian",
         "Studies,",
-        "Development",
-        "Studies,",
         "Geographical",
         "Studies,",
         "Global",
-        "Development",
+        "Development,",
+        "(",
+        "3447",
+        ")",
         "||",
         "Sociology",
         "&&",
@@ -4084,14 +4056,13 @@
         "the",
         "following",
         "specialisations,",
+        "(",
+        "3447",
+        ")",
+        "||",
         "Sociology",
         "&&",
-        "Anthropology.",
-        "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
+        "Anthropology",
         ")"
     ],
     "ARTS3886": [
@@ -4110,13 +4081,19 @@
         "of",
         "the",
         "following",
-        "streams,",
-        "Criminology/S&A.",
-        "||",
-        "48UOC",
+        "specialisations,",
+        "(",
+        "3447",
+        ")",
+        ",",
+        "Policy,",
+        "Power",
         "&&",
-        "an",
-        "INST#",
+        "Government",
+        "||",
+        "Sociology",
+        "&&",
+        "Anthropology",
         ")"
     ],
     "ARTS3900": [
@@ -4158,11 +4135,9 @@
         "of",
         "the",
         "following",
-        "streams,",
+        "specialisations,",
         "Gender",
         "Studies",
-        "||",
-        "Philosophy",
         ")"
     ],
     "ARTS3991": [
@@ -4427,6 +4402,13 @@
         ")",
         ")"
     ],
+    "ARTS4713": [
+        "(",
+        "(",
+        "PHILBH",
+        ")",
+        ")"
+    ],
     "ARTS4714": [
         "(",
         "(",
@@ -4463,6 +4445,13 @@
         ")"
     ],
     "ARTS4815": [
+        "(",
+        "(",
+        "CHINBH",
+        ")",
+        ")"
+    ],
+    "ARTS4816": [
         "(",
         "(",
         "CHINBH",
@@ -5186,6 +5175,11 @@
         "AVIA?H",
         ")"
     ],
+    "AVIA4004": [
+        "(",
+        "AVIA?H",
+        ")"
+    ],
     "BABS1111": [
         "(",
         ")"
@@ -5640,6 +5634,11 @@
         "96UOC",
         ")"
     ],
+    "BEIL0003": [
+        "(",
+        "96UOC",
+        ")"
+    ],
     "BEIL0004": [
         "(",
         "96UOC",
@@ -5755,7 +5754,7 @@
     ],
     "BEIL6009": [
         "(",
-        "96UOC",
+        "48UOC",
         ")"
     ],
     "BEIL6010": [
@@ -5847,6 +5846,7 @@
     ],
     "BENV2708": [
         "(",
+        "96UOC",
         ")"
     ],
     "BENV2930": [
@@ -5863,6 +5863,14 @@
     ],
     "BENV4000": [
         "(",
+        ")"
+    ],
+    "BENV6713": [
+        "(",
+        "96UOC",
+        "in",
+        "Built",
+        "Environment",
         ")"
     ],
     "BENV7814": [
@@ -6023,9 +6031,9 @@
         "(",
         "126UOC",
         "&&",
-        "3rd",
-        "year",
-        "core",
+        "CORES",
+        "in",
+        "L3",
         ")"
     ],
     "BIOM4952": [
@@ -6649,9 +6657,9 @@
         "(",
         "126UOC",
         "&&",
-        "3rd",
-        "year",
-        "core",
+        "CORES",
+        "in",
+        "L3",
         ")"
     ],
     "CEIC4952": [
@@ -7223,6 +7231,11 @@
         ")",
         ")"
     ],
+    "CHEM4518": [
+        "(",
+        "CHEM?H",
+        ")"
+    ],
     "CHEM6041": [
         "(",
         "CHEM2041",
@@ -7331,46 +7344,33 @@
     ],
     "CODE1231": [
         "(",
+        "CODE1161",
         ")"
     ],
     "CODE1234": [
         "(",
-        "(",
-        "CODE1231",
-        "||",
-        "CODE2132",
-        ")",
+        "CODE2120",
         ")"
     ],
     "CODE1240": [
         "(",
         "BENV1012",
-        "||",
-        "BENV1010",
         ")"
     ],
     "CODE2120": [
         "(",
-        "(",
         "CODE2132",
-        "||",
-        "CODE2170",
-        ")",
         ")"
     ],
     "CODE2121": [
         "(",
         "BENV1012",
-        "||",
+        "&&",
         "CODE1240",
         ")"
     ],
     "CODE2132": [
         "(",
-        "BENV1012",
-        "||",
-        "CODE1240",
-        "||",
         "CODE2121",
         ")"
     ],
@@ -7384,6 +7384,7 @@
     ],
     "CODE2250": [
         "(",
+        "CODE1161",
         ")"
     ],
     "CODE2270": [
@@ -7404,10 +7405,6 @@
     "CODE3201": [
         "(",
         "CODE3100",
-        "&&",
-        "[",
-        "CODE3202",
-        "]",
         ")"
     ],
     "CODE3202": [
@@ -7697,6 +7694,10 @@
         "COMM6000",
         "&&",
         "108UOC",
+        "&&",
+        "CORES",
+        "in",
+        "L1",
         ")"
     ],
     "COMM3999": [
@@ -8010,6 +8011,14 @@
         "||",
         "BINF",
         ")",
+        "&&",
+        "CORES",
+        "in",
+        "L1",
+        "&&",
+        "CORES",
+        "in",
+        "L2",
         ")"
     ],
     "COMP3902": [
@@ -8023,6 +8032,14 @@
         "||",
         "BINF",
         ")",
+        "&&",
+        "CORES",
+        "in",
+        "L1",
+        "&&",
+        "CORES",
+        "in",
+        "L2",
         ")"
     ],
     "COMP4121": [
@@ -9023,6 +9040,10 @@
         "MATH1241",
         ")"
     ],
+    "CVEN2101": [
+        "(",
+        ")"
+    ],
     "CVEN2303": [
         "(",
         "(",
@@ -9136,6 +9157,11 @@
         "70WAM",
         "&&",
         "132UOC",
+        ")"
+    ],
+    "CVEN4041": [
+        "(",
+        "CVEN4040",
         ")"
     ],
     "CVEN4050": [
@@ -9310,9 +9336,9 @@
         "(",
         "126UOC",
         "&&",
-        "3rd",
-        "year",
-        "core",
+        "CORES",
+        "in",
+        "L3",
         ")"
     ],
     "CVEN4703": [
@@ -9347,6 +9373,13 @@
     "CVEN4953": [
         "(",
         "CVEN4952",
+        ")"
+    ],
+    "CVEN4961": [
+        "(",
+        "132UOC",
+        "&&",
+        "80WAM",
         ")"
     ],
     "CVEN4962": [
@@ -9486,6 +9519,10 @@
         "48UOC",
         ")"
     ],
+    "DART1200": [
+        "(",
+        ")"
+    ],
     "DART1201": [
         "(",
         "DART1200",
@@ -9532,6 +9569,10 @@
         "(",
         ")"
     ],
+    "DART1340": [
+        "(",
+        ")"
+    ],
     "DART1350": [
         "(",
         ")"
@@ -9568,7 +9609,6 @@
     ],
     "DART2140": [
         "(",
-        "DART1140",
         ")"
     ],
     "DART2141": [
@@ -9725,9 +9765,25 @@
         "DART2120",
         ")"
     ],
+    "DART3130": [
+        "(",
+        "DART2130",
+        ")"
+    ],
     "DART3140": [
         "(",
-        "DART2140",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "DART1140,",
+        "DART1141,",
+        "DART2140,",
+        "DART2141,",
+        "DDES1040",
+        "||",
+        "SDES2463",
         ")"
     ],
     "DART3150": [
@@ -9761,6 +9817,13 @@
         "(",
         "72UOC",
         "in",
+        "the",
+        "Animation",
+        "&&",
+        "Moving",
+        "Image",
+        "major",
+        "||",
         "a",
         "Media",
         "Arts",
@@ -9801,6 +9864,8 @@
     ],
     "DART3342": [
         "(",
+        "48UOC",
+        "&&",
         "a",
         "Fine",
         "Arts",
@@ -9808,8 +9873,6 @@
         "Art",
         "Theory",
         "program",
-        "&&",
-        "48UOC",
         ")"
     ],
     "DART4101": [
@@ -9899,6 +9962,10 @@
         "(",
         ")"
     ],
+    "DDES1024": [
+        "(",
+        ")"
+    ],
     "DDES1030": [
         "(",
         ")"
@@ -9951,12 +10018,18 @@
         "(",
         ")"
     ],
+    "DDES1071": [
+        "(",
+        ")"
+    ],
     "DDES1100": [
         "(",
         ")"
     ],
     "DDES1101": [
         "(",
+        "FADA1010",
+        "||",
         "DDES1100",
         ")"
     ],
@@ -9988,6 +10061,11 @@
         "(",
         ")"
     ],
+    "DDES1201": [
+        "(",
+        "DDES1200",
+        ")"
+    ],
     "DDES2100": [
         "(",
         "DDES1101",
@@ -10000,16 +10078,17 @@
     ],
     "DDES2102": [
         "(",
-        "DDES1100",
-        "&&",
-        "DDES1101",
-        "&&",
         "DDES2100",
         ")"
     ],
     "DDES2110": [
         "(",
         "DDES1110",
+        ")"
+    ],
+    "DDES2111": [
+        "(",
+        "DDES2110",
         ")"
     ],
     "DDES2120": [
@@ -10057,6 +10136,11 @@
         "DDES1160",
         ")"
     ],
+    "DDES2161": [
+        "(",
+        "DDES2160",
+        ")"
+    ],
     "DDES2200": [
         "(",
         "Must",
@@ -10067,6 +10151,10 @@
     ],
     "DDES3100": [
         "(",
+        "DDES2100",
+        "&&",
+        "FADA2020",
+        "||",
         "DDES2101",
         ")"
     ],
@@ -10100,6 +10188,14 @@
     ],
     "DDES4103": [
         "(",
+        ")"
+    ],
+    "DDES4200": [
+        "(",
+        "Honours",
+        "&&",
+        "[",
+        "]",
         ")"
     ],
     "DESN1000": [
@@ -10820,6 +10916,19 @@
         "DPGE1002",
         ")"
     ],
+    "DPHU1001": [
+        "(",
+        "7005",
+        "UNSW",
+        "Global",
+        "Diploma",
+        "in",
+        "Media",
+        "&&",
+        "Communication",
+        "Program",
+        ")"
+    ],
     "DPHU1002": [
         "(",
         "7005",
@@ -10886,6 +10995,19 @@
         ")"
     ],
     "DPHU1007": [
+        "(",
+        "7005",
+        "UNSW",
+        "Global",
+        "Diploma",
+        "in",
+        "Media",
+        "&&",
+        "Communication",
+        "Program",
+        ")"
+    ],
+    "DPHU1008": [
         "(",
         "7005",
         "UNSW",
@@ -11035,6 +11157,19 @@
         "DPST1031",
         ")"
     ],
+    "DPST1041": [
+        "(",
+        "(",
+        "7001",
+        "||",
+        "7002",
+        "||",
+        "7003",
+        "||",
+        "7004",
+        ")",
+        ")"
+    ],
     "DPST1051": [
         "(",
         "(",
@@ -11062,6 +11197,19 @@
         ")"
     ],
     "DPST1061": [
+        "(",
+        "(",
+        "7001",
+        "||",
+        "7002",
+        "||",
+        "7003",
+        "||",
+        "7004",
+        ")",
+        ")"
+    ],
+    "DPST1071": [
         "(",
         "(",
         "7001",
@@ -11758,6 +11906,16 @@
         "enrolment",
         ")"
     ],
+    "EDST4080": [
+        "(",
+        "78UOC",
+        "&&",
+        "EDST2002",
+        "&&",
+        "an",
+        "EDST#",
+        ")"
+    ],
     "EDST4084": [
         "(",
         "78UOC",
@@ -12159,6 +12317,15 @@
     "EDST6746": [
         "(",
         "EDST6716",
+        "&&",
+        "[",
+        "EDST6760",
+        "]",
+        ")"
+    ],
+    "EDST6747": [
+        "(",
+        "EDST6717",
         "&&",
         "[",
         "EDST6760",
@@ -12598,6 +12765,17 @@
         "]",
         ")"
     ],
+    "ELEC2141": [
+        "(",
+        "[",
+        "ELEC1111",
+        "||",
+        "DPST1081",
+        "||",
+        "ELEC1112",
+        "]",
+        ")"
+    ],
     "ELEC2911": [
         "(",
         "ELEC1111",
@@ -12608,6 +12786,13 @@
     "ELEC3104": [
         "(",
         "ELEC2134",
+        ")"
+    ],
+    "ELEC3105": [
+        "(",
+        "ELEC2134",
+        "&&",
+        "ELEC3115",
         ")"
     ],
     "ELEC3106": [
@@ -13014,6 +13199,15 @@
         "(",
         ")"
     ],
+    "EXPT1155": [
+        "(",
+        "SOMS1912",
+        "&&",
+        "[",
+        "SOMS1913",
+        "]",
+        ")"
+    ],
     "EXPT1182": [
         "(",
         ")"
@@ -13106,6 +13300,21 @@
         "EXPT2154",
         ")"
     ],
+    "EXPT3152": [
+        "(",
+        "(",
+        "SOMS1912,",
+        "SOMS1913,",
+        "HESC2451",
+        ")",
+        "||",
+        "(",
+        "HESC2452",
+        "&&",
+        "NEUR3101",
+        ")",
+        ")"
+    ],
     "EXPT3153": [
         "(",
         "EXPT2151",
@@ -13151,6 +13360,15 @@
         "EXPT3179",
         ")"
     ],
+    "EXPT3178": [
+        "(",
+        "EXPT3148",
+        "&&",
+        "EXPT2151",
+        "&&",
+        "EXPT3179",
+        ")"
+    ],
     "EXPT3179": [
         "(",
         "EXPT2170",
@@ -13183,20 +13401,41 @@
     ],
     "FADA2020": [
         "(",
-        "FADA1010",
-        "&&",
-        "B.",
-        "DDES#",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "FADA1010,",
+        "DDES1100,",
+        "IDES1211",
+        "||",
+        "CODE2170",
         ")"
     ],
     "FADA3030": [
         "(",
-        "FADA1010",
+        "One",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "FADA2020,",
+        "CODE2270,",
+        "DDES2101",
+        "||",
+        "IDES2021",
         "&&",
-        "FADA2020",
-        "&&",
-        "B.",
-        "DDES#",
+        "one",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "CODE3100,",
+        "DDES3100,",
+        "IDES2023",
+        "||",
+        "IDES3333",
         ")"
     ],
     "FADA3900": [
@@ -13208,13 +13447,7 @@
         "(",
         "48UOC",
         ".",
-        "must.",
-        "Consent",
-        "from",
-        "ADA",
-        "WIL",
-        "Team",
-        "required",
+        "must",
         ")"
     ],
     "FINS1613": [
@@ -13860,6 +14093,10 @@
         "(",
         ")"
     ],
+    "GEOS1211": [
+        "(",
+        ")"
+    ],
     "GEOS1701": [
         "(",
         ")"
@@ -13902,6 +14139,11 @@
         ")"
     ],
     "GEOS2711": [
+        "(",
+        "GEOS1701",
+        ")"
+    ],
+    "GEOS2721": [
         "(",
         "GEOS1701",
         ")"
@@ -14248,6 +14490,23 @@
         "NEUR3101",
         ")"
     ],
+    "HESC4501": [
+        "(",
+        "(",
+        "3831",
+        ")",
+        "||",
+        "(",
+        "MATH1041,",
+        "HESC2501",
+        "&&",
+        "12UOC",
+        "in",
+        "L3",
+        "HESC",
+        ")",
+        ")"
+    ],
     "HESC4502": [
         "(",
         "(",
@@ -14360,36 +14619,6 @@
     "HUMS1007": [
         "(",
         "24UOC",
-        "required.",
-        "In",
-        "exceptional",
-        "circumstances,",
-        "who",
-        "are",
-        ",",
-        "but",
-        "have",
-        "yet",
-        "to",
-        "complete",
-        "24UOC",
-        "may",
-        "be",
-        "considered",
-        "if",
-        "they",
-        "can",
-        "provide",
-        "strong",
-        "evidence",
-        "of",
-        "meeting",
-        "the",
-        "selection",
-        "criteria.",
-        "School",
-        "consent",
-        "required",
         ")"
     ],
     "HUMS1008": [
@@ -14432,10 +14661,14 @@
     ],
     "HUMS2006": [
         "(",
+        "48UOC",
         ")"
     ],
     "HUMS2007": [
         "(",
+        "48UOC",
+        "&&",
+        "75WAM",
         ")"
     ],
     "IDES1071": [
@@ -14464,6 +14697,9 @@
     ],
     "IDES1312": [
         "(",
+        "IDES1311",
+        "||",
+        "IDES1212",
         ")"
     ],
     "IDES1314": [
@@ -14527,14 +14763,31 @@
     ],
     "IDES2321": [
         "(",
+        "FADA1010",
+        "||",
+        "IDES1211",
+        "||",
+        "IDES1311",
+        "||",
+        "IDES1212",
+        "&&",
+        "IDES1312",
+        "||",
+        "IDES1213",
         ")"
     ],
     "IDES2322": [
         "(",
+        "IDES2321",
+        "||",
+        "IDES2221",
         ")"
     ],
     "IDES2323": [
         "(",
+        "IDES2322",
+        "||",
+        "IDES2222",
         ")"
     ],
     "IDES2325": [
@@ -14577,6 +14830,17 @@
     ],
     "IDES3331": [
         "(",
+        "IDES2321",
+        "||",
+        "IDES2221",
+        "||",
+        "IDES2322",
+        "||",
+        "IDES2222",
+        "&&",
+        "IDES2323",
+        "||",
+        "IDES2223",
         ")"
     ],
     "IDES3333": [
@@ -14782,6 +15046,11 @@
         "INFS2701",
         ")"
     ],
+    "INFS3703": [
+        "(",
+        "INFS2603",
+        ")"
+    ],
     "INFS3822": [
         "(",
         "INFS2822",
@@ -14871,13 +15140,6 @@
     ],
     "INST1005": [
         "(",
-        "(",
-        "3447",
-        ")",
-        ")"
-    ],
-    "INST1007": [
-        "(",
         ")"
     ],
     "INST2003": [
@@ -14898,19 +15160,16 @@
     "INST2006": [
         "(",
         "INST1005",
-        "&&",
-        "(",
-        "3447",
-        ")",
         ")"
     ],
     "INST3900": [
         "(",
-        "96UOC",
+        "72UOC",
         "&&",
-        "(",
-        "3447",
-        ")",
+        "an",
+        "INST#",
+        "||",
+        "specialisation",
         ")"
     ],
     "INTA1000": [
@@ -14923,6 +15182,8 @@
     ],
     "INTA1003": [
         "(",
+        "BENV1010",
+        "||",
         "INTA1001",
         "&&",
         "INTA1002",
@@ -14956,9 +15217,15 @@
     ],
     "INTA2411": [
         "(",
+        "INTA3002",
+        "&&",
         "INTA3003",
         "&&",
         "INTA3004",
+        "&&",
+        "BENV1015",
+        "||",
+        "INTA3001",
         ")"
     ],
     "INTA3000": [
@@ -14966,10 +15233,6 @@
         "INTA1000",
         "&&",
         "INTA2000",
-        "&&",
-        "INTA2101",
-        "&&",
-        "INTA2102",
         ")"
     ],
     "INTA3001": [
@@ -14983,12 +15246,19 @@
     "INTA3003": [
         "(",
         "BENV1015",
+        "||",
+        "INTA3001",
         "&&",
         "INTA3002",
         ")"
     ],
     "INTA3004": [
         "(",
+        "BENV1015",
+        "||",
+        "INTA3001",
+        "&&",
+        "INTA3002",
         ")"
     ],
     "INTA4000": [
@@ -14996,14 +15266,17 @@
         "INTA1000",
         "&&",
         "INTA2000",
-        "&&",
-        "INTA2101",
-        "&&",
-        "INTA2102",
         ")"
     ],
     "INTA4004": [
         "(",
+        "INTA2003",
+        "&&",
+        "INTA2004",
+        "&&",
+        "INTA3000",
+        "&&",
+        "INTA4000",
         ")"
     ],
     "INTA5000": [
@@ -15011,16 +15284,10 @@
         "INTA3000",
         "&&",
         "INTA4000",
-        "&&",
-        "INTA2201",
-        "&&",
-        "INTA2202",
         ")"
     ],
     "INTA6000": [
         "(",
-        "INTA2301",
-        "&&",
         "INTA5000",
         ")"
     ],
@@ -15206,7 +15473,7 @@
         "&&",
         "[",
         "LAWS1055.",
-        "corequisite",
+        "CORESquisite",
         "LAWS1055",
         "(",
         "Legal",
@@ -16117,6 +16384,14 @@
         "courses",
         ")"
     ],
+    "LAWS3144": [
+        "(",
+        "78UOC",
+        "in",
+        "LAWS",
+        "courses",
+        ")"
+    ],
     "LAWS3146": [
         "(",
         "78UOC",
@@ -16687,6 +16962,33 @@
         "or",
         "LAWS1011",
         ")",
+        ")"
+    ],
+    "LAWS3321": [
+        "(",
+        "Restricted",
+        "to",
+        "Legal",
+        "Studies.",
+        "Academic",
+        "Program",
+        "must",
+        "be",
+        "4055",
+        "||",
+        "3408",
+        "||",
+        "4054",
+        "||",
+        "4053",
+        ")"
+    ],
+    "LAWS3326": [
+        "(",
+        "78UOC",
+        "in",
+        "LAWS",
+        "courses",
         ")"
     ],
     "LAWS3327": [
@@ -17589,6 +17891,10 @@
         "(",
         ")"
     ],
+    "MARK4214": [
+        "(",
+        ")"
+    ],
     "MARK4300": [
         "(",
         ")"
@@ -18205,6 +18511,41 @@
         "75GRADE",
         "in",
         "MATH2019",
+        ")",
+        ")"
+    ],
+    "MATH3201": [
+        "(",
+        "(",
+        "MATH2501",
+        "||",
+        "MATH2601",
+        "||",
+        "MATH2089",
+        "||",
+        "MATH2099",
+        ")",
+        "&&",
+        "(",
+        "MATH2011",
+        "||",
+        "MATH2111",
+        "||",
+        "75GRADE",
+        "in",
+        "MATH2018",
+        "||",
+        "75GRADE",
+        "in",
+        "MATH2019",
+        "||",
+        "65GRADE",
+        "in",
+        "MATH2069",
+        "||",
+        "MATH2121",
+        "||",
+        "MATH2221",
         ")",
         ")"
     ],
@@ -18924,12 +19265,21 @@
         "MATS?H",
         ")"
     ],
+    "MATS4504": [
+        "(",
+        "MATS?H",
+        ")"
+    ],
     "MATS4505": [
         "(",
         "MATS?H",
         ")"
     ],
     "MATS5001": [
+        "(",
+        ")"
+    ],
+    "MATS5002": [
         "(",
         ")"
     ],
@@ -18970,33 +19320,22 @@
     ],
     "MDIA1002": [
         "(",
-        "MDIA#",
         ")"
     ],
     "MDIA1003": [
         "(",
-        "MDIA#",
         ")"
     ],
     "MDIA1004": [
         "(",
-        "MDIA#",
-        "||",
-        "(",
-        "CRWTA1",
-        "||",
-        "CRWTAH",
-        ")",
         ")"
     ],
     "MDIA1005": [
         "(",
-        "MDIA#",
         ")"
     ],
     "MDIA1007": [
         "(",
-        "MDIA#",
         ")"
     ],
     "MDIA1008": [
@@ -19018,378 +19357,269 @@
     "MDIA2000": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1000",
-        "||",
-        "MDIA1005",
-        "||",
-        "ARTS1064",
         ")"
     ],
     "MDIA2002": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1002",
-        "||",
-        "MDIA1004",
-        "||",
-        "MDIA1007",
         ")"
     ],
     "MDIA2003": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1002",
-        "||",
-        "MDIA1004",
-        "||",
-        "MDIA1007",
         ")"
     ],
     "MDIA2005": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1002",
-        "||",
-        "MDIA1003",
         ")"
     ],
     "MDIA2006": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1002",
-        "||",
-        "MDIA1003",
         ")"
     ],
     "MDIA2007": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1002",
-        "||",
-        "MDIA1003",
         ")"
     ],
     "MDIA2008": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA#",
         ")"
     ],
     "MDIA2009": [
         "(",
+        "24UOC",
         ")"
     ],
     "MDIA2010": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA#",
-        "||",
-        "(",
-        "CRWTA1",
-        "||",
-        "CRWTAH",
-        "||",
-        "CRWTA2",
-        ")",
         ")"
     ],
     "MDIA2011": [
         "(",
         "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "MDIA1002",
-        "||",
-        "MDIA1003.",
-        "||",
-        "24UOC",
-        "in",
-        "L1",
-        "&&",
-        "enrolment",
-        "in",
-        "a",
-        "Global",
-        "Development",
-        "major",
         ")"
     ],
     "MDIA2012": [
         "(",
-        "(",
-        "MDIA1002",
-        "||",
-        "MDIA1003",
-        ")",
-        "&&",
-        "a",
-        "single",
-        "||",
-        "double",
-        "degree",
-        "Bachelor",
-        "of",
-        "Media",
-        "(",
-        "PR",
-        "&&",
-        "Advertising",
-        ")",
-        "program",
+        "24UOC",
         ")"
     ],
     "MDIA2013": [
         "(",
         "24UOC",
-        "&&",
-        "MDIA1006",
-        "Mediated",
-        "Storytelling",
-        "||",
-        "ARTS1064",
-        "Screen",
-        "Production",
-        "I",
-        "||",
-        "MDIA1004",
-        "News",
-        "Fundamentals",
-        "||",
-        "(",
-        "with",
-        "course",
-        "convenor",
-        "approval",
-        ")",
-        "6UOC",
-        "of",
-        "an",
-        "audio-visual",
-        "media",
-        "production",
-        "||",
-        "feature",
-        "writing",
-        "course",
         ")"
     ],
     "MDIA2014": [
         "(",
-        "MDIA#",
+        "24UOC",
         ")"
     ],
     "MDIA2091": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MDIA2092": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MDIA2093": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MDIA2094": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MDIA2095": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MDIA2096": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MDIA3000": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA2005",
-        "||",
-        "MDIA2006",
-        "||",
-        "MDIA2012",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Public",
+        "Relations",
+        "&&",
+        "Advertising",
+        "courses",
         ")"
     ],
     "MDIA3002": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA2002",
-        "||",
-        "MDIA2003",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Communication",
+        "&&",
+        "Journalism",
+        "courses",
         ")"
     ],
     "MDIA3003": [
         "(",
         "66UOC",
         "&&",
+        "(",
         "6UOC",
         "in",
         "L2",
         "MDIA",
-        "core",
-        "courses",
-        "&&",
-        "a",
-        "Media",
-        "(",
-        "Communication",
-        "&&",
-        "Journalism",
+        "CORES",
         ")",
+        "&&",
+        "(",
+        "3454",
         "||",
-        "Media",
-        "(",
-        "PR",
-        "&&",
-        "Advertising",
+        "3453",
         ")",
-        "program",
         ")"
     ],
     "MDIA3004": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA#",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Screen",
+        "Production",
+        "||",
+        "Screen",
+        "&&",
+        "Sound",
+        "Production",
+        "courses",
         ")"
     ],
     "MDIA3005": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA2005",
-        "||",
-        "MDIA2006",
-        "||",
-        "MDIA2012",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Public",
+        "Relations",
+        "&&",
+        "Advertising",
+        "courses",
         ")"
     ],
     "MDIA3006": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "ARTS2065",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Screen",
+        "Production",
         "||",
-        "ARTS2066",
-        "||",
-        "MDIA2000",
-        "||",
-        "MDIA2001",
-        "||",
-        "MDIA2010",
+        "Screen",
         "&&",
-        "MDIA#",
+        "Sound",
+        "Production",
+        "courses",
         ")"
     ],
     "MDIA3008": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA2005",
-        "||",
-        "MDIA2006",
-        "||",
-        "MDIA2012",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Public",
+        "Relations",
+        "&&",
+        "Advertising",
+        "courses",
         ")"
     ],
     "MDIA3009": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA2005",
-        "||",
-        "MDIA2006",
-        "||",
-        "MDIA2012",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Public",
+        "Relations",
+        "&&",
+        "Advertising",
+        "courses",
         ")"
     ],
     "MDIA3010": [
         "(",
-        "66UOC",
-        "&&",
-        "MDIA2002",
-        "||",
-        "MDIA2003.",
-        "As",
-        "a",
+        "48UOC",
         ",",
-        "international",
-        "exchange",
-        "a",
-        "course",
-        "at",
-        "their",
-        "home",
-        "university",
-        "which",
-        "includes",
-        "practice-oriented",
-        "journalistic",
-        "content",
-        "creation",
+        "one",
+        "of",
+        "the",
+        "following",
+        "courses,",
+        "MDIA2002,",
+        "MDIA2003",
+        "||",
+        "MDIA2008",
         ")"
     ],
     "MDIA3011": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA#",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Communication",
+        "&&",
+        "Journalism",
+        "courses",
         ")"
     ],
     "MDIA3012": [
         "(",
-        "66UOC",
+        "48UOC",
         "&&",
-        "MDIA2005",
-        "||",
-        "MDIA2006",
+        "6UOC",
+        "from",
+        "in",
+        "L2",
+        "Public",
+        "Relations",
+        "&&",
+        "Advertising",
+        "courses",
         ")"
     ],
     "MDIA3090": [
@@ -19397,17 +19627,17 @@
         "48UOC",
         "&&",
         "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
+        "from",
         "in",
         "L2",
-        "in",
+        "Media",
+        "Studies",
+        "||",
         "Media,",
         "Culture",
         "&&",
         "Technology",
+        "courses",
         ")"
     ],
     "MDIA3091": [
@@ -19415,37 +19645,17 @@
         "48UOC",
         "&&",
         "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "streams,",
-        "MCT.",
-        "||",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
+        "from",
         "in",
         "L2",
         "Media",
-        "Electives",
-        "&&",
-        "a",
-        "Media",
-        "single",
+        "Studies",
         "||",
-        "double",
-        "degreel",
-        "program",
+        "Media,",
+        "Culture",
+        "&&",
+        "Technology",
+        "courses",
         ")"
     ],
     "MDIA3092": [
@@ -19453,37 +19663,17 @@
         "48UOC",
         "&&",
         "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "streams,",
-        "MCT.",
-        "||",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
+        "from",
         "in",
         "L2",
         "Media",
-        "Electives",
-        "&&",
-        "a",
-        "Media",
-        "single",
+        "Studies",
         "||",
-        "double",
-        "degreel",
-        "program",
+        "Media,",
+        "Culture",
+        "&&",
+        "Technology",
+        "courses",
         ")"
     ],
     "MDIA3093": [
@@ -19491,37 +19681,17 @@
         "48UOC",
         "&&",
         "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "streams,",
-        "MCT.",
-        "||",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
+        "from",
         "in",
         "L2",
         "Media",
-        "Electives",
-        "&&",
-        "a",
-        "Media",
-        "single",
+        "Studies",
         "||",
-        "double",
-        "degreel",
-        "program",
+        "Media,",
+        "Culture",
+        "&&",
+        "Technology",
+        "courses",
         ")"
     ],
     "MDIA3096": [
@@ -19529,37 +19699,17 @@
         "48UOC",
         "&&",
         "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "streams,",
-        "MCT.",
-        "||",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
+        "from",
         "in",
         "L2",
         "Media",
-        "Electives",
-        "&&",
-        "a",
-        "Media",
-        "single",
+        "Studies",
         "||",
-        "double",
-        "degreel",
-        "program",
+        "Media,",
+        "Culture",
+        "&&",
+        "Technology",
+        "courses",
         ")"
     ],
     "MDIA3097": [
@@ -19567,37 +19717,17 @@
         "48UOC",
         "&&",
         "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "streams,",
-        "MCT.",
-        "||",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
+        "from",
         "in",
         "L2",
         "Media",
-        "Electives",
-        "&&",
-        "a",
-        "Media",
-        "single",
+        "Studies",
         "||",
-        "double",
-        "degreel",
-        "program",
+        "Media,",
+        "Culture",
+        "&&",
+        "Technology",
+        "courses",
         ")"
     ],
     "MDIA4000": [
@@ -19745,6 +19875,10 @@
         ")"
     ],
     "MECH9910": [
+        "(",
+        ")"
+    ],
+    "MERE2001": [
         "(",
         ")"
     ],
@@ -20128,6 +20262,16 @@
         "4501",
         ")"
     ],
+    "MGMT4104": [
+        "(",
+        "4501",
+        ")"
+    ],
+    "MGMT4500": [
+        "(",
+        "4501",
+        ")"
+    ],
     "MGMT4501": [
         "(",
         "4501",
@@ -20413,6 +20557,11 @@
         "132UOC",
         ")"
     ],
+    "MMAN4020": [
+        "(",
+        "MMAN4010",
+        ")"
+    ],
     "MMAN4200": [
         "(",
         ")"
@@ -20579,10 +20728,41 @@
     ],
     "MUSC1801": [
         "(",
+        "a",
+        "Music",
+        "specialisation",
+        "in",
+        "a",
+        "Fine",
+        "Arts",
+        "||",
+        "MUSC#",
+        ")"
+    ],
+    "MUSC1802": [
+        "(",
+        "a",
+        "Music",
+        "specialisation",
+        "in",
+        "a",
+        "Fine",
+        "Arts",
+        "||",
+        "MUSC#",
         ")"
     ],
     "MUSC1803": [
         "(",
+        "a",
+        "Music",
+        "specialisation",
+        "in",
+        "a",
+        "Fine",
+        "Arts",
+        "||",
+        "MUSC#",
         ")"
     ],
     "MUSC1804": [
@@ -20603,6 +20783,9 @@
     ],
     "MUSC1808": [
         "(",
+        "MUSC1807",
+        "||",
+        "MUSC1602",
         ")"
     ],
     "MUSC1901": [
@@ -20632,9 +20815,7 @@
     ],
     "MUSC2117": [
         "(",
-        "30UOC",
-        "in",
-        "L1",
+        "24UOC",
         ")"
     ],
     "MUSC2118": [
@@ -20680,16 +20861,24 @@
     ],
     "MUSC2706": [
         "(",
+        "a",
+        "Music",
+        "specialisation",
+        "in",
+        "a",
+        "Fine",
+        "Arts",
+        "||",
+        "MUSC#",
         ")"
     ],
     "MUSC2801": [
         "(",
-        "the",
+        "a",
         "Music",
         "Creative",
         "Practice",
-        "Stream",
-        "MUSC#",
+        "specialisation",
         ")"
     ],
     "MUSC2802": [
@@ -20701,28 +20890,7 @@
         "the",
         "Music",
         "Pedagogy",
-        "stream",
-        "MUSC#.",
-        "Note:",
-        "This",
-        "course",
-        "is",
-        "for",
-        "instrumental",
-        "||",
-        "vocal",
-        ".",
-        "who",
-        "entered",
-        "the",
-        "MUSC#me",
-        "as",
-        "composers",
-        "may",
-        "be",
-        "required",
-        "to",
-        "audition",
+        "specialisation",
         ")"
     ],
     "MUSC2803": [
@@ -20733,29 +20901,54 @@
         "&&",
         "MUSC#",
         "||",
-        "Music",
-        "major",
-        "||",
-        "minor",
+        "specialisation",
         ")"
     ],
     "MUSC2804": [
         "(",
         "24UOC",
-        "in",
-        "L1",
         ")"
     ],
     "MUSC2901": [
         "(",
+        "MUSC1801",
+        "&&",
+        "MUSC1802",
+        "&&",
+        "MUSC1803.",
+        "||",
+        "MUSC1707",
+        "(",
+        "12UOC",
+        ")",
         ")"
     ],
     "MUSC2902": [
         "(",
+        "MUSC1801",
+        "&&",
+        "MUSC1802",
+        "&&",
+        "MUSC1803.",
+        "||",
+        "MUSC1707",
+        "(",
+        "12UOC",
+        ")",
         ")"
     ],
     "MUSC2903": [
         "(",
+        "MUSC1801",
+        "&&",
+        "MUSC1802",
+        "&&",
+        "MUSC1803.",
+        "||",
+        "MUSC1707",
+        "(",
+        "12UOC",
+        ")",
         ")"
     ],
     "MUSC2905": [
@@ -20800,8 +20993,12 @@
     "MUSC3162": [
         "(",
         "MUSC1602",
-        "&&",
+        "||",
+        "MUSC1807",
+        "||",
         "MUSC1603",
+        "||",
+        "MUSC1808",
         "&&",
         "MUSC1604",
         ")"
@@ -20809,12 +21006,14 @@
     "MUSC3302": [
         "(",
         "MUSC1602",
-        "&&",
+        "||",
+        "MUSC1807",
+        "||",
         "MUSC1603",
+        "||",
+        "MUSC1808",
         "&&",
         "MUSC1604",
-        "&&",
-        "MUSC2116",
         ")"
     ],
     "MUSC3705": [
@@ -20901,49 +21100,62 @@
         "&&",
         "MUSC2802",
         "&&",
-        "the",
+        "a",
         "Music",
         "Pedagogy",
         "specialisation",
+        ")"
+    ],
+    "MUSC3805": [
+        "(",
+        "24UOC",
         "in",
+        "MUSC",
+        "courses",
+        "&&",
+        "a",
+        "Bachelor",
+        "of",
+        "Music",
+        "||",
         "a",
         "Music",
-        "single",
+        "Sonic",
+        "Arts",
+        "specialisation.",
         "||",
-        "double",
-        "degree",
+        "48UOC",
+        "&&",
+        "MDIA1005",
+        "&&",
+        "MDIA#",
+        "||",
+        "a",
+        "Screen",
+        "Production",
+        "specialisation",
         ")"
     ],
     "MUSC3806": [
         "(",
-        "(",
         "MUSC2803",
         "&&",
-        "the",
-        "Sonic",
-        "Arts",
-        "stream",
-        "in",
         "a",
         "Music",
-        "single",
+        "Sonic",
+        "Arts",
+        "specialisation.",
         "||",
-        "double",
-        "degree",
-        ")",
-        "||",
-        "66UOC",
+        "48UOC",
         "&&",
         "MDIA1005",
         "&&",
-        "Media",
-        "(",
-        "S&SP",
-        ")",
-        "single",
+        "MDIA#",
         "||",
-        "double",
-        "degree",
+        "a",
+        "Screen",
+        "Production",
+        "specialisation",
         ")"
     ],
     "MUSC3807": [
@@ -20968,6 +21180,7 @@
     ],
     "MUSC3809": [
         "(",
+        "MUSC2801",
         ")"
     ],
     "MUSC4009": [
@@ -21065,14 +21278,15 @@
     "MUSC4101": [
         "(",
         "(",
+        "CORES",
+        "in",
+        "(",
         "L1",
-        "CORES",
-        "&&",
+        "||",
         "L2",
-        "CORES",
-        "&&",
+        "||",
         "L3",
-        "CORES",
+        ")",
         ")",
         "||",
         "(",
@@ -21092,27 +21306,52 @@
         "(",
         "MUSC4101",
         "&&",
-        "(",
-        "MUSC??",
-        "||",
-        "4508",
-        ")",
-        ".",
+        "a",
+        "Bachelor",
+        "of",
+        "Music.",
         "||",
         "48UOC",
         "&&",
+        "MUSC2116",
+        "&&",
+        "one",
+        "of",
+        "the",
+        "following",
+        "||",
         "MUSC1602",
         "||",
         "MUSC1604",
-        "&&",
-        "MUSC2116",
+        "||",
+        "MUSC1807",
         "&&",
         "a",
         "Music",
         "major",
         "in",
-        "an",
-        "ARTS#",
+        "the",
+        "Bachelor",
+        "of",
+        "Arts.",
+        "||",
+        "in",
+        "L1",
+        "&&",
+        "2",
+        "Music",
+        "CORES",
+        "courses",
+        "&&",
+        "a",
+        "Music",
+        "specialisation",
+        "in",
+        "the",
+        "Bachelor",
+        "of",
+        "Fine",
+        "Arts",
         ")"
     ],
     "MUSC4103": [
@@ -21236,6 +21475,13 @@
         "3831",
         ")",
         "||",
+        "(",
+        "NEUR?H",
+        ")",
+        ")"
+    ],
+    "NEUR4441": [
+        "(",
         "(",
         "NEUR?H",
         ")",
@@ -21466,6 +21712,17 @@
         "]",
         ")"
     ],
+    "OPTM6422": [
+        "(",
+        "OPTM6412",
+        "&&",
+        "OPTM6411",
+        "&&",
+        "OPTM6413",
+        "&&",
+        "OPTM6421",
+        ")"
+    ],
     "OPTM6423": [
         "(",
         "OPTM6413",
@@ -21487,6 +21744,30 @@
     "OPTM8511": [
         "(",
         "OPTM6422",
+        ")"
+    ],
+    "OPTM8512": [
+        "(",
+        "OPTM6421",
+        "&&",
+        "OPTM6422",
+        "&&",
+        "OPTM6423",
+        "&&",
+        "OPTM6424",
+        ")"
+    ],
+    "OPTM8513": [
+        "(",
+        "OPTM6411",
+        "&&",
+        "OPTM6413",
+        "&&",
+        "OPTM6423",
+        "&&",
+        "OPTM6422",
+        "&&",
+        "OPTM6421",
         ")"
     ],
     "OPTM8514": [
@@ -22084,6 +22365,15 @@
         "PHSL2121",
         ")"
     ],
+    "PHSL2501": [
+        "(",
+        "BABS1201",
+        "&&",
+        "CHEM1831",
+        "&&",
+        "MATH1041",
+        ")"
+    ],
     "PHSL2502": [
         "(",
         "PHSL2501",
@@ -22495,6 +22785,66 @@
         "PHYS2111",
         ")"
     ],
+    "PHYS3199": [
+        "(",
+        "SCIF#",
+        "&&",
+        "a",
+        "Physics",
+        "major.",
+        "Must",
+        "pass",
+        "for",
+        "WIL",
+        "modules",
+        ".",
+        "Placement",
+        "must",
+        "be",
+        "related",
+        "to",
+        "the",
+        "\u2019s",
+        "major",
+        "&&",
+        "approved",
+        "by",
+        "the",
+        "School",
+        "of",
+        "Physics",
+        ".",
+        "48UOC",
+        "&&",
+        "65WAM.",
+        "It",
+        "is",
+        "the",
+        "\u2019s",
+        "responsibility",
+        "to",
+        "check",
+        "if",
+        "they",
+        "have",
+        "space",
+        "in",
+        "their",
+        "program",
+        "for",
+        "this",
+        "elective.",
+        "This",
+        "course",
+        "cannot",
+        "be",
+        "taken",
+        "during",
+        "an",
+        "Honours",
+        "year",
+        ")"
+    ],
     "PHYS3299": [
         "(",
         "Must",
@@ -22610,6 +22960,10 @@
         "(",
         ")"
     ],
+    "PLAN1001": [
+        "(",
+        ")"
+    ],
     "PLAN1002": [
         "(",
         ")"
@@ -22644,7 +22998,6 @@
     ],
     "PLAN2004": [
         "(",
-        "PLAN1003",
         ")"
     ],
     "PLAN2005": [
@@ -22882,6 +23235,15 @@
         ")"
     ],
     "PSYC2071": [
+        "(",
+        "PSYC1001",
+        "&&",
+        "PSYC1011",
+        "&&",
+        "PSYC1111",
+        ")"
+    ],
+    "PSYC2081": [
         "(",
         "PSYC1001",
         "&&",
@@ -23217,6 +23579,11 @@
         "PTRL3015",
         ")"
     ],
+    "PTRL4020": [
+        "(",
+        "PTRL2019",
+        ")"
+    ],
     "PTRL4021": [
         "(",
         "PTRL3001",
@@ -23431,10 +23798,6 @@
         "(",
         ")"
     ],
-    "SDES2414": [
-        "(",
-        ")"
-    ],
     "SDES2415": [
         "(",
         ")"
@@ -23447,12 +23810,6 @@
         "(",
         "L2",
         "Ceramics",
-        ")"
-    ],
-    "SDES3409": [
-        "(",
-        "L2",
-        "Jewellery",
         ")"
     ],
     "SDES3412": [
@@ -23771,7 +24128,7 @@
         "||",
         "ARTS2871",
         "||",
-        "SOSS/SRAP2002",
+        "SRAP2002",
         "&&",
         "SOCW#",
         ")"
@@ -24023,6 +24380,15 @@
         "SOLA2540",
         ")"
     ],
+    "SOLA4951": [
+        "(",
+        "126UOC",
+        "&&",
+        "CORES",
+        "in",
+        "L3",
+        ")"
+    ],
     "SOLA4952": [
         "(",
         "SOLA4951",
@@ -24068,6 +24434,13 @@
     ],
     "SOLA5057": [
         "(",
+        ")"
+    ],
+    "SOLA5508": [
+        "(",
+        "SOLA2060",
+        "||",
+        "SOLA2540",
         ")"
     ],
     "SOLA5509": [
@@ -24260,43 +24633,39 @@
     ],
     "SOSS3003": [
         "(",
-        "SOSS/SRAP1000",
+        "36UOC",
         "&&",
-        "ARTS2871",
+        "SOSS/SRAP1000",
         ")"
     ],
     "SOSS3006": [
         "(",
         "SOSS/SRAP1000,",
-        "SOSS/SRAP1001,",
-        "SOSS/SRAP2001,",
-        "DIPP1112",
-        "||",
-        "CDEV1112",
+        "SOSS/SRAP2001",
         "&&",
-        "(",
-        "3321",
+        "a",
+        "Social",
+        "Science/s",
         "||",
-        "3420",
-        ")",
+        "Social",
+        "Research",
+        "&&",
+        "Policy",
+        "program",
         ")"
     ],
     "SOSS3007": [
         "(",
-        "SOSS1001",
+        "36UOC",
         "&&",
-        "(",
-        "3321",
-        "||",
-        "3420",
-        ")",
+        "SOSS/SRAP1001",
         ")"
     ],
     "SOSS3008": [
         "(",
         "36UOC",
         "&&",
-        "SOSS1000",
+        "SOSS/SRAP1000",
         ")"
     ],
     "SOSS4051": [
@@ -24469,6 +24838,15 @@
     ],
     "TABL2793": [
         "(",
+        ")"
+    ],
+    "TABL3033": [
+        "(",
+        "TABL2751",
+        "&&",
+        "COMM6000",
+        "&&",
+        "65WAM",
         ")"
     ],
     "TABL3545": [
@@ -24806,6 +25184,10 @@
         "ZBUS1102",
         ")"
     ],
+    "ZBUS2206": [
+        "(",
+        ")"
+    ],
     "ZBUS2207": [
         "(",
         ")"
@@ -24903,6 +25285,13 @@
         "(",
         ")"
     ],
+    "ZBUS3302": [
+        "(",
+        "ZBUS1102",
+        "&&",
+        "ZBUS2202",
+        ")"
+    ],
     "ZBUS3303": [
         "(",
         ")"
@@ -24989,6 +25378,10 @@
         "ZEIT1208",
         "&&",
         "ZPEM1303",
+        ")"
+    ],
+    "ZEIT1208": [
+        "(",
         ")"
     ],
     "ZEIT1290": [
@@ -25099,6 +25492,17 @@
         "ZPEM1304",
         ")"
     ],
+    "ZEIT2503": [
+        "(",
+        "ZEIT1503",
+        "&&",
+        "ZEIT2500",
+        "&&",
+        "ZPEM1303",
+        "&&",
+        "ZPEM1304",
+        ")"
+    ],
     "ZEIT2504": [
         "(",
         "ZEIT1503",
@@ -25136,6 +25540,11 @@
     "ZEIT2902": [
         "(",
         "CCDF#",
+        ")"
+    ],
+    "ZEIT3101": [
+        "(",
+        "ZEIT3118",
         ")"
     ],
     "ZEIT3102": [
@@ -25192,6 +25601,10 @@
         ")"
     ],
     "ZEIT3119": [
+        "(",
+        ")"
+    ],
+    "ZEIT3120": [
         "(",
         ")"
     ],
@@ -25297,6 +25710,11 @@
     ],
     "ZEIT3504": [
         "(",
+        ")"
+    ],
+    "ZEIT3505": [
+        "(",
+        "ZEIT2502",
         ")"
     ],
     "ZEIT3506": [
@@ -25493,6 +25911,10 @@
         "(",
         ")"
     ],
+    "ZEIT4150": [
+        "(",
+        ")"
+    ],
     "ZEIT4151": [
         "(",
         ")"
@@ -25551,6 +25973,10 @@
         ")"
     ],
     "ZEIT4231": [
+        "(",
+        ")"
+    ],
+    "ZEIT4297": [
         "(",
         ")"
     ],
@@ -25615,6 +26041,11 @@
     ],
     "ZEIT4702": [
         "(",
+        ")"
+    ],
+    "ZEIT4703": [
+        "(",
+        "ZEIT1503",
         ")"
     ],
     "ZEIT4750": [
@@ -25861,6 +26292,23 @@
         "ZHSS1401",
         "&&",
         "ZHSS1402",
+        ")"
+    ],
+    "ZHSS2428": [
+        "(",
+        ")"
+    ],
+    "ZHSS2506": [
+        "(",
+        "Any",
+        "2",
+        "of",
+        "ZHSS1102,",
+        "ZHSS1202,",
+        "ZHSS1302,",
+        "ZHSS1304,",
+        "ZHSS1402,",
+        "ZPEM1202",
         ")"
     ],
     "ZHSS2600": [
@@ -26110,6 +26558,10 @@
         "ZPEM1202",
         ")"
     ],
+    "ZHSS3502": [
+        "(",
+        ")"
+    ],
     "ZHSS3505": [
         "(",
         "Any",
@@ -26127,6 +26579,10 @@
         "(",
         ")"
     ],
+    "ZHSS4001": [
+        "(",
+        ")"
+    ],
     "ZHSS4002": [
         "(",
         ")"
@@ -26140,6 +26596,10 @@
         ")"
     ],
     "ZHSS4005": [
+        "(",
+        ")"
+    ],
+    "ZHSS4006": [
         "(",
         ")"
     ],
@@ -26559,703 +27019,6 @@
     ],
     "ZPEM4502": [
         "(",
-        ")"
-    ],
-    "DPST1071": [
-        "(",
-        "(",
-        "7001",
-        "||",
-        "7002",
-        "||",
-        "7003",
-        "||",
-        "7004",
-        ")",
-        ")"
-    ],
-    "ZBUS2206": [
-        "(",
-        ")"
-    ],
-    "ZBUS3302": [
-        "(",
-        "ZBUS1102",
-        "&&",
-        "ZBUS2202",
-        ")"
-    ],
-    "CVEN4041": [
-        "(",
-        "CVEN4040",
-        ")"
-    ],
-    "BEIL0003": [
-        "(",
-        "96UOC",
-        ")"
-    ],
-    "ACTL4010": [
-        "(",
-        ")"
-    ],
-    "ZEIT4297": [
-        "(",
-        ")"
-    ],
-    "GEOS1211": [
-        "(",
-        ")"
-    ],
-    "LAWS3144": [
-        "(",
-        "78UOC",
-        "in",
-        "LAWS",
-        "courses",
-        ")"
-    ],
-    "MATS4504": [
-        "(",
-        "MATS?H",
-        ")"
-    ],
-    "DART1340": [
-        "(",
-        ")"
-    ],
-    "INFS3703": [
-        "(",
-        "INFS2603",
-        ")"
-    ],
-    "DPST1041": [
-        "(",
-        "(",
-        "7001",
-        "||",
-        "7002",
-        "||",
-        "7003",
-        "||",
-        "7004",
-        ")",
-        ")"
-    ],
-    "EXPT3152": [
-        "(",
-        "(",
-        "SOMS1912,",
-        "SOMS1913,",
-        "HESC2451",
-        ")",
-        "||",
-        "(",
-        "HESC2452",
-        "&&",
-        "NEUR3101",
-        ")",
-        ")"
-    ],
-    "DPHU1008": [
-        "(",
-        "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
-        ")"
-    ],
-    "NEUR4441": [
-        "(",
-        "(",
-        "NEUR?H",
-        ")",
-        ")"
-    ],
-    "ELEC3105": [
-        "(",
-        "ELEC2134",
-        "&&",
-        "ELEC3115",
-        ")"
-    ],
-    "EDST4080": [
-        "(",
-        "78UOC",
-        "&&",
-        "EDST2002",
-        "&&",
-        "an",
-        "EDST#",
-        ")"
-    ],
-    "BENV6713": [
-        "(",
-        "96UOC",
-        "in",
-        "Built",
-        "Environment",
-        ")"
-    ],
-    "ZHSS2428": [
-        "(",
-        ")"
-    ],
-    "PHYS3199": [
-        "(",
-        "SCIF#",
-        "&&",
-        "a",
-        "Physics",
-        "major.",
-        "Must",
-        "pass",
-        "for",
-        "WIL",
-        "modules",
-        ".",
-        "Placement",
-        "must",
-        "be",
-        "related",
-        "to",
-        "the",
-        "\u2019s",
-        "major",
-        "&&",
-        "approved",
-        "by",
-        "the",
-        "School",
-        "of",
-        "Physics",
-        ".",
-        "48UOC",
-        "&&",
-        "65WAM.",
-        "It",
-        "is",
-        "the",
-        "\u2019s",
-        "responsibility",
-        "to",
-        "check",
-        "if",
-        "they",
-        "have",
-        "space",
-        "in",
-        "their",
-        "program",
-        "for",
-        "this",
-        "elective.",
-        "This",
-        "course",
-        "cannot",
-        "be",
-        "taken",
-        "during",
-        "an",
-        "Honours",
-        "year",
-        ")"
-    ],
-    "ZEIT3120": [
-        "(",
-        ")"
-    ],
-    "ZHSS4006": [
-        "(",
-        ")"
-    ],
-    "ACTL2131": [
-        "(",
-        "ACTL1101",
-        "&&",
-        "(",
-        "MATH1251",
-        "||",
-        "MATH1241",
-        ")",
-        ")"
-    ],
-    "ARTS2050": [
-        "(",
-        "12UOC",
-        "in",
-        "L1",
-        "&&",
-        "an",
-        "Arts",
-        "&&",
-        "Social",
-        "Sciences",
-        "||",
-        "Art",
-        "&&",
-        "Design",
-        "single",
-        "||",
-        "dual",
-        "award",
-        "program",
-        ")"
-    ],
-    "OPTM8513": [
-        "(",
-        "OPTM6411",
-        "&&",
-        "OPTM6413",
-        "&&",
-        "OPTM6423",
-        "&&",
-        "OPTM6422",
-        "&&",
-        "OPTM6421",
-        ")"
-    ],
-    "GEOS2721": [
-        "(",
-        "GEOS1701",
-        ")"
-    ],
-    "PSYC2081": [
-        "(",
-        "PSYC1001",
-        "&&",
-        "PSYC1011",
-        "&&",
-        "PSYC1111",
-        ")"
-    ],
-    "EXPT1155": [
-        "(",
-        "SOMS1912",
-        "&&",
-        "[",
-        "SOMS1913",
-        "]",
-        ")"
-    ],
-    "MGMT4104": [
-        "(",
-        "4501",
-        ")"
-    ],
-    "CVEN2101": [
-        "(",
-        ")"
-    ],
-    "PHSL2501": [
-        "(",
-        "BABS1201",
-        "&&",
-        "CHEM1831",
-        "&&",
-        "MATH1041",
-        ")"
-    ],
-    "ARTS3750": [
-        "(",
-        "48UOC",
-        "&&",
-        "6UOC",
-        "in",
-        "L1",
-        "&&",
-        "6UOC",
-        "in",
-        "L2",
-        "in",
-        "one",
-        "of",
-        "the",
-        "following",
-        "specialisations,",
-        "Development",
-        "Studies,",
-        "Geographical",
-        "Studies",
-        "||",
-        "Global",
-        "Development.",
-        "||",
-        "48UOC",
-        "&&",
-        "an",
-        "INST#",
-        ")"
-    ],
-    "MATS5002": [
-        "(",
-        ")"
-    ],
-    "DART3130": [
-        "(",
-        "DART2130",
-        ")"
-    ],
-    "ZHSS3502": [
-        "(",
-        ")"
-    ],
-    "MMAN4020": [
-        "(",
-        "MMAN4010",
-        ")"
-    ],
-    "EXPT3178": [
-        "(",
-        "EXPT3148",
-        "&&",
-        "EXPT2151",
-        "&&",
-        "EXPT3179",
-        ")"
-    ],
-    "AVIA4004": [
-        "(",
-        "AVIA?H",
-        ")"
-    ],
-    "MARK4214": [
-        "(",
-        ")"
-    ],
-    "HESC4501": [
-        "(",
-        "(",
-        "3831",
-        ")",
-        "||",
-        "(",
-        "MATH1041,",
-        "HESC2501",
-        "&&",
-        "12UOC",
-        "in",
-        "L3",
-        "HESC",
-        ")",
-        ")"
-    ],
-    "SOLA5508": [
-        "(",
-        "SOLA2060",
-        "||",
-        "SOLA2540",
-        ")"
-    ],
-    "EDST6747": [
-        "(",
-        "EDST6717",
-        "&&",
-        "[",
-        "EDST6760",
-        "]",
-        ")"
-    ],
-    "MATH3201": [
-        "(",
-        "(",
-        "MATH2501",
-        "||",
-        "MATH2601",
-        "||",
-        "MATH2089",
-        "||",
-        "MATH2099",
-        ")",
-        "&&",
-        "(",
-        "MATH2011",
-        "||",
-        "MATH2111",
-        "||",
-        "75GRADE",
-        "in",
-        "MATH2018",
-        "||",
-        "75GRADE",
-        "in",
-        "MATH2019",
-        "||",
-        "65GRADE",
-        "in",
-        "MATH2069",
-        "||",
-        "MATH2121",
-        "||",
-        "MATH2221",
-        ")",
-        ")"
-    ],
-    "MUSC3805": [
-        "(",
-        "(",
-        "24UOC",
-        "in",
-        "MUSC",
-        "courses",
-        "&&",
-        "a",
-        "Music",
-        "single",
-        "||",
-        "double",
-        "degree",
-        ")",
-        "||",
-        "66UOC",
-        "&&",
-        "(",
-        "4510",
-        "||",
-        "3454",
-        "||",
-        "3438",
-        "||",
-        "3453",
-        ")",
-        "(",
-        "S&SP",
-        ")",
-        "program",
-        ")"
-    ],
-    "ZHSS4001": [
-        "(",
-        ")"
-    ],
-    "DART1200": [
-        "(",
-        ")"
-    ],
-    "MUSC1802": [
-        "(",
-        ")"
-    ],
-    "DDES2111": [
-        "(",
-        "DDES2110",
-        ")"
-    ],
-    "DDES1201": [
-        "(",
-        "DDES1200",
-        ")"
-    ],
-    "ELEC2141": [
-        "(",
-        "[",
-        "ELEC1111",
-        "||",
-        "DPST1081",
-        "||",
-        "ELEC1112",
-        "]",
-        ")"
-    ],
-    "MGMT4500": [
-        "(",
-        "4501",
-        ")"
-    ],
-    "LAWS3326": [
-        "(",
-        "78UOC",
-        "in",
-        "LAWS",
-        "courses",
-        ")"
-    ],
-    "ARTS3639": [
-        "(",
-        "24UOC",
-        "in",
-        "L1",
-        ")"
-    ],
-    "CVEN4961": [
-        "(",
-        "132UOC",
-        "&&",
-        "80WAM",
-        ")"
-    ],
-    "CHEM4518": [
-        "(",
-        "CHEM?H",
-        ")"
-    ],
-    "DDES2161": [
-        "(",
-        "DDES2160",
-        ")"
-    ],
-    "PTRL4020": [
-        "(",
-        "PTRL2019",
-        ")"
-    ],
-    "ARTS4816": [
-        "(",
-        "(",
-        "CHINBH",
-        ")",
-        ")"
-    ],
-    "DDES4200": [
-        "(",
-        "Honours",
-        "&&",
-        "[",
-        "]",
-        ")"
-    ],
-    "LAWS3321": [
-        "(",
-        "Restricted",
-        "to",
-        "Legal",
-        "Studies.",
-        "Academic",
-        "Program",
-        "must",
-        "be",
-        "4055",
-        "||",
-        "3408",
-        "||",
-        "4054",
-        "||",
-        "4053",
-        ")"
-    ],
-    "DPHU1001": [
-        "(",
-        "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
-        ")"
-    ],
-    "ZEIT4703": [
-        "(",
-        "ZEIT1503",
-        ")"
-    ],
-    "ZEIT1208": [
-        "(",
-        ")"
-    ],
-    "PLAN1001": [
-        "(",
-        ")"
-    ],
-    "MERE2001": [
-        "(",
-        ")"
-    ],
-    "ARTS4713": [
-        "(",
-        "(",
-        "PHILBH",
-        ")",
-        ")"
-    ],
-    "ZEIT4150": [
-        "(",
-        ")"
-    ],
-    "ARTS3751": [
-        "(",
-        "72UOC",
-        "&&",
-        "a",
-        "Global",
-        "Development",
-        "major",
-        "||",
-        "Development",
-        "Studies",
-        "major",
-        ")"
-    ],
-    "ZEIT3101": [
-        "(",
-        "ZEIT3118",
-        ")"
-    ],
-    "SOLA4951": [
-        "(",
-        "126UOC",
-        "&&",
-        "3rd",
-        "year",
-        "core",
-        ")"
-    ],
-    "OPTM6422": [
-        "(",
-        "OPTM6412",
-        "&&",
-        "OPTM6411",
-        "&&",
-        "OPTM6413",
-        "&&",
-        "OPTM6421",
-        ")"
-    ],
-    "ZHSS2506": [
-        "(",
-        "Any",
-        "2",
-        "of",
-        "ZHSS1102,",
-        "ZHSS1202,",
-        "ZHSS1302,",
-        "ZHSS1304,",
-        "ZHSS1402,",
-        "ZPEM1202",
-        ")"
-    ],
-    "ZEIT2503": [
-        "(",
-        "ZEIT1503",
-        "&&",
-        "ZEIT2500",
-        "&&",
-        "ZPEM1303",
-        "&&",
-        "ZPEM1304",
-        ")"
-    ],
-    "OPTM8512": [
-        "(",
-        "OPTM6421",
-        "&&",
-        "OPTM6422",
-        "&&",
-        "OPTM6423",
-        "&&",
-        "OPTM6424",
-        ")"
-    ],
-    "ZEIT3505": [
-        "(",
-        "ZEIT2502",
         ")"
     ]
 }

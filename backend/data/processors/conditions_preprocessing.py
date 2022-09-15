@@ -115,6 +115,7 @@ def preprocess_conditions():
         processed = convert_manual_programs_and_specialisations(processed)
         processed = convert_AND_OR(processed)
         processed = convert_coreqs(processed)
+        processed = convert_core(processed)
 
         # Phase 3: Algo logic
         processed = joining_terms(processed)
@@ -273,7 +274,7 @@ def convert_UOC(processed: str) -> str:
     )
 
     # Remove "minimum" since it is implied
-    processed = re.sub(r"minimum (\d+UOC)", r"\1", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"minimum (?:of )?(\d+UOC)", r"\1", processed, flags=re.IGNORECASE)
 
     return processed
 
@@ -329,8 +330,9 @@ def convert_GRADE(processed: str) -> str:
     return processed
 
 
-def convert_level(processed: str) -> str:
-    """Converts level X to LX"""
+def convert_level(processed):
+    """Converts level X and X year to LX"""
+    processed = re.sub(r"3rd year", r"L3", processed, flags=re.IGNORECASE)
     processed = re.sub(r"((at|in|of) )?level (\d)( courses)?", r"in L\3", processed, flags=re.IGNORECASE)
     return re.sub(r"in L(\d)( [A-Z]{4})( courses)?", r"in L\1\2", processed, flags=re.IGNORECASE)
 
@@ -399,6 +401,10 @@ def convert_coreqs(processed: str) -> str:
         r",*;*\.*\s*(co-?(re)?requisites?|concurrentl?y?)\s*;?:?\s*(.*)", r" [\3]", processed, flags=re.IGNORECASE
     )
 
+def convert_core(processed):
+    """ Converts 'core' to 'CORES' for core course conditions """
+    processed = re.sub("core", "CORES", processed, flags=re.IGNORECASE)
+    return re.sub(r"(L\d) CORES", r"CORES in \1", processed, flags=re.IGNORECASE)
 
 # -----------------------------------------------------------------------------
 # Phase 3: Algo logic
