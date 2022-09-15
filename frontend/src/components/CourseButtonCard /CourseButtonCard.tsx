@@ -8,7 +8,7 @@ import S from './styles';
 type Props = {
   courseCode: string
   title: string
-  planned: boolean
+  planned?: boolean
 };
 
 const CourseButtonCard = ({ courseCode, title, planned }: Props) => {

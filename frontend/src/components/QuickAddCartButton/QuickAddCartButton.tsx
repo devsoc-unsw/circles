@@ -14,7 +14,7 @@ import S from './styles';
 
 type Props = {
   courseCode: string
-  planned: boolean
+  planned?: boolean
 };
 
 const QuickAddCartButton = ({ courseCode, planned }: Props) => {
