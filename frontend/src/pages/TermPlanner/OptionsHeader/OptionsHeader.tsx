@@ -3,7 +3,7 @@ import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
+  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, UploadOutlined, WarningFilled,
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
@@ -12,6 +12,7 @@ import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
+import ImportPlannerMenu from '../ImportPlannerMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
 import S from './styles';
@@ -67,6 +68,23 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             <Tooltip title="Export">
               <S.OptionButton>
                 <DownloadOutlined style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+          </div>
+        </Tippy>
+        <Tippy
+          content={<ImportPlannerMenu />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme}
+          zIndex={1}
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Import">
+              <S.OptionButton>
+                <UploadOutlined style={iconStyles} />
               </S.OptionButton>
             </Tooltip>
           </div>
