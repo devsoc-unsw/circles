@@ -25,7 +25,7 @@ from server.routers.model import (
     Structure,
     StructureContainer,
 )
-from server.routers.utility import map_suppressed_errors
+from server.routers.utility import get_core_courses, map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -110,16 +110,27 @@ def add_subgroup_container(structure: dict[str, StructureContainer], type: str, 
     }
     return list(structure[type]["content"][title]["courses"].keys())
 
-def add_geneds_courses(programCode: str, structure: dict, container: ProgramContainer) -> list[str]:
+def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer], container: ProgramContainer) -> list[str]:
     """ Returns the added courses """
     if container.get("type") != "gened":
         return []
 
     item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
-
     if container.get("courses") is None:
-        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
+        gen_ed_courses = list(set(get_gen_eds(programCode)["courses"].keys()) - set(sum(
+            (
+                sum((
+                    list(value["courses"].keys())
+                    for sub_group, value in spec["content"].items()
+                    if 'core' in sub_group.lower()
+                ), [])
+            for spec_name, spec in structure.items()
+            if "Major" in spec_name or "Honours" in spec_name)
+        , [])))
+        geneds = get_gen_eds(programCode)
+        item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
+
 
     return list(item["courses"].keys())
 
@@ -293,8 +304,8 @@ def get_structure_course_list(
 )
 def get_gen_eds(programCode: str):
     """ fetches gen eds from file """
-    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
-    return {"courses" : all_geneds[programCode]}
+    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+    return {"courses" : all_geneds}
 
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
@@ -335,6 +346,9 @@ def graph(
         "courses": courses,
     }
 
+@router.get("/getCores/{programCode}/{spec}")
+def get_cores(programCode: str, spec: str):
+    return get_core_courses(programCode, spec.split('+'))
 
 ###############################################################
 #                       End of Routes                         #

@@ -115,8 +115,8 @@ def COMP_3901_2(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "80WAM in (COMP || SENG || BINF)",
-        "handbook_note": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+        "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
+        "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     }
 
 
