@@ -43,6 +43,7 @@ const CourseList = styled.div`
 const FilterBarWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   margin-right: 15px;
