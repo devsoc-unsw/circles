@@ -40,13 +40,13 @@ const CourseList = styled.div`
   overflow-x: hidden;
 `;
 
-const SortBtnWrapper = styled.div`
+const FilterBarWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   margin-right: 15px;
-
   & > * {
     cursor: pointer;
     font-size: 1.25rem;
@@ -59,5 +59,5 @@ export default {
   Instruction,
   CourseModal,
   CourseList,
-  SortBtnWrapper,
+  FilterBarWrapper,
 };
