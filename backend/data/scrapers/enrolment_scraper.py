@@ -13,7 +13,7 @@ import subprocess
 import paramiko
 import argparse
 import hashlib
-import waiting
+import waiting #type: ignore
 import re
 
 from data.utility.data_helpers import read_data, write_data
@@ -49,7 +49,7 @@ def scrape_enrolment_data(username:str, password:str):
         print(course_code)
         try:
             waiting.wait(lambda: stdin.channel.send_ready(), timeout_seconds=13)
-            stdin.channel.sendall(f'members {course_code}_Student\n')
+            stdin.channel.sendall(f'members {course_code}_Student\n'.encode())
 
             waiting.wait(lambda: stdout.channel.recv_ready(), timeout_seconds=13)
             result = stdout.channel.recv(MAX_BYTES).decode('utf-8')
