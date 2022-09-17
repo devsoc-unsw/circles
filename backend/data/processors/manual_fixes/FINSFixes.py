@@ -34,8 +34,8 @@ def fix_conditions():
     CONDITIONS["FINS3303"][PROCESSED] = FINS_3202_3303()
     CONDITIONS["FINS3626"][PROCESSED] = FINS_3626()
     CONDITIONS["FINS3630"][PROCESSED] = FINS_3630()
-    CONDITIONS["FINS3645"][PROCESSED] = FINS_3645_6()
-    CONDITIONS["FINS3646"][PROCESSED] = FINS_3645_6()
+    CONDITIONS["FINS3645"][PROCESSED] = FINS_3645()
+    CONDITIONS["FINS3646"][PROCESSED] = FINS_3646()
     CONDITIONS["FINS4774"][PROCESSED] = FINS_4774()
     CONDITIONS["FINS4776"][PROCESSED] = FINS_4776_7_9()
     CONDITIONS["FINS4777"][PROCESSED] = FINS_4776_7_9()
@@ -66,7 +66,7 @@ def FINS_2622():
     "processed": "|| [FINS1612 && FINS2624]"
     """
 
-    return "[FINS1612 && FINS2624]"
+    return "[FINS1612 || FINS2618] && FINS2624"
 
 
 def FINS_3202_3303():
@@ -82,62 +82,67 @@ def FINS_3202_3303():
 
 def FINS_3626():
     """
-    "original": "Prerequisite: COMM1140 or ACCT1511 and COMM1180 or FINS1613<br/><br/>",
+    "original": "Prerequisite: COMM1140 or ACCT1511 and COMM1180 or (COMM1140 and ECON1102) or FINS1613<br/><br/>",
 
-    "processed": "COMM1140 || ACCT1511 && COMM1180 || FINS1613"
     """
 
-    return "(COMM1140 || ACCT1511) && (COMM1180 || FINS1613)"
+    return "(COMM1140 || ACCT1511) && (COMM1180 || (COMM1140 && ECON1102) || FINS1613)"
 
 
 def FINS_3630():
     """
-    "original": "Prerequisite: FINS1612, COMM1180<br/><br/>",
-
-    "processed": "FINS1612, COMM1180"
+    "original": "FINS1612/FINS2618, and, COMM1180 OR (COMM1140 and ECON1102) OR FINS1613<br/><br/>",
     """
 
-    return "FINS1612 && COMM1180"
+    return "(FINS1612 || FINS2618) && (COMM1180 || (COMM1140 && ECON1102) || FINS1613)"
 
 
-def FINS_3645_6():
+def FINS_3645():
     """
-    "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
+    "original": "Pre-requisite: FINS1612/2618;  OR enrolment in a Business Analytics Major (COMMJ1) and completion of COMM1180 or FINS1613 or (COMM1140 and ECON1102)<br/><br/>",
+
+    """
+
+    return "(FINS1612 || FINS1618) || (COMMJ1 && (COMM1180 || FINS1613 || (COMM1140 && ECON1102)))"
+
+def FINS_3646():
+    """
+    "original": "Pre-requisite: FINS1612/FINS2618 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613 OR (COMM1140 and ECON1102)<br/><br/>",
 
     "processed": "FINS1612 || (Business Analytics Major (COMMJ1) && COMM1180 || FINS1613"
     """
 
-    return "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
+    return "FINS1612 || FINS2618 || (COMMJ1 && (COMM1180 || FINS1613 || (COMM1140 && ECON1102)))"
 
 
 def FINS_4774():
     """
-    "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520. <br/>Corequisite: FINS3775 or FINS4775 or FINS4779<br/><br/>",
+    "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/><br/>",
 
-    "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
+    "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520."
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
+    return "((FINSAH && 4501) || (FINSBH && 3565) || 4520)"
 
 
 def FINS_4776_7_9():
     """
-    "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
+    "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520",
 
-    "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 ||]"
+    "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520."
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
+    return "((FINSAH && 4501) || (FINSBH && 3565) || 4520)"
 
 
 def FINS_4792():
     """
-    "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520. <br/>Corequisite:  FINS3775 or FINS4775<br/><br/>",
+    "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520.<br/><br/>",
 
-    "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [ FINS3775 || FINS4775]"
+    "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520."
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775]"
+    return "((FINSAH && 4501) || (FINSBH && 3565) || 4520) "
 
 
 if __name__ == "__main__":

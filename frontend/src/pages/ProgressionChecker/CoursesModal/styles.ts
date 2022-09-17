@@ -11,12 +11,14 @@ const ModalHeader = styled.div`
 
 const ModalTitle = styled(Title)`
   margin: 0 !important;
+  color: ${({ theme }) => theme.text} !important;
 `;
 
 const Instruction = styled.p`
   margin-top: 10px;
   margin-bottom: 0px;
   font-size: 18px;
+  color: ${({ theme }) => theme.text};
 `;
 
 const CourseModal = styled(Modal)`
@@ -38,13 +40,13 @@ const CourseList = styled.div`
   overflow-x: hidden;
 `;
 
-const SortBtnWrapper = styled.div`
+const FilterBarWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   margin-right: 15px;
-
   & > * {
     cursor: pointer;
     font-size: 1.25rem;
@@ -57,5 +59,5 @@ export default {
   Instruction,
   CourseModal,
   CourseList,
-  SortBtnWrapper,
+  FilterBarWrapper,
 };

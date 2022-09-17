@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
-import {
-  Alert,
-  Button, Tooltip, Typography,
-} from 'antd';
-import PlannerCartCourseCard from 'components/PlannerCartCourseCard';
+import { Button, Tooltip, Typography } from 'antd';
+import CourseCartCard from 'components/CourseCartCard';
 import type { RootState } from 'config/store';
 import { removeAllCourses } from 'reducers/plannerSlice';
 import S from './styles';
@@ -17,27 +14,12 @@ const PlannerCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const courses = useSelector((store: RootState) => store.planner.courses);
-  const [openMenu, setOpenMenu] = useState(false);
-  const [show, setShow] = useState(false);
-  const [code, setCode] = useState('');
+  const [showMenu, setShowMenu] = useState(false);
 
-  const deleteAllCourses = () => {
-    dispatch(removeAllCourses());
-  };
-
-  const showAlert = (c: string) => {
-    setShow(false);
-    setCode(c);
-    setShow(true);
-    setTimeout(() => {
-      setShow(false);
-      setCode('');
-    }, 3500);
-  };
   const pathname = useLocation();
 
   useEffect(() => {
-    setOpenMenu(false);
+    setShowMenu(false);
   }, [pathname]);
 
   return (
@@ -47,61 +29,51 @@ const PlannerCart = () => {
           type="primary"
           icon={<CalendarOutlined style={{ fontSize: '26px' }} />}
           size="large"
-          onClick={() => setOpenMenu(!openMenu)}
+          onClick={() => setShowMenu((prevState) => !prevState)}
         />
       </Tooltip>
-      {openMenu && (
-        <S.PlannerCartMenu>
+      {showMenu && (
+        <S.PlannerCartContainer>
           <Title className="text" level={4}>
             Your selected courses
           </Title>
-          {show && (
-            <Alert
-              message={`Successfully removed ${code} from planner`}
-              type="success"
-              style={{ margin: '10px' }}
-              banner
-              showIcon
-              closable
-              afterClose={() => setShow(false)}
-            />
-          )}
           {Object.keys(courses).length > 0 ? (
-            <S.PlannerCartContent>
-              {/* Reversed map to show the most recently added courses first */}
-              {Object.keys(courses).reverse().map((courseCode) => (
-                <PlannerCartCourseCard
-                  code={courseCode}
-                  title={courses[courseCode].title}
-                  showAlert={showAlert}
-                />
-              ))}
-            </S.PlannerCartContent>
+            <>
+              <S.CartContentWrapper>
+                {/* Reversed map to show the most recently added courses first */}
+                {Object.keys(courses).reverse().map((courseCode) => (
+                  <CourseCartCard
+                    code={courseCode}
+                    title={courses[courseCode].title}
+                  />
+                ))}
+              </S.CartContentWrapper>
+              {Object.keys(courses).length > 0 && (
+                <Button
+                  block
+                  danger
+                  icon={<DeleteOutlined />}
+                  onClick={() => dispatch(removeAllCourses())}
+                >
+                  Delete all courses
+                </Button>
+              )}
+            </>
           ) : (
-            <S.PlannerCartEmptyCont>
+            <S.EmptyWrapper>
               <Text className="text">
                 You have not selected any courses. Find them in our course
                 selector
               </Text>
-              <S.LinkButton
+              <Button
                 shape="round"
                 onClick={() => navigate('/course-selector')}
               >
                 Go to course selector
-              </S.LinkButton>
-            </S.PlannerCartEmptyCont>
+              </Button>
+            </S.EmptyWrapper>
           )}
-          {/* TODO: Hacky solution so prevent overflow.. help  */}
-          {!show && Object.keys(courses).length > 0 && (
-            <S.DelButton
-              danger
-              icon={<DeleteOutlined />}
-              onClick={deleteAllCourses}
-            >
-              Delete all courses
-            </S.DelButton>
-          )}
-        </S.PlannerCartMenu>
+        </S.PlannerCartContainer>
       )}
     </S.PlannerCartRoot>
   );

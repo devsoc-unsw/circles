@@ -29,12 +29,13 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["ECON1101"] = ECON_1101(CONDITIONS["ECON1101"])
+    CONDITIONS["ECON1102"] = ECON_1102(CONDITIONS["ECON1102"])
     CONDITIONS["ECON1203"] = ECON_1203("ECON1203", CONDITIONS["ECON1203"])
     CONDITIONS["ECON2101"][PROCESSED] = ECON_2101_2102_2112()
     CONDITIONS["ECON2102"][PROCESSED] = ECON_2101_2102_2112()
     CONDITIONS["ECON2112"][PROCESSED] = ECON_2101_2102_2112()
-    CONDITIONS["ECON2209"][PROCESSED] = ECON_2209()
     CONDITIONS["ECON2206"] = ECON_2206(CONDITIONS["ECON2206"])
+    CONDITIONS["ECON2209"] = ECON_2209(CONDITIONS["ECON2209"])
     CONDITIONS["ECON2403"][PROCESSED] = ECON_2403()
     CONDITIONS["ECON3000"][PROCESSED] = ECON_3000()
     CONDITIONS["ECON3208"][PROCESSED] = ECON_3208()
@@ -84,6 +85,19 @@ def ECON_1101(conditions):
     }
 
 
+def ECON_1102(conditions):
+    """
+        "original": "Enrolment excluded for BCom single or dual-degree programs, except students in dual 3155 Actl/Comm and dual 3521 Comm/Econ programs.<br/><br/>",
+        "processed": "Enrolment"
+    """
+
+    return {
+        "original": conditions["original"],
+        "processed": "",
+        "handbook_note": "Enrolment excluded for BCom single or dual-degree programs, except students in dual 3155 Actl/Comm and dual 3521 Comm/Econ programs."
+    }
+
+
 def ECON_1203(code, conditions):
     """
     "original": "Excluded: MATH2841, MATH2801, MATH2901, MATH2099, ACTL2002 & ACTL2131. <br/>Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ), or program 3715 or 3764<br/><br/>"
@@ -116,17 +130,23 @@ def ECON_2206(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "ECON1203 || COMM1110 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
-        "handbook_note": ". It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
+        "processed": "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
+        "handbook_note": "It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course."
     }
 
-def ECON_2209():
+
+def ECON_2209(conditions):
     """
         "original": "Pre-requisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
         "processed": "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251. It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
     """
 
-    return "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
+    return {
+        "original": conditions["original"],
+        "processed": "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
+        "handbook_note": "It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course."
+    }
+
 
 def ECON_2403():
     """

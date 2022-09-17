@@ -2,9 +2,11 @@
 Contains the Conditions classes
 """
 
-import json
+from functools import reduce
+import json, re
 from abc import ABC, abstractmethod
-from typing import Optional, Tuple, TypedDict
+from typing import List, Optional, Tuple, TypedDict
+import warnings
 
 from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
 from algorithms.objects.user import User
@@ -81,7 +83,7 @@ class CourseCondition(Condition):
         return self.course == course
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.has_taken_course(self.course), []
+        return (True, []) if user.has_taken_course(self.course) else (False, [self.course])
 
     def __str__(self) -> str:
         return json.dumps({
@@ -109,20 +111,20 @@ class CoreqCoursesCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """ Returns True if the user is taking these courses in the same term """
+        
         match self.logic:
             case Logic.AND:
-                return all(
-                    user.has_taken_course(course)
-                    or user.is_taking_course(course)
-                    for course in self.courses
-                ), []
+                warning = [course for course in self.courses if not user.has_taken_course(course) and not user.is_taking_course(course)]
+                return (True, []) if not warning else (False, ['(Corequisites: ' + ' AND '.join(warning) + ')'])
             case Logic.OR:
-                return any(
+                conditions_met = any(
                     user.has_taken_course(course)
                     or user.is_taking_course(course)
                     for course in self.courses
-                ), []
-
+                )
+                warning = [f'{course}' for course in self.courses]
+                return conditions_met, ([] if conditions_met else ['(Corequisites: ' + ' OR '.join(warning) + ')'])
+        
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
 
@@ -154,7 +156,8 @@ class UOCCondition(Condition):
         # SENG - course codes starting with SENG
         # L4 - level 4 courses
         # L2 MATH - level 2 courses starting with MATH
-        # CORE - core courses
+        # CORES - core courses
+        # L2 CORES - level 2 core courses
         # And more...
         self.category: Category = AnyCategory()
 
@@ -166,7 +169,9 @@ class UOCCondition(Condition):
         self.category = category_classobj
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.uoc(self.category) >= self.uoc, []
+        uoc_met = user.uoc(self.category) >= self.uoc
+        category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
+        return uoc_met, ([] if uoc_met else [f"{self.uoc} UOC required in {category} you have {user.uoc(self.category)} UOC"])
 
     def __str__(self) -> str:
         return json.dumps({
@@ -197,18 +202,20 @@ class WAMCondition(Condition):
         """
         Determines if the user has met the WAM condition for this category.
 
-        Will always return True and a warning since WAM can fluctuate
+        Will always return False and a warning since WAM can fluctuate
         """
         warning = self.get_warning(user.wam(self.category))
-        return True, [warning] if warning else []
+        return True, [warning]
 
-    def get_warning(self, applicable_wam: Optional[float]) -> str | None:
+    def get_warning(self, applicable_wam: Optional[float]) -> str:
         """ Returns an appropriate warning message or None if not needed """
+        category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
+        wam_warning = f"Requires {self.wam} WAM in {category}. "
         if applicable_wam is None:
-            return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
+            return f"{wam_warning} Your WAM in {category} has not been recorded"
         if applicable_wam >= self.wam:
-            return None
-        return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
+            return wam_warning
+        return f"{wam_warning} Your WAM in {category} is currently {applicable_wam:.3f}"
 
     def __str__(self) -> str:
         return json.dumps({
@@ -239,16 +246,17 @@ class GradeCondition(Condition):
                 unlocked, warnings = list(zip(*validations))
                 satisfied = all(unlocked) if category.logic == Logic.AND else any(unlocked)
                 return satisfied, warnings
+
             elif isinstance(category, ClassCategory):
                 course = category.class_name
                 if course not in user.courses:
-                    return False, []
+                    return False, [f"Need {self.grade} in {course} for this course"]
 
                 user_grade = user.get_grade(course)
                 if user_grade is None:
                     return True, [self.get_warning()]
                 if user_grade < self.grade:
-                    return False, []
+                    return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
                 return True, []
             else:
                 return True, ["We have failed to parse this correctly"]
@@ -272,6 +280,31 @@ class GradeCondition(Condition):
     def __str__(self) -> str:
         return json.dumps({
             'grade': self.grade,
+            'category': str(self.category)
+        })
+
+
+class CoresCondition(Condition):
+    """ Handles Core Course conditions such as L1 CORES """
+
+    def __init__(self):
+        """ the subset of courses in CORES that must be completed """
+        self.category = AnyCategory()
+
+    def set_category(self, category_classobj: Category):
+        """ Set own category to the one given """
+        self.category = category_classobj
+
+    def is_path_to(self, course: str) -> bool:
+        return self.category.match_definition(course)
+
+    def validate(self, user: User) -> tuple[bool, list[str]]:
+        res = user.completed_core(self.category)
+        return res, ([] if res else [f'you have not completed your {self.category} cores'])
+
+    def __str__(self) -> str:
+        return json.dumps({
+            'cores': None,
             'category': str(self.category)
         })
 
@@ -342,12 +375,13 @@ class CourseExclusionCondition(Condition):
         self.exclusion = exclusion
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
+
         is_valid = not user.has_taken_specific_course(self.exclusion)
-        return is_valid, ([] if is_valid else [f"{self.exclusion} is an exclusion course for this one"])
+        return is_valid, ([] if is_valid else [f"Exclusion: {self.exclusion}"])
 
     def is_path_to(self, course: str) -> bool:
         return False
-
+        
     def __str__(self) -> str:
         return json.dumps({
             'exclusion': self.exclusion,
@@ -364,7 +398,8 @@ class ProgramExclusionCondition(Condition):
         self.exclusion = exclusion
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return not user.in_program(self.exclusion), []
+        excluded = not user.in_program(self.exclusion)
+        return (excluded, []) if excluded else (excluded, ["This course cannot be taken in your program"])
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -400,10 +435,15 @@ class CompositeCondition(Condition):
 
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
-        unlocked, warnings = list(zip(*validations))
-        satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
+        unlocked, all_warnings = list(zip(*validations))
+        wam_warning = sum([warning for unlocked_cond, warning in validations if unlocked_cond], []) # type: List[str]
 
-        return satisfied, sum(warnings, [])  # warnings are flattened
+        if self.logic == Logic.AND:
+            satisfied = all(unlocked) 
+            return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
+        else:
+            satisfied = any(unlocked)     
+            return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
@@ -433,4 +473,4 @@ class CompositeCondition(Condition):
             else:
                 data['children'].append(json.loads(str(cond)))
         return json.dumps(data)
-
+        

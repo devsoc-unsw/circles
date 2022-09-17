@@ -54,12 +54,12 @@ def fix_conditions():
 
 def MGMT_2101():
     """
-    "original": "Prerequisite or corequisite:MGMT1101or COMM1150  Excluded: IBUS2107<br/><br/>",
+    "original": "Prerequisite or corequisite:MGMT1101 or COMM1150 or COMM1900 or ECON1102. Excluded: IBUS2107<br/><br/>",
     "processed": "|| [MGMT1101or COMM1150]"
     """
     COURSES["MGMT2101"]["exclusions"]["IBUS2107"] = 1
 
-    return "[MGMT1101 || COMM1150]"
+    return "[MGMT1101 || COMM1150 || COMM1900 || ECON1102]"
 
 
 def MGMT_2718():
@@ -67,7 +67,7 @@ def MGMT_2718():
     "original": "Prerequisite or Co-requisite: MGMT1001 OR MGMT1101 OR MGMT1002 OR COMM1100 OR COMM1150 OR COMM1170<br/><br/>",
     "processed": "|| [MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
     """
-    return "[MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
+    return "[MGMT1001 || MGMT1101 || MGMT1002 || MGMT2004 || COMM1100 || COMM1150 || COMM1170]"
 
 
 def MGMT_3001():
