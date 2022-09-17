@@ -4,7 +4,7 @@ from ortools.sat.python import cp_model # type: ignore
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
 from .validate_term_planner import validate_terms
-from server.routers.model import CONDITIONS, ValidPlannerData
+from server.routers.model import CONDITIONS
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
 
@@ -14,11 +14,14 @@ def terms_between(start: Tuple[int, int], end: Tuple[int, int]):
 def map_var_to_course(courses: list[Course], var):
     return [course for course in courses if course.name == var.Name()][0]
 
+def map_course_to_var(course: Course, variables):
+    return [variable for variable in variables if course == variable.Name()][0]
 
 def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]):
     model = cp_model.CpModel()
     num_terms = terms_between(start, end)
-    variables = [model.NewIntVar(0, num_terms, course.name) for course in courses]
+    # enforces terms
+    variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start)), course.name) for course in courses]
     # set max UOC for a term
     for index, m in enumerate(uoc_max):
         booleanIndexes = []
