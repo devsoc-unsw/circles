@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import type { MenuProps } from 'antd';
 import axios from 'axios';
 import { CoursesAllUnlocked } from 'types/api';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
@@ -8,6 +9,7 @@ import { ProgramStructure } from 'types/structure';
 import getNumTerms from 'utils/getNumTerms';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
+import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
 import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
@@ -26,7 +28,7 @@ type SubgroupTitleProps = {
 
 const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   <S.SubgroupHeader>
-    {title}
+    <S.LabelTitle>{title}</S.LabelTitle>
     <S.UOCBadge>
       {currUOC} / {totalUOC}
     </S.UOCBadge>
@@ -87,7 +89,10 @@ const CourseMenu = ({ structure }: Props) => {
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                  += planner.courses[courseCode].UOC * getNumTerms(planner.courses[courseCode].UOC);
+                  += planner.courses[courseCode].UOC * getNumTerms(
+                    planner.courses[courseCode].UOC,
+                    planner.courses[courseCode].isMultiterm,
+                  );
               }
             });
           }
@@ -106,7 +111,7 @@ const CourseMenu = ({ structure }: Props) => {
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);
     } catch (err) {
-      // eslint-disable-next-line
+      // eslint-disable-next-line no-console
       console.error('Error at getAllUnlocked', err);
     }
   }, [structure, planner, degree, dispatch]);
@@ -135,7 +140,9 @@ const CourseMenu = ({ structure }: Props) => {
     item1.courseCode > item2.courseCode ? 1 : -1
   );
 
-  const menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
+  const defaultOpenKeys = [Object.keys(menuData)[0]];
+
+  const menuItems: MenuProps['items'] = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
     label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
     key: groupKey,
     children: Object
@@ -144,6 +151,7 @@ const CourseMenu = ({ structure }: Props) => {
       .map(([subgroupKey, subGroupEntry]) => {
         const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
         const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
+        if (subGroupEntry.length <= MAX_COURSES_OVERFLOW) defaultOpenKeys.push(subgroupKey);
         return {
           label: <SubgroupTitle
             title={subgroupKey}
@@ -151,7 +159,9 @@ const CourseMenu = ({ structure }: Props) => {
             totalUOC={totalUOC}
           />,
           key: subgroupKey,
-          children: subGroupEntry.sort(sortCourses)
+          disabled: !subGroupEntry.length, // disable submenu if there are no courses
+          // check if there are courses to show collapsible submenu
+          children: subGroupEntry.length ? subGroupEntry.sort(sortCourses)
             .filter((course) => course.unlocked || showLockedCourses)
             .map((course) => ({
               label: <CourseTitle
@@ -164,8 +174,7 @@ const CourseMenu = ({ structure }: Props) => {
               // key is course code + groupKey + subgroupKey to differentiate as unique
               // course items in menu
               key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
-            })),
-          type: 'group',
+            })) : null,
         };
       }),
   }));
@@ -183,7 +192,7 @@ const CourseMenu = ({ structure }: Props) => {
         ? (
           <S.Menu
             defaultSelectedKeys={[]}
-            defaultOpenKeys={[Object.keys(menuData)[0]]}
+            defaultOpenKeys={defaultOpenKeys}
             items={menuItems}
             mode="inline"
             onClick={handleClick}

@@ -5,7 +5,6 @@ import {
   Routes,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import PageFallback from 'components/pageFallback/PageFallback';
 import PageLoading from 'components/PageLoading';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
@@ -27,12 +26,11 @@ const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
-    <Suspense fallback={<PageFallback />}>
-      <ErrorBoundary>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-          <GlobalStyles />
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <Suspense fallback={<PageLoading />}>
+        <ErrorBoundary>
           <Router>
-            <PageLoading />
             <Routes>
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
@@ -42,9 +40,9 @@ const App = () => {
               <Route path="*" element={<Page404 />} />
             </Routes>
           </Router>
-        </ThemeProvider>
-      </ErrorBoundary>
-    </Suspense>
+        </ErrorBoundary>
+      </Suspense>
+    </ThemeProvider>
   );
 };
 

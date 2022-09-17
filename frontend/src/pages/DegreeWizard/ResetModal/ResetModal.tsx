@@ -45,10 +45,10 @@ const ResetModal = ({ modalVisible, setModalVisible }: Props) => {
         </Button>,
       ]}
     >
-      <p>
+      <div>
         Are you sure want to reset your planner? Your existing data will be
         permanently removed.
-      </p>
+      </div>
     </Modal>
   );
 };

@@ -37,13 +37,14 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: bool
+    is_multiterm: Optional[bool]
 
 
 class ContainerContent(TypedDict):
     UOC: int
     courses: dict[str, str | list[str]]
     type: str
+    notes: str
 
 class StructureContainer(TypedDict):
     name: str
@@ -177,6 +178,11 @@ class SpecialisationTypes(BaseModel):
 class Graph(BaseModel):
     edges: list[dict[str, str]]
     courses: list[str]
+
+class TermsList(BaseModel):
+    terms: Optional[dict[str, Optional[list[str]]]]
+    # Actually tuple(str, fastapi.exceptions.HTTPException)
+    fails: Optional[list[tuple]]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

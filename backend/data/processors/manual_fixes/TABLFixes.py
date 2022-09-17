@@ -31,7 +31,7 @@ def fix_conditions():
     CONDITIONS["TABL2710"][PROCESSED] = TABL_2710()
     CONDITIONS["TABL2712"][PROCESSED] = TABL_2712()
     CONDITIONS["TABL2741"][PROCESSED] = TABL_2741()
-    CONDITIONS["TABL3755"][PROCESSED] = TABL_3755()
+    CONDITIONS["TABL3033"] = TABL_3033(CONDITIONS["TABL3033"])
     CONDITIONS["TABL5805"][PROCESSED] = TABL_5805()
 
     # Updates the files with the modified dictionaries
@@ -64,18 +64,6 @@ def TABL_2741():
     return "LEGT1710 || TABL1710 || TABL2710 || (COMM1100 && COMM1150) || COMM1900"
 
 
-def TABL_3755():
-    """
-    "original": "Prerequisite: LEGT2751 or TABL2751 and LAWS3147<br/><br/>",
-
-    "processed": "LEGT2751 || TABL2751 && LAWS3147"
-    """
-
-    # Seems to be a mistake. It should be || (checking 2019, 2020, 2021 handbook)
-    # On top of this, LAWS3147 is an exclusion of TABL2751 in the 2022 handbook
-    return "LEGT2751 || TABL2751 || LAWS3147"
-
-
 def TABL_5805():
     """
     "original": "Restricted to students enrolled in Program 9245, 9255, 9257 or Stream TABLBS9250, TABLDS9250, TABLAH4501<br/><br/>",
@@ -91,5 +79,18 @@ def TABL_2712():
         "processed": "LEGT1710 || TABL1710 || TABL 2710 || 12UOC in F Business"
     """
     return "LEGT1710 || TABL1710 || TABL2710 || 12UOC in F Business"
+
+def TABL_3033(condition):
+    """
+        "original": "Pre-requisite: TABL2751, COMM6000 CA:Essentials, 65+ WAM and Good Standing.<br/>Note: This course is by application only. Visit Career Accelerator page on Business School website for more information.<br/><br/>",
+        "handbook_note": "This course is by application only.",
+        "processed": "TABL2751 && COMM6000 CA:Essentials && 65WAM && Good Standing. Note: Visit Career Accelerator page on Business School website for more information"
+    """
+    return {
+        "original": condition["original"],
+        "handbook_note": "Good Standing. This course is by application only. Note: Visit Career Accelerator page on Business School website for more information",
+        "processed": "TABL2751 && COMM6000 && 65WAM"
+    }
+
 if __name__ == "__main__":
     fix_conditions()

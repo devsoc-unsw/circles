@@ -6,10 +6,11 @@ import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import getNumTerms from 'utils/getNumTerms';
-import DegreeCard from 'components/DegreeCard';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
+import SpecialisationCard from 'components/SpecialisationCard';
 import type { RootState } from 'config/store';
+import FreeElectivesCard from './FreeElectivesCard';
 import S from './styles';
 
 type StoreUOC = {
@@ -23,9 +24,12 @@ type Props = {
   isLoading: boolean
   structure: ProgramStructure
   totalUOC: number
+  freeElectivesUOC: number
 };
 
-const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
+const Dashboard = ({
+  isLoading, structure, totalUOC, freeElectivesUOC,
+}: Props) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -39,16 +43,9 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
   const { courses } = useSelector((state: RootState) => state.planner);
   const { programCode, programName } = useSelector((state: RootState) => state.degree);
 
-  const programCourseList = (
-    Object.values(structure)
-      .flatMap((specialisation) => Object.values(specialisation.content)
-        .filter((spec) => typeof spec === 'object' && spec.courses && !spec.type.includes('rule'))
-        .flatMap((spec) => Object.keys(spec.courses)))
-  );
-
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+    if (courses[courseCode]?.plannedFor) {
       completedUOC += courses[courseCode].UOC
         * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
     }
@@ -71,11 +68,14 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
       const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
 
       if (subgroupStructure.courses && !isRule) {
+        let currUOC = 0;
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (courses[courseCode]?.plannedFor) {
-            storeUOC[group].curr += courses[courseCode].UOC
+          if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
+            const courseUOC = courses[courseCode].UOC
               * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+            storeUOC[group].curr += courseUOC;
+            currUOC += courseUOC;
           }
         });
       }
@@ -110,7 +110,7 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
             {Object.entries(structure)
               .filter(([group]) => group !== 'Rules')
               .map(([group, specialisation]) => (
-                <DegreeCard
+                <SpecialisationCard
                   key={group}
                   type={group}
                   totalUOC={storeUOC[group].total}
@@ -118,6 +118,7 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
                   specTitle={specialisation.name}
                 />
               ))}
+            <FreeElectivesCard uoc={freeElectivesUOC} />
           </S.CardsWrapper>
           <Button
             type="primary"

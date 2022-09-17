@@ -18,7 +18,7 @@ def test_get_a_course():
 
     assert x.status_code == 200
     assert x.json()['code'] == "COMP1521"
-    assert x.json()['is_multiterm'] == False
+    assert not x.json()['is_multiterm']
 
 
 def test_get_archived_course():
@@ -31,6 +31,6 @@ def test_get_archived_course():
 
 def test_get_course_all_courses():
     for course in CONDITIONS.keys():
-        if  random.random() < 0.03:
+        if random.random() < 0.05:
             x = requests.get(f'http://127.0.0.1:8000/courses/getCourse/{course}')
-            assert x.status_code == 200 
+            assert x.status_code == 200, f'{course} cant be fetched'

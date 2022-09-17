@@ -6,15 +6,16 @@ import re
 from typing import Dict, List, Mapping, Set, Tuple
 
 from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz # type: ignore
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
-                                  CoursesUnlockedWhenTaken, ProgramCourses,
+                                  CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
+from server.routers.utility import get_core_courses, map_suppressed_errors
 
 
 router = APIRouter(
@@ -58,6 +59,7 @@ def fix_user_data(userData: dict):
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
+    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"].keys()))
     return userData
 
 
@@ -66,6 +68,10 @@ def api_index() -> str:
     """ Returns the index of the courses API """
     return "Index of courses"
 
+
+@router.get("/jsonified/{courseCode}")
+def get_jsonified_course(courseCode: str) -> str:
+    return str(CONDITIONS[courseCode])
 
 @router.get(
     "/getCourse/{courseCode}",
@@ -306,7 +312,7 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year, courseCode):
+def get_legacy_course(year, courseCode) -> Dict:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
@@ -441,6 +447,72 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
         'indirect_unlock': sorted(list(indirect_unlock))
     }
 
+
+@router.get(
+    "/termsOffered/{course}/{years}",
+    response_model=TermsList,
+    responses={
+        400: {
+            "description": "The given course code could not be found in the database",
+        },
+        200: {
+            "description": "Returns the terms a course is offered in",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "terms": {
+                            "2022": [ "T1", "T2", "T3" ],
+                        },
+                        "fails": [
+                            [
+                                "COMP1511",
+                                "2023",
+                                {
+                                    "status_code": 400,
+                                    "detail": "invalid course code or year",
+                                    "headers": None
+                                }
+                            ]
+                        ]
+                    },
+                },
+            },
+        },
+    }
+)
+def terms_offered(course: str, years:str) -> Dict:
+    """
+    Recieves a course and a list of years. Returns a list of terms the
+    course is offered in for the given years.
+
+    Expected Input:
+        course: (str) CODEXXXX
+        years: (str): `+`-connected string of years
+            eg: "2020+2021+2022"
+    Output: {
+            year: [terms offered],
+            fails: [(year, exception)]
+        }
+    """
+    fails: List[str] = []
+    terms = {
+        year: map_suppressed_errors(get_term_offered, fails, course, year)
+        for year in years.split("+")
+    }
+
+    return {
+        "terms": terms,
+        "fails": fails,
+    }
+
+
+###############################################################################
+#                                                                             #
+#                             End of Routes                                   #
+#                                                                             #
+###############################################################################
+
+
 def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
@@ -503,3 +575,18 @@ def weight_course(course: tuple[str, str], search_term: str, structure: dict,
             break
 
     return weight
+
+def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
+    """
+    Returns the course info for the given course and year.
+    If no year is given, the current year is used.
+    If the year is not the LIVE_YEAR, then uses legacy information
+    """
+    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(year, course)
+
+def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
+    """
+    Returns the terms in which the given course is offered, for the given year.
+    """
+    return get_course_info(course, year).get("terms", [])
+

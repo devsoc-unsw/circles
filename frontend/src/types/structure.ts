@@ -7,6 +7,7 @@ export type ProgramStructure = {
         courses: {
           [courseKey: string]: string
         }
+        notes: string
       }
     }
     name: string

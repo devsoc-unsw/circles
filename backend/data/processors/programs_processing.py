@@ -76,8 +76,20 @@ ENG_PROGS = (
 
 OTH_PROGS = (
     "3502",
+    "3053",
+    "3979",
+    "3959",
+    "3181",
+    "3543",
+    "3586",
+    "3805",
+    "3871",
+    "3956",
+    "3454",
+    "3453",
     "3970",
     "3707",
+    "3543",
 )
 
 # Enable or disable testing, and choose what programs to test on

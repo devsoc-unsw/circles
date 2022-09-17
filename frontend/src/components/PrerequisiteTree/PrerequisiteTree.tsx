@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import axios from 'axios';
-import { CourseChildren, CoursePathFrom, CoursesAllUnlocked } from 'types/api';
+import { CourseChildren, CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
@@ -25,7 +24,6 @@ type Props = {
 const PrerequisiteTree = ({ courseCode }: Props) => {
   const [loading, setLoading] = useState(true);
   const [graph, setGraph] = useState<TreeGraph | null>(null);
-  const [courseAccurate, setCourseAccurate] = useState(true);
   const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
   const [coursesRequires, setCoursesRequires] = useState<CourseList>([]);
   const dispatch = useDispatch();
@@ -96,19 +94,6 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       }
     };
 
-    const determineCourseAccuracy = async () => {
-      try {
-        const res = await axios.post<CoursesAllUnlocked>(
-          '/courses/getAllUnlocked/',
-          JSON.stringify(prepareUserPayload(degree, planner)),
-        );
-        setCourseAccurate(res.data.courses_state[courseCode].is_accurate);
-      } catch (err) {
-        // eslint-disable-next-line
-        console.error('Error at determineCourseAccuracy', err);
-      }
-    };
-
     /* MAIN */
     const setupGraph = async (c: string) => {
       setLoading(true);
@@ -127,29 +112,23 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       };
 
       // render graph
-      if (!graph) {
+      if (!graph && graphData.children.length !== 0) {
         generateTreeGraph(graphData);
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
       }
-
       setLoading(false);
     };
-
-    determineCourseAccuracy();
-
     if (courseCode) setupGraph(courseCode);
   }, [courseCode, degree, dispatch, graph, planner]);
 
   return (
-    !courseAccurate ? (
-      <p>We could not parse the prerequisite requirements for this course</p>
-    ) : (
-      <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
-        {loading && <Spinner text="Loading tree..." />}
-      </S.PrereqTreeContainer>
-    )
+    <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
+      {loading && <Spinner text="Loading tree..." />}
+      {!loading && !graph?.getNodes
+      && <p> No prerequisite visualisation is needed for this course </p> }
+    </S.PrereqTreeContainer>
   );
 };
 

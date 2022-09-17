@@ -25,7 +25,7 @@ from server.routers.model import (
     Structure,
     StructureContainer,
 )
-from server.routers.utility import map_suppressed_errors
+from server.routers.utility import get_core_courses, map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -69,16 +69,18 @@ def get_programs() -> dict[str, dict[str, str]]:
             "3778": "Computer Science",
             "3502": "Commerce",
             "3970": "Science",
+            "3543": "Economics",
             "3707": "Engineering (Honours)",
             "3784": "Commerce / Computer Science",
             "3789": "Science / Computer Science",
             "3785": "Engineering (Honours) / Computer Science",
+            "3673": "Economics / Computer Science"
         }
     }
 
 def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    if " or " in object:
+    if " or " in object and isinstance(description, list):
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(rf"^{object}")
@@ -103,20 +105,32 @@ def add_subgroup_container(structure: dict[str, StructureContainer], type: str, 
                 if course not in exceptions
             }, container.get("courses", {}).items(), {}
         ),
-        "type": container.get("type", "")
+        "type": container.get("type", ""),
+        "notes": container.get("notes", "") if type == "Rules" else ""
     }
     return list(structure[type]["content"][title]["courses"].keys())
 
-def add_geneds_courses(programCode: str, structure: dict, container: ProgramContainer) -> list[str]:
+def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer], container: ProgramContainer) -> list[str]:
     """ Returns the added courses """
     if container.get("type") != "gened":
         return []
 
     item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
-
     if container.get("courses") is None:
-        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
+        gen_ed_courses = list(set(get_gen_eds(programCode)["courses"].keys()) - set(sum(
+            (
+                sum((
+                    list(value["courses"].keys())
+                    for sub_group, value in spec["content"].items()
+                    if 'core' in sub_group.lower()
+                ), [])
+            for spec_name, spec in structure.items()
+            if "Major" in spec_name or "Honours" in spec_name)
+        , [])))
+        geneds = get_gen_eds(programCode)
+        item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
+
 
     return list(item["courses"].keys())
 
@@ -174,7 +188,8 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                                         "ENGG2600": "Engineering Vertically Integrated Project",
                                     },
                                 },
-                            }
+                            },
+                            "notes": "Students must take 30 UOC of the following courses.",
                         },
                         "Major - FINSA1 - Finance": {
                             "name": "Finance",
@@ -185,7 +200,8 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                                         "FINS3121": "Financial Accounting",
                                     },
                                 },
-                            }
+                            },
+                            "notes": "Students must take 60 UOC of the following courses.",
                         },
                         "Minor - FINSA2 - Finance": {
                             "name": "Finance",
@@ -205,12 +221,13 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                                         "FINS1612": "Capital Markets and Institutions",
                                     },
                                 },
-                            }
+                            },
+                            "notes": "Students must take 12 UOC of the following courses.",
                         },
                         "General": {
                             "name": "General Program Requirements",
                             "content": {
-                                "GeneralEducation": {"UOC": 12},
+                                "General Education": {"UOC": 12},
                                 "FlexEducation": {"UOC": 6},
                                 "BusinessCoreCourses": {
                                     "UOC": 6,
@@ -287,8 +304,8 @@ def get_structure_course_list(
 )
 def get_gen_eds(programCode: str):
     """ fetches gen eds from file """
-    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
-    return {"courses" : all_geneds[programCode]}
+    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+    return {"courses" : all_geneds}
 
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
@@ -329,6 +346,9 @@ def graph(
         "courses": courses,
     }
 
+@router.get("/getCores/{programCode}/{spec}")
+def get_cores(programCode: str, spec: str):
+    return get_core_courses(programCode, spec.split('+'))
 
 ###############################################################
 #                       End of Routes                         #
