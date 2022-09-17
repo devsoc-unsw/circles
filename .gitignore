@@ -71,3 +71,5 @@ tmp.*
 **/.DS_Store
 .idea
 
+# "sensitive" data (i.e. raw zID)
+backend/data/scrapers/enrolmentDataRaw.json
