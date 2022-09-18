@@ -36,10 +36,10 @@ def scrape_enrolment_data(username:str, password:str):
         stdin, stdout, stderr = ssh.exec_command('ls', timeout=1)
     except paramiko.ssh_exception.AuthenticationException:
         print('Authentication failed')
-        return 1
+        exit(1)
     except paramiko.ssh_exception.SSHException:
         print('SSH failed')
-        return 1
+        exit(1)
 
     stdin, stdout, stderr = ssh.exec_command(f'ls\n', timeout=1)
     #stdout.channel.set_combine_stderr(True)
@@ -54,10 +54,7 @@ def scrape_enrolment_data(username:str, password:str):
             waiting.wait(lambda: stdout.channel.recv_ready(), timeout_seconds=13)
             result = stdout.channel.recv(MAX_BYTES).decode('utf-8')
 
-            enrolments = []
-            for res in result.split('\n'):
-                if re.match(r'[0-9]{7}', res):
-                    enrolments.append(res.split(' ')[0]) 
+            enrolments = [res.split(' ')[0] for res in result.split('\n') if re.match(r'[0-9]{7}', res)]
 
             enrolment_data[course_code] = enrolments
             hashed_enrolment_data[course_code] = list(map(lambda s: hashlib.sha256(s.encode('utf-8')).hexdigest(), enrolments))
