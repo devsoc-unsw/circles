@@ -83,11 +83,11 @@ def run_manual_fixes():
 
 def run_scrape_enrolment_data():
     """ runs the enrolment scraper """
-    try:
+    if args.username is None or args.password is None:
+        print("Please provide a username and password for the enrolment scraper")
+    else:
         scrape_enrolment_data(args.username, args.password)
-    except subprocess.CalledProcessError:
-        print("Unable to run the 'enrolment_scraper.py'; exiting with error")
-        exit(0)
+
 
 run: dict[str, dict[str, Callable]] = {
     "faculty": {
