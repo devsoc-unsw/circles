@@ -8,7 +8,8 @@ from server.routers.model import ValidCoursesState, PlannerData, LocalStorage, C
 from server.database import usersDB
 from server.config import DUMMY_TOKEN
 from bson.objectid import ObjectId
-import pydantic 
+import pydantic
+from server.routers.utility import get_core_courses
 pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
 
 
@@ -32,7 +33,7 @@ def planner_index() -> str:
     return "Index of planner"
 
 @router.post("/validateTermPlanner/", response_model=ValidCoursesState)
-async def validate_term_planner(plannerData: PlannerData):
+def validate_term_planner(plannerData: PlannerData):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
@@ -48,10 +49,11 @@ async def validate_term_planner(plannerData: PlannerData):
         "specialisations": data.specialisations,
         "year": 1,  # Start off as a first year
         "courses": {},  # Start off the user with an empty year
+        "core_courses": get_core_courses(data.program, data.specialisations),
     }
     user = User(emptyUserData)
     # State of courses on the term planner
-    coursesState = {}  # TODO: possibly push to user class?
+    coursesState = {}
 
     currYear = data.mostRecentPastTerm["Y"]
     pastTerm = data.mostRecentPastTerm["T"]

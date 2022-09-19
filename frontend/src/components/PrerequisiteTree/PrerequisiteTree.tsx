@@ -112,22 +112,22 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       };
 
       // render graph
-      if (!graph) {
+      if (!graph && graphData.children.length !== 0) {
         generateTreeGraph(graphData);
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
       }
-
       setLoading(false);
     };
-
     if (courseCode) setupGraph(courseCode);
   }, [courseCode, degree, dispatch, graph, planner]);
 
   return (
     <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
       {loading && <Spinner text="Loading tree..." />}
+      {!loading && !graph?.getNodes
+      && <p> No prerequisite visualisation is needed for this course </p> }
     </S.PrereqTreeContainer>
   );
 };

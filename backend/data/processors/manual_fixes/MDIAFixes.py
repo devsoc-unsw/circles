@@ -9,7 +9,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.MUSCFixes
+    python3 -m data.processors.manualFixes.MDIAFixes
 """
 
 from data.utility import data_helpers
@@ -21,26 +21,26 @@ PROCESSED = "processed"
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
+PROGRAMS = data_helpers.read_data("data/final_data/programsProcessed.json")
+
 
 def fix_conditions():
     """ Functions to apply manual fixes """
 
-    CONDITIONS["MINE2810"][PROCESSED] = MINE_2810()
-
+    CONDITIONS["MDIA3003"][PROCESSED] = MDIA_3003()
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 
-def MINE_2810():
+def MDIA_3003():
     """
-        "original": "Prerequsite: PHYS1131 OR MATS1101 OR GEOS111<br/><br/>",
-        "processed": "PHYS1131 || MATS1101 || GEOS111"
+        "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
+        "processed": "66UOC && 6UOC L2 MDIA CORES courses && enrolment in a Media (Communication && Journalism) || Media (PR && Advertising) program"
     """
 
-
-    return "PHYS1131 || MATS1101 || GEOS1111"
+    return f"66UOC && (6UOC in L2 MDIA CORES) && (3454 || 3453)"
 
 if __name__ == "__main__":
     fix_conditions()

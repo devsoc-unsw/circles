@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import PageLoading from 'components/PageLoading';
+import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './App.less';
@@ -27,24 +28,24 @@ const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <ErrorBoundary>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-          <GlobalStyles />
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <Suspense fallback={<PageLoading />}>
+        <ErrorBoundary>
           <Router>
             <Routes>
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
-              <Route path="/graphical-selector" element={<GraphicalSelector />} />
+              {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
               <Route path="/term-planner" element={<TermPlanner />} />
               <Route path="/progression-checker" element={<ProgressionChecker />} />
               <Route path="*" element={<Page404 />} />
               <Route path="/login" element={<Auth />} />
             </Routes>
           </Router>
-        </ThemeProvider>
-      </ErrorBoundary>
-    </Suspense>
+        </ErrorBoundary>
+      </Suspense>
+    </ThemeProvider>
   );
 };
 

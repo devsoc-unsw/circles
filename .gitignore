@@ -75,3 +75,5 @@ tmp.*
 SECRET
 secret.json
 secret.env
+# "sensitive" data (i.e. raw zID)
+backend/data/scrapers/enrolmentDataRaw.json
