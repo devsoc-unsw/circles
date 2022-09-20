@@ -27,8 +27,8 @@ MAX_BYTES = 2**32
 
 def scrape_enrolment_data(username:str, password:str):
     data = read_data(COURSE_CODES_INPUT_PATH)
-    enrolment_data = {}
-    hashed_enrolment_data = {}
+    enrolment_data = {} # type: ignore
+    hashed_enrolment_data = {}  # type: ignore
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
