@@ -46,26 +46,31 @@ def scrape_enrolment_data(username:str, password:str):
     for course_code in data:
         if not course_code.startswith("COMP"):
             continue
+        enrolment_data[course_code] = {}
+        hashed_enrolment_data[course_code] = {}
         print(course_code)
-        try:
-            waiting.wait(lambda: stdin.channel.send_ready(), timeout_seconds=13)
-            stdin.channel.sendall(f'members {course_code}_Student\n'.encode())
+        for i in range(0, 4):
+            enrolment_data[course_code][f'T{i}'] = []
+            hashed_enrolment_data[course_code][f'T{i}'] = []
+            try:
+                waiting.wait(lambda: stdin.channel.send_ready(), timeout_seconds=8)
+                stdin.channel.sendall(f'members {course_code}t{i}_Student\n'.encode())
 
-            waiting.wait(lambda: stdout.channel.recv_ready(), timeout_seconds=13)
-            result = stdout.channel.recv(MAX_BYTES).decode('utf-8')
+                waiting.wait(lambda: stdout.channel.recv_ready(), timeout_seconds=8)
+                result = stdout.channel.recv(MAX_BYTES).decode('utf-8')
 
-            enrolments = [res.split(' ')[0] for res in result.split('\n') if re.match(r'[0-9]{7}', res)]
+                enrolment_data[course_code][f'T{i}'] = [res.split(' ')[0] for res in result.split('\n') if re.match(r'[0-9]{7}', res)]
+                hashed_enrolment_data[course_code][f'T{i}'] = list(map(lambda s: hashlib.sha256(s.encode('utf-8')).hexdigest(), enrolment_data[course_code][f'T{i}']))
 
-            enrolment_data[course_code] = enrolments
-            hashed_enrolment_data[course_code] = list(map(lambda s: hashlib.sha256(s.encode('utf-8')).hexdigest(), enrolments))
-        except waiting.exceptions.TimeoutExpired:
-            print(f'Timeout expired {course_code}')
-            continue
+            except waiting.exceptions.TimeoutExpired:
+                print(f'Timeout expired -- no data available for {course_code} in Term {i}')
+                continue
+
         print(enrolment_data[course_code])
 
     write_data(enrolment_data, ENROLMENT_DATA_OUTPUT_PATH)
     write_data(hashed_enrolment_data, HASHED_ENROLMENT_DATA_OUTPUT_PATH)
-    ssh.close()
+    ssh.close
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrape enrolment data')
