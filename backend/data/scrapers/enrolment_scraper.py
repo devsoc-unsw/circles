@@ -70,7 +70,7 @@ def scrape_enrolment_data(username:str, password:str):
 
     write_data(enrolment_data, ENROLMENT_DATA_OUTPUT_PATH)
     write_data(hashed_enrolment_data, HASHED_ENROLMENT_DATA_OUTPUT_PATH)
-    ssh.close
+    ssh.close()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrape enrolment data')
