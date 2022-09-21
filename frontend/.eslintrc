@@ -23,6 +23,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "no-param-reassign": ["error", { "ignorePropertyModificationsFor": [ "state" ] }], // enabled only for redux toolkit
         "no-nested-ternary": ["off"], // disabled to allow for nested ternary statements
         "import/order": "off", // disabled for simple-import-sort plugin

@@ -53,7 +53,7 @@ def customise_spn_data():
                 # 'description' field
                 constraints.append(get_constraint(container))
 
-            else:
+            elif not 'Free Elective' in container['title'] or container.get('credits_to_complete') == 0:
                 # Otherwise, the container includes course data which must be
                 # parsed and extracted
                 curriculum_item = {
