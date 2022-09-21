@@ -1,17 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-namespace */
 import React, {
   FunctionComponent,
-  MouseEventHandler,
   useEffect,
   useState,
 } from 'react';
 import { useSelector } from 'react-redux';
-import { Tag, Typography } from 'antd';
+import { Typography } from 'antd';
 import axios from 'axios';
-import styled, { css } from 'styled-components';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -19,8 +13,9 @@ import Collapsible from 'components/Collapsible';
 import TermTag from 'components/TermTag';
 import { RootState } from 'config/store';
 import GraphicalCourseTag from './GraphicalCourseTag';
+import PlannerButtonCode from './GraphicalPlannerButton';
 import LoadingCourseInfo from './LoadingCourseInfo';
-import PlannerButtonCode from './PlannerButtonCode';
+import S from './styles';
 
 const { Title, Text } = Typography;
 
@@ -30,40 +25,17 @@ interface CourseInfoProps {
   onCourseAdd?: () => void;
 }
 
-const S = {
-  Wrapper: styled.div`
-    width: 100%;
-    padding: 10px;
-  `,
-
-  TermWrapper: styled.div`
-    margin-top: 20px;
-  `,
-
-  MiscInfo: styled.div`
-    display: flex;
-    justify-content: space-evenly;
-  `,
-
-  MiscInfoChild: styled.div`
-    padding: 16px 4px;
-    flex: 1 1 0;
-    text-align: center;
-
-    &:nth-child(2) {
-      border-left: #d9d9d9c0 solid 1px;
-      border-right: #d9d9d9c0 solid 1px;
-    }
-  `,
-};
-
 type CourseUserInfo = {
   course: Course;
   pathFrom: CourseList;
   unlocked: CoursesUnlockedWhenTaken;
 };
 
-const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseClick, onCourseAdd }) => {
+const CourseInfo: FunctionComponent<CourseInfoProps> = ({
+  courseCode,
+  onCourseClick,
+  onCourseAdd,
+}) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -140,7 +112,13 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseCl
               .filter((code) => Object.keys(planner.courses).includes(code))
               .map((code) => (
                 onCourseClick
-                  ? <GraphicalCourseTag key={code} name={code} onClick={() => { onCourseClick(code); }} />
+                  ? (
+                    <GraphicalCourseTag
+                      key={code}
+                      name={code}
+                      onClick={() => { onCourseClick(code); }}
+                    />
+                  )
                   : <GraphicalCourseTag key={code} name={code} />
               ))
           ) : 'None'}
@@ -151,7 +129,13 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseCl
           {unlocked.direct_unlock && unlocked.direct_unlock.length > 0 ? (
             unlocked.direct_unlock.map((code) => (
               onCourseClick
-                ? <GraphicalCourseTag key={code} name={code} onClick={() => { onCourseClick(code); }} />
+                ? (
+                  <GraphicalCourseTag
+                    key={code}
+                    name={code}
+                    onClick={() => { onCourseClick(code); }}
+                  />
+                )
                 : <GraphicalCourseTag key={code} name={code} />
             ))
           ) : 'None'}
@@ -162,7 +146,13 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({ courseCode, onCourseCl
           {unlocked.indirect_unlock && unlocked.indirect_unlock.length > 0 ? (
             unlocked.indirect_unlock.map((code) => (
               onCourseClick
-                ? <GraphicalCourseTag key={code} name={code} onClick={() => { onCourseClick(code); }} />
+                ? (
+                  <GraphicalCourseTag
+                    key={code}
+                    name={code}
+                    onClick={() => { onCourseClick(code); }}
+                  />
+                )
                 : <GraphicalCourseTag key={code} name={code} />
             ))
           ) : 'None'}

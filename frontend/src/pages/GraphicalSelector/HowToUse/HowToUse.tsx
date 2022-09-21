@@ -1,33 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { Typography } from 'antd';
-import styled from 'styled-components';
 import step1 from 'assets/graphicalSelector/step1.jpg';
 import step2 from 'assets/graphicalSelector/step2.jpg';
 import step3 from 'assets/graphicalSelector/step3.jpg';
-
-const S = {
-  Wrapper: styled.div`
-    width: 100%;
-    padding: 10px;
-  `,
-
-  TitleWrapper: styled.div`
-    text-align: center;
-  `,
-
-  ContentsWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  `,
-
-  ImageStep: styled.img`
-    display: block;
-    align-self: center;
-    width: 70%;
-  `,
-};
+import S from './styles';
 
 const { Title, Text } = Typography;
 

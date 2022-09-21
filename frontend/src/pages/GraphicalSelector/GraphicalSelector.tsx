@@ -13,8 +13,8 @@ import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
-import CourseInfo from './CourseInfo/CourseInfo';
-import HowToUse from './CourseInfo/HowToUse';
+import CourseInfo from './CourseInfo';
+import HowToUse from './HowToUse/HowToUse';
 import S from './styles';
 import handleNodeData from './utils';
 
@@ -237,7 +237,6 @@ const GraphicalSelector = () => {
                   courseCode={course.code}
                   key={course.code}
                   onCourseClick={(code) => focusCourse(code)}
-                  onCourseAdd={() => { console.log('refreshing'); console.log(graph); graph?.render(); handleHideGraph(); handleShowAllCoursesGraph(); }}
                 />
               )
               : <HowToUse />}

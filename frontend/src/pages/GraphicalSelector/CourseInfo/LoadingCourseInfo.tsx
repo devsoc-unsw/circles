@@ -1,17 +1,9 @@
 import React from 'react';
 import { Skeleton } from 'antd';
-import styled from 'styled-components';
-
-const SkeletonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-  gap: 20px;
-`;
+import S from './styles';
 
 const LoadingCourseInfo = () => (
-  <SkeletonWrapper>
+  <S.SkeletonWrapper>
     {/* title */}
     <Skeleton.Input style={{ width: '70%', height: 70 }} active />
     {/* overview */}
@@ -26,7 +18,7 @@ const LoadingCourseInfo = () => (
     {/* unlocks */}
     <Skeleton.Input style={{ width: '25%', height: 40 }} active />
     <Skeleton.Input style={{ width: '100%', height: 40 }} active />
-  </SkeletonWrapper>
+  </S.SkeletonWrapper>
 );
 
 export default LoadingCourseInfo;
