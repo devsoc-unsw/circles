@@ -9,7 +9,6 @@ In the backend folder run:
     python3 runprocessors.py --type=enrolment --stage=scrape --username=z5555555 --password=abc123
 """
 
-import subprocess
 import paramiko
 import argparse
 import hashlib

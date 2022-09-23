@@ -6927,7 +6927,7 @@
     },
     "INFS3303": {
         "original": "Prerequisite: INFS3202 and in (Plan INFSB13554 or INFSCH3964 or INFSCH3971)<br/><br/>",
-        "processed": "INFS3202 && (INFSB13554 || INFSCH3964 || INFSCH3971)"
+        "processed": "INFS3202 && ((INFSB1 && 3554) || INFSCH3964 || INFSCH3971)"
     },
     "INFS3603": {
         "original": "Pre-requisite: INFS1602 OR INFS2602 OR ((in program 3959 or completing Business Analytics major (COMMJ1)) AND completed 48 UOC)<br/><br/>",

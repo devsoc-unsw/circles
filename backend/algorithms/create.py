@@ -20,7 +20,7 @@ from algorithms.objects.categories import (
 from algorithms.objects.conditions import (
     CompositeCondition,
     CoresCondition,
-    CoreqCoursesCondition,
+    CoreqCourseCondition,
     CourseCondition,
     CourseExclusionCondition,
     GradeCondition,
@@ -189,13 +189,13 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
             # OR type logic
             result.set_logic(Logic.OR)
         elif token == "[":
-            # Beginning of co-requisite. Parse courses and logical
+            # Beginning of co-requisite. Always composite. Parse courses and logical
             # operators until closing "]"
-            coreq_cond = CoreqCoursesCondition()
+            coreq_cond = CompositeCondition()
             i = 1  # Helps track our index offset to parse this co-requisite
             while tokens[index + i] != "]":
                 if is_course(tokens[index + i]):
-                    coreq_cond.add_course(tokens[index + i])
+                    coreq_cond.add_condition(CoreqCourseCondition(tokens[index + i]))
                 elif tokens[index + i] == "&&":
                     coreq_cond.set_logic(Logic.AND)
                 elif tokens[index + i] == "||":
