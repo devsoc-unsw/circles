@@ -150,7 +150,7 @@ def test_wam_condition_simple():
     cond1_user_unlocked = cond1.validate(user)
     assert cond1_user_unlocked[0]
     assert len(cond1_user_unlocked[1]) == 1
-    assert "Requires 70 WAM in all courses. Your WAM in all courses has not been recorded" in cond1_user_unlocked[1]
+    assert "Requires 70 WAM in all courses.  Your WAM in all courses has not been recorded" in cond1_user_unlocked[1]
 
     user1 = User(USERS["user3"])
     user1.add_courses({
@@ -160,19 +160,20 @@ def test_wam_condition_simple():
     })
     cond1_user1_unlocked = cond1.validate(user1)
     assert cond1_user1_unlocked[0]
-    assert len(cond1_user1_unlocked[1]) == 0
+    assert len(cond1_user1_unlocked[1]) == 1
+    assert 'Requires 70 WAM in all courses.' in (cond1_user1_unlocked[1])[0]
 
     cond2 = create_condition((["(", "90WAM", ")"]))
     cond2_user1_unlocked = cond2.validate(user1)
     assert cond2_user1_unlocked[0]
-    assert len(cond2_user1_unlocked[1]) == 0
-
+    assert len(cond2_user1_unlocked[1]) == 1
+    assert 'Requires 90 WAM in all courses.' in (cond2_user1_unlocked[1])[0]
 
     cond4 = create_condition((["(", "100WAM", ")"]))
     cond4_user1_unlocked = cond4.validate(user1)
     assert cond4_user1_unlocked[0]
     assert len(cond4_user1_unlocked[1]) == 1
-    assert "Requires 100 WAM in all courses. Your WAM in all courses is currently 90.000" in cond4_user1_unlocked[1]
+    assert "Requires 100 WAM in all courses.  Your WAM in all courses is currently 90.000" in cond4_user1_unlocked[1]
 
 def test_wam_condition_complex():
     '''Testing wam condition including keywords'''
@@ -218,19 +219,22 @@ def test_grade_condition():
     comp1521_70 = create_condition(["(", "70GRADE", "in", "COMP1521", ")"])
     math1131_70 = create_condition(["(", "70GRADE", "in", "MATH1131", ")"])
 
+    # Mark not entered assume condition met and display warning
     comp1511_70_user_unlocked = comp1511_70.validate(user)
     assert comp1511_70_user_unlocked[0]
     assert len(comp1511_70_user_unlocked[1]) == 1
     assert "Requires 70 mark in COMP1511. Your mark has not been recorded"
 
+    # Mark not entered assume condition met and display warning
     math1131_70_user_unlocked = math1131_70.validate(user)
     assert math1131_70_user_unlocked[0]
     assert len(math1131_70_user_unlocked[1]) == 1
     assert "Requires 70 mark in MATH1131. Your mark has not been recorded"
 
     # Has not taken the course. Should be false
-    assert not (comp1521_70.validate(user))[0]
-    assert len((comp1521_70.validate(user))[1]) == 0
+    assert not comp1521_70.validate(user)[0]
+    assert len(comp1521_70.validate(user)[1]) == 1
+    assert '((Need 70 in COMP1521 for this course))' in ((comp1521_70.validate(user))[1])[0]
     
     comp1511_60 = create_condition(["(", "60GRADE", "in", "COMP1511", ")"])
     comp1511_90 = create_condition(["(", "90GRADE", "in", "COMP1511", ")"])
@@ -263,6 +267,7 @@ def test_grade_condition():
     complex_cond_100 = create_condition(
         ["(", "100GRADE", "in", "ENGG1000", "||", "100GRADE", "in", "COMP1511", "||", "100GRADE", "in", "COMP1521", ")"])
     assert not (complex_cond_100.validate(user2))[0]
+    assert 'Your grade 50 in course ENGG1000 does not meet the grade requirements (minimum 100) for this course' in ((complex_cond_100.validate(user2))[1])[0]
 
     complex_cond_60 = create_condition(
         ["(", "60GRADE", "in", "ENGG1000", "||", "60GRADE", "in", "COMP1511", "||", "60GRADE", "in", "COMP1521", ")"])
@@ -272,7 +277,7 @@ def test_grade_condition():
     complex_cond_70_not_taken = create_condition(
         ["(", "70GRADE", "in", "MATH1081", "||", "70GRADE", "in", "MATH1131", "||", "70GRADE", "in", "COMP1511", ")"])
     assert not (complex_cond_70_not_taken.validate(user2))[0]
-
+    assert 'Need 70 in MATH1081 for this course OR Need 70 in MATH1131 for this course' in ((complex_cond_70_not_taken.validate(user2))[1])[0]
 
 def test_specialisation_condition_simple():
     """Testing simple specialisation condition such as enrolled in COMPA1"""

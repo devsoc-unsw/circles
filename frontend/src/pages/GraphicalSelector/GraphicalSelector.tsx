@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
+import {
+  LockOutlined, UnlockOutlined, ZoomInOutlined,
+  ZoomOutOutlined,
+} from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
@@ -17,6 +20,10 @@ import CourseInfo from './CourseInfo';
 import HowToUse from './HowToUse/HowToUse';
 import S from './styles';
 import handleNodeData from './utils';
+
+const HIGHER_ZOOM_RATIO = 0.5;
+const LOWER_ZOOM_RATIO = 0.1;
+const ZOOM_LIMIT = 1;
 
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
@@ -202,10 +209,45 @@ const GraphicalSelector = () => {
     }
   };
 
+  const getZoomRatio = () => {
+    if (!graph) return 0;
+    return graph.getZoom() >= ZOOM_LIMIT ? HIGHER_ZOOM_RATIO : LOWER_ZOOM_RATIO;
+  };
+
+  const zoomIn = () => {
+    if (!graph) return;
+    const zoom = graph.getZoom();
+    graph.zoomTo(zoom + getZoomRatio());
+  };
+
+  const zoomOut = () => {
+    if (!graph) return;
+    const zoom = graph.getZoom();
+    graph.zoomTo(zoom - getZoomRatio());
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
         <S.GraphPlaygroundWrapper ref={ref}>
+          <S.ToolsWrapper>
+            <Tooltip placement="bottomLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
+              <Switch
+                defaultChecked={showUnlockedOnly}
+                onChange={toggleShowLockedCourses}
+                checkedChildren={<LockOutlined />}
+                unCheckedChildren={<UnlockOutlined />}
+              />
+            </Tooltip>
+            <Button
+              onClick={handleShowAllCoursesGraph}
+            >
+              Show Graph
+            </Button>
+            <Button onClick={handleHideGraph}>
+              Hide Graph
+            </Button>
+          </S.ToolsWrapper>
           {loading
             ? <Spinner text="Loading graph..." />
             : (
@@ -224,6 +266,8 @@ const GraphicalSelector = () => {
               unCheckedChildren={<UnlockOutlined />}
             />
           </Tooltip>
+          <ZoomInOutlined onClick={zoomIn} />
+          <ZoomOutOutlined onClick={zoomOut} />
           <Button onClick={handleShowAllCoursesGraph}>
             Show Graph
           </Button>

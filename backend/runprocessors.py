@@ -29,22 +29,42 @@ from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
+from data.scrapers.enrolment_scraper import scrape_enrolment_data
 
 parser = argparse.ArgumentParser()
+
 parser.add_argument(
     "--type",
     type=str,
-    help="program, specialisation, course, condition, data-fix",
+    help="program, specialisation, course, condition, data-fix, enrolment",
 )
+
 parser.add_argument(
     "--stage",
     type=str,
     help="""
-                    (any) --> all
-                    program/specialisation/course --> scrape, format, process
-                    condition --> process, manual, tokenise, parsingErrors, pickle
-                    cache --> exclusion, handbook_note, mapping, program
-                    """,
+            (any) --> all
+            program/specialisation/course --> scrape, format, process
+            condition --> process, manual, tokenise, parsingErrors, pickle
+            cache --> exclusion, handbook_note, mapping, program
+            enrolment --> scrape
+        """,
+)
+
+parser.add_argument(
+    "--username",
+    type=str,
+    help="username (zID) for the enrolment scraper",
+    nargs='?',
+    default=None,
+)
+
+parser.add_argument(
+    "--password",
+    type=str,
+    help="password (zPass) for the enrolment scraper",
+    nargs='?',
+    default=None,
 )
 
 try:
@@ -60,6 +80,13 @@ def run_manual_fixes():
     except subprocess.CalledProcessError:
         print("Unable to run the 'run_manual_fixes.sh'; exiting with error")
         exit(0)
+
+def run_scrape_enrolment_data():
+    """ runs the enrolment scraper """
+    if args.username is None or args.password is None:
+        print("Please provide a username and password for the enrolment scraper")
+    else:
+        scrape_enrolment_data(args.username, args.password)
 
 
 run: dict[str, dict[str, Callable]] = {
@@ -99,6 +126,9 @@ run: dict[str, dict[str, Callable]] = {
         "program": cache_program_mappings,
         "graph": cache_graph
     },
+    "enrolment": {
+        "scrape": run_scrape_enrolment_data,
+    },
 }
 
 if __name__ == "__main__":
@@ -110,7 +140,6 @@ if __name__ == "__main__":
         else:
             parser.print_help()
             exit()
-
     if args.type == "data-fix" and args.stage == "all":
         # run all the things except for the scrapers and formatters to deal with code changes
         for t, type in run.items():

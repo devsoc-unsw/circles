@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
-import { Tooltip } from 'antd';
+import { Input, Tooltip } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
 import CourseBadge from '../CourseBadge';
@@ -17,8 +17,19 @@ const CoursesModal = ({
   title, courses, modalVisible, setModalVisible,
 }: Props) => {
   const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
+  const [filter, setFilter] = useState('');
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value);
+  };
 
   const applySortFn = sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel;
+
+  const courseList = courses
+    .filter((course) => course.courseCode.toLowerCase()
+      .concat(course.title.toLowerCase())
+      .includes(filter.toLowerCase()))
+    .sort(applySortFn);
 
   return (
     <S.CourseModal
@@ -28,32 +39,39 @@ const CoursesModal = ({
           <S.Instruction>See available courses:</S.Instruction>
         </S.ModalHeader>
     )}
-      width="650px"
+      width="625px"
       visible={modalVisible}
       onCancel={() => setModalVisible(false)}
       footer={null}
     >
-      <S.SortBtnWrapper>
+      <S.FilterBarWrapper>
+        <Input
+          placeholder="Filter available courses"
+          onChange={handleSearch}
+          style={{ width: 500 }}
+        />
         <Tooltip title="Sort by Alphabet">
           <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
         </Tooltip>
         <Tooltip title="Sort by Course Level">
           <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
         </Tooltip>
-      </S.SortBtnWrapper>
+      </S.FilterBarWrapper>
       <S.CourseList>
-        {courses.sort(applySortFn).map((course) => (
-          <CourseBadge
-            courseCode={course.courseCode}
-            title={course.title}
-            uoc={course.UOC}
-            plannedFor={course.plannedFor}
-            isUnplanned={course.isUnplanned}
-            isMultiterm={course.isMultiterm}
-            isDoubleCounted={course.isDoubleCounted}
-            isOverCounted={course.isOverCounted}
-          />
-        ))}
+        {courseList.length > 0
+          ? courseList
+            .map((course) => (
+              <CourseBadge
+                courseCode={course.courseCode}
+                title={course.title}
+                uoc={course.UOC}
+                plannedFor={course.plannedFor}
+                isUnplanned={course.isUnplanned}
+                isMultiterm={course.isMultiterm}
+                isDoubleCounted={course.isDoubleCounted}
+                isOverCounted={course.isOverCounted}
+              />
+            )) : <S.PlaceholderWrapper>No courses available</S.PlaceholderWrapper>}
       </S.CourseList>
     </S.CourseModal>
   );
