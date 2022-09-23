@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  LockOutlined, UnlockOutlined, ZoomInOutlined,
-  ZoomOutOutlined,
+  ExpandAltOutlined, LockOutlined, ShrinkOutlined, UnlockOutlined,
+  ZoomInOutlined, ZoomOutOutlined,
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tooltip } from 'antd';
@@ -30,6 +30,7 @@ const GraphicalSelector = () => {
 
   const [graph, setGraph] = useState<Graph | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sidebar, setSidebar] = useState(false);
   const [course, setCourse] = useState<Course | null>(null);
   const [showUnlockedOnly, setShowUnlockedOnly] = useState(true);
 
@@ -76,6 +77,7 @@ const GraphicalSelector = () => {
         nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
       });
 
+      setSidebar(true);
       setGraph(graphInstance);
 
       const data = {
@@ -224,6 +226,10 @@ const GraphicalSelector = () => {
     graph.zoomTo(zoom - getZoomRatio());
   };
 
+  const toggleSidebar = () => {
+    setSidebar(!sidebar);
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
@@ -245,6 +251,9 @@ const GraphicalSelector = () => {
             <Button onClick={handleHideGraph}>
               Hide Graph
             </Button>
+            {sidebar
+              ? <Button onClick={toggleSidebar} icon={<ExpandAltOutlined />} />
+              : <Button onClick={toggleSidebar} icon={<ShrinkOutlined />} />}
           </S.ToolsWrapper>
           {loading
             ? <Spinner text="Loading graph..." />
@@ -254,28 +263,32 @@ const GraphicalSelector = () => {
               </S.SearchBarWrapper>
             )}
         </S.GraphPlaygroundWrapper>
-        <S.SidebarWrapper>
-          <Tooltip placement="topLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
-            <Switch
-              defaultChecked={showUnlockedOnly}
-              style={{ alignSelf: 'flex-end' }}
-              onChange={toggleShowLockedCourses}
-              checkedChildren={<LockOutlined />}
-              unCheckedChildren={<UnlockOutlined />}
-            />
-          </Tooltip>
-          <ZoomInOutlined onClick={zoomIn} />
-          <ZoomOutOutlined onClick={zoomOut} />
-          <Button onClick={handleShowAllCoursesGraph}>
-            Show Graph
-          </Button>
-          <Button onClick={handleHideGraph}>
-            Hide Graph
-          </Button>
-          <div>
-            {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
-          </div>
-        </S.SidebarWrapper>
+        {sidebar
+          ? (
+            <S.SidebarWrapper>
+              <Tooltip placement="topLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
+                <Switch
+                  defaultChecked={showUnlockedOnly}
+                  style={{ alignSelf: 'flex-end' }}
+                  onChange={toggleShowLockedCourses}
+                  checkedChildren={<LockOutlined />}
+                  unCheckedChildren={<UnlockOutlined />}
+                />
+              </Tooltip>
+              <Button onClick={zoomIn} icon={<ZoomInOutlined />} />
+              <Button onClick={zoomOut} icon={<ZoomOutOutlined />} />
+              <Button onClick={handleShowAllCoursesGraph}>
+                Show Graph
+              </Button>
+              <Button onClick={handleHideGraph}>
+                Hide Graph
+              </Button>
+              <div>
+                {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
+              </div>
+            </S.SidebarWrapper>
+          )
+          : null}
       </S.Wrapper>
     </PageTemplate>
   );

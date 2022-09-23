@@ -39,6 +39,7 @@ const ToolsWrapper = styled.div`
   margin-bottom: 10px;
   margin-left: 10px;
 `;
+
 export default {
   Wrapper,
   GraphPlaygroundWrapper,
