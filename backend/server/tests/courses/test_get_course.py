@@ -37,7 +37,3 @@ def test_get_course_all_courses():
         )
     ]
     assert failed_courses == [], f"Total of {len(failed_courses)} courses failed.\n{failed_courses}"
-    # for course in CONDITIONS.keys():
-    #     if random.random() < 0.05:
-    #     x = requests.get(f'http://127.0.0.1:8000/courses/getCourse/{course}')
-    #     assert x.status_code == 200, f'{course} cant be fetched'
