@@ -5,12 +5,40 @@ on:
     types:
       - completed
 jobs:
-  report:
+  test-results:
+    name: Test Results
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion != 'skipped'
+    permissions:
+      checks: write
+      # needed unless run with comment_mode: off
+      pull-requests: write
+      # only needed for private repository
+      contents: read
+      # only needed for private repository
+      issues: read
+      # required by download step to access artifacts API
+      actions: read
     steps:
-      - uses: dorny/test-reporter@v1
+      - name: Download and extract artifacts
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          mkdir -p artifacts && cd artifacts
+
+          artifacts_url=${{ github.event.workflow_run.artifacts_url }}
+
+          gh api "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read artifact
+          do
+            IFS=$'\t' read name url <<< "$artifact"
+            gh api $url > "$name.zip"
+            unzip -d "$name" "$name.zip"
+          done
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          artifact: test-results # artifact name
-          name: Backend tests # Name of the check run which will be created
-          path: "*.xml" # Path to test results (inside artifact .zip)
-          reporter: java-junit # Format of test results
+          commit: ${{ github.event.workflow_run.head_sha }}
+          event_file: artifacts/Event File/event.json
+          event_name: ${{ github.event.workflow_run.event }}
+          junit_files: "artifacts/**/*.xml"
