@@ -124,7 +124,7 @@ class User:
         Given a course which the student has taken, returns their
         grade (or None for no grade)
         """
-        return self.courses[course][1]
+        return self.courses.get(course, (6, None))[1]
 
     def wam(self, category: Category = AnyCategory()) -> Optional[float]:
         """
