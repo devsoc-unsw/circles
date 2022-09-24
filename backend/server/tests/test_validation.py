@@ -21,30 +21,27 @@ ignored = [
 ]
 
 def test_validation():
-    # TODO: remove thhis return
-    return
-    # unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS['user3']).json()['courses_state']
-    # for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
-    #     majorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/majors')
-    #     minorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/minors')
-    #     honoursGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/honours')
-    #     majorsGroups = majorsGroups.json()['spec'] if majorsGroups.status_code == 200 else {}
-    #     minorsGroups = minorsGroups.json()['spec'] if minorsGroups.status_code == 200 else {}
-    #     honoursGroups = honoursGroups.json()['spec'] if honoursGroups.status_code == 200 else {}
-    #     for group in chain(majorsGroups.values(), minorsGroups.values(), honoursGroups.values()):
-    #         for spec in group['specs'].keys():
-    #             if spec not in fake_specs:
-    #                 assert_possible_structure(unlocked, program, spec)
+    unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS['user3']).json()['courses_state']
+    for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
+        majorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/majors')
+        minorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/minors')
+        honoursGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/honours')
+        majorsGroups = majorsGroups.json()['spec'] if majorsGroups.status_code == 200 else {}
+        minorsGroups = minorsGroups.json()['spec'] if minorsGroups.status_code == 200 else {}
+        honoursGroups = honoursGroups.json()['spec'] if honoursGroups.status_code == 200 else {}
+        for group in chain(majorsGroups.values(), minorsGroups.values(), honoursGroups.values()):
+            for spec in group['specs'].keys():
+                if spec not in fake_specs:
+                    assert_possible_structure(unlocked, program, spec)
 
 
 def assert_possible_structure(unlocked, program, spec):
-    return
-    # structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
-    # for container in structure:
-    #     with suppress(KeyError):
-    #         del structure[container]['content']['General Education']
-    #     for container2 in structure[container]['content']:
-    #         for course in structure[container]['content'][container2]['courses']:
-    #             for c in unlocked:
-    #                 if course in c and all(ignore not in c for ignore in ignored):
-    #                     assert unlocked[c]['is_accurate'], f'{c} is inaccurate'
+    structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
+    for container in structure:
+        with suppress(KeyError):
+            del structure[container]['content']['General Education']
+        for container2 in structure[container]['content']:
+            for course in structure[container]['content'][container2]['courses']:
+                for c in unlocked:
+                    if course in c and all(ignore not in c for ignore in ignored):
+                        assert unlocked[c]['is_accurate'], f'{c} is inaccurate'
