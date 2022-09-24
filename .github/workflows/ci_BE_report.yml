@@ -1,7 +1,7 @@
 name: "BE Test Report"
 on:
   workflow_run:
-    workflows: ["Run Backend Unit Tests"] # runs after CI workflow
+    workflows: ["Backend Unit Tests"] # runs after CI workflow
     types:
       - completed
 jobs:

@@ -1,4 +1,4 @@
-name: Run Backend Unit Tests
+name: Backend Unit Tests
 
 on:
   pull_request:
