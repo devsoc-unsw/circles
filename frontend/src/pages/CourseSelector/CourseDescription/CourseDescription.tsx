@@ -10,7 +10,7 @@ import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import { LoadingCourseDescription } from 'components/LoadingSkeleton';
-import PlannerButton from 'components/PlannerButton/PlannerButton';
+import PlannerButton from 'components/PlannerButton';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
@@ -194,7 +194,7 @@ const CourseDescription = () => {
           <S.DescriptionContent>
             <S.DescriptionTitleBar>
               <Title level={2} className="text">{id} - {course?.title}</Title>
-              <PlannerButton />
+              {course ? <PlannerButton course={course} /> : undefined}
             </S.DescriptionTitleBar>
             {
               course?.is_legacy

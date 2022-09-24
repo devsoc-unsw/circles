@@ -10,10 +10,10 @@ import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Collapsible from 'components/Collapsible';
+import PlannerButton from 'components/PlannerButton';
 import TermTag from 'components/TermTag';
 import { RootState } from 'config/store';
 import GraphicalCourseTag from './GraphicalCourseTag';
-import PlannerButtonCode from './GraphicalPlannerButton';
 import LoadingCourseInfo from './LoadingCourseInfo';
 import S from './styles';
 
@@ -22,7 +22,7 @@ const { Title, Text } = Typography;
 interface CourseInfoProps {
   courseCode: string;
   onCourseClick?: (code: string) => void;
-  onCourseAdd?: () => void;
+  // onCourseAdd?: () => void;
 }
 
 type CourseUserInfo = {
@@ -34,7 +34,6 @@ type CourseUserInfo = {
 const CourseInfo: FunctionComponent<CourseInfoProps> = ({
   courseCode,
   onCourseClick,
-  onCourseAdd,
 }) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
@@ -75,7 +74,7 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
   return (
     <S.Wrapper>
       <Title level={2} className="text">{courseCode} - {course.title}</Title>
-      <PlannerButtonCode course={course} onChange={onCourseAdd} />
+      <PlannerButton course={course} />
       <S.TermWrapper>
         <Text strong>Terms: </Text>
         {course.terms.length
