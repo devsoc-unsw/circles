@@ -1,12 +1,12 @@
 # Sets up the backend, without writing data into the database.
 
-# Latest python image
-FROM python:3-slim
+# Python image
+FROM python:3.10.5-slim
 
 # gcc required for python-Levenshtein
 RUN apt-get update \
-&& apt-get install gcc -y \
-&& apt-get clean
+    && apt-get install gcc -y \
+    && apt-get clean
 
 # Set current working directory inside container to /backend
 WORKDIR /backend
