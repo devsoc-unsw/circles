@@ -5,20 +5,19 @@ on:
     branches: [dev, main]
 
 jobs:
-  build:
+  test:
     name: Backend CI Testing
-
     runs-on: ubuntu-latest
-
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
-
       - name: Set up Python (latest)
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-
+          python-version: "3.10.5"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -38,4 +37,12 @@ jobs:
       - name: Test algorithm with pytest
         run: |
           cd backend
-          python -m pytest
+          pip install pytest pytest-cov
+          python -m pytest --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always() # run this step even if previous step failed
+        with:
+          name: Backend tests # Name of the check run which will be created
+          path: backend/junit/test-results.xml # Path to test results
+          reporter: jest-junit # Format of test results
