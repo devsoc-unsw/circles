@@ -227,7 +227,7 @@ const GraphicalSelector = () => {
   };
 
   const toggleSidebar = () => {
-    setSidebar(sidebar => !sidebar);
+    setSidebar((sidebar) => !sidebar);
   };
 
   return (
@@ -263,8 +263,7 @@ const GraphicalSelector = () => {
               </S.SearchBarWrapper>
             )}
         </S.GraphPlaygroundWrapper>
-        {sidebar
-          ? (
+        {sidebar && (
             <S.SidebarWrapper>
               <Tooltip placement="topLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
                 <Switch
@@ -287,8 +286,7 @@ const GraphicalSelector = () => {
                 {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
               </div>
             </S.SidebarWrapper>
-          )
-          : null}
+          )}
       </S.Wrapper>
     </PageTemplate>
   );
