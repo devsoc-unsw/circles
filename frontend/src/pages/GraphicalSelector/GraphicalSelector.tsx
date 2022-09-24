@@ -227,7 +227,7 @@ const GraphicalSelector = () => {
   };
 
   const toggleSidebar = () => {
-    setSidebar(!sidebar);
+    setSidebar(sidebar => !sidebar);
   };
 
   return (
