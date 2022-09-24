@@ -17,12 +17,12 @@ def map_var_to_course(courses: list[Course], var: cp_model.IntVar):
     return [course for course in courses if course.name == var.Name()][0]
 
 def map_course_to_var(course: Course, variables: list[cp_model.IntVar]):
-    return [variable for variable in variables if course == variable.Name()][0]
+    return [variable for variable in variables if course.name == variable.Name()][0]
 
 def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]):
     model = cp_model.CpModel()
     # enforces terms
-    variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start)), course.name) for course in courses]
+    variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start, end)), course.name) for course in courses]
     # set max UOC for a term
     for index, m in enumerate(uoc_max):
         booleanIndexes = []
@@ -53,7 +53,8 @@ if __name__ == '__main__':
     test_cond.add_condition(SpecialisationCondition("COMPA1"))
     autoplan(
         [
-            Course("COMP1511", test_cond, 65, 6, {2022: [1, 2, 3]}),
+            Course("COMP1511", CONDITIONS["COMP1511"], 65, 6, {2022: [1, 2, 3]}),
+            Course("COMP1521", CONDITIONS["COMP1521"], 65, 6, {2022: [1, 2, 3]}),
         ],
         User({
             "program": "3778",

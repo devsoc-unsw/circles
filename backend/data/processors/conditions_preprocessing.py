@@ -19,9 +19,11 @@ CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code
 # TODO: think of how to automate some of this
 SPECIALISATION_MAPPINGS = {
     'School of the Arts and Media honours': 'MDIA?H',
+    'Business \(Honours\) Program 4512': '4512',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
     'Creative Writing honours': 'CRWTWH',
     'Nanoscience Honours' : 'NANO?H',
+    '4508 Music \(Honours\)': '4508',
     'Construction Management and Property undergraduate program or minor': 'BLDG??',
     'Media, Culture and Technology honours': 'MECTBH',
     'Theatre and Performance Studies honours': 'THSTBH',
@@ -66,6 +68,7 @@ SPECIALISATION_MAPPINGS = {
     'single or dual award Media': '4510 || 3454 || 3438 || 3453',
     'single or double degree Media': '4510 || 3454 || 3438 || 3453',
     'Social Science or Social Research and Policy': '3321 || 3420',
+    'single or double Music \(Honours\) program': '4508',
     'Education program': '4509 || 4056',
     'Landscape Architecture minor': 'LANDA2',
     'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',

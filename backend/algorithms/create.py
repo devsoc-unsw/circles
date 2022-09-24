@@ -220,7 +220,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
-            cond: UOCCondition | WAMCondition | GradeCondition | CoresCondition
+            cond: UOCCondition | WAMCondition | GradeCondition | CoresCondition | CompositeCondition
             if is_uoc(token):
                 # Condition for UOC requirement
                 cond = UOCCondition(get_uoc(token))
@@ -229,7 +229,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
                 cond = WAMCondition(get_wam(token))
             elif is_grade(token):
                 # Condition for GRADE requirement (mark in a single course)
-                cond = GradeCondition(get_grade(token))
+                cond = GradeCondition(get_grade(token), "")
             elif token == "CORES":
                 # Condition for Core Course completion requirement
                 cond = CoresCondition()
@@ -247,9 +247,22 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
                 if category is None:
                     # Error. Return None.
                     return None, index
-
-                # Add the category to the condition and adjust the current index position
-                cond.set_category(category)
+                if isinstance(cond, GradeCondition):
+                    # special, only allow class categories
+                    grade_cond = cond
+                    cond = CompositeCondition()
+                    if isinstance(category, CompositeCategory):
+                        cond.set_logic(category.logic)
+                        for class_category in category.categories:
+                            if isinstance(class_category, ClassCategory):
+                                cond.add_condition(GradeCondition(grade_cond.grade, class_category.class_name))
+                    elif isinstance(category, ClassCategory):
+                        cond = GradeCondition(grade_cond.grade, category.class_name)
+                    else:
+                        print("WARNING: failed to parse! Grade condition too complex.")
+                else:
+                    # Add the category to the condition and adjust the current index position
+                    cond.set_category(category)
                 [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(cond)

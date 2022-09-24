@@ -9,9 +9,11 @@ class Course:
     mark: int
     uoc: int
     terms: dict[int, list[int]]
-    def term_domain(self, start: Tuple[int, int]):
+    def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]):
         numbers = []
         for key, value in self.terms.items():
             for term in value:
-                numbers.append((key - start[0]) * 4 + term - start[1])
+                new_number = (key - start[0]) * 4 + term - start[1]
+                if new_number <= (end[0] - start[0]) * 4 + end[1] - start[1]:
+                    numbers.append(new_number)
         return [[number, number] for number in numbers]
