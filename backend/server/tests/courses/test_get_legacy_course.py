@@ -4,7 +4,7 @@ data is working.
 """
 
 import json
-from typing import Annotated, Optional
+from typing import Annotated, Any, Optional
 import requests
 
 with open(
@@ -23,7 +23,7 @@ def get_legacy_course_wrapper(year: int, course: str):
 
 def compare_course_details(
         output, expected, compare_desc: bool=False
-    ) -> Optional[dict[str, object]]:
+    ) -> dict[str, Any]:
     """
     Used to compare two course-detail objects.
     Returns the key (str) that had a differing value, otherwise None.
