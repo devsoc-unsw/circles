@@ -39,13 +39,11 @@ jobs:
           cd backend
           pip install pytest-cov
           python -m pytest --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
-      - name: Test report
-        uses: dorny/test-reporter@v1
-        if: always() # run this step even if previous step failed
+      - uses: actions/upload-artifact@v2 # upload test results
+        if: always()
         with:
-          name: Backend tests # Name of the check run which will be created
+          name: test-results
           path: backend/junit/test-results.xml # Path to test results
-          reporter: java-junit # Format of test results
       - name: Code coverage report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
