@@ -3,7 +3,7 @@ from typing import Tuple
 from ortools.sat.python import cp_model # type: ignore
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
-from algorithms.objects.conditions import CompositeCondition, ProgramCondition, SpecialisationCondition
+from algorithms.objects.conditions import CompositeCondition, ProgramCondition, SpecialisationCondition, UOCCondition
 from algorithms.objects.helper import Logic
 from .validate_term_planner import validate_terms
 from server.routers.model import CONDITIONS
@@ -25,13 +25,13 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start, end)), course.name) for course in courses]
     # set max UOC for a term
     for index, m in enumerate(uoc_max):
-        booleanIndexes = []
+        boolean_indexes = []
         for v in variables:
             b = model.NewBoolVar('hi')
             model.Add(v == index).OnlyEnforceIf(b)
             model.Add(v != index).OnlyEnforceIf(b.Not())
-            booleanIndexes.append(b)
-        model.AddReservoirConstraintWithActive(variables, list(map_var_to_course(courses, var).uoc for var in variables), booleanIndexes, 0, m)
+            boolean_indexes.append(b)
+        model.AddReservoirConstraintWithActive(variables, list(map_var_to_course(courses, var).uoc for var in variables), boolean_indexes, 0, m)
 
     # enforce prereqs
     for course in courses:
@@ -49,12 +49,11 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
 
 if __name__ == '__main__':
     test_cond = CompositeCondition(Logic.AND)
-    test_cond.add_condition(ProgramCondition("3707"))
-    test_cond.add_condition(SpecialisationCondition("COMPA1"))
+    test_cond.add_condition(UOCCondition(6))
     autoplan(
         [
             Course("COMP1511", CONDITIONS["COMP1511"], 65, 6, {2022: [1, 2, 3]}),
-            Course("COMP1521", CONDITIONS["COMP1521"], 65, 6, {2022: [1, 2, 3]}),
+            Course("COMP1521", test_cond, 65, 6, {2022: [1, 2, 3]}),
         ],
         User({
             "program": "3778",

@@ -178,7 +178,13 @@ class UOCCondition(Condition):
         # we need to do this because OR Tools doesnt allow for checking capacity is >=
         if total_uoc_allowable_after_course < 0:
             return [model.AddBoolAnd(False)]
-        return [model.AddCumulative(([course_variable, cp_model.INT32_MAX] for _ in filtered_courses), list(var[1].uoc for var in filtered_courses), total_uoc_allowable_after_course)]
+        boolean_indexes = []
+        for variable, _ in filtered_courses:
+            b = model.NewBoolVar('hi')
+            model.Add(variable >= course_variable).OnlyEnforceIf(b)
+            model.Add(variable < course_variable).OnlyEnforceIf(b.Not())
+            boolean_indexes.append(b)
+        return [model.AddReservoirConstraintWithActive([course[0] for course in filtered_courses], list(var[1].uoc for var in filtered_courses), boolean_indexes, 0, total_uoc_allowable_after_course)]
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         filtered_courses = [course for course in courses if self.category.match_definition(course[1].name)]
