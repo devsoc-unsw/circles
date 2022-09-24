@@ -3,16 +3,28 @@
   "lockFileMaintenance": { "enabled": true, "automerge": true },
   "prHourlyLimit": 5,
   "labels": ["dependencies"],
+  "reviewersFromCodeOwners": true,
   "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "pin", "digest"],
-      "automerge": true,
-      "automergeStrategy": "branch"
-    },
     {
       "matchUpdateTypes": ["patch"],
       "groupName": "weekly patch updates",
-      "schedule": ["before 5am every monday"]
+      "schedule": ["before 5am every monday"],
+      "addLabels": ["deps: patches"]
+    },
+    {
+      "groupName": "ci-actions",
+      "managers": ["github-actions", "dockerfile"],
+      "automerge": true,
+      "automergeType": "branch",
+      "addLabels": ["deps: ci-actions"]
+    },
+    {
+      "managers": ["npm"],
+      "addLabels": ["deps: javascript"]
+    },
+    {
+      "matchLanguages": ["python"],
+      "addLabels": ["deps: python"]
     }
   ]
 }
