@@ -47,10 +47,19 @@ const FilterBarWrapper = styled.div`
   gap: 10px;
   margin-bottom: 10px;
   margin-right: 15px;
-  & > * {
+  & > :not(:first-child) {
     cursor: pointer;
     font-size: 1.25rem;
   }
+`;
+
+const PlaceholderWrapper = styled.div`
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 1rem;
 `;
 
 export default {
@@ -60,4 +69,5 @@ export default {
   CourseModal,
   CourseList,
   FilterBarWrapper,
+  PlaceholderWrapper,
 };

@@ -25,6 +25,12 @@ const CoursesModal = ({
 
   const applySortFn = sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel;
 
+  const courseList = courses
+    .filter((course) => course.courseCode.toLowerCase()
+      .concat(course.title.toLowerCase())
+      .includes(filter.toLowerCase()))
+    .sort(applySortFn);
+
   return (
     <S.CourseModal
       title={(
@@ -40,7 +46,7 @@ const CoursesModal = ({
     >
       <S.FilterBarWrapper>
         <Input
-          placeholder="Filter avaliable courses"
+          placeholder="Filter available courses"
           onChange={handleSearch}
           style={{ width: 500 }}
         />
@@ -52,23 +58,20 @@ const CoursesModal = ({
         </Tooltip>
       </S.FilterBarWrapper>
       <S.CourseList>
-        {courses
-          .filter((course) => String(course.courseCode).toLowerCase()
-            .concat(course.title.toLowerCase())
-            .includes(filter.toLowerCase()))
-          .sort(applySortFn)
-          .map((course) => (
-            <CourseBadge
-              courseCode={course.courseCode}
-              title={course.title}
-              uoc={course.UOC}
-              plannedFor={course.plannedFor}
-              isUnplanned={course.isUnplanned}
-              isMultiterm={course.isMultiterm}
-              isDoubleCounted={course.isDoubleCounted}
-              isOverCounted={course.isOverCounted}
-            />
-          ))}
+        {courseList.length > 0
+          ? courseList
+            .map((course) => (
+              <CourseBadge
+                courseCode={course.courseCode}
+                title={course.title}
+                uoc={course.UOC}
+                plannedFor={course.plannedFor}
+                isUnplanned={course.isUnplanned}
+                isMultiterm={course.isMultiterm}
+                isDoubleCounted={course.isDoubleCounted}
+                isOverCounted={course.isOverCounted}
+              />
+            )) : <S.PlaceholderWrapper>No courses available</S.PlaceholderWrapper>}
       </S.CourseList>
     </S.CourseModal>
   );

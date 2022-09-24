@@ -103,7 +103,7 @@ const ProgressionChecker = () => {
           // additional courses can be considered to count to the subgroup progression
           // only exception is Rules where it should display all courses
           const isOverCounted = !!courses[courseCode]?.plannedFor
-            && currUOC >= subgroupStructure.UOC
+            && currUOC > subgroupStructure.UOC
             && !isRule;
 
           const course: ViewSubgroupCourse = {
