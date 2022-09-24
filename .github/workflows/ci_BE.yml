@@ -45,4 +45,4 @@ jobs:
         with:
           name: Backend tests # Name of the check run which will be created
           path: backend/junit/test-results.xml # Path to test results
-          reporter: jest-junit # Format of test results
+          reporter: java-junit # Format of test results
