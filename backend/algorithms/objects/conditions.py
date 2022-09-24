@@ -120,9 +120,10 @@ class CoreqCourseCondition(Condition):
     def __init__(self, course):
         self.course: str = course
 
-    def validate(self, user: User) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> Tuple[bool, list[str]]:
         """ Returns True if the user is taking these courses in the same term """
-        return user.has_taken_course(self.course) or user.is_taking_course(self.course)
+        valid = user.has_taken_course(self.course) or user.is_taking_course(self.course)
+        return valid, ([] if valid else [f'Corequisite: {self.course}'])
 
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         condition_var = get_variable(courses, self.course)

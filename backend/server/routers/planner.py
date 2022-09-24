@@ -9,7 +9,7 @@ from server.routers.model import ValidCoursesState, PlannerData, ValidPlannerDat
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
-    plan: list[list[dict[str, Tuple[int, int | None]]]] = [[]]
+    plan: list[list[dict[str, Tuple[int, int | None]]]] = [[{}]]
     for year_index, year in enumerate(plannerData.plan):
         for term_index, term in enumerate(year):
             for courseName, course in term.items():
@@ -17,11 +17,13 @@ def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
                     plan[year_index][term_index][courseName] = (get_course(courseName)["UOC"], course)
                 elif course[0] is not None:
                     plan[year_index][term_index][courseName] = (course[0], course[1])
+            plan[year_index].append({})
         plan.append([])
     return ValidPlannerData(
         program=plannerData.program,
         specialisations=plannerData.specialisations,
-        plan=plan
+        plan=plan,
+        mostRecentPastTerm=plannerData.mostRecentPastTerm
     )
 
 router = APIRouter(

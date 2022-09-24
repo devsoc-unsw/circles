@@ -35,7 +35,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
 
     # enforce prereqs
     for course in courses:
-        course.condition.condition_to_model(model, user, variables, map_course_to_var(course, variables))
+        course.condition.condition_to_model(model, user, list((variable, map_var_to_course(courses, variable)) for variable in variables), map_course_to_var(course, variables))
 
     solver = cp_model.CpSolver()
     status = solver.Solve(model)

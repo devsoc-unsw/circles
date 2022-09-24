@@ -1,11 +1,13 @@
 from dataclasses import dataclass
-from typing import Tuple
-from algorithms.objects.conditions import Condition
+from typing import Tuple, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from algorithms.objects.conditions import Condition
 
 @dataclass
 class Course:
     name: str
-    condition: Condition
+    condition: "Condition"
     mark: int
     uoc: int
     terms: dict[int, list[int]]
