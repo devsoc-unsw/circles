@@ -95,10 +95,8 @@ def test_legacy_comp6991():
     assert get_legacy_course_wrapper(2021, "COMP6991").status_code == 400
 
     res2022 = get_legacy_course_wrapper(2022, "COMP6991")
-    #TODO: Update to 200 once LIVE_YEAR is updated to 2023
-    assert res2022.status_code == 400
-    # TODO: Uncomment this once the LIVE_YEAR is updated to 2023.
-    # assert compare_course_details(res2022.json(), TEST_OBJECTS["comp6991_2022"])
+    assert res2022.status_code == 200
+    assert compare_course_details(res2022.json(), TEST_OBJECTS["comp6991_2022"])
 
 def test_legacy_math3361():
     """
@@ -118,4 +116,7 @@ def test_legacy_math3361():
     res2021 = get_legacy_course_wrapper(2021, "MATH3361")
     assert res2021.status_code == 200
     assert not compare_course_details(res2021.json(), TEST_OBJECTS["math3361_2021"])
-    # TODO: update the following line when LIVE_YEAR updated to 2023 to include 2022
+
+    res2022 = get_legacy_course_wrapper(2022, "MATH3361")
+    assert res2022.status_code == 200
+    assert not compare_course_details(res2022.json(), TEST_OBJECTS["math3361_2022"])
