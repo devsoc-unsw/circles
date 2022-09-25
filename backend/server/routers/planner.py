@@ -49,7 +49,7 @@ def validate_term_planner(plannerData: PlannerData):
         "specialisations": data.specialisations,
         "year": 1,  # Start off as a first year
         "courses": {},  # Start off the user with an empty year
-        "core_courses": get_core_courses(data.program, data.specialisations),
+        "core_courses": get_core_courses(data.programCode, data.specialisations),
     }
     user = User(emptyUserData)
     # State of courses on the term planner
@@ -90,7 +90,6 @@ def save_local_storage(localStorage: LocalStorage):
     #TODO: replace dummy token 
     #token = localStorage.token
     token = DUMMY_TOKEN
-    print(localStorage.plan)
     item = {
         'degree': {
             'programCode': localStorage.programCode,
