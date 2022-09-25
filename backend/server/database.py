@@ -116,36 +116,12 @@ def create_dynamic_db():
                             "plan": {
                                 'bsonType': 'array',
                                 'items': {
-                                    'bsonType': 'object',
-                                    'required': ['T0', 'T1', 'T2', 'T3'],
-                                    'properties': {
-                                        'T0': {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        },
-                                        'T1': {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        },
-                                        'T2': {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        },
-                                        'T3': {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        }
+                                    'bsonType': 'array',
+                                    'items': {
+                                        'bsonType': 'object'
                                     }
-                                }
-                            },
+                                },
+                            }
                         }
                     }
                 }
@@ -158,15 +134,16 @@ def create_dynamic_db():
             'properties': {
                 'token': {
                     'description': 'token given by FE',
-                    'bsonType': 'int'
+                    'bsonType': 'string'
                 },
                 'objectId': {
                     'description': 'objectId for the user object we are storing',
-                    'bsonType': 'int'
+                    'bsonType': 'objectId'
                 }
             }
         }
     })
+    print("finished creating user database")
     # example insertion
     # usersDB['users'].insert_one({
     #     'degree': {
@@ -198,6 +175,7 @@ def overwrite_all():
     overwrite_archives()
 
 def optionally_create_new_data():
-    with suppress(errors.CollectionInvalid):
-        create_dynamic_db()
-
+    # TODO: DELETE NEXT LINE IN PROD
+    usersDB.drop_collection('users')
+    usersDB.drop_collection('tokens')
+    create_dynamic_db()

@@ -160,6 +160,7 @@ class LocalStorage(PlannerData):
     startYear: int
     numYears: int
     isSummerEnabled: bool
+    plan: list[list[dict[str, None | list[int | None]]]]
     token: str
 
 class CourseCodes(BaseModel):

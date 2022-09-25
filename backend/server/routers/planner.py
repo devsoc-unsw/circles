@@ -90,25 +90,27 @@ def save_local_storage(localStorage: LocalStorage):
     #TODO: replace dummy token 
     #token = localStorage.token
     token = DUMMY_TOKEN
-    degree = {
-        'programCode': localStorage.programCode,
-        'programName': localStorage.programName,
-        'specs': localStorage.specialisations
-    }
-
-    planner = {
-        'unplanned': localStorage.unplanned,
-        'mostRecentPastTerm': localStorage.mostRecentPastTerm,
-        'plan': localStorage.plan,
-        'startYear':  localStorage.startYear,
-        'numYears': localStorage.numYears,
-        'isSummerEnabled': localStorage.isSummerEnabled
+    print(localStorage.plan)
+    item = {
+        'degree': {
+            'programCode': localStorage.programCode,
+            'programName': localStorage.programName,
+            'specs': localStorage.specialisations
+        },
+        'planner': {
+            'unplanned': localStorage.unplanned,
+            'mostRecentPastTerm': localStorage.mostRecentPastTerm,
+            'plan': localStorage.plan,
+            'startYear':  localStorage.startYear,
+            'numYears': localStorage.numYears,
+            'isSummerEnabled': localStorage.isSummerEnabled
+        }
     }
 
     data = usersDB['tokens'].find_one({'token': token})
     if data is not None:
         objectID = data['objectId']
-        usersDB['users'].update_one({'_id': ObjectId(objectID)}, {'$set': {'degree': degree, 'planner': planner}})
+        usersDB['users'].update_one({'_id': ObjectId(objectID)}, {'$set': item})
     else:
-        objectID = usersDB['users'].insert_one({'degree': degree, 'planner': planner}).inserted_id
+        objectID = usersDB['users'].insert_one(item).inserted_id
         usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})
