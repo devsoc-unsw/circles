@@ -90,18 +90,20 @@ def save_local_storage(localStorage: LocalStorage):
     #TODO: replace dummy token 
     #token = localStorage.token
     token = DUMMY_TOKEN
-    degree = {}
-    degree['programCode'] = localStorage.programCode
-    degree['programName'] = localStorage.programName
-    degree['specs'] = localStorage.specialisations
+    degree = {
+        'programCode': localStorage.programCode,
+        'programName': localStorage.programName,
+        'specs': localStorage.specialisations
+    }
 
-    planner = {}
-    planner['unplanned'] = localStorage.unplanned
-    planner['mostRecentPastTerm'] = localStorage.mostRecentPastTerm
-    planner['plan'] = localStorage.plan
-    planner['startYear'] = localStorage.startYear
-    planner['numYears'] = localStorage.numYears
-    planner['isSummerEnabled'] = localStorage.isSummerEnabled
+    planner = {
+        'unplanned': localStorage.unplanned,
+        'mostRecentPastTerm': localStorage.mostRecentPastTerm,
+        'plan': localStorage.plan,
+        'startYear':  localStorage.startYear,
+        'numYears': localStorage.numYears,
+        'isSummerEnabled': localStorage.isSummerEnabled
+    }
 
     data = usersDB['tokens'].find_one({'token': token})
     if data is not None:
