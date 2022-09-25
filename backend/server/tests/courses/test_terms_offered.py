@@ -4,6 +4,10 @@ Tests for the `termsOffered/{course}/{year}` routes.
 Tests for data can be run against specific examples from legacy year 2021.
 Be careful with anything from the LIVE_YEAR as that may change.
 Anything further back is not guaranteed either.
+
+TODO: Figure out why terms don't work for old data - pre-2021 or so.
+    - Exist on handbook
+    - Don't exist in our data.
 """
 
 import requests
