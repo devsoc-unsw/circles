@@ -2,7 +2,7 @@ name: Run Frontend Build
 
 on:
   pull_request:
-    branches: [dev, main]
+    branches: [dev, main, CIRCLES-331/user-data-to-backend]
 
 jobs:
   build:
