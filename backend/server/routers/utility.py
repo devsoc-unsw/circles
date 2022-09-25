@@ -5,7 +5,6 @@ specifically in any one function
 
 
 from typing import Any, Callable, List
-import requests
 
 def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs) -> Any:
     """
@@ -20,7 +19,7 @@ def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs
 
 def get_core_courses(program: str, specialisations: list[str]):
     from server.routers.programs import get_structure
-    
+
     req = get_structure(program, "+".join(specialisations))
     return sum(
             (
