@@ -47,15 +47,36 @@ def tokenise_dependency(condition: str):
     print("^.condition: ", condition)
     if re.search("UOC", condition):
         return tokenise_uoc_dependency(condition)
+    if re.search("(level|prescribed|core|cores)"):
+        return tokenise_core_dependency(condition)
     return condition
 
-def tokenise_uoc_dependency(condition: str):
+def tokenise_uoc_dependency(condition: str) -> List[str]:
     """
     Tokenise the UOC dependency.
     Assumes that the caller has already verified that the given condition is UOC only.
+
+    Example input: "Must have completed 24 UOC"
+
     """
     num_uoc = re.search("(\d+)", condition)
     return ["UOC", num_uoc.group()]
+
+def tokenise_core_dependency(condition: str):
+    """
+    Tokenise the core dependency.
+    Assumes that the caller has already verified that the given condition is core only.
+
+    Example Input:
+        "Students must have completed all Level 1 ECON courses prescribed in the degree"
+    Want to catch
+        - Level \d (If it exists)
+        - Category (If it exists)
+        - Prescribed (If it exists) -> CORE
+    The given example will be outputted as:
+        ["L1", "ECON", "CORES"]
+    """
+    pass
 
 def tokenise_dependant(condition: str):
     return condition
