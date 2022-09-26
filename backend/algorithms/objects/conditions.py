@@ -4,7 +4,7 @@ Contains the Conditions classes
 
 import json
 from abc import ABC, abstractmethod
-from typing import Optional, Tuple, TypedDict
+from typing import List, Optional, Tuple, TypedDict
 
 from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
 from algorithms.objects.user import User
@@ -99,9 +99,10 @@ class MaturityCondition(Condition):
         self.dependent = dependent
         self.dependency = dependency
 
-    def validate(self, user: User) -> bool:
+    def validate(self, user: User) -> tuple[bool, List[str]]:
         """ Validate if user has passed a maturity requirement """
         raise NotImplementedError
+        return True, []
 
     def has_completed_dependency(self, user: User):
         """ Checks if the user has completed the dependency """
