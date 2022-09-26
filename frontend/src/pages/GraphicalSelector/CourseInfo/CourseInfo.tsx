@@ -85,17 +85,23 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
       </S.TermWrapper>
       <S.MiscInfo>
         <S.MiscInfoChild>
-          <Text>{course.study_level}</Text>
-          <br />
-          <Text>{course.campus}</Text>
+          <div>
+            <Text>{course.study_level}</Text>
+          </div>
+          <div>
+            <Text>{course.campus}</Text>
+          </div>
         </S.MiscInfoChild>
         <S.MiscInfoChild>
           <Text>{course.school}</Text>
         </S.MiscInfoChild>
         <S.MiscInfoChild>
-          <Text strong>{course.UOC} UOC</Text>
-          <br />
-          <Text>View Handbook</Text>
+          <div>
+            <Text strong>{course.UOC} UOC</Text>
+          </div>
+          <div>
+            <Text>View Handbook</Text>
+          </div>
         </S.MiscInfoChild>
       </S.MiscInfo>
       <Collapsible title="Overview">

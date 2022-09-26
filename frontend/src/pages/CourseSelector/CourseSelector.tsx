@@ -6,6 +6,7 @@ import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
+import CourseInfoFull from 'pages/GraphicalSelector/CourseInfo/CourseInfoFull';
 import CourseBanner from './CourseBanner';
 import CourseDescription from './CourseDescription';
 import CourseMenu from './CourseMenu';
@@ -52,7 +53,10 @@ const CourseSelector = () => {
         <CourseTabs />
         <S.ContentWrapper>
           <CourseMenu structure={structure} />
-          <CourseDescription />
+          <div>
+            <CourseDescription />
+            <CourseInfoFull courseCode="COMP1511" />
+          </div>
         </S.ContentWrapper>
       </S.ContainerWrapper>
     </PageTemplate>

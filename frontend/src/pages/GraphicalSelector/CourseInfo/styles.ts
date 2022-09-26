@@ -6,6 +6,13 @@ const Wrapper = styled.div`
   padding: 10px;
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const TermWrapper = styled.div`
   margin-top: 20px;
 `;
@@ -48,6 +55,7 @@ const Tag = styled(antdTag)`
 
 export default {
   Wrapper,
+  TitleWrapper,
   TermWrapper,
   MiscInfo,
   MiscInfoChild,
