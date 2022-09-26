@@ -18,6 +18,31 @@ PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
 # FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
+def run_program_token_process():
+    """
+    Start Here:
+    """
+    # Raw data of programs
+    program_info = read_data(PROGRAMS_PROCESSED_PATH)
+
+    # At this stage, conditions are pre-processed
+    pre_processed = {
+        code: filter_pre_processable_conditions(info)
+        for code, info in program_info.items()
+    }
+
+    # Only care for programs with relevant coditions
+    pre_pre_processed_shortlist = shortlist_pre_proc(pre_processed)
+    pre_processed_shortlist = [
+        pre_process_program_requirements(cond)
+        for conds in pre_pre_processed_shortlist.values()
+        for cond in conds
+    ]
+    print(f"Found a total of {len(pre_pre_processed_shortlist)} relevant programs")
+    write_data(pre_pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
+    return pre_processed_shortlist
+
+
 def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict]:
     """
     Do epic pre-proc (i only want to take in the relevant ones)
@@ -27,7 +52,16 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
     need to actually check what the condition type is first
     """
     notes: str = condition_raw.get("notes", "")
-    return pre_process_maturity_condition(notes)
+    # Assumption: Only one condition per sentence. No misc. `.`
+    notes: List[str] = [
+        note.strip() for note in notes.split(".")
+        if len(note) > 0
+    ]
+    print("NOTES:", notes)
+    return [
+        pre_process_maturity_condition(note)
+        for note in notes
+    ]
 
 def pre_process_maturity_condition(string: str) -> List[str]:
     """
@@ -39,13 +73,18 @@ def pre_process_maturity_condition(string: str) -> List[str]:
                         fulfilled before the dependency is satisfied.
     """
     print("\n"*2)
-    print("am dealing with maturity:", string)
+    # print("am dealing with maturity:", string)
     components: List[str] = string.split("before")
+    print("components:", components)
     dependency: str = components[0].strip()
     dependant: str = components[1].strip()
     print("reduction:::::", dependency, "---------", dependant)
-    return (dependency,  dependant)
-    
+    return {
+        # "dependency": "", "dependant": "",
+        "dependency": dependency,
+        "dependant": dependant
+    }
+
 
 def maturity_match(string: str):
     return re.match(r".*(maturity)+", string.lower())
@@ -83,8 +122,8 @@ def is_relevant_string(string: str) -> bool:
     relevant: bool = any(
         [maturity_match(string)]
     )
-    if relevant:
-        print("RELEVANT:", string)
+    # if relevant:
+    #     print("RELEVANT:", string)
     return relevant
 
 def tokenise_program_requirements(program_info: Dict) -> Dict:
@@ -111,26 +150,9 @@ def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
         pre_procced = pre_process_cond(condition)
         if pre_procced is not None:
             pre_processes_conditions.append(pre_procced)
-            print("above is for ", condition.get("title", ""))
+            # print("above is for ", condition.get("title", ""))
     return pre_processes_conditions
 
-def run_program_token_process():
-    program_info = read_data(PROGRAMS_PROCESSED_PATH)
-
-    pre_processed = {
-        code: filter_pre_processable_conditions(info)
-        for code, info in program_info.items()
-    }
-
-    pre_pre_processed_shortlist = shortlist_pre_proc(pre_processed)
-    pre_processed_shortlist = [
-        pre_process_program_requirements(cond)
-        for conds in pre_pre_processed_shortlist.values()
-        for cond in conds
-    ]
-    print(f"Found a total of {len(pre_pre_processed_shortlist)} relevant programs")
-    write_data(pre_pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
-    return pre_processed_shortlist
 
 if __name__ == "__main__":
     run_program_token_process()

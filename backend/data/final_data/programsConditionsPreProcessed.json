@@ -6,28 +6,7 @@
             "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
         }
     ],
-    "3420": [
-        {
-            "type": "info_rule",
-            "title": "Maturity Requirements",
-            "notes": "You must complete at least 24 UOC before enrolling in Level 2 courses.\nYou must complete at least 24 UOC in your major before enrolling in Level 3 courses."
-        }
-    ],
-    "3460": [
-        {
-            "type": "info_rule",
-            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
-            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
-        }
-    ],
     "3462": [
-        {
-            "type": "info_rule",
-            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
-            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
-        }
-    ],
-    "3473": [
         {
             "type": "info_rule",
             "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
@@ -97,13 +76,6 @@
             "notes": "Students must have completed all Level 1 ECON courses prescribed in the degree before taking any Level 3 ECON courses."
         }
     ],
-    "3572": [
-        {
-            "type": "info_rule",
-            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
-            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
-        }
-    ],
     "3573": [
         {
             "type": "info_rule",
@@ -116,13 +88,6 @@
             "type": "info_rule",
             "title": "Level 3 Maturity Requirements",
             "notes": "Students must have completed all Level 1 ECON courses prescribed in the degree before taking any Level 3 ECON courses."
-        }
-    ],
-    "3575": [
-        {
-            "type": "info_rule",
-            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
-            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
         }
     ],
     "3584": [
@@ -146,7 +111,21 @@
             "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
         }
     ],
-    "3596": [
+    "3597": [
+        {
+            "type": "info_rule",
+            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
+            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
+        }
+    ],
+    "3598": [
+        {
+            "type": "info_rule",
+            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
+            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
+        }
+    ],
+    "3599": [
         {
             "type": "info_rule",
             "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
@@ -158,6 +137,13 @@
             "type": "info_rule",
             "title": "Level 3 Maturity Requirements",
             "notes": "Students must have completed all Level 1 ECON courses prescribed in the degree before taking any Level 3 ECON courses."
+        }
+    ],
+    "3734": [
+        {
+            "type": "info_rule",
+            "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
+            "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
         }
     ],
     "3764": [
@@ -214,13 +200,6 @@
             "type": "info_rule",
             "title": "Level 3 Maturity Requirements",
             "notes": "Students must have completed all Level 1 ECON courses prescribed in the degree before taking any Level 3 ECON courses."
-        }
-    ],
-    "4815": [
-        {
-            "type": "info_rule",
-            "title": "Maturity Requirements",
-            "notes": "You must complete at least 24 UOC before enrolling in Level 2 courses.\nYou must complete at least 24 UOC in your major before enrolling in Level 3 courses."
         }
     ]
 }
