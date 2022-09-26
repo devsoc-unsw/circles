@@ -1,57 +1,60 @@
 {
     "empty_year": {
-        "programCode": "3707",
-        "specialisations": ["COMPA1"],
-        "year": 1,
-        "plan": [
-            [
-                {},
-                {},
-                {},
-                {}
-            ]
-        ],
-        "mostRecentPastTerm": {
-            "Y": 1,
-            "T": 0
+        "degree": {
+            "programCode": "3707",
+            "specs": ["COMPA1"],
+            "isComplete": true
         },
-        "programName": "Computer Science",
-        "unplanned": [],
-        "startYear": 2020,
-        "numYears": 3,
-        "isSummerEnabled": true,
-        "token": ""
+        "planner": {
+            "plan": [
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0
+            },
+            "unplanned": [],
+            "startYear": 2020,
+            "numYears": 3,
+            "isSummerEnabled": true
+        }
     },
     "simple_year": {
-        "programCode": "3707",
-        "specialisations": ["COMPA1"],
-        "year": 1,
-        "plan": [
-            [
-                {},
-                {
-                    "COMP1511": [6, null],
-                    "MATH1141": [6, null],
-                    "MATH1081": [6, null]
-                },
-                {
-                    "COMP1521": [6, null],
-                    "COMP1531": [6, null],
-                    "COMP2521": [6, null]
-                },
-                {
-                }
-            ]
-        ],
-        "mostRecentPastTerm": {
-            "Y": 1,
-            "T": 0
+        "degree": {
+            "programCode": "3707",
+            "specs": ["COMPA1"],
+            "isComplete": true
         },
-        "programName": "Computer Science",
-        "unplanned": ["COMP6447"],
-        "startYear": 2020,
-        "numYears": 3,
-        "isSummerEnabled": false,
-        "token": ""
+        "planner": {
+            "plan": [
+                {
+                    "T0": [],
+                    "T1": [
+                        "COMP1511",
+                        "MATH1141",
+                        "MATH1081"
+                    ],
+                    "T2": [
+                        "COMP1521",
+                        "COMP1531",
+                        "COMP2521"
+                    ],
+                    "T3": []
+                }
+            ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0
+            },
+            "unplanned": ["COMP6447"],
+            "startYear": 2020,
+            "numYears": 3,
+            "isSummerEnabled": false
+        }
     }
 }

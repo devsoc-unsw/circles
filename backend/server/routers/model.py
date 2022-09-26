@@ -154,14 +154,23 @@ class PlannerData(BaseModel):
             }
         }
 
-class LocalStorage(PlannerData):
-    programName: str
+class DegreeLocalStorage(TypedDict):
+    programCode: str
+    specs: list[str]
+    isComplete: bool
+
+class PlannerLocalStorage(TypedDict):
+    mostRecentPastTerm: MostRecentPastTerm
     unplanned: list[str]
     startYear: int
     numYears: int
     isSummerEnabled: bool
-    plan: list[list[dict[str, None | list[int | None]]]]
-    token: str
+    plan: list[dict[str, None | list[str]]]
+
+class LocalStorage(BaseModel):
+    degree: DegreeLocalStorage
+    planner: PlannerLocalStorage
+
 
 class CourseCodes(BaseModel):
     courses: list[str]

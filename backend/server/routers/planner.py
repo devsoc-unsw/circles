@@ -91,19 +91,8 @@ def save_local_storage(localStorage: LocalStorage):
     #token = localStorage.token
     token = DUMMY_TOKEN
     item = {
-        'degree': {
-            'programCode': localStorage.programCode,
-            'programName': localStorage.programName,
-            'specs': localStorage.specialisations
-        },
-        'planner': {
-            'unplanned': localStorage.unplanned,
-            'mostRecentPastTerm': localStorage.mostRecentPastTerm,
-            'plan': localStorage.plan,
-            'startYear':  localStorage.startYear,
-            'numYears': localStorage.numYears,
-            'isSummerEnabled': localStorage.isSummerEnabled
-        }
+        'degree': localStorage.degree,
+        'planner': localStorage.planner
     }
 
     data = usersDB['tokens'].find_one({'token': token})

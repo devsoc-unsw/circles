@@ -95,7 +95,6 @@ def create_dynamic_db():
                     },
                     'planner': {
                         'bsonType': 'object',
-                        'description': 'Set to default value',
                         'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'plan'],
                         'properties': {
                             "unplanned": {
@@ -116,9 +115,35 @@ def create_dynamic_db():
                             "plan": {
                                 'bsonType': 'array',
                                 'items': {
-                                    'bsonType': 'array',
-                                    'items': {
-                                        'bsonType': 'object'
+                                    'bsonType': 'object',
+                                    'properties': {
+                                        "T0": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+
+                                        "T1": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+
+                                        "T2": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+
+                                        "T3": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        }
                                     }
                                 },
                             }
