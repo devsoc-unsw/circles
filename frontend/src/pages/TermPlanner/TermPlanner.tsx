@@ -1,3 +1,8 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable no-console */
 import React, {
   Suspense, useEffect, useRef, useState,
 } from 'react';
@@ -28,15 +33,61 @@ import {
 
 const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext })));
 
+type TermsOfferedType = {
+  [course: string]: {
+    [year: string]: Term[] | null
+  }
+};
+
+type APIResult = {
+  "terms": {
+    [year: string]: Term[] | null
+  },
+  "fails": unknown[]
+};
+
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const [termsOffered, setTermsOffered] = useState<Term[]>([]);
+  const [termsOffered, setTermsOffered] = useState<TermsOfferedType>({});
+  const [currCourse, setCurrCourse] = useState<string>("");
   const [isDragging, setIsDragging] = useState(false);
 
   const dispatch = useDispatch();
+  
+  // hacky solution because it cant compare arrays well enough :c
+  const courseList = Object.keys(planner.courses);
+  const courseListStr = courseList.join("+");
+  useEffect(() => {
+    // get the terms offered
+    const getTermsOffered = async () => {
+      const years: string[] = [];
+      for (let i = 0; i < planner.numYears; i++) {
+        years.push(String(planner.startYear + i));
+      }
+      const yearsStr = years.join("+");
+
+      const offered: TermsOfferedType = {};
+      await Promise.all(courseList.map(async (course) => {
+        try {
+          const res = await axios.get<APIResult>(`/courses/termsOffered/${course}/${yearsStr}`);
+          if (res.status === 200) {
+            offered[course] = res.data.terms;
+          }
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Error at getting terms offered', e);
+        }
+      }));
+
+      setTermsOffered(offered);
+    };
+
+    getTermsOffered();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseListStr, planner.startYear, planner.numYears]);
 
   const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
@@ -71,8 +122,7 @@ const TermPlanner = () => {
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
-    const terms = planner.courses[course].termsOffered;
-    setTermsOffered(terms);
+    setCurrCourse(course);
     setIsDragging(true);
   };
 
@@ -161,6 +211,7 @@ const TermPlanner = () => {
     }
   };
 
+  let lastTermsOffered: Term[] = [];
   return (
     <PageTemplate>
       <OptionsHeader
@@ -214,12 +265,16 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
+                        
+                        // use the last known terms offered to assume future
+                        lastTermsOffered = termsOffered[currCourse]?.[iYear] ?? lastTermsOffered;
+                        const termIsOffered = lastTermsOffered.includes(term as Term);
                         return (
                           <TermBox
                             key={key}
                             name={key}
                             coursesList={year[term as Term]}
-                            termsOffered={termsOffered}
+                            termOffered={termIsOffered}
                             dragging={isDragging}
                           />
                         );

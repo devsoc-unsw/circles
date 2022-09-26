@@ -15,12 +15,12 @@ const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => 
 type Props = {
   name: string
   coursesList: string[]
-  termsOffered: string[]
+  termOffered: boolean
   dragging: boolean
 };
 
 const TermBox = ({
-  name, coursesList, termsOffered, dragging,
+  name, coursesList, termOffered, dragging,
 }: Props) => {
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
@@ -46,7 +46,7 @@ const TermBox = ({
 
   const isCompleted = !!completedTerms[name];
 
-  const isOffered = termsOffered.includes(term) && !isCompleted;
+  const isOffered = termOffered && !isCompleted;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
