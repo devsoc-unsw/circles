@@ -45,18 +45,17 @@ def tokenise_dependency(condition: str):
     """
     # print("here")
     print("^.condition: ", condition)
-    if re.match("UOC", condition):
-        print("MATHHHHHHHHHHHHHHHHHHHHHHHHHHHHhh\n\n\n\n")
+    if re.search("UOC", condition):
         return tokenise_uoc_dependency(condition)
     return condition
 
 def tokenise_uoc_dependency(condition: str):
     """
-    Tokenise the UOC dependency
+    Tokenise the UOC dependency.
+    Assumes that the caller has already verified that the given condition is UOC only.
     """
-    num_uoc = re.match("(\d+)", condition)
-    print("uoc needed: ", num_uoc)
-    return condition
+    num_uoc = re.search("(\d+)", condition)
+    return ["UOC", num_uoc.group()]
 
 def tokenise_dependant(condition: str):
     return condition
