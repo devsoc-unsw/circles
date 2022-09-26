@@ -18,7 +18,7 @@ PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
 # FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
-def run_program_token_process():
+def pre_process():
     """
     Start Here:
     """
@@ -33,13 +33,13 @@ def run_program_token_process():
 
     # Only care for programs with relevant coditions
     pre_pre_processed_shortlist = shortlist_pre_proc(pre_processed)
-    pre_processed_shortlist = [
-        pre_process_program_requirements(cond)
-        for conds in pre_pre_processed_shortlist.values()
+    pre_processed_shortlist = {
+        program: pre_process_program_requirements(cond)
+        for program, conds in pre_pre_processed_shortlist.items()
         for cond in conds
-    ]
+    }
     print(f"Found a total of {len(pre_pre_processed_shortlist)} relevant programs")
-    write_data(pre_pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
+    write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
     return pre_processed_shortlist
 
 
@@ -153,7 +153,6 @@ def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
             # print("above is for ", condition.get("title", ""))
     return pre_processes_conditions
 
-
 if __name__ == "__main__":
-    run_program_token_process()
+    pre_process()
 
