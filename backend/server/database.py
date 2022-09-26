@@ -5,14 +5,12 @@ initialisation.
 NOTE: The helper functions must be run from the backend directory due to their paths
 """
 
-from contextlib import suppress
 import json
 import os
 from sys import exit
-from wsgiref.validate import validator
 
 from data.config import ARCHIVED_YEARS
-from pymongo import MongoClient, errors
+from pymongo import MongoClient
 
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
@@ -95,7 +93,7 @@ def create_dynamic_db():
                     },
                     'planner': {
                         'bsonType': 'object',
-                        'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'plan'],
+                        'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'years'],
                         'properties': {
                             "unplanned": {
                                 'bsonType': 'array',
@@ -112,7 +110,7 @@ def create_dynamic_db():
                             "isSummerEnabled": {
                                 'bsonType': 'bool'
                             },
-                            "plan": {
+                            "years": {
                                 'bsonType': 'array',
                                 'items': {
                                     'bsonType': 'object',
