@@ -16,7 +16,6 @@ from data.utility.data_helpers import read_data, write_data
 
 PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
-# FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
 def pre_process():
     """
