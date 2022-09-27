@@ -68,6 +68,40 @@ class Condition(ABC):
         return self.__str__()
 
 
+class MaturityCondition(Condition):
+    def __init__(self, program: str, dependency: Condition, dependent: Category):
+        self.program = program
+        self.dependency = dependency
+        self.dependent = dependent
+
+    def match_dependant(self, course: str) -> bool:
+        """
+        Check if the given course is a match for the category defined in the dependant
+        """
+        return self.dependent.match_definition(course)
+
+    def dependency_met(self, user: User) -> bool:
+        return self.dependency.validate(user)[0]
+
+    def validate(
+            self, user: User, course: Optional[str]=None
+        ) -> tuple[bool, list[str]]:
+        if course is None:
+            return self.dependency_met(user), []
+        raise NotImplementedError
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
+        """
+        Will a course be beneficial to advancing this condition?
+        More specifically, can the course be used to meet the dependency?
+        """
+        return self.dependency.beneficial(user, course)
+
+
+    def is_path_to(self, course: str) -> bool:
+        raise NotImplementedError
+
+
 class CourseCondition(Condition):
     """
     Condition that the student has completed this course before
@@ -87,27 +121,6 @@ class CourseCondition(Condition):
         return json.dumps({
             'id': self.course
         })
-
-class MaturityCondition(Condition):
-    """
-    Handles Maturity Requirement Conditions. This is is a particularly
-    special case as it attaches to the program itself and is not neccessarily
-    a requirement of a course.
-    """
-    def __init__(self, program: str, dependent: Condition, dependency: Condition):
-        self.program = program
-        self.dependent = dependent
-        self.dependency = dependency
-
-    def validate(self, user: User) -> tuple[bool, List[str]]:
-        """ Validate if user has passed a maturity requirement """
-        raise NotImplementedError
-        return True, []
-
-    def has_completed_dependency(self, user: User):
-        """ Checks if the user has completed the dependency """
-        return self.dependency.validate(user)
-
 
 class CoreqCoursesCondition(Condition):
     """ Condition that the student has completed the course/s in or before the current term """
@@ -319,24 +332,6 @@ class CoresCondition(Condition):
         return json.dumps({
             'cores': None,
             'category': str(self.category)
-        })
-
-
-class ProgramCondition(Condition):
-    """ Handles Program conditions such as 3707 """
-
-    def __init__(self, program: str):
-        self.program = program
-
-    def is_path_to(self, course: str) -> bool:
-        return False
-
-    def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.in_program(self.program), []
-
-    def __str__(self) -> str:
-        return json.dumps({
-            'program': self.program,
         })
 
 
