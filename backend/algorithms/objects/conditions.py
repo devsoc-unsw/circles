@@ -94,10 +94,10 @@ class MaturityCondition(Condition):
         Can not be done iff there is a match on dependant and dependency is not met
         """
         if course is None:
-            return True
-        if self.dependency_met(user):
-            return True
-        return self.match_dependant(course)
+            return True, []
+        if self.match_dependant(course):
+            return self.dependency.validate(user)
+        return True, []
 
     def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         """

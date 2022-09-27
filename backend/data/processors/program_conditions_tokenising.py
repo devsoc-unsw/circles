@@ -77,19 +77,19 @@ def tokenise_core_dependency(condition: str):
     The given example will be outputted as:
         ["L1", "ECON", "CORES"]
     """
-    tokens: List[str] = condition.split(" ")
+    tokens_raw: List[str] = condition.split(" ")
     # ['Students', 'must', 'have', 'completed', 'all', 'Level', '1', 'ECON',
             # 'courses', 'prescribed', 'in', 'the', 'degree']
 
     # Keep only tokens with meaning
-    tokens: List[str] = filter(
+    tokens_filtered: List[str] = list(filter(
             lambda tok: re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", tok),
-            tokens
-        )
-    tokens: List[str] = compress_level_tokens(list(tokens))
-    tokens: List[str] = compress_cores_tokens(tokens)
+            tokens_raw
+        ))
+    tokens_post_level: List[str] = compress_level_tokens(tokens_filtered)
+    tokens_post_core: List[str] = compress_cores_tokens(tokens_post_level)
 
-    return tokens
+    return tokens_post_core
     # raise NotImplementedError
 
 def compress_cores_tokens(tokens: List[str]) -> List[str]:
