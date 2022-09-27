@@ -17,16 +17,19 @@ FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 def tokenise_program_conditions():
     """
     """
-    pre_processed_conditions: Dict[str, List[Dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
+    pre_processed_conditions_data: Dict[str, List[Dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
 
     tokenised_conditions: Dict[str, List[Dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
 
     # TODO: for loops cringe
-    for program, pre_processed_conditions in pre_processed_conditions.items():
-        cond_list = []
-        for pre_processed_conditions in pre_processed_conditions:
-            cond_list.append(tokenise_maturity_requirement(pre_processed_conditions))
-        tokenised_conditions[program] = cond_list
+
+    tokenised_conditions: Dict[str, List[Dict[str, List[str]]]] = {
+        program: [
+            tokenise_maturity_requirement(pre_processed_condition)
+            for pre_processed_condition in pre_processed_conditions_list
+        ]
+        for program, pre_processed_conditions_list in pre_processed_conditions_data.items()
+    }
     write_data(tokenised_conditions, FINAL_TOKENS_PATH)
 
 def tokenise_maturity_requirement(condition: Dict[str, str]):
@@ -83,10 +86,10 @@ def tokenise_core_dependency(condition: str):
             # 'courses', 'prescribed', 'in', 'the', 'degree']
 
     # Keep only tokens with meaning
-    tokens_filtered: List[str] = list(filter(
-            lambda tok: re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", tok),
-            tokens_raw
-        ))
+    tokens_filtered: List[str] = [
+        token for token in tokens_filtered
+        if re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", token)
+    ]
     tokens_post_level: List[str] = compress_level_tokens(tokens_filtered)
     tokens_post_core: List[str] = compress_cores_tokens(tokens_post_level)
 
