@@ -5,11 +5,11 @@ Assume everything is a maturity condition for now.
 - Tokenise the pre-processed data.
 """
 
+from contextlib import suppress
 import re
 from typing import Dict, List
-from data.processors.conditions_preprocessing import preprocess_condition
 from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
-from data.utility.data_helpers import read_data
+from data.utility.data_helpers import read_data, write_data
 
 FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
@@ -27,6 +27,7 @@ def tokenise_program_conditions():
         for pre_processed_conditions in pre_processed_conditions:
             cond_list.append(tokenise_maturity_requirement(pre_processed_conditions))
         tokenised_conditions[program] = cond_list
+    write_data(tokenised_conditions, FINAL_TOKENS_PATH)
 
 def tokenise_maturity_requirement(condition: Dict[str, str]):
     return {
@@ -34,7 +35,7 @@ def tokenise_maturity_requirement(condition: Dict[str, str]):
         "dependant": tokenise_dependant(condition["dependant"]),
     }
 
-def tokenise_dependency(condition: str):
+def tokenise_dependency(condition: str) -> List[str]:
     """
     This is literally just a condition. At time of writing, it follows one of the following form
         - Must have completed \d UOC
@@ -43,13 +44,13 @@ def tokenise_dependency(condition: str):
 
     Assumption (True as of 2023): There are no composite dependencies
     """
-    # print("here")
-    print("^.condition: ", condition)
     if re.search("UOC", condition):
         return tokenise_uoc_dependency(condition)
-    if re.search("(level|prescribed|core|cores)"):
+    if re.search("(level|prescribed|core|cores)", condition):
         return tokenise_core_dependency(condition)
-    return condition
+    # Ideally shouldn't get to this point since caller should verify
+    # only parseable strings passed in; TODO: raise Error
+    return [condition]
 
 def tokenise_uoc_dependency(condition: str) -> List[str]:
     """
@@ -76,10 +77,82 @@ def tokenise_core_dependency(condition: str):
     The given example will be outputted as:
         ["L1", "ECON", "CORES"]
     """
-    pass
+    tokens: List[str] = condition.split(" ")
+    # ['Students', 'must', 'have', 'completed', 'all', 'Level', '1', 'ECON',
+            # 'courses', 'prescribed', 'in', 'the', 'degree']
+
+    # Keep only tokens with meaning
+    tokens: List[str] = filter(
+            lambda tok: re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", tok),
+            tokens
+        )
+    tokens: List[str] = compress_level_tokens(list(tokens))
+    tokens: List[str] = compress_cores_tokens(tokens)
+
+    return tokens
+    # raise NotImplementedError
+
+def compress_cores_tokens(tokens: List[str]) -> List[str]:
+    """
+    Take in a list of tokens [..., "prescribed", ...]
+    and simplify to [..., "CORES", ...]
+    """
+    tokens = iter(tokens)
+    tokens_out: List[str] = []
+
+    with suppress(StopIteration):
+        while (tok := next(tokens), None):
+            if re.search("prescribed", tok):
+                tokens_out.append("CORES")
+            else:
+                tokens_out.append(tok)
+    return list(tokens_out)
+
+def compress_level_tokens(tokens: List[str]) -> List[str]:
+    """
+    Take in a list of tokens [..., "Level", "\d", ...]
+    and simplify to [..., "L\d", ...]
+    """
+    # Want this as iterable rather than just a for-loop over the tokens
+    # to not have to deal with iteration invalidation or, cringe index stuff
+    # for arbitrary consumption of future tokens
+    tokens = iter(tokens)
+    tokens_out: List[str] = []
+
+    with suppress(StopIteration):
+        while (tok := next(tokens), None):
+            if re.search("[Ll]evel", tok):
+                # Valid assumption (as of 2023) that next *will* be a digit
+                # TODO: Make FutureProof with error handling
+                level_num = next(tokens)
+                tokens_out.append("L" + level_num)
+            else:
+                tokens_out.append(tok)
+    return list(tokens_out)
 
 def tokenise_dependant(condition: str):
-    return condition
+    """
+    Tokenise the dependant condition.
+    These come in *usually* as a category.
+    Examples:
+        - "taking any level 2 courses"
+        - "taking any level 2 ECON course"
+    Output:
+        - ["L2"]
+        - ["L2", "ECON"]
+    As of 2023 Handbook, no other example types exist.
+    Will assume only Level and Faculty Category types
+    """
+    tokens: List[str] = condition.split(" ")
+    # Keep only tokens with meaning
+    tokens: List[str] = list(filter(
+            # Groups (left -> right): level, FaculyCode, Number
+            lambda tok: re.search("([Ll]evel)|(^[A-Za-z]{4}$)|(\d+)", tok),
+            tokens
+        ))
+    tokens: List[str] = compress_level_tokens(tokens)
+    tokens: List[str] = compress_cores_tokens(tokens)
+    return tokens
 
 
 if __name__ == "__main__":
