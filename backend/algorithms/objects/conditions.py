@@ -86,9 +86,15 @@ class MaturityCondition(Condition):
     def validate(
             self, user: User, course: Optional[str]=None
         ) -> tuple[bool, list[str]]:
+        """
+        Validate whether a user can do the given course.
+        Can not be done iff there is a match on dependant and dependency is not met
+        """
         if course is None:
-            return self.dependency_met(user), []
-        raise NotImplementedError
+            return True
+        if self.dependency_met(user):
+            return True
+        return self.match_dependant(course)
 
     def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         """
