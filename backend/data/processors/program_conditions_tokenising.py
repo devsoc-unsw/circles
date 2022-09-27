@@ -7,7 +7,7 @@ Assume everything is a maturity condition for now.
 
 from contextlib import suppress
 import re
-from typing import Dict, List
+from typing import Dict, Iterator, List, Optional
 from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
 from data.utility.data_helpers import read_data, write_data
 
@@ -60,8 +60,9 @@ def tokenise_uoc_dependency(condition: str) -> List[str]:
     Example input: "Must have completed 24 UOC"
 
     """
-    num_uoc = re.search("(\d+)", condition)
-    return ["UOC", num_uoc.group()]
+    num_uoc: Optional[re.Match[str]] = re.search("(\d+)", condition)
+
+    return ["UOC", num_uoc.group()] if num_uoc else ["UOC", "0"]
 
 def tokenise_core_dependency(condition: str):
     """
@@ -97,11 +98,11 @@ def compress_cores_tokens(tokens: List[str]) -> List[str]:
     Take in a list of tokens [..., "prescribed", ...]
     and simplify to [..., "CORES", ...]
     """
-    tokens = iter(tokens)
+    tokens_iter: Iterator[str] = iter(tokens)
     tokens_out: List[str] = []
 
     with suppress(StopIteration):
-        while (tok := next(tokens), None):
+        while (tok := next(tokens_iter), None):
             if re.search("prescribed", tok):
                 tokens_out.append("CORES")
             else:
@@ -116,15 +117,15 @@ def compress_level_tokens(tokens: List[str]) -> List[str]:
     # Want this as iterable rather than just a for-loop over the tokens
     # to not have to deal with iteration invalidation or, cringe index stuff
     # for arbitrary consumption of future tokens
-    tokens = iter(tokens)
+    tokens_iter: Iterator[str] = iter(tokens)
     tokens_out: List[str] = []
 
     with suppress(StopIteration):
-        while (tok := next(tokens), None):
+        while (tok := next(tokens_iter), None):
             if re.search("[Ll]evel", tok):
                 # Valid assumption (as of 2023) that next *will* be a digit
                 # TODO: Make FutureProof with error handling
-                level_num = next(tokens)
+                level_num = next(tokens_iter)
                 tokens_out.append("L" + level_num)
             else:
                 tokens_out.append(tok)
@@ -145,13 +146,13 @@ def tokenise_dependant(condition: str):
     """
     tokens: List[str] = condition.split(" ")
     # Keep only tokens with meaning
-    tokens: List[str] = list(filter(
+    tokens = list(filter(
             # Groups (left -> right): level, FaculyCode, Number
             lambda tok: re.search("([Ll]evel)|(^[A-Za-z]{4}$)|(\d+)", tok),
             tokens
         ))
-    tokens: List[str] = compress_level_tokens(tokens)
-    tokens: List[str] = compress_cores_tokens(tokens)
+    tokens = compress_level_tokens(tokens)
+    tokens = compress_cores_tokens(tokens)
     return tokens
 
 

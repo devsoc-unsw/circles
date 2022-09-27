@@ -42,7 +42,7 @@ def pre_process():
     return pre_processed_shortlist
 
 
-def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict]:
+def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict[str, str]]:
     """
     Do epic pre-proc (i only want to take in the relevant ones)
     If you feed me a condition with no notes, i will literally die
@@ -50,19 +50,18 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
     Currently assumes only 'maturity' conditions exist. To add support for more
     need to actually check what the condition type is first
     """
-    notes: str = condition_raw.get("notes", "")
+    notes_raw: str = condition_raw.get("notes", "")
     # Assumption: Only one condition per sentence. No misc. `.`
     notes: List[str] = [
-        note.strip() for note in notes.split(".")
+        note.strip() for note in notes_raw.split(".")
         if len(note) > 0
     ]
-    print("NOTES:", notes)
     return [
         pre_process_maturity_condition(note)
         for note in notes
     ]
 
-def pre_process_maturity_condition(string: str) -> List[str]:
+def pre_process_maturity_condition(string: str) -> Dict[str, str]:
     """
     Pre-processes a maturity condition.
     These conditions are constructed of two sections
@@ -125,12 +124,6 @@ def is_relevant_string(string: str) -> bool:
     #     print("RELEVANT:", string)
     return relevant
 
-def tokenise_program_requirements(program_info: Dict) -> Dict:
-    """
-    Recieves the pre-processed program info and tokenises the conditions.
-    """
-    program_info
-    return []
 
 def shortlist_pre_proc(full_condition_list):
     return {
