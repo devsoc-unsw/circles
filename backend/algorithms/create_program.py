@@ -4,7 +4,7 @@ Converts from the tokens to actual conditions that can be made.
 """
 
 from typing import Dict, List
-from algorithms.objects.conditions import Condition, ProgramCondition
+from algorithms.objects.conditions import Condition
 from algorithms.objects.helper import read_data
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
@@ -21,7 +21,8 @@ def create_all_program_conditions():
 
     raise NotImplementedError
 
-def create_program_condition() -> ProgramCondition:
+# TODO: Make this use a real condition
+def create_program_condition() -> Condition:
     raise NotImplementedError
 
 if __name__ == "__main__":

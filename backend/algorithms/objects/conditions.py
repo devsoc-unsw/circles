@@ -105,7 +105,6 @@ class MaturityCondition(Condition):
 
 
     def is_path_to(self, course: str) -> bool:
-        # Dont know how much sense this makes in terms of the course semantic
         return self.dependency.is_path_to(course)
 
     def __str__(self) -> str:
@@ -344,6 +343,23 @@ class CoresCondition(Condition):
         return json.dumps({
             'cores': None,
             'category': str(self.category)
+        })
+
+class ProgramCondition(Condition):
+    """ Handles Program conditions such as 3707 """
+
+    def __init__(self, program: str):
+        self.program = program
+
+    def is_path_to(self, course: str) -> bool:
+        return False
+
+    def validate(self, user: User) -> tuple[bool, list[str]]:
+        return user.in_program(self.program), []
+
+    def __str__(self) -> str:
+        return json.dumps({
+            'program': self.program,
         })
 
 
