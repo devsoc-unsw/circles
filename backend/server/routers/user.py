@@ -1,6 +1,7 @@
+from os import getenv
 from typing import cast
 from fastapi import APIRouter, HTTPException
-from server.database import usersDB
+from server.database import create_dynamic_db, usersDB
 from bson.objectid import ObjectId
 from server.routers.model import LocalStorage, Storage
 import pydantic
@@ -11,6 +12,18 @@ router = APIRouter(
     prefix="/user",
     tags=["user"],
 )
+
+# DANGEROUS!!!!!!!
+# NEVER ALLOW TO RUN IN PROD
+# PLEASE DONT BE STUPID
+if getenv("DANGEROUS_ALLOW_DELETE_DB_REQUEST") == "true":
+    @router.post("/drop")
+    def drop_users():
+        """drop users in database. Used before every test is run."""
+        usersDB.drop_collection('users')
+        usersDB.drop_collection('tokens')
+        create_dynamic_db()
+
 # keep this private
 def set_user(token: str, item: Storage, overwrite: bool = False):
     data = usersDB['tokens'].find_one({'token': token})
@@ -33,8 +46,6 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
         'planner': localStorage.planner
     }
     set_user(token, cast(Storage, item), True) # TODO: turn to false
-
-    
 
 @router.get("/data/{token}")
 def get_user(token: str) -> Storage:

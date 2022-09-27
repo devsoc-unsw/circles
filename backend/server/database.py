@@ -198,7 +198,7 @@ def overwrite_all():
     overwrite_archives()
 
 def optionally_create_new_data():
-    # TODO: DELETE NEXT LINE IN PROD
+    # TODO: DELETE NEXT LINES IN PROD
     usersDB.drop_collection('users')
     usersDB.drop_collection('tokens')
     create_dynamic_db()

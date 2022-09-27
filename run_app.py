@@ -51,7 +51,8 @@ def get_backend_env():
     username = os.getenv("MONGODB_USERNAME")
     password = os.getenv("MONGODB_PASSWORD")
     python = os.getenv("PYTHON_VERSION") or "python"
-    return (username, password, python)
+    allow_delete =  os.getenv("DANGEROUS_ALLOW_DELETE_DB_REQUEST") or "false"
+    return (username, password, python, allow_delete)
 
 def get_frontend_env():
     """
@@ -74,12 +75,12 @@ def main():
     )
     sys.stdout = LogPipe(logging.INFO)
     sys.stderr = LogPipe(logging.ERROR)
-    username, password, python_ver = get_backend_env()
+    username, password, python_ver, allow_delete = get_backend_env()
     base_url = get_frontend_env()
     os.system('docker compose run --rm init-mongo')
     try:
         Popen(
-            f'MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec {python_ver} runserver.py',
+            f'DANGEROUS_ALLOW_DELETE_DB_REQUEST={allow_delete} MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec {python_ver} runserver.py',
             stdout=sys.stdout,
             stderr=sys.stderr,
             shell=True,

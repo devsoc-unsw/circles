@@ -16,6 +16,11 @@ In `backend.env`, add the environment variables:
 - `MONGODB_PASSWORD=...`
 - `MONGODB_SERVICE_HOSTNAME=mongodb`
 
+FOR DEV ONLY, you can also add:
+- `DANGEROUS_ALLOW_DELETE_DB_REQUEST=true`
+
+This is to allow for the database to be cleared over HTTP (like we do during tests)
+
 FOR PRODUCTION, also add:
 - `FORWARDED_ALLOW_IPS=*`
 
