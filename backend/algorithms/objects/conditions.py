@@ -105,7 +105,13 @@ class MaturityCondition(Condition):
 
 
     def is_path_to(self, course: str) -> bool:
-        raise NotImplementedError
+        # Dont know how much sense this makes in terms of the course semantic
+        return self.dependency.is_path_to(course)
+
+    def __str__(self) -> str:
+        return (
+            f"MaturityCondition({self.program}): Dependency: {self.dependency}, self.dependent: {self.dependent}"
+        )
 
 
 class CourseCondition(Condition):
