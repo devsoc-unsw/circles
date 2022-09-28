@@ -1,7 +1,6 @@
-from os import getenv
 from typing import cast
 from fastapi import APIRouter, HTTPException
-from server.database import create_dynamic_db, usersDB
+from server.database import usersDB
 from bson.objectid import ObjectId
 from server.routers.model import LocalStorage, Storage
 import pydantic
