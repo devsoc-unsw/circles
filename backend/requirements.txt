@@ -43,3 +43,4 @@ uvicorn==0.18.3
 waiting==1.4.1
 zipp==3.8.1
 pyjwt==2.4.0
+docker==6.0.0

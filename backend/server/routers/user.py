@@ -13,17 +13,6 @@ router = APIRouter(
     tags=["user"],
 )
 
-# DANGEROUS!!!!!!!
-# NEVER ALLOW TO RUN IN PROD
-# PLEASE DONT BE STUPID
-if getenv("DANGEROUS_ALLOW_DELETE_DB_REQUEST") == "true":
-    @router.post("/drop")
-    def drop_users():
-        """drop users in database. Used before every test is run."""
-        usersDB.drop_collection('users')
-        usersDB.drop_collection('tokens')
-        create_dynamic_db()
-
 # keep this private
 def set_user(token: str, item: Storage, overwrite: bool = False):
     data = usersDB['tokens'].find_one({'token': token})

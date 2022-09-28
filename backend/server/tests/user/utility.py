@@ -1,6 +1,19 @@
-import requests
+import os
+import docker # type: ignore
+from dotenv import load_dotenv
+load_dotenv("../env/backend.env")
+
+docker_client = docker.from_env()
+# check if you are running in docker
+try:
+    docker_client.containers.get("backend")
+except docker.errors.NotFound:
+    os.environ["MONGODB_SERVICE_HOSTNAME"] = "localhost"
+
+from server.database import usersDB, create_dynamic_db
 
 def clear():
-    x = requests.post('http://127.0.0.1:8000/user/drop')
-    if x.status_code == 404:
-        assert False, "ERROR: You need to set the DANGEROUS_ALLOW_DELETE_DB_REQUEST variable to run tests. Never run this test suite in prod."
+    """drop users in database. Used before every test is run."""
+    usersDB.drop_collection('users')
+    usersDB.drop_collection('tokens')
+    create_dynamic_db()

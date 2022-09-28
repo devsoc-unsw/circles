@@ -2,8 +2,6 @@ import json
 import requests
 from server.config import DUMMY_TOKEN
 from server.tests.user.utility import clear
-
-
 PATH = "server/example_input/example_local_storage_data.json"
 
 with open(PATH, encoding="utf8") as f:
