@@ -16,12 +16,12 @@ FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
 def tokenise_program_conditions():
     """
+    Pipeline Starts Here:
+        - Read in the pre-processed data
+        - Tokenise the data
+        - Write the tokenised data to a `.json` file
     """
     pre_processed_conditions_data: Dict[str, List[Dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
-
-    tokenised_conditions: Dict[str, List[Dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
-
-    # TODO: for loops cringe
 
     tokenised_conditions: Dict[str, List[Dict[str, List[str]]]] = {
         program: [
@@ -82,19 +82,18 @@ def tokenise_core_dependency(condition: str):
         ["L1", "ECON", "CORES"]
     """
     tokens_raw: List[str] = condition.split(" ")
-    # ['Students', 'must', 'have', 'completed', 'all', 'Level', '1', 'ECON',
-            # 'courses', 'prescribed', 'in', 'the', 'degree']
 
     # Keep only tokens with meaning
     tokens_filtered: List[str] = [
-        token for token in tokens_filtered
+        token for token in tokens_raw
         if re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", token)
     ]
+
+    # Clean tokens into a regular form readable by processors
     tokens_post_level: List[str] = compress_level_tokens(tokens_filtered)
     tokens_post_core: List[str] = compress_cores_tokens(tokens_post_level)
 
     return tokens_post_core
-    # raise NotImplementedError
 
 def compress_cores_tokens(tokens: List[str]) -> List[str]:
     """
@@ -150,10 +149,11 @@ def tokenise_dependant(condition: str):
     tokens: List[str] = condition.split(" ")
     # Keep only tokens with meaning
     tokens = list(filter(
-            # Groups (left -> right): level, FaculyCode, Number
+            # Groups (left -> right): level, FacultyCode, Number
             lambda tok: re.search("([Ll]evel)|(^[A-Za-z]{4}$)|(\d+)", tok),
             tokens
         ))
+    # Clean tokens into a regular form readable by processors
     tokens = compress_level_tokens(tokens)
     tokens = compress_cores_tokens(tokens)
     return tokens
@@ -161,5 +161,4 @@ def tokenise_dependant(condition: str):
 
 if __name__ == "__main__":
     tokenise_program_conditions()
-
 

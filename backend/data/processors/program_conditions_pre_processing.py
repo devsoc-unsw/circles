@@ -19,7 +19,11 @@ PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
 
 def pre_process():
     """
-    Start Here:
+    Pipeline starts here:
+        - Read in the cleaned programs data
+        - Filter out conditions that are not relevant to the pre_process
+        - Pre-process the conditions
+        - Write the pre-processed conditions to `.json` file
     """
     # Raw data of programs
     program_info = read_data(PROGRAMS_PROCESSED_PATH)
@@ -37,7 +41,6 @@ def pre_process():
         for program, conds in pre_pre_processed_shortlist.items()
         for cond in conds
     }
-    print(f"Found a total of {len(pre_pre_processed_shortlist)} relevant programs")
     write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
     return pre_processed_shortlist
 
@@ -70,13 +73,9 @@ def pre_process_maturity_condition(string: str) -> Dict[str, str]:
         - "dependant": This is the condition that is restricted and cannot be
                         fulfilled before the dependency is satisfied.
     """
-    print("\n"*2)
-    # print("am dealing with maturity:", string)
     components: List[str] = string.split("before")
-    print("components:", components)
     dependency: str = components[0].strip()
     dependant: str = components[1].strip()
-    print("reduction:::::", dependency, "---------", dependant)
     return {
         # "dependency": "", "dependant": "",
         "dependency": dependency,
@@ -106,8 +105,6 @@ def pre_process_cond(condition: Dict):
     if not is_relevant_string(condition.get("notes", "")) and not is_relevant_string(condition.get("title", "")):
         return None
     return condition
-    # Epic regex happens here
-    # TODO: Remove all cringe stuff -- wait for conditions
 
 def is_relevant_string(string: str) -> bool:
     """
@@ -120,12 +117,15 @@ def is_relevant_string(string: str) -> bool:
     relevant: bool = any(
         [maturity_match(string)]
     )
-    # if relevant:
-    #     print("RELEVANT:", string)
     return relevant
 
 
 def shortlist_pre_proc(full_condition_list):
+    """
+    Shortlist the pre-processed conditions so that only non-empty
+    ones are passed through to the next stage.
+    Prevents future processors from needing to do null / emptiness checks.
+    """
     return {
         course_code: relevant_str_conditions
         for course_code, relevant_str_conditions in full_condition_list.items()
@@ -133,6 +133,10 @@ def shortlist_pre_proc(full_condition_list):
     }
 
 def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
+    """
+    Filters out conditions that are not relevant to the pre_process
+    pipeline for the given process.
+    """
     non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
     if not len(non_spec_data):
         return []
@@ -142,7 +146,6 @@ def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
         pre_procced = pre_process_cond(condition)
         if pre_procced is not None:
             pre_processes_conditions.append(pre_procced)
-            # print("above is for ", condition.get("title", ""))
     return pre_processes_conditions
 
 if __name__ == "__main__":
