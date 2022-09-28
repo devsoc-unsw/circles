@@ -1,0 +1,256 @@
+{
+    "3134": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3462": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3502": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3523": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3529": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3543": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "3554": [
+        {
+            "dependency": "Students must have completed 24 UOC",
+            "dependant": "taking any Level 2 course"
+        },
+        {
+            "dependency": "Students must have completed 72 UOC",
+            "dependant": "taking any Level 3 course"
+        },
+        {
+            "dependency": "Students must have completed 120 UOC",
+            "dependant": "taking any Level 4 course"
+        }
+    ],
+    "3558": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3563": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "3564": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "3566": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "3573": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3574": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "3584": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3587": [
+        {
+            "dependency": "Students must have completed 24 UOC",
+            "dependant": "enrolling in Level 2 courses"
+        },
+        {
+            "dependency": "Students must have completed 48 UOC",
+            "dependant": "enrolling in Level 3 courses"
+        }
+    ],
+    "3593": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3597": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3598": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3599": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3673": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "3734": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3764": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3784": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3835": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "3964": [
+        {
+            "dependency": "Students must have completed 48 UOC",
+            "dependant": "taking any Level 3 courses"
+        }
+    ],
+    "3980": [
+        {
+            "dependency": "Students must have completed 48 UOC",
+            "dependant": "taking any General Education course"
+        }
+    ],
+    "4058": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ],
+    "4733": [
+        {
+            "dependency": "Student must have completed 24 UOC",
+            "dependant": "taking any level 2 courses"
+        },
+        {
+            "dependency": "Student must have completed 48 UOC",
+            "dependant": "taking any level 3 courses"
+        }
+    ],
+    "4744": [
+        {
+            "dependency": "Students must have completed all Level 1 ECON courses prescribed in the degree",
+            "dependant": "taking any Level 3 ECON courses"
+        }
+    ]
+}
