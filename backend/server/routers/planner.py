@@ -4,13 +4,8 @@ route for planner algorithms
 from fastapi import APIRouter
 from algorithms.objects.user import User
 from server.routers.courses import get_course
-from server.routers.model import ValidCoursesState, PlannerData, LocalStorage, CONDITIONS, CACHED_HANDBOOK_NOTE
-from server.database import usersDB
-from server.config import DUMMY_TOKEN
-from bson.objectid import ObjectId
-import pydantic
+from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
 from server.routers.utility import get_core_courses
-pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
 
 
 def fix_planner_data(plannerData: PlannerData):
@@ -84,21 +79,3 @@ def validate_term_planner(plannerData: PlannerData):
         user.year += 1
 
     return {"courses_state": coursesState}
-
-@router.post("/saveLocalStorage/")
-def save_local_storage(localStorage: LocalStorage):
-    #TODO: replace dummy token 
-    #token = localStorage.token
-    token = DUMMY_TOKEN
-    item = {
-        'degree': localStorage.degree,
-        'planner': localStorage.planner
-    }
-
-    data = usersDB['tokens'].find_one({'token': token})
-    if data is not None:
-        objectID = data['objectId']
-        usersDB['users'].update_one({'_id': ObjectId(objectID)}, {'$set': item})
-    else:
-        objectID = usersDB['users'].insert_one(item).inserted_id
-        usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})

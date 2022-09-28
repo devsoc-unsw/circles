@@ -3,7 +3,6 @@ General purpose utility functions for the server, that do not fit
 specifically in any one function
 """
 
-
 from typing import Any, Callable, List
 
 def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs) -> Any:
@@ -31,4 +30,3 @@ def get_core_courses(program: str, specialisations: list[str]):
             for spec_name, spec in req["structure"].items()
             if "Major" in spec_name or "Honours" in spec_name)
          , [])
-

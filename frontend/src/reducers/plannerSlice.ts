@@ -7,6 +7,7 @@ import {
 import { getTermsList } from 'pages/TermPlanner/utils';
 
 // set up hidden object
+// TODO: this hidden stuff needs to be put into its own slice or settingsSlice
 const generateHiddenInit = (startYear: number, numYears: number) => {
   const hiddenInit: Record<string, boolean> = {};
   for (let i = -1; i < numYears - 1; i++) {

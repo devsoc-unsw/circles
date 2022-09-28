@@ -165,7 +165,12 @@ class PlannerLocalStorage(TypedDict):
     startYear: int
     numYears: int
     isSummerEnabled: bool
-    plan: list[dict[str, None | list[str]]]
+    years: list[dict[str, None | list[str]]]
+
+class Storage(TypedDict):
+    degree: DegreeLocalStorage
+    planner: PlannerLocalStorage
+    
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage

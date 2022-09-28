@@ -16,7 +16,6 @@ if __name__ == "__main__":
         action="store_true",
         help="Inclusion of option will overwrite the database",
     )
-
     try:
         args = parser.parse_args()
     except argparse.ArgumentError:
