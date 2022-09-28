@@ -126,7 +126,7 @@ class LevelCourseCategory(CompositeCategory):
 
 
 class SchoolCategory(Category):
-    '''Category for courses belonging to a school (e.g. S Mechanical)'''
+    """Category for courses belonging to a school (e.g. S Mechanical)"""
 
     def __init__(self, school):
         self.school = school  # The code for the school (S Mechanical)
