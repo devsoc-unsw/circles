@@ -5,10 +5,10 @@ Converts from the tokens to actual conditions that can be made.
 
 import re
 from typing import Dict, List
-from algorithms.objects.categories import Category, CompositeCategory, CourseCategory, LevelCategory
+from algorithms.objects.categories import Category, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data
-from algorithms.objects.program_restrictions import ProgramRestriction
+from algorithms.objects.program_restrictions import MaturityRestriction, ProgramRestriction
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
 
@@ -47,7 +47,8 @@ def create_maturity_restriction(tokens: Dict[str, List[str]]) -> ProgramRestrict
     dependency_tokens: List[str] = tokens.get("dependency", [])
     dependent_tokens: List[str] = tokens.get("dependent", [])
     dependency: Condition = create_dependency_condition(dependency_tokens)
-    dependent: Category = create_dependent_condition(dependency_tokens)
+    dependent: Category = create_dependent_condition(dependent_tokens)
+    return MaturityRestriction(dependency, dependent)
 
 def create_dependent_condition(tokens: List[str]) -> Category:
     """
@@ -57,11 +58,6 @@ def create_dependent_condition(tokens: List[str]) -> Category:
         "UOC": Will immediately be followed by a digit.
         "L\d", "CODE", "CORES": Wants
     """
-    # Need a while loop. Cannot be done with a for loop because might want
-    # negative lookahead and, to consume multiple tokens at once. Doing this
-    # with iterators makes it incredibly complex to have lookahead that doesnt
-    # consume the token
-
     # Maybe don't need a loop. Be smart in pre-processing so that all conds
     # are split up beforehand into something neat
 
@@ -100,11 +96,8 @@ def create_dependent_condition(tokens: List[str]) -> Category:
         index += 1
         # CoreCondition w/ Level and Faculty;
         # Don't read third token because it's just `"CORES"`; Token2 is faculty
-        faculty_category = CourseCategory(second_token)
-
-        composite_category = CompositeCategory()
-        composite_category.add_category(level_category)
-        composite_category.add_category(faculty_category)
+        faculty = second_token
+        composite_category = LevelCourseCategory(level, faculty)
 
         core_condition = CoresCondition()
         core_condition.set_category(composite_category)
@@ -115,8 +108,19 @@ def create_dependent_condition(tokens: List[str]) -> Category:
 def create_dependency_condition(tokens: List[str]) -> Condition:
     """
     Creates a dependency condition from the tokens.
+
+    Need to worry about:
+        - "L\d"
+        - "L\d", Faculty
     """
-    # Do NOT add a loop here.
+    level = int(tokens[0][1:])
+    level_condition = LevelCategory(level)
+
+    if len(tokens) == 1:
+        return level_condition
+
+    faculty = tokens[1]
+    return LevelCourseCategory(level, faculty)
 
 if __name__ == "__main__":
     create_all_program_conditions()
