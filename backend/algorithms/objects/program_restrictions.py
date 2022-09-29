@@ -32,7 +32,6 @@ class ProgramRestriction(ABC):
     def __str__(self) -> str:
         return super().__str__()
 
-    @abstractmethod
     def __repr__(self) -> str:
         return super().__repr__()
 
@@ -42,8 +41,7 @@ class MaturityRestriction(ProgramRestriction):
     must be achieved before a course from a given Category (dependant) can be taken.
     """
 
-    def __init__(self, program: str, dependency: Condition, dependent: Category):
-        self.program = program
+    def __init__(self, dependency: Condition, dependent: Category):
         self.dependency = dependency
         self.dependent = dependent
 
@@ -74,6 +72,6 @@ class MaturityRestriction(ProgramRestriction):
 
     def __str__(self) -> str:
         return (
-            f"MaturityCondition({self.program}): Dependency: {self.dependency}, self.dependent: {self.dependent}"
+            f"MaturityCondition: Dependency: {self.dependency}, self.dependent: {self.dependent}"
         )
 
