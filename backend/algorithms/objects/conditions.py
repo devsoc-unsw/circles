@@ -71,50 +71,6 @@ class Condition(ABC):
         return self.__str__()
 
 
-class MaturityCondition(Condition):
-    def __init__(self, program: str, dependency: Condition, dependent: Category):
-        self.program = program
-        self.dependency = dependency
-        self.dependent = dependent
-
-    def match_dependant(self, course: str) -> bool:
-        """
-        Check if the given course is a match for the category defined in the dependant
-        """
-        return self.dependent.match_definition(course)
-
-    def dependency_met(self, user: User) -> bool:
-        return self.dependency.validate(user)[0]
-
-    def validate(
-            self, user: User, course: Optional[str]=None
-        ) -> tuple[bool, list[str]]:
-        """
-        Validate whether a user can do the given course.
-        Can not be done iff there is a match on dependant and dependency is not met
-        """
-        if course is None:
-            return True, []
-        if self.match_dependant(course):
-            return self.dependency.validate(user)
-        return True, []
-
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
-        """
-        Will a course be beneficial to advancing this condition?
-        More specifically, can the course be used to meet the dependency?
-        """
-        return self.dependency.beneficial(user, course)
-
-
-    def is_path_to(self, course: str) -> bool:
-        return self.dependency.is_path_to(course)
-
-    def __str__(self) -> str:
-        return (
-            f"MaturityCondition({self.program}): Dependency: {self.dependency}, self.dependent: {self.dependent}"
-        )
-
 
 class CourseCondition(Condition):
     """
@@ -190,7 +146,7 @@ class CoreqCoursesCondition(Condition):
         })
 
 class UOCCondition(Condition):
-    """ UOC conditions such as '24UOC in COMP' """
+    """ UOC conditions such as `24UOC in COMP` """
 
     def __init__(self, uoc: int):
         self.uoc = uoc

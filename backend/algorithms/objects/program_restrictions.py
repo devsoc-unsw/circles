@@ -3,10 +3,10 @@ Contains `ProgramRestrictions` and relevant sub-classes
 """
 
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Tuple
+
 from algorithms.objects.categories import Category
 from algorithms.objects.conditions import Condition
-
 from algorithms.objects.user import User
 
 
@@ -71,9 +71,6 @@ class MaturityRestriction(ProgramRestriction):
         More specifically, can the course be used to meet the dependency?
         """
         return self.dependency.beneficial(user, course)
-
-    def is_path_to(self, course: str) -> bool:
-        return self.dependency.is_path_to(course)
 
     def __str__(self) -> str:
         return (
