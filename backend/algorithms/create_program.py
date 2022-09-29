@@ -102,6 +102,7 @@ def create_dependency_condition(tokens: List[str]) -> Condition:
         core_condition.set_category(composite_category)
         return core_condition
 
+    # This should literally never happen and indicates you have broken smth
     raise UnparseableError(tokens)
 
 
