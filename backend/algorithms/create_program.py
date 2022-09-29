@@ -73,47 +73,42 @@ def create_dependent_condition(tokens: List[str]) -> Category:
         """
         return index >= len(tokens)
 
-    while True:
-        if index >= len(tokens):
-            break
+    base_token: str = tokens[index]
 
-        base_token: str = tokens[index]
+    if base_token == "UOC":
+        # Guaranteed. Also guaranteed to be the only prefix
+        num_uoc = int(tokens[index + 1])
+        return UOCCondition(num_uoc)
+        # Maybe assert that this is the end?
 
-        if base_token == "UOC":
-            # Guaranteed. Also guaranteed to be the only prefix
-            num_uoc = int(tokens[index + 1])
-            return UOCCondition(num_uoc)
-            # Maybe assert that this is the end?
+    # Matching LevelCategory
+    if re.match("L\d", base_token):
+        index += 1
+        level = int(base_token[1:])
+        level_category = LevelCategory(level)
 
-        # Matching LevelCategory
-        if re.match("L\d", base_token):
-            index += 1
-            level = int(base_token[1:])
-            level_category = LevelCategory(level)
-
-            if __tokens_finished(): # Simple LevelCategory
-                return LevelCategory(level)
-            # Next is either `CORES` by itself -> just a CoreCondition w/ Level
-            # or: `FACULTY` -> CoreCondition w/ Level and Faculty
-            second_token: str = tokens[index]
-            # 'CORES' w/ level
-            if second_token == "CORES":
-                core_condition = CoresCondition()
-                core_condition.set_category(level_category)
-                return core_condition
-            index += 1
-            # CoreCondition w/ Level and Faculty;
-            # Don't read third token because it's just `"CORES"`; Token2 is faculty
-            faculty_category = CourseCategory(second_token)
-
-            composite_category = CompositeCategory()
-            composite_category.add_category(level_category)
-            composite_category.add_category(faculty_category)
-
+        if __tokens_finished(): # Simple LevelCategory
+            return LevelCategory(level)
+        # Next is either `CORES` by itself -> just a CoreCondition w/ Level
+        # or: `FACULTY` -> CoreCondition w/ Level and Faculty
+        second_token: str = tokens[index]
+        # 'CORES' w/ level
+        if second_token == "CORES":
             core_condition = CoresCondition()
-            core_condition.set_category(composite_category)
+            core_condition.set_category(level_category)
             return core_condition
+        index += 1
+        # CoreCondition w/ Level and Faculty;
+        # Don't read third token because it's just `"CORES"`; Token2 is faculty
+        faculty_category = CourseCategory(second_token)
 
+        composite_category = CompositeCategory()
+        composite_category.add_category(level_category)
+        composite_category.add_category(faculty_category)
+
+        core_condition = CoresCondition()
+        core_condition.set_category(composite_category)
+        return core_condition
 
     raise NotImplementedError
 
@@ -121,7 +116,7 @@ def create_dependency_condition(tokens: List[str]) -> Condition:
     """
     Creates a dependency condition from the tokens.
     """
-    raise NotImplementedError
+    # Do NOT add a loop here.
 
 if __name__ == "__main__":
     create_all_program_conditions()
