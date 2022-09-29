@@ -33,8 +33,7 @@ from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
-# TODO: This needs to be uncommented - m1 moment :(
-# from data.scrapers.enrolment_scraper import scrape_enrolment_data
+from data.scrapers.enrolment_scraper import scrape_enrolment_data
 
 parser = argparse.ArgumentParser()
 
