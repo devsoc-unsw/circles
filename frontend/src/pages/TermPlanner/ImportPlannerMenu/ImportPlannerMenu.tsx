@@ -7,7 +7,12 @@ import { PlannerCourse, PlannerYear, Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import {
-  addToUnplanned, setUnplannedCourseToTerm, toggleSummer, updateDegreeLength, updateStartYear,
+  addToUnplanned,
+  moveCourse,
+  setUnplannedCourseToTerm,
+  toggleSummer,
+  updateDegreeLength,
+  updateStartYear,
 } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
@@ -85,6 +90,11 @@ const ImportPlannerMenu = () => {
                     const destTerm = key as Term;
                     const destRow = destYear - planner.startYear;
                     const destIndex = index;
+                    dispatch(moveCourse({
+                      course: code,
+                      destTerm: `${destYear}${destTerm}`,
+                      srcTerm: 'unplanned',
+                    }));
                     dispatch(setUnplannedCourseToTerm({
                       destRow, destTerm, destIndex, course: code,
                     }));
