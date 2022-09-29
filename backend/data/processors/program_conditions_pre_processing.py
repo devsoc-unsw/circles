@@ -57,7 +57,7 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
     # Assumption: Only one condition per sentence. No misc. `.`
     notes: List[str] = [
         note.strip() for note in notes_raw.split(".")
-        if len(note) > 0
+        if note
     ]
     return [
         pre_process_maturity_condition(note)
