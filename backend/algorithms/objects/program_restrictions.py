@@ -87,8 +87,8 @@ class NoRestriction(ProgramRestriction):
     def __init__(self) -> None:
         pass
 
-    def validate_course_allowed(self, user: User) -> bool:
-        user
+    def validate_course_allowed(self, user: User, course: str) -> bool:
+        del user, course
         return True
 
     def __str__(self) -> str:
@@ -190,7 +190,7 @@ class CategoryRestriction(ProgramRestriction):
         A user cannot do the course if:
             - Course matches the category
         """
-        user # Silence unused variable warning but preserve ABC structure
+        del user
         return not self.category.match_definition(course)
 
     def __str__(self) -> str:

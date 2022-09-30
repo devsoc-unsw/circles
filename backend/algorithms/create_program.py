@@ -20,7 +20,7 @@ class UnparseableError(Exception):
     def __init__(self, tokens: List[str]):
         super().__init__("Unparseable tokens: {}".format(tokens))
 
-def create_all_program_conditions():
+def create_all_program_conditions() -> Dict[str, CompositeRestriction]:
     """
     Returns a dictionary that contains all the program conditions.
     """
@@ -29,14 +29,12 @@ def create_all_program_conditions():
 
     # Always keep top-level restriction as composite, even if it is composed
     # of a single restriction
-    program_restrictions: Dict[str, List[CompositeRestriction]] = {}
-
-    for program in programs_list:
-        conditons = [
+    program_restrictions: Dict[str, CompositeRestriction] = {
+        program: CompositeRestriction(restrictions=[
             create_program_restriction(tokens)
             for tokens in tokens_data.get(program, [])
-        ]
-        program_restrictions[program] = CompositeRestriction(restrictions=conditons)
+        ]) for program in programs_list
+    }
 
     return program_restrictions
 
