@@ -133,7 +133,7 @@ run: dict[str, dict[str, Callable]] = {
     "program_condition": {
         "pre_process": pre_process,
         "tokenise": tokenise_program_conditions,
-        # "process": create_all_program_conditions,
+        "process": create_all_program_conditions,
     },
     "enrolment": {
         "scrape": run_scrape_enrolment_data,
