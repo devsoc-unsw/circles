@@ -72,12 +72,16 @@ class CompositeRestriction(ProgramRestriction):
         """ Set the logic of the composite restriction"""
         self.logic = logic
 
+    def is_restriction_free(self) -> bool:
+        """Returns whether or not the composite restriction is empty"""
+        return len(self.restrictions) == 0
+
     def add_restriction(self, restriction: ProgramRestriction):
         """Add an aditional category to the composite restriction"""
         self.restrictions.append(restriction)
 
     def __str__(self) -> str:
-        return f"CompositeRestriction: Logic::({self.logic}) Restrictions::({self.restrictions})"
+        return f"CompositeRestriction: Logic::({self.logic}) Restrictions::({[str(restriction) for restriction in self.restrictions]})"
 
 class NoRestriction(ProgramRestriction):
     """

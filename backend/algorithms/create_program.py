@@ -28,9 +28,6 @@ def process_program_conditions() -> None:
     Creates all program conditions, then serialised them and saves them to a file.
     """
     all_program_conditions: Dict[str, CompositeRestriction] = create_all_program_conditions()
-    for prog, cond in all_program_conditions.items():
-        if not isinstance(cond, NoRestriction):
-            print(prog, cond)
 
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "wb") as f:
         pickle.dump(all_program_conditions, f, pickle.HIGHEST_PROTOCOL)
