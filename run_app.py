@@ -49,7 +49,7 @@ def get_backend_env():
     """
     load_dotenv("./env/backend.env")
     username = os.getenv("MONGODB_USERNAME")
-    password = os.getenv("MONGODB_USERNAME")
+    password = os.getenv("MONGODB_PASSWORD")
     python = os.getenv("PYTHON_VERSION") or "python"
     return (username, password, python)
 
@@ -65,7 +65,7 @@ def get_frontend_env():
 def main():
     if os.system("docker ps") != 0:
         print("please run docker first!")
-        exit(1)
+        sys.exit(1)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',
         handlers=[
         logging.FileHandler("debug.log", mode='w'),

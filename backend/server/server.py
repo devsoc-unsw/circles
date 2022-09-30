@@ -4,6 +4,7 @@ Configure the FastAPI server
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from data.config import LIVE_YEAR
 
 from server.routers import courses, planner, programs, specialisations
 
@@ -47,3 +48,9 @@ app.include_router(specialisations.router)
 async def index() -> str:
     """ sanity test that this file is loaded """
     return "At index inside server.py"
+
+@app.get("/live_year")
+def live_year() -> int:
+    """ sanity check for the live year """
+    return LIVE_YEAR
+

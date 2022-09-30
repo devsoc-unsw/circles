@@ -1,7 +1,8 @@
 """
-The driver for our procsesors. Provide the relevant command line arguments
+The driver for our processors. Provide the relevant command line arguments
 in order to run the relevant drivers
-if you need to  bash this, use python3 -m runprocessors --type data-fix --stage all
+If you need to  bash this, use:
+    python3 -m runprocessors --type data-fix --stage all
 """
 
 import argparse
@@ -11,13 +12,16 @@ from typing import Callable
 
 from algorithms.cache.cache import (cache_equivalents, cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
+from algorithms.create_program import create_all_program_conditions
 from data.processors.cache_graph import cache_graph
 from data.processors.load_conditions import cache_conditions_pkl_file
 from data.processors.log_broken import log_broken_conditions
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
+from data.processors.program_conditions_pre_processing import pre_process
 from data.processors.courses_processing import process_course_data
+from data.processors.program_conditions_tokenising import tokenise_program_conditions
 from data.processors.programs_processing import process_prg_data
 from data.processors.specialisations_processing import customise_spn_data
 
@@ -29,22 +33,42 @@ from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
+from data.scrapers.enrolment_scraper import scrape_enrolment_data
 
 parser = argparse.ArgumentParser()
+
 parser.add_argument(
     "--type",
     type=str,
-    help="program, specialisation, course, condition, data-fix",
+    help="program, specialisation, course, condition, data-fix, enrolment",
 )
+
 parser.add_argument(
     "--stage",
     type=str,
     help="""
-                    (any) --> all
-                    program/specialisation/course --> scrape, format, process
-                    condition --> process, manual, tokenise, parsingErrors, pickle
-                    cache --> exclusion, handbook_note, mapping, program
-                    """,
+            (any) --> all
+            program/specialisation/course --> scrape, format, process
+            condition --> process, manual, tokenise, parsingErrors, pickle
+            cache --> exclusion, handbook_note, mapping, program
+            enrolment --> scrape
+        """,
+)
+
+parser.add_argument(
+    "--username",
+    type=str,
+    help="username (zID) for the enrolment scraper",
+    nargs='?',
+    default=None,
+)
+
+parser.add_argument(
+    "--password",
+    type=str,
+    help="password (zPass) for the enrolment scraper",
+    nargs='?',
+    default=None,
 )
 
 try:
@@ -60,6 +84,13 @@ def run_manual_fixes():
     except subprocess.CalledProcessError:
         print("Unable to run the 'run_manual_fixes.sh'; exiting with error")
         exit(0)
+
+def run_scrape_enrolment_data():
+    """ runs the enrolment scraper """
+    if args.username is None or args.password is None:
+        print("Please provide a username and password for the enrolment scraper")
+    else:
+        scrape_enrolment_data(args.username, args.password)
 
 
 run: dict[str, dict[str, Callable]] = {
@@ -99,6 +130,15 @@ run: dict[str, dict[str, Callable]] = {
         "program": cache_program_mappings,
         "graph": cache_graph
     },
+    "program_condition": {
+        "pre_process": pre_process,
+        "tokenise": tokenise_program_conditions,
+        "process": create_all_program_conditions,
+    },
+    "enrolment": {
+        "scrape": run_scrape_enrolment_data,
+    },
+
 }
 
 if __name__ == "__main__":
@@ -110,7 +150,6 @@ if __name__ == "__main__":
         else:
             parser.print_help()
             exit()
-
     if args.type == "data-fix" and args.stage == "all":
         # run all the things except for the scrapers and formatters to deal with code changes
         for t, type in run.items():
@@ -134,4 +173,9 @@ if __name__ == "__main__":
                 run[args.type][s]()
     else:
         # Run the specific process
-        run[args.type][args.stage]()
+        try:
+            run[args.type][args.stage]()
+        except KeyError:
+            print(f"{args.type} and {args.stage} is an invalid combination")
+            parser.print_help()
+
