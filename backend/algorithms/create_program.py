@@ -144,16 +144,17 @@ def create_dependent_condition(tokens: List[str]) -> Category:
     Need to worry about:
         - "L\d"
         - "L\d", Faculty
+        - "GENS"
     """
-    try:
-        level = int(tokens[0][1:])
-        level_condition = LevelCategory(level)
-    except Exception as e:
-        print("\n"*2)
-        print(tokens)
-        print(e)
-        print("\n"*2)
-        raise Exception from e
+
+    # Gened case first
+    if tokens[0] == "GENS":
+        #
+        pass
+
+    # Only level case is left over at this stage
+    level = int(tokens[0][1:])
+    level_condition = LevelCategory(level)
 
     if len(tokens) == 1:
         return level_condition
