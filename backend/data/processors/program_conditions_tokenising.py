@@ -51,9 +51,6 @@ def tokenise_dependency(condition: str) -> List[str]:
         return tokenise_uoc_dependency(condition)
     if re.search("(level|prescribed|core|cores)", condition):
         return tokenise_core_dependency(condition)
-    if re.search("[Gg]eneral .[Ee]ducation", condition):
-        print("FOUND GENED with: ", condition)
-        return ["GENS"]
     # Ideally shouldn't get to this point since caller should verify
     # only parseable strings passed in; TODO: raise Error
     return [condition]
@@ -143,12 +140,21 @@ def tokenise_dependent(condition: str):
     Examples:
         - "taking any level 2 courses"
         - "taking any level 2 ECON course"
+        - "taking any General Education course"
     Output:
         - ["L2"]
         - ["L2", "ECON"]
+        - ["GENS"] # This *can* be generalised to take a category after but, no need (2023 handbook)
     As of 2023 Handbook, no other example types exist.
     Will assume only Level and Faculty Category types
     """
+
+    # Gened case
+    if re.search("general", condition.lower()):
+        print("FOUND GENED with: ", condition)
+        return ["GENS"]
+
+    # UOCRestriction
     tokens: List[str] = condition.split(" ")
     # Keep only tokens with meaning
     tokens = list(filter(
