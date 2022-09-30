@@ -57,7 +57,7 @@ def create_all_program_conditions() -> Dict[str, CompositeRestriction]:
     program_restrictions: Dict[str, CompositeRestriction] = {
         program: CompositeRestriction(restrictions=[
             create_program_restriction(tokens)
-            for tokens in tokens_data.get(program, [])
+            for tokens in tokens_data.get(program, {})
         ]) for program in programs_list
     }
 
@@ -71,6 +71,8 @@ def create_program_restriction(tokens: Dict[str, List[str]]) -> ProgramRestricti
     """
     # TODO: Once more restriction types are created, there needs to be a check
     # for the type of restriction
+    if not tokens.get("dependency") or not tokens.get("dependent"):
+        raise UnparseableError(tokens)
     return create_maturity_restriction(tokens)
 
 def create_maturity_restriction(tokens: Dict[str, List[str]]) -> ProgramRestriction:
@@ -143,8 +145,15 @@ def create_dependent_condition(tokens: List[str]) -> Category:
         - "L\d"
         - "L\d", Faculty
     """
-    level = int(tokens[0][1:])
-    level_condition = LevelCategory(level)
+    try:
+        level = int(tokens[0][1:])
+        level_condition = LevelCategory(level)
+    except Exception as e:
+        print("\n"*2)
+        print(tokens)
+        print(e)
+        print("\n"*2)
+        raise Exception from e
 
     if len(tokens) == 1:
         return level_condition

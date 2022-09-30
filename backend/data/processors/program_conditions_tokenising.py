@@ -35,7 +35,7 @@ def tokenise_program_conditions():
 def tokenise_maturity_requirement(condition: Dict[str, str]):
     return {
         "dependency": tokenise_dependency(condition["dependency"]),
-        "dependant": tokenise_dependant(condition["dependant"]),
+        "dependent": tokenise_dependent(condition["dependent"]),
     }
 
 def tokenise_dependency(condition: str) -> List[str]:
@@ -133,9 +133,9 @@ def compress_level_tokens(tokens: List[str]) -> List[str]:
                 tokens_out.append(tok)
     return list(tokens_out)
 
-def tokenise_dependant(condition: str):
+def tokenise_dependent(condition: str):
     """
-    Tokenise the dependant condition.
+    Tokenise the dependent condition.
     These come in *usually* as a category.
     Examples:
         - "taking any level 2 courses"
