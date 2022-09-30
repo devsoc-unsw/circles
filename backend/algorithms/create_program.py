@@ -6,14 +6,14 @@ Converts from the tokens to actual conditions that can be made.
 import pickle
 import re
 from typing import Dict, List
-from algorithms.objects.categories import Category, LevelCategory, LevelCourseCategory
+from algorithms.objects.categories import Category, GenEdCategory, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data
 from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, NoRestriction, ProgramRestriction
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
 
-PROGRAM_RESTRICTIONS_PICKLE_FILE = "data/processed/program_restrictions.pkl"
+PROGRAM_RESTRICTIONS_PICKLE_FILE = "data/final_data/program_restrictions.pkl"
 
 
 class UnparseableError(Exception):
@@ -149,8 +149,7 @@ def create_dependent_condition(tokens: List[str]) -> Category:
 
     # Gened case first
     if tokens[0] == "GENS":
-        #
-        pass
+        return GenEdCategory()
 
     # Only level case is left over at this stage
     level = int(tokens[0][1:])
