@@ -30,6 +30,13 @@ const ImportPlannerMenu = () => {
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    planner.years.forEach((year) => {
+      Object.values(year).forEach((termKey) => {
+        termKey.forEach((code) => {
+          array.push(code);
+        });
+      });
+    });
     if (e.target.files !== null) {
       if (e.target.files[0].type !== 'application/json') {
         openNotification({
@@ -52,7 +59,6 @@ const ImportPlannerMenu = () => {
           };
           try {
             const fileInJson: FileJSONFormt = JSON.parse(content as string) as FileJSONFormt;
-            console.log(typeof fileInJson);
             dispatch(updateDegreeLength(fileInJson.numYears));
             dispatch(updateStartYear(fileInJson.startYear));
             if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
@@ -61,9 +67,7 @@ const ImportPlannerMenu = () => {
             (fileInJson.years).forEach((i, ind) => {
               Object.entries(i).forEach(([key, val]) => {
                 val.forEach(async (code, index: number) => {
-                  console.log(code);
                   const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
-                  console.log(course);
                   const courseData: PlannerCourse = {
                     title: course.title,
                     termsOffered: course.terms,
@@ -83,10 +87,8 @@ const ImportPlannerMenu = () => {
                   const indexArray = array.indexOf(course.code);
                   if (indexArray === -1) {
                     array.push(course.code);
-                    console.log(planner);
                     dispatch(addToUnplanned({ courseCode: course.code, courseData }));
                     const destYear = Number(ind) + Number(planner.startYear);
-                    console.log(destYear);
                     const destTerm = key as Term;
                     const destRow = destYear - planner.startYear;
                     const destIndex = index;
@@ -105,6 +107,11 @@ const ImportPlannerMenu = () => {
           } catch (err) {
             // eslint-disable-next-line no-console
             console.error(err);
+            openNotification({
+              type: 'error',
+              message: 'Invalid structure of the json file',
+              description: 'The structure of the JSON file is not valid.',
+            });
           }
         }
       };
