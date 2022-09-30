@@ -51,6 +51,9 @@ def tokenise_dependency(condition: str) -> List[str]:
         return tokenise_uoc_dependency(condition)
     if re.search("(level|prescribed|core|cores)", condition):
         return tokenise_core_dependency(condition)
+    if re.search("[Gg]eneral .[Ee]ducation", condition):
+        print("FOUND GENED with: ", condition)
+        return ["GENS"]
     # Ideally shouldn't get to this point since caller should verify
     # only parseable strings passed in; TODO: raise Error
     return [condition]
