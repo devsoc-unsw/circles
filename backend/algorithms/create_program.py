@@ -3,14 +3,17 @@ Like `create.py` but, for `program_conditions`.
 Converts from the tokens to actual conditions that can be made.
 """
 
+import pickle
 import re
 from typing import Dict, List
 from algorithms.objects.categories import Category, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data
-from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, ProgramRestriction
+from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, NoRestriction, ProgramRestriction
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
+
+PROGRAM_RESTRICTIONS_PICKLE_FILE = "data/processed/program_restrictions.pkl"
 
 
 class UnparseableError(Exception):
@@ -19,6 +22,28 @@ class UnparseableError(Exception):
     """
     def __init__(self, tokens: List[str]):
         super().__init__("Unparseable tokens: {}".format(tokens))
+
+def process_program_conditions() -> None:
+    """
+    Creates all program conditions, then serialised them and saves them to a file.
+    """
+    all_program_conditions: Dict[str, CompositeRestriction] = create_all_program_conditions()
+    for prog, cond in all_program_conditions.items():
+        if not isinstance(cond, NoRestriction):
+            print(prog, cond)
+
+    with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "wb") as f:
+        pickle.dump(all_program_conditions, f, pickle.HIGHEST_PROTOCOL)
+
+def get_all_program_restrictions() -> Dict[str, CompositeRestriction]:
+    """
+    Reads the serialised program restrictions from a file and returns it.
+    Note that this will NOT create the file if it does not exist and,
+    will not compute any new program restrictions.
+    """
+    with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as f:
+        return pickle.load(f)
+
 
 def create_all_program_conditions() -> Dict[str, CompositeRestriction]:
     """
