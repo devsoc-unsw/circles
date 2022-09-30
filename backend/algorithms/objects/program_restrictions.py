@@ -69,6 +69,7 @@ class CompositeRestriction(ProgramRestriction):
                 raise ValueError(f"Unknown logic: {self.logic}")
 
     def set_logic(self, logic: Logic):
+        """ Set the logic of the composite restriction"""
         self.logic = logic
 
     def add_category(self, category: Category):
@@ -95,6 +96,7 @@ class MaturityRestriction(ProgramRestriction):
         return self.dependent.match_definition(course)
 
     def dependency_met(self, user: User) -> bool:
+        """ Wrapper to validate `dependency` as just a boolean """
         return self.dependency.validate(user)[0]
 
     def validate_course_allowed(
@@ -127,7 +129,6 @@ class CourseRestriction(ProgramRestriction):
         self.course = course
 
     def validate_course_allowed(self, user: User, course: str) -> bool:
-        user # prevent unused variable warning but keep ABC satisfied
         return course != self.course
 
     def __str__(self) -> str:
