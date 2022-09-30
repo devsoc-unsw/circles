@@ -20,7 +20,7 @@ class UnparseableError(Exception):
     """
     The given token cannot be parsed
     """
-    def __init__(self, tokens: List[str]):
+    def __init__(self, tokens: List[str] | Dict):
         super().__init__("Unparseable tokens: {}".format(tokens))
 
 def process_program_conditions() -> None:
