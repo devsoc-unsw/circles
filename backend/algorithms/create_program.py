@@ -8,7 +8,7 @@ from typing import Dict, List
 from algorithms.objects.categories import Category, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data
-from algorithms.objects.program_restrictions import MaturityRestriction, ProgramRestriction
+from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, ProgramRestriction
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
 
@@ -22,17 +22,23 @@ class UnparseableError(Exception):
 
 def create_all_program_conditions():
     """
+    Returns a dictionary that contains all the program conditions.
     """
     programs_list: List[str] = read_data(PROGRAMS_PROCESSED_PATH)
     tokens_data: Dict[str, List[Dict[str, List[str]]]] = read_data(FINAL_TOKENS_PATH)
+
+    # Always keep top-level restriction as composite, even if it is composed
+    # of a single restriction
+    program_restrictions: Dict[str, List[CompositeRestriction]] = {}
+
     for program in programs_list:
         conditons = [
             create_program_restriction(tokens)
             for tokens in tokens_data.get(program, [])
         ]
-        print(conditons)
+        program_restrictions[program] = CompositeRestriction(restrictions=conditons)
 
-        create_program_restriction(program)
+    return program_restrictions
 
 def create_program_restriction(tokens: Dict[str, List[str]]) -> ProgramRestriction:
     """

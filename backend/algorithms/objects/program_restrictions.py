@@ -77,7 +77,23 @@ class CompositeRestriction(ProgramRestriction):
         self.restrictions.append(restriction)
 
     def __str__(self) -> str:
-        return f"CompositeRestriction({self.restrictions})"
+        return f"CompositeRestriction: Logic::({self.logic}) Restrictions::({self.restrictions})"
+
+class NoRestriction(ProgramRestriction):
+    """
+    Will always allow a course to be taken. Does not enforce any conditins.
+    """
+
+    def __init__(self) -> None:
+        pass
+
+    def validate_course_allowed(self, user: User) -> bool:
+        user
+        return True
+
+    def __str__(self) -> str:
+        return "NoRestriction"
+
 
 class MaturityRestriction(ProgramRestriction):
     """
