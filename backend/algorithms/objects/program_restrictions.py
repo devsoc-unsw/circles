@@ -3,10 +3,11 @@ Contains `ProgramRestrictions` and relevant sub-classes
 """
 
 from abc import ABC, abstractmethod
-from typing import Tuple
+from typing import List, Optional, Tuple
 
 from algorithms.objects.categories import Category
 from algorithms.objects.conditions import Condition
+from algorithms.objects.helper import Logic
 from algorithms.objects.user import User
 
 
@@ -34,6 +35,48 @@ class ProgramRestriction(ABC):
 
     def __repr__(self) -> str:
         return super().__repr__()
+
+class CompositeRestriction(ProgramRestriction):
+    """
+    A composite restriction is a restriction that is made up of other
+    restrictions. It is used to combine restrictions together.
+    """
+
+    def __init__(self, logic: Logic=Logic.AND, restrictions: Optional[List[ProgramRestriction]]=None):
+        self.restrictions = restrictions if restrictions is not None else []
+        self.logic = logic
+
+
+    def validate_course_allowed(self, user: User, course: str) -> bool:
+        """
+        Returns whether or not the course is allowed.
+        Future possibility: Also return back a str of why it may not
+        be allowed.
+        """
+        match self.logic:
+            case Logic.AND:
+                return all(
+                    restriction.validate_course_allowed(user, course)
+                    for restriction in self.restrictions
+                )
+            case Logic.OR:
+                return any(
+                    restriction.validate_course_allowed(user, course)
+                    for restriction in self.restrictions
+                )
+            case _:
+                # Should never actually happen as the above cases are exhaustive
+                raise ValueError(f"Unknown logic: {self.logic}")
+
+    def set_logic(self, logic: Logic):
+        self.logic = logic
+
+    def add_category(self, category: Category):
+        """Add an aditional category to the composite restriction"""
+        self.restrictions.append(category)
+
+    def __str__(self) -> str:
+        return f"CompositeRestriction({self.restrictions})"
 
 class MaturityRestriction(ProgramRestriction):
     """
@@ -75,3 +118,63 @@ class MaturityRestriction(ProgramRestriction):
             f"MaturityCondition: Dependency: {self.dependency}, self.dependent: {self.dependent}"
         )
 
+class CourseRestriction(ProgramRestriction):
+    """
+    For when a certain course is disallowed by the program
+    """
+
+    def __init__(self, course: str):
+        self.course = course
+
+    def validate_course_allowed(self, user: User, course: str) -> bool:
+        user # prevent unused variable warning but keep ABC satisfied
+        return course != self.course
+
+    def __str__(self) -> str:
+        return f"CourseRestriction: {self.course}"
+
+class CategoryUOCRestriction(ProgramRestriction):
+    """
+    For when a user is only allowed to do a max uoc of some category.,
+    Ex: May only do 56 UOC of Level 1 Courses
+    """
+
+    def __init__(self, uoc: int, category: Category) -> None:
+        self.category: int = category
+        self.uoc_allowed: int = uoc
+
+    def validate_course_allowed(self, user: User, course: str, course_uoc: int=6) -> bool:
+        """
+        A user cannot do the course if:
+            - Course matches the category
+            - User has already done max uoc of the category
+        """
+        if not self.ctegory.match_definition(course):
+            return True
+        uoc_completed: int = sum(
+            uoc for _, uoc in user.get_courses_with_uoc()
+        )
+        return uoc_completed + course_uoc <= self.uoc_allowed
+
+    def __str__(self) -> str:
+        return f"CategoryUOCRestriction: {self.uoc_allowed} UOC of {self.category}"
+
+class CategoryRestriction(ProgramRestriction):
+    """
+    User is disallowed from doing a course from certain category.
+    EX: You may not take courses from a certain faculty.
+    """
+
+    def __init__(self, category: Category) -> None:
+        self.category = category
+
+    def validate_course_allowed(self, user: User, course: str) -> bool:
+        """
+        A user cannot do the course if:
+            - Course matches the category
+        """
+        user # Silence unused variable warning but preserve ABC structure
+        return not self.category.match_definition(course)
+
+    def __str__(self) -> str:
+        return f"CategoryRestriction: {self.category}"
