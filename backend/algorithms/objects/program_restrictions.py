@@ -72,9 +72,9 @@ class CompositeRestriction(ProgramRestriction):
         """ Set the logic of the composite restriction"""
         self.logic = logic
 
-    def add_category(self, category: Category):
+    def add_restriction(self, restriction: ProgramRestriction):
         """Add an aditional category to the composite restriction"""
-        self.restrictions.append(category)
+        self.restrictions.append(restriction)
 
     def __str__(self) -> str:
         return f"CompositeRestriction({self.restrictions})"
@@ -141,7 +141,7 @@ class CategoryUOCRestriction(ProgramRestriction):
     """
 
     def __init__(self, uoc: int, category: Category) -> None:
-        self.category: int = category
+        self.category: Category = category
         self.uoc_allowed: int = uoc
 
     def validate_course_allowed(self, user: User, course: str, course_uoc: int=6) -> bool:
@@ -150,7 +150,7 @@ class CategoryUOCRestriction(ProgramRestriction):
             - Course matches the category
             - User has already done max uoc of the category
         """
-        if not self.ctegory.match_definition(course):
+        if not self.category.match_definition(course):
             return True
         uoc_completed: int = sum(
             uoc for _, uoc in user.get_courses_with_uoc()
