@@ -8,10 +8,10 @@ Assume everything is a maturity condition for now.
 from contextlib import suppress
 import re
 from typing import Dict, Iterator, List, Optional
-from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
+from data.processors.program_restrictions_pre_processing import PRE_PROCESSED_DATA_PATH
 from data.utility.data_helpers import read_data, write_data
 
-FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
+FINAL_TOKENS_PATH = "data/final_data/programRestrictionsTokens.json"
 
 
 def tokenise_program_conditions():
