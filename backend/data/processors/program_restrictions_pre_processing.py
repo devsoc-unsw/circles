@@ -9,6 +9,7 @@ This file currently does the job of two. TODO: move stuff out
 """
 
 
+from enum import Enum
 import re
 from typing import Dict, List
 
@@ -16,6 +17,16 @@ from data.utility.data_helpers import read_data, write_data
 
 PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programRestrictionsPreProcessed.json"
+
+class ProgramRuleType(Enum):
+    """
+    The different types of program rules.
+    This information is needed by the tokeniser to understand what pre-processed
+    rules it is working on.
+    """
+    MaturityRestrictionRule = 1
+    CourseRestrictionRule = 2
+    LevelUocRestrictionRule = 3
 
 def pre_process():
     """
@@ -77,7 +88,7 @@ def pre_process_maturity_condition(string: str) -> Dict[str, str]:
     dependency: str = components[0].strip()
     dependent: str = components[1].strip()
     return {
-        # "dependency": "", "dependent": "",
+        "type": ProgramRuleType.MaturityRestrictionRule,
         "dependency": dependency,
         "dependent": dependent
     }
@@ -85,6 +96,9 @@ def pre_process_maturity_condition(string: str) -> Dict[str, str]:
 
 def maturity_match(string: str):
     return re.match(r".*(maturity)+", string.lower())
+
+def course_restriction_match(string: str):
+    return re.search("excluded ", string.lower())
 
 def pre_process_cond(condition: Dict):
     """
@@ -114,11 +128,11 @@ def is_relevant_string(string: str) -> bool:
 
     Add any future condition checkers here inside the list in the `any`
     """
-    relevant: bool = any(
-        [maturity_match(string)]
-    )
+    relevant: bool = any([
+        maturity_match(string),
+        course_restriction_match(string),
+    ])
     return relevant
-
 
 def shortlist_pre_proc(full_condition_list):
     """
