@@ -12,7 +12,8 @@ from typing import Callable
 
 from algorithms.cache.cache import (cache_equivalents, cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
-from algorithms.create_program import create_all_program_conditions
+
+from algorithms.create_program import process_program_conditions
 from data.processors.cache_graph import cache_graph
 from data.processors.load_conditions import cache_conditions_pkl_file
 from data.processors.log_broken import log_broken_conditions
@@ -33,7 +34,7 @@ from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
-from data.scrapers.enrolment_scraper import scrape_enrolment_data
+# from data.scrapers.enrolment_scraper import scrape_enrolment_data
 
 parser = argparse.ArgumentParser()
 
@@ -85,12 +86,12 @@ def run_manual_fixes():
         print("Unable to run the 'run_manual_fixes.sh'; exiting with error")
         exit(0)
 
-def run_scrape_enrolment_data():
-    """ runs the enrolment scraper """
-    if args.username is None or args.password is None:
-        print("Please provide a username and password for the enrolment scraper")
-    else:
-        scrape_enrolment_data(args.username, args.password)
+# def run_scrape_enrolment_data():
+#     """ runs the enrolment scraper """
+#     if args.username is None or args.password is None:
+#         print("Please provide a username and password for the enrolment scraper")
+#     else:
+#         scrape_enrolment_data(args.username, args.password)
 
 
 run: dict[str, dict[str, Callable]] = {
@@ -133,10 +134,10 @@ run: dict[str, dict[str, Callable]] = {
     "program_condition": {
         "pre_process": pre_process,
         "tokenise": tokenise_program_conditions,
-        "process": create_all_program_conditions,
+        "process": process_program_conditions,
     },
     "enrolment": {
-        "scrape": run_scrape_enrolment_data,
+        # "scrape": run_scrape_enrolment_data,
     },
 
 }
