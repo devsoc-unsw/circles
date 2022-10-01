@@ -34,7 +34,7 @@ from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
-# from data.scrapers.enrolment_scraper import scrape_enrolment_data
+from data.scrapers.enrolment_scraper import scrape_enrolment_data
 
 parser = argparse.ArgumentParser()
 
@@ -86,12 +86,12 @@ def run_manual_fixes():
         print("Unable to run the 'run_manual_fixes.sh'; exiting with error")
         exit(0)
 
-# def run_scrape_enrolment_data():
-#     """ runs the enrolment scraper """
-#     if args.username is None or args.password is None:
-#         print("Please provide a username and password for the enrolment scraper")
-#     else:
-#         scrape_enrolment_data(args.username, args.password)
+def run_scrape_enrolment_data():
+    """ runs the enrolment scraper """
+    if args.username is None or args.password is None:
+        print("Please provide a username and password for the enrolment scraper")
+    else:
+        scrape_enrolment_data(args.username, args.password)
 
 
 run: dict[str, dict[str, Callable]] = {
@@ -137,7 +137,7 @@ run: dict[str, dict[str, Callable]] = {
         "process": process_program_conditions,
     },
     "enrolment": {
-        # "scrape": run_scrape_enrolment_data,
+        "scrape": run_scrape_enrolment_data,
     },
 
 }
