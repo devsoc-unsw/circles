@@ -89,6 +89,7 @@ class Condition(ABC):
         return self.__str__()
 
 
+
 class CourseCondition(Condition):
     """
     Condition that the student has completed this course before
@@ -148,7 +149,7 @@ class CoreqCourseCondition(Condition):
         })
 
 class UOCCondition(Condition):
-    """ UOC conditions such as '24UOC in COMP' """
+    """ UOC conditions such as `24UOC in COMP` """
 
     def __init__(self, uoc: int):
         self.uoc = uoc
@@ -387,7 +388,6 @@ class CoresCondition(Condition):
             'cores': None,
             'category': str(self.category)
         })
-
 
 class ProgramCondition(Condition):
     """ Handles Program conditions such as 3707 """

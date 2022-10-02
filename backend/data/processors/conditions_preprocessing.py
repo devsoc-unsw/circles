@@ -86,66 +86,68 @@ def preprocess_conditions():
         # if not course["enrolment_rules"]:
         #     # Store it as empty rule
         #     continue
-
-        original = course["enrolment_rules"]
-        conditions = {}
-
-        # Store original text for debugging
-        conditions["original"] = original
-        processed = original
-
-        # Phase 1: Deletions
-        processed = delete_exclusions_and_equivalents(processed)
-        processed = delete_HTML(processed)
-        note, processed = remove_extraneous_handbook_data(processed)
-        if note != "":
-            conditions["handbook_note"] = note
-        processed = delete_self_referencing(code, processed)
-        processed = delete_extraneous_phrasing(processed)
-        processed = delete_prereq_label(processed)
-        processed = delete_trailing_punc(processed)
-
-        # Phase 2: Conversions
-        processed = convert_semicolon(processed)
-        processed = convert_square_brackets(processed)
-        processed = convert_UOC(processed)
-        processed = convert_WAM(processed)
-        processed = convert_GRADE(processed)
-        processed = convert_level(processed)
-        processed = convert_program_type(processed)
-        processed = convert_fslash(processed)
-        processed = convert_including(processed)
-        processed = convert_manual_programs_and_specialisations(processed)
-        processed = convert_AND_OR(processed)
-        processed = convert_coreqs(processed)
-        processed = convert_core(processed)
-
-        # Phase 3: Algo logic
-        processed = joining_terms(processed)
-        processed = handle_comma_logic(processed)
-
-        # Phase 4: Final touches
-        processed = strip_spaces(processed)
-        processed = strip_specialisation(processed)
-        processed = strip_bracket_spaces(processed)
-
-        # Phase 5: Common patterns
-        processed = uoc_in_business_school(processed)
-        processed = enrolment_in_program(processed)
-        processed = l2_math_courses(processed)
-        processed = unsw_global_degrees(processed)
-        processed = international_public_health(processed)
-        processed = business_honours(processed)
-        processed = honours_plan(processed)
-        processed = research_thesis(code, processed)
-
-
-
-        conditions["processed"] = processed
-
+        conditions = preprocess_condition(code, course)
         PREPROCESSED_CONDITIONS[code] = conditions
 
     write_data(PREPROCESSED_CONDITIONS, "data/final_data/conditionsProcessed.json")
+
+
+def preprocess_condition(code, course=None):
+    original = course["enrolment_rules"] if course is not None else ""
+    conditions = {}
+
+    # Store original text for debugging
+    conditions["original"] = original
+    processed = original
+
+    # Phase 1: Deletions
+    processed = delete_exclusions_and_equivalents(processed)
+    processed = delete_HTML(processed)
+    note, processed = remove_extraneous_handbook_data(processed)
+    if note != "":
+        conditions["handbook_note"] = note
+    processed = delete_self_referencing(code, processed)
+    processed = delete_extraneous_phrasing(processed)
+    processed = delete_prereq_label(processed)
+    processed = delete_trailing_punc(processed)
+
+    # Phase 2: Conversions
+    processed = convert_semicolon(processed)
+    processed = convert_square_brackets(processed)
+    processed = convert_UOC(processed)
+    processed = convert_WAM(processed)
+    processed = convert_GRADE(processed)
+    processed = convert_level(processed)
+    processed = convert_program_type(processed)
+    processed = convert_fslash(processed)
+    processed = convert_including(processed)
+    processed = convert_manual_programs_and_specialisations(processed)
+    processed = convert_AND_OR(processed)
+    processed = convert_coreqs(processed)
+    processed = convert_core(processed)
+
+    # Phase 3: Algo logic
+    processed = joining_terms(processed)
+    processed = handle_comma_logic(processed)
+
+    # Phase 4: Final touches
+    processed = strip_spaces(processed)
+    processed = strip_specialisation(processed)
+    processed = strip_bracket_spaces(processed)
+
+    # Phase 5: Common patterns
+    processed = uoc_in_business_school(processed)
+    processed = enrolment_in_program(processed)
+    processed = l2_math_courses(processed)
+    processed = unsw_global_degrees(processed)
+    processed = international_public_health(processed)
+    processed = business_honours(processed)
+    processed = honours_plan(processed)
+    processed = research_thesis(code, processed)
+
+    conditions["processed"] = processed
+    return conditions
+
 
 
 # -----------------------------------------------------------------------------

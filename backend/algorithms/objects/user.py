@@ -8,7 +8,7 @@
 import copy
 from itertools import chain
 import json
-from typing import Literal, Optional, Tuple
+from typing import List, Literal, Optional, Tuple
 import re
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
@@ -92,6 +92,12 @@ class User:
     def get_courses(self):
         """ get all course codes """
         return list(self.courses.keys())
+
+    def get_courses_with_uoc(self) -> List[Tuple[str, int]]:
+        return [
+            (course, uoc)
+            for course, (uoc, _) in self.courses.items()
+        ]
 
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """

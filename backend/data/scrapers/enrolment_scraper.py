@@ -1,5 +1,5 @@
 """
-Get enrolment data from CSE for COMP courses 
+Get enrolment data from CSE for COMP courses
 and write hashed zIDs to backend/data/final_data/enrolmentData.json
 (Note that a file of raw zIDs is also created at backend/data/final_data/enrolmentDataRaw.json
 but it shouldn't be used and should be included in .gitignore)

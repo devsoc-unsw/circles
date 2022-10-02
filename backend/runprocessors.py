@@ -1,7 +1,8 @@
 """
-The driver for our procsesors. Provide the relevant command line arguments
+The driver for our processors. Provide the relevant command line arguments
 in order to run the relevant drivers
-if you need to  bash this, use python3 -m runprocessors --type data-fix --stage all
+If you need to  bash this, use:
+    python3 -m runprocessors --type data-fix --stage all
 """
 
 import argparse
@@ -11,13 +12,17 @@ from typing import Callable
 
 from algorithms.cache.cache import (cache_equivalents, cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
+
+from algorithms.create_program import process_program_conditions
 from data.processors.cache_graph import cache_graph
 from data.processors.load_conditions import cache_conditions_pkl_file
 from data.processors.log_broken import log_broken_conditions
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
+from data.processors.program_conditions_pre_processing import pre_process
 from data.processors.courses_processing import process_course_data
+from data.processors.program_conditions_tokenising import tokenise_program_conditions
 from data.processors.programs_processing import process_prg_data
 from data.processors.specialisations_processing import customise_spn_data
 
@@ -126,9 +131,15 @@ run: dict[str, dict[str, Callable]] = {
         "program": cache_program_mappings,
         "graph": cache_graph
     },
+    "program_condition": {
+        "pre_process": pre_process,
+        "tokenise": tokenise_program_conditions,
+        "process": process_program_conditions,
+    },
     "enrolment": {
         "scrape": run_scrape_enrolment_data,
     },
+
 }
 
 if __name__ == "__main__":
@@ -163,4 +174,9 @@ if __name__ == "__main__":
                 run[args.type][s]()
     else:
         # Run the specific process
-        run[args.type][args.stage]()
+        try:
+            run[args.type][args.stage]()
+        except KeyError:
+            print(f"{args.type} and {args.stage} is an invalid combination")
+            parser.print_help()
+
