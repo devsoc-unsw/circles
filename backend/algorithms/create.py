@@ -20,7 +20,7 @@ from algorithms.objects.categories import (
 from algorithms.objects.conditions import (
     CompositeCondition,
     CoresCondition,
-    CoreqCoursesCondition,
+    CoreqCourseCondition,
     CourseCondition,
     CourseExclusionCondition,
     GradeCondition,
@@ -189,13 +189,13 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
             # OR type logic
             result.set_logic(Logic.OR)
         elif token == "[":
-            # Beginning of co-requisite. Parse courses and logical
+            # Beginning of co-requisite. Always composite. Parse courses and logical
             # operators until closing "]"
-            coreq_cond = CoreqCoursesCondition()
+            coreq_cond = CompositeCondition()
             i = 1  # Helps track our index offset to parse this co-requisite
             while tokens[index + i] != "]":
                 if is_course(tokens[index + i]):
-                    coreq_cond.add_course(tokens[index + i])
+                    coreq_cond.add_condition(CoreqCourseCondition(tokens[index + i]))
                 elif tokens[index + i] == "&&":
                     coreq_cond.set_logic(Logic.AND)
                 elif tokens[index + i] == "||":
@@ -220,7 +220,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
-            cond: UOCCondition | WAMCondition | GradeCondition | CoresCondition
+            cond: UOCCondition | WAMCondition | GradeCondition | CoresCondition | CompositeCondition
             if is_uoc(token):
                 # Condition for UOC requirement
                 cond = UOCCondition(get_uoc(token))
@@ -229,7 +229,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
                 cond = WAMCondition(get_wam(token))
             elif is_grade(token):
                 # Condition for GRADE requirement (mark in a single course)
-                cond = GradeCondition(get_grade(token))
+                cond = GradeCondition(get_grade(token), "")
             elif token == "CORES":
                 # Condition for Core Course completion requirement
                 cond = CoresCondition()
@@ -247,11 +247,25 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
                 if category is None:
                     # Error. Return None.
                     return None, index
-
-                # Add the category to the condition and adjust the current index position
-                cond.set_category(category)
+                if isinstance(cond, GradeCondition):
+                    # special, only allow class categories
+                    grade_cond = cond
+                    cond = CompositeCondition()
+                    if isinstance(category, CompositeCategory):
+                        cond.set_logic(category.logic)
+                        for class_category in category.categories:
+                            if isinstance(class_category, ClassCategory):
+                                cond.add_condition(GradeCondition(grade_cond.grade, class_category.class_name))
+                    elif isinstance(category, ClassCategory):
+                        cond = GradeCondition(grade_cond.grade, category.class_name)
+                    else:
+                        print("WARNING: failed to parse! Grade condition too complex.")
+                else:
+                    # Add the category to the condition and adjust the current index position
+                    cond.set_category(category)
                 [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(cond)
 
     return result, index
+

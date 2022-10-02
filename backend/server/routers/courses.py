@@ -121,6 +121,7 @@ def get_course(courseCode: str) -> Dict:
     - start with the current database
     - if not found, check the archives
     """
+    print("\n\nYOU REQUESTED:", courseCode)
     result = coursesCOL.find_one({"code": courseCode})
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
@@ -381,7 +382,7 @@ def unselect_course(userData: UserData, unselectedCourse: str) -> dict[str, list
             })
 def course_children(course: str):
     """
-    fetches courses which are dependant on taking 'course'
+    fetches courses which are dependent on taking 'course'
     eg 1511 -> 1521, 1531, 2521 etc
     """
     if not CONDITIONS.get(course):
