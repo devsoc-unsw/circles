@@ -12,7 +12,6 @@ type YearPlan = TermPlan[];
 
 type CoursesForValidationPayload = {
   program: string
-  year: number
   specialisations: string[]
   plan: YearPlan[]
   mostRecentPastTerm: MostRecentTerm
@@ -42,7 +41,6 @@ const prepareCoursesForValidationPayload = (
   return {
     program: programCode,
     specialisations: specs,
-    year: 1,
     plan,
     mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
   };
