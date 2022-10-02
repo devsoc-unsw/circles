@@ -74,34 +74,34 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     if status == 3:
         raise Exception('your courses are impossible to put in these terms!')
     else:
-        return {v.Name(): convert_to_term_year(solver.Value(v), start) for v in variables}
+        return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
 
 
 if __name__ == '__main__':
     pprint(autoplan(
         [
-            Course("MATH1141", CONDITIONS["MATH1141"], 65, 6, {2020: [1, 3]}),
-            Course("MATH1081", CONDITIONS["MATH1081"], 65, 6, {2020: [1, 2, 3]}),
-            Course("COMP1511", CONDITIONS["COMP1511"], 65, 6, {2020: [1, 2, 3]}),
-            Course("COMP2521", CONDITIONS["COMP2521"], 65, 6, {2020: [2, 3]}),
-            Course("COMP2041", CONDITIONS["COMP2041"], 65, 6, {2020: [2]}),
-            Course("COMP1531", CONDITIONS["COMP1531"], 65, 6, {2020: [1, 3]}),
-            Course("COMP1521", CONDITIONS["COMP1521"], 65, 6, {2020: [1, 2]}),
-            Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2021: [1, 2, 3]}),
-            Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2021: [1, 2, 3]}),
-            Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2021: [1, 2, 3]}),
-            Course("COMP2511", CONDITIONS["COMP2511"], 65, 6, {2020: [2, 3], 2021: [2, 3]}),
-            Course("MATH1241", CONDITIONS["MATH1141"], 65, 6, {2020: [2, 3]}),
-            Course("MATH3411", CONDITIONS["MATH3411"], 65, 6, {2020: [3]}),
-            Course("COMP3411", CONDITIONS["COMP3411"], 65, 6, {2021: [0]}),
-            Course("COMP6841", CONDITIONS["COMP6841"], 65, 6, {2021: [1]}),
-            Course("COMP3231", CONDITIONS["COMP3231"], 65, 6, {2021: [1]}),
-            Course("COMP3141", CONDITIONS["COMP3141"], 65, 6, {2021: [2]}),
-            Course("COMP3121", CONDITIONS["COMP3121"], 65, 6, {2021: [2, 3]}),
-            Course("COMP3131", CONDITIONS["COMP3131"], 65, 6, {2022: [1]}),
-            Course("COMP4141", CONDITIONS["COMP4141"], 65, 6, {2022: [1]}),
-            Course("COMP3311", CONDITIONS["COMP3311"], 65, 6, {2022: [1, 2, 3]}),
-            Course("ARTS1360", CONDITIONS["ARTS1360"], 65, 6, {2022: [2]}),
+            Course("MATH1141", CONDITIONS["MATH1141"], 65, 6, {2020: [1, 3], 2021: [1, 3], 2022: [1, 3]}),
+            Course("MATH1081", CONDITIONS["MATH1081"], 65, 6, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
+            Course("COMP1511", CONDITIONS["COMP1511"], 65, 6, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
+            Course("COMP2521", CONDITIONS["COMP2521"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
+            Course("COMP2041", CONDITIONS["COMP2041"], 65, 6, {2020: [2], 2021: [2], 2022: [2]}),
+            Course("COMP1531", CONDITIONS["COMP1531"], 65, 6, {2020: [1, 3], 2021: [1, 3], 2022: [1, 3]}),
+            Course("COMP1521", CONDITIONS["COMP1521"], 65, 6, {2020: [1, 2], 2021: [1, 2], 2022: [1, 2]}),
+            Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
+            Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
+            Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
+            Course("COMP2511", CONDITIONS["COMP2511"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
+            Course("MATH1241", CONDITIONS["MATH1141"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
+            Course("MATH3411", CONDITIONS["MATH3411"], 65, 6, {2020: [3], 2021: [3], 2022: [3]}),
+            Course("COMP3411", CONDITIONS["COMP3411"], 65, 6, {2020: [3], 2021: [0], 2022: [0]}),
+            Course("COMP6841", CONDITIONS["COMP6841"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
+            Course("COMP3231", CONDITIONS["COMP3231"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
+            Course("COMP3141", CONDITIONS["COMP3141"], 65, 6, {2020: [2], 2021: [2], 2022: [2]}),
+            Course("COMP3121", CONDITIONS["COMP3121"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
+            Course("COMP3131", CONDITIONS["COMP3131"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
+            Course("COMP4141", CONDITIONS["COMP4141"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
+            Course("COMP3311", CONDITIONS["COMP3311"], 65, 6, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
+            Course("ARTS1360", CONDITIONS["ARTS1360"], 65, 6, {2020: [2], 2021: [2], 2022: [2]}),
         ],
         User({
             "program": "3778",

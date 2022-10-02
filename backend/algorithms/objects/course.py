@@ -12,6 +12,7 @@ class Course:
     uoc: int
     terms: dict[int, list[int]]
     def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]):
+        """ create a domain of terms this course can be in for autoplanning """
         numbers = []
         for key, value in self.terms.items():
             for term in value:
