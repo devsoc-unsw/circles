@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  ExpandAltOutlined, LockOutlined, ShrinkOutlined, UnlockOutlined,
+  ExpandAltOutlined, ShrinkOutlined,
   ZoomInOutlined, ZoomOutOutlined,
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
@@ -232,12 +232,11 @@ const GraphicalSelector = () => {
                   <CourseSearchBar onSelectCallback={handleFocusCourse} style={{ width: '25rem' }} />
                 </S.SearchBarWrapper>
                 <S.ToolsWrapper>
+                  Show All Courses
                   <Tooltip placement="bottomLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
                     <Switch
                       defaultChecked={showUnlockedOnly}
                       onChange={handleShowCourses}
-                      checkedChildren={<LockOutlined />}
-                      unCheckedChildren={<UnlockOutlined />}
                     />
                   </Tooltip>
                   <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
