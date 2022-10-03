@@ -6,7 +6,7 @@ dnspython==2.2.1
 fastapi==0.85.0
 fuzzywuzzy==0.18.0
 h11==0.14.0
-hypothesis==6.55.0
+hypothesis==6.56.0
 idna==3.4
 importlib-metadata==5.0.0
 iniconfig==1.1.1
