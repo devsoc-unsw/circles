@@ -27,7 +27,6 @@ const YearStep = ({ incrementStep }: Props) => {
         </Title>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
           <RangePicker
-            data-testid="ant-rangepicker"
             picker="year"
             size="large"
             style={{

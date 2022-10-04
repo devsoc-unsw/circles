@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
+import { combineReducers, PreloadedState } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import coursesReducer from 'reducers/coursesSlice';
@@ -16,6 +16,11 @@ const rootReducer = combineReducers({
   courses: coursesReducer,
   planner: plannerReducer,
   settings: settingsReducer,
+});
+
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => configureStore({
+  reducer: rootReducer,
+  preloadedState,
 });
 
 const persistConfig = {
@@ -36,8 +41,9 @@ const store = configureStore({
   }),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
 export default store;
