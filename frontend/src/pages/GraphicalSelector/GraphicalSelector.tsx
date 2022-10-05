@@ -223,8 +223,9 @@ const GraphicalSelector = () => {
   }, [graph, sidebar]);
 
   const items = [
-    { label: 'Tab 1', key: 'item-1', children: 'Content 1' }, // remember to pass the key prop
-    { label: 'Tab 2', key: 'item-2', children: 'Content 2' },
+    { label: 'Course Info', key: 'item-1', children: 'Content 1' }, // remember to pass the key prop
+    { label: 'Program Structure', key: 'item-2', children: 'Content 2' },
+    { label: 'Help', key: 'item-3', children: 'Content 3' },
   ];
 
   return (
