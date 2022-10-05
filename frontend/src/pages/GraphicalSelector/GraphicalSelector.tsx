@@ -5,7 +5,9 @@ import {
   ZoomInOutlined, ZoomOutOutlined,
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
-import { Button, Switch, Tooltip } from 'antd';
+import {
+  Button, Switch, Tabs, Tooltip,
+} from 'antd';
 import axios from 'axios';
 import {
   Course, CourseEdge, CoursesAllUnlocked, GraphPayload,
@@ -220,6 +222,11 @@ const GraphicalSelector = () => {
     graph?.changeSize(ref.current?.scrollWidth ?? 0, ref.current?.scrollHeight ?? 0);
   }, [graph, sidebar]);
 
+  const items = [
+    { label: 'Tab 1', key: 'item-1', children: 'Content 1' }, // remember to pass the key prop
+    { label: 'Tab 2', key: 'item-2', children: 'Content 2' },
+  ];
+
   return (
     <PageTemplate>
       <S.Wrapper>
@@ -251,6 +258,7 @@ const GraphicalSelector = () => {
         </S.GraphPlaygroundWrapper>
         {sidebar && (
           <S.SidebarWrapper>
+            <Tabs items={items} />
             {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
           </S.SidebarWrapper>
         )}
