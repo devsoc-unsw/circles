@@ -44,7 +44,6 @@ const CourseMenu = ({ structure }: Props) => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
   const { showLockedCourses } = useSelector((state: RootState) => state.settings);
-
   const [pageLoaded, setPageLoaded] = useState(false);
 
   const getAllUnlocked = useCallback(async () => {
@@ -76,7 +75,6 @@ const CourseMenu = ({ structure }: Props) => {
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               // suppress gen ed courses if it has not been added to the planner
               if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
-
               newMenu[group][subgroup].push({
                 courseCode,
                 title: subgroupStructure.courses[courseCode],
@@ -85,7 +83,6 @@ const CourseMenu = ({ structure }: Props) => {
                   ? courses[courseCode].is_accurate
                   : true,
               });
-
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
@@ -162,7 +159,10 @@ const CourseMenu = ({ structure }: Props) => {
           disabled: !subGroupEntry.length, // disable submenu if there are no courses
           // check if there are courses to show collapsible submenu
           children: subGroupEntry.length ? subGroupEntry.sort(sortCourses)
-            .filter((course) => course.unlocked || showLockedCourses)
+            .filter((course) => (
+              course.unlocked
+              || showLockedCourses
+              || planner.courses[course.courseCode]))
             .map((course) => ({
               label: <CourseTitle
                 courseCode={course.courseCode}
@@ -178,14 +178,12 @@ const CourseMenu = ({ structure }: Props) => {
         };
       }),
   }));
-
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup
     // to differentiate duplicate courses in different groups/subgroups
     const courseCode = key.slice(0, 8);
     dispatch(addTab(courseCode));
   };
-
   return (
     <S.SidebarWrapper>
       {pageLoaded
