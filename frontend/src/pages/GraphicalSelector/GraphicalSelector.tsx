@@ -259,7 +259,7 @@ const GraphicalSelector = () => {
         </S.GraphPlaygroundWrapper>
         {sidebar && (
           <S.SidebarWrapper>
-            <Tabs items={items} />
+            <Tabs centered items={items} />
             {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
           </S.SidebarWrapper>
         )}
