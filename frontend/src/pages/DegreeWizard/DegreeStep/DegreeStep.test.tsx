@@ -23,7 +23,6 @@ describe('DegreeStep', () => {
   const useDispatchMock = vi.spyOn(reactRedux, 'useAppDispatch');
 
   beforeEach(() => {
-    incrementStepMock.mockClear();
     useSelectorMock.mockClear();
     useDispatchMock.mockClear();
     vi.clearAllMocks();
@@ -33,6 +32,23 @@ describe('DegreeStep', () => {
     renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.getByText('What are you studying?')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
+  });
+
+  it('should dispatch correct props and call incrementStep after selecting degree', async () => {
+    const dummyDispatch = vi.fn();
+    useDispatchMock.mockReturnValue(dummyDispatch);
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
+    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
+    await userEvent.click(await screen.findByText('3778 Computer Science'));
+    expect(dummyDispatch).toBeCalledWith({
+      payload: {
+        programCode: '3778',
+        programName: 'Computer Science',
+      },
+      type: 'degree/setProgram',
+    });
+    expect(incrementStepMock).toHaveBeenCalledWith(Steps.SPECS);
   });
 
   it('should show no degree options on mount', async () => {
@@ -62,21 +78,5 @@ describe('DegreeStep', () => {
     renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Economics');
     expect(screen.queryByTestId('antd-degree-menu')).not.toBeInTheDocument();
-  });
-
-  it('should dispatch correct props and call incrementStep after selecting degree', async () => {
-    const dummyDispatch = vi.fn();
-    useDispatchMock.mockReturnValue(dummyDispatch);
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
-    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
-    await userEvent.click(await screen.findByText('3778 Computer Science'));
-    expect(dummyDispatch).toBeCalledWith({
-      payload: {
-        programCode: '3778',
-        programName: 'Computer Science',
-      },
-      type: 'degree/setProgram',
-    });
-    expect(incrementStepMock).toHaveBeenCalledWith(Steps.SPECS);
   });
 });
