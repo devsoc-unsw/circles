@@ -29,6 +29,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
+      // TODO: alias should be sync with vitest.config.ts
       { find: 'assets', replacement: resolve(projectRootDir, 'src/assets') },
       { find: 'components', replacement: resolve(projectRootDir, './src/components') },
       { find: 'config', replacement: resolve(projectRootDir, './src/config') },
