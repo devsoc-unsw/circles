@@ -47,7 +47,11 @@ const DegreeWizard = () => {
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
-    if (!stepTo || stepTo > currStep) setCurrStep((prevState) => prevState + 1);
+    if (stepTo === Steps.SPECS) {
+      setCurrStep(stepTo);
+    } else if (!stepTo || stepTo > currStep) {
+      setCurrStep((prevState) => prevState + 1);
+    }
     setTimeout(() => {
       scroller.scrollTo(step, {
         duration: 1500,

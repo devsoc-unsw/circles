@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { renderWithProviders } from 'test/testUtil';
+import openNotification from 'utils/openNotification';
 import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import SpecialisationStep from './SpecialisationStep';
@@ -27,6 +28,10 @@ mockAxios.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
     },
   },
 });
+
+vi.mock('utils/openNotification', () => ({
+  default: vi.fn(),
+}));
 
 const preloadedState = {
   degree: {
@@ -98,6 +103,23 @@ describe('SpecialisationStep', () => {
       />,
       { preloadedState },
     );
+    await userEvent.click(await screen.findByText('COMPA1 Computer Science'));
     await userEvent.click(await screen.findByText('Next'));
+  });
+
+  it('should show error notification when "Next" button without selecting a spec', async () => {
+    renderWithProviders(
+      <SpecialisationStep
+        incrementStep={incrementStepMock}
+        currStep
+        type="majors"
+      />,
+      { preloadedState },
+    );
+    await userEvent.click(await screen.findByText('Next'));
+    expect(openNotification).toBeCalledWith({
+      message: 'Select a major for Computer Science',
+      type: 'error',
+    });
   });
 });
