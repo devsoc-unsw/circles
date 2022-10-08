@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
 import { vi } from 'vitest';
-import * as reactRedux from 'hooks';
+import * as hooks from 'hooks';
 import ResetModal from './ResetModal';
 
 vi.mock('react-router-dom', () => ({
@@ -21,8 +21,8 @@ const preloadedState = {
 };
 
 describe('ResetModal', () => {
-  const useSelectorMock = vi.spyOn(reactRedux, 'useAppSelector');
-  const useDispatchMock = vi.spyOn(reactRedux, 'useAppDispatch');
+  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
+  const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
   const useNavigateMock = vi.spyOn(reactRouterDom, 'useNavigate');
 
   beforeEach(() => {

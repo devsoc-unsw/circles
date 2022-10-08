@@ -39,7 +39,7 @@
     "build": "vite build",
     "preview": "vite preview --port 3000 --host",
     "preview:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.csesoc.app vite preview --port 3000 --host",
-    "test": "vitest src/pages/DegreeWizard/ResetModal/",
+    "test": "vitest src/pages/DegreeWizard/SpecialisationStep/",
     "coverage": "vitest run --coverage",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}",

@@ -5,9 +5,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { renderWithProviders } from 'test/testUtil';
 import { vi } from 'vitest';
+import * as hooks from 'hooks';
 import SpecialisationStep from './SpecialisationStep';
-
-const mockIncrementStep = vi.fn();
 
 const mockAxios = new MockAdapter(axios);
 mockAxios.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
@@ -38,16 +37,27 @@ const preloadedState = {
   },
 };
 
+const incrementStepMock = vi.fn();
+
 describe('SpecialisationStep', () => {
+  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
+  const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
+
+  beforeEach(() => {
+    useSelectorMock.mockClear();
+    useDispatchMock.mockClear();
+    vi.clearAllMocks();
+  });
+
   it('should render', async () => {
     renderWithProviders(
       <SpecialisationStep
-        incrementStep={mockIncrementStep}
-        currStep={false}
+        incrementStep={incrementStepMock}
         type="majors"
       />,
       { preloadedState },
     );
+    expect(screen.queryByText('Next')).not.toBeInTheDocument();
     expect(screen.getByText('What are your majors?')).toBeInTheDocument();
     expect(await screen.findByText('Majors for Computer Science')).toBeInTheDocument();
     expect(screen.getByText('Note: COMPA1 is the default stream, and will be used if no other stream is selected.')).toBeInTheDocument();
@@ -61,17 +71,33 @@ describe('SpecialisationStep', () => {
     expect(screen.getByText('COMPJ1 Computer Science (Programming Languages)')).toBeInTheDocument();
   });
 
-  it('should call incrementStep after selecting an option', async () => {
+  it('should dispatch correct props when selecting a specialisation', async () => {
+    const dummyDispatch = vi.fn();
+    useDispatchMock.mockReturnValue(dummyDispatch);
+
     renderWithProviders(
       <SpecialisationStep
-        incrementStep={mockIncrementStep}
-        currStep={false}
+        incrementStep={incrementStepMock}
         type="majors"
       />,
       { preloadedState },
     );
-    expect(mockIncrementStep).not.toHaveBeenCalled();
     await userEvent.click(await screen.findByText('COMPA1 Computer Science'));
-    expect(mockIncrementStep).toHaveBeenCalled();
+    expect(dummyDispatch).toBeCalledWith({
+      payload: 'COMPA1',
+      type: 'degree/addSpecialisation',
+    });
+  });
+
+  it('should display "Next" button when on current step and call incrementStep', async () => {
+    renderWithProviders(
+      <SpecialisationStep
+        incrementStep={incrementStepMock}
+        currStep
+        type="majors"
+      />,
+      { preloadedState },
+    );
+    await userEvent.click(await screen.findByText('Next'));
   });
 });

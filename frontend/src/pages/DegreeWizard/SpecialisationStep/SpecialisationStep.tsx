@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
 import type { RootState } from 'config/store';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
@@ -16,7 +16,7 @@ const { Title } = Typography;
 
 type Props = {
   incrementStep: (stepTo?: Steps) => void
-  currStep: boolean
+  currStep?: boolean
   type: string
 };
 
@@ -29,8 +29,8 @@ type Specialisation = {
 
 const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useDispatch();
-  const { programCode, specs } = useSelector((store: RootState) => store.degree);
+  const dispatch = useAppDispatch();
+  const { programCode, specs } = useAppSelector((store: RootState) => store.degree);
   const [options, setOptions] = useState<Specialisation>({ someProgramName: { specs: { major: 'major data' }, notes: 'a note' } });
 
   const fetchAllSpecialisations = useCallback(async () => {

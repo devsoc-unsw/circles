@@ -5,7 +5,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { renderWithProviders } from 'test/testUtil';
 import { vi } from 'vitest';
-import * as reactRedux from 'hooks';
+import * as hooks from 'hooks';
 import Steps from '../common/steps';
 import DegreeStep from './DegreeStep';
 
@@ -19,8 +19,8 @@ mockAxios.onGet('/programs/getPrograms').reply(200, {
 const incrementStepMock = vi.fn();
 
 describe('DegreeStep', () => {
-  const useSelectorMock = vi.spyOn(reactRedux, 'useAppSelector');
-  const useDispatchMock = vi.spyOn(reactRedux, 'useAppDispatch');
+  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
+  const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
 
   beforeEach(() => {
     useSelectorMock.mockClear();
