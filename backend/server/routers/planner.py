@@ -51,3 +51,13 @@ def validate_term_planner(plannerData: PlannerData):
     coursesState = validate_terms(data)
 
     return {"courses_state": coursesState}
+
+@router.post("/planner/movecourse", response_model=ElliotMoveCourseInfo)
+def movCourse(data: ElliotMoveCourseInfo):
+    course, destTerm, srcTerm = data.course, data.destTerm, data.srcTerm
+    courseInfo = get_course(course)
+    if courseInfo.ismultiterm():
+        year = int(destTerm[:4])
+        term = destTerm[4:]
+        uoc, termsOffered = courseInfo.uoc, courseInfo.termsOffered
+        

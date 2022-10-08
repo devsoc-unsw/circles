@@ -1,5 +1,6 @@
 """ model for interacting with the FE """
 # pylint: disable=missing-class-docstring
+from enum import Enum
 import json
 import pickle
 from typing import Literal, Optional, TypedDict
