@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { setupStore } from 'config/store';
 import {
   addSpecialisation,
@@ -9,7 +8,7 @@ import {
   setProgram,
 } from './degreeSlice';
 
-describe('Degree slice redux state tests', () => {
+describe('degreeSlice reducer tests', () => {
   it('tests setProgram reducer', () => {
     const store = setupStore();
     store.dispatch(setProgram({ programCode: '3778', programName: 'Computer Science' }));

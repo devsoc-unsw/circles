@@ -12,7 +12,7 @@ export const initialDegreeState: DegreeSliceState = {
   programCode: '',
   programName: '',
   specs: [],
-  isComplete: false,
+  isComplete: false, // boolean to identify if the degree setup is completed
 };
 
 const degreeSlice = createSlice({
