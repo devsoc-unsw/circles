@@ -5,6 +5,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { renderWithProviders } from 'test/testUtil';
 import { vi } from 'vitest';
+import * as reactRedux from 'hooks';
 import Steps from '../common/steps';
 import DegreeStep from './DegreeStep';
 
@@ -15,30 +16,67 @@ mockAxios.onGet('/programs/getPrograms').reply(200, {
   },
 });
 
-const mockIncrementStep = vi.fn();
+const incrementStepMock = vi.fn();
 
 describe('DegreeStep', () => {
+  const useSelectorMock = vi.spyOn(reactRedux, 'useAppSelector');
+  const useDispatchMock = vi.spyOn(reactRedux, 'useAppDispatch');
+
   beforeEach(() => {
-    vi.resetAllMocks();
+    incrementStepMock.mockClear();
+    useSelectorMock.mockClear();
+    useDispatchMock.mockClear();
+    vi.clearAllMocks();
   });
 
   it('should render', () => {
-    renderWithProviders(<DegreeStep incrementStep={mockIncrementStep} />);
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.getByText('What are you studying?')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
   });
 
   it('should show no degree options on mount', async () => {
-    renderWithProviders(<DegreeStep incrementStep={mockIncrementStep} />);
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.queryByText('Computer Science')).not.toBeInTheDocument();
   });
 
-  it('should show options and call incrementStep after selecting degree', async () => {
-    renderWithProviders(<DegreeStep incrementStep={mockIncrementStep} />);
-    expect(mockIncrementStep).not.toHaveBeenCalled();
-    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
+  it('should search degree based on program code', async () => {
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    userEvent.type(screen.getByPlaceholderText('Search Degree'), '3778');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('3778 Computer Science'));
-    expect(mockIncrementStep).toHaveBeenCalledWith(Steps.SPECS);
+  });
+
+  it('should search degree based on program name', async () => {
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Computer Science');
+    expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
+  });
+
+  it('should search degree case insensitively', async () => {
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'computer science');
+    expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
+  });
+
+  it('should not show degree options if no match', async () => {
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Economics');
+    expect(screen.queryByTestId('antd-degree-menu')).not.toBeInTheDocument();
+  });
+
+  it('should dispatch correct props and call incrementStep after selecting degree', async () => {
+    const dummyDispatch = vi.fn();
+    useDispatchMock.mockReturnValue(dummyDispatch);
+    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
+    await userEvent.click(await screen.findByText('3778 Computer Science'));
+    expect(dummyDispatch).toBeCalledWith({
+      payload: {
+        programCode: '3778',
+        programName: 'Computer Science',
+      },
+      type: 'degree/setProgram',
+    });
+    expect(incrementStepMock).toHaveBeenCalledWith(Steps.SPECS);
   });
 });
