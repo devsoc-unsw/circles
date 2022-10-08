@@ -1,88 +1,74 @@
+import { setupStore } from 'config/store';
 import {
-  afterEach, describe, expect, it,
-} from 'vitest';
-import store from 'config/store';
-import {
-  addSpecialisation, removeSpecialisation, resetDegree, setIsComplete, setProgram,
+  addSpecialisation,
+  initialDegreeState,
+  removeSpecialisation,
+  resetDegree,
+  setIsComplete,
+  setProgram,
 } from './degreeSlice';
 
-const initialState = {
-  programCode: '',
-  programName: '',
-  specs: [],
-  isComplete: false,
-};
-
-describe('Degree slice redux state tests', () => {
-  afterEach(() => {
-    // TODO make this reset store without using this reducer
-    store.dispatch(resetDegree());
-  });
-
-  it('should be initialised to initial state', () => {
-    const { degree } = store.getState();
-    expect(degree).toEqual(initialState);
-  });
-
-  it('should set program code and name', () => {
+describe('degreeSlice reducer tests', () => {
+  it('tests setProgram reducer', () => {
+    const store = setupStore();
     store.dispatch(setProgram({ programCode: '3778', programName: 'Computer Science' }));
-    const { degree } = store.getState();
-    expect(degree).toEqual({
-      ...initialState,
+    expect(store.getState().degree).toEqual({
+      ...initialDegreeState,
       programCode: '3778',
       programName: 'Computer Science',
     });
   });
 
-  it('should be able to add specialisations', () => {
+  it('tests addSpecialisation reducer', () => {
+    const store = setupStore();
     store.dispatch(addSpecialisation('COMPA1'));
-    let { degree } = store.getState();
-    expect(degree).toEqual({
-      ...initialState,
+    expect(store.getState().degree).toEqual({
+      ...initialDegreeState,
       specs: ['COMPA1'],
     });
 
     store.dispatch(addSpecialisation('INFSA2'));
-    degree = store.getState().degree;
-    expect(degree).toEqual({
-      ...initialState,
+    expect(store.getState().degree).toEqual({
+      ...initialDegreeState,
       specs: ['COMPA1', 'INFSA2'],
     });
   });
 
-  it('should be able to remove a specialisation', () => {
-    store.dispatch(addSpecialisation('COMPA1'));
-    store.dispatch(addSpecialisation('INFSA2'));
-    let { degree } = store.getState();
-    expect(degree).toEqual({
-      ...initialState,
-      specs: ['COMPA1', 'INFSA2'],
-    });
-
+  it('tests removeSpecialisation reducer', () => {
+    const store = setupStore({ degree: { ...initialDegreeState, specs: ['COMPA1', 'INFSA2'] } });
     store.dispatch(removeSpecialisation('COMPA1'));
-    degree = store.getState().degree;
-    expect(degree).toEqual({
-      ...initialState,
+    expect(store.getState().degree).toEqual({
+      ...initialDegreeState,
       specs: ['INFSA2'],
     });
   });
 
-  it('should be able to remove non existent specialisation', () => {
-    store.dispatch(addSpecialisation('COMPA1'));
-    let { degree } = store.getState();
+  it('tests removeSpecialisation reducer for non existent specialisation', () => {
+    const store = setupStore({ degree: { ...initialDegreeState, specs: ['COMPA1'] } });
 
-    // removing a non existent spec
     store.dispatch(removeSpecialisation('NOTASPEC'));
-    degree = store.getState().degree;
-    expect(degree).toEqual({
-      ...initialState,
+    expect(store.getState().degree).toEqual({
+      ...initialDegreeState,
       specs: ['COMPA1'],
     });
   });
 
-  it('should be set isComplete', () => {
+  it('tests setIsComplete reducer', () => {
+    const store = setupStore();
     store.dispatch(setIsComplete(true));
-    const { degree } = store.getState();
-    expect(degree.isComplete).toEqual(true);
+    expect(store.getState().degree.isComplete).toEqual(true);
+  });
+
+  it('tests resetDegree reducer', () => {
+    const store = setupStore({
+      degree: {
+        programCode: '3778',
+        programName: 'Computer Science',
+        specs: ['COMPA1'],
+        isComplete: true,
+      },
+    });
+    store.dispatch(resetDegree());
+    expect(store.getState().degree).toEqual(initialDegreeState);
   });
 });

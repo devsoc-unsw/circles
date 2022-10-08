@@ -8,16 +8,16 @@ export type DegreeSliceState = {
   isComplete: boolean
 };
 
-const initialState: DegreeSliceState = {
+export const initialDegreeState: DegreeSliceState = {
   programCode: '',
   programName: '',
   specs: [],
-  isComplete: false,
+  isComplete: false, // boolean to identify if the degree setup is completed
 };
 
 const degreeSlice = createSlice({
   name: 'degree',
-  initialState,
+  initialState: initialDegreeState,
   reducers: {
     setProgram: (state, action: PayloadAction<{ programCode: string, programName: string }>) => {
       state.programCode = action.payload.programCode;
@@ -33,7 +33,7 @@ const degreeSlice = createSlice({
     setIsComplete: (state, action: PayloadAction<boolean>) => {
       state.isComplete = action.payload;
     },
-    resetDegree: () => initialState,
+    resetDegree: () => initialDegreeState,
   },
 });
 

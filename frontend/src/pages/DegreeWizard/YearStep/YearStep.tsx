@@ -1,15 +1,15 @@
 import React, { Suspense } from 'react';
-import { useDispatch } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
 import Spinner from 'components/Spinner';
+import { useAppDispatch } from 'hooks';
 import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
-const RangePicker = React.lazy(() => import('../../../components/Datepicker').then((d) => ({ default: d.default.RangePicker })));
+const RangePicker = React.lazy(() => import('components/Datepicker').then((d) => ({ default: d.default.RangePicker })));
 
 type Props = {
   incrementStep: (stepTo?: Steps) => void
@@ -17,7 +17,7 @@ type Props = {
 
 const YearStep = ({ incrementStep }: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <CS.StepContentWrapper id="year">
@@ -27,6 +27,7 @@ const YearStep = ({ incrementStep }: Props) => {
         </Title>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
           <RangePicker
+            data-testid="antd-rangepicker"
             picker="year"
             size="large"
             style={{

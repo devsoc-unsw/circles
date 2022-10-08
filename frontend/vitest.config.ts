@@ -1,14 +1,20 @@
+import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vitest/config';
 
 const projectRootDir = resolve(__dirname);
 
 export default defineConfig({
+  plugins: [react()],
   test: {
-    // TODO: add config
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: [resolve(projectRootDir, './src/test/setupTests.ts')],
+    testTimeout: 15000,
   },
   resolve: {
     alias: [
+      // TODO: alias should be sync with vite.config.ts
       { find: 'assets', replacement: resolve(projectRootDir, 'src/assets') },
       { find: 'components', replacement: resolve(projectRootDir, './src/components') },
       { find: 'config', replacement: resolve(projectRootDir, './src/config') },
@@ -17,6 +23,7 @@ export default defineConfig({
       { find: 'reducers', replacement: resolve(projectRootDir, './src/reducers') },
       { find: 'types', replacement: resolve(projectRootDir, './src/types') },
       { find: 'utils', replacement: resolve(projectRootDir, './src/utils') },
+      { find: 'test', replacement: resolve(projectRootDir, './src/test') },
     ],
   },
 });
