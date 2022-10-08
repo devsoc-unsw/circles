@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
 import axios from 'axios';
@@ -7,6 +6,7 @@ import { SpecialisationTypes } from 'types/api';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
+import { useAppSelector } from 'hooks';
 import Steps from './common/steps';
 import DegreeStep from './DegreeStep';
 import ResetModal from './ResetModal';
@@ -20,7 +20,7 @@ const { Title } = Typography;
 const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
-  const degree = useSelector((state: RootState) => state.degree);
+  const degree = useAppSelector((state: RootState) => state.degree);
 
   useEffect(() => {
     openNotification({
