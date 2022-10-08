@@ -9,21 +9,21 @@ import { vi } from 'vitest';
 import { initialDegreeState } from 'reducers/degreeSlice';
 import DegreeWizard from './DegreeWizard';
 
-const mockAxios = new MockAdapter(axios);
-mockAxios.onGet('/programs/getPrograms').reply(200, {
+const axiosMock = new MockAdapter(axios);
+axiosMock.onGet('/programs/getPrograms').reply(200, {
   programs: {
     3778: 'Computer Science',
   },
 });
 
-mockAxios.onGet('/specialisations/getSpecialisationTypes/3778').reply(200, {
+axiosMock.onGet('/specialisations/getSpecialisationTypes/3778').reply(200, {
   types: [
     'majors',
     'minors',
   ],
 });
 
-mockAxios.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
+axiosMock.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
   spec: {
     'Computer Science': {
       is_optional: false,
@@ -35,7 +35,7 @@ mockAxios.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
   },
 });
 
-mockAxios.onGet('/specialisations/getSpecialisations/3778/minors').reply(200, {
+axiosMock.onGet('/specialisations/getSpecialisations/3778/minors').reply(200, {
   spec: {
     'Computer Science': {
       is_optional: true,
@@ -59,7 +59,7 @@ describe('DegreeWizard', () => {
     expect(screen.getByText('Welcome to Circles!')).toBeInTheDocument();
   });
 
-  it('should render', async () => {
+  it('test degree wizard user flow', async () => {
     const dummyNavigate = vi.fn();
     useNavigateMock.mockReturnValue(dummyNavigate);
 

@@ -9,8 +9,8 @@ import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import SpecialisationStep from './SpecialisationStep';
 
-const mockAxios = new MockAdapter(axios);
-mockAxios.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
+const axiosMock = new MockAdapter(axios);
+axiosMock.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
   spec: {
     'Computer Science': {
       is_optional: false,

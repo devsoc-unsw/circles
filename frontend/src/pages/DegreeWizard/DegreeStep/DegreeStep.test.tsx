@@ -9,8 +9,8 @@ import * as hooks from 'hooks';
 import Steps from '../common/steps';
 import DegreeStep from './DegreeStep';
 
-const mockAxios = new MockAdapter(axios);
-mockAxios.onGet('/programs/getPrograms').reply(200, {
+const axiosMock = new MockAdapter(axios);
+axiosMock.onGet('/programs/getPrograms').reply(200, {
   programs: {
     3778: 'Computer Science',
   },
