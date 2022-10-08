@@ -12,7 +12,7 @@
     "@reduxjs/toolkit": "1.8.5",
     "@tippyjs/react": "4.2.6",
     "antd": "4.23.4",
-    "axios": "0.27.2",
+    "axios": "1.1.0",
     "dayjs": "1.11.5",
     "rc-picker": "2.6.10",
     "react": "18.2.0",
