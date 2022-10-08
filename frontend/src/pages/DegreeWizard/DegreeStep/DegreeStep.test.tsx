@@ -19,11 +19,9 @@ mockAxios.onGet('/programs/getPrograms').reply(200, {
 const incrementStepMock = vi.fn();
 
 describe('DegreeStep', () => {
-  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
 
   beforeEach(() => {
-    useSelectorMock.mockClear();
     useDispatchMock.mockClear();
     vi.clearAllMocks();
   });

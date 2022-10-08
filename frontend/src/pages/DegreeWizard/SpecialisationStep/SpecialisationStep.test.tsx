@@ -45,11 +45,9 @@ const preloadedState = {
 const incrementStepMock = vi.fn();
 
 describe('SpecialisationStep', () => {
-  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
 
   beforeEach(() => {
-    useSelectorMock.mockClear();
     useDispatchMock.mockClear();
     vi.clearAllMocks();
   });

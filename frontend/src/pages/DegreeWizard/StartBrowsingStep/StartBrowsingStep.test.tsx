@@ -17,12 +17,10 @@ vi.mock('utils/openNotification', () => ({
 }));
 
 describe('StartBrowsingStep', () => {
-  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
   const useNavigateMock = vi.spyOn(reactRouterDom, 'useNavigate');
 
   beforeEach(() => {
-    useSelectorMock.mockClear();
     useDispatchMock.mockClear();
     useNavigateMock.mockClear();
     vi.clearAllMocks();

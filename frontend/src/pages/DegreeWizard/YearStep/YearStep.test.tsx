@@ -10,11 +10,9 @@ import YearStep from './YearStep';
 const incrementStepMock = vi.fn();
 
 describe('YearStep', () => {
-  const useSelectorMock = vi.spyOn(hooks, 'useAppSelector');
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
 
   beforeEach(() => {
-    useSelectorMock.mockClear();
     useDispatchMock.mockClear();
     vi.clearAllMocks();
   });
@@ -30,7 +28,7 @@ describe('YearStep', () => {
     useDispatchMock.mockReturnValue(dummyDispatch);
 
     renderWithProviders(<YearStep incrementStep={incrementStepMock} />);
-    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), { timeout: 5000 });
     await userEvent.click(screen.getByTestId('antd-rangepicker'));
     await userEvent.click(screen.getByText('2020'));
     await userEvent.click(screen.getByText('2022'));
