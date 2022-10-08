@@ -12,7 +12,8 @@ from typing import Callable
 
 from algorithms.cache.cache import (cache_equivalents, cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
-from algorithms.create_program import create_all_program_conditions
+
+from algorithms.create_program import process_program_conditions
 from data.processors.cache_graph import cache_graph
 from data.processors.load_conditions import cache_conditions_pkl_file
 from data.processors.log_broken import log_broken_conditions
@@ -133,7 +134,7 @@ run: dict[str, dict[str, Callable]] = {
     "program_condition": {
         "pre_process": pre_process,
         "tokenise": tokenise_program_conditions,
-        # "process": create_all_program_conditions,
+        "process": process_program_conditions,
     },
     "enrolment": {
         "scrape": run_scrape_enrolment_data,

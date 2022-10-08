@@ -57,7 +57,7 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
     # Assumption: Only one condition per sentence. No misc. `.`
     notes: List[str] = [
         note.strip() for note in notes_raw.split(".")
-        if len(note) > 0
+        if note
     ]
     return [
         pre_process_maturity_condition(note)
@@ -69,17 +69,17 @@ def pre_process_maturity_condition(string: str) -> Dict[str, str]:
     Pre-processes a maturity condition.
     These conditions are constructed of two sections
         - "dependency": This is the conditin that must be passed before anything
-                        from the dependant my be satisfied.
-        - "dependant": This is the condition that is restricted and cannot be
+                        from the dependent my be satisfied.
+        - "dependent": This is the condition that is restricted and cannot be
                         fulfilled before the dependency is satisfied.
     """
     components: List[str] = string.split("before")
     dependency: str = components[0].strip()
-    dependant: str = components[1].strip()
+    dependent: str = components[1].strip()
     return {
-        # "dependency": "", "dependant": "",
+        # "dependency": "", "dependent": "",
         "dependency": dependency,
-        "dependant": dependant
+        "dependent": dependent
     }
 
 

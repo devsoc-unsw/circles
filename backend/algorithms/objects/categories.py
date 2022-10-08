@@ -149,3 +149,24 @@ class FacultyCategory(Category):
 
     def __str__(self) -> str:
         return self.faculty
+
+
+class GenEdCategory(Category):
+    """
+    Category for a course being a Gened
+        - This is condition is unique in the sense that it's matching is
+          contingent on the user's program
+
+    NOT IMPLEMENTED!!!!!!
+    """
+
+    def __init__(self):
+        pass
+
+    def match_definition(self, course: str) -> bool:
+        # TODO: Implement this
+        return False
+
+    def __str__(self) -> str:
+        return "GenEdCategory"
+
