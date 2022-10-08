@@ -47,7 +47,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   }, [programCode, type]);
 
   useEffect(() => {
-    if (!programCode) fetchAllSpecialisations();
+    if (programCode) fetchAllSpecialisations();
   }, [fetchAllSpecialisations, programCode, type]);
 
   const menuItems: MenuProps['items'] = options ? Object.keys(options).map((program, index) => ({
