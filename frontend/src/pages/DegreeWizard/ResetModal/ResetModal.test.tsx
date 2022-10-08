@@ -15,7 +15,7 @@ const preloadedState = {
   degree: {
     programCode: '3778',
     programName: 'Computer Science',
-    specs: ['COMP1A'],
+    specs: ['COMPA1'],
     isComplete: true,
   },
 };
@@ -51,7 +51,7 @@ describe('ResetModal', () => {
         degree: {
           programCode: '3778',
           programName: 'Computer Science',
-          specs: ['COMP1A'],
+          specs: ['COMPA1'],
           isComplete: true,
         },
       },

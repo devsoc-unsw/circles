@@ -80,7 +80,7 @@ describe('StartBrowsingStep', () => {
         degree: {
           programCode: '3778',
           programName: 'Computer Science',
-          specs: ['COMP1A'],
+          specs: ['COMPA1'],
           isComplete: false,
         },
       },
