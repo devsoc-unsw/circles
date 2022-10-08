@@ -120,8 +120,7 @@ def get_course(courseCode: str) -> Dict:
     Get info about a course given its courseCode
     - start with the current database
     - if not found, check the archives
-    """
-    print("\n\nYOU REQUESTED:", courseCode)
+    """ 
     result = coursesCOL.find_one({"code": courseCode})
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):

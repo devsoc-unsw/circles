@@ -21,7 +21,8 @@
             "unplanned": [],
             "startYear": 2020,
             "numYears": 3,
-            "isSummerEnabled": true
+            "isSummerEnabled": true,
+            "courses": {}
         }
     },
     "simple_year": {
@@ -54,7 +55,131 @@
             "unplanned": ["COMP6447"],
             "startYear": 2020,
             "numYears": 3,
-            "isSummerEnabled": false
+            "isSummerEnabled": false,
+            "courses": {
+                "COMP1511": {
+                    "title": "Programming Fundamentals",
+                    "termsOffered": [
+                        "T1",
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T1",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "MATH1141": {
+                    "title": "Higher Mathematics 1A",
+                    "termsOffered": [
+                        "T1",
+                        "T2"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T1",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "MATH1081": {
+                    "title": "Discrete Mathematics",
+                    "termsOffered": [
+                        "T1",
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T1",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "COMP1521": {
+                    "title": "Computer Hardware Fundamentals",
+                    "termsOffered": [
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T2",
+                    "prereqs": "Prerequsite: COMP1511",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "COMP1531": {
+                    "title": "Software Engineering Fundamentals",
+                    "termsOffered": [
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T2",
+                    "prereqs": "Prerequsite: COMP1511",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "COMP2521": {
+                    "title": "Data Structures and Algorithms",
+                    "termsOffered": [
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T2",
+                    "prereqs": "Prerequsite: COMP1511",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "COMP6447": {
+                    "title": "terrible sec course",
+                    "termsOffered": [
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": null,
+                    "prereqs": "Prerequsite: COMP6841",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": true,
+                    "mark": 67
+                }
+            }
         }
     }
 }

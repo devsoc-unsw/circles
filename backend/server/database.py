@@ -91,6 +91,23 @@ def create_dynamic_db():
                             },
                         }
                     },
+                    'courses': {
+                        'bsonType': 'array',
+                        'items': {
+                            'bsonType': 'object',
+                            'properties': {
+                                'mark': {
+                                    'bsonType': ['int', 'null']
+                                },
+                                'code': {
+                                    'bsonType': 'string'
+                                },
+                                'suppressed': {
+                                    'bsonType': 'bool'
+                                }
+                            }
+                        }
+                    },
                     'planner': {
                         'bsonType': 'object',
                         'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'years'],

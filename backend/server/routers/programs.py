@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations """
 from contextlib import suppress
 import functools
 import re
-from typing import Callable, Dict, List, Mapping, Optional, Tuple, cast
+from typing import Callable, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
 
@@ -24,6 +24,7 @@ from server.routers.model import (
     Programs,
     Structure,
     StructureContainer,
+    StructureDict,
 )
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
@@ -63,7 +64,6 @@ def programs_index() -> str:
 def get_programs() -> dict[str, dict[str, str]]:
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
-    # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {
         "programs": {
             "3778": "Computer Science",
@@ -78,7 +78,7 @@ def get_programs() -> dict[str, dict[str, str]]:
         }
     }
 
-def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> Mapping[str, str | list[str]]:
+def convert_subgroup_object_to_courses_dict(object: str, description: str | list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object and isinstance(description, list):
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
@@ -145,7 +145,7 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
     else:
         type = "Honours"
 
-    spnResult = cast(Specialisation | None, specialisationsCOL.find_one({"code": code}))
+    spnResult = cast(Optional[Specialisation], specialisationsCOL.find_one({"code": code}))
     type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
@@ -244,7 +244,7 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
     programCode: str, spec: Optional[str] = None
-):
+) -> StructureDict:
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
     structure: dict[str, StructureContainer] = {}
@@ -261,7 +261,7 @@ def get_structure(
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=CourseCodes)
 @router.get("/getStructureCourseList/{programCode}", response_model=CourseCodes)
 def get_structure_course_list(
-        programCode: str, spec: Optional[str]=None
+        programCode: str, spec: Optional[str] = None
     ):
     """
         Similar to `/getStructure` but, returns a raw list of courses with no further
@@ -310,7 +310,7 @@ def get_gen_eds(programCode: str):
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
 def graph(
-        programCode: str, spec: Optional[str]=None
+        programCode: str, spec: Optional[str] = None
     ):
     """
     Constructs a structure for the frontend to use for the graphical
@@ -331,9 +331,9 @@ def graph(
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
-    failed_courses: List[str] = []
+    failed_courses: list[str] = []
 
-    proto_edges: List[Dict[str, str]] = [map_suppressed_errors(
+    proto_edges: list[dict[str, str]] = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
     edges = prune_edges(
@@ -430,7 +430,7 @@ def compose(*functions: Callable) -> Callable:
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
 
-def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
+def proto_edges_to_edges(proto_edges: list[dict[str, str]]) -> list[dict[str, str]]:
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.
@@ -442,9 +442,9 @@ def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, st
     ]
     Effectively, turning an adjacency list into a flat list of edges
     """
-    edges: List = []
+    edges = []
     for proto_edge in proto_edges:
-        # Incoming: { original: str,  courses: List[str]}
+        # Incoming: { original: str,  courses: list[str]}
         # Outcome:  { "src": str, "target": str }
         if not proto_edge or not proto_edge["courses"]:
             continue
@@ -456,7 +456,7 @@ def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, st
             )
     return edges
 
-def prune_edges(edges: List[Dict[str, str]], courses: List[str]) -> List[Dict[str, str]]:
+def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[str, str]]:
     """
     Remove edges between vertices that are not in the list of courses provided.
     """

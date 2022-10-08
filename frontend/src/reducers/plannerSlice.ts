@@ -76,6 +76,7 @@ const plannerSlice = createSlice({
         state.unplanned.push(courseCode);
       }
     },
+    // this is a setting, should be handled on FE settings.
     toggleWarnings: (state, action: PayloadAction<CourseStates>) => {
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {

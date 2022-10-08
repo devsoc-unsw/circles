@@ -1,3 +1,4 @@
+from itertools import chain
 from typing import cast
 from fastapi import APIRouter, HTTPException
 from server.database import usersDB
@@ -28,12 +29,25 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
 @router.post("/saveLocalStorage/")
 def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     # TODO: turn giving no token into an error
-    # THINK: this is wierd security wise, because we are setting it to what we are given no ma
+    planned: list[str] = sum((sum(year.values(), []) for year in localStorage.planner['years']), [])
+    unplanned: list[str] = localStorage.planner['unplanned']
+    courses = [
+        {
+            'code': course,
+            'suppressed': localStorage.planner['courses'][course]['supressed'], # this is peter's fault for sucking at spelling
+            'mark': localStorage.planner['courses'][course].get('mark', None)
+        }
+        for course in chain(planned, unplanned)
+    ]
+    # cancer, but the FE inspired this cancer
+    real_planner = localStorage.planner.copy()
+    real_planner.pop('courses') # type: ignore
     item = {
         'degree': localStorage.degree,
-        'planner': localStorage.planner
+        'planner': real_planner,
+        'courses': courses
     }
-    set_user(token, cast(Storage, item), True) # TODO: turn to false
+    set_user(token, cast(Storage, item))
 
 @router.get("/data/{token}")
 def get_user(token: str) -> Storage:
@@ -47,4 +61,17 @@ def get_user(token: str) -> Storage:
 def toggle_summer_term(token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
+    set_user(token, user, True)
+
+@router.post("/toggleWarnings")
+def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    for course in courses:
+        user['planner']['courses'][course]['suppress'] = not user['planner']['courses'][course]['suppress']
+    set_user(token, user, True)
+
+@router.post("/updateCourseMark")
+def update_course_mark(course: str, mark: int, token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    user['planner']['courses'][course]['mark'] = mark
     set_user(token, user, True)

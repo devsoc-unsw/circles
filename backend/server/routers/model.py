@@ -165,7 +165,8 @@ class PlannerLocalStorage(TypedDict):
     startYear: int
     numYears: int
     isSummerEnabled: bool
-    years: list[dict[str, None | list[str]]]
+    years: list[dict[str, list[str]]]
+    courses: dict[str, dict]
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage
@@ -203,6 +204,10 @@ class TermsList(BaseModel):
     terms: Optional[dict[str, Optional[list[str]]]]
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
+
+class StructureDict(TypedDict):
+    structure: dict[str, StructureContainer]
+    uoc: int
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
