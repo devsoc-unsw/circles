@@ -1,5 +1,6 @@
 """ model for interacting with the FE """
 # pylint: disable=missing-class-docstring
+from enum import Enum
 import json
 import pickle
 from typing import Literal, Optional, TypedDict
@@ -203,6 +204,17 @@ class TermsList(BaseModel):
     terms: Optional[dict[str, Optional[list[str]]]]
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
+
+class ElliotMoveCourseInfo(BaseModel):
+    course: str
+    destTerm: str
+    srcTerm: str
+
+class ElliotTermEnum(Enum):
+    T0 = 0
+    T1 = 1
+    T2 = 2
+    T3 = 3
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

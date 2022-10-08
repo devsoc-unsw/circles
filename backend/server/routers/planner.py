@@ -3,9 +3,11 @@ route for planner algorithms
 """
 from fastapi import APIRouter
 from algorithms.objects.user import User
+from server.routers.model import ElliotMoveCourseInfo, ElliotTermEnum
 from server.routers.courses import get_course
 from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
 from server.routers.utility import get_core_courses
+from server.database import coursesCOL
 
 
 def fix_planner_data(plannerData: PlannerData):
@@ -79,3 +81,13 @@ def validate_term_planner(plannerData: PlannerData):
         user.year += 1
 
     return {"courses_state": coursesState}
+
+@router.post("/planner/movecourse", response_model=ElliotMoveCourseInfo)
+def movCourse(data: ElliotMoveCourseInfo):
+    course, destTerm, srcTerm = data.course, data.destTerm, data.srcTerm
+    courseInfo = get_course(course)
+    if courseInfo.ismultiterm():
+        year = int(destTerm[:4])
+        term = destTerm[4:]
+        uoc, termsOffered = courseInfo.uoc, courseInfo.termsOffered
+        
