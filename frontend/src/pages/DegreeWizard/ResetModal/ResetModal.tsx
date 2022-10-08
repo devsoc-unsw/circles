@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'antd';
 import type { RootState } from 'config/store';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
 import { resetDegree } from 'reducers/degreeSlice';
@@ -10,9 +10,9 @@ import { resetPlanner } from 'reducers/plannerSlice';
 
 const ResetModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const degree = useSelector((state: RootState) => state.degree);
+  const degree = useAppSelector((state: RootState) => state.degree);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (degree.isComplete) {

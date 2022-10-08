@@ -37,6 +37,7 @@ describe('DegreeStep', () => {
   it('should dispatch correct props and call incrementStep after selecting degree', async () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
+
     renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
