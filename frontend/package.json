@@ -74,6 +74,7 @@
     "@typescript-eslint/eslint-plugin": "5.38.1",
     "@typescript-eslint/parser": "5.38.1",
     "@vitejs/plugin-react": "2.1.0",
+    "@vitest/coverage-c8": "^0.24.0",
     "axios-mock-adapter": "1.21.2",
     "eslint": "8.24.0",
     "eslint-config-airbnb": "19.0.4",
