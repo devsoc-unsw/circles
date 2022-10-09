@@ -31,8 +31,12 @@ const AttributeWrapper = styled.div`
 
 const InfographicContainer = styled.div`
   @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   display: flex;
@@ -59,5 +63,5 @@ export default {
   AttributesContent,
   DescriptionTitleBar,
   AttributeWrapper,
-  InfographicContainer,
+  InfographicContainer
 };

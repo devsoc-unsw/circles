@@ -12,8 +12,8 @@ import DegreeStep from './DegreeStep';
 const axiosMock = new MockAdapter(axios);
 axiosMock.onGet('/programs/getPrograms').reply(200, {
   programs: {
-    3778: 'Computer Science',
-  },
+    3778: 'Computer Science'
+  }
 });
 
 const incrementStepMock = vi.fn();
@@ -43,9 +43,9 @@ describe('DegreeStep', () => {
     expect(dummyDispatch).toBeCalledWith({
       payload: {
         programCode: '3778',
-        programName: 'Computer Science',
+        programName: 'Computer Science'
       },
-      type: 'degree/setProgram',
+      type: 'degree/setProgram'
     });
     expect(incrementStepMock).toHaveBeenCalledWith(Steps.SPECS);
   });

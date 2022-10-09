@@ -8,7 +8,7 @@ import * as hooks from 'hooks';
 import ResetModal from './ResetModal';
 
 vi.mock('react-router-dom', () => ({
-  useNavigate: vi.fn(),
+  useNavigate: vi.fn()
 }));
 
 const preloadedState = {
@@ -16,8 +16,8 @@ const preloadedState = {
     programCode: '3778',
     programName: 'Computer Science',
     specs: ['COMPA1'],
-    isComplete: true,
-  },
+    isComplete: true
+  }
 };
 
 describe('ResetModal', () => {
@@ -50,16 +50,16 @@ describe('ResetModal', () => {
           programCode: '3778',
           programName: 'Computer Science',
           specs: ['COMPA1'],
-          isComplete: true,
-        },
-      },
+          isComplete: true
+        }
+      }
     });
     await userEvent.click(screen.getByText('Reset'));
     expect(dummyDispatch.mock.calls).toEqual([
       [{ payload: undefined, type: 'planner/resetPlanner' }],
       [{ payload: undefined, type: 'degree/resetDegree' }],
       [{ payload: undefined, type: 'courseTabs/resetTabs' }],
-      [{ payload: undefined, type: 'courses/resetCourses' }],
+      [{ payload: undefined, type: 'courses/resetCourses' }]
     ]);
   });
 

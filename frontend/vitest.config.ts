@@ -13,11 +13,11 @@ export default defineConfig({
     testTimeout: 15000,
     reporters: ['default', 'junit'],
     outputFile: {
-      junit: './junit/fe-test-results.xml',
+      junit: './junit/fe-test-results.xml'
     },
     coverage: {
-      provider: 'istanbul',
-    },
+      provider: 'istanbul'
+    }
   },
   resolve: {
     alias: [
@@ -30,7 +30,7 @@ export default defineConfig({
       { find: 'reducers', replacement: resolve(projectRootDir, './src/reducers') },
       { find: 'types', replacement: resolve(projectRootDir, './src/types') },
       { find: 'utils', replacement: resolve(projectRootDir, './src/utils') },
-      { find: 'test', replacement: resolve(projectRootDir, './src/test') },
-    ],
-  },
+      { find: 'test', replacement: resolve(projectRootDir, './src/test') }
+    ]
+  }
 });

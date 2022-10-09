@@ -4,7 +4,7 @@ import CS from '../common/styles';
 import S from './styles';
 
 type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>
+  plannerRef: React.RefObject<HTMLDivElement>;
 };
 
 const ExportPlannerMenu = ({ plannerRef }: Props) => {
@@ -14,7 +14,9 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
   const [format, setFormat] = useState('png');
 
   const download = async () => {
-    const { exportComponentAsJPEG, exportComponentAsPNG } = await import('react-component-export-image');
+    const { exportComponentAsJPEG, exportComponentAsPNG } = await import(
+      'react-component-export-image'
+    );
     if (format === 'png') {
       exportComponentAsPNG(plannerRef, exportFields);
     } else if (format === 'jpg') {
@@ -30,7 +32,9 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
         <CS.MenuText>File Type</CS.MenuText>
         <Radio.Group onChange={(e) => setFormat(e.target.value as string)} defaultValue="png">
           {exportFormats.map((form) => (
-            <Radio value={form} className="text">{form}</Radio>
+            <Radio value={form} className="text">
+              {form}
+            </Radio>
           ))}
         </Radio.Group>
       </CS.PopupEntry>

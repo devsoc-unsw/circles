@@ -9,11 +9,11 @@ import * as hooks from 'hooks';
 import StartBrowsingStep from './StartBrowsingStep';
 
 vi.mock('react-router-dom', () => ({
-  useNavigate: vi.fn(),
+  useNavigate: vi.fn()
 }));
 
 vi.mock('utils/openNotification', () => ({
-  default: vi.fn(),
+  default: vi.fn()
 }));
 
 describe('StartBrowsingStep', () => {
@@ -38,14 +38,14 @@ describe('StartBrowsingStep', () => {
           programCode: '',
           programName: '',
           specs: [],
-          isComplete: false,
-        },
-      },
+          isComplete: false
+        }
+      }
     });
     await userEvent.click(screen.getByText('Start browsing courses!'));
     expect(openNotification).toBeCalledWith({
       message: 'Please select a degree',
-      type: 'error',
+      type: 'error'
     });
   });
 
@@ -56,14 +56,14 @@ describe('StartBrowsingStep', () => {
           programCode: '3778',
           programName: 'Computer Science',
           specs: [],
-          isComplete: false,
-        },
-      },
+          isComplete: false
+        }
+      }
     });
     await userEvent.click(screen.getByText('Start browsing courses!'));
     expect(openNotification).toBeCalledWith({
       message: 'Please select a specialisation',
-      type: 'error',
+      type: 'error'
     });
   });
 
@@ -79,14 +79,14 @@ describe('StartBrowsingStep', () => {
           programCode: '3778',
           programName: 'Computer Science',
           specs: ['COMPA1'],
-          isComplete: false,
-        },
-      },
+          isComplete: false
+        }
+      }
     });
     await userEvent.click(screen.getByText('Start browsing courses!'));
     expect(dummyDispatch).toBeCalledWith({
       payload: true,
-      type: 'degree/setIsComplete',
+      type: 'degree/setIsComplete'
     });
     expect(dummyNavigate).toBeCalledWith('/course-selector');
   });

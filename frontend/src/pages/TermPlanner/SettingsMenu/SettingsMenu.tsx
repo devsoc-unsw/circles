@@ -33,7 +33,8 @@ const SettingsMenu = () => {
       openNotification({
         type: 'info',
         message: 'Your summer term courses have been unplanned',
-        description: 'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.',
+        description:
+          'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
       });
     }
   }
@@ -66,13 +67,11 @@ const SettingsMenu = () => {
       </CS.PopupEntry>
       <CS.PopupEntry>
         <CS.MenuText>Degree Length</CS.MenuText>
-        <Select
-          value={numYears}
-          style={{ width: 70 }}
-          onChange={handleUpdateDegreeLength}
-        >
+        <Select value={numYears} style={{ width: 70 }} onChange={handleUpdateDegreeLength}>
           {years.map((num) => (
-            <Option key={num} value={num}>{num}</Option>
+            <Option key={num} value={num}>
+              {num}
+            </Option>
           ))}
         </Select>
       </CS.PopupEntry>

@@ -1,9 +1,6 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  BrowserRouter as Router, Route,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';

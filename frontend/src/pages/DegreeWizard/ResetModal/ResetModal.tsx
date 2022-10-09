@@ -50,12 +50,11 @@ const ResetModal = () => {
         </Button>,
         <Button key="submit" type="primary" danger onClick={handleOk}>
           Reset
-        </Button>,
+        </Button>
       ]}
     >
       <div>
-        Are you sure want to reset your planner? Your existing data will be
-        permanently removed.
+        Are you sure want to reset your planner? Your existing data will be permanently removed.
       </div>
     </Modal>
   );

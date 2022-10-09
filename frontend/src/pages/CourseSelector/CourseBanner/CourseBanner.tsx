@@ -9,15 +9,15 @@ import S from './styles';
 const { Title } = Typography;
 
 const CourseBanner = () => {
-  const {
-    programCode, programName,
-  } = useSelector((state: RootState) => state.degree);
+  const { programCode, programName } = useSelector((state: RootState) => state.degree);
 
   const dispatch = useDispatch();
 
   return (
     <S.BannerWrapper>
-      <Title level={2} className="text">{programCode} - {programName}</Title>
+      <Title level={2} className="text">
+        {programCode} - {programName}
+      </Title>
       <CourseSearchBar onSelectCallback={(courseCode) => dispatch(addTab(courseCode))} />
     </S.BannerWrapper>
   );

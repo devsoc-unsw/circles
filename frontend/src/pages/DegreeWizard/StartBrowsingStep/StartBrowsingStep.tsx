@@ -17,12 +17,12 @@ const StartBrowsingStep = () => {
     if (!programCode) {
       openNotification({
         type: 'error',
-        message: 'Please select a degree',
+        message: 'Please select a degree'
       });
     } else if (!specs.length) {
       openNotification({
         type: 'error',
-        message: 'Please select a specialisation',
+        message: 'Please select a specialisation'
       });
     } else {
       dispatch(setIsComplete(true));

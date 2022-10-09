@@ -5,7 +5,7 @@ import {
   removeSpecialisation,
   resetDegree,
   setIsComplete,
-  setProgram,
+  setProgram
 } from './degreeSlice';
 
 describe('degreeSlice reducer tests', () => {
@@ -15,7 +15,7 @@ describe('degreeSlice reducer tests', () => {
     expect(store.getState().degree).toEqual({
       ...initialDegreeState,
       programCode: '3778',
-      programName: 'Computer Science',
+      programName: 'Computer Science'
     });
   });
 
@@ -24,13 +24,13 @@ describe('degreeSlice reducer tests', () => {
     store.dispatch(addSpecialisation('COMPA1'));
     expect(store.getState().degree).toEqual({
       ...initialDegreeState,
-      specs: ['COMPA1'],
+      specs: ['COMPA1']
     });
 
     store.dispatch(addSpecialisation('INFSA2'));
     expect(store.getState().degree).toEqual({
       ...initialDegreeState,
-      specs: ['COMPA1', 'INFSA2'],
+      specs: ['COMPA1', 'INFSA2']
     });
   });
 
@@ -39,7 +39,7 @@ describe('degreeSlice reducer tests', () => {
     store.dispatch(removeSpecialisation('COMPA1'));
     expect(store.getState().degree).toEqual({
       ...initialDegreeState,
-      specs: ['INFSA2'],
+      specs: ['INFSA2']
     });
   });
 
@@ -49,7 +49,7 @@ describe('degreeSlice reducer tests', () => {
     store.dispatch(removeSpecialisation('NOTASPEC'));
     expect(store.getState().degree).toEqual({
       ...initialDegreeState,
-      specs: ['COMPA1'],
+      specs: ['COMPA1']
     });
   });
 
@@ -65,8 +65,8 @@ describe('degreeSlice reducer tests', () => {
         programCode: '3778',
         programName: 'Computer Science',
         specs: ['COMPA1'],
-        isComplete: true,
-      },
+        isComplete: true
+      }
     });
     store.dispatch(resetDegree());
     expect(store.getState().degree).toEqual(initialDegreeState);

@@ -2,13 +2,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 type CourseTabsSliceState = {
-  tabs: string[]
-  active: number
+  tabs: string[];
+  active: number;
 };
 
 export const initialCourseTabsState: CourseTabsSliceState = {
   tabs: [], // list of course codes i.e. ['COMP1511', 'COMP1521']
-  active: 0, // index of the active tab in the tabs array
+  active: 0 // index of the active tab in the tabs array
 };
 
 const courseTabsSplice = createSlice({
@@ -40,12 +40,10 @@ const courseTabsSplice = createSlice({
     reorderTabs: (state, action: PayloadAction<string[]>) => {
       state.tabs = action.payload;
     },
-    resetTabs: () => initialCourseTabsState,
-  },
+    resetTabs: () => initialCourseTabsState
+  }
 });
 
-export const {
-  addTab, removeTab, setActiveTab, reorderTabs, resetTabs,
-} = courseTabsSplice.actions;
+export const { addTab, removeTab, setActiveTab, reorderTabs, resetTabs } = courseTabsSplice.actions;
 
 export default courseTabsSplice.reducer;
