@@ -15,11 +15,7 @@ type CourseInfoAttributesProps = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfoAttributes = ({
-  course,
-  concise,
-  courseCapacity
-}: CourseInfoAttributesProps) => {
+const CourseInfoAttributes = ({ course, concise, courseCapacity }: CourseInfoAttributesProps) => {
   const termTags = course.terms?.length
     ? course.terms.map((term) => {
         const termNo = term.slice(1);

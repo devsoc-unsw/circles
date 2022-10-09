@@ -21,7 +21,7 @@ type CourseInfoProps = {
   courseCode: string;
   concise?: boolean;
   onCourseClick?: (code: string) => void;
-}
+};
 
 type CourseUserInfo = {
   course?: Course;
@@ -30,11 +30,7 @@ type CourseUserInfo = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfo = ({
-  courseCode,
-  concise,
-  onCourseClick
-}: CourseInfoProps) => {
+const CourseInfo = ({ courseCode, concise, onCourseClick }: CourseInfoProps) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 

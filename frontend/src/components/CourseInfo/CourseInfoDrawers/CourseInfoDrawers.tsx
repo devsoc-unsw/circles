@@ -29,7 +29,7 @@ type CourseInfoDrawersProps = {
   prereqVis: boolean;
   planner: PlannerSliceState;
   onCourseClick?: (code: string) => void;
-}
+};
 
 const CourseInfoDrawers = ({
   course,
