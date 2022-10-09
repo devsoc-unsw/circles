@@ -11,6 +11,13 @@ export default defineConfig({
     globals: true,
     setupFiles: [resolve(projectRootDir, './src/test/setupTests.ts')],
     testTimeout: 15000,
+    reporters: ['default', 'junit'],
+    outputFile: {
+      junit: './junit/fe-test-results.xml',
+    },
+    coverage: {
+      provider: 'istanbul',
+    },
   },
   resolve: {
     alias: [
