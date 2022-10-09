@@ -4,9 +4,11 @@ import styled, { css } from 'styled-components';
 const Tag = styled(antdTag)`
   margin-bottom: 8px;
 
-  ${({ theme }) => theme.courseTag && css`
-    background: ${theme.courseTag.backgroundColor};
-  `}
+  ${({ theme }) =>
+    theme.courseTag &&
+    css`
+      background: ${theme.courseTag.backgroundColor};
+    `}
 
   &.clickable:hover {
     cursor: pointer;
@@ -14,5 +16,5 @@ const Tag = styled(antdTag)`
 `;
 
 export default {
-  Tag,
+  Tag
 };

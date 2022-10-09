@@ -29,5 +29,5 @@ export default {
   Attribute,
   TermWrapper,
   AttributesWrapperConcise,
-  AttributeConcise,
+  AttributeConcise
 };

@@ -247,29 +247,20 @@ const GraphicalSelector = () => {
             </>
           )}
         </S.GraphPlaygroundWrapper>
-        <S.SidebarWrapper>
-          <div>
-            {course
-              ? (
+        {sidebar && (
+          <S.SidebarWrapper>
+            <div>
+              {course ? (
                 <CourseInfo
                   concise
                   courseCode={course.code}
                   key={course.code}
                   onCourseClick={(code) => handleFocusCourse(code)}
                 />
-              )
-              : <HowToUse />}
-          </div>
-        </S.SidebarWrapper>
-        {sidebar && (
-          <S.SidebarWrapper>
-            {course ? (
-              <div>
-                {course.code} - {course.title}
-              </div>
-            ) : (
-              'No course selected'
-            )}
+              ) : (
+                <HowToUse />
+              )}
+            </div>
           </S.SidebarWrapper>
         )}
       </S.Wrapper>

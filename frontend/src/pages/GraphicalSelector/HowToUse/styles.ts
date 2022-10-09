@@ -26,5 +26,5 @@ export default {
   Wrapper,
   TitleWrapper,
   ContentsWrapper,
-  ImageStep,
+  ImageStep
 };

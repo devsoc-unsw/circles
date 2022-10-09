@@ -203,7 +203,9 @@ const CourseDescription = () => {
         <>
           <S.DescriptionContent>
             <S.DescriptionTitleBar>
-              <Title level={2} className="text">{id} - {course?.title}</Title>
+              <Title level={2} className="text">
+                {id} - {course?.title}
+              </Title>
               {course ? <PlannerButton course={course} /> : undefined}
             </S.DescriptionTitleBar>
             {course?.is_legacy && (

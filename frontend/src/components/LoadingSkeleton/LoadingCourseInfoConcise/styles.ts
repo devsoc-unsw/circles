@@ -10,5 +10,5 @@ const SkeletonWrapper = styled.div`
 `;
 
 export default {
-  SkeletonWrapper,
+  SkeletonWrapper
 };

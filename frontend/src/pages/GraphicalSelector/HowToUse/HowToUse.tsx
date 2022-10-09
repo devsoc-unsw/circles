@@ -10,7 +10,9 @@ const { Title, Text } = Typography;
 const HowToUse: FunctionComponent = () => (
   <S.Wrapper>
     <S.TitleWrapper>
-      <Title level={2} className="text">How to use the Graphical Selector</Title>
+      <Title level={2} className="text">
+        How to use the Graphical Selector
+      </Title>
     </S.TitleWrapper>
 
     <S.ContentsWrapper>

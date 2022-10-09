@@ -1,8 +1,4 @@
-import React, {
-  FunctionComponent,
-  useEffect,
-  useState,
-} from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
@@ -37,7 +33,7 @@ type CourseUserInfo = {
 const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
   courseCode,
   concise,
-  onCourseClick,
+  onCourseClick
 }) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
@@ -49,15 +45,18 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
         const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
-          axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner))),
-          axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`),
+          axios.post<CoursesUnlockedWhenTaken>(
+            `/courses/coursesUnlockedWhenTaken/${courseCode}`,
+            JSON.stringify(prepareUserPayload(degree, planner))
+          ),
+          axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
         ]);
 
         setInfo({
           course: unwrap(results[0])?.data,
           pathFrom: unwrap(results[1])?.data.courses,
           unlocked: unwrap(results[2])?.data,
-          courseCapacity: getEnrolmentCapacity(unwrap(results[3])?.data),
+          courseCapacity: getEnrolmentCapacity(unwrap(results[3])?.data)
         });
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -76,30 +75,29 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
     );
   }
 
-  const {
-    course, pathFrom, unlocked, courseCapacity,
-  } = info;
+  const { course, pathFrom, unlocked, courseCapacity } = info;
 
   return (
     <S.Wrapper concise={concise}>
       <S.MainWrapper>
         <S.TitleWrapper concise={concise}>
-          <div><Title level={2} className="text">{courseCode} - {course.title}</Title></div>
+          <div>
+            <Title level={2} className="text">
+              {courseCode} - {course.title}
+            </Title>
+          </div>
           <PlannerButton course={course} />
         </S.TitleWrapper>
-        {
-          course.is_legacy
-          && (
-            <Text strong>
-              NOTE: this course is discontinued - if a current course exists, pick that instead
-            </Text>
-          )
-        }
+        {course.is_legacy && (
+          <Text strong>
+            NOTE: this course is discontinued - if a current course exists, pick that instead
+          </Text>
+        )}
 
         {concise && (
-        <div style={{ flexBasis: '25%' }}>
-          <CourseInfoAttributes course={course} concise />
-        </div>
+          <div style={{ flexBasis: '25%' }}>
+            <CourseInfoAttributes course={course} concise />
+          </div>
         )}
 
         <CourseInfoDrawers
@@ -112,13 +110,11 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
         />
       </S.MainWrapper>
 
-      {!concise
-      && (
-      <S.SidebarWrapper>
-        <CourseInfoAttributes course={course} courseCapacity={courseCapacity} />
-      </S.SidebarWrapper>
+      {!concise && (
+        <S.SidebarWrapper>
+          <CourseInfoAttributes course={course} courseCapacity={courseCapacity} />
+        </S.SidebarWrapper>
       )}
-
     </S.Wrapper>
   );
 };

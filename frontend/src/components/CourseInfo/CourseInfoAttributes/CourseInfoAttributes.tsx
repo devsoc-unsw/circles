@@ -10,26 +10,28 @@ import S from './styles';
 const { Title, Text } = Typography;
 
 type CourseInfoAttributesProps = {
-  course: Course,
-  concise?: boolean,
-  courseCapacity?: EnrolmentCapacityData
+  course: Course;
+  concise?: boolean;
+  courseCapacity?: EnrolmentCapacityData;
 };
 
 const CourseInfoAttributes: FunctionComponent<CourseInfoAttributesProps> = ({
-  course, concise, courseCapacity,
+  course,
+  concise,
+  courseCapacity
 }) => {
   const termTags = course.terms?.length
     ? course.terms.map((term) => {
-      const termNo = term.slice(1);
-      return (
-        <TermTag key={term} name={term === 'T0' ? 'Summer' : `Term ${termNo}`} />
-      );
-    })
+        const termNo = term.slice(1);
+        return <TermTag key={term} name={term === 'T0' ? 'Summer' : `Term ${termNo}`} />;
+      })
     : 'None';
 
   const handbookLink = course.study_level && (
     <a
-      href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2023/${course.code}/`}
+      href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2023/${
+        course.code
+      }/`}
       target="_blank"
       rel="noreferrer"
     >
@@ -72,37 +74,52 @@ const CourseInfoAttributes: FunctionComponent<CourseInfoAttributesProps> = ({
   return (
     <div>
       <S.Attribute>
-        <Title level={3} className="text">Offering Terms</Title>
+        <Title level={3} className="text">
+          Offering Terms
+        </Title>
         {termTags}
       </S.Attribute>
       <S.Attribute>
-        <Title level={3} className="text">UNSW Handbook</Title>
+        <Title level={3} className="text">
+          UNSW Handbook
+        </Title>
         {handbookLink}
       </S.Attribute>
       <S.Attribute>
-        <Title level={3} className="text">School</Title>
+        <Title level={3} className="text">
+          School
+        </Title>
         {course.school}
       </S.Attribute>
       <S.Attribute>
-        <Title level={3} className="text">Study Level</Title>
+        <Title level={3} className="text">
+          Study Level
+        </Title>
         {course.study_level}
       </S.Attribute>
       <S.Attribute>
-        <Title level={3} className="text">Campus</Title>
+        <Title level={3} className="text">
+          Campus
+        </Title>
         {course.campus}
       </S.Attribute>
-      {courseCapacity
-        && (
+      {courseCapacity && (
         <S.Attribute>
-          <Title level={3} className="text">Course Capacity</Title>
-          <div>{courseCapacity.capacity} Students for {TERM}</div>
+          <Title level={3} className="text">
+            Course Capacity
+          </Title>
+          <div>
+            {courseCapacity.capacity} Students for {TERM}
+          </div>
           <ProgressBar
             progress={Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10}
           />
         </S.Attribute>
-        )}
+      )}
       <S.Attribute>
-        <Title level={3} className="text">Units of Credit</Title>
+        <Title level={3} className="text">
+          Units of Credit
+        </Title>
         {course.UOC}
       </S.Attribute>
     </div>

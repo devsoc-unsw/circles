@@ -9,5 +9,5 @@ export {
   LoadingCourseInfoConcise,
   LoadingCourseMenu,
   LoadingDashboard,
-  LoadingTermPlanner,
+  LoadingTermPlanner
 };

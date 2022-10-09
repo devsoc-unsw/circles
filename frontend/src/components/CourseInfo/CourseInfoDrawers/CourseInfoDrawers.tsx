@@ -12,11 +12,14 @@ type CourseTagProps = {
   onClick?: MouseEventHandler<HTMLSpanElement>;
 };
 
-const CourseTagGraphical = ({ name, onClick }: CourseTagProps) => (
-  (onClick !== undefined)
-    ? <S.Tag className="text clickable" onClick={onClick}>{name}</S.Tag>
-    : <S.Tag className="text">{name}</S.Tag>
-);
+const CourseTagGraphical = ({ name, onClick }: CourseTagProps) =>
+  onClick !== undefined ? (
+    <S.Tag className="text clickable" onClick={onClick}>
+      {name}
+    </S.Tag>
+  ) : (
+    <S.Tag className="text">{name}</S.Tag>
+  );
 
 interface CourseInfoDrawersProps {
   course: Course;
@@ -29,7 +32,12 @@ interface CourseInfoDrawersProps {
 }
 
 const CourseInfoDrawers: FunctionComponent<CourseInfoDrawersProps> = ({
-  course, onCourseClick, pathFrom, prereqVis, planner, unlocked,
+  course,
+  onCourseClick,
+  pathFrom,
+  prereqVis,
+  planner,
+  unlocked
 }) => {
   // figure out a better way to do this
   // difficult because classic CourseTag uses dispatches, where as CourseTagGraphical doesn't
@@ -45,61 +53,70 @@ const CourseInfoDrawers: FunctionComponent<CourseInfoDrawersProps> = ({
       </Collapsible>
       <Collapsible title="Courses you have done to unlock this course" initiallyCollapsed>
         <p>
-          {pathFrom && pathFrom.length > 0 ? (
-            pathFrom
-              .filter((code) => Object.keys(planner.courses).includes(code))
-              .map((code) => (
-                onCourseClick
-                  ? (
+          {pathFrom && pathFrom.length > 0
+            ? pathFrom
+                .filter((code) => Object.keys(planner.courses).includes(code))
+                .map((code) =>
+                  onCourseClick ? (
                     <CourseTag
                       key={code}
                       name={code}
-                      onClick={() => { onCourseClick(code); }}
+                      onClick={() => {
+                        onCourseClick(code);
+                      }}
                     />
+                  ) : (
+                    <CourseTag key={code} name={code} />
                   )
-                  : <CourseTag key={code} name={code} />
-              ))
-          ) : 'None'}
+                )
+            : 'None'}
         </p>
       </Collapsible>
       <Collapsible title="Doing this course will directly unlock these courses" initiallyCollapsed>
         <p>
-          {unlocked?.direct_unlock && unlocked.direct_unlock.length > 0 ? (
-            unlocked.direct_unlock.map((code) => (
-              onCourseClick
-                ? (
+          {unlocked?.direct_unlock && unlocked.direct_unlock.length > 0
+            ? unlocked.direct_unlock.map((code) =>
+                onCourseClick ? (
                   <CourseTag
                     key={code}
                     name={code}
-                    onClick={() => { onCourseClick(code); }}
+                    onClick={() => {
+                      onCourseClick(code);
+                    }}
                   />
+                ) : (
+                  <CourseTag key={code} name={code} />
                 )
-                : <CourseTag key={code} name={code} />
-            ))
-          ) : 'None'}
+              )
+            : 'None'}
         </p>
       </Collapsible>
-      <Collapsible title="Doing this course will indirectly unlock these courses" initiallyCollapsed>
+      <Collapsible
+        title="Doing this course will indirectly unlock these courses"
+        initiallyCollapsed
+      >
         <p>
-          {unlocked?.indirect_unlock && unlocked.indirect_unlock.length > 0 ? (
-            unlocked.indirect_unlock.map((code) => (
-              onCourseClick
-                ? (
+          {unlocked?.indirect_unlock && unlocked.indirect_unlock.length > 0
+            ? unlocked.indirect_unlock.map((code) =>
+                onCourseClick ? (
                   <CourseTag
                     key={code}
                     name={code}
-                    onClick={() => { onCourseClick(code); }}
+                    onClick={() => {
+                      onCourseClick(code);
+                    }}
                   />
+                ) : (
+                  <CourseTag key={code} name={code} />
                 )
-                : <CourseTag key={code} name={code} />
-            ))
-          ) : 'None'}
+              )
+            : 'None'}
         </p>
       </Collapsible>
       {prereqVis && (
-      <Collapsible title="Prerequisite Visualisation">
-        <PrerequisiteTree courseCode={course.code} />
-      </Collapsible>
+        <Collapsible title="Prerequisite Visualisation">
+          <PrerequisiteTree courseCode={course.code} />
+        </Collapsible>
       )}
     </div>
   );
