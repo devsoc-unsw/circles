@@ -26,14 +26,17 @@ const DegreeWizard = () => {
     openNotification({
       type: 'info',
       message: 'Disclaimer',
-      description: 'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!',
+      description:
+        'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
     });
   }, []);
 
   useEffect(() => {
     const getSteps = async () => {
       try {
-        const res = await axios.get<SpecialisationTypes>(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
+        const res = await axios.get<SpecialisationTypes>(
+          `/specialisations/getSpecialisationTypes/${degree.programCode}`
+        );
         setSpecs(res.data.types);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -55,7 +58,7 @@ const DegreeWizard = () => {
     setTimeout(() => {
       scroller.scrollTo(step, {
         duration: 1500,
-        smooth: true,
+        smooth: true
       });
     }, 100);
   };
@@ -66,22 +69,22 @@ const DegreeWizard = () => {
         <ResetModal />
         <Title className="text">Welcome to Circles!</Title>
         <S.Subtitle>
-          Let’s start by setting up your UNSW degree, so you can make a plan that
-          suits you.
+          Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
         </S.Subtitle>
         <S.HorizontalLine />
         <S.StepsWrapper>
           <YearStep incrementStep={incrementStep} />
           {currStep >= Steps.DEGREE && <DegreeStep incrementStep={incrementStep} />}
-          {specs.map((stepName, index) => (
-            currStep - Steps.SPECS >= index && (
-            <SpecialisationStep
-              incrementStep={incrementStep}
-              currStep={currStep - Steps.SPECS === index}
-              type={stepName}
-            />
-            )
-          ))}
+          {specs.map(
+            (stepName, index) =>
+              currStep - Steps.SPECS >= index && (
+                <SpecialisationStep
+                  incrementStep={incrementStep}
+                  currStep={currStep - Steps.SPECS === index}
+                  type={stepName}
+                />
+              )
+          )}
           {currStep === stepList.length - 1 && <StartBrowsingStep />}
         </S.StepsWrapper>
       </S.ContainerWrapper>

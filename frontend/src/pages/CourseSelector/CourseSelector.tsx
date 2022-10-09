@@ -15,9 +15,7 @@ import S from './styles';
 const CourseSelector = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
 
-  const {
-    programCode, specs,
-  } = useSelector((state: RootState) => state.degree);
+  const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses } = useSelector((state: RootState) => state.planner);
 
   useEffect(() => {
@@ -26,7 +24,8 @@ const CourseSelector = () => {
       openNotification({
         type: 'info',
         message: 'How do I see more sidebar courses?',
-        description: 'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.',
+        description:
+          'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
       });
     }
   }, [courses]);
@@ -35,7 +34,9 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get<Structure>(`/programs/getStructure/${programCode}/${specs.join('+')}`);
+        const res = await axios.get<Structure>(
+          `/programs/getStructure/${programCode}/${specs.join('+')}`
+        );
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

@@ -20,7 +20,9 @@ describe('YearStep', () => {
   it('should render', async () => {
     renderWithProviders(<YearStep incrementStep={incrementStepMock} />);
     expect(screen.getByText('What years do you start and finish?')).toBeInTheDocument();
-    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), { timeout: 5000 });
+    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {
+      timeout: 5000
+    });
   });
 
   it('should dispatch correct props and call incrementStep after selecting years', async () => {
@@ -28,19 +30,25 @@ describe('YearStep', () => {
     useDispatchMock.mockReturnValue(dummyDispatch);
 
     renderWithProviders(<YearStep incrementStep={incrementStepMock} />);
-    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), { timeout: 5000 });
+    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {
+      timeout: 5000
+    });
     await userEvent.click(screen.getByTestId('antd-rangepicker'));
     await userEvent.click(screen.getByText('2020'));
     await userEvent.click(screen.getByText('2022'));
     expect(dummyDispatch.mock.calls).toEqual([
-      [{
-        payload: 3,
-        type: 'planner/updateDegreeLength',
-      }],
-      [{
-        payload: 2020,
-        type: 'planner/updateStartYear',
-      }],
+      [
+        {
+          payload: 3,
+          type: 'planner/updateDegreeLength'
+        }
+      ],
+      [
+        {
+          payload: 2020,
+          type: 'planner/updateStartYear'
+        }
+      ]
     ]);
     expect(incrementStepMock).toHaveBeenCalledWith(Steps.DEGREE);
   });

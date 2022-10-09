@@ -13,14 +13,14 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: vi.fn(), // deprecated
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
+    dispatchEvent: vi.fn()
+  }))
 });
 
 // mock react-router-dom
 vi.mock('react-router-dom', () => ({
   useNavigate: vi.fn(),
-  useLocation: () => ({ pathname: '/' }),
+  useLocation: () => ({ pathname: '/' })
 }));
 
 const dummyNavigate = vi.fn();

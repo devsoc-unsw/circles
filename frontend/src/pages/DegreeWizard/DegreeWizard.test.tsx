@@ -12,15 +12,12 @@ import DegreeWizard from './DegreeWizard';
 const axiosMock = new MockAdapter(axios);
 axiosMock.onGet('/programs/getPrograms').reply(200, {
   programs: {
-    3778: 'Computer Science',
-  },
+    3778: 'Computer Science'
+  }
 });
 
 axiosMock.onGet('/specialisations/getSpecialisationTypes/3778').reply(200, {
-  types: [
-    'majors',
-    'minors',
-  ],
+  types: ['majors', 'minors']
 });
 
 axiosMock.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
@@ -28,11 +25,11 @@ axiosMock.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
     'Computer Science': {
       is_optional: false,
       specs: {
-        COMPA1: 'Computer Science',
+        COMPA1: 'Computer Science'
       },
-      notes: 'COMPA1 is the default stream, and will be used if no other stream is selected.',
-    },
-  },
+      notes: 'COMPA1 is the default stream, and will be used if no other stream is selected.'
+    }
+  }
 });
 
 axiosMock.onGet('/specialisations/getSpecialisations/3778/minors').reply(200, {
@@ -40,11 +37,12 @@ axiosMock.onGet('/specialisations/getSpecialisations/3778/minors').reply(200, {
     'Computer Science': {
       is_optional: true,
       specs: {
-        FINSA2: 'Finance',
+        FINSA2: 'Finance'
       },
-      notes: 'Optional minors available include the following. If you complete a minor of 30 UOC, you will also need to take 6 UOC of free electives.',
-    },
-  },
+      notes:
+        'Optional minors available include the following. If you complete a minor of 30 UOC, you will also need to take 6 UOC of free electives.'
+    }
+  }
 });
 
 describe('DegreeWizard', () => {
@@ -69,7 +67,9 @@ describe('DegreeWizard', () => {
     expect(store.getState().degree).toEqual(initialDegreeState);
 
     // select years
-    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), { timeout: 5000 });
+    await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {
+      timeout: 5000
+    });
     await userEvent.click(screen.getByTestId('antd-rangepicker'));
     await userEvent.click(screen.getByText('2020'));
     await userEvent.click(screen.getByText('2022'));
@@ -80,12 +80,16 @@ describe('DegreeWizard', () => {
     await userEvent.click(await screen.findByText('3778 Computer Science'));
 
     // select majors
-    await waitFor(() => expect(screen.getByText('Majors for Computer Science')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText('Majors for Computer Science')).toBeInTheDocument()
+    );
     await userEvent.click(screen.getByText('COMPA1 Computer Science'));
     await userEvent.click(screen.getByText('Next'));
 
     // select minors
-    await waitFor(() => expect(screen.getByText('Minors for Computer Science')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText('Minors for Computer Science')).toBeInTheDocument()
+    );
     await userEvent.click(screen.getByText('Skip'));
 
     // finish degree wizard
@@ -97,7 +101,7 @@ describe('DegreeWizard', () => {
       programCode: '3778',
       programName: 'Computer Science',
       specs: ['COMPA1'],
-      isComplete: true,
+      isComplete: true
     });
   });
 });

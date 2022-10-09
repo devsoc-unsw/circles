@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const GraphPlaygroundWrapper = styled.div`
   height: 100%;
   border-radius: 20px;
-  border: #C2C2C2 solid 1px;
+  border: #c2c2c2 solid 1px;
   overflow: hidden;
   flex: 5;
   position: relative;
@@ -21,7 +21,7 @@ const GraphPlaygroundWrapper = styled.div`
 
 const SidebarWrapper = styled.div`
   border-radius: 20px;
-  border: #C2C2C2 solid 1px;
+  border: #c2c2c2 solid 1px;
   padding: 10px;
   flex: 2;
 `;
@@ -46,5 +46,5 @@ export default {
   GraphPlaygroundWrapper,
   SidebarWrapper,
   SearchBarWrapper,
-  ToolsWrapper,
+  ToolsWrapper
 };

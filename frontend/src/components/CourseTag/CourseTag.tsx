@@ -4,7 +4,7 @@ import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
 type Props = {
-  name: string
+  name: string;
 };
 
 const CourseTag = ({ name }: Props) => {

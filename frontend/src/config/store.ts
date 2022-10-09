@@ -15,30 +15,31 @@ const rootReducer = combineReducers({
   courseTabs: courseTabsReducer,
   courses: coursesReducer,
   planner: plannerReducer,
-  settings: settingsReducer,
+  settings: settingsReducer
 });
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => configureStore({
-  reducer: rootReducer,
-  preloadedState,
-});
+export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState
+  });
 
 const persistConfig = {
   key: 'root',
   version: persistVersion,
   storage,
   whitelist: ['degree', 'courses', 'planner', 'settings'],
-  migrate: persistMigrate,
-
+  migrate: persistMigrate
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,6 +1,4 @@
-import React, {
-  Suspense, useEffect, useRef, useState,
-} from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { DraggingStyle } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
@@ -12,11 +10,13 @@ import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { removeTab, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
-const Draggable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable })));
+const Draggable = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
+);
 
 type Props = {
-  tabName: string
-  index: number
+  tabName: string;
+  index: number;
 };
 
 const DraggableTab = ({ tabName, index }: Props) => {
@@ -34,7 +34,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
         ...style,
         // style.transform = transform(Xpx, Ypx) - splitting string to only get the X position
         // and lock the Y position when dragging
-        transform: `${style.transform.split(',')[0]}, 0px)`,
+        transform: `${style.transform.split(',')[0]}, 0px)`
       };
     }
     return style;

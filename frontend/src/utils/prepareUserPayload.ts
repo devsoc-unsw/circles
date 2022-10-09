@@ -9,9 +9,9 @@ type UserPayloadCourse = Record<string, number | null>;
 type UserPayloadSpecialisations = Record<string, 1>;
 
 interface UserPayload {
-  program: string
-  courses: UserPayloadCourse
-  specialisations: UserPayloadSpecialisations
+  program: string;
+  courses: UserPayloadCourse;
+  specialisations: UserPayloadSpecialisations;
 }
 
 const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): UserPayload => {
@@ -19,7 +19,9 @@ const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState
   const { programCode, specs } = degree;
 
   const specialisations: UserPayloadSpecialisations = {};
-  specs.forEach((spec) => { specialisations[spec] = 1; });
+  specs.forEach((spec) => {
+    specialisations[spec] = 1;
+  });
 
   const selectedCourses: UserPayloadCourse = {};
   Object.entries(courses).forEach(([courseCode, courseData]) => {
@@ -29,7 +31,7 @@ const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState
   return {
     program: programCode,
     specialisations,
-    courses: selectedCourses,
+    courses: selectedCourses
   };
 };
 

@@ -9,10 +9,12 @@ import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
-const RangePicker = React.lazy(() => import('components/Datepicker').then((d) => ({ default: d.default.RangePicker })));
+const RangePicker = React.lazy(() =>
+  import('components/Datepicker').then((d) => ({ default: d.default.RangePicker }))
+);
 
 type Props = {
-  incrementStep: (stepTo?: Steps) => void
+  incrementStep: (stepTo?: Steps) => void;
 };
 
 const YearStep = ({ incrementStep }: Props) => {
@@ -31,7 +33,7 @@ const YearStep = ({ incrementStep }: Props) => {
             picker="year"
             size="large"
             style={{
-              width: '100%',
+              width: '100%'
             }}
             onChange={(_, [startYear, endYear]: [string, string]) => {
               const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;

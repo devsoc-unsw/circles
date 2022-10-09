@@ -17,17 +17,17 @@ import S from './styles';
 const { Title } = Typography;
 
 type Props = {
-  incrementStep: (stepTo?: Steps) => void
-  currStep?: boolean
-  type: string
+  incrementStep: (stepTo?: Steps) => void;
+  currStep?: boolean;
+  type: string;
 };
 
 type Specialisation = {
   [spec: string]: {
-    is_optional?: boolean
-    specs: Record<string, string>
-    notes: string
-  }
+    is_optional?: boolean;
+    specs: Record<string, string>;
+    notes: string;
+  };
 };
 
 const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
@@ -38,7 +38,9 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
 
   const fetchAllSpecialisations = useCallback(async () => {
     try {
-      const res = await axios.get<Specialisations>(`/specialisations/getSpecialisations/${programCode}/${type}`);
+      const res = await axios.get<Specialisations>(
+        `/specialisations/getSpecialisations/${programCode}/${type}`
+      );
       setOptions(res.data.spec);
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -50,24 +52,31 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
     if (programCode) fetchAllSpecialisations();
   }, [fetchAllSpecialisations, programCode, type]);
 
-  const menuItems: MenuProps['items'] = options ? Object.keys(options).map((program, index) => ({
-    label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
-    key: index,
-    children:
-      options[program].notes
-        ? [{
-          label: `Note: ${options[program].notes}`,
-          type: 'group',
-          children: Object.keys(options[program].specs).sort().map((spec) => ({
-            label: `${spec} ${options[program].specs[spec]}`,
-            key: spec,
-          })),
-        }]
-        : Object.keys(options[program].specs).sort().map((spec) => ({
-          label: `${spec} ${options[program].specs[spec]}`,
-          key: spec,
-        })),
-  })) : undefined;
+  const menuItems: MenuProps['items'] = options
+    ? Object.keys(options).map((program, index) => ({
+        label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
+        key: index,
+        children: options[program].notes
+          ? [
+              {
+                label: `Note: ${options[program].notes}`,
+                type: 'group',
+                children: Object.keys(options[program].specs)
+                  .sort()
+                  .map((spec) => ({
+                    label: `${spec} ${options[program].specs[spec]}`,
+                    key: spec
+                  }))
+              }
+            ]
+          : Object.keys(options[program].specs)
+              .sort()
+              .map((spec) => ({
+                label: `${spec} ${options[program].specs[spec]}`,
+                key: spec
+              }))
+      }))
+    : undefined;
 
   // check if step is optional and can be skipped
   let optionalStep = true;
@@ -85,16 +94,18 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
     let missingSpec = '';
     Object.keys(options).forEach((specKey) => {
       const { is_optional: isOptional, specs: optionSpecs } = options[specKey];
-      if (!isOptional
-        && !specs.some((spec) => Object.keys(optionSpecs).includes(spec))
-        && !missingSpec) {
+      if (
+        !isOptional &&
+        !specs.some((spec) => Object.keys(optionSpecs).includes(spec)) &&
+        !missingSpec
+      ) {
         missingSpec = specKey;
       }
     });
     if (missingSpec) {
       openNotification({
         type: 'error',
-        message: `Select a ${type.substring(0, type.length - 1)} for ${missingSpec}`,
+        message: `Select a ${type.substring(0, type.length - 1)} for ${missingSpec}`
       });
     } else incrementStep();
   };
@@ -107,9 +118,9 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
             What are your {type}?
           </Title>
           {currStep && (
-          <Button type="primary" onClick={handleOnNextClick}>
-            { optionalStep ? 'Skip' : 'Next'}
-          </Button>
+            <Button type="primary" onClick={handleOnNextClick}>
+              {optionalStep ? 'Skip' : 'Next'}
+            </Button>
           )}
         </CS.StepHeadingWrapper>
         {menuItems ? (
@@ -122,11 +133,13 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
             style={{
               gap: '10px',
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: 'column'
             }}
             items={menuItems}
           />
-        ) : <Spinner text={`Loading ${type}...`} />}
+        ) : (
+          <Spinner text={`Loading ${type}...`} />
+        )}
       </animated.div>
     </CS.StepContentWrapper>
   );

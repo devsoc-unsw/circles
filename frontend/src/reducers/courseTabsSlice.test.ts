@@ -1,6 +1,11 @@
 import { setupStore } from 'config/store';
 import {
-  addTab, initialCourseTabsState, removeTab, reorderTabs, resetTabs, setActiveTab,
+  addTab,
+  initialCourseTabsState,
+  removeTab,
+  reorderTabs,
+  resetTabs,
+  setActiveTab
 } from './courseTabsSlice';
 
 describe('courseTabsSlice reducer tests', () => {
@@ -10,7 +15,7 @@ describe('courseTabsSlice reducer tests', () => {
       store.dispatch(addTab('COMP1511'));
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1511'],
-        active: 0,
+        active: 0
       });
     });
 
@@ -22,7 +27,7 @@ describe('courseTabsSlice reducer tests', () => {
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1511', 'COMP1521', 'COMP1531'],
-        active: 2,
+        active: 2
       });
     });
 
@@ -35,7 +40,7 @@ describe('courseTabsSlice reducer tests', () => {
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1511', 'COMP1521', 'COMP1531'],
-        active: 1,
+        active: 1
       });
     });
   });
@@ -53,7 +58,7 @@ describe('courseTabsSlice reducer tests', () => {
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1511'],
-        active: 0,
+        active: 0
       });
     });
 
@@ -65,68 +70,82 @@ describe('courseTabsSlice reducer tests', () => {
     });
 
     it('removes a non active tab with active index positioned on the correct tab', () => {
-      const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 } });
+      const store = setupStore({
+        courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 }
+      });
       store.dispatch(removeTab(0));
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1521', 'COMP1531'],
-        active: 1,
+        active: 1
       });
     });
 
     it('removes the first tab (active tab) and set correct active index', () => {
-      const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 0 } });
+      const store = setupStore({
+        courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 0 }
+      });
       store.dispatch(removeTab(0));
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1521', 'COMP1531'],
-        active: 0,
+        active: 0
       });
     });
 
     it('removes the middle tab (active tab) and set correct active index', () => {
-      const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 1 } });
+      const store = setupStore({
+        courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 1 }
+      });
       store.dispatch(removeTab(1));
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1511', 'COMP1531'],
-        active: 1,
+        active: 1
       });
     });
 
     it('removes the last tab (active tab) and set correct active index', () => {
-      const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 } });
+      const store = setupStore({
+        courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 }
+      });
       store.dispatch(removeTab(2));
 
       expect(store.getState().courseTabs).toEqual({
         tabs: ['COMP1511', 'COMP1521'],
-        active: 1,
+        active: 1
       });
     });
   });
 
   it('tests setActiveTab reducer', () => {
-    const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 } });
+    const store = setupStore({
+      courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 }
+    });
     store.dispatch(setActiveTab(1));
 
     expect(store.getState().courseTabs).toEqual({
       tabs: ['COMP1511', 'COMP1521', 'COMP1531'],
-      active: 1,
+      active: 1
     });
   });
 
   it('tests reorderTabs reducer', () => {
-    const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 } });
+    const store = setupStore({
+      courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 }
+    });
     store.dispatch(reorderTabs(['COMP1531', 'COMP1511', 'COMP1521']));
 
     expect(store.getState().courseTabs).toEqual({
       tabs: ['COMP1531', 'COMP1511', 'COMP1521'],
-      active: 2,
+      active: 2
     });
   });
 
   it('tests resetTabs reducer', () => {
-    const store = setupStore({ courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 } });
+    const store = setupStore({
+      courseTabs: { tabs: ['COMP1511', 'COMP1521', 'COMP1531'], active: 2 }
+    });
     store.dispatch(resetTabs());
 
     expect(store.getState().courseTabs).toEqual(initialCourseTabsState);
