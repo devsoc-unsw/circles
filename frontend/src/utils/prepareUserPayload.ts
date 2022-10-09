@@ -8,11 +8,11 @@ type UserPayloadCourse = Record<string, number | null>;
 // key = spec, value = 1
 type UserPayloadSpecialisations = Record<string, 1>;
 
-interface UserPayload {
+type UserPayload = {
   program: string;
   courses: UserPayloadCourse;
   specialisations: UserPayloadSpecialisations;
-}
+};
 
 const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): UserPayload => {
   const { courses } = planner;
