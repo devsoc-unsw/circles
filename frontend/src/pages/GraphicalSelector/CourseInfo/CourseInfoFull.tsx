@@ -9,17 +9,20 @@ import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Collapsible from 'components/Collapsible';
 import PlannerButton from 'components/PlannerButton';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import TermTag from 'components/TermTag';
-import { inDev } from 'config/constants';
+import { inDev, TIMETABLE_API_URL } from 'config/constants';
 import { RootState } from 'config/store';
+import CourseInfoAttributes from './CourseInfoAttributes';
+import CourseInfoDrawers from './CourseInfoDrawers';
 import GraphicalCourseTag from './GraphicalCourseTag';
 import LoadingCourseInfo from './LoadingCourseInfo';
-import S from './styles';
+import S from './stylesFull';
 
 const { Title, Text } = Typography;
 
@@ -33,6 +36,28 @@ type CourseUserInfo = {
   course: Course;
   pathFrom: CourseList;
   unlocked: CoursesUnlockedWhenTaken;
+  courseCapacity: EnrolmentCapacityData;
+};
+
+const getCapacityAndEnrolment = (data: CourseTimetable): EnrolmentCapacityData => {
+  const enrolmentCapacityData: EnrolmentCapacityData = {
+    enrolments: 0,
+    capacity: 0,
+  };
+  for (let i = 0; i < data.classes.length; i++) {
+    if (
+      data.classes[i].activity === 'Lecture'
+      || data.classes[i].activity === 'Seminar'
+      || data.classes[i].activity === 'Thesis Research'
+      || data.classes[i].activity === 'Project'
+    ) {
+      enrolmentCapacityData.enrolments
+        += data.classes[i].courseEnrolment.enrolments;
+      enrolmentCapacityData.capacity
+        += data.classes[i].courseEnrolment.capacity;
+    }
+  }
+  return enrolmentCapacityData;
 };
 
 const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
@@ -50,12 +75,14 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
           axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner))),
+          axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`),
         ]);
 
         setInfo({
           course: results[0].data,
           pathFrom: results[1].data.courses,
           unlocked: results[2].data,
+          courseCapacity: getCapacityAndEnrolment(results[3].data),
         });
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -73,11 +100,13 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
     );
   }
 
-  const { course, pathFrom, unlocked } = info;
+  const {
+    course, pathFrom, unlocked, courseCapacity,
+  } = info;
 
   return (
-    <S.Wrapper style={{ display: 'flex', flexDirection: 'row' }}>
-      <div style={{ flexGrow: '3' }}>
+    <S.Wrapper>
+      <div style={{ flexBasis: '75%', flexGrow: '1' }}>
         <S.TitleWrapper>
           <div><Title level={2} className="text">{courseCode} - {course.title}</Title></div>
           <PlannerButton course={course} />
@@ -111,72 +140,17 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
             </div>
           </S.MiscInfoChild>
         </S.MiscInfo> */}
-        <Collapsible title="Overview">
-          <p>{course.description}</p>
-        </Collapsible>
-        <Collapsible title="Requirements" initiallyCollapsed>
-          <p>{course.raw_requirements}</p>
-        </Collapsible>
-        <Collapsible title="Courses you have done to unlock this course" initiallyCollapsed>
-          <p>
-            {pathFrom && pathFrom.length > 0 ? (
-              pathFrom
-                .filter((code) => Object.keys(planner.courses).includes(code))
-                .map((code) => (
-                  onCourseClick
-                    ? (
-                      <GraphicalCourseTag
-                        key={code}
-                        name={code}
-                        onClick={() => { onCourseClick(code); }}
-                      />
-                    )
-                    : <GraphicalCourseTag key={code} name={code} />
-                ))
-            ) : 'None'}
-          </p>
-        </Collapsible>
-        <Collapsible title="Doing this course will directly unlock these courses" initiallyCollapsed>
-          <p>
-            {unlocked.direct_unlock && unlocked.direct_unlock.length > 0 ? (
-              unlocked.direct_unlock.map((code) => (
-                onCourseClick
-                  ? (
-                    <GraphicalCourseTag
-                      key={code}
-                      name={code}
-                      onClick={() => { onCourseClick(code); }}
-                    />
-                  )
-                  : <GraphicalCourseTag key={code} name={code} />
-              ))
-            ) : 'None'}
-          </p>
-        </Collapsible>
-        <Collapsible title="Doing this course will indirectly unlock these courses" initiallyCollapsed>
-          <p>
-            {unlocked.indirect_unlock && unlocked.indirect_unlock.length > 0 ? (
-              unlocked.indirect_unlock.map((code) => (
-                onCourseClick
-                  ? (
-                    <GraphicalCourseTag
-                      key={code}
-                      name={code}
-                      onClick={() => { onCourseClick(code); }}
-                    />
-                  )
-                  : <GraphicalCourseTag key={code} name={code} />
-              ))
-            ) : 'None'}
-          </p>
-        </Collapsible>
-        {inDev && (
-        <Collapsible title="Prerequisite Visualisation">
-          <PrerequisiteTree courseCode={courseCode} />
-        </Collapsible>
-        )}
+        {/* <CourseInfoDrawers
+          course={course}
+          pathFrom={pathFrom}
+          planner={planner}
+          prereqVis
+          unlocked={unlocked}
+        /> */}
       </div>
-      <div style={{ flexGrow: '1' }} />
+      <div style={{ flexBasis: '25%' }}>
+        {/* <CourseInfoAttributes course={course} courseCapacity={courseCapacity} /> */}
+      </div>
     </S.Wrapper>
   );
 };

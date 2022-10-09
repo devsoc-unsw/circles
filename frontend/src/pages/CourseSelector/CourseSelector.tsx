@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -6,7 +8,7 @@ import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
-import CourseInfoFull from 'pages/GraphicalSelector/CourseInfo/CourseInfoFull';
+// import CourseInfoFull from 'pages/GraphicalSelector/CourseInfo/CourseInfoFull';
 import CourseBanner from './CourseBanner';
 import CourseDescription from './CourseDescription';
 import CourseMenu from './CourseMenu';
@@ -20,6 +22,9 @@ const CourseSelector = () => {
     programCode, specs,
   } = useSelector((state: RootState) => state.degree);
   const { courses } = useSelector((state: RootState) => state.planner);
+
+  const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
+  const id = tabs[active];
 
   useEffect(() => {
     // only open for users with no courses
@@ -55,7 +60,7 @@ const CourseSelector = () => {
           <CourseMenu structure={structure} />
           <div>
             <CourseDescription />
-            <CourseInfoFull courseCode="COMP1511" />
+            {/* <CourseInfoFull courseCode={id} /> */}
           </div>
         </S.ContentWrapper>
       </S.ContainerWrapper>
