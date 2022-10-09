@@ -25,6 +25,12 @@ jobs:
           npm ci
           npm run test
 
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: fe-test-results
+          path: frontend/junit/fe-test-results.xml
+
       - name: Test the frontend successfully builds
         run: |
           mkdir env

@@ -13,7 +13,7 @@ export default defineConfig({
     testTimeout: 15000,
     reporters: ['default', 'junit'],
     outputFile: {
-      junit: './junit/test-results.xml',
+      junit: './junit/fe-test-results.xml',
     },
     coverage: {
       provider: 'istanbul',
