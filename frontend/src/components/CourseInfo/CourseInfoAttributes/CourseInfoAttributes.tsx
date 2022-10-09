@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Typography } from 'antd';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
@@ -15,11 +15,11 @@ type CourseInfoAttributesProps = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfoAttributes: FunctionComponent<CourseInfoAttributesProps> = ({
+const CourseInfoAttributes = ({
   course,
   concise,
   courseCapacity
-}) => {
+}: CourseInfoAttributesProps) => {
   const termTags = course.terms?.length
     ? course.terms.map((term) => {
         const termNo = term.slice(1);

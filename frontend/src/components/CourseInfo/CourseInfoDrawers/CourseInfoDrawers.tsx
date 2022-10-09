@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
 import Collapsible from 'components/Collapsible';
@@ -21,7 +21,7 @@ const CourseTagGraphical = ({ name, onClick }: CourseTagProps) =>
     <S.Tag className="text">{name}</S.Tag>
   );
 
-interface CourseInfoDrawersProps {
+type CourseInfoDrawersProps = {
   course: Course;
   pathFrom?: CourseList;
   unlocked?: CoursesUnlockedWhenTaken;
@@ -31,14 +31,14 @@ interface CourseInfoDrawersProps {
   onCourseClick?: (code: string) => void;
 }
 
-const CourseInfoDrawers: FunctionComponent<CourseInfoDrawersProps> = ({
+const CourseInfoDrawers = ({
   course,
   onCourseClick,
   pathFrom,
   prereqVis,
   planner,
   unlocked
-}) => {
+}: CourseInfoDrawersProps) => {
   // figure out a better way to do this
   // difficult because classic CourseTag uses dispatches, where as CourseTagGraphical doesn't
   const CourseTag = prereqVis ? CourseTagStandard : CourseTagGraphical;

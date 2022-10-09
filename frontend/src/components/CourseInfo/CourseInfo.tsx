@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
@@ -17,7 +17,7 @@ import S from './styles';
 
 const { Title, Text } = Typography;
 
-interface CourseInfoFullProps {
+type CourseInfoProps = {
   courseCode: string;
   concise?: boolean;
   onCourseClick?: (code: string) => void;
@@ -30,11 +30,11 @@ type CourseUserInfo = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
+const CourseInfo = ({
   courseCode,
   concise,
   onCourseClick
-}) => {
+}: CourseInfoProps) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -52,11 +52,12 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
           axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
         ]);
 
+        const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
         setInfo({
-          course: unwrap(results[0])?.data,
-          pathFrom: unwrap(results[1])?.data.courses,
-          unlocked: unwrap(results[2])?.data,
-          courseCapacity: getEnrolmentCapacity(unwrap(results[3])?.data)
+          course: unwrap(courseRes)?.data,
+          pathFrom: unwrap(pathFromRes)?.data.courses,
+          unlocked: unwrap(unlockedRes)?.data,
+          courseCapacity: getEnrolmentCapacity(unwrap(courseCapRes)?.data)
         });
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -119,4 +120,4 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
   );
 };
 
-export default CourseInfoFull;
+export default CourseInfo;

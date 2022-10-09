@@ -15,9 +15,9 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import CourseInfo from '../../components/CourseInfo';
+import CourseInfo from 'components/CourseInfo';
 import GRAPH_STYLE from './config';
-import HowToUse from './HowToUse/HowToUse';
+import HowToUse from './HowToUse';
 import S from './styles';
 import handleNodeData from './utils';
 
