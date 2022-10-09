@@ -75,3 +75,7 @@ def update_course_mark(course: str, mark: int, token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['courses'][course]['mark'] = mark
     set_user(token, user, True)
+
+@router.post("/updateStartYear")
+def update_start_year():
+    pass
