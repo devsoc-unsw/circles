@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -9,9 +7,8 @@ import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
-import CourseInfoFull from 'pages/GraphicalSelector/CourseInfo/CourseInfoFull';
+import CourseInfo from 'pages/GraphicalSelector/CourseInfo';
 import CourseBanner from './CourseBanner';
-import CourseDescription from './CourseDescription';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
@@ -61,7 +58,7 @@ const CourseSelector = () => {
           <CourseMenu structure={structure} />
           {id ? (
             <div style={{ overflow: 'auto' }}>
-              <CourseInfoFull courseCode={id} />
+              <CourseInfo courseCode={id} />
             </div>
           ) : (
             <S.InfographicContainer>

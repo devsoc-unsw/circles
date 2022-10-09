@@ -16,7 +16,7 @@ import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
-import CourseInfoFull from './CourseInfo/CourseInfoFull';
+import CourseInfo from './CourseInfo';
 import HowToUse from './HowToUse/HowToUse';
 import S from './styles';
 import handleNodeData from './utils';
@@ -277,19 +277,12 @@ const GraphicalSelector = () => {
           <div>
             {course
               ? (
-                <>
-                  {/* <CourseInfo
-                    courseCode={course.code}
-                    key={course.code}
-                    onCourseClick={(code) => focusCourse(code)}
-                  /> */}
-                  <CourseInfoFull
-                    concise
-                    courseCode={course.code}
-                    key={course.code}
-                    onCourseClick={(code) => focusCourse(code)}
-                  />
-                </>
+                <CourseInfo
+                  concise
+                  courseCode={course.code}
+                  key={course.code}
+                  onCourseClick={(code) => focusCourse(code)}
+                />
               )
               : <HowToUse />}
           </div>

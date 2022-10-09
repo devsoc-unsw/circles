@@ -7,32 +7,36 @@ import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import Collapsible from 'components/Collapsible';
-import CourseTag from 'components/CourseTag';
-import { LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
+import { LoadingCourseInfo, LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
-import TermTag from 'components/TermTag';
+import { TIMETABLE_API_URL } from 'config/constants';
 import { RootState } from 'config/store';
+import CourseInfoAttributes from './CourseInfoAttributes';
+import CourseInfoDrawers from './CourseInfoDrawers';
+import { getEnrolmentCapacity, unwrap } from './helpers';
 import S from './styles';
 
 const { Title, Text } = Typography;
 
-interface CourseInfoProps {
+interface CourseInfoFullProps {
   courseCode: string;
+  concise?: boolean;
   onCourseClick?: (code: string) => void;
-  // onCourseAdd?: () => void;
 }
 
 type CourseUserInfo = {
-  course: Course;
-  pathFrom: CourseList;
-  unlocked: CoursesUnlockedWhenTaken;
+  course?: Course;
+  pathFrom?: CourseList;
+  unlocked?: CoursesUnlockedWhenTaken;
+  courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfo: FunctionComponent<CourseInfoProps> = ({
+const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
   courseCode,
+  concise,
   onCourseClick,
 }) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
@@ -42,16 +46,18 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
   useEffect(() => {
     const getInfo = async () => {
       try {
-        const results = await Promise.all([
+        const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
           axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner))),
+          axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`),
         ]);
 
         setInfo({
-          course: results[0].data,
-          pathFrom: results[1].data.courses,
-          unlocked: results[2].data,
+          course: unwrap(results[0])?.data,
+          pathFrom: unwrap(results[1])?.data.courses,
+          unlocked: unwrap(results[2])?.data,
+          courseCapacity: getEnrolmentCapacity(unwrap(results[3])?.data),
         });
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -61,110 +67,60 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
     getInfo();
   }, [courseCode, degree, planner]);
 
-  if (!info) {
+  if (!info || !info?.course) {
+    // either still loading or the course wasn't fetchable (fatal)
     return (
-      <S.Wrapper>
-        <LoadingCourseInfoConcise />
+      <S.Wrapper concise={concise}>
+        {concise ? <LoadingCourseInfoConcise /> : <LoadingCourseInfo />}
       </S.Wrapper>
     );
   }
 
-  const { course, pathFrom, unlocked } = info;
+  const {
+    course, pathFrom, unlocked, courseCapacity,
+  } = info;
 
   return (
-    <S.Wrapper>
-      <Title level={2} className="text">{courseCode} - {course.title}</Title>
-      <PlannerButton course={course} />
-      <S.TermWrapper>
-        <Text strong>Terms: </Text>
-        {course.terms.length
-          ? course.terms.map((term) => (
-            <TermTag key={term} name={term === 'T0' ? 'Summer' : `Term ${term.slice(1)}`} />
-          ))
-          : 'None'}
-      </S.TermWrapper>
-      <S.MiscInfo>
-        <S.MiscInfoChild>
-          <div>
-            <Text>{course.study_level}</Text>
-          </div>
-          <div>
-            <Text>{course.campus}</Text>
-          </div>
-        </S.MiscInfoChild>
-        <S.MiscInfoChild>
-          <Text>{course.school}</Text>
-        </S.MiscInfoChild>
-        <S.MiscInfoChild>
-          <div>
-            <Text strong>{course.UOC} UOC</Text>
-          </div>
-          <div>
-            <Text>View Handbook</Text>
-          </div>
-        </S.MiscInfoChild>
-      </S.MiscInfo>
-      <Collapsible title="Overview">
-        <p>{course.description}</p>
-      </Collapsible>
-      <Collapsible title="Requirements" initiallyCollapsed>
-        <p>{course.raw_requirements}</p>
-      </Collapsible>
-      <Collapsible title="Courses you have done to unlock this course" initiallyCollapsed>
-        <p>
-          {pathFrom && pathFrom.length > 0 ? (
-            pathFrom
-              .filter((code) => Object.keys(planner.courses).includes(code))
-              .map((code) => (
-                onCourseClick
-                  ? (
-                    <CourseTag
-                      key={code}
-                      name={code}
-                      // onClick={() => { onCourseClick(code); }}
-                    />
-                  )
-                  : <CourseTag key={code} name={code} />
-              ))
-          ) : 'None'}
-        </p>
-      </Collapsible>
-      <Collapsible title="Doing this course will directly unlock these courses" initiallyCollapsed>
-        <p>
-          {unlocked.direct_unlock && unlocked.direct_unlock.length > 0 ? (
-            unlocked.direct_unlock.map((code) => (
-              onCourseClick
-                ? (
-                  <CourseTag
-                    key={code}
-                    name={code}
-                    // onClick={() => { onCourseClick(code); }}
-                  />
-                )
-                : <CourseTag key={code} name={code} />
-            ))
-          ) : 'None'}
-        </p>
-      </Collapsible>
-      <Collapsible title="Doing this course will indirectly unlock these courses" initiallyCollapsed>
-        <p>
-          {unlocked.indirect_unlock && unlocked.indirect_unlock.length > 0 ? (
-            unlocked.indirect_unlock.map((code) => (
-              onCourseClick
-                ? (
-                  <CourseTag
-                    key={code}
-                    name={code}
-                    // onClick={() => { onCourseClick(code); }}
-                  />
-                )
-                : <CourseTag key={code} name={code} />
-            ))
-          ) : 'None'}
-        </p>
-      </Collapsible>
+    <S.Wrapper concise={concise}>
+      <S.MainWrapper>
+        <S.TitleWrapper concise={concise}>
+          <div><Title level={2} className="text">{courseCode} - {course.title}</Title></div>
+          <PlannerButton course={course} />
+        </S.TitleWrapper>
+        {
+          course.is_legacy
+          && (
+            <Text strong>
+              NOTE: this course is discontinued - if a current course exists, pick that instead
+            </Text>
+          )
+        }
+
+        {concise && (
+        <div style={{ flexBasis: '25%' }}>
+          <CourseInfoAttributes course={course} concise />
+        </div>
+        )}
+
+        <CourseInfoDrawers
+          course={course}
+          pathFrom={pathFrom}
+          planner={planner}
+          prereqVis={!concise}
+          unlocked={unlocked}
+          onCourseClick={onCourseClick}
+        />
+      </S.MainWrapper>
+
+      {!concise
+      && (
+      <S.SidebarWrapper>
+        <CourseInfoAttributes course={course} courseCapacity={courseCapacity} />
+      </S.SidebarWrapper>
+      )}
+
     </S.Wrapper>
   );
 };
 
-export default CourseInfo;
+export default CourseInfoFull;
