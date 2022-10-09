@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from 'antd';
 import S from './styles';
 
-const LoadingCourseInfo = () => (
+const LoadingCourseInfoConcise = () => (
   <S.SkeletonWrapper>
     {/* title */}
     <Skeleton.Input style={{ width: '70%', height: 70 }} active />
@@ -21,4 +21,4 @@ const LoadingCourseInfo = () => (
   </S.SkeletonWrapper>
 );
 
-export default LoadingCourseInfo;
+export default LoadingCourseInfoConcise;

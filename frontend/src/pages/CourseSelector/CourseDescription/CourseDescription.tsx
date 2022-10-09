@@ -9,7 +9,7 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
-import { LoadingCourseDescription } from 'components/LoadingSkeleton';
+import { LoadingCourseInfo } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import ProgressBar from 'components/ProgressBar';
@@ -188,7 +188,7 @@ const CourseDescription = () => {
   return (
     <S.DescriptionWrapper>
       {!pageLoaded ? (
-        <LoadingCourseDescription />
+        <LoadingCourseInfo />
       ) : (
         <>
           <S.DescriptionContent>

@@ -10,11 +10,11 @@ import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Collapsible from 'components/Collapsible';
+import CourseTag from 'components/CourseTag';
+import { LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
 import TermTag from 'components/TermTag';
 import { RootState } from 'config/store';
-import GraphicalCourseTag from './GraphicalCourseTag';
-import LoadingCourseInfo from './LoadingCourseInfo';
 import S from './styles';
 
 const { Title, Text } = Typography;
@@ -64,7 +64,7 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
   if (!info) {
     return (
       <S.Wrapper>
-        <LoadingCourseInfo />
+        <LoadingCourseInfoConcise />
       </S.Wrapper>
     );
   }
@@ -118,13 +118,13 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
               .map((code) => (
                 onCourseClick
                   ? (
-                    <GraphicalCourseTag
+                    <CourseTag
                       key={code}
                       name={code}
-                      onClick={() => { onCourseClick(code); }}
+                      // onClick={() => { onCourseClick(code); }}
                     />
                   )
-                  : <GraphicalCourseTag key={code} name={code} />
+                  : <CourseTag key={code} name={code} />
               ))
           ) : 'None'}
         </p>
@@ -135,13 +135,13 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
             unlocked.direct_unlock.map((code) => (
               onCourseClick
                 ? (
-                  <GraphicalCourseTag
+                  <CourseTag
                     key={code}
                     name={code}
-                    onClick={() => { onCourseClick(code); }}
+                    // onClick={() => { onCourseClick(code); }}
                   />
                 )
-                : <GraphicalCourseTag key={code} name={code} />
+                : <CourseTag key={code} name={code} />
             ))
           ) : 'None'}
         </p>
@@ -152,13 +152,13 @@ const CourseInfo: FunctionComponent<CourseInfoProps> = ({
             unlocked.indirect_unlock.map((code) => (
               onCourseClick
                 ? (
-                  <GraphicalCourseTag
+                  <CourseTag
                     key={code}
                     name={code}
-                    onClick={() => { onCourseClick(code); }}
+                    // onClick={() => { onCourseClick(code); }}
                   />
                 )
-                : <GraphicalCourseTag key={code} name={code} />
+                : <CourseTag key={code} name={code} />
             ))
           ) : 'None'}
         </p>

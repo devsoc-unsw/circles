@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import React, {
   FunctionComponent,
   useEffect,
@@ -12,56 +10,33 @@ import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import Collapsible from 'components/Collapsible';
+import { LoadingCourseInfo, LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
-import PrerequisiteTree from 'components/PrerequisiteTree';
-import TermTag from 'components/TermTag';
-import { inDev, TIMETABLE_API_URL } from 'config/constants';
+import { TIMETABLE_API_URL } from 'config/constants';
 import { RootState } from 'config/store';
 import CourseInfoAttributes from './CourseInfoAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
-import GraphicalCourseTag from './GraphicalCourseTag';
-import LoadingCourseInfo from './LoadingCourseInfo';
+import { getEnrolmentCapacity, unwrap } from './helpers';
 import S from './stylesFull';
 
 const { Title, Text } = Typography;
 
 interface CourseInfoFullProps {
   courseCode: string;
+  concise?: boolean;
   onCourseClick?: (code: string) => void;
-  // onCourseAdd?: () => void;
 }
 
 type CourseUserInfo = {
-  course: Course;
-  pathFrom: CourseList;
-  unlocked: CoursesUnlockedWhenTaken;
-  courseCapacity: EnrolmentCapacityData;
-};
-
-const getCapacityAndEnrolment = (data: CourseTimetable): EnrolmentCapacityData => {
-  const enrolmentCapacityData: EnrolmentCapacityData = {
-    enrolments: 0,
-    capacity: 0,
-  };
-  for (let i = 0; i < data.classes.length; i++) {
-    if (
-      data.classes[i].activity === 'Lecture'
-      || data.classes[i].activity === 'Seminar'
-      || data.classes[i].activity === 'Thesis Research'
-      || data.classes[i].activity === 'Project'
-    ) {
-      enrolmentCapacityData.enrolments
-        += data.classes[i].courseEnrolment.enrolments;
-      enrolmentCapacityData.capacity
-        += data.classes[i].courseEnrolment.capacity;
-    }
-  }
-  return enrolmentCapacityData;
+  course?: Course;
+  pathFrom?: CourseList;
+  unlocked?: CoursesUnlockedWhenTaken;
+  courseCapacity?: EnrolmentCapacityData;
 };
 
 const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
   courseCode,
+  concise,
   onCourseClick,
 }) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
@@ -71,7 +46,7 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
   useEffect(() => {
     const getInfo = async () => {
       try {
-        const results = await Promise.all([
+        const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
           axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner))),
@@ -79,10 +54,10 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
         ]);
 
         setInfo({
-          course: results[0].data,
-          pathFrom: results[1].data.courses,
-          unlocked: results[2].data,
-          courseCapacity: getCapacityAndEnrolment(results[3].data),
+          course: unwrap(results[0])?.data,
+          pathFrom: unwrap(results[1])?.data.courses,
+          unlocked: unwrap(results[2])?.data,
+          courseCapacity: getEnrolmentCapacity(unwrap(results[3])?.data),
         });
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -92,10 +67,11 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
     getInfo();
   }, [courseCode, degree, planner]);
 
-  if (!info) {
+  if (!info || !info?.course) {
+    // either still loading or the course wasn't fetchable (fatal)
     return (
-      <S.Wrapper>
-        <LoadingCourseInfo />
+      <S.Wrapper concise={concise}>
+        {concise ? <LoadingCourseInfoConcise /> : <LoadingCourseInfo />}
       </S.Wrapper>
     );
   }
@@ -105,52 +81,44 @@ const CourseInfoFull: FunctionComponent<CourseInfoFullProps> = ({
   } = info;
 
   return (
-    <S.Wrapper>
-      <div style={{ flexBasis: '75%', flexGrow: '1' }}>
-        <S.TitleWrapper>
+    <S.Wrapper concise={concise}>
+      <S.MainWrapper>
+        <S.TitleWrapper concise={concise}>
           <div><Title level={2} className="text">{courseCode} - {course.title}</Title></div>
           <PlannerButton course={course} />
         </S.TitleWrapper>
-        {/* <S.TermWrapper>
-          <Text strong>Terms: </Text>
-          {course.terms.length
-            ? course.terms.map((term) => (
-              <TermTag key={term} name={term === 'T0' ? 'Summer' : `Term ${term.slice(1)}`} />
-            ))
-            : 'None'}
-        </S.TermWrapper>
-        <S.MiscInfo>
-          <S.MiscInfoChild>
-            <div>
-              <Text>{course.study_level}</Text>
-            </div>
-            <div>
-              <Text>{course.campus}</Text>
-            </div>
-          </S.MiscInfoChild>
-          <S.MiscInfoChild>
-            <Text>{course.school}</Text>
-          </S.MiscInfoChild>
-          <S.MiscInfoChild>
-            <div>
-              <Text strong>{course.UOC} UOC</Text>
-            </div>
-            <div>
-              <Text>View Handbook</Text>
-            </div>
-          </S.MiscInfoChild>
-        </S.MiscInfo> */}
-        {/* <CourseInfoDrawers
+        {
+          course.is_legacy
+          && (
+            <Text strong>
+              NOTE: this course is discontinued - if a current course exists, pick that instead
+            </Text>
+          )
+        }
+
+        {concise && (
+        <div style={{ flexBasis: '25%' }}>
+          <CourseInfoAttributes course={course} concise />
+        </div>
+        )}
+
+        <CourseInfoDrawers
           course={course}
           pathFrom={pathFrom}
           planner={planner}
-          prereqVis
+          prereqVis={!concise}
           unlocked={unlocked}
-        /> */}
-      </div>
-      <div style={{ flexBasis: '25%' }}>
-        {/* <CourseInfoAttributes course={course} courseCapacity={courseCapacity} /> */}
-      </div>
+          onCourseClick={onCourseClick}
+        />
+      </S.MainWrapper>
+
+      {!concise
+      && (
+      <S.SidebarWrapper>
+        <CourseInfoAttributes course={course} courseCapacity={courseCapacity} />
+      </S.SidebarWrapper>
+      )}
+
     </S.Wrapper>
   );
 };

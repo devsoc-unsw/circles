@@ -1,5 +1,4 @@
-import { Tag as antdTag } from 'antd';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -34,23 +33,12 @@ const MiscInfoChild = styled.div`
 `;
 
 const SkeletonWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
   gap: 20px;
-`;
-
-const Tag = styled(antdTag)`
-  margin-bottom: 8px;
-
-  ${({ theme }) => theme.courseTag && css`
-    background: ${theme.courseTag.backgroundColor};
-  `}
-
-  &.clickable:hover {
-    cursor: pointer;
-  }
 `;
 
 export default {
@@ -60,5 +48,4 @@ export default {
   MiscInfo,
   MiscInfoChild,
   SkeletonWrapper,
-  Tag,
 };

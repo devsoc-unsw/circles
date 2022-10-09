@@ -6,9 +6,10 @@ import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
+import infographic from 'assets/infographicFontIndependent.svg';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
-// import CourseInfoFull from 'pages/GraphicalSelector/CourseInfo/CourseInfoFull';
+import CourseInfoFull from 'pages/GraphicalSelector/CourseInfo/CourseInfoFull';
 import CourseBanner from './CourseBanner';
 import CourseDescription from './CourseDescription';
 import CourseMenu from './CourseMenu';
@@ -24,7 +25,7 @@ const CourseSelector = () => {
   const { courses } = useSelector((state: RootState) => state.planner);
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
-  const id = tabs[active];
+  const id: string | undefined = tabs[active];
 
   useEffect(() => {
     // only open for users with no courses
@@ -58,10 +59,15 @@ const CourseSelector = () => {
         <CourseTabs />
         <S.ContentWrapper>
           <CourseMenu structure={structure} />
-          <div>
-            <CourseDescription />
-            {/* <CourseInfoFull courseCode={id} /> */}
-          </div>
+          {id ? (
+            <div style={{ overflow: 'auto' }}>
+              <CourseInfoFull courseCode={id} />
+            </div>
+          ) : (
+            <S.InfographicContainer>
+              <img src={infographic} alt="How to use Circles infographic" />
+            </S.InfographicContainer>
+          )}
         </S.ContentWrapper>
       </S.ContainerWrapper>
     </PageTemplate>
