@@ -10,22 +10,22 @@ const projectRootDir = resolve(__dirname);
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    'process.env': process.env,
+    'process.env': process.env
   },
   build: {
-    outDir: 'build',
+    outDir: 'build'
   },
   plugins: [
     react(),
     svgrPlugin({
       svgrOptions: {
-        icon: true,
+        icon: true
         // ...svgr options (https://react-svgr.com/docs/options/)
-      },
+      }
     }),
     eslint(),
     splitVendorChunkPlugin(),
-    checker({ typescript: true }),
+    checker({ typescript: true })
   ],
   resolve: {
     alias: [
@@ -38,17 +38,17 @@ export default defineConfig({
       { find: 'reducers', replacement: resolve(projectRootDir, './src/reducers') },
       { find: 'types', replacement: resolve(projectRootDir, './src/types') },
       { find: 'utils', replacement: resolve(projectRootDir, './src/utils') },
-      { find: 'test', replacement: resolve(projectRootDir, './src/test') },
-    ],
+      { find: 'test', replacement: resolve(projectRootDir, './src/test') }
+    ]
   },
   css: {
     preprocessorOptions: {
       less: {
         modifyVars: {
-          '@primary-color': '#9254de', // purple-5
+          '@primary-color': '#9254de' // purple-5
         },
-        javascriptEnabled: true,
-      },
-    },
-  },
+        javascriptEnabled: true
+      }
+    }
+  }
 });
