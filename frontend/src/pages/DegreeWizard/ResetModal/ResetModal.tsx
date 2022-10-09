@@ -1,21 +1,29 @@
-import type { Dispatch, SetStateAction } from 'react';
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'antd';
+import type { RootState } from 'config/store';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
 import { resetDegree } from 'reducers/degreeSlice';
 import { resetPlanner } from 'reducers/plannerSlice';
 
-type Props = {
-  modalVisible: boolean
-  setModalVisible: Dispatch<SetStateAction<boolean>>
-};
-
-const ResetModal = ({ modalVisible, setModalVisible }: Props) => {
+const ResetModal = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const degree = useAppSelector((state: RootState) => state.degree);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (degree.isComplete) {
+      setModalVisible(true);
+    } else {
+      dispatch(resetPlanner());
+      dispatch(resetDegree());
+      dispatch(resetTabs());
+      dispatch(resetCourses());
+    }
+  }, [degree.isComplete, dispatch]);
 
   const handleOk = () => {
     setModalVisible(false);
@@ -33,7 +41,7 @@ const ResetModal = ({ modalVisible, setModalVisible }: Props) => {
   return (
     <Modal
       title="Reset Planner?"
-      visible={modalVisible}
+      open={modalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
       footer={[
@@ -42,12 +50,11 @@ const ResetModal = ({ modalVisible, setModalVisible }: Props) => {
         </Button>,
         <Button key="submit" type="primary" danger onClick={handleOk}>
           Reset
-        </Button>,
+        </Button>
       ]}
     >
       <div>
-        Are you sure want to reset your planner? Your existing data will be
-        permanently removed.
+        Are you sure want to reset your planner? Your existing data will be permanently removed.
       </div>
     </Modal>
   );

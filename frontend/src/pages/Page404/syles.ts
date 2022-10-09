@@ -57,5 +57,10 @@ const Text404 = styled.div`
 `;
 
 export default {
-  PageWrapper, GridCircleWrapper, LogoBox, TextWrapper, Text404, Title404,
+  PageWrapper,
+  GridCircleWrapper,
+  LogoBox,
+  TextWrapper,
+  Text404,
+  Title404
 };

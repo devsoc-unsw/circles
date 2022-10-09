@@ -36,5 +36,9 @@ const TabsCloseAll = styled.div`
 `;
 
 export default {
-  CourseTabsWrapper, CourseTabsSection, TabsCloseAll, ShowAllCourses, TextShowCourses,
+  CourseTabsWrapper,
+  CourseTabsSection,
+  TabsCloseAll,
+  ShowAllCourses,
+  TextShowCourses
 };

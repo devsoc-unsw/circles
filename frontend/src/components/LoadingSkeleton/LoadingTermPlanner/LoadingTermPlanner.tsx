@@ -9,7 +9,7 @@ const LoadingTermPlanner = () => {
     height: '18em',
     margin: '1em',
     padding: '1.2em',
-    borderRadius: '2em',
+    borderRadius: '2em'
   };
 
   return (
@@ -21,55 +21,19 @@ const LoadingTermPlanner = () => {
         <GridItem>Term 3</GridItem>
 
         <GridItem />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
 
         <GridItem />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
 
         <GridItem />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
+        <Skeleton.Button active shape="round" style={skeletonTermStyle} />
       </CS.PlannerGridWrapper>
     </CS.PlannerContainer>
   );

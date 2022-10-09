@@ -1,14 +1,12 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  BrowserRouter as Router, Route,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import LandingPage from 'pages/LandingPage';
 import './App.less';
 import './config/axios';
 // stylesheets for antd library
@@ -33,6 +31,7 @@ const App = () => {
         <ErrorBoundary>
           <Router>
             <Routes>
+              {inDev && <Route path="/landing-page" element={<LandingPage />} />}
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
               {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}

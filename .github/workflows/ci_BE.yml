@@ -1,24 +1,32 @@
-name: Run Backend Unit Tests
+name: Backend Unit Tests
 
 on:
   pull_request:
     branches: [dev, main]
 
 jobs:
-  build:
-    name: Backend CI Testing
-
+  event_file:
+    name: Event File
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Event File
+          path: ${{ github.event_path }}
+  test:
+    name: Backend CI Testing
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
-
       - name: Set up Python (latest)
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-
+          python-version: "3.10.5"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -38,4 +46,10 @@ jobs:
       - name: Test algorithm with pytest
         run: |
           cd backend
-          python -m pytest
+          pip install pytest-cov
+          python -m pytest --junitxml=junit/be-test-results.xml --cov=. --cov-report=xml --cov-report=html
+      - uses: actions/upload-artifact@v3 # upload test results
+        if: always()
+        with:
+          name: be-test-results
+          path: backend/junit/be-test-results.xml # Path to test results

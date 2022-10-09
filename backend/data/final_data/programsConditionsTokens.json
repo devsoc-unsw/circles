@@ -1,0 +1,517 @@
+{
+    "3134": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3462": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3502": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3523": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3529": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3543": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "3554": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "72"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "120"
+            ],
+            "dependent": [
+                "L4"
+            ]
+        }
+    ],
+    "3558": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3563": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "3564": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "3566": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "3573": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3574": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "3584": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3587": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3593": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3597": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3598": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3599": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3673": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "3734": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3764": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3784": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3835": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3964": [
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "3980": [
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "GENS"
+            ]
+        }
+    ],
+    "4058": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ],
+    "4733": [
+        {
+            "dependency": [
+                "UOC",
+                "24"
+            ],
+            "dependent": [
+                "L2"
+            ]
+        },
+        {
+            "dependency": [
+                "UOC",
+                "48"
+            ],
+            "dependent": [
+                "L3"
+            ]
+        }
+    ],
+    "4744": [
+        {
+            "dependency": [
+                "L1",
+                "ECON",
+                "CORES"
+            ],
+            "dependent": [
+                "L3",
+                "ECON"
+            ]
+        }
+    ]
+}
