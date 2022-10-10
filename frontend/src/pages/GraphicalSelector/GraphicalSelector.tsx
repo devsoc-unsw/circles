@@ -254,6 +254,7 @@ const GraphicalSelector = () => {
         {sidebar && (
           <S.SidebarWrapper>
             <Tabs items={items} />
+
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
