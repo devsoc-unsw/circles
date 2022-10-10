@@ -7,9 +7,9 @@ import {
   ZoomOutOutlined
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
-import { Button, Switch, Tooltip } from 'antd';
+import { Button, Switch, Tabs, Tooltip } from 'antd';
 import axios from 'axios';
-import { Course, CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
@@ -33,20 +33,10 @@ const GraphicalSelector = () => {
   const [graph, setGraph] = useState<Graph | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebar, setSidebar] = useState(true);
-  const [course, setCourse] = useState<Course | null>(null);
+  const [courseCode, setCourseCode] = useState<string>();
   const [showUnlockedOnly, setShowUnlockedOnly] = useState(true);
 
   const ref = useRef<HTMLDivElement | null>(null);
-
-  const updateCourse = async (courseCode: string) => {
-    try {
-      const res = await axios.get<Course>(`/courses/getCourse/${courseCode}`);
-      setCourse(res.data);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at updateCourse', e);
-    }
-  };
 
   useEffect(() => {
     // courses is a list of course codes
@@ -93,7 +83,7 @@ const GraphicalSelector = () => {
         // load up course information
         const node = ev.item as INode;
         const id = node.getID();
-        updateCourse(id);
+        setCourseCode(id);
 
         // hides/ unhides dependent nodes
         if (node.hasState('click')) {
@@ -192,10 +182,10 @@ const GraphicalSelector = () => {
     setShowUnlockedOnly((prevState) => !prevState);
   };
 
-  const handleFocusCourse = (courseCode: string) => {
-    if (graph?.findById(courseCode)) {
-      graph.focusItem(courseCode);
-      updateCourse(courseCode);
+  const handleFocusCourse = (code: string) => {
+    if (graph?.findById(code)) {
+      graph.focusItem(code);
+      setCourseCode(code);
     }
   };
 
@@ -217,6 +207,25 @@ const GraphicalSelector = () => {
     // resize canvas size when sidebar state changes
     graph?.changeSize(ref.current?.scrollWidth ?? 0, ref.current?.scrollHeight ?? 0);
   }, [graph, sidebar]);
+
+  const items = [
+    {
+      label: 'Course Info',
+      key: 'course-info',
+      children: courseCode ? (
+        <CourseDescriptionPanel
+          concise
+          courseCode={courseCode}
+          key={courseCode}
+          onCourseClick={(code) => handleFocusCourse(code)}
+        />
+      ) : (
+        'No course selected'
+      )
+    },
+    { label: 'Program Structure', key: 'program-structure', children: 'Content 2' },
+    { label: 'Help', key: 'help', children: <HowToUse /> }
+  ];
 
   return (
     <PageTemplate>
@@ -249,18 +258,7 @@ const GraphicalSelector = () => {
         </S.GraphPlaygroundWrapper>
         {sidebar && (
           <S.SidebarWrapper>
-            <div>
-              {course ? (
-                <CourseDescriptionPanel
-                  concise
-                  courseCode={course.code}
-                  key={course.code}
-                  onCourseClick={(code) => handleFocusCourse(code)}
-                />
-              ) : (
-                <HowToUse />
-              )}
-            </div>
+            <Tabs items={items} />
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
