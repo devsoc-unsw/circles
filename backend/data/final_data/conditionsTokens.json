@@ -653,7 +653,6 @@
     ],
     "ARCH1101": [
         "(",
-        "Currently",
         "3261",
         "Architectural",
         "Studies,",
@@ -10858,106 +10857,58 @@
     ],
     "DPHU1001": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1002": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1003": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1004": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1005": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1006": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1007": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPHU1008": [
         "(",
+        "(",
         "7005",
-        "UNSW",
-        "Global",
-        "Diploma",
-        "in",
-        "Media",
-        "&&",
-        "Communication",
-        "Program",
+        ")",
         ")"
     ],
     "DPST1013": [
@@ -13415,8 +13366,6 @@
     "FADA6700": [
         "(",
         "48UOC",
-        ".",
-        "must",
         ")"
     ],
     "FINS1613": [
@@ -14650,10 +14599,6 @@
         "(",
         "24UOC",
         "&&",
-        "on",
-        "good",
-        "academic",
-        "standing",
         ")"
     ],
     "HUMS2005": [
@@ -15579,50 +15524,30 @@
     ],
     "LAWS1121": [
         "(",
-        "Academic",
-        "program",
-        "must",
-        "be",
-        "7016,",
-        "Humanities",
-        "Pathway",
-        "Program",
+        "(",
+        "7016",
+        ")",
         ")"
     ],
     "LAWS1122": [
         "(",
-        "Academic",
-        "program",
-        "must",
-        "be",
-        "7016,",
-        "Humanities",
-        "Pathway",
-        "Program",
+        "(",
+        "7016",
+        ")",
         ")"
     ],
     "LAWS1123": [
         "(",
-        "Academic",
-        "program",
-        "must",
-        "be",
-        "7016,",
-        "Humanities",
-        "Pathway",
-        "Program",
+        "(",
+        "7016",
+        ")",
         ")"
     ],
     "LAWS1124": [
         "(",
-        "Academic",
-        "program",
-        "must",
-        "be",
-        "7016,",
-        "Humanities",
-        "Pathway",
-        "Program",
+        "(",
+        "7016",
+        ")",
         ")"
     ],
     "LAWS1141": [
@@ -15630,7 +15555,6 @@
         "24UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "LAWS1052",
         ")"
@@ -15670,7 +15594,6 @@
         "24UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "LAWS1052",
         ")"
@@ -15697,7 +15620,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Equity",
         "&&",
@@ -15724,9 +15646,8 @@
     "LAWS2320": [
         "(",
         "24UOC",
-        "of",
+        "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS2326": [
@@ -15734,7 +15655,6 @@
         "24UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS2351": [
@@ -15796,9 +15716,8 @@
     "LAWS2384": [
         "(",
         "24UOC",
-        "of",
+        "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS2385": [
@@ -15820,9 +15739,8 @@
     "LAWS2820": [
         "(",
         "24UOC",
-        "of",
+        "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3014": [
@@ -15830,7 +15748,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Business",
         "Associations",
@@ -15844,7 +15761,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Legal",
         "Theory",
@@ -15875,7 +15791,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "[",
         "Business",
@@ -15897,7 +15812,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3022": [
@@ -15905,7 +15819,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3023": [
@@ -15913,7 +15826,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Business",
         "Associations",
@@ -15927,7 +15839,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3028": [
@@ -15935,7 +15846,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3040": [
@@ -15943,7 +15853,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3046": [
@@ -15951,7 +15860,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3047": [
@@ -15959,7 +15867,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "[",
         "Resolving",
@@ -15976,7 +15883,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "[",
         "Foundations",
@@ -16002,7 +15908,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -16034,7 +15939,6 @@
         "36UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3065": [
@@ -16042,7 +15946,6 @@
         "36UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3067": [
@@ -16050,7 +15953,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3070": [
@@ -16058,7 +15960,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3072": [
@@ -16066,7 +15967,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Resolving",
         "Civil",
@@ -16081,7 +15981,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Land",
         "Law",
@@ -16095,7 +15994,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3080": [
@@ -16103,7 +16001,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3084": [
@@ -16111,7 +16008,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3086": [
@@ -16119,7 +16015,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3087": [
@@ -16127,7 +16022,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3102": [
@@ -16135,7 +16029,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3105": [
@@ -16143,7 +16036,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3115": [
@@ -16151,7 +16043,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Land",
         "Law",
@@ -16165,7 +16056,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3125": [
@@ -16173,7 +16063,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3131": [
@@ -16181,7 +16070,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3133": [
@@ -16189,7 +16077,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3135": [
@@ -16197,7 +16084,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Equity",
         "&&",
@@ -16212,7 +16098,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "[",
         "Resolving",
@@ -16229,7 +16114,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3144": [
@@ -16237,7 +16121,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3146": [
@@ -16245,7 +16128,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3149": [
@@ -16253,7 +16135,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3150": [
@@ -16261,7 +16142,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Federal",
         "Constitutional",
@@ -16276,7 +16156,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3155": [
@@ -16284,7 +16163,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Business",
         "Associations",
@@ -16298,7 +16176,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Law",
         "in",
@@ -16315,7 +16192,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3165": [
@@ -16323,7 +16199,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3167": [
@@ -16331,7 +16206,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3170": [
@@ -16339,7 +16213,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Resolving",
         "Civil",
@@ -16373,7 +16246,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3182": [
@@ -16381,7 +16253,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3183": [
@@ -16389,7 +16260,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3185": [
@@ -16397,7 +16267,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3186": [
@@ -16405,7 +16274,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3187": [
@@ -16413,7 +16281,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3188": [
@@ -16421,7 +16288,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3192": [
@@ -16429,7 +16295,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Business",
         "Associations",
@@ -16443,7 +16308,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "[",
         "Federal",
@@ -16460,7 +16324,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3198": [
@@ -16474,9 +16337,8 @@
     "LAWS3208": [
         "(",
         "78UOC",
-        "of",
+        "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3211": [
@@ -16484,7 +16346,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3212": [
@@ -16492,7 +16353,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3216": [
@@ -16500,7 +16360,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3221": [
@@ -16508,7 +16367,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3222": [
@@ -16516,7 +16374,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3231": [
@@ -16524,7 +16381,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3240": [
@@ -16532,7 +16388,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -16548,7 +16403,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3250": [
@@ -16564,7 +16418,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3272": [
@@ -16572,7 +16425,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Federal",
         "Constitutional",
@@ -16587,7 +16439,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Federal",
         "Constitutional",
@@ -16602,7 +16453,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Administrative",
         "Law",
@@ -16625,7 +16475,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Administrative",
         "Law",
@@ -16639,7 +16488,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3301": [
@@ -16647,7 +16495,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3302": [
@@ -16655,7 +16502,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Administrative",
         "Law",
@@ -16676,7 +16522,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -16699,7 +16544,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -16722,7 +16566,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -16745,7 +16588,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -16768,7 +16610,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Resolving",
         "Civil",
@@ -16783,7 +16624,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3319": [
@@ -16791,7 +16631,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Criminal",
         "Laws",
@@ -16816,7 +16655,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3327": [
@@ -16824,7 +16662,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3331": [
@@ -16832,7 +16669,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3332": [
@@ -16840,7 +16676,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3335": [
@@ -16848,7 +16683,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3341": [
@@ -16856,7 +16690,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3345": [
@@ -16864,7 +16697,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3346": [
@@ -16872,7 +16704,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3348": [
@@ -16880,7 +16711,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3350": [
@@ -16921,7 +16751,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3361": [
@@ -16929,7 +16758,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3362": [
@@ -16958,7 +16786,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Law",
         "in",
@@ -16975,7 +16802,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3383": [
@@ -16983,7 +16809,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3384": [
@@ -16991,7 +16816,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3391": [
@@ -16999,7 +16823,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3392": [
@@ -17007,7 +16830,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3393": [
@@ -17015,7 +16837,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Land",
         "Law",
@@ -17029,7 +16850,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3396": [
@@ -17043,7 +16863,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3401": [
@@ -17051,7 +16870,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3402": [
@@ -17059,7 +16877,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3412": [
@@ -17067,7 +16884,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3413": [
@@ -17075,7 +16891,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3423": [
@@ -17083,7 +16898,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3427": [
@@ -17091,7 +16905,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3434": [
@@ -17099,7 +16912,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3441": [
@@ -17107,7 +16919,6 @@
         "36UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3442": [
@@ -17115,7 +16926,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3445": [
@@ -17123,7 +16933,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3478": [
@@ -17131,7 +16940,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3501": [
@@ -17139,7 +16947,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3510": [
@@ -17147,7 +16954,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3512": [
@@ -17155,7 +16961,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3513": [
@@ -17163,7 +16968,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3523": [
@@ -17182,7 +16986,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3533": [
@@ -17207,7 +17010,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3549": [
@@ -17215,7 +17017,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3555": [
@@ -17223,7 +17024,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3589": [
@@ -17231,7 +17031,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Resolving",
         "Civil",
@@ -17246,7 +17045,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Lawyers,",
         "Ethics",
@@ -17262,7 +17060,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         "&&",
         "Law",
         "in",
@@ -17286,7 +17083,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3758": [
@@ -17294,7 +17090,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3777": [
@@ -17319,7 +17114,6 @@
         "78UOC",
         "in",
         "LAWS",
-        "courses",
         ")"
     ],
     "LAWS3901": [
@@ -17399,7 +17193,7 @@
         "(",
         "96UOC",
         "&&",
-        "65WAM%",
+        "65WAM",
         ")"
     ],
     "MARK2012": [
@@ -20848,7 +20642,6 @@
         "24UOC",
         "in",
         "MUSC",
-        "courses",
         "&&",
         "one",
         "of",
@@ -20873,7 +20666,6 @@
         "24UOC",
         "in",
         "MUSC",
-        "courses",
         "&&",
         "MUSC2802",
         "&&",
@@ -20888,7 +20680,6 @@
         "24UOC",
         "in",
         "MUSC",
-        "courses",
         "&&",
         "a",
         "Bachelor",
@@ -20940,7 +20731,6 @@
         "24UOC",
         "in",
         "MUSC",
-        "courses",
         "&&",
         "a",
         "Music",
@@ -21174,9 +20964,8 @@
         ")",
         "||",
         "12UOC",
-        "of",
+        "in",
         "PSYC",
-        "courses",
         ")"
     ],
     "NEUR3101": [
@@ -21769,13 +21558,9 @@
     ],
     "PHCM1001": [
         "(",
-        "Currently",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "PHCM1002": [
@@ -23671,7 +23456,6 @@
     ],
     "SENG3993": [
         "(",
-        "Currently",
         "3707",
         "in",
         "the",
@@ -24272,12 +24056,9 @@
         "3897",
         ")",
         "||",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "SOMS1913": [
@@ -24470,65 +24251,44 @@
     ],
     "SOSS4051": [
         "(",
-        "4529",
-        "Social",
-        "Science",
         "(",
-        "Honours",
+        "4529",
         ")",
         ")"
     ],
     "SOSS4052": [
         "(",
-        "4529",
-        "Social",
-        "Science",
         "(",
-        "Honours",
+        "4529",
         ")",
         ")"
     ],
     "SOSS4053": [
         "(",
-        "4529",
-        "Social",
-        "Science",
         "(",
-        "Honours",
+        "4529",
         ")",
         ")"
     ],
     "SRAP4051": [
         "(",
-        "the",
-        "Social",
-        "Research",
-        "&&",
-        "Policy",
-        "honours",
-        "program",
+        "(",
+        "4504",
+        ")",
         ")"
     ],
     "SRAP4052": [
         "(",
-        "the",
-        "Social",
-        "Research",
-        "&&",
-        "Policy",
-        "honours",
-        "program",
+        "(",
+        "4504",
+        ")",
         ")"
     ],
     "SRAP4053": [
         "(",
-        "the",
-        "Social",
-        "Research",
-        "&&",
-        "Policy",
-        "honours",
-        "program",
+        "(",
+        "4504",
+        ")",
         ")"
     ],
     "SWCH9011": [
@@ -24894,46 +24654,30 @@
     ],
     "YMED1001": [
         "(",
-        "Currently",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "YMED1003": [
         "(",
-        "Currently",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "YMED1005": [
         "(",
-        "Currently",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "YMED1008": [
         "(",
-        "Currently",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "YMED3004": [
@@ -24950,13 +24694,9 @@
     ],
     "YMED3007": [
         "(",
-        "Currently",
+        "(",
         "3880",
-        "Bachelor",
-        "of",
-        "International",
-        "Public",
-        "Health",
+        ")",
         ")"
     ],
     "ZBUS1101": [
@@ -26779,12 +26519,8 @@
     ],
     "ZPEM4205": [
         "(",
-        "Currently",
-        "4511",
-        "B",
-        "Arts",
         "(",
-        "Honours",
+        "4511",
         ")",
         ")"
     ],
