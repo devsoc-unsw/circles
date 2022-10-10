@@ -23,6 +23,8 @@ SPECIALISATION_MAPPINGS = {
     '3895 Pharmaceutical Medicine\/Pharmacy': '3895',
     '3896 Exercise Science\/Physiotherapy and Exercise Physiology': '3896',
     'FINSD1 Finance Co-Op': 'FINSD1',
+    '(a )?Politics, Philosophy, and Economics program': 'PPES#',
+    "(a )?Politics and International Relations specialisation": 'POLSG?',
     'School of the Arts and Media honours': 'MDIA?H',
     'Business \(Honours\) Program 4512': '4512',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
@@ -123,10 +125,10 @@ def preprocess_condition(code, course=None):
     processed = convert_WAM(processed)
     processed = convert_GRADE(processed)
     processed = convert_level(processed)
+    processed = convert_manual_programs_and_specialisations(processed)
     processed = convert_program_type(processed)
     processed = convert_fslash(processed)
     processed = convert_including(processed)
-    processed = convert_manual_programs_and_specialisations(processed)
     processed = convert_AND_OR(processed)
     processed = convert_coreqs(processed)
     processed = convert_core(processed)

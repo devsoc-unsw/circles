@@ -94,31 +94,6 @@
         ],
         "broke at": "Index 6, Arts,"
     },
-    "ARTS2852": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit overall, and enrolment in a Politics, Philosophy, and Economics program or a Politics and International Relations specialisation<br/><br/>",
-            "processed": "24UOC && a Politics, Philosophy && ECON# || a Politics && International Relations specialisation"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "&&",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "ECON#",
-            "||",
-            "a",
-            "Politics",
-            "&&",
-            "International",
-            "Relations",
-            "specialisation",
-            ")"
-        ],
-        "broke at": "Index 4, Politics,"
-    },
     "ARTS3013": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in the following declared specialisation, Theatre and Performance Studies. Or 96 UOC overall and enrolment in a Bachelor of Music. Students must have a WAM of at least 65.<br/><br/>",
@@ -935,7 +910,7 @@
     "ARTS3212": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && an INST#"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -965,8 +940,9 @@
             "||",
             "48UOC",
             "&&",
-            "an",
-            "INST#",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2733,7 +2709,7 @@
     "ARTS3872": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && an INST#"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -2763,8 +2739,9 @@
             "||",
             "48UOC",
             "&&",
-            "an",
-            "INST#",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -5534,7 +5511,7 @@
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && an EDST#. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
+            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
         },
         "tokens": [
             "(",
@@ -5546,8 +5523,12 @@
             "&&",
             "EDST2003",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -5602,7 +5583,7 @@
     "EDST2094": {
         "condition": {
             "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-            "processed": "18UOC in L1 && an EDST#. Please contact the School of Education for enrolment"
+            "processed": "18UOC in L1 && (4509 || 4056) . Please contact the School of Education for enrolment"
         },
         "tokens": [
             "(",
@@ -5610,8 +5591,12 @@
             "in",
             "L1",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "Please",
             "contact",
             "the",
@@ -5622,58 +5607,7 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 6, EDST#."
-    },
-    "EDST4080": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && an EDST#"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "an",
-            "EDST#",
-            ")"
-        ],
-        "broke at": "Index 6, EDST#"
-    },
-    "EDST4084": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && an EDST#"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "an",
-            "EDST#",
-            ")"
-        ],
-        "broke at": "Index 6, EDST#"
-    },
-    "EDST4096": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && an EDST#"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "an",
-            "EDST#",
-            ")"
-        ],
-        "broke at": "Index 6, EDST#"
+        "broke at": "Index 11, Please"
     },
     "EDST6706": {
         "condition": {
@@ -5742,7 +5676,7 @@
     "EDST6760": {
         "condition": {
             "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -5756,8 +5690,12 @@
             "1",
             "courses",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -5809,7 +5747,7 @@
     "EDST6765": {
         "condition": {
             "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -5824,8 +5762,12 @@
             "Method",
             "courses",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -6182,12 +6124,29 @@
     "INST2003": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-            "processed": "an INST#. || ARTS1250 && a Geographical Studies major || minor"
+            "processed": "(3447) (2017). || INST1005 && INST1006 && (3447) (2017+). || ARTS1250 && a Geographical Studies major || minor"
         },
         "tokens": [
             "(",
-            "an",
-            "INST#.",
+            "(",
+            "3447",
+            ")",
+            "(",
+            "2017",
+            ")",
+            ".",
+            "||",
+            "INST1005",
+            "&&",
+            "INST1006",
+            "&&",
+            "(",
+            "3447",
+            ")",
+            "(",
+            "2017+",
+            ")",
+            ".",
             "||",
             "ARTS1250",
             "&&",
@@ -6199,24 +6158,25 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 2, INST#."
+        "broke at": "Index 8, ||"
     },
     "INST3900": {
         "condition": {
             "original": "Prerequisite: 72 units of credit overall, and enrolment in an International Studies program or specialisation<br/><br/>",
-            "processed": "72UOC && an INST# || specialisation"
+            "processed": "72UOC && (3447) || specialisation"
         },
         "tokens": [
             "(",
             "72UOC",
             "&&",
-            "an",
-            "INST#",
+            "(",
+            "3447",
+            ")",
             "||",
             "specialisation",
             ")"
         ],
-        "broke at": "Index 4, INST#"
+        "broke at": "Index 8, )"
     },
     "INTA2004": {
         "condition": {
@@ -9771,7 +9731,7 @@
     "MUSC1801": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -9783,7 +9743,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -9791,7 +9755,7 @@
     "MUSC1802": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -9803,7 +9767,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -9811,7 +9779,7 @@
     "MUSC1803": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -9823,7 +9791,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -9831,7 +9803,7 @@
     "MUSC2706": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -9843,7 +9815,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -9886,7 +9862,7 @@
     "MUSC2803": {
         "condition": {
             "original": "Prerequisite: 36 units of credit at level 1 and enrolment in a Music program or specialisation<br/><br/>",
-            "processed": "36UOC in L1 && MUSC# || specialisation"
+            "processed": "36UOC in L1 && (MUSC?? || 4508) || specialisation"
         },
         "tokens": [
             "(",
@@ -9894,12 +9870,16 @@
             "in",
             "L1",
             "&&",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             "||",
             "specialisation",
             ")"
         ],
-        "broke at": "Index 8, )"
+        "broke at": "Index 12, )"
     },
     "MUSC2901": {
         "condition": {
@@ -9967,7 +9947,7 @@
     "MUSC3706": {
         "condition": {
             "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-            "processed": "MUSC2702 || MUSC2703 (12UOC) && a Music Creative Practice || Music Pedagogy stream MUSC#"
+            "processed": "MUSC2702 || MUSC2703 (12UOC) && a Music Creative Practice || Music Pedagogy stream in (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -9986,7 +9966,12 @@
             "Music",
             "Pedagogy",
             "stream",
-            "MUSC#",
+            "in",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 9, Music"
@@ -10220,7 +10205,7 @@
     "MUSC4705": {
         "condition": {
             "original": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-            "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream MUSC#"
+            "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream in (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10236,7 +10221,12 @@
             "Creative",
             "Practice",
             "stream",
-            "MUSC#",
+            "in",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 9, Music"
@@ -11024,7 +11014,7 @@
     "SOCW3009": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3013]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
         },
         "tokens": [
             "(",
@@ -11054,7 +11044,9 @@
             "||",
             "SRAP2002",
             "&&",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW3013",
@@ -11066,7 +11058,7 @@
     "SOCW3012": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW#"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033)"
         },
         "tokens": [
             "(",
@@ -11094,7 +11086,9 @@
             "||",
             "SRAP2002",
             "&&",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             ")"
         ],
         "broke at": "Index 18, ||"
@@ -11102,7 +11096,7 @@
     "SOCW4003": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11114,7 +11108,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11125,8 +11122,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11134,7 +11130,7 @@
     "SOCW4011": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11146,7 +11142,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11157,8 +11156,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11166,7 +11164,7 @@
     "SOCW4012": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11178,7 +11176,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11189,8 +11190,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11198,7 +11198,7 @@
     "SOCW4013": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11210,7 +11210,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11221,8 +11224,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11230,7 +11232,7 @@
     "SOCW4015": {
         "condition": {
             "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, SOCW# && an overall 70WAM && [SOCW4018]"
+            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, (4033) && an overall 70WAM && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -11240,7 +11242,9 @@
             "SOCW4011,",
             "SOCW4012,",
             "SOCW4013,",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             "&&",
             "an",
             "overall",
@@ -11256,7 +11260,7 @@
     "SOCW4016": {
         "condition": {
             "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && SOCW# && [SOCW4018]"
+            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -11268,7 +11272,9 @@
             "&&",
             "SOCW4013",
             "&&",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW4018",
