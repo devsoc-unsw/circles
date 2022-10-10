@@ -44,7 +44,6 @@ const GraphicalSelector = () => {
       const container = ref.current;
       if (!container) return;
       const { Graph, Arrow } = await import('@antv/g6');
-      const { breadthFirstSearch } = await import('@antv/algorithm');
       const graphInstance = new Graph({
         container,
         width: container.scrollWidth,
@@ -85,31 +84,34 @@ const GraphicalSelector = () => {
         const id = node.getID();
         setCourseCode(id);
 
-        // hides/ unhides dependent nodes
-        if (node.hasState('click')) {
-          graphInstance.clearItemStates(node, 'click');
-          breadthFirstSearch(data, id, {
-            enter: ({ current }: { current: string }) => {
-              if (id !== current) {
-                const currentNode = graphInstance.findById(current) as INode;
-                // Unhiding node won't unhide other hidden nodes
-                currentNode.getEdges().forEach((e) => e.show());
-                currentNode.show();
-              }
-            }
-          });
-        } else if (node.getOutEdges().length) {
-          graphInstance.setItemState(node, 'click', true);
-          breadthFirstSearch(data, id, {
-            enter: ({ current }: { current: string }) => {
-              if (id !== current) {
-                const currentNode = graphInstance.findById(current) as INode;
-                currentNode.getEdges().forEach((e) => e.hide());
-                currentNode.hide();
-              }
-            }
-          });
-        }
+        // TODO: may need to remove this?
+        // const { breadthFirstSearch } = await import('@antv/algorithm');
+
+        // // hides/ unhides dependent nodes
+        // if (node.hasState('click')) {
+        //   graphInstance.clearItemStates(node, 'click');
+        //   breadthFirstSearch(data, id, {
+        //     enter: ({ current }: { current: string }) => {
+        //       if (id !== current) {
+        //         const currentNode = graphInstance.findById(current) as INode;
+        //         // Unhiding node won't unhide other hidden nodes
+        //         currentNode.getEdges().forEach((e) => e.show());
+        //         currentNode.show();
+        //       }
+        //     }
+        //   });
+        // } else if (node.getOutEdges().length) {
+        //   graphInstance.setItemState(node, 'click', true);
+        //   breadthFirstSearch(data, id, {
+        //     enter: ({ current }: { current: string }) => {
+        //       if (id !== current) {
+        //         const currentNode = graphInstance.findById(current) as INode;
+        //         currentNode.getEdges().forEach((e) => e.hide());
+        //         currentNode.hide();
+        //       }
+        //     }
+        //   });
+        // }
       });
 
       graphInstance.on('node:mouseenter', async (ev) => {
@@ -214,7 +216,6 @@ const GraphicalSelector = () => {
       key: 'course-info',
       children: courseCode ? (
         <CourseDescriptionPanel
-          concise
           courseCode={courseCode}
           key={courseCode}
           onCourseClick={(code) => handleFocusCourse(code)}

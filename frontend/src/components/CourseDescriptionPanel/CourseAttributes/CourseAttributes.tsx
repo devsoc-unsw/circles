@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
@@ -9,13 +10,15 @@ import S from './styles';
 
 const { Title, Text } = Typography;
 
-type CourseInfoAttributesProps = {
+type CourseAttributesProps = {
   course: Course;
-  concise?: boolean;
   courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfoAttributes = ({ course, concise, courseCapacity }: CourseInfoAttributesProps) => {
+const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
+  const { pathname } = useLocation();
+  const showAttributesSidebar = !!(pathname === '/course-selector');
+
   const termTags = course.terms?.length
     ? course.terms.map((term) => {
         const termNo = term.slice(1);
@@ -35,7 +38,7 @@ const CourseInfoAttributes = ({ course, concise, courseCapacity }: CourseInfoAtt
     </a>
   );
 
-  if (concise) {
+  if (!showAttributesSidebar) {
     return (
       <div>
         <S.TermWrapper>
@@ -122,4 +125,4 @@ const CourseInfoAttributes = ({ course, concise, courseCapacity }: CourseInfoAtt
   );
 };
 
-export default CourseInfoAttributes;
+export default CourseAttributes;

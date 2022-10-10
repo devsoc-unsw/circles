@@ -1,33 +1,17 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
 import Collapsible from 'components/Collapsible';
-import CourseTagStandard from 'components/CourseTag';
+import CourseTag from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import { inDev } from 'config/constants';
-import { PlannerSliceState } from 'reducers/plannerSlice';
-import S from './styles';
-
-type CourseTagProps = {
-  name: string;
-  onClick?: MouseEventHandler<HTMLSpanElement>;
-};
-
-const CourseTagGraphical = ({ name, onClick }: CourseTagProps) =>
-  onClick !== undefined ? (
-    <S.Tag className="text clickable" onClick={onClick}>
-      {name}
-    </S.Tag>
-  ) : (
-    <S.Tag className="text">{name}</S.Tag>
-  );
+import type { RootState } from 'config/store';
 
 type CourseInfoDrawersProps = {
   course: Course;
   pathFrom?: CourseList;
   unlocked?: CoursesUnlockedWhenTaken;
-  prereqVis: boolean;
-  planner: PlannerSliceState;
   onCourseClick?: (code: string) => void;
 };
 
@@ -35,13 +19,9 @@ const CourseInfoDrawers = ({
   course,
   onCourseClick,
   pathFrom,
-  prereqVis,
-  planner,
   unlocked
 }: CourseInfoDrawersProps) => {
-  // figure out a better way to do this
-  // difficult because classic CourseTag uses dispatches, where as CourseTagGraphical doesn't
-  const CourseTag = prereqVis ? CourseTagStandard : CourseTagGraphical;
+  const planner = useSelector((state: RootState) => state.planner);
 
   return (
     <div>
@@ -59,11 +39,7 @@ const CourseInfoDrawers = ({
             ? pathFrom
                 .filter((courseCode) => Object.keys(planner.courses).includes(courseCode))
                 .map((courseCode) => (
-                  <CourseTag
-                    key={courseCode}
-                    onClick={() => onCourseClick && onCourseClick(courseCode)}
-                    name={courseCode}
-                  />
+                  <CourseTag key={courseCode} onCourseClick={onCourseClick} name={courseCode} />
                 ))
             : 'None'}
         </p>
@@ -72,11 +48,7 @@ const CourseInfoDrawers = ({
         <p>
           {unlocked?.direct_unlock && unlocked.direct_unlock.length > 0
             ? unlocked.direct_unlock.map((courseCode) => (
-                <CourseTag
-                  key={courseCode}
-                  onClick={() => onCourseClick && onCourseClick(courseCode)}
-                  name={courseCode}
-                />
+                <CourseTag key={courseCode} onCourseClick={onCourseClick} name={courseCode} />
               ))
             : 'None'}
         </p>
@@ -87,25 +59,15 @@ const CourseInfoDrawers = ({
       >
         <p>
           {unlocked?.indirect_unlock && unlocked.indirect_unlock.length > 0
-            ? unlocked.indirect_unlock.map((code) =>
-                onCourseClick ? (
-                  <CourseTag
-                    key={code}
-                    name={code}
-                    onClick={() => {
-                      onCourseClick(code);
-                    }}
-                  />
-                ) : (
-                  <CourseTag key={code} name={code} />
-                )
-              )
+            ? unlocked.indirect_unlock.map((code) => (
+                <CourseTag key={code} name={code} onCourseClick={onCourseClick} />
+              ))
             : 'None'}
         </p>
       </Collapsible>
       {inDev && (
         <Collapsible title="Prerequisite Visualisation">
-          <PrerequisiteTree courseCode={course.code} />
+          <PrerequisiteTree courseCode={course.code} onCourseClick={onCourseClick} />
         </Collapsible>
       )}
     </div>

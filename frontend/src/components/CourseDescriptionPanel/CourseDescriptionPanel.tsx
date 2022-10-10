@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
@@ -9,8 +10,8 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseInfo, LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
 import { TIMETABLE_API_URL } from 'config/constants';
-import { RootState } from 'config/store';
-import CourseInfoAttributes from './CourseInfoAttributes';
+import type { RootState } from 'config/store';
+import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
 import { getEnrolmentCapacity, unwrap } from './helpers';
 import S from './styles';
@@ -19,29 +20,25 @@ const { Title, Text } = Typography;
 
 type CourseDescriptionPanelProps = {
   courseCode: string;
-  concise?: boolean;
   onCourseClick?: (code: string) => void;
 };
 
-type CourseUserInfo = {
-  course?: Course;
-  pathFrom?: CourseList;
-  unlocked?: CoursesUnlockedWhenTaken;
-  courseCapacity?: EnrolmentCapacityData;
-};
-
-const CourseDescriptionPanel = ({
-  courseCode,
-  concise,
-  onCourseClick
-}: CourseDescriptionPanelProps) => {
-  const [info, setInfo] = useState<CourseUserInfo | null>(null);
+const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
+
+  const { pathname } = useLocation();
+  const showAttributesSidebar = !!(pathname === '/course-selector');
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [course, setCourse] = useState<Course>();
+  const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>();
+  const [coursesUnlocked, setCoursesUnlocked] = useState<CoursesUnlockedWhenTaken>();
+  const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>();
 
   // get the info
   useEffect(() => {
     const getInfo = async () => {
-      setInfo(null);
+      setIsLoading(true);
       try {
         const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
@@ -54,12 +51,12 @@ const CourseDescriptionPanel = ({
         ]);
 
         const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
-        setInfo({
-          course: unwrap(courseRes)?.data,
-          pathFrom: unwrap(pathFromRes)?.data.courses,
-          unlocked: unwrap(unlockedRes)?.data,
-          courseCapacity: getEnrolmentCapacity(unwrap(courseCapRes)?.data)
-        });
+
+        setCourse(unwrap(courseRes)?.data);
+        setCoursesPathFrom(unwrap(pathFromRes)?.data.courses);
+        setCoursesUnlocked(unwrap(unlockedRes)?.data);
+        setCourseCapacity(getEnrolmentCapacity(unwrap(courseCapRes)?.data));
+        setIsLoading(false);
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error at getCourse', e);
@@ -68,21 +65,19 @@ const CourseDescriptionPanel = ({
     getInfo();
   }, [courseCode]);
 
-  if (!info || !info?.course) {
+  if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)
     return (
-      <S.Wrapper concise={concise}>
-        {concise ? <LoadingCourseInfoConcise /> : <LoadingCourseInfo />}
+      <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
+        {!showAttributesSidebar ? <LoadingCourseInfoConcise /> : <LoadingCourseInfo />}
       </S.Wrapper>
     );
   }
 
-  const { course, pathFrom, unlocked, courseCapacity } = info;
-
   return (
-    <S.Wrapper concise={concise}>
+    <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
       <S.MainWrapper>
-        <S.TitleWrapper concise={concise}>
+        <S.TitleWrapper showAttributesSidebar={showAttributesSidebar}>
           <div>
             <Title level={2} className="text">
               {courseCode} - {course.title}
@@ -90,31 +85,30 @@ const CourseDescriptionPanel = ({
           </div>
           <PlannerButton course={course} />
         </S.TitleWrapper>
+        {/* TODO: Style this better? */}
         {course.is_legacy && (
           <Text strong>
             NOTE: this course is discontinued - if a current course exists, pick that instead
           </Text>
         )}
 
-        {concise && (
+        {!showAttributesSidebar && (
           <div style={{ flexBasis: '25%' }}>
-            <CourseInfoAttributes course={course} concise />
+            <CourseAttributes course={course} />
           </div>
         )}
 
         <CourseInfoDrawers
           course={course}
-          pathFrom={pathFrom}
-          planner={planner}
-          prereqVis={!concise}
-          unlocked={unlocked}
+          pathFrom={coursesPathFrom}
+          unlocked={coursesUnlocked}
           onCourseClick={onCourseClick}
         />
       </S.MainWrapper>
 
-      {!concise && (
+      {showAttributesSidebar && (
         <S.SidebarWrapper>
-          <CourseInfoAttributes course={course} courseCapacity={courseCapacity} />
+          <CourseAttributes course={course} courseCapacity={courseCapacity} />
         </S.SidebarWrapper>
       )}
     </S.Wrapper>

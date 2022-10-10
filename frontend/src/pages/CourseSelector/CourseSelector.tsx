@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
@@ -8,6 +8,7 @@ import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
+import { addTab } from 'reducers/courseTabsSlice';
 import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
@@ -18,9 +19,11 @@ const CourseSelector = () => {
 
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses } = useSelector((state: RootState) => state.planner);
-
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
-  const id: string | undefined = tabs[active];
+
+  const dispatch = useDispatch();
+
+  const courseCode = tabs[active];
 
   useEffect(() => {
     // only open for users with no courses
@@ -57,9 +60,12 @@ const CourseSelector = () => {
         <CourseTabs />
         <S.ContentWrapper>
           <CourseMenu structure={structure} />
-          {id ? (
+          {courseCode ? (
             <div style={{ overflow: 'auto' }}>
-              <CourseDescriptionPanel courseCode={id} />
+              <CourseDescriptionPanel
+                courseCode={courseCode}
+                onCourseClick={(code) => dispatch(addTab(code))}
+              />
             </div>
           ) : (
             <S.InfographicContainer>

@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
-const Wrapper = styled.div<{ concise?: boolean }>`
+const Wrapper = styled.div<{ showAttributesSidebar?: boolean }>`
   width: 100%;
   padding: 10px;
 
-  ${({ concise }) =>
-    !concise &&
+  ${({ showAttributesSidebar }) =>
+    showAttributesSidebar &&
     css`
       padding: 30px;
       display: flex;
@@ -23,9 +23,9 @@ const SidebarWrapper = styled.div`
   flex-basis: 25%;
 `;
 
-const TitleWrapper = styled.div<{ concise?: boolean }>`
-  ${({ concise }) =>
-    !concise &&
+const TitleWrapper = styled.div<{ showAttributesSidebar?: boolean }>`
+  ${({ showAttributesSidebar }) =>
+    showAttributesSidebar &&
     css`
       display: flex;
       flex-direction: row;
