@@ -9,13 +9,15 @@ import {
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tabs, Tooltip } from 'antd';
 import axios from 'axios';
-import { Course, CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
+import HowToUse from './HowToUse';
 import S from './styles';
 import handleNodeData from './utils';
 
@@ -31,20 +33,10 @@ const GraphicalSelector = () => {
   const [graph, setGraph] = useState<Graph | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebar, setSidebar] = useState(true);
-  const [course, setCourse] = useState<Course | null>(null);
+  const [courseCode, setCourseCode] = useState<string>();
   const [showUnlockedOnly, setShowUnlockedOnly] = useState(true);
 
   const ref = useRef<HTMLDivElement | null>(null);
-
-  const updateCourse = async (courseCode: string) => {
-    try {
-      const res = await axios.get<Course>(`/courses/getCourse/${courseCode}`);
-      setCourse(res.data);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at updateCourse', e);
-    }
-  };
 
   useEffect(() => {
     // courses is a list of course codes
@@ -52,7 +44,6 @@ const GraphicalSelector = () => {
       const container = ref.current;
       if (!container) return;
       const { Graph, Arrow } = await import('@antv/g6');
-      const { breadthFirstSearch } = await import('@antv/algorithm');
       const graphInstance = new Graph({
         container,
         width: container.scrollWidth,
@@ -91,33 +82,36 @@ const GraphicalSelector = () => {
         // load up course information
         const node = ev.item as INode;
         const id = node.getID();
-        updateCourse(id);
+        setCourseCode(id);
 
-        // hides/ unhides dependent nodes
-        if (node.hasState('click')) {
-          graphInstance.clearItemStates(node, 'click');
-          breadthFirstSearch(data, id, {
-            enter: ({ current }: { current: string }) => {
-              if (id !== current) {
-                const currentNode = graphInstance.findById(current) as INode;
-                // Unhiding node won't unhide other hidden nodes
-                currentNode.getEdges().forEach((e) => e.show());
-                currentNode.show();
-              }
-            }
-          });
-        } else if (node.getOutEdges().length) {
-          graphInstance.setItemState(node, 'click', true);
-          breadthFirstSearch(data, id, {
-            enter: ({ current }: { current: string }) => {
-              if (id !== current) {
-                const currentNode = graphInstance.findById(current) as INode;
-                currentNode.getEdges().forEach((e) => e.hide());
-                currentNode.hide();
-              }
-            }
-          });
-        }
+        // TODO: may need to remove this?
+        // const { breadthFirstSearch } = await import('@antv/algorithm');
+
+        // // hides/ unhides dependent nodes
+        // if (node.hasState('click')) {
+        //   graphInstance.clearItemStates(node, 'click');
+        //   breadthFirstSearch(data, id, {
+        //     enter: ({ current }: { current: string }) => {
+        //       if (id !== current) {
+        //         const currentNode = graphInstance.findById(current) as INode;
+        //         // Unhiding node won't unhide other hidden nodes
+        //         currentNode.getEdges().forEach((e) => e.show());
+        //         currentNode.show();
+        //       }
+        //     }
+        //   });
+        // } else if (node.getOutEdges().length) {
+        //   graphInstance.setItemState(node, 'click', true);
+        //   breadthFirstSearch(data, id, {
+        //     enter: ({ current }: { current: string }) => {
+        //       if (id !== current) {
+        //         const currentNode = graphInstance.findById(current) as INode;
+        //         currentNode.getEdges().forEach((e) => e.hide());
+        //         currentNode.hide();
+        //       }
+        //     }
+        //   });
+        // }
       });
 
       graphInstance.on('node:mouseenter', async (ev) => {
@@ -190,10 +184,10 @@ const GraphicalSelector = () => {
     setShowUnlockedOnly((prevState) => !prevState);
   };
 
-  const handleFocusCourse = (courseCode: string) => {
-    if (graph?.findById(courseCode)) {
-      graph.focusItem(courseCode);
-      updateCourse(courseCode);
+  const handleFocusCourse = (code: string) => {
+    if (graph?.findById(code)) {
+      graph.focusItem(code);
+      setCourseCode(code);
     }
   };
 
@@ -217,9 +211,21 @@ const GraphicalSelector = () => {
   }, [graph, sidebar]);
 
   const items = [
-    { label: 'Course Info', key: 'course-info', children: 'Content 1' },
+    {
+      label: 'Course Info',
+      key: 'course-info',
+      children: courseCode ? (
+        <CourseDescriptionPanel
+          courseCode={courseCode}
+          key={courseCode}
+          onCourseClick={(code) => handleFocusCourse(code)}
+        />
+      ) : (
+        'No course selected'
+      )
+    },
     { label: 'Program Structure', key: 'program-structure', children: 'Content 2' },
-    { label: 'Help', key: 'help', children: 'Content 3' }
+    { label: 'Help', key: 'help', children: <HowToUse /> }
   ];
 
   return (
@@ -254,13 +260,6 @@ const GraphicalSelector = () => {
         {sidebar && (
           <S.SidebarWrapper>
             <Tabs items={items} />
-            {course ? (
-              <div>
-                {course.code} - {course.title}
-              </div>
-            ) : (
-              'No course selected'
-            )}
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
