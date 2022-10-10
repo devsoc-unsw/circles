@@ -1,12 +1,12 @@
-import LoadingCourseInfo from './LoadingCourseInfo';
-import LoadingCourseInfoConcise from './LoadingCourseInfoConcise';
+import LoadingCourseDescriptionPanel from './LoadingCourseDescriptionPanel';
+import LoadingCourseDescriptionPanelSidebar from './LoadingCourseDescriptionPanelSidebar';
 import LoadingCourseMenu from './LoadingCourseMenu';
 import LoadingDashboard from './LoadingDashboard';
 import LoadingTermPlanner from './LoadingTermPlanner';
 
 export {
-  LoadingCourseInfo,
-  LoadingCourseInfoConcise,
+  LoadingCourseDescriptionPanel,
+  LoadingCourseDescriptionPanelSidebar,
   LoadingCourseMenu,
   LoadingDashboard,
   LoadingTermPlanner

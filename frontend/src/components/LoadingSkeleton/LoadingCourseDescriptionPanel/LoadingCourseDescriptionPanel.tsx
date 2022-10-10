@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from 'antd';
 import S from './styles';
 
-const LoadingCourseInfo = () => (
+const LoadingCourseDescriptionPanel = () => (
   <S.SkeletonWrapper>
     <S.SkeletonDescription>
       {/* title */}
@@ -29,4 +29,4 @@ const LoadingCourseInfo = () => (
   </S.SkeletonWrapper>
 );
 
-export default LoadingCourseInfo;
+export default LoadingCourseDescriptionPanel;

@@ -8,7 +8,10 @@ import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import { LoadingCourseInfo, LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
+import {
+  LoadingCourseDescriptionPanel,
+  LoadingCourseDescriptionPanelSidebar
+} from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
 import { TIMETABLE_API_URL } from 'config/constants';
 import type { RootState } from 'config/store';
@@ -78,7 +81,11 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
     // either still loading or the course wasn't fetchable (fatal)
     return (
       <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
-        {!showAttributesSidebar ? <LoadingCourseInfoConcise /> : <LoadingCourseInfo />}
+        {!showAttributesSidebar ? (
+          <LoadingCourseDescriptionPanelSidebar />
+        ) : (
+          <LoadingCourseDescriptionPanel />
+        )}
       </S.Wrapper>
     );
   }
