@@ -17,13 +17,13 @@ import CourseTitle from './CourseTitle';
 import S from './styles';
 
 type Props = {
-  structure: ProgramStructure
+  structure: ProgramStructure;
 };
 
 type SubgroupTitleProps = {
-  title: string
-  currUOC: number
-  totalUOC: number
+  title: string;
+  currUOC: number;
+  totalUOC: number;
 };
 
 const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
@@ -66,7 +66,7 @@ const CourseMenu = ({ structure }: Props) => {
           const subgroupStructure = structure[group].content[subgroup];
           newCoursesUnits[group][subgroup] = {
             total: subgroupStructure.UOC,
-            curr: 0,
+            curr: 0
           };
           newMenu[group][subgroup] = [];
 
@@ -79,16 +79,15 @@ const CourseMenu = ({ structure }: Props) => {
                 courseCode,
                 title: subgroupStructure.courses[courseCode],
                 unlocked: !!courses[courseCode],
-                accuracy: courses[courseCode]
-                  ? courses[courseCode].is_accurate
-                  : true,
+                accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
               });
               // add UOC to curr
               if (planner.courses[courseCode]) {
-                newCoursesUnits[group][subgroup].curr
-                  += planner.courses[courseCode].UOC * getNumTerms(
+                newCoursesUnits[group][subgroup].curr +=
+                  planner.courses[courseCode].UOC *
+                  getNumTerms(
                     planner.courses[courseCode].UOC,
-                    planner.courses[courseCode].isMultiterm,
+                    planner.courses[courseCode].isMultiterm
                   );
               }
             });
@@ -103,7 +102,7 @@ const CourseMenu = ({ structure }: Props) => {
     try {
       const res = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner)),
+        JSON.stringify(prepareUserPayload(degree, planner))
       );
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);
@@ -120,7 +119,7 @@ const CourseMenu = ({ structure }: Props) => {
 
   const sortSubgroups = (
     item1: [string, MenuDataSubgroup[]],
-    item2: [string, MenuDataSubgroup[]],
+    item2: [string, MenuDataSubgroup[]]
   ) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
       return -1;
@@ -133,31 +132,26 @@ const CourseMenu = ({ structure }: Props) => {
     return item1[0] > item2[0] ? 1 : -1;
   };
 
-  const sortCourses = (item1: MenuDataSubgroup, item2: MenuDataSubgroup) => (
-    item1.courseCode > item2.courseCode ? 1 : -1
-  );
+  const sortCourses = (item1: MenuDataSubgroup, item2: MenuDataSubgroup) =>
+    item1.courseCode > item2.courseCode ? 1 : -1;
 
   const defaultOpenKeys = [Object.keys(menuData)[0]];
 
   const menuItems: MenuProps['items'] = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
     label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
     key: groupKey,
-    children: Object
-      .entries(groupEntry)
+    children: Object.entries(groupEntry)
       .sort(sortSubgroups)
       .map(([subgroupKey, subGroupEntry]) => {
         const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
         const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
         if (subGroupEntry.length <= MAX_COURSES_OVERFLOW) defaultOpenKeys.push(subgroupKey);
         return {
-          label: <SubgroupTitle
-            title={subgroupKey}
-            currUOC={currUOC}
-            totalUOC={totalUOC}
-          />,
+          label: <SubgroupTitle title={subgroupKey} currUOC={currUOC} totalUOC={totalUOC} />,
           key: subgroupKey,
           disabled: !subGroupEntry.length, // disable submenu if there are no courses
           // check if there are courses to show collapsible submenu
+
           children: subGroupEntry.length ? subGroupEntry.sort(sortCourses)
             .filter((course) => (
               course.unlocked
@@ -176,7 +170,7 @@ const CourseMenu = ({ structure }: Props) => {
               key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
             })) : null,
         };
-      }),
+      })
   }));
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup
@@ -186,17 +180,17 @@ const CourseMenu = ({ structure }: Props) => {
   };
   return (
     <S.SidebarWrapper>
-      {pageLoaded
-        ? (
-          <S.Menu
-            defaultSelectedKeys={[]}
-            defaultOpenKeys={defaultOpenKeys}
-            items={menuItems}
-            mode="inline"
-            onClick={handleClick}
-          />
-        )
-        : <LoadingCourseMenu />}
+      {pageLoaded ? (
+        <S.Menu
+          defaultSelectedKeys={[]}
+          defaultOpenKeys={defaultOpenKeys}
+          items={menuItems}
+          mode="inline"
+          onClick={handleClick}
+        />
+      ) : (
+        <LoadingCourseMenu />
+      )}
     </S.SidebarWrapper>
   );
 };

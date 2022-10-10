@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  MinusOutlined, PlusOutlined,
-} from '@ant-design/icons';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
@@ -13,8 +11,8 @@ import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 import S from './styles';
 
 type Props = {
-  courseCode: string
-  planned?: boolean
+  courseCode: string;
+  planned?: boolean;
 };
 
 const QuickAddCartButton = ({ courseCode, planned }: Props) => {
@@ -40,7 +38,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
         isAccurate: course.is_accurate,
         isMultiterm: course.is_multiterm,
         supressed: false,
-        mark: undefined,
+        mark: undefined
       };
       dispatch(addToUnplanned({ courseCode: course.code, courseData }));
     } catch (err) {
@@ -52,7 +50,10 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
     try {
-      const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${code}`, JSON.stringify(prepareUserPayload(degree, planner)));
+      const res = await axios.post<UnselectCourses>(
+        `/courses/unselectCourse/${code}`,
+        JSON.stringify(prepareUserPayload(degree, planner))
+      );
       dispatch(removeCourses(res.data.courses));
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -60,26 +61,24 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
     }
   };
 
-  return (
-    !planned ? (
-      <Tooltip title="Add to Planner" placement="top">
-        <Button
-          onClick={(e) => addToPlanner(e, courseCode)}
-          size="small"
-          shape="circle"
-          icon={<PlusOutlined />}
-        />
-      </Tooltip>
-    ) : (
-      <Tooltip title="Remove from Planner" placement="top">
-        <S.DeselectButton
-          onClick={(e) => removeFromPlanner(e, courseCode)}
-          size="small"
-          shape="circle"
-          icon={<MinusOutlined />}
-        />
-      </Tooltip>
-    )
+  return !planned ? (
+    <Tooltip title="Add to Planner" placement="top">
+      <Button
+        onClick={(e) => addToPlanner(e, courseCode)}
+        size="small"
+        shape="circle"
+        icon={<PlusOutlined />}
+      />
+    </Tooltip>
+  ) : (
+    <Tooltip title="Remove from Planner" placement="top">
+      <S.DeselectButton
+        onClick={(e) => removeFromPlanner(e, courseCode)}
+        size="small"
+        shape="circle"
+        icon={<MinusOutlined />}
+      />
+    </Tooltip>
   );
 };
 

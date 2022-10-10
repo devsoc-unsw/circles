@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components';
 import { shake } from '../common/styles';
 
 type CourseWrapperProps = {
-  isSmall: boolean
-  summerEnabled: boolean
-  warningsDisabled: boolean
-  isWarning: boolean
-  dragDisabled: boolean
+  isSmall: boolean;
+  summerEnabled: boolean;
+  warningsDisabled: boolean;
+  isWarning: boolean;
+  dragDisabled: boolean;
 };
 
 const CourseWrapper = styled.li<CourseWrapperProps>`
@@ -25,35 +25,46 @@ const CourseWrapper = styled.li<CourseWrapperProps>`
   align-items: center;
   gap: 0.7em;
   line-height: 1.5715;
-  background-color: ${({ theme }) => theme.draggableCourse.backgroundColor}; 
+  background-color: ${({ theme }) => theme.draggableCourse.backgroundColor};
 
-  ${({ isSmall }) => isSmall && css`
-    border-radius: 1.25em;
-    padding: 0.8em;
-    width: 10em;
-  `}
+  ${({ isSmall }) =>
+    isSmall &&
+    css`
+      border-radius: 1.25em;
+      padding: 0.8em;
+      width: 10em;
+    `}
 
-  ${({ summerEnabled, isSmall }) => summerEnabled && isSmall && css`
-    width: 8em;
-  `}
+  ${({ summerEnabled, isSmall }) =>
+    summerEnabled &&
+    isSmall &&
+    css`
+      width: 8em;
+    `}
 
-  ${({ warningsDisabled }) => warningsDisabled && css`
-    background-color: #fff3e0;
-  `}
+  ${({ warningsDisabled }) =>
+    warningsDisabled &&
+    css`
+      background-color: #fff3e0;
+    `}
 
-  ${({ isWarning }) => isWarning && css`
-    background-color: ${({ theme }) => theme.draggableCourse.warningBackgroundColor}; 
-  `}
+  ${({ isWarning }) =>
+    isWarning &&
+    css`
+      background-color: ${({ theme }) => theme.draggableCourse.warningBackgroundColor};
+    `}
 
-  ${({ dragDisabled }) => dragDisabled && css`
-    background-color: ${({ theme }) => theme.draggableCourse.dragDisabledBackgroundColor};
+  ${({ dragDisabled }) =>
+    dragDisabled &&
+    css`
+      background-color: ${({ theme }) => theme.draggableCourse.dragDisabledBackgroundColor};
 
-    &:hover {
-      animation: ${shake} 0.25s;
-      transform: none;
-      cursor: not-allowed;
-    }
-  `}
+      &:hover {
+        animation: ${shake} 0.25s;
+        transform: none;
+        cursor: not-allowed;
+      }
+    `}
 `;
 
 const CourseLabel = styled.div`
@@ -65,5 +76,6 @@ const CourseLabel = styled.div`
 `;
 
 export default {
-  CourseWrapper, CourseLabel,
+  CourseWrapper,
+  CourseLabel
 };

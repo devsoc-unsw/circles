@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 import S from 'components/SpecialisationCard/styles';
 
 type Props = {
-  uoc: number
+  uoc: number;
 };
 
 const FreeElectivesCard = ({ uoc }: Props) => {

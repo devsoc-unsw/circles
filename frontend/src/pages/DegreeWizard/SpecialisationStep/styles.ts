@@ -11,11 +11,13 @@ const Menu = styled(antdMenu)`
     background-color: inherit;
   }
 
-  ${({ theme }) => theme.courseSidebar && css`
-    .ant-menu-sub {
-      background-color: ${theme.courseSidebar.menuSubColor} !important;
-    }
-  `}
+  ${({ theme }) =>
+    theme.courseSidebar &&
+    css`
+      .ant-menu-sub {
+        background-color: ${theme.courseSidebar.menuSubColor} !important;
+      }
+    `}
 
   .ant-menu-title-content, .ant-menu-submenu-arrow {
     color: ${({ theme }) => theme.text};
@@ -24,7 +26,6 @@ const Menu = styled(antdMenu)`
   .ant-menu-submenu {
     border: 1px solid #a86fed;
   }
-
 `;
 
 export default { Menu };

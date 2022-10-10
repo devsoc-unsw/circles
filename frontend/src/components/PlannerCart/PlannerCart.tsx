@@ -41,12 +41,11 @@ const PlannerCart = () => {
             <>
               <S.CartContentWrapper>
                 {/* Reversed map to show the most recently added courses first */}
-                {Object.keys(courses).reverse().map((courseCode) => (
-                  <CourseCartCard
-                    code={courseCode}
-                    title={courses[courseCode].title}
-                  />
-                ))}
+                {Object.keys(courses)
+                  .reverse()
+                  .map((courseCode) => (
+                    <CourseCartCard code={courseCode} title={courses[courseCode].title} />
+                  ))}
               </S.CartContentWrapper>
               {Object.keys(courses).length > 0 && (
                 <Button
@@ -62,13 +61,9 @@ const PlannerCart = () => {
           ) : (
             <S.EmptyWrapper>
               <Text className="text">
-                You have not selected any courses. Find them in our course
-                selector
+                You have not selected any courses. Find them in our course selector
               </Text>
-              <Button
-                shape="round"
-                onClick={() => navigate('/course-selector')}
-              >
+              <Button shape="round" onClick={() => navigate('/course-selector')}>
                 Go to course selector
               </Button>
             </S.EmptyWrapper>

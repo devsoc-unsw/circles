@@ -11,15 +11,13 @@ import CS from '../common/styles';
 import S from './styles';
 
 type HelpStepProps = {
-  title: string
-  gif: string
-  pic: string
-  altText: string
+  title: string;
+  gif: string;
+  pic: string;
+  altText: string;
 };
 
-const HelpStep = ({
-  title, gif, pic, altText,
-}: HelpStepProps) => {
+const HelpStep = ({ title, gif, pic, altText }: HelpStepProps) => {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -43,26 +41,26 @@ const HelpMenu = () => {
       title: '1. Drag and Drop Courses',
       pic: dragAndDropPic,
       gif: dragAndDropGif,
-      altText: 'drag and drop walkthrough',
+      altText: 'drag and drop walkthrough'
     },
     {
       title: '2. Right Click Courses for More Actions',
       pic: unschedulePic,
       gif: unscheduleGif,
-      altText: 'context menu walkthrough',
+      altText: 'context menu walkthrough'
     },
     {
       title: '3. Hide Year',
       pic: hideYearPic,
       gif: hideYearGif,
-      altText: 'hide year walkthrough',
+      altText: 'hide year walkthrough'
     },
     {
       title: '4. Additional Features',
       pic: additionalOptionsPic,
       gif: additionalOptionsGif,
-      altText: 'additional options walkthrough',
-    },
+      altText: 'additional options walkthrough'
+    }
   ];
 
   return (
@@ -71,9 +69,9 @@ const HelpMenu = () => {
         <CS.MenuHeader>Term Planner Tips (Hover to Play)</CS.MenuHeader>
         <CS.MenuDivider />
       </S.HeaderWrapper>
-      {helpSteps.map(({
-        title, pic, gif, altText,
-      }) => <HelpStep title={title} gif={gif} pic={pic} altText={altText} />)}
+      {helpSteps.map(({ title, pic, gif, altText }) => (
+        <HelpStep title={title} gif={gif} pic={pic} altText={altText} />
+      ))}
     </S.HelpMenuWrapper>
   );
 };

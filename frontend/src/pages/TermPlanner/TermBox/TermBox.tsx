@@ -10,26 +10,24 @@ import { toggleTermComplete } from 'reducers/plannerSlice';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
 
-const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
+const Droppable = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
+);
 
 type Props = {
-  name: string
-  coursesList: string[]
-  termsOffered: string[]
-  dragging: boolean
+  name: string;
+  coursesList: string[];
+  termsOffered: string[];
+  dragging: boolean;
 };
 
-const TermBox = ({
-  name, coursesList, termsOffered, dragging,
-}: Props) => {
+const TermBox = ({ name, coursesList, termsOffered, dragging }: Props) => {
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
-  const {
-    isSummerEnabled,
-    completedTerms,
-    courses,
-  } = useSelector((state: RootState) => state.planner);
+  const { isSummerEnabled, completedTerms, courses } = useSelector(
+    (state: RootState) => state.planner
+  );
   const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
@@ -52,36 +50,29 @@ const TermBox = ({
 
   const iconStyle = {
     fontSize: '12px',
-    color: theme.termCheckbox.color,
+    color: theme.termCheckbox.color
   };
 
   const uocBadgeStyle = {
     backgroundColor: theme.uocBadge.backgroundColor,
-    boxShadow: 'none',
+    boxShadow: 'none'
   };
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isCompleted}>
         {(provided) => (
           <Badge
-            count={(
+            count={
               <S.TermCheckboxWrapper checked={isCompleted}>
-                {(
-                    !isCompleted
-                      ? (
-                        <UnlockFilled
-                          style={iconStyle}
-                          onClick={handleCompleteTerm}
-                        />
-                      ) : (
-                        <LockFilled
-                          style={iconStyle}
-                          onClick={handleCompleteTerm}
-                        />
-                      ) //
-                  )}
+                {
+                  !isCompleted ? (
+                    <UnlockFilled style={iconStyle} onClick={handleCompleteTerm} />
+                  ) : (
+                    <LockFilled style={iconStyle} onClick={handleCompleteTerm} />
+                  ) //
+                }
               </S.TermCheckboxWrapper>
-              )}
+            }
             offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
           >
             <S.TermBoxWrapper
@@ -91,16 +82,9 @@ const TermBox = ({
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {coursesList.map(
-                (code, index) => (
-                  <DraggableCourse
-                    key={`${code}${term}`}
-                    code={code}
-                    index={index}
-                    term={term}
-                  />
-                ),
-              )}
+              {coursesList.map((code, index) => (
+                <DraggableCourse key={`${code}${term}`} code={code} index={index} term={term} />
+              ))}
               {provided.placeholder}
               <S.UOCBadgeWrapper>
                 <Badge
