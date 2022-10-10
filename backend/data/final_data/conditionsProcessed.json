@@ -4820,7 +4820,7 @@
     },
     "DIET1001": {
         "original": "Prerequisite: Enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/><br/>",
-        "processed": "3894 Nutrition/Dietetics && Food Innovation"
+        "processed": "(3894)"
     },
     "DIET2001": {
         "original": "Pre-requisites: BABS1201, CHEM1832, SOMS1912, SOMS1913, BIOC2181<br/><br/>",
@@ -5225,7 +5225,7 @@
     },
     "ECON3203": {
         "original": "ECON3209 or MATH2801 or MATH2901 or Enrolment in FINSBH Finance Co-Op Honours or Enrolment in FINSD1 Finance Co-Op<br/><br/>",
-        "processed": "ECON3209 || MATH2801 || MATH2901 || (FINSBH) || FINSD1 Finance Co-Op"
+        "processed": "ECON3209 || MATH2801 || MATH2901 || (FINSBH) || (FINSD1)"
     },
     "ECON3206": {
         "original": "Prerequisite: ECON2209<br/><br/>",
@@ -5954,7 +5954,7 @@
     },
     "EXPT1200": {
         "original": "Prerequisite: Enrolment in 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-        "processed": "3897 Applied Exercise Science/Clinical Exercise Physiology"
+        "processed": "(3897)"
     },
     "EXPT2137": {
         "original": "Prerequisites: ANAT1452<br/><br/>",
@@ -5998,7 +5998,7 @@
     },
     "EXPT3170": {
         "original": "Prerequisites: EXPT2154, EXPT2168 and (EXPT2137 or enrolment in 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-        "processed": "EXPT2154 && EXPT2168 && (EXPT2137 || 3897 Applied Exercise Science/Clinical Exercise Physiology)"
+        "processed": "EXPT2154 && EXPT2168 && (EXPT2137 || (3897) )"
     },
     "EXPT3174": {
         "original": "Pre-requisites: SOMS1912, SOMS1913, EXPT1155, EXPT2154<br/><br/>",
@@ -6655,11 +6655,11 @@
     },
     "HLTH1000": {
         "original": "Prerequisite:  Enrolment in 3894 Nutrition/Dietetics and Food Innovation <br/>OR 3895 Pharmaceutical Medicine/Pharmacy<br/>OR 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>OR 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-        "processed": "3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology"
+        "processed": "(3894) || (3895) || (3896) || (3897)"
     },
     "HLTH1001": {
         "original": "Co-requisite: DIET1001 or PHRM1011 or EXPT1182<br/><br/>Prerequisite: Enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>OR 3895 Pharmaceutical Medicine/Pharmacy<br/>OR 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>OR 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-        "processed": "[DIET1001 || PHRM1011 || EXPT1182 3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology]"
+        "processed": "[DIET1001 || PHRM1011 || EXPT1182] && ((3894) || (3895) || (3896) || (3897))"
     },
     "HLTH2000": {
         "original": "Pre-requisite: HLTH1000<br/><br/>",
@@ -6667,7 +6667,7 @@
     },
     "HLTH3000": {
         "original": "Prerequisites: HLTH1000, HLTH2000 and (PHCM2100 or enrolment into 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-        "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to 3897 Applied Exercise Science/Clinical Exercise Physiology)"
+        "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to (3897) )"
     },
     "HLTH3001": {
         "original": "Pre-requisite: PHCM2100<br/><br/>",
@@ -9797,15 +9797,15 @@
     },
     "PHRM1011": {
         "original": "Prerequisite: Enrolment in 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-        "processed": "3895 Pharmaceutical Medicine/Pharmacy"
+        "processed": "(3895)"
     },
     "PHRM1021": {
         "original": "Prerequisite: CHEM1832 and enrolment in 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-        "processed": "CHEM1832 && 3895 Pharmaceutical Medicine/Pharmacy"
+        "processed": "CHEM1832 && (3895)"
     },
     "PHRM2031": {
         "original": "Prerequisite: PHRM1011 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>Co-requisite: PHAR2911, DIET2001<br/><br/>",
-        "processed": "PHRM1011 && 48UOC in L1 from 3895 Pharmaceutical Medicine/Pharmacy && [PHAR2911, DIET2001]"
+        "processed": "PHRM1011 && 48UOC in L1 from (3895) && [PHAR2911, DIET2001]"
     },
     "PHRM3011": {
         "original": "Pre-requisites: CHEM2832, CHEM2051, MICR2012<br/><br/>",
@@ -9813,7 +9813,7 @@
     },
     "PHRM3021": {
         "original": "Prerequisite: PHRM2031, MICR2012, PHAR2911 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-        "processed": "PHRM2031 && MICR2012 && PHAR2911 && 48UOC in L1 from 3895 Pharmaceutical Medicine/Pharmacy"
+        "processed": "PHRM2031 && MICR2012 && PHAR2911 && 48UOC in L1 from (3895)"
     },
     "PHRM3022": {
         "original": "Pre-requisite: 3892 Pharmaceutical Medicine (Year 1) and PHRM2031, MICR2012, PHAR2911\t<br/><br/>",
@@ -10797,11 +10797,11 @@
     },
     "SOMS1912": {
         "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation <br/>or 3895 Pharmaceutical Medicine/Pharmacy <br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology <br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology || 3880 Bachelor of International Public Health"
+        "processed": "(3894) || (3895) || (3896) || (3897) || 3880 Bachelor of International Public Health"
     },
     "SOMS1913": {
         "original": "SOMS1912 Human Systems 1 and enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>or 3895 Pharmaceutical Medicine/Pharmacy<br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 International Public Health<br/><br/>",
-        "processed": "SOMS1912 Human Systems 1 && 3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology || 3880 International Public Health"
+        "processed": "SOMS1912 Human Systems 1 && (3894) || (3895) || (3896) || (3897) || 3880 International Public Health"
     },
     "SOMS3001": {
         "original": "WAM above 75<br/><br/>",

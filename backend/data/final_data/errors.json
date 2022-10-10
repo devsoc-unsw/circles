@@ -4744,22 +4744,6 @@
         ],
         "broke at": "Index 3, least"
     },
-    "DIET1001": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/><br/>",
-            "processed": "3894 Nutrition/Dietetics && Food Innovation"
-        },
-        "tokens": [
-            "(",
-            "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
-            ")"
-        ],
-        "broke at": "Index 3, &&"
-    },
     "DPBS1001": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
@@ -5547,30 +5531,6 @@
         ],
         "broke at": "Index 13, credit"
     },
-    "ECON3203": {
-        "condition": {
-            "original": "ECON3209 or MATH2801 or MATH2901 or Enrolment in FINSBH Finance Co-Op Honours or Enrolment in FINSD1 Finance Co-Op<br/><br/>",
-            "processed": "ECON3209 || MATH2801 || MATH2901 || (FINSBH) || FINSD1 Finance Co-Op"
-        },
-        "tokens": [
-            "(",
-            "ECON3209",
-            "||",
-            "MATH2801",
-            "||",
-            "MATH2901",
-            "||",
-            "(",
-            "FINSBH",
-            ")",
-            "||",
-            "FINSD1",
-            "Finance",
-            "Co-Op",
-            ")"
-        ],
-        "broke at": "Index 13, Co-Op"
-    },
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
@@ -5947,23 +5907,6 @@
         ],
         "broke at": "Index 6, 4061,"
     },
-    "EXPT1200": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-            "processed": "3897 Applied Exercise Science/Clinical Exercise Physiology"
-        },
-        "tokens": [
-            "(",
-            "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
-            ")"
-        ],
-        "broke at": "Index 3, Exercise"
-    },
     "EXPT2168": {
         "condition": {
             "original": "Prerequisites - EXPT1155 Exercise Physiology and Metabolism <br/><br/>",
@@ -6002,31 +5945,6 @@
             ")"
         ],
         "broke at": "Index 2, SOMS1912,"
-    },
-    "EXPT3170": {
-        "condition": {
-            "original": "Prerequisites: EXPT2154, EXPT2168 and (EXPT2137 or enrolment in 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-            "processed": "EXPT2154 && EXPT2168 && (EXPT2137 || 3897 Applied Exercise Science/Clinical Exercise Physiology)"
-        },
-        "tokens": [
-            "(",
-            "EXPT2154",
-            "&&",
-            "EXPT2168",
-            "&&",
-            "(",
-            "EXPT2137",
-            "||",
-            "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 9, Applied"
     },
     "FADA2020": {
         "condition": {
@@ -6221,85 +6139,10 @@
         ],
         "broke at": "Index 2, Stage"
     },
-    "HLTH1000": {
-        "condition": {
-            "original": "Prerequisite:  Enrolment in 3894 Nutrition/Dietetics and Food Innovation <br/>OR 3895 Pharmaceutical Medicine/Pharmacy<br/>OR 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>OR 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-            "processed": "3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology"
-        },
-        "tokens": [
-            "(",
-            "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
-            "||",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            "||",
-            "3896",
-            "Exercise",
-            "Science/Physiotherapy",
-            "&&",
-            "Exercise",
-            "Physiology",
-            "||",
-            "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
-            ")"
-        ],
-        "broke at": "Index 3, &&"
-    },
-    "HLTH1001": {
-        "condition": {
-            "original": "Co-requisite: DIET1001 or PHRM1011 or EXPT1182<br/><br/>Prerequisite: Enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>OR 3895 Pharmaceutical Medicine/Pharmacy<br/>OR 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>OR 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-            "processed": "[DIET1001 || PHRM1011 || EXPT1182 3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology]"
-        },
-        "tokens": [
-            "(",
-            "[",
-            "DIET1001",
-            "||",
-            "PHRM1011",
-            "||",
-            "EXPT1182",
-            "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
-            "||",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            "||",
-            "3896",
-            "Exercise",
-            "Science/Physiotherapy",
-            "&&",
-            "Exercise",
-            "Physiology",
-            "||",
-            "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 7, 3894"
-    },
     "HLTH3000": {
         "condition": {
             "original": "Prerequisites: HLTH1000, HLTH2000 and (PHCM2100 or enrolment into 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-            "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to 3897 Applied Exercise Science/Clinical Exercise Physiology)"
+            "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to (3897) )"
         },
         "tokens": [
             "(",
@@ -6311,12 +6154,9 @@
             "PHCM2100",
             "||",
             "to",
+            "(",
             "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
+            ")",
             ")",
             ")"
         ],
@@ -10645,40 +10485,10 @@
         ],
         "broke at": "Index 2, is"
     },
-    "PHRM1011": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-            "processed": "3895 Pharmaceutical Medicine/Pharmacy"
-        },
-        "tokens": [
-            "(",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            ")"
-        ],
-        "broke at": "Index 3, Medicine/Pharmacy"
-    },
-    "PHRM1021": {
-        "condition": {
-            "original": "Prerequisite: CHEM1832 and enrolment in 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-            "processed": "CHEM1832 && 3895 Pharmaceutical Medicine/Pharmacy"
-        },
-        "tokens": [
-            "(",
-            "CHEM1832",
-            "&&",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            ")"
-        ],
-        "broke at": "Index 5, Medicine/Pharmacy"
-    },
     "PHRM2031": {
         "condition": {
             "original": "Prerequisite: PHRM1011 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>Co-requisite: PHAR2911, DIET2001<br/><br/>",
-            "processed": "PHRM1011 && 48UOC in L1 from 3895 Pharmaceutical Medicine/Pharmacy && [PHAR2911, DIET2001]"
+            "processed": "PHRM1011 && 48UOC in L1 from (3895) && [PHAR2911, DIET2001]"
         },
         "tokens": [
             "(",
@@ -10688,9 +10498,9 @@
             "in",
             "L1",
             "from",
+            "(",
             "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
+            ")",
             "&&",
             "[",
             "PHAR2911,",
@@ -10698,31 +10508,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 9, Medicine/Pharmacy"
-    },
-    "PHRM3021": {
-        "condition": {
-            "original": "Prerequisite: PHRM2031, MICR2012, PHAR2911 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-            "processed": "PHRM2031 && MICR2012 && PHAR2911 && 48UOC in L1 from 3895 Pharmaceutical Medicine/Pharmacy"
-        },
-        "tokens": [
-            "(",
-            "PHRM2031",
-            "&&",
-            "MICR2012",
-            "&&",
-            "PHAR2911",
-            "&&",
-            "48UOC",
-            "in",
-            "L1",
-            "from",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            ")"
-        ],
-        "broke at": "Index 13, Medicine/Pharmacy"
+        "broke at": "Index 12, PHAR2911,"
     },
     "PHRM3022": {
         "condition": {
@@ -11494,33 +11280,25 @@
     "SOMS1912": {
         "condition": {
             "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation <br/>or 3895 Pharmaceutical Medicine/Pharmacy <br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology <br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology || 3880 Bachelor of International Public Health"
+            "processed": "(3894) || (3895) || (3896) || (3897) || 3880 Bachelor of International Public Health"
         },
         "tokens": [
             "(",
+            "(",
             "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
+            ")",
             "||",
+            "(",
             "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
+            ")",
             "||",
+            "(",
             "3896",
-            "Exercise",
-            "Science/Physiotherapy",
-            "&&",
-            "Exercise",
-            "Physiology",
+            ")",
             "||",
+            "(",
             "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
+            ")",
             "||",
             "3880",
             "Bachelor",
@@ -11530,12 +11308,12 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 3, &&"
+        "broke at": "Index 19, of"
     },
     "SOMS1913": {
         "condition": {
             "original": "SOMS1912 Human Systems 1 and enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>or 3895 Pharmaceutical Medicine/Pharmacy<br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 International Public Health<br/><br/>",
-            "processed": "SOMS1912 Human Systems 1 && 3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology || 3880 International Public Health"
+            "processed": "SOMS1912 Human Systems 1 && (3894) || (3895) || (3896) || (3897) || 3880 International Public Health"
         },
         "tokens": [
             "(",
@@ -11544,29 +11322,21 @@
             "Systems",
             "1",
             "&&",
+            "(",
             "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
+            ")",
             "||",
+            "(",
             "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
+            ")",
             "||",
+            "(",
             "3896",
-            "Exercise",
-            "Science/Physiotherapy",
-            "&&",
-            "Exercise",
-            "Physiology",
+            ")",
             "||",
+            "(",
             "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
+            ")",
             "||",
             "3880",
             "International",

@@ -18,6 +18,11 @@ CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code
 
 # TODO: think of how to automate some of this
 SPECIALISATION_MAPPINGS = {
+    '3894 Nutrition\/Dietetics and Food Innovation': '3894',
+    '3897 Applied Exercise Science\/Clinical Exercise Physiology': '3897',
+    '3895 Pharmaceutical Medicine\/Pharmacy': '3895',
+    '3896 Exercise Science\/Physiotherapy and Exercise Physiology': '3896',
+    'FINSD1 Finance Co-Op': 'FINSD1',
     'School of the Arts and Media honours': 'MDIA?H',
     'Business \(Honours\) Program 4512': '4512',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
