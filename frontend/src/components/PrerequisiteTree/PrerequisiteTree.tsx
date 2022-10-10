@@ -55,7 +55,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       treeGraphInstance.on('node:click', (event) => {
         // open new course tab
         const node = event.item as Item;
-        if (onCourseClick) onCourseClick(node.getID());
+        if (onCourseClick) onCourseClick(node.getModel().label as string);
       });
     };
 
