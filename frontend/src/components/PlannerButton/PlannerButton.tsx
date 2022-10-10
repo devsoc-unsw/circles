@@ -9,12 +9,11 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
-interface PlannerButtonCodeProps {
+interface PlannerButtonProps {
   course: Course;
-  // onChange?: () => void;
 }
 
-const PlannerButton: FunctionComponent<PlannerButtonCodeProps> = ({ course }) => {
+const PlannerButton: FunctionComponent<PlannerButtonProps> = ({ course }) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 

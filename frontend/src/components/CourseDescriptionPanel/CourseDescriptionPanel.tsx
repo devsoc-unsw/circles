@@ -17,7 +17,7 @@ import S from './styles';
 
 const { Title, Text } = Typography;
 
-type CourseInfoProps = {
+type CourseDescriptionPanelProps = {
   courseCode: string;
   concise?: boolean;
   onCourseClick?: (code: string) => void;
@@ -30,13 +30,18 @@ type CourseUserInfo = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseInfo = ({ courseCode, concise, onCourseClick }: CourseInfoProps) => {
+const CourseDescriptionPanel = ({
+  courseCode,
+  concise,
+  onCourseClick
+}: CourseDescriptionPanelProps) => {
   const [info, setInfo] = useState<CourseUserInfo | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
   // get the info
   useEffect(() => {
     const getInfo = async () => {
+      setInfo(null);
       try {
         const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
@@ -61,7 +66,7 @@ const CourseInfo = ({ courseCode, concise, onCourseClick }: CourseInfoProps) => 
       }
     };
     getInfo();
-  }, [courseCode, degree, planner]);
+  }, [courseCode]);
 
   if (!info || !info?.course) {
     // either still loading or the course wasn't fetchable (fatal)
@@ -116,4 +121,4 @@ const CourseInfo = ({ courseCode, concise, onCourseClick }: CourseInfoProps) => 
   );
 };
 
-export default CourseInfo;
+export default CourseDescriptionPanel;

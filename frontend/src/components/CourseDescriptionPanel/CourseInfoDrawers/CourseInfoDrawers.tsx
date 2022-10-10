@@ -4,6 +4,7 @@ import { CourseList } from 'types/courses';
 import Collapsible from 'components/Collapsible';
 import CourseTagStandard from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';
+import { inDev } from 'config/constants';
 import { PlannerSliceState } from 'reducers/plannerSlice';
 import S from './styles';
 
@@ -25,7 +26,6 @@ type CourseInfoDrawersProps = {
   course: Course;
   pathFrom?: CourseList;
   unlocked?: CoursesUnlockedWhenTaken;
-
   prereqVis: boolean;
   planner: PlannerSliceState;
   onCourseClick?: (code: string) => void;
@@ -46,48 +46,38 @@ const CourseInfoDrawers = ({
   return (
     <div>
       <Collapsible title="Overview">
-        <p>{course.description}</p>
+        {/* eslint-disable-next-line react/no-danger */}
+        <p dangerouslySetInnerHTML={{ __html: course?.description || 'None' }} />
       </Collapsible>
       <Collapsible title="Requirements" initiallyCollapsed>
-        <p>{course.raw_requirements}</p>
+        {/* eslint-disable-next-line react/no-danger */}
+        <p dangerouslySetInnerHTML={{ __html: course?.raw_requirements || 'None' }} />
       </Collapsible>
       <Collapsible title="Courses you have done to unlock this course" initiallyCollapsed>
         <p>
           {pathFrom && pathFrom.length > 0
             ? pathFrom
-                .filter((code) => Object.keys(planner.courses).includes(code))
-                .map((code) =>
-                  onCourseClick ? (
-                    <CourseTag
-                      key={code}
-                      name={code}
-                      onClick={() => {
-                        onCourseClick(code);
-                      }}
-                    />
-                  ) : (
-                    <CourseTag key={code} name={code} />
-                  )
-                )
+                .filter((courseCode) => Object.keys(planner.courses).includes(courseCode))
+                .map((courseCode) => (
+                  <CourseTag
+                    key={courseCode}
+                    onClick={() => onCourseClick && onCourseClick(courseCode)}
+                    name={courseCode}
+                  />
+                ))
             : 'None'}
         </p>
       </Collapsible>
       <Collapsible title="Doing this course will directly unlock these courses" initiallyCollapsed>
         <p>
           {unlocked?.direct_unlock && unlocked.direct_unlock.length > 0
-            ? unlocked.direct_unlock.map((code) =>
-                onCourseClick ? (
-                  <CourseTag
-                    key={code}
-                    name={code}
-                    onClick={() => {
-                      onCourseClick(code);
-                    }}
-                  />
-                ) : (
-                  <CourseTag key={code} name={code} />
-                )
-              )
+            ? unlocked.direct_unlock.map((courseCode) => (
+                <CourseTag
+                  key={courseCode}
+                  onClick={() => onCourseClick && onCourseClick(courseCode)}
+                  name={courseCode}
+                />
+              ))
             : 'None'}
         </p>
       </Collapsible>
@@ -113,7 +103,7 @@ const CourseInfoDrawers = ({
             : 'None'}
         </p>
       </Collapsible>
-      {prereqVis && (
+      {inDev && (
         <Collapsible title="Prerequisite Visualisation">
           <PrerequisiteTree courseCode={course.code} />
         </Collapsible>

@@ -11,11 +11,11 @@ import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
 import { Course, CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import CourseInfo from 'components/CourseInfo';
 import GRAPH_STYLE from './config';
 import HowToUse from './HowToUse';
 import S from './styles';
@@ -251,7 +251,7 @@ const GraphicalSelector = () => {
           <S.SidebarWrapper>
             <div>
               {course ? (
-                <CourseInfo
+                <CourseDescriptionPanel
                   concise
                   courseCode={course.code}
                   key={course.code}

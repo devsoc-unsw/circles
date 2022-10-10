@@ -5,7 +5,7 @@ import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
-import CourseInfo from 'components/CourseInfo';
+import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
 import CourseBanner from './CourseBanner';
@@ -59,7 +59,7 @@ const CourseSelector = () => {
           <CourseMenu structure={structure} />
           {id ? (
             <div style={{ overflow: 'auto' }}>
-              <CourseInfo courseCode={id} />
+              <CourseDescriptionPanel courseCode={id} />
             </div>
           ) : (
             <S.InfographicContainer>
