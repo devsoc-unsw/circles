@@ -1047,7 +1047,7 @@
     },
     "ARTS2852": {
         "original": "Prerequisite: 24 units of credit overall, and enrolment in a Politics, Philosophy, and Economics program or a Politics and International Relations specialisation<br/><br/>",
-        "processed": "24UOC && a Politics, Philosophy && ECON# || a Politics && International Relations specialisation"
+        "processed": "24UOC && (PPES#) || (POLSG?)"
     },
     "ARTS2870": {
         "original": "Prerequisite: 24 units of credit overall<br/><br/>",
@@ -1215,7 +1215,7 @@
     },
     "ARTS3212": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && an INST#"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && (3447)"
     },
     "ARTS3216": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies or International Studies. Or 48 UOC including 12 UOC in Chinese Studies language courses.<br/><br/>",
@@ -1621,7 +1621,7 @@
     },
     "ARTS3872": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && an INST#"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
     },
     "ARTS3874": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Geographical Studies, Global Development, International Studies, or Sociology & Anthropology<br/><br/>",
@@ -5350,7 +5350,7 @@
     },
     "EDST2002": {
         "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && an EDST#. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
+        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
     },
     "EDST2003": {
         "original": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
@@ -5374,19 +5374,19 @@
     },
     "EDST2094": {
         "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-        "processed": "18UOC in L1 && an EDST#. Please contact the School of Education for enrolment"
+        "processed": "18UOC in L1 && (4509 || 4056) . Please contact the School of Education for enrolment"
     },
     "EDST4080": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed": "78UOC && EDST2002 && an EDST#"
+        "processed": "78UOC && EDST2002 && (4509 || 4056)"
     },
     "EDST4084": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed": "78UOC && EDST2002 && an EDST#"
+        "processed": "78UOC && EDST2002 && (4509 || 4056)"
     },
     "EDST4096": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed": "78UOC && EDST2002 && an EDST#"
+        "processed": "78UOC && EDST2002 && (4509 || 4056)"
     },
     "EDST4501": {
         "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
@@ -5582,7 +5582,7 @@
     },
     "EDST6760": {
         "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-        "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
         "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
@@ -5590,7 +5590,7 @@
     },
     "EDST6765": {
         "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-        "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6771": {
         "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
@@ -7021,7 +7021,7 @@
     },
     "INST2003": {
         "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-        "processed": "an INST#. || ARTS1250 && a Geographical Studies major || minor"
+        "processed": "(3447) (2017). || INST1005 && INST1006 && (3447) (2017+). || ARTS1250 && a Geographical Studies major || minor"
     },
     "INST2006": {
         "original": "Prerequisite: INST1005<br/><br/>",
@@ -7029,7 +7029,7 @@
     },
     "INST3900": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in an International Studies program or specialisation<br/><br/>",
-        "processed": "72UOC && an INST# || specialisation"
+        "processed": "72UOC && (3447) || specialisation"
     },
     "INTA1000": {
         "original": "",
@@ -9237,7 +9237,7 @@
     },
     "MUSC1707": {
         "original": "Prerequisite: Enrolment in a Music program.<br/><br/>",
-        "processed": "MUSC#"
+        "processed": "(MUSC?? || 4508)"
     },
     "MUSC1708": {
         "original": "",
@@ -9245,15 +9245,15 @@
     },
     "MUSC1801": {
         "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-        "processed": "a Music specialisation in a Fine Arts || MUSC#"
+        "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
     },
     "MUSC1802": {
         "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-        "processed": "a Music specialisation in a Fine Arts || MUSC#"
+        "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
     },
     "MUSC1803": {
         "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-        "processed": "a Music specialisation in a Fine Arts || MUSC#"
+        "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
     },
     "MUSC1804": {
         "original": "",
@@ -9309,11 +9309,11 @@
     },
     "MUSC2703": {
         "original": "Prerequisite: Enrolment in a Music program and either MUSC1701 and MUSC1704, or MUSC1702 and MUSC1705, or MUSC1707 (12 uoc).<br/><br/>",
-        "processed": "MUSC# && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
+        "processed": "(MUSC?? || 4508) && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
     },
     "MUSC2706": {
         "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-        "processed": "a Music specialisation in a Fine Arts || MUSC#"
+        "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
     },
     "MUSC2801": {
         "original": "Prerequisite: Enrolment in a Music Creative Practice specialisation<br/><br/>",
@@ -9325,7 +9325,7 @@
     },
     "MUSC2803": {
         "original": "Prerequisite: 36 units of credit at level 1 and enrolment in a Music program or specialisation<br/><br/>",
-        "processed": "36UOC in L1 && MUSC# || specialisation"
+        "processed": "36UOC in L1 && (MUSC?? || 4508) || specialisation"
     },
     "MUSC2804": {
         "original": "Prerequisite: 24 units of credit overall<br/><br/>",
@@ -9365,11 +9365,11 @@
     },
     "MUSC3705": {
         "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music program.<br/><br/>",
-        "processed": "MUSC2702 || MUSC2703 (12UOC) && MUSC#"
+        "processed": "MUSC2702 || MUSC2703 (12UOC) && (MUSC?? || 4508)"
     },
     "MUSC3706": {
         "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-        "processed": "MUSC2702 || MUSC2703 (12UOC) && a Music Creative Practice || Music Pedagogy stream MUSC#"
+        "processed": "MUSC2702 || MUSC2703 (12UOC) && a Music Creative Practice || Music Pedagogy stream in (MUSC?? || 4508)"
     },
     "MUSC3801": {
         "original": "Prerequisite: MUSC2801 and enrolment in the Music Creative Practice specialisation in a Music single or double degree<br/><br/>",
@@ -9453,7 +9453,7 @@
     },
     "MUSC4705": {
         "original": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-        "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream MUSC#"
+        "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream in (MUSC?? || 4508)"
     },
     "NANO2002": {
         "original": "",
@@ -10157,15 +10157,15 @@
     },
     "PPEC1001": {
         "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "PPES#"
+        "processed": "(3478 || 4797)"
     },
     "PPEC2001": {
         "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "24UOC && PPEC1001 && PPES#"
+        "processed": "24UOC && PPEC1001 && (3478 || 4797)"
     },
     "PPEC3001": {
         "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "72UOC && PPEC2001 && PPES#"
+        "processed": "72UOC && PPEC2001 && (3478 || 4797)"
     },
     "PSCY9901": {
         "original": "Prerequisite: Enrolment in 3831 Science (Medicine) Honours<br/><br/>",
@@ -10629,75 +10629,75 @@
     },
     "SOCW2003": {
         "original": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-        "processed": "SOCW1001 && SOCW1004 && SOCW#"
+        "processed": "SOCW1001 && SOCW1004 && (4033)"
     },
     "SOCW2006": {
         "original": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-        "processed": "SOCW1001 && SOCW#"
+        "processed": "SOCW1001 && (4033)"
     },
     "SOCW2008": {
         "original": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-        "processed": "SOCW1001 && SOCW1004 && SOCW#"
+        "processed": "SOCW1001 && SOCW1004 && (4033)"
     },
     "SOCW2009": {
         "original": "Prerequisite: SOCW2003 and enrolment in a Social Work Program<br/><br/>",
-        "processed": "SOCW2003 && SOCW#"
+        "processed": "SOCW2003 && (4033)"
     },
     "SOCW2100": {
         "original": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-        "processed": "SOCW1001 && SOCW#"
+        "processed": "SOCW1001 && (4033)"
     },
     "SOCW3006": {
         "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program.  Excluded: Students enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && SOCW#"
+        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && (4033)"
     },
     "SOCW3009": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3013]"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
     },
     "SOCW3010": {
         "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program<br/><br/>",
-        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && SOCW#"
+        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && (4033)"
     },
     "SOCW3012": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW#"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033)"
     },
     "SOCW3013": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3009]"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3009]"
     },
     "SOCW4003": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
     },
     "SOCW4011": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
     },
     "SOCW4012": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
     },
     "SOCW4013": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
     },
     "SOCW4015": {
         "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-        "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, SOCW# && an overall 70WAM && [SOCW4018]"
+        "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, (4033) && an overall 70WAM && [SOCW4018]"
     },
     "SOCW4016": {
         "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-        "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && SOCW# && [SOCW4018]"
+        "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
     },
     "SOCW4017": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW# && [SOCW4013]"
+        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013]"
     },
     "SOCW4018": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && SOCW# && [SOCW4015 || SOCW4016]"
+        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && (4033) && [SOCW4015 || SOCW4016]"
     },
     "SOLA1070": {
         "original": "",
