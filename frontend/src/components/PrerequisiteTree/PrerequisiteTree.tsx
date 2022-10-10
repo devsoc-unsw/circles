@@ -6,7 +6,6 @@ import { CourseChildren, CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import { addTab } from 'reducers/courseTabsSlice';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';
 import S from './styles';
@@ -14,9 +13,10 @@ import { bringEdgeLabelsToFront, calcHeight, handleNodeData, updateEdges } from 
 
 type Props = {
   courseCode: string;
+  onCourseClick?: (code: string) => void;
 };
 
-const PrerequisiteTree = ({ courseCode }: Props) => {
+const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
   const [loading, setLoading] = useState(true);
   const [graph, setGraph] = useState<TreeGraph | null>(null);
   const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
@@ -55,7 +55,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       treeGraphInstance.on('node:click', (event) => {
         // open new course tab
         const node = event.item as Item;
-        dispatch(addTab(node.getModel().label as string));
+        if (onCourseClick) onCourseClick(node.getModel().label as string);
       });
     };
 
