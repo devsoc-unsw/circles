@@ -399,7 +399,8 @@ class ProgramCondition(Condition):
         return False
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.in_program(self.program), []
+        valid = user.in_program(self.program)
+        return valid, ([] if valid else [f'Program required: {self.program}'])
 
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         # just add straight up true or false
@@ -429,7 +430,8 @@ class ProgramTypeCondition(Condition):
         return False
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], []
+        valid = user.program in CACHED_PROGRAM_MAPPINGS[self.programType]
+        return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], ([] if valid else [f'you need to do a program of type {self.programType[0:4]}'])
 
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         # just add straight up true or false
@@ -451,7 +453,8 @@ class SpecialisationCondition(Condition):
         self.specialisation = specialisation
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.in_specialisation(self.specialisation), []
+        valid = user.in_specialisation(self.specialisation)
+        return valid, ([] if valid else [f'Specialisation: {self.specialisation}'])
 
     def is_path_to(self, course: str) -> bool:
         return False
