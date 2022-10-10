@@ -44,5 +44,9 @@ const TextShowMarks = styled.div`
 `;
 
 export default {
-  OptionsHeaderWrapper, OptionButton, OptionSection, ShowMarks, TextShowMarks,
+  OptionsHeaderWrapper,
+  OptionButton,
+  OptionSection,
+  ShowMarks,
+  TextShowMarks
 };

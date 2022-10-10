@@ -7,8 +7,8 @@ const BEG_MONTH_START = 1;
 const TERM_PAST_AMOUNT = 14;
 
 export type MostRecentTerm = {
-  Y: number
-  T: number
+  Y: number;
+  T: number;
 };
 
 // takes in startYear (int) and gets current date to
@@ -21,9 +21,8 @@ const getMostRecentPastTerm = (startYear: number): MostRecentTerm => {
   const currDay = currTime.getDate();
   const currDegreeYear = currYear - startYear + 1;
 
-  const pastStart = (monthStart: number, month: number) => (
-    (currDay >= monthStart + TERM_PAST_AMOUNT && currMonth === month) || currMonth > month
-  );
+  const pastStart = (monthStart: number, month: number) =>
+    (currDay >= monthStart + TERM_PAST_AMOUNT && currMonth === month) || currMonth > month;
 
   // session dates gathered from: https://www.student.unsw.edu.au/teaching-periods
   let lastTermPast;
@@ -39,7 +38,7 @@ const getMostRecentPastTerm = (startYear: number): MostRecentTerm => {
 
   return {
     Y: currDegreeYear,
-    T: lastTermPast,
+    T: lastTermPast
   };
 };
 

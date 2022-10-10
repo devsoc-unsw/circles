@@ -5,15 +5,15 @@ const defaultNode = {
   style: {
     fill: '#9254de',
     stroke: '#9254de',
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   labelCfg: {
     style: {
       fill: '#fff',
       fontFamily: 'Arial',
-      cursor: 'pointer',
-    },
-  },
+      cursor: 'pointer'
+    }
+  }
 };
 
 const defaultEdge = (arrow: typeof Arrow) => ({
@@ -21,20 +21,20 @@ const defaultEdge = (arrow: typeof Arrow) => ({
     endArrow: {
       path: arrow.triangle(5, 5, 30),
       fill: '#e0e0e0',
-      d: 25,
-    },
-  },
+      d: 25
+    }
+  }
 });
 
 const nodeStateStyles = {
   hover: {
     fill: '#b37feb',
-    stroke: '#b37feb',
+    stroke: '#b37feb'
   },
   click: {
     fill: '#b37feb',
-    stroke: '#b37feb',
-  },
+    stroke: '#b37feb'
+  }
 };
 
 const unplannedNodeAdditionalStyle = (courseCode: string) => ({
@@ -42,18 +42,18 @@ const unplannedNodeAdditionalStyle = (courseCode: string) => ({
   label: courseCode,
   style: {
     fill: '#fff',
-    stroke: '#9254de',
+    stroke: '#9254de'
   },
   labelCfg: {
     style: {
-      fill: '#9254de',
-    },
-  },
+      fill: '#9254de'
+    }
+  }
 });
 
 export default {
   defaultNode,
   defaultEdge,
   nodeStateStyles,
-  unplannedNodeAdditionalStyle,
+  unplannedNodeAdditionalStyle
 };

@@ -71,5 +71,10 @@ const MenuText = styled.span`
 `;
 
 export default {
-  MenuPopup, PopupEntry, MenuWrapper, MenuDivider, MenuHeader, MenuText,
+  MenuPopup,
+  PopupEntry,
+  MenuWrapper,
+  MenuDivider,
+  MenuHeader,
+  MenuText
 };

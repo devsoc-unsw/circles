@@ -5,22 +5,22 @@ import { PlannerSliceState } from 'reducers/plannerSlice';
 
 type TermPlan = {
   // key = course code, value = [UOC, mark]
-  [courseCode: string]: [number, number | null]
+  [courseCode: string]: [number, number | null];
 };
 
 type YearPlan = TermPlan[];
 
 type CoursesForValidationPayload = {
-  program: string
-  specialisations: string[]
-  plan: YearPlan[]
-  mostRecentPastTerm: MostRecentTerm
+  program: string;
+  specialisations: string[];
+  plan: YearPlan[];
+  mostRecentPastTerm: MostRecentTerm;
 };
 
 const prepareCoursesForValidationPayload = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
-  showWarnings: boolean,
+  showWarnings: boolean
 ): CoursesForValidationPayload => {
   const { years, startYear, courses } = planner;
   const { programCode, specs } = degree;
@@ -42,7 +42,7 @@ const prepareCoursesForValidationPayload = (
     program: programCode,
     specialisations: specs,
     plan,
-    mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
+    mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear)
   };
 };
 

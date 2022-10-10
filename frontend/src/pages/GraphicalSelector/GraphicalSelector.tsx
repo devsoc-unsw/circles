@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  ExpandAltOutlined, ShrinkOutlined,
-  ZoomInOutlined, ZoomOutOutlined,
+  ExpandAltOutlined,
+  ShrinkOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import {
   Button, Switch, Tabs, Tooltip,
 } from 'antd';
 import axios from 'axios';
-import {
-  Course, CourseEdge, CoursesAllUnlocked, GraphPayload,
-} from 'types/api';
+import { Course, CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
@@ -61,40 +61,36 @@ const GraphicalSelector = () => {
         height: container.scrollHeight,
         linkCenter: true,
         modes: {
-          default: [
-            'drag-canvas',
-            'zoom-canvas',
-          // "drag-node",
-          ],
+          default: ['drag-canvas', 'zoom-canvas']
         },
         layout: {
           type: 'comboCombined',
           preventOverlap: true,
           nodeSpacing: 10,
-          linkDistance: 500,
+          linkDistance: 500
         },
         animate: true, // Boolean, whether to activate the animation when global changes happen
         animateCfg: {
           duration: 500, // Number, the duration of one animation
-          easing: 'easeQuadInOut', // String, the easing function
+          easing: 'easeQuadInOut' // String, the easing function
         },
         defaultNode: GRAPH_STYLE.defaultNode,
         defaultEdge: GRAPH_STYLE.defaultEdge(Arrow),
-        nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
+        nodeStateStyles: GRAPH_STYLE.nodeStateStyles
       });
 
       setGraph(graphInstance);
 
       const data = {
         nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
-        edges: courseEdges,
+        edges: courseEdges
       };
 
       graphInstance.data(data);
       graphInstance.render();
 
       graphInstance.on('node:click', async (ev) => {
-      // load up course information
+        // load up course information
         const node = ev.item as INode;
         const id = node.getID();
         updateCourse(id);
@@ -110,7 +106,7 @@ const GraphicalSelector = () => {
                 currentNode.getEdges().forEach((e) => e.show());
                 currentNode.show();
               }
-            },
+            }
           });
         } else if (node.getOutEdges().length) {
           graphInstance.setItemState(node, 'click', true);
@@ -121,7 +117,7 @@ const GraphicalSelector = () => {
                 currentNode.getEdges().forEach((e) => e.hide());
                 currentNode.hide();
               }
-            },
+            }
           });
         }
       });
@@ -139,7 +135,9 @@ const GraphicalSelector = () => {
 
     const setupGraph = async () => {
       try {
-        const res = await axios.get<GraphPayload>(`/programs/graph/${programCode}/${specs.join('+')}`);
+        const res = await axios.get<GraphPayload>(
+          `/programs/graph/${programCode}/${specs.join('+')}`
+        );
         const { edges, courses } = res.data;
         if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
       } catch (e) {
@@ -166,21 +164,19 @@ const GraphicalSelector = () => {
     try {
       const res = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner)),
+        JSON.stringify(prepareUserPayload(degree, planner))
       );
       const coursesStates = res.data.courses_state;
       const nodes = graph.getNodes();
-      nodes.forEach(
-        (n) => {
-          const id = n.getID();
-          if (coursesStates[id] && coursesStates[id].unlocked) {
-            n.show();
-          } else {
-            n.getEdges().forEach((e) => e.hide());
-            n.hide();
-          }
-        },
-      );
+      nodes.forEach((n) => {
+        const id = n.getID();
+        if (coursesStates[id] && coursesStates[id].unlocked) {
+          n.show();
+        } else {
+          n.getEdges().forEach((e) => e.hide());
+          n.hide();
+        }
+      });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
@@ -232,35 +228,45 @@ const GraphicalSelector = () => {
     <PageTemplate>
       <S.Wrapper>
         <S.GraphPlaygroundWrapper ref={ref}>
-          {loading
-            ? <Spinner text="Loading graph..." />
-            : (
-              <>
-                <S.SearchBarWrapper>
-                  <CourseSearchBar onSelectCallback={handleFocusCourse} style={{ width: '25rem' }} />
-                </S.SearchBarWrapper>
-                <S.ToolsWrapper>
-                  Show All Courses
-                  <Tooltip placement="bottomLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
-                    <Switch
-                      defaultChecked={showUnlockedOnly}
-                      onChange={handleShowCourses}
-                    />
-                  </Tooltip>
-                  <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
-                  <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
-                  <Button
-                    onClick={handleToggleSidebar}
-                    icon={sidebar ? <ExpandAltOutlined /> : <ShrinkOutlined />}
-                  />
-                </S.ToolsWrapper>
-              </>
-            )}
+          {loading ? (
+            <Spinner text="Loading graph..." />
+          ) : (
+            <>
+              <S.SearchBarWrapper>
+                <CourseSearchBar onSelectCallback={handleFocusCourse} style={{ width: '25rem' }} />
+              </S.SearchBarWrapper>
+              <S.ToolsWrapper>
+                Show All Courses
+                <Tooltip
+                  placement="bottomLeft"
+                  title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}
+                >
+                  <Switch defaultChecked={showUnlockedOnly} onChange={handleShowCourses} />
+                </Tooltip>
+                <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
+                <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
+                <Button
+                  onClick={handleToggleSidebar}
+                  icon={sidebar ? <ExpandAltOutlined /> : <ShrinkOutlined />}
+                />
+              </S.ToolsWrapper>
+            </>
+          )}
         </S.GraphPlaygroundWrapper>
         {sidebar && (
           <S.SidebarWrapper>
+<<<<<<< HEAD
             <Tabs items={items} />
             {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
+=======
+            {course ? (
+              <div>
+                {course.code} - {course.title}
+              </div>
+            ) : (
+              'No course selected'
+            )}
+>>>>>>> dev
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
