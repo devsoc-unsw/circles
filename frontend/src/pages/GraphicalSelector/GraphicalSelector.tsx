@@ -254,7 +254,13 @@ const GraphicalSelector = () => {
         {sidebar && (
           <S.SidebarWrapper>
             <Tabs items={items} />
-
+            {course ? (
+              <div>
+                {course.code} - {course.title}
+              </div>
+            ) : (
+              'No course selected'
+            )}
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
