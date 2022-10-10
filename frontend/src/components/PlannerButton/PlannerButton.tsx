@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -13,7 +13,7 @@ interface PlannerButtonProps {
   course: Course;
 }
 
-const PlannerButton: FunctionComponent<PlannerButtonProps> = ({ course }) => {
+const PlannerButton = ({ course }: PlannerButtonProps) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 

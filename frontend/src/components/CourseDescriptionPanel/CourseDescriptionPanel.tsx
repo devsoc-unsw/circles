@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
+import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseInfo, LoadingCourseInfoConcise } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
@@ -13,7 +14,6 @@ import { TIMETABLE_API_URL } from 'config/constants';
 import type { RootState } from 'config/store';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
-import { getEnrolmentCapacity, unwrap } from './helpers';
 import S from './styles';
 
 const { Title, Text } = Typography;
@@ -35,9 +35,18 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   const [coursesUnlocked, setCoursesUnlocked] = useState<CoursesUnlockedWhenTaken>();
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>();
 
-  // get the info
+  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
+    if (res.status === 'rejected') {
+      // eslint-disable-next-line no-console
+      console.error('Rejected request at unwrap', res.reason);
+      return undefined;
+    }
+    return res.value;
+  }
+
   useEffect(() => {
-    const getInfo = async () => {
+    // gets the associated info for a course
+    const getCourseInfo = async () => {
       setIsLoading(true);
       try {
         const results = await Promise.allSettled([
@@ -62,7 +71,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
         console.error('Error at getCourse', e);
       }
     };
-    getInfo();
+    getCourseInfo();
   }, [courseCode]);
 
   if (isLoading || !course) {

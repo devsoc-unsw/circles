@@ -1,6 +1,6 @@
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 
-export const getEnrolmentCapacity = (data?: CourseTimetable): EnrolmentCapacityData | undefined => {
+const getEnrolmentCapacity = (data?: CourseTimetable): EnrolmentCapacityData | undefined => {
   if (!data) {
     return undefined;
   }
@@ -22,11 +22,4 @@ export const getEnrolmentCapacity = (data?: CourseTimetable): EnrolmentCapacityD
   return enrolmentCapacityData;
 };
 
-export function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
-  if (res.status === 'rejected') {
-    // eslint-disable-next-line no-console
-    console.log('Rejected request at getInfo', res.reason);
-    return undefined;
-  }
-  return res.value;
-}
+export default getEnrolmentCapacity;
