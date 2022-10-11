@@ -39,20 +39,22 @@ const CourseButtonCard = styled(Button)<{ planned?: boolean }>`
   justify-content: space-between;
   gap: 5px;
 
-  ${({ planned }) => !planned && css`
-    background: #FAFAFA; 
-    border-color: #DCDCDC;
-    color: #000000 !important;
+  ${({ planned }) =>
+    !planned &&
+    css`
+      background: #fafafa;
+      border-color: #dcdcdc;
+      color: #000000 !important;
 
-    &:hover {
-      background-color: #F9F9F9;
-    }
-  `}
+      &:hover {
+        background-color: #f9f9f9;
+      }
+    `}
 `;
 
 export default {
   CourseWrapper,
   CourseCode,
   CourseTitle,
-  CourseButtonCard,
+  CourseButtonCard
 };

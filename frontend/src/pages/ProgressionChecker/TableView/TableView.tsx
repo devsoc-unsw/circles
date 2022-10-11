@@ -7,25 +7,22 @@ import CoursesModal from '../CoursesModal';
 import S from './styles';
 
 type Props = {
-  subgroupTitle: string
-  courses: ViewSubgroupCourse[]
-  notes: string
-  showNotes: boolean
-  type: string
-  uoc: number
+  subgroupTitle: string;
+  courses: ViewSubgroupCourse[];
+  notes: string;
+  showNotes: boolean;
+  type: string;
+  uoc: number;
 };
 
 const { Title } = Typography;
 
-const TableView = ({
-  subgroupTitle, courses, notes, showNotes, uoc, type,
-}: Props) => {
+const TableView = ({ subgroupTitle, courses, notes, showNotes, uoc, type }: Props) => {
   const plannedCourses = courses.filter((c) => c.plannedFor && !c.isOverCounted);
   const unplannedCourses = courses.filter((c) => !c.plannedFor || c.isOverCounted);
   const plannedUOC = plannedCourses.reduce(
-    (sum, course) => (sum + ((course.UOC ?? 0)
-      * getNumTerms((course.UOC ?? 0), course.isMultiterm))),
-    0,
+    (sum, course) => sum + (course.UOC ?? 0) * getNumTerms(course.UOC ?? 0, course.isMultiterm),
+    0
   );
   const remainingUOC = Math.max(uoc - plannedUOC, 0);
 
@@ -33,7 +30,9 @@ const TableView = ({
 
   return (
     <>
-      <Title level={2} className="text">{subgroupTitle}</Title>
+      <Title level={2} className="text">
+        {subgroupTitle}
+      </Title>
       {showNotes && <p>{notes}</p>}
       {type !== 'info_rule' && (
         <>
@@ -43,9 +42,9 @@ const TableView = ({
           <Table
             dataSource={plannedCourses.map((c) => ({
               ...c,
-              UOC: `${c.isMultiterm
-                ? `${getNumTerms(c.UOC, c.isMultiterm)} × ${c.UOC}`
-                : c.UOC} UOC`,
+              UOC: `${
+                c.isMultiterm ? `${getNumTerms(c.UOC, c.isMultiterm)} × ${c.UOC}` : c.UOC
+              } UOC`
             }))}
             columns={columnsData}
             pagination={false}

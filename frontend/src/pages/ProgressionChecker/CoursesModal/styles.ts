@@ -69,5 +69,5 @@ export default {
   CourseModal,
   CourseList,
   FilterBarWrapper,
-  PlaceholderWrapper,
+  PlaceholderWrapper
 };

@@ -40,5 +40,5 @@ export default {
   SortBtnWrapper,
   CourseGroup,
   ViewAllCoursesWrapper,
-  NotesText,
+  NotesText
 };

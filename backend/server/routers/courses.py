@@ -381,7 +381,7 @@ def unselect_course(userData: UserData, unselectedCourse: str) -> dict[str, list
             })
 def course_children(course: str):
     """
-    fetches courses which are dependant on taking 'course'
+    fetches courses which are dependent on taking 'course'
     eg 1511 -> 1521, 1531, 2521 etc
     """
     if not CONDITIONS.get(course):

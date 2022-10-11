@@ -2,16 +2,15 @@
 Contains the Conditions classes
 """
 
-from functools import reduce
 import json, re
 from abc import ABC, abstractmethod
-from typing import List, Optional, Tuple, TypedDict
-import warnings
+from typing import  Optional, Tuple, TypedDict
 
-
-from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
+from algorithms.objects.categories import Category, AnyCategory
+from algorithms.objects.course import Course
 from algorithms.objects.user import User
 from algorithms.objects.helper import Logic
+from ortools.sat.python import cp_model # type: ignore
 
 # CACHED
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
@@ -23,6 +22,10 @@ CACHED_PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 with open(CACHED_PROGRAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
     CACHED_PROGRAM_MAPPINGS = json.load(f)
 
+
+def get_variable(courses: list[Tuple[cp_model.IntVar, Course]], course: str) -> Optional[cp_model.IntVar]:
+    var_list = [variable[0] for variable in courses if variable[0].Name() == course]
+    return None if len(var_list) == 0 else var_list[0]
 
 
 class CompositeJsonData(TypedDict):
@@ -52,6 +55,20 @@ class Condition(ABC):
         """ checks if 'course' is able to meet any subtree's requirements"""
         pass
 
+    @abstractmethod
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        """ add the condition directly to the model, and return all constraints generated """
+        # just add straight up true or false. This default implementation works for things based only on the user, and not their courses
+        is_valid, _ = self.validate(user)
+        return [model.AddBoolAnd(is_valid)]
+
+    @abstractmethod
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        """ add the negation of the condition directly to the model, and return the constraints generated """
+        # just add straight up true or false. This default implementation works for things based only on the user, and not their courses
+        is_valid, _ = self.validate(user)
+        return [model.AddBoolAnd(not is_valid)]
+
     def beneficial(self, user: User,  course: dict[str, Tuple[int, int | None]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
@@ -65,55 +82,12 @@ class Condition(ABC):
 
     @abstractmethod
     def __str__(self) -> str:
+        """ json representation """
         return super().__str__()
 
     def __repr__(self) -> str:
         return self.__str__()
 
-
-class MaturityCondition(Condition):
-    def __init__(self, program: str, dependency: Condition, dependent: Category):
-        self.program = program
-        self.dependency = dependency
-        self.dependent = dependent
-
-    def match_dependant(self, course: str) -> bool:
-        """
-        Check if the given course is a match for the category defined in the dependant
-        """
-        return self.dependent.match_definition(course)
-
-    def dependency_met(self, user: User) -> bool:
-        return self.dependency.validate(user)[0]
-
-    def validate(
-            self, user: User, course: Optional[str]=None
-        ) -> tuple[bool, list[str]]:
-        """
-        Validate whether a user can do the given course.
-        Can not be done iff there is a match on dependant and dependency is not met
-        """
-        if course is None:
-            return True, []
-        if self.match_dependant(course):
-            return self.dependency.validate(user)
-        return True, []
-
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
-        """
-        Will a course be beneficial to advancing this condition?
-        More specifically, can the course be used to meet the dependency?
-        """
-        return self.dependency.beneficial(user, course)
-
-
-    def is_path_to(self, course: str) -> bool:
-        return self.dependency.is_path_to(course)
-
-    def __str__(self) -> str:
-        return (
-            f"MaturityCondition({self.program}): Dependency: {self.dependency}, self.dependent: {self.dependent}"
-        )
 
 
 class CourseCondition(Condition):
@@ -131,66 +105,51 @@ class CourseCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return (True, []) if user.has_taken_course(self.course) else (False, [self.course])
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # make sure this course happens before the given course
+        condition_var = get_variable(courses, self.course)
+        return [model.Add(condition_var < course_variable)] if condition_var is not None else [model.AddBoolAnd(False)]
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # make sure the course doesnt exist, or happens after the current course
+        condition_var = get_variable(courses, self.course)
+        return [model.Add(condition_var >= course_variable)] if condition_var is not None else [model.AddBoolAnd(True)]
+
     def __str__(self) -> str:
         return json.dumps({
             'id': self.course
         })
 
-class CoreqCoursesCondition(Condition):
-    """ Condition that the student has completed the course/s in or before the current term """
 
-    def __init__(self, logic: Logic = Logic.AND):
-        # An example corequisite is [COMP1511 || COMP1521 || COMP1531]. The user
-        # must have taken one of these courses either before or in the current term
-        self.courses: list[str] = []
-        self.logic: Logic = logic
+class CoreqCourseCondition(Condition):
+    """ Condition that the student has completed the course in or before the current term """
+    def __init__(self, course):
+        self.course: str = course
 
-    def add_course(self, course: str):
-        """ add a course to 'courses' """
-        self.courses.append(course)
-
-    def set_logic(self, logic: Logic):
-        """ allow logic to be swapped between AND and OR """
-
-        self.logic = logic
-
-    def validate(self, user: User) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> Tuple[bool, list[str]]:
         """ Returns True if the user is taking these courses in the same term """
-        
-        match self.logic:
-            case Logic.AND:
-                warning = [course for course in self.courses if not user.has_taken_course(course) and not user.is_taking_course(course)]
-                return (True, []) if not warning else (False, ['(Corequisites: ' + ' AND '.join(warning) + ')'])
-            case Logic.OR:
-                conditions_met = any(
-                    user.has_taken_course(course)
-                    or user.is_taking_course(course)
-                    for course in self.courses
-                )
-                warning = [f'{course}' for course in self.courses]
-                return conditions_met, ([] if conditions_met else ['(Corequisites: ' + ' OR '.join(warning) + ')'])
-        
-        print("Conditions Error: validation was not of type AND or OR")
-        return True, []
+        valid = user.has_taken_course(self.course) or user.is_taking_course(self.course)
+        return valid, ([] if valid else [f'Corequisite: {self.course}'])
+
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # same as courseCondition, but also allow for the course to be the same as the given course
+        condition_var = get_variable(courses, self.course)
+        return [model.Add(condition_var <= course_variable)] if condition_var is not None else [model.AddBoolAnd(False)]
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        condition_var = get_variable(courses, self.course)
+        return [model.Add(condition_var > course_variable)] if condition_var is not None else [model.AddBoolAnd(True)]
 
     def is_path_to(self, course: str) -> bool:
-        return course in self.courses
-
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
-        course_name = list(course.keys())[0]
-        if self.validate(user)[0] or user.has_taken_course(course_name) or user.is_taking_course(course_name):
-            return False
-        return any(c in course.keys() for c in self.courses)
+        return self.course == course
 
     def __str__(self) -> str:
-        logic = "and" if self.logic == Logic.AND else "or"
         return json.dumps({
-            'logic': logic,
-            'children': [{'id': course} for course in self.courses],
+            {'id': self.course}
         })
 
 class UOCCondition(Condition):
-    """ UOC conditions such as '24UOC in COMP' """
+    """ UOC conditions such as `24UOC in COMP` """
 
     def __init__(self, uoc: int):
         self.uoc = uoc
@@ -218,6 +177,64 @@ class UOCCondition(Condition):
         category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
         return uoc_met, ([] if uoc_met else [f"{self.uoc} UOC required in {category} you have {user.uoc(self.category)} UOC"])
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # find courses which match definition
+        filtered_courses = [course for course in courses if self.category.match_definition(course[1].name)]
+        total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses) 
+        total_uoc_allowable_after_course = total_filtered_uoc - self.uoc
+        # we check if there are
+        # 1. enough courses matching our definition to feasibly meet the condition (ie self.uoc courses have been selected)
+        # 2. these courses don't come too late in the degree.
+        #    There must be at most total_filtered_uoc - self.uoc after the course, or else you didnt complete enough UoC yet
+
+        # we need to do this because OR Tools doesnt allow for checking capacity is >=
+        if total_uoc_allowable_after_course < 0:
+            return [model.AddBoolAnd(False)]
+        boolean_indexes = []
+        for variable, _ in filtered_courses:
+            # b is a 'channeling constraint'. This is done to fill the resovoir only *if* the course is after or at the same term as the course
+            # https://developers.google.com/optimization/cp/channeling
+            b = model.NewBoolVar('hi')
+            model.Add(variable >= course_variable).OnlyEnforceIf(b)
+            model.Add(variable < course_variable).OnlyEnforceIf(b.Not())
+            boolean_indexes.append(b)
+        return [
+            model.AddReservoirConstraintWithActive(
+                (course[0] for course in filtered_courses), # the variables of the filtered courses
+                (var[1].uoc for var in filtered_courses), # can fill the resovoir by some UOC
+                boolean_indexes, # if it comes after the course given
+                0,
+                total_uoc_allowable_after_course # until a certain point, or fail the constraint
+            )
+        ]
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        filtered_courses = [course for course in courses if self.category.match_definition(course[1].name)]
+
+        total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses) 
+        if total_filtered_uoc < self.uoc:
+            return [model.AddBoolAnd(True)] # if we already dont have enough UOC to meet it, our job is already done
+        
+        boolean_indexes = []
+        for variable, _ in filtered_courses:
+            # b is a 'channeling constraint'. This is done to fill the resovoir only *if* the course is before the course's term
+            # https://developers.google.com/optimization/cp/channeling
+            b = model.NewBoolVar('hi')
+            model.Add(variable < course_variable).OnlyEnforceIf(b)
+            model.Add(variable >= course_variable).OnlyEnforceIf(b.Not())
+            boolean_indexes.append(b)
+        return [
+            model.AddReservoirConstraintWithActive(
+                (course[0] for course in filtered_courses), # the variables of the filtered courses
+                (var[1].uoc for var in filtered_courses), # can fill the resovoir by some UOC
+                boolean_indexes, # if it comes before the course given
+                0,
+                self.uoc # until a certain point, or fail the constraint
+            )
+        ]
+
+
+
     def __str__(self) -> str:
         return json.dumps({
             'UOC': self.uoc,
@@ -227,7 +244,6 @@ class UOCCondition(Condition):
 
 class WAMCondition(Condition):
     """ Handles WAM conditions such as 65WAM and 80WAM in """
-
     def __init__(self, wam: int):
         self.wam = wam
 
@@ -262,6 +278,13 @@ class WAMCondition(Condition):
             return wam_warning
         return f"{wam_warning} Your WAM in {category} is currently {applicable_wam:.3f}"
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # straight up true or false if the user's current wam supports the course
+        return super().condition_to_model(model, user, courses, course_variable)
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        return super().condition_negation(model, user, courses, course_variable)
+
     def __str__(self) -> str:
         return json.dumps({
             'wam': self.wam,
@@ -272,60 +295,46 @@ class WAMCondition(Condition):
 class GradeCondition(Condition):
     """ Handles Grade conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4} """
 
-    def __init__(self, grade: int):
+    def __init__(self, grade: int, course: str):
         self.grade = grade
-        self.category: Category = CompositeCategory()
-
-    def set_category(self, category_classobj: Category):
-        """ Set own category to the one given """
-        self.category = category_classobj
+        self.course = course
 
     def is_path_to(self, course: str) -> bool:
-        return self.category.match_definition(course)
+        return self.course == course
+
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        course_grade = user.get_grade(self.course)
+        if course_grade and course_grade < self.grade:
+            # if you have already failed to meet it, gg
+            return super().condition_to_model(model, user, courses, course_variable)
+        condition_var = get_variable(courses, self.course)
+        # we cant predict what your mark is, so we just treat it like a CourseCondition
+        return [model.Add(condition_var < course_variable)] if condition_var is not None else [model.AddBoolAnd(False)]
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        course_grade = user.get_grade(self.course)
+        if course_grade and course_grade >= self.grade:
+            # if you already beat it, gg
+            return super().condition_negation(model, user, courses, course_variable)
+        condition_var = get_variable(courses, self.course)
+        # we cant predict what your mark is, so we just treat it like a CourseCondition
+        return [model.Add(condition_var >= course_variable)] if condition_var is not None else [model.AddBoolAnd(True)]
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        def _validate_course(category: Category):
-            # Grade condition can only be used with ClassCategory
-            if isinstance(category, CompositeCategory):
-                validations = [_validate_course(c) for c in category.categories]
-                unlocked, warnings = list(zip(*validations))
-                satisfied = all(unlocked) if category.logic == Logic.AND else any(unlocked)
-                return satisfied, warnings
+        if self.course not in user.courses:
+            return False, [f"Need {self.grade} in {self.course} for this course"]
 
-            elif isinstance(category, ClassCategory):
-                course = category.class_name
-                if course not in user.courses:
-                    return False, [f"Need {self.grade} in {course} for this course"]
-
-                user_grade = user.get_grade(course)
-                if user_grade is None:
-                    return True, [self.get_warning()]
-                if user_grade < self.grade:
-                    return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
-                return True, []
-            else:
-                return True, ["We have failed to parse this correctly"]
-
-        if isinstance(self.category, CompositeCategory):
-            validations = [_validate_course(course) for course in self.category.categories]
-            logic = self.category.logic
-        else:
-            validations = [_validate_course(self.category)]
-            logic = Logic.AND
-        # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
-        unlocked, warnings = list(zip(*validations))
-        satisfied = all(unlocked) if logic == Logic.AND else any(unlocked)
-
-        return satisfied, sum(warnings, [])  # warnings are flattened
-
-    def get_warning(self) -> str:
-        """ Return warning string for grade condition error """
-        return f"Requires {self.grade} mark in {self.category}. Your mark has not been recorded"
+        user_grade = user.get_grade(self.course)
+        if user_grade is None:
+            return True, [f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"]
+        if user_grade < self.grade:
+            return False, [f"Your grade {user_grade} in course {self.course} does not meet the grade requirements (minimum {self.grade}) for this course"]
+        return True, []
 
     def __str__(self) -> str:
         return json.dumps({
             'grade': self.grade,
-            'category': str(self.category)
+            'course': self.course
         })
 
 
@@ -347,6 +356,33 @@ class CoresCondition(Condition):
         res = user.completed_core(self.category)
         return res, ([] if res else [f'you have not completed your {self.category} cores'])
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        course_names = [var[0].Name() for var in courses]
+        does_match, relevant_courses = user.matches_core(course_names, self.category())
+        if not does_match:
+            # if you can never match the core, gg
+            return [model.AddBoolAnd(False)]
+        # else we find the relevant courses and assert that they need to happen first
+        return [model.Add(get_variable(courses, course) < course_variable) for course in relevant_courses]
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        course_names = [var[0].Name() for var in courses]
+        does_match, relevant_courses = user.matches_core(course_names, self.category())
+        if not does_match:
+            # if you cant match the core, youre good
+            return [model.AddBoolAnd(True)]
+
+        or_constraints: list[cp_model.Constraint] = [model.Add(get_variable(courses, course) >= course_variable) for course in relevant_courses]
+        or_opposite_constraints: list[cp_model.Constraint] = [model.Add(get_variable(courses, course) < course_variable) for course in relevant_courses]
+        boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
+        for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
+            # b is a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
+            # https://developers.google.com/optimization/cp/channeling
+            constraint.OnlyEnforceIf(boolean)
+            negation.OnlyEnforceIf(boolean.Not())
+        model.AddBoolOr(boolean_vars)
+        return or_constraints
+
     def __str__(self) -> str:
         return json.dumps({
             'cores': None,
@@ -364,6 +400,13 @@ class ProgramCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_program(self.program), []
+
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # just add straight up true or false
+        return super().condition_to_model(model, user, courses, course_variable)
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        return super().condition_negation(model, user, courses, course_variable)
 
     def __str__(self) -> str:
         return json.dumps({
@@ -388,6 +431,13 @@ class ProgramTypeCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], []
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # just add straight up true or false
+        return super().condition_to_model(model, user, courses, course_variable)
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        return super().condition_negation(model, user, courses, course_variable)
+
     def __str__(self) -> str:
         return json.dumps({
             'programType': self.programType,
@@ -406,6 +456,13 @@ class SpecialisationCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return False
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # just add straight up true or false
+        return super().condition_to_model(model, user, courses, course_variable)
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        return super().condition_negation(model, user, courses, course_variable)
+
     def __str__(self) -> str:
         return json.dumps({
             'specialisation': self.specialisation,
@@ -415,20 +472,28 @@ class SpecialisationCondition(Condition):
 class CourseExclusionCondition(Condition):
     """ Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141"""
 
-    def __init__(self, exclusion: str):
-        self.exclusion = exclusion
+    def __init__(self, course: str):
+        self.course = course
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
 
-        is_valid = not user.has_taken_specific_course(self.exclusion)
-        return is_valid, ([] if is_valid else [f"Exclusion: {self.exclusion}"])
+        is_valid = not user.has_taken_specific_course(self.course)
+        return is_valid, ([] if is_valid else [f"Exclusion: {self.course}"])
 
     def is_path_to(self, course: str) -> bool:
         return False
-        
+
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        condition_var = get_variable(courses, self.course)
+        return [model.Add(condition_var >= course_variable)] if condition_var is not None else [model.AddBoolAnd(True)]
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        condition_var = get_variable(courses, self.course)
+        return [model.Add(condition_var < course_variable)] if condition_var is not None else [model.AddBoolAnd(False)]
+
     def __str__(self) -> str:
         return json.dumps({
-            'exclusion': self.exclusion,
+            'exclusion': self.course,
         })
 
 
@@ -447,6 +512,13 @@ class ProgramExclusionCondition(Condition):
 
     def is_path_to(self, course: str) -> bool:
         return False
+
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        # just add straight up true or false
+        return super().condition_to_model(model, user, courses, course_variable)
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        return super().condition_negation(model, user, courses, course_variable)
 
     def __str__(self) -> str:
         return json.dumps({
@@ -469,6 +541,44 @@ class CompositeCondition(Condition):
         """ AND or OR """
         self.logic = logic
 
+    def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        if len(self.conditions) == 0:
+            return []
+
+        if self.logic == Logic.AND:
+            # just aggregate the conditions together, they are already all simutaneously asserted
+            return sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
+        else:
+            or_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
+            or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
+            boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
+            # boolean_vars are a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
+            # https://developers.google.com/optimization/cp/channeling
+            for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
+                constraint.OnlyEnforceIf(boolean)
+                negation.OnlyEnforceIf(boolean.Not())
+            model.AddBoolOr(boolean_vars)
+            return or_constraints
+
+    def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
+        if len(self.conditions) == 0:
+            # still ignore empty composite conditions
+            return []
+
+        if self.logic == Logic.OR:
+            # opposite of OR is NAND
+            return sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
+        else:
+            # opposite of AND is NOR - at least one must be false
+            and_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
+            and_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
+            boolean_vars = [model.NewBoolVar("hi") for _ in and_constraints]
+            for constraint, negation, boolean in zip(and_constraints, and_opposite_constraints, boolean_vars):
+                constraint.OnlyEnforceIf(boolean)
+                negation.OnlyEnforceIf(boolean.Not())
+            model.AddBoolOr(boolean_vars)
+            return and_constraints
+
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """
         Validate user conditions and return the validated conditions and
@@ -480,7 +590,7 @@ class CompositeCondition(Condition):
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
         unlocked, all_warnings = list(zip(*validations))
-        wam_warning = sum([warning for unlocked_cond, warning in validations if unlocked_cond], []) # type: List[str]
+        wam_warning: list[str] = sum((warning for unlocked_cond, warning in validations if unlocked_cond), [])
 
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
@@ -517,4 +627,3 @@ class CompositeCondition(Condition):
             else:
                 data['children'].append(json.loads(str(cond)))
         return json.dumps(data)
-        

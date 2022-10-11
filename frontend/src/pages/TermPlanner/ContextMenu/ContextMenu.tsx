@@ -10,8 +10,8 @@ import { removeCourse, unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/dist/ReactContexify.css';
 
 type Props = {
-  code: string
-  plannedFor: string | null
+  code: string;
+  plannedFor: string | null;
 };
 
 const ContextMenu = ({ code, plannedFor }: Props) => {
@@ -23,10 +23,12 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
   };
 
   const handleUnschedule = () => {
-    dispatch(unschedule({
-      code,
-      destIndex: null,
-    }));
+    dispatch(
+      unschedule({
+        code,
+        destIndex: null
+      })
+    );
   };
   const id = `${code}-context`;
 
@@ -43,7 +45,7 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
 
   const iconStyle = {
     fontSize: '14px',
-    marginRight: '5px',
+    marginRight: '5px'
   };
 
   return (

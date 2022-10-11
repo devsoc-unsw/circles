@@ -13,7 +13,7 @@ const IconsWrapper = styled.div`
   gap: 5px;
 `;
 
-const CourseTitleWrapper = styled.div<{ selected: boolean, locked: boolean }>`
+const CourseTitleWrapper = styled.div<{ selected: boolean; locked: boolean }>`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -26,9 +26,10 @@ const CourseTitleWrapper = styled.div<{ selected: boolean, locked: boolean }>`
     if (selected) return '700';
     return 'normal';
   }};
-
 `;
 
 export default {
-  Wrapper, IconsWrapper, CourseTitleWrapper,
+  Wrapper,
+  IconsWrapper,
+  CourseTitleWrapper
 };

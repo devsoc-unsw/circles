@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BarsOutlined } from '@ant-design/icons';
-import {
-  Button, Drawer,
-  Menu, Typography,
-} from 'antd';
+import { Button, Drawer, Menu, Typography } from 'antd';
 import circlesLogo from 'assets/circlesLogo.svg';
 import PlannerCart from 'components/PlannerCart';
 import ThemeToggle from 'components/ThemeToggle';
@@ -40,7 +37,7 @@ const Header = () => {
     .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
     .map((route) => ({
       label: route.label,
-      key: route.link,
+      key: route.link
     }));
 
   const largeHeader = (
@@ -51,7 +48,7 @@ const Header = () => {
         mode="horizontal"
         overflowedIndicator={null}
         style={{
-          backgroundColor: 'inherit',
+          backgroundColor: 'inherit'
         }}
         onClick={(e) => navigate(e.key)}
         items={items}
@@ -71,7 +68,7 @@ const Header = () => {
             style={{
               color: 'white',
               marginLeft: '0.3em',
-              marginBottom: '0',
+              marginBottom: '0'
             }}
           >
             Circles
@@ -81,10 +78,7 @@ const Header = () => {
 
       {isSmall ? smallHeader : largeHeader}
 
-      <Drawer
-        onClose={() => setShowDrawer(false)}
-        visible={showDrawer}
-      >
+      <Drawer onClose={() => setShowDrawer(false)} visible={showDrawer}>
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>
     </S.HeaderWrapper>

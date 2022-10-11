@@ -6,22 +6,17 @@ import { CourseChildren, CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import { addTab } from 'reducers/courseTabsSlice';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';
 import S from './styles';
-import {
-  bringEdgeLabelsToFront,
-  calcHeight,
-  handleNodeData,
-  updateEdges,
-} from './utils';
+import { bringEdgeLabelsToFront, calcHeight, handleNodeData, updateEdges } from './utils';
 
 type Props = {
-  courseCode: string
+  courseCode: string;
+  onCourseClick?: (code: string) => void;
 };
 
-const PrerequisiteTree = ({ courseCode }: Props) => {
+const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
   const [loading, setLoading] = useState(true);
   const [graph, setGraph] = useState<TreeGraph | null>(null);
   const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
@@ -44,7 +39,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         fitView: true,
         layout: GRAPH_STYLE.graphLayout,
         defaultNode: GRAPH_STYLE.defaultNode,
-        defaultEdge: GRAPH_STYLE.defaultEdge,
+        defaultEdge: GRAPH_STYLE.defaultEdge
       });
 
       setGraph(treeGraphInstance);
@@ -60,7 +55,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       treeGraphInstance.on('node:click', (event) => {
         // open new course tab
         const node = event.item as Item;
-        dispatch(addTab(node.getModel().label as string));
+        if (onCourseClick) onCourseClick(node.getModel().label as string);
       });
     };
 
@@ -107,8 +102,9 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       const graphData = {
         id: 'root',
         label: courseCode,
-        children: prereqs?.map((child) => (handleNodeData(child, TREE_CONSTANTS.PREREQ)))
-          .concat(unlocks?.map((child) => (handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))),
+        children: prereqs
+          ?.map((child) => handleNodeData(child, TREE_CONSTANTS.PREREQ))
+          .concat(unlocks?.map((child) => handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))
       };
 
       // render graph
@@ -126,8 +122,9 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
   return (
     <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
       {loading && <Spinner text="Loading tree..." />}
-      {!loading && !graph?.getNodes
-      && <p> No prerequisite visualisation is needed for this course </p> }
+      {!loading && !graph?.getNodes && (
+        <p> No prerequisite visualisation is needed for this course </p>
+      )}
     </S.PrereqTreeContainer>
   );
 };

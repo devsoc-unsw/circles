@@ -4,13 +4,13 @@ import { FEEDBACK_LINK } from 'config/constants';
 import S from './styles';
 
 type Props = {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 };
 
 type State = {
-  hasError: boolean
-  error: Error | null
-  errorInfo: ErrorInfo | null
+  hasError: boolean;
+  error: Error | null;
+  errorInfo: ErrorInfo | null;
 };
 
 class ErrorBoundary extends React.Component<Props, State> {
@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // eslint-disable-next-line no-console
-    console.log({ error, errorInfo });
+    console.error({ error, errorInfo });
     this.setState({ errorInfo });
   }
 
@@ -45,16 +45,20 @@ class ErrorBoundary extends React.Component<Props, State> {
           <h1>An error has occurred. You should never see this...</h1>
           <S.TextBody>
             <p>
-              Unfortunately, due to a bug in Circles, an error has occurred.
-              If you want to help us fix this bug, please let us know! We would
-              greatly appreciate it!
+              Unfortunately, due to a bug in Circles, an error has occurred. If you want to help us
+              fix this bug, please let us know! We would greatly appreciate it!
             </p>
             <p>
-              Fill in this form <a href={FEEDBACK_LINK} target="_blank" rel="noreferrer">here</a> to inform us how
-              the error occurred! Please also include brief description on the steps that led
-              up to the error and a copy of the error messages seen below.
+              Fill in this form{' '}
+              <a href={FEEDBACK_LINK} target="_blank" rel="noreferrer">
+                here
+              </a>{' '}
+              to inform us how the error occurred! Please also include brief description on the
+              steps that led up to the error and a copy of the error messages seen below.
             </p>
-            <Button onClick={handleClick} type="primary">Return to Circles</Button>
+            <Button onClick={handleClick} type="primary">
+              Return to Circles
+            </Button>
           </S.TextBody>
           <h3>Error</h3>
           <p>{JSON.stringify(error, Object.getOwnPropertyNames(error))}</p>

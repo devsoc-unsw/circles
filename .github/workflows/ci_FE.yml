@@ -5,26 +5,35 @@ on:
     branches: [dev, main, CIRCLES-331/user-data-to-backend]
 
 jobs:
+  event_file:
+    name: Event File
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Event File
+          path: ${{ github.event_path }}
   build:
     name: Frontend CI Testing
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
-
       - name: Set up Python (latest)
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
-
       - name: Run frontend tests
         run: |
           cd frontend
           npm ci
           npm run test
-
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: fe-test-results
+          path: frontend/junit/fe-test-results.xml
       - name: Test the frontend successfully builds
         run: |
           mkdir env

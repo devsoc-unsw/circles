@@ -1,5 +1,5 @@
 .github/ @csesoc/technical
 renovate.json @csesoc/technical
 
-backend/ @csesoc/circles-team-leads
-frontend/ @csesoc/circles-team-leads
+backend/ @Peedee2002
+frontend/ @gtangelo
