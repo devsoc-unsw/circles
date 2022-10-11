@@ -5,9 +5,7 @@ from typing import Tuple
 from fastapi import APIRouter
 from algorithms.validate_term_planner import validate_terms
 from server.routers.courses import get_course
-from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
-from server.routers.utility import get_core_courses
-
+from server.routers.model import ValidCoursesState, PlannerData, ValidPlannerData
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
@@ -22,7 +20,7 @@ def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
                 elif course[0] is not None:
                     plan[year_index][term_index][courseName] = (course[0], course[1])
     return ValidPlannerData(
-        program=plannerData.program,
+        program=plannerData.programCode,
         specialisations=plannerData.specialisations,
         plan=plan,
         mostRecentPastTerm=plannerData.mostRecentPastTerm
