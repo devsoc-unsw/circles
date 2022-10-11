@@ -19,10 +19,10 @@ const updateEdges = (graphInstance: TreeGraph, graphData: TreeGraphData) => {
   // edge does not contain node data so ids must be used
   // find target node id that should have label (as defaultEdge changes all edges)
   const prereqs = graphData.children.filter(
-    (child) => child.rootRelationship === TREE_CONSTANTS.PREREQ,
+    (child) => child.rootRelationship === TREE_CONSTANTS.PREREQ
   );
   const unlocks = graphData.children.filter(
-    (child) => child.rootRelationship === TREE_CONSTANTS.UNLOCKS,
+    (child) => child.rootRelationship === TREE_CONSTANTS.UNLOCKS
   );
 
   // get middle node id, if even pick left most (equates to higher one in graph)
@@ -45,7 +45,8 @@ const updateEdges = (graphInstance: TreeGraph, graphData: TreeGraphData) => {
 
 const bringEdgeLabelsToFront = (graphInstance: TreeGraph) => {
   // bring edges with labels to front
-  graphInstance.getEdges()
+  graphInstance
+    .getEdges()
     .filter((e) => Object.prototype.hasOwnProperty.call(e.getModel(), 'label'))
     .forEach((e) => e.toFront());
   // Repaint the graph after shifting
@@ -60,9 +61,4 @@ const calcHeight = (courseRequires: CourseList, courseUnlocks: CourseList) => {
   return 2 * maxCourseGroupNum;
 };
 
-export {
-  bringEdgeLabelsToFront,
-  calcHeight,
-  handleNodeData,
-  updateEdges,
-};
+export { bringEdgeLabelsToFront, calcHeight, handleNodeData, updateEdges };

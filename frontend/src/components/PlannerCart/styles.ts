@@ -16,7 +16,7 @@ const PlannerCartContainer = styled.div`
   right: 0px;
   border-radius: 5px;
   border: #f5f5f5 solid 1px;
-  background-color:${({ theme }) => theme.plannerCartMenu.backgroundColor}; 
+  background-color: ${({ theme }) => theme.plannerCartMenu.backgroundColor};
 `;
 
 const CartContentWrapper = styled.div`
@@ -38,5 +38,5 @@ export default {
   PlannerCartRoot,
   PlannerCartContainer,
   CartContentWrapper,
-  EmptyWrapper,
+  EmptyWrapper
 };

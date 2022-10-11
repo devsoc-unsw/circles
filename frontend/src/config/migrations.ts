@@ -40,25 +40,29 @@ const persistMigrations: MigrationManifest = {
     const newState = { ...oldState };
 
     const courses = Object.keys(newState.planner.courses);
-    await Promise.all(courses.map(async (course) => {
-      try {
-        const res = await axios.get<Course>(`/courses/getCourse/${course}`);
-        if (res.status === 200) {
-          const courseData = res.data;
-          newState.planner.courses[courseData.code].isMultiterm = courseData.is_multiterm;
+    await Promise.all(
+      courses.map(async (course) => {
+        try {
+          const res = await axios.get<Course>(`/courses/getCourse/${course}`);
+          if (res.status === 200) {
+            const courseData = res.data;
+            newState.planner.courses[courseData.code].isMultiterm = courseData.is_multiterm;
+          }
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Error at migrations v3', e);
         }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at migrations v3', e);
-      }
-    }));
+      })
+    );
     return newState;
   },
   4: (oldState) => {
     const newState = { ...oldState };
-    newState.degree.specs = (newState.degree.specs as string[]).map((spec) => (spec.includes('-') ? spec.split('-')[1] : spec));
+    newState.degree.specs = (newState.degree.specs as string[]).map((spec) =>
+      spec.includes('-') ? spec.split('-')[1] : spec
+    );
     return newState;
-  },
+  }
 };
 
 /**

@@ -1,7 +1,7 @@
 enum Steps {
   YEAR,
   DEGREE,
-  SPECS,
+  SPECS
 }
 
 export default Steps;

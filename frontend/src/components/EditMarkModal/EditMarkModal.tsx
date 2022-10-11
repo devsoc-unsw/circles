@@ -1,27 +1,22 @@
 import type { Dispatch, SetStateAction } from 'react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Button, Input, message,
-  Modal,
-} from 'antd';
+import { Button, Input, message, Modal } from 'antd';
 import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
 import S from './styles';
 
 type Props = {
-  code: string
-  isVisible: boolean
-  setIsVisible: Dispatch<SetStateAction<boolean>>
+  code: string;
+  isVisible: boolean;
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
 };
 
-const EditMarkModal = ({
-  code, isVisible, setIsVisible,
-}: Props) => {
+const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   const dispatch = useDispatch();
   const [markValue, setMarkValue] = useState<string | number | undefined>(
-    useSelector((state: RootState) => state.planner.courses[code].mark),
+    useSelector((state: RootState) => state.planner.courses[code].mark)
   );
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
@@ -33,18 +28,20 @@ const EditMarkModal = ({
   };
 
   const updateMark = (mark: Mark) => {
-    dispatch(updateCourseMark({
-      code,
-      mark,
-    }));
+    dispatch(
+      updateCourseMark({
+        code,
+        mark
+      })
+    );
     setMarkValue(mark);
     setIsVisible(false);
     message.success('Mark Updated');
   };
 
   const handleUpdateMark = () => {
-    if (!Number.isNaN(parseInt((markValue as string), 10))) {
-      if ((Number(markValue) >= 0 && Number(markValue) <= 100)) {
+    if (!Number.isNaN(parseInt(markValue as string, 10))) {
+      if (Number(markValue) >= 0 && Number(markValue) <= 100) {
         updateMark(Number(markValue));
       } else {
         // number is not in range
@@ -77,13 +74,9 @@ const EditMarkModal = ({
           style={{ width: '100%' }}
         />
         <S.LetterGradeWrapper>
-          {
-            letterGrades.map((letterGrade) => (
-              <Button onClick={() => updateMark(letterGrade)}>
-                {letterGrade}
-              </Button>
-            ))
-          }
+          {letterGrades.map((letterGrade) => (
+            <Button onClick={() => updateMark(letterGrade)}>{letterGrade}</Button>
+          ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>
     </Modal>

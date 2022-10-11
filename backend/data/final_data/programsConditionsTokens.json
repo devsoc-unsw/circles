@@ -5,7 +5,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -14,7 +14,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -25,7 +25,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -34,7 +34,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -45,7 +45,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -54,7 +54,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -65,7 +65,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -74,7 +74,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -85,7 +85,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -94,7 +94,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -106,7 +106,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -118,7 +118,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -127,7 +127,7 @@
                 "UOC",
                 "72"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         },
@@ -136,7 +136,7 @@
                 "UOC",
                 "120"
             ],
-            "dependant": [
+            "dependent": [
                 "L4"
             ]
         }
@@ -147,7 +147,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -156,7 +156,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -168,7 +168,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -181,7 +181,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -194,7 +194,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -206,7 +206,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -215,7 +215,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -227,7 +227,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -239,7 +239,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -248,7 +248,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -259,7 +259,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -268,7 +268,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -279,7 +279,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -288,7 +288,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -299,7 +299,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -308,7 +308,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -319,7 +319,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -328,7 +328,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -339,7 +339,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -348,7 +348,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -360,7 +360,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -372,7 +372,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -381,7 +381,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -392,7 +392,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -401,7 +401,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -412,7 +412,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -421,7 +421,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -432,7 +432,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -441,7 +441,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -452,7 +452,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -463,7 +463,9 @@
                 "UOC",
                 "48"
             ],
-            "dependant": []
+            "dependent": [
+                "GENS"
+            ]
         }
     ],
     "4058": [
@@ -473,7 +475,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]
@@ -485,7 +487,7 @@
                 "UOC",
                 "24"
             ],
-            "dependant": [
+            "dependent": [
                 "L2"
             ]
         },
@@ -494,7 +496,7 @@
                 "UOC",
                 "48"
             ],
-            "dependant": [
+            "dependent": [
                 "L3"
             ]
         }
@@ -506,7 +508,7 @@
                 "ECON",
                 "CORES"
             ],
-            "dependant": [
+            "dependent": [
                 "L3",
                 "ECON"
             ]

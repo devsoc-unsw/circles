@@ -72,26 +72,46 @@ class CompositeRestriction(ProgramRestriction):
         """ Set the logic of the composite restriction"""
         self.logic = logic
 
+    def is_restriction_free(self) -> bool:
+        """Returns whether or not the composite restriction is empty"""
+        return len(self.restrictions) == 0
+
     def add_restriction(self, restriction: ProgramRestriction):
         """Add an aditional category to the composite restriction"""
         self.restrictions.append(restriction)
 
     def __str__(self) -> str:
-        return f"CompositeRestriction({self.restrictions})"
+        return f"CompositeRestriction: Logic::({self.logic}) Restrictions::({[str(restriction) for restriction in self.restrictions]})"
+
+class NoRestriction(ProgramRestriction):
+    """
+    Will always allow a course to be taken. Does not enforce any conditins.
+    """
+
+    def __init__(self) -> None:
+        pass
+
+    def validate_course_allowed(self, user: User, course: str) -> bool:
+        del user, course
+        return True
+
+    def __str__(self) -> str:
+        return "NoRestriction"
+
 
 class MaturityRestriction(ProgramRestriction):
     """
     Models the `Maturity Requirement` wherein, a certain condition (dependancy)
-    must be achieved before a course from a given Category (dependant) can be taken.
+    must be achieved before a course from a given Category (dependent) can be taken.
     """
 
     def __init__(self, dependency: Condition, dependent: Category):
         self.dependency = dependency
         self.dependent = dependent
 
-    def match_dependant(self, course: str) -> bool:
+    def match_dependent(self, course: str) -> bool:
         """
-        Check if the given course is a match for the category defined in the dependant
+        Check if the given course is a match for the category defined in the dependent
         """
         return self.dependent.match_definition(course)
 
@@ -104,9 +124,9 @@ class MaturityRestriction(ProgramRestriction):
         ) -> bool:
         """
         Validate whether a user can do the given course.
-        Can not be done iff there is a match on dependant and dependency is not met
+        Can not be done iff there is a match on dependent and dependency is not met
         """
-        return not (self.match_dependant(course) and not self.dependency_met(user))
+        return not (self.match_dependent(course) and not self.dependency_met(user))
 
     def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         """
@@ -174,7 +194,7 @@ class CategoryRestriction(ProgramRestriction):
         A user cannot do the course if:
             - Course matches the category
         """
-        user # Silence unused variable warning but preserve ABC structure
+        del user
         return not self.category.match_definition(course)
 
     def __str__(self) -> str:

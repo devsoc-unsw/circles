@@ -4,66 +4,66 @@ import 'styled-components';
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
-    purplePrimary: string
-    purpleLight: string
-    purpleDark: string
+    purplePrimary: string;
+    purpleLight: string;
+    purpleDark: string;
 
-    body: string
-    text: string
+    body: string;
+    text: string;
     droppable: {
-      backgroundColor: string
-    }
+      backgroundColor: string;
+    };
     plannerCartCard: {
-      backgroundColorHover: string
-    }
+      backgroundColorHover: string;
+    };
     plannerCartMenu: {
-      backgroundColor: string
-    }
+      backgroundColor: string;
+    };
     draggableTab: {
-      backgroundColor: string
-      borderColor: string
-    }
+      backgroundColor: string;
+      borderColor: string;
+    };
 
     degreeCard: {
-      backgroundColor: string
-    }
+      backgroundColor: string;
+    };
     draggableCourse: {
-      backgroundColor: string
-      warningBackgroundColor: string
-      dragDisabledBackgroundColor: string
-      iconColor: string
-    }
+      backgroundColor: string;
+      warningBackgroundColor: string;
+      dragDisabledBackgroundColor: string;
+      iconColor: string;
+    };
     termCheckbox: {
-      color: string
-    }
+      color: string;
+    };
     warningOutlined: {
-      color: string
-    }
+      color: string;
+    };
     termBoxWrapper: {
-      borderColor: string
-    },
+      borderColor: string;
+    };
     optionsHeader: {
-      borderColor: string
-    }
+      borderColor: string;
+    };
     infoOutlined: {
-      color: string
-    }
+      color: string;
+    };
     uocBadge: {
-      backgroundColor: string
-    }
+      backgroundColor: string;
+    };
 
     courseTag?: {
-      backgroundColor: string
-    }
+      backgroundColor: string;
+    };
     courseSidebar?: {
-      menuSubColor: string
-    }
+      menuSubColor: string;
+    };
     courseButton: {
-      backgroundColor: string
-      hoverBackgroundColor: string
-    }
+      backgroundColor: string;
+      hoverBackgroundColor: string;
+    };
     courseMenu?: {
-      backgroundColor: string
-    }
+      backgroundColor: string;
+    };
   }
 }
