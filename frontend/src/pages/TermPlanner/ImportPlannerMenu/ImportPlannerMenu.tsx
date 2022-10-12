@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Radio } from 'antd';
+import { Button, Typography } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
 import { PlannerCourse, PlannerYear, Term } from 'types/planner';
@@ -12,28 +12,37 @@ import {
   setUnplannedCourseToTerm,
   toggleSummer,
   updateDegreeLength,
-  updateStartYear,
+  updateStartYear
 } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
 
+const { Text } = Typography;
+type FileJSONFormat = {
+  startYear: number;
+  numYears: number;
+  isSummerEnabled: boolean;
+  years: PlannerYear[];
+  version: number;
+};
+
 const ImportPlannerMenu = () => {
-  const exportFormats = ['json'];
   const planner = useSelector((state: RootState) => state.planner);
-  const inputRef = useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLInputElement>;
+  const inputRef = useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const dispatch = useDispatch();
 
-  const array: string[] = [];
-
   const download = async () => {
-    inputRef.current.click();
+    if (inputRef !== undefined) {
+      inputRef.current.click();
+    }
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const plannedCourses: string[] = [];
     planner.years.forEach((year) => {
       Object.values(year).forEach((termKey) => {
         termKey.forEach((code) => {
-          array.push(code);
+          plannedCourses.push(code);
         });
       });
     });
@@ -42,8 +51,9 @@ const ImportPlannerMenu = () => {
         openNotification({
           type: 'error',
           message: 'Import file needs to be JSON.',
-          description: 'The uploaded file is not of type JSON.',
+          description: 'The uploaded file is not of type JSON.'
         });
+        e.target.value = '';
         return;
       }
       const reader = new FileReader();
@@ -51,22 +61,32 @@ const ImportPlannerMenu = () => {
       reader.onload = (ev) => {
         if (ev.target !== null) {
           const content = ev.target.result;
-          type FileJSONFormt = {
-            startYear: number
-            numYears: number
-            isSummerEnabled: boolean
-            years: PlannerYear[]
-          };
+          e.target.value = '';
+
           try {
-            const fileInJson: FileJSONFormt = JSON.parse(content as string) as FileJSONFormt;
+            const fileInJson = JSON.parse(content as string) as FileJSONFormat;
+            if (
+              !Object.prototype.hasOwnProperty.call(fileInJson, 'startYear') ||
+              !Object.prototype.hasOwnProperty.call(fileInJson, 'numYears') ||
+              !Object.prototype.hasOwnProperty.call(fileInJson, 'isSummerEnabled') ||
+              !Object.prototype.hasOwnProperty.call(fileInJson, 'years') ||
+              !Object.prototype.hasOwnProperty.call(fileInJson, 'version')
+            ) {
+              openNotification({
+                type: 'error',
+                message: 'Invalid structure of the json file',
+                description: 'The structure of the JSON file is not valid.'
+              });
+              return;
+            }
             dispatch(updateDegreeLength(fileInJson.numYears));
             dispatch(updateStartYear(fileInJson.startYear));
             if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
               dispatch(toggleSummer());
             }
-            (fileInJson.years).forEach((i, ind) => {
-              Object.entries(i).forEach(([key, val]) => {
-                val.forEach(async (code, index: number) => {
+            fileInJson.years.forEach((year, yearIndex) => {
+              Object.entries(year).forEach(([term, termCourses]) => {
+                termCourses.forEach(async (code, index: number) => {
                   const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
                   const courseData: PlannerCourse = {
                     title: course.title,
@@ -81,38 +101,46 @@ const ImportPlannerMenu = () => {
                     isAccurate: course.is_accurate,
                     isMultiterm: course.is_multiterm,
                     supressed: false,
-                    mark: undefined,
+                    mark: undefined
                   };
 
-                  const indexArray = array.indexOf(course.code);
-                  if (indexArray === -1) {
-                    array.push(course.code);
+                  if (plannedCourses.indexOf(course.code) === -1) {
+                    plannedCourses.push(course.code);
                     dispatch(addToUnplanned({ courseCode: course.code, courseData }));
-                    const destYear = Number(ind) + Number(planner.startYear);
-                    const destTerm = key as Term;
+                    const destYear = Number(yearIndex) + Number(planner.startYear);
+                    const destTerm = term as Term;
                     const destRow = destYear - planner.startYear;
                     const destIndex = index;
-                    dispatch(moveCourse({
-                      course: code,
-                      destTerm: `${destYear}${destTerm}`,
-                      srcTerm: 'unplanned',
-                    }));
-                    dispatch(setUnplannedCourseToTerm({
-                      destRow, destTerm, destIndex, course: code,
-                    }));
+                    dispatch(
+                      moveCourse({
+                        course: code,
+                        destTerm: `${destYear}${destTerm}`,
+                        srcTerm: 'unplanned'
+                      })
+                    );
+                    dispatch(
+                      setUnplannedCourseToTerm({
+                        destRow,
+                        destTerm,
+                        destIndex,
+                        course: code
+                      })
+                    );
                   }
                 });
               });
             });
           } catch (err) {
             // eslint-disable-next-line no-console
-            console.error(err);
-            openNotification({
-              type: 'error',
-              message: 'Invalid structure of the json file',
-              description: 'The structure of the JSON file is not valid.',
-            });
+            console.log('Error at uploadedJSONFile', err);
+            return;
           }
+
+          openNotification({
+            type: 'success',
+            message: 'JSON Imported',
+            description: 'Planner has been successfully imported.'
+          });
         }
       };
     }
@@ -124,11 +152,7 @@ const ImportPlannerMenu = () => {
       <CS.MenuDivider />
       <CS.PopupEntry>
         <CS.MenuText>File Type</CS.MenuText>
-        <Radio.Group defaultValue="json">
-          {exportFormats.map((form) => (
-            <Radio value={form} className="text">{form}</Radio>
-          ))}
-        </Radio.Group>
+        <Text>JSON</Text>
       </CS.PopupEntry>
       <>
         <Button style={{ width: '150px' }} onClick={download}>

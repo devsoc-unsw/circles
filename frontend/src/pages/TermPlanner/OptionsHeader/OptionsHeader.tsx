@@ -7,6 +7,7 @@ import {
   EyeFilled,
   QuestionCircleOutlined,
   SettingFilled,
+  UploadOutlined,
   WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';

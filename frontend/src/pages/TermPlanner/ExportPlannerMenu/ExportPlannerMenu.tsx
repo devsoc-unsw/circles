@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Radio } from 'antd';
+import { PlannerYear } from 'types/planner';
 import type { RootState } from 'config/store';
 import CS from '../common/styles';
 import S from './styles';
@@ -8,23 +9,33 @@ import S from './styles';
 type Props = {
   plannerRef: React.RefObject<HTMLDivElement>;
 };
+type FileJSONFormat = {
+  startYear: number;
+  numYears: number;
+  isSummerEnabled: boolean;
+  years: PlannerYear[];
+  version: number;
+};
 
 const ExportPlannerMenu = ({ plannerRef }: Props) => {
   const exportFormats = ['png', 'jpg', 'json'];
   const exportFields = { fileName: 'Term Planner' };
   const planner = useSelector((state: RootState) => state.planner);
 
-  const jsonFormat = {
+  const jsonFormat: FileJSONFormat = {
     startYear: planner.startYear,
     numYears: planner.numYears,
     isSummerEnabled: planner.isSummerEnabled,
     years: planner.years,
+    version: 0
   };
 
   const exportComponentAsJSON = () => {
+    // Download function for json file.
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      JSON.stringify(jsonFormat),
+      JSON.stringify(jsonFormat)
     )}`;
+    // creating an element for downloading the json file.
     const link = document.createElement('a');
     link.href = jsonString;
     link.download = 'Term Planner.json';
@@ -42,7 +53,6 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
     } else if (format === 'jpg') {
       exportComponentAsJPEG(plannerRef, exportFields);
     } else if (format === 'json') {
-      console.log(jsonFormat);
       exportComponentAsJSON();
     }
   };
