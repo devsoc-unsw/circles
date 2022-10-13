@@ -20,6 +20,8 @@ from algorithms.cache.cache_config import (CACHE_CONFIG, CACHED_EQUIVALENTS_FILE
                                            PROGRAMS_FORMATTED_FILE)
 from data.utility.data_helpers import read_data, write_data
 
+# TODO: Stronger typing for this file
+
 def cache_equivalents():
     """
     Reads from processed courses and stores the exclusions in a map mapping
@@ -34,10 +36,10 @@ def cache_equivalents():
 
     courses = read_data(COURSES_PROCESSED_FILE)
 
-    cached_exclusions = {}
-
-    for course, data in courses.items():
-        cached_exclusions[course] =  data["equivalents"]
+    cached_exclusions = {
+        course: data["equivalents"]
+        for course, data in courses.items()
+    }
 
     write_data(cached_exclusions, CACHED_EQUIVALENTS_FILE)
 
@@ -55,10 +57,10 @@ def cache_exclusions():
 
     courses = read_data(COURSES_PROCESSED_FILE)
 
-    cached_exclusions = {}
-
-    for course, data in courses.items():
-        cached_exclusions[course] = data["exclusions"] | data["equivalents"]
+    cached_exclusions = {
+        course: data["exclusions"] | data["equivalents"]
+        for course, data in courses.items()
+    }
 
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
 
@@ -74,11 +76,11 @@ def cache_handbook_note():
 
     conditions = read_data(CONDITIONS_PROCESSED_FILE)
 
-    cached_handbook_note = {}
-
-    for course, data in conditions.items():
-        if "handbook_note" in data:
-            cached_handbook_note[course] = data["handbook_note"]
+    cached_handbook_note = {
+        course: data["handbook_note"]
+        for course, data in conditions.items()
+        if "handbook_note" in data
+    }
 
     write_data(cached_handbook_note, CACHED_WARNINGS_FILE)
 
@@ -167,8 +169,8 @@ def cache_program_mappings():
     keyword_codes: dict[str, list[str]] = read_data(CACHE_CONFIG)
 
     mappings = {
-        code: {} for code
-        in reduce(operator.add, keyword_codes.values())
+        code: {}
+        for code in sum(keyword_codes.values(), [])
     }
 
     programs: dict[str, Any] = read_data(PROGRAMS_FORMATTED_FILE)
