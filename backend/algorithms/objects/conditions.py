@@ -454,7 +454,7 @@ class SpecialisationCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         valid = user.in_specialisation(self.specialisation)
-        return valid, ([] if valid else [f'Specialisation: {self.specialisation}'])
+        return valid, ([] if valid else [f'Specialisation required: {self.specialisation}'])
 
     def is_path_to(self, course: str) -> bool:
         return False
