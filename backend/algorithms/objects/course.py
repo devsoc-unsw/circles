@@ -11,7 +11,7 @@ class Course:
     mark: int
     uoc: int
     terms: dict[int, list[int]]
-    def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]) -> List[Tuple[int, int]]:
+    def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]) -> List[List[int]]:
         """ create a domain of terms this course can be in for autoplanning """
         numbers = [
             new_number
