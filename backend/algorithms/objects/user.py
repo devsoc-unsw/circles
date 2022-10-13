@@ -6,6 +6,7 @@
 """
 
 import copy
+from functools import reduce
 from itertools import chain
 import json
 from typing import List, Literal, Optional, Tuple
