@@ -254,19 +254,19 @@ def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     that they have already completed
     """
 
-    coursesState = {}
     user = User(fix_user_data(userData.dict()))
-    for course, condition in CONDITIONS.items():
-        result, warnings = condition.validate(user) if condition is not None else (True, [])
-        if result:
-            coursesState[course] = {
-                "is_accurate": condition is not None,
-                "unlocked": result,
-                "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
-                "warnings": warnings,
-            }
 
-    return {"courses_state": coursesState}
+    return {
+        "courses_state": {
+            course: {
+                "is_accurate": condition is not None,
+                "unlocked": res[0],
+                "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
+                "warnings": res[1],
+            } for course, condition in CONDITIONS.items()
+            if (res := condition.validate(user))[0]
+        }
+    }
 
 
 @router.get(
