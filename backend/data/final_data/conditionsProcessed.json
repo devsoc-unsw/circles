@@ -300,7 +300,7 @@
     },
     "ARCH1101": {
         "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-        "processed": "Currently 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
+        "processed": "3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
     },
     "ARCH1102": {
         "original": "Prerequisite: ARCH1101<br/><br/>",
@@ -3449,6 +3449,7 @@
     },
     "COMM3030": {
         "original": "\u2022\thave completed a minimum of 48 UOC at the commencement of this course;<br/>\u2022\thave room in their degree for this course;<br/>\u2022\tare in good academic standing;<br/>\u2022\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
+        "handbook_note": "Students must be in Good Academic Standing.",
         "processed": "(COMM6000 || COMM1999) && 65WAM && 48UOC"
     },
     "COMM3050": {
@@ -5004,35 +5005,35 @@
     },
     "DPHU1001": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1002": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1003": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1004": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1005": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1006": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1007": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPHU1008": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-        "processed": "7005 UNSW Global Diploma in Media && Communication Program"
+        "processed": "(7005)"
     },
     "DPST1013": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -6047,7 +6048,7 @@
     "FADA6700": {
         "original": "Prerequisite: 48 units of credit overall. Student must be in good academic standing<br/><br/>",
         "handbook_note": "Students must be in Good Academic Standing.",
-        "processed": "48UOC . must"
+        "processed": "48UOC"
     },
     "FINS1613": {
         "original": "",
@@ -6711,7 +6712,8 @@
     },
     "HUMS2003": {
         "original": "Prerequisite: 24 units of credit overall and on good academic standing<br/><br/>",
-        "processed": "24UOC && on good academic standing"
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": "24UOC &&"
     },
     "HUMS2005": {
         "original": "",
@@ -7241,23 +7243,23 @@
     },
     "LAWS1121": {
         "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed": "Academic program must be 7016, Humanities Pathway Program"
+        "processed": "(7016)"
     },
     "LAWS1122": {
         "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed": "Academic program must be 7016, Humanities Pathway Program"
+        "processed": "(7016)"
     },
     "LAWS1123": {
         "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed": "Academic program must be 7016, Humanities Pathway Program"
+        "processed": "(7016)"
     },
     "LAWS1124": {
         "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed": "Academic program must be 7016, Humanities Pathway Program"
+        "processed": "(7016)"
     },
     "LAWS1141": {
         "original": "Pre-requisite: 24 UOC completed in LAWS courses including LAWS1052.<br/><br/>",
-        "processed": "24UOC in LAWS courses && LAWS1052"
+        "processed": "24UOC in LAWS && LAWS1052"
     },
     "LAWS1150": {
         "original": "Prerequisite: LAWS1052<br/><br/>",
@@ -7277,7 +7279,7 @@
     },
     "LAWS1230": {
         "original": "Pre-requisite: 24 UOC completed in LAWS courses including LAWS1052.<br/><br/>",
-        "processed": "24UOC in LAWS courses && LAWS1052"
+        "processed": "24UOC in LAWS && LAWS1052"
     },
     "LAWS2150": {
         "original": "Prerequisite: Principles of Public Law (LAWS1141) and Administrative Law (LAWS1160)<br/><br/>",
@@ -7285,7 +7287,7 @@
     },
     "LAWS2270": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity and Trusts (LAWS2385). <br/><br/>",
-        "processed": "78UOC in LAWS courses && Equity && Trusts (LAWS2385)"
+        "processed": "78UOC in LAWS && Equity && Trusts (LAWS2385)"
     },
     "LAWS2277": {
         "original": "Corequisite: LAWS1160 completed prior to or concurrently with enrolment in this course<br/><br/>",
@@ -7293,11 +7295,11 @@
     },
     "LAWS2320": {
         "original": "Pre-requisite: Completion of 24 UOC of LAWS courses.<br/><br/>",
-        "processed": "24UOC of LAWS courses"
+        "processed": "24UOC in LAWS"
     },
     "LAWS2326": {
         "original": "Prerequisite: 24 UOC completed in LAWS courses.<br/><br/>",
-        "processed": "24UOC in LAWS courses"
+        "processed": "24UOC in LAWS"
     },
     "LAWS2351": {
         "original": "Prerequisite: Crime and Criminal Process (LAWS1021) and Criminal Laws (LAWS1022).<br/><br/>",
@@ -7313,7 +7315,7 @@
     },
     "LAWS2384": {
         "original": "Pre-requisite: Completion of 24 UOC of LAWS courses.<br/><br/>",
-        "processed": "24UOC of LAWS courses"
+        "processed": "24UOC in LAWS"
     },
     "LAWS2385": {
         "original": "Prerequisite: Principles of Private Law (LAWS1150) and Contracts (LAWS1075)<br/><br/>",
@@ -7321,227 +7323,227 @@
     },
     "LAWS2820": {
         "original": "Pre-requisite: Completion of 24 UOC of LAWS courses.<br/><br/>",
-        "processed": "24UOC of LAWS courses"
+        "processed": "24UOC in LAWS"
     },
     "LAWS3014": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+        "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
     },
     "LAWS3017": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Legal Theory (LAWS2320), Law and Social Theory (LAWS2820) or Theories of Law and Justice (LAWS2326).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Legal Theory (LAWS2320), Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
+        "processed": "78UOC in LAWS && Legal Theory (LAWS2320), Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
     },
     "LAWS3018": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses<br/>Co-requisite: Business Associations (LAWS1091) and Land Law (LAWS2383)<br/><br/>",
-        "processed": "78UOC in LAWS courses && [Business Associations (LAWS1091) && Land Law (LAWS2383)]"
+        "processed": "78UOC in LAWS && [Business Associations (LAWS1091) && Land Law (LAWS2383)]"
     },
     "LAWS3021": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3046/JURD7446, LAWS3248/JURD7448, LAWS3523/GENL2323 and LAWS8017/JURD7617<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3022": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3023": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+        "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
     },
     "LAWS3025": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3028": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3040": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3046": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3047": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-        "processed": "78UOC in LAWS courses && [Resolving Civil Disputes (LAWS2371)]"
+        "processed": "78UOC in LAWS && [Resolving Civil Disputes (LAWS2371)]"
     },
     "LAWS3057": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/>Co-requisite: Foundations of Intellectual Property Law (LAWS3021) or Intellectual Property Law (LAWS8017).<br/><br/>",
-        "processed": "78UOC in LAWS courses && [Foundations of Intellectual Property Law (LAWS3021) || Intellectual Property Law (LAWS8017)]"
+        "processed": "78UOC in LAWS && [Foundations of Intellectual Property Law (LAWS3021) || Intellectual Property Law (LAWS8017)]"
     },
     "LAWS3060": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230),  Resolving Civil Disputes (LAWS2371) and Court Process, Evidence & Proof (LAWS2351).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230), Resolving Civil Disputes (LAWS2371) && Court Process, Evidence && Proof (LAWS2351)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230), Resolving Civil Disputes (LAWS2371) && Court Process, Evidence && Proof (LAWS2351)"
     },
     "LAWS3064": {
         "original": "Prerequisite: Completion of 36 UOC in LAWS courses.<br/><br/>",
-        "processed": "36UOC in LAWS courses"
+        "processed": "36UOC in LAWS"
     },
     "LAWS3065": {
         "original": "Prerequisite: Completion of 36 UOC in LAWS courses.<br/><br/>",
-        "processed": "36UOC in LAWS courses"
+        "processed": "36UOC in LAWS"
     },
     "LAWS3067": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3070": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3072": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3073": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Land Law (LAWS2383)"
+        "processed": "78UOC in LAWS && Land Law (LAWS2383)"
     },
     "LAWS3079": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3080": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3084": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3086": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3087": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3102": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3105": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3115": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Land Law (LAWS2383)"
+        "processed": "78UOC in LAWS && Land Law (LAWS2383)"
     },
     "LAWS3123": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3125": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3131": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3133": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3135": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity & Trusts (LAWS2385).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Equity && Trusts (LAWS2385)"
+        "processed": "78UOC in LAWS && Equity && Trusts (LAWS2385)"
     },
     "LAWS3137": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-        "processed": "78UOC in LAWS courses && [Resolving Civil Disputes (LAWS2371)]"
+        "processed": "78UOC in LAWS && [Resolving Civil Disputes (LAWS2371)]"
     },
     "LAWS3139": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3144": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3146": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3149": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3150": {
         "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Federal Constitutional Law (LAWS2150)"
+        "processed": "78UOC in LAWS && Federal Constitutional Law (LAWS2150)"
     },
     "LAWS3152": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3155": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+        "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
     },
     "LAWS3157": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses and Law in the Global Context (LAWS2270).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Law in the Global Context (LAWS2270)"
+        "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270)"
     },
     "LAWS3159": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3165": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3167": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3170": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) && [Court Process, Evidence && Proof (LAWS2351)]"
+        "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) && [Court Process, Evidence && Proof (LAWS2351)]"
     },
     "LAWS3181": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3182": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3183": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3185": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3186": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3187": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3188": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3192": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+        "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
     },
     "LAWS3195": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Federal Constitutional Law (LAWS2150)<br/><br/>",
-        "processed": "78UOC in LAWS courses && [Federal Constitutional Law (LAWS2150)]"
+        "processed": "78UOC in LAWS && [Federal Constitutional Law (LAWS2150)]"
     },
     "LAWS3196": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3198": {
         "original": "78 UOC of LAWS Courses<br/><br/>",
@@ -7549,39 +7551,39 @@
     },
     "LAWS3208": {
         "original": "78 UOC of LAWS courses<br/><br/>",
-        "processed": "78UOC of LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3211": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3212": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3216": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3221": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3222": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3231": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3240": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230)"
     },
     "LAWS3248": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3250": {
         "original": "78 UOC in LAWS Courses<br/><br/>",
@@ -7589,63 +7591,63 @@
     },
     "LAWS3251": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3272": {
         "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Federal Constitutional Law (LAWS2150)"
+        "processed": "78UOC in LAWS && Federal Constitutional Law (LAWS2150)"
     },
     "LAWS3276": {
         "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Federal Constitutional Law (LAWS2150)"
+        "processed": "78UOC in LAWS && Federal Constitutional Law (LAWS2150)"
     },
     "LAWS3281": {
         "original": "Prerequisites: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160). <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160) && [Resolving Civil Disputes (LAWS2371)]"
+        "processed": "78UOC in LAWS && Administrative Law (LAWS1160) && [Resolving Civil Disputes (LAWS2371)]"
     },
     "LAWS3282": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160)"
+        "processed": "78UOC in LAWS && Administrative Law (LAWS1160)"
     },
     "LAWS3292": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3301": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3302": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160) and Equity and Trusts (LAWS2385).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160) && Equity && Trusts (LAWS2385)"
+        "processed": "78UOC in LAWS && Administrative Law (LAWS1160) && Equity && Trusts (LAWS2385)"
     },
     "LAWS3303": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3304": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3305": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3309": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3314": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3316": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3319": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Criminal Laws (LAWS1022)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Criminal Laws (LAWS1022)"
+        "processed": "78UOC in LAWS && Criminal Laws (LAWS1022)"
     },
     "LAWS3321": {
         "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053<br/><br/>",
@@ -7653,39 +7655,39 @@
     },
     "LAWS3326": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3327": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3331": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3332": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3335": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3341": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3345": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3346": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3348": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3350": {
         "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053<br/><br/>",
@@ -7701,11 +7703,11 @@
     },
     "LAWS3354": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3361": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3362": {
         "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053.<br/><br/>",
@@ -7717,99 +7719,99 @@
     },
     "LAWS3381": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses and Law in the Global Context (LAWS2270).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Law in the Global Context (LAWS2270)"
+        "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270)"
     },
     "LAWS3382": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3383": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3384": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3391": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3392": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3393": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Land Law (LAWS2383)"
+        "processed": "78UOC in LAWS && Land Law (LAWS2383)"
     },
     "LAWS3395": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3396": {
         "original": "Prerequisite: Family Law (LAWS3391) and completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "Family Law (LAWS3391) && 78UOC in LAWS courses"
+        "processed": "Family Law (LAWS3391) && 78UOC in LAWS"
     },
     "LAWS3401": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3402": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3412": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3413": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3423": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3427": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3434": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3441": {
         "original": "Prerequisite: Completion of 36 UOC in LAWS courses.<br/><br/>",
-        "processed": "36UOC in LAWS courses"
+        "processed": "36UOC in LAWS"
     },
     "LAWS3442": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3445": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3478": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3501": {
         "original": "Completion of 78 UOC in LAWS courses<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3510": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3512": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3513": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3523": {
         "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053.<br/><br/>",
@@ -7817,7 +7819,7 @@
     },
     "LAWS3524": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3533": {
         "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or an approved exchange program. Students enrolled in UNSW Law programs are excluded from this course.<br/><br/>",
@@ -7825,35 +7827,35 @@
     },
     "LAWS3541": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3549": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3555": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3589": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371)"
+        "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3623": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
+        "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230)"
     },
     "LAWS3713": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Law in the Global Context (LAWS2270) or Public International Law (LAWS3381).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Law in the Global Context (LAWS2270) || Public International Law (LAWS3381)"
+        "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270) || Public International Law (LAWS3381)"
     },
     "LAWS3751": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. Exclusion: TABL2751<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3758": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3777": {
         "original": "Prerequisite: Completion of 78 UOC of LAWS Courses; and enrolment in LAWS3555 concurrently or consecutively<br/><br/>",
@@ -7861,7 +7863,7 @@
     },
     "LAWS3812": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-        "processed": "78UOC in LAWS courses"
+        "processed": "78UOC in LAWS"
     },
     "LAWS3901": {
         "original": "This course is strictly for students undertaking Law (Honours) programs only.<br/><br/>",
@@ -7901,7 +7903,7 @@
     },
     "MANF9550": {
         "original": "Successful completion of 96 UOC and minimum WAM 65%<br/><br/>",
-        "processed": "96UOC && 65WAM%"
+        "processed": "96UOC && 65WAM"
     },
     "MARK2012": {
         "original": "",
@@ -9377,15 +9379,15 @@
     },
     "MUSC3802": {
         "original": "Prerequisite: 24uoc in MUSC courses and enrolment in one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology, or Sonic Arts<br/><br/>",
-        "processed": "24UOC in MUSC courses && one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology || Sonic Arts"
+        "processed": "24UOC in MUSC && one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology || Sonic Arts"
     },
     "MUSC3804": {
         "original": "Prerequisite: 24 units of credit in MUSC courses, including MUSC2802, and enrolment in a Music Pedagogy specialisation<br/><br/>",
-        "processed": "24UOC in MUSC courses && MUSC2802 && a Music Pedagogy specialisation"
+        "processed": "24UOC in MUSC && MUSC2802 && a Music Pedagogy specialisation"
     },
     "MUSC3805": {
         "original": "Prerequisite: 24 UOC in MUSC courses, and enrolment in a Bachelor of Music or a Music Sonic Arts specialisation. Or 48 UOC overall, including MDIA1005 and enrolment in a Media program or a Screen Production specialisation<br/><br/>",
-        "processed": "24UOC in MUSC courses && a Bachelor of Music || a Music Sonic Arts specialisation. || 48UOC && MDIA1005 && MDIA# || a Screen Production specialisation"
+        "processed": "24UOC in MUSC && a Bachelor of Music || a Music Sonic Arts specialisation. || 48UOC && MDIA1005 && MDIA# || a Screen Production specialisation"
     },
     "MUSC3806": {
         "original": "Prerequisite: MUSC2803 and enrolment in a Music Sonic Arts specialisation. Or 48 UOC overall, including MDIA1005 and enrolment in a Media program or a Screen Production specialisation<br/><br/>",
@@ -9393,7 +9395,7 @@
     },
     "MUSC3807": {
         "original": "Prerequisite: 24uoc in MUSC courses, and enrolment in a Music single or dual program<br/><br/>",
-        "processed": "24UOC in MUSC courses && a Music single || dual program"
+        "processed": "24UOC in MUSC && a Music single || dual program"
     },
     "MUSC3808": {
         "original": "Prerequisite: 36 UOC overall<br/><br/>",
@@ -9477,7 +9479,7 @@
     },
     "NEUR2201": {
         "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
-        "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC of PSYC courses"
+        "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC in PSYC"
     },
     "NEUR3101": {
         "original": "Prerequisites: PHSL2101 or PHSL2121 or PHSL2501 or NEUR2201<br/><br/>",
@@ -9697,7 +9699,7 @@
     },
     "PHCM1001": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently 3880 Bachelor of International Public Health"
+        "processed": "(3880)"
     },
     "PHCM1002": {
         "original": "",
@@ -10609,7 +10611,7 @@
     },
     "SENG3993": {
         "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>",
-        "processed": "Currently 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
+        "processed": "3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
     },
     "SENG3994": {
         "original": "Successful completion of SENG2991 and (SENG3991or SENG3993) are a prerequisite for this course<br/><br/>Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG3011.<br/><br/>",
@@ -10797,7 +10799,7 @@
     },
     "SOMS1912": {
         "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation <br/>or 3895 Pharmaceutical Medicine/Pharmacy <br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology <br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "(3894) || (3895) || (3896) || (3897) || 3880 Bachelor of International Public Health"
+        "processed": "(3894) || (3895) || (3896) || (3897) || (3880)"
     },
     "SOMS1913": {
         "original": "SOMS1912 Human Systems 1 and enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>or 3895 Pharmaceutical Medicine/Pharmacy<br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 International Public Health<br/><br/>",
@@ -10873,27 +10875,27 @@
     },
     "SOSS4051": {
         "original": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
-        "processed": "4529 Social Science (Honours)"
+        "processed": "(4529)"
     },
     "SOSS4052": {
         "original": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
-        "processed": "4529 Social Science (Honours)"
+        "processed": "(4529)"
     },
     "SOSS4053": {
         "original": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
-        "processed": "4529 Social Science (Honours)"
+        "processed": "(4529)"
     },
     "SRAP4051": {
         "original": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-        "processed": "the Social Research && Policy honours program"
+        "processed": "(4504)"
     },
     "SRAP4052": {
         "original": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-        "processed": "the Social Research && Policy honours program"
+        "processed": "(4504)"
     },
     "SRAP4053": {
         "original": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-        "processed": "the Social Research && Policy honours program"
+        "processed": "(4504)"
     },
     "SWCH9011": {
         "original": "Prerequisite: Enrolment in 3831 Science (Medicine) Honours<br/><br/>",
@@ -11070,19 +11072,19 @@
     },
     "YMED1001": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently 3880 Bachelor of International Public Health"
+        "processed": "(3880)"
     },
     "YMED1003": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently 3880 Bachelor of International Public Health"
+        "processed": "(3880)"
     },
     "YMED1005": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently 3880 Bachelor of International Public Health"
+        "processed": "(3880)"
     },
     "YMED1008": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently 3880 Bachelor of International Public Health"
+        "processed": "(3880)"
     },
     "YMED3004": {
         "original": "",
@@ -11098,7 +11100,7 @@
     },
     "YMED3007": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently 3880 Bachelor of International Public Health"
+        "processed": "(3880)"
     },
     "ZBUS1101": {
         "original": "",
@@ -12423,7 +12425,7 @@
     },
     "ZPEM4205": {
         "original": "Currently enrolled in 4511 B Arts (Honours)<br/><br/>",
-        "processed": "Currently 4511 B Arts (Honours)"
+        "processed": "(4511)"
     },
     "ZPEM4301": {
         "original": "",
