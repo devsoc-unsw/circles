@@ -34,7 +34,7 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
 const CollapsibleContent = styled.div<{ collapsed: boolean }>`
   transition: 250ms;
   width: 100%;
-  padding: 10px 35px;
+  padding: 10px;
 
   ${({ collapsed }) =>
     collapsed &&
