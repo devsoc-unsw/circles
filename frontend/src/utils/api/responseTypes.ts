@@ -73,7 +73,7 @@ export type APIProgramCourses = {
   courses: { [code: CourseCode]: string };
 };
 
-type APIPrograms = {
+export type APIPrograms = {
   programs: { [code: string]: string };
 };
 
@@ -91,7 +91,7 @@ type APISpecialisations = {
   };
 };
 
-type APIStructure = {
+export type APIStructure = {
   structure: { [group: string]: APIStructureContainer };
   uoc: UOC;
 };

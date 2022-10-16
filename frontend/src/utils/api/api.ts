@@ -7,28 +7,13 @@ import {
   APICoursesState,
   APICoursesUnlockedWhenTaken,
   APIProgramCourses,
+  APIPrograms,
+  APIStructure,
   APITermsList,
   APIValidCoursesState
 } from './responseTypes';
 
-// TODO: handle errors
-async function get<T>(url: string): Promise<T> {
-  const res = await axios.get<T>(url);
-  if (res.status !== 200) {
-    throw Error('TODO');
-  }
-
-  return res.data;
-}
-
-async function post<T>(url: string, data?: unknown): Promise<T> {
-  const res = await axios.post<T>(url, data);
-  if (res.status !== 200) {
-    throw Error('TODO');
-  }
-
-  return res.data;
-}
+// TODO: make error unwrapping functions
 
 interface PlannerEndpoints {
   validate: (plannerData?: APIPlannerData) => Promise<APIValidCoursesState>;
@@ -51,14 +36,20 @@ interface CoursesEndpoints {
   termsOffered: (courseCode: CourseCode, years: string[]) => Promise<APITermsList>;
 }
 
+interface ProgramsEndpoints {
+  all: () => Promise<APIPrograms>;
+  structure: (programCode: string, spec?: string) => Promise<APIStructure>;
+}
+
 type APIEndpoints = {
   planner: PlannerEndpoints;
   courses: CoursesEndpoints;
+  programs: ProgramsEndpoints;
 };
 
 const API: APIEndpoints = {
   planner: {
-    validate: (plannerData) => post('/planner/validateTermPlanner', plannerData)
+    validate: (plannerData) => axios.post('/planner/validateTermPlanner', plannerData)
   }
 };
 
