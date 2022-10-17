@@ -48,16 +48,19 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   }
 
   useEffect(() => {
-    // gets the associated info for a course
+    // if the course code changes, force a reload
+    setIsLoading(true);
+  }, [courseCode]);
+
+  useEffect(() => {
     const getCourseInfo = async () => {
-      setIsLoading(true);
       try {
         const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
           axios.post<CoursesUnlockedWhenTaken>(
             `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-            JSON.stringify(prepareUserPayload(degree, planner))
+            prepareUserPayload(degree, planner)
           ),
           axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
         ]);
@@ -74,8 +77,12 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
         console.error('Error at getCourse', e);
       }
     };
-    getCourseInfo();
-  }, [courseCode]);
+
+    if (isLoading) {
+      // gets the associated info for a course
+      getCourseInfo();
+    }
+  }, [courseCode, degree, isLoading, planner]);
 
   if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)
