@@ -11,7 +11,6 @@ import { Button, Switch, Tabs, Tooltip } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
@@ -183,10 +182,8 @@ const GraphicalSelector = () => {
   };
 
   const handleFocusCourse = (code: string) => {
-    if (graphRef.current?.findById(code)) {
-      graphRef.current.focusItem(code);
-      setCourseCode(code);
-    }
+    graphRef.current?.focusItem(code);
+    setCourseCode(code);
   };
 
   const handleZoomIn = () => {
@@ -219,7 +216,7 @@ const GraphicalSelector = () => {
       label: 'Course Info',
       key: 'course-info',
       children: courseCode ? (
-        <CourseDescriptionPanel
+        <S.CourseDescriptionPanel
           courseCode={courseCode}
           key={courseCode}
           onCourseClick={(code) => handleFocusCourse(code)}
