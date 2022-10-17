@@ -60,7 +60,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
           axios.post<CoursesUnlockedWhenTaken>(
             `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-            prepareUserPayload(degree, planner)
+            JSON.stringify(prepareUserPayload(degree, planner))
           ),
           axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
         ]);
