@@ -190,7 +190,7 @@ const GraphicalSelector = () => {
   };
 
   const handleZoomIn = () => {
-    const viewportCenter = graphRef.current?.getViewPortCenterPoint() ?? undefined;
+    const viewportCenter = graphRef.current?.getViewPortCenterPoint();
     graphRef.current?.zoom(ZOOM_IN_RATIO, viewportCenter, true, {
       easing: 'easeQuadIn',
       duration: 200
@@ -198,7 +198,7 @@ const GraphicalSelector = () => {
   };
 
   const handleZoomOut = () => {
-    const viewportCenter = graphRef.current?.getViewPortCenterPoint() ?? undefined;
+    const viewportCenter = graphRef.current?.getViewPortCenterPoint();
     graphRef.current?.zoom(ZOOM_OUT_RATIO, viewportCenter, true, {
       easing: 'easeQuadOut',
       duration: 200
