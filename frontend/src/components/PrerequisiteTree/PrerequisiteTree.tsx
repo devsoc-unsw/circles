@@ -16,7 +16,7 @@ type Props = {
 
 const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
   const [loading, setLoading] = useState(true);
-  const [graph, setGraph] = useState<TreeGraph | null>(null);
+  const graphRef = useRef<TreeGraph | null>(null);
   const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
   const [coursesRequires, setCoursesRequires] = useState<CourseList>([]);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -33,7 +33,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       if (!container) return;
       const { TreeGraph } = await import('@antv/g6');
 
-      const treeGraphInstance = new TreeGraph({
+      graphRef.current = new TreeGraph({
         container,
         width: container.scrollWidth,
         height: container.scrollHeight,
@@ -43,17 +43,15 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
         defaultEdge: GRAPH_STYLE.defaultEdge
       });
 
-      setGraph(treeGraphInstance);
+      graphRef.current.data(graphData);
 
-      treeGraphInstance.data(graphData);
+      updateEdges(graphRef.current, graphData);
 
-      updateEdges(treeGraphInstance, graphData);
+      graphRef.current.render();
 
-      treeGraphInstance.render();
+      bringEdgeLabelsToFront(graphRef.current);
 
-      bringEdgeLabelsToFront(treeGraphInstance);
-
-      treeGraphInstance.on('node:click', (event) => {
+      graphRef.current.on('node:click', (event) => {
         // open new course tab
         const node = event.item as Item;
         if (onCourseClick) onCourseClick(node.getModel().label as string);
@@ -62,9 +60,9 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
 
     // NOTE: This is for hot reloading in development as new graph will instantiate every time
     const updateTreeGraph = (graphData: TreeGraphData) => {
-      if (!graph) return;
-      graph.changeData(graphData);
-      bringEdgeLabelsToFront(graph);
+      if (!graphRef.current) return;
+      graphRef.current.changeData(graphData);
+      bringEdgeLabelsToFront(graphRef.current);
     };
 
     /* REQUESTS */
@@ -109,7 +107,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       };
 
       // render graph
-      if (!graph && graphData.children.length !== 0) {
+      if (!graphRef.current && graphData.children.length !== 0) {
         generateTreeGraph(graphData);
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
@@ -122,12 +120,12 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       setupGraph(courseCode);
       setLoading(false);
     }
-  }, [courseCode, graph, loading, onCourseClick]);
+  }, [courseCode, loading, onCourseClick]);
 
   return (
     <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
       {loading && <Spinner text="Loading tree..." />}
-      {!loading && !graph?.getNodes && (
+      {!loading && graphRef.current && !graphRef.current.getEdges().length && (
         <p> No prerequisite visualisation is needed for this course </p>
       )}
     </S.PrereqTreeContainer>
