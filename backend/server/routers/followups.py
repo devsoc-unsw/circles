@@ -1,13 +1,6 @@
-from contextlib import suppress
 from typing import Dict
-from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS
-from fastapi import APIRouter, HTTPException
-from fuzzywuzzy import fuzz # type: ignore
-from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
-                                  UserData)
-from server.routers.utility import get_core_courses
+from fastapi import APIRouter
+from server.database import coursesCOL
 import json 
 
 router = APIRouter(
@@ -15,101 +8,79 @@ router = APIRouter(
     tags=["followups"],
 )
 
-def fix_user_data(userData: dict):
-    """ Updates and returns the userData with the UOC of a course """
-    coursesWithoutUoc = [
-        course
-        for course in userData["courses"]
-        if not isinstance(userData["courses"][course], list)
-    ]
-    filledInCourses = {
-        course: [get_course(course)["UOC"], userData["courses"][course]]
-        for course in coursesWithoutUoc
-    }
-    userData["courses"].update(filledInCourses)
-    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"].keys()))
-    return userData
-
-def get_course(courseCode: str) -> Dict:
-    """
-    Get info about a course given its courseCode
-    - start with the current database
-    - if not found, check the archives
-    """
-    result = coursesCOL.find_one({"code": courseCode})
-    if not result:
-        for year in sorted(ARCHIVED_YEARS, reverse=True):
-            result = archivesDB[str(year)].find_one({"code": courseCode})
-            if result is not None:
-                result.setdefault("raw_requirements", "")
-                result["is_legacy"] = True
-                break
-    else:
-        result["is_legacy"] = False
-
-    if not result:
-        raise HTTPException(
-            status_code=400, detail=f"Course code {courseCode} was not found"
-        )
-    result.setdefault("school", None)
-    result['is_accurate'] = CONDITIONS.get(courseCode) is not None
-    result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
-    del result["_id"]
-    with suppress(KeyError):
-        del result["exclusions"]["leftover_plaintext"]
-    return result
+def get_next_term(term: str) -> str:
+    if term[0] == 'T':
+        if int(term[-1]) < 3:
+            return 'T' + str(int(term[-1]) + 1)
+        return 'S'
+    return 'T1'
 
 @router.post(
-    "/getFollowups/{takenCourse}",
+    "/getFollowups/{origin_course}/{origin_term}",
     responses={
         200: {
             "description": "Returns a list of the most popular followup courses",
             "content": {
                 "application/json": {
                     "example": {
-                        "COMP2521" : "Data Structures and Algorithms",
-                        "COMP1521" : "Computer Systems Fundamentals",
-                        "COMP1531" : "SoftEng Fundamentals",
+                        "originCourse": "COMP1511",
+                        "originTerm": "T2",
+                        "followups": {
+                            "COMP1521": {
+                                "T3": 339,
+                            },
+                            "COMP1531": {
+                                "T3": 200,
+                            },
+                            "COMP2521": {
+                                "T3": 120,
+                            },
+                            "COMP1511": {
+                                "T3": 45,
+                            }
+                        }
                     }
                 }
             }
         }
-    },
+    }
 )
-def get_followups(userData: UserData, takenCourse: str) -> Dict[str, str]:
-    """
-    Rank courses in order of priority according to the sequences
-    others have taken before.
-    
-    At this point, using only t2 -> t3 data (because that's all we have)
-
-    Also I'm just using data[course] to represent the enrolment data cause i dont know exactly how to access it.
-    """
-
-    enrolmentDataFile = open('data/final_data/enrolmentData.json')
-    enrolmentData = json.load(enrolmentDataFile)
-
-    followups = {}
-
-    print(enrolmentData[takenCourse])
-
-    takenCourseMembers = enrolmentData[takenCourse].t2
-
-    user = User(fix_user_data(userData.dict()))
-    
-    for course, condition in CONDITIONS.items():
-        result = condition.validate(user) if condition is not None else (True, [])
-        if result:
-            #if course is unlocked for this user
-            #count duplicates between people who took this course in t3 and people who took the initial course in t2
-            followups[course].t3 = len([enrolmentData[course].t3.index(i) for i in takenCourseMembers])
-
-    topFollowups = sorted(followups.items(), reverse=True, key=lambda course: course[1]['t3'])
-
-
-
-    enrolmentDataFile.close()
+def get_followups(origin_course: str, origin_term: str) -> Dict[str, str]:
+    # origin_term is the term that the original course was/would be taken in
  
-    return dict(topFollowups)
+    # we only have enrolment data from T2(2022) -> T3(2022) at this stage
+    origin_term = "T2" # remove this line after we get more data
+    next_term = get_next_term(origin_term)
+
+    # get all comp courses
+    all_comp_courses = []
+    for course in coursesCOL.find():
+        if course["code"].startswith("COMP"):
+            all_comp_courses.append(course["code"])
+    
+    # get enrolment data
+    enrolment_data_file = open("./data/final_data/enrolmentData.json")
+    enrolment_data = json.load(enrolment_data_file)
+    enrolment_data_file.close()
+    origin_course_members = enrolment_data[origin_course][origin_term]
+    
+    # calculate followups
+    followups = {}
+    for course in all_comp_courses:
+        # count duplicates between:
+        #  people who took the origin_course in origin_term 
+        #  people who took this course in the following term.
+        num_followups = len(set(enrolment_data[course][next_term]) & set(origin_course_members))
+        
+        if num_followups != 0:
+            followups.update({ course: { next_term: num_followups } })
+
+    top_followups = sorted(followups.items(), reverse=True, key=lambda course: course[1][next_term])
+ 
+    return {"originCourse": origin_course,
+            "originTerm": origin_term,
+            "followups": dict(top_followups),     
+            }
+
 
     
