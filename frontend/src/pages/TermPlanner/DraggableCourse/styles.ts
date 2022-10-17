@@ -11,7 +11,7 @@ type CourseWrapperProps = {
 
 const CourseWrapper = styled.li<CourseWrapperProps>`
   user-select: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   cursor: grab;
   padding: 0.9em;
   padding-right: 1.1em;
