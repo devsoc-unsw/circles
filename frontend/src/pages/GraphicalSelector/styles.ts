@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
 const Wrapper = styled.div`
   height: calc(100vh - var(--navbar-height));
@@ -42,7 +43,14 @@ const ToolsWrapper = styled.div`
   gap: 10px;
 `;
 
+const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
+  & h3.ant-typography {
+    font-size: 20px !important;
+  }
+`;
+
 export default {
+  CourseDescriptionPanel,
   Wrapper,
   GraphPlaygroundWrapper,
   SidebarWrapper,

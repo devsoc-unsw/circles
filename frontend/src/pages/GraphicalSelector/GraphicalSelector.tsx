@@ -11,7 +11,6 @@ import { Button, Switch, Tabs, Tooltip } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
@@ -30,7 +29,7 @@ const GraphicalSelector = () => {
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
   const { degree, planner } = useSelector((state: RootState) => state);
 
-  const [graph, setGraph] = useState<Graph | null>(null);
+  const graphRef = useRef<Graph | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebar, setSidebar] = useState(true);
   const [courseCode, setCourseCode] = useState<string>();
@@ -44,7 +43,7 @@ const GraphicalSelector = () => {
       const container = ref.current;
       if (!container) return;
       const { Graph, Arrow } = await import('@antv/g6');
-      const graphInstance = new Graph({
+      graphRef.current = new Graph({
         container,
         width: container.scrollWidth,
         height: container.scrollHeight,
@@ -68,17 +67,15 @@ const GraphicalSelector = () => {
         nodeStateStyles: GRAPH_STYLE.nodeStateStyles
       });
 
-      setGraph(graphInstance);
-
       const data = {
         nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
         edges: courseEdges
       };
 
-      graphInstance.data(data);
-      graphInstance.render();
+      graphRef.current.data(data);
+      graphRef.current.render();
 
-      graphInstance.on('node:click', async (ev) => {
+      graphRef.current.on('node:click', async (ev) => {
         // load up course information
         const node = ev.item as INode;
         const id = node.getID();
@@ -89,11 +86,11 @@ const GraphicalSelector = () => {
 
         // // hides/ unhides dependent nodes
         // if (node.hasState('click')) {
-        //   graphInstance.clearItemStates(node, 'click');
+        //   graphRef.current.clearItemStates(node, 'click');
         //   breadthFirstSearch(data, id, {
         //     enter: ({ current }: { current: string }) => {
         //       if (id !== current) {
-        //         const currentNode = graphInstance.findById(current) as INode;
+        //         const currentNode = graphRef.current.findById(current) as INode;
         //         // Unhiding node won't unhide other hidden nodes
         //         currentNode.getEdges().forEach((e) => e.show());
         //         currentNode.show();
@@ -101,11 +98,11 @@ const GraphicalSelector = () => {
         //     }
         //   });
         // } else if (node.getOutEdges().length) {
-        //   graphInstance.setItemState(node, 'click', true);
+        //   graphRef.current.setItemState(node, 'click', true);
         //   breadthFirstSearch(data, id, {
         //     enter: ({ current }: { current: string }) => {
         //       if (id !== current) {
-        //         const currentNode = graphInstance.findById(current) as INode;
+        //         const currentNode = graphRef.current.findById(current) as INode;
         //         currentNode.getEdges().forEach((e) => e.hide());
         //         currentNode.hide();
         //       }
@@ -114,14 +111,14 @@ const GraphicalSelector = () => {
         // }
       });
 
-      graphInstance.on('node:mouseenter', async (ev) => {
+      graphRef.current.on('node:mouseenter', async (ev) => {
         const node = ev.item as Item;
-        graphInstance.setItemState(node, 'hover', true);
+        graphRef.current?.setItemState(node, 'hover', true);
       });
 
-      graphInstance.on('node:mouseleave', async (ev) => {
+      graphRef.current.on('node:mouseleave', async (ev) => {
         const node = ev.item as Item;
-        graphInstance.clearItemStates(node, 'hover');
+        graphRef.current?.clearItemStates(node, 'hover');
       });
     };
 
@@ -139,27 +136,27 @@ const GraphicalSelector = () => {
       setLoading(false);
     };
 
-    if (!graph) setupGraph();
-  }, [graph, plannedCourses, programCode, specs]);
+    if (!graphRef.current) setupGraph();
+  }, [plannedCourses, programCode, specs]);
 
   const showAllCourses = () => {
-    if (graph) {
-      const nodes = graph.getNodes();
-      const edges = graph.getEdges();
+    if (graphRef.current) {
+      const nodes = graphRef.current.getNodes();
+      const edges = graphRef.current.getEdges();
       nodes.forEach((n) => n.show());
       edges.forEach((e) => e.show());
     }
   };
 
   const showUnlockedCourses = async () => {
-    if (!graph) return;
+    if (!graphRef.current) return;
     try {
       const res = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner))
       );
       const coursesStates = res.data.courses_state;
-      const nodes = graph.getNodes();
+      const nodes = graphRef.current.getNodes();
       nodes.forEach((n) => {
         const id = n.getID();
         if (coursesStates[id] && coursesStates[id].unlocked) {
@@ -185,20 +182,24 @@ const GraphicalSelector = () => {
   };
 
   const handleFocusCourse = (code: string) => {
-    if (graph?.findById(code)) {
-      graph.focusItem(code);
-      setCourseCode(code);
-    }
+    graphRef.current?.focusItem(code);
+    setCourseCode(code);
   };
 
   const handleZoomIn = () => {
-    const viewportCenter = graph?.getViewPortCenterPoint() ?? undefined;
-    graph?.zoom(ZOOM_IN_RATIO, viewportCenter, true, { easing: 'easeQuadIn', duration: 200 });
+    const viewportCenter = graphRef.current?.getViewPortCenterPoint();
+    graphRef.current?.zoom(ZOOM_IN_RATIO, viewportCenter, true, {
+      easing: 'easeQuadIn',
+      duration: 200
+    });
   };
 
   const handleZoomOut = () => {
-    const viewportCenter = graph?.getViewPortCenterPoint() ?? undefined;
-    graph?.zoom(ZOOM_OUT_RATIO, viewportCenter, true, { easing: 'easeQuadOut', duration: 200 });
+    const viewportCenter = graphRef.current?.getViewPortCenterPoint();
+    graphRef.current?.zoom(ZOOM_OUT_RATIO, viewportCenter, true, {
+      easing: 'easeQuadOut',
+      duration: 200
+    });
   };
 
   const handleToggleSidebar = () => {
@@ -207,15 +208,15 @@ const GraphicalSelector = () => {
 
   useEffect(() => {
     // resize canvas size when sidebar state changes
-    graph?.changeSize(ref.current?.scrollWidth ?? 0, ref.current?.scrollHeight ?? 0);
-  }, [graph, sidebar]);
+    graphRef.current?.changeSize(ref.current?.scrollWidth ?? 0, ref.current?.scrollHeight ?? 0);
+  }, [sidebar]);
 
   const items = [
     {
       label: 'Course Info',
       key: 'course-info',
       children: courseCode ? (
-        <CourseDescriptionPanel
+        <S.CourseDescriptionPanel
           courseCode={courseCode}
           key={courseCode}
           onCourseClick={(code) => handleFocusCourse(code)}
@@ -224,7 +225,7 @@ const GraphicalSelector = () => {
         'No course selected'
       )
     },
-    { label: 'Program Structure', key: 'program-structure', children: 'Content 2' },
+    { label: 'Program Structure', key: 'program-structure', children: 'Program Structure' },
     { label: 'Help', key: 'help', children: <HowToUse /> }
   ];
 
