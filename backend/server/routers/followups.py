@@ -60,15 +60,17 @@ def get_course(courseCode: str) -> Dict:
     return result
 
 @router.post(
-    "/followups/{course}",
+    "/getFollowups/{takenCourse}",
     responses={
         200: {
             "description": "Returns a list of the most popular followup courses",
             "content": {
-                "example": {
-                    "COMP1521",
-                    "COMP2521",
-                    "COMP1531",
+                "application/json": {
+                    "example": {
+                        "COMP2521" : "Data Structures and Algorithms",
+                        "COMP1521" : "Computer Systems Fundamentals",
+                        "COMP1531" : "SoftEng Fundamentals",
+                    }
                 }
             }
         }
@@ -87,7 +89,9 @@ def get_followups(userData: UserData, takenCourse: str) -> Dict[str, str]:
     enrolmentDataFile = open('data/final_data/enrolmentData.json')
     enrolmentData = json.load(enrolmentDataFile)
 
-    followups = {};
+    followups = {}
+
+    print(enrolmentData[takenCourse])
 
     takenCourseMembers = enrolmentData[takenCourse].t2
 
@@ -96,14 +100,16 @@ def get_followups(userData: UserData, takenCourse: str) -> Dict[str, str]:
     for course, condition in CONDITIONS.items():
         result = condition.validate(user) if condition is not None else (True, [])
         if result:
-            #if course is unlocked
+            #if course is unlocked for this user
             #count duplicates between people who took this course in t3 and people who took the initial course in t2
             followups[course].t3 = len([enrolmentData[course].t3.index(i) for i in takenCourseMembers])
 
     topFollowups = sorted(followups.items(), reverse=True, key=lambda course: course[1]['t3'])
 
-    enrolmentDataFile.close();
 
-    return topFollowups
+
+    enrolmentDataFile.close()
+ 
+    return dict(topFollowups)
 
     
