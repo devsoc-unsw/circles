@@ -8,7 +8,7 @@ type APIContainerContent = {
 };
 
 export type APICourseCodes = {
-  courses: string[];
+  courses: CourseCode[];
 };
 
 export type APICourseDetails = {
@@ -38,7 +38,7 @@ type APICourseState = {
   warnings: unknown[]; // TODO: possibly string[]
 };
 
-type APICourses = {
+export type APICourses = {
   courses: { [code: CourseCode]: string };
 };
 
@@ -56,17 +56,12 @@ export type APICoursesUnlockedWhenTaken = {
   indirect_unlock: string[];
 };
 
-type APIGraph = {
+export type APIGraph = {
   edges: {
     source: CourseCode;
     target: CourseCode;
   }[];
   courses: CourseCode[];
-};
-
-type APIMostRecentPastTerm = {
-  Y: number;
-  T: number;
 };
 
 export type APIProgramCourses = {
@@ -77,11 +72,11 @@ export type APIPrograms = {
   programs: { [code: string]: string };
 };
 
-type APISpecialisationTypes = {
+export type APISpecialisationTypes = {
   types: string[];
 };
 
-type APISpecialisations = {
+export type APISpecialisations = {
   spec: {
     [program: string]: {
       is_optional: boolean;

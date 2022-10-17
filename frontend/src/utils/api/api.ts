@@ -1,56 +1,43 @@
 import axios from 'axios';
-import { CourseCode } from './commonTypes';
-import {
-  APICourseCodes,
-  APICourseDetails,
-  APICoursesPath,
-  APICoursesState,
-  APICoursesUnlockedWhenTaken,
-  APIProgramCourses,
-  APIPrograms,
-  APIStructure,
-  APITermsList,
-  APIValidCoursesState
-} from './responseTypes';
-
-// TODO: make error unwrapping functions
-
-interface PlannerEndpoints {
-  validate: (plannerData?: APIPlannerData) => Promise<APIValidCoursesState>;
-}
-
-interface CoursesEndpoints {
-  jsonified: (courseCode: CourseCode) => Promise<string>;
-  course: (courseCode: CourseCode) => Promise<APICourseDetails>;
-  search: (searchString: string, userData: APIUserData) => Promise<{ [code: CourseCode]: string }>;
-  allUnlocked: (userData: APIUserData) => Promise<APICoursesState>;
-  legacyCourses: (year: string, term: string) => Promise<APIProgramCourses>;
-  legacyCourse: (year: string, courseCode: CourseCode) => Promise<APICourseDetails>;
-  unselect: (courseCode: CourseCode, userData: APIUserData) => Promise<APICourseCodes>;
-  children: (courseCode: CourseCode) => Promise<APICoursesPath>;
-  pathFrom: (courseCode: CourseCode) => Promise<APICoursesPath>;
-  unlockedWhenTaken: (
-    courseCode: CourseCode,
-    userData: APIUserData
-  ) => Promise<APICoursesUnlockedWhenTaken>;
-  termsOffered: (courseCode: CourseCode, years: string[]) => Promise<APITermsList>;
-}
-
-interface ProgramsEndpoints {
-  all: () => Promise<APIPrograms>;
-  structure: (programCode: string, spec?: string) => Promise<APIStructure>;
-}
-
-type APIEndpoints = {
-  planner: PlannerEndpoints;
-  courses: CoursesEndpoints;
-  programs: ProgramsEndpoints;
-};
+import { APIEndpoints } from './endpointTypes';
+import { optionalSegments } from './utils';
 
 const API: APIEndpoints = {
   planner: {
-    validate: (plannerData) => axios.post('/planner/validateTermPlanner', plannerData)
-  }
+    validate: (plannerData) => axios.post('/planner/validateTermPlanner', plannerData),
+  },
+
+  courses: {
+    jsonified: (courseCode) => axios.get(`/courses/jsonified/${courseCode}`),
+    course: (courseCode) => axios.get(`/courses/getCourse/${courseCode}`),
+    search: (searchString, userData) => axios.post(`/courses/searchCourse/${searchString}`, userData),
+    allUnlocked: (userData) => axios.post('/courses/getAllUnlocked', userData),
+    legacyCourses: (year, term) => axios.get(`/courses/getLegacyCourses/${year}/${term}`),
+    legacyCourse: (year, courseCode) => axios.get(`/courses/getLegacyCourse/${year}/${courseCode}`),
+    unselect: (courseCode, userData) => axios.post(`/courses/unselectCourse/${courseCode}`, userData),
+    children: (courseCode) => axios.get(`/courses/courseChildren/${courseCode}`),
+    pathFrom: (courseCode) => axios.get(`/courses/getPathFrom/${courseCode}`),
+    unlockedWhenTaken: (courseCode, userData) => axios.post(`/courses/coursesUnlockedWhenTaken/${courseCode}`, userData),
+    termsOffered: (courseCode, years) => axios.get(`/courses/termsOffered/${courseCode}/${years}`),
+  },
+
+  programs: {
+    all: () => axios.get('/programs/getPrograms'),
+    structure: (programCode: string, spec?: string) => axios.get(`/programs/getStructure/${optionalSegments(programCode, spec)}`),
+    courses: (programCode: string, spec?: string) => axios.get(`/programs/getStructureCourseList/${optionalSegments(programCode, spec)}`),
+    geneds: (programCode: string) => axios.get(`/programs/getGenEds/${programCode}`),
+    graph: (programCode: string, spec?: string) => axios.get(`/programs/graph/${optionalSegments(programCode, spec)}`),
+    cores: (programCode: string, spec: string) => axios.get(`/programs/getCores/${programCode}/${spec}`),
+  },
+
+  specialisations: {
+    types: (programCode: string) => axios.get(`/specialisations/getSpecialisationTypes/${programCode}`),
+    specialisations: (programCode: string, type: string) => axios.get(`/specialisations/getSpecialisations/${programCode}/${type}`),
+  },
+
+  default: {
+    liveYear: () => axios.get(`/live_year`),
+  },
 };
 
 export default API;
