@@ -89,7 +89,7 @@ const CourseInfoDrawers = ({
         ) : (
           <p>
             {inPlanner
-              ? "This course has already been added to your planner and hence can't unlock anymore courses."
+              ? "This course have already been added to your planner and hence can't unlock anymore courses."
               : 'No courses will be unlocked after completing this course.'}
           </p>
         )}
@@ -107,7 +107,7 @@ const CourseInfoDrawers = ({
         ) : (
           <p>
             {inPlanner
-              ? "This course has already been added to your planner and hence can't unlock anymore courses."
+              ? "This course have already been added to your planner and hence can't unlock anymore courses."
               : 'No courses will be indirectly unlocked after completing this course.'}
           </p>
         )}
