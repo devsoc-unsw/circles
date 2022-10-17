@@ -24,23 +24,21 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
   transition: 200ms;
   transform: rotate(90deg);
 
-  ${({ collapsed }) => collapsed && css`
-    transform: rotate(0);
-  `}
+  ${({ collapsed }) =>
+    collapsed &&
+    css`
+      transform: rotate(0);
+    `}
 `;
 
-const CollapsibleContent = styled.div<{ collapsed: boolean }>`
-  transition: 250ms;
-  width: 100%;
-  padding: 10px 35px;
-
-  ${({ collapsed }) => collapsed && css`
-    height: 0px;
-    opacity: 0px;
-    display: none;
-    transition: 250ms;
+const CollapsibleContent = styled.div(
+  ({ collapsed }: { collapsed: boolean }) => css`
     width: 100%;
-  `}
-`;
+    margin: 10px;
+    max-height: ${collapsed ? 0 : 1000}px;
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+  `
+);
 
 export default { CollapsibleHeader, CollapsibleContent, CollapseButton };

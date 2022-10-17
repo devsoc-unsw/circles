@@ -4,7 +4,7 @@ import { Spin } from 'antd';
 import S from './styles';
 
 type Props = {
-  text: string
+  text: string;
 };
 
 const Spinner = ({ text }: Props) => (

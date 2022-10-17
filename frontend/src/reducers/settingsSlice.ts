@@ -4,17 +4,17 @@ import { createSlice } from '@reduxjs/toolkit';
 type Theme = 'light' | 'dark';
 
 type SettingsSliceState = {
-  theme: Theme
-  showMarks: boolean
-  showLockedCourses: boolean
-  showWarnings: boolean
+  theme: Theme;
+  showMarks: boolean;
+  showLockedCourses: boolean;
+  showWarnings: boolean;
 };
 
 const initialState: SettingsSliceState = {
   theme: 'light',
   showMarks: false,
   showLockedCourses: false,
-  showWarnings: true,
+  showWarnings: true
 };
 
 const settingsSlice = createSlice({
@@ -32,12 +32,11 @@ const settingsSlice = createSlice({
     },
     toggleShowWarnings: (state) => {
       state.showWarnings = !state.showWarnings;
-    },
-  },
+    }
+  }
 });
 
-export const {
-  toggleTheme, toggleShowMarks, toggleLockedCourses, toggleShowWarnings,
-} = settingsSlice.actions;
+export const { toggleTheme, toggleShowMarks, toggleLockedCourses, toggleShowWarnings } =
+  settingsSlice.actions;
 
 export default settingsSlice.reducer;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
 const Wrapper = styled.div`
   height: calc(100vh - var(--navbar-height));
@@ -10,20 +11,21 @@ const Wrapper = styled.div`
 const GraphPlaygroundWrapper = styled.div`
   height: 100%;
   border-radius: 20px;
-  border: #C2C2C2 solid 1px;
+  border: #c2c2c2 solid 1px;
   overflow: hidden;
-  display: flex;
   flex: 5;
   position: relative;
-  flex-direction: column-reverse;
-  align-items: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SidebarWrapper = styled.div`
   border-radius: 20px;
-  border: #C2C2C2 solid 1px;
+  border: #c2c2c2 solid 1px;
   padding: 10px;
   flex: 2;
+  overflow-y: auto;
 `;
 
 const SearchBarWrapper = styled.div`
@@ -33,16 +35,25 @@ const SearchBarWrapper = styled.div`
 `;
 
 const ToolsWrapper = styled.div`
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
 `;
+
+const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
+  & h3.ant-typography {
+    font-size: 20px !important;
+  }
+`;
+
 export default {
+  CourseDescriptionPanel,
   Wrapper,
   GraphPlaygroundWrapper,
   SidebarWrapper,
   SearchBarWrapper,
-  ToolsWrapper,
+  ToolsWrapper
 };

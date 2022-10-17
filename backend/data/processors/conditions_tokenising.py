@@ -41,8 +41,7 @@ def tokenise_conditions():
         logic = ["("]
 
         # Split on white space
-        for word in text.split():
-            logic.append(word)
+        logic.extend(text.split())
 
         logic.append(")")
 

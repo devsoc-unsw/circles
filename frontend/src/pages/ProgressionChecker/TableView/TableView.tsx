@@ -7,47 +7,44 @@ import CoursesModal from '../CoursesModal';
 import S from './styles';
 
 type Props = {
-  subgroupTitle: string
-  courses: ViewSubgroupCourse[]
-  notes: string
-  showNotes: boolean
-  type: string
-  uoc: number
+  subgroupTitle: string;
+  courses: ViewSubgroupCourse[];
+  notes: string;
+  showNotes: boolean;
+  type: string;
+  uoc: number;
 };
 
 const { Title } = Typography;
 
-const TableView = ({
-  subgroupTitle, courses, notes, showNotes, uoc, type,
-}: Props) => {
-  const plannedCourses = courses.filter((c) => c.plannedFor);
-  const unplannedCourses = courses.filter((c) => !c.plannedFor);
+const TableView = ({ subgroupTitle, courses, notes, showNotes, uoc, type }: Props) => {
+  const plannedCourses = courses.filter((c) => c.plannedFor && !c.isOverCounted);
+  const unplannedCourses = courses.filter((c) => !c.plannedFor || c.isOverCounted);
+  const plannedUOC = plannedCourses.reduce(
+    (sum, course) => sum + (course.UOC ?? 0) * getNumTerms(course.UOC ?? 0, course.isMultiterm),
+    0
+  );
+  const remainingUOC = Math.max(uoc - plannedUOC, 0);
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const plannedUOC = courses
-    .filter((course) => course.plannedFor)
-    .reduce(
-      (sum, course) => (sum + ((course.UOC ?? 0)
-        * getNumTerms((course.UOC ?? 0), course.isMultiterm))),
-      0,
-    );
-
   return (
     <>
-      <Title level={2} className="text">{subgroupTitle}</Title>
+      <Title level={2} className="text">
+        {subgroupTitle}
+      </Title>
       {showNotes && <p>{notes}</p>}
       {type !== 'info_rule' && (
         <>
           <Title level={3} className="text">
-            {uoc} UOC worth of courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)
+            {uoc} UOC worth of courses ({remainingUOC} UOC remaining)
           </Title>
           <Table
             dataSource={plannedCourses.map((c) => ({
               ...c,
-              UOC: `${c.isMultiterm
-                ? `${getNumTerms(c.UOC, c.isMultiterm)} × ${c.UOC}`
-                : c.UOC} UOC`,
+              UOC: `${
+                c.isMultiterm ? `${getNumTerms(c.UOC, c.isMultiterm)} × ${c.UOC}` : c.UOC
+              } UOC`
             }))}
             columns={columnsData}
             pagination={false}

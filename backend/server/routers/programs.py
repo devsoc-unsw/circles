@@ -316,7 +316,7 @@ def graph(
     Constructs a structure for the frontend to use for the graphical
     selector.
     Returns back a list of directed edges where u -> v => u in v's
-    prereqs or coreqs. Will also return back a 
+    prereqs or coreqs.
     Returns:
         "edges" :{
             [

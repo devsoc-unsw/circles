@@ -10,7 +10,8 @@
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:react/recommended",
         "airbnb",
-        "airbnb-typescript"
+        "airbnb-typescript",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,7 +21,8 @@
         "react",
         "react-hooks",
         "simple-import-sort",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
@@ -58,7 +60,7 @@
         "@typescript-eslint/no-floating-promises": ["off"],
         "react/require-default-props": ["off"], // off since we have typescript instead
         "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }], 
-        "react-hooks/exhaustive-deps": ["warn"], // Checks effect dependencies - TODO: make this error
+        "react-hooks/exhaustive-deps": ["error"],
         "react-hooks/rules-of-hooks": ["error"] // Checks rules of Hooks
     },
     "settings": {

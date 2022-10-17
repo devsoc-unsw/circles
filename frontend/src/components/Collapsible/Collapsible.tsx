@@ -5,18 +5,13 @@ import S from './styles';
 const { Title } = Typography;
 
 type Props = {
-  initiallyCollapsed?: boolean
-  title: string | React.ReactNode
-  children: React.ReactNode
-  headerStyle?: React.CSSProperties
+  initiallyCollapsed?: boolean;
+  title: string | React.ReactNode;
+  children: React.ReactNode;
+  headerStyle?: React.CSSProperties;
 };
 
-const Collapsible = ({
-  initiallyCollapsed = false,
-  title,
-  children,
-  headerStyle = {},
-}: Props) => {
+const Collapsible = ({ initiallyCollapsed = false, title, children, headerStyle = {} }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
 
   const toggleCollapse = () => {
@@ -27,18 +22,15 @@ const Collapsible = ({
     <div>
       <S.CollapsibleHeader onClick={toggleCollapse} style={headerStyle}>
         <S.CollapseButton collapsed={isCollapsed} />
-        {(typeof title === 'string')
-          ? (
-            <Title level={3} className="text">
-              {title}
-            </Title>
-          ) : (
-            title
-          )}
+        {typeof title === 'string' ? (
+          <Title level={3} className="text">
+            {title}
+          </Title>
+        ) : (
+          title
+        )}
       </S.CollapsibleHeader>
-      <S.CollapsibleContent collapsed={isCollapsed}>
-        {children}
-      </S.CollapsibleContent>
+      <S.CollapsibleContent collapsed={isCollapsed}>{children}</S.CollapsibleContent>
     </div>
   );
 };
