@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
-const Wrapper = styled.div<{ showAttributesSidebar?: boolean }>`
+const Wrapper = styled.div<{ sidebar?: boolean }>`
   width: 100%;
   padding: 10px;
 
-  ${({ showAttributesSidebar }) =>
-    showAttributesSidebar &&
+  ${({ sidebar }) =>
+    sidebar &&
     css`
       padding: 30px;
       display: flex;
@@ -23,9 +23,9 @@ const SidebarWrapper = styled.div`
   flex-basis: 25%;
 `;
 
-const TitleWrapper = styled.div<{ showAttributesSidebar?: boolean }>`
-  ${({ showAttributesSidebar }) =>
-    showAttributesSidebar &&
+const TitleWrapper = styled.div<{ sidebar?: boolean }>`
+  ${({ sidebar }) =>
+    sidebar &&
     css`
       display: flex;
       flex-direction: row;

@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-const Attribute = styled.div`
+const AttributeWrapper = styled.div`
   border-bottom: #d9d9d9 solid 1px; // grey-5
   padding: 10px 0;
+`;
+
+const AttributeText = styled.div`
+  font-size: 0.9rem;
 `;
 
 const TermWrapper = styled.div`
@@ -26,7 +30,8 @@ const AttributeConcise = styled.div`
 `;
 
 export default {
-  Attribute,
+  AttributeWrapper,
+  AttributeText,
   TermWrapper,
   AttributesWrapperConcise,
   AttributeConcise

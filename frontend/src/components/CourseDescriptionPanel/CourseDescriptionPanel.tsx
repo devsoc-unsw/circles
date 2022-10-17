@@ -30,7 +30,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const { pathname } = useLocation();
-  const showAttributesSidebar = !!(pathname === '/course-selector');
+  const sidebar = !!(pathname === '/course-selector');
 
   const [isLoading, setIsLoading] = useState(false);
   const [course, setCourse] = useState<Course>();
@@ -87,20 +87,16 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)
     return (
-      <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
-        {!showAttributesSidebar ? (
-          <LoadingCourseDescriptionPanelSidebar />
-        ) : (
-          <LoadingCourseDescriptionPanel />
-        )}
+      <S.Wrapper sidebar={sidebar}>
+        {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
       </S.Wrapper>
     );
   }
 
   return (
-    <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
+    <S.Wrapper sidebar={sidebar}>
       <S.MainWrapper>
-        <S.TitleWrapper showAttributesSidebar={showAttributesSidebar}>
+        <S.TitleWrapper sidebar={sidebar}>
           <div>
             <Title level={2} className="text">
               {courseCode} - {course.title}
@@ -115,7 +111,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
           </Text>
         )}
 
-        {!showAttributesSidebar && (
+        {!sidebar && (
           <div style={{ flexBasis: '25%' }}>
             <CourseAttributes course={course} />
           </div>
@@ -129,7 +125,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
         />
       </S.MainWrapper>
 
-      {showAttributesSidebar && (
+      {sidebar && (
         <S.SidebarWrapper>
           <CourseAttributes course={course} courseCapacity={courseCapacity} />
         </S.SidebarWrapper>
