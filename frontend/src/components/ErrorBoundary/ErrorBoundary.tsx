@@ -32,6 +32,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     const { hasError, error, errorInfo } = this.state;
+    const { children } = this.props;
 
     const handleClick = () => {
       localStorage.clear();
@@ -68,8 +69,7 @@ class ErrorBoundary extends React.Component<Props, State> {
       );
     }
 
-    // eslint-disable-next-line react/destructuring-assignment
-    return this.props.children;
+    return children;
   }
 }
 

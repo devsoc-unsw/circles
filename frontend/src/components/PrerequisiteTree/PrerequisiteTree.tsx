@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import axios from 'axios';
 import { CourseChildren, CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';
 import S from './styles';
@@ -21,9 +19,12 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
   const graphRef = useRef<TreeGraph | null>(null);
   const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
   const [coursesRequires, setCoursesRequires] = useState<CourseList>([]);
-  const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement | null>(null);
-  const { degree, planner } = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    // if the course code changes, force a reload
+    setLoading(true);
+  }, [courseCode]);
 
   useEffect(() => {
     /* GRAPH IMPLEMENTATION */
@@ -114,8 +115,12 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       }
       setLoading(false);
     };
-    if (courseCode) setupGraph(courseCode);
-  }, [courseCode, degree, dispatch, onCourseClick, planner]);
+
+    if (loading) {
+      setupGraph(courseCode);
+      setLoading(false);
+    }
+  }, [courseCode, loading, onCourseClick]);
 
   return (
     <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>

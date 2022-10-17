@@ -1,7 +1,7 @@
-name: "BE Test Report"
+name: "Test Report"
 on:
   workflow_run:
-    workflows: ["Backend Unit Tests", "Run Frontend Build"]
+    workflows: ["Unit Tests"]
     types:
       - completed
 jobs:
