@@ -22,11 +22,16 @@ import S from './styles';
 const { Title, Text } = Typography;
 
 type CourseDescriptionPanelProps = {
+  className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
 };
 
-const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescriptionPanelProps) => {
+const CourseDescriptionPanel = ({
+  className,
+  courseCode,
+  onCourseClick
+}: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const { pathname } = useLocation();
@@ -94,7 +99,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   }
 
   return (
-    <S.Wrapper sidebar={sidebar}>
+    <S.Wrapper sidebar={sidebar} className={className}>
       <S.MainWrapper>
         <S.TitleWrapper sidebar={sidebar}>
           <div>
