@@ -13,7 +13,7 @@ import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
 import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
-import CourseTitle from './CourseTitle';
+import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
 
 type Props = {
@@ -160,7 +160,7 @@ const CourseMenu = ({ structure }: Props) => {
                 .filter((course) => course.unlocked || showLockedCourses)
                 .map((course) => ({
                   label: (
-                    <CourseTitle
+                    <CourseMenuTitle
                       courseCode={course.courseCode}
                       title={course.title}
                       selected={planner.courses[course.courseCode] !== undefined}

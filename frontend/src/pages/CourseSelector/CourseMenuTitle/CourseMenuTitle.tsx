@@ -14,7 +14,7 @@ type Props = {
   title: string;
 };
 
-const CourseTitle = ({ courseCode, selected, accurate, unlocked, title }: Props) => {
+const CourseMenuTitle = ({ courseCode, selected, accurate, unlocked, title }: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
   const theme = useTheme();
 
@@ -52,4 +52,4 @@ const CourseTitle = ({ courseCode, selected, accurate, unlocked, title }: Props)
   );
 };
 
-export default CourseTitle;
+export default CourseMenuTitle;
