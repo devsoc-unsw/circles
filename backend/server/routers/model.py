@@ -108,7 +108,7 @@ class MostRecentPastTerm(TypedDict):
 
 
 class ValidPlannerData(BaseModel):
-    program: str
+    programCode: str
     specialisations: list[str]
     plan: list[list[dict[str, tuple[int, int | None]]]]
     mostRecentPastTerm: MostRecentPastTerm
