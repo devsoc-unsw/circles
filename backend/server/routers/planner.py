@@ -20,7 +20,7 @@ def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
                 elif course[0] is not None:
                     plan[year_index][term_index][courseName] = (course[0], course[1])
     return ValidPlannerData(
-        programCode=plannerData.program,
+        programCode=plannerData.programCode,
         specialisations=plannerData.specialisations,
         plan=plan,
         mostRecentPastTerm=plannerData.mostRecentPastTerm
