@@ -210,11 +210,9 @@ class ElliotMoveCourseInfo(BaseModel):
     destTerm: str
     srcTerm: str
 
-class ElliotTermEnum(Enum):
-    T0 = 0
-    T1 = 1
-    T2 = 2
-    T3 = 3
+class ElliotGetTermsData(BaseModel):
+    rowOffset: int
+    term: str
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
