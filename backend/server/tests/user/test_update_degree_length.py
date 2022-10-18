@@ -30,4 +30,3 @@ def test_updateDegreeLength_shorten():
     assert len(user_after['planner']['years']) == 2
     assert user_after['planner']['years'][0] == { "T0": [], "T1": [ "COMP1511", "MATH1141", "MATH1081"], "T2": [ "COMP1521", "COMP1531", "COMP2521"], "T3": []}
     assert user_after['planner']['years'][1] == {"T0": [], "T1": [], "T2": [], "T3": []}
-
