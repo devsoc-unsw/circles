@@ -6,28 +6,26 @@ import { CoursesForValidationPayload } from './prepareCoursesForValidationPayloa
 
 type TermPlan = {
   // key = course code, value = [UOC, mark]
-  [courseCode: string]: [number, number | null]
+  [courseCode: string]: [number, number | null];
 };
 
 type YearPlan = TermPlan[];
 
 type LocalStorageData = CoursesForValidationPayload & {
-  programName: string
-  startYear: number
-  numYears: number
-  unplanned: string[]
-  isSummerEnabled: boolean
-  token: string
+  programName: string;
+  startYear: number;
+  numYears: number;
+  unplanned: string[];
+  isSummerEnabled: boolean;
+  token: string;
 };
 
 const prepareLocalStorageData = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
-  token: string,
+  token: string
 ): LocalStorageData => {
-  const {
-    years, startYear, courses, unplanned, numYears, isSummerEnabled,
-  } = planner;
+  const { years, startYear, courses, unplanned, numYears, isSummerEnabled } = planner;
   const { programCode, programName, specs } = degree;
 
   const plan: YearPlan[] = [];
@@ -46,7 +44,6 @@ const prepareLocalStorageData = (
   return {
     programCode,
     specialisations: specs,
-    year: 1,
     plan,
     mostRecentPastTerm: getMostRecentPastTerm(startYear) ?? { Y: 0, T: 0 },
     programName,
@@ -54,7 +51,7 @@ const prepareLocalStorageData = (
     startYear,
     numYears,
     isSummerEnabled,
-    token,
+    token
   };
 };
 
