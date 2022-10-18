@@ -8,9 +8,9 @@ import S from './styles';
 
 type Props = {
   courseCode: string;
-  selected: boolean;
-  accurate: boolean;
-  unlocked: boolean;
+  selected?: boolean;
+  accurate?: boolean;
+  unlocked?: boolean;
   title: string;
 };
 
@@ -38,6 +38,7 @@ const CourseMenuTitle = ({ courseCode, selected, accurate, unlocked, title }: Pr
             title="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
           >
             <WarningOutlined
+              data-testid="antd-warning-icon"
               style={{
                 color: '#DC9930',
                 fontSize: '16px'
@@ -45,7 +46,12 @@ const CourseMenuTitle = ({ courseCode, selected, accurate, unlocked, title }: Pr
             />
           </Tooltip>
         )}
-        {!unlocked && <LockOutlined style={{ fontSize: '12px', color: theme.text }} />}
+        {!unlocked && (
+          <LockOutlined
+            data-testid="antd-lock-icon"
+            style={{ fontSize: '12px', color: theme.text }}
+          />
+        )}
         <QuickAddCartButton courseCode={courseCode} planned={selected} />
       </S.IconsWrapper>
     </S.Wrapper>
