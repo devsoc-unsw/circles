@@ -3,7 +3,7 @@ from server.routers.model import CONDITIONS, CACHED_HANDBOOK_NOTE, ValidPlannerD
 
 def validate_terms(data: ValidPlannerData):
     emptyUserData = {
-        "program": data.program,
+        "program": data.programCode,
         "specialisations": data.specialisations,
         "courses": {},  # Start off the user with an empty year
     }
