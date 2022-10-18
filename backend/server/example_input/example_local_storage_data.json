@@ -12,6 +12,18 @@
                     "T1": [],
                     "T2": [],
                     "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
                 }
             ],
             "mostRecentPastTerm": {
@@ -45,6 +57,18 @@
                         "COMP1531",
                         "COMP2521"
                     ],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
                     "T3": []
                 }
             ],
@@ -178,6 +202,83 @@
                     "isMultiterm": false,
                     "supressed": true,
                     "mark": 67
+                }
+            }
+        }
+    },
+    "out_of_order": {
+        "degree": {
+            "programCode": "3707",
+            "specs": ["COMPA1"],
+            "isComplete": true
+        },
+        "planner": {
+            "years": [
+                {
+                    "T0": [],
+                    "T1": [
+                        "MATH1241"
+                    ],
+                    "T2": [
+                        "MATH1141"
+                    ],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0
+            },
+            "unplanned": [],
+            "startYear": 2020,
+            "numYears": 3,
+            "isSummerEnabled": false,
+            "courses": {
+                "MATH1141": {
+                    "title": "Higher Mathematics 1A",
+                    "termsOffered": [
+                        "T1",
+                        "T2"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T2",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "MATH1241": {
+                    "title": "Higher Mathematics 1B",
+                    "termsOffered": [
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T1",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
                 }
             }
         }

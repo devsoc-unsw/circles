@@ -123,7 +123,6 @@ class PlannerData(BaseModel):
             "example": {
                 "program": "3707",
                 "specialisations": ["COMPA1"],
-                "year": 1,
                 "plan": [
                     [
                         {},
@@ -167,20 +166,28 @@ class PlannerLocalStorage(TypedDict):
     mostRecentPastTerm: MostRecentPastTerm
     unplanned: list[str]
     startYear: int
-    numYears: int
     isSummerEnabled: bool
     years: list[dict[str, list[str]]]
     courses: dict[str, dict]
 
+class CoursesStorage(TypedDict):
+    code: str
+    suppressed: bool
+    mark: int
+
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
+    courses: dict[str, CoursesStorage]
     
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
 
+class CourseMark(BaseModel):
+    course: str
+    mark: int
 
 class CourseCodes(BaseModel):
     courses: list[str]

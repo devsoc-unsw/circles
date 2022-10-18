@@ -364,6 +364,7 @@ const plannerSlice = createSlice({
         }
       }
     },
+    // this is setting?
     toggleTermComplete: (state, action: PayloadAction<string>) => {
       state.completedTerms[action.payload] = !state.completedTerms[action.payload];
     },

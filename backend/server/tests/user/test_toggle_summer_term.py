@@ -14,6 +14,6 @@ def test_toggleSummerTerm():
     assert x.status_code == 200
     data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
     assert data.json()["planner"]["isSummerEnabled"]
-    requests.post('http://127.0.0.1:8000/user/toggleSummerTerm')
+    requests.put('http://127.0.0.1:8000/user/toggleSummerTerm')
     data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
     assert not data.json()["planner"]["isSummerEnabled"]
