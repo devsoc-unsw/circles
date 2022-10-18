@@ -3,21 +3,17 @@ import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import type { LiquidConfig } from '@ant-design/plots';
 import Spinner from 'components/Spinner';
-import {
-  darkGrey,
-  lightGrey,
-  lightYellow,
-  purple,
-  yellow,
-} from 'config/constants';
+import { darkGrey, lightGrey, lightYellow, purple, yellow } from 'config/constants';
 import type { RootState } from 'config/store';
 
 type Props = {
-  completedUOC: number
-  totalUOC: number
+  completedUOC: number;
+  totalUOC: number;
 };
 
-const Liquid = React.lazy(() => import('@ant-design/plots').then((plot) => ({ default: plot.Liquid })));
+const Liquid = React.lazy(() =>
+  import('@ant-design/plots').then((plot) => ({ default: plot.Liquid }))
+);
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   const [percent, setPercent] = useState(0);
@@ -51,22 +47,22 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
       title: {
         formatter: () => 'Progress',
         style: () => ({
-          fill: textColor,
-        }),
+          fill: textColor
+        })
       },
       content: {
         style: {
           fontSize: '60px',
           lineHeight: 1,
-          fill: textColor,
+          fill: textColor
         },
-        formatter: () => `${(percent * 100).toFixed(0)}%`,
-      },
+        formatter: () => `${(percent * 100).toFixed(0)}%`
+      }
     },
     liquidStyle: () => ({
       fill: percent > 0.45 ? purple : yellow,
-      stroke: percent > 0.45 ? purple : yellow,
-    }),
+      stroke: percent > 0.45 ? purple : yellow
+    })
   };
   // increment percentage from 0 to fillValue
   useEffect(() => {

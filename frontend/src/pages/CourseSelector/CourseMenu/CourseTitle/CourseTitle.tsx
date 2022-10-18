@@ -7,16 +7,14 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import S from './styles';
 
 type Props = {
-  courseCode: string
-  selected: boolean
-  accurate: boolean
-  unlocked: boolean
-  title: string
+  courseCode: string;
+  selected: boolean;
+  accurate: boolean;
+  unlocked: boolean;
+  title: string;
 };
 
-const CourseTitle = ({
-  courseCode, selected, accurate, unlocked, title,
-}: Props) => {
+const CourseTitle = ({ courseCode, selected, accurate, unlocked, title }: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
   const theme = useTheme();
 
@@ -42,16 +40,13 @@ const CourseTitle = ({
             <WarningOutlined
               style={{
                 color: '#DC9930',
-                fontSize: '16px',
+                fontSize: '16px'
               }}
             />
           </Tooltip>
         )}
         {!unlocked && <LockOutlined style={{ fontSize: '12px', color: theme.text }} />}
-        <QuickAddCartButton
-          courseCode={courseCode}
-          planned={selected}
-        />
+        <QuickAddCartButton courseCode={courseCode} planned={selected} />
       </S.IconsWrapper>
     </S.Wrapper>
   );

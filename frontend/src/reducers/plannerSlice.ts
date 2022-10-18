@@ -1,9 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { CourseList, CourseStates } from 'types/courses';
-import {
-  Mark, PlannerCourse, PlannerYear, Term,
-} from 'types/planner';
+import { Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
 import { getTermsList } from 'pages/TermPlanner/utils';
 
 // set up hidden object
@@ -20,7 +18,10 @@ const generateEmptyYears = (nYears: number) => {
   const res: PlannerYear[] = [];
   for (let i = 0; i < nYears; i++) {
     res.push({
-      T0: [], T1: [], T2: [], T3: [],
+      T0: [],
+      T1: [],
+      T2: [],
+      T3: []
     });
   }
   return res;
@@ -30,15 +31,15 @@ const fakeStartYear = new Date().getFullYear();
 const fakeNumYears = 3;
 
 export type PlannerSliceState = {
-  unplanned: string[]
-  startYear: number
-  numYears: number
-  isSummerEnabled: boolean
-  years: PlannerYear[]
-  courses: Record<string, PlannerCourse>
-  completedTerms: Record<string, boolean>
-  hidden: Record<string, boolean>
-  areYearsHidden: boolean
+  unplanned: string[];
+  startYear: number;
+  numYears: number;
+  isSummerEnabled: boolean;
+  years: PlannerYear[];
+  courses: Record<string, PlannerCourse>;
+  completedTerms: Record<string, boolean>;
+  hidden: Record<string, boolean>;
+  areYearsHidden: boolean;
 };
 
 const initialState: PlannerSliceState = {
@@ -48,28 +49,41 @@ const initialState: PlannerSliceState = {
   isSummerEnabled: false,
   years: [
     {
-      T0: [], T1: [], T2: [], T3: [],
+      T0: [],
+      T1: [],
+      T2: [],
+      T3: []
     },
     {
-      T0: [], T1: [], T2: [], T3: [],
+      T0: [],
+      T1: [],
+      T2: [],
+      T3: []
     },
     {
-      T0: [], T1: [], T2: [], T3: [],
-    },
+      T0: [],
+      T1: [],
+      T2: [],
+      T3: []
+    }
   ],
   courses: {},
   completedTerms: {},
   hidden: generateHiddenInit(fakeStartYear, fakeNumYears),
-  areYearsHidden: false,
+  areYearsHidden: false
 };
 
 const plannerSlice = createSlice({
   name: 'planner',
   initialState,
   reducers: {
-    addToUnplanned: (state, action: PayloadAction<{
-      courseCode: string, courseData: PlannerCourse
-    }>) => {
+    addToUnplanned: (
+      state,
+      action: PayloadAction<{
+        courseCode: string;
+        courseData: PlannerCourse;
+      }>
+    ) => {
       const { courseCode, courseData } = action.payload;
       if (!state.courses[courseCode]) {
         state.courses[courseCode] = courseData;
@@ -80,7 +94,11 @@ const plannerSlice = createSlice({
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
           const {
-            is_accurate: isAccurate, unlocked, warnings, handbook_note: handbookNote, supressed,
+            is_accurate: isAccurate,
+            unlocked,
+            warnings,
+            handbook_note: handbookNote,
+            supressed
           } = action.payload[course];
 
           state.courses[course].isAccurate = isAccurate;
@@ -91,15 +109,17 @@ const plannerSlice = createSlice({
         }
       });
     },
-    setUnplannedCourseToTerm: (state, action: PayloadAction<{
-      destRow: number, destTerm: Term, destIndex: number, course: string
-    }>) => {
-      const {
-        destRow, destTerm, destIndex, course,
-      } = action.payload;
-      state.unplanned = state.unplanned.filter(
-        (c) => c !== course,
-      );
+    setUnplannedCourseToTerm: (
+      state,
+      action: PayloadAction<{
+        destRow: number;
+        destTerm: Term;
+        destIndex: number;
+        course: string;
+      }>
+    ) => {
+      const { destRow, destTerm, destIndex, course } = action.payload;
+      state.unplanned = state.unplanned.filter((c) => c !== course);
 
       if (state.courses[course].isMultiterm) {
         const { UOC: uoc, termsOffered } = state.courses[course];
@@ -115,17 +135,21 @@ const plannerSlice = createSlice({
         state.years[destRow][destTerm].splice(destIndex, 0, course);
       }
     },
-    setPlannedCourseToTerm: (state, action: PayloadAction<{
-      srcRow: number, srcTerm: Term, srcIndex: number, destRow: number,
-      destTerm: Term, destIndex: number, course: string
-    }>) => {
-      const {
-        srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, course,
-      } = action.payload;
+    setPlannedCourseToTerm: (
+      state,
+      action: PayloadAction<{
+        srcRow: number;
+        srcTerm: Term;
+        srcIndex: number;
+        destRow: number;
+        destTerm: Term;
+        destIndex: number;
+        course: string;
+      }>
+    ) => {
+      const { srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, course } = action.payload;
 
-      const {
-        UOC: uoc, termsOffered, isMultiterm,
-      } = state.courses[course];
+      const { UOC: uoc, termsOffered, isMultiterm } = state.courses[course];
 
       const srcTermList: string[] = [];
 
@@ -154,13 +178,9 @@ const plannerSlice = createSlice({
 
       // Add new instances of the course into the planner
       const instanceNum = srcTermList.indexOf(srcTerm);
-      const newTerms = state.courses[course].isMultiterm ? getTermsList(
-        destTerm,
-        uoc,
-        termsOffered,
-        state.isSummerEnabled,
-        instanceNum,
-      ) : [];
+      const newTerms = state.courses[course].isMultiterm
+        ? getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled, instanceNum)
+        : [];
       newTerms.splice(instanceNum, 1);
       const firstTerm = state.years[destRow][destTerm];
       let dropIndex = destIndex;
@@ -181,9 +201,14 @@ const plannerSlice = createSlice({
         targetTerm.splice(index, 0, course);
       });
     },
-    moveCourse: (state, action: PayloadAction<{
-      course: string, destTerm: string, srcTerm: string
-    }>) => {
+    moveCourse: (
+      state,
+      action: PayloadAction<{
+        course: string;
+        destTerm: string;
+        srcTerm: string;
+      }>
+    ) => {
       const { course, destTerm, srcTerm } = action.payload;
 
       // If about to move multiterm course out of bounds, do nothing
@@ -198,7 +223,7 @@ const plannerSlice = createSlice({
           uoc,
           termsOffered,
           state.isSummerEnabled,
-          instanceNum,
+          instanceNum
         );
         const maxRowOffset = terms[terms.length - 1].rowOffset;
         if (year + maxRowOffset > state.startYear + state.numYears) {
@@ -219,7 +244,7 @@ const plannerSlice = createSlice({
             uoc,
             termsOffered,
             state.isSummerEnabled,
-            instanceNum,
+            instanceNum
           );
           terms.splice(instanceNum, 1);
 
@@ -234,7 +259,7 @@ const plannerSlice = createSlice({
         state.courses[course].plannedFor = newPlannedFor.join(' ');
       }
     },
-    updateCourseMark: (state, action: PayloadAction<{ code: string, mark: Mark }>) => {
+    updateCourseMark: (state, action: PayloadAction<{ code: string; mark: Mark }>) => {
       const { code, mark } = action.payload;
 
       if (state.courses[code]) {
@@ -258,21 +283,22 @@ const plannerSlice = createSlice({
             const term = termId.slice(4) as Term;
             // remove the course from the year and term
             state.years[yearIndex][term] = state.years[yearIndex][term].filter(
-              (course) => course !== action.payload,
+              (course) => course !== action.payload
             );
           });
         } else {
           // course must be in unplanned
-          state.unplanned = state.unplanned.filter(
-            (course) => course !== action.payload,
-          );
+          state.unplanned = state.unplanned.filter((course) => course !== action.payload);
         }
       }
     },
     removeCourses: (state, action: PayloadAction<CourseList>) => {
       const courses = action.payload;
       courses.forEach((course) => {
-        plannerSlice.caseReducers.removeCourse(state, { payload: course, type: 'planner/removeCourse' });
+        plannerSlice.caseReducers.removeCourse(state, {
+          payload: course,
+          type: 'planner/removeCourse'
+        });
       });
     },
     removeAllCourses: (state) => {
@@ -280,7 +306,7 @@ const plannerSlice = createSlice({
       state.courses = {};
       state.unplanned = [];
     },
-    unschedule: (state, action: PayloadAction<{ code: string, destIndex: number | null }>) => {
+    unschedule: (state, action: PayloadAction<{ code: string; destIndex: number | null }>) => {
       const { destIndex, code } = action.payload;
 
       if (typeof destIndex === 'number') {
@@ -316,7 +342,10 @@ const plannerSlice = createSlice({
     unscheduleAll: (state) => {
       Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code }, type: 'planner/unschedule' });
+          plannerSlice.caseReducers.unschedule(state, {
+            payload: { destIndex: null, code },
+            type: 'planner/unschedule'
+          });
         }
       });
     },
@@ -326,8 +355,10 @@ const plannerSlice = createSlice({
         for (let i = 0; i < state.numYears; i++) {
           const courses = state.years[i].T0;
           courses.forEach((course) => {
-            plannerSlice.caseReducers
-              .unschedule(state, { payload: { destIndex: null, code: course }, type: 'planner/unschedule' });
+            plannerSlice.caseReducers.unschedule(state, {
+              payload: { destIndex: null, code: course },
+              type: 'planner/unschedule'
+            });
           });
         }
       }
@@ -348,7 +379,10 @@ const plannerSlice = createSlice({
         } else {
           // add empty year
           updatedYears.push({
-            T0: [], T1: [], T2: [], T3: [],
+            T0: [],
+            T1: [],
+            T2: [],
+            T3: []
           });
           // unschedule the courses that are in the year which will be removed
           const yearToBeRemoved = state.years[state.numYears - i - 1];
@@ -373,7 +407,10 @@ const plannerSlice = createSlice({
           // add new empty years
           for (let i = 0; i < newNumYears - state.numYears; i++) {
             state.years.push({
-              T0: [], T1: [], T2: [], T3: [],
+              T0: [],
+              T1: [],
+              T2: [],
+              T3: []
             });
           }
         } else {
@@ -406,16 +443,29 @@ const plannerSlice = createSlice({
       });
       state.areYearsHidden = false;
     },
-    resetPlanner: () => initialState,
-  },
+    resetPlanner: () => initialState
+  }
 });
 
 export const {
-  addToUnplanned, setUnplannedCourseToTerm, setPlannedCourseToTerm,
-  toggleWarnings, removeCourse, removeCourses, removeAllCourses,
-  moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
-  updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
-  updateCourseMark,
+  addToUnplanned,
+  setUnplannedCourseToTerm,
+  setPlannedCourseToTerm,
+  toggleWarnings,
+  removeCourse,
+  removeCourses,
+  removeAllCourses,
+  moveCourse,
+  unschedule,
+  unscheduleAll,
+  toggleSummer,
+  toggleTermComplete,
+  updateStartYear,
+  updateDegreeLength,
+  hideYear,
+  unhideAllYears,
+  resetPlanner,
+  updateCourseMark
 } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

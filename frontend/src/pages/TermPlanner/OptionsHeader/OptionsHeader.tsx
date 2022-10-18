@@ -3,8 +3,12 @@ import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SaveFilled,
-  SettingFilled, WarningFilled,
+  DownloadOutlined,
+  EyeFilled,
+  QuestionCircleOutlined,
+  SaveFilled,
+  SettingFilled,
+  WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
@@ -22,7 +26,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>
+  plannerRef: React.RefObject<HTMLDivElement>;
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {
@@ -32,7 +36,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const dispatch = useDispatch();
   const iconStyles = {
     fontSize: '20px',
-    color: '#323739',
+    color: '#323739'
   };
 
   return (
@@ -122,13 +126,8 @@ const OptionsHeader = ({ plannerRef }: Props) => {
 
       <S.OptionSection>
         <S.ShowMarks>
-          <S.TextShowMarks>
-            Show Marks
-          </S.TextShowMarks>
-          <Switch
-            defaultChecked={showMarks}
-            onChange={() => dispatch(toggleShowMarks())}
-          />
+          <S.TextShowMarks>Show Marks</S.TextShowMarks>
+          <Switch defaultChecked={showMarks} onChange={() => dispatch(toggleShowMarks())} />
         </S.ShowMarks>
         <Tippy
           content={<HelpMenu />}

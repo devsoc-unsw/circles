@@ -4,11 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 type Theme = 'light' | 'dark';
 
 type SettingsSliceState = {
-  theme: Theme
-  showMarks: boolean
-  showLockedCourses: boolean
-  showWarnings: boolean
-  token: string
+  theme: Theme;
+  showMarks: boolean;
+  showLockedCourses: boolean;
+  showWarnings: boolean;
+  token: string;
 };
 
 const initialState: SettingsSliceState = {
@@ -16,7 +16,7 @@ const initialState: SettingsSliceState = {
   showMarks: false,
   showLockedCourses: false,
   showWarnings: true,
-  token: '',
+  token: ''
 };
 
 const settingsSlice = createSlice({
@@ -37,12 +37,11 @@ const settingsSlice = createSlice({
     },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const {
-  toggleTheme, toggleShowMarks, toggleLockedCourses, toggleShowWarnings, setToken,
-} = settingsSlice.actions;
+export const { toggleTheme, toggleShowMarks, toggleLockedCourses, toggleShowWarnings, setToken } =
+  settingsSlice.actions;
 
 export default settingsSlice.reducer;

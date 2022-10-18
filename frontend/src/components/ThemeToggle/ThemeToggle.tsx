@@ -10,7 +10,7 @@ const ThemeToggle = () => {
   const dispatch = useDispatch();
 
   const toggleStyle = {
-    backgroundColor: theme === 'light' ? '#b37feb' : '#722ed1',
+    backgroundColor: theme === 'light' ? '#b37feb' : '#722ed1'
   };
 
   return (

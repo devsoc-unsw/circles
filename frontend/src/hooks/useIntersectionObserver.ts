@@ -6,7 +6,7 @@ const useIntersectionObserver = (ref: React.RefObject<HTMLElement>, config = {})
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIntersecting(entry.isIntersecting),
-      config,
+      config
     );
     if (ref.current) {
       observer.observe(ref.current);

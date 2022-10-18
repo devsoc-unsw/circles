@@ -1,21 +1,30 @@
 """
 route for planner algorithms
 """
+from typing import Tuple
 from fastapi import APIRouter
-from algorithms.objects.user import User
+from algorithms.validate_term_planner import validate_terms
 from server.routers.courses import get_course
-from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
-from server.routers.utility import get_core_courses
+from server.routers.model import ValidCoursesState, PlannerData, ValidPlannerData
 
-
-def fix_planner_data(plannerData: PlannerData):
+def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
+    plan: list[list[dict[str, Tuple[int, int | None]]]] = []
     for year_index, year in enumerate(plannerData.plan):
+        plan.append([])
         for term_index, term in enumerate(year):
+            plan[year_index].append({})
             for courseName, course in term.items():
                 if not isinstance(course, list):
-                    plannerData.plan[year_index][term_index][courseName] = [get_course(courseName)["UOC"], course]
-    return plannerData
+                    plan[year_index][term_index][courseName] = (get_course(courseName)["UOC"], course)
+                elif course[0] is not None:
+                    plan[year_index][term_index][courseName] = (course[0], course[1])
+    return ValidPlannerData(
+        program=plannerData.program,
+        specialisations=plannerData.specialisations,
+        plan=plan,
+        mostRecentPastTerm=plannerData.mostRecentPastTerm
+    )
 
 router = APIRouter(
     prefix="/planner", tags=["planner"], responses={404: {"description": "Not found"}}
@@ -39,43 +48,6 @@ def validate_term_planner(plannerData: PlannerData):
     Returns the state of all the courses on the term planner
     """
     data = fix_planner_data(plannerData)
-    emptyUserData = {
-        "program": data.programCode,
-        "specialisations": data.specialisations,
-        "year": 1,  # Start off as a first year
-        "courses": {},  # Start off the user with an empty year
-        "core_courses": get_core_courses(data.programCode, data.specialisations),
-    }
-    user = User(emptyUserData)
-    # State of courses on the term planner
-    coursesState = {}
-
-    currYear = data.mostRecentPastTerm["Y"]
-    pastTerm = data.mostRecentPastTerm["T"]
-
-    for yearIndex, year in enumerate(data.plan):
-        # Go through all the years
-        for termIndex, term in enumerate(year):
-            user.add_current_courses(term)
-
-            for course in term:
-                is_answer_accurate = CONDITIONS.get(course) is not None
-                unlocked, warnings = (
-                    CONDITIONS[course].validate(user)
-                    if is_answer_accurate
-                    else (True, [])
-                )
-                coursesState[course] = {
-                    "is_accurate": is_answer_accurate,
-                    "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
-                    "unlocked": unlocked,
-                    "warnings": warnings,
-                    "supressed": yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
-                }
-            # Add all these courses to the user in preparation for the next term
-            user.empty_current_courses()
-            user.add_courses(term)
-
-        user.year += 1
+    coursesState = validate_terms(data)
 
     return {"courses_state": coursesState}

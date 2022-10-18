@@ -18,10 +18,25 @@ CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code
 
 # TODO: think of how to automate some of this
 SPECIALISATION_MAPPINGS = {
+    '7005 UNSW Global Diploma in Media and Communication Program': '7005',
+    'Academic program must be 7016, Humanities Pathway Program': '7016',
+    'the Social Research and Policy honours program': '4504',
+    '4529 Social Science \(Honours\)': '4529',
+    '4511 B Arts \(Honours\)': '4511',
+    '3880 Bachelor of International Public Health': '3880',
+    '3894 Nutrition\/Dietetics and Food Innovation': '3894',
+    '3897 Applied Exercise Science\/Clinical Exercise Physiology': '3897',
+    '3895 Pharmaceutical Medicine\/Pharmacy': '3895',
+    '3896 Exercise Science\/Physiotherapy and Exercise Physiology': '3896',
+    'FINSD1 Finance Co-Op': 'FINSD1',
+    '(a )?Politics, Philosophy, and Economics program': 'PPES#',
+    "(a )?Politics and International Relations specialisation": 'POLSG?',
     'School of the Arts and Media honours': 'MDIA?H',
+    'Business \(Honours\) Program 4512': '4512',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
     'Creative Writing honours': 'CRWTWH',
     'Nanoscience Honours' : 'NANO?H',
+    '4508 Music \(Honours\)': '4508',
     'Construction Management and Property undergraduate program or minor': 'BLDG??',
     'Media, Culture and Technology honours': 'MECTBH',
     'Theatre and Performance Studies honours': 'THSTBH',
@@ -66,6 +81,7 @@ SPECIALISATION_MAPPINGS = {
     'single or dual award Media': '4510 || 3454 || 3438 || 3453',
     'single or double degree Media': '4510 || 3454 || 3438 || 3453',
     'Social Science or Social Research and Policy': '3321 || 3420',
+    'single or double Music \(Honours\) program': '4508',
     'Education program': '4509 || 4056',
     'Landscape Architecture minor': 'LANDA2',
     'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
@@ -115,10 +131,10 @@ def preprocess_condition(code, course=None):
     processed = convert_WAM(processed)
     processed = convert_GRADE(processed)
     processed = convert_level(processed)
+    processed = convert_manual_programs_and_specialisations(processed)
     processed = convert_program_type(processed)
     processed = convert_fslash(processed)
     processed = convert_including(processed)
-    processed = convert_manual_programs_and_specialisations(processed)
     processed = convert_AND_OR(processed)
     processed = convert_coreqs(processed)
     processed = convert_core(processed)
@@ -134,6 +150,7 @@ def preprocess_condition(code, course=None):
 
     # Phase 5: Common patterns
     processed = uoc_in_business_school(processed)
+    processed = uoc_in_school(processed)
     processed = enrolment_in_program(processed)
     processed = l2_math_courses(processed)
     processed = unsw_global_degrees(processed)
@@ -216,6 +233,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
 
     # Remove completion language
     completion_text = [
+        "^currently",
         "Successful completion of",
         "completion of",
         "must successfully complete",
@@ -287,7 +305,7 @@ def convert_WAM(processed: str) -> str:
     #    - "WAM of 65" -> "65WAM"
     #    - "WAM of at least 65" -> "65WAM"
     processed = re.sub(
-        r"WAM ([a-z]* ){0,3}(>=)?(\d\d)", r"\3WAM", processed, flags=re.IGNORECASE
+        r"WAM ([a-z]* ){0,3}(>=)?(\d\d)(%)?", r"\3WAM", processed, flags=re.IGNORECASE
     )
 
     # Then delete any superfluous preceding words, chars or spaces, e.g.:
@@ -536,6 +554,8 @@ def uoc_in_business_school(processed: str) -> str:
 
     return processed
 
+def uoc_in_school(processed: str) -> str:
+    return re.sub(r"(\d+UOC) (in|of|at) ([A-Z]{4}) courses", r"\1 in \3", processed)
 
 def l2_math_courses(processed: str) -> str:
     """Converts L2 Maths courses to L@ MATH"""
@@ -586,7 +606,7 @@ def remove_extraneous_handbook_data(processed):
     example: 'good academic standing' -> '' with a handbook_note:'Students must be in Good Academic Standing.' """
     note = ""
     # Academic Standing note
-    processed, note = add_note_if_found(processed, r"(Students must)? (be)? [io]n Good (Academic)? Standing( and)?", note, r"", "Students must be in Good Academic Standing.")
+    processed, note = add_note_if_found(processed, r"(Students )?(must )?(be )?[io]n Good (Academic)? Standing( and)?", note, r"", "Students must be in Good Academic Standing.")
 
     # Final 2 terms note
     processed, note = add_note_if_found(processed, r"It is strongly recommended that students only complete this course within their final 2 terms of study", note, r"", "Recommended to take this course within their final 2 terms of study.")
