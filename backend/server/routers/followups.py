@@ -9,6 +9,10 @@ router = APIRouter(
 )
 
 def get_next_term(term: str) -> str:
+    # 'S' -> 'T1'
+    # 'T1' -> 'T2'
+    # 'T2' -> 'T3'
+    # 'T3' -> 'S'
     if term[0] == 'T':
         if int(term[-1]) < 3:
             return 'T' + str(int(term[-1]) + 1)
@@ -45,7 +49,7 @@ def get_next_term(term: str) -> str:
         }
     }
 )
-def get_followups(origin_course: str, origin_term: str) -> Dict[str, str]:
+def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[str, dict[str, int]]]:
     # origin_term is the term that the original course was/would be taken in
  
     # we only have enrolment data from T2(2022) -> T3(2022) at this stage
@@ -53,15 +57,14 @@ def get_followups(origin_course: str, origin_term: str) -> Dict[str, str]:
     next_term = get_next_term(origin_term)
 
     # get all comp courses
-    all_comp_courses = []
-    for course in coursesCOL.find():
-        if course["code"].startswith("COMP"):
-            all_comp_courses.append(course["code"])
+    all_comp_courses = filter(lambda course: course.startswith("COMP"), 
+                              [course["code"] for course in coursesCOL.find()])
+    
+    print(all_comp_courses)
     
     # get enrolment data
-    enrolment_data_file = open("./data/final_data/enrolmentData.json")
-    enrolment_data = json.load(enrolment_data_file)
-    enrolment_data_file.close()
+    with open("./data/final_data/enrolmentData.json") as enrolment_data_file:
+        enrolment_data = json.load(enrolment_data_file) 
     origin_course_members = enrolment_data[origin_course][origin_term]
     
     # calculate followups
@@ -77,10 +80,11 @@ def get_followups(origin_course: str, origin_term: str) -> Dict[str, str]:
 
     top_followups = sorted(followups.items(), reverse=True, key=lambda course: course[1][next_term])
  
-    return {"originCourse": origin_course,
-            "originTerm": origin_term,
-            "followups": dict(top_followups),     
-            }
+    return {
+        "originCourse": origin_course,
+        "originTerm": origin_term,
+        "followups": dict(top_followups),
+    }
 
 
     
