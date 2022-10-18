@@ -1,6 +1,10 @@
 import { createGlobalStyle, DefaultTheme } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+    font-size: 16px;
+  }
+
   html,
   * {
     margin: 0;
@@ -11,6 +15,19 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
+
+    --navbar-height: 70px;
+    --option-header-height: 65px;
+
+    --cs-top-cont-height: 23%;
+    --cs-tabs-cont-height: 40px;
+    --cs-bottom-cont-height: calc(100% - var(--cs-top-cont-height) - var(--cs-tabs-cont-height));
+
+    --tp-main-container-padding: 10px;
+    --tp-grid-item-font-size: 1.5rem;
+    --tp-planner-container-margin: 15px;
+    --tp-term-box-margin: 1em;
+    --tp-summer-term-box-margin: 0.5em;
   }
 
   .text {
@@ -18,7 +35,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
@@ -34,6 +51,22 @@ export const GlobalStyles = createGlobalStyle`
   .ant-modal-title {
     background-color: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text} !important;
+  }
+
+  // Scrollbar settings
+  /* width */
+  ::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #FAFAFA;        /* color of the tracking area */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #C2C2C2;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #FAFAFA;  /* creates padding around scroll thumb */
   }
 `;
 

@@ -7,7 +7,6 @@ import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import LandingPage from 'pages/LandingPage';
-import './App.less';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';

@@ -19,8 +19,6 @@ const CourseTitleWrapper = styled.div<{ selected: boolean; locked: boolean }>`
   white-space: nowrap;
   color: ${({ theme }) => theme.text};
 
-  font-size: 0.8rem;
-
   font-weight: ${({ selected, locked }) => {
     if (locked) return '100';
     if (selected) return '700';

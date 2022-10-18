@@ -22,15 +22,20 @@ import S from './styles';
 const { Title, Text } = Typography;
 
 type CourseDescriptionPanelProps = {
+  className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
 };
 
-const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescriptionPanelProps) => {
+const CourseDescriptionPanel = ({
+  className,
+  courseCode,
+  onCourseClick
+}: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const { pathname } = useLocation();
-  const showAttributesSidebar = !!(pathname === '/course-selector');
+  const sidebar = !!(pathname === '/course-selector');
 
   const [isLoading, setIsLoading] = useState(false);
   const [course, setCourse] = useState<Course>();
@@ -48,9 +53,12 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   }
 
   useEffect(() => {
-    // gets the associated info for a course
+    // if the course code changes, force a reload
+    setIsLoading(true);
+  }, [courseCode]);
+
+  useEffect(() => {
     const getCourseInfo = async () => {
-      setIsLoading(true);
       try {
         const results = await Promise.allSettled([
           axios.get<Course>(`/courses/getCourse/${courseCode}`),
@@ -74,26 +82,26 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
         console.error('Error at getCourse', e);
       }
     };
-    getCourseInfo();
-  }, [courseCode]);
+
+    if (isLoading) {
+      // gets the associated info for a course
+      getCourseInfo();
+    }
+  }, [courseCode, degree, isLoading, planner]);
 
   if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)
     return (
-      <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
-        {!showAttributesSidebar ? (
-          <LoadingCourseDescriptionPanelSidebar />
-        ) : (
-          <LoadingCourseDescriptionPanel />
-        )}
+      <S.Wrapper sidebar={sidebar}>
+        {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
       </S.Wrapper>
     );
   }
 
   return (
-    <S.Wrapper showAttributesSidebar={showAttributesSidebar}>
+    <S.Wrapper sidebar={sidebar} className={className}>
       <S.MainWrapper>
-        <S.TitleWrapper showAttributesSidebar={showAttributesSidebar}>
+        <S.TitleWrapper sidebar={sidebar}>
           <div>
             <Title level={2} className="text">
               {courseCode} - {course.title}
@@ -108,7 +116,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
           </Text>
         )}
 
-        {!showAttributesSidebar && (
+        {!sidebar && (
           <div style={{ flexBasis: '25%' }}>
             <CourseAttributes course={course} />
           </div>
@@ -122,7 +130,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
         />
       </S.MainWrapper>
 
-      {showAttributesSidebar && (
+      {sidebar && (
         <S.SidebarWrapper>
           <CourseAttributes course={course} courseCapacity={courseCapacity} />
         </S.SidebarWrapper>
