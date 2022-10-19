@@ -520,7 +520,7 @@ def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
-def is_course_unlocked(course: str, user: UserData) -> Tuple[bool, List[str]]:
+def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
     """
     Returns if the course is unlocked for the given user.
     Also returns a list of warnings.
@@ -532,7 +532,7 @@ def is_course_unlocked(course: str, user: UserData) -> Tuple[bool, List[str]]:
     # TODO: remove this as blank once program_restrictions return warnings
     program_warnings: List[str] = []
     program_restriction = get_program_restriction(user.program) or NoRestriction()
-    program_result = program_restriction.validate_course_allowed(course, user)
+    program_result = program_restriction.validate_course_allowed(user, course)
 
     return (course_result and program_result), (course_warnings + program_warnings),
 
