@@ -1,6 +1,7 @@
 import { CourseList, CourseStates, CourseValidation } from './courses';
 import { Term } from './planner';
 import { ProgramStructure } from './structure';
+import { APICourseDetails } from 'utils/api/responseTypes';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
@@ -14,21 +15,22 @@ export type ValidateTermPlanner = {
 
 /* Courses api */
 
-export type Course = {
-  title: string;
-  code: string;
-  UOC: number;
-  description: string;
-  study_level: string;
-  school: string;
-  campus: string;
-  raw_requirements: string;
-  terms: Term[];
-  is_legacy: boolean;
-  is_accurate: boolean;
-  is_multiterm: boolean;
-  handbook_note: string;
-};
+export type Course = APICourseDetails;
+// export type Course = {
+//   title: string;
+//   code: string;
+//   UOC: number;
+//   description: string;
+//   study_level: string;
+//   school: string;
+//   campus: string;
+//   raw_requirements: string;
+//   terms: Term[];
+//   is_legacy: boolean;
+//   is_accurate: boolean;
+//   is_multiterm: boolean;
+//   handbook_note: string;
+// };
 
 export type SearchCourse = Record<string, string>;
 

@@ -49,7 +49,7 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
         warnings: [],
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
-        isMultiterm: course.is_multiterm,
+        isMultiterm: course.is_multiterm ?? false,
         supressed: false,
         mark: undefined
       };

@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import { CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
+import API from 'utils/api';
+import { APICourseDetails } from 'utils/api/responseTypes';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import {
@@ -33,7 +35,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   const showAttributesSidebar = !!(pathname === '/course-selector');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [course, setCourse] = useState<Course>();
+  const [course, setCourse] = useState<APICourseDetails>();
   const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>();
   const [coursesUnlocked, setCoursesUnlocked] = useState<CoursesUnlockedWhenTaken>();
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>();
@@ -53,7 +55,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
       setIsLoading(true);
       try {
         const results = await Promise.allSettled([
-          axios.get<Course>(`/courses/getCourse/${courseCode}`),
+          API.courses.course(courseCode),
           axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
           axios.post<CoursesUnlockedWhenTaken>(
             `/courses/coursesUnlockedWhenTaken/${courseCode}`,

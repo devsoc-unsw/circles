@@ -3,10 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import axios from 'axios';
 import type { MigrationManifest } from 'redux-persist';
 import { createMigrate } from 'redux-persist';
-import { Course } from 'types/api';
+import API from 'utils/api';
 
 /**
  * IMPORTANT NOTE:
@@ -43,7 +42,7 @@ const persistMigrations: MigrationManifest = {
     await Promise.all(
       courses.map(async (course) => {
         try {
-          const res = await axios.get<Course>(`/courses/getCourse/${course}`);
+          const res = await API.courses.course(course);
           if (res.status === 200) {
             const courseData = res.data;
             newState.planner.courses[courseData.code].isMultiterm = courseData.is_multiterm;

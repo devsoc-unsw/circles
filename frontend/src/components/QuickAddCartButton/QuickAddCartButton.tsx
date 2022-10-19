@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import axios from 'axios';
-import { Course, UnselectCourses } from 'types/api';
+import { UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
+import API from 'utils/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
@@ -23,7 +24,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
     try {
-      const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
+      const { data: course } = await API.courses.course(code);
 
       const courseData: PlannerCourse = {
         title: course.title,
@@ -36,7 +37,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
         warnings: [],
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
-        isMultiterm: course.is_multiterm,
+        isMultiterm: course.is_multiterm ?? false,
         supressed: false,
         mark: undefined
       };
