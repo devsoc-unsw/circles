@@ -57,7 +57,9 @@ def validate_term_planner(plannerData: PlannerData):
 
 from server.database import usersDB, coursesCOL
 from server.config import DUMMY_TOKEN
-from model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData
+from server.routers.model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData
+
+# from model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData
 
 # NOTE: Not worrying about index atm. That can be a frontend thing :)
 
@@ -134,6 +136,21 @@ def setPlannedCourseToTerm(srcRow, srcTerm, srcIndex, destRow, destTerm, destInd
             index = previousIndex[termId] if termId in previousIndex else len(targetTerm)
             targetTerm.insert(index, courseCode)
 
+
+from pprint import pprint
+from server.routers.user import get_user
+
+@router.get("/elliot")
+def elliot():
+    print("IN ELLIOT!")
+
+    course = get_course("COMP1511")
+    pprint(course)
+
+    pprint(usersDB.get_collection('tokens'))
+    usersDB.
+    # user = get_user(DUMMY_TOKEN)
+    # pprint(user)
 
 # @router.get("/elliot", response_model=ElliotMoveCourseInfo)
 # def moveCourse(data: ElliotMoveCourseInfo):
