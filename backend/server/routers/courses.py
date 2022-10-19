@@ -620,7 +620,6 @@ def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
     # TODO: This loading should not be here; very slow
     # making it global causes some errors
     # There needs to be a startup event for routers to load data
-    program_restrictions: Dict[str, ProgramRestriction]
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:
         program_restrictions: dict[str, ProgramRestriction] = pickle.load(file)
     return program_restrictions.get(program_code, None)
