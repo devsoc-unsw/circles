@@ -524,6 +524,7 @@ def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
     """
     Returns if the course is unlocked for the given user.
     Also returns a list of warnings.
+    TODO: !Untested
     """
     course_result, course_warnings = (
         cond.validate(user) if (cond := CONDITIONS[course]) else (True, [])
