@@ -4,6 +4,7 @@ APIs for the /courses/ route.
 from contextlib import suppress
 import re
 from typing import Dict, List, Mapping, Set, Tuple
+from algorithms.objects.program_restrictions import NoRestriction
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
@@ -15,6 +16,7 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
+from server.routers.programs import get_program_restriction
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
 
@@ -518,6 +520,21 @@ def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
+def is_course_unlocked(course: str, user: UserData) -> Tuple[bool, List[str]]:
+    """
+    Returns if the course is unlocked for the given user.
+    Also returns a list of warnings.
+    """
+    course_result, course_warnings = (
+        cond.validate(user) if (cond := CONDITIONS[course]) else (True, [])
+    )
+
+    # TODO: remove this as blank once program_restrictions return warnings
+    program_warnings: List[str] = []
+    program_restriction = get_program_restriction(user.program) or NoRestriction()
+    program_result = program_restriction.validate_course_allowed(course, user)
+
+    return (course_result and program_result), (course_warnings + program_warnings),
 
 def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
     """ Gives the course a weighting based on the relevance to the search """
