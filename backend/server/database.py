@@ -91,9 +91,12 @@ def create_dynamic_db():
                             },
                         }
                     },
+                    'courses': {
+                        'bsonType': 'object', # painful to validate properly :/
+                    },
                     'planner': {
                         'bsonType': 'object',
-                        'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'years'],
+                        'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years'],
                         'properties': {
                             "unplanned": {
                                 'bsonType': 'array',
@@ -102,9 +105,6 @@ def create_dynamic_db():
                                 }
                             },
                             "startYear": {
-                                'bsonType': 'int'
-                            },
-                            "numYears": {
                                 'bsonType': 'int'
                             },
                             "isSummerEnabled": {
@@ -177,7 +177,6 @@ def create_dynamic_db():
     #     'planner': {
     #         "unplanned":[],
     #         "startYear": 2021,
-    #         "numYears": 4,
     #         "isSummerEnabled": False,
     #         "plan": [
     #             {

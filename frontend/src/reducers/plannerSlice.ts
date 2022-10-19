@@ -90,6 +90,7 @@ const plannerSlice = createSlice({
         state.unplanned.push(courseCode);
       }
     },
+    // this is a setting, should be handled on FE settings.
     toggleWarnings: (state, action: PayloadAction<CourseStates>) => {
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
@@ -363,6 +364,7 @@ const plannerSlice = createSlice({
         }
       }
     },
+    // this is setting?
     toggleTermComplete: (state, action: PayloadAction<string>) => {
       state.completedTerms[action.payload] = !state.completedTerms[action.payload];
     },

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Course } from 'types/api';
 import { CourseValidation } from 'types/courses';
 
-type CoursesSliceState = {
+export type CoursesSliceState = {
   courses: Record<string, CourseValidation>;
   course: Course | null;
 };

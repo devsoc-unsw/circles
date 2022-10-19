@@ -123,7 +123,6 @@ class PlannerData(BaseModel):
             "example": {
                 "program": "3707",
                 "specialisations": ["COMPA1"],
-                "year": 1,
                 "plan": [
                     [
                         {},
@@ -167,19 +166,28 @@ class PlannerLocalStorage(TypedDict):
     mostRecentPastTerm: MostRecentPastTerm
     unplanned: list[str]
     startYear: int
-    numYears: int
     isSummerEnabled: bool
-    years: list[dict[str, None | list[str]]]
+    years: list[dict[str, list[str]]]
+    courses: dict[str, dict]
+
+class CoursesStorage(TypedDict):
+    code: str
+    suppressed: bool
+    mark: int
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
+    courses: dict[str, CoursesStorage]
     
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
 
+class CourseMark(BaseModel):
+    course: str
+    mark: int
 
 class CourseCodes(BaseModel):
     courses: list[str]
@@ -207,6 +215,10 @@ class TermsList(BaseModel):
     terms: Optional[dict[str, Optional[list[str]]]]
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
+
+class StructureDict(TypedDict):
+    structure: dict[str, StructureContainer]
+    uoc: int
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

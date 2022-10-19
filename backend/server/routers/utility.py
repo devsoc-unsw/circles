@@ -20,13 +20,12 @@ def get_core_courses(program: str, specialisations: list[str]):
     from server.routers.programs import get_structure
 
     req = get_structure(program, "+".join(specialisations))
-    return sum(
-            (
+    return sum((
                 sum((
                     list(value["courses"].keys())
                     for sub_group, value in spec["content"].items()
                     if 'core' in sub_group.lower()
                 ), [])
-            for spec_name, spec in req["structure"].items()
-            if "Major" in spec_name or "Honours" in spec_name)
+                for spec_name, spec in req["structure"].items()
+                if "Major" in spec_name or "Honours" in spec_name)
          , [])
