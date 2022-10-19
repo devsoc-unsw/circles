@@ -6,8 +6,6 @@ import re
 from typing import Callable, Dict, List, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
-from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
-from algorithms.objects.program_restrictions import ProgramRestriction
 
 from data.processors.models import (
     CourseContainer,
@@ -29,9 +27,6 @@ from server.routers.model import (
 )
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
-# Lazy eval this on first call; This and `course` routers should refactor
-# to have a more elegant startup process
-PROGRAM_RESTRICTIONS: Optional[Dict[str, ProgramRestriction]] = None
 
 router = APIRouter(
     prefix="/programs",
@@ -360,18 +355,6 @@ def get_cores(programCode: str, spec: str):
 #                       End of Routes                         #
 ###############################################################
 
-def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
-    """
-    Returns the program restriction for the given program code.
-    Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.
-    !Untested
-    """
-    global PROGRAM_RESTRICTIONS
-    PROGRAM_RESTRICTIONS = (
-        PROGRAM_RESTRICTIONS or
-        data_helpers.read_data(PROGRAM_RESTRICTIONS_PICKLE_FILE)
-    )
-    return PROGRAM_RESTRICTIONS.get(program_code, None)
 
 def course_list_from_structure(structure: dict) -> list[str]:
     """

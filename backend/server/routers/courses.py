@@ -2,8 +2,9 @@
 APIs for the /courses/ route.
 """
 from contextlib import suppress
+import pickle
 import re
-from typing import Dict, List, Mapping, Set, Tuple
+from typing import Dict, List, Mapping, Optional, Set, Tuple
 from algorithms.objects.program_restrictions import NoRestriction
 
 from algorithms.objects.user import User
@@ -16,8 +17,9 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
-from server.routers.programs import get_program_restriction
 from server.routers.utility import get_core_courses, map_suppressed_errors
+from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
+from algorithms.objects.program_restrictions import ProgramRestriction
 
 
 router = APIRouter(
@@ -609,3 +611,16 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
     """
     return get_course_info(course, year).get("terms", [])
 
+def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
+    """
+    Returns the program restriction for the given program code.
+    Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.
+    !Untested
+    """
+    # TODO: This loading should not be here; very slow
+    # making it global causes some errors
+    # There needs to be a startup event for routers to load data
+    program_restrictions: Dict[str, ProgramRestriction]
+    with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:
+        program_restrictions: dict[str, ProgramRestriction] = pickle.load(file)
+    return program_restrictions.get(program_code, None)
