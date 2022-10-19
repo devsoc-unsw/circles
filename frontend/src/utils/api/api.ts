@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import axios from 'axios';
 import { APIEndpoints } from './endpointTypes';
 import { optionalSegments } from './utils';
@@ -18,7 +20,7 @@ const API: APIEndpoints = {
     children: (courseCode) => axios.get(`/courses/courseChildren/${courseCode}`),
     pathFrom: (courseCode) => axios.get(`/courses/getPathFrom/${courseCode}`),
     unlockedWhenTaken: (courseCode, userData) => axios.post(`/courses/coursesUnlockedWhenTaken/${courseCode}`, userData),
-    termsOffered: (courseCode, years) => axios.get(`/courses/termsOffered/${courseCode}/${years}`),
+    termsOffered: (courseCode, years) => axios.get(`/courses/termsOffered/${courseCode}/${years.join('+')}`),
   },
 
   programs: {

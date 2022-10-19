@@ -1,4 +1,4 @@
-import { CourseCode, Optional, UOC } from './commonTypes';
+import { CourseCode, Optional, Term, UOC } from './commonTypes';
 
 type APIContainerContent = {
   UOC: UOC;
@@ -24,11 +24,11 @@ export type APICourseDetails = {
   raw_requirements: string;
   exclusions: { [code: CourseCode]: 1 };
   handbook_note: string;
-  terms: string[];
+  terms: Term[];
   gen_ed: boolean;
   is_legacy: boolean;
   is_accurate: boolean;
-  is_multiterm: Optional<string>;
+  is_multiterm: Optional<boolean>;
 };
 
 type APICourseState = {
@@ -97,7 +97,7 @@ type APIStructureContainer = {
 };
 
 export type APITermsList = {
-  terms: { [year: string]: Optional<string[]> };
+  terms: { [year: string]: Optional<Term[]> };
   fails: [string, string, unknown][];
 };
 

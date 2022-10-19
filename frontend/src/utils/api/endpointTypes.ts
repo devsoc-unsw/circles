@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { CourseCode } from './commonTypes';
 import { APIPlannerData, APIUserData } from './requestTypes';
 import {
@@ -16,7 +17,6 @@ import {
   APITermsList,
   APIValidCoursesState
 } from './responseTypes';
-import { AxiosResponse } from 'axios';
 
 interface PlannerEndpoints {
   validate: (plannerData: APIPlannerData) => Promise<AxiosResponse<APIValidCoursesState>>;
