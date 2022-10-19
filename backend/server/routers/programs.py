@@ -367,8 +367,10 @@ def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
     !Untested
     """
     global PROGRAM_RESTRICTIONS
-    if not PROGRAM_RESTRICTIONS:
-        PROGRAM_RESTRICTIONS = data_helpers.read_data(PROGRAM_RESTRICTIONS_PICKLE_FILE)
+    PROGRAM_RESTRICTIONS = (
+        PROGRAM_RESTRICTIONS or
+        data_helpers.read_data(PROGRAM_RESTRICTIONS_PICKLE_FILE)
+    )
     return PROGRAM_RESTRICTIONS.get(program_code, None)
 
 def course_list_from_structure(structure: dict) -> list[str]:
