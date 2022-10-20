@@ -10,9 +10,10 @@ import {
   APISearch,
   APISpecialisations,
   APISpecialisationTypes,
-  APIStructure
+  APIStructure,
+  APIValidCoursesState
 } from 'utils/api/responseTypes';
-import { CourseList, CourseStates } from './courses';
+import { CourseList } from './courses';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
@@ -20,9 +21,10 @@ import { CourseList, CourseStates } from './courses';
 
 /* Planner api */
 
-export type ValidateTermPlanner = {
-  courses_state: CourseStates;
-};
+export type ValidateTermPlanner = APIValidCoursesState;
+// export type ValidateTermPlanner = {
+//   courses_state: CourseStates;
+// };
 
 /* Courses api */
 

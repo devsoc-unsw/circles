@@ -2,9 +2,8 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
-import axios from 'axios';
-import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
+import API from 'utils/api';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
@@ -44,7 +43,7 @@ const TermPlanner = () => {
   useEffect(() => {
     const validateTermPlanner = async () => {
       try {
-        const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
+        const res = await API.planner.validate(payload);
         dispatch(toggleWarnings(res.data.courses_state));
       } catch (err) {
         // eslint-disable-next-line no-console

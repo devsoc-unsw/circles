@@ -22,7 +22,7 @@ import {
 } from './responseTypes';
 
 interface PlannerEndpoints {
-  validate: (plannerData: APIPlannerData) => Promise<AxiosResponse<APIValidCoursesState>>;
+  validate: (plannerData: APIPlannerData | string) => Promise<AxiosResponse<APIValidCoursesState>>;
 }
 
 interface CoursesEndpoints {

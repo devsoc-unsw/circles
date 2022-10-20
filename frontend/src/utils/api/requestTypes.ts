@@ -1,4 +1,4 @@
-import { Optional, UOC } from './commonTypes';
+import { CourseCode, Optional, UOC } from './commonTypes';
 
 export type APIUserData = {
   program: string;
@@ -11,9 +11,15 @@ type APIMostRecentPastTerm = {
   T: number;
 };
 
+type APITermPlan = {
+  [code: CourseCode]: Optional<[UOC, Optional<number>]>; // number = mark
+};
+
+type APIYearPlan = APITermPlan[];
+
 export type APIPlannerData = {
   program: string;
   specialisations: string[];
-  plan: { [code: string]: Optional<[UOC, Optional<number>]> }[][]; // List of years, that are a list of terms
+  plan: APIYearPlan[];
   mostRecentPastTerm: APIMostRecentPastTerm;
 };
