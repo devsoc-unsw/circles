@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import { CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import API from 'utils/api';
@@ -56,7 +56,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
       try {
         const results = await Promise.allSettled([
           API.courses.course(courseCode),
-          axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
+          API.courses.pathFrom(courseCode),
           axios.post<CoursesUnlockedWhenTaken>(
             `/courses/coursesUnlockedWhenTaken/${courseCode}`,
             JSON.stringify(prepareUserPayload(degree, planner))

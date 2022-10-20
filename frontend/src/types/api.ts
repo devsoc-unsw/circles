@@ -46,10 +46,11 @@ export type CourseChildren = APICoursesPath;
 //   courses: CourseList;
 // };
 
-export type CoursePathFrom = {
-  original: string;
-  courses: CourseList;
-};
+export type CoursePathFrom = APICoursesPath;
+// export type CoursePathFrom = {
+//   original: string;
+//   courses: CourseList;
+// };
 
 export type CoursesUnlockedWhenTaken = {
   direct_unlock: CourseList;
