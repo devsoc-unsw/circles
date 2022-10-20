@@ -1,6 +1,5 @@
-import { APICourseDetails, APICoursesPath } from 'utils/api/responseTypes';
+import { APICourseDetails, APICoursesPath, APIStructure } from 'utils/api/responseTypes';
 import { CourseList, CourseStates, CourseValidation } from './courses';
-import { ProgramStructure } from './structure';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
@@ -62,10 +61,11 @@ export type Programs = {
   programs: Record<string, string>;
 };
 
-export type Structure = {
-  structure: ProgramStructure;
-  uoc: number;
-};
+export type Structure = APIStructure;
+// export type Structure = {
+//   structure: ProgramStructure;
+//   uoc: number;
+// };
 
 export type StructureCourseList = {
   courses: CourseList;

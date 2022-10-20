@@ -2,7 +2,7 @@ import { CourseCode, Optional, Term, UOC } from './commonTypes';
 
 type APIContainerContent = {
   UOC: UOC;
-  courses: { [code: CourseCode]: string | string[] };
+  courses: { [code: CourseCode]: string /* | string[] */ }; // TODO: SHOULD BE A UNION OF string | string[]
   type: string;
   notes: string;
 };

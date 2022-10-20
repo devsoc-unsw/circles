@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
+import API from 'utils/api';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
@@ -41,9 +40,7 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get<Structure>(
-          `/programs/getStructure/${programCode}/${specs.join('+')}`
-        );
+        const res = await API.programs.structure(programCode, specs.join('+'));
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

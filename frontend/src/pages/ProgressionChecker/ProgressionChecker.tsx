@@ -7,8 +7,6 @@ import {
   TableOutlined
 } from '@ant-design/icons';
 import { Button, Divider, Typography } from 'antd';
-import axios from 'axios';
-import { Structure } from 'types/api';
 import {
   ProgressionAdditionalCourses,
   ProgressionViewStructure,
@@ -17,6 +15,7 @@ import {
   ViewSubgroupCourse
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import API from 'utils/api';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
@@ -42,9 +41,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get<Structure>(
-          `/programs/getStructure/${programCode}/${specs.join('+')}`
-        );
+        const res = await API.programs.structure(programCode, specs.join('+'));
         setStructure(res.data.structure);
         setUoc(res.data.uoc);
       } catch (err) {
