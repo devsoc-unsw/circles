@@ -2,6 +2,7 @@ import {
   APICourseCodes,
   APICourseDetails,
   APICoursesPath,
+  APICoursesState,
   APICoursesUnlockedWhenTaken,
   APIGraph,
   APIGraphEdge,
@@ -11,7 +12,7 @@ import {
   APISpecialisationTypes,
   APIStructure
 } from 'utils/api/responseTypes';
-import { CourseList, CourseStates, CourseValidation } from './courses';
+import { CourseList, CourseStates } from './courses';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
@@ -45,9 +46,10 @@ export type Course = APICourseDetails;
 export type SearchCourse = APISearch;
 // export type SearchCourse = Record<string, string>;
 
-export type CoursesAllUnlocked = {
-  courses_state: Record<string, CourseValidation>;
-};
+export type CoursesAllUnlocked = APICoursesState;
+// export type CoursesAllUnlocked = {
+//   courses_state: Record<string, CourseValidation>;
+// };
 
 export type UnselectCourses = APICourseCodes;
 // export type UnselectCourses = {

@@ -35,7 +35,7 @@ type APICourseState = {
   is_accurate: boolean;
   unlocked: boolean;
   handbook_note: string;
-  warnings: unknown[]; // TODO: possibly string[]
+  warnings: string[]; // TODO: possibly unkown[]
 };
 
 export type APICourses = {

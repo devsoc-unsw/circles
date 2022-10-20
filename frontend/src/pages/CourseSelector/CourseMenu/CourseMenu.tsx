@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
-import axios from 'axios';
-import { CoursesAllUnlocked } from 'types/api';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
+import API from 'utils/api';
 import getNumTerms from 'utils/getNumTerms';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
@@ -103,10 +102,7 @@ const CourseMenu = ({ structure }: Props) => {
     };
 
     try {
-      const res = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
+      const res = await API.courses.allUnlocked(prepareUserPayload(degree, planner));
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);
     } catch (err) {

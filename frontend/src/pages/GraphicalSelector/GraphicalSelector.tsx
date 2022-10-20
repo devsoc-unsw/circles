@@ -8,8 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tabs, Tooltip } from 'antd';
-import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked } from 'types/api';
+import { CourseEdge } from 'types/api';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
@@ -153,10 +152,7 @@ const GraphicalSelector = () => {
   const showUnlockedCourses = async () => {
     if (!graph) return;
     try {
-      const res = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
+      const res = await API.courses.allUnlocked(prepareUserPayload(degree, planner));
       const coursesStates = res.data.courses_state;
       const nodes = graph.getNodes();
       nodes.forEach((n) => {
