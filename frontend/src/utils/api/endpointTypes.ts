@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { AxiosResponse } from 'axios';
 import { CourseCode } from './commonTypes';
 import { APIPlannerData, APIUserData } from './requestTypes';
@@ -62,5 +64,5 @@ export type APIEndpoints = {
   courses: CoursesEndpoints;
   programs: ProgramsEndpoints;
   specialisations: SpecialisationsEndpoints;
-  default: DefaultEndpoints
+  default: DefaultEndpoints;
 };

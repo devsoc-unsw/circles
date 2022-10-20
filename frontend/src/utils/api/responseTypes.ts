@@ -44,7 +44,7 @@ export type APICourses = {
 
 export type APICoursesPath = {
   original: string;
-  courses: string[];
+  courses: CourseCode[];
 };
 
 export type APICoursesState = {
@@ -52,8 +52,8 @@ export type APICoursesState = {
 };
 
 export type APICoursesUnlockedWhenTaken = {
-  direct_unlock: string[];
-  indirect_unlock: string[];
+  direct_unlock: CourseCode[];
+  indirect_unlock: CourseCode[];
 };
 
 export type APIGraph = {
