@@ -13,7 +13,6 @@ import {
   APIStructure,
   APIValidCoursesState
 } from 'utils/api/responseTypes';
-import { CourseList } from './courses';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
@@ -87,10 +86,6 @@ export type Structure = APIStructure;
 //   structure: ProgramStructure;
 //   uoc: number;
 // };
-
-export type StructureCourseList = {
-  courses: CourseList;
-};
 
 export type CourseEdge = APIGraphEdge;
 // export type CourseEdge = {

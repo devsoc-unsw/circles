@@ -2,8 +2,8 @@ import { CourseCode, Optional, UOC } from './commonTypes';
 
 export type APIUserData = {
   program: string;
-  specialisations: unknown;
-  courses: unknown;
+  specialisations: { [spec: string]: 1 }; // TODO: double check this with backend
+  courses: { [course: CourseCode]: Optional<number> }; // TODO: double check this with backend
 };
 
 type APIMostRecentPastTerm = {
