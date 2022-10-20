@@ -57,10 +57,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
         const results = await Promise.allSettled([
           API.courses.course(courseCode),
           API.courses.pathFrom(courseCode),
-          axios.post<CoursesUnlockedWhenTaken>(
-            `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-            JSON.stringify(prepareUserPayload(degree, planner))
-          ),
+          API.courses.unlockedWhenTaken(courseCode, prepareUserPayload(degree, planner)),
           axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
         ]);
 

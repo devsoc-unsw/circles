@@ -1,6 +1,7 @@
 import {
   APICourseDetails,
   APICoursesPath,
+  APICoursesUnlockedWhenTaken,
   APIGraph,
   APIGraphEdge,
   APIPrograms,
@@ -61,10 +62,11 @@ export type CoursePathFrom = APICoursesPath;
 //   courses: CourseList;
 // };
 
-export type CoursesUnlockedWhenTaken = {
-  direct_unlock: CourseList;
-  indirect_unlock: CourseList;
-};
+export type CoursesUnlockedWhenTaken = APICoursesUnlockedWhenTaken;
+// export type CoursesUnlockedWhenTaken = {
+//   direct_unlock: CourseList;
+//   indirect_unlock: CourseList;
+// };
 
 /* Programs api */
 export type Programs = APIPrograms;

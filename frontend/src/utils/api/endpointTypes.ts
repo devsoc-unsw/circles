@@ -27,17 +27,14 @@ interface PlannerEndpoints {
 interface CoursesEndpoints {
   jsonified: (courseCode: CourseCode) => Promise<AxiosResponse<string>>;
   course: (courseCode: CourseCode) => Promise<AxiosResponse<APICourseDetails>>;
-  search: (searchString: string, userData: APIUserData) => Promise<AxiosResponse<{ [code: CourseCode]: string }>>;
-  allUnlocked: (userData: APIUserData) => Promise<AxiosResponse<APICoursesState>>;
+  search: (searchString: string, userData: APIUserData | string) => Promise<AxiosResponse<{ [code: CourseCode]: string }>>;
+  allUnlocked: (userData: APIUserData | string) => Promise<AxiosResponse<APICoursesState>>;
   legacyCourses: (year: string, term: string) => Promise<AxiosResponse<APIProgramCourses>>;
   legacyCourse: (year: string, courseCode: CourseCode) => Promise<AxiosResponse<APICourseDetails>>;
-  unselect: (courseCode: CourseCode, userData: APIUserData) => Promise<AxiosResponse<APICourseCodes>>;
+  unselect: (courseCode: CourseCode, userData: APIUserData | string) => Promise<AxiosResponse<APICourseCodes>>;
   children: (courseCode: CourseCode) => Promise<AxiosResponse<APICoursesPath>>;
   pathFrom: (courseCode: CourseCode) => Promise<AxiosResponse<APICoursesPath>>;
-  unlockedWhenTaken: (
-    courseCode: CourseCode,
-    userData: APIUserData
-  ) => Promise<AxiosResponse<APICoursesUnlockedWhenTaken>>;
+  unlockedWhenTaken: (courseCode: CourseCode, userData: APIUserData | string) => Promise<AxiosResponse<APICoursesUnlockedWhenTaken>>;
   termsOffered: (courseCode: CourseCode, years: string[]) => Promise<AxiosResponse<APITermsList>>;
 }
 
