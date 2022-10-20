@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
-import axios from 'axios';
-import { SpecialisationTypes } from 'types/api';
+import API from 'utils/api';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
@@ -34,9 +33,7 @@ const DegreeWizard = () => {
   useEffect(() => {
     const getSteps = async () => {
       try {
-        const res = await axios.get<SpecialisationTypes>(
-          `/specialisations/getSpecialisationTypes/${degree.programCode}`
-        );
+        const res = await API.specialisations.types(degree.programCode);
         setSpecs(res.data.types);
       } catch (e) {
         // eslint-disable-next-line no-console

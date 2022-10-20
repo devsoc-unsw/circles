@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
-import axios from 'axios';
-import { Specialisations } from 'types/api';
+import API from 'utils/api';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -38,9 +37,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
 
   const fetchAllSpecialisations = useCallback(async () => {
     try {
-      const res = await axios.get<Specialisations>(
-        `/specialisations/getSpecialisations/${programCode}/${type}`
-      );
+      const res = await API.specialisations.specialisations(programCode, type);
       setOptions(res.data.spec);
     } catch (e) {
       // eslint-disable-next-line no-console

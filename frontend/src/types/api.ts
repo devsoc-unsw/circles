@@ -1,4 +1,10 @@
-import { APICourseDetails, APICoursesPath, APIStructure } from 'utils/api/responseTypes';
+import {
+  APICourseDetails,
+  APICoursesPath,
+  APISpecialisations,
+  APISpecialisationTypes,
+  APIStructure
+} from 'utils/api/responseTypes';
 import { CourseList, CourseStates, CourseValidation } from './courses';
 
 // types are layed out from the BE api routes
@@ -84,16 +90,18 @@ export type GraphPayload = {
 
 /* Specialisations api */
 
-export type Specialisations = {
-  spec: {
-    [specKey: string]: {
-      is_optional?: boolean;
-      notes: string;
-      specs: Record<string, string>;
-    };
-  };
-};
+export type Specialisations = APISpecialisations;
+// export type Specialisations = {
+//   spec: {
+//     [specKey: string]: {
+//       is_optional?: boolean;
+//       notes: string;
+//       specs: Record<string, string>;
+//     };
+//   };
+// };
 
-export type SpecialisationTypes = {
-  types: string[];
-};
+export type SpecialisationTypes = APISpecialisationTypes;
+// export type SpecialisationTypes = {
+//   types: string[];
+// };
