@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
-import axios from 'axios';
-import { Programs } from 'types/api';
+import API from 'utils/api';
 import type { RootState } from 'config/store';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { resetDegree, setProgram } from 'reducers/degreeSlice';
@@ -26,7 +25,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
 
   const fetchAllDegrees = async () => {
     try {
-      const res = await axios.get<Programs>('/programs/getPrograms');
+      const res = await API.programs.all();
       setAllDegrees(res.data.programs);
     } catch (e) {
       // eslint-disable-next-line no-console

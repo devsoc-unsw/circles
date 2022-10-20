@@ -1,6 +1,7 @@
 import {
   APICourseDetails,
   APICoursesPath,
+  APIPrograms,
   APISpecialisations,
   APISpecialisationTypes,
   APIStructure
@@ -64,9 +65,10 @@ export type CoursesUnlockedWhenTaken = {
 };
 
 /* Programs api */
-export type Programs = {
-  programs: Record<string, string>;
-};
+export type Programs = APIPrograms;
+// export type Programs = {
+//   programs: Record<string, string>;
+// };
 
 export type Structure = APIStructure;
 // export type Structure = {
