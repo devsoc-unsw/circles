@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import axios from 'axios';
-import { CourseChildren, CoursePathFrom } from 'types/api';
+import { CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
+import API from 'utils/api';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
@@ -69,7 +70,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
     /* REQUESTS */
     const getCourseUnlocks = async (code: string) => {
       try {
-        const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
+        const res = await API.courses.children(code);
         return res.data.courses;
       } catch (e) {
         // eslint-disable-next-line no-console

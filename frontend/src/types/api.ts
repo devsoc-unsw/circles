@@ -1,7 +1,6 @@
+import { APICourseDetails, APICoursesPath } from 'utils/api/responseTypes';
 import { CourseList, CourseStates, CourseValidation } from './courses';
-import { Term } from './planner';
 import { ProgramStructure } from './structure';
-import { APICourseDetails } from 'utils/api/responseTypes';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
@@ -42,10 +41,11 @@ export type UnselectCourses = {
   courses: CourseList;
 };
 
-export type CourseChildren = {
-  original: string;
-  courses: CourseList;
-};
+export type CourseChildren = APICoursesPath;
+// export type CourseChildren = {
+//   original: string;
+//   courses: CourseList;
+// };
 
 export type CoursePathFrom = {
   original: string;
