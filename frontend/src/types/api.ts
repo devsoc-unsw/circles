@@ -5,6 +5,7 @@ import {
   APIGraph,
   APIGraphEdge,
   APIPrograms,
+  APISearch,
   APISpecialisations,
   APISpecialisationTypes,
   APIStructure
@@ -40,7 +41,8 @@ export type Course = APICourseDetails;
 //   handbook_note: string;
 // };
 
-export type SearchCourse = Record<string, string>;
+export type SearchCourse = APISearch;
+// export type SearchCourse = Record<string, string>;
 
 export type CoursesAllUnlocked = {
   courses_state: Record<string, CourseValidation>;

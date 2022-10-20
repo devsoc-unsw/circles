@@ -74,6 +74,10 @@ export type APIPrograms = {
   programs: { [code: string]: string };
 };
 
+export type APISearch = {
+  [code: CourseCode]: string;
+};
+
 export type APISpecialisationTypes = {
   types: string[];
 };

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
-import axios from 'axios';
-import { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';
+import API from 'utils/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 
@@ -25,10 +24,7 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   useEffect(() => {
     const searchCourse = async (query: string) => {
       try {
-        const res = await axios.post<SearchCourse>(
-          `/courses/searchCourse/${query}`,
-          JSON.stringify(prepareUserPayload(degree, planner))
-        );
+        const res = await API.courses.search(query, prepareUserPayload(degree, planner));
         setCourses(
           Object.keys(res.data).map((course) => ({
             label: `${course}: ${res.data[course]}`,
