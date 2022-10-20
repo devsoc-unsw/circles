@@ -1,6 +1,8 @@
 import {
   APICourseDetails,
   APICoursesPath,
+  APIGraph,
+  APIGraphEdge,
   APIPrograms,
   APISpecialisations,
   APISpecialisationTypes,
@@ -80,15 +82,17 @@ export type StructureCourseList = {
   courses: CourseList;
 };
 
-export type CourseEdge = {
-  source: string;
-  target: string;
-};
+export type CourseEdge = APIGraphEdge;
+// export type CourseEdge = {
+//   source: string;
+//   target: string;
+// };
 
-export type GraphPayload = {
-  edges: CourseEdge[];
-  courses: CourseList;
-};
+export type GraphPayload = APIGraph;
+// export type GraphPayload = {
+//   edges: CourseEdge[];
+//   courses: CourseList;
+// };
 
 /* Specialisations api */
 

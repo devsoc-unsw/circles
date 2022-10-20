@@ -56,11 +56,13 @@ export type APICoursesUnlockedWhenTaken = {
   indirect_unlock: CourseCode[];
 };
 
+export type APIGraphEdge = {
+  source: CourseCode;
+  target: CourseCode;
+};
+
 export type APIGraph = {
-  edges: {
-    source: CourseCode;
-    target: CourseCode;
-  }[];
+  edges: APIGraphEdge[];
   courses: CourseCode[];
 };
 

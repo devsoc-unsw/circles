@@ -9,7 +9,8 @@ import {
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tabs, Tooltip } from 'antd';
 import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge, CoursesAllUnlocked } from 'types/api';
+import API from 'utils/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
@@ -127,9 +128,7 @@ const GraphicalSelector = () => {
 
     const setupGraph = async () => {
       try {
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
+        const res = await API.programs.graph(programCode, specs.join('+'));
         const { edges, courses } = res.data;
         if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
       } catch (e) {
