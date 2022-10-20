@@ -2,8 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
-import axios from 'axios';
-import { UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -51,10 +49,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
     try {
-      const res = await axios.post<UnselectCourses>(
-        `/courses/unselectCourse/${code}`,
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
+      const res = await API.courses.unselect(code, prepareUserPayload(degree, planner));
       dispatch(removeCourses(res.data.courses));
     } catch (err) {
       // eslint-disable-next-line no-console

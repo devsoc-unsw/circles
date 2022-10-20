@@ -1,4 +1,5 @@
 import {
+  APICourseCodes,
   APICourseDetails,
   APICoursesPath,
   APICoursesUnlockedWhenTaken,
@@ -48,9 +49,10 @@ export type CoursesAllUnlocked = {
   courses_state: Record<string, CourseValidation>;
 };
 
-export type UnselectCourses = {
-  courses: CourseList;
-};
+export type UnselectCourses = APICourseCodes;
+// export type UnselectCourses = {
+//   courses: CourseList;
+// };
 
 export type CourseChildren = APICoursesPath;
 // export type CourseChildren = {
