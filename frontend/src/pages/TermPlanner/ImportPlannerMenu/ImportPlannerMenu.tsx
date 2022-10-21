@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Button, Spin, Typography } from 'antd';
+import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
 import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
@@ -18,19 +18,15 @@ import {
 import CS from '../common/styles';
 import S from './styles';
 
-const { Text } = Typography;
-
 const ImportPlannerMenu = () => {
   const planner = useSelector((state: RootState) => state.planner);
-  const inputRef = useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const spinIcon = <LoadingOutlined style={{ fontSize: 28 }} spin />;
 
-  const download = async () => {
-    if (inputRef !== undefined) {
-      inputRef.current.click();
-    }
+  const download = () => {
+    inputRef.current?.click();
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +85,7 @@ const ImportPlannerMenu = () => {
           }
           fileInJson.years.forEach((year, yearIndex) => {
             Object.entries(year).forEach(([term, termCourses]) => {
-              termCourses.forEach(async (code, index: number) => {
+              termCourses.forEach(async (code, index) => {
                 const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
                 const courseData: PlannerCourse = {
                   title: course.title,
@@ -157,14 +153,12 @@ const ImportPlannerMenu = () => {
     <S.Wrapper style={{ width: '240px' }}>
       <CS.MenuHeader>Import</CS.MenuHeader>
       <CS.MenuDivider />
-      <CS.PopupEntry>
-        <CS.MenuText>File Type</CS.MenuText>
-        <Text>JSON</Text>
-      </CS.PopupEntry>
+      <div>Import an existing planner if you have exported it previously as a JSON file.</div>
+      <div>If you currently have courses planned, it may be merged with the imported planner.</div>
       <>
         <div style={{ display: 'flex' }}>
           <Button style={{ width: '150px', margin: '5px' }} onClick={download}>
-            Upload a file
+            Upload a planner
           </Button>
           {loading && <Spin indicator={spinIcon} />}
         </div>
