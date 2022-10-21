@@ -23,7 +23,6 @@ const ImportPlannerMenu = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const spinIcon = <LoadingOutlined style={{ fontSize: 28 }} spin />;
 
   const download = () => {
     inputRef.current?.click();
@@ -58,7 +57,6 @@ const ImportPlannerMenu = () => {
     reader.readAsText(e.target.files[0], 'UTF-8');
     reader.onload = (ev) => {
       if (ev.target !== null) {
-        setLoading(false);
         const content = ev.target.result;
         e.target.value = '';
 
@@ -129,7 +127,9 @@ const ImportPlannerMenu = () => {
               });
             });
           });
+          setLoading(false);
         } catch (err) {
+          setLoading(false);
           // eslint-disable-next-line no-console
           console.error('Error at uploadedJSONFile', err);
           openNotification({
@@ -148,6 +148,8 @@ const ImportPlannerMenu = () => {
       }
     };
   };
+
+  const spinIcon = <LoadingOutlined style={{ fontSize: 28 }} spin />;
 
   return (
     <S.Wrapper style={{ width: '240px' }}>
