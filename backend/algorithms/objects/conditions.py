@@ -358,7 +358,7 @@ class CoresCondition(Condition):
 
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         course_names = [var[0].Name() for var in courses]
-        does_match, relevant_courses = user.matches_core(course_names, self.category())
+        does_match, relevant_courses = user.matches_core(course_names, self.category)
         if not does_match:
             # if you can never match the core, gg
             return [model.AddBoolAnd(False)]
@@ -367,7 +367,7 @@ class CoresCondition(Condition):
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         course_names = [var[0].Name() for var in courses]
-        does_match, relevant_courses = user.matches_core(course_names, self.category())
+        does_match, relevant_courses = user.matches_core(course_names, self.category)
         if not does_match:
             # if you cant match the core, youre good
             return [model.AddBoolAnd(True)]
