@@ -21,7 +21,7 @@ def major_minor_for_program(draw):
     for t in requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisationTypes/{program}").json()["types"]:
         majorsRequest = requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/{t}")
         majorsRequestJson = majorsRequest.json()['spec'] if majorsRequest.status_code == 200 else {}
-        possible_specs.extend(sum((prog['specs'].keys() for prog in majorsRequestJson.values()), []))
+        possible_specs.extend(sum((list(prog['specs'].keys()) for prog in majorsRequestJson.values()), []))
 
 
     # select doubles
