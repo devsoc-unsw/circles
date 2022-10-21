@@ -4,7 +4,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin, Typography } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
-import { PlannerCourse, PlannerYear, Term } from 'types/planner';
+import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import {
@@ -19,13 +19,6 @@ import CS from '../common/styles';
 import S from './styles';
 
 const { Text } = Typography;
-type FileJSONFormat = {
-  startYear: number;
-  numYears: number;
-  isSummerEnabled: boolean;
-  years: PlannerYear[];
-  version: number;
-};
 
 const ImportPlannerMenu = () => {
   const planner = useSelector((state: RootState) => state.planner);
@@ -41,15 +34,6 @@ const ImportPlannerMenu = () => {
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const plannedCourses: string[] = [];
-    planner.years.forEach((year) => {
-      Object.values(year).forEach((termKey) => {
-        termKey.forEach((code) => {
-          plannedCourses.push(code);
-        });
-      });
-    });
-
     if (e.target.files === null) {
       return;
     }
@@ -63,6 +47,16 @@ const ImportPlannerMenu = () => {
       e.target.value = '';
       return;
     }
+
+    const plannedCourses: string[] = [];
+    planner.years.forEach((year) => {
+      Object.values(year).forEach((termKey) => {
+        termKey.forEach((code) => {
+          plannedCourses.push(code);
+        });
+      });
+    });
+
     setLoading(true);
     const reader = new FileReader();
     reader.readAsText(e.target.files[0], 'UTF-8');
@@ -73,7 +67,7 @@ const ImportPlannerMenu = () => {
         e.target.value = '';
 
         try {
-          const fileInJson = JSON.parse(content as string) as FileJSONFormat;
+          const fileInJson = JSON.parse(content as string) as JSONPlanner;
           if (
             !Object.prototype.hasOwnProperty.call(fileInJson, 'startYear') ||
             !Object.prototype.hasOwnProperty.call(fileInJson, 'numYears') ||
@@ -83,7 +77,7 @@ const ImportPlannerMenu = () => {
           ) {
             openNotification({
               type: 'error',
-              message: 'Invalid structure of the json file',
+              message: 'Invalid structure of the JSON file',
               description: 'The structure of the JSON file is not valid.'
             });
             return;
@@ -141,11 +135,11 @@ const ImportPlannerMenu = () => {
           });
         } catch (err) {
           // eslint-disable-next-line no-console
-          console.log('Error at uploadedJSONFile', err);
+          console.error('Error at uploadedJSONFile', err);
           openNotification({
             type: 'error',
             message: 'Invalid JSON format',
-            description: 'The uploaded json file maybe content SyntaxError'
+            description: 'An error occured when parsing the JSON file'
           });
           return;
         }
