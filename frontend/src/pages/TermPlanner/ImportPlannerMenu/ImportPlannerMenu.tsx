@@ -24,7 +24,7 @@ const ImportPlannerMenu = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  const download = () => {
+  const upload = () => {
     inputRef.current?.click();
   };
 
@@ -159,7 +159,7 @@ const ImportPlannerMenu = () => {
       <div>If you currently have courses planned, it may be merged with the imported planner.</div>
       <>
         <div style={{ display: 'flex' }}>
-          <Button style={{ width: '150px', margin: '5px' }} onClick={download}>
+          <Button style={{ width: '150px', margin: '5px' }} onClick={upload}>
             Upload a planner
           </Button>
           {loading && <Spin indicator={spinIcon} />}
