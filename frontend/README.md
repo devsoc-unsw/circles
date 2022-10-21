@@ -50,7 +50,7 @@ To see what containers are running, use `docker ps`. To see all containers, incl
 
 For FE development, it is probably easier to hit the live instance of circlesapi and run the FE locally. You can do this by doing:
 ```bash
-npm install # install dependancies
+npm install # install dependencies
 npm start
 ```
 
@@ -63,5 +63,5 @@ To stop a docker containers that is running, run `docker-compose stop <container
 
 ### Running Circles without Docker
 It is now possible to run Circles without docker, and have your changes to the backend codebase be reflected in the development server. To do this, ensure nodemon is installed on your linux distribution by running `npm i -g nodemon`. Nodemon is a node package which automatically restarts an app when it detects code changes. 
-You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependancies).
+You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependencies).
  Ensure your python3 version is set to 3.10. All parts of the app should now be running and talking to eachother. 

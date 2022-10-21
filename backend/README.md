@@ -44,7 +44,7 @@ Every once in a while, you will want to clean up docker. To do this, use `docker
 assuming that you correctly followed the steps above, you can run all of circles by using `docker compose up frontend` in a dev environment which will reflect your changes. If you change anything related to `database.py`, you will need to rebuild it to refect the changes.
 #### without Docker
 It is possible to run Circles without docker, to conserve system resources if it is taking too much of a toll. To do this, ensure nodemon is installed on your linux distribution by running `npm i -g nodemon`. Nodemon is a node package which automatically restarts an app when it detects code changes. 
-You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependancies).
+You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependencies).
 Ensure your python3 version is set to 3.10. All parts of the app should now be running and talking to eachother. 
 
 If you have having trouble with `python not found`, manually choose what python version is being run by adding `PYTHON_VERSION=python3` or, any version of your choosing in `backend.env`.
