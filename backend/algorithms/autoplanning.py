@@ -20,7 +20,7 @@ def map_course_to_var(course: Course, variables: list[cp_model.IntVar]):
 def convert_to_term_year(number: int, start: Tuple[int, int]):
     return (number // 4 + start[0], number % 4 + start[1])
 
-def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]):
+def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]) -> int | list[Tuple[str, Tuple[int, int]]]:
     """
     given a list of courses, we will fill our terms in a valid ordering.
     we will enforce that:
