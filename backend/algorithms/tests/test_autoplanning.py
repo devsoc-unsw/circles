@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from pytest import raises
 from algorithms.autoplanning import autoplan, terms_between
 from algorithms.objects.course import Course
