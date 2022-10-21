@@ -18,14 +18,14 @@ MongoDB and the backend require a few environment variables to get started. In t
 
 In `backend.env`, add the environment variables:
 
-- `MONGODB_USERNAME=...`
-- `MONGODB_PASSWORD=...`
+- `MONGODB_USERNAME=name`
+- `MONGODB_PASSWORD=name`
 - `MONGODB_SERVICE_HOSTNAME=mongodb`
 
 In `mongodb.env`, add:
 
-- `MONGO_INITDB_ROOT_USERNAME=...`
-- `MONGO_INITDB_ROOT_PASSWORD=...`
+- `MONGO_INITDB_ROOT_USERNAME=name`
+- `MONGO_INITDB_ROOT_PASSWORD=name`
 
 In `frontend.env`, add:
 
@@ -46,8 +46,15 @@ You will now have the backend API available on `localhost:8000/docs` and the fro
 Note that changes to the frontend React code will be visible live while developing due to the bind mount in the docker-compose file (see line 37). It is not necessary to rebuild the images to view the frontend changes.
 
 To see what containers are running, use `docker ps`. To see all containers, including stopped containers, add option `-a`. You can remove a particular container using `docker rm <container>`. Another handy command is `docker logs <containerName>` to view a container's output.
+#### Running against live backend
 
+For FE development, it is probably easier to hit the live instance of circlesapi and run the FE locally. You can do this by doing:
+```bash
+npm install # install dependancies
+npm start
+```
 
+you can also hit a local BE by using `npm start:local`.
 ### Removing Docker Containers
 
 To remove all containers and the docker network, run `docker-compose down`. Add the option `-v` to also remove persistent volumes: that is, the mongoDB data. I tend to run this before I rebuild if I have made changes to the backend code to keep everything clean on my system.
