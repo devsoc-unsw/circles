@@ -5,6 +5,11 @@ specifically in any one function
 
 
 from typing import Any, Callable, List
+from algorithms.objects.course import Course
+from data.utility import data_helpers
+from server.routers.model import CONDITIONS
+
+COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs) -> Any:
     """
@@ -32,3 +37,13 @@ def get_core_courses(program: str, specialisations: list[str]):
             if "Major" in spec_name or "Honours" in spec_name)
          , [])
 
+
+def get_course(code: str) -> Course:
+    """ TODO: get proper Course """
+    return Course(
+        code,
+        CONDITIONS[code],
+        100,
+        COURSES[code]["UOC"],
+        {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]},
+    )
