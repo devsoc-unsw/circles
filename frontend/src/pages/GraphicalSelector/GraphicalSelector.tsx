@@ -38,12 +38,12 @@ const GraphicalSelector = () => {
   const [unlockedCourses, setUnlockedCourses] = useState(false);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
 
-  const ref = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     // courses is a list of course codes
     const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
-      const container = ref.current;
+      const container = containerRef.current;
       if (!container) return;
 
       const { Graph, Arrow } = await import('@antv/g6');
@@ -57,10 +57,13 @@ const GraphicalSelector = () => {
           default: ['drag-canvas', 'zoom-canvas']
         },
         layout: {
-          type: 'comboCombined',
+          type: 'gForce',
+          linkDistance: 500,
+          nodeStrength: 2500,
           preventOverlap: true,
-          nodeSpacing: 10,
-          linkDistance: 500
+          onLayoutEnd: () => {
+            setLoading(false);
+          }
         },
         animate: true, // Boolean, whether to activate the animation when global changes happen
         animateCfg: {
@@ -142,7 +145,6 @@ const GraphicalSelector = () => {
         // eslint-disable-next-line no-console
         console.error('Error at setupGraph', e);
       }
-      setLoading(false);
     };
 
     if (!graphRef.current) setupGraph();
@@ -208,7 +210,10 @@ const GraphicalSelector = () => {
 
   useEffect(() => {
     // resize canvas size when sidebar state changes
-    graphRef.current?.changeSize(ref.current?.scrollWidth ?? 0, ref.current?.scrollHeight ?? 0);
+    graphRef.current?.changeSize(
+      containerRef.current?.scrollWidth ?? 0,
+      containerRef.current?.scrollHeight ?? 0
+    );
   }, [sidebar]);
 
   useEffect(() => {
@@ -237,9 +242,11 @@ const GraphicalSelector = () => {
   return (
     <PageTemplate>
       <S.Wrapper>
-        <S.GraphPlaygroundWrapper ref={ref}>
+        <S.GraphPlaygroundWrapper ref={containerRef}>
           {loading ? (
-            <Spinner text="Loading graph..." />
+            <S.SpinnerWraper>
+              <Spinner text="Loading graph..." />
+            </S.SpinnerWraper>
           ) : (
             <>
               <S.SearchBarWrapper>

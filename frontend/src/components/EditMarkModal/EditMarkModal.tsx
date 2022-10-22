@@ -60,7 +60,7 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   return (
     <Modal
       title={`Edit mark for ${code}`}
-      visible={isVisible}
+      open={isVisible}
       onOk={handleUpdateMark}
       onCancel={() => setIsVisible(false)}
       width="350px"

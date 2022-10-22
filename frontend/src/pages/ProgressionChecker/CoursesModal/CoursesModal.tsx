@@ -41,7 +41,7 @@ const CoursesModal = ({ title, courses, modalVisible, setModalVisible }: Props) 
         </S.ModalHeader>
       }
       width="625px"
-      visible={modalVisible}
+      open={modalVisible}
       onCancel={() => setModalVisible(false)}
       footer={null}
     >
