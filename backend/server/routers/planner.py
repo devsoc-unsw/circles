@@ -93,10 +93,10 @@ def validate_term_planner(plannerData: PlannerData):
 )
 def autoplanning(courseCodes: List, userData: UserData, programTime: ProgramTime) -> Dict:
 
-    courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
     user = User(dict(userData))
 
     try:
+        courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
