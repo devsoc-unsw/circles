@@ -46,7 +46,6 @@ def get_course_object(code: str, progTime: ProgramTime) -> Course:
     '''
     from server.routers.courses import terms_offered
     years = "+".join(str(year) for year in range(progTime.startTime[0], progTime.endTime[0] + 1))
-    print(years)
     terms_result = terms_offered(code, years)["terms"]
 
     new_terms_offered = {}

@@ -92,7 +92,6 @@ def validate_term_planner(plannerData: PlannerData):
     }
 )
 def autoplanning(courseCodes: List, userData: UserData, programTime: ProgramTime) -> Dict:
-
     user = User(dict(userData))
 
     try:
