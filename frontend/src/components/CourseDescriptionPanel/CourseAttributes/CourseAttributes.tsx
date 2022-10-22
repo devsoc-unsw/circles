@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
-import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
+import { APICourse } from 'utils/api/types/responses';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { TERM } from 'config/constants';
@@ -11,7 +11,7 @@ import S from './styles';
 const { Title, Text } = Typography;
 
 type CourseAttributesProps = {
-  course: Course;
+  course: APICourse;
   courseCapacity?: EnrolmentCapacityData;
 };
 

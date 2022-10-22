@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { Course } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/api/prepareUserPayload';
+import { APICourse } from 'utils/api/types/responses';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
 interface PlannerButtonProps {
-  course: Course;
+  course: APICourse;
 }
 
 const PlannerButton = ({ course }: PlannerButtonProps) => {

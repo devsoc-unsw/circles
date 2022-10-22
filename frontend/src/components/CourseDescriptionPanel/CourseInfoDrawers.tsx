@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
+import { APICourse, APICoursesUnlockedWhenTaken } from 'utils/api/types/responses';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';
@@ -9,9 +9,9 @@ import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 
 type CourseInfoDrawersProps = {
-  course: Course;
+  course: APICourse;
   pathFrom?: CourseList;
-  unlocked?: CoursesUnlockedWhenTaken;
+  unlocked?: APICoursesUnlockedWhenTaken;
   onCourseClick?: (code: string) => void;
 };
 

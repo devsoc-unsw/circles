@@ -8,9 +8,9 @@ import {
 } from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tabs, Tooltip } from 'antd';
-import { CourseEdge } from 'types/api';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/api/prepareUserPayload';
+import { APIGraphEdge } from 'utils/api/types/responses';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
@@ -40,7 +40,7 @@ const GraphicalSelector = () => {
 
   useEffect(() => {
     // courses is a list of course codes
-    const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
+    const initialiseGraph = async (courses: string[], courseEdges: APIGraphEdge[]) => {
       const container = ref.current;
       if (!container) return;
       const { Graph, Arrow } = await import('@antv/g6');

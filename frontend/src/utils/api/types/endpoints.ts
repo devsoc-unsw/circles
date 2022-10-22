@@ -5,7 +5,7 @@ import { CourseCode } from './common';
 import { APIPlannerData, APIUserData } from './requests';
 import {
   APICourseCodes,
-  APICourseDetails,
+  APICourse,
   APICourses,
   APICoursesPath,
   APICoursesState,
@@ -27,14 +27,14 @@ interface PlannerEndpoints {
 
 interface CoursesEndpoints {
   jsonified: (courseCode: CourseCode) => Promise<AxiosResponse<string>>;
-  course: (courseCode: CourseCode) => Promise<AxiosResponse<APICourseDetails>>;
+  course: (courseCode: CourseCode) => Promise<AxiosResponse<APICourse>>;
   search: (
     searchString: string,
     userData: APIUserData | string
   ) => Promise<AxiosResponse<APISearch>>;
   allUnlocked: (userData: APIUserData | string) => Promise<AxiosResponse<APICoursesState>>;
   legacyCourses: (year: string, term: string) => Promise<AxiosResponse<APIProgramCourses>>;
-  legacyCourse: (year: string, courseCode: CourseCode) => Promise<AxiosResponse<APICourseDetails>>;
+  legacyCourse: (year: string, courseCode: CourseCode) => Promise<AxiosResponse<APICourse>>;
   unselect: (
     courseCode: CourseCode,
     userData: APIUserData | string

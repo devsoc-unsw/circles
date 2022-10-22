@@ -11,7 +11,7 @@ export type APICourseCodes = {
   courses: CourseCode[];
 };
 
-export type APICourseDetails = {
+export type APICourse = {
   title: string;
   code: string;
   UOC: UOC;

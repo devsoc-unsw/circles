@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/api/prepareUserPayload';
-import { APICourseDetails } from 'utils/api/types/responses';
+import { APICourse, APICoursesUnlockedWhenTaken } from 'utils/api/types/responses';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import {
   LoadingCourseDescriptionPanel,
@@ -35,9 +34,9 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   const showAttributesSidebar = !!(pathname === '/course-selector');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [course, setCourse] = useState<APICourseDetails>();
+  const [course, setCourse] = useState<APICourse>();
   const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>();
-  const [coursesUnlocked, setCoursesUnlocked] = useState<CoursesUnlockedWhenTaken>();
+  const [coursesUnlocked, setCoursesUnlocked] = useState<APICoursesUnlockedWhenTaken>();
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>();
 
   function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {

@@ -1,11 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { Course } from 'types/api';
 import { CourseValidation } from 'types/courses';
+import { APICourse } from 'utils/api/types/responses';
 
 type CoursesSliceState = {
   courses: Record<string, CourseValidation>;
-  course: Course | null;
+  course: APICourse | null;
 };
 
 const initialState: CoursesSliceState = {
@@ -20,7 +20,7 @@ const coursesSplice = createSlice({
     setCourses: (state, action: PayloadAction<Record<string, CourseValidation>>) => {
       state.courses = action.payload;
     },
-    setCourse: (state, action: PayloadAction<Course>) => {
+    setCourse: (state, action: PayloadAction<APICourse>) => {
       state.course = action.payload;
     },
     resetCourses: () => initialState
