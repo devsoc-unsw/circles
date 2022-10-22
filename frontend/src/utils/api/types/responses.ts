@@ -93,8 +93,12 @@ export type APISpecialisations = {
 };
 
 export type APIStructure = {
-  structure: { [group: string]: APIStructureContainer };
+  structure: APIProgramStructure;
   uoc: UOC;
+};
+
+export type APIProgramStructure = {
+  [group: string]: APIStructureContainer;
 };
 
 type APIStructureContainer = {

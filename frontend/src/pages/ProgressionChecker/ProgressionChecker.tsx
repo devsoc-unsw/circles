@@ -14,8 +14,8 @@ import {
   ViewSubgroup,
   ViewSubgroupCourse
 } from 'types/progressionViews';
-import { ProgramStructure } from 'types/structure';
 import API from 'utils/api';
+import { APIProgramStructure } from 'utils/api/types/responses';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
@@ -32,7 +32,7 @@ const { Title } = Typography;
 
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [structure, setStructure] = useState<ProgramStructure>({});
+  const [structure, setStructure] = useState<APIProgramStructure>({});
   const [uoc, setUoc] = useState(0);
 
   const { programCode, specs } = useSelector((state: RootState) => state.degree);

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
-import { ProgramStructure } from 'types/structure';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/api/prepareUserPayload';
+import { APIProgramStructure } from 'utils/api/types/responses';
 import getNumTerms from 'utils/getNumTerms';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
@@ -16,7 +16,7 @@ import CourseTitle from './CourseTitle';
 import S from './styles';
 
 type Props = {
-  structure: ProgramStructure;
+  structure: APIProgramStructure;
 };
 
 type SubgroupTitleProps = {

@@ -4,7 +4,7 @@ import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
-import { ProgramStructure } from 'types/structure';
+import { APIProgramStructure } from 'utils/api/types/responses';
 import getNumTerms from 'utils/getNumTerms';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
@@ -22,7 +22,7 @@ type StoreUOC = {
 
 type Props = {
   isLoading: boolean;
-  structure: ProgramStructure;
+  structure: APIProgramStructure;
   totalUOC: number;
   freeElectivesUOC: number;
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ProgramStructure } from 'types/structure';
 import API from 'utils/api';
+import { APIProgramStructure } from 'utils/api/types/responses';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
@@ -14,7 +14,7 @@ import CourseTabs from './CourseTabs';
 import S from './styles';
 
 const CourseSelector = () => {
-  const [structure, setStructure] = useState<ProgramStructure>({});
+  const [structure, setStructure] = useState<APIProgramStructure>({});
 
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses } = useSelector((state: RootState) => state.planner);
