@@ -31,7 +31,7 @@ describe('ResetModal', () => {
   });
 
   it('should render', () => {
-    renderWithProviders(<ResetModal open />);
+    renderWithProviders(<ResetModal open={false} />);
     expect(screen.queryByText('Reset Planner?')).not.toBeInTheDocument();
   });
 
