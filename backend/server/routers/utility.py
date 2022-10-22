@@ -8,6 +8,7 @@ from typing import Any, Callable, List
 from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
+from typing import List, Dict
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
@@ -38,17 +39,17 @@ def get_core_courses(program: str, specialisations: list[str]):
          , [])
 
 
-def get_course(code: str, progTime: ProgramTime) -> Course:
+def get_course_object(code: str, progTime: ProgramTime) -> Course:
     ''' 
     This return the Course object for the given course code.
     Note the difference between this and the get_course function in courses.py
     '''
     from server.routers.courses import terms_offered
     years = "+".join(str(year) for year in range(progTime.startTime[0], progTime.endTime[0] + 1))
-    terms_offered = terms_offered(code, years)["terms"]
+    terms_result = terms_offered(code, years)["terms"]
 
-    new_terms_offered = {}
-    for year, terms in terms_offered.items():
+    new_terms_offered = Dict({})
+    for year, terms in terms_result.items():
         new_terms_offered[int(year)] = list(map(lambda x: int(x[1]), terms))
 
     return Course(

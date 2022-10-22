@@ -1,15 +1,16 @@
 """
 route for planner algorithms
 """
-from typing import Tuple
+from typing import Tuple, List, Dict
 from fastapi import APIRouter, HTTPException
-from server.routers.utility import get_course
 from algorithms.validate_term_planner import validate_terms
 from algorithms.autoplanning import autoplan
 from algorithms.objects.user import User
 from algorithms.objects.course import Course
 from server.routers.model import (ValidCoursesState, PlannerData, ValidPlannerData, 
                                 CourseCodes, UserData, ProgramTime)
+from server.routers.courses import get_course
+from server.routers.utility import get_course_object
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
@@ -90,9 +91,9 @@ def validate_term_planner(plannerData: PlannerData):
         }
     }
 )
-def autoplanning(courseCodes: list, userData: UserData, programTime: ProgramTime):
+def autoplanning(courseCodes: List, userData: UserData, programTime: ProgramTime) -> Dict:
 
-    courses = [get_course(courseCode, programTime) for courseCode in courseCodes]
+    courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
     user = User(dict(userData))
 
     try:
@@ -100,7 +101,8 @@ def autoplanning(courseCodes: list, userData: UserData, programTime: ProgramTime
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
     
-    result = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
+    result: Dict = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
+
     for course in autoplanned:
         result["plan"][course[1][0] - programTime.startTime[0]].setdefault(f'T{course[1][1]}', []).append(course[0])
     return result
