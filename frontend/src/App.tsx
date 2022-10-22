@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
@@ -12,7 +13,6 @@ import './config/axios';
 import 'antd/dist/antd.less';
 
 // Lazy load in pages
-const ErrorBoundary = React.lazy(() => import('./components/ErrorBoundary'));
 const CourseSelector = React.lazy(() => import('./pages/CourseSelector'));
 const DegreeWizard = React.lazy(() => import('./pages/DegreeWizard'));
 const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
@@ -26,8 +26,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <Suspense fallback={<PageLoading />}>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoading />}>
           <Router>
             <Routes>
               {inDev && <Route path="/landing-page" element={<LandingPage />} />}
@@ -39,8 +39,8 @@ const App = () => {
               <Route path="*" element={<Page404 />} />
             </Routes>
           </Router>
-        </ErrorBoundary>
-      </Suspense>
+        </Suspense>
+      </ErrorBoundary>
     </ThemeProvider>
   );
 };
