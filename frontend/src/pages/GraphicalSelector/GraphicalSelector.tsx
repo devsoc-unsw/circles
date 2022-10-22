@@ -35,7 +35,7 @@ const GraphicalSelector = () => {
   const [loading, setLoading] = useState(true);
   const [sidebar, setSidebar] = useState(true);
   const [courseCode, setCourseCode] = useState<string | null>(null);
-  const [showUnlockedOnly, setShowUnlockedOnly] = useState(false);
+  const [unlockedCourses, setUnlockedCourses] = useState(false);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -181,15 +181,6 @@ const GraphicalSelector = () => {
     }
   }, [degree, planner]);
 
-  const handleToggleCourses = async () => {
-    if (showUnlockedOnly) {
-      showUnlockedCourses();
-    } else {
-      showAllCourses();
-    }
-    setShowUnlockedOnly((prevState) => !prevState);
-  };
-
   const handleFocusCourse = (code: string) => {
     graphRef.current?.focusItem(code);
     setCourseCode(code);
@@ -221,8 +212,9 @@ const GraphicalSelector = () => {
   }, [sidebar]);
 
   useEffect(() => {
-    showUnlockedCourses();
-  }, [planner.courses, showUnlockedCourses, graphRef]);
+    if (unlockedCourses) showUnlockedCourses();
+    else showAllCourses();
+  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
 
   const items = [
     {
@@ -255,7 +247,10 @@ const GraphicalSelector = () => {
               </S.SearchBarWrapper>
               <S.ToolsWrapper>
                 Show All Courses
-                <Switch defaultChecked={showUnlockedOnly} onChange={handleToggleCourses} />
+                <Switch
+                  checked={!unlockedCourses}
+                  onChange={() => setUnlockedCourses((prevState) => !prevState)}
+                />
                 <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
                 <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
                 <Button
