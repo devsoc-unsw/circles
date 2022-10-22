@@ -48,7 +48,7 @@ def get_course_object(code: str, progTime: ProgramTime) -> Course:
     years = "+".join(str(year) for year in range(progTime.startTime[0], progTime.endTime[0] + 1))
     terms_result = terms_offered(code, years)["terms"]
 
-    new_terms_offered = Dict({})
+    new_terms_offered = {}
     for year, terms in terms_result.items():
         new_terms_offered[int(year)] = list(map(lambda x: int(x[1]), terms))
 
