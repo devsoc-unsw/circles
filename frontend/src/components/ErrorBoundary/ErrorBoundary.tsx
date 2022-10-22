@@ -71,6 +71,10 @@ class ErrorBoundary extends React.Component<Props, State> {
               to inform us how the error occurred! Please also include brief description on the
               steps that led up to the error and a copy of the error messages seen below.
             </p>
+            <p>
+              If you are seeing this page often, try to reset your data by clicking the &apos;Reset
+              Data&apos; button. Otherwise, you can return back to planning your future degree!
+            </p>
             <Space wrap>
               <Button onClick={gotoCourses} type="primary">
                 Return to Circles
