@@ -27,6 +27,7 @@ from server.routers.model import (
 )
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
+
 router = APIRouter(
     prefix="/programs",
     tags=["programs"],
@@ -353,6 +354,7 @@ def get_cores(programCode: str, spec: str):
 ###############################################################
 #                       End of Routes                         #
 ###############################################################
+
 
 def course_list_from_structure(structure: dict) -> list[str]:
     """

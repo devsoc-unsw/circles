@@ -78,7 +78,7 @@ const Header = () => {
 
       {isSmall ? smallHeader : largeHeader}
 
-      <Drawer onClose={() => setShowDrawer(false)} visible={showDrawer}>
+      <Drawer onClose={() => setShowDrawer(false)} open={showDrawer}>
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>
     </S.HeaderWrapper>
