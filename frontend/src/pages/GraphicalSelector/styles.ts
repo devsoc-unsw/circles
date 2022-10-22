@@ -47,6 +47,10 @@ const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
   & h3.ant-typography {
     font-size: 20px !important;
   }
+
+  & h2.ant-typography {
+    font-size: 26px !important;
+  }
 `;
 
 export default {
