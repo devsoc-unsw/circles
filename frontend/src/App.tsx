@@ -1,19 +1,18 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import LandingPage from 'pages/LandingPage';
-import './App.less';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';
 
 // Lazy load in pages
-const ErrorBoundary = React.lazy(() => import('./components/ErrorBoundary'));
 const CourseSelector = React.lazy(() => import('./pages/CourseSelector'));
 const DegreeWizard = React.lazy(() => import('./pages/DegreeWizard'));
 const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
@@ -24,13 +23,24 @@ const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
+  const degree = useSelector((state: RootState) => state.degree);
+
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <Suspense fallback={<PageLoading />}>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoading />}>
           <Router>
             <Routes>
+              <Route
+                path="/"
+                element={
+                  <Navigate
+                    to={!degree.isComplete ? '/degree-wizard' : '/course-selector'}
+                    replace
+                  />
+                }
+              />
               {inDev && <Route path="/landing-page" element={<LandingPage />} />}
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
@@ -40,8 +50,8 @@ const App = () => {
               <Route path="*" element={<Page404 />} />
             </Routes>
           </Router>
-        </ErrorBoundary>
-      </Suspense>
+        </Suspense>
+      </ErrorBoundary>
     </ThemeProvider>
   );
 };

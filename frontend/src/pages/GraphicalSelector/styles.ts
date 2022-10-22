@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
 const Wrapper = styled.div`
   height: calc(100vh - var(--navbar-height));
@@ -13,6 +14,7 @@ const GraphPlaygroundWrapper = styled.div`
   border: #c2c2c2 solid 1px;
   overflow: hidden;
   flex: 5;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -42,10 +44,29 @@ const ToolsWrapper = styled.div`
   gap: 10px;
 `;
 
+const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
+  & h3.ant-typography {
+    font-size: 20px !important;
+  }
+
+  & h2.ant-typography {
+    font-size: 26px !important;
+  }
+`;
+
+const SpinnerWraper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 export default {
+  CourseDescriptionPanel,
   Wrapper,
   GraphPlaygroundWrapper,
   SidebarWrapper,
   SearchBarWrapper,
+  SpinnerWraper,
   ToolsWrapper
 };

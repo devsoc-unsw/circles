@@ -17,49 +17,36 @@ type CourseAttributesProps = {
 
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
-  const showAttributesSidebar = !!(pathname === '/course-selector');
+  const sidebar = !!(pathname === '/course-selector');
 
-  const termTags = course.terms?.length
-    ? course.terms.map((term) => {
+  const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
+
+  const termTags = terms?.length
+    ? terms.map((term) => {
         const termNo = term.slice(1);
         return <TermTag key={term} name={term === 'T0' ? 'Summer' : `Term ${termNo}`} />;
       })
     : 'None';
 
-  const handbookLink = course.study_level && (
-    <a
-      href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2023/${
-        course.code
-      }/`}
-      target="_blank"
-      rel="noreferrer"
-    >
-      View {course.code} in handbook
-    </a>
-  );
-
-  if (!showAttributesSidebar) {
+  if (!sidebar) {
     return (
       <div>
-        <S.TermWrapper>
-          <Text strong>Terms: </Text>
-          {termTags}
-        </S.TermWrapper>
+        <S.TermWrapper>{termTags !== 'None' && termTags}</S.TermWrapper>
         <S.AttributesWrapperConcise>
           <S.AttributeConcise>
             <div>
-              <Text>{course.study_level}</Text>
+              <Text>{studyLevel}</Text>
             </div>
             <div>
-              <Text>{course.campus}</Text>
+              <Text>{campus}</Text>
             </div>
           </S.AttributeConcise>
           <S.AttributeConcise>
-            <Text>{course.school}</Text>
+            <Text>{school}</Text>
           </S.AttributeConcise>
           <S.AttributeConcise>
             <div>
-              <Text strong>{course.UOC} UOC</Text>
+              <Text strong>{UOC} UOC</Text>
             </div>
             <div>
               <Text>View Handbook</Text>
@@ -70,58 +57,76 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
     );
   }
 
+  // course selector attribute view
+  const courseAttributesData = course
+    ? [
+        {
+          title: 'Offering Terms',
+          content: termTags
+        },
+        {
+          title: 'UNSW Handbook',
+          content: studyLevel ? (
+            <a
+              href={`https://www.handbook.unsw.edu.au/${studyLevel.toLowerCase()}/courses/2023/${code}/`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View {code} in handbook
+            </a>
+          ) : null
+        },
+        {
+          title: 'School',
+          content: school
+        },
+        {
+          title: 'Study Level',
+          content: studyLevel
+        },
+        {
+          title: 'Campus',
+          content: campus
+        },
+        {
+          title: 'Course Capacity',
+          content:
+            courseCapacity && Object.keys(courseCapacity).length ? (
+              <>
+                <div>
+                  {courseCapacity.capacity} Students for {TERM}
+                </div>
+                <ProgressBar
+                  progress={
+                    Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
+                  }
+                />
+              </>
+            ) : (
+              <p>No data available</p>
+            )
+        },
+        {
+          title: 'Units of Credit',
+          content: UOC
+        }
+      ]
+    : [];
+
   return (
-    <div>
-      <S.Attribute>
-        <Title level={3} className="text">
-          Offering Terms
-        </Title>
-        {termTags}
-      </S.Attribute>
-      <S.Attribute>
-        <Title level={3} className="text">
-          UNSW Handbook
-        </Title>
-        {handbookLink}
-      </S.Attribute>
-      <S.Attribute>
-        <Title level={3} className="text">
-          School
-        </Title>
-        {course.school}
-      </S.Attribute>
-      <S.Attribute>
-        <Title level={3} className="text">
-          Study Level
-        </Title>
-        {course.study_level}
-      </S.Attribute>
-      <S.Attribute>
-        <Title level={3} className="text">
-          Campus
-        </Title>
-        {course.campus}
-      </S.Attribute>
-      {courseCapacity && (
-        <S.Attribute>
-          <Title level={3} className="text">
-            Course Capacity
-          </Title>
-          <div>
-            {courseCapacity.capacity} Students for {TERM}
-          </div>
-          <ProgressBar
-            progress={Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10}
-          />
-        </S.Attribute>
+    <>
+      {courseAttributesData.map(
+        ({ title, content }) =>
+          content && (
+            <S.AttributeWrapper>
+              <Title level={3} className="text">
+                {title}
+              </Title>{' '}
+              <S.AttributeText>{content}</S.AttributeText>{' '}
+            </S.AttributeWrapper>
+          )
       )}
-      <S.Attribute>
-        <Title level={3} className="text">
-          Units of Credit
-        </Title>
-        {course.UOC}
-      </S.Attribute>
-    </div>
+    </>
   );
 };
 

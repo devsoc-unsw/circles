@@ -31,20 +31,14 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
     `}
 `;
 
-const CollapsibleContent = styled.div<{ collapsed: boolean }>`
-  transition: 250ms;
-  width: 100%;
-  padding: 10px 35px;
-
-  ${({ collapsed }) =>
-    collapsed &&
-    css`
-      height: 0px;
-      opacity: 0px;
-      display: none;
-      transition: 250ms;
-      width: 100%;
-    `}
-`;
+const CollapsibleContent = styled.div(
+  ({ collapsed }: { collapsed: boolean }) => css`
+    width: 100%;
+    margin: 10px;
+    max-height: ${collapsed ? 0 : 4000}px;
+    transition: max-height 0.4s ease-in-out;
+    overflow: hidden;
+  `
+);
 
 export default { CollapsibleHeader, CollapsibleContent, CollapseButton };
