@@ -65,6 +65,7 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
       }
     };
     getCourseInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseCode]);
 
   if (isLoading || !course) {

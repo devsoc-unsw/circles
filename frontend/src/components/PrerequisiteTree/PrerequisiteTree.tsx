@@ -116,6 +116,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       setLoading(false);
     };
     if (courseCode) setupGraph(courseCode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseCode, degree, dispatch, graph, planner]);
 
   return (
