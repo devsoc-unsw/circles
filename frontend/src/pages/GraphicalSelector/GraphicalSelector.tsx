@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   ExpandAltOutlined,
@@ -6,8 +6,8 @@ import {
   ZoomInOutlined,
   ZoomOutOutlined
 } from '@ant-design/icons';
-import type { Graph, INode, Item } from '@antv/g6';
-import { Button, Switch, Tabs, Tooltip } from 'antd';
+import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
+import { Button, Switch, Tabs } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -15,14 +15,16 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import GRAPH_STYLE from './config';
+import {
+  COURSE_INFO_TAB,
+  HELP_TAB,
+  PROGRAM_STRUCTURE_TAB,
+  ZOOM_IN_RATIO,
+  ZOOM_OUT_RATIO
+} from './constants';
+import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
 import HowToUse from './HowToUse';
 import S from './styles';
-import handleNodeData from './utils';
-
-const ZOOM_RATIO = 0.2;
-const ZOOM_IN_RATIO = 1 + ZOOM_RATIO;
-const ZOOM_OUT_RATIO = 1 - ZOOM_RATIO;
 
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
@@ -32,8 +34,9 @@ const GraphicalSelector = () => {
   const graphRef = useRef<Graph | null>(null);
   const [loading, setLoading] = useState(true);
   const [sidebar, setSidebar] = useState(true);
-  const [courseCode, setCourseCode] = useState<string>();
-  const [showUnlockedOnly, setShowUnlockedOnly] = useState(true);
+  const [courseCode, setCourseCode] = useState<string | null>(null);
+  const [showUnlockedOnly, setShowUnlockedOnly] = useState(false);
+  const [activeTab, setActiveTab] = useState(HELP_TAB);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -42,8 +45,10 @@ const GraphicalSelector = () => {
     const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
       const container = ref.current;
       if (!container) return;
+
       const { Graph, Arrow } = await import('@antv/g6');
-      graphRef.current = new Graph({
+
+      const graphArgs: GraphOptions = {
         container,
         width: container.scrollWidth,
         height: container.scrollHeight,
@@ -62,13 +67,15 @@ const GraphicalSelector = () => {
           duration: 500, // Number, the duration of one animation
           easing: 'easeQuadInOut' // String, the easing function
         },
-        defaultNode: GRAPH_STYLE.defaultNode,
-        defaultEdge: GRAPH_STYLE.defaultEdge(Arrow),
-        nodeStateStyles: GRAPH_STYLE.nodeStateStyles
-      });
+        defaultNode,
+        defaultEdge: defaultEdge(Arrow),
+        nodeStateStyles
+      };
+
+      graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
+        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
         edges: courseEdges
       };
 
@@ -76,10 +83,12 @@ const GraphicalSelector = () => {
       graphRef.current.render();
 
       graphRef.current.on('node:click', async (ev) => {
-        // load up course information
+        // Clicking a node loads up course description for the course and set active
+        // tab to course info
         const node = ev.item as INode;
         const id = node.getID();
         setCourseCode(id);
+        setActiveTab('course-info');
 
         // TODO: may need to remove this?
         // const { breadthFirstSearch } = await import('@antv/algorithm');
@@ -140,39 +149,41 @@ const GraphicalSelector = () => {
   }, [plannedCourses, programCode, specs]);
 
   const showAllCourses = () => {
-    if (graphRef.current) {
-      const nodes = graphRef.current.getNodes();
-      const edges = graphRef.current.getEdges();
-      nodes.forEach((n) => n.show());
-      edges.forEach((e) => e.show());
-    }
+    if (!graphRef.current) return;
+    graphRef.current.getNodes().forEach((n) => n.show());
+    graphRef.current.getEdges().forEach((e) => e.show());
   };
 
-  const showUnlockedCourses = async () => {
+  const showUnlockedCourses = useCallback(async () => {
     if (!graphRef.current) return;
     try {
-      const res = await axios.post<CoursesAllUnlocked>(
+      const {
+        data: { courses_state: coursesStates }
+      } = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner))
       );
-      const coursesStates = res.data.courses_state;
-      const nodes = graphRef.current.getNodes();
-      nodes.forEach((n) => {
+      graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();
+        // eslint-disable-next-line no-debugger
+        if (id === 'MATH1241') debugger;
         if (coursesStates[id] && coursesStates[id].unlocked) {
           n.show();
+          n.getOutEdges().forEach((e) => {
+            if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
+          });
         } else {
-          n.getEdges().forEach((e) => e.hide());
           n.hide();
+          n.getEdges().forEach((e) => e.hide());
         }
       });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  };
+  }, [degree, planner]);
 
-  const handleShowCourses = async () => {
+  const handleToggleCourses = async () => {
     if (showUnlockedOnly) {
       showUnlockedCourses();
     } else {
@@ -211,10 +222,14 @@ const GraphicalSelector = () => {
     graphRef.current?.changeSize(ref.current?.scrollWidth ?? 0, ref.current?.scrollHeight ?? 0);
   }, [sidebar]);
 
+  useEffect(() => {
+    showUnlockedCourses();
+  }, [planner.courses, showUnlockedCourses, graphRef]);
+
   const items = [
     {
       label: 'Course Info',
-      key: 'course-info',
+      key: COURSE_INFO_TAB,
       children: courseCode ? (
         <S.CourseDescriptionPanel
           courseCode={courseCode}
@@ -225,8 +240,8 @@ const GraphicalSelector = () => {
         'No course selected'
       )
     },
-    { label: 'Program Structure', key: 'program-structure', children: 'Program Structure' },
-    { label: 'Help', key: 'help', children: <HowToUse /> }
+    { label: 'Program Structure', key: PROGRAM_STRUCTURE_TAB, children: 'Program Structure' },
+    { label: 'Help', key: HELP_TAB, children: <HowToUse /> }
   ];
 
   return (
@@ -242,12 +257,7 @@ const GraphicalSelector = () => {
               </S.SearchBarWrapper>
               <S.ToolsWrapper>
                 Show All Courses
-                <Tooltip
-                  placement="bottomLeft"
-                  title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}
-                >
-                  <Switch defaultChecked={showUnlockedOnly} onChange={handleShowCourses} />
-                </Tooltip>
+                <Switch defaultChecked={showUnlockedOnly} onChange={handleToggleCourses} />
                 <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
                 <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
                 <Button
@@ -260,7 +270,11 @@ const GraphicalSelector = () => {
         </S.GraphPlaygroundWrapper>
         {sidebar && (
           <S.SidebarWrapper>
-            <Tabs items={items} />
+            <Tabs
+              items={items}
+              activeKey={activeTab}
+              onChange={(activeKey) => setActiveTab(activeKey)}
+            />
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
