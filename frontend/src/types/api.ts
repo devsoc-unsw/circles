@@ -12,7 +12,7 @@ import {
   APISpecialisationTypes,
   APIStructure,
   APIValidCoursesState
-} from 'utils/api/responseTypes';
+} from 'utils/api/types/responses';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url

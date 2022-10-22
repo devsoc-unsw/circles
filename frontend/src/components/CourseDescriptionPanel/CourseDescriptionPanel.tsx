@@ -7,9 +7,9 @@ import { CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
 import API from 'utils/api';
-import { APICourseDetails } from 'utils/api/responseTypes';
+import prepareUserPayload from 'utils/api/prepareUserPayload';
+import { APICourseDetails } from 'utils/api/types/responses';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar

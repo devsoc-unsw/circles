@@ -4,7 +4,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import { PlannerCourse } from 'types/planner';
 import API from 'utils/api';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import prepareUserPayload from 'utils/api/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 import S from './styles';

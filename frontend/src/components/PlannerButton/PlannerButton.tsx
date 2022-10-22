@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { Course } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import API from 'utils/api';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import prepareUserPayload from 'utils/api/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 

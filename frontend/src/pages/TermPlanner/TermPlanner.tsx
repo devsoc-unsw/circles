@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import { Term } from 'types/planner';
 import API from 'utils/api';
+import prepareValidationPayload from 'utils/api/prepareValidationPayload';
 import openNotification from 'utils/openNotification';
-import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -38,7 +38,7 @@ const TermPlanner = () => {
 
   const dispatch = useDispatch();
 
-  const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
+  const payload = JSON.stringify(prepareValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
   useEffect(() => {
     const validateTermPlanner = async () => {

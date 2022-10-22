@@ -10,7 +10,7 @@ import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tabs, Tooltip } from 'antd';
 import { CourseEdge } from 'types/api';
 import API from 'utils/api';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import prepareUserPayload from 'utils/api/prepareUserPayload';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';

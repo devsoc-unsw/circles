@@ -4,7 +4,6 @@ import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
 import { APIPlannerData, APITermPlan, APIYearPlan } from './types/requests';
 
-// eslint-disable-next-line import/prefer-default-export
 const prepareValidationPayload = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,

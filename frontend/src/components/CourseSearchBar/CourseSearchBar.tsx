@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
 import { useDebounce } from 'use-debounce';
 import API from 'utils/api';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import prepareUserPayload from 'utils/api/prepareUserPayload';
 import type { RootState } from 'config/store';
 
 type Props = {

@@ -5,8 +5,8 @@ import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import API from 'utils/api';
+import prepareUserPayload from 'utils/api/prepareUserPayload';
 import getNumTerms from 'utils/getNumTerms';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
