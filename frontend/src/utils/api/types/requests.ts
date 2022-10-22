@@ -1,6 +1,10 @@
 import { CourseCode } from 'types/courses';
 import { Optional, UOC } from './common';
 
+/**
+ * For user data
+ */
+
 // TODO: double check this with backend
 export type APIUserSpecs = { [spec: string]: 1 };
 
@@ -12,6 +16,10 @@ export type APIUserData = {
   specialisations: APIUserSpecs;
   courses: APIUserCoursesAndMarks;
 };
+
+/**
+ * For Validation payload
+ */
 
 type APIMostRecentPastTerm = {
   Y: number;
