@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
@@ -23,6 +23,8 @@ const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
+  const degree = useSelector((state: RootState) => state.degree);
+
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
@@ -30,6 +32,15 @@ const App = () => {
         <Suspense fallback={<PageLoading />}>
           <Router>
             <Routes>
+              <Route
+                path="/"
+                element={
+                  <Navigate
+                    to={!degree.isComplete ? '/degree-wizard' : '/course-selector'}
+                    replace
+                  />
+                }
+              />
               {inDev && <Route path="/landing-page" element={<LandingPage />} />}
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
