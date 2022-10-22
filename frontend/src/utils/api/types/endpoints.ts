@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 import { AxiosResponse } from 'axios';
-import { CourseCode } from './commonTypes';
-import { APIPlannerData, APIUserData } from './requestTypes';
+import { CourseCode } from './common';
+import { APIPlannerData, APIUserData } from './requests';
 import {
   APICourseCodes,
   APICourseDetails,
@@ -19,7 +19,7 @@ import {
   APIStructure,
   APITermsList,
   APIValidCoursesState
-} from './responseTypes';
+} from './responses';
 
 interface PlannerEndpoints {
   validate: (plannerData: APIPlannerData | string) => Promise<AxiosResponse<APIValidCoursesState>>;
@@ -28,14 +28,23 @@ interface PlannerEndpoints {
 interface CoursesEndpoints {
   jsonified: (courseCode: CourseCode) => Promise<AxiosResponse<string>>;
   course: (courseCode: CourseCode) => Promise<AxiosResponse<APICourseDetails>>;
-  search: (searchString: string, userData: APIUserData | string) => Promise<AxiosResponse<APISearch>>;
+  search: (
+    searchString: string,
+    userData: APIUserData | string
+  ) => Promise<AxiosResponse<APISearch>>;
   allUnlocked: (userData: APIUserData | string) => Promise<AxiosResponse<APICoursesState>>;
   legacyCourses: (year: string, term: string) => Promise<AxiosResponse<APIProgramCourses>>;
   legacyCourse: (year: string, courseCode: CourseCode) => Promise<AxiosResponse<APICourseDetails>>;
-  unselect: (courseCode: CourseCode, userData: APIUserData | string) => Promise<AxiosResponse<APICourseCodes>>;
+  unselect: (
+    courseCode: CourseCode,
+    userData: APIUserData | string
+  ) => Promise<AxiosResponse<APICourseCodes>>;
   children: (courseCode: CourseCode) => Promise<AxiosResponse<APICoursesPath>>;
   pathFrom: (courseCode: CourseCode) => Promise<AxiosResponse<APICoursesPath>>;
-  unlockedWhenTaken: (courseCode: CourseCode, userData: APIUserData | string) => Promise<AxiosResponse<APICoursesUnlockedWhenTaken>>;
+  unlockedWhenTaken: (
+    courseCode: CourseCode,
+    userData: APIUserData | string
+  ) => Promise<AxiosResponse<APICoursesUnlockedWhenTaken>>;
   termsOffered: (courseCode: CourseCode, years: string[]) => Promise<AxiosResponse<APITermsList>>;
 }
 
@@ -50,7 +59,10 @@ interface ProgramsEndpoints {
 
 interface SpecialisationsEndpoints {
   types: (programCode: string) => Promise<AxiosResponse<APISpecialisationTypes>>;
-  specialisations: (programCode: string, type: string) => Promise<AxiosResponse<APISpecialisations>>;
+  specialisations: (
+    programCode: string,
+    type: string
+  ) => Promise<AxiosResponse<APISpecialisations>>;
 }
 
 interface DefaultEndpoints {

@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 import axios from 'axios';
-import { APIEndpoints } from './endpointTypes';
-import { optionalSegments } from './utils';
+import { APIEndpoints } from './types/endpoints';
+import composeEndpoint from './composeEndpoint';
 
 const API: APIEndpoints = {
   planner: {
@@ -25,10 +25,10 @@ const API: APIEndpoints = {
 
   programs: {
     all: () => axios.get('/programs/getPrograms'),
-    structure: (programCode: string, spec?: string) => axios.get(`/programs/getStructure/${optionalSegments(programCode, spec)}`),
-    courses: (programCode: string, spec?: string) => axios.get(`/programs/getStructureCourseList/${optionalSegments(programCode, spec)}`),
+    structure: (programCode: string, spec?: string) => axios.get(`/programs/getStructure/${composeEndpoint(programCode, spec)}`),
+    courses: (programCode: string, spec?: string) => axios.get(`/programs/getStructureCourseList/${composeEndpoint(programCode, spec)}`),
     geneds: (programCode: string) => axios.get(`/programs/getGenEds/${programCode}`),
-    graph: (programCode: string, spec?: string) => axios.get(`/programs/graph/${optionalSegments(programCode, spec)}`),
+    graph: (programCode: string, spec?: string) => axios.get(`/programs/graph/${composeEndpoint(programCode, spec)}`),
     cores: (programCode: string, spec: string) => axios.get(`/programs/getCores/${programCode}/${spec}`),
   },
 

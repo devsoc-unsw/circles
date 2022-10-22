@@ -1,4 +1,4 @@
-import { CourseCode, Optional, Term, UOC } from './commonTypes';
+import { CourseCode, Optional, Term, UOC } from './common';
 
 type APIContainerContent = {
   UOC: UOC;

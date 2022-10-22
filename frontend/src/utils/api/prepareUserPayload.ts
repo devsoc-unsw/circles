@@ -1,29 +1,18 @@
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
+import { APIUserCoursesAndMarks, APIUserData, APIUserSpecs } from './types/requests';
 
-// key = course code, value = mark of course (number | null)
-type UserPayloadCourse = Record<string, number | null>;
-
-// key = spec, value = 1
-type UserPayloadSpecialisations = Record<string, 1>;
-
-type UserPayload = {
-  program: string;
-  courses: UserPayloadCourse;
-  specialisations: UserPayloadSpecialisations;
-};
-
-const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): UserPayload => {
+const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): APIUserData => {
   const { courses } = planner;
   const { programCode, specs } = degree;
 
-  const specialisations: UserPayloadSpecialisations = {};
+  const specialisations: APIUserSpecs = {};
   specs.forEach((spec) => {
     specialisations[spec] = 1;
   });
 
-  const selectedCourses: UserPayloadCourse = {};
+  const selectedCourses: APIUserCoursesAndMarks = {};
   Object.entries(courses).forEach(([courseCode, courseData]) => {
     selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
   });

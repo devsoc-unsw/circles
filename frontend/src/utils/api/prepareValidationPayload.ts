@@ -1,35 +1,23 @@
-import getMostRecentPastTerm, { MostRecentTerm } from 'utils/getMostRecentPastTerm';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
+import { APIPlannerData, APITermPlan, APIYearPlan } from './types/requests';
 
-type TermPlan = {
-  // key = course code, value = [UOC, mark]
-  [courseCode: string]: [number, number | null];
-};
-
-type YearPlan = TermPlan[];
-
-type CoursesForValidationPayload = {
-  program: string;
-  specialisations: string[];
-  plan: YearPlan[];
-  mostRecentPastTerm: MostRecentTerm;
-};
-
-const prepareCoursesForValidationPayload = (
+// eslint-disable-next-line import/prefer-default-export
+const prepareValidationPayload = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
   showWarnings: boolean
-): CoursesForValidationPayload => {
+): APIPlannerData => {
   const { years, startYear, courses } = planner;
   const { programCode, specs } = degree;
 
-  const plan: YearPlan[] = [];
+  const plan: APIYearPlan[] = [];
   years.forEach((year) => {
-    const formattedYear: YearPlan = [];
+    const formattedYear: APIYearPlan = [];
     Object.values(year).forEach((term) => {
-      const coursesData: TermPlan = {};
+      const coursesData: APITermPlan = {};
       Object.values(term).forEach((c) => {
         coursesData[c] = [courses[c].UOC, parseMarkToInt(courses[c].mark)];
       });
@@ -46,4 +34,4 @@ const prepareCoursesForValidationPayload = (
   };
 };
 
-export default prepareCoursesForValidationPayload;
+export default prepareValidationPayload;
