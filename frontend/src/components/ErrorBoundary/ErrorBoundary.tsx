@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ErrorInfo } from 'react';
-import { redirect } from 'react-router-dom';
-import { Button, Modal, Space } from 'antd';
+import { Button, Space } from 'antd';
+import ResetModal from 'components/ResetModal';
 import { FEEDBACK_LINK } from 'config/constants';
 import S from './styles';
 
@@ -14,12 +12,13 @@ type State = {
   hasError: boolean;
   error: Error | null;
   errorInfo: ErrorInfo | null;
+  modalOpen: boolean;
 };
 
 class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+    this.state = { hasError: false, error: null, errorInfo: null, modalOpen: false };
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -34,38 +33,30 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   render() {
-    const { hasError, error, errorInfo } = this.state;
+    const { hasError, error, errorInfo, modalOpen } = this.state;
     const { children } = this.props;
 
-    const resetData = () => {
-      // localStorage.clear();
+    const gotoDegrees = () => {
       window.location.href = '/degree-wizard';
     };
 
-    const returnUnharmed = () => {
+    const gotoCourses = () => {
       window.location.href = '/course-selector';
     };
 
-    const openWarning = () => {
-      Modal.warning({
-        title: 'Are you sure?',
-        content: 'This will delete all course and planner data...',
+    const openModal = () => {
+      this.setState({ modalOpen: true });
+    };
 
-        okText: 'Reset Data!',
-        okCancel: true,
-        okButtonProps: {
-          danger: true
-        },
-        onOk: resetData,
-
-        cancelText: 'No, go back!'
-      });
+    const closeModal = () => {
+      this.setState({ modalOpen: false });
     };
 
     if (hasError) {
       // You can render any custom fallback UI
       return (
         <S.Container>
+          <ResetModal open={modalOpen} onOk={gotoDegrees} onCancel={closeModal} />
           <h1>An error has occurred. You should never see this...</h1>
           <S.TextBody>
             <p>
@@ -81,10 +72,10 @@ class ErrorBoundary extends React.Component<Props, State> {
               steps that led up to the error and a copy of the error messages seen below.
             </p>
             <Space wrap>
-              <Button onClick={returnUnharmed} type="primary">
+              <Button onClick={gotoCourses} type="primary">
                 Return to Circles
               </Button>
-              <Button onClick={openWarning} type="primary" danger>
+              <Button onClick={openModal} type="primary" danger>
                 Reset Data
               </Button>
             </Space>

@@ -31,12 +31,12 @@ describe('ResetModal', () => {
   });
 
   it('should render', () => {
-    renderWithProviders(<ResetModal />);
+    renderWithProviders(<ResetModal open />);
     expect(screen.queryByText('Reset Planner?')).not.toBeInTheDocument();
   });
 
   it('should show modal when degree wizard is complete', () => {
-    renderWithProviders(<ResetModal />, { preloadedState });
+    renderWithProviders(<ResetModal open />, { preloadedState });
     expect(screen.getByText('Reset Planner?')).toBeInTheDocument();
   });
 
@@ -44,7 +44,7 @@ describe('ResetModal', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<ResetModal />, {
+    renderWithProviders(<ResetModal open />, {
       preloadedState: {
         degree: {
           programCode: '3778',
@@ -63,12 +63,14 @@ describe('ResetModal', () => {
     ]);
   });
 
-  it('should redirect back to course selector if cancel button is clicked', async () => {
-    const dummyNavigate = vi.fn();
-    useNavigateMock.mockReturnValue(dummyNavigate);
+  // TODO: Disabled since it now takes a onCancel to be reusable
+  //       Can no longer navigate itself, since `navigate` cannot be used for ErrorBoundary
+  // it('should redirect back to course selector if cancel button is clicked', async () => {
+  //   const dummyNavigate = vi.fn();
+  //   useNavigateMock.mockReturnValue(dummyNavigate);
 
-    renderWithProviders(<ResetModal />, { preloadedState });
-    await userEvent.click(screen.getByText('Go back to planner'));
-    expect(dummyNavigate).toBeCalledWith('/course-selector');
-  });
+  //   renderWithProviders(<ResetModal open />, { preloadedState });
+  //   await userEvent.click(screen.getByText('Go back to planner'));
+  //   expect(dummyNavigate).toBeCalledWith('/course-selector');
+  // });
 });
