@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ErrorInfo } from 'react';
-import { Button } from 'antd';
+import { redirect } from 'react-router-dom';
+import { Button, Modal, Space } from 'antd';
 import { FEEDBACK_LINK } from 'config/constants';
 import S from './styles';
 
@@ -34,9 +37,29 @@ class ErrorBoundary extends React.Component<Props, State> {
     const { hasError, error, errorInfo } = this.state;
     const { children } = this.props;
 
-    const handleClick = () => {
-      localStorage.clear();
+    const resetData = () => {
+      // localStorage.clear();
       window.location.href = '/degree-wizard';
+    };
+
+    const returnUnharmed = () => {
+      window.location.href = '/course-selector';
+    };
+
+    const openWarning = () => {
+      Modal.warning({
+        title: 'Are you sure?',
+        content: 'This will delete all course and planner data...',
+
+        okText: 'Reset Data!',
+        okCancel: true,
+        okButtonProps: {
+          danger: true
+        },
+        onOk: resetData,
+
+        cancelText: 'No, go back!'
+      });
     };
 
     if (hasError) {
@@ -57,9 +80,14 @@ class ErrorBoundary extends React.Component<Props, State> {
               to inform us how the error occurred! Please also include brief description on the
               steps that led up to the error and a copy of the error messages seen below.
             </p>
-            <Button onClick={handleClick} type="primary">
-              Return to Circles
-            </Button>
+            <Space wrap>
+              <Button onClick={returnUnharmed} type="primary">
+                Return to Circles
+              </Button>
+              <Button onClick={openWarning} type="primary" danger>
+                Reset Data
+              </Button>
+            </Space>
           </S.TextBody>
           <h3>Error</h3>
           <p>{JSON.stringify(error, Object.getOwnPropertyNames(error))}</p>
