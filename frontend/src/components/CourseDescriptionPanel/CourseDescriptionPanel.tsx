@@ -8,6 +8,7 @@ import { CourseList } from 'types/courses';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/api/prepareUserPayload';
 import { APICourse, APICoursesUnlockedWhenTaken } from 'utils/api/types/responses';
+import unwrap from 'utils/api/unwrapSettled';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import {
   LoadingCourseDescriptionPanel,
@@ -38,15 +39,6 @@ const CourseDescriptionPanel = ({ courseCode, onCourseClick }: CourseDescription
   const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>();
   const [coursesUnlocked, setCoursesUnlocked] = useState<APICoursesUnlockedWhenTaken>();
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>();
-
-  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
-    if (res.status === 'rejected') {
-      // eslint-disable-next-line no-console
-      console.error('Rejected request at unwrap', res.reason);
-      return undefined;
-    }
-    return res.value;
-  }
 
   useEffect(() => {
     // gets the associated info for a course
