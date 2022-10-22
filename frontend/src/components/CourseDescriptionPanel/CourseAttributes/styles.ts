@@ -10,7 +10,7 @@ const AttributeText = styled.div`
 `;
 
 const TermWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const AttributesWrapperConcise = styled.div`
