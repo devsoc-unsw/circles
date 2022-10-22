@@ -165,9 +165,7 @@ const GraphicalSelector = () => {
       );
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();
-        // eslint-disable-next-line no-debugger
-        if (id === 'MATH1241') debugger;
-        if (coursesStates[id] && coursesStates[id].unlocked) {
+        if (coursesStates[id]?.unlocked) {
           n.show();
           n.getOutEdges().forEach((e) => {
             if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
