@@ -1,4 +1,5 @@
-import { CourseCode, Optional, UOC } from './common';
+import { CourseCode } from 'types/courses';
+import { Optional, UOC } from './common';
 
 // TODO: double check this with backend
 export type APIUserSpecs = { [spec: string]: 1 };

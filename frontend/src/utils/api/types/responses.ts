@@ -1,4 +1,6 @@
-import { CourseCode, Optional, Term, UOC } from './common';
+import { CourseCode } from 'types/courses';
+import { Term } from 'types/planner';
+import { Optional, UOC } from './common';
 
 type APIContainerContent = {
   UOC: UOC;
@@ -31,7 +33,7 @@ export type APICourse = {
   is_multiterm: Optional<boolean>;
 };
 
-type APICourseState = {
+export type APICourseState = {
   is_accurate: boolean;
   unlocked: boolean;
   handbook_note: string;
@@ -119,6 +121,11 @@ type APIValidCourseState = {
   supressed: boolean;
 };
 
+// weird intermediate type since used by plannerSlice
+export type APIValidCoursesStateInner = {
+  [code: CourseCode]: APIValidCourseState;
+};
+
 export type APIValidCoursesState = {
-  courses_state: { [code: CourseCode]: APIValidCourseState };
+  courses_state: APIValidCoursesStateInner;
 };

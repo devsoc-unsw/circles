@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
-import { CourseValidation } from 'types/courses';
 import API from 'utils/api';
 import prepareUserPayload from 'utils/api/prepareUserPayload';
-import { APIProgramStructure } from 'utils/api/types/responses';
+import { APICourseState, APIProgramStructure } from 'utils/api/types/responses';
 import getNumTerms from 'utils/getNumTerms';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
@@ -48,7 +47,7 @@ const CourseMenu = ({ structure }: Props) => {
 
   const getAllUnlocked = useCallback(async () => {
     // generate menu content
-    const generateMenuData = (courses: Record<string, CourseValidation>) => {
+    const generateMenuData = (courses: Record<string, APICourseState>) => {
       const newMenu: MenuDataStructure = {};
       const newCoursesUnits: CourseUnitsStructure = {};
 

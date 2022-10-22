@@ -1,7 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { CourseList, CourseStates } from 'types/courses';
+import { CourseList } from 'types/courses';
 import { Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
+import { APIValidCoursesStateInner } from 'utils/api/types/responses';
 import { getTermsList } from 'pages/TermPlanner/utils';
 
 // set up hidden object
@@ -89,7 +90,7 @@ const plannerSlice = createSlice({
         state.unplanned.push(courseCode);
       }
     },
-    toggleWarnings: (state, action: PayloadAction<CourseStates>) => {
+    toggleWarnings: (state, action: PayloadAction<APIValidCoursesStateInner>) => {
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
           const {

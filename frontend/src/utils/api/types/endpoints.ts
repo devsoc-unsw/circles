@@ -1,11 +1,9 @@
-/* eslint-disable */
-
 import { AxiosResponse } from 'axios';
-import { CourseCode } from './common';
+import { CourseCode } from 'types/courses';
 import { APIPlannerData, APIUserData } from './requests';
 import {
-  APICourseCodes,
   APICourse,
+  APICourseCodes,
   APICourses,
   APICoursesPath,
   APICoursesState,
