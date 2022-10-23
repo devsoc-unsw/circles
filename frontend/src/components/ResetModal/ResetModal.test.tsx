@@ -1,15 +1,10 @@
 import React from 'react';
-import * as reactRouterDom from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
 import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import ResetModal from './ResetModal';
-
-vi.mock('react-router-dom', () => ({
-  useNavigate: vi.fn()
-}));
 
 const preloadedState = {
   degree: {
@@ -22,11 +17,9 @@ const preloadedState = {
 
 describe('ResetModal', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
-  const useNavigateMock = vi.spyOn(reactRouterDom, 'useNavigate');
 
   beforeEach(() => {
     useDispatchMock.mockClear();
-    useNavigateMock.mockClear();
     vi.clearAllMocks();
   });
 
@@ -63,14 +56,19 @@ describe('ResetModal', () => {
     ]);
   });
 
-  // TODO: Disabled since it now takes a onCancel to be reusable
-  //       Can no longer navigate itself, since `navigate` cannot be used for ErrorBoundary
-  // it('should redirect back to course selector if cancel button is clicked', async () => {
-  //   const dummyNavigate = vi.fn();
-  //   useNavigateMock.mockReturnValue(dummyNavigate);
+  it('should call the OnCancel callback when the Go Back button is clicked', async () => {
+    const dummyOnCancel = vi.fn();
 
-  //   renderWithProviders(<ResetModal open />, { preloadedState });
-  //   await userEvent.click(screen.getByText('Go back to planner'));
-  //   expect(dummyNavigate).toBeCalledWith('/course-selector');
-  // });
+    renderWithProviders(<ResetModal open onCancel={dummyOnCancel} />, { preloadedState });
+    await userEvent.click(screen.getByText('Go back'));
+    expect(dummyOnCancel).toBeCalled();
+  });
+
+  it('should call the OnOk callback when the Reset button is clicked', async () => {
+    const dummyOnOk = vi.fn();
+
+    renderWithProviders(<ResetModal open onOk={dummyOnOk} />, { preloadedState });
+    await userEvent.click(screen.getByText('Reset'));
+    expect(dummyOnOk).toBeCalled();
+  });
 });
