@@ -6,7 +6,6 @@ import pickle
 import re
 from typing import Dict, List, Mapping, Optional, Set, Tuple
 from algorithms.objects.program_restrictions import NoRestriction
-
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
@@ -553,7 +552,8 @@ def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple[str, str], search_term: str, structure: dict,
+def weight_course(
+        course: tuple[str, str], search_term: str, structure: dict,
                   majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)

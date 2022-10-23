@@ -1,9 +1,12 @@
 """
 API for fetching data about programs and specialisations """
 from contextlib import suppress
+from copy import Error
 import functools
+import traceback
 import re
 from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
+from exceptiongroup import catch
 
 from fastapi import APIRouter, HTTPException
 
@@ -133,7 +136,7 @@ def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer
     item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
     if container.get("courses") is None:
-        gen_ed_courses = list(set(get_gen_eds(programCode)["courses"].keys()) - set(sum(
+        gen_ed_courses = list(set(get_gen_eds(programCode, [])["courses"].keys()) - set(sum(
             (
                 sum((
                     list(value["courses"].keys())
@@ -143,7 +146,9 @@ def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer
             for spec_name, spec in structure.items()
             if "Major" in spec_name or "Honours" in spec_name)
         , [])))
-        geneds = get_gen_eds(programCode)
+        # clist = course_list_from_structure(structure)
+        # print(clist)
+        geneds = get_gen_eds(programCode, [])
         item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
 
 
@@ -258,14 +263,20 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
-    programCode: str, spec: Optional[str] = None
+    programCode: str, spec: Optional[str] = None, ignore: Optional[str] = None
 ):
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
+
+    ignored = ignore.split("+") if ignore else []
+
     structure: dict[str, StructureContainer] = {}
-    structure = add_specialisations(structure, spec)
-    structure, uoc = add_program_code_details(structure, programCode)
-    structure = add_geneds_to_structure(structure, programCode)
+    if "spec" not in ignored:
+        structure = add_specialisations(structure, spec)
+    if "code_details" not in ignored:
+        structure, uoc = add_program_code_details(structure, programCode)
+    if "gened" not in ignored:
+        structure = add_geneds_to_structure(structure, programCode)
     apply_manual_fixes(structure, programCode)
 
     return {
@@ -317,10 +328,38 @@ def get_structure_course_list(
         },
     },
 )
-def get_gen_eds(programCode: str):
+def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
     """ fetches gen eds from file """
-    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    return {"courses" : all_geneds}
+    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened"))
+    return get_gen_eds(programCode, course_list)
+
+def get_gen_eds(
+        programCode: str, excluded_courses: Optional[List[str]] = None
+    ) -> Dict[str, Dict[str, str]]:
+    """ fetches gen eds from file and removes excluded courses """
+    print("called")
+    try:
+        raise Exception("test")
+    except Exception as e:
+        print("E is caught:")
+        print(e)
+    print("\n\n")
+    excluded_courses = excluded_courses if excluded_courses is not None else []
+    geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+    # print(geneds)
+    for course in excluded_courses:
+        if course in geneds:
+            del geneds[course]
+
+
+    print("exclusion courses list len:")
+    print(len(excluded_courses))
+    print(f"returing a total of {len(geneds)} gen eds")
+
+    # print("\n\n\n==================POST::::::::::;", geneds)
+
+    return {"courses": geneds}
+
 
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
