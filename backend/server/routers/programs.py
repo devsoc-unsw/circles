@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations """
 from contextlib import suppress
 import functools
 import re
-from typing import Callable, Dict, List, Mapping, Optional, Tuple, cast
+from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
 
@@ -40,8 +40,9 @@ def programs_index() -> str:
     return "Index of programs"
 
 
-@router.get("/getAllPrograms",response_model=Programs)
-def get_all_programs() -> Programs:
+# TODO: response model to this somehow
+@router.get("/getAllPrograms")
+def get_all_programs() -> Dict[Any, Any]:
     """
     Like `/getPrograms` but does not filter any programs for if they are
     production ready.
@@ -142,7 +143,7 @@ def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer
             for spec_name, spec in structure.items()
             if "Major" in spec_name or "Honours" in spec_name)
         , [])))
-        geneds = get_gen_eds(programCode, structure)
+        geneds = get_gen_eds(programCode)
         item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
 
 
