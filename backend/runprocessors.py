@@ -45,12 +45,6 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--year",
-    type=str,
-    help="year to scrape data for",
-)
-
-parser.add_argument(
     "--stage",
     type=str,
     help="""
@@ -118,9 +112,9 @@ run: dict[str, dict[str, Callable]] = {
         "process": customise_spn_data,
     },
     "course": {
-        "scrape": scrape_course_data(args.year),
-        "format": format_course_data(args.year),
-        "process": process_course_data(args.year),
+        "scrape": scrape_course_data,
+        "format": format_course_data,
+        "process": process_course_data,
     },
     "condition": {
         "process": preprocess_conditions,
