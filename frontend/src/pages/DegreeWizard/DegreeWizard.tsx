@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
+import ResetModal from 'components/ResetModal';
 import type { RootState } from 'config/store';
 import { useAppSelector } from 'hooks';
 import Steps from './common/steps';
 import DegreeStep from './DegreeStep';
-import ResetModal from './ResetModal';
 import SpecialisationStep from './SpecialisationStep';
 import StartBrowsingStep from './StartBrowsingStep';
 import S from './styles';
@@ -21,6 +22,7 @@ const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
   const degree = useAppSelector((state: RootState) => state.degree);
+  const navigate = useNavigate();
 
   useEffect(() => {
     openNotification({
@@ -66,7 +68,7 @@ const DegreeWizard = () => {
   return (
     <PageTemplate showHeader={false}>
       <S.ContainerWrapper>
-        <ResetModal />
+        <ResetModal open={degree.isComplete} onCancel={() => navigate('/course-selector')} />
         <Title className="text">Welcome to Circles!</Title>
         <S.Subtitle>
           Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
