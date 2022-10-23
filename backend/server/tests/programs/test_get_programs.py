@@ -16,7 +16,7 @@ def test_sanity_all():
     programs = x.json()['programs']
 
     # Not actual number, just a rough lower bound
-    assert programs.length > 100
+    assert len(programs) > 100
 
     for key, value in programs.items():
         assert re.match(r"[0-9]{4}", key)
