@@ -337,16 +337,12 @@ def get_gen_eds(
         programCode: str, excluded_courses: Optional[List[str]] = None
     ) -> Dict[str, Dict[str, str]]:
     """ fetches gen eds from file and removes excluded courses """
-    print("called")
-    try:
-        raise Exception("test")
-    except Exception as e:
-        print("E is caught:")
-        print(e)
-    print("\n\n")
     excluded_courses = excluded_courses if excluded_courses is not None else []
-    geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    # print(geneds)
+    try:
+        geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+    except KeyError:
+        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}")
+
     for course in excluded_courses:
         if course in geneds:
             del geneds[course]
