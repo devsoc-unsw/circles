@@ -7,7 +7,7 @@ import { resetDegree } from 'reducers/degreeSlice';
 import { resetPlanner } from 'reducers/plannerSlice';
 
 type Props = {
-  open: boolean;
+  open?: boolean;
   onOk?: () => void; // runs after resetting the data
   onCancel?: () => void;
 };
@@ -28,7 +28,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   return (
     <Modal
       title="Reset Planner?"
-      open={open}
+      open={open ?? false}
       closable={false}
       onOk={handleOk}
       okText="Reset"
