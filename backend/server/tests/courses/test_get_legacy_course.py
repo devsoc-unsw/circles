@@ -97,7 +97,6 @@ def test_legacy_math3361():
     However, it still has legacy handbook entries in the years that it doesn't run.
     """
     res2019 = get_legacy_course_wrapper(2019, "MATH3361")
-    print(res2019.json())
     assert res2019.status_code == 200
     assert not compare_course_details(res2019.json(), TEST_OBJECTS["math3361_2019"])
 
