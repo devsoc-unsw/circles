@@ -1,12 +1,9 @@
 """
 API for fetching data about programs and specialisations """
 from contextlib import suppress
-from copy import Error
 import functools
-import traceback
 import re
 from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
-from exceptiongroup import catch
 
 from fastapi import APIRouter, HTTPException
 
@@ -329,14 +326,25 @@ def get_structure_course_list(
     },
 )
 def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
-    """ fetches gen eds from file """
+    """ Fetches the geneds for a given program code """
     course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened"))
     return get_gen_eds(programCode, course_list)
 
 def get_gen_eds(
         programCode: str, excluded_courses: Optional[List[str]] = None
     ) -> Dict[str, Dict[str, str]]:
-    """ fetches gen eds from file and removes excluded courses """
+    """
+    fetches gen eds from file and removes excluded courses
+    WARNING:
+        The `excluded_courses` is an optional parameter. This does
+        NOT mean you are free to ignore it. Default behaviour is to generate
+        a list of courses to exclude based on the `getStructure` call
+        for the respective programCode.
+        Be very careful leaving this field empty as `None` unless you are sure
+        you want to auto-generate excluded_courses. This can lead to unexpected
+        behaviour / infinite recursion.
+        OTHERWISE: pass in an empty list.
+    """
     excluded_courses = excluded_courses if excluded_courses is not None else []
     try:
         geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
@@ -351,8 +359,6 @@ def get_gen_eds(
     print("exclusion courses list len:")
     print(len(excluded_courses))
     print(f"returing a total of {len(geneds)} gen eds")
-
-    # print("\n\n\n==================POST::::::::::;", geneds)
 
     return {"courses": geneds}
 
