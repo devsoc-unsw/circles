@@ -40,6 +40,19 @@ def programs_index() -> str:
     return "Index of programs"
 
 
+@router.get("/getAllPrograms",response_model=Programs)
+def get_all_programs() -> Programs:
+    """
+    Like `/getPrograms` but does not filter any programs for if they are
+    production ready.
+    """
+    return {
+        "programs": {
+            q["code"]: q["title"]
+            for q in programsCOL.find()
+        }
+    }
+
 @router.get(
     "/getPrograms",
     response_model=Programs,
@@ -129,7 +142,7 @@ def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer
             for spec_name, spec in structure.items()
             if "Major" in spec_name or "Honours" in spec_name)
         , [])))
-        geneds = get_gen_eds(programCode)
+        geneds = get_gen_eds(programCode, structure)
         item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
 
 
@@ -407,6 +420,7 @@ def add_program_code_details(structure: dict[str, StructureContainer], programCo
     structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
+# TODO: This should be computed at scrape-time
 def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
     """
         Insert geneds of the given programCode into the structure
