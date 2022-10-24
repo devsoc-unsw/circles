@@ -2,11 +2,16 @@
     "empty_year": {
         "degree": {
             "programCode": "3707",
-            "specs": ["COMPA1"],
+            "specs": [ "COMPA1" ],
             "isComplete": true
         },
         "planner": {
-            "years": [
+            "years": [ {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
                 {
                     "T0": [],
                     "T1": [],
@@ -40,12 +45,11 @@
     "simple_year": {
         "degree": {
             "programCode": "3707",
-            "specs": ["COMPA1"],
+            "specs": [ "COMPA1" ],
             "isComplete": true
         },
         "planner": {
-            "years": [
-                {
+            "years": [ {
                     "T0": [],
                     "T1": [
                         "COMP1511",
@@ -76,7 +80,7 @@
                 "Y": 1,
                 "T": 0
             },
-            "unplanned": ["COMP6447"],
+            "unplanned": [ "COMP6447" ],
             "startYear": 2020,
             "numYears": 3,
             "isSummerEnabled": false,
@@ -209,12 +213,11 @@
     "out_of_order": {
         "degree": {
             "programCode": "3707",
-            "specs": ["COMPA1"],
+            "specs": [ "COMPA1" ],
             "isComplete": true
         },
         "planner": {
-            "years": [
-                {
+            "years": [ {
                     "T0": [],
                     "T1": [
                         "MATH1241"

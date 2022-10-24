@@ -57,139 +57,172 @@ def validate_term_planner(plannerData: PlannerData):
 
 from server.database import usersDB, coursesCOL
 from server.config import DUMMY_TOKEN
-from server.routers.model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData
-
+from server.routers.model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData, Storage
+from pydantic import BaseModel
 # from model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData
 
-# NOTE: Not worrying about index atm. That can be a frontend thing :)
+from pprint import pprint
+from server.routers.user import get_user, set_user
+import requests
+import json
+from operator import itemgetter
+from server.tests.user.utility import clear
+PATH = "server/example_input/example_local_storage_data.json"
 
-def addToUnplanned(courseCode: str):
-    course = coursesCOL.find_one({'code': courseCode})
-    planner = get_planner()
-    planner.unplanned.append(courseCode)
+with open(PATH, encoding="utf8") as f:
+    DATA = json.load(f)
 
-def setUnPlannedCourseToTerm(destRow: int, destTerm: str, destIndex: int, courseName: str):
-    course: CourseDetails = coursesCOL.find_one({'code': courseName})
-    planner: PlannerLocalStorage = get_planner()
-    # remove from unplanned
-    planner.unplanned.remove(courseName)
+def print_user():
+    x = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
+    pprint(json.loads(x.text))
 
-    if course.is_multiterm:
-        uoc, terms = course.UOC, course.terms
-        termsList = getTermsList(destTerm, uoc, terms, planner.isSummerEnabled)
+@router.get("/elliot")
+def elliot():
+    clear()
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"])
+    a = {'courseCode': 'COMP1511'}
+    requests.post('http://127.0.0.1:8000/planner/addToUnplanned', json=a)
+    a['courseCode'] = 'ENGG2600'
+    requests.post('http://127.0.0.1:8000/planner/addToUnplanned', json=a)
+    requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
 
+    data = {
+        'destRow': 0,
+        'destTerm': 'T3',
+        'destIndex': 0,
+        'courseCode': 'COMP1511'
+    }
+    requests.post('http://127.0.0.1:8000/planner/unPlannedToTerm', json=data)
+    data = {
+        'destRow': 0,
+        'destTerm': 'T1',
+        'destIndex': 0,
+        'courseCode': 'ENGG2600'
+    }
+    requests.post('http://127.0.0.1:8000/planner/unPlannedToTerm', json=data)
+
+    move = {
+        'srcRow': 0,
+        'srcTerm': 'T3',
+        'destRow': 1,
+        'destTerm': 'T1',
+        'destIndex': 1,
+        'courseCode': 'ENGG2600'
+    }
+    requests.post('http://127.0.0.1:8000/planner/plannedToTerm', json=move)
+    print_user()
+
+class AddToUnplanned(BaseModel):
+    courseCode: str
+
+class UnPlannedToTerm(BaseModel):
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
+class PlannedToTerm(BaseModel):
+    srcRow: int
+    srcTerm: str
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
+@router.post("/addToUnplanned")
+def addToUnplanned(courseCode: AddToUnplanned, token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    user['planner']['unplanned'].append(courseCode.courseCode)
+    set_user(token, user, True)
+
+@router.post("/unPlannedToTerm")
+def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
+    course = coursesCOL.find_one({'code': d.courseCode})
+    user = get_user(token)
+    planner = user['planner']
+
+    # print(d.destTerm)
+    planner['unplanned'].remove(d.courseCode)
+    instanceNum = 0
+
+    if course['is_multiterm']:
+        uoc, terms = itemgetter('UOC', 'terms')(course)
+        termsList = getTermsList(d.destTerm, uoc, terms, planner['isSummerEnabled'], instanceNum)
+        termsList.pop(instanceNum)
+        planner['years'][d.destRow][d.destTerm].insert(d.destIndex, d.courseCode)
+        # pprint(termsList)
         for termRow in termsList:
-            term, rowOffset = termRow
-            index = planner.years[destRow + rowOffset][term].insert(index, courseName)
+            term, rowOffset = itemgetter('term', 'rowOffset')(termRow)
+            index = len(planner['years'][d.destRow + rowOffset][term])
+            planner['years'][d.destRow + rowOffset][term].insert(index, d.courseCode)
     else:
-        planner.years[destRow][destTerm].insert(destIndex, courseName)
+        planner['years'][d.destRow][d.destTerm].insert(d.destIndex, d.courseCode)
+    set_user(token, user, True)
 
+@router.post("/plannedToTerm")
+def setPlannedCourseToTerm(d: PlannedToTerm, token: str = DUMMY_TOKEN):
+    course: CourseDetails = coursesCOL.find_one({'code': d.courseCode})
+    user = get_user(token)
+    planner = user['planner']
 
-def setPlannedCourseToTerm(srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, courseCode):
-    course: CourseDetails = coursesCOL.find_one({'code': courseCode})
-    planner: PlannerLocalStorage = get_planner()
-
-    uoc, termsOffered, isMultiterm = course.UOC, course.terms, course.is_multiterm
+    uoc, termsOffered, isMultiterm = itemgetter('UOC', 'terms', 'is_multiterm')(course)
 
     srcTermList = []
 
-    # If only changing index of multiterm course, don'T change other course instances
-    if isMultiterm and srcRow == destRow and srcTerm == destTerm:
-        planner.years[srcRow][srcTerm].remove(courseCode)
-        planner.years[srcRow][srcTerm].insert(destIndex, courseCode)
+    # If only changing index of multiterm course, don't change other course instances
+    if isMultiterm and d.srcRow == d.destRow and d.srcTerm == d.destTerm:
+        planner.years[d.srcRow][d.srcTerm].remove(d.courseCode)
+        planner.years[d.srcRow][d.srcTerm].insert(d.destIndex, d.courseCode)
+        set_user(token, user, True)
         return
 
     # Remove every instance of the course from the planner
     previousIndex = {}
-    for year in range(len(planner.years)):
-        terms = planner.years[year]
+    for year in range(len(planner['years'])):
+        terms = planner['years'][year]
         # term = 'T1', 'T2', 'T3', etc
         for term in terms:
-            targetTerm: list = planner.years[year][term]
+            targetTerm: list = planner['years'][year][term]
             try:
-                courseIndex = targetTerm.index(courseCode)
+                courseIndex = targetTerm.index(d.courseCode)
             except ValueError:
                 courseIndex = None
-            
-            if courseIndex:
+            # print(courseIndex)
+            if courseIndex is not None:
                 previousIndex[f'{year}{term}'] = courseIndex
-                targetTerm.remove(courseIndex)
+                targetTerm.remove(d.courseCode)
                 srcTermList.append(term)
+                # print('wot')
 
-    instanceNum = srcTermList.index(srcTerm)
-    newTerms = getTermsList(destTerm, uoc, termsOffered, planner.isSummerEnabled, instanceNum) if isMultiterm else []
-    newTerms.pop(instanceNum)
-    firstTerm = planner.years[destRow][destTerm]
-    dropIndex = destIndex
+    # pprint(previousIndex)
+    # pprint(srcTermList)
+    instanceNum = srcTermList.index(d.srcTerm) # 0
+    newTerms = getTermsList(d.destTerm, uoc, termsOffered, planner['isSummerEnabled'], instanceNum) if isMultiterm else []
+    pprint(newTerms)
+    if isMultiterm:
+        newTerms.pop(instanceNum)
+    # for x in newTerms:
+    #     print(x)
+    firstTerm = planner['years'][d.destRow][d.destTerm]
+    dropIndex = d.destIndex
 
     # Place dragged multiterm instance into correct index
-    if isMultiterm and f'{destRow}{destTerm}' in previousIndex:
-        currIndex = previousIndex[f'{destRow}{destTerm}']
-        if currIndex < destIndex:
+    if isMultiterm and f'{d.destRow}{d.destTerm}' in previousIndex:
+        currIndex = previousIndex[f'{d.destRow}{d.destTerm}']
+        if currIndex < d.destIndex:
             dropIndex -= 1
 
-        firstTerm.insert(dropIndex, courseCode)
+        firstTerm.insert(dropIndex, d.courseCode)
         for termRowOffset in newTerms:
-            term, rowOffset = termRowOffset
-            targetTerm = planner.years[destRow + rowOffset][term]
-            termId = f'{destRow + rowOffset}{term}'
+            term, rowOffset = itemgetter('term', 'rowOffset')(termRowOffset)
+            targetTerm = planner['years'][d.destRow + rowOffset][term]
+            termId = f'{d.destRow + rowOffset}{term}'
             index = previousIndex[termId] if termId in previousIndex else len(targetTerm)
-            targetTerm.insert(index, courseCode)
+            targetTerm.insert(index, d.courseCode)
+    else:
+        planner['years'][d.destRow][d.destTerm].insert(d.destIndex, d.courseCode)
+    set_user(token, user, True)
 
-
-from pprint import pprint
-from server.routers.user import get_user
-
-@router.get("/elliot")
-def elliot():
-    print("IN ELLIOT!")
-
-    course = get_course("COMP1511")
-    pprint(course)
-
-    pprint(usersDB.get_collection('tokens'))
-    usersDB.
-    # user = get_user(DUMMY_TOKEN)
-    # pprint(user)
-
-# @router.get("/elliot", response_model=ElliotMoveCourseInfo)
-# def moveCourse(data: ElliotMoveCourseInfo):
-#     courseName, destTerm, srcTerm = data.courseName, data.destTerm, data.srcTerm
-#     # destTerm = 2020T1
-#     course: CourseDetails = coursesCOL.find_one({'code': courseName})
-
-#     newPlannedFor = [destTerm]
-#     planner: PlannerLocalStorage = get_planner()
-#     if course.is_multiterm:
-#         year = int(srcTerm[:4]) # year = 2020
-#         startTerm = srcTerm[4:] # startTerm = T1
-#         uoc, termsOffered = course.UOC, course.terms
-#         # e.g. startTerm == T2
-
-#         plannedFor = getPlannedFor(planner, courseName)
-
-#         instanceNum = plannedFor.index(startTerm) if plannedFor else 0
-
-#         terms: list(ElliotGetTermsData) = getTermsList(startTerm, uoc, termsOffered, planner.isSummerEnabled, instanceNum)
-
-#         maxRowOffset = terms[len(terms) - 1].rowOffset
-#         if year + maxRowOffset > planner.startYear + planner.numYears:
-#             pass
-#             # multiterm course going off the edge
-
-#         # Moving course (move every instance of multiterm courses)
-#         startTerm = destTerm[:4]
-#         instanceNum = plannedFor.index(startTerm) if plannedFor else 0
-
-#         terms.pop(instanceNum)
-
-#         for termRow in terms:
-#             term, rowOffset = termRow.term, termRow.rowOffset
-#             year = int(destTerm[:4] + rowOffset)
-#             newPlannedFor.append(f'{year}{term}')
-
-#     newPlannedFor.sort()
-#     # update plannedFor (not used)
 
 def removeCourse(courseName):
     planner = get_planner()
@@ -249,42 +282,50 @@ def generate_empty_years(nYears: int):
     return [{'T0': [], 'T1': [], 'T2': [], 'T3': []} for _ in range(nYears)]
 
 def getTermsList(currentTerm: str, uoc: int, termsOffered: list[str], isSummerEnabled: bool, instanceNum: int):
+    # print("SUYMMER", isSummerEnabled)
+    # print("offered", termsOffered)
     allTerms = ['T1', 'T2', 'T3']
     termsList = []
     if isSummerEnabled:
         allTerms.insert(0, 'T0')
-
-    terms = list(set(allTerms) & set(termsOffered))
-
+    # print(allTerms)
+    terms = sorted(list(set(allTerms) & set(termsOffered)))
     index = terms.index(currentTerm) - 1
     rowOffset = 0
 
-    numTerms = lcm(uoc, MIN_COMPLETED_COURSE_UOC)
+    numTerms = lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc
+    # print("beans",numTerms)
 
     for _ in range(instanceNum):
+        # print('wto')
         if index < 0:
-            index = terms.length - 1
+            index = len(terms) - 1
             rowOffset -= 1
         
-        terms.insert(0, {
+        termsList.insert(0, {
             'term': terms[(index + len(terms) % 3)],
             'rowOffset': rowOffset
         })
 
         index -= 1
+    # pprint(termsList)
+    rowOffset = 0
+    index = terms.index(currentTerm)
 
     for _ in range(instanceNum, numTerms):
         if index == len(terms):
             index = 0
             rowOffset += 1
 
+        # print(index, terms[index], rowOffset)
         termsList.append({
             'term': terms[index],
             'rowOffset': rowOffset
         })
+        # print(terms[index], rowOffset)
 
         index += 1
-
+    # pprint(termsList)
     return termsList
 
 def get_planner():
