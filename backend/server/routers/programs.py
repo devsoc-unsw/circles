@@ -334,16 +334,11 @@ def get_gen_eds(
         programCode: str, excluded_courses: Optional[List[str]] = None
     ) -> Dict[str, Dict[str, str]]:
     """
-    fetches gen eds from file and removes excluded courses
-    WARNING:
-        The `excluded_courses` is an optional parameter. This does
-        NOT mean you are free to ignore it. Default behaviour is to generate
-        a list of courses to exclude based on the `getStructure` call
-        for the respective programCode.
-        Be very careful leaving this field empty as `None` unless you are sure
-        you want to auto-generate excluded_courses. This can lead to unexpected
-        behaviour / infinite recursion.
-        OTHERWISE: pass in an empty list.
+    fetches gen eds from file and removes excluded courses.
+        - `programCode` is the program code to fetch geneds for
+        - `excluded_courses` is a list of courses to exclude from the gened list.
+        Typically the result of a `courseList` from `getStructure` to prevent
+        duplicate courses between cores, electives and geneds.
     """
     excluded_courses = excluded_courses if excluded_courses is not None else []
     try:
