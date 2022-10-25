@@ -8,6 +8,7 @@ import {
   QuestionCircleOutlined,
   SaveFilled,
   SettingFilled,
+  UploadOutlined,
   WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
@@ -18,6 +19,7 @@ import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
+import ImportPlannerMenu from '../ImportPlannerMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
 import S from './styles';
@@ -77,6 +79,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           </div>
         </Tippy>
         <Tippy
+          content={<ImportPlannerMenu />}
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
@@ -88,6 +91,11 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             <Tooltip title="Save">
               <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
                 <SaveFilled style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+            <Tooltip title="Import">
+              <S.OptionButton>
+                <UploadOutlined style={iconStyles} />
               </S.OptionButton>
             </Tooltip>
           </div>
