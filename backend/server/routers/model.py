@@ -241,6 +241,11 @@ class PlannedToTerm(BaseModel):
     destIndex: int
     courseCode: str
 
+class ProgramTime(BaseModel):
+    startTime: tuple[int, int] # (Year, Term) start of program
+    endTime: tuple[int, int]
+    uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = pickle.load(file)
