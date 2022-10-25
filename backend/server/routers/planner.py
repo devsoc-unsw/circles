@@ -67,7 +67,9 @@ def addToUnplanned(courseCode: CourseCode, token: str = DUMMY_TOKEN):
     user['planner']['unplanned'].append(courseCode.courseCode)
     set_user(token, user, True)
 
-
+import requests
+import json
+from pprint import pprint
 @router.post("/unPlannedToTerm")
 def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
     course = get_course(d.courseCode)
@@ -76,9 +78,10 @@ def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
     planner = user['planner']
     instanceNum = 0
     termsList = getTermsList(d.destTerm, uoc, terms, planner['isSummerEnabled'], instanceNum)
+    pprint(requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}').json())
 
     # If moving a multiterm course out of bounds
-    if course['is_multiterm'] and isCourseOutOfBounds(planner['numYears'], d.destRow, termsList):
+    if course['is_multiterm'] and isCourseOutOfBounds(len(planner['years']), d.destRow, termsList):
         raise HTTPException(status_code=400, detail=f'{d.courseCode} would extend outside of the term planner. Either drag it to a different term, or extend the planner first')
 
     planner['unplanned'].remove(d.courseCode)
@@ -132,7 +135,7 @@ def setPlannedCourseToTerm(d: PlannedToTerm, token: str = DUMMY_TOKEN):
     newTerms = getTermsList(d.destTerm, uoc, termsOffered, planner['isSummerEnabled'], instanceNum) if isMultiterm else []
 
     # If multiterm course and out of bounds, raise exception without updating database
-    if isMultiterm and isCourseOutOfBounds(planner['numYears'], d.destRow, newTerms):
+    if isMultiterm and isCourseOutOfBounds(len(planner['years']), d.destRow, newTerms):
         raise HTTPException(status_code=400, detail=f'{d.courseCode} would extend outside of the term planner. Either drag it to a different term, or extend the planner first')
     elif isMultiterm:
         newTerms.pop(instanceNum)
@@ -179,7 +182,7 @@ def removeAllCourses(token: str = DUMMY_TOKEN):
     user = get_user(token)
     
     # Replace each year with an empty year
-    user['planner']['years'] = generate_empty_years(user['planner']['numYears'])
+    user['planner']['years'] = generate_empty_years(len(user['planner']))
 
     # Clear unplanned column
     user['planner']['unplanned'] = []
