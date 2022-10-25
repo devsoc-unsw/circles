@@ -1,4 +1,5 @@
 from typing import Dict
+from xml.sax.handler import property_declaration_handler
 from fastapi import APIRouter
 from server.database import coursesCOL
 import json 
@@ -19,7 +20,7 @@ def get_next_term(term: str) -> str:
         return 'S'
     return 'T1'
 
-@router.post(
+@router.get(
     "/getFollowups/{origin_course}/{origin_term}",
     responses={
         200: {
@@ -85,6 +86,3 @@ def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[
         "originTerm": origin_term,
         "followups": dict(top_followups),
     }
-
-
-    
