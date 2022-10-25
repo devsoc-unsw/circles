@@ -1,6 +1,6 @@
 from typing import Dict
 from xml.sax.handler import property_declaration_handler
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL
 import json 
 
@@ -10,15 +10,13 @@ router = APIRouter(
 )
 
 def get_next_term(term: str) -> str:
-    # 'S' -> 'T1'
-    # 'T1' -> 'T2'
-    # 'T2' -> 'T3'
-    # 'T3' -> 'S'
-    if term[0] == 'T':
-        if int(term[-1]) < 3:
-            return 'T' + str(int(term[-1]) + 1)
-        return 'S'
-    return 'T1'
+
+    terms = ['S', 'T1', 'T2', 'T3']
+    try:
+        return terms[(terms.index(term) + 1) % 4]
+    except:
+        return "invalid_term"
+
 
 @router.get(
     "/getFollowups/{origin_course}/{origin_term}",
@@ -53,15 +51,21 @@ def get_next_term(term: str) -> str:
 def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[str, dict[str, int]]]:
     # origin_term is the term that the original course was/would be taken in
  
-    # we only have enrolment data from T2(2022) -> T3(2022) at this stage
-    origin_term = "T2" # remove this line after we get more data
     next_term = get_next_term(origin_term)
+    
+    if (next_term == 'invalid_term'):
+        raise HTTPException(400, f"Invalid term {origin_term}")
+
+    # we only have enrolment data from T2(2022) -> T3(2022) at this stage
+    if (origin_term != 'T2'):
+        raise HTTPException(400, f"Data only available from T2")
 
     # get all comp courses
     all_comp_courses = filter(lambda course: course.startswith("COMP"), 
                               [course["code"] for course in coursesCOL.find()])
     
-    print(all_comp_courses)
+    if (origin_course not in all_comp_courses):
+        raise HTTPException(400, f"Invalid COMP course {origin_course}")
     
     # get enrolment data
     with open("./data/final_data/enrolmentData.json") as enrolment_data_file:
