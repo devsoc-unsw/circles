@@ -2,13 +2,17 @@
 route for planner algorithms
 """
 from typing import Tuple
-from fastapi import APIRouter
 from algorithms.validate_term_planner import validate_terms
+from fastapi import APIRouter, HTTPException
 from server.routers.courses import get_course
-from server.routers.model import ValidCoursesState, ValidPlannerData, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
+from server.routers.model import ValidCoursesState, ValidPlannerData, PlannerData, CourseCode, UnPlannedToTerm, PlannedToTerm, CONDITIONS, CACHED_HANDBOOK_NOTE
 from math import lcm
+from server.routers.user import get_user, set_user
+from server.config import DUMMY_TOKEN
+from operator import itemgetter
 
 MIN_COMPLETED_COURSE_UOC = 6
+
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
@@ -55,102 +59,34 @@ def validate_term_planner(plannerData: PlannerData):
 
     return {"courses_state": coursesState}
 
-from server.database import usersDB, coursesCOL
-from server.config import DUMMY_TOKEN
-from server.routers.model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData, Storage
-from pydantic import BaseModel
-# from model import CourseDetails, PlannerLocalStorage, ElliotMoveCourseInfo, ElliotGetTermsData
-
-from pprint import pprint
-from server.routers.user import get_user, set_user
-import requests
-import json
-from operator import itemgetter
-from server.tests.user.utility import clear
-PATH = "server/example_input/example_local_storage_data.json"
-
-with open(PATH, encoding="utf8") as f:
-    DATA = json.load(f)
-
-def print_user():
-    x = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
-    pprint(json.loads(x.text))
-
-@router.get("/elliot")
-def elliot():
-    clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"])
-    a = {'courseCode': 'COMP1511'}
-    requests.post('http://127.0.0.1:8000/planner/addToUnplanned', json=a)
-    a['courseCode'] = 'ENGG2600'
-    requests.post('http://127.0.0.1:8000/planner/addToUnplanned', json=a)
-    requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
-
-    data = {
-        'destRow': 0,
-        'destTerm': 'T3',
-        'destIndex': 0,
-        'courseCode': 'COMP1511'
-    }
-    requests.post('http://127.0.0.1:8000/planner/unPlannedToTerm', json=data)
-    data = {
-        'destRow': 0,
-        'destTerm': 'T1',
-        'destIndex': 0,
-        'courseCode': 'ENGG2600'
-    }
-    requests.post('http://127.0.0.1:8000/planner/unPlannedToTerm', json=data)
-
-    move = {
-        'srcRow': 0,
-        'srcTerm': 'T3',
-        'destRow': 1,
-        'destTerm': 'T1',
-        'destIndex': 1,
-        'courseCode': 'ENGG2600'
-    }
-    requests.post('http://127.0.0.1:8000/planner/plannedToTerm', json=move)
-    print_user()
-
-class AddToUnplanned(BaseModel):
-    courseCode: str
-
-class UnPlannedToTerm(BaseModel):
-    destRow: int
-    destTerm: str
-    destIndex: int
-    courseCode: str
-
-class PlannedToTerm(BaseModel):
-    srcRow: int
-    srcTerm: str
-    destRow: int
-    destTerm: str
-    destIndex: int
-    courseCode: str
 
 @router.post("/addToUnplanned")
-def addToUnplanned(courseCode: AddToUnplanned, token: str = DUMMY_TOKEN):
+def addToUnplanned(courseCode: CourseCode, token: str = DUMMY_TOKEN):
+    # Add course to unplanned column
     user = get_user(token)
     user['planner']['unplanned'].append(courseCode.courseCode)
     set_user(token, user, True)
 
+
 @router.post("/unPlannedToTerm")
 def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
-    course = coursesCOL.find_one({'code': d.courseCode})
+    course = get_course(d.courseCode)
+    uoc, terms = itemgetter('UOC', 'terms')(course)
     user = get_user(token)
     planner = user['planner']
-
-    # print(d.destTerm)
-    planner['unplanned'].remove(d.courseCode)
     instanceNum = 0
+    termsList = getTermsList(d.destTerm, uoc, terms, planner['isSummerEnabled'], instanceNum)
 
+    # If moving a multiterm course out of bounds
+    if course['is_multiterm'] and isCourseOutOfBounds(planner['numYears'], d.destRow, termsList):
+        raise HTTPException(status_code=400, detail=f'{d.courseCode} would extend outside of the term planner. Either drag it to a different term, or extend the planner first')
+
+    planner['unplanned'].remove(d.courseCode)
+
+    # If multiterm add multiple instances of course
     if course['is_multiterm']:
-        uoc, terms = itemgetter('UOC', 'terms')(course)
-        termsList = getTermsList(d.destTerm, uoc, terms, planner['isSummerEnabled'], instanceNum)
         termsList.pop(instanceNum)
         planner['years'][d.destRow][d.destTerm].insert(d.destIndex, d.courseCode)
-        # pprint(termsList)
         for termRow in termsList:
             term, rowOffset = itemgetter('term', 'rowOffset')(termRow)
             index = len(planner['years'][d.destRow + rowOffset][term])
@@ -159,9 +95,10 @@ def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
         planner['years'][d.destRow][d.destTerm].insert(d.destIndex, d.courseCode)
     set_user(token, user, True)
 
+
 @router.post("/plannedToTerm")
 def setPlannedCourseToTerm(d: PlannedToTerm, token: str = DUMMY_TOKEN):
-    course: CourseDetails = coursesCOL.find_one({'code': d.courseCode})
+    course = get_course(d.courseCode)
     user = get_user(token)
     planner = user['planner']
 
@@ -180,124 +117,128 @@ def setPlannedCourseToTerm(d: PlannedToTerm, token: str = DUMMY_TOKEN):
     previousIndex = {}
     for year in range(len(planner['years'])):
         terms = planner['years'][year]
-        # term = 'T1', 'T2', 'T3', etc
         for term in terms:
             targetTerm: list = planner['years'][year][term]
             try:
                 courseIndex = targetTerm.index(d.courseCode)
             except ValueError:
                 courseIndex = None
-            # print(courseIndex)
             if courseIndex is not None:
                 previousIndex[f'{year}{term}'] = courseIndex
                 targetTerm.remove(d.courseCode)
                 srcTermList.append(term)
-                # print('wot')
 
-    # pprint(previousIndex)
-    # pprint(srcTermList)
-    instanceNum = srcTermList.index(d.srcTerm) # 0
+    instanceNum = srcTermList.index(d.srcTerm)
     newTerms = getTermsList(d.destTerm, uoc, termsOffered, planner['isSummerEnabled'], instanceNum) if isMultiterm else []
-    pprint(newTerms)
-    if isMultiterm:
+
+    # If multiterm course and out of bounds, raise exception without updating database
+    if isMultiterm and isCourseOutOfBounds(planner['numYears'], d.destRow, newTerms):
+        raise HTTPException(status_code=400, detail=f'{d.courseCode} would extend outside of the term planner. Either drag it to a different term, or extend the planner first')
+    elif isMultiterm:
         newTerms.pop(instanceNum)
-    # for x in newTerms:
-    #     print(x)
+
     firstTerm = planner['years'][d.destRow][d.destTerm]
     dropIndex = d.destIndex
 
-    # Place dragged multiterm instance into correct index
-    if isMultiterm and f'{d.destRow}{d.destTerm}' in previousIndex:
-        currIndex = previousIndex[f'{d.destRow}{d.destTerm}']
+    # If dragged multiterm course to a column it already exists in
+    if isMultiterm and f'{d.destRow}{d.destIndex}' in previousIndex:
+        currIndex = previousIndex[f'{d.destRow}{d.destIndex}']
         if currIndex < d.destIndex:
             dropIndex -= 1
 
-        firstTerm.insert(dropIndex, d.courseCode)
-        for termRowOffset in newTerms:
-            term, rowOffset = itemgetter('term', 'rowOffset')(termRowOffset)
-            targetTerm = planner['years'][d.destRow + rowOffset][term]
-            termId = f'{d.destRow + rowOffset}{term}'
-            index = previousIndex[termId] if termId in previousIndex else len(targetTerm)
-            targetTerm.insert(index, d.courseCode)
-    else:
-        planner['years'][d.destRow][d.destTerm].insert(d.destIndex, d.courseCode)
+    # Move every instance of course
+    firstTerm.insert(dropIndex, d.courseCode)
+    for termRowOffset in newTerms:
+        term, rowOffset = itemgetter('term', 'rowOffset')(termRowOffset)
+        targetTerm = planner['years'][d.destRow + rowOffset][term]
+        termId = f'{d.destRow + rowOffset}{term}'
+        index = previousIndex[termId] if termId in previousIndex else len(targetTerm)
+        targetTerm.insert(index, d.courseCode)
     set_user(token, user, True)
 
 
-def removeCourse(courseName):
-    planner = get_planner()
-    # remove course from years
-    for year in planner.years:
+@router.post('/removeCourse')
+def removeCourse(d: CourseCode, token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    planner = user['planner']
+
+    # remove course from years (if it's there)
+    for year in planner['years']:
         for _, courseList in year.items():
-            if courseName in courseList:
-                courseList.remove(courseName)
-        # for courseList in year.__dict__.values():
-        #     if courseName in courseList:
-        #         courseList.remove(courseName)
+            if d.courseCode in courseList:
+                courseList.remove(d.courseCode)
 
-    # remove course from unplanned
-    if courseName in planner.unplanned:
-        planner.unplanned.remove(courseName)
-
-def removeAllCourses():
-    planner = get_planner()
-    planner.years = generate_empty_years(planner.numYears)
-    planner.unplanned = []
+    # remove course from unplanned (if it's there)
+    if d.courseCode in planner['unplanned']:
+        planner['unplanned'].remove(d.courseCode)
+    set_user(token, user, True)
 
 
-def unschedule(code):
-    planner = get_planner()
+@router.post("/removeAll")
+def removeAllCourses(token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    
+    # Replace each year with an empty year
+    user['planner']['years'] = generate_empty_years(user['planner']['numYears'])
+
+    # Clear unplanned column
+    user['planner']['unplanned'] = []
+    set_user(token, user, True)
+
+
+@router.post("/unscheduleCourse")
+def unschedule(d: CourseCode, token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    planner = user['planner']
+    course = get_course(d.courseCode)
+
     removed = set()
-    for year in planner.years:
-        for courseList in year.__dict__.values():
-            if code in courseList:
-                courseList.remove(code)
-                removed.add(code)
+    # Remove every instance of the course from each year
+    for year in planner['years']:
+        for courseList in year.values():
+            if d.courseCode in courseList:
+                courseList.remove(d.courseCode)
+                removed.add(d.courseCode)
 
+    # Add the course to unplanned
     for course in removed:
-        planner.unplanned.append(course)
+        planner['unplanned'].append(course)
+    set_user(token, user, True)
 
 
-    #! plannerSlice.ts has code that I can't replicate
-    # state.courses[code].plannedFor = null;
-    # state.courses[code].isUnlocked = true;
-    # state.courses[code].warnings = [];
-    # state.courses[code].handbookNote = '';
-    # state.courses[code].isAccurate = true;
-
-def unscheduleAll():
-    planner = get_planner()
+@router.post('/unscheduleAll')
+def unscheduleAll(token: str = DUMMY_TOKEN):
+    user = get_user(token)
     removed = set()
-    for year in planner.years:
-        for term, courseList in year.__dict__.items():
+
+    # Remove every course from each year
+    for year in user['planner']['years']:
+        for term, courseList in year.items():
             removed = removed | set(courseList)
             year[term] = []
+
+    # Add every removed course to unplanned column
     for course in removed:
-        planner.unplanned.append(course)
-
-
-
+        user['planner']['unplanned'].append(course)
+    set_user(token, user, True)
 
 def generate_empty_years(nYears: int):
     return [{'T0': [], 'T1': [], 'T2': [], 'T3': []} for _ in range(nYears)]
 
 def getTermsList(currentTerm: str, uoc: int, termsOffered: list[str], isSummerEnabled: bool, instanceNum: int):
-    # print("SUYMMER", isSummerEnabled)
-    # print("offered", termsOffered)
     allTerms = ['T1', 'T2', 'T3']
     termsList = []
     if isSummerEnabled:
         allTerms.insert(0, 'T0')
-    # print(allTerms)
+
+    # Remove any unavailable terms
     terms = sorted(list(set(allTerms) & set(termsOffered)))
     index = terms.index(currentTerm) - 1
     rowOffset = 0
 
     numTerms = lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc
-    # print("beans",numTerms)
 
     for _ in range(instanceNum):
-        # print('wto')
         if index < 0:
             index = len(terms) - 1
             rowOffset -= 1
@@ -308,7 +249,7 @@ def getTermsList(currentTerm: str, uoc: int, termsOffered: list[str], isSummerEn
         })
 
         index -= 1
-    # pprint(termsList)
+
     rowOffset = 0
     index = terms.index(currentTerm)
 
@@ -317,33 +258,18 @@ def getTermsList(currentTerm: str, uoc: int, termsOffered: list[str], isSummerEn
             index = 0
             rowOffset += 1
 
-        # print(index, terms[index], rowOffset)
         termsList.append({
             'term': terms[index],
             'rowOffset': rowOffset
         })
-        # print(terms[index], rowOffset)
 
         index += 1
-    # pprint(termsList)
     return termsList
 
-def get_planner():
-    pass
 
-def getPlannedFor(planner: PlannerLocalStorage, courseName: str):
-    plannedFor = []
-    for year in planner.years:
-        for term, courses in year.__dict__.items():
-            if courseName in courses:
-                plannedFor.append(term)
-    return plannedFor
+def isCourseOutOfBounds(numYears, destRow, terms):
+    max_rowoffset = max(terms, key= lambda x: x['rowOffset'])['rowOffset']
+    min_rowoffset = min(terms, key= lambda x: x['rowOffset'])['rowOffset']
 
-def checkCourseOutofBounds(course, planner, destTerm):
-    plannedFor = getPlannedFor(planner, course.code)
-    termCode = destTerm[4:]
-    instanceNum = plannedFor.index(termCode)
-
-    termList = getTermsList(destTerm, course.uoc, course.terms, planner.isSummerEnabled, instanceNum)
-    
+    return destRow + min_rowoffset < 0 or destRow + max_rowoffset > numYears - 1
 

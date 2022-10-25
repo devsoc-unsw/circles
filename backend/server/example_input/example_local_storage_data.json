@@ -23,12 +23,6 @@
                     "T1": [],
                     "T2": [],
                     "T3": []
-                },
-                {
-                    "T0": [],
-                    "T1": [],
-                    "T2": [],
-                    "T3": []
                 }
             ],
             "mostRecentPastTerm": {
@@ -65,9 +59,9 @@
                 },
                 {
                     "T0": [],
-                    "T1": [],
-                    "T2": [],
-                    "T3": []
+                    "T1": [ "ENGG2600" ],
+                    "T2": [ "ENGG2600" ],
+                    "T3": [ "ENGG2600" ]
                 },
                 {
                     "T0": [],
@@ -206,6 +200,25 @@
                     "isMultiterm": false,
                     "supressed": true,
                     "mark": 67
+                },
+                "ENGG2600": {
+                    "title": "Vertically Integrated Project",
+                    "termsOffered": [
+                        "T2",
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 2,
+                    "plannedFor": null,
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": true,
+                    "supressed": true,
+                    "mark": 100
                 }
             }
         }

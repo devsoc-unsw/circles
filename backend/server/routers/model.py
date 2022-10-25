@@ -220,6 +220,26 @@ class TermsList(BaseModel):
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
     uoc: int
+    
+# Used in addToUnplanned, removeCourse and unscheduleCourse routes
+class CourseCode(BaseModel):
+    courseCode: str
+
+# Used in unPlannedToTerm route
+class UnPlannedToTerm(BaseModel):
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
+# used in PlannedToTerm route
+class PlannedToTerm(BaseModel):
+    srcRow: int
+    srcTerm: str
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
