@@ -35,8 +35,7 @@ def test_get_followups_COMP3331():
     x = requests.get('http://127.0.0.1:8000/followups/getFollowups/COMP3331/T2')
 
     assert x.status_code == 200
-    assert x.status_code == 400
     assert x.json()['originCourse'] == "COMP3331"
     assert x.json()['originTerm'] == "T2"
     assert x.json()['followups']['COMP4920'] == { 'T3': 63 }
-    assert x.json()['followups']['COMP3311'] == { 'T3': 54 }
+    assert x.json()['followups']['COMP3900'] == { 'T3': 36 }
