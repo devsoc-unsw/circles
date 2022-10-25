@@ -1,7 +1,7 @@
 """
 route for planner algorithms
 """
-from typing import Tuple, List, Dict
+from typing import Tuple, List, Dict, Set
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException
 from server.routers.courses import get_course
@@ -17,6 +17,7 @@ from server.config import DUMMY_TOKEN
 from operator import itemgetter
 from algorithms.objects.user import User
 from algorithms.objects.course import Course
+from algorithms.autoplanning import autoplan
 
 
 MIN_COMPLETED_COURSE_UOC = 6
@@ -114,8 +115,8 @@ def setPlannedCourseToTerm(d: PlannedToTerm, token: str = DUMMY_TOKEN):
 
     # If only changing index of multiterm course, don't change other course instances
     if isMultiterm and d.srcRow == d.destRow and d.srcTerm == d.destTerm:
-        planner.years[d.srcRow][d.srcTerm].remove(d.courseCode)
-        planner.years[d.srcRow][d.srcTerm].insert(d.destIndex, d.courseCode)
+        planner['years'][d.srcRow][d.srcTerm].remove(d.courseCode)
+        planner['years'][d.srcRow][d.srcTerm].insert(d.destIndex, d.courseCode)
         set_user(token, user, True)
         return
 
@@ -198,7 +199,7 @@ def unschedule(d: CourseCode, token: str = DUMMY_TOKEN):
     planner = user['planner']
     course = get_course(d.courseCode)
 
-    removed = set()
+    removed: Set[str] = set()
     # Remove every instance of the course from each year
     for year in planner['years']:
         for courseList in year.values():
@@ -207,15 +208,15 @@ def unschedule(d: CourseCode, token: str = DUMMY_TOKEN):
                 removed.add(d.courseCode)
 
     # Add the course to unplanned
-    for course in removed:
-        planner['unplanned'].append(course)
+    for item in removed:
+        planner['unplanned'].append(item)
     set_user(token, user, True)
 
 
 @router.post('/unscheduleAll')
 def unscheduleAll(token: str = DUMMY_TOKEN):
     user = get_user(token)
-    removed = set()
+    removed: Set[str] = set()
 
     # Remove every course from each year
     for year in user['planner']['years']:
@@ -233,7 +234,7 @@ def generate_empty_years(nYears: int):
 
 def getTermsList(currentTerm: str, uoc: int, termsOffered: list[str], isSummerEnabled: bool, instanceNum: int):
     allTerms = ['T1', 'T2', 'T3']
-    termsList = []
+    termsList: List[Dict[str, int | str]] = []
     if isSummerEnabled:
         allTerms.insert(0, 'T0')
 
