@@ -26,3 +26,11 @@ export type PlannerYear = {
   T2: string[];
   T3: string[];
 };
+
+export type JSONPlanner = {
+  startYear: number;
+  numYears: number;
+  isSummerEnabled: boolean;
+  years: PlannerYear[];
+  version: number;
+};
