@@ -67,9 +67,6 @@ def addToUnplanned(courseCode: CourseCode, token: str = DUMMY_TOKEN):
     user['planner']['unplanned'].append(courseCode.courseCode)
     set_user(token, user, True)
 
-import requests
-import json
-from pprint import pprint
 @router.post("/unPlannedToTerm")
 def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
     course = get_course(d.courseCode)
@@ -78,7 +75,6 @@ def setUnPlannedCourseToTerm(d: UnPlannedToTerm, token: str = DUMMY_TOKEN):
     planner = user['planner']
     instanceNum = 0
     termsList = getTermsList(d.destTerm, uoc, terms, planner['isSummerEnabled'], instanceNum)
-    pprint(requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}').json())
 
     # If moving a multiterm course out of bounds
     if course['is_multiterm'] and isCourseOutOfBounds(len(planner['years']), d.destRow, termsList):
