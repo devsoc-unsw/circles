@@ -68,7 +68,7 @@ def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[
         raise HTTPException(400, f"Invalid COMP course {origin_course}")
     
     # get enrolment data
-    with open("./data/final_data/enrolmentData.json") as enrolment_data_file:
+    with open("./data/final_data/enrolmentData.json", "r", encoding="utf8") as enrolment_data_file:
         enrolment_data = json.load(enrolment_data_file) 
     origin_course_members = enrolment_data[origin_course][origin_term]
     
