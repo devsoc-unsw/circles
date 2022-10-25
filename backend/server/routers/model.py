@@ -205,14 +205,25 @@ class TermsList(BaseModel):
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
 
-class ElliotMoveCourseInfo(BaseModel):
-    course: str
-    destTerm: str
-    srcTerm: str
+# Used in addToUnplanned, removeCourse and unscheduleCourse routes
+class CourseCode(BaseModel):
+    courseCode: str
 
-class ElliotGetTermsData(BaseModel):
-    rowOffset: int
-    term: str
+# Used in unPlannedToTerm route
+class UnPlannedToTerm(BaseModel):
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
+# used in PlannedToTerm route
+class PlannedToTerm(BaseModel):
+    srcRow: int
+    srcTerm: str
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
