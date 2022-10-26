@@ -35,8 +35,8 @@ const CollapsibleContent = styled.div(
   ({ collapsed }: { collapsed: boolean }) => css`
     width: 100%;
     margin: 10px;
-    max-height: ${collapsed ? 0 : 1000}px;
-    transition: max-height 0.3s ease-in-out;
+    max-height: ${collapsed ? 0 : 4000}px;
+    transition: max-height 0.4s ease-in-out;
     overflow: hidden;
   `
 );
