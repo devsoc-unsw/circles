@@ -133,7 +133,7 @@ def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer
     item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
     if container.get("courses") is None:
-        gen_ed_courses = list(set(get_gen_eds(programCode, [])["courses"].keys()) - set(sum(
+        gen_ed_courses = list(set(get_gen_eds(programCode)["courses"].keys()) - set(sum(
             (
                 sum((
                     list(value["courses"].keys())
@@ -143,9 +143,7 @@ def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer
             for spec_name, spec in structure.items()
             if "Major" in spec_name or "Honours" in spec_name)
         , [])))
-        # clist = course_list_from_structure(structure)
-        # print(clist)
-        geneds = get_gen_eds(programCode, [])
+        geneds = get_gen_eds(programCode)
         item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
 
 
