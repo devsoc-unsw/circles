@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from data.config import LIVE_YEAR
 
-from server.routers import courses, planner, programs, specialisations
+from server.routers import courses, planner, programs, specialisations, followups
 
 app = FastAPI()
 
@@ -42,6 +42,7 @@ app.include_router(planner.router)
 app.include_router(courses.router)
 app.include_router(programs.router)
 app.include_router(specialisations.router)
+app.include_router(followups.router)
 
 
 @app.get("/")
