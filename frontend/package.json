@@ -76,7 +76,7 @@
     "@types/styled-components": "5.1.26",
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
-    "@vitejs/plugin-react": "2.1.0",
+    "@vitejs/plugin-react": "2.2.0",
     "@vitest/coverage-c8": "0.24.3",
     "axios-mock-adapter": "1.21.2",
     "eslint": "8.26.0",
