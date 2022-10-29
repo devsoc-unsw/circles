@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
+const LandingPageContainer = styled.div`
+  margin-top: 30px;
+`;
 const LandingPageTitle = styled.h1`
   font-size: 50px;
   background: -webkit-linear-gradient(45deg, #9f62de, #b77eff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
-  margin-top: 30px;
   position: relative;
 `;
 
@@ -33,12 +35,13 @@ const Card = styled.div`
   }
 `;
 
-const dragContainer = styled.div`
+const iconContainer = styled.div`
   height: 66px;
   width: 66px;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 15px;
+  background: ${({ color }) => color};
 `;
 
 const dragTitle = styled.h3`
@@ -76,14 +79,57 @@ const content = styled.p`
   line-height: 15px;
 `;
 
+const InteractiveViewContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 120px;
+  margin: 250px 0px;
+`;
+
+const InteractiveViewTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+`;
+
+const InteractiveViewTitle = styled.h1`
+  font-size: 40px;
+  background: -webkit-linear-gradient(30deg, #9f62de, #b77eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-top: 30px;
+  position: relative;
+  font-weight: 600;
+`;
+
+const InteractiveViewText = styled.p`
+  font-size: 15px;
+  color: #acacac;
+`;
+
+const gradientBox = styled.div`
+  width: 418px;
+  height: 418px;
+  border-radius: 20px;
+  background: -webkit-linear-gradient(#eeddff, #faeef5, #ffffff);
+`;
+
 export default {
+  LandingPageContainer,
   LandingPageTitle,
   CardContainer,
   Card,
-  dragContainer,
+  iconContainer,
   dragTitle,
   flagTitle,
   padlockTitle,
   divider,
-  content
+  content,
+  InteractiveViewContainer,
+  InteractiveViewTextContainer,
+  InteractiveViewTitle,
+  InteractiveViewText,
+  gradientBox
 };
