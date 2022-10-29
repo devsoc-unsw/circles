@@ -17,7 +17,7 @@ def test_fix_wam_only_unlock_given_course():
     assert x.json()["courses_state"]["COMP1521"]["is_accurate"] is True
 
 
-def test_unlock_dependant_course():
+def test_unlock_dependent_course():
     x = requests.post(
         "http://127.0.0.1:8000/courses/getAllUnlocked", json=USERS["user2"]
     )

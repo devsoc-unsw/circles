@@ -13,12 +13,14 @@ const DraggableTabWrapper = styled.div<{ active: boolean }>`
   border: 1px solid ${({ theme }) => theme.draggableTab.borderColor};
   color: ${({ theme }) => theme.text};
 
-  ${({ active, theme }) => active && css`
-    background-color: ${theme.body};
-    border-bottom-color: ${theme.body};
-    color: #9254de;
-    font-weight: 700;
-  `}
+  ${({ active, theme }) =>
+    active &&
+    css`
+      background-color: ${theme.body};
+      border-bottom-color: ${theme.body};
+      color: #9254de;
+      font-weight: 700;
+    `}
 `;
 
 const TabNameWrapper = styled.span`

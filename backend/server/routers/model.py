@@ -59,7 +59,6 @@ class UserData(BaseModel):
     program: str
     specialisations: dict
     courses: dict
-    year: int
 
 
 class CourseState(BaseModel):
@@ -107,10 +106,15 @@ class MostRecentPastTerm(TypedDict):
     T: int
 
 
+class ValidPlannerData(BaseModel):
+    program: str
+    specialisations: list[str]
+    plan: list[list[dict[str, tuple[int, int | None]]]]
+    mostRecentPastTerm: MostRecentPastTerm
+
 class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    year: int
     plan: list[list[dict[str,  None | list[int | None]]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
@@ -179,6 +183,11 @@ class TermsList(BaseModel):
     terms: Optional[dict[str, Optional[list[str]]]]
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
+
+class ProgramTime(BaseModel):
+    startTime: tuple[int, int] # (Year, Term) start of program
+    endTime: tuple[int, int]
+    uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

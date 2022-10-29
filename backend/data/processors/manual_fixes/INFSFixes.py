@@ -74,7 +74,7 @@ def INFS_3303():
     "original": "Prerequisite: INFS3202 and in (Plan INFSB13554 or INFSCH3964 or INFSCH3971)<br/><br/>",
     "processed": "INFS3202 && in (Plan INFSB13554 || INFSCH3964 || INFSCH3971)"
     """
-    return "INFS3202 && (INFSB13554 || INFSCH3964 || INFSCH3971)"
+    return "INFS3202 && ((INFSB1 && 3554) || INFSCH3964 || INFSCH3971)"
 
 
 def INFS_3603():

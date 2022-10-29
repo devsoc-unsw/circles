@@ -22,8 +22,6 @@ def test_user1():
     assert user.has_taken_course("COMP1521")
     assert isclose(user.wam(), 70.5)
     assert user.uoc() == 12
-    assert user.year == 3
-
 
 def test_user2():
     user = User(USERS["user2"])
@@ -35,7 +33,6 @@ def test_user2():
     assert user.has_taken_course("MATH1081")
     assert user.wam() == None
     assert user.uoc() == 18
-    assert user.year == 1
 
 
 def test_user3():
@@ -45,7 +42,6 @@ def test_user3():
     assert user.in_specialisation("COMPA1")
     assert user.wam() == None
     assert user.uoc() == 0
-    assert user.year == 1
 
 def test_user_no_data():
     user = User()
@@ -53,7 +49,6 @@ def test_user_no_data():
     assert user.cur_courses == []
     assert user.program == None
     assert user.specialisations == {}
-    assert user.year == 0
 
 def test_user_empty():
     """
@@ -66,4 +61,3 @@ def test_user_empty():
     assert empty_dict_user.cur_courses == default_user.cur_courses
     assert empty_dict_user.program == default_user.program
     assert empty_dict_user.specialisations == default_user.specialisations
-    assert empty_dict_user.year == default_user.year

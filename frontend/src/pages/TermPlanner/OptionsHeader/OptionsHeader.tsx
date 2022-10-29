@@ -3,7 +3,12 @@ import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
+  DownloadOutlined,
+  EyeFilled,
+  QuestionCircleOutlined,
+  SettingFilled,
+  UploadOutlined,
+  WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
@@ -12,6 +17,7 @@ import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
+import ImportPlannerMenu from '../ImportPlannerMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
 import S from './styles';
@@ -20,7 +26,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>
+  plannerRef: React.RefObject<HTMLDivElement>;
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {
@@ -31,7 +37,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
 
   const iconStyles = {
     fontSize: '20px',
-    color: '#323739',
+    color: '#323739'
   };
 
   return (
@@ -71,6 +77,23 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             </Tooltip>
           </div>
         </Tippy>
+        <Tippy
+          content={<ImportPlannerMenu />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme}
+          zIndex={1}
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Import">
+              <S.OptionButton>
+                <UploadOutlined style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+          </div>
+        </Tippy>
 
         {!isPlannerEmpty(years) && (
           <Tooltip title="Unplan all courses">
@@ -105,13 +128,8 @@ const OptionsHeader = ({ plannerRef }: Props) => {
 
       <S.OptionSection>
         <S.ShowMarks>
-          <S.TextShowMarks>
-            Show Marks
-          </S.TextShowMarks>
-          <Switch
-            defaultChecked={showMarks}
-            onChange={() => dispatch(toggleShowMarks())}
-          />
+          <S.TextShowMarks>Show Marks</S.TextShowMarks>
+          <Switch defaultChecked={showMarks} onChange={() => dispatch(toggleShowMarks())} />
         </S.ShowMarks>
         <Tippy
           content={<HelpMenu />}

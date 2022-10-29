@@ -126,7 +126,7 @@ class LevelCourseCategory(CompositeCategory):
 
 
 class SchoolCategory(Category):
-    '''Category for courses belonging to a school (e.g. S Mechanical)'''
+    """Category for courses belonging to a school (e.g. S Mechanical)"""
 
     def __init__(self, school):
         self.school = school  # The code for the school (S Mechanical)
@@ -149,3 +149,24 @@ class FacultyCategory(Category):
 
     def __str__(self) -> str:
         return self.faculty
+
+
+class GenEdCategory(Category):
+    """
+    Category for a course being a Gened
+        - This is condition is unique in the sense that it's matching is
+          contingent on the user's program
+
+    NOT IMPLEMENTED!!!!!!
+    """
+
+    def __init__(self):
+        pass
+
+    def match_definition(self, course: str) -> bool:
+        # TODO: Implement this
+        return False
+
+    def __str__(self) -> str:
+        return "GenEdCategory"
+

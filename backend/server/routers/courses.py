@@ -2,9 +2,10 @@
 APIs for the /courses/ route.
 """
 from contextlib import suppress
+import pickle
 import re
-from typing import Dict, List, Mapping, Set, Tuple
-
+from typing import Dict, List, Mapping, Optional, Set, Tuple
+from algorithms.objects.program_restrictions import NoRestriction
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
@@ -16,6 +17,8 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
 from server.routers.utility import get_core_courses, map_suppressed_errors
+from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
+from algorithms.objects.program_restrictions import ProgramRestriction
 
 
 router = APIRouter(
@@ -381,7 +384,7 @@ def unselect_course(userData: UserData, unselectedCourse: str) -> dict[str, list
             })
 def course_children(course: str):
     """
-    fetches courses which are dependant on taking 'course'
+    fetches courses which are dependent on taking 'course'
     eg 1511 -> 1521, 1531, 2521 etc
     """
     if not CONDITIONS.get(course):
@@ -517,6 +520,22 @@ def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
+def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
+    """
+    Returns if the course is unlocked for the given user.
+    Also returns a list of warnings.
+    TODO: !Untested
+    """
+    course_result, course_warnings = (
+        cond.validate(user) if (cond := CONDITIONS[course]) else (True, [])
+    )
+
+    # TODO: remove this as blank once program_restrictions return warnings
+    program_warnings: List[str] = []
+    program_restriction = get_program_restriction(user.program) or NoRestriction()
+    program_result = program_restriction.validate_course_allowed(user, course)
+
+    return (course_result and program_result), (course_warnings + program_warnings),
 
 def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
     """ Gives the course a weighting based on the relevance to the search """
@@ -532,7 +551,8 @@ def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple[str, str], search_term: str, structure: dict,
+def weight_course(
+        course: tuple[str, str], search_term: str, structure: dict,
                   majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
@@ -590,3 +610,15 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
     """
     return get_course_info(course, year).get("terms", [])
 
+def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
+    """
+    Returns the program restriction for the given program code.
+    Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.
+    !Untested
+    """
+    # TODO: This loading should not be here; very slow
+    # making it global causes some errors
+    # There needs to be a startup event for routers to load data
+    with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:
+        program_restrictions: dict[str, ProgramRestriction] = pickle.load(file)
+    return program_restrictions.get(program_code, None)
