@@ -43,8 +43,10 @@ const LandingPage = () => (
           <S.iconContainer color="#eae5ed">
             <img src={drag} alt="" width={50} height={50} />
           </S.iconContainer>
-          <S.dragTitle>Drag N' Drop</S.dragTitle>
-          <S.divider style={{ background: '#c3b3c9' }} />
+          <S.LandingPageSubtitle startColor="#cabade" endColor="#9e88ba">
+            Drag N' Drop
+          </S.LandingPageSubtitle>
+          <S.divider color="#c3b3c9" />
           <S.content>
             Drag and drop functionality to make planning an intuitive and easy process
           </S.content>
@@ -53,8 +55,10 @@ const LandingPage = () => (
           <S.iconContainer color="#eddafc">
             <img src={flag} alt="" width={50} height={50} />
           </S.iconContainer>
-          <S.flagTitle>Track progress</S.flagTitle>
-          <S.divider style={{ background: '#f2ccff' }} />
+          <S.LandingPageSubtitle startColor="#9b5dea" endColor="#dbe2fc">
+            Track progress
+          </S.LandingPageSubtitle>
+          <S.divider color="#f2ccff" />
           <S.content>
             Plan ahead with our progression tracker, and track how far you've gone in your degree
           </S.content>
@@ -63,8 +67,10 @@ const LandingPage = () => (
           <S.iconContainer color="#d4ffdc">
             <img src={padlock} alt="" width={50} height={50} />
           </S.iconContainer>
-          <S.padlockTitle>Prereq Validation</S.padlockTitle>
-          <S.divider style={{ background: '#a3ebb1' }} />
+          <S.LandingPageSubtitle startColor="#9fecae" endColor="#93d392">
+            Prereq Validation
+          </S.LandingPageSubtitle>
+          <S.divider color="#a3ebb1" />
           <S.content>
             Verify you meet all the pre-requisites required to take any given course
           </S.content>

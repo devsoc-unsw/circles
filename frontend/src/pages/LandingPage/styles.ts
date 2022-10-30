@@ -5,7 +5,7 @@ const LandingPageContainer = styled.div`
 `;
 const LandingPageTitle = styled.h1`
   font-size: 50px;
-  background: -webkit-linear-gradient(45deg, #9f62de, #b77eff);
+  background: -webkit-linear-gradient(30deg, #9f62de, #b77eff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -44,21 +44,13 @@ const iconContainer = styled.div`
   background: ${({ color }) => color};
 `;
 
-const dragTitle = styled.h3`
+const LandingPageSubtitle = styled.h3<{ startColor: string; endColor: string }>`
   font-size: 20px;
-  background: -webkit-linear-gradient(45deg, #cabade, #9e88ba);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`;
-const flagTitle = styled.h3`
-  font-size: 20px;
-  background: -webkit-linear-gradient(45deg, #9b5dea, #dbe2fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`;
-const padlockTitle = styled.h3`
-  font-size: 20px;
-  background: -webkit-linear-gradient(45deg, #9fecae, #93d392);
+  background: -webkit-linear-gradient(
+    45deg,
+    ${({ startColor }) => startColor},
+    ${({ endColor }) => endColor}
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
@@ -69,7 +61,7 @@ const divider = styled.hr`
   border-radius: 2px;
   border: 0 none;
   margin: 10px 0px;
-  background-color: #c3b3c9;
+  background-color: ${({ color }) => color};
 `;
 
 const content = styled.p`
@@ -121,9 +113,7 @@ export default {
   CardContainer,
   Card,
   iconContainer,
-  dragTitle,
-  flagTitle,
-  padlockTitle,
+  LandingPageSubtitle,
   divider,
   content,
   InteractiveViewContainer,
