@@ -99,7 +99,6 @@ const InteractiveViewTitle = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
-  margin-top: 30px;
   position: relative;
   font-weight: 600;
 `;
