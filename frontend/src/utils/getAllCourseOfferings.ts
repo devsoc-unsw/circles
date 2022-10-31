@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { Term } from 'types/planner';
+import { CourseLegacyOfferings, PlannerCourse, Term } from 'types/planner';
 
-export type CourseOfferings = {
-  [course: string]: {
-    [year: string]: Term[];
-  };
+export type ManyCoursesOfferings = {
+  [course: string]: CourseLegacyOfferings;
 };
 
 type APIResult = {
@@ -17,9 +15,14 @@ type APIResult = {
 const getAllCourseOfferings = async (
   courses: string[],
   years: string[]
-): Promise<CourseOfferings> => {
+): Promise<ManyCoursesOfferings> => {
+  if (courses.length === 0 || years.length === 0) {
+    return {};
+  }
+
   const yearsStr = years.join('+');
-  const offers: CourseOfferings = {};
+  const offers: ManyCoursesOfferings = {};
+
   await Promise.all(
     courses.map(async (course) => {
       try {
@@ -44,15 +47,13 @@ const getAllCourseOfferings = async (
   return offers;
 };
 
-export const courseHasOffering = (
-  code: string,
-  year: string,
-  term: string,
-  offerings: CourseOfferings
-): boolean => {
-  return (
-    code in offerings && year in offerings[code] && offerings[code][year].includes(term as Term)
-  );
+export const courseHasOffering = (course: PlannerCourse, year: string, term: Term): boolean => {
+  if (course.legacyOfferings === undefined) {
+    // fall back to the current offerings
+    return course.termsOffered.includes(term);
+  }
+
+  return year in course.legacyOfferings && course.legacyOfferings[year].includes(term);
 };
 
 export default getAllCourseOfferings;

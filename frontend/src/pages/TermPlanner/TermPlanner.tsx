@@ -1,8 +1,3 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable no-console */
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +5,7 @@ import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
-import getAllCourseOfferings, { CourseOfferings } from 'utils/getAllCourseOfferings';
+import getAllCourseOfferings from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
@@ -21,7 +16,8 @@ import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
   toggleWarnings,
-  unschedule
+  unschedule,
+  updateLegacyOfferings
 } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
@@ -40,30 +36,39 @@ const TermPlanner = () => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const [termsOffered, setTermsOffered] = useState<CourseOfferings>({});
-  const [draggingCourse, setDraggingCourse] = useState<string | null>('');
+  const [draggingCourse, setDraggingCourse] = useState<string | undefined>();
 
   const dispatch = useDispatch();
 
-  // hacky solution because it cant compare arrays well enough :c
-  const courseList = Object.keys(planner.courses);
-  const courseListStr = courseList.join('+');
   useEffect(() => {
-    // get the terms offered
-    const getTermsOffered = async () => {
+    // update the legacy term offered
+    const updateOfferingsData = async () => {
       const years: string[] = [];
       for (let i = 0; i < planner.numYears; i++) {
         years.push((planner.startYear + i).toString());
       }
 
-      const offerings = await getAllCourseOfferings(courseList, years);
+      // get the outdated legacy offerings
+      const outdated = Object.entries(planner.courses)
+        .filter(([, course]) => {
+          const oldOfferings = course.legacyOfferings;
+          // no legacy offering data, or doesn't include the wanted years
+          return !oldOfferings || years.filter((y) => !(y in oldOfferings)).length > 0;
+        })
+        .map(([code]) => code);
 
-      setTermsOffered(offerings);
+      // update them
+      const data = await getAllCourseOfferings(outdated, years);
+      Object.entries(data).forEach(([code, offerings]) => {
+        dispatch(updateLegacyOfferings({ code, offerings }));
+      });
     };
 
-    getTermsOffered();
+    updateOfferingsData();
+    // hacky solution to useEffect deps, because it cant compare arrays well enough :c
+    // also only want it to update on new/removed courses, not altered inner state
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [courseListStr, planner.startYear, planner.numYears]);
+  }, [Object.keys(planner.courses).join(''), planner.startYear, planner.numYears]);
 
   const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
@@ -100,7 +105,7 @@ const TermPlanner = () => {
   };
 
   const handleOnDragEnd: OnDragEndResponder = (result) => {
-    setDraggingCourse(null);
+    setDraggingCourse(undefined);
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -241,15 +246,14 @@ const TermPlanner = () => {
                             key={key}
                             name={key}
                             coursesList={year[term as Term]}
-                            courseOfferings={termsOffered}
-                            draggingCourse={draggingCourse ?? undefined}
+                            draggingCourse={draggingCourse}
                           />
                         );
                       })}
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={draggingCourse !== null} />
+                <UnplannedColumn dragging={draggingCourse !== undefined} />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>

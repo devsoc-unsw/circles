@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { CourseList, CourseStates } from 'types/courses';
-import { Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
+import { CourseLegacyOfferings, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
 import { getTermsList } from 'pages/TermPlanner/utils';
 
 // set up hidden object
@@ -265,6 +265,23 @@ const plannerSlice = createSlice({
         state.courses[code].mark = mark;
       }
     },
+    updateLegacyOfferings: (
+      state,
+      action: PayloadAction<{ code: string; offerings: CourseLegacyOfferings }>
+    ) => {
+      const { code, offerings } = action.payload;
+
+      if (state.courses[code]) {
+        if (state.courses[code].legacyOfferings === undefined) {
+          state.courses[code].legacyOfferings = {};
+        }
+
+        Object.entries(offerings).forEach(([year, terms]) => {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          state.courses[code].legacyOfferings![year] = terms;
+        });
+      }
+    },
     // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses
     removeCourse: (state, action: PayloadAction<string>) => {
       // Remove courses from years and courses
@@ -464,7 +481,8 @@ export const {
   hideYear,
   unhideAllYears,
   resetPlanner,
-  updateCourseMark
+  updateCourseMark,
+  updateLegacyOfferings
 } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

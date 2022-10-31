@@ -4,6 +4,10 @@ export type Mark = number | Grade | undefined;
 
 export type Grade = 'SY' | 'FL' | 'PS' | 'CR' | 'DN' | 'HD';
 
+export type CourseLegacyOfferings = {
+  [year: string]: Term[];
+};
+
 export type PlannerCourse = {
   title: string;
   termsOffered: Term[];
@@ -18,6 +22,7 @@ export type PlannerCourse = {
   supressed: boolean;
   isMultiterm: boolean;
   mark: Mark;
+  legacyOfferings?: CourseLegacyOfferings;
 };
 
 export type PlannerYear = {

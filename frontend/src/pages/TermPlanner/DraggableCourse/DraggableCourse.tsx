@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
@@ -6,7 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
-import { courseHasOffering, CourseOfferings } from 'utils/getAllCourseOfferings';
+import { Term } from 'types/planner';
+import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -17,14 +17,13 @@ type Props = {
   code: string;
   index: number;
   term: string;
-  courseOfferings?: CourseOfferings;
 };
 
 const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ code, index, term, courseOfferings }: Props) => {
+const DraggableCourse = ({ code, index, term }: Props) => {
   const { courses, isSummerEnabled, completedTerms } = useSelector(
     (state: RootState) => state.planner
   );
@@ -33,25 +32,13 @@ const DraggableCourse = ({ code, index, term, courseOfferings }: Props) => {
   const { Text } = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
-  const {
-    title,
-    isUnlocked,
-    plannedFor,
-    isLegacy,
-    isAccurate,
-    // termsOffered,
-    handbookNote,
-    supressed,
-    mark
-  } = courses[code];
+  const { title, isUnlocked, plannedFor, isLegacy, isAccurate, handbookNote, supressed, mark } =
+    courses[code];
   const warningMessage = courses[code].warnings;
-  const isOffered = plannedFor && courseOfferings
-          ? courseHasOffering(code, plannedFor.slice(0, 4), plannedFor.slice(4, 6), courseOfferings)
-          : true;
-  // const isOffered =
-  //   plannedFor && /T[0-3]/.test(plannedFor)
-  //     ? (termsOffered as string[]).includes(plannedFor.match(/T[0-3]/)?.[0] as string)
-  //     : true;
+
+  const isOffered = plannedFor
+    ? courseHasOffering(courses[code], plannedFor.slice(0, 4), term as Term)
+    : true;
   const BEwarnings = handbookNote !== '' || !!warningMessage.length;
 
   const contextMenu = useContextMenu({
