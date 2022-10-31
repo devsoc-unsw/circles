@@ -1,8 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Suspense, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
+import { Term } from 'types/planner';
+import { courseHasOffering, CourseOfferings } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -17,11 +21,12 @@ const Droppable = React.lazy(() =>
 type Props = {
   name: string;
   coursesList: string[];
-  termOffered: boolean;
-  dragging: boolean;
+  courseOfferings: CourseOfferings;
+  draggingCourse: string | undefined;
 };
 
-const TermBox = ({ name, coursesList, termOffered, dragging }: Props) => {
+const TermBox = ({ name, coursesList, courseOfferings, draggingCourse }: Props) => {
+  const year = name.slice(0, 4);
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
@@ -44,7 +49,9 @@ const TermBox = ({ name, coursesList, termOffered, dragging }: Props) => {
 
   const isCompleted = !!completedTerms[name];
 
-  const isOffered = termOffered && !isCompleted;
+  const offeredInTerm =
+    !!draggingCourse && courseHasOffering(draggingCourse, year, term, courseOfferings);
+  const isOffered = offeredInTerm && !isCompleted;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
@@ -76,14 +83,20 @@ const TermBox = ({ name, coursesList, termOffered, dragging }: Props) => {
             offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
           >
             <S.TermBoxWrapper
-              droppable={isOffered && dragging}
+              droppable={isOffered && !!draggingCourse}
               summerEnabled={isSummerEnabled}
               isSmall={isSmall}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
               {coursesList.map((code, index) => (
-                <DraggableCourse key={`${code}${term}`} code={code} index={index} term={term} />
+                <DraggableCourse
+                  key={`${code}${term}`}
+                  code={code}
+                  index={index}
+                  term={term}
+                  courseOfferings={courseOfferings}
+                />
               ))}
               {provided.placeholder}
               <S.UOCBadgeWrapper>

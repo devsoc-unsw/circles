@@ -10,6 +10,7 @@ import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
+import getAllCourseOfferings, { CourseOfferings } from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
@@ -34,27 +35,13 @@ const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
 );
 
-type TermsOfferedType = {
-  [course: string]: {
-    [year: string]: Term[] | null;
-  };
-};
-
-type APIResult = {
-  terms: {
-    [year: string]: Term[] | null;
-  };
-  fails: unknown[];
-};
-
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const [termsOffered, setTermsOffered] = useState<TermsOfferedType>({});
-  const [currCourse, setCurrCourse] = useState<string>('');
-  const [isDragging, setIsDragging] = useState(false);
+  const [termsOffered, setTermsOffered] = useState<CourseOfferings>({});
+  const [draggingCourse, setDraggingCourse] = useState<string | null>('');
 
   const dispatch = useDispatch();
 
@@ -66,26 +53,12 @@ const TermPlanner = () => {
     const getTermsOffered = async () => {
       const years: string[] = [];
       for (let i = 0; i < planner.numYears; i++) {
-        years.push(String(planner.startYear + i));
+        years.push((planner.startYear + i).toString());
       }
-      const yearsStr = years.join('+');
 
-      const offered: TermsOfferedType = {};
-      await Promise.all(
-        courseList.map(async (course) => {
-          try {
-            const res = await axios.get<APIResult>(`/courses/termsOffered/${course}/${yearsStr}`);
-            if (res.status === 200) {
-              offered[course] = res.data.terms;
-            }
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error('Error at getting terms offered', e);
-          }
-        })
-      );
+      const offerings = await getAllCourseOfferings(courseList, years);
 
-      setTermsOffered(offered);
+      setTermsOffered(offerings);
     };
 
     getTermsOffered();
@@ -123,12 +96,11 @@ const TermPlanner = () => {
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
-    setCurrCourse(course);
-    setIsDragging(true);
+    setDraggingCourse(course);
   };
 
   const handleOnDragEnd: OnDragEndResponder = (result) => {
-    setIsDragging(false);
+    setDraggingCourse(null);
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -221,7 +193,6 @@ const TermPlanner = () => {
     }
   };
 
-  let lastTermsOffered: Term[] = [];
   return (
     <PageTemplate>
       <OptionsHeader plannerRef={plannerPicRef} />
@@ -265,24 +236,20 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
-
-                        // use the last known terms offered to assume future
-                        lastTermsOffered = termsOffered[currCourse]?.[iYear] ?? lastTermsOffered;
-                        const termIsOffered = lastTermsOffered.includes(term as Term);
                         return (
                           <TermBox
                             key={key}
                             name={key}
                             coursesList={year[term as Term]}
-                            termOffered={termIsOffered}
-                            dragging={isDragging}
+                            courseOfferings={termsOffered}
+                            draggingCourse={draggingCourse ?? undefined}
                           />
                         );
                       })}
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={isDragging} />
+                <UnplannedColumn dragging={draggingCourse !== null} />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>
