@@ -29,7 +29,7 @@ def test_unplanned_to_term():
 
     data = {
         'destRow': 0,
-        'destTerm': 'T2',
+        'destTerm': 'T3',
         'destIndex': 1,
         'courseCode': 'COMP6447'
     }
@@ -38,7 +38,7 @@ def test_unplanned_to_term():
 
     data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}').json()
     assert "COMP6447" not in data['planner']['unplanned']
-    assert data['planner']['years'][0]['T2'][1]  == "COMP6447"
+    assert data['planner']['years'][0]['T3'][0]  == "COMP6447"
 
 def test_unplanned_to_term_multiterm():
     clear()
