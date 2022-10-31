@@ -16,7 +16,6 @@ from server.routers.model import (ValidCoursesState, ValidPlannerData,
 from server.routers.user import get_user, set_user
 from server.config import DUMMY_TOKEN
 from algorithms.objects.user import User
-from algorithms.objects.course import Course
 from algorithms.autoplanning import autoplan
 
 
@@ -67,15 +66,39 @@ def validate_term_planner(plannerData: PlannerData):
 
     return {"courses_state": coursesState}
 
+
 @router.post("/addToUnplanned")
 def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
-    # Add course to unplanned column
+    """
+    Adds a course to the user's unplanned column within their planner
+
+    Args:
+        data (CourseCode):
+            - courseCode(str): The course to add to the unplanned column
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+    """
     user = get_user(token)
     user['planner']['unplanned'].append(data.courseCode)
     set_user(token, user, True)
 
 @router.post("/unPlannedToTerm")
 def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN):
+    """
+    Moved a course out of the user's unplanned column and into the specified course on their planner
+
+    Args:
+        data (UnPlannedToTerm):
+            - destRow(int): The row in the planner the course should be moved to
+            - destTerm(str): The term in the planner the course should be moved to
+            - destIndex(int): The index within the term the course should be moved to
+                (incase there are multiple courses in the same term)
+            - courseCode(str): The course to add to the unplanned column
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Raises:
+        HTTPException: Moving a multiterm course somewhere that would result in a
+            course being placed before or after the planner
+    """
     course = get_course(data.courseCode)
     uoc, terms = itemgetter('UOC', 'terms')(course)
     user = get_user(token)
@@ -84,7 +107,7 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
     terms_list = get_terms_list(data.destTerm, uoc, terms, planner['isSummerEnabled'], instance_num)
 
     # If moving a multiterm course out of bounds
-    if course['is_multiterm'] and is_course_out_of_bounds(len(planner['years']), data.destRow, terms_list):
+    if course['is_multiterm'] and out_of_bounds(len(planner['years']), data.destRow, terms_list):
         raise HTTPException(status_code=400,
             detail = f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
@@ -105,9 +128,27 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
 
 @router.post("/plannedToTerm")
 def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
+    """
+    Moves a course out of one term and into a second term.
+
+    Args:
+        data (PlannedToTerm):
+            - srcRow(int): The row in the planner the course was originally in
+            - srcTerm(int): The term in the planner the course was originally in
+            - destRow(int): The row in the planner the course should be moved to
+            - destTerm(str): The term in the planner the course should be moved to
+            - destIndex(int): The index within the term the course should be moved to
+                (incase there are multiple courses in the same term)
+            - courseCode(str): The course to add to the unplanned column
+
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Raises:
+        HTTPException: Moving a multiterm course somewhere that would result in a
+            course being placed before or after the planner
+    """
     course = get_course(data.courseCode)
     user = get_user(token)
-    planner = user['planner']
 
     uoc, terms_offered, is_multiterm = itemgetter('UOC', 'terms', 'is_multiterm')(course)
 
@@ -115,17 +156,17 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
 
     # If only changing index of multiterm course, don't change other course instances
     if is_multiterm and data.srcRow == data.destRow and data.srcTerm == data.destTerm:
-        planner['years'][data.srcRow][data.srcTerm].remove(data.courseCode)
-        planner['years'][data.srcRow][data.srcTerm].insert(data.destIndex, data.courseCode)
+        user['planner']['years'][data.srcRow][data.srcTerm].remove(data.courseCode)
+        user['planner']['years'][data.srcRow][data.srcTerm].insert(data.destIndex, data.courseCode)
         set_user(token, user, True)
         return
 
     # Remove every instance of the course from the planner
     previous_index = {}
-    for year in range(len(planner['years'])):
-        terms = planner['years'][year]
+    for year in range(len(user['planner']['years'])):
+        terms = user['planner']['years'][year]
         for term in terms:
-            target_term: list = planner['years'][year][term]
+            target_term: list = user['planner']['years'][year][term]
             try:
                 course_index = target_term.index(data.courseCode)
             except ValueError:
@@ -136,17 +177,23 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
                 src_term_list.append(term)
 
     instance_num = src_term_list.index(data.srcTerm)
-    new_terms = get_terms_list(data.destTerm, uoc, terms_offered, planner['isSummerEnabled'], instance_num) if is_multiterm else []
+    new_terms = get_terms_list(
+        data.destTerm,
+        uoc,
+        terms_offered,
+        user['planner']['isSummerEnabled'],
+        instance_num
+    ) if is_multiterm else []
 
     # If multiterm course and out of bounds, raise exception without updating database
-    if is_multiterm and is_course_out_of_bounds(len(planner['years']), data.destRow, new_terms):
+    if is_multiterm and out_of_bounds(len(user['planner']['years']), data.destRow, new_terms):
         raise HTTPException(status_code=400,
                 detail = f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
     if is_multiterm:
         new_terms.pop(instance_num)
 
-    first_term = planner['years'][data.destRow][data.destTerm]
+    first_term = user['planner']['years'][data.destRow][data.destTerm]
     drop_index = data.destIndex
 
     # If dragged multiterm course to a column it already exists in
@@ -159,7 +206,7 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
     first_term.insert(drop_index, data.courseCode)
     for term_row_offset in new_terms:
         term, row_offset = itemgetter('term', 'row_offset')(term_row_offset)
-        target_term = planner['years'][data.destRow + row_offset][term]
+        target_term = user['planner']['years'][data.destRow + row_offset][term]
         term_id = f'{data.destRow + row_offset}{term}'
         index = previous_index[term_id] if term_id in previous_index else len(target_term)
         target_term.insert(index, data.courseCode)
@@ -167,6 +214,14 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
 
 @router.post('/removeCourse')
 def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
+    """
+    Removes a course from the user's planner data
+
+    Args:
+        data (CourseCode):
+            - courseCode(str): The course to add to the unplanned column
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+    """
     user = get_user(token)
     planner = user['planner']
 
@@ -183,6 +238,12 @@ def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
 
 @router.post("/removeAll")
 def remove_all(token: str = DUMMY_TOKEN):
+    """
+    Removes all courses from the user's planner data
+
+    Args:
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+    """
     user = get_user(token)
 
     # Replace each year with an empty year
@@ -194,6 +255,14 @@ def remove_all(token: str = DUMMY_TOKEN):
 
 @router.post("/unscheduleCourse")
 def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
+    """
+    Moves a course out of a term and into the user's unplanned column
+
+    Args:
+        data (CourseCode):
+            - courseCode(str): The course to add to the unplanned column
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+    """
     user = get_user(token)
     planner = user['planner']
 
@@ -212,6 +281,12 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
 
 @router.post('/unscheduleAll')
 def unschedule_all(token: str = DUMMY_TOKEN):
+    """
+    Removes all courses from every term and moves then into the user's unplanned column.
+
+    Args:
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+    """
     user = get_user(token)
     removed: Set[str] = set()
 
@@ -227,9 +302,40 @@ def unschedule_all(token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 def generate_empty_years(num_years: int):
+    """
+    Generates a set amount of empty years
+
+    Args:
+        num_years (int): Number of empty year to create
+
+    Returns:
+        List[List[terms]]: An empty list of years and terms
+    """
     return [{'T0': [], 'T1': [], 'T2': [], 'T3': []} for _ in range(num_years)]
 
-def get_terms_list(current_term: str, uoc: int, terms_offered: list[str], is_summer_enabled: bool, instance_num: int):
+def get_terms_list(
+    current_term: str,
+    uoc: int,
+    terms_offered: list[str],
+    is_summer_enabled: bool,
+    instance_num: int
+):
+    """
+    Determines which terms a multiterm course should be moved to.
+    Some multiterm courses need to be done 2 times, whereas others need to be
+    done 3 times, so it can't be hard-coded
+
+    Args:
+        current_term (str): The term the multi-term course is being moved to
+        uoc (int): The UOC each instance of the course counts as
+        terms_offered (list[str]): A list of terms the course is offered in
+        is_summer_enabled (bool): Whether multiterm courses can go in the summer term
+        instance_num (int): Which instance of the multiterm course is being dragged
+
+    Returns:
+        List[Dict[str, str | int]]: A list of terms and their offsets from the original
+            row that the multiterm course will be moved to
+    """
     all_terms = ['T1', 'T2', 'T3']
     terms_list: List[Dict[str, int | str]] = []
     if is_summer_enabled:
@@ -271,7 +377,19 @@ def get_terms_list(current_term: str, uoc: int, terms_offered: list[str], is_sum
     return terms_list
 
 
-def is_course_out_of_bounds(num_years, dest_row, terms):
+def out_of_bounds(num_years, dest_row, terms):
+    """
+    Determines whether the result of get_terms will go out of bounds of the planner
+
+    Args:
+        num_years (int): The number of years in the planner
+        dest_row (int): The row the multiterm course was placed in
+        terms (List[Dict[str, str | int]]): The list of terms the multiterm
+                                            course will go in if valid
+
+    Returns:
+        bool: Whether the multiterm course can be placed where specified
+    """
     max_row_offset = max(terms, key= lambda x: x['row_offset'])['row_offset']
     min_row_offset = min(terms, key= lambda x: x['row_offset'])['row_offset']
 
