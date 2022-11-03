@@ -1,5 +1,5 @@
 # TODO: move to pipenv
-fastapi==0.85.1
+fastapi==0.86.0
 fuzzywuzzy==0.18.0
 hypothesis==6.56.3
 mypy==0.982
