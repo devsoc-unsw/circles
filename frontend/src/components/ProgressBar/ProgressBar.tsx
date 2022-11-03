@@ -2,7 +2,7 @@ import React from 'react';
 import { Progress } from 'antd';
 
 type Props = {
-  progress: number
+  progress: number;
 };
 
 const ProgressBar = ({ progress }: Props) => {
@@ -13,11 +13,6 @@ const ProgressBar = ({ progress }: Props) => {
     bgColor = '#ffa500';
   }
 
-  return (
-    <Progress
-      strokeColor={bgColor}
-      percent={progress}
-    />
-  );
+  return <Progress strokeColor={bgColor} percent={progress} />;
 };
 export default ProgressBar;

@@ -1,5 +1,5 @@
-import json 
-import requests 
+import json
+import requests
 import random
 
 from server.routers.model import CONDITIONS
@@ -28,9 +28,24 @@ def test_get_archived_course():
     assert x.json()['is_legacy'] == True
 
 
-
 def test_get_course_all_courses():
-    for course in CONDITIONS.keys():
-        if random.random() < 0.05:
-            x = requests.get(f'http://127.0.0.1:8000/courses/getCourse/{course}')
-            assert x.status_code == 200, f'{course} cant be fetched'
+    failed_courses = {
+        course for course in CONDITIONS.keys()
+        if (
+            # random.random() < 0.5 and # Comment out this line to test all courses
+            requests.get(f'http://127.0.0.1:8000/courses/getCourse/{course}').status_code != 200
+        )
+    }
+
+    # Offered alternate years => offered alternate years (not this year) but entry exists
+    # Not Offered => it is not offered, no further information, entry exists
+    known_failed_courses: set[str] = {
+        'PSCY9914', # Offered alternate years
+        'BEES3223', # Offered alternate years
+        'CEIC6714', # Not offered this year
+        'PSCY9901', # Offered alternate years
+        'PSCY9912', # Offered alternate years
+        'PHCM9612', # Not offered this year
+    }
+    failed_courses = failed_courses.difference(known_failed_courses)
+    assert failed_courses == set(), f"Total of {len(failed_courses)} courses failed.\n{failed_courses}"

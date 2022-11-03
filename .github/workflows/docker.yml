@@ -20,7 +20,7 @@ jobs:
             args: |
               "API_URL=https://circlesapi.csesoc.app"
           - component: backend
-            dockerfile: backend.dockerfile
+            dockerfile: production.dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -63,7 +63,7 @@ jobs:
           repository: csesoc/deployment
           token: ${{ secrets.GH_TOKEN }}
       - name: Install yq - portable yaml processor
-        uses: mikefarah/yq@v4.27.3
+        uses: mikefarah/yq@v4.27.5
       - name: Update deployment
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

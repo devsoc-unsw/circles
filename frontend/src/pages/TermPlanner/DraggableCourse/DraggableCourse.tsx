@@ -12,57 +12,86 @@ import ContextMenu from '../ContextMenu';
 import S from './styles';
 
 type Props = {
-  code: string
-  index: number
-  term: string
+  code: string;
+  index: number;
+  term: string;
 };
 
-const Draggable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable })));
+const Draggable = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
+);
 
 const DraggableCourse = ({ code, index, term }: Props) => {
-  const {
-    courses,
-    isSummerEnabled,
-    completedTerms,
-  } = useSelector((state: RootState) => state.planner);
+  const { courses, isSummerEnabled, completedTerms } = useSelector(
+    (state: RootState) => state.planner
+  );
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
-    prereqs, title, isUnlocked, plannedFor,
-    isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
+    title,
+    isUnlocked,
+    plannedFor,
+    isLegacy,
+    isAccurate,
+    termsOffered,
+    handbookNote,
+    supressed,
+    mark
   } = courses[code];
   const warningMessage = courses[code].warnings;
-  const isOffered = plannedFor && /T[0-3]/.test(plannedFor) ? (termsOffered as string[]).includes(plannedFor.match(/T[0-3]/)?.[0] as string) : true;
+  const isOffered =
+    plannedFor && /T[0-3]/.test(plannedFor)
+      ? (termsOffered as string[]).includes(plannedFor.match(/T[0-3]/)?.[0] as string)
+      : true;
   const BEwarnings = handbookNote !== '' || !!warningMessage.length;
 
   const contextMenu = useContextMenu({
-    id: `${code}-context`,
+    id: `${code}-context`
   });
 
   const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
-  const shouldHaveWarning = !supressed && (
-    isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered
-  );
-  const errorIsInformational = shouldHaveWarning && isUnlocked
-    && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
+  const shouldHaveWarning =
+    !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered);
+  const errorIsInformational =
+    shouldHaveWarning &&
+    isUnlocked &&
+    warningMessage.length === 0 &&
+    !isLegacy &&
+    isAccurate &&
+    isOffered;
 
   const handleContextMenu = (e: React.MouseEvent) => {
     if (!isDragDisabled) contextMenu.show(e);
   };
 
+  const stripExtraParenthesis = (warning: string): string => {
+    if (warning[0] !== '(' || warning[warning.length - 1] !== ')') {
+      return warning;
+    }
+    let openParenCount = 0;
+    // If first open brace is ever fully closed, we don't want to strip them out
+    for (let i = 0; i < warning.length - 1; i += 1) {
+      if (warning[i] === '(') {
+        openParenCount += 1;
+      } else if (warning[i] === ')') {
+        openParenCount -= 1;
+      }
+      if (openParenCount <= 0) {
+        return warning;
+      }
+    }
+    return stripExtraParenthesis(warning.slice(1, warning.length - 1));
+  };
+
   return (
     <>
       <Suspense fallback={<Spinner text="Loading Course..." />}>
-        <Draggable
-          isDragDisabled={isDragDisabled}
-          draggableId={`${code}${term}`}
-          index={index}
-        >
+        <Draggable isDragDisabled={isDragDisabled} draggableId={`${code}${term}`} index={index}>
           {(provided) => (
             <S.CourseWrapper
               summerEnabled={isSummerEnabled}
@@ -79,11 +108,10 @@ const DraggableCourse = ({ code, index, term }: Props) => {
               id={code}
               onContextMenu={handleContextMenu}
             >
-              {!isDragDisabled && shouldHaveWarning
-                && (errorIsInformational ? (
-                  <InfoCircleOutlined
-                    style={{ color: theme.infoOutlined.color }}
-                  />
+              {!isDragDisabled &&
+                shouldHaveWarning &&
+                (errorIsInformational ? (
+                  <InfoCircleOutlined style={{ color: theme.infoOutlined.color }} />
                 ) : (
                   <WarningOutlined
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
@@ -102,7 +130,9 @@ const DraggableCourse = ({ code, index, term }: Props) => {
                 )}
                 {showMarks && (
                   <div>
-                    <Text strong className="text">Mark: </Text>
+                    <Text strong className="text">
+                      Mark:{' '}
+                    </Text>
                     <Text className="text">
                       {/*
                       Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
@@ -116,7 +146,8 @@ const DraggableCourse = ({ code, index, term }: Props) => {
             </S.CourseWrapper>
           )}
         </Draggable>
-      </Suspense><ContextMenu code={code} plannedFor={plannedFor} />
+      </Suspense>
+      <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
@@ -126,12 +157,16 @@ const DraggableCourse = ({ code, index, term }: Props) => {
       )}
       {!isDragDisabled && shouldHaveWarning && (
         <ReactTooltip id={code} place="bottom">
-          {isLegacy ? 'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
-            : !isUnlocked ? prereqs.trim()
-              : !isOffered ? 'The course is not offered in this term.'
-                : warningMessage.length !== 0 ? warningMessage.join('\n')
-                  // eslint-disable-next-line react/no-danger
-                  : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
+          {isLegacy ? (
+            'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
+          ) : !isOffered ? (
+            'The course is not offered in this term.'
+          ) : warningMessage.length !== 0 ? (
+            stripExtraParenthesis(warningMessage.join('\n'))
+          ) : (
+            // eslint-disable-next-line react/no-danger
+            <div dangerouslySetInnerHTML={{ __html: handbookNote }} />
+          )}
           {!isAccurate ? ' The course info may be inaccurate.' : ''}
         </ReactTooltip>
       )}

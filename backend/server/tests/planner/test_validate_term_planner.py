@@ -105,7 +105,7 @@ def test_validateTermPlanner_invalid_progress():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [],
+            "warnings": ['((COMP1531 AND (COMP2521 OR COMP1927)))'],
             "supressed": False
         },
         "COMP4128": {
@@ -113,7 +113,7 @@ def test_validateTermPlanner_invalid_progress():
             "unlocked": False,
             "handbook_note": "",
             "warnings": [
-                "Requires 75 WAM in all courses. Your WAM in all courses has not been recorded"
+                '((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses.  Your WAM in all courses has not been recorded)))'
             ],
             "supressed": False
         }
@@ -130,7 +130,7 @@ def test_validateTermPlanner_out_of_order_progress():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [],
+            "warnings": ['((Need 65 in MATH1131 for this course OR Need 65 in MATH1141 for this course OR Need 65 in DPST1013 for this course))'],
             "supressed": False
         },
         "MATH1141": {
@@ -180,16 +180,14 @@ def test_validateTermPlanner_past_term_suppress_warnings():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [],
+            "warnings": ['((COMP1531 AND (COMP2521 OR COMP1927)))'],
             "supressed": True
         },
         "COMP4128": {
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [
-                "Requires 75 WAM in all courses. Your WAM in all courses has not been recorded"
-            ],
+            "warnings": ['((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses.  Your WAM in all courses has not been recorded)))'],
             "supressed": True
         }
     }

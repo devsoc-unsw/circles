@@ -4,14 +4,17 @@ import {
   BorderlessTableOutlined,
   EyeFilled,
   EyeInvisibleOutlined,
-  TableOutlined,
+  TableOutlined
 } from '@ant-design/icons';
 import { Button, Divider, Typography } from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import {
   ProgressionAdditionalCourses,
-  ProgressionViewStructure, Views, ViewSubgroup, ViewSubgroupCourse,
+  ProgressionViewStructure,
+  Views,
+  ViewSubgroup,
+  ViewSubgroupCourse
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
 import getNumTerms from 'utils/getNumTerms';
@@ -33,15 +36,15 @@ const ProgressionChecker = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
 
-  const {
-    programCode, specs,
-  } = useSelector((state: RootState) => state.degree);
+  const { programCode, specs } = useSelector((state: RootState) => state.degree);
 
   useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get<Structure>(`/programs/getStructure/${programCode}/${specs.join('+')}`);
+        const res = await axios.get<Structure>(
+          `/programs/getStructure/${programCode}/${specs.join('+')}`
+        );
         setStructure(res.data.structure);
         setUoc(res.data.uoc);
       } catch (err) {
@@ -57,7 +60,8 @@ const ProgressionChecker = () => {
     openNotification({
       type: 'info',
       message: 'Disclaimer',
-      description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
+      description:
+        "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy."
     });
   }, []);
 
@@ -78,86 +82,94 @@ const ProgressionChecker = () => {
       newViewLayout[group] = {};
 
       // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group].content).sort().forEach((subgroup) => {
-        const subgroupStructure = structure[group].content[subgroup];
+      Object.keys(structure[group].content)
+        .sort()
+        .forEach((subgroup) => {
+          const subgroupStructure = structure[group].content[subgroup];
 
-        const isRule = subgroupStructure.type.includes('rule');
-        const isGenEd = subgroupStructure.type.includes('gened');
-        const isElectives = subgroupStructure.type.includes('electives');
+          const isRule = subgroupStructure.type.includes('rule');
+          const isGenEd = subgroupStructure.type.includes('gened');
+          const isElectives = subgroupStructure.type.includes('electives');
 
-        newViewLayout[group][subgroup] = {
-          // section types with gened or rule/elective substring can have their
-          // courses hidden as a modal
-          isCoursesOverflow: isGenEd || isRule || isElectives
-            || Object.keys(subgroupStructure.courses).length > MAX_COURSES_OVERFLOW,
-          courses: [],
-        };
-
-        let currUOC = 0;
-
-        // only consider disciplinary component courses
-        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          const isDoubleCounted = countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules');
-
-          // flag when a course is overcounted (i.e. if a subgroup UOC requirement is filled) but
-          // additional courses can be considered to count to the subgroup progression
-          // only exception is Rules where it should display all courses
-          const isOverCounted = !!courses[courseCode]?.plannedFor
-            && currUOC >= subgroupStructure.UOC
-            && !isRule;
-
-          const course: ViewSubgroupCourse = {
-            courseCode,
-            title: subgroupStructure.courses[courseCode],
-            UOC: courses[courseCode]?.UOC || 0,
-            plannedFor: courses[courseCode]?.plannedFor || '',
-            isUnplanned: unplanned.includes(courseCode),
-            isMultiterm: !!courses[courseCode]?.isMultiterm,
-            isDoubleCounted,
-            isOverCounted,
+          newViewLayout[group][subgroup] = {
+            // section types with gened or rule/elective substring can have their
+            // courses hidden as a modal
+            isCoursesOverflow:
+              isGenEd ||
+              isRule ||
+              isElectives ||
+              Object.keys(subgroupStructure.courses).length > MAX_COURSES_OVERFLOW,
+            courses: []
           };
 
-          newViewLayout[group][subgroup].courses.push(course);
-          if (courses[courseCode]?.plannedFor
-            && !isOverCounted
-            && !countedCourses.includes(courseCode)
-          ) {
-            countedCourses.push(courseCode);
-          }
+          let currUOC = 0;
 
-          // adjust overflow courses
-          if (!isRule) {
-            if (!isOverCounted && overflowCourses[course.courseCode]) {
-              // case where a course will be counted in a subgroup UOC requirement
-              // delete the entry
-              delete overflowCourses[course.courseCode];
-            } else if (isOverCounted && !isDoubleCounted) {
-              // check if course should be displayed as 'Additional Electives'
-              // Double counted courses should not show as 'Additional Electives'
-              // as we are counting double counted courses in the subgroup progression
-              overflowCourses[course.courseCode] = {
-                ...course,
-                isDoubleCounted: false,
-                isOverCounted: false,
-              };
+          // only consider disciplinary component courses
+          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            const isDoubleCounted =
+              countedCourses.includes(courseCode) &&
+              !/Core/.test(subgroup) &&
+              !group.includes('Rules');
+
+            // flag when a course is overcounted (i.e. if a subgroup UOC requirement is filled) but
+            // additional courses can be considered to count to the subgroup progression
+            // only exception is Rules where it should display all courses
+            const isOverCounted =
+              !!courses[courseCode]?.plannedFor && currUOC > subgroupStructure.UOC && !isRule;
+
+            const course: ViewSubgroupCourse = {
+              courseCode,
+              title: subgroupStructure.courses[courseCode],
+              UOC: courses[courseCode]?.UOC || 0,
+              plannedFor: courses[courseCode]?.plannedFor || '',
+              isUnplanned: unplanned.includes(courseCode),
+              isMultiterm: !!courses[courseCode]?.isMultiterm,
+              isDoubleCounted,
+              isOverCounted
+            };
+
+            newViewLayout[group][subgroup].courses.push(course);
+            if (
+              courses[courseCode]?.plannedFor &&
+              !isOverCounted &&
+              !countedCourses.includes(courseCode)
+            ) {
+              countedCourses.push(courseCode);
             }
-          }
 
-          currUOC += (courses[courseCode]?.UOC ?? 0)
-            * getNumTerms(courses[courseCode]?.UOC, courses[courseCode]?.isMultiterm);
+            // adjust overflow courses
+            if (!isRule) {
+              if (!isOverCounted && overflowCourses[course.courseCode]) {
+                // case where a course will be counted in a subgroup UOC requirement
+                // delete the entry
+                delete overflowCourses[course.courseCode];
+              } else if (isOverCounted && !isDoubleCounted) {
+                // check if course should be displayed as 'Additional Electives'
+                // Double counted courses should not show as 'Additional Electives'
+                // as we are counting double counted courses in the subgroup progression
+                overflowCourses[course.courseCode] = {
+                  ...course,
+                  isDoubleCounted: false,
+                  isOverCounted: false
+                };
+              }
+            }
+
+            currUOC +=
+              (courses[courseCode]?.UOC ?? 0) *
+              getNumTerms(courses[courseCode]?.UOC, courses[courseCode]?.isMultiterm);
+          });
+
+          newViewLayout[group][subgroup].courses.sort((a, b) =>
+            a.courseCode.localeCompare(b.courseCode)
+          );
         });
-
-        newViewLayout[group][subgroup].courses.sort(
-          (a, b) => a.courseCode.localeCompare(b.courseCode),
-        );
-      });
     });
 
-    const programCourseList = (
-      Object.values(structure)
-        .flatMap((specialisation) => Object.values(specialisation.content)
-          .filter((spec) => typeof spec === 'object' && spec.courses && !spec.type.includes('rule'))
-          .flatMap((spec) => Object.keys(spec.courses)))
+    const programCourseList = Object.values(structure).flatMap((specialisation) =>
+      Object.values(specialisation.content)
+        .filter((spec) => typeof spec === 'object' && spec.courses && !spec.type.includes('rule'))
+        .flatMap((spec) => Object.keys(spec.courses))
     );
     Object.keys(courses).forEach((courseCode) => {
       if (!programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
@@ -169,7 +181,7 @@ const ProgressionChecker = () => {
           isUnplanned: unplanned.includes(courseCode),
           isMultiterm: courses[courseCode].isMultiterm,
           isDoubleCounted: false,
-          isOverCounted: false,
+          isOverCounted: false
         };
       }
     });
@@ -199,51 +211,52 @@ const ProgressionChecker = () => {
           totalUOC={uoc}
           freeElectivesUOC={Object.values(overflowCourses).reduce((acc, curr) => acc + curr.UOC, 0)}
         />
-        <div id="divider"><Divider /></div>
+        <div id="divider">
+          <Divider />
+        </div>
         <S.ProgressionViewContainer>
           <S.ViewSwitcherWrapper>
-            {view === Views.GRID || view === Views.GRID_CONCISE
-              ? (
-                <>
-                  <Button
-                    type="primary"
-                    icon={view === Views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
-                    onClick={() => setView(view === Views.GRID ? Views.GRID_CONCISE : Views.GRID)}
-                  >
-                    {view === Views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
-                  </Button>
-                  <Button
-                    type="primary"
-                    icon={<TableOutlined />}
-                    onClick={() => setView(Views.TABLE)}
-                  >
-                    Display Table View
-                  </Button>
-                </>
-              )
-              : (
+            {view === Views.GRID || view === Views.GRID_CONCISE ? (
+              <>
                 <Button
                   type="primary"
-                  icon={<BorderlessTableOutlined />}
-                  onClick={() => setView(Views.GRID)}
+                  icon={view === Views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
+                  onClick={() => setView(view === Views.GRID ? Views.GRID_CONCISE : Views.GRID)}
                 >
-                  Display Grid View
+                  {view === Views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
                 </Button>
-              )}
+                <Button
+                  type="primary"
+                  icon={<TableOutlined />}
+                  onClick={() => setView(Views.TABLE)}
+                >
+                  Display Table View
+                </Button>
+              </>
+            ) : (
+              <Button
+                type="primary"
+                icon={<BorderlessTableOutlined />}
+                onClick={() => setView(Views.GRID)}
+              >
+                Display Grid View
+              </Button>
+            )}
           </S.ViewSwitcherWrapper>
           {Object.entries(viewStructure).map(([group, groupEntry]) => (
             <Collapsible
-              title={(
+              title={
                 <Title level={1} className="text" id={group}>
                   {structure[group].name ? `${group} - ${structure[group].name}` : group}
                 </Title>
-            )}
+              }
               key={group}
               initiallyCollapsed={group === 'Rules'}
             >
-              {Object.entries(groupEntry).sort(sortSubgroups).map(
-                ([subgroup, subgroupEntry]) => (view === Views.TABLE
-                  ? (
+              {Object.entries(groupEntry)
+                .sort(sortSubgroups)
+                .map(([subgroup, subgroupEntry]) =>
+                  view === Views.TABLE ? (
                     <TableView
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
@@ -252,8 +265,7 @@ const ProgressionChecker = () => {
                       type={structure[group].content[subgroup].type}
                       courses={subgroupEntry.courses}
                     />
-                  )
-                  : (
+                  ) : (
                     <GridView
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
@@ -264,8 +276,8 @@ const ProgressionChecker = () => {
                       isCoursesOverflow={subgroupEntry.isCoursesOverflow}
                       isConcise={view === Views.GRID_CONCISE}
                     />
-                  )),
-              )}
+                  )
+                )}
             </Collapsible>
           ))}
           <FreeElectiveSection courses={Object.values(overflowCourses)} view={view} />

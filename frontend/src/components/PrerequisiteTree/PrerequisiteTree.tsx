@@ -1,34 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import axios from 'axios';
 import { CourseChildren, CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
-import { addTab } from 'reducers/courseTabsSlice';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';
 import S from './styles';
-import {
-  bringEdgeLabelsToFront,
-  calcHeight,
-  handleNodeData,
-  updateEdges,
-} from './utils';
+import { bringEdgeLabelsToFront, calcHeight, handleNodeData, updateEdges } from './utils';
 
 type Props = {
-  courseCode: string
+  courseCode: string;
+  onCourseClick?: (code: string) => void;
 };
 
-const PrerequisiteTree = ({ courseCode }: Props) => {
+const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
   const [loading, setLoading] = useState(true);
-  const [graph, setGraph] = useState<TreeGraph | null>(null);
+  const graphRef = useRef<TreeGraph | null>(null);
   const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
   const [coursesRequires, setCoursesRequires] = useState<CourseList>([]);
-  const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement | null>(null);
-  const { degree, planner } = useSelector((state: RootState) => state);
+
+  useEffect(() => {
+    // if the course code changes, force a reload
+    setLoading(true);
+  }, [courseCode]);
 
   useEffect(() => {
     /* GRAPH IMPLEMENTATION */
@@ -37,38 +33,36 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       if (!container) return;
       const { TreeGraph } = await import('@antv/g6');
 
-      const treeGraphInstance = new TreeGraph({
+      graphRef.current = new TreeGraph({
         container,
         width: container.scrollWidth,
         height: container.scrollHeight,
         fitView: true,
         layout: GRAPH_STYLE.graphLayout,
         defaultNode: GRAPH_STYLE.defaultNode,
-        defaultEdge: GRAPH_STYLE.defaultEdge,
+        defaultEdge: GRAPH_STYLE.defaultEdge
       });
 
-      setGraph(treeGraphInstance);
+      graphRef.current.data(graphData);
 
-      treeGraphInstance.data(graphData);
+      updateEdges(graphRef.current, graphData);
 
-      updateEdges(treeGraphInstance, graphData);
+      graphRef.current.render();
 
-      treeGraphInstance.render();
+      bringEdgeLabelsToFront(graphRef.current);
 
-      bringEdgeLabelsToFront(treeGraphInstance);
-
-      treeGraphInstance.on('node:click', (event) => {
+      graphRef.current.on('node:click', (event) => {
         // open new course tab
         const node = event.item as Item;
-        dispatch(addTab(node.getModel().label as string));
+        if (onCourseClick) onCourseClick(node.getModel().label as string);
       });
     };
 
     // NOTE: This is for hot reloading in development as new graph will instantiate every time
     const updateTreeGraph = (graphData: TreeGraphData) => {
-      if (!graph) return;
-      graph.changeData(graphData);
-      bringEdgeLabelsToFront(graph);
+      if (!graphRef.current) return;
+      graphRef.current.changeData(graphData);
+      bringEdgeLabelsToFront(graphRef.current);
     };
 
     /* REQUESTS */
@@ -107,27 +101,33 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       const graphData = {
         id: 'root',
         label: courseCode,
-        children: prereqs?.map((child) => (handleNodeData(child, TREE_CONSTANTS.PREREQ)))
-          .concat(unlocks?.map((child) => (handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))),
+        children: prereqs
+          ?.map((child) => handleNodeData(child, TREE_CONSTANTS.PREREQ))
+          .concat(unlocks?.map((child) => handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))
       };
 
       // render graph
-      if (!graph) {
+      if (!graphRef.current && graphData.children.length !== 0) {
         generateTreeGraph(graphData);
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
       }
-
       setLoading(false);
     };
 
-    if (courseCode) setupGraph(courseCode);
-  }, [courseCode, degree, dispatch, graph, planner]);
+    if (loading) {
+      setupGraph(courseCode);
+      setLoading(false);
+    }
+  }, [courseCode, loading, onCourseClick]);
 
   return (
     <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
       {loading && <Spinner text="Loading tree..." />}
+      {!loading && graphRef.current && !graphRef.current.getEdges().length && (
+        <p> No prerequisite visualisation is needed for this course </p>
+      )}
     </S.PrereqTreeContainer>
   );
 };

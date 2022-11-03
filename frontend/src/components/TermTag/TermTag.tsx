@@ -2,13 +2,9 @@ import React from 'react';
 import S from './styles';
 
 type Props = {
-  name: string
+  name: string;
 };
 
-const TermTag = ({ name }: Props) => (
-  <S.Tag className="text">
-    {name}
-  </S.Tag>
-);
+const TermTag = ({ name }: Props) => <S.Tag className="text">{name}</S.Tag>;
 
 export default TermTag;
