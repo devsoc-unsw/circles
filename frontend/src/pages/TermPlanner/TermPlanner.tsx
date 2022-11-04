@@ -32,11 +32,12 @@ const DragDropContext = React.lazy(() =>
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
-  console.log(planner);
   const degree = useSelector((state: RootState) => state.degree);
 
   const [termsOffered, setTermsOffered] = useState<Term[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
+  const [multiCourse, setMultiCourse] = useState('');
 
   const dispatch = useDispatch();
 
@@ -71,30 +72,19 @@ const TermPlanner = () => {
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
-    console.log(planner.years);
-    // if (planner.courses[course].isMultiterm) {
-    //   planner.years.forEach((ele, c) => {
-    //     Object.entries(ele).forEach(([key, val]) => {
-    //       console.log(ele, key, val, c);
-    //       val.forEach((i, ind) => {
-    //         if (course === i) {
-    //           console.log(key, ind);
-    //           if (key === 'T2') {
-    //             planner.years[c].T1.splice(ind, 1);
-    //           }
-    //         }
-    //       });
-    //     });
-    //   });
-    // }
     const terms = planner.courses[course].termsOffered;
-    console.log(terms);
     setTermsOffered(terms);
+    if (planner.courses[course].isMultiterm) {
+      setCheckYearMultiTerm(result.source.droppableId);
+      setMultiCourse(course);
+    }
     setIsDragging(true);
   };
 
   const handleOnDragEnd: OnDragEndResponder = (result) => {
     setIsDragging(false);
+    setCheckYearMultiTerm('');
+    setMultiCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -230,6 +220,18 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
+                        if (checkYearMultiTerm !== '' && checkYearMultiTerm === key) {
+                          return (
+                            <TermBox
+                              key={key}
+                              name={key}
+                              coursesList={year[term as Term]}
+                              termsOffered={termsOffered}
+                              dragging={isDragging}
+                              multiCourseDrag={multiCourse}
+                            />
+                          );
+                        }
                         return (
                           <TermBox
                             key={key}
@@ -237,6 +239,7 @@ const TermPlanner = () => {
                             coursesList={year[term as Term]}
                             termsOffered={termsOffered}
                             dragging={isDragging}
+                            multiCourseDrag=""
                           />
                         );
                       })}

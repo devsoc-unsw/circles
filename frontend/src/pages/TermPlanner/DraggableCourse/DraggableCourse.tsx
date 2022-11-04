@@ -3,7 +3,7 @@ import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
-import { Typography } from 'antd';
+import { Badge, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -15,13 +15,14 @@ type Props = {
   code: string;
   index: number;
   term: string;
+  isDragged: boolean;
 };
 
 const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ code, index, term }: Props) => {
+const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
   const { courses, isSummerEnabled, completedTerms } = useSelector(
     (state: RootState) => state.planner
   );
@@ -117,32 +118,34 @@ const DraggableCourse = ({ code, index, term }: Props) => {
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))}
-              <S.CourseLabel>
-                {isSmall ? (
-                  <Text className="text">{code}</Text>
-                ) : (
-                  <div>
-                    <Text className="text">
-                      <strong>{code}: </strong>
-                      {title}
-                    </Text>
-                  </div>
-                )}
-                {showMarks && (
-                  <div>
-                    <Text strong className="text">
-                      Mark:{' '}
-                    </Text>
-                    <Text className="text">
-                      {/*
-                      Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
-                      Mark can be 0.
-                    */}
-                      {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
-                    </Text>
-                  </div>
-                )}
-              </S.CourseLabel>
+              <Badge count={isDragged ? 'x3' : ''}>
+                <S.CourseLabel>
+                  {isSmall ? (
+                    <Text className="text">{code}</Text>
+                  ) : (
+                    <div>
+                      <Text className="text">
+                        <strong>{code}: </strong>
+                        {title}
+                      </Text>
+                    </div>
+                  )}
+                  {showMarks && (
+                    <div>
+                      <Text strong className="text">
+                        Mark:{' '}
+                      </Text>
+                      <Text className="text">
+                        {/*
+                          Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
+                          Mark can be 0.
+                        */}
+                        {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
+                      </Text>
+                    </div>
+                  )}
+                </S.CourseLabel>
+              </Badge>
             </S.CourseWrapper>
           )}
         </Draggable>

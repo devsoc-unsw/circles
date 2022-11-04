@@ -19,9 +19,10 @@ type Props = {
   coursesList: string[];
   termsOffered: string[];
   dragging: boolean;
+  multiCourseDrag: string;
 };
 
-const TermBox = ({ name, coursesList, termsOffered, dragging }: Props) => {
+const TermBox = ({ name, coursesList, termsOffered, dragging, multiCourseDrag }: Props) => {
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
@@ -82,9 +83,29 @@ const TermBox = ({ name, coursesList, termsOffered, dragging }: Props) => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {coursesList.map((code, index) => (
-                <DraggableCourse key={`${code}${term}`} code={code} index={index} term={term} />
-              ))}
+              {coursesList.map((code, index) => {
+                if (multiCourseDrag !== '' && multiCourseDrag === code) {
+                  const val = true;
+                  return (
+                    <DraggableCourse
+                      key={`${code}${term}`}
+                      code={code}
+                      index={index}
+                      term={term}
+                      isDragged={val}
+                    />
+                  );
+                }
+                return (
+                  <DraggableCourse
+                    key={`${code}${term}`}
+                    code={code}
+                    index={index}
+                    term={term}
+                    isDragged={false}
+                  />
+                );
+              })}
               {provided.placeholder}
               <S.UOCBadgeWrapper>
                 <Badge
