@@ -9,7 +9,7 @@
     "@antv/algorithm": "0.1.25",
     "@antv/g6": "4.7.10",
     "@react-spring/web": "9.5.5",
-    "@reduxjs/toolkit": "1.8.6",
+    "@reduxjs/toolkit": "1.9.0",
     "@tippyjs/react": "4.2.6",
     "antd": "4.24.1",
     "axios": "1.1.3",
