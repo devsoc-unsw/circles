@@ -122,8 +122,9 @@ const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
                 ))}
               <Badge
                 style={{
-                  backgroundColor: '#9254de',
-                  color: '#fff'
+                  backgroundColor: theme.uocBadge.backgroundColor,
+                  color: '#fff',
+                  boxShadow: 'none'
                 }}
                 count={
                   isDragged ? `x${getNumTerms(planner.courses[code].UOC, true).toString()}` : ''
