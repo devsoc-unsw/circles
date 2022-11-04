@@ -9,6 +9,7 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
+import { getNumTerms } from '../utils';
 import S from './styles';
 
 type Props = {
@@ -26,6 +27,7 @@ const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
   const { courses, isSummerEnabled, completedTerms } = useSelector(
     (state: RootState) => state.planner
   );
+  const planner = useSelector((state: RootState) => state.planner);
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
@@ -118,7 +120,15 @@ const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))}
-              <Badge count={isDragged ? 'x3' : ''}>
+              <Badge
+                style={{
+                  backgroundColor: '#9254de',
+                  color: '#fff'
+                }}
+                count={
+                  isDragged ? `x${getNumTerms(planner.courses[code].UOC, true).toString()}` : ''
+                }
+              >
                 <S.CourseLabel>
                   {isSmall ? (
                     <Text className="text">{code}</Text>
