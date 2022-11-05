@@ -70,13 +70,11 @@ const CourseMenu = ({ structure }: Props) => {
             curr: 0
           };
           newMenu[group][subgroup] = [];
-
           if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               // suppress gen ed courses if it has not been added to the planner
               if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
-
               newMenu[group][subgroup].push({
                 courseCode,
                 title: subgroupStructure.courses[courseCode],
@@ -157,7 +155,10 @@ const CourseMenu = ({ structure }: Props) => {
           children: subGroupEntry.length
             ? subGroupEntry
                 .sort(sortCourses)
-                .filter((course) => course.unlocked || showLockedCourses)
+                .filter(
+                  (course) =>
+                    course.unlocked || planner.courses[course.courseCode] || showLockedCourses
+                )
                 .map((course) => ({
                   label: (
                     <CourseMenuTitle
