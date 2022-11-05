@@ -30,7 +30,7 @@ describe('CourseTabs', () => {
     await waitFor(() => expect(screen.getByText('COMP1531')).toBeInTheDocument());
   });
 
-  it.todo('should remove all tabs', async () => {
+  it('should remove all tabs', async () => {
     renderWithProviders(<CourseTabs />, { preloadedState });
     await userEvent.click(screen.getByTestId('delete-tabs'));
     await userEvent.click(screen.getByText('Yes'));
