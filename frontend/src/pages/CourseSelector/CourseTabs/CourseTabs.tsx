@@ -79,7 +79,7 @@ const CourseTabs = () => {
             cancelText="No"
           >
             <Tooltip title="Close all tabs">
-              <DeleteOutlined />
+              <DeleteOutlined data-testid="delete-tabs" />
             </Tooltip>
           </Popconfirm>
         </S.TabsCloseAll>

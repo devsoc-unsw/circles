@@ -8,14 +8,6 @@ import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import StartBrowsingStep from './StartBrowsingStep';
 
-vi.mock('react-router-dom', () => ({
-  useNavigate: vi.fn()
-}));
-
-vi.mock('utils/openNotification', () => ({
-  default: vi.fn()
-}));
-
 describe('StartBrowsingStep', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
   const useNavigateMock = vi.spyOn(reactRouterDom, 'useNavigate');

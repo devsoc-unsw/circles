@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { renderWithProviders } from 'test/testUtil';
-import { vi } from 'vitest';
 import CourseMenuTitle from './CourseMenuTitle';
 
 const defaultProps = {
@@ -18,14 +17,6 @@ const axiosMock = new MockAdapter(axios);
 axiosMock.onGet('/courses/getCourse/COMP1511').reply(200, {
   code: 'COMP1511',
   title: 'Programming Fundamentals'
-});
-
-vi.mock('styled-components', async () => {
-  const styledComponents: object = await vi.importActual('styled-components');
-  return {
-    ...styledComponents,
-    useTheme: vi.fn().mockResolvedValue({})
-  };
 });
 
 describe('CourseMenuTitle', () => {

@@ -39,7 +39,7 @@
     "build": "vite build",
     "preview": "vite preview --port 3000 --host",
     "preview:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.csesoc.app vite preview --port 3000 --host",
-    "test": "vitest run",
+    "test": "vitest run src/pages/CourseSelector/*",
     "coverage": "vitest run --coverage",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}",

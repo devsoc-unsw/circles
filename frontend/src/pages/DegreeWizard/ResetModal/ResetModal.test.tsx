@@ -7,10 +7,6 @@ import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import ResetModal from './ResetModal';
 
-vi.mock('react-router-dom', () => ({
-  useNavigate: vi.fn()
-}));
-
 const preloadedState = {
   degree: {
     programCode: '3778',

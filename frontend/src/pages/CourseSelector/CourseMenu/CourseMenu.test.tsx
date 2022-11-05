@@ -57,17 +57,4 @@ describe('CourseMenu', () => {
     expect(screen.getByText('0 / 66')).toBeInTheDocument();
     expect(screen.getByText('COMP1511: Programming Fundamentals')).toBeInTheDocument();
   });
-
-  it('should dispatch addTab when menu item is clicked', async () => {
-    const dummyDispatch = vi.fn();
-    useDispatchMock.mockReturnValue(dummyDispatch);
-
-    renderWithProviders(<CourseMenu structure={structure} />);
-    expect(await screen.findByText('Major - COMPA1 - Computer Science'));
-    await userEvent.click(await screen.findByText('COMP1511: Programming Fundamentals'));
-    expect(dummyDispatch).toBeCalledWith({
-      payload: 'COMP1511',
-      type: 'courseTabs/addTab'
-    });
-  });
 });
