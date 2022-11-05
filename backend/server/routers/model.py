@@ -219,6 +219,26 @@ class TermsList(BaseModel):
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
     uoc: int
+    
+# Used in addToUnplanned, removeCourse and unscheduleCourse routes
+class CourseCode(BaseModel):
+    courseCode: str
+
+# Used in unPlannedToTerm route
+class UnPlannedToTerm(BaseModel):
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
+# used in PlannedToTerm route
+class PlannedToTerm(BaseModel):
+    srcRow: int
+    srcTerm: str
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
 
 class ProgramTime(BaseModel):
     startTime: tuple[int, int] # (Year, Term) start of program
