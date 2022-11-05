@@ -17,6 +17,10 @@ vi.mock('components/DraggableTab', () => ({
 }));
 
 describe('CourseTabs', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('should render', async () => {
     renderWithProviders(<CourseTabs />, { preloadedState });
     expect(screen.getByText('Show all courses')).toBeInTheDocument();

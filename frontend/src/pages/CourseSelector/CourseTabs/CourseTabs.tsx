@@ -47,6 +47,7 @@ const CourseTabs = () => {
         <S.TextShowCourses>Show all courses</S.TextShowCourses>
         <Switch
           size="small"
+          data-testid="show-all-courses"
           defaultChecked={showLockedCourses}
           onChange={() => dispatch(toggleLockedCourses())}
         />

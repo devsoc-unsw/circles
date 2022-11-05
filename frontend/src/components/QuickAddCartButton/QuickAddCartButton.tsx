@@ -74,7 +74,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   ) : (
     <Tooltip title="Remove from Planner" placement="top">
       <S.DeselectButton
-        data-testid="quick-add-cart-button"
+        data-testid="quick-remove-cart-button"
         onClick={(e) => removeFromPlanner(e, courseCode)}
         size="small"
         shape="circle"

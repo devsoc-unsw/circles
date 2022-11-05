@@ -80,7 +80,7 @@ const CourseMenu = ({ structure }: Props) => {
               newMenu[group][subgroup].push({
                 courseCode,
                 title: subgroupStructure.courses[courseCode],
-                unlocked: !!courses[courseCode],
+                unlocked: !!courses[courseCode]?.unlocked,
                 accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
               });
 

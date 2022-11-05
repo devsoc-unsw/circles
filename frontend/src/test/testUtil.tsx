@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
@@ -27,9 +28,11 @@ export const renderWithProviders = (
 ) => {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const Wrapper = ({ children }: PropsWithChildren<{}>) => (
-    <ThemeProvider theme={lightTheme}>
-      <Provider store={store}>{children}</Provider>
-    </ThemeProvider>
+    <MemoryRouter>
+      <ThemeProvider theme={lightTheme}>
+        <Provider store={store}>{children}</Provider>
+      </ThemeProvider>
+    </MemoryRouter>
   );
 
   // Return an object with the store and all of RTL's query functions
