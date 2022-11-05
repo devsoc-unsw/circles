@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from 'antd';
 import CourseSearchBar from 'components/CourseSearchBar';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
