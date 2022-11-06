@@ -2,24 +2,9 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 1.5rem;
-  gap: 10rem;
-
-  @media (max-width: 1024px) {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 3rem;
-  }
+  height: 25rem;
+  margin-top: -15rem;
 `;
-
-const HeaderDots = motion(styled.img`
-  width: 2.8rem;
-  position: absolute;
-  left: 0;
-`);
 
 const LandingLogo = motion(styled.img`
   width: 200px;
@@ -45,9 +30,8 @@ const Bubble2 = motion(styled.div`
 `);
 
 export default {
-  LandingLogo,
   Wrapper,
-  HeaderDots,
+  LandingLogo,
   Bubble,
   Bubble2
 };
