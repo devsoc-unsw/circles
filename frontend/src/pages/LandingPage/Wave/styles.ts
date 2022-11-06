@@ -23,7 +23,7 @@ const waveStyle = css`
 
 const WaveForeground = styled.div`
   ${waveStyle}
-  background: url('src/assets/landingHero/wave3.svg') repeat-x;
+  background: url('src/assets/landingHero/wave_foreground.svg') repeat-x;
   animation: ${waveAnimation} 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
     ${waveSwell} 5s ease -1.25s infinite;
   top: -10px;
@@ -31,7 +31,7 @@ const WaveForeground = styled.div`
 
 const WaveBackground = styled.div`
   ${waveStyle}
-  background: url('src/assets/landingHero/wave4.svg') repeat-x;
+  background: url('src/assets/landingHero/wave_background.svg') repeat-x;
   animation: ${waveAnimation} 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
   top: -33px;
