@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from 'react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, message, Modal } from 'antd';
@@ -9,11 +8,11 @@ import S from './styles';
 
 type Props = {
   code: string;
-  isVisible: boolean;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
+  open: boolean;
+  onCancel: () => void;
 };
 
-const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
+const EditMarkModal = ({ code, open, onCancel }: Props) => {
   const dispatch = useDispatch();
   const [markValue, setMarkValue] = useState<string | number | undefined>(
     useSelector((state: RootState) => state.planner.courses[code].mark)
@@ -35,7 +34,7 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
       })
     );
     setMarkValue(mark);
-    setIsVisible(false);
+    onCancel();
     message.success('Mark Updated');
   };
 
@@ -60,9 +59,9 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   return (
     <Modal
       title={`Edit mark for ${code}`}
-      visible={isVisible}
+      open={open}
       onOk={handleUpdateMark}
-      onCancel={() => setIsVisible(false)}
+      onCancel={onCancel}
       width="350px"
     >
       <S.EditMarkWrapper>

@@ -8,16 +8,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# nginx state for serving content
-FROM nginx:1.21.6-alpine
-COPY nginx.conf /temp/prod.conf
-RUN envsubst /app < /temp/prod.conf > /etc/nginx/conf.d/default.conf
-# Set working directory to nginx asset directory
-WORKDIR /usr/share/nginx/html
-# Remove default nginx static assets
-RUN rm -rf ./*
-# Copy static assets from builder stage
-COPY --from=builder /app/build .
-EXPOSE 80
-# Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+FROM caddy:2.6.2-alpine
+COPY ./Caddyfile /etc/caddy/Caddyfile
+COPY --from=builder /app/build /srv 
+

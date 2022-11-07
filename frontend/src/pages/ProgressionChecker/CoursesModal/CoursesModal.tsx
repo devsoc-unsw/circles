@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
 import { Input, Tooltip } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
@@ -9,11 +9,11 @@ import S from './styles';
 type Props = {
   title: string;
   courses: ViewSubgroupCourse[];
-  modalVisible: boolean;
-  setModalVisible: Dispatch<SetStateAction<boolean>>;
+  open: boolean;
+  onCancel: () => void;
 };
 
-const CoursesModal = ({ title, courses, modalVisible, setModalVisible }: Props) => {
+const CoursesModal = ({ title, courses, open, onCancel }: Props) => {
   const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
   const [filter, setFilter] = useState('');
 
@@ -41,8 +41,8 @@ const CoursesModal = ({ title, courses, modalVisible, setModalVisible }: Props) 
         </S.ModalHeader>
       }
       width="625px"
-      visible={modalVisible}
-      onCancel={() => setModalVisible(false)}
+      open={open}
+      onCancel={onCancel}
       footer={null}
     >
       <S.FilterBarWrapper>
