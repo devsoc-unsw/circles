@@ -30,12 +30,16 @@ const LoginButton = styled.button`
   background: transparent;
   font-weight: 700;
   color: #fff;
-  transition: all 0.2s;
+  transition: all 0.1s;
 
   &: hover {
     background: #e3a4fa;
     font-size: 1.2em;
     color: #fff;
+  }
+
+  &: active {
+    scale: 0.9;
   }
 
   @media (max-width: 1024px) {
