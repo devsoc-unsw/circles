@@ -275,7 +275,7 @@ def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     coursesState = {}
     user = User(fix_user_data(userData.dict()))
     for course, condition in CONDITIONS.items():
-        result, warnings = condition.validate(user) if condition is not None else (True, [])
+        result, warnings = is_course_unlocked(course, user) if condition is not None else (True, [])
         if result:
             coursesState[course] = {
                 "is_accurate": condition is not None,
@@ -546,9 +546,13 @@ def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
         cond.validate(user) if (cond := CONDITIONS[course]) else (True, [])
     )
 
-    # TODO: remove this as blank once program_restrictions return warnings
-    program_warnings: List[str] = []
     program_restriction = get_program_restriction(user.program) or NoRestriction()
+    
+    # TODO: update this once program_restrictions return warnings
+    program_warnings: List[str] = []
+    if (program_restriction != NoRestriction):
+        program_warnings.append('Please check the program for possible maturity requirements.')
+    
     program_result = program_restriction.validate_course_allowed(user, course)
 
     return (course_result and program_result), (course_warnings + program_warnings),
