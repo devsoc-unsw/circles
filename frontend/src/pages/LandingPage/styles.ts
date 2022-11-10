@@ -83,6 +83,7 @@ const InteractiveViewTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 370px;
+  viewBox="0 0 723 505";
 `;
 
 const InteractiveViewTitle = styled.h1`
@@ -101,8 +102,8 @@ const InteractiveViewText = styled.p`
 `;
 
 const gradientBox = styled.div`
-  width: 418px;
-  height: 418px;
+  width: 500px;
+  height: 500px;
   border-radius: 20px;
   background: -webkit-linear-gradient(#eeddff, #faeef5, #ffffff);
 `;
