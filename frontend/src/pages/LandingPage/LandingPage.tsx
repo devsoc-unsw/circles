@@ -4,6 +4,7 @@ import drag from './Assets/img/drag-and-drop.png';
 import flag from './Assets/img/flag.png';
 import padlock from './Assets/img/open-padlock.png';
 import view from './Assets/img/view.png';
+import Footer from './Footer/Footer';
 import S from './styles';
 
 const LandingPage = () => (
@@ -193,6 +194,7 @@ const LandingPage = () => (
       </S.gradientBox>
     </S.InteractiveViewContainer>
     <br />
+    <Footer />
   </S.LandingPageContainer>
 );
 
