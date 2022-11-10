@@ -76,6 +76,22 @@ def api_index() -> str:
 def get_jsonified_course(courseCode: str) -> str:
     return str(CONDITIONS[courseCode])
 
+@router.get("/dump")
+def get_courses() -> list[Dict]:
+    """
+    Gets all courses in the database.
+    (For CSElectives), by yours truly, Aimen 💫
+    """
+    courses = []
+    for course in coursesCOL.find():
+        course["is_legacy"] = False
+        course.setdefault("school", None)
+        del course["_id"]
+        with suppress(KeyError):
+            del course["exclusions"]["leftover_plaintext"]
+        courses.append(course)
+    return courses
+
 @router.get(
     "/getCourse/{courseCode}",
     response_model=CourseDetails,
@@ -607,8 +623,10 @@ def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
 def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
     """
     Returns the terms in which the given course is offered, for the given year.
+    If the year is from the future then, backfill the LIVE_YEAR's results
     """
-    return get_course_info(course, year).get("terms", [])
+    year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
+    return get_course_info(course, year_to_fetch).get("terms", [])
 
 def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
     """
