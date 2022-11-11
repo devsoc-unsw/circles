@@ -14,7 +14,7 @@
     "antd": "4.24.1",
     "axios": "1.1.3",
     "dayjs": "1.11.6",
-    "rc-picker": "2.6.11",
+    "rc-picker": "2.7.0",
     "react": "18.2.0",
     "react-beautiful-dnd": "13.1.1",
     "react-component-export-image": "1.0.6",
