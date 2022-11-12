@@ -5,10 +5,7 @@ from typing import Tuple, List, Dict
 from fastapi import APIRouter, HTTPException
 from algorithms.validate_term_planner import validate_terms
 from algorithms.autoplanning import autoplan
-from algorithms.objects.user import User
-from algorithms.objects.course import Course
-from server.routers.model import (ValidCoursesState, PlannerData, ValidPlannerData, 
-                                CourseCodes, UserData, ProgramTime)
+from server.routers.model import (ValidCoursesState, PlannerData, ValidPlannerData, ProgramTime)
 from server.routers.courses import get_course
 from server.routers.utility import get_course_object, extract_user_from_planner_data
 

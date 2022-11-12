@@ -9,7 +9,6 @@ from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
 from algorithms.objects.user import User
-from typing import List, Dict
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
@@ -49,10 +48,10 @@ def get_course_object(code: str, progTime: ProgramTime, term_offerings: dict = N
     years = "+".join(str(year) for year in range(progTime.startTime[0], progTime.endTime[0] + 1))
     terms_result = terms_offered(code, years)["terms"]
 
-    if term_offerings == None:
+    if term_offerings is not None:
         term_offerings = {}
         for year, terms in terms_result.items():
-            if terms != None: 
+            if terms is not None: 
                 term_offerings[int(year)] = [int(term[1]) for term in terms]
 
     try:
@@ -71,8 +70,6 @@ def extract_user_from_planner_data(plannerData: dict) -> User:
     """
     Extracts a user object from the plannerData
     """
-    from server.routers.courses import get_course
-
     user = User()
     user.program = plannerData.program
     user.specialisations = plannerData.specialisations
