@@ -20,7 +20,7 @@ def map_course_to_var(course: Course, variables: list[cp_model.IntVar]):
 def convert_to_term_year(number: int, start: Tuple[int, int]):
     return (number // 4 + start[0], number % 4 + start[1])
 
-def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]) -> int | list[Tuple[str, Tuple[int, int]]]:
+def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]) -> list[Tuple[str, Tuple[int, int]]]:
     """
     given a list of courses, we will fill our terms in a valid ordering.
     we will enforce that:
@@ -71,8 +71,8 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         )
     solver = cp_model.CpSolver()
     status: int = solver.Solve(model)
-    if status == 3:
-        raise Exception('your courses are impossible to put in these terms!')
+    if isinstance(status, int):
+        raise Exception(f'your courses are impossible to put in these terms! Error code: {status}')
     else:
         return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
 
