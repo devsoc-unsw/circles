@@ -8,6 +8,7 @@ from typing import Any, Callable, List
 from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
+from algorithms.objects.user import User
 from typing import List, Dict
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
@@ -39,7 +40,7 @@ def get_core_courses(program: str, specialisations: list[str]):
          , [])
 
 
-def get_course_object(code: str, progTime: ProgramTime) -> Course:
+def get_course_object(code: str, progTime: ProgramTime, term_offerings: dict = None) -> Course:
     ''' 
     This return the Course object for the given course code.
     Note the difference between this and the get_course function in courses.py
@@ -48,9 +49,11 @@ def get_course_object(code: str, progTime: ProgramTime) -> Course:
     years = "+".join(str(year) for year in range(progTime.startTime[0], progTime.endTime[0] + 1))
     terms_result = terms_offered(code, years)["terms"]
 
-    new_terms_offered = {}
-    for year, terms in terms_result.items():
-        new_terms_offered[int(year)] = list(map(lambda x: int(x[1]), terms))
+    if term_offerings == None:
+        term_offerings = {}
+        for year, terms in terms_result.items():
+            if terms != None: 
+                term_offerings[int(year)] = [int(term[1]) for term in terms]
 
     try:
         return Course(
@@ -58,8 +61,22 @@ def get_course_object(code: str, progTime: ProgramTime) -> Course:
             CONDITIONS[code],
             100,
             COURSES[code]["UOC"],
-            new_terms_offered,
+            term_offerings
         )
     except KeyError:
         raise Exception(f"Course {code} not found (most likely course is discontinued)")
 
+
+def extract_user_from_planner_data(plannerData: dict) -> User:
+    """
+    Extracts a user object from the plannerData
+    """
+    from server.routers.courses import get_course
+
+    user = User()
+    user.program = plannerData.program
+    user.specialisations = plannerData.specialisations
+    for year_index, year in enumerate(list(plannerData.plan)):
+        for term in year:
+            user.add_courses(term) 
+    return user

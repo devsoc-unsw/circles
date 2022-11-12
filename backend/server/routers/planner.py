@@ -10,7 +10,7 @@ from algorithms.objects.course import Course
 from server.routers.model import (ValidCoursesState, PlannerData, ValidPlannerData, 
                                 CourseCodes, UserData, ProgramTime)
 from server.routers.courses import get_course
-from server.routers.utility import get_course_object
+from server.routers.utility import get_course_object, extract_user_from_planner_data
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
@@ -91,11 +91,24 @@ def validate_term_planner(plannerData: PlannerData):
         }
     }
 )
-def autoplanning(courseCodes: List, userData: UserData, programTime: ProgramTime) -> Dict:
-    user = User(dict(userData))
-
+def autoplanning(courseCodes: List, plannerData: PlannerData, programTime: ProgramTime) -> Dict:
+    user = extract_user_from_planner_data(plannerData)
+    autoplanned = []
     try:
+        # Convert list of course codes to list of Course objects 
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
+
+        # Convert plannerData to list of Course object and FORCE the term the course is taken in
+        # e.g. if the user has taken COMP1511 in 2022 T1, then the autoplanning will have COMP1511 in 2022 T1 
+        # regardless of the actual COMP1511 term offerings
+        for year_index, year in enumerate(plannerData.plan):
+            for term_index, term in enumerate(year):
+                term_offerings = {year_index + programTime.startTime[0]: [term_index]}
+                for courseCode in term.keys():
+                    course = get_course_object(courseCode, programTime, term_offerings)
+                    courses.append(course)
+
+        # call autoplanning
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
