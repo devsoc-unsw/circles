@@ -6,7 +6,6 @@ import pickle
 import re
 from typing import Dict, List, Mapping, Optional, Set, Tuple
 from algorithms.objects.program_restrictions import NoRestriction
-
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
@@ -77,6 +76,22 @@ def api_index() -> str:
 def get_jsonified_course(courseCode: str) -> str:
     return str(CONDITIONS[courseCode])
 
+@router.get("/dump")
+def get_courses() -> list[Dict]:
+    """
+    Gets all courses in the database.
+    (For CSElectives), by yours truly, Aimen 💫
+    """
+    courses = []
+    for course in coursesCOL.find():
+        course["is_legacy"] = False
+        course.setdefault("school", None)
+        del course["_id"]
+        with suppress(KeyError):
+            del course["exclusions"]["leftover_plaintext"]
+        courses.append(course)
+    return courses
+
 @router.get(
     "/getCourse/{courseCode}",
     response_model=CourseDetails,
@@ -125,7 +140,6 @@ def get_course(courseCode: str) -> Dict:
     - start with the current database
     - if not found, check the archives
     """
-    print("\n\nYOU REQUESTED:", courseCode)
     result = coursesCOL.find_one({"code": courseCode})
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
@@ -553,7 +567,8 @@ def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple[str, str], search_term: str, structure: dict,
+def weight_course(
+        course: tuple[str, str], search_term: str, structure: dict,
                   majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
@@ -608,8 +623,10 @@ def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
 def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
     """
     Returns the terms in which the given course is offered, for the given year.
+    If the year is from the future then, backfill the LIVE_YEAR's results
     """
-    return get_course_info(course, year).get("terms", [])
+    year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
+    return get_course_info(course, year_to_fetch).get("terms", [])
 
 def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
     """
