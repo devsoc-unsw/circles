@@ -76,6 +76,22 @@ def api_index() -> str:
 def get_jsonified_course(courseCode: str) -> str:
     return str(CONDITIONS[courseCode])
 
+@router.get("/dump")
+def get_courses() -> list[Dict]:
+    """
+    Gets all courses in the database.
+    (For CSElectives), by yours truly, Aimen 💫
+    """
+    courses = []
+    for course in coursesCOL.find():
+        course["is_legacy"] = False
+        course.setdefault("school", None)
+        del course["_id"]
+        with suppress(KeyError):
+            del course["exclusions"]["leftover_plaintext"]
+        courses.append(course)
+    return courses
+
 @router.get(
     "/getCourse/{courseCode}",
     response_model=CourseDetails,

@@ -10,7 +10,7 @@ type SettingsSliceState = {
   showWarnings: boolean;
 };
 
-const initialState: SettingsSliceState = {
+export const initialSettingsState: SettingsSliceState = {
   theme: 'light',
   showMarks: false,
   showLockedCourses: false,
@@ -19,7 +19,7 @@ const initialState: SettingsSliceState = {
 
 const settingsSlice = createSlice({
   name: 'settings',
-  initialState,
+  initialState: initialSettingsState,
   reducers: {
     toggleTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
