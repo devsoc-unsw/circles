@@ -76,8 +76,9 @@ const InteractiveViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 120px;
-  margin: 250px 0px;
+  gap: 15%;
+  flex-wrap: wrap;
+  margin: 15% 5%;
 `;
 
 const InteractiveViewTextContainer = styled.div`
