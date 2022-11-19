@@ -1,7 +1,7 @@
 import React from 'react';
 import circlesLogo from './circlesLogo.svg';
 import CSESocLogo from './CSESocLogo.png';
-import S from './styles';
+import S from './Footer/styles';
 
 const Footer = () => {
   return (

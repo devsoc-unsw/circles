@@ -1,7 +1,7 @@
 import React from 'react';
-import drag from '../../assets/LandingPage/dragImg.png';
-import flag from '../../assets/LandingPage/flag.png';
-import padlock from '../../assets/LandingPage/openPadlock.png';
+import drag from '../../assets/LandingPage/KeyFeatures/dragImg.png';
+import flag from '../../assets/LandingPage/KeyFeatures/flag.png';
+import padlock from '../../assets/LandingPage/KeyFeatures/openPadlock.png';
 import S from './styles';
 
 const KeyFeaturesSection = () => {

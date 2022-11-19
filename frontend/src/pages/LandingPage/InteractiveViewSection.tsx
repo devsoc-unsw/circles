@@ -1,6 +1,6 @@
 import React from 'react';
 // import nodeGraph from '../../assets/LandingPage/nodeGraph.svg';
-import view from '../../assets/LandingPage/view.png';
+import view from '../../assets/LandingPage/InteractiveView/view.png';
 import S from './styles';
 
 const InteractiveViewSection = () => {
@@ -18,7 +18,7 @@ const InteractiveViewSection = () => {
         </S.InteractiveViewText>
       </S.InteractiveViewTextContainer>
       <S.GradientBox>
-        <img src="src/assets/LandingPage/nodeGraph.svg" alt="Node Graph" />
+        <img src="src/assets/LandingPage/InteractiveView/nodeGraph.svg" alt="Node Graph" />
       </S.GradientBox>
     </S.InteractiveViewContainer>
   );

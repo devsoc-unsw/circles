@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from './Footer/Footer';
+import Footer from './Footer';
 import InteractiveViewSection from './InteractiveViewSection';
 import KeyFeaturesSection from './KeyFeaturesSection';
 import S from './styles';
