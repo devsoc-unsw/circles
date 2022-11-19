@@ -1,12 +1,15 @@
 import React from 'react';
+import circlesLogo from './circlesLogo.svg';
 import CSESocLogo from './CSESocLogo.png';
+import S from './styles';
 
 const Footer = () => {
   return (
     <div>
       <div className="left">
         <b>circles</b>
-        <img src={CSESocLogo} alt="CSELogo" />
+        <img src={CSESocLogo} alt="CSESoc Logo" />
+        <img src={circlesLogo} alt="Circles Logo" />
         <p>
           CSESoc is the constituent student society of UNSW’s School of Computer Science and
           Engineering. We do not represent the School, Faculty, or University. This website seeks to
@@ -25,10 +28,10 @@ const Footer = () => {
         <b>Leave Feedback</b>
         <p>Any comments, suggestions or feedback for improvement? We want to hear it all! </p>
         <div className="info">
-          <input placeholder="Name" />
+          <input className="landing-page-input" placeholder="Name" />
           <input placeholder="Email address" />
         </div>
-        <input placeholder="Comment" />
+        <S.styledInput placeholder="Comment" />
         <p>Checkout our github repo!</p>
       </div>
     </div>
