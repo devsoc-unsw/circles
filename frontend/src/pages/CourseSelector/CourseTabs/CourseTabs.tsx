@@ -47,6 +47,7 @@ const CourseTabs = () => {
         <S.TextShowCourses>Show all courses</S.TextShowCourses>
         <Switch
           size="small"
+          data-testid="show-all-courses"
           defaultChecked={showLockedCourses}
           onChange={() => dispatch(toggleLockedCourses())}
         />
@@ -79,7 +80,7 @@ const CourseTabs = () => {
             cancelText="No"
           >
             <Tooltip title="Close all tabs">
-              <DeleteOutlined />
+              <DeleteOutlined data-testid="delete-tabs" />
             </Tooltip>
           </Popconfirm>
         </S.TabsCloseAll>

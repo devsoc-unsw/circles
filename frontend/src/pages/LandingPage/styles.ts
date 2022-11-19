@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const LandingPageContainer = styled.div`
   margin-top: 30px;
 `;
+
 const LandingPageTitle = styled.h1`
   font-size: 50px;
   background: -webkit-linear-gradient(30deg, #9f62de, #b77eff);
@@ -35,7 +36,7 @@ const Card = styled.div`
   }
 `;
 
-const iconContainer = styled.div`
+const IconContainer = styled.div`
   height: 66px;
   width: 66px;
   border-radius: 10px;
@@ -55,7 +56,7 @@ const LandingPageSubtitle = styled.h3<{ startColor: string; endColor: string }>`
   -webkit-text-fill-color: transparent;
 `;
 
-const divider = styled.hr`
+const Divider = styled.hr`
   width: 80%;
   height: 6px;
   border-radius: 2px;
@@ -64,7 +65,7 @@ const divider = styled.hr`
   background-color: ${({ color }) => color};
 `;
 
-const content = styled.p`
+const Content = styled.p`
   font-size: 13px;
   color: #c8bfbf;
   letter-spacing: -0.3px;
@@ -75,8 +76,9 @@ const InteractiveViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 120px;
-  margin: 250px 0px;
+  gap: 15%;
+  flex-wrap: wrap;
+  margin: 15% 5%;
 `;
 
 const InteractiveViewTextContainer = styled.div`
@@ -101,7 +103,7 @@ const InteractiveViewText = styled.p`
   color: #acacac;
 `;
 
-const gradientBox = styled.div`
+const GradientBox = styled.div`
   width: 500px;
   height: 500px;
   border-radius: 20px;
@@ -113,13 +115,13 @@ export default {
   LandingPageTitle,
   CardContainer,
   Card,
-  iconContainer,
+  IconContainer,
   LandingPageSubtitle,
-  divider,
-  content,
+  Divider,
+  Content,
   InteractiveViewContainer,
   InteractiveViewTextContainer,
   InteractiveViewTitle,
   InteractiveViewText,
-  gradientBox
+  GradientBox
 };
