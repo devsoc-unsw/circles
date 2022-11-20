@@ -113,7 +113,10 @@ const GradientBox = styled.div`
 const FooterContainer = styled.div`
   margin-bottom: 0;
   width: 100%;
-  background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 160px, rgba(145, 84, 222, 1) 160px);
+  background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 160px, rgba(145, 84, 222, 1) 10px);
+  @media all and (max-width: 450px) {
+    background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 5%, rgba(145, 84, 222, 1) 10px);
+  }
 `;
 
 const FooterContentContainer = styled.div`
