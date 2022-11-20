@@ -53,7 +53,7 @@ const Footer = () => {
             <S.LeaveFeedbackText>Leave Feedback</S.LeaveFeedbackText>
             <p> Any comments, suggestions or feedback for improvement? We want to hear it all!</p>
           </S.FooterTextContainer>
-          <S.FormInput>
+          <S.FormInputContainer>
             <S.LeftFormInput>
               <S.LeftStyledInput placeholder="Name" />
               <S.LeftStyledInput placeholder="Email address" />
@@ -61,7 +61,7 @@ const Footer = () => {
             <S.RightFormInput>
               <S.RightStyledInput placeholder="Comment" />
             </S.RightFormInput>
-          </S.FormInput>
+          </S.FormInputContainer>
           <S.FooterSubmitButton type="submit">
             <b>SUBMIT</b>
           </S.FooterSubmitButton>

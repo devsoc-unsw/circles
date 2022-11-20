@@ -113,6 +113,7 @@ const GradientBox = styled.div`
 const FooterContainer = styled.div`
   margin-bottom: 0;
   width: 100%;
+  background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 160px, rgba(145, 84, 222, 1) 160px);
 `;
 
 const FooterContentContainer = styled.div`
@@ -122,9 +123,8 @@ const FooterContentContainer = styled.div`
   position: relative;
   justify-content: space-between;
   padding: 150px 50px 0px 50px;
-  gap: 50px;
+  gap: 80px;
   flex-wrap: wrap;
-  background-color: #9154de;
 `;
 
 const FooterLeftContent = styled.div`
@@ -132,6 +132,9 @@ const FooterLeftContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media all and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const CirclesLogoContainer = styled.div`
@@ -151,7 +154,7 @@ const FooterTextContainer = styled.p`
 `;
 
 const FooterMainLeftText = styled.p`
-  font-size: 8px;
+  font-size: 12px;
 `;
 
 const FooterRightContent = styled.div`
@@ -159,19 +162,22 @@ const FooterRightContent = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 30px;
+  @media all and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const LeaveFeedbackText = styled.b`
   font-size: 30px;
 `;
 
-const FormInput = styled.div`
+const FormInputContainer = styled.div`
   display: flex;
   flex-direction: row;
   position: relative;
   justify-content: space-between;
   gap: 10px;
-  height: 20%;
+  height: 126px;
 `;
 
 const StyledInput = styled.input`
@@ -266,7 +272,7 @@ export default {
   LeftStyledInput,
   RightFormInput,
   RightStyledInput,
-  FormInput,
+  FormInputContainer,
   StyledInput,
   FooterSubmitButton,
   GithubText
