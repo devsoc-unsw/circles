@@ -173,7 +173,7 @@ def get_course(courseCode: str) -> Dict:
     return result
 
 @router.get(
-    "filterCourses/{filters}",
+    "/filterCourses/{filters}",
     description="""Returns a list of courses that match the given filters.\n
     Filters must be `+` seperated strings.\n
     Multiple filters in one query are an INTERSECTION, not a UNION.\n
