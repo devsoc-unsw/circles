@@ -180,6 +180,7 @@ def get_course(courseCode: str) -> Dict:
     Available filter types:\n
         - `type`:                 - Examples:\n
         - `CODE`:               - `"COMP"`, `"MATH"`, `"COMM"`
+        - `Level`:              - `"LEVEL1"`, `"LEVEL2"`, `"LEVEL3"`, `"LEVEL4"`
     """,
 )
 def filtered_courses(filters: Optional[str] = None):
@@ -187,9 +188,6 @@ def filtered_courses(filters: Optional[str] = None):
     Returns a list of courses that match the given filters.
     Filters must be `+` seperated strings.
     Multiple filters in one query are an INTERSECTION, not a UNION.
-    Available filter types:
-        - type:                 - Examples:
-        - `CODE`:               - `COMP`, `MATH`, `COMM`
     """
     filter_list = filters.split("+") if filters else []
 
