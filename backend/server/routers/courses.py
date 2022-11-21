@@ -38,7 +38,9 @@ def fetch_all_courses() -> Dict[str, str]:
         key: course code
         value: course_title
     """
-
+    # TODO: with actual bootstrapping, this should be done once and cached
+    # without giving anyone else the ability to access the global
+    # directly
     global ALL_COURSES
     if ALL_COURSES is not None:
         return ALL_COURSES
