@@ -31,6 +31,7 @@ const LoginButton = styled.button`
   font-weight: 700;
   color: #fff;
   transition: all 0.1s;
+  z-index: 1;
 
   &: hover {
     background: #e3a4fa;
@@ -47,9 +48,15 @@ const LoginButton = styled.button`
   }
 `;
 
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export default {
   Header,
   HeaderLogo,
   HeaderTitle,
+  LogoWrapper,
   LoginButton
 };
