@@ -38,6 +38,13 @@ def fetch_all_courses() -> Dict[str, str]:
         key: course code
         value: course_title
     """
+    # TODO: with actual bootstrapping, this should be done once and cached
+    # without giving anyone else the ability to access the global
+    # directly
+    global ALL_COURSES
+    if ALL_COURSES is not None:
+        return ALL_COURSES
+
     courses = {}
     for course in coursesCOL.find():
         courses[course["code"]] = course["title"]
@@ -47,7 +54,9 @@ def fetch_all_courses() -> Dict[str, str]:
             if course["code"] not in courses:
                 courses[course["code"]] = course["title"]
 
-    return courses
+    ALL_COURSES = courses
+
+    return ALL_COURSES
 
 
 def fix_user_data(userData: dict):
@@ -200,18 +209,16 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
           "COMP1531": "SoftEng Fundamentals",
             ……. }
     """
-    global ALL_COURSES
     from server.routers.programs import get_structure
 
-    if ALL_COURSES is None:
-        ALL_COURSES = fetch_all_courses()
+    all_courses = fetch_all_courses()
 
     specialisations = list(userData.specialisations.keys())
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
     structure = get_structure(userData.program, "+".join(specialisations))['structure']
 
-    top_results = sorted(ALL_COURSES.items(), reverse=True,
+    top_results = sorted(all_courses.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
                          )[:100]
     weighted_results = sorted(top_results, reverse=True,
