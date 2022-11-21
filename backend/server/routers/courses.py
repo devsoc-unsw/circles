@@ -4,7 +4,7 @@ APIs for the /courses/ route.
 from contextlib import suppress
 import pickle
 import re
-from typing import Dict, List, Mapping, Optional, Set, Tuple
+from typing import Dict, Iterable, List, Mapping, Optional, Set, Tuple
 from algorithms.objects.program_restrictions import NoRestriction
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
@@ -13,7 +13,7 @@ from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz # type: ignore
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
-                                  CourseDetails, CoursesState, CoursesPath,
+                                  CourseDetails, Courses, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
 from server.routers.utility import get_core_courses, map_suppressed_errors
@@ -171,6 +171,73 @@ def get_course(courseCode: str) -> Dict:
     with suppress(KeyError):
         del result["exclusions"]["leftover_plaintext"]
     return result
+
+@router.get(
+    "filterCourses/{filters}",
+    description="""Returns a list of courses that match the given filters.\n
+    Filters must be `+` seperated strings.\n
+    Multiple filters in one query are an INTERSECTION, not a UNION.\n
+    Available filter types:\n
+        - `type`:                 - Examples:\n
+        - `CODE`:               - `"COMP"`, `"MATH"`, `"COMM"`
+    """,
+)
+def filtered_courses(filters: Optional[str] = None):
+    """
+    Returns a list of courses that match the given filters.
+    Filters must be `+` seperated strings.
+    Multiple filters in one query are an INTERSECTION, not a UNION.
+    Available filter types:
+        - type:                 - Examples:
+        - `CODE`:               - `COMP`, `MATH`, `COMM`
+    """
+    filter_list = filters.split("+") if filters else []
+
+    all_courses = fetch_all_courses()
+
+    filtered_courses = all_courses
+
+    bad_filters: List[str] = []
+
+    while filter_list:
+        filtered_courses = apply_filter(
+            filter_list.pop(),
+            filtered_courses,
+            bad_filters
+        )
+
+    return {
+        "courses":  filtered_courses,
+        "bad_filters": bad_filters,
+    }
+
+def apply_filter(
+    filter_str: str,
+    courses: Dict[str, str],
+    bad_filters: List[str]
+) -> Dict[str, str]:
+
+    filter_str = filter_str.strip()
+
+    if re.match(r"^[A-Z]{4}$", filter_str): # CODE filter
+        return {
+            code: description
+            for code, description in courses.items()
+            if code.startswith(filter_str)
+        }
+
+    if re.match(r"^LEVEL\d$", filter_str): # LEVEL filter
+        level: str = filter_str[5]
+        return {
+            code: desc
+            for code, desc in courses.items()
+            if code[4] == level
+        }
+
+    # no match
+    bad_filters.append(filter_str)
+    return courses
+
 
 
 @router.post(
