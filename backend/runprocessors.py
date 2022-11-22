@@ -20,9 +20,9 @@ from data.processors.log_broken import log_broken_conditions
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
-from data.processors.program_conditions_pre_processing import pre_process
+from data.processors.program_restrictions_pre_processing import pre_process
 from data.processors.courses_processing import process_course_data
-from data.processors.program_conditions_tokenising import tokenise_program_conditions
+from data.processors.program_restrictions_tokenising import tokenise_program_conditions
 from data.processors.programs_processing import process_prg_data
 from data.processors.specialisations_processing import customise_spn_data
 

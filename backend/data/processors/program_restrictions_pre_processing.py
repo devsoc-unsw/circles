@@ -11,7 +11,7 @@ This file currently does the job of two. TODO: move stuff out
 
 from enum import Enum
 import re
-from typing import Dict, List
+from typing import Dict, List, TypedDict
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -47,7 +47,7 @@ def pre_process():
 
     # Only care for programs with relevant coditions
     pre_pre_processed_shortlist = shortlist_pre_proc(pre_processed)
-    pre_processed_shortlist = {
+    pre_processed_shortlist: Dict[str, List[Dict[str, str]]] = {
         program: pre_process_program_requirements(cond)
         for program, conds in pre_pre_processed_shortlist.items()
         for cond in conds
@@ -75,7 +75,12 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
         for note in notes
     ]
 
-def pre_process_maturity_condition(string: str) -> Dict[str, str]:
+class PreprocessedMaturityCondition(TypedDict):
+    type: ProgramRuleType
+    dependency: str
+    dependent: str
+
+def pre_process_maturity_condition(string: str):
     """
     Pre-processes a maturity condition.
     These conditions are constructed of two sections
