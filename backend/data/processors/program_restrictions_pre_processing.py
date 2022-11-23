@@ -9,7 +9,9 @@ This file currently does the job of two. TODO: move stuff out
 """
 
 
+from abc import ABC
 from enum import Enum
+from logging import info
 import re
 from typing import Dict, List, TypedDict
 
@@ -24,14 +26,29 @@ class ProgramRuleType(Enum):
     This information is needed by the tokeniser to understand what pre-processed
     rules it is working on.
     """
+    NoRestrictionRule = 0
     MaturityRestrictionRule = 1
     CourseRestrictionRule = 2
     LevelUocRestrictionRule = 3
 
-class PreprocessedMaturityCondition(TypedDict):
+class PreprocessedRestriction(TypedDict):
     type: ProgramRuleType
+
+class PreprocessedMaturityCondition(PreprocessedRestriction):
+    type: ProgramRuleType.MaturityRestrictionRule
     dependency: str
     dependent: str
+
+class PreProcessedNoRestrictionCondition(PreprocessedRestriction):
+    type: ProgramRuleType.NoRestrictionRule
+
+class PreProcessedCourseRestriction(PreprocessedRestriction):
+    type: ProgramRuleType.CourseRestrictionRule
+
+class PreProcessedCourseRestriction(PreprocessedRestriction):
+    type: ProgramRuleType.CourseRestrictionRule
+
+
 
 def pre_process():
     """
@@ -49,6 +66,7 @@ def pre_process():
         code: filter_pre_processable_conditions(info)
         for code, info in program_info.items()
     }
+    print("Pre-processed condition: ", pre_processed)
 
     # Only care for programs with relevant coditions
     pre_pre_processed_shortlist = shortlist_pre_proc(pre_processed)
@@ -166,6 +184,7 @@ def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
         pre_procced = pre_process_cond(condition)
         if pre_procced is not None:
             pre_processes_conditions.append(pre_procced)
+    print("returnign: ", pre_processes_conditions)
     return pre_processes_conditions
 
 if __name__ == "__main__":
