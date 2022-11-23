@@ -9,7 +9,7 @@ const CourseCardWrapper = styled.div`
   border-radius: 10px;
 
   &:hover {
-    background-color: ${(props) => (props.theme.plannerCartCard.backgroundColorHover)};
+    background-color: ${(props) => props.theme.plannerCartCard.backgroundColorHover};
     cursor: pointer;
     transition: all 0.2s ease;
   }

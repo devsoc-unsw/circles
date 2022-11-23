@@ -6,17 +6,21 @@ import CoursesModal from '../CoursesModal';
 import S from './styles';
 
 type CoursesSectionProps = {
-  title: string
-  plannedCourses: ViewSubgroupCourse[]
-  unplannedCourses: ViewSubgroupCourse[]
-  isCoursesOverflow?: boolean
-  sortFn?: (courseA: ViewSubgroupCourse, courseB: ViewSubgroupCourse) => number
+  title: string;
+  plannedCourses: ViewSubgroupCourse[];
+  unplannedCourses: ViewSubgroupCourse[];
+  isCoursesOverflow?: boolean;
+  sortFn?: (courseA: ViewSubgroupCourse, courseB: ViewSubgroupCourse) => number;
 };
 
 const CoursesSection = ({
-  title, plannedCourses, unplannedCourses, isCoursesOverflow, sortFn,
+  title,
+  plannedCourses,
+  unplannedCourses,
+  isCoursesOverflow,
+  sortFn
 }: CoursesSectionProps) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   if (isCoursesOverflow) {
     plannedCourses.sort(sortFn);
@@ -39,13 +43,13 @@ const CoursesSection = ({
         </S.CourseGroup>
         {!!unplannedCourses.length && (
           <S.ViewAllCoursesWrapper>
-            <Button type="primary" onClick={() => setModalVisible(true)}>
+            <Button type="primary" onClick={() => setOpenModal(true)}>
               View Courses
             </Button>
             <CoursesModal
               title={title}
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
+              open={openModal}
+              onCancel={() => setOpenModal(false)}
               courses={unplannedCourses}
             />
           </S.ViewAllCoursesWrapper>
@@ -75,7 +79,13 @@ const CoursesSection = ({
     );
   }
 
-  return <Empty className="text" description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+  return (
+    <Empty
+      className="text"
+      description="Nothing to see here! 👀"
+      image={Empty.PRESENTED_IMAGE_SIMPLE}
+    />
+  );
 };
 
 export default CoursesSection;

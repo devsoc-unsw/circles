@@ -43,14 +43,14 @@ class User:
         """
         self.courses.update(courses)
 
-    def add_current_course(self, course: str):
+    def add_current_course(self, course: Tuple[int, int | None]):
         """
         Given a course the user is taking in their current term,
         adds it to their cur_courses
         """
         self.cur_courses.append(course)
 
-    def add_current_courses(self, courses: list[str]):
+    def add_current_courses(self, courses: dict[str, Tuple[int, int | None]]):
         """
         Takes in a list of courses (represented as strings by course
         code) and, adds it to the list of current courses.
@@ -130,7 +130,7 @@ class User:
         Given a course which the student has taken, returns their
         grade (or None for no grade)
         """
-        return self.courses[course][1]
+        return self.courses.get(course, (6, None))[1]
 
     def wam(self, category: Category = AnyCategory()) -> Optional[float]:
         """
@@ -156,17 +156,29 @@ class User:
 
     def completed_core(self, category: Category = AnyCategory()):
         """ Checks that the user has completed all core courses matching a category """
+        return self.matches_core(list(self.courses.keys()), category)[0]
+
+    def matches_core(self, courses: list[str], category: Category = AnyCategory()):
+        """ Checks that the user has listed all core courses matching a category """
         has_done = {
             course: False for course in self.core_courses
             if category.match_definition(course)
         }
+        relevant_courses = []
+        old_courses = dict(self.courses)
+        self.add_courses({course: (6, None) for course in courses if course not in self.courses.keys()})
         for course in has_done:
             if self.has_taken_course(course):
+                if has_done.get(course, True) is False or not all(has_done.get(exclusion, True) for exclusion in CACHED_EXCLUSIONS.get(course, {}).keys()):
+                    # this course flipped something
+                    relevant_courses.append(course)
                 has_done[course] = True
                 for exclusion in CACHED_EXCLUSIONS.get(course, {}).keys():
                     if exclusion in has_done:
                         has_done[exclusion] = True
-        return all(has_done.values())
+        # reset courses
+        self.courses = old_courses
+        return all(has_done.values()), relevant_courses
 
     def pop_course(self, course: str) -> Tuple[int, Optional[int]]:
         """

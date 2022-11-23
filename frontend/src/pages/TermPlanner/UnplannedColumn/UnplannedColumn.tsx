@@ -7,10 +7,12 @@ import DraggableCourse from '../DraggableCourse';
 import S from './styles';
 
 type Props = {
-  dragging: boolean
+  dragging: boolean;
 };
 
-const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
+const Droppable = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
+);
 
 const UnplannedColumn = ({ dragging }: Props) => {
   const { isSummerEnabled, unplanned } = useSelector((state: RootState) => state.planner);
@@ -30,12 +32,7 @@ const UnplannedColumn = ({ dragging }: Props) => {
               isSmall={isSmall}
             >
               {unplanned.map((course, courseIndex) => (
-                <DraggableCourse
-                  code={course}
-                  index={courseIndex}
-                  key={course}
-                  term=""
-                />
+                <DraggableCourse code={course} index={courseIndex} key={course} term="" />
               ))}
               {provided.placeholder}
             </S.UnplannedBox>

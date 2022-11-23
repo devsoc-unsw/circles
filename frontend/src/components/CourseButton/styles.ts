@@ -10,14 +10,16 @@ const CourseButton = styled(Button)<{ planned?: boolean }>`
   height: 80px;
   white-space: normal;
 
-  ${({ planned, theme }) => !planned && css`
-    background-color: ${theme.courseButton.backgroundColor};
-    color: #9254de !important;
+  ${({ planned, theme }) =>
+    !planned &&
+    css`
+      background-color: ${theme.courseButton.backgroundColor};
+      color: #9254de !important;
 
-    &:hover {
-      background-color: ${theme.courseButton.hoverBackgroundColor};
-    }
-  `}
+      &:hover {
+        background-color: ${theme.courseButton.hoverBackgroundColor};
+      }
+    `}
 `;
 
 export default { CourseButton };

@@ -8,6 +8,7 @@ yarn.lock
 
 # testing
 /coverage
+/junit
 
 # production
 /build

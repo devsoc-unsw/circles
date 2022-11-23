@@ -1,0 +1,3 @@
+import LoadingCourseDescriptionPanelSidebar from './LoadingCourseDescriptionPanelSidebar';
+
+export default LoadingCourseDescriptionPanelSidebar;

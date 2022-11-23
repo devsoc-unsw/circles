@@ -1,17 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
 type Props = {
-  name: string
+  name: string;
+  onCourseClick?: (code: string) => void;
 };
 
-const CourseTag = ({ name }: Props) => {
-  const dispatch = useDispatch();
-
+const CourseTag = ({ name, onCourseClick }: Props) => {
   return (
-    <S.Tag onClick={() => dispatch(addTab(name))} className="text">
+    <S.Tag onClick={() => onCourseClick && onCourseClick(name)} className="text">
       {name}
     </S.Tag>
   );

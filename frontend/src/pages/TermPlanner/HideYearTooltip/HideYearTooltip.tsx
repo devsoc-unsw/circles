@@ -7,7 +7,7 @@ import type { RootState } from 'config/store';
 import { hideYear } from 'reducers/plannerSlice';
 
 type Props = {
-  year: number
+  year: number;
 };
 
 const HideYearTooltip = ({ year }: Props) => {
@@ -19,8 +19,8 @@ const HideYearTooltip = ({ year }: Props) => {
     if (numHidden === numYears - 1) {
       openNotification({
         type: 'error',
-        message: 'Something\'s not right',
-        description: 'You cannot hide all years in your term planner',
+        message: "Something's not right",
+        description: 'You cannot hide all years in your term planner'
       });
     } else {
       dispatch(hideYear(year));

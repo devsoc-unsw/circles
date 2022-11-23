@@ -20,7 +20,7 @@ jobs:
             args: |
               "API_URL=https://circlesapi.csesoc.app"
           - component: backend
-            dockerfile: backend.dockerfile
+            dockerfile: production.dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

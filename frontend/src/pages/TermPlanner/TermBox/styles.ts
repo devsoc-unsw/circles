@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { Droppable } from '../common/styles';
 
 type TermBoxWrapperProps = {
-  droppable: boolean
-  summerEnabled: boolean
-  isSmall: boolean
+  droppable: boolean;
+  summerEnabled: boolean;
+  isSmall: boolean;
 };
 
 const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
@@ -21,25 +21,32 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
 
   ${({ droppable }) => droppable && Droppable}
 
-  ${({ summerEnabled }) => summerEnabled && css`
-    margin: 0.5em;
-    min-height: 18em;
-    min-width: 15em;
-    padding: 1em;
-    padding-top: 0.5em;
-    border-radius: 1em;
-  `}
+  ${({ summerEnabled }) =>
+    summerEnabled &&
+    css`
+      margin: 0.5em;
+      min-height: 18em;
+      min-width: 15em;
+      padding: 1em;
+      padding-top: 0.5em;
+      border-radius: 1em;
+    `}
 
-  ${({ isSmall }) => isSmall && css`
-    min-width: 12em;
-    min-height: 14em;
-    border-radius: 1em;
-  `}
+  ${({ isSmall }) =>
+    isSmall &&
+    css`
+      min-width: 12em;
+      min-height: 14em;
+      border-radius: 1em;
+    `}
 
-  ${({ isSmall, summerEnabled }) => isSmall && summerEnabled && css`
-    min-height: 13.5em;
-    min-width: 13em;
-  `}
+  ${({ isSmall, summerEnabled }) =>
+    isSmall &&
+    summerEnabled &&
+    css`
+      min-height: 13.5em;
+      min-width: 13em;
+    `}
 `;
 
 const TermCheckboxWrapper = styled.div<{ checked: boolean }>`
@@ -66,5 +73,7 @@ const UOCBadgeWrapper = styled.div`
 `;
 
 export default {
-  TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper,
+  TermBoxWrapper,
+  TermCheckboxWrapper,
+  UOCBadgeWrapper
 };

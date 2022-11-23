@@ -1,21 +1,21 @@
 export type MenuDataSubgroup = {
-  courseCode: string
-  title: string
-  unlocked: boolean
-  accuracy: boolean
+  courseCode: string;
+  title: string;
+  unlocked: boolean;
+  accuracy: boolean;
 };
 
 export type MenuDataStructure = {
   [groupKey: string]: {
-    [subgroupKey: string]: MenuDataSubgroup[]
-  }
+    [subgroupKey: string]: MenuDataSubgroup[];
+  };
 };
 
 export type CourseUnitsStructure = {
   [groupKey: string]: {
     [subgroupKey: string]: {
-      total: number
-      curr: number
-    }
-  }
+      total: number;
+      curr: number;
+    };
+  };
 };

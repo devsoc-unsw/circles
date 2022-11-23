@@ -1,6 +1,4 @@
-import {
-  Grade, Mark, PlannerCourse, PlannerYear, Term,
-} from 'types/planner';
+import { Grade, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
 import getNumTerms from 'utils/getNumTerms';
 
 const parseMarkToInt = (mark: Mark): number | null => {
@@ -12,19 +10,16 @@ const parseMarkToInt = (mark: Mark): number | null => {
       PS: 60,
       CR: 70,
       DN: 80,
-      HD: 90,
+      HD: 90
     };
-    return Object.keys(letterGradeToIntMap).includes(mark)
-      ? letterGradeToIntMap[mark]
-      : null;
+    return Object.keys(letterGradeToIntMap).includes(mark) ? letterGradeToIntMap[mark] : null;
   }
   return mark;
 };
 
 // Checks if no courses have been planned
-const isPlannerEmpty = (years: PlannerYear[]) => (
-  years.every((year) => Object.keys(year).every((term) => year[term as Term].length === 0))
-);
+const isPlannerEmpty = (years: PlannerYear[]) =>
+  years.every((year) => Object.keys(year).every((term) => year[term as Term].length === 0));
 
 // Returns a list of terms and rowOffsets that multiterm course will be added to
 const getTermsList = (
@@ -32,7 +27,7 @@ const getTermsList = (
   uoc: number,
   availableTerms: Term[],
   isSummerTerm: boolean,
-  instanceNum: number,
+  instanceNum: number
 ) => {
   const allTerms = ['T1', 'T2', 'T3'];
   const termsList = [];
@@ -54,7 +49,7 @@ const getTermsList = (
 
     termsList.unshift({
       term: terms[(index + terms.length) % 3],
-      rowOffset,
+      rowOffset
     });
 
     index -= 1;
@@ -71,7 +66,7 @@ const getTermsList = (
 
     termsList.push({
       term: terms[index],
-      rowOffset,
+      rowOffset
     });
 
     index += 1;
@@ -82,18 +77,16 @@ const getTermsList = (
 
 // Checks whether multiterm course will extend below bottom row of term planner
 type MultitermInBoundsPayload = {
-  srcTerm: Term | 'unplanned'
-  destTerm: Term
-  destRow: number
-  course: PlannerCourse
-  isSummerTerm: boolean
-  numYears: number
+  srcTerm: Term | 'unplanned';
+  destTerm: Term;
+  destRow: number;
+  course: PlannerCourse;
+  isSummerTerm: boolean;
+  numYears: number;
 };
 
 const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
-  const {
-    destTerm, course, isSummerTerm, destRow, numYears, srcTerm,
-  } = payload;
+  const { destTerm, course, isSummerTerm, destRow, numYears, srcTerm } = payload;
 
   const { UOC: uoc, termsOffered, plannedFor } = course;
 
@@ -101,19 +94,14 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
     return false;
   }
 
-  const instanceNum = srcTerm === 'unplanned' || !plannedFor ? 0 : plannedFor.split(' ').indexOf(srcTerm);
+  const instanceNum =
+    srcTerm === 'unplanned' || !plannedFor ? 0 : plannedFor.split(' ').indexOf(srcTerm);
   const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm, instanceNum);
 
   const { rowOffset: maxRowOffset } = termsList[termsList.length - 1];
   const { rowOffset: minRowOffset } = termsList[0];
 
-  return (maxRowOffset < numYears - destRow) && (minRowOffset + destRow >= 0);
+  return maxRowOffset < numYears - destRow && minRowOffset + destRow >= 0;
 };
 
-export {
-  checkMultitermInBounds,
-  getNumTerms,
-  getTermsList,
-  isPlannerEmpty,
-  parseMarkToInt,
-};
+export { checkMultitermInBounds, getNumTerms, getTermsList, isPlannerEmpty, parseMarkToInt };

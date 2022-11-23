@@ -10,45 +10,39 @@ import { removeCourse, unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/dist/ReactContexify.css';
 
 type Props = {
-  code: string
-  plannedFor: string | null
+  code: string;
+  plannedFor: string | null;
 };
 
 const ContextMenu = ({ code, plannedFor }: Props) => {
+  const [openModal, setOpenModal] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDelete = () => {
-    dispatch(removeCourse(code));
-  };
-
+  const showEditMark = () => setOpenModal(true);
+  const handleDelete = () => dispatch(removeCourse(code));
   const handleUnschedule = () => {
-    dispatch(unschedule({
-      code,
-      destIndex: null,
-    }));
+    dispatch(
+      unschedule({
+        code,
+        destIndex: null
+      })
+    );
   };
-  const id = `${code}-context`;
-
   const handleInfo = () => {
     navigate('/course-selector');
     dispatch(addTab(code));
   };
 
-  const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
-
-  const showEditMark = () => {
-    setIsEditMarkVisible(true);
-  };
-
   const iconStyle = {
     fontSize: '14px',
-    marginRight: '5px',
+    marginRight: '5px'
   };
 
   return (
     <>
-      <Menu id={id} theme={theme.dark}>
+      <Menu id={`${code}-context`} theme={theme.dark}>
         {plannedFor && (
           <Item onClick={handleUnschedule}>
             <FaRegCalendarTimes style={iconStyle} /> Unschedule
@@ -64,11 +58,7 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
           <InfoCircleFilled style={iconStyle} /> View Info
         </Item>
       </Menu>
-      <EditMarkModal
-        code={code}
-        isVisible={isEditMarkVisible}
-        setIsVisible={setIsEditMarkVisible}
-      />
+      <EditMarkModal code={code} open={openModal} onCancel={() => setOpenModal(false)} />
     </>
   );
 };

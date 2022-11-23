@@ -15,21 +15,19 @@ import S from './styles';
 
 type StoreUOC = {
   [groupKey: string]: {
-    total: number
-    curr: number
-  }
+    total: number;
+    curr: number;
+  };
 };
 
 type Props = {
-  isLoading: boolean
-  structure: ProgramStructure
-  totalUOC: number
-  freeElectivesUOC: number
+  isLoading: boolean;
+  structure: ProgramStructure;
+  totalUOC: number;
+  freeElectivesUOC: number;
 };
 
-const Dashboard = ({
-  isLoading, structure, totalUOC, freeElectivesUOC,
-}: Props) => {
+const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -37,7 +35,7 @@ const Dashboard = ({
     from: { opacity: 0 },
     to: { opacity: 1 },
     reset: true,
-    config: { tension: 80, friction: 60 },
+    config: { tension: 80, friction: 60 }
   });
 
   const { courses } = useSelector((state: RootState) => state.planner);
@@ -46,8 +44,9 @@ const Dashboard = ({
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
     if (courses[courseCode]?.plannedFor) {
-      completedUOC += courses[courseCode].UOC
-        * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+      completedUOC +=
+        courses[courseCode].UOC *
+        getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
     }
   });
 
@@ -57,7 +56,7 @@ const Dashboard = ({
   Object.keys(structure).forEach((group) => {
     storeUOC[group] = {
       total: 0,
-      curr: 0,
+      curr: 0
     };
 
     // Example subgroup: Core Courses, Computing Electives
@@ -72,8 +71,9 @@ const Dashboard = ({
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
           if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
-            const courseUOC = courses[courseCode].UOC
-              * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+            const courseUOC =
+              courses[courseCode].UOC *
+              getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
             storeUOC[group].curr += courseUOC;
             currUOC += courseUOC;
           }
@@ -85,7 +85,7 @@ const Dashboard = ({
   const handleClick = () => {
     scroller.scrollTo('divider', {
       duration: 1500,
-      smooth: true,
+      smooth: true
     });
   };
 
@@ -95,16 +95,15 @@ const Dashboard = ({
         <LoadingDashboard />
       ) : (
         <S.ContentWrapper style={props}>
-          <LiquidProgressChart
-            completedUOC={completedUOC}
-            totalUOC={totalUOC}
-          />
+          <LiquidProgressChart completedUOC={completedUOC} totalUOC={totalUOC} />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Title className="text">{programCode} - {programName}</Title>
+            <Title className="text">
+              {programCode} - {programName}
+            </Title>
           </a>
           <S.CardsWrapper>
             {Object.entries(structure)

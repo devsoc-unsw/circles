@@ -101,7 +101,7 @@ class NoRestriction(ProgramRestriction):
 
 class MaturityRestriction(ProgramRestriction):
     """
-    Models the `Maturity Requirement` wherein, a certain condition (dependancy)
+    Models the `Maturity Requirement` wherein, a certain condition (dependency)
     must be achieved before a course from a given Category (dependent) can be taken.
     """
 

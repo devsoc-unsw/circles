@@ -5,19 +5,23 @@
       "code": "COMP1511",
       "UOC": 6,
       "level": 1,
-      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. ",
+      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to\u00a0analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921.\u00a0",
       "study_level": "Undergraduate",
       "school": "School of Computer Science and Engineering",
       "faculty": "Faculty of Engineering",
       "campus": "Kensington",
       "equivalents": {
-        "DPST1091": 1,
-        "COMP1917": 1
+          "DPST1091": 1,
+          "COMP1917": 1
       },
       "exclusions": {
-        "DPST1091": 1
+          "DPST1091": 1
       },
-      "terms": [],
+      "terms": [
+          "T1",
+          "T2",
+          "T3"
+      ],
       "gen_ed": true,
       "raw_requirements": "",
       "is_multiterm": false,
@@ -28,19 +32,23 @@
       "code": "COMP1511",
       "UOC": 6,
       "level": 1,
-      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. ",
+      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to\u00a0analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921.\u00a0",
       "study_level": "Undergraduate",
       "school": "School of Computer Science and Engineering",
       "faculty": "Faculty of Engineering",
       "campus": "Kensington",
       "equivalents": {
-        "COMP1917": 1,
-        "DPST1091": 1
+          "COMP1917": 1,
+          "DPST1091": 1
       },
       "exclusions": {
-        "DPST1091": 1
+          "DPST1091": 1
       },
-      "terms": [],
+      "terms": [
+          "T1",
+          "T2",
+          "T3"
+      ],
       "gen_ed": true,
       "raw_requirements": "",
       "is_multiterm": false,
@@ -51,24 +59,24 @@
       "code": "COMP1511",
       "UOC": 6,
       "level": 1,
-      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. ",
+      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to\u00a0analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921.\u00a0",
       "study_level": "Undergraduate",
       "school": "School of Computer Science and Engineering",
       "faculty": "Faculty of Engineering",
       "campus": "Sydney",
       "equivalents": {
-        "COMP1917": 1,
-        "DPST1091": 1
+          "COMP1917": 1,
+          "DPST1091": 1
       },
       "exclusions": {
-        "DPST1091": 1
+          "DPST1091": 1
       },
       "terms": [
-        "T1",
-        "T2",
-        "T3"
+          "T1",
+          "T2",
+          "T3"
       ],
-      "gen_ed": 1,
+      "gen_ed": true,
       "raw_requirements": "",
       "is_multiterm": false,
       "is_legacy": true
@@ -78,22 +86,22 @@
       "code": "COMP1511",
       "UOC": 6,
       "level": 1,
-      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. ",
+      "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to\u00a0analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.\nAdditional Information\nThis course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.\nCOMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.\nDue to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921.\u00a0",
       "study_level": "Undergraduate",
       "school": "School of Computer Science and Engineering",
       "faculty": "Faculty of Engineering",
       "campus": "Sydney",
       "equivalents": {
-        "DPST1091": 1,
-        "COMP1917": 1
+          "DPST1091": 1,
+          "COMP1917": 1
       },
       "exclusions": {
-        "DPST1091": 1
+          "DPST1091": 1
       },
       "terms": [
-        "T1",
-        "T2",
-        "T3"
+          "T1",
+          "T2",
+          "T3"
       ],
       "gen_ed": 1,
       "raw_requirements": "",
@@ -112,7 +120,9 @@
       "campus": "Kensington",
       "equivalents": {},
       "exclusions": {},
-      "terms": [],
+      "terms": [
+          "T1"
+      ],
       "gen_ed": false,
       "raw_requirements": "",
       "is_multiterm": false,
@@ -130,7 +140,9 @@
       "campus": "Kensington",
       "equivalents": {},
       "exclusions": {},
-      "terms": [],
+      "terms": [
+          "T1"
+      ],
       "gen_ed": false,
       "raw_requirements": "Prerequisite: MATH2011 or MATH2111 or MATH2018 (DN) or MATH2019(DN) or MATH2069(DN) and MATH2801 or MATH2901 or MATH2089(DN) or MATH2099(DN)",
       "is_multiterm": false,
@@ -149,9 +161,9 @@
       "equivalents": {},
       "exclusions": {},
       "terms": [
-        "T1"
+          "T1"
       ],
-      "gen_ed": 0,
+      "gen_ed": false,
       "raw_requirements": "Prerequisite: MATH2011 or MATH2111 or MATH2018 (DN) or MATH2019(DN) or MATH2069(DN) and MATH2801 or MATH2901 or MATH2089(DN) or MATH2099(DN)",
       "is_multiterm": false,
       "is_legacy": true

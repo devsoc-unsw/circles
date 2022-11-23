@@ -49,11 +49,10 @@
     "ARCH1101": {
         "condition": {
             "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-            "processed": "Currently 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
+            "processed": "3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
         },
         "tokens": [
             "(",
-            "Currently",
             "3261",
             "Architectural",
             "Studies,",
@@ -71,7 +70,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 2, 3261"
+        "broke at": "Index 3, Studies,"
     },
     "ARTS2050": {
         "condition": {
@@ -93,31 +92,6 @@
             ")"
         ],
         "broke at": "Index 6, Arts,"
-    },
-    "ARTS2852": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit overall, and enrolment in a Politics, Philosophy, and Economics program or a Politics and International Relations specialisation<br/><br/>",
-            "processed": "24UOC && a Politics, Philosophy && ECON# || a Politics && International Relations specialisation"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "&&",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "ECON#",
-            "||",
-            "a",
-            "Politics",
-            "&&",
-            "International",
-            "Relations",
-            "specialisation",
-            ")"
-        ],
-        "broke at": "Index 4, Politics,"
     },
     "ARTS3013": {
         "condition": {
@@ -935,7 +909,7 @@
     "ARTS3212": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && an INST#"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -965,8 +939,9 @@
             "||",
             "48UOC",
             "&&",
-            "an",
-            "INST#",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -1563,8 +1538,8 @@
     },
     "ARTS3373": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Philosophy<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Philosophy"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Philosophy<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Philosophy"
         },
         "tokens": [
             "(",
@@ -1582,7 +1557,7 @@
             "of",
             "the",
             "following",
-            "streams,",
+            "specialisations,",
             "Philosophy",
             ")"
         ],
@@ -1590,8 +1565,8 @@
     },
     "ARTS3377": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Philosophy<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Philosophy"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Philosophy<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Philosophy"
         },
         "tokens": [
             "(",
@@ -1609,7 +1584,7 @@
             "of",
             "the",
             "following",
-            "streams,",
+            "specialisations,",
             "Philosophy",
             ")"
         ],
@@ -1617,8 +1592,8 @@
     },
     "ARTS3378": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Philosophy<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Philosophy"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Philosophy<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Philosophy"
         },
         "tokens": [
             "(",
@@ -1636,7 +1611,7 @@
             "of",
             "the",
             "following",
-            "streams,",
+            "specialisations,",
             "Philosophy",
             ")"
         ],
@@ -1934,8 +1909,8 @@
     },
     "ARTS3690": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Linguistics<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Linguistics"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Linguistics<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Linguistics"
         },
         "tokens": [
             "(",
@@ -1953,7 +1928,7 @@
             "of",
             "the",
             "following",
-            "streams,",
+            "specialisations,",
             "Linguistics",
             ")"
         ],
@@ -1961,8 +1936,8 @@
     },
     "ARTS3695": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Linguistics<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Linguistics"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Linguistics<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Linguistics"
         },
         "tokens": [
             "(",
@@ -1980,7 +1955,7 @@
             "of",
             "the",
             "following",
-            "streams,",
+            "specialisations,",
             "Linguistics",
             ")"
         ],
@@ -2733,7 +2708,7 @@
     "ARTS3872": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && an INST#"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -2763,8 +2738,9 @@
             "||",
             "48UOC",
             "&&",
-            "an",
-            "INST#",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2913,8 +2889,8 @@
     },
     "ARTS3900": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History.<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Gender Studies || History"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Gender Studies or History.<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Gender Studies || History"
         },
         "tokens": [
             "(",
@@ -2932,7 +2908,7 @@
             "of",
             "the",
             "following",
-            "streams,",
+            "specialisations,",
             "Gender",
             "Studies",
             "||",
@@ -3356,6 +3332,21 @@
             ")"
         ],
         "broke at": "Index 2, complete"
+    },
+    "BEES0006": {
+        "condition": {
+            "original": "Prerequisite: completion of 48 UOC of Science courses. <br/><br/>",
+            "processed": "48UOC of Science courses"
+        },
+        "tokens": [
+            "(",
+            "48UOC",
+            "of",
+            "Science",
+            "courses",
+            ")"
+        ],
+        "broke at": "Index 3, Science"
     },
     "BEES3199": {
         "condition": {
@@ -4520,27 +4511,27 @@
     },
     "DART3200": {
         "condition": {
-            "original": "Students must complete 72 UOC including at least one of: DART2211, DART2221, DART2231, DART2241, DDES2111.<br/><br/>",
-            "processed": "must complete 72UOC && at least one of: DART2211, DART2221, DART2231, DART2241, DDES2111"
+            "original": "Prerequisite: 72 UOC overall, including one of the following courses, DART2211, DART2221, DART2231, DART2241, or DDES2111<br/><br/>",
+            "processed": "72UOC && one of the following courses, DART2211, DART2221, DART2231, DART2241 || DDES2111"
         },
         "tokens": [
             "(",
-            "must",
-            "complete",
             "72UOC",
             "&&",
-            "at",
-            "least",
             "one",
-            "of:",
+            "of",
+            "the",
+            "following",
+            "courses,",
             "DART2211,",
             "DART2221,",
             "DART2231,",
-            "DART2241,",
+            "DART2241",
+            "||",
             "DDES2111",
             ")"
         ],
-        "broke at": "Index 2, complete"
+        "broke at": "Index 4, of"
     },
     "DART3203": {
         "condition": {
@@ -4669,21 +4660,6 @@
             ")"
         ],
         "broke at": "Index 2, Theory"
-    },
-    "DDES2200": {
-        "condition": {
-            "original": "Must have complete DDES1201<br/><br/>",
-            "processed": "Must have complete DDES1201"
-        },
-        "tokens": [
-            "(",
-            "Must",
-            "have",
-            "complete",
-            "DDES1201",
-            ")"
-        ],
-        "broke at": "Index 2, have"
     },
     "DDES4101": {
         "condition": {
@@ -5338,166 +5314,6 @@
         ],
         "broke at": "Index 2, Global"
     },
-    "DPHU1001": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1002": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1003": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1004": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1005": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1006": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1007": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPHU1008": {
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
     "DPST1024": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
@@ -5534,7 +5350,7 @@
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && an EDST#. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
+            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
         },
         "tokens": [
             "(",
@@ -5546,8 +5362,12 @@
             "&&",
             "EDST2003",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -5602,7 +5422,7 @@
     "EDST2094": {
         "condition": {
             "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-            "processed": "18UOC in L1 && an EDST#. Please contact the School of Education for enrolment"
+            "processed": "18UOC in L1 && (4509 || 4056) . Please contact the School of Education for enrolment"
         },
         "tokens": [
             "(",
@@ -5610,8 +5430,12 @@
             "in",
             "L1",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "Please",
             "contact",
             "the",
@@ -5622,58 +5446,7 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 6, EDST#."
-    },
-    "EDST4080": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && an EDST#"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "an",
-            "EDST#",
-            ")"
-        ],
-        "broke at": "Index 6, EDST#"
-    },
-    "EDST4084": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && an EDST#"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "an",
-            "EDST#",
-            ")"
-        ],
-        "broke at": "Index 6, EDST#"
-    },
-    "EDST4096": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && an EDST#"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "an",
-            "EDST#",
-            ")"
-        ],
-        "broke at": "Index 6, EDST#"
+        "broke at": "Index 11, Please"
     },
     "EDST6706": {
         "condition": {
@@ -5742,7 +5515,7 @@
     "EDST6760": {
         "condition": {
             "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -5756,8 +5529,12 @@
             "1",
             "courses",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -5809,7 +5586,7 @@
     "EDST6765": {
         "condition": {
             "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -5824,8 +5601,12 @@
             "Method",
             "courses",
             "&&",
-            "an",
-            "EDST#.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -5946,31 +5727,6 @@
         ],
         "broke at": "Index 2, SOMS1912,"
     },
-    "EXPT3170": {
-        "condition": {
-            "original": "Prerequisites: EXPT2154, EXPT2168 and (EXPT2137 or enrolment in 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-            "processed": "EXPT2154 && EXPT2168 && (EXPT2137 || 3897 Applied Exercise Science/Clinical Exercise Physiology)"
-        },
-        "tokens": [
-            "(",
-            "EXPT2154",
-            "&&",
-            "EXPT2168",
-            "&&",
-            "(",
-            "EXPT2137",
-            "||",
-            "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 9, Applied"
-    },
     "FADA2020": {
         "condition": {
             "original": "Prerequisite: One of the following courses, FADA1010, DDES1100, IDES1211, or CODE2170<br/><br/>",
@@ -6023,21 +5779,6 @@
             ")"
         ],
         "broke at": "Index 2, of"
-    },
-    "FADA6700": {
-        "condition": {
-            "original": "Prerequisite: 48 units of credit overall. Student must be in good academic standing<br/><br/>",
-            "handbook_note": "Students must be in Good Academic Standing.",
-            "processed": "48UOC . must"
-        },
-        "tokens": [
-            "(",
-            "48UOC",
-            ".",
-            "must",
-            ")"
-        ],
-        "broke at": "Index 3, must"
     },
     "FOOD6804": {
         "condition": {
@@ -6135,10 +5876,39 @@
         ],
         "broke at": "Index 6, MATH1041,"
     },
+    "HESC4611": {
+        "condition": {
+            "original": "Prerequisites: Completed all Stage 3 courses and in Penultimate Term (36 UOC left to graduate) at time of enrolment<br/><br/>",
+            "processed": "all Stage 3 courses && in Penultimate Term (36UOC left to graduate) at time of enrolment"
+        },
+        "tokens": [
+            "(",
+            "all",
+            "Stage",
+            "3",
+            "courses",
+            "&&",
+            "in",
+            "Penultimate",
+            "Term",
+            "(",
+            "36UOC",
+            "left",
+            "to",
+            "graduate",
+            ")",
+            "at",
+            "time",
+            "of",
+            "enrolment",
+            ")"
+        ],
+        "broke at": "Index 2, Stage"
+    },
     "HLTH3000": {
         "condition": {
             "original": "Prerequisites: HLTH1000, HLTH2000 and (PHCM2100 or enrolment into 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-            "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to 3897 Applied Exercise Science/Clinical Exercise Physiology)"
+            "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to (3897) )"
         },
         "tokens": [
             "(",
@@ -6150,47 +5920,40 @@
             "PHCM2100",
             "||",
             "to",
+            "(",
             "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
+            ")",
             ")",
             ")"
         ],
         "broke at": "Index 8, to"
     },
-    "HUMS2003": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit at level 1 and on good academic standing. Consent required<br/><br/>",
-            "processed": "24UOC in L1 && on good academic standing. Consent required"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "L1",
-            "&&",
-            "on",
-            "good",
-            "academic",
-            "standing.",
-            "Consent",
-            "required",
-            ")"
-        ],
-        "broke at": "Index 6, good"
-    },
     "INST2003": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-            "processed": "an INST#. || ARTS1250 && a Geographical Studies major || minor"
+            "processed": "(3447) (2017). || INST1005 && INST1006 && (3447) (2017+). || ARTS1250 && a Geographical Studies major || minor"
         },
         "tokens": [
             "(",
-            "an",
-            "INST#.",
+            "(",
+            "3447",
+            ")",
+            "(",
+            "2017",
+            ")",
+            ".",
+            "||",
+            "INST1005",
+            "&&",
+            "INST1006",
+            "&&",
+            "(",
+            "3447",
+            ")",
+            "(",
+            "2017+",
+            ")",
+            ".",
             "||",
             "ARTS1250",
             "&&",
@@ -6202,24 +5965,25 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 2, INST#."
+        "broke at": "Index 8, ||"
     },
     "INST3900": {
         "condition": {
             "original": "Prerequisite: 72 units of credit overall, and enrolment in an International Studies program or specialisation<br/><br/>",
-            "processed": "72UOC && an INST# || specialisation"
+            "processed": "72UOC && (3447) || specialisation"
         },
         "tokens": [
             "(",
             "72UOC",
             "&&",
-            "an",
-            "INST#",
+            "(",
+            "3447",
+            ")",
             "||",
             "specialisation",
             ")"
         ],
-        "broke at": "Index 4, INST#"
+        "broke at": "Index 8, )"
     },
     "INTA2004": {
         "condition": {
@@ -6302,10 +6066,28 @@
         ],
         "broke at": "Index 3, LAWS1052."
     },
+    "LAWS1061": {
+        "condition": {
+            "original": "Prerequisite: Completion of Introducing Law and Justice (LAWS1052).<br/><br/>",
+            "processed": "Introducing Law && Justice (LAWS1052)"
+        },
+        "tokens": [
+            "(",
+            "Introducing",
+            "Law",
+            "&&",
+            "Justice",
+            "(",
+            "LAWS1052",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Law"
+    },
     "LAWS1075": {
         "condition": {
-            "original": "Pre-requisite: Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150, or JURD7171)<br/><br/>",
-            "processed": "Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150 || JURD7171)"
+            "original": "Prerequisite: Principles of Private Law (LAWS1150)<br/><br/>",
+            "processed": "Principles of Private Law (LAWS1150)"
         },
         "tokens": [
             "(",
@@ -6314,14 +6096,7 @@
             "Private",
             "Law",
             "(",
-            "any",
-            "one",
-            "of",
-            "LAWS1071,",
-            "LAWS1150,",
-            "JURD7150",
-            "||",
-            "JURD7171",
+            "LAWS1150",
             ")",
             ")"
         ],
@@ -6329,8 +6104,8 @@
     },
     "LAWS1091": {
         "condition": {
-            "original": "Prerequisite: Principles of Private Law (LAWS1150 /JURD7150), Contracts (LAWS1075/JURD7175) and Equity and Trusts (LAWS2385/JURD7285).<br/><br/>",
-            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)), Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
+            "original": "Prerequisite: Principles of Private Law (LAWS1150), Contracts (LAWS1075) and Equity and Trusts (LAWS2385).<br/><br/>",
+            "processed": "Principles of Private Law (LAWS1150), Contracts (LAWS1075) && Equity && Trusts (LAWS2385)"
         },
         "tokens": [
             "(",
@@ -6339,139 +6114,28 @@
             "Private",
             "Law",
             "(",
-            "(",
             "LAWS1150",
-            "||",
-            "JURD7150",
-            ")",
             ")",
             ",",
             "Contracts",
             "(",
-            "(",
             "LAWS1075",
-            "||",
-            "JURD7175",
-            ")",
             ")",
             "&&",
             "Equity",
             "&&",
             "Trusts",
             "(",
-            "(",
             "LAWS2385",
-            "||",
-            "JURD7285",
-            ")",
             ")",
             ")"
         ],
         "broke at": "Index 2, of"
     },
-    "LAWS1121": {
-        "condition": {
-            "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-            "processed": "Academic program must be 7016, Humanities Pathway Program"
-        },
-        "tokens": [
-            "(",
-            "Academic",
-            "program",
-            "must",
-            "be",
-            "7016,",
-            "Humanities",
-            "Pathway",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "LAWS1122": {
-        "condition": {
-            "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-            "processed": "Academic program must be 7016, Humanities Pathway Program"
-        },
-        "tokens": [
-            "(",
-            "Academic",
-            "program",
-            "must",
-            "be",
-            "7016,",
-            "Humanities",
-            "Pathway",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "LAWS1123": {
-        "condition": {
-            "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-            "processed": "Academic program must be 7016, Humanities Pathway Program"
-        },
-        "tokens": [
-            "(",
-            "Academic",
-            "program",
-            "must",
-            "be",
-            "7016,",
-            "Humanities",
-            "Pathway",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "LAWS1124": {
-        "condition": {
-            "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-            "processed": "Academic program must be 7016, Humanities Pathway Program"
-        },
-        "tokens": [
-            "(",
-            "Academic",
-            "program",
-            "must",
-            "be",
-            "7016,",
-            "Humanities",
-            "Pathway",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "LAWS1141": {
-        "condition": {
-            "original": "Pre-requisite: 24 UOC completed in LLB courses including LAWS1052 or 24 UOC completed in Juris Doctor courses.<br/><br/>",
-            "processed": "24UOC in LLB courses && LAWS1052 || 24UOC in Juris Doctor courses"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "LLB",
-            "courses",
-            "&&",
-            "LAWS1052",
-            "||",
-            "24UOC",
-            "in",
-            "Juris",
-            "Doctor",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
-    },
     "LAWS1160": {
         "condition": {
-            "original": "Pre-requisite: Principles of Public Law (LAWS1141/JURD7141) or Public Law (LAWS1140/JURD7140)<br/><br/>",
-            "processed": "Principles of Public Law ((LAWS1141 || JURD7141)) || Public Law ((LAWS1140 || JURD7140))"
+            "original": "Pre-requisite: Principles of Public Law (LAWS1141) or Public Law (LAWS1140)<br/><br/>",
+            "processed": "Principles of Public Law (LAWS1141) || Public Law (LAWS1140)"
         },
         "tokens": [
             "(",
@@ -6480,76 +6144,37 @@
             "Public",
             "Law",
             "(",
-            "(",
             "LAWS1141",
-            "||",
-            "JURD7141",
-            ")",
             ")",
             "||",
             "Public",
             "Law",
             "(",
-            "(",
             "LAWS1140",
-            "||",
-            "JURD7140",
-            ")",
             ")",
             ")"
         ],
         "broke at": "Index 2, of"
     },
-    "LAWS1230": {
-        "condition": {
-            "original": "Pre-requisite: 24 UOC completed in LLB courses including LAWS1052 or 24 UOC completed in Juris Doctor courses.<br/><br/>",
-            "processed": "24UOC in LLB courses && LAWS1052 || 24UOC in Juris Doctor courses"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "LLB",
-            "courses",
-            "&&",
-            "LAWS1052",
-            "||",
-            "24UOC",
-            "in",
-            "Juris",
-            "Doctor",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
-    },
     "LAWS2150": {
         "condition": {
-            "original": "Prerequisite: Principle of Public Law (LAWS1141/JURD7141) and Administrative Law (LAWS1160/JURD7160)<br/><br/>",
-            "processed": "Principle of Public Law ((LAWS1141 || JURD7141)) && Administrative Law ((LAWS1160 || JURD7160))"
+            "original": "Prerequisite: Principles of Public Law (LAWS1141) and Administrative Law (LAWS1160)<br/><br/>",
+            "processed": "Principles of Public Law (LAWS1141) && Administrative Law (LAWS1160)"
         },
         "tokens": [
             "(",
-            "Principle",
+            "Principles",
             "of",
             "Public",
             "Law",
             "(",
-            "(",
             "LAWS1141",
-            "||",
-            "JURD7141",
-            ")",
             ")",
             "&&",
             "Administrative",
             "Law",
             "(",
-            "(",
             "LAWS1160",
-            "||",
-            "JURD7160",
-            ")",
             ")",
             ")"
         ],
@@ -6557,15 +6182,14 @@
     },
     "LAWS2270": {
         "condition": {
-            "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Equity and Trusts (LAWS2385). This course is open ONLY to the students who commenced their program from 2013.<br/><br/>",
-            "processed": "78UOC in LAWS courses && Equity && Trusts (LAWS2385). This course is open ONLY to the who commenced their program from 2013"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity and Trusts (LAWS2385). <br/><br/>",
+            "processed": "78UOC in LAWS && Equity && Trusts (LAWS2385)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Equity",
             "&&",
@@ -6573,117 +6197,35 @@
             "(",
             "LAWS2385",
             ")",
-            ".",
-            "This",
-            "course",
-            "is",
-            "open",
-            "ONLY",
-            "to",
-            "the",
-            "who",
-            "commenced",
-            "their",
-            "program",
-            "from",
-            "2013",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, &&"
     },
     "LAWS2277": {
         "condition": {
-            "original": "Corequisite: LAWS1160 or JURD7160<br/>(One of these courses must be completed prior to or concurrently with enrolment in LAWS2277)<br/><br/>",
-            "processed": "[LAWS1160 || JURD7160 (One of these courses must be prior to || concurrently &&)]"
+            "original": "Corequisite: LAWS1160 completed prior to or concurrently with enrolment in this course<br/><br/>",
+            "processed": "[LAWS1160 prior to || concurrently && this course]"
         },
         "tokens": [
             "(",
             "[",
             "LAWS1160",
-            "||",
-            "JURD7160",
-            "(",
-            "One",
-            "of",
-            "these",
-            "courses",
-            "must",
-            "be",
             "prior",
             "to",
             "||",
             "concurrently",
             "&&",
-            ")",
+            "this",
+            "course",
             "]",
             ")"
         ],
-        "broke at": "Index 5, ("
-    },
-    "LAWS2320": {
-        "condition": {
-            "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-            "processed": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "LLB",
-            "courses",
-            "||",
-            "24UOC",
-            "in",
-            "Juris",
-            "Doctor",
-            "courses.",
-            "Juris",
-            "Doctor",
-            "who",
-            "commenced",
-            "prior",
-            "to",
-            "2013",
-            "need",
-            "no",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
-    },
-    "LAWS2326": {
-        "condition": {
-            "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-            "processed": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "LLB",
-            "courses",
-            "||",
-            "24UOC",
-            "in",
-            "Juris",
-            "Doctor",
-            "courses.",
-            "Juris",
-            "Doctor",
-            "who",
-            "commenced",
-            "prior",
-            "to",
-            "2013",
-            "need",
-            "no",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
+        "broke at": "Index 3, prior"
     },
     "LAWS2351": {
         "condition": {
-            "original": "Prerequisite: Crime and Criminal Process (LAWS1021/JURD7121) and Criminal Laws (LAWS1022/JURD7122).<br/><br/>",
-            "processed": "Crime && Criminal Process ((LAWS1021 || JURD7121)) && Criminal Laws ((LAWS1022 || JURD7122))"
+            "original": "Prerequisite: Crime and Criminal Process (LAWS1021) and Criminal Laws (LAWS1022).<br/><br/>",
+            "processed": "Crime && Criminal Process (LAWS1021) && Criminal Laws (LAWS1022)"
         },
         "tokens": [
             "(",
@@ -6692,21 +6234,13 @@
             "Criminal",
             "Process",
             "(",
-            "(",
             "LAWS1021",
-            "||",
-            "JURD7121",
-            ")",
             ")",
             "&&",
             "Criminal",
             "Laws",
             "(",
-            "(",
             "LAWS1022",
-            "||",
-            "JURD7122",
-            ")",
             ")",
             ")"
         ],
@@ -6714,8 +6248,8 @@
     },
     "LAWS2371": {
         "condition": {
-            "original": "Prerequisite: Principles of Private Law (LAWS1150/JURD7150) and Contracts (LAWS1075/ JURD7175)<br/><br/>",
-            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)) && Contracts ((LAWS1075 || JURD7175))"
+            "original": "Prerequisite: Principles of Private Law (LAWS1150) and Contracts (LAWS1075)<br/><br/>",
+            "processed": "Principles of Private Law (LAWS1150) && Contracts (LAWS1075)"
         },
         "tokens": [
             "(",
@@ -6724,20 +6258,12 @@
             "Private",
             "Law",
             "(",
-            "(",
             "LAWS1150",
-            "||",
-            "JURD7150",
-            ")",
             ")",
             "&&",
             "Contracts",
             "(",
-            "(",
             "LAWS1075",
-            "||",
-            "JURD7175",
-            ")",
             ")",
             ")"
         ],
@@ -6745,8 +6271,8 @@
     },
     "LAWS2383": {
         "condition": {
-            "original": "Prerequisite: Principles of Private Law (LAWS1150 /JURD7150), Contracts (LAWS1075/JURD7175) and Equity and Trusts (LAWS2385/JURD7285).<br/><br/>",
-            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)), Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
+            "original": "Prerequisite: Principles of Private Law (LAWS1150), Contracts (LAWS1075) and Equity and Trusts (LAWS2385).<br/><br/>",
+            "processed": "Principles of Private Law (LAWS1150), Contracts (LAWS1075) && Equity && Trusts (LAWS2385)"
         },
         "tokens": [
             "(",
@@ -6755,70 +6281,28 @@
             "Private",
             "Law",
             "(",
-            "(",
             "LAWS1150",
-            "||",
-            "JURD7150",
-            ")",
             ")",
             ",",
             "Contracts",
             "(",
-            "(",
             "LAWS1075",
-            "||",
-            "JURD7175",
-            ")",
             ")",
             "&&",
             "Equity",
             "&&",
             "Trusts",
             "(",
-            "(",
             "LAWS2385",
-            "||",
-            "JURD7285",
-            ")",
             ")",
             ")"
         ],
         "broke at": "Index 2, of"
     },
-    "LAWS2384": {
-        "condition": {
-            "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-            "processed": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "LLB",
-            "courses",
-            "||",
-            "24UOC",
-            "in",
-            "Juris",
-            "Doctor",
-            "courses.",
-            "Juris",
-            "Doctor",
-            "who",
-            "commenced",
-            "prior",
-            "to",
-            "2013",
-            "need",
-            "no",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
-    },
     "LAWS2385": {
         "condition": {
-            "original": "Prerequisite: Principles of Private Law (LAWS1150/JURD7150) and Contracts (LAWS1075/ JURD7175)<br/><br/>",
-            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)) && Contracts ((LAWS1075 || JURD7175))"
+            "original": "Prerequisite: Principles of Private Law (LAWS1150) and Contracts (LAWS1075)<br/><br/>",
+            "processed": "Principles of Private Law (LAWS1150) && Contracts (LAWS1075)"
         },
         "tokens": [
             "(",
@@ -6827,66 +6311,27 @@
             "Private",
             "Law",
             "(",
-            "(",
             "LAWS1150",
-            "||",
-            "JURD7150",
-            ")",
             ")",
             "&&",
             "Contracts",
             "(",
-            "(",
             "LAWS1075",
-            "||",
-            "JURD7175",
-            ")",
             ")",
             ")"
         ],
         "broke at": "Index 2, of"
     },
-    "LAWS2820": {
-        "condition": {
-            "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-            "processed": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "LLB",
-            "courses",
-            "||",
-            "24UOC",
-            "in",
-            "Juris",
-            "Doctor",
-            "courses.",
-            "Juris",
-            "Doctor",
-            "who",
-            "commenced",
-            "prior",
-            "to",
-            "2013",
-            "need",
-            "no",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
-    },
     "LAWS3014": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+            "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Business",
             "Associations",
@@ -6895,19 +6340,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Associations"
     },
     "LAWS3017": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Legal Theory (LAWS2320), Law and Social Theory (LAWS2820) or Theories of Law and Justice (LAWS2326).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Legal Theory (LAWS2320), Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
+            "processed": "78UOC in LAWS && Legal Theory (LAWS2320), Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Legal",
             "Theory",
@@ -6933,19 +6377,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Theory"
     },
     "LAWS3018": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses<br/>Co-requisite: Business Associations (LAWS1091) and Land Law (LAWS2383)<br/><br/>",
-            "processed": "78UOC in LAWS courses && [Business Associations (LAWS1091) && Land Law (LAWS2383)]"
+            "processed": "78UOC in LAWS && [Business Associations (LAWS1091) && Land Law (LAWS2383)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "[",
             "Business",
@@ -6962,49 +6405,18 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3021": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3046/JURD7446, LAWS3248/JURD7448, LAWS3523/GENL2323 and LAWS8017/JURD7617<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3022": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Business"
     },
     "LAWS3023": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+            "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Business",
             "Associations",
@@ -7013,79 +6425,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3025": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3028": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3040": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3046": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Associations"
     },
     "LAWS3047": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-            "processed": "78UOC in LAWS courses && [Resolving Civil Disputes (LAWS2371)]"
+            "processed": "78UOC in LAWS && [Resolving Civil Disputes (LAWS2371)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "[",
             "Resolving",
@@ -7097,19 +6448,18 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Resolving"
     },
     "LAWS3057": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Foundations of Intellectual Property Law (LAWS3021/JURD7321) or Intellectual Property Law (LAWS8017/JURD7617).<br/><br/>",
-            "processed": "78UOC in LAWS courses && [Foundations of Intellectual Property Law ((LAWS3021 || JURD7321)) || Intellectual Property Law ((LAWS8017 || JURD7617))]"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/>Co-requisite: Foundations of Intellectual Property Law (LAWS3021) or Intellectual Property Law (LAWS8017).<br/><br/>",
+            "processed": "78UOC in LAWS && [Foundations of Intellectual Property Law (LAWS3021) || Intellectual Property Law (LAWS8017)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "[",
             "Foundations",
@@ -7118,39 +6468,30 @@
             "Property",
             "Law",
             "(",
-            "(",
             "LAWS3021",
-            "||",
-            "JURD7321",
-            ")",
             ")",
             "||",
             "Intellectual",
             "Property",
             "Law",
             "(",
-            "(",
             "LAWS8017",
-            "||",
-            "JURD7617",
-            ")",
             ")",
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Foundations"
     },
     "LAWS3060": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230),  Resolving Civil Disputes (LAWS2371) and Court Process, Evidence & Proof (LAWS2351).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230), Resolving Civil Disputes (LAWS2371) && Court Process, Evidence && Proof (LAWS2351)"
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230), Resolving Civil Disputes (LAWS2371) && Court Process, Evidence && Proof (LAWS2351)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Lawyers,",
             "Ethics",
@@ -7177,79 +6518,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3064": {
-        "condition": {
-            "original": "Prerequisite: Completion of 36 UOC in LAWS courses.<br/><br/>",
-            "processed": "36UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "36UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3065": {
-        "condition": {
-            "original": "Prerequisite: Completion of 36 UOC in LAWS courses.<br/><br/>",
-            "processed": "36UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "36UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3067": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3070": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Ethics"
     },
     "LAWS3072": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371)"
+            "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Resolving",
             "Civil",
@@ -7259,19 +6539,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Civil"
     },
     "LAWS3073": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Land Law (LAWS2383)"
+            "processed": "78UOC in LAWS && Land Law (LAWS2383)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Land",
             "Law",
@@ -7280,124 +6559,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3079": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3080": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3084": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3086": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3087": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3102": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3105": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Law"
     },
     "LAWS3115": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Land Law (LAWS2383)"
+            "processed": "78UOC in LAWS && Land Law (LAWS2383)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Land",
             "Law",
@@ -7406,98 +6579,39 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3123": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3125": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3131": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3133": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Law"
     },
     "LAWS3135": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity & Trusts<br/><br/>",
-            "processed": "78UOC in LAWS courses && Equity && Trusts"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity & Trusts (LAWS2385).<br/><br/>",
+            "processed": "78UOC in LAWS && Equity && Trusts (LAWS2385)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Equity",
             "&&",
             "Trusts",
+            "(",
+            "LAWS2385",
+            ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, &&"
     },
     "LAWS3137": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-            "processed": "78UOC in LAWS courses && [Resolving Civil Disputes (LAWS2371)]"
+            "processed": "78UOC in LAWS && [Resolving Civil Disputes (LAWS2371)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "[",
             "Resolving",
@@ -7509,79 +6623,18 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3139": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3144": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3146": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3149": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Resolving"
     },
     "LAWS3150": {
         "condition": {
             "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Federal Constitutional Law (LAWS2150)"
+            "processed": "78UOC in LAWS && Federal Constitutional Law (LAWS2150)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Federal",
             "Constitutional",
@@ -7591,34 +6644,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3152": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Constitutional"
     },
     "LAWS3155": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+            "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Business",
             "Associations",
@@ -7627,25 +6664,19 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Associations"
     },
     "LAWS3157": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. Students enrolled after 2013 must have also completed Law in the Global Context (LAWS2270) before enrolling in this course.<br/><br/>",
-            "processed": "78UOC in LAWS courses. enrolled after 2013 must have also Law in the Global Context (LAWS2270) before enrolling in this course"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses and Law in the Global Context (LAWS2270).<br/><br/>",
+            "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses.",
-            "enrolled",
-            "after",
-            "2013",
-            "must",
-            "have",
-            "also",
+            "&&",
             "Law",
             "in",
             "the",
@@ -7654,71 +6685,20 @@
             "(",
             "LAWS2270",
             ")",
-            "before",
-            "enrolling",
-            "in",
-            "this",
-            "course",
             ")"
         ],
-        "broke at": "Index 5, enrolled"
-    },
-    "LAWS3159": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3165": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3167": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, in"
     },
     "LAWS3170": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) && [Court Process, Evidence && Proof (LAWS2351)]"
+            "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) && [Court Process, Evidence && Proof (LAWS2351)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Resolving",
             "Civil",
@@ -7747,124 +6727,18 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3181": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3182": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3183": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3185": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3186": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3187": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3188": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Civil"
     },
     "LAWS3192": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Business Associations (LAWS1091)"
+            "processed": "78UOC in LAWS && Business Associations (LAWS1091)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Business",
             "Associations",
@@ -7873,19 +6747,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Associations"
     },
     "LAWS3195": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Federal Constitutional Law (LAWS2150)<br/><br/>",
-            "processed": "78UOC in LAWS courses && [Federal Constitutional Law (LAWS2150)]"
+            "processed": "78UOC in LAWS && [Federal Constitutional Law (LAWS2150)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "[",
             "Federal",
@@ -7897,22 +6770,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3196": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Federal"
     },
     "LAWS3198": {
         "condition": {
@@ -7929,122 +6787,16 @@
         ],
         "broke at": "Index 3, LAWS"
     },
-    "LAWS3208": {
-        "condition": {
-            "original": "78 UOC of LAWS courses<br/><br/>",
-            "processed": "78UOC of LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "of",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 3, LAWS"
-    },
-    "LAWS3211": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3212": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3216": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3221": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3222": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3231": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
     "LAWS3240": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Lawyers,",
             "Ethics",
@@ -8055,22 +6807,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3248": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Ethics"
     },
     "LAWS3250": {
         "condition": {
@@ -8087,32 +6824,16 @@
         ],
         "broke at": "Index 5, )"
     },
-    "LAWS3251": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
     "LAWS3272": {
         "condition": {
             "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Federal Constitutional Law (LAWS2150)"
+            "processed": "78UOC in LAWS && Federal Constitutional Law (LAWS2150)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Federal",
             "Constitutional",
@@ -8122,19 +6843,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Constitutional"
     },
     "LAWS3276": {
         "condition": {
             "original": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Federal Constitutional Law (LAWS2150)"
+            "processed": "78UOC in LAWS && Federal Constitutional Law (LAWS2150)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Federal",
             "Constitutional",
@@ -8144,19 +6864,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Constitutional"
     },
     "LAWS3281": {
         "condition": {
             "original": "Prerequisites: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160). <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160) && [Resolving Civil Disputes (LAWS2371)]"
+            "processed": "78UOC in LAWS && Administrative Law (LAWS1160) && [Resolving Civil Disputes (LAWS2371)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Administrative",
             "Law",
@@ -8174,19 +6893,18 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Law"
     },
     "LAWS3282": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160)"
+            "processed": "78UOC in LAWS && Administrative Law (LAWS1160)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Administrative",
             "Law",
@@ -8195,49 +6913,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3292": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3301": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Law"
     },
     "LAWS3302": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160) and Equity and Trusts (LAWS2385).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160) && Equity && Trusts (LAWS2385)"
+            "processed": "78UOC in LAWS && Administrative Law (LAWS1160) && Equity && Trusts (LAWS2385)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Administrative",
             "Law",
@@ -8253,139 +6940,26 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Law"
     },
     "LAWS3303": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
             "(",
-            "LAWS1230/1210",
+            "LAWS1230",
             ")",
-            "&&",
-            "Resolving",
-            "Civil",
-            "Disputes",
-            "(",
-            "LAWS2371/2311",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3304": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            "&&",
-            "Lawyers,",
-            "Ethics",
-            "&&",
-            "Justice",
-            "(",
-            "LAWS1230/1210",
-            ")",
-            "&&",
-            "Resolving",
-            "Civil",
-            "Disputes",
-            "(",
-            "LAWS2371/2311",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3305": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            "&&",
-            "Lawyers,",
-            "Ethics",
-            "&&",
-            "Justice",
-            "(",
-            "LAWS1230/1210",
-            ")",
-            "&&",
-            "Resolving",
-            "Civil",
-            "Disputes",
-            "(",
-            "LAWS2371/2311",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3309": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            "&&",
-            "Lawyers,",
-            "Ethics",
-            "&&",
-            "Justice",
-            "(",
-            "LAWS1230/1210",
-            ")",
-            "&&",
-            "Resolving",
-            "Civil",
-            "Disputes",
-            "(",
-            "LAWS2371/2311",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3314": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
             "&&",
             "Resolving",
             "Civil",
@@ -8395,331 +6969,222 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Ethics"
     },
-    "LAWS3316": {
+    "LAWS3304": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3319": {
-        "condition": {
-            "original": "Completion of 78 UOC in LAWS courses including LAWS1022 Criminal Laws (or LAWS1011) <br/><br/>",
-            "processed": "78UOC in LAWS courses && LAWS1022 Criminal Laws (or LAWS1011)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
             "&&",
-            "LAWS1022",
-            "Criminal",
-            "Laws",
+            "Lawyers,",
+            "Ethics",
+            "&&",
+            "Justice",
             "(",
-            "or",
-            "LAWS1011",
+            "LAWS1230",
+            ")",
+            "&&",
+            "Resolving",
+            "Civil",
+            "Disputes",
+            "(",
+            "LAWS2371",
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Ethics"
+    },
+    "LAWS3305": {
+        "condition": {
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "in",
+            "LAWS",
+            "&&",
+            "Lawyers,",
+            "Ethics",
+            "&&",
+            "Justice",
+            "(",
+            "LAWS1230",
+            ")",
+            "&&",
+            "Resolving",
+            "Civil",
+            "Disputes",
+            "(",
+            "LAWS2371",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 6, Ethics"
+    },
+    "LAWS3309": {
+        "condition": {
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "in",
+            "LAWS",
+            "&&",
+            "Lawyers,",
+            "Ethics",
+            "&&",
+            "Justice",
+            "(",
+            "LAWS1230",
+            ")",
+            "&&",
+            "Resolving",
+            "Civil",
+            "Disputes",
+            "(",
+            "LAWS2371",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 6, Ethics"
+    },
+    "LAWS3314": {
+        "condition": {
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
+            "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371)"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "in",
+            "LAWS",
+            "&&",
+            "Resolving",
+            "Civil",
+            "Disputes",
+            "(",
+            "LAWS2371",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 6, Civil"
+    },
+    "LAWS3319": {
+        "condition": {
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Criminal Laws (LAWS1022)<br/><br/>",
+            "processed": "78UOC in LAWS && Criminal Laws (LAWS1022)"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "in",
+            "LAWS",
+            "&&",
+            "Criminal",
+            "Laws",
+            "(",
+            "LAWS1022",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 6, Laws"
     },
     "LAWS3321": {
         "condition": {
-            "original": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-            "processed": "Restricted to Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053 || LEGLC24053"
         },
         "tokens": [
             "(",
             "Restricted",
             "to",
             "Legal",
-            "Studies.",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
+            "Studies",
+            "LEGLB24053",
             "||",
-            "3408",
-            "||",
-            "4054",
-            "||",
-            "4053",
+            "LEGLC24053",
             ")"
         ],
         "broke at": "Index 2, to"
     },
-    "LAWS3326": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3327": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3331": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3332": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3335": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3341": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3345": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3346": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3348": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
     "LAWS3350": {
         "condition": {
-            "original": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-            "processed": "Restricted to Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053 || LEGLC24053"
         },
         "tokens": [
             "(",
             "Restricted",
             "to",
             "Legal",
-            "Studies:",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
+            "Studies",
+            "LEGLB24053",
             "||",
-            "3408",
-            "||",
-            "4054",
+            "LEGLC24053",
             ")"
         ],
         "broke at": "Index 2, to"
     },
     "LAWS3351": {
         "condition": {
-            "original": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-            "processed": "Restricted to Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053.<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053 || LEGLC24053"
         },
         "tokens": [
             "(",
             "Restricted",
             "to",
             "Legal",
-            "Studies:",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
+            "Studies",
+            "LEGLB24053",
             "||",
-            "3408",
-            "||",
-            "4054",
+            "LEGLC24053",
             ")"
         ],
         "broke at": "Index 2, to"
     },
     "LAWS3352": {
         "condition": {
-            "original": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-            "processed": "Restricted to Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053 || LEGLC24053"
         },
         "tokens": [
             "(",
             "Restricted",
             "to",
             "Legal",
-            "Studies:",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
+            "Studies",
+            "LEGLB24053",
             "||",
-            "3408",
-            "||",
-            "4054",
+            "LEGLC24053",
             ")"
         ],
         "broke at": "Index 2, to"
     },
-    "LAWS3354": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3361": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
     "LAWS3362": {
         "condition": {
-            "original": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-            "processed": "Restricted to Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053.<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053 || LEGLC24053"
         },
         "tokens": [
             "(",
             "Restricted",
             "to",
             "Legal",
-            "Studies.",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
+            "Studies",
+            "LEGLB24053",
             "||",
-            "3408",
-            "||",
-            "4054",
-            "||",
-            "4053",
+            "LEGLC24053",
             ")"
         ],
         "broke at": "Index 2, to"
@@ -8743,21 +7208,15 @@
     },
     "LAWS3381": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. Students enrolled after 2013 must have also completed Law in the Global Context (LAWS2270) before enrolling in this course.<br/><br/>",
-            "processed": "78UOC in LAWS courses. enrolled after 2013 must have also Law in the Global Context (LAWS2270) before enrolling in this course"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses and Law in the Global Context (LAWS2270).<br/><br/>",
+            "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses.",
-            "enrolled",
-            "after",
-            "2013",
-            "must",
-            "have",
-            "also",
+            "&&",
             "Law",
             "in",
             "the",
@@ -8766,101 +7225,20 @@
             "(",
             "LAWS2270",
             ")",
-            "before",
-            "enrolling",
-            "in",
-            "this",
-            "course",
             ")"
         ],
-        "broke at": "Index 5, enrolled"
-    },
-    "LAWS3382": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3383": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3384": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3391": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3392": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, in"
     },
     "LAWS3393": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Land Law (LAWS2383)"
+            "processed": "78UOC in LAWS && Land Law (LAWS2383)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Land",
             "Law",
@@ -8869,27 +7247,12 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3395": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, Law"
     },
     "LAWS3396": {
         "condition": {
             "original": "Prerequisite: Family Law (LAWS3391) and completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "Family Law (LAWS3391) && 78UOC in LAWS courses"
+            "processed": "Family Law (LAWS3391) && 78UOC in LAWS"
         },
         "tokens": [
             "(",
@@ -8902,325 +7265,24 @@
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             ")"
         ],
         "broke at": "Index 2, Law"
     },
-    "LAWS3401": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3402": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3412": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3413": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3423": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3427": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3431": {
-        "condition": {
-            "original": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-            "processed": "Restricted to Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
-        },
-        "tokens": [
-            "(",
-            "Restricted",
-            "to",
-            "Legal",
-            "Studies.",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
-            "||",
-            "3408",
-            "||",
-            "4054",
-            "||",
-            "4053",
-            ")"
-        ],
-        "broke at": "Index 2, to"
-    },
-    "LAWS3434": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3441": {
-        "condition": {
-            "original": "Prerequisite: Completion of 36 UOC in LAWS courses.<br/><br/>",
-            "processed": "36UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "36UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3442": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3445": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3478": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3501": {
-        "condition": {
-            "original": "Completion of 78 UOC in LAWS courses<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3510": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3512": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3513": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
     "LAWS3523": {
         "condition": {
-            "original": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-            "processed": "Restricted to Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or LEGLC24053.<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053 || LEGLC24053"
         },
         "tokens": [
             "(",
             "Restricted",
             "to",
             "Legal",
-            "Studies.",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
+            "Studies",
+            "LEGLB24053",
             "||",
-            "3408",
-            "||",
-            "4054",
-            "||",
-            "4053",
-            ")"
-        ],
-        "broke at": "Index 2, to"
-    },
-    "LAWS3524": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3532": {
-        "condition": {
-            "original": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-            "processed": "Restricted to Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
-        },
-        "tokens": [
-            "(",
-            "Restricted",
-            "to",
-            "Legal",
-            "Studies.",
-            "Academic",
-            "Program",
-            "must",
-            "be",
-            "4055",
-            "||",
-            "3408",
-            "||",
-            "4054",
-            "||",
-            "4053",
+            "LEGLC24053",
             ")"
         ],
         "broke at": "Index 2, to"
@@ -9249,62 +7311,16 @@
         ],
         "broke at": "Index 2, to"
     },
-    "LAWS3541": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3549": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3555": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
     "LAWS3589": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371)"
+            "processed": "78UOC in LAWS && Resolving Civil Disputes (LAWS2371)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Resolving",
             "Civil",
@@ -9314,19 +7330,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Civil"
     },
     "LAWS3623": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
+            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Lawyers,",
             "Ethics",
@@ -9337,19 +7352,18 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Ethics"
     },
     "LAWS3713": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Law in the Global Context (LAWS2270) or Public International Law (LAWS3381).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Law in the Global Context (LAWS2270) || Public International Law (LAWS3381)"
+            "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270) || Public International Law (LAWS3381)"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "courses",
             "&&",
             "Law",
             "in",
@@ -9368,37 +7382,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "LAWS3751": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses. Exclusion: TABL2751<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
-    },
-    "LAWS3758": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
+        "broke at": "Index 6, in"
     },
     "LAWS3777": {
         "condition": {
@@ -9423,21 +7407,6 @@
             ")"
         ],
         "broke at": "Index 3, of"
-    },
-    "LAWS3812": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
-            "processed": "78UOC in LAWS courses"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 5, )"
     },
     "LAWS3901": {
         "condition": {
@@ -9478,20 +7447,6 @@
             ")"
         ],
         "broke at": "Index 2, Program"
-    },
-    "MANF9550": {
-        "condition": {
-            "original": "Successful completion of 96 UOC and minimum WAM 65%<br/><br/>",
-            "processed": "96UOC && 65WAM%"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "&&",
-            "65WAM%",
-            ")"
-        ],
-        "broke at": "Index 4, )"
     },
     "MATS3199": {
         "condition": {
@@ -10042,7 +7997,7 @@
     "MUSC1801": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10054,7 +8009,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -10062,7 +8021,7 @@
     "MUSC1802": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10074,7 +8033,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -10082,7 +8045,7 @@
     "MUSC1803": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10094,7 +8057,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -10102,7 +8069,7 @@
     "MUSC2706": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music specialisation in a Fine Arts or Music program <br/><br/>",
-            "processed": "a Music specialisation in a Fine Arts || MUSC#"
+            "processed": "a Music specialisation in a Fine Arts || (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10114,7 +8081,11 @@
             "Fine",
             "Arts",
             "||",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 2, Music"
@@ -10157,7 +8128,7 @@
     "MUSC2803": {
         "condition": {
             "original": "Prerequisite: 36 units of credit at level 1 and enrolment in a Music program or specialisation<br/><br/>",
-            "processed": "36UOC in L1 && MUSC# || specialisation"
+            "processed": "36UOC in L1 && (MUSC?? || 4508) || specialisation"
         },
         "tokens": [
             "(",
@@ -10165,12 +8136,16 @@
             "in",
             "L1",
             "&&",
-            "MUSC#",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             "||",
             "specialisation",
             ")"
         ],
-        "broke at": "Index 8, )"
+        "broke at": "Index 12, )"
     },
     "MUSC2901": {
         "condition": {
@@ -10238,7 +8213,7 @@
     "MUSC3706": {
         "condition": {
             "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-            "processed": "MUSC2702 || MUSC2703 (12UOC) && a Music Creative Practice || Music Pedagogy stream MUSC#"
+            "processed": "MUSC2702 || MUSC2703 (12UOC) && a Music Creative Practice || Music Pedagogy stream in (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10257,7 +8232,12 @@
             "Music",
             "Pedagogy",
             "stream",
-            "MUSC#",
+            "in",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 9, Music"
@@ -10290,14 +8270,13 @@
     "MUSC3802": {
         "condition": {
             "original": "Prerequisite: 24uoc in MUSC courses and enrolment in one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology, or Sonic Arts<br/><br/>",
-            "processed": "24UOC in MUSC courses && one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology || Sonic Arts"
+            "processed": "24UOC in MUSC && one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology || Sonic Arts"
         },
         "tokens": [
             "(",
             "24UOC",
             "in",
             "MUSC",
-            "courses",
             "&&",
             "one",
             "of",
@@ -10317,19 +8296,18 @@
             "Arts",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, of"
     },
     "MUSC3804": {
         "condition": {
             "original": "Prerequisite: 24 units of credit in MUSC courses, including MUSC2802, and enrolment in a Music Pedagogy specialisation<br/><br/>",
-            "processed": "24UOC in MUSC courses && MUSC2802 && a Music Pedagogy specialisation"
+            "processed": "24UOC in MUSC && MUSC2802 && a Music Pedagogy specialisation"
         },
         "tokens": [
             "(",
             "24UOC",
             "in",
             "MUSC",
-            "courses",
             "&&",
             "MUSC2802",
             "&&",
@@ -10339,19 +8317,18 @@
             "specialisation",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 8, Music"
     },
     "MUSC3805": {
         "condition": {
             "original": "Prerequisite: 24 UOC in MUSC courses, and enrolment in a Bachelor of Music or a Music Sonic Arts specialisation. Or 48 UOC overall, including MDIA1005 and enrolment in a Media program or a Screen Production specialisation<br/><br/>",
-            "processed": "24UOC in MUSC courses && a Bachelor of Music || a Music Sonic Arts specialisation. || 48UOC && MDIA1005 && MDIA# || a Screen Production specialisation"
+            "processed": "24UOC in MUSC && a Bachelor of Music || a Music Sonic Arts specialisation. || 48UOC && MDIA1005 && MDIA# || a Screen Production specialisation"
         },
         "tokens": [
             "(",
             "24UOC",
             "in",
             "MUSC",
-            "courses",
             "&&",
             "a",
             "Bachelor",
@@ -10376,7 +8353,7 @@
             "specialisation",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 6, Bachelor"
     },
     "MUSC3806": {
         "condition": {
@@ -10410,14 +8387,13 @@
     "MUSC3807": {
         "condition": {
             "original": "Prerequisite: 24uoc in MUSC courses, and enrolment in a Music single or dual program<br/><br/>",
-            "processed": "24UOC in MUSC courses && a Music single || dual program"
+            "processed": "24UOC in MUSC && a Music single || dual program"
         },
         "tokens": [
             "(",
             "24UOC",
             "in",
             "MUSC",
-            "courses",
             "&&",
             "a",
             "Music",
@@ -10427,155 +8403,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, &&"
-    },
-    "MUSC4009": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-            "processed": "4508 Music (Honours)"
-        },
-        "tokens": [
-            "(",
-            "4508",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "MUSC4010": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-            "processed": "4508 Music (Honours)"
-        },
-        "tokens": [
-            "(",
-            "4508",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "MUSC4011": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-            "processed": "4508 Music (Honours)"
-        },
-        "tokens": [
-            "(",
-            "4508",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "MUSC4013": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-            "processed": "a single || double Music (Honours) program"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "single",
-            "||",
-            "double",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, single"
-    },
-    "MUSC4014": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-            "processed": "a single || double Music (Honours) program"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "single",
-            "||",
-            "double",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, single"
-    },
-    "MUSC4015": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-            "processed": "a single || double Music (Honours) program"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "single",
-            "||",
-            "double",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, single"
-    },
-    "MUSC4016": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-            "processed": "a single || double Music (Honours) program"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "single",
-            "||",
-            "double",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, single"
-    },
-    "MUSC4017": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-            "processed": "a single || double Music (Honours) program"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "single",
-            "||",
-            "double",
-            "Music",
-            "(",
-            "Honours",
-            ")",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, single"
+        "broke at": "Index 6, Music"
     },
     "MUSC4102": {
         "condition": {
@@ -10639,7 +8467,7 @@
     "MUSC4705": {
         "condition": {
             "original": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-            "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream MUSC#"
+            "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream in (MUSC?? || 4508)"
         },
         "tokens": [
             "(",
@@ -10655,7 +8483,12 @@
             "Creative",
             "Practice",
             "stream",
-            "MUSC#",
+            "in",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
             ")"
         ],
         "broke at": "Index 9, Music"
@@ -10663,7 +8496,7 @@
     "NEUR2201": {
         "condition": {
             "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
-            "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC of PSYC courses"
+            "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC in PSYC"
         },
         "tokens": [
             "(",
@@ -10683,9 +8516,8 @@
             ")",
             "||",
             "12UOC",
-            "of",
+            "in",
             "PSYC",
-            "courses",
             ")"
         ],
         "broke at": "Index 2, which"
@@ -10773,24 +8605,6 @@
             ")"
         ],
         "broke at": "Index 2, Highly"
-    },
-    "PHCM1001": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, 3880"
     },
     "PHCM2100": {
         "condition": {
@@ -10907,7 +8721,7 @@
     "PHRM2031": {
         "condition": {
             "original": "Prerequisite: PHRM1011 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>Co-requisite: PHAR2911, DIET2001<br/><br/>",
-            "processed": "PHRM1011 && 48UOC in L1 from 3895 Pharmaceutical Medicine/Pharmacy && [PHAR2911, DIET2001]"
+            "processed": "PHRM1011 && 48UOC in L1 from (3895) && [PHAR2911, DIET2001]"
         },
         "tokens": [
             "(",
@@ -10917,9 +8731,9 @@
             "in",
             "L1",
             "from",
+            "(",
             "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
+            ")",
             "&&",
             "[",
             "PHAR2911,",
@@ -10927,31 +8741,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 9, Medicine/Pharmacy"
-    },
-    "PHRM3021": {
-        "condition": {
-            "original": "Prerequisite: PHRM2031, MICR2012, PHAR2911 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
-            "processed": "PHRM2031 && MICR2012 && PHAR2911 && 48UOC in L1 from 3895 Pharmaceutical Medicine/Pharmacy"
-        },
-        "tokens": [
-            "(",
-            "PHRM2031",
-            "&&",
-            "MICR2012",
-            "&&",
-            "PHAR2911",
-            "&&",
-            "48UOC",
-            "in",
-            "L1",
-            "from",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            ")"
-        ],
-        "broke at": "Index 13, Medicine/Pharmacy"
+        "broke at": "Index 12, PHAR2911,"
     },
     "PHRM3022": {
         "condition": {
@@ -11382,11 +9172,10 @@
     "SENG3993": {
         "condition": {
             "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>",
-            "processed": "Currently 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
+            "processed": "3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
         },
         "tokens": [
             "(",
-            "Currently",
             "3707",
             "in",
             "the",
@@ -11427,7 +9216,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 2, 3707"
+        "broke at": "Index 3, the"
     },
     "SENG3994": {
         "condition": {
@@ -11467,7 +9256,7 @@
     "SOCW3009": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3013]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
         },
         "tokens": [
             "(",
@@ -11497,7 +9286,9 @@
             "||",
             "SRAP2002",
             "&&",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW3013",
@@ -11509,7 +9300,7 @@
     "SOCW3012": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW#"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033)"
         },
         "tokens": [
             "(",
@@ -11537,7 +9328,9 @@
             "||",
             "SRAP2002",
             "&&",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             ")"
         ],
         "broke at": "Index 18, ||"
@@ -11545,7 +9338,7 @@
     "SOCW4003": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11557,7 +9350,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11568,8 +9364,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11577,7 +9372,7 @@
     "SOCW4011": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11589,7 +9384,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11600,8 +9398,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11609,7 +9406,7 @@
     "SOCW4012": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11621,7 +9418,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11632,8 +9432,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11641,7 +9440,7 @@
     "SOCW4013": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11653,7 +9452,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "SOCW#.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -11664,8 +9466,7 @@
             "(",
             "4033",
             ")",
-            "/Law",
-            "program",
+            "/LAWS#",
             ")"
         ],
         "broke at": "Index 6, ||"
@@ -11673,7 +9474,7 @@
     "SOCW4015": {
         "condition": {
             "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, SOCW# && an overall 70WAM && [SOCW4018]"
+            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, (4033) && an overall 70WAM && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -11683,7 +9484,9 @@
             "SOCW4011,",
             "SOCW4012,",
             "SOCW4013,",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             "&&",
             "an",
             "overall",
@@ -11699,7 +9502,7 @@
     "SOCW4016": {
         "condition": {
             "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && SOCW# && [SOCW4018]"
+            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -11711,7 +9514,9 @@
             "&&",
             "SOCW4013",
             "&&",
-            "SOCW#",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW4018",
@@ -11720,73 +9525,41 @@
         ],
         "broke at": "Index 4, SOCW4011,"
     },
-    "SOMS1912": {
-        "condition": {
-            "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation <br/>or 3895 Pharmaceutical Medicine/Pharmacy <br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology <br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-            "processed": "3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology"
-        },
-        "tokens": [
-            "(",
-            "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
-            "||",
-            "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
-            "||",
-            "3896",
-            "Exercise",
-            "Science/Physiotherapy",
-            "&&",
-            "Exercise",
-            "Physiology",
-            "||",
-            "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
-            ")"
-        ],
-        "broke at": "Index 3, &&"
-    },
     "SOMS1913": {
         "condition": {
-            "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>or 3895 Pharmaceutical Medicine/Pharmacy<br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
-            "processed": "3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy || 3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology"
+            "original": "SOMS1912 Human Systems 1 and enrolment in 3894 Nutrition/Dietetics and Food Innovation<br/>or 3895 Pharmaceutical Medicine/Pharmacy<br/>or 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/>or 3897 Applied Exercise Science/Clinical Exercise Physiology<br/>or 3880 International Public Health<br/><br/>",
+            "processed": "SOMS1912 Human Systems 1 && (3894) || (3895) || (3896) || (3897) || 3880 International Public Health"
         },
         "tokens": [
             "(",
+            "SOMS1912",
+            "Human",
+            "Systems",
+            "1",
+            "&&",
+            "(",
             "3894",
-            "Nutrition/Dietetics",
-            "&&",
-            "Food",
-            "Innovation",
+            ")",
             "||",
+            "(",
             "3895",
-            "Pharmaceutical",
-            "Medicine/Pharmacy",
+            ")",
             "||",
+            "(",
             "3896",
-            "Exercise",
-            "Science/Physiotherapy",
-            "&&",
-            "Exercise",
-            "Physiology",
+            ")",
             "||",
+            "(",
             "3897",
-            "Applied",
-            "Exercise",
-            "Science/Clinical",
-            "Exercise",
-            "Physiology",
+            ")",
+            "||",
+            "3880",
+            "International",
+            "Public",
+            "Health",
             ")"
         ],
-        "broke at": "Index 3, &&"
+        "broke at": "Index 3, Systems"
     },
     "SOMS3199": {
         "condition": {
@@ -11863,7 +9636,7 @@
     },
     "SOSS2002": {
         "condition": {
-            "original": "Prerequisite: SOSS/SRAP1001. <br/>Equivalent: SRAP3001<br/><br/>",
+            "original": "Prerequisite: SOSS/SRAP1001<br/><br/>",
             "processed": "SOSS/SRAP1001"
         },
         "tokens": [
@@ -11895,7 +9668,7 @@
     },
     "SOSS3003": {
         "condition": {
-            "original": "Prerequisite: 36 UOC overall, including SOSS/SRAP1000<br/><br/>",
+            "original": "Prerequisite: 36 UOC overall, including SOSS/SRAP1000. Excluded: Students in the Bachelor of Social Work (Honours) / Criminology & Criminal Justice double degree program.<br/><br/>",
             "processed": "36UOC && SOSS/SRAP1000"
         },
         "tokens": [
@@ -11958,201 +9731,6 @@
         ],
         "broke at": "Index 4, )"
     },
-    "SOSS4051": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
-            "processed": "4529 Social Science (Honours)"
-        },
-        "tokens": [
-            "(",
-            "4529",
-            "Social",
-            "Science",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, Science"
-    },
-    "SOSS4052": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
-            "processed": "4529 Social Science (Honours)"
-        },
-        "tokens": [
-            "(",
-            "4529",
-            "Social",
-            "Science",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, Science"
-    },
-    "SOSS4053": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
-            "processed": "4529 Social Science (Honours)"
-        },
-        "tokens": [
-            "(",
-            "4529",
-            "Social",
-            "Science",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, Science"
-    },
-    "SRAP4051": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-            "processed": "the Social Research && Policy honours program"
-        },
-        "tokens": [
-            "(",
-            "the",
-            "Social",
-            "Research",
-            "&&",
-            "Policy",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, Social"
-    },
-    "SRAP4052": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-            "processed": "the Social Research && Policy honours program"
-        },
-        "tokens": [
-            "(",
-            "the",
-            "Social",
-            "Research",
-            "&&",
-            "Policy",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, Social"
-    },
-    "SRAP4053": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-            "processed": "the Social Research && Policy honours program"
-        },
-        "tokens": [
-            "(",
-            "the",
-            "Social",
-            "Research",
-            "&&",
-            "Policy",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, Social"
-    },
-    "YMED1001": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, 3880"
-    },
-    "YMED1003": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, 3880"
-    },
-    "YMED1005": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, 3880"
-    },
-    "YMED1008": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, 3880"
-    },
-    "YMED3007": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, 3880"
-    },
     "ZBUS3104": {
         "condition": {
             "original": "Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>Business Program (4405 or 4462) and ZBUS1104<br/><br/>",
@@ -12183,74 +9761,6 @@
             ")"
         ],
         "broke at": "Index 3, Strategy"
-    },
-    "ZBUS4001": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, ("
-    },
-    "ZBUS4002": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, ("
-    },
-    "ZBUS4101": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, ("
-    },
-    "ZBUS4102": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, ("
     },
     "ZEIT3112": {
         "condition": {
@@ -12310,6 +9820,20 @@
             ")"
         ],
         "broke at": "Index 4, Embedded"
+    },
+    "ZEIT4507": {
+        "condition": {
+            "original": "Prerequisite: ZEIT4506 Orbital Mechanics<br/><br/>",
+            "processed": "ZEIT4506 Orbital Mechanics"
+        },
+        "tokens": [
+            "(",
+            "ZEIT4506",
+            "Orbital",
+            "Mechanics",
+            ")"
+        ],
+        "broke at": "Index 3, Mechanics"
     },
     "ZHSS2506": {
         "condition": {
@@ -12466,23 +9990,5 @@
             ")"
         ],
         "broke at": "Index 8, ZPEM1501,"
-    },
-    "ZPEM4205": {
-        "condition": {
-            "original": "Currently enrolled in 4511 B Arts (Honours)<br/><br/>",
-            "processed": "Currently 4511 B Arts (Honours)"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "4511",
-            "B",
-            "Arts",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, 4511"
     }
 }

@@ -10,8 +10,12 @@ import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import { toggleLockedCourses } from 'reducers/settingsSlice';
 import S from './styles';
 
-const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext })));
-const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
+const DragDropContext = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
+);
+const Droppable = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
+);
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
@@ -40,11 +44,10 @@ const CourseTabs = () => {
   return (
     <S.CourseTabsWrapper>
       <S.ShowAllCourses>
-        <S.TextShowCourses>
-          Show all courses
-        </S.TextShowCourses>
+        <S.TextShowCourses>Show all courses</S.TextShowCourses>
         <Switch
           size="small"
+          data-testid="show-all-courses"
           defaultChecked={showLockedCourses}
           onChange={() => dispatch(toggleLockedCourses())}
         />
@@ -66,25 +69,22 @@ const CourseTabs = () => {
           </Droppable>
         </DragDropContext>
       </Suspense>
-      {
-        !!tabs.length
-        && (
-          <S.TabsCloseAll>
-            <Popconfirm
-              placement="bottomRight"
-              title="Do you want to close all tabs?"
-              onConfirm={() => dispatch(resetTabs())}
-              style={{ width: '500px' }}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Tooltip title="Close all tabs">
-                <DeleteOutlined />
-              </Tooltip>
-            </Popconfirm>
-          </S.TabsCloseAll>
-        )
-      }
+      {!!tabs.length && (
+        <S.TabsCloseAll>
+          <Popconfirm
+            placement="bottomRight"
+            title="Do you want to close all tabs?"
+            onConfirm={() => dispatch(resetTabs())}
+            style={{ width: '500px' }}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Tooltip title="Close all tabs">
+              <DeleteOutlined data-testid="delete-tabs" />
+            </Tooltip>
+          </Popconfirm>
+        </S.TabsCloseAll>
+      )}
     </S.CourseTabsWrapper>
   );
 };

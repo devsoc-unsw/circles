@@ -82,7 +82,7 @@ def process_terms(processed: dict, formatted: dict) -> None:
     Terms that do not conform to this (e.g. 'Summer Canberra') are left
     as is and will be modified at a later stage"""
     res = ""
-    if formatted["calendar"] == "3+":
+    if formatted["calendar"] in ["3+", ""]:
         res = re.sub("Term ", "T", formatted["terms"])
     elif formatted["calendar"] == "Semester":
         res = re.sub("Semester ", "S", formatted["terms"])

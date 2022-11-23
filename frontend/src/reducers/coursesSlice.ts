@@ -4,13 +4,13 @@ import { Course } from 'types/api';
 import { CourseValidation } from 'types/courses';
 
 type CoursesSliceState = {
-  courses: Record<string, CourseValidation>
-  course: Course | null
+  courses: Record<string, CourseValidation>;
+  course: Course | null;
 };
 
 const initialState: CoursesSliceState = {
   courses: {},
-  course: null,
+  course: null
 };
 
 const coursesSplice = createSlice({
@@ -23,12 +23,10 @@ const coursesSplice = createSlice({
     setCourse: (state, action: PayloadAction<Course>) => {
       state.course = action.payload;
     },
-    resetCourses: () => initialState,
-  },
+    resetCourses: () => initialState
+  }
 });
 
-export const {
-  setCourses, setCourse, resetCourses,
-} = coursesSplice.actions;
+export const { setCourses, setCourse, resetCourses } = coursesSplice.actions;
 
 export default coursesSplice.reducer;

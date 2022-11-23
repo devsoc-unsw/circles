@@ -2,24 +2,24 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type DegreeSliceState = {
-  programCode: string
-  programName: string
-  specs: string[]
-  isComplete: boolean
+  programCode: string;
+  programName: string;
+  specs: string[];
+  isComplete: boolean;
 };
 
-const initialState: DegreeSliceState = {
+export const initialDegreeState: DegreeSliceState = {
   programCode: '',
   programName: '',
   specs: [],
-  isComplete: false,
+  isComplete: false // boolean to identify if the degree setup is completed
 };
 
 const degreeSlice = createSlice({
   name: 'degree',
-  initialState,
+  initialState: initialDegreeState,
   reducers: {
-    setProgram: (state, action: PayloadAction<{ programCode: string, programName: string }>) => {
+    setProgram: (state, action: PayloadAction<{ programCode: string; programName: string }>) => {
       state.programCode = action.payload.programCode;
       state.programName = action.payload.programName;
     },
@@ -33,12 +33,11 @@ const degreeSlice = createSlice({
     setIsComplete: (state, action: PayloadAction<boolean>) => {
       state.isComplete = action.payload;
     },
-    resetDegree: () => initialState,
-  },
+    resetDegree: () => initialDegreeState
+  }
 });
 
-export const {
-  setProgram, resetDegree, addSpecialisation, removeSpecialisation, setIsComplete,
-} = degreeSlice.actions;
+export const { setProgram, resetDegree, addSpecialisation, removeSpecialisation, setIsComplete } =
+  degreeSlice.actions;
 
 export default degreeSlice.reducer;

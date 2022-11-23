@@ -28,6 +28,11 @@ class ProgramRuleType(Enum):
     CourseRestrictionRule = 2
     LevelUocRestrictionRule = 3
 
+class PreprocessedMaturityCondition(TypedDict):
+    type: ProgramRuleType
+    dependency: str
+    dependent: str
+
 def pre_process():
     """
     Pipeline starts here:
@@ -36,8 +41,8 @@ def pre_process():
         - Pre-process the conditions
         - Write the pre-processed conditions to `.json` file
     """
-    # Raw data of programs
-    program_info = read_data(PROGRAMS_PROCESSED_PATH)
+    # Raw data of programs. Expect very little type safety here.
+    program_info: Dict[str, Dict] = read_data(PROGRAMS_PROCESSED_PATH)
 
     # At this stage, conditions are pre-processed
     pre_processed = {
@@ -75,10 +80,6 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
         for note in notes
     ]
 
-class PreprocessedMaturityCondition(TypedDict):
-    type: ProgramRuleType
-    dependency: str
-    dependent: str
 
 def pre_process_maturity_condition(string: str):
     """

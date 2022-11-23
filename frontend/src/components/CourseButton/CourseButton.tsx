@@ -5,9 +5,9 @@ import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
 type Props = {
-  courseCode: string
-  title: string
-  planned?: boolean
+  courseCode: string;
+  title: string;
+  planned?: boolean;
 };
 
 const CourseButton = ({ courseCode, title, planned }: Props) => {
@@ -21,11 +21,7 @@ const CourseButton = ({ courseCode, title, planned }: Props) => {
   };
 
   return (
-    <S.CourseButton
-      planned={planned}
-      type="primary"
-      onClick={handleCourseLink}
-    >
+    <S.CourseButton planned={planned} type="primary" onClick={handleCourseLink}>
       {courseCode}: {title}
     </S.CourseButton>
   );

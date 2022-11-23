@@ -3,19 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import axios from 'axios';
-import { UnselectCourses } from 'types/api';
+import { Course, UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
-const PlannerButton = () => {
-  const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
+interface PlannerButtonProps {
+  course: Course;
+}
+
+const PlannerButton = ({ course }: PlannerButtonProps) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
-  const { course } = useSelector((state: RootState) => state.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 
-  const id = tabs[active];
+  const id = course.code;
   const dispatch = useDispatch();
   const [isAddedInPlanner, setIsAddedInPlanner] = useState(!!coursesInPlanner[id]);
   const [loading, setLoading] = useState(false);
@@ -49,7 +51,7 @@ const PlannerButton = () => {
         isAccurate: course.is_accurate,
         isMultiterm: course.is_multiterm,
         supressed: false,
-        mark: undefined,
+        mark: undefined
       };
       dispatch(addToUnplanned({ courseCode: course.code, courseData }));
       addCourseToPlannerTimeout(true);
@@ -58,7 +60,10 @@ const PlannerButton = () => {
 
   const removeFromPlanner = async () => {
     try {
-      const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${id}`, JSON.stringify(prepareUserPayload(degree, planner)));
+      const res = await axios.post<UnselectCourses>(
+        `/courses/unselectCourse/${id}`,
+        JSON.stringify(prepareUserPayload(degree, planner))
+      );
       addCourseToPlannerTimeout(false);
       dispatch(removeCourses(res.data.courses));
     } catch (e) {
@@ -67,25 +72,14 @@ const PlannerButton = () => {
     }
   };
 
-  return (
-    isAddedInPlanner ? (
-      <Button
-        loading={loading}
-        onClick={removeFromPlanner}
-        icon={<StopOutlined />}
-      >
-        {!loading ? 'Remove from planner' : 'Removing from planner'}
-      </Button>
-    ) : (
-      <Button
-        loading={loading}
-        onClick={addToPlanner}
-        icon={<PlusOutlined />}
-        type="primary"
-      >
-        {!loading ? 'Add to planner' : 'Adding to planner'}
-      </Button>
-    )
+  return isAddedInPlanner ? (
+    <Button loading={loading} onClick={removeFromPlanner} icon={<StopOutlined />}>
+      {!loading ? 'Remove from planner' : 'Removing from planner'}
+    </Button>
+  ) : (
+    <Button loading={loading} onClick={addToPlanner} icon={<PlusOutlined />} type="primary">
+      {!loading ? 'Add to planner' : 'Adding to planner'}
+    </Button>
   );
 };
 

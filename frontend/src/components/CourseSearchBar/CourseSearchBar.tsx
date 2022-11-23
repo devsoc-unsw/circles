@@ -8,13 +8,13 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 
 type Props = {
-  onSelectCallback: (courseCode: string) => void
-  style?: React.CSSProperties
+  onSelectCallback: (courseCode: string) => void;
+  style?: React.CSSProperties;
 };
 
 const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [value, setValue] = useState<string | null>(null);
-  const [courses, setCourses] = useState<{ label: string, value: string }[]>([]);
+  const [courses, setCourses] = useState<{ label: string; value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [debouncedSearchTerm] = useDebounce(value, 200);
@@ -27,13 +27,13 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
       try {
         const res = await axios.post<SearchCourse>(
           `/courses/searchCourse/${query}`,
-          JSON.stringify(prepareUserPayload(degree, planner)),
+          JSON.stringify(prepareUserPayload(degree, planner))
         );
         setCourses(
           Object.keys(res.data).map((course) => ({
             label: `${course}: ${res.data[course]}`,
-            value: course,
-          })),
+            value: course
+          }))
         );
       } catch (err) {
         // eslint-disable-next-line no-console

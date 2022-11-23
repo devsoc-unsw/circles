@@ -7,7 +7,7 @@ import { FEEDBACK_LINK, inDev } from 'config/constants';
 import routes from './routes';
 
 type Props = {
-  onCloseDrawer: () => void
+  onCloseDrawer: () => void;
 };
 
 const DrawerContent = ({ onCloseDrawer }: Props) => {
@@ -28,14 +28,12 @@ const DrawerContent = ({ onCloseDrawer }: Props) => {
     .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
     .map((route) => ({
       label: route.label,
-      key: route.link,
+      key: route.link
     }));
 
   items.push({ label: 'Report a bug!', key: FEEDBACK_KEY, icon: <BugOutlined /> });
 
-  return (
-    <Menu mode="vertical" style={{ marginTop: '2em' }} onClick={handleClick} items={items} />
-  );
+  return <Menu mode="vertical" style={{ marginTop: '2em' }} onClick={handleClick} items={items} />;
 };
 
 export default DrawerContent;

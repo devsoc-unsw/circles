@@ -5,7 +5,7 @@ const SidebarWrapper = styled.div`
   overflow: auto;
   overflow-x: hidden;
   height: 100%;
-  border-right: 1px solid #F0F0F0;
+  border-right: 1px solid #f0f0f0;
 `;
 
 const SubgroupHeader = styled.div`
@@ -41,11 +41,13 @@ const Menu = styled(antdMenu)`
     color: ${({ theme }) => theme.text};
   }
 
-  ${({ theme }) => theme.courseSidebar && css`
-    .ant-menu-sub {
-      background-color: ${theme.courseSidebar.menuSubColor} !important;
-    }
-  `}
+  ${({ theme }) =>
+    theme.courseSidebar &&
+    css`
+      .ant-menu-sub {
+        background-color: ${theme.courseSidebar.menuSubColor} !important;
+      }
+    `}
 
   // overwrite collapsible sub menu stylings
   .ant-menu-sub.ant-menu-inline > .ant-menu-item.ant-menu-item-only-child {
@@ -64,5 +66,9 @@ const Menu = styled(antdMenu)`
 `;
 
 export default {
-  SidebarWrapper, LabelTitle, UOCBadge, SubgroupHeader, Menu,
+  SidebarWrapper,
+  LabelTitle,
+  UOCBadge,
+  SubgroupHeader,
+  Menu
 };

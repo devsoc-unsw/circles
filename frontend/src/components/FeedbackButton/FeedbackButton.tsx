@@ -13,20 +13,18 @@ const FeedbackButton = () => {
   };
 
   // Move this to the drawer if the screen is too small
-  return isTablet
-    ? null
-    : (
-      <S.FeedbackBtnWrapper>
-        <Tooltip title="Report a bug!">
-          <Button
-            shape="circle"
-            icon={<BugOutlined />}
-            size="large"
-            onClick={() => openFeedbackLink()}
-          />
-        </Tooltip>
-      </S.FeedbackBtnWrapper>
-    );
+  return isTablet ? null : (
+    <S.FeedbackBtnWrapper>
+      <Tooltip title="Report a bug!">
+        <Button
+          shape="circle"
+          icon={<BugOutlined />}
+          size="large"
+          onClick={() => openFeedbackLink()}
+        />
+      </Tooltip>
+    </S.FeedbackBtnWrapper>
+  );
 };
 
 export default FeedbackButton;

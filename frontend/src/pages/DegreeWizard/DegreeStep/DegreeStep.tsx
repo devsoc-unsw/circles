@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
-import {
-  Input, Menu, Typography,
-} from 'antd';
+import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
 import type { RootState } from 'config/store';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { resetDegree, setProgram } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
@@ -15,7 +13,7 @@ import CS from '../common/styles';
 const { Title } = Typography;
 
 type Props = {
-  incrementStep: (stepTo?: Steps) => void
+  incrementStep: (stepTo?: Steps) => void;
 };
 
 const DegreeStep = ({ incrementStep }: Props) => {
@@ -23,8 +21,8 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
-  const dispatch = useDispatch();
-  const programCode = useSelector((store: RootState) => store.degree.programCode);
+  const dispatch = useAppDispatch();
+  const programCode = useAppSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
     try {
@@ -42,9 +40,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
 
   const handleDegreeChange = ({ key }: { key: string }) => {
     dispatch(resetDegree());
-    dispatch(
-      setProgram({ programCode: key.substring(0, 4), programName: key.substring(5) }),
-    );
+    dispatch(setProgram({ programCode: key.substring(0, 4), programName: key.substring(5) }));
     setInput(key);
     setOptions([]);
 
@@ -53,7 +49,8 @@ const DegreeStep = ({ incrementStep }: Props) => {
 
   const searchDegree = (newInput: string) => {
     setInput(newInput);
-    const degreeOptions = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`)
+    const degreeOptions = Object.keys(allDegrees)
+      .map((code) => `${code} ${allDegrees[code]}`)
       .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
       .splice(0, 8);
     setOptions(degreeOptions);
@@ -63,7 +60,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
 
   const items = options.map((degreeName) => ({
     label: degreeName,
-    key: degreeName,
+    key: degreeName
   }));
 
   return (
@@ -77,7 +74,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
           type="text"
           value={input}
           placeholder="Search Degree"
-          onChange={(e) => (searchDegree(e.target.value))}
+          onChange={(e) => searchDegree(e.target.value)}
         />
         {input && options && (
           <Menu
@@ -85,6 +82,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
             selectedKeys={programCode ? [programCode] : []}
             items={items}
             mode="inline"
+            data-testid="antd-degree-menu"
           />
         )}
       </animated.div>

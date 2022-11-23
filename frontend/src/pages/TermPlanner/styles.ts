@@ -15,7 +15,8 @@ const PlannerContainer = styled.div`
 
 const PlannerGridWrapper = styled.div<{ summerEnabled?: boolean }>`
   display: grid;
-  grid-template-columns: ${({ summerEnabled }) => (summerEnabled ? '7em 1fr 1fr 1fr 1fr 1fr' : '7em 1fr 1fr 1fr 1fr')};
+  grid-template-columns: ${({ summerEnabled }) =>
+    summerEnabled ? '7em 1fr 1fr 1fr 1fr 1fr' : '7em 1fr 1fr 1fr 1fr'};
   align-items: center;
 `;
 
@@ -26,10 +27,12 @@ const YearGridBox = styled(GridItem)`
 `;
 
 const YearText = styled.div<{ currYear: boolean }>`
-  ${({ currYear }) => currYear && css`
-    color: #9254de;
-    font-weight: bold;
-  `}
+  ${({ currYear }) =>
+    currYear &&
+    css`
+      color: #9254de;
+      font-weight: bold;
+    `}
 `;
 
 const YearWrapper = styled.div`
@@ -55,5 +58,10 @@ const YearWrapper = styled.div`
 `;
 
 export default {
-  ContainerWrapper, PlannerContainer, PlannerGridWrapper, YearGridBox, YearText, YearWrapper,
+  ContainerWrapper,
+  PlannerContainer,
+  PlannerGridWrapper,
+  YearGridBox,
+  YearText,
+  YearWrapper
 };

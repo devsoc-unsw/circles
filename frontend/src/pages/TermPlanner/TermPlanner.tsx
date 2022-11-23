@@ -1,6 +1,4 @@
-import React, {
-  Suspense, useEffect, useRef, useState,
-} from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
@@ -13,7 +11,11 @@ import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import {
-  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
+  moveCourse,
+  setPlannedCourseToTerm,
+  setUnplannedCourseToTerm,
+  toggleWarnings,
+  unschedule
 } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
@@ -21,12 +23,11 @@ import OptionsHeader from './OptionsHeader';
 import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
-import {
-  checkMultitermInBounds,
-  isPlannerEmpty,
-} from './utils';
+import { checkMultitermInBounds, isPlannerEmpty } from './utils';
 
-const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext })));
+const DragDropContext = React.lazy(() =>
+  import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
+);
 
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
@@ -43,10 +44,7 @@ const TermPlanner = () => {
   useEffect(() => {
     const validateTermPlanner = async () => {
       try {
-        const res = await axios.post<ValidateTermPlanner>(
-          '/planner/validateTermPlanner/',
-          payload,
-        );
+        const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
         dispatch(toggleWarnings(res.data.courses_state));
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -58,7 +56,8 @@ const TermPlanner = () => {
       openNotification({
         type: 'info',
         message: 'Your terms are looking a little empty',
-        description: 'Add courses from the course selector to the term planner and drag courses from the unplanned column',
+        description:
+          'Add courses from the course selector to the term planner and drag courses from the unplanned column'
       });
     }
     validateTermPlanner();
@@ -87,18 +86,21 @@ const TermPlanner = () => {
 
     if (destination.droppableId !== 'unplanned') {
       // Check if multiterm course extends below bottom row of term planner
-      if (planner.courses[draggableId].isMultiterm && !checkMultitermInBounds({
-        destRow: Number(destination.droppableId.match(/[0-9]{4}/)?.[0]) - planner.startYear,
-        destTerm: destination.droppableId.match(/T[0-3]/)?.[0] as Term,
-        srcTerm: source.droppableId as Term,
-        course: planner.courses[draggableId],
-        isSummerTerm: planner.isSummerEnabled,
-        numYears: planner.numYears,
-      })) {
+      if (
+        planner.courses[draggableId].isMultiterm &&
+        !checkMultitermInBounds({
+          destRow: Number(destination.droppableId.match(/[0-9]{4}/)?.[0]) - planner.startYear,
+          destTerm: destination.droppableId.match(/T[0-3]/)?.[0] as Term,
+          srcTerm: source.droppableId as Term,
+          course: planner.courses[draggableId],
+          isSummerTerm: planner.isSummerEnabled,
+          numYears: planner.numYears
+        })
+      ) {
         openNotification({
           type: 'warning',
           message: 'Course would extend outside of the term planner',
-          description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`,
+          description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`
         });
         return;
       }
@@ -109,16 +111,13 @@ const TermPlanner = () => {
           moveCourse({
             course: draggableId,
             destTerm: destination.droppableId,
-            srcTerm: source.droppableId,
-          }),
+            srcTerm: source.droppableId
+          })
         );
       }
     }
 
-    if (
-      destination.droppableId === source.droppableId
-      && destination.index === source.index
-    ) {
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
       // drag to same place
       return;
     }
@@ -127,10 +126,12 @@ const TermPlanner = () => {
 
     if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
-      dispatch(unschedule({
-        destIndex,
-        code: draggableId,
-      }));
+      dispatch(
+        unschedule({
+          destIndex,
+          code: draggableId
+        })
+      );
       return;
     }
 
@@ -140,43 +141,42 @@ const TermPlanner = () => {
 
     if (source.droppableId === 'unplanned') {
       // === move unplanned course to term ===
-      dispatch(setUnplannedCourseToTerm({
-        destRow, destTerm, destIndex, course: draggableId,
-      }));
+      dispatch(
+        setUnplannedCourseToTerm({
+          destRow,
+          destTerm,
+          destIndex,
+          course: draggableId
+        })
+      );
     } else {
       // === move between terms ===
       const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)?.[0] as string, 10);
       const srcTerm = source.droppableId.match(/T[0-3]/)?.[0] as Term;
       const srcRow = srcYear - planner.startYear;
       const srcIndex = source.index;
-      dispatch(setPlannedCourseToTerm({
-        srcRow,
-        srcTerm,
-        srcIndex,
-        destRow,
-        destTerm,
-        destIndex,
-        course: draggableId,
-      }));
+      dispatch(
+        setPlannedCourseToTerm({
+          srcRow,
+          srcTerm,
+          srcIndex,
+          destRow,
+          destTerm,
+          destIndex,
+          course: draggableId
+        })
+      );
     }
   };
 
   return (
     <PageTemplate>
-      <OptionsHeader
-        plannerRef={plannerPicRef}
-      />
+      <OptionsHeader plannerRef={plannerPicRef} />
       <S.ContainerWrapper>
         <Suspense fallback={<Spinner text="Loading Table..." />}>
-          <DragDropContext
-            onDragEnd={handleOnDragEnd}
-            onDragStart={handleOnDragStart}
-          >
+          <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
             <S.PlannerContainer>
-              <S.PlannerGridWrapper
-                summerEnabled={planner.isSummerEnabled}
-                ref={plannerPicRef}
-              >
+              <S.PlannerGridWrapper summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
                 <GridItem /> {/* Empty grid item for the year */}
                 {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
                 <GridItem>Term 1</GridItem>
@@ -197,15 +197,13 @@ const TermPlanner = () => {
                     <React.Fragment key={iYear}>
                       <S.YearGridBox>
                         <S.YearWrapper>
-                          <S.YearText currYear={currYear === iYear}>
-                            {iYear}
-                          </S.YearText>
+                          <S.YearText currYear={currYear === iYear}>{iYear}</S.YearText>
                           <HideYearTooltip year={iYear} />
                         </S.YearWrapper>
                         <Badge
                           style={{
                             backgroundColor: '#efdbff',
-                            color: '#000000',
+                            color: '#000000'
                           }}
                           size="small"
                           count={`${yearUOC} UOC`}

@@ -24,5 +24,8 @@ const StepsWrapper = styled.div`
 `;
 
 export default {
-  ContainerWrapper, HorizontalLine, Subtitle, StepsWrapper,
+  ContainerWrapper,
+  HorizontalLine,
+  Subtitle,
+  StepsWrapper
 };
