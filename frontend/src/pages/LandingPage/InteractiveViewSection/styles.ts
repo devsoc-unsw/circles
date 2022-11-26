@@ -5,6 +5,7 @@ const InteractiveViewContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  // TODO: Fix margin
   margin: 15% 5%;
 `;
 
