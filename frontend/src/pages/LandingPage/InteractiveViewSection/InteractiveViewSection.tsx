@@ -1,5 +1,6 @@
 import React from 'react';
-import view from 'assets/LandingPage/InteractiveView/view.png';
+import nodeGraphSrc from 'assets/LandingPage/nodeGraph.svg';
+import viewEyeIconSrc from 'assets/LandingPage/viewEyeIcon.png';
 import S from './styles';
 
 const InteractiveViewSection = () => {
@@ -7,8 +8,8 @@ const InteractiveViewSection = () => {
     <S.InteractiveViewContainer>
       <S.InteractiveViewTextContainer>
         <S.InteractiveViewTitle>
-          Interactive View&nbsp;&nbsp;
-          <img src={view} alt="" width={60} height={60} />
+          <span>Interactive View</span>
+          <img src={viewEyeIconSrc} alt="" width={60} height={60} />
         </S.InteractiveViewTitle>
         <S.InteractiveViewText>
           Try our interactive <strong style={{ color: '#929292' }}>Graph Selector</strong> feature
@@ -16,9 +17,7 @@ const InteractiveViewSection = () => {
           table and graph view of your degree plan.
         </S.InteractiveViewText>
       </S.InteractiveViewTextContainer>
-      <S.GradientBox>
-        <img src="src/assets/LandingPage/InteractiveView/nodeGraph.svg" alt="Node Graph" />
-      </S.GradientBox>
+      <S.GradientBox src={nodeGraphSrc} alt="Node Graph" />
     </S.InteractiveViewContainer>
   );
 };
