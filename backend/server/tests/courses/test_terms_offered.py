@@ -29,7 +29,6 @@ def test_term_offered_comp1511_bad_years_past():
 
     assert res.status_code == 200
     data = res.json()
-    print(data)
 
     fails = data.get("fails", [])
     assert check_year_in_fails("2001", fails)
@@ -50,7 +49,6 @@ def test_term_offered_fake_course():
 
     assert res.status_code == 200
     data = res.json()
-    print(data)
 
     fails = data.get("fails", [])
     assert len(fails) == 3
