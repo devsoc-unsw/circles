@@ -10,7 +10,7 @@ const FooterContainer = styled.div`
 `;
 
 const FooterContentContainer = styled.div`
-  position: 'absolute';
+  position: absolute;
   display: flex;
   flex-direction: row;
   position: relative;
