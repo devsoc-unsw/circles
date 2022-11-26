@@ -1,6 +1,5 @@
 import React from 'react';
-// import nodeGraph from '../../assets/LandingPage/nodeGraph.svg';
-import view from '../../assets/LandingPage/InteractiveView/view.png';
+import view from 'assets/LandingPage/InteractiveView/view.png';
 import S from './styles';
 
 const InteractiveViewSection = () => {
