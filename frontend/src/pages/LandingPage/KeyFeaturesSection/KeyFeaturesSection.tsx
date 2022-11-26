@@ -9,7 +9,7 @@ const KeyFeaturesSection = () => {
   return (
     <>
       <S.FeatureTitle>Introducing our features</S.FeatureTitle>
-      <S.CardContainer>
+      <S.CardsSection>
         <BlobBackground />
         <S.Card>
           <S.IconContainer color="#eae5ed">
@@ -48,7 +48,7 @@ const KeyFeaturesSection = () => {
             Verify you meet all the pre-requisites required to take any given course
           </S.Content>
         </S.Card>
-      </S.CardContainer>
+      </S.CardsSection>
     </>
   );
 };

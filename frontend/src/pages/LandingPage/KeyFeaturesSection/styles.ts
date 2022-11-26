@@ -7,21 +7,22 @@ const FeatureTitle = styled.h1`
   -webkit-text-fill-color: transparent;
   text-align: center;
   position: relative;
+  margin-bottom: 75px;
 `;
 
-const CardContainer = styled.div`
+const CardsSection = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: space-evenly;
+  align-content: center;
+  gap: 2rem;
   position: relative;
 `;
+
 const Card = styled.div`
   background: #fff;
   border-radius: 20px;
-  display: inline-block;
   height: 275px;
-  margin: 1rem;
   position: relative;
   width: 250px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -33,11 +34,12 @@ const Card = styled.div`
 `;
 
 const IconContainer = styled.div`
-  height: 66px;
-  width: 66px;
+  height: 65px;
+  width: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
   background: ${({ color }) => color};
 `;
 
@@ -77,7 +79,7 @@ const BlobContainer = styled.div`
 
 export default {
   FeatureTitle,
-  CardContainer,
+  CardsSection,
   Card,
   IconContainer,
   FeatureSubtitle,
