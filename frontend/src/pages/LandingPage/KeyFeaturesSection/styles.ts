@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LandingPageTitle = styled.h1`
+const FeatureTitle = styled.h1`
   font-size: 50px;
   background: -webkit-linear-gradient(30deg, #9f62de, #b77eff);
   -webkit-background-clip: text;
@@ -41,7 +41,7 @@ const IconContainer = styled.div`
   background: ${({ color }) => color};
 `;
 
-const LandingPageSubtitle = styled.h3<{ startColor: string; endColor: string }>`
+const FeatureSubtitle = styled.h3<{ startColor: string; endColor: string }>`
   font-size: 20px;
   background: -webkit-linear-gradient(
     45deg,
@@ -76,11 +76,11 @@ const BlobContainer = styled.div`
 `;
 
 export default {
-  LandingPageTitle,
+  FeatureTitle,
   CardContainer,
   Card,
   IconContainer,
-  LandingPageSubtitle,
+  FeatureSubtitle,
   Divider,
   Content,
   BlobContainer

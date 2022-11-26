@@ -8,16 +8,16 @@ import S from './styles';
 const KeyFeaturesSection = () => {
   return (
     <>
-      <S.LandingPageTitle>Introducing our features</S.LandingPageTitle>
+      <S.FeatureTitle>Introducing our features</S.FeatureTitle>
       <S.CardContainer>
         <BlobBackground />
         <S.Card>
           <S.IconContainer color="#eae5ed">
             <img src={dragIconSrc} alt="" width={50} height={50} />
           </S.IconContainer>
-          <S.LandingPageSubtitle startColor="#cabade" endColor="#9e88ba">
+          <S.FeatureSubtitle startColor="#cabade" endColor="#9e88ba">
             Drag N&apos; Drop
-          </S.LandingPageSubtitle>
+          </S.FeatureSubtitle>
           <S.Divider color="#c3b3c9" />
           <S.Content>
             Drag and drop functionality to make planning an intuitive and easy process
@@ -27,9 +27,9 @@ const KeyFeaturesSection = () => {
           <S.IconContainer color="#eddafc">
             <img src={flagIconSrc} alt="" width={50} height={50} />
           </S.IconContainer>
-          <S.LandingPageSubtitle startColor="#9b5dea" endColor="#dbe2fc">
+          <S.FeatureSubtitle startColor="#9b5dea" endColor="#dbe2fc">
             Track progress
-          </S.LandingPageSubtitle>
+          </S.FeatureSubtitle>
           <S.Divider color="#f2ccff" />
           <S.Content>
             Plan ahead with our progression tracker, and track how far you&apos;ve gone in your
@@ -40,9 +40,9 @@ const KeyFeaturesSection = () => {
           <S.IconContainer color="#d4ffdc">
             <img src={padlockIconSrc} alt="" width={50} height={50} />
           </S.IconContainer>
-          <S.LandingPageSubtitle startColor="#9fecae" endColor="#93d392">
+          <S.FeatureSubtitle startColor="#9fecae" endColor="#93d392">
             Prereq Validation
-          </S.LandingPageSubtitle>
+          </S.FeatureSubtitle>
           <S.Divider color="#a3ebb1" />
           <S.Content>
             Verify you meet all the pre-requisites required to take any given course
