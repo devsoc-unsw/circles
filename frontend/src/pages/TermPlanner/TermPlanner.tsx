@@ -36,7 +36,7 @@ const TermPlanner = () => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const [draggingCourse, setDraggingCourse] = useState<string | undefined>();
+  const [draggingCourse, setDraggingCourse] = useState('');
 
   const dispatch = useDispatch();
 
@@ -105,7 +105,7 @@ const TermPlanner = () => {
   };
 
   const handleOnDragEnd: OnDragEndResponder = (result) => {
-    setDraggingCourse(undefined);
+    setDraggingCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -246,14 +246,14 @@ const TermPlanner = () => {
                             key={key}
                             name={key}
                             coursesList={year[term as Term]}
-                            draggingCourse={draggingCourse}
+                            draggingCourse={!draggingCourse ? undefined : draggingCourse}
                           />
                         );
                       })}
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={draggingCourse !== undefined} />
+                <UnplannedColumn dragging={!!draggingCourse} />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>

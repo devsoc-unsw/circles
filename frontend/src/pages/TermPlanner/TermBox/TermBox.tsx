@@ -19,7 +19,7 @@ const Droppable = React.lazy(() =>
 type Props = {
   name: string;
   coursesList: string[];
-  draggingCourse?: string | undefined;
+  draggingCourse?: string;
 };
 
 const TermBox = ({ name, coursesList, draggingCourse }: Props) => {
