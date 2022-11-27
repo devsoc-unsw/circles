@@ -28,13 +28,10 @@ const getAllCourseOfferings = async (
       try {
         const res = await axios.get<APIResult>(`/courses/termsOffered/${course}/${yearsStr}`);
         if (res.status === 200) {
-          let mostRecentYear: Term[] = [];
           offers[course] = {};
           Object.entries(res.data.terms).forEach(([year, terms]) => {
-            offers[course][year] = terms ?? mostRecentYear;
-            if (terms !== null) {
-              mostRecentYear = terms;
-            }
+            // remove null for old years
+            offers[course][year] = terms ?? [];
           });
         }
       } catch (e) {
