@@ -1,6 +1,14 @@
 import React from 'react';
+import InteractiveViewSection from './InteractiveViewSection';
+import KeyFeaturesSection from './KeyFeaturesSection';
+import S from './styles';
 
-// TODO: Setup landing page
-const LandingPage = () => <div>LandingPage</div>;
+const LandingPage = () => (
+  <S.LandingPageContainer>
+    <KeyFeaturesSection />
+    <InteractiveViewSection />
+    <br />
+  </S.LandingPageContainer>
+);
 
 export default LandingPage;

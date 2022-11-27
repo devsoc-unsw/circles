@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography } from 'antd';
-import step1 from 'assets/graphicalSelector/step1.jpg';
-import step2 from 'assets/graphicalSelector/step2.jpg';
-import step3 from 'assets/graphicalSelector/step3.jpg';
+import step1 from 'assets/GraphicalSelectorHelp/step1.jpg';
+import step2 from 'assets/GraphicalSelectorHelp/step2.jpg';
+import step3 from 'assets/GraphicalSelectorHelp/step3.jpg';
 import S from './styles';
 
 const { Title } = Typography;

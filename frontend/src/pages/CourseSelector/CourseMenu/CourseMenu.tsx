@@ -13,7 +13,7 @@ import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
 import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
-import CourseTitle from './CourseTitle';
+import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
 
 type Props = {
@@ -78,7 +78,7 @@ const CourseMenu = ({ structure }: Props) => {
               newMenu[group][subgroup].push({
                 courseCode,
                 title: subgroupStructure.courses[courseCode],
-                unlocked: !!courses[courseCode],
+                unlocked: !!courses[courseCode]?.unlocked,
                 accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
               });
 
@@ -161,7 +161,7 @@ const CourseMenu = ({ structure }: Props) => {
                 )
                 .map((course) => ({
                   label: (
-                    <CourseTitle
+                    <CourseMenuTitle
                       courseCode={course.courseCode}
                       title={course.title}
                       selected={planner.courses[course.courseCode] !== undefined}

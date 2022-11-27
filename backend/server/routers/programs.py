@@ -348,11 +348,6 @@ def get_gen_eds(
         if course in geneds:
             del geneds[course]
 
-
-    print("exclusion courses list len:")
-    print(len(excluded_courses))
-    print(f"returing a total of {len(geneds)} gen eds")
-
     return {"courses": geneds}
 
 
