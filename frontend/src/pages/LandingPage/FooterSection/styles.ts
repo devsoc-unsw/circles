@@ -2,9 +2,12 @@ import styled from 'styled-components';
 
 const FooterContainer = styled.div`
   margin-bottom: 0;
-  background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 11vh, rgba(145, 84, 222, 1) 11vh);
-  @media all and (max-width: 730px) {
-    background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 5vh, rgba(145, 84, 222, 1) 5vh);
+  background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 14vh, rgba(145, 84, 222, 1) 14vh);
+  @media all and (max-width: 1000px) {
+    background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 8vh, rgba(145, 84, 222, 1) 8vh);
+  }
+  @media all and (max-width: 550px) {
+    background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 4vh, rgba(145, 84, 222, 1) 4vh);
   }
 `;
 
