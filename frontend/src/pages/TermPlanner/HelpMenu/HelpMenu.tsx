@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import additionalOptionsGif from 'assets/helpGifs/additional-options.gif';
-import additionalOptionsPic from 'assets/helpGifs/additional-options.jpg';
-import dragAndDropGif from 'assets/helpGifs/drag-and-drop.gif';
-import dragAndDropPic from 'assets/helpGifs/drag-and-drop.jpg';
-import hideYearGif from 'assets/helpGifs/hide-year.gif';
-import hideYearPic from 'assets/helpGifs/hide-year.jpg';
-import unscheduleGif from 'assets/helpGifs/unschedule.gif';
-import unschedulePic from 'assets/helpGifs/unschedule.jpg';
+import additionalOptionsGif from 'assets/TermPlannerHelp/additional-options.gif';
+import additionalOptionsPic from 'assets/TermPlannerHelp/additional-options.jpg';
+import dragAndDropGif from 'assets/TermPlannerHelp/drag-and-drop.gif';
+import dragAndDropPic from 'assets/TermPlannerHelp/drag-and-drop.jpg';
+import hideYearGif from 'assets/TermPlannerHelp/hide-year.gif';
+import hideYearPic from 'assets/TermPlannerHelp/hide-year.jpg';
+import unscheduleGif from 'assets/TermPlannerHelp/unschedule.gif';
+import unschedulePic from 'assets/TermPlannerHelp/unschedule.jpg';
 import CS from '../common/styles';
 import S from './styles';
 
