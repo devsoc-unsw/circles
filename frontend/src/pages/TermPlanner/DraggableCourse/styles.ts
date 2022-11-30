@@ -1,3 +1,4 @@
+import { Badge as BadgeAnt } from 'antd';
 import styled, { css } from 'styled-components';
 import { shake } from '../common/styles';
 
@@ -75,7 +76,15 @@ const CourseLabel = styled.div`
   margin: 0px;
 `;
 
+const MultiBadge = styled(BadgeAnt)`
+  #background-color: ${({ theme }) => theme.uocBadge.backgroundColor};
+  color: #fff;
+  box-shadow: none;
+  line-height: 1.5;
+`;
+
 export default {
   CourseWrapper,
-  CourseLabel
+  CourseLabel,
+  MultiBadge
 };

@@ -220,18 +220,6 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
-                        if (checkYearMultiTerm !== '' && checkYearMultiTerm === key) {
-                          return (
-                            <TermBox
-                              key={key}
-                              name={key}
-                              coursesList={year[term as Term]}
-                              termsOffered={termsOffered}
-                              dragging={isDragging}
-                              multiCourseDrag={multiCourse}
-                            />
-                          );
-                        }
                         return (
                           <TermBox
                             key={key}
@@ -239,7 +227,7 @@ const TermPlanner = () => {
                             coursesList={year[term as Term]}
                             termsOffered={termsOffered}
                             dragging={isDragging}
-                            multiCourseDrag=""
+                            showMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
                           />
                         );
                       })}

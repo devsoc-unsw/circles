@@ -3,7 +3,7 @@ import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
-import { Badge, Typography } from 'antd';
+import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -16,14 +16,14 @@ type Props = {
   code: string;
   index: number;
   term: string;
-  isDragged: boolean;
+  showMultiCourseBadge: boolean;
 };
 
 const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
+const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => {
   const { courses, isSummerEnabled, completedTerms } = useSelector(
     (state: RootState) => state.planner
   );
@@ -120,14 +120,17 @@ const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))}
-              <Badge
+              <S.MultiBadge
                 style={{
                   backgroundColor: theme.uocBadge.backgroundColor,
                   color: '#fff',
-                  boxShadow: 'none'
+                  boxShadow: 'none',
+                  lineHeight: '1.5'
                 }}
                 count={
-                  isDragged ? `x${getNumTerms(planner.courses[code].UOC, true).toString()}` : ''
+                  showMultiCourseBadge
+                    ? `x${getNumTerms(planner.courses[code].UOC, true).toString()}`
+                    : ''
                 }
               >
                 <S.CourseLabel>
@@ -156,7 +159,7 @@ const DraggableCourse = ({ code, index, term, isDragged }: Props) => {
                     </div>
                   )}
                 </S.CourseLabel>
-              </Badge>
+              </S.MultiBadge>
             </S.CourseWrapper>
           )}
         </Draggable>

@@ -19,10 +19,10 @@ type Props = {
   coursesList: string[];
   termsOffered: string[];
   dragging: boolean;
-  multiCourseDrag: string;
+  showMultiCourseDrag: string;
 };
 
-const TermBox = ({ name, coursesList, termsOffered, dragging, multiCourseDrag }: Props) => {
+const TermBox = ({ name, coursesList, termsOffered, dragging, showMultiCourseDrag }: Props) => {
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
@@ -84,25 +84,13 @@ const TermBox = ({ name, coursesList, termsOffered, dragging, multiCourseDrag }:
               {...provided.droppableProps}
             >
               {coursesList.map((code, index) => {
-                if (multiCourseDrag !== '' && multiCourseDrag === code) {
-                  const val = true;
-                  return (
-                    <DraggableCourse
-                      key={`${code}${term}`}
-                      code={code}
-                      index={index}
-                      term={term}
-                      isDragged={val}
-                    />
-                  );
-                }
                 return (
                   <DraggableCourse
                     key={`${code}${term}`}
                     code={code}
                     index={index}
                     term={term}
-                    isDragged={false}
+                    showMultiCourseBadge={showMultiCourseDrag === code}
                   />
                 );
               })}

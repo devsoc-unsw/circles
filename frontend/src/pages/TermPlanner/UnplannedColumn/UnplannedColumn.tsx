@@ -33,25 +33,13 @@ const UnplannedColumn = ({ dragging }: Props) => {
               isSmall={isSmall}
             >
               {unplanned.map((course, courseIndex) => {
-                if (planner.courses[course].isMultiterm) {
-                  const val = true;
-                  return (
-                    <DraggableCourse
-                      code={course}
-                      index={courseIndex}
-                      key={course}
-                      term=""
-                      isDragged={val}
-                    />
-                  );
-                }
                 return (
                   <DraggableCourse
                     code={course}
                     index={courseIndex}
                     key={course}
                     term=""
-                    isDragged={false}
+                    showMultiCourseBadge={planner.courses[course].isMultiterm}
                   />
                 );
               })}
