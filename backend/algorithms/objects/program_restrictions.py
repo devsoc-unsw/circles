@@ -95,6 +95,11 @@ class NoRestriction(ProgramRestriction):
         del user, course
         return True
 
+    def __dict__(self) -> dict:
+        return {
+            "type": "NoRestriction"
+        }
+
     def __str__(self) -> str:
         return "NoRestriction"
 
