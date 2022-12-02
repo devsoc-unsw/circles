@@ -20,7 +20,7 @@ from data.processors.log_broken import log_broken_conditions
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
-from data.processors.program_restrictions_pre_processing import pre_process
+from data.processors.program_restrictions_pre_processing import pre_process_all_restrictions
 from data.processors.courses_processing import process_course_data
 from data.processors.program_restrictions_tokenising import tokenise_program_conditions
 from data.processors.programs_processing import process_prg_data
@@ -132,7 +132,7 @@ run: dict[str, dict[str, Callable]] = {
         "graph": cache_graph
     },
     "program_condition": {
-        "pre_process": pre_process,
+        "pre_process": pre_process_all_restrictions,
         "tokenise": tokenise_program_conditions,
         "process": process_program_conditions,
     },

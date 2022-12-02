@@ -1,7 +1,12 @@
 """
-DOCUMENTATION: TBA
 
-1. Pre-process condition tokenisations
+PreProcesses the ProgramRestrictions so that the tokeniser only deals with clean input
+[ ] Scrape Program data
+[ ] Format, filter and process program data
+[x] Pre-process the ProgramRestrictions <------- You are HERE
+[ ] Tokenise ProgramRestrictions
+[ ] Parse the tokens to create `ProgramRestriction` objects
+
 
 Entrypoint: `pre_process_all_restrictions`:
     1. filter_pre_processable_sub_conditions # does the pre_processing
