@@ -3,16 +3,22 @@ DOCUMENTATION: TBA
 
 1. Pre-process condition tokenisations
 
-Entrypoint:
-    - pre_process_all_restrictions
-    - filter_pre_processable_sub_conditions # does the pre_processing
-        - calls pre_pre_process on this
+Entrypoint: `pre_process_all_restrictions`:
+    1. filter_pre_processable_sub_conditions # does the pre_processing
+        1.1 - calls pre_pre_process on this
         # This will pre-pre-process: extract `type` `title` `notes` from info_rule only
         # if not notes or title is relevant, then return None
 
-    - `shortlist_pre_proc` - only non-empty stuff is left; effectively a nullity check
-    - use pre_process_program_requirements: list of dicts
+    2. `shortlist_pre_proc` - only non-empty stuff is left; effectively a nullity check
+    3. use pre_process_program_requirements: list of dicts
+        3.1. pre_proc whatever; does the matchy thing: this should attach types and stuff too
 
+
+# For injection of new type, follow the given steps:
+    0. Create a corresponding `PreprocessedRestriction` class
+    1. If applicable, add needed types to `1.1`
+    2. Go to `3.1` and add another check for your type.
+        - Then, add the actual function to create the conditon
 
 """
 
