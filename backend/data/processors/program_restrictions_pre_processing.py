@@ -28,72 +28,14 @@ Entrypoint: `pre_process_all_restrictions`:
 """
 
 
-from enum import Enum
 import re
-from typing import Dict, List, TypedDict
-from algorithms.objects.program_restrictions import NoRestriction
+from typing import Dict, List
 
 from data.utility.data_helpers import read_data, write_data
 
 PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programRestrictionsPreProcessed.json"
 
-class ProgramRuleType(Enum):
-    """
-    The different types of program rules.
-    This information is needed by the tokeniser to understand what pre-processed
-    rules it is working on.
-    """
-    NoRestrictionRule = 0
-    MaturityRestrictionRule = 1
-    CourseRestrictionRule = 2
-    LevelUocRestrictionRule = 3
-
-class PreprocessedRestriction():
-    type: ProgramRuleType
-
-class PreprocessedMaturityCondition(PreprocessedRestriction):
-    type: ProgramRuleType = ProgramRuleType.MaturityRestrictionRule
-    dependency: str
-    dependent: str
-
-    def __init__(self, dependency: str, dependent) -> None:
-        self.dependency = dependency
-        self.dependent = dependent
-
-    def __dict__(self):
-        return {
-            "type": self.type,
-            "dependency": self.dependency,
-            "dependent": self.dependent
-        }
-
-class PreProcessedNoRestrictionCondition(PreprocessedRestriction):
-    type = ProgramRuleType.NoRestrictionRule
-
-    def __init__(self) -> None:
-        super().__init__()
-
-    def __dict__(self):
-        return {
-            "type": self.type
-        }
-
-class PreProcessedCourseRestriction(PreprocessedRestriction):
-    type = ProgramRuleType.CourseRestrictionRule
-
-    def __dict__(self):
-        return {
-            "type": self.type
-        }
-
-class PreProcessedCourseRestriction(PreprocessedRestriction):
-    type: ProgramRuleType.CourseRestrictionRule
-
-    def __dict__(self):
-        return {
-            "type": self.type
-        }
 
 
 
@@ -247,3 +189,4 @@ def pre_pre_proccess(condition: Dict):
     if not is_relevant_string(condition.get("notes", "")) and not is_relevant_string(condition.get("title", "")):
         return None
     return condition
+

@@ -1,5 +1,9 @@
 """
 Contains `ProgramRestrictions` and relevant sub-classes
+
+TODO: Also contains the classes for the `PreProcessedRestrictions`.
+These should be moved out. The whole file structure needs a refactor
+to accomodate program restrictions
 """
 
 from abc import ABC, abstractmethod
@@ -204,3 +208,67 @@ class CategoryRestriction(ProgramRestriction):
 
     def __str__(self) -> str:
         return f"CategoryRestriction: {self.category}"
+
+
+##############################################################################
+##############################################################################
+#
+# End of ProgramRestrictions
+#
+##############################################################################
+##############################################################################
+
+##############################################################################
+# Start of pre-processed restrictions
+##############################################################################
+
+from enum import Enum
+
+class ProgramRuleType(Enum):
+    """
+    The different types of program rules.
+    This information is needed by the tokeniser to understand what pre-processed
+    rules it is working on.
+    """
+    NoRestrictionRule = 0
+    MaturityRestrictionRule = 1
+    CourseRestrictionRule = 2
+    LevelUocRestrictionRule = 3
+
+class PreprocessedRestriction():
+    type: ProgramRuleType
+
+    def __dict__():
+        return {
+            "type": type
+        }
+
+class PreprocessedMaturityCondition(PreprocessedRestriction):
+    type: ProgramRuleType = ProgramRuleType.MaturityRestrictionRule
+    dependency: str
+    dependent: str
+
+    def __init__(self, dependency: str, dependent) -> None:
+        self.dependency = dependency
+        self.dependent = dependent
+
+    def __dict__(self):
+        return {
+            "type": self.type,
+            "dependency": self.dependency,
+            "dependent": self.dependent
+        }
+
+class PreProcessedNoRestrictionCondition(PreprocessedRestriction):
+    type = ProgramRuleType.NoRestrictionRule
+
+class PreProcessedCourseRestriction(PreprocessedRestriction):
+    type = ProgramRuleType.CourseRestrictionRule
+
+class PreProcessedCourseRestriction(PreprocessedRestriction):
+    type: ProgramRuleType.CourseRestrictionRule
+
+class PreProcessedNoRestriction(PreprocessedRestriction):
+    type: ProgramRuleType.NoRestrictionRule
+
+
