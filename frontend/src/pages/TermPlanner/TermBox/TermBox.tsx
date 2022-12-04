@@ -58,6 +58,7 @@ const TermBox = ({ name, coursesList, termsOffered, dragging, showMultiCourseDra
     backgroundColor: theme.uocBadge.backgroundColor,
     boxShadow: 'none'
   };
+
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isCompleted}>

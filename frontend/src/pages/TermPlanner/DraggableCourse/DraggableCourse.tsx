@@ -3,7 +3,7 @@ import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
-import { Typography } from 'antd';
+import { Badge, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -91,6 +91,11 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
     return stripExtraParenthesis(warning.slice(1, warning.length - 1));
   };
 
+  const multiCourseBadgeStyle = {
+    backgroundColor: theme.uocBadge.backgroundColor,
+    boxShadow: 'none'
+  };
+
   return (
     <>
       <Suspense fallback={<Spinner text="Loading Course..." />}>
@@ -120,46 +125,41 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))}
-              <S.MultiBadge
-                style={{
-                  backgroundColor: theme.uocBadge.backgroundColor,
-                  color: '#fff',
-                  boxShadow: 'none',
-                  lineHeight: '1.5'
-                }}
-                count={
-                  showMultiCourseBadge
-                    ? `x${getNumTerms(planner.courses[code].UOC, true).toString()}`
-                    : ''
-                }
-              >
-                <S.CourseLabel>
-                  {isSmall ? (
-                    <Text className="text">{code}</Text>
-                  ) : (
-                    <div>
-                      <Text className="text">
-                        <strong>{code}: </strong>
-                        {title}
-                      </Text>
-                    </div>
-                  )}
-                  {showMarks && (
-                    <div>
-                      <Text strong className="text">
-                        Mark:{' '}
-                      </Text>
-                      <Text className="text">
-                        {/*
+              <S.CourseLabel>
+                {isSmall ? (
+                  <Text className="text">{code}</Text>
+                ) : (
+                  <div>
+                    <Text className="text">
+                      <strong>{code}: </strong>
+                      {title}
+                    </Text>
+                  </div>
+                )}
+                {showMarks && (
+                  <div>
+                    <Text strong className="text">
+                      Mark:&nbsp;
+                    </Text>
+                    <Text className="text">
+                      {/*
                           Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                           Mark can be 0.
                         */}
-                        {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
-                      </Text>
-                    </div>
-                  )}
-                </S.CourseLabel>
-              </S.MultiBadge>
+                      {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
+                    </Text>
+                  </div>
+                )}
+                {showMultiCourseBadge && (
+                  <S.MultiCourseBadgeWrapper>
+                    <Badge
+                      style={multiCourseBadgeStyle}
+                      size="small"
+                      count={`x${getNumTerms(planner.courses[code].UOC, true).toString()}`}
+                    />
+                  </S.MultiCourseBadgeWrapper>
+                )}
+              </S.CourseLabel>
             </S.CourseWrapper>
           )}
         </Draggable>

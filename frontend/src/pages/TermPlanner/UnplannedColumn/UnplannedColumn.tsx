@@ -32,17 +32,15 @@ const UnplannedColumn = ({ dragging }: Props) => {
               droppable={dragging}
               isSmall={isSmall}
             >
-              {unplanned.map((course, courseIndex) => {
-                return (
-                  <DraggableCourse
-                    code={course}
-                    index={courseIndex}
-                    key={course}
-                    term=""
-                    showMultiCourseBadge={planner.courses[course].isMultiterm}
-                  />
-                );
-              })}
+              {unplanned.map((course, courseIndex) => (
+                <DraggableCourse
+                  code={course}
+                  index={courseIndex}
+                  key={course}
+                  term=""
+                  showMultiCourseBadge={planner.courses[course].isMultiterm}
+                />
+              ))}
               {provided.placeholder}
             </S.UnplannedBox>
           )}
