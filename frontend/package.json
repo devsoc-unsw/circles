@@ -18,7 +18,7 @@
     "react": "18.2.0",
     "react-beautiful-dnd": "13.1.1",
     "react-component-export-image": "1.0.6",
-    "react-contexify": "5.0.0",
+    "react-contexify": "6.0.0",
     "react-dom": "18.2.0",
     "react-helmet": "6.1.0",
     "react-icons": "4.7.1",
