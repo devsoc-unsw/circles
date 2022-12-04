@@ -122,9 +122,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
               <Title level={3} className="text">
                 {title}
               </Title>
-              &nbsp;
               <S.AttributeText>{content}</S.AttributeText>
-              &nbsp;
             </S.AttributeWrapper>
           )
       )}
