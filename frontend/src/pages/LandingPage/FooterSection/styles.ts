@@ -1,64 +1,45 @@
 import styled from 'styled-components';
 
-const FooterContainer = styled.div`
-  margin-bottom: 0;
-  background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 14vh, rgba(145, 84, 222, 1) 14vh);
-  @media all and (max-width: 1000px) {
-    background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 8vh, rgba(145, 84, 222, 1) 8vh);
-  }
-  @media all and (max-width: 550px) {
-    background: -webkit-linear-gradient(rgba(145, 84, 222, 0) 4vh, rgba(145, 84, 222, 1) 4vh);
-  }
-`;
-
-const FooterContentContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  justify-content: space-between;
-  padding: 0px 100px;
-  gap: 80px;
-  @media all and (max-width: 900px) {
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-`;
-
-const FooterContent = styled.div`
-  display: flex;
-`;
-
-const StyledImg = styled.img`
+const FooterBlob = styled.img`
   width: 100%;
 `;
 
-const StyledCSELogo = styled.img`
-  width: 290px;
-  height: 66px;
-  @media all and (max-width: 900px) {
-    width: 100%;
-  }
+const FooterContentContainer = styled.div`
+  background-color: #9154de;
+  position: relative;
+  display: flex;
+  color: #fff;
+  justify-content: space-between;
+  padding: 40px 100px;
+  gap: 75px;
+  flex-wrap: wrap;
+  /* TODO: Hack coz of pixel diff between blob and footer content */
+  margin-top: -0.5px;
 `;
 
-const FooterText = styled.p`
-  color: white;
-  font-size: 12px;
-  padding-bottom: 100px;
-  white-space: pre-line;
+const FooterLogoWrapper = styled.div`
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 50px;
 `;
 
-const BottomLeft = styled.b`
-  position: absolute;
-  bottom: 50px;
-  color: white;
+const CSELogo = styled.img`
+  width: 100%;
+`;
+
+const FooterDisclaimer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
 `;
 
 export default {
-  FooterContainer,
-  StyledImg,
+  FooterBlob,
   FooterContentContainer,
-  FooterContent,
-  StyledCSELogo,
-  BottomLeft,
-  FooterText
+  FooterLogoWrapper,
+  FooterDisclaimer,
+  CSELogo
 };
