@@ -227,7 +227,7 @@ const TermPlanner = () => {
                             coursesList={year[term as Term]}
                             termsOffered={termsOffered}
                             dragging={isDragging}
-                            showMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
+                            currMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
                           />
                         );
                       })}

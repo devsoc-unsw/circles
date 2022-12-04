@@ -19,10 +19,10 @@ type Props = {
   coursesList: string[];
   termsOffered: string[];
   dragging: boolean;
-  showMultiCourseDrag: string;
+  currMultiCourseDrag: string;
 };
 
-const TermBox = ({ name, coursesList, termsOffered, dragging, showMultiCourseDrag }: Props) => {
+const TermBox = ({ name, coursesList, termsOffered, dragging, currMultiCourseDrag }: Props) => {
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
@@ -91,7 +91,7 @@ const TermBox = ({ name, coursesList, termsOffered, dragging, showMultiCourseDra
                     code={code}
                     index={index}
                     term={term}
-                    showMultiCourseBadge={showMultiCourseDrag === code}
+                    showMultiCourseBadge={currMultiCourseDrag === code}
                   />
                 );
               })}
