@@ -1,0 +1,45 @@
+import styled from 'styled-components';
+
+const FooterBlob = styled.img`
+  width: 100%;
+`;
+
+const FooterContentContainer = styled.div`
+  background-color: #9154de;
+  position: relative;
+  display: flex;
+  color: #fff;
+  justify-content: space-between;
+  padding: 40px 100px;
+  gap: 75px;
+  flex-wrap: wrap;
+  /* TODO: Hack coz of pixel diff between blob and footer content */
+  margin-top: -0.5px;
+`;
+
+const FooterLogoWrapper = styled.div`
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 50px;
+`;
+
+const CSELogo = styled.img`
+  width: 100%;
+`;
+
+const FooterDisclaimer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
+`;
+
+export default {
+  FooterBlob,
+  FooterContentContainer,
+  FooterLogoWrapper,
+  FooterDisclaimer,
+  CSELogo
+};
