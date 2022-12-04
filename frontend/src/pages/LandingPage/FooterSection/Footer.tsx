@@ -1,13 +1,15 @@
 import React from 'react';
+import csesocLogoSrc from 'assets/csesocLogo.png';
+import footerBlobSrc from 'assets/LandingPage/footerBlob.svg';
 import S from './styles';
 
 const Footer = () => {
   return (
     <S.FooterContainer>
-      <S.StyledImg src="./src/assets/LandingPage/Footer/backgroundTop.svg" alt="CSESoc Logo" />
+      <S.StyledImg src={footerBlobSrc} alt="CSESoc Logo" />
       <S.FooterContentContainer>
         <S.FooterContent>
-          <S.StyledCSELogo src="./src/assets/LandingPage/Footer/CSESocLogo.svg" alt="CSESoc Logo" />
+          <S.StyledCSELogo src={csesocLogoSrc} alt="CSESoc Logo" />
           <S.BottomLeft>© 2022 — CSESoc UNSW</S.BottomLeft>
         </S.FooterContent>
         <S.FooterContent>
