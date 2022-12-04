@@ -19,9 +19,10 @@ type Props = {
   coursesList: string[];
   termsOffered: string[];
   dragging: boolean;
+  currMultiCourseDrag: string;
 };
 
-const TermBox = ({ name, coursesList, termsOffered, dragging }: Props) => {
+const TermBox = ({ name, coursesList, termsOffered, dragging, currMultiCourseDrag }: Props) => {
   const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
@@ -57,6 +58,7 @@ const TermBox = ({ name, coursesList, termsOffered, dragging }: Props) => {
     backgroundColor: theme.uocBadge.backgroundColor,
     boxShadow: 'none'
   };
+
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isCompleted}>
@@ -82,9 +84,17 @@ const TermBox = ({ name, coursesList, termsOffered, dragging }: Props) => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {coursesList.map((code, index) => (
-                <DraggableCourse key={`${code}${term}`} code={code} index={index} term={term} />
-              ))}
+              {coursesList.map((code, index) => {
+                return (
+                  <DraggableCourse
+                    key={`${code}${term}`}
+                    code={code}
+                    index={index}
+                    term={term}
+                    showMultiCourseBadge={currMultiCourseDrag === code}
+                  />
+                );
+              })}
               {provided.placeholder}
               <S.UOCBadgeWrapper>
                 <Badge

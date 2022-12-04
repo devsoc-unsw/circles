@@ -36,6 +36,8 @@ const TermPlanner = () => {
 
   const [termsOffered, setTermsOffered] = useState<Term[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
+  const [multiCourse, setMultiCourse] = useState('');
 
   const dispatch = useDispatch();
 
@@ -72,11 +74,17 @@ const TermPlanner = () => {
     const course = result.draggableId.slice(0, 8);
     const terms = planner.courses[course].termsOffered;
     setTermsOffered(terms);
+    if (planner.courses[course].isMultiterm) {
+      setCheckYearMultiTerm(result.source.droppableId);
+      setMultiCourse(course);
+    }
     setIsDragging(true);
   };
 
   const handleOnDragEnd: OnDragEndResponder = (result) => {
     setIsDragging(false);
+    setCheckYearMultiTerm('');
+    setMultiCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -219,6 +227,7 @@ const TermPlanner = () => {
                             coursesList={year[term as Term]}
                             termsOffered={termsOffered}
                             dragging={isDragging}
+                            currMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
                           />
                         );
                       })}
