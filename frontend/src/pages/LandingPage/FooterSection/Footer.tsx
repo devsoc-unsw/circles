@@ -1,6 +1,7 @@
 import React from 'react';
 import csesocLogoSrc from 'assets/csesocLogo.png';
 import footerBlobSrc from 'assets/LandingPage/footerBlob.svg';
+import { CURR_YEAR } from 'config/constants';
 import S from './styles';
 
 const Footer = () => {
@@ -10,7 +11,7 @@ const Footer = () => {
       <S.FooterContentContainer>
         <S.FooterLogoWrapper>
           <S.CSELogo src={csesocLogoSrc} alt="CSESoc Logo" />
-          <b>© 2022 — CSESoc UNSW</b>
+          <b>© {CURR_YEAR} — CSESoc UNSW</b>
         </S.FooterLogoWrapper>
         <S.FooterDisclaimer>
           <div>
