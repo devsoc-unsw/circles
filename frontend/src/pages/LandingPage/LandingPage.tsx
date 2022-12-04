@@ -8,7 +8,6 @@ const LandingPage = () => (
   <S.LandingPageContainer>
     <KeyFeaturesSection />
     <InteractiveViewSection />
-    <br />
     <Footer />
   </S.LandingPageContainer>
 );
