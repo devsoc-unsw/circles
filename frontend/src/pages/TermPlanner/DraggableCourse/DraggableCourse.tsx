@@ -3,7 +3,7 @@ import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
-import { Typography } from 'antd';
+import { Badge, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Term } from 'types/planner';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
@@ -11,22 +11,25 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
+import { getNumTerms } from '../utils';
 import S from './styles';
 
 type Props = {
   code: string;
   index: number;
   term: string;
+  showMultiCourseBadge: boolean;
 };
 
 const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ code, index, term }: Props) => {
+const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => {
   const { courses, isSummerEnabled, completedTerms } = useSelector(
     (state: RootState) => state.planner
   );
+  const planner = useSelector((state: RootState) => state.planner);
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
@@ -81,6 +84,11 @@ const DraggableCourse = ({ code, index, term }: Props) => {
     return stripExtraParenthesis(warning.slice(1, warning.length - 1));
   };
 
+  const multiCourseBadgeStyle = {
+    backgroundColor: theme.uocBadge.backgroundColor,
+    boxShadow: 'none'
+  };
+
   return (
     <>
       <Suspense fallback={<Spinner text="Loading Course..." />}>
@@ -124,16 +132,25 @@ const DraggableCourse = ({ code, index, term }: Props) => {
                 {showMarks && (
                   <div>
                     <Text strong className="text">
-                      Mark:{' '}
+                      Mark:&nbsp;
                     </Text>
                     <Text className="text">
                       {/*
-                      Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
-                      Mark can be 0.
-                    */}
+                          Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
+                          Mark can be 0.
+                        */}
                       {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
                     </Text>
                   </div>
+                )}
+                {showMultiCourseBadge && (
+                  <S.MultiCourseBadgeWrapper>
+                    <Badge
+                      style={multiCourseBadgeStyle}
+                      size="small"
+                      count={`x${getNumTerms(planner.courses[code].UOC, true).toString()}`}
+                    />
+                  </S.MultiCourseBadgeWrapper>
                 )}
               </S.CourseLabel>
             </S.CourseWrapper>

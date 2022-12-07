@@ -37,8 +37,14 @@ const TermPlanner = () => {
   const degree = useSelector((state: RootState) => state.degree);
 
   const [draggingCourse, setDraggingCourse] = useState('');
+  const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
+  const [multiCourse, setMultiCourse] = useState('');
 
   const dispatch = useDispatch();
+
+  // hacky solution to useEffect deps, because it cant compare arrays well enough :c
+  // also only want it to update on new/removed courses, not altered inner state
+  const courses = Object.keys(planner.courses).sort().join('');
 
   useEffect(() => {
     // update the legacy term offered
@@ -65,10 +71,7 @@ const TermPlanner = () => {
     };
 
     updateOfferingsData();
-    // hacky solution to useEffect deps, because it cant compare arrays well enough :c
-    // also only want it to update on new/removed courses, not altered inner state
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Object.keys(planner.courses).join(''), planner.startYear, planner.numYears]);
+  }, [courses, dispatch, planner.courses, planner.numYears, planner.startYear]);
 
   const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
@@ -102,10 +105,16 @@ const TermPlanner = () => {
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
     setDraggingCourse(course);
+    if (planner.courses[course].isMultiterm) {
+      setCheckYearMultiTerm(result.source.droppableId);
+      setMultiCourse(course);
+    }
   };
 
   const handleOnDragEnd: OnDragEndResponder = (result) => {
     setDraggingCourse('');
+    setCheckYearMultiTerm('');
+    setMultiCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -247,6 +256,7 @@ const TermPlanner = () => {
                             name={key}
                             coursesList={year[term as Term]}
                             draggingCourse={!draggingCourse ? undefined : draggingCourse}
+                            currMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
                           />
                         );
                       })}
