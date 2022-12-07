@@ -7,6 +7,7 @@ import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import GraphicalSelectorNew from 'pages/GraphicalSelectorNew/GraphicalSelector';
 import LandingPage from 'pages/LandingPage';
 import './config/axios';
 // stylesheets for antd library
@@ -45,6 +46,7 @@ const App = () => {
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
               {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+              {inDev && <Route path="/graphical-selector-new" element={<GraphicalSelectorNew />} />}
               <Route path="/term-planner" element={<TermPlanner />} />
               <Route path="/progression-checker" element={<ProgressionChecker />} />
               <Route path="*" element={<Page404 />} />
