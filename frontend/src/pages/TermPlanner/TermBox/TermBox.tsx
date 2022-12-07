@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
+import { Term } from 'types/planner';
+import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -17,13 +19,13 @@ const Droppable = React.lazy(() =>
 type Props = {
   name: string;
   coursesList: string[];
-  termsOffered: string[];
-  dragging: boolean;
+  draggingCourse?: string;
   currMultiCourseDrag: string;
 };
 
-const TermBox = ({ name, coursesList, termsOffered, dragging, currMultiCourseDrag }: Props) => {
-  const term = name.match(/T[0-3]/)?.[0] as string;
+const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Props) => {
+  const year = name.slice(0, 4);
+  const term = name.match(/T[0-3]/)?.[0] as Term;
   const theme = useTheme();
 
   const { isSummerEnabled, completedTerms, courses } = useSelector(
@@ -44,8 +46,8 @@ const TermBox = ({ name, coursesList, termsOffered, dragging, currMultiCourseDra
   }, [courses, coursesList]);
 
   const isCompleted = !!completedTerms[name];
-
-  const isOffered = termsOffered.includes(term) && !isCompleted;
+  const offeredInTerm = !!draggingCourse && courseHasOffering(courses[draggingCourse], year, term);
+  const isOffered = offeredInTerm && !isCompleted;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
@@ -78,7 +80,7 @@ const TermBox = ({ name, coursesList, termsOffered, dragging, currMultiCourseDra
             offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
           >
             <S.TermBoxWrapper
-              droppable={isOffered && dragging}
+              droppable={isOffered && !!draggingCourse}
               summerEnabled={isSummerEnabled}
               isSmall={isSmall}
               ref={provided.innerRef}
