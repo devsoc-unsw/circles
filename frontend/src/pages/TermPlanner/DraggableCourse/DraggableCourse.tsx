@@ -69,7 +69,7 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
     isOffered;
 
   const handleContextMenu = (e: React.MouseEvent) => {
-    if (!isDragDisabled) contextMenu.show(e);
+    if (!isDragDisabled) contextMenu.show({ event: e });
   };
 
   const stripExtraParenthesis = (warning: string): string => {
