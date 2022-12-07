@@ -42,8 +42,8 @@ const TermPlanner = () => {
 
   const dispatch = useDispatch();
 
-  // hacky solution to useEffect deps, because it cant compare arrays well enough :c
-  // also only want it to update on new/removed courses, not altered inner state
+  // needed for useEffect deps as it does not deep compare arrays well enough :c
+  // also only want it to update on new/removed course codes
   const courses = Object.keys(planner.courses).sort().join('');
 
   useEffect(() => {
@@ -71,7 +71,10 @@ const TermPlanner = () => {
     };
 
     updateOfferingsData();
-  }, [courses, dispatch, planner.courses, planner.numYears, planner.startYear]);
+
+    // disabled planner.courses as part of useEffect dep to avoid api double calling
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courses, dispatch, planner.numYears, planner.startYear]);
 
   const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
