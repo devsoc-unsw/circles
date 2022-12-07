@@ -130,11 +130,6 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
             selectedKeys={specs}
             defaultOpenKeys={['0']}
             mode="inline"
-            style={{
-              gap: '10px',
-              display: 'flex',
-              flexDirection: 'column'
-            }}
             items={menuItems}
           />
         ) : (

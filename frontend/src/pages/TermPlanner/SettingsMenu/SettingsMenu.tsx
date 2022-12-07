@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Select, Switch } from 'antd';
+import { DatePicker, Select, Switch } from 'antd';
 import dayjs from 'dayjs';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
@@ -9,25 +9,23 @@ import type { RootState } from 'config/store';
 import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 
-const DatePicker = React.lazy(() => import('components/Datepicker'));
-
 const SettingsMenu = () => {
   const { Option } = Select;
   const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
 
   const dispatch = useDispatch();
 
-  function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
+  const handleUpdateStartYear = (_: dayjs.Dayjs | null, dateString: string) => {
     if (dateString) {
       dispatch(updateStartYear(parseInt(dateString, 10)));
     }
-  }
+  };
 
-  function handleUpdateDegreeLength(value: number) {
+  const handleUpdateDegreeLength = (value: number) => {
     dispatch(updateDegreeLength(value));
-  }
+  };
 
-  function handleSummerToggle() {
+  const handleSummerToggle = () => {
     dispatch(toggleSummer());
     if (isSummerEnabled) {
       openNotification({
@@ -37,7 +35,7 @@ const SettingsMenu = () => {
           'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
       });
     }
-  }
+  };
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

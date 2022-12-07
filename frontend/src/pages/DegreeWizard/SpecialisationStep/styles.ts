@@ -6,6 +6,7 @@ const Menu = styled(antdMenu)`
   border-right: none;
   background-color: inherit;
   color: ${({ theme }) => theme.text};
+  margin: 10px 0;
 
   .ant-menu-submenu-title {
     background-color: inherit;

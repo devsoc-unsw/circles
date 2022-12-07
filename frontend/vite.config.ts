@@ -40,15 +40,5 @@ export default defineConfig({
       { find: 'utils', replacement: resolve(projectRootDir, './src/utils') },
       { find: 'test', replacement: resolve(projectRootDir, './src/test') }
     ]
-  },
-  css: {
-    preprocessorOptions: {
-      less: {
-        modifyVars: {
-          '@primary-color': '#9254de' // purple-5
-        },
-        javascriptEnabled: true
-      }
-    }
   }
 });

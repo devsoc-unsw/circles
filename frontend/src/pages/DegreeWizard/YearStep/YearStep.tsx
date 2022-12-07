@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
-import { Typography } from 'antd';
+import { DatePicker, Typography } from 'antd';
 import Spinner from 'components/Spinner';
 import { useAppDispatch } from 'hooks';
 import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
@@ -9,9 +9,7 @@ import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
-const RangePicker = React.lazy(() =>
-  import('components/Datepicker').then((d) => ({ default: d.default.RangePicker }))
-);
+const { RangePicker } = DatePicker;
 
 type Props = {
   incrementStep: (stepTo?: Steps) => void;

@@ -28,7 +28,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   return (
     <Modal
       title="Reset Planner?"
-      open={open ?? false}
+      open={open}
       closable={false}
       onOk={handleOk}
       okText="Reset"

@@ -16,6 +16,10 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
 
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,apple color emoji,segoe ui emoji,Segoe UI Symbol,noto color emoji;
+    line-height: 1.5715;
+    font-size: 14px;
+
     --navbar-height: 70px;
     --option-header-height: 65px;
 
@@ -30,12 +34,27 @@ export const GlobalStyles = createGlobalStyle`
     --tp-summer-term-box-margin: 0.5em;
   }
 
+  a {
+    color: #9254de;
+    text-decoration: none;
+    transition: color .3s;
+  }
+
+  a:active {
+    color: #703db8;
+  }
+
+  a:hover {
+    color: #b37feb;
+  }
+
   .text {
     color: ${({ theme }) => theme.text} !important;
   }
 
   p {
     font-size: 0.9rem;
+    margin-bottom: 1em;
   }
 
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {

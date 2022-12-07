@@ -1,8 +1,9 @@
 import { notification } from 'antd';
-import type { IconType } from 'antd/lib/notification';
+
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 type Props = {
-  type: IconType;
+  type: NotificationType;
   message?: string;
   description?: string;
   duration?: number;
