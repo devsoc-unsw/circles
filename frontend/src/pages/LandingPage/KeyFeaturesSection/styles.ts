@@ -8,6 +8,7 @@ const FeatureTitle = styled.h1`
   text-align: center;
   position: relative;
   margin-bottom: 75px;
+  font-weight: 650;
 `;
 
 const CardsSection = styled.div`
@@ -52,6 +53,7 @@ const FeatureSubtitle = styled.h3<{ startColor: string; endColor: string }>`
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 700;
 `;
 
 const Divider = styled.hr`
@@ -67,7 +69,7 @@ const Content = styled.p`
   font-size: 13px;
   color: #c8bfbf;
   letter-spacing: -0.3px;
-  line-height: 15px;
+  line-height: 1.2rem;
 `;
 
 const BlobContainer = styled.div`

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const HeroSection = styled.section`
-  margin-bottom: 20rem;
+  margin-bottom: 22rem;
 `;
 
 const Wrapper = styled.div`
