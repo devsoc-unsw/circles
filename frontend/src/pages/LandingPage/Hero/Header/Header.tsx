@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import circlesLogo from 'assets/circlesLogo.svg';
+import { inDev } from 'config/constants';
 import S from './styles';
 
 const Header = () => (
@@ -11,7 +12,7 @@ const Header = () => (
         <S.HeaderTitle>Circles</S.HeaderTitle>
       </S.LogoWrapper>
     </Link>
-    <S.LoginButton>Log in</S.LoginButton>
+    {inDev && <S.LoginButton>Login</S.LoginButton>}
   </S.Header>
 );
 

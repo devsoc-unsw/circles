@@ -1,4 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
+import waveBackground from 'assets/LandingPage/waveBackground.svg';
+import waveForeground from 'assets/LandingPage/waveForeground.svg';
 
 const waveAnimation = keyframes`
   0%, {margin-left: 0;}
@@ -24,7 +26,7 @@ const waveStyle = css`
 
 const WaveForeground = styled.div`
   ${waveStyle}
-  background: url('src/assets/LandingPage/wave_foreground.svg') repeat-x;
+  background: url(${waveForeground}) repeat-x;
   animation: ${waveAnimation} 13s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
     ${waveSwell} 5s ease -1.25s infinite;
   @media (min-width: 1024px) {
@@ -40,11 +42,12 @@ const WaveForeground = styled.div`
 
 const WaveBackground = styled.div`
   ${waveStyle}
-  background: url('src/assets/LandingPage/wave_background.svg') repeat-x;
+  background: url(${waveBackground}) repeat-x;
   animation: ${waveAnimation} 13s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
   @media (min-width: 1024px) {
     top: -42vh;
+  }
   @media (min-width: 1440px) {
     top: -25vh;
   }

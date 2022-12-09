@@ -20,10 +20,12 @@ const ContentHeading = styled.h1`
   font-size: 3rem;
 `;
 
-const SubContent = styled.h3`
+const SubContent = styled.div`
   color: #fff;
   margin-top: 2rem;
-  line-height: 3rem;
+  line-height: 2;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 export default {

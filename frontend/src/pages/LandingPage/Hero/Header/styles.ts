@@ -28,21 +28,22 @@ const HeaderLogo = styled.img`
 const LoginButton = styled.button`
   background: none;
   border-radius: 50px;
-  border: solid 0.3rem #e3a4fa;
-  width: 12%;
-  height: 3rem;
+  border: solid 3px #e3a4fa;
+  text-transform: uppercase;
+  width: 10%;
+  height: 45px;
   cursor: pointer;
   background: transparent;
   font-weight: 700;
   color: #fff;
   transition: all 0.1s;
   z-index: 1;
-  &: hover {
+  &:hover {
     background: #e3a4fa;
     font-size: 1.2em;
     color: #fff;
   }
-  &: active {
+  &:active {
     scale: 0.9;
   }
   @media (max-width: 1024px) {
