@@ -1,16 +1,17 @@
 import React from 'react';
+import PageContainer from 'styles/PageContainer';
+import blobBgSrc from 'assets/LandingPage/blobFeaturesBackground.svg';
 import dragIconSrc from 'assets/LandingPage/dragIcon.png';
 import flagIconSrc from 'assets/LandingPage/flagIcon.png';
 import padlockIconSrc from 'assets/LandingPage/padlockIcon.png';
-import BlobBackground from './BlobBackground';
 import S from './styles';
 
 const KeyFeaturesSection = () => {
   return (
-    <>
+    <PageContainer>
       <S.FeatureTitle>Introducing our features</S.FeatureTitle>
       <S.CardsSection>
-        <BlobBackground />
+        <S.BlobBackground src={blobBgSrc} alt="Key Features Wave Background" />
         <S.Card>
           <S.IconContainer color="#eae5ed">
             <img src={dragIconSrc} alt="" width={50} height={50} />
@@ -49,7 +50,7 @@ const KeyFeaturesSection = () => {
           </S.Content>
         </S.Card>
       </S.CardsSection>
-    </>
+    </PageContainer>
   );
 };
 
