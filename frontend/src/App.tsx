@@ -41,7 +41,7 @@ const App = () => {
                   />
                 }
               />
-              {inDev && <Route path="/landing-page" element={<LandingPage />} />}
+              <Route path="/landing-page" element={<LandingPage />} />
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
               {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}

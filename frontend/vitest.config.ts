@@ -30,7 +30,8 @@ export default defineConfig({
       { find: 'reducers', replacement: resolve(projectRootDir, './src/reducers') },
       { find: 'types', replacement: resolve(projectRootDir, './src/types') },
       { find: 'utils', replacement: resolve(projectRootDir, './src/utils') },
-      { find: 'test', replacement: resolve(projectRootDir, './src/test') }
+      { find: 'test', replacement: resolve(projectRootDir, './src/test') },
+      { find: 'styles', replacement: resolve(projectRootDir, './src/styles') }
     ]
   }
 });
