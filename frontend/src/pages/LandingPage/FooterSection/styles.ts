@@ -4,17 +4,20 @@ const FooterBlob = styled.img`
   width: 100%;
 `;
 
-const FooterContentContainer = styled.div`
+const FooterWrapper = styled.div`
   background-color: #9154de;
+  /* TODO: Hack coz of pixel diff between blob and footer content */
+  margin-top: -0.5px;
+`;
+
+const FooterContentContainer = styled.div`
   position: relative;
   display: flex;
   color: #fff;
   justify-content: space-between;
-  padding: 40px 100px;
+  padding: 40px 0;
   gap: 75px;
   flex-wrap: wrap;
-  /* TODO: Hack coz of pixel diff between blob and footer content */
-  margin-top: -0.5px;
 `;
 
 const FooterLogoWrapper = styled.div`
@@ -41,5 +44,6 @@ export default {
   FooterContentContainer,
   FooterLogoWrapper,
   FooterDisclaimer,
+  FooterWrapper,
   CSELogo
 };
