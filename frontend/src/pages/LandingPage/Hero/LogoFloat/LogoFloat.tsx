@@ -34,8 +34,8 @@ const LogoFloat = () => (
     <S.LandingLogo
       src={circlesLogo}
       alt="Circles Logo"
-      animate={{ y: 120 }}
-      initial={{ y: 50 }}
+      animate={{ y: 40 }}
+      initial={{ y: -20 }}
       transition={{
         duration: 2,
         delay: 0.3,

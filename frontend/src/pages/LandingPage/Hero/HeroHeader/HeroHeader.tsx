@@ -4,7 +4,7 @@ import circlesLogo from 'assets/circlesLogo.svg';
 import { inDev } from 'config/constants';
 import S from './styles';
 
-const Header = () => (
+const HeroHeader = () => (
   <S.Header animate={{ y: 0 }} initial={{ y: -40 }} transition={{ duration: 0.5, ease: 'easeOut' }}>
     <Link to="/landing-page">
       <S.LogoWrapper>
@@ -16,4 +16,4 @@ const Header = () => (
   </S.Header>
 );
 
-export default Header;
+export default HeroHeader;

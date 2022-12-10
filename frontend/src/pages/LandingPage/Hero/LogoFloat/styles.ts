@@ -2,13 +2,11 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  height: 25rem;
-  margin-top: -15rem;
+  position: relative;
 `;
 
 const LandingLogo = motion(styled.img`
   width: 200px;
-  margin-left: -8em;
   position: relative;
   z-index: 1;
 `);
@@ -16,17 +14,21 @@ const LandingLogo = motion(styled.img`
 const Bubble = motion(styled.div`
   background-color: #fff;
   border-radius: 50%;
-  width: 2em;
-  height: 2em;
-  margin-left: -25em;
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  top: -140px;
+  left: -210px;
 `);
 
 const Bubble2 = motion(styled.div`
   background-color: #fff;
   border-radius: 50%;
-  width: 3em;
-  height: 3em;
-  margin-left: -10em;
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: -140px;
+  left: -10px;
 `);
 
 export default {

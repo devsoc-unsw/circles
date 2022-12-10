@@ -19,7 +19,7 @@ const HeroContent = () => (
       <Link to="/degree-wizard">START</Link>
       <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
     </S.HeroCTA>
-    <S.CSELogo
+    <S.CSESocLogo
       src={cseLogo}
       alt="CSE Logo"
       initial={{ opacity: 0, scale: 0.5, x: 100 }}
