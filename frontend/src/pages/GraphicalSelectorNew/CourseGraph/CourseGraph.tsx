@@ -21,9 +21,10 @@ type Props = {
   onNodeClick: (node: INode) => void;
   handleToggleFullscreen: () => void;
   fullscreen: boolean;
+  focused?: string;
 };
 
-const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen }: Props) => {
+const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
   const { degree, planner } = useSelector((state: RootState) => state);
@@ -82,35 +83,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen }: Props)
       graphRef.current.on('node:click', async (ev) => {
         // Clicking a node loads up course description for the course and set active
         // tab to course info
-        const node = ev.item as INode;
-        onNodeClick(node);
-        // TODO: may need to remove this?
-        // const { breadthFirstSearch } = await import('@antv/algorithm');
-        // // hides/ unhides dependent nodes
-        // if (node.hasState('click')) {
-        //   graphRef.current.clearItemStates(node, 'click');
-        //   breadthFirstSearch(data, id, {
-        //     enter: ({ current }: { current: string }) => {
-        //       if (id !== current) {
-        //         const currentNode = graphRef.current.findById(current) as INode;
-        //         // Unhiding node won't unhide other hidden nodes
-        //         currentNode.getEdges().forEach((e) => e.show());
-        //         currentNode.show();
-        //       }
-        //     }
-        //   });
-        // } else if (node.getOutEdges().length) {
-        //   graphRef.current.setItemState(node, 'click', true);
-        //   breadthFirstSearch(data, id, {
-        //     enter: ({ current }: { current: string }) => {
-        //       if (id !== current) {
-        //         const currentNode = graphRef.current.findById(current) as INode;
-        //         currentNode.getEdges().forEach((e) => e.hide());
-        //         currentNode.hide();
-        //       }
-        //     }
-        //   });
-        // }
+        onNodeClick(ev.item as INode);
       });
 
       graphRef.current.on('node:mouseenter', async (ev) => {
@@ -189,6 +162,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen }: Props)
     });
   };
 
+  // focus the focussed course
+  useEffect(() => {
+    if (focused) {
+      graphRef.current?.focusItem(focused);
+    }
+  }, [focused]);
+
   useEffect(() => {
     // resize canvas size when sidebar state changes
     graphRef.current?.changeSize(
@@ -220,7 +200,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen }: Props)
           <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
           <Button
             onClick={handleToggleFullscreen}
-            icon={fullscreen ? <ExpandAltOutlined /> : <ShrinkOutlined />}
+            icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
           />
         </S.ToolsWrapper>
       )}

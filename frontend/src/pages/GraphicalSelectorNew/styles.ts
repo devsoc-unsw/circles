@@ -1,21 +1,32 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ fullscreen: boolean }>`
   height: calc(100vh - var(--navbar-height));
-  padding: 25px;
   display: flex;
   gap: 20px;
+
+  ${({ fullscreen }) =>
+    !fullscreen &&
+    css`
+      padding: 25px;
+    `}
 `;
 
-const GraphWrapper = styled.div`
+const GraphWrapper = styled.div<{ fullscreen: boolean }>`
   height: 100%;
   width: 100%;
-  border-radius: 20px;
-  border: #c2c2c2 solid 1px;
   overflow: hidden;
   flex: 5;
   position: relative;
+  /* box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.1) inset; */
+
+  ${({ fullscreen }) =>
+    !fullscreen &&
+    css`
+      border-radius: 20px;
+      border: #c2c2c2 solid 1px;
+    `}
 `;
 
 const SidebarWrapper = styled.div`

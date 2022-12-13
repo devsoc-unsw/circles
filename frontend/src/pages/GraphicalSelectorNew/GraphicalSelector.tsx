@@ -1,32 +1,5 @@
-// import React, { useCallback, useEffect, useRef, useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import {
-//   ExpandAltOutlined,
-//   ShrinkOutlined,
-//   ZoomInOutlined,
-//   ZoomOutOutlined
-// } from '@ant-design/icons';
-// import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
-// import { Button, Switch, Tabs } from 'antd';
-// import axios from 'axios';
-// import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
-// import prepareUserPayload from 'utils/prepareUserPayload';
-// import CourseSearchBar from 'components/CourseSearchBar';
-// import PageTemplate from 'components/PageTemplate';
-// import Spinner from 'components/Spinner';
-// import type { RootState } from 'config/store';
-// import {
-//   COURSE_INFO_TAB,
-//   HELP_TAB,
-//   PROGRAM_STRUCTURE_TAB,
-//   ZOOM_IN_RATIO,
-//   ZOOM_OUT_RATIO
-// } from './constants';
-// import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
-// import HowToUse from './HowToUse';
-// import S from './styles';
-// import CourseGraph from './CourseGraph/CourseGraph';
-
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import CourseSearchBar from 'components/CourseSearchBar';
@@ -34,12 +7,14 @@ import PageTemplate from 'components/PageTemplate';
 import { COURSE_INFO_TAB, HELP_TAB, PROGRAM_STRUCTURE_TAB } from './constants';
 import CourseGraph from './CourseGraph/CourseGraph';
 import HowToUse from './HowToUse';
+import SidebarDrawer from './SidebarDrawer/SidebarDrawer';
 import S from './styles';
 
 const GraphicalSelectorNew = () => {
   const [fullscreen, setFullscreen] = useState(true);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
+  // const [drawerOpen, setDrawerOpen] = useState(false);
 
   const items = [
     {
@@ -49,8 +24,7 @@ const GraphicalSelectorNew = () => {
         <S.CourseDescriptionPanel
           courseCode={courseCode}
           key={courseCode}
-          // onCourseClick={(code) => handleFocusCourse(code)}
-          onCourseClick={() => {}}
+          onCourseClick={setCourseCode}
         />
       ) : (
         'No course selected'
@@ -62,8 +36,8 @@ const GraphicalSelectorNew = () => {
 
   return (
     <PageTemplate>
-      <S.Wrapper>
-        <S.GraphWrapper>
+      <S.Wrapper fullscreen={fullscreen}>
+        <S.GraphWrapper fullscreen={fullscreen}>
           <CourseGraph
             onNodeClick={(node) => {
               setCourseCode(node.getID());
@@ -71,23 +45,20 @@ const GraphicalSelectorNew = () => {
             }}
             fullscreen={fullscreen}
             handleToggleFullscreen={() => setFullscreen((prevState) => !prevState)}
+            focused={courseCode ?? undefined}
           />
           <S.SearchBarWrapper>
-            <CourseSearchBar
-              onSelectCallback={() => {
-                // TODO
-              }}
-              style={{ width: '25rem' }}
-            />
+            <CourseSearchBar onSelectCallback={setCourseCode} style={{ width: '25rem' }} />
           </S.SearchBarWrapper>
+          {fullscreen && (
+            <SidebarDrawer>
+              <Tabs items={items} activeKey={activeTab} onChange={setActiveTab} />
+            </SidebarDrawer>
+          )}
         </S.GraphWrapper>
-        {fullscreen && (
+        {!fullscreen && (
           <S.SidebarWrapper>
-            <Tabs
-              items={items}
-              activeKey={activeTab}
-              onChange={(activeKey) => setActiveTab(activeKey)}
-            />
+            <Tabs items={items} activeKey={activeTab} onChange={setActiveTab} />
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
