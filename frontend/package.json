@@ -8,7 +8,7 @@
     "@ant-design/plots": "1.2.2",
     "@antv/algorithm": "0.1.25",
     "@antv/g6": "4.7.16",
-    "@react-spring/web": "9.5.5",
+    "@react-spring/web": "9.6.0",
     "@reduxjs/toolkit": "1.9.1",
     "@rive-app/react-canvas": "^3.0.33",
     "@tippyjs/react": "4.2.6",
