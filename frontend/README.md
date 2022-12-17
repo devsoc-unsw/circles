@@ -65,3 +65,51 @@ To stop a docker containers that is running, run `docker-compose stop <container
 It is now possible to run Circles without docker, and have your changes to the backend codebase be reflected in the development server. To do this, ensure nodemon is installed on your linux distribution by running `npm i -g nodemon`. Nodemon is a node package which automatically restarts an app when it detects code changes. 
 You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependencies).
  Ensure your python3 version is set to 3.10. All parts of the app should now be running and talking to eachother. 
+
+## Project Structure
+```
+frontend/
+├─ public/                              # files related to the initial static html
+├─ src/
+│  ├─ assets/                           # stores all static assets (images, svgs, css)
+│  ├─ components/                       # stores reusable components
+│  │  ├─ CourseButton/
+│  │  │  ├─ CourseButton.tsx            # component implementation
+│  │  │  ├─ CourseButton.test.tsx       # test file for the component
+│  │  │  ├─ index.ts                    # should contain only imports of component(s) to be exported from this folder
+│  │  │  ├─ styles.ts                   # contains stylings related to this component(s)
+│  ├─ config/                           # stores any config and misc files
+│  ├─ hooks/                            # stores custom hooks
+│  ├─ pages/
+│  │  ├─ CourseSelector/
+│  │  │  ├─ CourseSelector.tsx
+│  │  │  ├─ CourseSelector.test.tsx
+│  │  │  ├─ index.ts
+│  │  │  ├─ styles.ts
+│  │  │  ├─ CourseBanner/               # components specific to this page
+│  │  │  │  ├─ CourseBanner.tsx
+│  │  │  │  ├─ CourseBanner.test.tsx
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ styles.ts
+│  │  │  ├─ ...
+│  │  ├─ ...
+│  ├─ reducers/                         # reducer slices files
+│  ├─ styles/                           # styled components styles that can be reused globally
+│  ├─ test/                             # helper files relating to testing
+│  ├─ types/                            # type definition files to be used globally
+│  ├─ utils/                            # utility/helper functions to be used globally
+│  ├─ App.tsx
+│  ├─ index.tsx
+│  ├─ ...
+├─ dev.dockerfile                       # dockerfile to run in dev env
+├─ production.dockerfile                # dockerfile to run in prod env
+├─ index.html
+├─ package.json
+├─ package-lock.json
+├─ tsconfig.json                        # specifies the root files and the compiler options required to compile the project
+├─ vite.config.ts                       # config file to setup vite
+├─ vitest.config.ts                     # config file to setup vitest
+├─ .eslintrc                            # eslint config
+├─ .prettierrc                          # prettier config
+├─ ...
+```shell
