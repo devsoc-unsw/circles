@@ -14,7 +14,6 @@ const GraphicalSelectorNew = () => {
   const [fullscreen, setFullscreen] = useState(true);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
-  // const [drawerOpen, setDrawerOpen] = useState(false);
 
   const items = [
     {

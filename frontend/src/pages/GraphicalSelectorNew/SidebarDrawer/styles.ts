@@ -9,8 +9,6 @@ const Wrapper = styled.div<{ open?: boolean }>`
 
   background-color: white;
   border-radius: 10px 0 0 10px;
-  /* box-shadow: -3px 3px 8px 2px rgba(0, 0, 0, 0.3); */
-  z-index: 1000;
   filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.3));
 
   animation-duration: 0.7s;
@@ -23,11 +21,9 @@ const Wrapper = styled.div<{ open?: boolean }>`
       : open
       ? css`
           animation-name: animation_open;
-          /* right: 0rem; */
         `
       : css`
           animation-name: animation_closed;
-          /* right: -30rem; */
         `}
 
   @keyframes animation_open {
@@ -61,7 +57,6 @@ const ChildrenWrapper = styled.div`
 const ArrowWrapper = styled.div`
   height: 40%;
   width: 2rem;
-  padding-left: 0.5rem;
 
   position: absolute;
   left: -2rem;
@@ -70,15 +65,31 @@ const ArrowWrapper = styled.div`
 
   border-radius: 10px 0 0 10px;
   cursor: pointer;
-  /* box-shadow: -3px 3px 8px 2px rgba(0, 0, 0, 0.3); */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   :hover {
-    background-color: rgba(255, 255, 255, 0.9);
+    background: #f0f0f0;
   }
+`;
+
+const SVGWrapper = styled.svg`
+  width: 12px;
+  height: 48px;
+`;
+
+const SVGLine = styled.line`
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: #aaa;
 `;
 
 export default {
   Wrapper,
   ChildrenWrapper,
-  ArrowWrapper
+  ArrowWrapper,
+  SVGLine,
+  SVGWrapper
 };

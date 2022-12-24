@@ -1,9 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
-// import { DoubleRightOutlined } from '@ant-design/icons';
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
 import S from './styles';
 
 type Props = {
@@ -15,8 +10,11 @@ const SidebarDrawer = ({ children }: Props) => {
 
   return (
     <S.Wrapper open={open}>
-      <S.ArrowWrapper onClick={() => setOpen(!open)}>
-        {/* open ? <AiOutlineDoubleRight /> : <AiOutlineDoubleLeft /> */}
+      <S.ArrowWrapper role="button" title="See Info..." onClick={() => setOpen(!open)}>
+        <S.SVGWrapper xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 48">
+          <S.SVGLine y1="2" y2="46" x1="2" x2="2" />
+          <S.SVGLine y1="2" y2="46" x1="10" x2="10" />
+        </S.SVGWrapper>
       </S.ArrowWrapper>
       <S.ChildrenWrapper>{children}</S.ChildrenWrapper>
     </S.Wrapper>

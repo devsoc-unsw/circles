@@ -14,7 +14,7 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
-import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from '../graph';
+import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
 import S from './styles';
 
 type Props = {
