@@ -11,7 +11,7 @@ import SidebarDrawer from './SidebarDrawer/SidebarDrawer';
 import S from './styles';
 
 const GraphicalSelectorNew = () => {
-  const [fullscreen, setFullscreen] = useState(true);
+  const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
 
