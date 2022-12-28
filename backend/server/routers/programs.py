@@ -24,6 +24,7 @@ from server.routers.model import (
     Programs,
     Structure,
     StructureContainer,
+    CoursesPathDict,
 )
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
@@ -375,9 +376,9 @@ def graph(
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
-    failed_courses: List[str] = []
+    failed_courses: list[tuple] = []
 
-    proto_edges: List[Dict[str, str]] = [map_suppressed_errors(
+    proto_edges: list[CoursesPathDict | None] = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
     edges = prune_edges(
@@ -476,7 +477,7 @@ def compose(*functions: Callable) -> Callable:
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
 
-def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
+def proto_edges_to_edges(proto_edges: list[CoursesPathDict | None]) -> List[Dict[str, str]]:
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.

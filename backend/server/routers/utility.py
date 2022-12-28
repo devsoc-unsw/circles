@@ -4,16 +4,17 @@ specifically in any one function
 """
 
 
-from typing import Any, Callable, List
+from typing import Callable
 from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime, PlannerData
-from typing import List
+from typing import TypeVar
 from algorithms.objects.user import User
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
-def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs) -> Any:
+B = TypeVar('B')
+def map_suppressed_errors(func: Callable[..., B], errors_log: list[tuple], *args, **kwargs) -> B | None:
     """
     Map a function to a list of arguments, and return the result of the function
     if no error is raised. If an error is raised, log the error and return None.
@@ -40,11 +41,13 @@ def get_core_courses(program: str, specialisations: list[str]):
          , [])
 
 
-def get_course_object(code: str, prog_time: ProgramTime, locked_offering: tuple[str, str] | None = None, mark: int = 100) -> Course:
+def get_course_object(code: str, prog_time: ProgramTime, locked_offering: tuple[int, int] | None = None, mark: int | None = 100) -> Course:
     ''' 
     This return the Course object for the given course code.
     Note the difference between this and the get_course function in courses.py
     '''
+    if mark is None:
+        mark = 100
     from server.routers.courses import terms_offered
     years = "+".join(str(year) for year in range(prog_time.startTime[0], prog_time.endTime[0] + 1))
     terms_result = terms_offered(code, years)["terms"]
@@ -73,5 +76,8 @@ def extract_user_from_planner_data(plannerData: PlannerData) -> User:
     user.specialisations = plannerData.specialisations
     for _, year in enumerate(list(plannerData.plan)):
         for term in year:
-            user.add_courses(term)
+            cleaned_term = {}
+            for course_name, course_value in term.items():
+                cleaned_term[course_name] = (course_value[0], course_value[1]) if course_value else (COURSES[course_name]["UOC"], None)
+            user.add_courses(cleaned_term)
     return user

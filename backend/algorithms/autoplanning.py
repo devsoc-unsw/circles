@@ -34,7 +34,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     # 1. enforces terms
     variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start, end)), course.name) for course in courses]
     # 2. if any courses are named the same, then they must be taken consecutively
-    possible_course_dupes = [course.name for course in courses and not course.locked]
+    possible_course_dupes = [course.name for course in courses if not course.locked]
     duplicate_courses = set(c for c in possible_course_dupes if possible_course_dupes.count(c) > 1)
     for dupe in duplicate_courses:
         matched_courses = [variable for variable in variables if variable.Name() == dupe]

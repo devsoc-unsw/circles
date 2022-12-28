@@ -15,7 +15,7 @@ from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
-                                  UserData, TermsOffered)
+                                  UserData, TermsOffered, CoursesPathDict)
 from server.routers.utility import get_core_courses, map_suppressed_errors
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import ProgramRestriction
@@ -426,7 +426,7 @@ def course_children(course: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def get_path_from(course: str) -> dict[str, str | list[str]]:
+def get_path_from(course: str) -> CoursesPathDict:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
@@ -520,9 +520,9 @@ def terms_offered(course: str, years:str) -> TermsOffered:
             fails: [(year, exception)]
         }
     """
-    fails: list[str] = []
+    fails: list[tuple] = []
     terms = {
-        year: map_suppressed_errors(get_term_offered, fails, course, year)
+        year: map_suppressed_errors(get_term_offered, fails, course, year) or []
         for year in years.split("+")
     }
 
@@ -635,7 +635,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
     return get_course_info(course, year_to_fetch).get("terms", [])
 
-def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
+def get_program_restriction(program_code: str | None) -> Optional[ProgramRestriction]:
     """
     Returns the program restriction for the given program code.
     Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.
@@ -644,6 +644,8 @@ def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
     # TODO: This loading should not be here; very slow
     # making it global causes some errors
     # There needs to be a startup event for routers to load data
+    if not program_code:
+        return None
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:
         program_restrictions: dict[str, ProgramRestriction] = pickle.load(file)
     return program_restrictions.get(program_code, None)

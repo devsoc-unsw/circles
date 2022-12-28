@@ -35,18 +35,18 @@ def check_in_fixes(cname: str, ls: list[tuple[str,str]], error: str) -> None:
 
 def main():
     """ runs the comparison between a target and a source year """
-    source_courses = (
+    source_course_location = (
         "data/final_data/coursesProcessed.json"
         if args.source is None
         else f"data/final_data/archive/processed/{args.source}.json"
     )
 
-    target_courses = f"data/final_data/archive/processed/{args.target}.json"
+    target_course_location = f"data/final_data/archive/processed/{args.target}.json"
 
-    with open(source_courses, "r", encoding="utf8") as f:
+    with open(source_course_location, "r", encoding="utf8") as f:
         source_courses: dict[str, Course] = json.loads(f.read())
 
-    with open(target_courses, "r", encoding="utf8") as f:
+    with open(target_course_location, "r", encoding="utf8") as f:
         target_courses: dict[str, Course] = json.loads(f.read())
 
     all_source = set(source_courses.keys())

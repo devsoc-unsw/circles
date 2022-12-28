@@ -115,7 +115,7 @@ class ValidPlannerData(BaseModel):
 class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    plan: list[list[dict[str,  None | list[int | None]]]]
+    plan: list[list[dict[str, list[int | None] | None ]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {
@@ -166,6 +166,9 @@ class CoursesPath(BaseModel):
     original: str
     courses: list[str]
 
+class CoursesPathDict(TypedDict):
+    original: str
+    courses: list[str]
 
 class Description(BaseModel):
     description: str
@@ -189,8 +192,8 @@ class ProgramTime(BaseModel):
     uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
 class TermsOffered(TypedDict):
-    terms: dict[int, list[str]]
-    fails: list[tuple[int, str]]
+    terms: dict[str, list[str]]
+    fails: list[tuple]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

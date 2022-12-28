@@ -27,7 +27,7 @@ class User:
         self.courses: dict[str, Tuple[int, int | None]] = {}
         self.cur_courses: dict[str, Tuple[int, int | None]] = {}
         self.program: str | None = None
-        self.specialisations: dict[str, int] = {}
+        self.specialisations: list[str] = []
         self.year: int = 0
         self.core_courses: list[str] = []
 
@@ -70,7 +70,7 @@ class User:
 
     def add_specialisation(self, specialisation: str):
         """ Adds a specialisation to this user """
-        self.specialisations[specialisation] = 1
+        self.specialisations.append(specialisation)
 
     def has_taken_specific_course(self, course):
         """ taken a course directly, no equivalents """

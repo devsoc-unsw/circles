@@ -97,13 +97,13 @@ def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: 
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
         for year_index, year in enumerate(list(plannerData.plan)):
             for term_index, term in enumerate(year):
-                for course, (_, mark) in term.items():
+                for course in term:
                     courses.append(
                         get_course_object(
                             course,
                             programTime,
                             (year_index, term_index),
-                            mark
+                            user.get_grade(course)
                         )
                     )
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
@@ -112,6 +112,6 @@ def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: 
 
     result: dict[str, list[dict]] = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
 
-    for course, (year, term) in autoplanned:
-        result["plan"][year - programTime.startTime[0]].setdefault(f'T{term}', []).append(course)
+    for course, (year_autoplanned, term_autoplanned) in autoplanned:
+        result["plan"][year_autoplanned - programTime.startTime[0]].setdefault(f'T{term_autoplanned}', []).append(course)
     return result
