@@ -12,7 +12,7 @@ class Course:
     mark: int
     uoc: int
     terms: dict[int, list[int]]
-    locked: tuple[int, int]
+    locked: tuple[int, int] | None = None
     def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]):
         """ create a domain of terms this course can be in for autoplanning """
         if self.locked:

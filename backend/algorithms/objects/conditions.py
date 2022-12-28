@@ -343,7 +343,7 @@ class CoresCondition(Condition):
 
     def __init__(self):
         """ the subset of courses in CORES that must be completed """
-        self.category = AnyCategory()
+        self.category: Category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """

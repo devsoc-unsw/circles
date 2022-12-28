@@ -40,7 +40,7 @@ def get_core_courses(program: str, specialisations: list[str]):
          , [])
 
 
-def get_course_object(code: str, prog_time: ProgramTime, locked_offering: tuple[str, str] = None, mark: int = 100) -> Course:
+def get_course_object(code: str, prog_time: ProgramTime, locked_offering: tuple[str, str] | None = None, mark: int = 100) -> Course:
     ''' 
     This return the Course object for the given course code.
     Note the difference between this and the get_course function in courses.py

@@ -25,8 +25,8 @@ class User:
     def __init__(self, data = None):
         # Will load the data if any was given
         self.courses: dict[str, Tuple[int, int | None]] = {}
-        self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
-        self.program: str = None
+        self.cur_courses: dict[str, Tuple[int, int | None]] = {}
+        self.program: str | None = None
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
         self.core_courses: list[str] = []
@@ -43,26 +43,26 @@ class User:
         """
         self.courses.update(courses)
 
-    def add_current_course(self, course: Tuple[int, int | None]):
+    def add_current_course(self, course_code: str, course: Tuple[int, int | None]):
         """
         Given a course the user is taking in their current term,
         adds it to their cur_courses
         """
-        self.cur_courses.append(course)
+        self.cur_courses[course_code] = course
 
     def add_current_courses(self, courses: dict[str, Tuple[int, int | None]]):
         """
         Takes in a list of courses (represented as strings by course
         code) and, adds it to the list of current courses.
         """
-        self.cur_courses.extend(courses)
+        self.cur_courses = self.cur_courses | courses
 
     def empty_current_courses(self):
         """
         Empty all the current courses. Helps with moving
         on to the next term in the term planner api
         """
-        self.cur_courses.clear()
+        self.cur_courses = {}
 
     def add_program(self, program: str):
         """ Adds a program to this user """
