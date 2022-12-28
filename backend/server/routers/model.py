@@ -57,7 +57,7 @@ class Structure(BaseModel):
 
 class UserData(BaseModel):
     program: str
-    specialisations: dict
+    specialisations: list[str]
     courses: dict
 
 

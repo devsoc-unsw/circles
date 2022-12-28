@@ -8,8 +8,7 @@
         "courses": {
             "COMP1511": [6, 84],
             "COMP1521": [6, 57]
-        },
-        "year": 3
+        }
     },
     "user1_no_marks": {
         "program": "3707",
@@ -20,8 +19,7 @@
         "courses": {
             "COMP1511": [6, null],
             "COMP1521": [6, null]
-        },
-        "year": 3
+        }
     },
     "user2": {
         "program": "3778",
@@ -36,8 +34,7 @@
         "core_courses": {
             "MATH1131": [6, null],
             "MATH1141": [6, null]
-        },
-        "year": 1
+        }
     },
     "user3": {
         "program": "3778",
@@ -45,7 +42,6 @@
             "COMPA1"
         ],
         "courses": {},
-        "year": 1,
         "core_courses": {
             "COMP1531": [6, 57],
             "COMP1521": [6, 57]
@@ -63,8 +59,7 @@
             "COMP1521": [6, 57],
             "MATH1141": [6, 80],
             "MATH1081": [6, 57]
-        },
-        "year": 3
+        }
     },
     "user5": {
         "program": "3778",
@@ -80,8 +75,7 @@
         "core_courses": {
             "COMP1511": [52, null],
             "COMP2521": [52, null]
-        },
-        "year": 1
+        }
     },
     "user6": {
         "program": "3789",
@@ -96,8 +90,7 @@
             "COMP1531": [6, 66],
             "COMP1521": [6, 57],
             "COMP1511": [6, 84]
-        },
-        "year": 3
+        }
     },
     "empty_user": {
     },
@@ -107,8 +100,7 @@
             "COMPA1",
             "ACCTA2"
         ],
-        "courses": {},
-        "year": 1
+        "courses": {}
     },
     "user_one_course": {
         "program": "3707",
@@ -118,8 +110,7 @@
         ],
         "courses": {
             "COMP1511": [6, 100]
-        },
-        "year": 1
+        }
     },
     "user_fail_comp1511": {
         "program": "3707",
@@ -129,8 +120,7 @@
         ],
         "courses": {
             "COMP1511": [6, 49]
-        },
-        "year": 1
+        }
     },
     "user_bare_pass_comp1511": {
         "program": "3707",
@@ -140,7 +130,6 @@
         ],
         "courses": {
             "COMP1511": [6, 50]
-        },
-        "year": 1
+        }
     }
 }

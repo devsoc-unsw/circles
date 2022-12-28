@@ -71,7 +71,7 @@ def fix_user_data(userData: dict):
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
-    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"].keys()))
+    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"]))
     return userData
 
 
@@ -213,7 +213,7 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
 
     all_courses = fetch_all_courses()
 
-    specialisations = list(userData.specialisations.keys())
+    specialisations = list(userData.specialisations)
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
     structure = get_structure(userData.program, "+".join(specialisations))['structure']
@@ -338,12 +338,12 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year, courseCode) -> Dict:
+def get_legacy_course(year: str, courseCode: str) -> Dict:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = archivesDB[str(year)].find_one({"code": courseCode})
+    result = archivesDB[year].find_one({"code": courseCode})
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
@@ -619,13 +619,13 @@ def weight_course(
 
     return weight
 
-def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
+def get_course_info(course: str, year: str | int = LIVE_YEAR) -> Dict:
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.
     If the year is not the LIVE_YEAR, then uses legacy information
     """
-    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(year, course)
+    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(str(year), course)
 
 def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     """
