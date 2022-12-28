@@ -12,8 +12,12 @@ class Course:
     mark: int
     uoc: int
     terms: dict[int, list[int]]
+    locked: tuple[int, int]
     def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]):
         """ create a domain of terms this course can be in for autoplanning """
+        if self.locked:
+            locked_number = (self.locked[0] - start[0]) * 4 + self.locked[1] - start[1]
+            return [[locked_number, locked_number]]
         numbers = []
         for key, value in self.terms.items():
             for term in value:

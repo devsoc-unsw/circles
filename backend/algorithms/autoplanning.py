@@ -31,17 +31,18 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     """
     # TODO: add a way to lock in courses
     model = cp_model.CpModel()
-    # enforces terms
+    # 1. enforces terms
     variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start, end)), course.name) for course in courses]
-    # if any courses are named the same, then they must be taken consecutively
-    course_names = [course.name for course in courses]
-    duplicate_courses = set(c for c in course_names if course_names.count(c) > 1)
+
+    # 2. if any courses are named the same, then they must be taken consecutively
+    possible_course_dupes = [course.name for course in courses and not course.locked]
+    duplicate_courses = set(c for c in possible_course_dupes if possible_course_dupes.count(c) > 1)
     for dupe in duplicate_courses:
         matched_courses = [variable for variable in variables if variable.Name() == dupe]
         for match, next_match in zip(matched_courses, matched_courses[1:]):
             model.Add(match + 1 == next_match)
 
-    # set max UOC for a term
+    # 3. set max UOC for a term
     for index, m in enumerate(uoc_max):
         boolean_indexes = []
         for v in variables:
@@ -60,9 +61,12 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
             m # uoc_max
         )
 
-    # enforce prereqs
+    # 4. enforce prereqs, only if not locked by user
     for course in courses:
-        # this is the responsibility of the condition class to generate this.
+        if course.locked:
+            continue
+
+        # this is the responsibility of the condition class to generate prereq model.
         course.condition.condition_to_model(
             model,
             user,

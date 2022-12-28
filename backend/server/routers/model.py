@@ -122,7 +122,6 @@ class PlannerData(BaseModel):
             "example": {
                 "program": "3707",
                 "specialisations": ["COMPA1"],
-                "year": 1,
                 "plan": [
                     [
                         {},
@@ -188,6 +187,10 @@ class ProgramTime(BaseModel):
     startTime: tuple[int, int] # (Year, Term) start of program
     endTime: tuple[int, int]
     uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+
+class TermsOffered(TypedDict):
+    terms: dict[int, list[str]]
+    fails: list[tuple[int, str]]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

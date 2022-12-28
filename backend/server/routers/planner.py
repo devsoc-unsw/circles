@@ -7,9 +7,9 @@ from algorithms.validate_term_planner import validate_terms
 from algorithms.autoplanning import autoplan
 from algorithms.objects.user import User
 from server.routers.model import (ValidCoursesState, PlannerData, 
-                                ValidPlannerData, UserData, ProgramTime)
+                                ValidPlannerData, ProgramTime)
 from server.routers.courses import get_course
-from server.routers.utility import get_course_object
+from server.routers.utility import get_course_object, extract_user_from_planner_data
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
@@ -90,17 +90,28 @@ def validate_term_planner(plannerData: PlannerData):
         }
     }
 )
-def autoplanning(courseCodes: list[str], userData: UserData, programTime: ProgramTime) -> dict:
-    user = User(dict(userData))
+def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
+    user = User(extract_user_from_planner_data(plannerData))
 
     try:
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
+        for year_index, year in enumerate(list(plannerData.plan)):
+            for term_index, term in enumerate(year):
+                for course, (_, mark) in term.items():
+                    courses.append(
+                        get_course_object(
+                            course,
+                            programTime,
+                            (year_index, term_index),
+                            mark
+                        )
+                    )
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
 
     result: dict[str, list[dict]] = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
 
-    for course in autoplanned:
-        result["plan"][course[1][0] - programTime.startTime[0]].setdefault(f'T{course[1][1]}', []).append(course[0])
+    for course, (year, term) in autoplanned:
+        result["plan"][year - programTime.startTime[0]].setdefault(f'T{term}', []).append(course)
     return result

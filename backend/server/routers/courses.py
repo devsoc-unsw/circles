@@ -15,7 +15,7 @@ from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
-                                  UserData)
+                                  UserData, TermsOffered)
 from server.routers.utility import get_core_courses, map_suppressed_errors
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import ProgramRestriction
@@ -499,7 +499,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
         },
     }
 )
-def terms_offered(course: str, years:str) -> Dict:
+def terms_offered(course: str, years:str) -> TermsOffered:
     """
     Recieves a course and a list of years. Returns a list of terms the
     course is offered in for the given years.
@@ -513,7 +513,7 @@ def terms_offered(course: str, years:str) -> Dict:
             fails: [(year, exception)]
         }
     """
-    fails: List[str] = []
+    fails: list[str] = []
     terms = {
         year: map_suppressed_errors(get_term_offered, fails, course, year)
         for year in years.split("+")
@@ -620,7 +620,7 @@ def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
     """
     return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(year, course)
 
-def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
+def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     """
     Returns the terms in which the given course is offered, for the given year.
     If the year is from the future then, backfill the LIVE_YEAR's results
