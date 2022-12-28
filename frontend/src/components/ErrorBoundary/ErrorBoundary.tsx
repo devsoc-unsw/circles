@@ -64,12 +64,12 @@ class ErrorBoundary extends React.Component<Props, State> {
               fix this bug, please let us know! We would greatly appreciate it!
             </p>
             <p>
-              Fill in this form{' '}
+              Fill in this form&nbsp;
               <a href={FEEDBACK_LINK} target="_blank" rel="noreferrer">
                 here
-              </a>{' '}
-              to inform us how the error occurred! Please also include brief description on the
-              steps that led up to the error and a copy of the error messages seen below.
+              </a>
+              &nbsp;to inform us how the error occurred! Please also include brief description on
+              the steps that led up to the error and a copy of the error messages seen below.
             </p>
             <p>
               If you are seeing this page often, try to reset your data by clicking the &apos;Reset
