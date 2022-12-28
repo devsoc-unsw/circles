@@ -1,6 +1,6 @@
 """ an autoplanning solver which takes in courses and spits a plan """
 from pprint import pprint
-from typing import Tuple, cast
+from typing import Tuple
 from ortools.sat.python import cp_model # type: ignore
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
@@ -74,7 +74,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         )
     solver = cp_model.CpSolver()
     status: int = solver.Solve(model)
-    if isinstance(status, int):
+    if status == 3 or status == 1:
         raise Exception(f'your courses are impossible to put in these terms! Error code: {status}')
     else:
         return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
