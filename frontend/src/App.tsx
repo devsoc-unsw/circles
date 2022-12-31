@@ -35,13 +35,10 @@ const App = () => {
               <Route
                 path="/"
                 element={
-                  <Navigate
-                    to={!degree.isComplete ? '/degree-wizard' : '/course-selector'}
-                    replace
-                  />
+                  !degree.isComplete ? <LandingPage /> : <Navigate to="/course-selector" replace />
                 }
               />
-              <Route path="/landing-page" element={<LandingPage />} />
+              <Route path="/" element={<LandingPage />} />
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
               {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
