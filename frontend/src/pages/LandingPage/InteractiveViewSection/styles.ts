@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const InteractiveViewContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  // TODO: Fix margin
-  margin: 15% 5%;
+  gap: 10px;
+  margin: 200px 0;
 `;
 
 const InteractiveViewTextContainer = styled.div`

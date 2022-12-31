@@ -8,6 +8,8 @@ const FeatureTitle = styled.h1`
   text-align: center;
   position: relative;
   margin-bottom: 75px;
+  font-weight: 650;
+  margin-top: 200px;
 `;
 
 const CardsSection = styled.div`
@@ -15,8 +17,9 @@ const CardsSection = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  gap: 2rem;
+  gap: 30px;
   position: relative;
+  margin-bottom: 200px;
 `;
 
 const Card = styled.div`
@@ -52,6 +55,7 @@ const FeatureSubtitle = styled.h3<{ startColor: string; endColor: string }>`
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 700;
 `;
 
 const Divider = styled.hr`
@@ -67,14 +71,19 @@ const Content = styled.p`
   font-size: 13px;
   color: #c8bfbf;
   letter-spacing: -0.3px;
-  line-height: 15px;
+  line-height: 1.2rem;
 `;
 
-const BlobContainer = styled.div`
+const BlobBackground = styled.img`
+  width: 100%;
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 75%;
+  top: 65%;
   left: 50%;
+
+  @media (max-width: 902px) {
+    top: 50%;
+  }
 `;
 
 export default {
@@ -85,5 +94,5 @@ export default {
   FeatureSubtitle,
   Divider,
   Content,
-  BlobContainer
+  BlobBackground
 };
