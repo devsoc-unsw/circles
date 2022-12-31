@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Course, CoursesUnlockedWhenTaken } from 'types/api';
-import { CourseList } from 'types/courses';
+import type { Course, CoursesUnlockedWhenTaken } from 'types/api';
+import type { CourseList } from 'types/courses';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';

@@ -3,8 +3,8 @@ import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-d
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
-import { ValidateTermPlanner } from 'types/api';
-import { Term } from 'types/planner';
+import type { ValidateTermPlanner } from 'types/api';
+import type { Term } from 'types/planner';
 import getAllCourseOfferings from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';

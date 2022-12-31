@@ -8,15 +8,15 @@ import {
 } from '@ant-design/icons';
 import { Button, Divider, Typography } from 'antd';
 import axios from 'axios';
-import { Structure } from 'types/api';
-import {
+import type { Structure } from 'types/api';
+import type {
   ProgressionAdditionalCourses,
   ProgressionViewStructure,
-  Views,
   ViewSubgroup,
   ViewSubgroupCourse
 } from 'types/progressionViews';
-import { ProgramStructure } from 'types/structure';
+import { Views } from 'types/progressionViews';
+import type { ProgramStructure } from 'types/structure';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';

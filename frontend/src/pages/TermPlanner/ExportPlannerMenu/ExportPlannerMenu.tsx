@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Radio } from 'antd';
-import { JSONPlanner } from 'types/planner';
+import type { JSONPlanner } from 'types/planner';
 import type { RootState } from 'config/store';
 import CS from '../common/styles';
 import S from './styles';

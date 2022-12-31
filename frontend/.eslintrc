@@ -1,74 +1,75 @@
 {
-    "root": true,
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:react/recommended",
-        "airbnb",
-        "airbnb-typescript",
-        "plugin:prettier/recommended"
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "react-hooks", "simple-import-sort", "@typescript-eslint", "prettier"],
+  "rules": {
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-param-reassign": ["error", { "ignorePropertyModificationsFor": ["state"] }], // enabled only for redux toolkit
+    "no-nested-ternary": ["off"], // disabled to allow for nested ternary statements
+    "import/order": "off", // disabled for simple-import-sort plugin
+    "react/jsx-props-no-spreading": ["off"], // disabled as to prefer using {...args} for props
+    "react/jsx-one-expression-per-line": ["off"], // disabled jsx needing to be only in a single line
+    "react/jsx-no-bind": ["off"], // disabled as it is needed for some antd components
+    "jsx-a11y/click-events-have-key-events": ["off"],
+    "jsx-a11y/interactive-supports-focus": ["off"],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }],
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "project": "./tsconfig.json"
-    },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "simple-import-sort",
-        "@typescript-eslint",
-        "prettier"
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            // react based packages
+            "^react",
+            // packages
+            "^@?\\w",
+            // absolute imports
+            "^(assets|components|config|hooks|pages|reducers)",
+            // absolute path or other imports that is not matched by the other groups
+            "^",
+            // relative imports
+            "^\\.",
+            // side effect imports
+            "^\\u0000"
+          ]
+        ]
+      }
     ],
-    "rules": {
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-        "no-param-reassign": ["error", { "ignorePropertyModificationsFor": [ "state" ] }], // enabled only for redux toolkit
-        "no-nested-ternary": ["off"], // disabled to allow for nested ternary statements
-        "import/order": "off", // disabled for simple-import-sort plugin
-        "react/jsx-props-no-spreading": ["off"], // disabled as to prefer using {...args} for props
-        "react/jsx-one-expression-per-line": ["off"], // disabled jsx needing to be only in a single line
-        "react/jsx-no-bind": ["off"], // disabled as it is needed for some antd components
-        "jsx-a11y/click-events-have-key-events": ["off"],
-        "jsx-a11y/interactive-supports-focus": ["off"],
-        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-        "no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }],
-        "react/function-component-definition": ["error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],
-        "simple-import-sort/imports": ["error", {
-            "groups": [
-                [
-                    // react based packages
-                    "^react",
-                    // packages
-                    "^@?\\w",
-                    // absolute imports
-                    "^(assets|components|config|hooks|pages|reducers)",
-                    // absolute path or other imports that is not matched by the other groups
-                    "^",
-                    // relative imports
-                    "^\\.",
-                    // side effect imports
-                    "^\\u0000"
-                  ]
-            ]
-        }],
-        "simple-import-sort/exports": ["error"],
-        "@typescript-eslint/no-explicit-any": ["error"],
-        "@typescript-eslint/no-floating-promises": ["off"],
-        "react/require-default-props": ["off"], // off since we have typescript instead
-        "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }], 
-        "react-hooks/exhaustive-deps": ["error"],
-        "react-hooks/rules-of-hooks": ["error"] // Checks rules of Hooks
-    },
-    "settings": {
-        "import/resolver": {
-          "node": {
-            "moduleDirectory": ["node_modules", "src/"],
-            "extensions": [".ts", ".tsx"]
-          }
-        }
+    "simple-import-sort/exports": ["error"],
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/no-floating-promises": ["off"],
+    "react/require-default-props": ["off"], // off since we have typescript instead
+    "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
+    "react-hooks/exhaustive-deps": ["error"],
+    "react-hooks/rules-of-hooks": ["error"], // Checks rules of Hooks
+    "@typescript-eslint/consistent-type-imports": ["error"]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"],
+        "extensions": [".ts", ".tsx"]
+      }
     }
+  }
 }

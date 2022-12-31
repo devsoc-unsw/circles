@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { Course } from 'types/api';
-import { CourseValidation } from 'types/courses';
+import type { Course } from 'types/api';
+import type { CourseValidation } from 'types/courses';
 
 type CoursesSliceState = {
   courses: Record<string, CourseValidation>;

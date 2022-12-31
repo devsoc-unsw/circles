@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
 import axios from 'axios';
-import { SearchCourse } from 'types/api';
+import type { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';

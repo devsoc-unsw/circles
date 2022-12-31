@@ -1,6 +1,6 @@
-import { CourseList, CourseStates, CourseValidation } from './courses';
-import { Term } from './planner';
-import { ProgramStructure } from './structure';
+import type { CourseList, CourseStates, CourseValidation } from './courses';
+import type { Term } from './planner';
+import type { ProgramStructure } from './structure';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import axios from 'axios';
-import { CourseChildren, CoursePathFrom } from 'types/api';
-import { CourseList } from 'types/courses';
+import type { CourseChildren, CoursePathFrom } from 'types/api';
+import type { CourseList } from 'types/courses';
 import Spinner from 'components/Spinner';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Typography } from 'antd';
-import { Views, ViewSubgroupCourse } from 'types/progressionViews';
+import type { ViewSubgroupCourse } from 'types/progressionViews';
+import { Views } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
 import Collapsible from 'components/Collapsible';
 import columnsData from '../columnsData';

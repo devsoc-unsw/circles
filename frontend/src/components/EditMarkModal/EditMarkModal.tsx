@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, message, Modal } from 'antd';
-import { Grade, Mark } from 'types/planner';
+import type { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
 import S from './styles';

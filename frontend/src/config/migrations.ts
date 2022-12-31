@@ -6,7 +6,7 @@
 import axios from 'axios';
 import type { MigrationManifest } from 'redux-persist';
 import { createMigrate } from 'redux-persist';
-import { Course } from 'types/api';
+import type { Course } from 'types/api';
 
 /**
  * IMPORTANT NOTE:

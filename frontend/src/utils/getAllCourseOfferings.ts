@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CourseLegacyOfferings, PlannerCourse, Term } from 'types/planner';
+import type { CourseLegacyOfferings, PlannerCourse, Term } from 'types/planner';
 
 export type ManyCoursesOfferings = {
   [course: string]: CourseLegacyOfferings;

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers, PreloadedState } from 'redux';
+import type { PreloadedState } from 'redux';
+import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import coursesReducer from 'reducers/coursesSlice';

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
-import { Term } from 'types/planner';
+import type { Term } from 'types/planner';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';

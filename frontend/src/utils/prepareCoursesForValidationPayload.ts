@@ -1,7 +1,8 @@
-import getMostRecentPastTerm, { MostRecentTerm } from 'utils/getMostRecentPastTerm';
+import type { MostRecentTerm } from 'utils/getMostRecentPastTerm';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
-import { DegreeSliceState } from 'reducers/degreeSlice';
-import { PlannerSliceState } from 'reducers/plannerSlice';
+import type { DegreeSliceState } from 'reducers/degreeSlice';
+import type { PlannerSliceState } from 'reducers/plannerSlice';
 
 type TermPlan = {
   // key = course code, value = [UOC, mark]

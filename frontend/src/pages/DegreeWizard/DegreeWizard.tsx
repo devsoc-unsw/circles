@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { SpecialisationTypes } from 'types/api';
+import type { SpecialisationTypes } from 'types/api';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';

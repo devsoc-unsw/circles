@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Structure } from 'types/api';
-import { ProgramStructure } from 'types/structure';
+import type { Structure } from 'types/api';
+import type { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';

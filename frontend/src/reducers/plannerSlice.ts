@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { CourseList, CourseStates } from 'types/courses';
-import { CourseLegacyOfferings, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
+import type { CourseList, CourseStates } from 'types/courses';
+import type { CourseLegacyOfferings, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
 import { getTermsList } from 'pages/TermPlanner/utils';
 
 // set up hidden object

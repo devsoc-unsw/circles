@@ -1,11 +1,13 @@
-import React, { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { AppStore, RootState, setupStore } from 'config/store';
+import type { AppStore, RootState } from 'config/store';
+import { setupStore } from 'config/store';
 import { lightTheme } from 'config/theme';
 import '@testing-library/jest-dom/extend-expect';
 

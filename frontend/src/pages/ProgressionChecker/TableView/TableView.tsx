@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Table, Typography } from 'antd';
-import { ViewSubgroupCourse } from 'types/progressionViews';
+import type { ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
 import columnsData from '../columnsData';
 import CoursesModal from '../CoursesModal';

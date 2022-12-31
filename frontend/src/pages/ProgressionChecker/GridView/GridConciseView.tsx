@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
 import { Tooltip, Typography } from 'antd';
-import { ViewSubgroupCourse } from 'types/progressionViews';
+import type { ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
 import Collapsible from 'components/Collapsible';

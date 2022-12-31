@@ -9,7 +9,7 @@ import {
 import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch, Tabs } from 'antd';
 import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import type { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';

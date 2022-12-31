@@ -1,4 +1,4 @@
-import { Grade, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
+import type { Grade, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
 import getNumTerms from 'utils/getNumTerms';
 
 const parseMarkToInt = (mark: Mark): number | null => {

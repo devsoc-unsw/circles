@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
-import { Programs } from 'types/api';
+import type { Programs } from 'types/api';
 import type { RootState } from 'config/store';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { resetDegree, setProgram } from 'reducers/degreeSlice';

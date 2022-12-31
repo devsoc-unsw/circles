@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Empty } from 'antd';
-import { ViewSubgroupCourse } from 'types/progressionViews';
+import type { ViewSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
 import CoursesModal from '../CoursesModal';
 import S from './styles';

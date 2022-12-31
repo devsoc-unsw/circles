@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import FeedbackButton from 'components/FeedbackButton';
 import Header from 'components/Header';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 
 type Props = {
   children: React.ReactNode;

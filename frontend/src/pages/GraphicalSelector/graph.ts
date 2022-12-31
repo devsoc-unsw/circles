@@ -1,5 +1,5 @@
 import type { Arrow } from '@antv/g6';
-import { PlannerCourse } from 'types/planner';
+import type { PlannerCourse } from 'types/planner';
 
 export const defaultNode = {
   size: 70,

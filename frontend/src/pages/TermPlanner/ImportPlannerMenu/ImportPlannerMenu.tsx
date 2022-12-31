@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
-import { Course } from 'types/api';
-import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
+import type { Course } from 'types/api';
+import type { JSONPlanner, PlannerCourse, Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import {

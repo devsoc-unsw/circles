@@ -3,14 +3,14 @@ import { animated, useSpring } from '@react-spring/web';
 import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
 import axios from 'axios';
-import { Specialisations } from 'types/api';
+import type { Specialisations } from 'types/api';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
-import Steps from '../common/steps';
+import type Steps from '../common/steps';
 import CS from '../common/styles';
 import S from './styles';
 

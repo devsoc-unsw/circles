@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Badge, Typography } from 'antd';
 import { useTheme } from 'styled-components';
-import { Term } from 'types/planner';
+import type { Term } from 'types/planner';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';

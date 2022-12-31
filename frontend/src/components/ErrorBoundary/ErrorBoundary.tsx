@@ -1,4 +1,5 @@
-import React, { ErrorInfo } from 'react';
+import type { ErrorInfo } from 'react';
+import React from 'react';
 import { Button, Space } from 'antd';
 import ResetModal from 'components/ResetModal';
 import { FEEDBACK_LINK } from 'config/constants';

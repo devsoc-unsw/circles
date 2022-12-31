@@ -1,4 +1,4 @@
-import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
+import type { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 
 const getEnrolmentCapacity = (data?: CourseTimetable): EnrolmentCapacityData | undefined => {
   if (!data) {

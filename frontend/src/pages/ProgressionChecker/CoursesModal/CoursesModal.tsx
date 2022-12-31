@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
 import { Input, Tooltip } from 'antd';
-import { ViewSubgroupCourse } from 'types/progressionViews';
+import type { ViewSubgroupCourse } from 'types/progressionViews';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
 import CourseBadge from '../CourseBadge';
 import S from './styles';

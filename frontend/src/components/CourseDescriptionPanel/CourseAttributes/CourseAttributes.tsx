@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
-import { Course } from 'types/api';
-import { EnrolmentCapacityData } from 'types/courseCapacity';
+import type { Course } from 'types/api';
+import type { EnrolmentCapacityData } from 'types/courseCapacity';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { TERM } from 'config/constants';

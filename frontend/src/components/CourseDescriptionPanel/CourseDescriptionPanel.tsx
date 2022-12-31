@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
-import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
-import { CourseList } from 'types/courses';
+import type { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import type { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
+import type { CourseList } from 'types/courses';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import {
