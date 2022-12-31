@@ -7,12 +7,12 @@ import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
-import LandingPage from 'pages/LandingPage';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';
 
 // Lazy load in pages
+const LandingPage = React.lazy(() => import('./pages/LandingPage'));
 const CourseSelector = React.lazy(() => import('./pages/CourseSelector'));
 const DegreeWizard = React.lazy(() => import('./pages/DegreeWizard'));
 const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
