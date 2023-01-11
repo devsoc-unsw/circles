@@ -68,7 +68,8 @@ To remove all containers and the docker network, run `docker-compose down`. Add 
 
 To stop a docker containers that is running, run `docker-compose stop <containerName>`. This will not remove the container.
 
-## Project Structure
+## Project Structure 
+(Accurate as of January 2023)
 ```bash
 frontend/
 ├─ public/                              # files related to the initial static html
