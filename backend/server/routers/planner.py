@@ -91,7 +91,7 @@ def validate_term_planner(plannerData: PlannerData):
     }
 )
 def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
-    user = User(extract_user_from_planner_data(plannerData))
+    user = extract_user_from_planner_data(plannerData)
 
     try:
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]

@@ -28,7 +28,7 @@ def test_basic_CS_autoplanning():
             Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
             Course("ENGG2600", CONDITIONS["ENGG2600"], 65, 2, {2020: [1, 2, 3], 2021: [1, 2, 3], 2022: [1, 2, 3]}),
             Course("COMP2511", CONDITIONS["COMP2511"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
-            Course("MATH1241", CONDITIONS["MATH1141"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
+            Course("MATH1241", CONDITIONS["MATH1241"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
             Course("MATH3411", CONDITIONS["MATH3411"], 65, 6, {2020: [3], 2021: [3], 2022: [3]}),
             Course("COMP3411", CONDITIONS["COMP3411"], 65, 6, {2020: [3], 2021: [0], 2022: [0]}),
             Course("COMP6841", CONDITIONS["COMP6841"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
