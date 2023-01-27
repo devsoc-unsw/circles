@@ -38,7 +38,6 @@ const App = () => {
                   !degree.isComplete ? <LandingPage /> : <Navigate to="/course-selector" replace />
                 }
               />
-              <Route path="/" element={<LandingPage />} />
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
               {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
