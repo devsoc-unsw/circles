@@ -10,15 +10,17 @@ const HeroContent = () => (
     <S.HeroTitle animate={{ x: [-60, 10, 0] }} transition={{ duration: 1, ease: 'easeInOut' }}>
       Degree planning made <S.HeroSubTitle src={easySubTitle} alt="Hero Subtitle" />
     </S.HeroTitle>
-    <S.HeroCTA
-      initial={{ scale: 0.0 }}
-      animate={{ scale: 1 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-      whileHover={{ scale: 1.1 }}
-    >
-      <Link to="/degree-wizard">START</Link>
-      <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
-    </S.HeroCTA>
+    <Link to="/degree-wizard">
+      <S.HeroCTA
+        initial={{ scale: 0.0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+        whileHover={{ scale: 1.1 }}
+      >
+        START
+        <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
+      </S.HeroCTA>
+    </Link>
     <S.CSESocLogo
       src={cseLogo}
       alt="CSE Logo"
