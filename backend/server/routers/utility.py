@@ -4,7 +4,7 @@ specifically in any one function
 """
 
 
-from typing import Callable
+from typing import Callable, Optional
 from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime, PlannerData
@@ -14,7 +14,7 @@ from algorithms.objects.user import User
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 B = TypeVar('B')
-def map_suppressed_errors(func: Callable[..., B], errors_log: list[tuple], *args, **kwargs) -> B | None:
+def map_suppressed_errors(func: Callable[..., B], errors_log: list[tuple], *args, **kwargs) -> Optional[B]:
     """
     Map a function to a list of arguments, and return the result of the function
     if no error is raised. If an error is raised, log the error and return None.
@@ -41,7 +41,7 @@ def get_core_courses(program: str, specialisations: list[str]):
          , [])
 
 
-def get_course_object(code: str, prog_time: ProgramTime, locked_offering: tuple[int, int] | None = None, mark: int | None = 100) -> Course:
+def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Optional[tuple[int, int]] = None, mark: Optional[int] = 100) -> Course:
     ''' 
     This return the Course object for the given course code.
     Note the difference between this and the get_course function in courses.py

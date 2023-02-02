@@ -109,13 +109,13 @@ class MostRecentPastTerm(TypedDict):
 class ValidPlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    plan: list[list[dict[str, tuple[int, int | None]]]]
+    plan: list[list[dict[str, tuple[int, Optional[int]]]]]
     mostRecentPastTerm: MostRecentPastTerm
 
 class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    plan: list[list[dict[str, list[int | None] | None ]]]
+    plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {

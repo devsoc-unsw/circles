@@ -27,7 +27,7 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES: Dict[str, str] | None = None
+ALL_COURSES: Optional[Dict[str, str]] = None
 CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
 INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
@@ -635,7 +635,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
     return get_course_info(course, year_to_fetch).get("terms", [])
 
-def get_program_restriction(program_code: str | None) -> Optional[ProgramRestriction]:
+def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """
     Returns the program restriction for the given program code.
     Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.

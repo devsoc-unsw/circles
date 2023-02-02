@@ -69,7 +69,7 @@ class Condition(ABC):
         is_valid, _ = self.validate(user)
         return [model.AddBoolAnd(not is_valid)]
 
-    def beneficial(self, user: User,  course: dict[str, Tuple[int, int | None]]) -> bool:
+    def beneficial(self, user: User,  course: dict[str, Tuple[int, Optional[int]]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
@@ -605,7 +605,7 @@ class CompositeCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, Optional[int]]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False
