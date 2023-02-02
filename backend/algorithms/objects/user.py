@@ -24,9 +24,9 @@ class User:
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, Tuple[int, int | None]] = {}
-        self.cur_courses: dict[str, Tuple[int, int | None]] = {}
-        self.program: str | None = None
+        self.courses: dict[str, Tuple[int, Optional[int]]] = {}
+        self.cur_courses: dict[str, Tuple[int, Optional[int]]] = {}
+        self.program: Optional[str] = None
         self.specialisations: list[str] = []
         self.year: int = 0
         self.core_courses: list[str] = []
@@ -35,7 +35,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, Tuple[int, int | None]]):
+    def add_courses(self, courses: dict[str, Tuple[int, Optional[int]]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -43,14 +43,14 @@ class User:
         """
         self.courses.update(courses)
 
-    def add_current_course(self, course_code: str, course: Tuple[int, int | None]):
+    def add_current_course(self, course_code: str, course: Tuple[int, Optional[int]]):
         """
         Given a course the user is taking in their current term,
         adds it to their cur_courses
         """
         self.cur_courses[course_code] = course
 
-    def add_current_courses(self, courses: dict[str, Tuple[int, int | None]]):
+    def add_current_courses(self, courses: dict[str, Tuple[int, Optional[int]]]):
         """
         Takes in a list of courses (represented as strings by course
         code) and, adds it to the list of current courses.
