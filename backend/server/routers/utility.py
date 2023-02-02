@@ -65,7 +65,7 @@ def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Option
             locked_offering
         )
     except KeyError:
-        raise Exception(f"Course {code} not found (most likely course is discontinuation)")
+        raise Exception(f"Course {code} not found (course is most likely discontinued)")
 
 def extract_user_from_planner_data(plannerData: PlannerData) -> User:
     """
