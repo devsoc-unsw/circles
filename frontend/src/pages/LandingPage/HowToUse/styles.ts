@@ -2,8 +2,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  margin-top: -5rem;
-  margin-bottom: 20rem;
+  margin-bottom: 80px;
 `;
 
 const Title = styled.h1`

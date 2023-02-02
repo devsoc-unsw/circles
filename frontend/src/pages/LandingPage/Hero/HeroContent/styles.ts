@@ -26,7 +26,7 @@ const HeroCTA = motion(styled.button`
   border-radius: 50px;
   background-color: #fff;
   border: none;
-  width: 30%;
+  width: 200px;
   height: 3.5rem;
   cursor: pointer;
   margin-bottom: 2.5rem;
