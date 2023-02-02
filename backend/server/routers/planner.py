@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 from algorithms.validate_term_planner import validate_terms
 from algorithms.autoplanning import autoplan
 from algorithms.objects.user import User
-from server.routers.model import (ValidCoursesState, PlannerData, 
+from server.routers.model import (ValidCoursesState, PlannerData,
                                 ValidPlannerData, ProgramTime)
 from server.routers.courses import get_course
 from server.routers.utility import get_course_object, extract_user_from_planner_data
@@ -56,7 +56,7 @@ def validate_term_planner(plannerData: PlannerData):
 
     return {"courses_state": coursesState}
 
-@router.post("/autoplanning/", 
+@router.post("/autoplanning/",
     response_model=dict,
     responses = {
         400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},

@@ -4,17 +4,17 @@ specifically in any one function
 """
 
 
-from typing import Callable, Optional
+from typing import Callable, Optional, TypeVar
 from algorithms.objects.course import Course
+
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime, PlannerData
-from typing import TypeVar
 from algorithms.objects.user import User
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
-B = TypeVar('B')
-def map_suppressed_errors(func: Callable[..., B], errors_log: list[tuple], *args, **kwargs) -> Optional[B]:
+R = TypeVar('R')
+def map_suppressed_errors(func: Callable[..., R], errors_log: list[tuple], *args, **kwargs) -> Optional[R]:
     """
     Map a function to a list of arguments, and return the result of the function
     if no error is raised. If an error is raised, log the error and return None.
