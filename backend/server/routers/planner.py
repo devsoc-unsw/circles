@@ -112,8 +112,6 @@ def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: 
         print("got to end")
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
-        print("Error: ", e)
-        print(dict(e))
         raise HTTPException(status_code=400, detail=f"Error: {e}")
 
     result: dict[str, list[dict]] = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
