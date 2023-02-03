@@ -10,10 +10,11 @@ values, whereas the contents of this file require further intialisation
 This should be initialised AFTER the database has been initialised
 """
 
-from typing import Mapping
+from typing import Literal, Mapping, Sequence
+from algorithms.objects.helper import read_data
 
 from server.database import archivesDB, coursesCOL
-from data.config import ARCHIVED_YEARS
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
 
 def initialise_all_courses() -> Mapping[str, str]:
     """
@@ -33,6 +34,9 @@ def initialise_all_courses() -> Mapping[str, str]:
 
     return courses
 
-ALL_COURSES: Mapping[str, str] = initialise_all_courses()
-# CODE_MAPPING: Optional[Dict[str, str]] = None
+# def initialise_code_mapping
 
+CODE_TO_TITLE_MAPPING: Mapping[str, str] = initialise_all_courses()
+GRAPH: Mapping[Literal["incoming_adjacency_list"], Mapping[str, Sequence[str]]] = read_data(GRAPH_CACHE_FILE)
+INCOMING_ADJACENCY: Mapping[str, Sequence[str]] = GRAPH.get("incoming_adjacency_list", {})
+TITLE_TO_CODE: Mapping[str, str] = read_data("data/utility/programCodeMappings.json")["title_to_code"]

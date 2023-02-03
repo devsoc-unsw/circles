@@ -5,7 +5,7 @@ print("INITIALISE: server/routers/courses.py")
 from contextlib import suppress
 import pickle
 import re
-from typing import Dict, List, Mapping, Optional, Set, Tuple
+from typing import Dict, List, Mapping, Optional, Sequence, Set, Tuple
 from algorithms.objects.program_restrictions import NoRestriction
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
@@ -19,7 +19,7 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   UserData)
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
-from server.startup import ALL_COURSES
+from server.startup import CODE_TO_TITLE_MAPPING, INCOMING_ADJACENCY
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import ProgramRestriction
@@ -30,10 +30,6 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-# ALL_COURSES: Dict[str, str] | None = None
-CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
-GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
-INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
 
 def fetch_all_courses() -> Mapping[str, str]:
     """
@@ -41,25 +37,11 @@ def fetch_all_courses() -> Mapping[str, str]:
         key: course code
         value: course_title
     """
-    # TODO: with actual bootstrapping, this should be done once and cached
-    # without giving anyone else the ability to access the global
-    # directly
-    global ALL_COURSES
-    if ALL_COURSES is not None:
-        return ALL_COURSES
-
-    courses = {}
-    for course in coursesCOL.find():
-        courses[course["code"]] = course["title"]
-
-    for year in sorted(ARCHIVED_YEARS, reverse=True):
-        for course in archivesDB[str(year)].find():
-            if course["code"] not in courses:
-                courses[course["code"]] = course["title"]
-
-    ALL_COURSES = courses
-
-    return ALL_COURSES
+    # TODO: This has been bootstrapped - Should have better naming with respect
+    # to the fact that it is not all course info,
+    # just a mapping of code to title
+    # TODO: this also should *not* be in the router file
+    return CODE_TO_TITLE_MAPPING
 
 
 def fix_user_data(userData: dict):
