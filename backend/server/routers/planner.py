@@ -9,7 +9,7 @@ from algorithms.objects.user import User
 from server.routers.model import (ValidCoursesState, PlannerData,
                                 ValidPlannerData, ProgramTime)
 from server.routers.courses import get_course
-from server.routers.utility import get_course_object, extract_user_from_planner_data
+from server.routers.utility import get_course_object
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
@@ -91,7 +91,7 @@ def validate_term_planner(plannerData: PlannerData):
     }
 )
 def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
-    user = extract_user_from_planner_data(plannerData)
+    user = plannerData.to_user()
 
     try:
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]

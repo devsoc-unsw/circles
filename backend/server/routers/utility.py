@@ -67,17 +67,3 @@ def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Option
     except KeyError:
         raise Exception(f"Course {code} not found (course is most likely discontinued)")
 
-def extract_user_from_planner_data(plannerData: PlannerData) -> User:
-    """
-    Extracts a user object from the plannerData
-    """
-    user = User()
-    user.program = plannerData.program
-    user.specialisations = plannerData.specialisations
-    for _, year in enumerate(list(plannerData.plan)):
-        for term in year:
-            cleaned_term = {}
-            for course_name, course_value in term.items():
-                cleaned_term[course_name] = (course_value[0], course_value[1]) if course_value else (COURSES[course_name]["UOC"], None)
-            user.add_courses(cleaned_term)
-    return user

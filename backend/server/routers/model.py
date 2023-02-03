@@ -7,6 +7,8 @@ from typing import Literal, Optional, TypedDict
 from pydantic import BaseModel
 
 from algorithms.objects.conditions import CompositeCondition
+from algorithms.objects.user import User
+from server.routers.utility import COURSES
 
 class Programs(BaseModel):
     programs: dict
@@ -155,6 +157,22 @@ class PlannerData(BaseModel):
                 },
             }
         }
+
+    def to_user(self) -> User:
+        user = User()
+        user.program = self.program
+        user.specialisations = self.specialisations[:]
+        for year in self.plan:
+            for term in year:
+                cleaned_term = {}
+                for course_name, course_value in term.items():
+                    cleaned_term[course_name] = (
+                        (course_value[0], course_value[1]) if course_value
+                        else (COURSES[course_name]["UOC"], None)
+                    )
+                user.add_courses(cleaned_term)
+        return user
+
 
 class CourseCodes(BaseModel):
     courses: list[str]
