@@ -1,6 +1,7 @@
 """
 APIs for the /courses/ route.
 """
+print("INITIALISE: server/routers/courses.py")
 from contextlib import suppress
 import pickle
 import re
@@ -17,9 +18,11 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
 from server.routers.utility import get_core_courses, map_suppressed_errors
+
+from server.startup import ALL_COURSES
+
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import ProgramRestriction
-
 
 router = APIRouter(
     prefix="/courses",
@@ -27,12 +30,12 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES: Dict[str, str] | None = None
+# ALL_COURSES: Dict[str, str] | None = None
 CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
 INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
 
-def fetch_all_courses() -> Dict[str, str]:
+def fetch_all_courses() -> Mapping[str, str]:
     """
     Returns a dictionary of all courses as a key-val pair with:
         key: course code

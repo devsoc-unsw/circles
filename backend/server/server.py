@@ -46,7 +46,6 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(followups.router)
 
-
 @app.get("/")
 async def index() -> str:
     """ sanity test that this file is loaded """
