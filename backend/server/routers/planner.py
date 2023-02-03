@@ -91,10 +91,13 @@ def validate_term_planner(plannerData: PlannerData):
     }
 )
 def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
+    print("started to_user")
     user = plannerData.to_user()
+    print('finished the to_user')
 
     try:
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
+        print('in the try')
         for year_index, year in enumerate(list(plannerData.plan)):
             for term_index, term in enumerate(year):
                 for course in term:
@@ -106,8 +109,11 @@ def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: 
                             user.get_grade(course)
                         )
                     )
+        print("got to end")
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
+        print("Error: ", e)
+        print(dict(e))
         raise HTTPException(status_code=400, detail=f"Error: {e}")
 
     result: dict[str, list[dict]] = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}

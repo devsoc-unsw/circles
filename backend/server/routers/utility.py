@@ -8,8 +8,7 @@ from typing import Callable, Optional, TypeVar
 from algorithms.objects.course import Course
 
 from data.utility import data_helpers
-from server.routers.model import CONDITIONS, ProgramTime, PlannerData
-from algorithms.objects.user import User
+from server.routers.model import CONDITIONS, ProgramTime
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
@@ -24,6 +23,7 @@ def map_suppressed_errors(func: Callable[..., R], errors_log: list[tuple], *args
     except Exception as e:
         errors_log.append((*args, e))
     return None
+
 
 def get_core_courses(program: str, specialisations: list[str]):
     from server.routers.programs import get_structure

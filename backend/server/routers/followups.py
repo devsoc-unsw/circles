@@ -1,8 +1,8 @@
-from typing import Dict
-from xml.sax.handler import property_declaration_handler
-from fastapi import APIRouter, HTTPException
-from server.database import coursesCOL
 import json
+
+from fastapi import APIRouter, HTTPException
+
+from server.database import coursesCOL
 
 router = APIRouter(
     prefix="/followups",
