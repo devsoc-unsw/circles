@@ -5,9 +5,9 @@
   "dependencies": {
     "@ant-design/colors": "6.0.0",
     "@ant-design/icons": "4.8.0",
-    "@ant-design/plots": "1.2.2",
+    "@ant-design/plots": "1.2.4",
     "@antv/algorithm": "0.1.25",
-    "@antv/g6": "4.8.0",
+    "@antv/g6": "4.8.3",
     "@react-spring/web": "9.6.0",
     "@reduxjs/toolkit": "1.9.1",
     "@rive-app/react-canvas": "^3.0.33",
@@ -67,7 +67,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "7.20.5",
+    "@babel/core": "7.20.12",
     "@testing-library/dom": "8.19.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",

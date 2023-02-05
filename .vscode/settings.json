@@ -5,6 +5,7 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.cwd": "${workspaceFolder}/backend",
+    "mypy.configFile": "./backend/mypy.ini",
     "files.exclude": {
         "**/__pycache__": true,
         "**/.hypothesis": true,

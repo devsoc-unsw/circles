@@ -15,7 +15,7 @@ from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
-                                  UserData)
+                                  UserData, TermsOffered, CoursesPathDict)
 from server.routers.utility import get_core_courses, map_suppressed_errors
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import ProgramRestriction
@@ -27,7 +27,7 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES: Dict[str, str] | None = None
+ALL_COURSES: Optional[Dict[str, str]] = None
 CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
 INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
@@ -71,7 +71,7 @@ def fix_user_data(userData: dict):
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
-    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"].keys()))
+    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"]))
     return userData
 
 
@@ -213,7 +213,7 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
 
     all_courses = fetch_all_courses()
 
-    specialisations = list(userData.specialisations.keys())
+    specialisations = list(userData.specialisations)
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
     structure = get_structure(userData.program, "+".join(specialisations))['structure']
@@ -338,12 +338,12 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year, courseCode) -> Dict:
+def get_legacy_course(year: str, courseCode: str) -> Dict:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = archivesDB[str(year)].find_one({"code": courseCode})
+    result = archivesDB[year].find_one({"code": courseCode})
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
@@ -426,7 +426,7 @@ def course_children(course: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def get_path_from(course: str) -> dict[str, str | list[str]]:
+def get_path_from(course: str) -> CoursesPathDict:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
@@ -506,7 +506,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
         },
     }
 )
-def terms_offered(course: str, years:str) -> Dict:
+def terms_offered(course: str, years:str) -> TermsOffered:
     """
     Recieves a course and a list of years. Returns a list of terms the
     course is offered in for the given years.
@@ -520,9 +520,9 @@ def terms_offered(course: str, years:str) -> Dict:
             fails: [(year, exception)]
         }
     """
-    fails: List[str] = []
+    fails: list[tuple] = []
     terms = {
-        year: map_suppressed_errors(get_term_offered, fails, course, year)
+        year: map_suppressed_errors(get_term_offered, fails, course, year) or []
         for year in years.split("+")
     }
 
@@ -619,15 +619,15 @@ def weight_course(
 
     return weight
 
-def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
+def get_course_info(course: str, year: str | int = LIVE_YEAR) -> Dict:
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.
     If the year is not the LIVE_YEAR, then uses legacy information
     """
-    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(year, course)
+    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(str(year), course)
 
-def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
+def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     """
     Returns the terms in which the given course is offered, for the given year.
     If the year is from the future then, backfill the LIVE_YEAR's results
@@ -635,7 +635,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
     return get_course_info(course, year_to_fetch).get("terms", [])
 
-def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
+def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """
     Returns the program restriction for the given program code.
     Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.
@@ -644,6 +644,8 @@ def get_program_restriction(program_code: str) -> Optional[ProgramRestriction]:
     # TODO: This loading should not be here; very slow
     # making it global causes some errors
     # There needs to be a startup event for routers to load data
+    if not program_code:
+        return None
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:
         program_restrictions: dict[str, ProgramRestriction] = pickle.load(file)
     return program_restrictions.get(program_code, None)

@@ -396,7 +396,7 @@ def test_coreq_condition():
         "COMP1511": (6, None),
         "COMP1521": (6, None),
     })
-    user.add_current_course("COMP1531")
+    user.add_current_course("COMP1531", (6, None))
 
     # Testing simple co-requisite conditions
     coreq_cond1 = create_condition(["(", "[", "COMP1531", "]", ")"])
@@ -409,7 +409,7 @@ def test_coreq_condition():
     assert (coreq_cond3.validate(user))[0]
     assert not (coreq_cond4.validate(user))[0]
 
-    user.add_current_course("COMP1541")
+    user.add_current_course("COMP1541", (6, None))
 
     # Testing more complex co-requisite conditions
     complex_coreq_cond1 = create_condition(["(", "[", "COMP1521", "&&", "COMP1531", "&&", "COMP1541", "]", ")"])

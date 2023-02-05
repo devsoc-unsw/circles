@@ -1,20 +1,19 @@
 """
 route for planner algorithms
 """
-from typing import Tuple, List, Dict
+from typing import Optional, Tuple
 from fastapi import APIRouter, HTTPException
 from algorithms.validate_term_planner import validate_terms
 from algorithms.autoplanning import autoplan
 from algorithms.objects.user import User
-from algorithms.objects.course import Course
-from server.routers.model import (ValidCoursesState, PlannerData, ValidPlannerData, 
-                                CourseCodes, UserData, ProgramTime)
+from server.routers.model import (ValidCoursesState, PlannerData,
+                                ValidPlannerData, ProgramTime)
 from server.routers.courses import get_course
 from server.routers.utility import get_course_object
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
-    plan: list[list[dict[str, Tuple[int, int | None]]]] = []
+    plan: list[list[dict[str, Tuple[int, Optional[int]]]]] = []
     for year_index, year in enumerate(plannerData.plan):
         plan.append([])
         for term_index, term in enumerate(year):
@@ -57,7 +56,7 @@ def validate_term_planner(plannerData: PlannerData):
 
     return {"courses_state": coursesState}
 
-@router.get("/autoplanning/", 
+@router.post("/autoplanning/",
     response_model=dict,
     responses = {
         400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
@@ -91,17 +90,32 @@ def validate_term_planner(plannerData: PlannerData):
         }
     }
 )
-def autoplanning(courseCodes: List, userData: UserData, programTime: ProgramTime) -> Dict:
-    user = User(dict(userData))
+def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
+    print("started to_user")
+    user = plannerData.to_user()
+    print('finished the to_user')
 
     try:
         courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
+        print('in the try')
+        for year_index, year in enumerate(list(plannerData.plan)):
+            for term_index, term in enumerate(year):
+                for course in term:
+                    courses.append(
+                        get_course_object(
+                            course,
+                            programTime,
+                            (year_index, term_index),
+                            user.get_grade(course)
+                        )
+                    )
+        print("got to end")
         autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
-    
-    result: Dict = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
 
-    for course in autoplanned:
-        result["plan"][course[1][0] - programTime.startTime[0]].setdefault(f'T{course[1][1]}', []).append(course[0])
+    result: dict[str, list[dict]] = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
+
+    for course, (year_autoplanned, term_autoplanned) in autoplanned:
+        result["plan"][year_autoplanned - programTime.startTime[0]].setdefault(f'T{term_autoplanned}', []).append(course)
     return result

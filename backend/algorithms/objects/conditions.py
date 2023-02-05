@@ -69,7 +69,7 @@ class Condition(ABC):
         is_valid, _ = self.validate(user)
         return [model.AddBoolAnd(not is_valid)]
 
-    def beneficial(self, user: User,  course: dict[str, Tuple[int, int | None]]) -> bool:
+    def beneficial(self, user: User,  course: dict[str, Tuple[int, Optional[int]]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
@@ -343,7 +343,7 @@ class CoresCondition(Condition):
 
     def __init__(self):
         """ the subset of courses in CORES that must be completed """
-        self.category = AnyCategory()
+        self.category: Category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """
@@ -358,7 +358,7 @@ class CoresCondition(Condition):
 
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         course_names = [var[0].Name() for var in courses]
-        does_match, relevant_courses = user.matches_core(course_names, self.category())
+        does_match, relevant_courses = user.matches_core(course_names, self.category)
         if not does_match:
             # if you can never match the core, gg
             return [model.AddBoolAnd(False)]
@@ -367,7 +367,7 @@ class CoresCondition(Condition):
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         course_names = [var[0].Name() for var in courses]
-        does_match, relevant_courses = user.matches_core(course_names, self.category())
+        does_match, relevant_courses = user.matches_core(course_names, self.category)
         if not does_match:
             # if you cant match the core, youre good
             return [model.AddBoolAnd(True)]
@@ -605,7 +605,7 @@ class CompositeCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, Optional[int]]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False
