@@ -145,7 +145,7 @@ class CoreqCourseCondition(Condition):
 
     def __str__(self) -> str:
         return json.dumps({
-            {'id': self.course}
+            'id': self.course
         })
 
 class UOCCondition(Condition):
