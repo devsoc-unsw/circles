@@ -7,6 +7,16 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 - Leonardo Fan (@leonardo-fan) - Frontend Director
 - Hussain Nawaz (@imagine-hussain) - Backend Director
 
+### Full Stack Members
+- Christian Lam (@ui-Auxilary)
+- Martin Knezevic (@martanman)
+- Oliver Bowers (@ollibowers)
+- Vinayak Fialok (@VinayakFia)
+- Luke Prior (@LukePrior)
+- Lucas Harvey (@lhvy)
+- Kobi Beckett (@Bahnschrift)
+- Sandeep Das (@Dasyure)
+
 ## 2022
 ### Leads
 - Gabriel Ting (@gtangelo) - Frontend Lead
