@@ -18,9 +18,21 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 // mock react-router-dom
-vi.mock('react-router-dom', () => ({
-  useNavigate: vi.fn(),
-  useLocation: () => ({ pathname: '/' })
+vi.mock('react-router-dom', async () => {
+  const reactRouterDomImports: object = await vi.importActual('react-router-dom');
+  return {
+    ...reactRouterDomImports,
+    useNavigate: vi.fn(),
+    useLocation: () => ({ pathname: '/' })
+  };
+});
+
+vi.mock('utils/openNotification', () => ({
+  default: vi.fn()
+}));
+
+vi.mock('hooks/useIntersectionObserver', () => ({
+  default: vi.fn()
 }));
 
 const dummyNavigate = vi.fn();

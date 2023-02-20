@@ -5,7 +5,7 @@ import argparse
 from contextlib import suppress
 import json
 from sys import exit
-
+from data.processors.models import Course
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -25,7 +25,7 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
-def check_in_fixes(cname: str, ls: list, error: str) -> None:
+def check_in_fixes(cname: str, ls: list[tuple[str,str]], error: str) -> None:
     """ mutates the list given to add the course name if it is in manual fixes"""
     with suppress(FileNotFoundError):
         with open(f"data/processors/manual_fixes/{cname[0:4]}Fixes.py", "r", encoding="utf8") as file:
@@ -35,23 +35,23 @@ def check_in_fixes(cname: str, ls: list, error: str) -> None:
 
 def main():
     """ runs the comparison between a target and a source year """
-    source_courses = (
+    source_course_location = (
         "data/final_data/coursesProcessed.json"
         if args.source is None
         else f"data/final_data/archive/processed/{args.source}.json"
     )
 
-    target_courses = f"data/final_data/archive/processed/{args.target}.json"
+    target_course_location = f"data/final_data/archive/processed/{args.target}.json"
 
-    with open(source_courses, "r", encoding="utf8") as f:
-        source_courses = json.loads(f.read())
+    with open(source_course_location, "r", encoding="utf8") as f:
+        source_courses: dict[str, Course] = json.loads(f.read())
 
-    with open(target_courses, "r", encoding="utf8") as f:
-        target_courses = json.loads(f.read())
+    with open(target_course_location, "r", encoding="utf8") as f:
+        target_courses: dict[str, Course] = json.loads(f.read())
 
     all_source = set(source_courses.keys())
     all_target = set(target_courses.keys())
-    courses_in_manual = []
+    courses_in_manual: list[tuple[str, str]] = []
 
     print("removed:")
     for removed in sorted(all_target - all_source):

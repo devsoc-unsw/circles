@@ -14,11 +14,13 @@ const LogoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: max-content;
   cursor: pointer;
 `;
 
 const HeaderContent = styled.div`
   display: flex;
+  flex-grow: 1;
   justify-content: flex-end;
   align-items: center;
 `;

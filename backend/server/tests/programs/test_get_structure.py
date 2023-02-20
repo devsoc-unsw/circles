@@ -17,7 +17,6 @@ fake_specs = ["NAVLAH", "GMATEH", "ARCYB2"]
 def major_minor_for_program(draw):
     program = draw(sampled_from(programs))
     possible_specs: list[str] = []
-    
     for t in requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisationTypes/{program}").json()["types"]:
         majorsRequest = requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/{t}")
         majorsRequestJson = majorsRequest.json()['spec'] if majorsRequest.status_code == 200 else {}

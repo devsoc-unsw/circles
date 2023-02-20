@@ -26,7 +26,7 @@ const TableView = ({ subgroupTitle, courses, notes, showNotes, uoc, type }: Prop
   );
   const remainingUOC = Math.max(uoc - plannedUOC, 0);
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
@@ -50,13 +50,13 @@ const TableView = ({ subgroupTitle, courses, notes, showNotes, uoc, type }: Prop
             pagination={false}
           />
           <S.ViewCoursesButtonWrapper>
-            <Button type="primary" onClick={() => setModalVisible(true)}>
+            <Button type="primary" onClick={() => setOpenModal(true)}>
               View Courses
             </Button>
             <CoursesModal
               title={subgroupTitle}
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
+              open={openModal}
+              onCancel={() => setOpenModal(false)}
               courses={unplannedCourses}
             />
           </S.ViewCoursesButtonWrapper>

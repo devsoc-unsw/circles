@@ -10,6 +10,7 @@ type CourseWrapperProps = {
 };
 
 const CourseWrapper = styled.li<CourseWrapperProps>`
+  position: relative;
   user-select: none;
   font-size: 0.8rem;
   cursor: grab;
@@ -75,7 +76,14 @@ const CourseLabel = styled.div`
   margin: 0px;
 `;
 
+const MultiCourseBadgeWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
 export default {
   CourseWrapper,
-  CourseLabel
+  CourseLabel,
+  MultiCourseBadgeWrapper
 };

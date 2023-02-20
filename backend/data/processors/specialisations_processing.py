@@ -29,7 +29,7 @@ def customise_spn_data():
 
     data = read_data("data/scrapers/specialisationsFormattedRaw.json")
 
-    customised_data = {}  # Dictionary for all customised data
+    customised_data: dict = {}  # TODO: specify type # Dictionary for all customised data
     for spn in data.keys():
         if not any((prog in TEST_PROGS for prog in data[spn]["programs"])):
             continue

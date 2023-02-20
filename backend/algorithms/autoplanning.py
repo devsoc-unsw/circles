@@ -20,7 +20,7 @@ def map_course_to_var(course: Course, variables: list[cp_model.IntVar]):
 def convert_to_term_year(number: int, start: Tuple[int, int]):
     return (number // 4 + start[0], number % 4 + start[1])
 
-def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]):
+def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]) -> list[Tuple[str, Tuple[int, int]]]:
     """
     given a list of courses, we will fill our terms in a valid ordering.
     we will enforce that:
@@ -31,17 +31,17 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     """
     # TODO: add a way to lock in courses
     model = cp_model.CpModel()
-    # enforces terms
+    # 1. enforces terms
     variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start, end)), course.name) for course in courses]
-    # if any courses are named the same, then they must be taken consecutively
-    course_names = [course.name for course in courses]
-    duplicate_courses = set(c for c in course_names if course_names.count(c) > 1)
+    # 2. if any courses are named the same, then they must be taken consecutively
+    possible_course_dupes = [course.name for course in courses if not course.locked]
+    duplicate_courses = set(c for c in possible_course_dupes if possible_course_dupes.count(c) > 1)
     for dupe in duplicate_courses:
         matched_courses = [variable for variable in variables if variable.Name() == dupe]
         for match, next_match in zip(matched_courses, matched_courses[1:]):
             model.Add(match + 1 == next_match)
 
-    # set max UOC for a term
+    # 3. set max UOC for a term
     for index, m in enumerate(uoc_max):
         boolean_indexes = []
         for v in variables:
@@ -60,9 +60,12 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
             m # uoc_max
         )
 
-    # enforce prereqs
+    # 4. enforce prereqs, only if not locked by user
     for course in courses:
-        # this is the responsibility of the condition class to generate this.
+        if course.locked:
+            continue
+
+        # this is the responsibility of the condition class to generate prereq model.
         course.condition.condition_to_model(
             model,
             user,
@@ -71,8 +74,8 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         )
     solver = cp_model.CpSolver()
     status: int = solver.Solve(model)
-    if status == 3:
-        raise Exception('your courses are impossible to put in these terms!')
+    if status == 3 or status == 1:
+        raise Exception(f'your courses are impossible to put in these terms! Error code: {status}')
     else:
         return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
 

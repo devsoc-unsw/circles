@@ -9,7 +9,7 @@ from typing import Dict, List
 from algorithms.objects.categories import Category, GenEdCategory, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data
-from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, NoRestriction, ProgramRestriction
+from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, ProgramRestriction
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
 

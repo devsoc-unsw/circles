@@ -46,9 +46,10 @@ const Header = () => {
         theme="dark"
         selectedKeys={[pathname]}
         mode="horizontal"
-        overflowedIndicator={null}
         style={{
-          backgroundColor: 'inherit'
+          backgroundColor: 'inherit',
+          justifyContent: 'flex-end',
+          flexGrow: '1'
         }}
         onClick={(e) => navigate(e.key)}
         items={items}

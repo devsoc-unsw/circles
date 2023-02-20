@@ -5,23 +5,15 @@ import { PlannerSliceState } from 'reducers/plannerSlice';
 // key = course code, value = mark of course (number | null)
 type UserPayloadCourse = Record<string, number | null>;
 
-// key = spec, value = 1
-type UserPayloadSpecialisations = Record<string, 1>;
-
 type UserPayload = {
   program: string;
   courses: UserPayloadCourse;
-  specialisations: UserPayloadSpecialisations;
+  specialisations: string[];
 };
 
 const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): UserPayload => {
   const { courses } = planner;
   const { programCode, specs } = degree;
-
-  const specialisations: UserPayloadSpecialisations = {};
-  specs.forEach((spec) => {
-    specialisations[spec] = 1;
-  });
 
   const selectedCourses: UserPayloadCourse = {};
   Object.entries(courses).forEach(([courseCode, courseData]) => {
@@ -30,7 +22,7 @@ const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState
 
   return {
     program: programCode,
-    specialisations,
+    specialisations: specs,
     courses: selectedCourses
   };
 };

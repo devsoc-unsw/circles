@@ -7,7 +7,7 @@ This should be run from the backend directory or via runprocessors
 from functools import reduce
 import operator
 import re
-from typing import Any
+from typing import Any, Literal
 
 from algorithms.cache.cache_config import (CACHE_CONFIG, CACHED_EQUIVALENTS_FILE,
                                            CACHED_EXCLUSIONS_FILE,
@@ -88,7 +88,7 @@ def cache_mappings():
     Writes to mappings.json and courseMappings.json (i.e maps courses to corresponding school/faculty)
     """
     mappings = {}
-    courseMappings = {}
+    courseMappings: dict[str, dict[str, Literal[1]]] = {}
     courses = read_data(COURSES_PROCESSED_FILE)
 
     # Tokenise faculty using regex, e.g 'UNSW Business School' -> 'F Business'
@@ -100,6 +100,8 @@ def cache_mappings():
             match_object = re.search(r"(?<=UNSW\s)[^\s\n\,]+", Faculty)
         else:
             match_object = re.search("^([\w]+)", Faculty)
+        if match_object is None:
+            raise Exception(f'no match found for faculty: {Faculty}')
         match = match_object.group()
         faculty_token += match
         return faculty_token
@@ -113,12 +115,16 @@ def cache_mappings():
             match_object = re.search("(?<=School\sof\s)[^\s\n\,]+", School)
         elif re.search("^(UC)", School):
             match_object = re.search("(?<=UC\s)[^\s\n\,]+", School)
+            if match_object is None:
+                raise Exception(f'no match found for school: {School}')
             match = school_token + "UC-" +  match_object.group()
             return match
         elif re.search("UNSW", School):
             match_object = re.search("(?<=UNSW\s)[^\s\n\,]+", School)
         else:
             match_object = re.search("^([\w]+)", School)
+        if match_object is None:
+            raise Exception(f'no match found for school: {School}')
         match = match_object.group()
         school_token += match
         return school_token
@@ -166,7 +172,7 @@ def cache_program_mappings():
 
     keyword_codes: dict[str, list[str]] = read_data(CACHE_CONFIG)
 
-    mappings = {
+    mappings : dict = { # TODO: make more strict
         code: {} for code
         in reduce(operator.add, keyword_codes.values())
     }

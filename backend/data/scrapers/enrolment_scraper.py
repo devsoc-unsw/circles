@@ -47,7 +47,6 @@ def scrape_enrolment_data(username:str, password:str):
             continue
         enrolment_data[course_code] = {}
         hashed_enrolment_data[course_code] = {}
-        print(course_code)
         for i in range(0, 4):
             enrolment_data[course_code][f'T{i}'] = []
             hashed_enrolment_data[course_code][f'T{i}'] = []

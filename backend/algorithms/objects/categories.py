@@ -11,6 +11,10 @@ from algorithms.objects.helper import Logic
 # Preload the mappings to school and faculty
 CACHED_MAPPINGS = {}
 
+print("path is")
+import os
+print(os.path.dirname(os.path.realpath(__file__)))
+# This is so bad, needs a fix lol
 with open("./algorithms/cache/courseMappings.json", "r", encoding="utf8") as f:
     CACHED_MAPPINGS = json.load(f)
 
