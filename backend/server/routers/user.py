@@ -26,6 +26,8 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
         usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})
 
 
+# Ideally not used often.
+# 
 @router.post("/saveLocalStorage/")
 def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     # TODO: turn giving no token into an error
