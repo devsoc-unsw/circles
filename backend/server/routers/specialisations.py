@@ -84,4 +84,4 @@ def get_specialisations(programCode: str, typeSpec: Literal["majors"] | Literal[
             if not specialisationsCOL.find_one({"code": code}):
                 del item["specs"][code]
 
-    return {"spec": result["components"]["spec_data"][typeSpec]}
+    return {"spec": result["components"]["spec_data"].get(typeSpec)}
