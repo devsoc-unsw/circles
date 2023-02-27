@@ -43,8 +43,8 @@ This project is rapidly expanding and our roadmap includes features such as:
 
 # Our team
 
-- We are a team that is part of CSESoc Projects!
-- Also, special thanks to
-  - James Ji, Vincent Xiao, Hayes Choy - for being the first team to work on and inspire Circles :)
+We are a team that is part of CSESoc Projects! See [TEAM.md](./TEAM.md) for more information on the current and previous team that contributed to the development of Circles.
+
+Also, special thanks to James Ji, Vincent Xiao, Hayes Choy for being the first team to work on and inspire Circles :)
 
 [For further development documentation, a linktree to our jira boards and more!](https://compclub.atlassian.net/wiki/spaces/C/pages/1664385928/About+Circles)

@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from data.config import LIVE_YEAR
 
-from server.routers import courses, planner, programs, specialisations, auth, user
+from server.routers import courses, planner, programs, specialisations, auth, followups
 
 app = FastAPI()
 
@@ -27,7 +27,9 @@ origins = [
     "http://frontend:3000",
     "http://frontend:3001",
     "https://circles.csesoc.unsw.edu.au",
-    "https://circles.csesoc.app"
+    "https://circles.csesoc.app",
+    "https://cselectives.staging.csesoc.unsw.edu.au",
+    "https://cselectives.csesoc.unsw.edu.au",
 ]
 
 app.add_middleware(
@@ -44,6 +46,7 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(auth.router)
 app.include_router(user.router)
+app.include_router(followups.router)
 
 
 @app.get("/")

@@ -128,7 +128,9 @@ class MaturityRestriction(ProgramRestriction):
         """
         return not (self.match_dependent(course) and not self.dependency_met(user))
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
+    # TODO: This type signature is very messy. That course dict should have
+    # a Course : Mark mapping type or, somethign similar
+    def beneficial(self, user: User, course: dict[str, Tuple[int, Optional[int]]]) -> bool:
         """
         Will a course be beneficial to advancing this condition?
         More specifically, can the course be used to meet the dependency?

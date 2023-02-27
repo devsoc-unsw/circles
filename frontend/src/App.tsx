@@ -1,18 +1,18 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
-import LandingPage from 'pages/LandingPage';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';
 
 // Lazy load in pages
+const LandingPage = React.lazy(() => import('./pages/LandingPage'));
 const CourseSelector = React.lazy(() => import('./pages/CourseSelector'));
 const DegreeWizard = React.lazy(() => import('./pages/DegreeWizard'));
 const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
@@ -33,16 +33,7 @@ const App = () => {
         <Suspense fallback={<PageLoading />}>
           <Router>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Navigate
-                    to={!degree.isComplete ? '/degree-wizard' : '/course-selector'}
-                    replace
-                  />
-                }
-              />
-              {inDev && <Route path="/landing-page" element={<LandingPage />} />}
+              <Route path="/" element={!degree.isComplete ? <LandingPage /> : <CourseSelector />} />
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
               {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
