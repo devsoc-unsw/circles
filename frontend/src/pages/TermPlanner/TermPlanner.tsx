@@ -14,8 +14,8 @@ import {
   moveCourse,
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
-  toggleWarnings,
-  unschedule
+  toggleWarnings
+  // unschedule
 } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
@@ -126,12 +126,21 @@ const TermPlanner = () => {
 
     if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
-      dispatch(
-        unschedule({
-          destIndex,
-          code: draggableId
-        })
-      );
+      // dispatch(
+      //   unschedule({
+      //     destIndex,
+      //     code: draggableId
+      //   })
+      // );
+      // Replace with call to backend API
+      try {
+        // eslint-disable-next-line no-console
+        console.log('Attempting to unschedule course');
+        axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }));
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error("Couldn't unschedule course", e);
+      }
       return;
     }
 
