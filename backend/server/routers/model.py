@@ -160,7 +160,7 @@ class PlannerData(BaseModel):
 
     def to_user(self) -> User:
         user = User()
-        user.program = self.program
+        user.program = self.programCode
         user.specialisations = self.specialisations[:]
 
         # prevent circular import; TODO: There has to be a better way

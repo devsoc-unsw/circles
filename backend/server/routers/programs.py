@@ -259,10 +259,8 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
-    programCode: str, spec: Optional[str] = None
-) -> StructureDict:
     programCode: str, spec: Optional[str] = None, ignore: Optional[str] = None
-):
+) -> StructureDict:
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
 
@@ -286,13 +284,14 @@ def get_structure(
 @router.get("/getStructureCourseList/{programCode}", response_model=CourseCodes)
 def get_structure_course_list(
         programCode: str, spec: Optional[str] = None
-    ):
+):
     """
         Similar to `/getStructure` but, returns a raw list of courses with no further
         nesting or categorisation.
         TODO: Add a test for this.
     """
     structure: dict[str, StructureContainer] = {}
+
     structure = add_specialisations(structure, spec)
     structure, _ = add_program_code_details(structure, programCode)
     apply_manual_fixes(structure, programCode)
@@ -328,7 +327,7 @@ def get_structure_course_list(
 )
 def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
     """ Fetches the geneds for a given program code """
-    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened"))
+    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened")["structure"])
     return get_gen_eds(programCode, course_list)
 
 def get_gen_eds(
@@ -404,10 +403,12 @@ def get_cores(programCode: str, spec: str):
 ###############################################################
 
 
-def course_list_from_structure(structure: dict) -> list[str]:
+def course_list_from_structure(structure: Dict[str, StructureContainer]) -> list[str]:
     """
         Given a formed structure, return the list of courses
-        in that structure
+        in that structure.
+        TODO: The `__recursive_course_search` should be deprecated
+        due to better type definitions of `StructureDict`
     """
     courses = []
     def __recursive_course_search(structure: dict) -> None:
@@ -425,7 +426,7 @@ def course_list_from_structure(structure: dict) -> list[str]:
                 courses.extend(v.keys())
             __recursive_course_search(v)
         return
-    __recursive_course_search(structure)
+    __recursive_course_search(dict(structure))
     return courses
 
 def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
