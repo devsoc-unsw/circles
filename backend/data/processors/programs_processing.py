@@ -31,6 +31,7 @@ CS_PROGS = (
     "3673", # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
     "3674",
     "3778",
+    "3779",
     "3781",
     "3782",
     "3783",
