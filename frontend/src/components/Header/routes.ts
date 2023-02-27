@@ -21,6 +21,11 @@ const routes: Route[] = [
   {
     label: 'Progression Checker',
     link: '/progression-checker'
+  },
+  {
+    label: 'Login',
+    link: '/login',
+    dev: true
   }
 ];
 
