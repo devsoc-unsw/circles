@@ -57,7 +57,7 @@ def get_user(token: str) -> Storage:
     data = usersDB['tokens'].find_one({'token': token})
     if data is None:
         # TODO: this is so jank - add actual register / checking process when it comes
-        # should error and prompt a registration - at some point ;)
+        # This actually should error and prompt a registration - at some point ;)
         return default_cs_user()
         # raise HTTPException(400,f"Invalid token: {token}")
     else:
