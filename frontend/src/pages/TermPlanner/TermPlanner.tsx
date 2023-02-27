@@ -15,7 +15,6 @@ import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
   toggleWarnings
-  unschedule
 } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
