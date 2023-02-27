@@ -49,7 +49,7 @@ const App = () => {
               <Route path="/term-planner" element={<TermPlanner />} />
               <Route path="/progression-checker" element={<ProgressionChecker />} />
               <Route path="*" element={<Page404 />} />
-              <Route path="/login" element={<Auth />} />
+              {inDev && <Route path="/login" element={<Auth />} />}
             </Routes>
           </Router>
         </Suspense>
