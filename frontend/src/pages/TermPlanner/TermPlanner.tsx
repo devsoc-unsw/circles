@@ -74,7 +74,7 @@ const TermPlanner = () => {
     setIsDragging(true);
   };
 
-  const handleOnDragEnd: OnDragEndResponder = (result) => {
+  const handleOnDragEnd: OnDragEndResponder = async (result) => {
     setIsDragging(false);
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
@@ -126,7 +126,7 @@ const TermPlanner = () => {
     if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
       try {
-        axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }), {
+        await axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }), {
           params: { token }
         });
       } catch (e) {
