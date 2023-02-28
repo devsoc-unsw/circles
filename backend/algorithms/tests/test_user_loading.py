@@ -46,9 +46,9 @@ def test_user3():
 def test_user_no_data():
     user = User()
     assert user.courses == {}
-    assert user.cur_courses == []
+    assert user.cur_courses == {}
     assert user.program == None
-    assert user.specialisations == {}
+    assert user.specialisations == []
 
 def test_user_empty():
     """

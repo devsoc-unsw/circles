@@ -29,10 +29,6 @@ axiosMock.onGet('/specialisations/getSpecialisations/3778/majors').reply(200, {
   }
 });
 
-vi.mock('utils/openNotification', () => ({
-  default: vi.fn()
-}));
-
 const preloadedState = {
   degree: {
     programCode: '3778',

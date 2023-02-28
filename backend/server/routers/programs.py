@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations """
 from contextlib import suppress
 import functools
 import re
-from typing import Callable, Mapping, Optional, Tuple, cast
+from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
 
@@ -25,6 +25,7 @@ from server.routers.model import (
     Structure,
     StructureContainer,
     StructureDict,
+    CoursesPathDict,
 )
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
@@ -40,6 +41,20 @@ def programs_index() -> str:
     """ sanity test that this file is loaded """
     return "Index of programs"
 
+
+# TODO: response model to this somehow
+@router.get("/getAllPrograms")
+def get_all_programs() -> Dict[Any, Any]:
+    """
+    Like `/getPrograms` but does not filter any programs for if they are
+    production ready.
+    """
+    return {
+        "programs": {
+            q["code"]: q["title"]
+            for q in programsCOL.find()
+        }
+    }
 
 @router.get(
     "/getPrograms",
@@ -244,14 +259,20 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
-    programCode: str, spec: Optional[str] = None
+    programCode: str, spec: Optional[str] = None, ignore: Optional[str] = None
 ) -> StructureDict:
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
+
+    ignored = ignore.split("+") if ignore else []
+
     structure: dict[str, StructureContainer] = {}
-    structure = add_specialisations(structure, spec)
-    structure, uoc = add_program_code_details(structure, programCode)
-    structure = add_geneds_to_structure(structure, programCode)
+    if "spec" not in ignored:
+        structure = add_specialisations(structure, spec)
+    if "code_details" not in ignored:
+        structure, uoc = add_program_code_details(structure, programCode)
+    if "gened" not in ignored:
+        structure = add_geneds_to_structure(structure, programCode)
     apply_manual_fixes(structure, programCode)
 
     return {
@@ -263,13 +284,14 @@ def get_structure(
 @router.get("/getStructureCourseList/{programCode}", response_model=CourseCodes)
 def get_structure_course_list(
         programCode: str, spec: Optional[str] = None
-    ):
+):
     """
         Similar to `/getStructure` but, returns a raw list of courses with no further
         nesting or categorisation.
         TODO: Add a test for this.
     """
     structure: dict[str, StructureContainer] = {}
+
     structure = add_specialisations(structure, spec)
     structure, _ = add_program_code_details(structure, programCode)
     apply_manual_fixes(structure, programCode)
@@ -303,10 +325,33 @@ def get_structure_course_list(
         },
     },
 )
-def get_gen_eds(programCode: str):
-    """ fetches gen eds from file """
-    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    return {"courses" : all_geneds}
+def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
+    """ Fetches the geneds for a given program code """
+    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened")["structure"])
+    return get_gen_eds(programCode, course_list)
+
+def get_gen_eds(
+        programCode: str, excluded_courses: Optional[List[str]] = None
+    ) -> Dict[str, Dict[str, str]]:
+    """
+    fetches gen eds from file and removes excluded courses.
+        - `programCode` is the program code to fetch geneds for
+        - `excluded_courses` is a list of courses to exclude from the gened list.
+        Typically the result of a `courseList` from `getStructure` to prevent
+        duplicate courses between cores, electives and geneds.
+    """
+    excluded_courses = excluded_courses if excluded_courses is not None else []
+    try:
+        geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+    except KeyError:
+        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}")
+
+    for course in excluded_courses:
+        if course in geneds:
+            del geneds[course]
+
+    return {"courses": geneds}
+
 
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
@@ -332,11 +377,13 @@ def graph(
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
-    failed_courses: list[str] = []
 
-    proto_edges: list[dict[str, str]] = [map_suppressed_errors(
+    failed_courses: list[tuple] = []
+
+    proto_edges: list[Optional[CoursesPathDict]] = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
+
     edges = prune_edges(
             proto_edges_to_edges(proto_edges),
             courses
@@ -356,10 +403,12 @@ def get_cores(programCode: str, spec: str):
 ###############################################################
 
 
-def course_list_from_structure(structure: dict) -> list[str]:
+def course_list_from_structure(structure: Dict[str, StructureContainer]) -> list[str]:
     """
         Given a formed structure, return the list of courses
-        in that structure
+        in that structure.
+        TODO: The `__recursive_course_search` should be deprecated
+        due to better type definitions of `StructureDict`
     """
     courses = []
     def __recursive_course_search(structure: dict) -> None:
@@ -377,7 +426,7 @@ def course_list_from_structure(structure: dict) -> list[str]:
                 courses.extend(v.keys())
             __recursive_course_search(v)
         return
-    __recursive_course_search(structure)
+    __recursive_course_search(dict(structure))
     return courses
 
 def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
@@ -407,12 +456,13 @@ def add_program_code_details(structure: dict[str, StructureContainer], programCo
     structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
+# TODO: This should be computed at scrape-time
 def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
     """
         Insert geneds of the given programCode into the structure
         provided
     """
-    programsResult = cast(Program | None, programsCOL.find_one({"code": programCode}))
+    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
     if programsResult is None:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
@@ -432,7 +482,8 @@ def compose(*functions: Callable) -> Callable:
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
 
-def proto_edges_to_edges(proto_edges: list[dict[str, str]]) -> list[dict[str, str]]:
+
+def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[Dict[str, str]]:
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.
