@@ -15,9 +15,10 @@ type Props = {
 
 const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   const dispatch = useDispatch();
-  const [markValue, setMarkValue] = useState<string | number | undefined>(
-    useSelector((state: RootState) => state.planner.courses[code].mark)
-  );
+  // const [markValue, setMarkValue] = useState<string | number | undefined>(
+  //   useSelector((state: RootState) => state.planner.courses[code].mark)
+  // );
+  const [markValue, setMarkValue] = useState<string | number | undefined>();
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
 

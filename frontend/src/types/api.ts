@@ -40,6 +40,11 @@ export type UnselectCourses = {
   courses: CourseList;
 };
 
+export type CourseMark = {
+  course: string;
+  mark: number;
+};
+
 export type CourseChildren = {
   original: string;
   courses: CourseList;
