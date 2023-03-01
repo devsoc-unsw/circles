@@ -2,7 +2,7 @@
 from contextlib import suppress
 from itertools import chain
 import requests
-
+from server.routers.model import StructureContainer
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
@@ -36,7 +36,7 @@ def test_validation():
 
 
 def assert_possible_structure(unlocked, program, spec):
-    structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
+    structure: dict[str,StructureContainer] = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
     for container in structure:
         with suppress(KeyError):
             del structure[container]['content']['General Education']

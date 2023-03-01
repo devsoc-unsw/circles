@@ -10,6 +10,7 @@ import { setToken } from 'reducers/settingsSlice';
 
 // import MetaTags from "react-meta-tags";
 import "./index.less";
+import PageTemplate from 'components/PageTemplate';
 
 const Auth = () => {
   const [userObject, setUserObject] = useState({});
@@ -100,29 +101,31 @@ const Auth = () => {
   }
 
   return (
-    <div>
-      {Object.keys(userObject).length === 0 ?
-        (
-          <div>
-            <h1>NOT LOGGED IN</h1>
-            <div id="signInDiv" />
-          </div>
-        )
-        :
-        (
-          <div>
-            <div> signed in </div>
+    <PageTemplate>
+      <div>
+        {Object.keys(userObject).length === 0 ?
+          (
             <div>
-              <h2>Data:</h2>
-              <JsonObject
-                obj={userObject}
-              />
+              <h1>NOT LOGGED IN</h1>
+              <div id="signInDiv" />
             </div>
-            <LogoutButton />
-          </div>
-        )
-      }
-    </div>
+          )
+          :
+          (
+            <div>
+              <div> signed in </div>
+              <div>
+                <h2>Data:</h2>
+                <JsonObject
+                  obj={userObject}
+                />
+              </div>
+              <LogoutButton />
+            </div>
+          )
+        }
+      </div>
+    </PageTemplate>
   );
 };
 

@@ -1,18 +1,23 @@
 """
 route for planner algorithms
 """
-from typing import Tuple, List, Dict, Set
+
+from typing import Tuple, List, Dict, Set, Optional
 from operator import itemgetter
 from math import lcm
 from fastapi import APIRouter, HTTPException
 from algorithms.validate_term_planner import validate_terms
+from algorithms.autoplanning import autoplan
+from algorithms.objects.user import User
+from server.routers.model import (ValidCoursesState, PlannerData,
+                                  ValidPlannerData, ProgramTime)
 from server.routers.courses import get_course
 from server.routers.utility import get_course_object
 from server.routers.model import (ValidCoursesState, ValidPlannerData,
-                                    PlannerData, CourseCode, UnPlannedToTerm,
-                                    PlannedToTerm, UserData, ProgramTime, CourseCodes,
-                                    CONDITIONS, CACHED_HANDBOOK_NOTE
-                                    )
+                                  PlannerData, CourseCode, UnPlannedToTerm,
+                                  PlannedToTerm, UserData, ProgramTime, CourseCodes,
+                                  CONDITIONS, CACHED_HANDBOOK_NOTE
+                                  )
 from server.routers.user import get_user, set_user
 from server.config import DUMMY_TOKEN
 from algorithms.objects.user import User
@@ -21,24 +26,28 @@ from algorithms.autoplanning import autoplan
 
 MIN_COMPLETED_COURSE_UOC = 6
 
+
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
-    plan: list[list[dict[str, Tuple[int, int | None]]]] = []
+    plan: list[list[dict[str, Tuple[int, Optional[int]]]]] = []
     for year_index, year in enumerate(plannerData.plan):
         plan.append([])
         for term_index, term in enumerate(year):
             plan[year_index].append({})
             for courseName, course in term.items():
                 if not isinstance(course, list):
-                    plan[year_index][term_index][courseName] = (get_course(courseName)["UOC"], course)
+                    plan[year_index][term_index][courseName] = (
+                        get_course(courseName)["UOC"], course)
                 elif course[0] is not None:
-                    plan[year_index][term_index][courseName] = (course[0], course[1])
+                    plan[year_index][term_index][courseName] = (
+                        course[0], course[1])
     return ValidPlannerData(
         programCode=plannerData.programCode,
         specialisations=plannerData.specialisations,
         plan=plan,
         mostRecentPastTerm=plannerData.mostRecentPastTerm
     )
+
 
 router = APIRouter(
     prefix="/planner", tags=["planner"], responses={404: {"description": "Not found"}}
@@ -49,6 +58,7 @@ router = APIRouter(
 def planner_index() -> str:
     """ sanity test that this file is loaded """
     return "Index of planner"
+
 
 @router.post("/validateTermPlanner/", response_model=ValidCoursesState)
 def validate_term_planner(plannerData: PlannerData):
@@ -83,6 +93,7 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
     user['planner']['unplanned'].append(data.courseCode)
     set_user(token, user, True)
 
+
 @router.post("/unPlannedToTerm")
 def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN):
     """
@@ -106,12 +117,13 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
     user = get_user(token)
     planner = user['planner']
     instance_num = 0
-    terms_list = get_terms_list(data.destTerm, uoc, terms, planner['isSummerEnabled'], instance_num)
+    terms_list = get_terms_list(
+        data.destTerm, uoc, terms, planner['isSummerEnabled'], instance_num)
 
     # If moving a multiterm course out of bounds
     if course['is_multiterm'] and out_of_bounds(len(planner['years']), data.destRow, terms_list):
         raise HTTPException(status_code=400,
-            detail = f'{data.courseCode} would extend outside of the term planner. \
+                            detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
 
     planner['unplanned'].remove(data.courseCode)
@@ -119,14 +131,18 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
     # If multiterm add multiple instances of course
     if course['is_multiterm']:
         terms_list.pop(instance_num)
-        planner['years'][data.destRow][data.destTerm].insert(data.destIndex, data.courseCode)
+        planner['years'][data.destRow][data.destTerm].insert(
+            data.destIndex, data.courseCode)
         for term_row in terms_list:
             term, row_offset = itemgetter('term', 'row_offset')(term_row)
             index = len(planner['years'][data.destRow + row_offset][term])
-            planner['years'][data.destRow + row_offset][term].insert(index, data.courseCode)
+            planner['years'][data.destRow +
+                             row_offset][term].insert(index, data.courseCode)
     else:
-        planner['years'][data.destRow][data.destTerm].insert(data.destIndex, data.courseCode)
+        planner['years'][data.destRow][data.destTerm].insert(
+            data.destIndex, data.courseCode)
     set_user(token, user, True)
+
 
 @router.post("/plannedToTerm")
 def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
@@ -152,14 +168,17 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
     course = get_course(data.courseCode)
     user = get_user(token)
 
-    uoc, terms_offered, is_multiterm = itemgetter('UOC', 'terms', 'is_multiterm')(course)
+    uoc, terms_offered, is_multiterm = itemgetter(
+        'UOC', 'terms', 'is_multiterm')(course)
 
     src_term_list = []
 
     # If only changing index of multiterm course, don't change other course instances
     if is_multiterm and data.srcRow == data.destRow and data.srcTerm == data.destTerm:
-        user['planner']['years'][data.srcRow][data.srcTerm].remove(data.courseCode)
-        user['planner']['years'][data.srcRow][data.srcTerm].insert(data.destIndex, data.courseCode)
+        user['planner']['years'][data.srcRow][data.srcTerm].remove(
+            data.courseCode)
+        user['planner']['years'][data.srcRow][data.srcTerm].insert(
+            data.destIndex, data.courseCode)
         set_user(token, user, True)
         return
 
@@ -190,7 +209,7 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
     # If multiterm course and out of bounds, raise exception without updating database
     if is_multiterm and out_of_bounds(len(user['planner']['years']), data.destRow, new_terms):
         raise HTTPException(status_code=400,
-                detail = f'{data.courseCode} would extend outside of the term planner. \
+                            detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
     if is_multiterm:
         new_terms.pop(instance_num)
@@ -210,9 +229,11 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
         term, row_offset = itemgetter('term', 'row_offset')(term_row_offset)
         target_term = user['planner']['years'][data.destRow + row_offset][term]
         term_id = f'{data.destRow + row_offset}{term}'
-        index = previous_index[term_id] if term_id in previous_index else len(target_term)
+        index = previous_index[term_id] if term_id in previous_index else len(
+            target_term)
         target_term.insert(index, data.courseCode)
     set_user(token, user, True)
+
 
 @router.post('/removeCourse')
 def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
@@ -238,6 +259,7 @@ def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
         planner['unplanned'].remove(data.courseCode)
     set_user(token, user, True)
 
+
 @router.post("/removeAll")
 def remove_all(token: str = DUMMY_TOKEN):
     """
@@ -254,6 +276,7 @@ def remove_all(token: str = DUMMY_TOKEN):
     # Clear unplanned column
     user['planner']['unplanned'] = []
     set_user(token, user, True)
+
 
 @router.post("/unscheduleCourse")
 def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
@@ -281,6 +304,7 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
         planner['unplanned'].append(item)
     set_user(token, user, True)
 
+
 @router.post('/unscheduleAll')
 def unschedule_all(token: str = DUMMY_TOKEN):
     """
@@ -303,6 +327,7 @@ def unschedule_all(token: str = DUMMY_TOKEN):
         user['planner']['unplanned'].append(course)
     set_user(token, user, True)
 
+
 def generate_empty_years(num_years: int):
     """
     Generates a set amount of empty years
@@ -314,6 +339,7 @@ def generate_empty_years(num_years: int):
         List[List[terms]]: An empty list of years and terms
     """
     return [{'T0': [], 'T1': [], 'T2': [], 'T3': []} for _ in range(num_years)]
+
 
 def get_terms_list(
     current_term: str,
@@ -392,56 +418,76 @@ def out_of_bounds(num_years, dest_row, terms):
     Returns:
         bool: Whether the multiterm course can be placed where specified
     """
-    max_row_offset = max(terms, key= lambda x: x['row_offset'])['row_offset']
-    min_row_offset = min(terms, key= lambda x: x['row_offset'])['row_offset']
+    max_row_offset = max(terms, key=lambda x: x['row_offset'])['row_offset']
+    min_row_offset = min(terms, key=lambda x: x['row_offset'])['row_offset']
 
     return dest_row + min_row_offset < 0 or dest_row + max_row_offset > num_years - 1
 
-@router.get("/autoplanning/",
-    response_model=dict,
-    responses = {
-        400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
-        200: {
-            "description": "Successful Response",
-            "content": {
-                "plan": [
-                    {
-                        "T1": [
-                            "COMP1511",
-                            "MATH1131"
-                        ],
-                        "T3": [
-                            "COMP1521"
-                        ]
-                    },
-                    {
-                        "T0": [
-                            "COMP2521"
-                        ],
-                        "T2": [
-                            "COMP1531"
-                        ],
-                        "T1": [
-                            "COMP3821",
-                            "COMP3891",
-                        ]
-                    }
-                ]
-            }
-        }
-    }
-)
-def autoplanning(courseCodes: List, userData: UserData, programTime: ProgramTime) -> Dict:
-    user = User(dict(userData))
+
+@router.post("/autoplanning/",
+             response_model=dict,
+             responses={
+                 400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
+                 200: {
+                     "description": "Successful Response",
+                     "content": {
+                         "plan": [
+                             {
+                                 "T1": [
+                                     "COMP1511",
+                                     "MATH1131"
+                                 ],
+                                 "T3": [
+                                     "COMP1521"
+                                 ]
+                             },
+                             {
+                                 "T0": [
+                                     "COMP2521"
+                                 ],
+                                 "T2": [
+                                     "COMP1531"
+                                 ],
+                                 "T1": [
+                                     "COMP3821",
+                                     "COMP3891",
+                                 ]
+                             }
+                         ]
+                     }
+                 }
+             }
+             )
+def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
+    print("started to_user")
+    user = plannerData.to_user()
+    print('finished the to_user')
 
     try:
-        courses = [get_course_object(courseCode, programTime) for courseCode in courseCodes]
-        autoplanned = autoplan(courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
+        courses = [get_course_object(courseCode, programTime)
+                   for courseCode in courseCodes]
+        print('in the try')
+        for year_index, year in enumerate(list(plannerData.plan)):
+            for term_index, term in enumerate(year):
+                for course in term:
+                    courses.append(
+                        get_course_object(
+                            course,
+                            programTime,
+                            (year_index, term_index),
+                            user.get_grade(course)
+                        )
+                    )
+        print("got to end")
+        autoplanned = autoplan(
+            courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
 
-    result: Dict = {"plan": [ {} for _ in range(programTime.endTime[0] - programTime.startTime[0] + 1)]}
+    result: dict[str, list[dict]] = {"plan": [{} for _ in range(
+        programTime.endTime[0] - programTime.startTime[0] + 1)]}
 
-    for course in autoplanned:
-        result["plan"][course[1][0] - programTime.startTime[0]].setdefault(f'T{course[1][1]}', []).append(course[0])
+    for course, (year_autoplanned, term_autoplanned) in autoplanned:
+        result["plan"][year_autoplanned - programTime.startTime[0]
+                       ].setdefault(f'T{term_autoplanned}', []).append(course)
     return result

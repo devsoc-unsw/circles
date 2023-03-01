@@ -15,6 +15,7 @@ const Droppable = React.lazy(() =>
 );
 
 const UnplannedColumn = ({ dragging }: Props) => {
+  const planner = useSelector((state: RootState) => state.planner);
   const { isSummerEnabled, unplanned } = useSelector((state: RootState) => state.planner);
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
@@ -32,7 +33,13 @@ const UnplannedColumn = ({ dragging }: Props) => {
               isSmall={isSmall}
             >
               {unplanned.map((course, courseIndex) => (
-                <DraggableCourse code={course} index={courseIndex} key={course} term="" />
+                <DraggableCourse
+                  code={course}
+                  index={courseIndex}
+                  key={course}
+                  term=""
+                  showMultiCourseBadge={planner.courses[course].isMultiterm}
+                />
               ))}
               {provided.placeholder}
             </S.UnplannedBox>
