@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, message, Modal } from 'antd';
 import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
-import { updateCourseMark } from 'reducers/plannerSlice';
 import S from './styles';
+import { updateCourseMark } from 'utils/planner';
+import { CourseMark } from 'types/api';
 
 type Props = {
   code: string;
@@ -29,12 +30,7 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   };
 
   const updateMark = (mark: Mark) => {
-    dispatch(
-      updateCourseMark({
-        code,
-        mark
-      })
-    );
+    updateCourseMark({course: code, mark: mark});
     setMarkValue(mark);
     setIsVisible(false);
     message.success('Mark Updated');

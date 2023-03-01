@@ -1,5 +1,5 @@
 import { CourseList, CourseStates, CourseValidation } from './courses';
-import { Term } from './planner';
+import { Mark, Term } from './planner';
 import { ProgramStructure } from './structure';
 
 // types are layed out from the BE api routes
@@ -42,7 +42,7 @@ export type UnselectCourses = {
 
 export type CourseMark = {
   course: string;
-  mark: number;
+  mark: Mark;
 };
 
 export type CourseChildren = {

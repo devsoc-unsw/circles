@@ -108,9 +108,24 @@ def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
         user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
     set_user(token, user, True)
 
-@router.put("/updateCourseMark")
+@router.put("/updateCourseMark", responses={
+    400: [
+            {
+                "description": "The given course code could not be found in the user's courses",
+                },
+            {
+                "description": "Invalid mark",
+                }
+        ]
+    }
+)
 def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
     user = get_user(token)
+
+    if isinstance(courseMark.mark, int) and (courseMark.mark < 0 or courseMark.mark > 100):
+        raise HTTPException(
+            status_code=400, detail=f"Invalid mark '{courseMark.mark}'"
+        )
 
     if courseMark.course in user['courses']:
         user['courses'][courseMark.course]['mark'] = courseMark.mark
@@ -118,10 +133,7 @@ def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
         raise HTTPException(
             status_code=400, detail=f"Course code {courseMark.course} was not found in user's courses"
         )
-    if courseMark.mark < 0 or courseMark.mark > 100:
-        raise HTTPException(
-            status_code=400, detail=f"Invalid mark '{courseMark.mark}'"
-        )
+
     set_user(token, user, True)
 
 @router.put("/updateStartYear")

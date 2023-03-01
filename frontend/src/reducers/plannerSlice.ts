@@ -1,6 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { CourseList, CourseStates } from 'types/courses';
 import { Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
 import { getTermsList } from 'pages/TermPlanner/utils';
@@ -267,8 +266,6 @@ const plannerSlice = createSlice({
       if (state.courses[code]) {
         state.courses[code].mark = mark;
       }
-
-      axios.put('/user/updateCourseMark', { code, mark });
     },
     // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses
     removeCourse: (state, action: PayloadAction<string>) => {
