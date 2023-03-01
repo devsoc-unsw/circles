@@ -10,9 +10,11 @@ import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { useDebouncedCallback } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
+import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
 import S from './styles';
@@ -28,6 +30,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
   const { degree, planner } = useSelector((state: RootState) => state);
+  const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
   const [loading, setLoading] = useState(true);
@@ -169,14 +172,25 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     }
   }, [focused]);
 
+  // handle resizing
+  const resizeGraph = useCallback(() => {
+    const graph = graphRef.current;
+    const container = containerRef.current;
+    if (!graph || graph.get('destroyed')) return;
+    if (!container || !container.scrollWidth || !container.scrollHeight) return;
+    graph.changeSize(container.scrollWidth, container.scrollHeight);
+  }, []);
+  const resizeGraphDebounce = useDebouncedCallback(resizeGraph, 20, { maxWait: 20 });
+
   useEffect(() => {
-    // resize canvas size when sidebar state changes
-    graphRef.current?.changeSize(
-      containerRef.current?.scrollWidth ?? 0,
-      containerRef.current?.scrollHeight ?? 0
-    );
-    // }, [sidebar]);
-  }, [fullscreen]);
+    // resize on window size change
+    resizeGraphDebounce();
+  }, [windowSize, resizeGraphDebounce]);
+
+  useEffect(() => {
+    // resize instantly for fullscreening
+    resizeGraph();
+  }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
     if (unlockedCourses) showUnlockedCourses();
