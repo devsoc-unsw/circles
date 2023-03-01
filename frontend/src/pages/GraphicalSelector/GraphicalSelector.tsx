@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import CourseSearchBar from 'components/CourseSearchBar';
@@ -10,7 +8,7 @@ import HowToUse from './HowToUse';
 import SidebarDrawer from './SidebarDrawer/SidebarDrawer';
 import S from './styles';
 
-const GraphicalSelectorNew = () => {
+const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
@@ -65,4 +63,4 @@ const GraphicalSelectorNew = () => {
   );
 };
 
-export default GraphicalSelectorNew;
+export default GraphicalSelector;

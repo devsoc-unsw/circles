@@ -19,7 +19,6 @@ const GraphWrapper = styled.div<{ fullscreen: boolean }>`
   overflow: hidden;
   flex: 5;
   position: relative;
-  /* box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.1) inset; */
 
   ${({ fullscreen }) =>
     !fullscreen &&
