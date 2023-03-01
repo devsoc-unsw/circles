@@ -147,3 +147,46 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
     else:
         user['planner']['years'] = user['planner']['years'][:diff]
     set_user(token, user, True)
+
+@router.put("/setProgram") 
+def setProgram(token: str = DUMMY_TOKEN, degree: dict):
+    user = get_user(token);
+    user['user']['degree']['programCode'] = degree['programCode']
+    set_user(token, user, True)
+
+@router.put("/addSpecialisation") 
+def addSpecialisation(token: str = DUMMY_TOKEN, specialisation: str):
+    user = get_user(token);
+    user['user']['degree']['specs'].append(specialisation)
+    set_user(token, user, True)
+
+@router.put("/removeSpecialisation") 
+def removeSpecialisation(token: str = DUMMY_TOKEN, specialisation: str):
+    user = get_user(token);
+    specs = user['user']['degree']['specs']
+    if specialisation in specs:
+        user['user']['degree']['specs'] = specs.remove(specialisation)
+    set_user(token, user, True)
+
+@router.put("/setIsComplete") 
+def setIsComplete(token: str = DUMMY_TOKEN, isComplete: bool):
+    user = get_user(token);
+    user['user']['degree']['isComplete'] = isComplete
+    set_user(token, user, True)
+
+@router.put("/reset")
+def reset(token: str = DUMMY_TOKEN):
+    user = get_user(token);
+    
+    user = default_cs_user();
+    user['user'] = {
+        'degree': {
+            'programCode': '',
+            'specs': [],
+            'isComplete': False,
+        },
+        'planner': planner,
+        'courses': {}
+    }
+    set_user(token, user, True)
+    
