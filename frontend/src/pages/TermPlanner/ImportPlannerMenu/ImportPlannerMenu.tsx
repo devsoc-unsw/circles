@@ -12,7 +12,6 @@ import {
   moveCourse,
   setUnplannedCourseToTerm,
   toggleSummer,
-  updateDegreeLength,
   updateStartYear
 } from 'reducers/plannerSlice';
 import CS from '../common/styles';
@@ -76,7 +75,7 @@ const ImportPlannerMenu = () => {
             });
             return;
           }
-          dispatch(updateDegreeLength(fileInJson.numYears));
+          axios.put('/user/updateDegreeLength', { numYears: fileInJson.numYears });
           dispatch(updateStartYear(fileInJson.startYear));
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             dispatch(toggleSummer());

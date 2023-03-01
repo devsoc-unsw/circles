@@ -2,11 +2,12 @@ import React, { Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
+import axios from 'axios';
 import dayjs from 'dayjs';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
+import { toggleSummer, updateStartYear } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 
 const DatePicker = React.lazy(() => import('components/Datepicker'));
@@ -24,7 +25,7 @@ const SettingsMenu = () => {
   }
 
   function handleUpdateDegreeLength(value: number) {
-    dispatch(updateDegreeLength(value));
+    axios.put('/user/updateDegreeLength', { numYears: value });
   }
 
   function handleSummerToggle() {

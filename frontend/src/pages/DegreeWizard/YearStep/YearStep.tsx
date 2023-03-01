@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
+import axios from 'axios';
 import Spinner from 'components/Spinner';
 import { useAppDispatch } from 'hooks';
-import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
+import { updateStartYear } from 'reducers/plannerSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -37,7 +38,7 @@ const YearStep = ({ incrementStep }: Props) => {
             }}
             onChange={(_, [startYear, endYear]: [string, string]) => {
               const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;
-              dispatch(updateDegreeLength(numYears));
+              axios.put('/user/updateDegreeLength', { numYears });
               dispatch(updateStartYear(parseInt(startYear, 10)));
 
               if (startYear && endYear) incrementStep(Steps.DEGREE);
