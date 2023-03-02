@@ -24,6 +24,7 @@ from server.routers.model import (
     Programs,
     Structure,
     StructureContainer,
+    CoursesPathDict,
 )
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
@@ -82,6 +83,7 @@ def get_programs() -> dict[str, dict[str, str]]:
     return {
         "programs": {
             "3778": "Computer Science",
+            "3779": "Advanced Computer Science (Honours)",
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",
@@ -160,7 +162,7 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
     else:
         type = "Honours"
 
-    spnResult = cast(Specialisation | None, specialisationsCOL.find_one({"code": code}))
+    spnResult = cast(Optional[Specialisation], specialisationsCOL.find_one({"code": code}))
     type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
@@ -375,11 +377,12 @@ def graph(
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
-    failed_courses: List[str] = []
+    failed_courses: list[tuple] = []
 
-    proto_edges: List[Dict[str, str]] = [map_suppressed_errors(
+    proto_edges: list[Optional[CoursesPathDict]] = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
+
     edges = prune_edges(
             proto_edges_to_edges(proto_edges),
             courses
@@ -456,7 +459,7 @@ def add_geneds_to_structure(structure: dict[str, StructureContainer], programCod
         Insert geneds of the given programCode into the structure
         provided
     """
-    programsResult = cast(Program | None, programsCOL.find_one({"code": programCode}))
+    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
     if programsResult is None:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
@@ -476,7 +479,7 @@ def compose(*functions: Callable) -> Callable:
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
 
-def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
+def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[Dict[str, str]]:
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.

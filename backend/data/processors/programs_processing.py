@@ -13,6 +13,7 @@ Step in the data's journey:
 
 import re
 from collections import OrderedDict
+from typing import Optional
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -30,6 +31,7 @@ CS_PROGS = (
     "3673", # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
     "3674",
     "3778",
+    "3779",
     "3781",
     "3782",
     "3783",
@@ -215,7 +217,7 @@ def split_program_names(title: str) -> list[str]:
     return list(map(lambda s: s.strip(), program_names))
 
 
-def find_program_name(program_data: dict, item: dict) -> str | None:
+def find_program_name(program_data: dict, item: dict) -> Optional[str] :
     """
     Find the program name (if possible).
     Returns a string with the program name if found,

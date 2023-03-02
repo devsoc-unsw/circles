@@ -7,6 +7,7 @@ from typing import Literal, Optional, TypedDict
 from pydantic import BaseModel
 
 from algorithms.objects.conditions import CompositeCondition
+from algorithms.objects.user import User
 
 class Programs(BaseModel):
     programs: dict
@@ -57,7 +58,7 @@ class Structure(BaseModel):
 
 class UserData(BaseModel):
     program: str
-    specialisations: dict
+    specialisations: list[str]
     courses: dict
 
 
@@ -109,20 +110,19 @@ class MostRecentPastTerm(TypedDict):
 class ValidPlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    plan: list[list[dict[str, tuple[int, int | None]]]]
+    plan: list[list[dict[str, tuple[int, Optional[int]]]]]
     mostRecentPastTerm: MostRecentPastTerm
 
 class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    plan: list[list[dict[str,  None | list[int | None]]]]
+    plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {
             "example": {
                 "program": "3707",
                 "specialisations": ["COMPA1"],
-                "year": 1,
                 "plan": [
                     [
                         {},
@@ -157,6 +157,26 @@ class PlannerData(BaseModel):
             }
         }
 
+    def to_user(self) -> User:
+        user = User()
+        user.program = self.program
+        user.specialisations = self.specialisations[:]
+
+        # prevent circular import; TODO: There has to be a better way
+        from server.routers.courses import get_course
+
+        for year in self.plan:
+            for term in year:
+                cleaned_term = {}
+                for course_name, course_value in term.items():
+                    cleaned_term[course_name] = (
+                        (course_value[0], course_value[1]) if course_value
+                        else (get_course(course_name)["UOC"], None)
+                    )
+                user.add_courses(cleaned_term)
+        return user
+
+
 class CourseCodes(BaseModel):
     courses: list[str]
 
@@ -167,6 +187,9 @@ class CoursesPath(BaseModel):
     original: str
     courses: list[str]
 
+class CoursesPathDict(TypedDict):
+    original: str
+    courses: list[str]
 
 class Description(BaseModel):
     description: str
@@ -188,6 +211,10 @@ class ProgramTime(BaseModel):
     startTime: tuple[int, int] # (Year, Term) start of program
     endTime: tuple[int, int]
     uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+
+class TermsOffered(TypedDict):
+    terms: dict[str, list[str]]
+    fails: list[tuple]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

@@ -21,6 +21,7 @@ const LoginButton = styled.button`
   padding: 6px 0;
   transition: all 0.1s;
   z-index: 1;
+  letter-spacing: 0.8px;
 
   &:hover {
     background: #e3a4fa;
