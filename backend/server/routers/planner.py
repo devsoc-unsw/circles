@@ -289,19 +289,14 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    planner = user['planner']
 
-    removed: Set[str] = set()
-    # Remove every instance of the course from each year
-    for year in planner['years']:
+    # Remove every instance of the course from each year and add to unplanned
+    for year in user['planner']['years']:
         for course_list in year.values():
             if data.courseCode in course_list:
                 course_list.remove(data.courseCode)
-                removed.add(data.courseCode)
+                user['planner']['unplanned'].append(data.courseCode)
 
-    # Add the course to unplanned
-    for item in removed:
-        planner['unplanned'].append(item)
     set_user(token, user, True)
 
 
