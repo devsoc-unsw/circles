@@ -13,9 +13,10 @@ import {
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
+import axios from 'axios';
 import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
-import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
+import { unhideAllYears } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
@@ -39,6 +40,15 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const iconStyles = {
     fontSize: '20px',
     color: '#323739'
+  };
+
+  const handleUnscheduleAll = async () => {
+    try {
+      await axios.post('planner/unscheduleAll', {}, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleUnscheduleAll: ', err);
+    }
   };
 
   return (
@@ -106,7 +116,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             <Popconfirm
               placement="bottomRight"
               title="Are you sure you want to unplan all your courses?"
-              onConfirm={() => dispatch(unscheduleAll())}
+              onConfirm={handleUnscheduleAll}
               style={{ width: '200px' }}
               okText="Yes"
               cancelText="No"
