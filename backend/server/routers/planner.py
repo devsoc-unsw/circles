@@ -314,17 +314,13 @@ def unschedule_all(token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    removed: Set[str] = set()
 
-    # Remove every course from each year
+    # Remove every course from each term and add it to unplanned
     for year in user['planner']['years']:
-        for term, course_list in year.items():
-            removed = removed | set(course_list)
-            year[term] = []
+        for course_list in year.values():
+            user['planner']['unplanned'].extend(course_list)
+            course_list.clear()
 
-    # Add every removed course to unplanned column
-    for course in removed:
-        user['planner']['unplanned'].append(course)
     set_user(token, user, True)
 
 
