@@ -23,7 +23,7 @@ services:
     env_file:
       - ./env/backend.env
     depends_on:
-      - mongodb
+      - init-mongo
     networks:
       - circles-net
     volumes:

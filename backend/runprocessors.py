@@ -139,7 +139,6 @@ run: dict[str, dict[str, Callable]] = {
     "enrolment": {
         # "scrape": run_scrape_enrolment_data,
     },
-
 }
 
 if __name__ == "__main__":
