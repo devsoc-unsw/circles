@@ -17,7 +17,7 @@ type CourseAttributesProps = {
 
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
-  const sidebar = !!(pathname === '/course-selector');
+  const sidebar = pathname === '/course-selector';
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
 

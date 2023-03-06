@@ -20,10 +20,10 @@
         "MATS",
         "MICR",
         "MSCI",
-        "NANO",
         "PHYS",
         "PSYC",
-        "SCIF"
+        "SCIF",
+        "NANO"
     ],
     "Civil and Environmental Engineering": [
         "CVEN"
@@ -473,8 +473,8 @@
         "INFS",
         "MARK",
         "MGMT",
-        "RISK",
-        "TABL"
+        "TABL",
+        "RISK"
     ],
     "F Arts": [
         "ADAD",
@@ -510,7 +510,6 @@
         "BINF",
         "BIOM",
         "CEIC",
-        "CHEN",
         "COMP",
         "CVEN",
         "DESN",
@@ -527,12 +526,12 @@
         "MMAN",
         "MTRN",
         "NAVL",
-        "PHTN",
-        "POLY",
         "PTRL",
         "SENG",
         "SOLA",
-        "TELE"
+        "TELE",
+        "CHEN",
+        "PHTN"
     ],
     "F Medicine": [
         "ANAT",
@@ -551,11 +550,11 @@
         "PHCM",
         "PHRM",
         "PHSL",
-        "PSCY",
         "SOMS",
-        "SWCH",
         "VISN",
-        "YMED"
+        "YMED",
+        "PSCY",
+        "SWCH"
     ],
     "F DVC": [
         "ATSI",
@@ -614,8 +613,9 @@
         "MTRN",
         "NAVL"
     ],
-    "S Medical": [
+    "S Biomedical": [
         "ANAT",
+        "BIOM",
         "HDAT",
         "NEUR",
         "PATH",
@@ -684,19 +684,16 @@
         "ENGG",
         "SENG"
     ],
-    "S Biomedical": [
-        "BIOM"
-    ],
     "S Chemical": [
         "CEIC",
-        "CHEN",
+        "ENGG",
         "FOOD",
-        "POLY"
+        "CHEN"
     ],
     "S Chemistry": [
         "CHEM",
-        "NANO",
-        "SCIF"
+        "SCIF",
+        "NANO"
     ],
     "S Information": [
         "COMM",
@@ -749,8 +746,8 @@
         "ELEC",
         "ENGG",
         "GENE",
-        "PHTN",
-        "TELE"
+        "TELE",
+        "PHTN"
     ],
     "S Division": [
         "EXCH"
@@ -792,10 +789,6 @@
         "OPTM",
         "VISN"
     ],
-    "S Clinical": [
-        "PSCY",
-        "SWCH"
-    ],
     "S Psychology": [
         "PSYC"
     ],
@@ -813,5 +806,9 @@
     "S UC-Science": [
         "ZINT",
         "ZPEM"
+    ],
+    "S Clinical": [
+        "PSCY",
+        "SWCH"
     ]
 }

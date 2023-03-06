@@ -1,4 +1,36 @@
 {
+    "ACTL3143": {
+        "condition": {
+            "original": "Prerequisite: ACTL2131 OR (MATH2931 and in B. Data Science and Decisions (3959)) OR (MATH2901 and MATH2931)<br/><br/>",
+            "processed": "ACTL2131 || (MATH2931 && in B. Data Science && Decisions (3959)) || (MATH2901 && MATH2931)"
+        },
+        "tokens": [
+            "(",
+            "ACTL2131",
+            "||",
+            "(",
+            "MATH2931",
+            "&&",
+            "in",
+            "B.",
+            "Data",
+            "Science",
+            "&&",
+            "Decisions",
+            "(",
+            "3959",
+            ")",
+            ")",
+            "||",
+            "(",
+            "MATH2901",
+            "&&",
+            "MATH2931",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 6, in"
+    },
     "ADAD3000": {
         "condition": {
             "original": "Prerequisite: One of the following courses, SART3800, SDES2116, SOMA3616, DART3203, DDES2102, DART3100, or DART3310<br/><br/>",
@@ -802,46 +834,6 @@
             ")"
         ],
         "broke at": "Index 5, in"
-    },
-    "ARTS3130": {
-        "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && an Art && DDES#"
-        },
-        "tokens": [
-            "(",
-            "48UOC",
-            "&&",
-            "6UOC",
-            "in",
-            "L1",
-            "&&",
-            "6UOC",
-            "in",
-            "L2",
-            "in",
-            "one",
-            "of",
-            "the",
-            "following",
-            "streams,",
-            "Dance",
-            "Studies",
-            "||",
-            "Theatre",
-            "&&",
-            "Performance",
-            "Studies.",
-            "||",
-            "72UOC",
-            "&&",
-            "an",
-            "Art",
-            "&&",
-            "DDES#",
-            ")"
-        ],
-        "broke at": "Index 11, one"
     },
     "ARTS3131": {
         "condition": {
@@ -1703,8 +1695,9 @@
     },
     "ARTS3458": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including ARTS3453 or a Chinese Professional elective, and enrolment in an Advanced Chinese Studies major/minor. Or 48 UOC overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor.<br/><br/>",
-            "processed": "48UOC && ARTS3453 || a Chinese Professional elective && an Advanced Chinese Studies major/minor. || 48UOC && ARTS2451 || ARTS2462 && a Chinese Studies major/minor"
+            "original": "Prerequisites: 48 UOC overall, including ARTS3453 or a Chinese Professional elective, and enrolment in an Advanced Chinese Studies major/minor. Or 48 UOC overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor. Or Language Placement Approval.<br/><br/>",
+            "handbook_note": "language placement approval can also be used.",
+            "processed": "48UOC && ARTS3453 || a Chinese Professional elective && an Advanced Chinese Studies major/minor. || 48UOC && ARTS2451 || ARTS2462 && a Chinese Studies major/minor."
         },
         "tokens": [
             "(",
@@ -1732,7 +1725,7 @@
             "a",
             "Chinese",
             "Studies",
-            "major/minor",
+            "major/minor.",
             ")"
         ],
         "broke at": "Index 6, Chinese"
@@ -2078,37 +2071,6 @@
             "(",
             "3447",
             ")",
-            ")"
-        ],
-        "broke at": "Index 11, one"
-    },
-    "ARTS3757": {
-        "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Development Studies or Global Development<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Development Studies || Global Development"
-        },
-        "tokens": [
-            "(",
-            "48UOC",
-            "&&",
-            "6UOC",
-            "in",
-            "L1",
-            "&&",
-            "6UOC",
-            "in",
-            "L2",
-            "in",
-            "one",
-            "of",
-            "the",
-            "following",
-            "streams,",
-            "Development",
-            "Studies",
-            "||",
-            "Global",
-            "Development",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2658,57 +2620,10 @@
         ],
         "broke at": "Index 4, Sociology"
     },
-    "ARTS3871": {
-        "condition": {
-            "original": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
-            "processed": "(48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A; || 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM) || 4034 && 30UOC at lv2 && 12UOC lv2 CRIM"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "48UOC",
-            "&&",
-            "6UOC",
-            "lv1",
-            "&&",
-            "6UOC",
-            "lv2",
-            "in",
-            "one",
-            "of",
-            "the",
-            "following",
-            "streams,",
-            "Criminology/S&A;",
-            "||",
-            "3422/4763",
-            "&&",
-            "12UOC",
-            "lv2",
-            "SRAP",
-            "&&",
-            "18UOC",
-            "lv2",
-            "CRIM",
-            ")",
-            "||",
-            "4034",
-            "&&",
-            "30UOC",
-            "at",
-            "lv2",
-            "&&",
-            "12UOC",
-            "lv2",
-            "CRIM",
-            ")"
-        ],
-        "broke at": "Index 5, lv1"
-    },
     "ARTS3872": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Studies, or Sociology & Anthropology<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, (3447) || Sociology && Anthropology"
         },
         "tokens": [
             "(",
@@ -2727,20 +2642,13 @@
             "the",
             "following",
             "specialisations,",
-            "Media,",
-            "Culture",
-            "&&",
-            "Technology",
-            "||",
-            "Sociology",
-            "&&",
-            "Anthropology.",
-            "||",
-            "48UOC",
-            "&&",
             "(",
             "3447",
             ")",
+            "||",
+            "Sociology",
+            "&&",
+            "Anthropology",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2776,38 +2684,6 @@
             "(",
             "3447",
             ")",
-            "||",
-            "Sociology",
-            "&&",
-            "Anthropology",
-            ")"
-        ],
-        "broke at": "Index 11, one"
-    },
-    "ARTS3883": {
-        "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or Sociology & Anthropology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || Sociology && Anthropology"
-        },
-        "tokens": [
-            "(",
-            "48UOC",
-            "&&",
-            "6UOC",
-            "in",
-            "L1",
-            "&&",
-            "6UOC",
-            "in",
-            "L2",
-            "in",
-            "one",
-            "of",
-            "the",
-            "following",
-            "streams,",
-            "Asian",
-            "Studies",
             "||",
             "Sociology",
             "&&",
@@ -3045,20 +2921,6 @@
             ")"
         ],
         "broke at": "Index 3, a"
-    },
-    "AVIA2117": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in 3980 and completion of AVIA2111-2116<br/><br/>",
-            "processed": "3980 && AVIA2111-2116"
-        },
-        "tokens": [
-            "(",
-            "3980",
-            "&&",
-            "AVIA2111-2116",
-            ")"
-        ],
-        "broke at": "Index 4, )"
     },
     "AVIA3199": {
         "condition": {
@@ -3500,51 +3362,6 @@
         ],
         "broke at": "Index 3, Science"
     },
-    "BEIL6000": {
-        "condition": {
-            "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
-            "processed": "96UOC in Built Environment"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "in",
-            "Built",
-            "Environment",
-            ")"
-        ],
-        "broke at": "Index 1, 96UOC"
-    },
-    "BEIL6003": {
-        "condition": {
-            "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
-            "processed": "96UOC in Built Environment"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "in",
-            "Built",
-            "Environment",
-            ")"
-        ],
-        "broke at": "Index 1, 96UOC"
-    },
-    "BEIL6010": {
-        "condition": {
-            "original": "96 UOC and enrolment in FBE  Design program<br/><br/>",
-            "processed": "96UOC && FBE DDES#"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "&&",
-            "FBE",
-            "DDES#",
-            ")"
-        ],
-        "broke at": "Index 4, DDES#"
-    },
     "BEIL6013": {
         "condition": {
             "original": "UG students must be in their third year of study (having completed 96 units of credit) to enroll in this course. <br/><br/>",
@@ -3583,57 +3400,6 @@
         ],
         "broke at": "Index 1, 96UOC"
     },
-    "BIOC3111": {
-        "condition": {
-            "original": "Prerequisites: BIOC2101 or LIFE2101, BIOC2201<br/><br/>",
-            "processed": "BIOC2101 || LIFE2101, BIOC2201"
-        },
-        "tokens": [
-            "(",
-            "BIOC2101",
-            "||",
-            "LIFE2101,",
-            "BIOC2201",
-            ")"
-        ],
-        "broke at": "Index 4, BIOC2201"
-    },
-    "BIOC3671": {
-        "condition": {
-            "original": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
-            "processed": "BIOC2101 && BIOC2201. Restricted to Advanced SCIF#"
-        },
-        "tokens": [
-            "(",
-            "BIOC2101",
-            "&&",
-            "BIOC2201.",
-            "Restricted",
-            "to",
-            "Advanced",
-            "SCIF#",
-            ")"
-        ],
-        "broke at": "Index 4, Restricted"
-    },
-    "BIOS3161": {
-        "condition": {
-            "original": "6 UOC from BIOS2031 or BIOS2051 or BIOS2061<br/><br/>",
-            "processed": "6UOC from BIOS2031 || BIOS2051 || BIOS2061"
-        },
-        "tokens": [
-            "(",
-            "6UOC",
-            "from",
-            "BIOS2031",
-            "||",
-            "BIOS2051",
-            "||",
-            "BIOS2061",
-            ")"
-        ],
-        "broke at": "Index 3, BIOS2031"
-    },
     "BLDG1011": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
@@ -3652,20 +3418,6 @@
             ")"
         ],
         "broke at": "Index 2, Construction"
-    },
-    "BLDG1012": {
-        "condition": {
-            "original": "Program 3331 3332<br/><br/>",
-            "processed": "Program 3331 3332"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "3331",
-            "3332",
-            ")"
-        ],
-        "broke at": "Index 2, 3331"
     },
     "BLDG1013": {
         "condition": {
@@ -3686,167 +3438,6 @@
         ],
         "broke at": "Index 2, Construction"
     },
-    "BLDG1014": {
-        "condition": {
-            "original": "Program 3331 3332<br/><br/>",
-            "processed": "Program 3331 3332"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "3331",
-            "3332",
-            ")"
-        ],
-        "broke at": "Index 2, 3331"
-    },
-    "BLDG1022": {
-        "condition": {
-            "original": "Program 3331 3332<br/><br/>",
-            "processed": "Program 3331 3332"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "3331",
-            "3332",
-            ")"
-        ],
-        "broke at": "Index 2, 3331"
-    },
-    "BLDG1023": {
-        "condition": {
-            "original": "Program 3331 3332<br/><br/>",
-            "processed": "Program 3331 3332"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "3331",
-            "3332",
-            ")"
-        ],
-        "broke at": "Index 2, 3331"
-    },
-    "BLDG1024": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-            "processed": "a Construction Management && Property program || minor"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "Construction",
-            "Management",
-            "&&",
-            "Property",
-            "program",
-            "||",
-            "minor",
-            ")"
-        ],
-        "broke at": "Index 2, Construction"
-    },
-    "BLDG4018": {
-        "condition": {
-            "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 w 65WAM || over"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
-            "||",
-            "Program",
-            "3332",
-            "w",
-            "65WAM",
-            "||",
-            "over",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
-    "BLDG4022": {
-        "condition": {
-            "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 w 65WAM || over"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
-            "||",
-            "Program",
-            "3332",
-            "w",
-            "65WAM",
-            "||",
-            "over",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
-    "BLDG4023": {
-        "condition": {
-            "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 w 65WAM || over"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
-            "||",
-            "Program",
-            "3332",
-            "w",
-            "65WAM",
-            "||",
-            "over",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
-    "BLDG4024": {
-        "condition": {
-            "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 w 65WAM || over"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
-            "||",
-            "Program",
-            "3332",
-            "w",
-            "65WAM",
-            "||",
-            "over",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
-    "BLDG4501": {
-        "condition": {
-            "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 w 65WAM || over"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
-            "||",
-            "Program",
-            "3332",
-            "w",
-            "65WAM",
-            "||",
-            "over",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
     "CDEV3101": {
         "condition": {
             "original": "Students are required to have completed a minimum of 30 UoC to enrol in this course.<br/><br/>",
@@ -3862,21 +3453,6 @@
             ")"
         ],
         "broke at": "Index 2, required"
-    },
-    "CDEV3200": {
-        "condition": {
-            "original": "Students need to have completed a minimum of 30 UoC to undertake this course.<br/><br/>",
-            "processed": "need to a 30UOC"
-        },
-        "tokens": [
-            "(",
-            "need",
-            "to",
-            "a",
-            "30UOC",
-            ")"
-        ],
-        "broke at": "Index 2, to"
     },
     "CEIC2000": {
         "condition": {
@@ -4053,24 +3629,6 @@
             ")"
         ],
         "broke at": "Index 2, complete"
-    },
-    "CODE3100": {
-        "condition": {
-            "original": "Pre: CODE2230 /CODE2250 /CODE 2270<br/><br/>",
-            "processed": "(CODE2230 || CODE2250) /CODE 2270"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "CODE2230",
-            "||",
-            "CODE2250",
-            ")",
-            "/CODE",
-            "2270",
-            ")"
-        ],
-        "broke at": "Index 7, 2270"
     },
     "CRIM2021": {
         "condition": {
@@ -4872,88 +4430,6 @@
         ],
         "broke at": "Index 7, &&"
     },
-    "DPBS1170": {
-        "condition": {
-            "original": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1140 6UOC GLDIP && a Global Diploma program"
-        },
-        "tokens": [
-            "(",
-            "DPBS1140",
-            "6UOC",
-            "GLDIP",
-            "&&",
-            "a",
-            "Global",
-            "Diploma",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 4, &&"
-    },
-    "DPBS1180": {
-        "condition": {
-            "original": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1140 6UOC GLDIP && a Global Diploma program"
-        },
-        "tokens": [
-            "(",
-            "DPBS1140",
-            "6UOC",
-            "GLDIP",
-            "&&",
-            "a",
-            "Global",
-            "Diploma",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 4, &&"
-    },
-    "DPBS1190": {
-        "condition": {
-            "original": "Prereq: DPBS1110 or DPBS1203,6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1110 || DPBS1203 && 6UOC GLDIP && a Global Diploma program"
-        },
-        "tokens": [
-            "(",
-            "DPBS1110",
-            "||",
-            "DPBS1203",
-            "&&",
-            "6UOC",
-            "GLDIP",
-            "&&",
-            "a",
-            "Global",
-            "Diploma",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 7, &&"
-    },
-    "DPBS1501": {
-        "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
-        },
-        "tokens": [
-            "(",
-            "6UOC",
-            "of",
-            "any",
-            "DPGE,",
-            "DPST,",
-            "DPBS",
-            "&&",
-            "a",
-            "Global",
-            "Diploma",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 3, any"
-    },
     "DPBS1511": {
         "condition": {
             "original": "Prereq: DPBS1501 + 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
@@ -5084,100 +4560,6 @@
         ],
         "broke at": "Index 3, any"
     },
-    "DPDE1001": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1002": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1003": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1004": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisites: DPDE1001 and DPDE1005 <br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program. DPDE1001 && DPDE1005"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program.",
-            "DPDE1001",
-            "&&",
-            "DPDE1005",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1005": {
-        "condition": {
-            "original": "Prerequisite: DPDE1002<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1002 7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "DPDE1002",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, Global"
-    },
     "DPDE1006": {
         "condition": {
             "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
@@ -5196,43 +4578,6 @@
         ],
         "broke at": "Index 3, Global"
     },
-    "DPDE1007": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1008": {
-        "condition": {
-            "original": "Prerequisite: DPDE1003<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1003 7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "DPDE1003",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, Global"
-    },
     "DPDE1009": {
         "condition": {
             "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1001 <br/><br/>",
@@ -5248,45 +4593,6 @@
             "Architecture",
             "Program.",
             "DPDE1001",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1010": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1011": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1001 and DPDE1005.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program. DPDE1001 && DPDE1005"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program.",
-            "DPDE1001",
-            "&&",
-            "DPDE1005",
             ")"
         ],
         "broke at": "Index 3, Global"
@@ -5313,39 +4619,6 @@
             ")"
         ],
         "broke at": "Index 2, Global"
-    },
-    "DPST1024": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-            "processed": "(7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "7001",
-            "||",
-            "7002",
-            "||",
-            "7003",
-            "||",
-            "7004",
-            ")",
-            "DPST1023",
-            "||",
-            "a",
-            "credit",
-            "(",
-            "\u226565%",
-            ")",
-            "in",
-            "DPST1021",
-            "&&",
-            "[",
-            "DPST1014",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 13, credit"
     },
     "EDST2002": {
         "condition": {
@@ -5384,41 +4657,6 @@
         ],
         "broke at": "Index 4, EDST1104,"
     },
-    "EDST2003": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
-            "processed": "24UOC in L1 && EDST1101 || EDST1104 && one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 || 4076"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "L1",
-            "&&",
-            "EDST1101",
-            "||",
-            "EDST1104",
-            "&&",
-            "one",
-            "of",
-            "the",
-            "following",
-            "teaching",
-            "Programs",
-            "3446,",
-            "3462,",
-            "4053,",
-            "4054,",
-            "4058,",
-            "4059,",
-            "4061,",
-            "4062",
-            "||",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 10, of"
-    },
     "EDST2094": {
         "condition": {
             "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
@@ -5447,141 +4685,6 @@
             ")"
         ],
         "broke at": "Index 11, Please"
-    },
-    "EDST6706": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053, 4054, or 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && 4053, 4054 || 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "4053,",
-            "4054",
-            "||",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, 4054"
-    },
-    "EDST6716": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462, 4054, or 4058<br/><br/>",
-            "processed": "78UOC && EDST2002 && 3462, 4054 || 4058"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "3462,",
-            "4054",
-            "||",
-            "4058",
-            ")"
-        ],
-        "broke at": "Index 6, 4054"
-    },
-    "EDST6727": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in one of the following programs, 3426, 3446, 3470, 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && one of the following programs, 3426, 3446, 3470, 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "one",
-            "of",
-            "the",
-            "following",
-            "programs,",
-            "3426,",
-            "3446,",
-            "3470,",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, of"
-    },
-    "EDST6760": {
-        "condition": {
-            "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
-        },
-        "tokens": [
-            "(",
-            "EDST2002",
-            "&&",
-            "EDST4084",
-            "&&",
-            "12UOC",
-            "Teaching",
-            "Method",
-            "1",
-            "courses",
-            "&&",
-            "(",
-            "4509",
-            "||",
-            "4056",
-            ")",
-            ".",
-            "must",
-            "have",
-            "passed",
-            "LANTITE.",
-            "must",
-            "have",
-            "sufficient",
-            "subject",
-            "content",
-            "knowledge",
-            "in",
-            "their",
-            "teaching",
-            "areas",
-            ")"
-        ],
-        "broke at": "Index 7, Method"
-    },
-    "EDST6761": {
-        "condition": {
-            "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
-            "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
-        },
-        "tokens": [
-            "(",
-            "EDST6760",
-            "&&",
-            "12UOC",
-            "in",
-            "Teaching",
-            "Methods",
-            "courses.",
-            "must",
-            "have",
-            "passed",
-            "the",
-            "Literacy",
-            "&&",
-            "Numeracy",
-            "Test",
-            "for",
-            "Initial",
-            "Teacher",
-            "Education",
-            ")"
-        ],
-        "broke at": "Index 3, 12UOC"
     },
     "EDST6765": {
         "condition": {
@@ -5624,108 +4727,6 @@
             ")"
         ],
         "broke at": "Index 9, Method"
-    },
-    "EDST6771": {
-        "condition": {
-            "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && 4059, 4061, 4062, 4064 || 4066"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "4059,",
-            "4061,",
-            "4062,",
-            "4064",
-            "||",
-            "4066",
-            ")"
-        ],
-        "broke at": "Index 6, 4061,"
-    },
-    "EDST6775": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && 4059, 4061, 4062, 4063, 4064 || 4066"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "4059,",
-            "4061,",
-            "4062,",
-            "4063,",
-            "4064",
-            "||",
-            "4066",
-            ")"
-        ],
-        "broke at": "Index 6, 4061,"
-    },
-    "EDST6777": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && 4059, 4061, 4063 || 4066"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "4059,",
-            "4061,",
-            "4063",
-            "||",
-            "4066",
-            ")"
-        ],
-        "broke at": "Index 6, 4061,"
-    },
-    "EXPT2168": {
-        "condition": {
-            "original": "Prerequisites - EXPT1155 Exercise Physiology and Metabolism <br/><br/>",
-            "processed": "- EXPT1155 Exercise Physiology && Metabolism"
-        },
-        "tokens": [
-            "(",
-            "-",
-            "EXPT1155",
-            "Exercise",
-            "Physiology",
-            "&&",
-            "Metabolism",
-            ")"
-        ],
-        "broke at": "Index 2, EXPT1155"
-    },
-    "EXPT3152": {
-        "condition": {
-            "original": "Pre-requisite: (SOMS1912, SOMS1913, HESC2451) or (HESC2452 and NEUR3101)<br/><br/>",
-            "processed": "(SOMS1912, SOMS1913, HESC2451) || (HESC2452 && NEUR3101)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "SOMS1912,",
-            "SOMS1913,",
-            "HESC2451",
-            ")",
-            "||",
-            "(",
-            "HESC2452",
-            "&&",
-            "NEUR3101",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, SOMS1912,"
     },
     "FADA2020": {
         "condition": {
@@ -5779,33 +4780,6 @@
             ")"
         ],
         "broke at": "Index 2, of"
-    },
-    "FOOD6804": {
-        "condition": {
-            "original": "Prerequsite :CHEM3811or INDC2003<br/><br/>",
-            "processed": "CHEM3811or INDC2003"
-        },
-        "tokens": [
-            "(",
-            "CHEM3811or",
-            "INDC2003",
-            ")"
-        ],
-        "broke at": "Index 2, INDC2003"
-    },
-    "GMAT4061": {
-        "condition": {
-            "original": "GMAT4060 Thesis A<br/><br/>",
-            "processed": "GMAT4060 Thesis A"
-        },
-        "tokens": [
-            "(",
-            "GMAT4060",
-            "Thesis",
-            "A",
-            ")"
-        ],
-        "broke at": "Index 3, A"
     },
     "HESC2452": {
         "condition": {
@@ -5905,29 +4879,6 @@
         ],
         "broke at": "Index 2, Stage"
     },
-    "HLTH3000": {
-        "condition": {
-            "original": "Prerequisites: HLTH1000, HLTH2000 and (PHCM2100 or enrolment into 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
-            "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to (3897) )"
-        },
-        "tokens": [
-            "(",
-            "HLTH1000",
-            "&&",
-            "HLTH2000",
-            "&&",
-            "(",
-            "PHCM2100",
-            "||",
-            "to",
-            "(",
-            "3897",
-            ")",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 8, to"
-    },
     "INST2003": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
@@ -6001,8 +4952,8 @@
     },
     "LAWS1052": {
         "condition": {
-            "original": "This course is strictly for students undertaking Law programs only. Corequisite : LAWS1055. Enrolment in corequisite LAWS1055 (Legal Research and Writing) is required in the same term or subsequent term.<br/><br/>",
-            "processed": "This course is strictly for undertaking LAWS# only && [LAWS1055. CORESquisite LAWS1055 (Legal Research && Writing) is required in the same term || subsequent term]"
+            "original": "This course is strictly for students undertaking Law programs only. Corequisite: LAWS1055. Students must be enrolled in LAWS1052 and LAWS1055 in the same term.<br/><br/>",
+            "processed": "This course is strictly for undertaking LAWS# only && [LAWS1055. must be && LAWS1055 in the same term]"
         },
         "tokens": [
             "(",
@@ -6017,22 +4968,13 @@
             "&&",
             "[",
             "LAWS1055.",
-            "CORESquisite",
-            "LAWS1055",
-            "(",
-            "Legal",
-            "Research",
+            "must",
+            "be",
             "&&",
-            "Writing",
-            ")",
-            "is",
-            "required",
+            "LAWS1055",
             "in",
             "the",
             "same",
-            "term",
-            "||",
-            "subsequent",
             "term",
             "]",
             ")"
@@ -6041,30 +4983,25 @@
     },
     "LAWS1055": {
         "condition": {
-            "original": "Co-requisite with LAWS1052. To be able to be enrolled in separately in subsequent term if LAWS1052 successfully completed<br/><br/>",
-            "processed": "[&& LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]"
+            "original": "Corequisite: LAWS1052. Students must be enrolled in LAWS1052 and LAWS1055 in the same term.<br/><br/>",
+            "processed": "[LAWS1052. must be LAWS1052 && in the same term]"
         },
         "tokens": [
             "(",
             "[",
-            "&&",
             "LAWS1052.",
-            "To",
+            "must",
             "be",
-            "able",
-            "to",
-            "be",
-            "separately",
-            "in",
-            "subsequent",
-            "term",
-            "if",
             "LAWS1052",
-            "successfully",
+            "&&",
+            "in",
+            "the",
+            "same",
+            "term",
             "]",
             ")"
         ],
-        "broke at": "Index 3, LAWS1052."
+        "broke at": "Index 2, LAWS1052."
     },
     "LAWS1061": {
         "condition": {
@@ -7945,27 +6882,6 @@
         ],
         "broke at": "Index 5, in"
     },
-    "MFAC4999": {
-        "condition": {
-            "original": "Students who have completed Year 3 clinical coursework requirements are eligible for enrolment.<br/><br/>",
-            "processed": "who Year 3 clinical coursework requirements are eligible for enrolment"
-        },
-        "tokens": [
-            "(",
-            "who",
-            "Year",
-            "3",
-            "clinical",
-            "coursework",
-            "requirements",
-            "are",
-            "eligible",
-            "for",
-            "enrolment",
-            ")"
-        ],
-        "broke at": "Index 2, Year"
-    },
     "MICR3621": {
         "condition": {
             "original": "Pre-req: 12 UoC from MICR2011 or BIOS2021/BABS2204 or BIOS2621/BABS2264 or BIOC2201<br/><br/>",
@@ -8522,23 +7438,6 @@
         ],
         "broke at": "Index 2, which"
     },
-    "PATH3209": {
-        "condition": {
-            "original": "Prerequisite: BABS3041. Highly recommended PATH2201 and PATH3205<br/><br/>",
-            "processed": "BABS3041. Highly recommended PATH2201 && PATH3205"
-        },
-        "tokens": [
-            "(",
-            "BABS3041.",
-            "Highly",
-            "recommended",
-            "PATH2201",
-            "&&",
-            "PATH3205",
-            ")"
-        ],
-        "broke at": "Index 2, Highly"
-    },
     "PHAR2011": {
         "condition": {
             "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
@@ -8718,101 +7617,6 @@
         ],
         "broke at": "Index 2, is"
     },
-    "PHRM2031": {
-        "condition": {
-            "original": "Prerequisite: PHRM1011 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>Co-requisite: PHAR2911, DIET2001<br/><br/>",
-            "processed": "PHRM1011 && 48UOC in L1 from (3895) && [PHAR2911, DIET2001]"
-        },
-        "tokens": [
-            "(",
-            "PHRM1011",
-            "&&",
-            "48UOC",
-            "in",
-            "L1",
-            "from",
-            "(",
-            "3895",
-            ")",
-            "&&",
-            "[",
-            "PHAR2911,",
-            "DIET2001",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 12, PHAR2911,"
-    },
-    "PHRM3022": {
-        "condition": {
-            "original": "Pre-requisite: 3892 Pharmaceutical Medicine (Year 1) and PHRM2031, MICR2012, PHAR2911\t<br/><br/>",
-            "processed": "3892 Pharmaceutical Medicine (Year 1) && PHRM2031, MICR2012, PHAR2911"
-        },
-        "tokens": [
-            "(",
-            "3892",
-            "Pharmaceutical",
-            "Medicine",
-            "(",
-            "Year",
-            "1",
-            ")",
-            "&&",
-            "PHRM2031,",
-            "MICR2012,",
-            "PHAR2911",
-            ")"
-        ],
-        "broke at": "Index 3, Medicine"
-    },
-    "PHRM3031": {
-        "condition": {
-            "original": "Pre-requisite: 3892 Pharmaceutical Medicine (Year 1) and PHRM2031, MICR2012, PHAR2911<br/><br/>",
-            "processed": "3892 Pharmaceutical Medicine (Year 1) && PHRM2031, MICR2012, PHAR2911"
-        },
-        "tokens": [
-            "(",
-            "3892",
-            "Pharmaceutical",
-            "Medicine",
-            "(",
-            "Year",
-            "1",
-            ")",
-            "&&",
-            "PHRM2031,",
-            "MICR2012,",
-            "PHAR2911",
-            ")"
-        ],
-        "broke at": "Index 3, Medicine"
-    },
-    "PHRM3032": {
-        "condition": {
-            "original": "Prerequisite: PHRM2031, MICR2012, PHAR2911 and completion of 48UOC of Level 1 courses in 3895 Pharmaceutical Medicine / Pharmacy<br/><br/>",
-            "processed": "PHRM2031 && MICR2012 && PHAR2911 && 48UOC in L1 in 3895 Pharmaceutical Medicine / Pharmacy"
-        },
-        "tokens": [
-            "(",
-            "PHRM2031",
-            "&&",
-            "MICR2012",
-            "&&",
-            "PHAR2911",
-            "&&",
-            "48UOC",
-            "in",
-            "L1",
-            "in",
-            "3895",
-            "Pharmaceutical",
-            "Medicine",
-            "/",
-            "Pharmacy",
-            ")"
-        ],
-        "broke at": "Index 11, 3895"
-    },
     "PHSL2101": {
         "condition": {
             "original": "Prerequisite: Prerequisite: 6 UOC of level 1 Biology; and 6 UOC of Level 1 CHEM; and 6 UOC Level 1 MATH or equivalent DPST courses.<br/><br/>",
@@ -8841,29 +7645,6 @@
             ")"
         ],
         "broke at": "Index 5, Biology;"
-    },
-    "PHSL3211": {
-        "condition": {
-            "original": "Prerequisite: PHSL2101 or PHSL2121 or PHSL 2501 AND PHSL2201 or PHSL2221 or PHSL2502<br/><br/>",
-            "processed": "PHSL2101 || PHSL2121 || PHSL 2501 && PHSL2201 || PHSL2221 || PHSL2502"
-        },
-        "tokens": [
-            "(",
-            "PHSL2101",
-            "||",
-            "PHSL2121",
-            "||",
-            "PHSL",
-            "2501",
-            "&&",
-            "PHSL2201",
-            "||",
-            "PHSL2221",
-            "||",
-            "PHSL2502",
-            ")"
-        ],
-        "broke at": "Index 6, 2501"
     },
     "PHYS3199": {
         "condition": {
@@ -9731,110 +8512,6 @@
         ],
         "broke at": "Index 4, )"
     },
-    "ZBUS3104": {
-        "condition": {
-            "original": "Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>Business Program (4405 or 4462) and ZBUS1104<br/><br/>",
-            "processed": "ZBUS3108 Business Strategy Implementation is assumed prior to undertaking Business Capstone (Work Practice Project). BUSN# && ZBUS1104"
-        },
-        "tokens": [
-            "(",
-            "ZBUS3108",
-            "Business",
-            "Strategy",
-            "Implementation",
-            "is",
-            "assumed",
-            "prior",
-            "to",
-            "undertaking",
-            "Business",
-            "Capstone",
-            "(",
-            "Work",
-            "Practice",
-            "Project",
-            ")",
-            ".",
-            "BUSN#",
-            "&&",
-            "ZBUS1104",
-            ")"
-        ],
-        "broke at": "Index 3, Strategy"
-    },
-    "ZEIT3112": {
-        "condition": {
-            "original": "Students must contact the course convenor to arrange a topic and supervisor to gain permission to enroll in this course.<br/><br/>",
-            "processed": "must contact the course convenor to arrange a topic && supervisor to gain permission"
-        },
-        "tokens": [
-            "(",
-            "must",
-            "contact",
-            "the",
-            "course",
-            "convenor",
-            "to",
-            "arrange",
-            "a",
-            "topic",
-            "&&",
-            "supervisor",
-            "to",
-            "gain",
-            "permission",
-            ")"
-        ],
-        "broke at": "Index 2, contact"
-    },
-    "ZEIT3118": {
-        "condition": {
-            "original": "Prerequisite: ZEIT2105 Systems Analysis and Design and 96 Units of Credit<br/><br/>",
-            "processed": "ZEIT2105 Systems Analysis && Design && 96UOC"
-        },
-        "tokens": [
-            "(",
-            "ZEIT2105",
-            "Systems",
-            "Analysis",
-            "&&",
-            "Design",
-            "&&",
-            "96UOC",
-            ")"
-        ],
-        "broke at": "Index 3, Analysis"
-    },
-    "ZEIT4230": {
-        "condition": {
-            "original": "Prerequisites: ZEIT2209 and ZEIT3xxx Embedded Systems<br/><br/>",
-            "processed": "ZEIT2209 && ZEIT3xxx Embedded Systems"
-        },
-        "tokens": [
-            "(",
-            "ZEIT2209",
-            "&&",
-            "ZEIT3xxx",
-            "Embedded",
-            "Systems",
-            ")"
-        ],
-        "broke at": "Index 4, Embedded"
-    },
-    "ZEIT4507": {
-        "condition": {
-            "original": "Prerequisite: ZEIT4506 Orbital Mechanics<br/><br/>",
-            "processed": "ZEIT4506 Orbital Mechanics"
-        },
-        "tokens": [
-            "(",
-            "ZEIT4506",
-            "Orbital",
-            "Mechanics",
-            ")"
-        ],
-        "broke at": "Index 3, Mechanics"
-    },
     "ZHSS2506": {
         "condition": {
             "original": "Pre: Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202.<br/><br/>",
@@ -9914,23 +8591,21 @@
     },
     "ZHSS3501": {
         "condition": {
-            "original": "Pre: Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202.<br/><br/>",
-            "processed": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202"
+            "original": "Prerequisite: Any one of ZHSS1302, ZHSS1304 or ZHSS1404<br/><br/>",
+            "processed": "Any one of ZHSS1302, ZHSS1304 || ZHSS1404"
         },
         "tokens": [
             "(",
             "Any",
-            "2",
+            "one",
             "of",
-            "ZHSS1102,",
-            "ZHSS1202,",
             "ZHSS1302,",
-            "ZHSS1304,",
-            "ZHSS1402,",
-            "ZPEM1202",
+            "ZHSS1304",
+            "||",
+            "ZHSS1404",
             ")"
         ],
-        "broke at": "Index 2, 2"
+        "broke at": "Index 2, one"
     },
     "ZHSS3505": {
         "condition": {
@@ -9952,6 +8627,1096 @@
         ],
         "broke at": "Index 2, 2"
     },
+    "BLDG1024": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
+            "processed": "a Construction Management && Property program || minor"
+        },
+        "tokens": [
+            "(",
+            "a",
+            "Construction",
+            "Management",
+            "&&",
+            "Property",
+            "program",
+            "||",
+            "minor",
+            ")"
+        ],
+        "broke at": "Index 2, Construction"
+    },
+    "BIOC3671": {
+        "condition": {
+            "original": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
+            "processed": "BIOC2101 && BIOC2201. Restricted to Advanced SCIF#"
+        },
+        "tokens": [
+            "(",
+            "BIOC2101",
+            "&&",
+            "BIOC2201.",
+            "Restricted",
+            "to",
+            "Advanced",
+            "SCIF#",
+            ")"
+        ],
+        "broke at": "Index 4, Restricted"
+    },
+    "BEIL6010": {
+        "condition": {
+            "original": "96 UOC and enrolment in FBE  Design program<br/><br/>",
+            "processed": "96UOC && FBE DDES#"
+        },
+        "tokens": [
+            "(",
+            "96UOC",
+            "&&",
+            "FBE",
+            "DDES#",
+            ")"
+        ],
+        "broke at": "Index 4, DDES#"
+    },
+    "BEIL6000": {
+        "condition": {
+            "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
+            "processed": "96UOC in Built Environment"
+        },
+        "tokens": [
+            "(",
+            "96UOC",
+            "in",
+            "Built",
+            "Environment",
+            ")"
+        ],
+        "broke at": "Index 1, 96UOC"
+    },
+    "BLDG1022": {
+        "condition": {
+            "original": "Program 3331 3332<br/><br/>",
+            "processed": "Program 3331 3332"
+        },
+        "tokens": [
+            "(",
+            "Program",
+            "3331",
+            "3332",
+            ")"
+        ],
+        "broke at": "Index 2, 3331"
+    },
+    "CODE3100": {
+        "condition": {
+            "original": "Pre: CODE2230 /CODE2250 /CODE 2270<br/><br/>",
+            "processed": "(CODE2230 || CODE2250) /CODE 2270"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "CODE2230",
+            "||",
+            "CODE2250",
+            ")",
+            "/CODE",
+            "2270",
+            ")"
+        ],
+        "broke at": "Index 7, 2270"
+    },
+    "BLDG4501": {
+        "condition": {
+            "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
+            "processed": "Program 4522 || Program 3332 w 65WAM || over"
+        },
+        "tokens": [
+            "(",
+            "Program",
+            "4522",
+            "||",
+            "Program",
+            "3332",
+            "w",
+            "65WAM",
+            "||",
+            "over",
+            ")"
+        ],
+        "broke at": "Index 2, 4522"
+    },
+    "AVIA2117": {
+        "condition": {
+            "original": "Prerequisite: Enrolled in 3980 and completion of AVIA2111-2116<br/><br/>",
+            "processed": "3980 && AVIA2111-2116"
+        },
+        "tokens": [
+            "(",
+            "3980",
+            "&&",
+            "AVIA2111-2116",
+            ")"
+        ],
+        "broke at": "Index 4, )"
+    },
+    "BLDG1012": {
+        "condition": {
+            "original": "Program 3331 3332<br/><br/>",
+            "processed": "Program 3331 3332"
+        },
+        "tokens": [
+            "(",
+            "Program",
+            "3331",
+            "3332",
+            ")"
+        ],
+        "broke at": "Index 2, 3331"
+    },
+    "BEIL6003": {
+        "condition": {
+            "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
+            "processed": "96UOC in Built Environment"
+        },
+        "tokens": [
+            "(",
+            "96UOC",
+            "in",
+            "Built",
+            "Environment",
+            ")"
+        ],
+        "broke at": "Index 1, 96UOC"
+    },
+    "BLDG1014": {
+        "condition": {
+            "original": "Program 3331 3332<br/><br/>",
+            "processed": "Program 3331 3332"
+        },
+        "tokens": [
+            "(",
+            "Program",
+            "3331",
+            "3332",
+            ")"
+        ],
+        "broke at": "Index 2, 3331"
+    },
+    "BIOS3161": {
+        "condition": {
+            "original": "6 UOC from BIOS2031 or BIOS2051 or BIOS2061<br/><br/>",
+            "processed": "6UOC from BIOS2031 || BIOS2051 || BIOS2061"
+        },
+        "tokens": [
+            "(",
+            "6UOC",
+            "from",
+            "BIOS2031",
+            "||",
+            "BIOS2051",
+            "||",
+            "BIOS2061",
+            ")"
+        ],
+        "broke at": "Index 3, BIOS2031"
+    },
+    "BIOC3111": {
+        "condition": {
+            "original": "Prerequisites: BIOC2101 or LIFE2101, BIOC2201<br/><br/>",
+            "processed": "BIOC2101 || LIFE2101, BIOC2201"
+        },
+        "tokens": [
+            "(",
+            "BIOC2101",
+            "||",
+            "LIFE2101,",
+            "BIOC2201",
+            ")"
+        ],
+        "broke at": "Index 4, BIOC2201"
+    },
+    "BLDG1023": {
+        "condition": {
+            "original": "Program 3331 3332<br/><br/>",
+            "processed": "Program 3331 3332"
+        },
+        "tokens": [
+            "(",
+            "Program",
+            "3331",
+            "3332",
+            ")"
+        ],
+        "broke at": "Index 2, 3331"
+    },
+    "DPBS1501": {
+        "condition": {
+            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+        },
+        "tokens": [
+            "(",
+            "6UOC",
+            "of",
+            "any",
+            "DPGE,",
+            "DPST,",
+            "DPBS",
+            "&&",
+            "a",
+            "Global",
+            "Diploma",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 3, any"
+    },
+    "DPBS1180": {
+        "condition": {
+            "original": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
+            "processed": "DPBS1140 6UOC GLDIP && a Global Diploma program"
+        },
+        "tokens": [
+            "(",
+            "DPBS1140",
+            "6UOC",
+            "GLDIP",
+            "&&",
+            "a",
+            "Global",
+            "Diploma",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, &&"
+    },
+    "EDST6775": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, 4066, 4067, or 4068<br/><br/>",
+            "processed": "78UOC && EDST2002 && 4059, 4061, 4062, 4063, 4064, 4066, 4067 || 4068"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "4059,",
+            "4061,",
+            "4062,",
+            "4063,",
+            "4064,",
+            "4066,",
+            "4067",
+            "||",
+            "4068",
+            ")"
+        ],
+        "broke at": "Index 6, 4061,"
+    },
+    "DPDE1003": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "DPDE1002": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "DPDE1008": {
+        "condition": {
+            "original": "Prerequisite: DPDE1003<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "DPDE1003 7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "DPDE1003",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 4, Global"
+    },
+    "DPDE1010": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "EDST6760": {
+        "condition": {
+            "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
+            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        },
+        "tokens": [
+            "(",
+            "EDST2002",
+            "&&",
+            "EDST4084",
+            "&&",
+            "12UOC",
+            "Teaching",
+            "Method",
+            "1",
+            "courses",
+            "&&",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
+            "must",
+            "have",
+            "passed",
+            "LANTITE.",
+            "must",
+            "have",
+            "sufficient",
+            "subject",
+            "content",
+            "knowledge",
+            "in",
+            "their",
+            "teaching",
+            "areas",
+            ")"
+        ],
+        "broke at": "Index 7, Method"
+    },
+    "EDST6777": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, 4066, 4067, or 4068<br/><br/>",
+            "processed": "78UOC && EDST2002 && 4059, 4061, 4063, 4066, 4067 || 4068"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "4059,",
+            "4061,",
+            "4063,",
+            "4066,",
+            "4067",
+            "||",
+            "4068",
+            ")"
+        ],
+        "broke at": "Index 6, 4061,"
+    },
+    "DPDE1004": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisites: DPDE1001 and DPDE1005 <br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program. DPDE1001 && DPDE1005"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program.",
+            "DPDE1001",
+            "&&",
+            "DPDE1005",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "DPBS1170": {
+        "condition": {
+            "original": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
+            "processed": "DPBS1140 6UOC GLDIP && a Global Diploma program"
+        },
+        "tokens": [
+            "(",
+            "DPBS1140",
+            "6UOC",
+            "GLDIP",
+            "&&",
+            "a",
+            "Global",
+            "Diploma",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, &&"
+    },
+    "DPBS1190": {
+        "condition": {
+            "original": "Prereq: DPBS1110 or DPBS1203,6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
+            "processed": "DPBS1110 || DPBS1203 && 6UOC GLDIP && a Global Diploma program"
+        },
+        "tokens": [
+            "(",
+            "DPBS1110",
+            "||",
+            "DPBS1203",
+            "&&",
+            "6UOC",
+            "GLDIP",
+            "&&",
+            "a",
+            "Global",
+            "Diploma",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 7, &&"
+    },
+    "EDST6727": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in one of the following programs, 3446, 3470, 4053, 4054, or 4068<br/><br/>",
+            "processed": "78UOC && EDST2002 && one of the following programs, 3446, 3470, 4053, 4054 || 4068"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "one",
+            "of",
+            "the",
+            "following",
+            "programs,",
+            "3446,",
+            "3470,",
+            "4053,",
+            "4054",
+            "||",
+            "4068",
+            ")"
+        ],
+        "broke at": "Index 6, of"
+    },
+    "DPDE1007": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "DPGE1004": {
+        "condition": {
+            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)<br/><br/>",
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Global",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004,",
+            "7005,",
+            "7006",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Global"
+    },
+    "DPST1024": {
+        "condition": {
+            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
+            "processed": "(7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "7001",
+            "||",
+            "7002",
+            "||",
+            "7003",
+            "||",
+            "7004",
+            ")",
+            "DPST1023",
+            "||",
+            "a",
+            "credit",
+            "(",
+            "\u226565%",
+            ")",
+            "in",
+            "DPST1021",
+            "&&",
+            "[",
+            "DPST1014",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 13, credit"
+    },
+    "DPDE1011": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1001 and DPDE1005.<br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program. DPDE1001 && DPDE1005"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program.",
+            "DPDE1001",
+            "&&",
+            "DPDE1005",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "DPDE1005": {
+        "condition": {
+            "original": "Prerequisite: DPDE1002<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "DPDE1002 7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "DPDE1002",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 4, Global"
+    },
+    "EDST6706": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053, 4054, or 4076<br/><br/>",
+            "processed": "78UOC && EDST2002 && 4053, 4054 || 4076"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "4053,",
+            "4054",
+            "||",
+            "4076",
+            ")"
+        ],
+        "broke at": "Index 6, 4054"
+    },
+    "EXPT3152": {
+        "condition": {
+            "original": "Pre-requisite: (SOMS1912, SOMS1913, HESC2451) or (HESC2452 and NEUR3101)<br/><br/>",
+            "processed": "(SOMS1912, SOMS1913, HESC2451) || (HESC2452 && NEUR3101)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "SOMS1912,",
+            "SOMS1913,",
+            "HESC2451",
+            ")",
+            "||",
+            "(",
+            "HESC2452",
+            "&&",
+            "NEUR3101",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, SOMS1912,"
+    },
+    "EDST6716": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462, 4054, or 4058<br/><br/>",
+            "processed": "78UOC && EDST2002 && 3462, 4054 || 4058"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "3462,",
+            "4054",
+            "||",
+            "4058",
+            ")"
+        ],
+        "broke at": "Index 6, 4054"
+    },
+    "HLTH3000": {
+        "condition": {
+            "original": "Prerequisites: HLTH1000, HLTH2000 and (PHCM2100 or enrolment into 3897 Applied Exercise Science/Clinical Exercise Physiology)<br/><br/>",
+            "processed": "HLTH1000 && HLTH2000 && (PHCM2100 || to (3897) )"
+        },
+        "tokens": [
+            "(",
+            "HLTH1000",
+            "&&",
+            "HLTH2000",
+            "&&",
+            "(",
+            "PHCM2100",
+            "||",
+            "to",
+            "(",
+            "3897",
+            ")",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 8, to"
+    },
+    "EDST6761": {
+        "condition": {
+            "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
+            "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
+        },
+        "tokens": [
+            "(",
+            "EDST6760",
+            "&&",
+            "12UOC",
+            "in",
+            "Teaching",
+            "Methods",
+            "courses.",
+            "must",
+            "have",
+            "passed",
+            "the",
+            "Literacy",
+            "&&",
+            "Numeracy",
+            "Test",
+            "for",
+            "Initial",
+            "Teacher",
+            "Education",
+            ")"
+        ],
+        "broke at": "Index 3, 12UOC"
+    },
+    "GMAT4061": {
+        "condition": {
+            "original": "GMAT4060 Thesis A<br/><br/>",
+            "processed": "GMAT4060 Thesis A"
+        },
+        "tokens": [
+            "(",
+            "GMAT4060",
+            "Thesis",
+            "A",
+            ")"
+        ],
+        "broke at": "Index 3, A"
+    },
+    "EXPT2168": {
+        "condition": {
+            "original": "Prerequisites - EXPT1155 Exercise Physiology and Metabolism <br/><br/>",
+            "processed": "- EXPT1155 Exercise Physiology && Metabolism"
+        },
+        "tokens": [
+            "(",
+            "-",
+            "EXPT1155",
+            "Exercise",
+            "Physiology",
+            "&&",
+            "Metabolism",
+            ")"
+        ],
+        "broke at": "Index 2, EXPT1155"
+    },
+    "EDST6728": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3446, 3470, or 4068<br/><br/>",
+            "processed": "78UOC && EDST2002 && 3446, 3470 || 4068"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "3446,",
+            "3470",
+            "||",
+            "4068",
+            ")"
+        ],
+        "broke at": "Index 6, 3470"
+    },
+    "FOOD6804": {
+        "condition": {
+            "original": "Prerequsite :CHEM3811or INDC2003<br/><br/>",
+            "processed": "CHEM3811or INDC2003"
+        },
+        "tokens": [
+            "(",
+            "CHEM3811or",
+            "INDC2003",
+            ")"
+        ],
+        "broke at": "Index 2, INDC2003"
+    },
+    "EDST6771": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, 4066, 4067, or 4068<br/><br/>",
+            "processed": "78UOC && EDST2002 && 4059, 4061, 4062, 4063, 4064, 4066, 4067 || 4068"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "4059,",
+            "4061,",
+            "4062,",
+            "4063,",
+            "4064,",
+            "4066,",
+            "4067",
+            "||",
+            "4068",
+            ")"
+        ],
+        "broke at": "Index 6, 4061,"
+    },
+    "DPDE1001": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Global Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Global"
+    },
+    "PHRM2031": {
+        "condition": {
+            "original": "Prerequisite: PHRM1011 and 48 UOC of Level 1 courses from 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>Co-requisite: PHAR2911, DIET2001<br/><br/>",
+            "processed": "PHRM1011 && 48UOC in L1 from (3895) && [PHAR2911, DIET2001]"
+        },
+        "tokens": [
+            "(",
+            "PHRM1011",
+            "&&",
+            "48UOC",
+            "in",
+            "L1",
+            "from",
+            "(",
+            "3895",
+            ")",
+            "&&",
+            "[",
+            "PHAR2911,",
+            "DIET2001",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 12, PHAR2911,"
+    },
+    "PHRM3032": {
+        "condition": {
+            "original": "Prerequisite: PHRM2031, MICR2012, PHAR2911 and completion of 48UOC of Level 1 courses in 3895 Pharmaceutical Medicine / Pharmacy<br/><br/>",
+            "processed": "PHRM2031 && MICR2012 && PHAR2911 && 48UOC in L1 in 3895 Pharmaceutical Medicine / Pharmacy"
+        },
+        "tokens": [
+            "(",
+            "PHRM2031",
+            "&&",
+            "MICR2012",
+            "&&",
+            "PHAR2911",
+            "&&",
+            "48UOC",
+            "in",
+            "L1",
+            "in",
+            "3895",
+            "Pharmaceutical",
+            "Medicine",
+            "/",
+            "Pharmacy",
+            ")"
+        ],
+        "broke at": "Index 11, 3895"
+    },
+    "PATH3209": {
+        "condition": {
+            "original": "Prerequisite: BABS3041. Highly recommended PATH2201 and PATH3205<br/><br/>",
+            "processed": "BABS3041. Highly recommended PATH2201 && PATH3205"
+        },
+        "tokens": [
+            "(",
+            "BABS3041.",
+            "Highly",
+            "recommended",
+            "PATH2201",
+            "&&",
+            "PATH3205",
+            ")"
+        ],
+        "broke at": "Index 2, Highly"
+    },
+    "MFAC4999": {
+        "condition": {
+            "original": "Students who have completed Year 3 clinical coursework requirements are eligible for enrolment.<br/><br/>",
+            "processed": "who Year 3 clinical coursework requirements are eligible for enrolment"
+        },
+        "tokens": [
+            "(",
+            "who",
+            "Year",
+            "3",
+            "clinical",
+            "coursework",
+            "requirements",
+            "are",
+            "eligible",
+            "for",
+            "enrolment",
+            ")"
+        ],
+        "broke at": "Index 2, Year"
+    },
+    "PHRM3022": {
+        "condition": {
+            "original": "Pre-requisite: 3892 Pharmaceutical Medicine (Year 1) and PHRM2031, MICR2012, PHAR2911\t<br/><br/>",
+            "processed": "3892 Pharmaceutical Medicine (Year 1) && PHRM2031, MICR2012, PHAR2911"
+        },
+        "tokens": [
+            "(",
+            "3892",
+            "Pharmaceutical",
+            "Medicine",
+            "(",
+            "Year",
+            "1",
+            ")",
+            "&&",
+            "PHRM2031,",
+            "MICR2012,",
+            "PHAR2911",
+            ")"
+        ],
+        "broke at": "Index 3, Medicine"
+    },
+    "PHSL3211": {
+        "condition": {
+            "original": "Prerequisite: PHSL2101 or PHSL2121 or PHSL 2501 AND PHSL2201 or PHSL2221 or PHSL2502<br/><br/>",
+            "processed": "PHSL2101 || PHSL2121 || PHSL 2501 && PHSL2201 || PHSL2221 || PHSL2502"
+        },
+        "tokens": [
+            "(",
+            "PHSL2101",
+            "||",
+            "PHSL2121",
+            "||",
+            "PHSL",
+            "2501",
+            "&&",
+            "PHSL2201",
+            "||",
+            "PHSL2221",
+            "||",
+            "PHSL2502",
+            ")"
+        ],
+        "broke at": "Index 6, 2501"
+    },
+    "PHRM3031": {
+        "condition": {
+            "original": "Pre-requisite: 3892 Pharmaceutical Medicine (Year 1) and PHRM2031, MICR2012, PHAR2911<br/><br/>",
+            "processed": "3892 Pharmaceutical Medicine (Year 1) && PHRM2031, MICR2012, PHAR2911"
+        },
+        "tokens": [
+            "(",
+            "3892",
+            "Pharmaceutical",
+            "Medicine",
+            "(",
+            "Year",
+            "1",
+            ")",
+            "&&",
+            "PHRM2031,",
+            "MICR2012,",
+            "PHAR2911",
+            ")"
+        ],
+        "broke at": "Index 3, Medicine"
+    },
+    "ZBUS3104": {
+        "condition": {
+            "original": "Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>Business Program (4405 or 4462) and ZBUS1104<br/><br/>",
+            "processed": "ZBUS3108 Business Strategy Implementation is assumed prior to undertaking Business Capstone (Work Practice Project). BUSN# && ZBUS1104"
+        },
+        "tokens": [
+            "(",
+            "ZBUS3108",
+            "Business",
+            "Strategy",
+            "Implementation",
+            "is",
+            "assumed",
+            "prior",
+            "to",
+            "undertaking",
+            "Business",
+            "Capstone",
+            "(",
+            "Work",
+            "Practice",
+            "Project",
+            ")",
+            ".",
+            "BUSN#",
+            "&&",
+            "ZBUS1104",
+            ")"
+        ],
+        "broke at": "Index 3, Strategy"
+    },
+    "ZEIT3112": {
+        "condition": {
+            "original": "Students must contact the course convenor to arrange a topic and supervisor to gain permission to enroll in this course.<br/><br/>",
+            "processed": "must contact the course convenor to arrange a topic && supervisor to gain permission"
+        },
+        "tokens": [
+            "(",
+            "must",
+            "contact",
+            "the",
+            "course",
+            "convenor",
+            "to",
+            "arrange",
+            "a",
+            "topic",
+            "&&",
+            "supervisor",
+            "to",
+            "gain",
+            "permission",
+            ")"
+        ],
+        "broke at": "Index 2, contact"
+    },
+    "ZEIT3118": {
+        "condition": {
+            "original": "Prerequisite: ZEIT2105 Systems Analysis and Design and 96 Units of Credit<br/><br/>",
+            "processed": "ZEIT2105 Systems Analysis && Design && 96UOC"
+        },
+        "tokens": [
+            "(",
+            "ZEIT2105",
+            "Systems",
+            "Analysis",
+            "&&",
+            "Design",
+            "&&",
+            "96UOC",
+            ")"
+        ],
+        "broke at": "Index 3, Analysis"
+    },
+    "ZEIT4230": {
+        "condition": {
+            "original": "Prerequisites: ZEIT2209 and ZEIT3223 Embedded Systems<br/><br/>",
+            "processed": "ZEIT2209 && ZEIT3223 Embedded Systems"
+        },
+        "tokens": [
+            "(",
+            "ZEIT2209",
+            "&&",
+            "ZEIT3223",
+            "Embedded",
+            "Systems",
+            ")"
+        ],
+        "broke at": "Index 5, Systems"
+    },
     "ZPEM2506": {
         "condition": {
             "original": "ZPEM1301 or ZPEM1303, ZPEM1302 or ZPEM1304, ZPEM1501.<br/><br/>",
@@ -9970,6 +9735,20 @@
             ")"
         ],
         "broke at": "Index 8, ZPEM1501"
+    },
+    "ZEIT4507": {
+        "condition": {
+            "original": "Prerequisite: ZEIT4506 Orbital Mechanics<br/><br/>",
+            "processed": "ZEIT4506 Orbital Mechanics"
+        },
+        "tokens": [
+            "(",
+            "ZEIT4506",
+            "Orbital",
+            "Mechanics",
+            ")"
+        ],
+        "broke at": "Index 3, Mechanics"
     },
     "ZPEM2509": {
         "condition": {
