@@ -278,7 +278,7 @@ def remove_all(token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 
-@router.post("/unscheduleCourse")
+@router.post("/unscheduleCourse")  # TODO: What if someone is enrolled in the same couse twice?
 def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
     """
     Moves a course out of a term and into the user's unplanned column
@@ -291,11 +291,16 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
     user = get_user(token)
 
     # Remove every instance of the course from each year and add to unplanned
+    removed = False
     for year in user['planner']['years']:
         for course_list in year.values():
             if data.courseCode in course_list:
+                removed = True
                 course_list.remove(data.courseCode)
                 user['planner']['unplanned'].append(data.courseCode)
+
+    if not removed:
+        raise HTTPException(status_code=400, detail=f'{data.courseCode} not found in planner')
 
     set_user(token, user, True)
 

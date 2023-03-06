@@ -196,6 +196,21 @@ def test_unschedule_course():
     assert "COMP1531" in data['planner']['unplanned']
 
 
+def test_unschedule_unplanned_course():
+    clear()
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"])
+    data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}').json()
+    assert "COMP6447" in data['planner']['unplanned']
+
+    data = {'courseCode': 'COMP6447'}
+    x = requests.post('http://127.0.0.1:8000/planner/unscheduleCourse', json=data)
+    assert x.status_code == 400
+
+    data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}').json()
+    assert "COMP6447" in data['planner']['unplanned']
+    assert all("COMP6447" not in year[term] for year in data['planner']['years'] for term in year)
+
+
 def test_unschedule_all():
     clear()
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"])
