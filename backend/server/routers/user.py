@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 from data.config import LIVE_YEAR
 from server.database import usersDB
 from bson.objectid import ObjectId
-from server.routers.model import CourseMark, CourseDetails, Courses, LocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, Courses, LocalStorage, PlannerLocalStorage, Storage
 import pydantic
 from server.config import DUMMY_TOKEN
 pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
@@ -147,3 +147,4 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
     else:
         user['planner']['years'] = user['planner']['years'][:diff]
     set_user(token, user, True)
+    
