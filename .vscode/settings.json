@@ -14,5 +14,6 @@
     "python.linting.mypyArgs": [
         "--config-file=${workspaceFolder}/backend/mypy.ini"
     ],
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "files.eol": "\n"
 }
