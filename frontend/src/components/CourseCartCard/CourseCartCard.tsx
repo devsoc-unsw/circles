@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Tooltip, Typography } from 'antd';
+import axios from 'axios';
+import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse } from 'reducers/plannerSlice';
 import S from './styles';
 
 const { Text } = Typography;
@@ -17,6 +18,17 @@ type Props = {
 const CourseCartCard = ({ code, title }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { token } = useSelector((state: RootState) => state.settings);
+
+  const handleConfirm = () => {
+    try {
+      axios
+        .post(`/planner/removeCourse`, JSON.stringify({ courseCode: code }), { params: { token } });
+    } catch (e) {
+      // esling-disable-next-line no-console
+      console.error('Error at removeCourse', e);
+    }
+  };
 
   const handleClick = () => {
     navigate('/course-selector');
@@ -34,7 +46,7 @@ const CourseCartCard = ({ code, title }: Props) => {
       <Popconfirm
         placement="bottomRight"
         title="Remove this course from your planner?"
-        onConfirm={() => dispatch(removeCourse(code))}
+        onConfirm={handleConfirm}
         style={{ width: '200px' }}
         okText="Yes"
         cancelText="No"

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Item, Menu } from 'react-contexify';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { DeleteFilled, EditFilled, InfoCircleFilled } from '@ant-design/icons';
+import axios from 'axios';
 import EditMarkModal from 'components/EditMarkModal';
+import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse, unschedule } from 'reducers/plannerSlice';
+import { unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
 
 type Props = {
@@ -16,12 +18,22 @@ type Props = {
 
 const ContextMenu = ({ code, plannedFor }: Props) => {
   const [openModal, setOpenModal] = useState(false);
+  const { token } = useSelector((state: RootState) => state.settings);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => dispatch(removeCourse(code));
+  const handleDelete = () => {
+    try {
+      axios.post(`/planner/removeCourse`, JSON.stringify({ courseCode: code }), {
+        params: { token }
+      });
+    } catch (e) {
+      // esling-disable-next-line no-console
+      console.error('Error at removeCourse', e);
+    }
+  };
   const handleUnschedule = () => {
     dispatch(
       unschedule({
