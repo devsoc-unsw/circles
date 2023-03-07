@@ -1,12 +1,14 @@
+/* eslint-disable */
+/* eslint no-console: "error" */
 import type { Dispatch, SetStateAction } from 'react';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, message, Modal } from 'antd';
-import { Grade, Mark } from 'types/planner';
-import type { RootState } from 'config/store';
-import S from './styles';
-import { updateCourseMark } from 'utils/planner';
 import { CourseMark } from 'types/api';
+import { Grade, Mark } from 'types/planner';
+import { updateCourseMark } from 'utils/planner';
+import S from './styles';
+import { useSelector } from 'react-redux';
+import { RootState } from 'config/store';
 
 type Props = {
   code: string;
@@ -15,10 +17,6 @@ type Props = {
 };
 
 const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
-  const dispatch = useDispatch();
-  // const [markValue, setMarkValue] = useState<string | number | undefined>(
-  //   useSelector((state: RootState) => state.planner.courses[code].mark)
-  // );
   const [markValue, setMarkValue] = useState<string | number | undefined>();
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
@@ -30,7 +28,8 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   };
 
   const updateMark = (mark: Mark) => {
-    updateCourseMark({course: code, mark: mark});
+    const { token } = useSelector((state: RootState) => state.settings);
+    updateCourseMark({ course: code, mark } as CourseMark, token);
     setMarkValue(mark);
     setIsVisible(false);
     message.success('Mark Updated');

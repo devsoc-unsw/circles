@@ -108,15 +108,12 @@ def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
         user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
     set_user(token, user, True)
 
-@router.put("/updateCourseMark", responses={
-    400: [
-            {
-                "description": "The given course code could not be found in the user's courses",
-                },
-            {
-                "description": "Invalid mark",
-                }
-        ]
+@router.put("/updateCourseMark",
+            responses={
+        400: { "description": "if the mark is invalid or it isn't in the user's courses" },
+        200: {
+            "description": "on successful update",
+        }
     }
 )
 def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
