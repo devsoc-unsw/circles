@@ -4,10 +4,9 @@ import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
-import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
-import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import { removeCourses } from 'reducers/plannerSlice';
 
 interface PlannerButtonProps {
   course: Course;
@@ -16,11 +15,21 @@ interface PlannerButtonProps {
 const PlannerButton = ({ course }: PlannerButtonProps) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
+  const { token } = useSelector((state: RootState) => state.settings);
 
   const id = course.code;
   const dispatch = useDispatch();
   const [isAddedInPlanner, setIsAddedInPlanner] = useState(!!coursesInPlanner[id]);
   const [loading, setLoading] = useState(false);
+
+  const handleAddToUnplanned = async () => {
+    try {
+      await axios.post('planner/addToUnplanned', { courseCode: id }, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleAddToUnplanned: ', err);
+    }
+  };
 
   const addCourseToPlannerTimeout = (isCourseInPlanner: boolean) => {
     setLoading(true);
@@ -38,22 +47,7 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
 
   const addToPlanner = () => {
     if (course) {
-      const courseData: PlannerCourse = {
-        title: course.title,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-        isMultiterm: course.is_multiterm,
-        supressed: false,
-        mark: undefined
-      };
-      dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+      handleAddToUnplanned();
       addCourseToPlannerTimeout(true);
     }
   };

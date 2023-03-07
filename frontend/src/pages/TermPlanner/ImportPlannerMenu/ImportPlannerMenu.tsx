@@ -8,7 +8,6 @@ import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import {
-  addToUnplanned,
   moveCourse,
   setUnplannedCourseToTerm,
   toggleSummer,
@@ -23,9 +22,19 @@ const ImportPlannerMenu = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { token } = useSelector((state: RootState) => state.settings);
 
   const upload = () => {
     inputRef.current?.click();
+  };
+
+  const handleAddToUnplanned = async (code: string) => {
+    try {
+      await axios.post('planner/addToUnplanned', { courseCode: code }, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleAddToUnplanned: ', err);
+    }
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +112,7 @@ const ImportPlannerMenu = () => {
 
                 if (plannedCourses.indexOf(course.code) === -1) {
                   plannedCourses.push(course.code);
-                  dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+                  handleAddToUnplanned(course.code);
                   const destYear = Number(yearIndex) + Number(planner.startYear);
                   const destTerm = term as Term;
                   const destRow = destYear - planner.startYear;

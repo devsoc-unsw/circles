@@ -147,9 +147,3 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
     else:
         user['planner']['years'] = user['planner']['years'][:diff]
     set_user(token, user, True)
-
-@router.put("/addToUnplanned")
-def add_to_unplanned(courseCode: str, courseData: CourseDetails, token: str = DUMMY_TOKEN):
-    user = get_user(token)
-    print(user)
-    set_user(token, user, True)

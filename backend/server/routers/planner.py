@@ -87,9 +87,9 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
             - courseCode(str): The course to add to the unplanned column
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    # TODO: Please just check that the course is not in any other planned
-    # term - else: u die cos u have a duplicate
     user = get_user(token)
+    if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
+        raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
     user['planner']['unplanned'].append(data.courseCode)
     set_user(token, user, True)
 
