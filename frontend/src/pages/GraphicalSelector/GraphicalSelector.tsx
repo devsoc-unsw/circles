@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
+import SidebarDrawer from 'components/SidebarDrawer';
 import { COURSE_INFO_TAB, HELP_TAB, PROGRAM_STRUCTURE_TAB } from './constants';
 import CourseGraph from './CourseGraph';
 import HowToUse from './HowToUse';
-import SidebarDrawer from './SidebarDrawer';
 import S from './styles';
 
 const GraphicalSelector = () => {
