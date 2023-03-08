@@ -118,6 +118,10 @@ def default_cs_user() -> Storage:
 def toggle_summer_term(token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
+    if not user['planner']['isSummerEnabled']:
+        for year in user['planner']['years']:
+            user['planner']['unplanned'].extend(year['T0'])
+            year['T0'] = []
     set_user(token, user, True)
 
 

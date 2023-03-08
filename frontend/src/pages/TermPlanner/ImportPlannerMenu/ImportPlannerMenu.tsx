@@ -7,7 +7,7 @@ import { Course } from 'types/api';
 import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
-import { moveCourse, toggleSummer } from 'reducers/plannerSlice';
+import { moveCourse } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -108,7 +108,16 @@ const ImportPlannerMenu = () => {
             return;
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
-            dispatch(toggleSummer());
+            try {
+              axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+            } catch {
+              openNotification({
+                type: 'error',
+                message: 'Error setting summer term',
+                description: 'An error occurred when toggling the summer term.'
+              });
+              return;
+            }
           }
           fileInJson.years.forEach((year, yearIndex) => {
             Object.entries(year).forEach(([term, termCourses]) => {
