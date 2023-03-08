@@ -162,7 +162,7 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
     else:
         for year in user['planner']['years'][diff:]:
             for term in year.values():
-                user['planner']['unplanned'] += term
+                user['planner']['unplanned'].extend(term)
         user['planner']['years'] = user['planner']['years'][:diff]
     set_user(token, user, True)
 
