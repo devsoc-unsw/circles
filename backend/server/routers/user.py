@@ -149,36 +149,46 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 @router.put("/setProgram") 
-def setProgram(token: str = DUMMY_TOKEN, degree: dict):
-    user = get_user(token);
-    user['user']['degree']['programCode'] = degree['programCode']
+def setProgram(programCode: str, token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    user['user']['degree']['programCode'] = programCode
     set_user(token, user, True)
 
 @router.put("/addSpecialisation") 
-def addSpecialisation(token: str = DUMMY_TOKEN, specialisation: str):
-    user = get_user(token);
+def addSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
+    user = get_user(token)
     user['user']['degree']['specs'].append(specialisation)
     set_user(token, user, True)
 
 @router.put("/removeSpecialisation") 
-def removeSpecialisation(token: str = DUMMY_TOKEN, specialisation: str):
-    user = get_user(token);
+def removeSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
+    user = get_user(token)
     specs = user['user']['degree']['specs']
     if specialisation in specs:
-        user['user']['degree']['specs'] = specs.remove(specialisation)
+        specs.remove(specialisation)
     set_user(token, user, True)
 
 @router.put("/setIsComplete") 
-def setIsComplete(token: str = DUMMY_TOKEN, isComplete: bool):
+def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
     user = get_user(token);
     user['user']['degree']['isComplete'] = isComplete
     set_user(token, user, True)
 
 @router.put("/reset")
 def reset(token: str = DUMMY_TOKEN):
-    user = get_user(token);
+    user = get_user(token)
+    planner: PlannerLocalStorage = {
+        'mostRecentPastTerm': {
+            'Y': 0,
+            'T': 0
+        },
+        'unplanned': [],
+        'isSummerEnabled': True, # shoudl default be false? who knows
+        'startYear': LIVE_YEAR,
+        'years': [],
+        'courses': {},
+    }
     
-    user = default_cs_user();
     user['user'] = {
         'degree': {
             'programCode': '',
