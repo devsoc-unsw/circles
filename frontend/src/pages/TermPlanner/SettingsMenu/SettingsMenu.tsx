@@ -15,6 +15,7 @@ const DatePicker = React.lazy(() => import('components/Datepicker'));
 const SettingsMenu = () => {
   const { Option } = Select;
   const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
+  const { token } = useSelector((state: RootState) => state.settings);
 
   const dispatch = useDispatch();
 
@@ -25,7 +26,15 @@ const SettingsMenu = () => {
   }
 
   function handleUpdateDegreeLength(value: number) {
-    axios.put('/user/updateDegreeLength', { numYears: value });
+    try {
+      axios.put('/user/updateDegreeLength', { numYears: value }, { params: { token } });
+    } catch {
+      openNotification({
+        type: 'error',
+        message: 'Error setting degree length',
+        description: 'There was an error updating the degree length.'
+      });
+    }
   }
 
   function handleSummerToggle() {

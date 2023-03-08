@@ -19,6 +19,7 @@ import S from './styles';
 
 const ImportPlannerMenu = () => {
   const planner = useSelector((state: RootState) => state.planner);
+  const { token } = useSelector((state: RootState) => state.settings);
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -75,7 +76,20 @@ const ImportPlannerMenu = () => {
             });
             return;
           }
-          axios.put('/user/updateDegreeLength', { numYears: fileInJson.numYears });
+          try {
+            axios.put(
+              '/user/updateDegreeLength',
+              { numYears: fileInJson.numYears },
+              { params: { token } }
+            );
+          } catch {
+            openNotification({
+              type: 'error',
+              message: 'Error setting degree length',
+              description: 'There was an error updating the degree length.'
+            });
+            return;
+          }
           dispatch(updateStartYear(fileInJson.startYear));
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             dispatch(toggleSummer());
