@@ -1,5 +1,22 @@
 import styled, { css } from 'styled-components';
 
+const getAnimationState = (openState: boolean | undefined) => {
+  // hasnt been opened or closed yet, is closed
+  if (openState === undefined)
+    return css`
+      right: -30rem;
+    `;
+
+  // to be opened or closed
+  return openState
+    ? css`
+        animation-name: animation_opening;
+      `
+    : css`
+        animation-name: animation_closing;
+      `;
+};
+
 const Wrapper = styled.div<{ open?: boolean }>`
   position: absolute;
   height: 85%;
@@ -13,20 +30,9 @@ const Wrapper = styled.div<{ open?: boolean }>`
 
   animation-duration: 0.7s;
   animation-fill-mode: forwards;
-  ${({ open }) =>
-    open === undefined
-      ? css`
-          right: -30rem;
-        `
-      : open
-      ? css`
-          animation-name: animation_open;
-        `
-      : css`
-          animation-name: animation_closed;
-        `}
+  ${({ open }) => getAnimationState(open)}
 
-  @keyframes animation_open {
+  @keyframes animation_opening {
     from {
       right: -30rem;
     }
@@ -35,7 +41,7 @@ const Wrapper = styled.div<{ open?: boolean }>`
     }
   }
 
-  @keyframes animation_closed {
+  @keyframes animation_closing {
     from {
       right: 0;
     }
@@ -54,7 +60,7 @@ const ChildrenWrapper = styled.div`
   overflow-x: hidden;
 `;
 
-const ArrowWrapper = styled.div`
+const ButtonWrapper = styled.div`
   height: 40%;
   width: 2rem;
 
@@ -89,7 +95,7 @@ const SVGLine = styled.line`
 export default {
   Wrapper,
   ChildrenWrapper,
-  ArrowWrapper,
+  ButtonWrapper,
   SVGLine,
   SVGWrapper
 };
