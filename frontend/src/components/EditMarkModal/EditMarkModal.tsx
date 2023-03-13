@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { message, Modal } from 'antd';
+import { message } from 'antd';
 import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
@@ -57,7 +57,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
   };
 
   return (
-    <Modal
+    <S.Modal
       title={`Edit mark for ${code}`}
       open={open}
       onOk={handleUpdateMark}
@@ -77,7 +77,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
           ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>
-    </Modal>
+    </S.Modal>
   );
 };
 

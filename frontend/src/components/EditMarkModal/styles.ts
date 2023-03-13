@@ -1,4 +1,4 @@
-import { Button as antdButton, Input as antdInput } from 'antd';
+import { Button as antdButton, Input as antdInput, Modal as antdModal } from 'antd';
 import styled from 'styled-components';
 
 const EditMarkWrapper = styled.div`
@@ -30,4 +30,19 @@ const Button = styled(antdButton)`
   }
 `;
 
-export default { EditMarkWrapper, LetterGradeWrapper, Input, Button };
+// NOTE: Very hacky way to override modal styling
+const Modal = styled(antdModal)`
+  .ant-modal-footer {
+    border: 0px;
+  }
+  .ant-modal-header {
+    border-color: ${({ theme }) => theme.editMark.borderColorHeader};
+  }
+  .ant-btn-default {
+    background-color: ${({ theme }) => theme.editMark.backgroundColor};
+    border-color: ${({ theme }) => theme.editMark.borderColor};
+    color: ${({ theme }) => theme.editMark.color};
+  }
+`;
+
+export default { EditMarkWrapper, LetterGradeWrapper, Input, Button, Modal };

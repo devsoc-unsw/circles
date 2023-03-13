@@ -136,6 +136,7 @@ export const lightTheme: DefaultTheme = {
     backgroundColor: '#fff',
     color: '#323739',
     borderColor: '#d9d9d9',
+    borderColorHeader: '#ededed',
     backgroundColorHover: '#fff'
   }
 };
@@ -205,6 +206,7 @@ export const darkTheme: DefaultTheme = {
     backgroundColor: '#2c2b2f',
     color: '#f1f1f1',
     borderColor: '#444249',
+    borderColorHeader: '#444249',
     backgroundColorHover: '#2c2b2f'
   }
 };

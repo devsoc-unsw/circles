@@ -70,6 +70,7 @@ declare module 'styled-components' {
       backgroundColor: string;
       color: string;
       borderColor: string;
+      borderColorHeader: string;
       backgroundColorHover: string;
     }
   }
