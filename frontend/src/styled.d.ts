@@ -65,5 +65,12 @@ declare module 'styled-components' {
     courseMenu?: {
       backgroundColor: string;
     };
+
+    editMark: {
+      backgroundColor: string;
+      color: string;
+      borderColor: string;
+      backgroundColorHover: string;
+    }
   }
 }

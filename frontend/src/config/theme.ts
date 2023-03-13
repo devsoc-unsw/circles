@@ -130,6 +130,13 @@ export const lightTheme: DefaultTheme = {
   courseButton: {
     backgroundColor: '#fff',
     hoverBackgroundColor: '#F9F9F9'
+  },
+
+  editMark: {
+    backgroundColor: '#fff',
+    color: '#323739',
+    borderColor: '#d9d9d9',
+    backgroundColorHover: '#fff'
   }
 };
 
@@ -192,5 +199,12 @@ export const darkTheme: DefaultTheme = {
   },
   courseMenu: {
     backgroundColor: darkBaseColors.purpleLight
+  },
+
+  editMark: {
+    backgroundColor: '#2c2b2f',
+    color: '#f1f1f1',
+    borderColor: '#444249',
+    backgroundColorHover: '#2c2b2f'
   }
 };

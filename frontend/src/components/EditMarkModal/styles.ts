@@ -1,3 +1,4 @@
+import { Button as antdButton, Input as antdInput } from 'antd';
 import styled from 'styled-components';
 
 const EditMarkWrapper = styled.div`
@@ -13,4 +14,20 @@ const LetterGradeWrapper = styled.div`
   justify-content: space-around;
 `;
 
-export default { EditMarkWrapper, LetterGradeWrapper };
+const Input = styled(antdInput)`
+  width: 100%;
+  background-color: ${({ theme }) => theme.editMark.backgroundColor};
+  color: ${({ theme }) => theme.editMark.color};
+  border-color: ${({ theme }) => theme.editMark.borderColor};
+`;
+
+const Button = styled(antdButton)`
+  background-color: ${({ theme }) => theme.editMark.backgroundColor};
+  color: ${({ theme }) => theme.editMark.color};
+  border-color: ${({ theme }) => theme.editMark.borderColor};
+  &:hover {
+    background-color: ${({ theme }) => theme.editMark.backgroundColor};
+  }
+`;
+
+export default { EditMarkWrapper, LetterGradeWrapper, Input, Button };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Input, message, Modal } from 'antd';
+import { message, Modal } from 'antd';
 import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
@@ -65,16 +65,15 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
       width="350px"
     >
       <S.EditMarkWrapper>
-        <Input
+        <S.Input
           value={markValue}
           onChange={handleInputChange}
           onPressEnter={handleUpdateMark}
           placeholder="Enter Mark"
-          style={{ width: '100%' }}
         />
         <S.LetterGradeWrapper>
           {letterGrades.map((letterGrade) => (
-            <Button onClick={() => updateMark(letterGrade)}>{letterGrade}</Button>
+            <S.Button onClick={() => updateMark(letterGrade)}>{letterGrade}</S.Button>
           ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>
