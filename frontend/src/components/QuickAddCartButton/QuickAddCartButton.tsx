@@ -7,8 +7,9 @@ import { Course, UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
-import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import { addToUnplanned } from 'reducers/plannerSlice';
 import S from './styles';
+import { CourseList } from 'types/courses';
 
 type Props = {
   courseCode: string;
@@ -17,7 +18,7 @@ type Props = {
 
 const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   const dispatch = useDispatch();
-
+  const { token } = useSelector((state: RootState) => state.settings);
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
@@ -54,7 +55,11 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
         `/courses/unselectCourse/${code}`,
         JSON.stringify(prepareUserPayload(degree, planner))
       );
-      dispatch(removeCourses(res.data.courses));
+      res.data.courses.forEach((course) => {
+        axios.post(`/planner/removeCourse`, JSON.stringify({ courseCode: course }), {
+          params: { token }
+        });
+      });
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Error at removeFromPlanner', err);
