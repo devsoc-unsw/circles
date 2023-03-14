@@ -44,6 +44,9 @@ declare module 'styled-components' {
     };
     optionsHeader: {
       borderColor: string;
+      buttonBorderColor: string;
+      buttonBackgroundColor: string;
+      buttonHoverColor: string;
     };
     infoOutlined: {
       color: string;

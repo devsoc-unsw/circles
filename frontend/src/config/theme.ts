@@ -119,7 +119,10 @@ export const lightTheme: DefaultTheme = {
     borderColor: '#d9d9d9'
   },
   optionsHeader: {
-    borderColor: '#d9d9d9'
+    borderColor: '#d9d9d9',
+    buttonBorderColor: '#cecece',
+    buttonBackgroundColor: '#fff',
+    buttonHoverColor: '#e3e3e3'
   },
   infoOutlined: {
     color: '#000'
@@ -186,7 +189,10 @@ export const darkTheme: DefaultTheme = {
     borderColor: '#4d4b4a'
   },
   optionsHeader: {
-    borderColor: '#4d4b4a'
+    borderColor: '#4d4b4a',
+    buttonBorderColor: '#5f5a64',
+    buttonBackgroundColor: '#444249',
+    buttonHoverColor: '#6d6772'
   },
   infoOutlined: {
     color: '#fff'

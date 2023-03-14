@@ -37,7 +37,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
 
   const iconStyles = {
     fontSize: '20px',
-    color: '#323739'
+    color: theme === 'light' ? '#323739' : '#f1f1f1'
   };
 
   return (
@@ -121,7 +121,12 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         )}
         <Tooltip title="Toggle warnings for previous terms">
           <S.OptionButton onClick={() => dispatch(toggleShowWarnings())}>
-            <WarningFilled style={{ ...iconStyles, ...(showWarnings && { color: '#9254de' }) }} />
+            <WarningFilled
+              style={{
+                ...iconStyles,
+                ...(showWarnings && { color: theme === 'light' ? '#9254de' : '#c198ef' })
+              }}
+            />
           </S.OptionButton>
         </Tooltip>
       </S.OptionSection>
