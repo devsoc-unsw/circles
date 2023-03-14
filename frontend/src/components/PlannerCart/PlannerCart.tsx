@@ -5,8 +5,8 @@ import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button, Tooltip, Typography } from 'antd';
 import CourseCartCard from 'components/CourseCartCard';
 import type { RootState } from 'config/store';
-import { removeAllCourses } from 'reducers/plannerSlice';
 import S from './styles';
+import axios from 'axios';
 
 const { Text, Title } = Typography;
 
@@ -14,6 +14,7 @@ const PlannerCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const courses = useSelector((store: RootState) => store.planner.courses);
+  const { token } = useSelector((state: RootState) => state.settings);
   const [showMenu, setShowMenu] = useState(false);
 
   const pathname = useLocation();
@@ -21,6 +22,15 @@ const PlannerCart = () => {
   useEffect(() => {
     setShowMenu(false);
   }, [pathname]);
+
+  const handleRemoveAllCourses = async () => {
+    try {
+      const res = await axios.post(`/planner/removeAll`, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at plannerCart removeAllCourses', err);
+    }
+  };
 
   return (
     <S.PlannerCartRoot>
@@ -52,7 +62,7 @@ const PlannerCart = () => {
                   block
                   danger
                   icon={<DeleteOutlined />}
-                  onClick={() => dispatch(removeAllCourses())}
+                  onClick={handleRemoveAllCourses}
                 >
                   Delete all courses
                 </Button>
