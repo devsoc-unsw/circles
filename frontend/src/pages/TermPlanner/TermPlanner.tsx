@@ -78,16 +78,22 @@ const TermPlanner = () => {
 
   const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
+  const { token } = useSelector((state: RootState) => state.settings);
   useEffect(() => {
     const validateTermPlanner = async () => {
       try {
         const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
         dispatch(toggleWarnings(res.data.courses_state));
+        await axios.put('user/toggleWarnings', Object.keys(res.data.courses_state), {
+          params: { token }
+        });
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error('Error at validateTermPlanner', err);
       }
     };
+    // eslint-disable-next-line no-console
+    console.log('hi mom');
 
     if (plannerEmpty) {
       openNotification({
@@ -98,7 +104,7 @@ const TermPlanner = () => {
       });
     }
     validateTermPlanner();
-  }, [payload, showWarnings, plannerEmpty, dispatch]);
+  }, [payload, showWarnings, plannerEmpty, dispatch, token]);
 
   const currYear = new Date().getFullYear();
 
