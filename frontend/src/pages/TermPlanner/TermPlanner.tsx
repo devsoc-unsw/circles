@@ -14,7 +14,6 @@ import type { RootState } from 'config/store';
 import {
   moveCourse,
   setPlannedCourseToTerm,
-  setUnplannedCourseToTerm,
   toggleWarnings,
   unschedule,
   updateLegacyOfferings
@@ -26,6 +25,7 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { checkMultitermInBounds, isPlannerEmpty } from './utils';
+import { UnPlannedToTerm } from 'types/planner';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -35,10 +35,20 @@ const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
+  const { token } = useSelector((state: RootState) => state.settings);
 
   const [draggingCourse, setDraggingCourse] = useState('');
   const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
   const [multiCourse, setMultiCourse] = useState('');
+
+  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
+    try {
+      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleSetUnplannedCourseToTerm: ' + err);
+    }
+  }
 
   const dispatch = useDispatch();
 
@@ -182,14 +192,13 @@ const TermPlanner = () => {
 
     if (source.droppableId === 'unplanned') {
       // === move unplanned course to term ===
-      dispatch(
-        setUnplannedCourseToTerm({
-          destRow,
-          destTerm,
-          destIndex,
-          course: draggableId
-        })
-      );
+      const data = {
+        'destRow': destRow,
+        'destTerm': destTerm,
+        'destIndex': destIndex,
+        'courseCode': draggableId
+      }
+      handleSetUnplannedCourseToTerm(data);
     } else {
       // === move between terms ===
       const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)?.[0] as string, 10);
