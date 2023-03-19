@@ -53,25 +53,25 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
-  // Antd Select customisation
-  .ant-select-selector {
+  // Antd Select customisation - TermPlanner SettingsMenu
+  .settings-degree-length-popup .ant-select-selector {
     background-color: ${({ theme }) => theme.settingsMenuSelect.selectBackgroundColor} !important;
     border-color: ${({ theme }) => theme.settingsMenuSelect.selectBorderColor} !important;
     color: ${({ theme }) => theme.text};
   }
-  .ant-select-arrow {
+  .settings-degree-length-popup .ant-select-arrow {
     color: ${({ theme }) => theme.settingsMenuSelect.selectArrowColor};
   }
-  .ant-select-item-option {
+  .settings-degree-length-popup.ant-select-item-option {
     background-color: ${({ theme }) => theme.settingsMenuSelect.optionBackgroundColor} !important;
     color: ${({ theme }) => theme.settingsMenuSelect.optionTextColor} !important;
   }
-  .ant-select-item-option-selected {
+  .settings-degree-length-popup.ant-select-item-option-selected {
     background-color: ${({ theme }) =>
       theme.settingsMenuSelect.optionHoverBackgroundColor} !important;
     color: ${({ theme }) => theme.settingsMenuSelect.optionTextColor} !important;
   }
-  .ant-select-item-option:hover {
+  .settings-degree-length-popup.ant-select-item-option:hover {
     background-color: ${({ theme }) =>
       theme.settingsMenuSelect.optionHoverBackgroundColor} !important;
   }
@@ -121,7 +121,7 @@ export const GlobalStyles = createGlobalStyle`
       background-color: #9154DE !important;
     }
   }
-
+ 
   // Scrollbar settings
   /* width */
   ::-webkit-scrollbar {

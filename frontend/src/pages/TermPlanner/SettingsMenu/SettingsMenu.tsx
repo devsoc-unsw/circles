@@ -55,7 +55,7 @@ const SettingsMenu = () => {
           unCheckedChildren={<CloseOutlined />}
         />
       </CS.PopupEntry>
-      <CS.PopupEntry>
+      <CS.PopupEntry className="settings-start-year-popup">
         <CS.MenuText>Start Year</CS.MenuText>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
           <DatePicker
@@ -66,20 +66,20 @@ const SettingsMenu = () => {
           />
         </Suspense>
       </CS.PopupEntry>
-      <CS.PopupEntry>
+      <CS.PopupEntry className="settings-degree-length-popup">
         <CS.MenuText>Degree Length</CS.MenuText>
         <Select
           value={numYears}
           style={{ width: 70 }}
-          // this is required despite the css in theme.ts
           dropdownStyle={{
             backgroundColor: theme === 'light' ? '#fff' : '#444249',
             color: theme === 'light' ? '#444249' : '#fff'
           }}
           onChange={handleUpdateDegreeLength}
+          className="settings-degree-length-popup"
         >
           {years.map((num) => (
-            <Option key={num} value={num}>
+            <Option key={num} value={num} className="settings-degree-length-popup">
               {num}
             </Option>
           ))}
