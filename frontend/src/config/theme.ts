@@ -53,6 +53,29 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
+  // Antd Select customisation
+  .ant-select-selector {
+    background-color: ${({ theme }) => theme.settingsMenuSelect.selectBackgroundColor} !important;
+    border-color: ${({ theme }) => theme.settingsMenuSelect.selectBorderColor} !important;
+    color: ${({ theme }) => theme.text};
+  }
+  .ant-select-arrow {
+    color: ${({ theme }) => theme.settingsMenuSelect.selectArrowColor};
+  }
+  .ant-select-item-option {
+    background-color: ${({ theme }) => theme.settingsMenuSelect.optionBackgroundColor} !important;
+    color: ${({ theme }) => theme.settingsMenuSelect.optionTextColor} !important;
+  }
+  .ant-select-item-option-selected {
+    background-color: ${({ theme }) =>
+      theme.settingsMenuSelect.optionHoverBackgroundColor} !important;
+    color: ${({ theme }) => theme.settingsMenuSelect.optionTextColor} !important;
+  }
+  .ant-select-item-option:hover {
+    background-color: ${({ theme }) =>
+      theme.settingsMenuSelect.optionHoverBackgroundColor} !important;
+  }
+
   // Scrollbar settings
   /* width */
   ::-webkit-scrollbar {
@@ -124,6 +147,14 @@ export const lightTheme: DefaultTheme = {
     buttonBackgroundColor: '#fff',
     buttonHoverColor: '#e3e3e3'
   },
+  settingsMenuSelect: {
+    selectBackgroundColor: 'fff',
+    selectBorderColor: '#d9d9d9',
+    selectArrowColor: '#d9d9d9',
+    optionBackgroundColor: '#fff',
+    optionTextColor: '#000',
+    optionHoverBackgroundColor: '#f5f5f5'
+  },
   infoOutlined: {
     color: '#000'
   },
@@ -193,6 +224,14 @@ export const darkTheme: DefaultTheme = {
     buttonBorderColor: '#5f5a64',
     buttonBackgroundColor: '#444249',
     buttonHoverColor: '#6d6772'
+  },
+  settingsMenuSelect: {
+    selectBackgroundColor: '#444249',
+    selectBorderColor: '#5f5a64',
+    selectArrowColor: '#cecece',
+    optionBackgroundColor: '#444249',
+    optionTextColor: '#fff',
+    optionHoverBackgroundColor: '#6d6772'
   },
   infoOutlined: {
     color: '#fff'

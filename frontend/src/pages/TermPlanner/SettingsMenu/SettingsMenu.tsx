@@ -13,6 +13,7 @@ const DatePicker = React.lazy(() => import('components/Datepicker'));
 
 const SettingsMenu = () => {
   const { Option } = Select;
+  const { theme } = useSelector((state: RootState) => state.settings);
   const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
 
   const dispatch = useDispatch();
@@ -67,7 +68,16 @@ const SettingsMenu = () => {
       </CS.PopupEntry>
       <CS.PopupEntry>
         <CS.MenuText>Degree Length</CS.MenuText>
-        <Select value={numYears} style={{ width: 70 }} onChange={handleUpdateDegreeLength}>
+        <Select
+          value={numYears}
+          style={{ width: 70 }}
+          // this is required despite the css in theme.ts
+          dropdownStyle={{
+            backgroundColor: theme === 'light' ? '#fff' : '#444249',
+            color: theme === 'light' ? '#444249' : '#fff'
+          }}
+          onChange={handleUpdateDegreeLength}
+        >
           {years.map((num) => (
             <Option key={num} value={num}>
               {num}

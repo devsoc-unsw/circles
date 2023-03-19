@@ -48,6 +48,14 @@ declare module 'styled-components' {
       buttonBackgroundColor: string;
       buttonHoverColor: string;
     };
+    settingsMenuSelect: {
+      selectBackgroundColor: string;
+      selectBorderColor: string;
+      selectArrowColor: string;
+      optionBackgroundColor: string;
+      optionTextColor: string;
+      optionHoverBackgroundColor: string;
+    };
     infoOutlined: {
       color: string;
     };
