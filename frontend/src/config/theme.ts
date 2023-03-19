@@ -191,7 +191,15 @@ export const lightTheme: DefaultTheme = {
     borderColor: '#d9d9d9',
     buttonBorderColor: '#cecece',
     buttonBackgroundColor: '#fff',
-    buttonHoverColor: '#e3e3e3'
+    buttonHoverColor: '#e3e3e3',
+    buttonHoverAlternativeColor: '#fff'
+  },
+  editMark: {
+    backgroundColor: '#fff',
+    color: '#323739',
+    borderColor: '#d9d9d9',
+    borderColorHeader: '#ededed',
+    backgroundColorHover: '#fff'
   },
   settingsMenuSelect: {
     selectBackgroundColor: '#fff',
@@ -221,14 +229,6 @@ export const lightTheme: DefaultTheme = {
   courseButton: {
     backgroundColor: '#fff',
     hoverBackgroundColor: '#F9F9F9'
-  },
-
-  editMark: {
-    backgroundColor: '#fff',
-    color: '#323739',
-    borderColor: '#d9d9d9',
-    borderColorHeader: '#ededed',
-    backgroundColorHover: '#fff'
   }
 };
 
@@ -280,7 +280,15 @@ export const darkTheme: DefaultTheme = {
     borderColor: '#4d4b4a',
     buttonBorderColor: '#5f5a64',
     buttonBackgroundColor: '#444249',
-    buttonHoverColor: '#6d6772'
+    buttonHoverColor: '#6d6772',
+    buttonHoverAlternativeColor: '#343239'
+  },
+  editMark: {
+    backgroundColor: '#2c2b2f',
+    color: '#f1f1f1',
+    borderColor: '#444249',
+    borderColorHeader: '#444249',
+    backgroundColorHover: '#1c1b1f'
   },
   settingsMenuSelect: {
     selectBackgroundColor: '#444249',
@@ -313,13 +321,5 @@ export const darkTheme: DefaultTheme = {
   },
   courseMenu: {
     backgroundColor: darkBaseColors.purpleLight
-  },
-
-  editMark: {
-    backgroundColor: '#2c2b2f',
-    color: '#f1f1f1',
-    borderColor: '#444249',
-    borderColorHeader: '#444249',
-    backgroundColorHover: '#2c2b2f'
   }
 };

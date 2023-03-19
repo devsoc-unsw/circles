@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { message } from 'antd';
+import { Button, message } from 'antd';
 import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
@@ -73,7 +73,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
         />
         <S.LetterGradeWrapper>
           {letterGrades.map((letterGrade) => (
-            <S.Button onClick={() => updateMark(letterGrade)}>{letterGrade}</S.Button>
+            <Button onClick={() => updateMark(letterGrade)}>{letterGrade}</Button>
           ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>

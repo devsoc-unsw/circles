@@ -42,11 +42,20 @@ declare module 'styled-components' {
     termBoxWrapper: {
       borderColor: string;
     };
+
     optionsHeader: {
       borderColor: string;
       buttonBorderColor: string;
       buttonBackgroundColor: string;
       buttonHoverColor: string;
+      buttonHoverAlternativeColor: string;
+    };
+    editMark: {
+      backgroundColor: string;
+      color: string;
+      borderColor: string;
+      borderColorHeader: string;
+      backgroundColorHover: string;
     };
     settingsMenuSelect: {
       selectBackgroundColor: string;
@@ -67,6 +76,7 @@ declare module 'styled-components' {
       yearHoverBackgroundColor: string;
       cellNotInViewColor: string;
     };
+
     infoOutlined: {
       color: string;
     };
@@ -87,13 +97,5 @@ declare module 'styled-components' {
     courseMenu?: {
       backgroundColor: string;
     };
-
-    editMark: {
-      backgroundColor: string;
-      color: string;
-      borderColor: string;
-      borderColorHeader: string;
-      backgroundColorHover: string;
-    }
   }
 }
