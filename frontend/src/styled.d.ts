@@ -56,6 +56,17 @@ declare module 'styled-components' {
       optionTextColor: string;
       optionHoverBackgroundColor: string;
     };
+    datePicker: {
+      inputBackgroundColor: string;
+      inputBorderColor: string;
+      calendarSvgFill: string;
+      clearSvgFill: string;
+      clearBackgroundColor: string;
+      bodyBackgroundColor: string;
+      arrowColor: string;
+      yearHoverBackgroundColor: string;
+      cellNotInViewColor: string;
+    };
     infoOutlined: {
       color: string;
     };

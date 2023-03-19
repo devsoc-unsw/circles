@@ -76,6 +76,52 @@ export const GlobalStyles = createGlobalStyle`
       theme.settingsMenuSelect.optionHoverBackgroundColor} !important;
   }
 
+  // Antd DatePicker customisation
+  .ant-picker {
+    background-color: ${({ theme }) => theme.datePicker.inputBackgroundColor};
+    border-color: ${({ theme }) => theme.datePicker.inputBorderColor};
+  }
+  .ant-picker-input input {
+    color: ${({ theme }) => theme.text};
+  }
+  .anticon-calendar svg {
+    fill: ${({ theme }) => theme.datePicker.calendarSvgFill};
+  }
+  .ant-picker-clear svg {
+    fill: ${({ theme }) => theme.datePicker.clearSvgFill};
+  }
+  .ant-picker-clear {
+    background-color: ${({ theme }) => theme.datePicker.clearBackgroundColor};
+  }
+  .ant-picker-header, .ant-picker-body {
+    background-color: ${({ theme }) => theme.datePicker.bodyBackgroundColor};
+  }
+  .ant-picker-header, .ant-picker-panel {
+    border-color: ${({ theme }) => theme.datePicker.inputBorderColor};
+  }
+  .ant-picker-header-super-prev-btn, .ant-picker-header-super-next-btn {
+    color: ${({ theme }) => theme.datePicker.arrowColor} !important;
+  }
+  .ant-picker-decade-btn {
+    color: ${({ theme }) => theme.text} !important;
+  }
+  .ant-picker-cell-end, .ant-picker-cell-start {
+    color: ${({ theme }) => theme.datePicker.cellNotInViewColor};
+  }
+  .ant-picker-cell-in-view {
+    color: ${({ theme }) => theme.text} !important;
+  }
+  .ant-picker-cell:hover {
+    .ant-picker-cell-inner {
+      background-color: ${({ theme }) => theme.datePicker.yearHoverBackgroundColor} !important;
+    }
+  }
+  .ant-picker-cell-selected.ant-picker-cell:hover {
+    .ant-picker-cell-inner {
+      background-color: #9154DE !important;
+    }
+  }
+
   // Scrollbar settings
   /* width */
   ::-webkit-scrollbar {
@@ -148,12 +194,23 @@ export const lightTheme: DefaultTheme = {
     buttonHoverColor: '#e3e3e3'
   },
   settingsMenuSelect: {
-    selectBackgroundColor: 'fff',
+    selectBackgroundColor: '#fff',
     selectBorderColor: '#d9d9d9',
     selectArrowColor: '#d9d9d9',
     optionBackgroundColor: '#fff',
     optionTextColor: '#000',
     optionHoverBackgroundColor: '#f5f5f5'
+  },
+  datePicker: {
+    inputBackgroundColor: '#fff',
+    inputBorderColor: '#d9d9d9',
+    calendarSvgFill: '#d9d9d9',
+    clearSvgFill: '#d9d9d9',
+    clearBackgroundColor: '#fff',
+    bodyBackgroundColor: '#fff',
+    arrowColor: '#d9d9d9',
+    yearHoverBackgroundColor: '#f5f5f5',
+    cellNotInViewColor: '#b8b8b8'
   },
   infoOutlined: {
     color: '#000'
@@ -232,6 +289,17 @@ export const darkTheme: DefaultTheme = {
     optionBackgroundColor: '#444249',
     optionTextColor: '#fff',
     optionHoverBackgroundColor: '#6d6772'
+  },
+  datePicker: {
+    inputBackgroundColor: '#444249',
+    inputBorderColor: '#5f5a64',
+    calendarSvgFill: '#cecece',
+    clearSvgFill: '#cecece',
+    clearBackgroundColor: '#444249',
+    bodyBackgroundColor: '#444249',
+    arrowColor: '#d9d9d9',
+    yearHoverBackgroundColor: '#6d6772',
+    cellNotInViewColor: '#8a8a8a'
   },
   infoOutlined: {
     color: '#fff'
