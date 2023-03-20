@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Tabs } from 'antd';
-import { CourseResCache } from 'components/CourseDescriptionPanel/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import SidebarDrawer from 'components/SidebarDrawer';
+import { CourseDescInfoResCache } from '../../types/courseDescription';
 import { COURSE_INFO_TAB, HELP_TAB, PROGRAM_STRUCTURE_TAB } from './constants';
 import CourseGraph from './CourseGraph';
 import HowToUse from './HowToUse';
@@ -13,7 +13,7 @@ const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
-  const courseResCache = useRef({} as CourseResCache);
+  const courseResCache = useRef({} as CourseDescInfoResCache);
 
   const items = [
     {

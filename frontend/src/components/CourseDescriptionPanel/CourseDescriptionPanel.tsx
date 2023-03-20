@@ -5,6 +5,7 @@ import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
+import { CourseDescInfoResCache } from 'types/courseDescription';
 import { CourseList } from 'types/courses';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -25,17 +26,8 @@ type CourseDescriptionPanelProps = {
   className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
-  courseResCache: React.MutableRefObject<CourseResCache>;
+  courseResCache: React.MutableRefObject<CourseDescInfoResCache>;
 };
-
-interface CourseInfo {
-  course?: Course;
-  pathFrom?: CourseList;
-  unlocked?: CoursesUnlockedWhenTaken;
-  courseCap?: EnrolmentCapacityData;
-}
-
-export type CourseResCache = Record<string, CourseInfo>;
 
 const CourseDescriptionPanel = ({
   className,
