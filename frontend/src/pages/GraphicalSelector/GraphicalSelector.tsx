@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Tabs } from 'antd';
+import { CourseResCache } from 'components/CourseDescriptionPanel/CourseDescriptionPanel';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import SidebarDrawer from 'components/SidebarDrawer';
@@ -12,6 +13,7 @@ const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
+  const courseResCache = useRef({} as CourseResCache);
 
   const items = [
     {
@@ -22,6 +24,7 @@ const GraphicalSelector = () => {
           courseCode={courseCode}
           key={courseCode}
           onCourseClick={setCourseCode}
+          courseResCache={courseResCache}
         />
       ) : (
         'No course selected'

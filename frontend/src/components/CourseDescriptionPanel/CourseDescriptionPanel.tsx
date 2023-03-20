@@ -25,12 +25,23 @@ type CourseDescriptionPanelProps = {
   className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
+  courseResCache: React.MutableRefObject<CourseResCache>;
 };
+
+interface CourseInfo {
+  course?: Course;
+  pathFrom?: CourseList;
+  unlocked?: CoursesUnlockedWhenTaken;
+  courseCap?: EnrolmentCapacityData;
+}
+
+export type CourseResCache = Record<string, CourseInfo>;
 
 const CourseDescriptionPanel = ({
   className,
   courseCode,
-  onCourseClick
+  onCourseClick,
+  courseResCache
 }: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -60,22 +71,39 @@ const CourseDescriptionPanel = ({
   useEffect(() => {
     const getCourseInfo = async () => {
       try {
-        const results = await Promise.allSettled([
-          axios.get<Course>(`/courses/getCourse/${courseCode}`),
-          axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
-          axios.post<CoursesUnlockedWhenTaken>(
-            `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-            JSON.stringify(prepareUserPayload(degree, planner))
-          ),
-          axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
-        ]);
+        // if it's not saved already then fetch it
+        if (!courseResCache.current[courseCode]) {
+          const results = await Promise.allSettled([
+            axios.get<Course>(`/courses/getCourse/${courseCode}`),
+            axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
+            axios.post<CoursesUnlockedWhenTaken>(
+              `/courses/coursesUnlockedWhenTaken/${courseCode}`,
+              JSON.stringify(prepareUserPayload(degree, planner))
+            ),
+            axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
+          ]);
 
-        const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
+          const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
 
-        setCourse(unwrap(courseRes)?.data);
-        setCoursesPathFrom(unwrap(pathFromRes)?.data.courses);
-        setCoursesUnlocked(unwrap(unlockedRes)?.data);
-        setCourseCapacity(getEnrolmentCapacity(unwrap(courseCapRes)?.data));
+          courseResCache.current[courseCode] = {
+            course: unwrap(courseRes)?.data,
+            pathFrom: unwrap(pathFromRes)?.data.courses,
+            unlocked: unwrap(unlockedRes)?.data,
+            courseCap: getEnrolmentCapacity(unwrap(courseCapRes)?.data)
+          };
+        }
+
+        const {
+          course: courseData,
+          pathFrom,
+          unlocked,
+          courseCap
+        } = courseResCache.current[courseCode];
+
+        setCourse(courseData);
+        setCoursesPathFrom(pathFrom);
+        setCoursesUnlocked(unlocked);
+        setCourseCapacity(courseCap);
         setIsLoading(false);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -87,7 +115,7 @@ const CourseDescriptionPanel = ({
       // gets the associated info for a course
       getCourseInfo();
     }
-  }, [courseCode, degree, isLoading, planner]);
+  }, [courseCode, courseResCache, degree, isLoading, planner]);
 
   if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)

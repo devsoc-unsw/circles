@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Structure } from 'types/api';
@@ -6,6 +6,7 @@ import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
+import { CourseResCache } from 'components/CourseDescriptionPanel/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
@@ -23,6 +24,7 @@ const CourseSelector = () => {
 
   const dispatch = useDispatch();
 
+  const courseResCache = useRef({} as CourseResCache);
   const courseCode = tabs[active];
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const CourseSelector = () => {
               <CourseDescriptionPanel
                 courseCode={courseCode}
                 onCourseClick={(code) => dispatch(addTab(code))}
+                courseResCache={courseResCache}
               />
             </div>
           ) : (
