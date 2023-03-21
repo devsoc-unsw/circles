@@ -41,6 +41,7 @@ export const GlobalStyles = createGlobalStyle`
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: ${({ theme }) => theme.courseMenu?.backgroundColor} !important;
   }
+  // Fixes white padding in dark mode in CourseMenu
   .ant-menu-root {
     border-right-color: ${({ theme }) => theme.courseMenu?.borderColor} !important; 
   }
@@ -54,6 +55,27 @@ export const GlobalStyles = createGlobalStyle`
   .ant-modal-title {
     background-color: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text} !important;
+  }
+
+  // Antd Select customisation - Course Searchbar
+  .ant-select-dropdown.ant-select-dropdown-placement-bottomLeft {
+    background-color: ${({ theme }) => theme.searchBar.backgroundColor} !important;
+    box-shadow: ${({ theme }) => theme.searchBar.boxShadow} !important; 
+  }
+  .ant-spin-dot-item {
+    background-color: ${({ theme }) => theme.searchBar.spinBackgroundColor} !important;
+  }
+  .course-search-bar .ant-select-selector {
+    background-color: ${({ theme }) => theme.searchBar.backgroundColor} !important;
+    border-color: ${({ theme }) => theme.searchBar.borderColor} !important;
+    color: ${({ theme }) => theme.text};
+  }
+  .rc-virtual-list .ant-select-item-option {
+    background-color: ${({ theme }) => theme.searchBar.backgroundColor} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
+  .rc-virtual-list .ant-select-item-option:hover {
+    background-color: ${({ theme }) => theme.searchBar.hoverBackgroundColor} !important;
   }
 
   // Antd Select customisation - TermPlanner SettingsMenu
@@ -267,6 +289,13 @@ export const lightTheme: DefaultTheme = {
     borderColor: '#f0f0f0',
     hrefColor: '#9254de',
     hrefHoverColor: '#c9aaef'
+  },
+  searchBar: {
+    spinBackgroundColor: '#9254de',
+    backgroundColor: '#fff',
+    boxShadow: '0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d',
+    borderColor: '#d9d9d9',
+    hoverBackgroundColor: '#f5f5f5'
   }
 };
 
@@ -371,5 +400,12 @@ export const darkTheme: DefaultTheme = {
     borderColor: '#333',
     hrefColor: '#b384ea',
     hrefHoverColor: '#c9aaef'
+  },
+  searchBar: {
+    spinBackgroundColor: '#b384ea',
+    backgroundColor: '#262626',
+    boxShadow: '0 3px 20px -10px #ffffe0, 0 5px 0px -10px #ffffeb, 0 10px 20px -25px #fffff2',
+    borderColor: '#5f5a64',
+    hoverBackgroundColor: '#6d6772'
   }
 };

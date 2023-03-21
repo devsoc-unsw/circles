@@ -109,5 +109,12 @@ declare module 'styled-components' {
       hrefColor: string;
       hrefHoverColor: string;
     };
+    searchBar: {
+      spinBackgroundColor: string;
+      backgroundColor: string;
+      boxShadow: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
+    }
   }
 }
