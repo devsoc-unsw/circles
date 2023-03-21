@@ -121,6 +121,23 @@ export const GlobalStyles = createGlobalStyle`
       background-color: #9154DE !important;
     }
   }
+
+  // Antd popconfirm
+  .popconfirm-unplan .ant-popover-inner,
+  .popconfirm-unplan .ant-popover-arrow-content:before {
+    background-color: ${({ theme }) => theme.popconfirm.backgroundColor};
+  }
+  .popconfirm-unplan .ant-popover-message-title {
+    color: ${({ theme }) => theme.text};
+  }
+  .popconfirm-unplan .ant-popover-buttons .ant-btn-default{
+    background-color: ${({ theme }) => theme.optionsHeader.buttonBackgroundColor};
+    color: ${({ theme }) => theme.text};
+    border-color: ${({ theme }) => theme.optionsHeader.borderAlternativeColor};
+    &:hover {
+      background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
+    }  
+  }
  
   // Scrollbar settings
   /* width */
@@ -189,6 +206,7 @@ export const lightTheme: DefaultTheme = {
   },
   optionsHeader: {
     borderColor: '#d9d9d9',
+    borderAlternativeColor: '#cecece',
     buttonBorderColor: '#cecece',
     buttonBackgroundColor: '#fff',
     buttonHoverColor: '#e3e3e3',
@@ -219,6 +237,9 @@ export const lightTheme: DefaultTheme = {
     arrowColor: '#d9d9d9',
     yearHoverBackgroundColor: '#f5f5f5',
     cellNotInViewColor: '#b8b8b8'
+  },
+  popconfirm: {
+    backgroundColor: '#fff'
   },
   infoOutlined: {
     color: '#000'
@@ -278,6 +299,7 @@ export const darkTheme: DefaultTheme = {
   },
   optionsHeader: {
     borderColor: '#4d4b4a',
+    borderAlternativeColor: '#7b7481',
     buttonBorderColor: '#5f5a64',
     buttonBackgroundColor: '#444249',
     buttonHoverColor: '#6d6772',
@@ -308,6 +330,9 @@ export const darkTheme: DefaultTheme = {
     arrowColor: '#d9d9d9',
     yearHoverBackgroundColor: '#6d6772',
     cellNotInViewColor: '#8a8a8a'
+  },
+  popconfirm: {
+    backgroundColor: '#444249'
   },
   infoOutlined: {
     color: '#fff'

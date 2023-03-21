@@ -104,6 +104,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
               style={{ width: '200px' }}
               okText="Yes"
               cancelText="No"
+              overlayClassName="popconfirm-unplan"
             >
               <S.OptionButton>
                 <FaRegCalendarTimes style={iconStyles} />

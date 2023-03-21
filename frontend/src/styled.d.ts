@@ -45,6 +45,7 @@ declare module 'styled-components' {
 
     optionsHeader: {
       borderColor: string;
+      borderAlternativeColor: string;
       buttonBorderColor: string;
       buttonBackgroundColor: string;
       buttonHoverColor: string;
@@ -76,6 +77,9 @@ declare module 'styled-components' {
       yearHoverBackgroundColor: string;
       cellNotInViewColor: string;
     };
+    popconfirm: {
+      backgroundColor: string;
+    }
 
     infoOutlined: {
       color: string;

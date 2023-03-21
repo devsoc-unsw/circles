@@ -64,7 +64,7 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
           ))}
         </Radio.Group>
       </CS.PopupEntry>
-      <S.Button onClick={download}> Download </S.Button>
+      <CS.Button onClick={download}> Download </CS.Button>
     </S.Wrapper>
   );
 };
