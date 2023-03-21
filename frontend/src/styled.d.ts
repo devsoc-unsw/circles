@@ -106,6 +106,8 @@ declare module 'styled-components' {
     courseMenu?: {
       backgroundColor: string;
       borderColor: string;
+      hrefColor: string;
+      hrefHoverColor: string;
     };
   }
 }

@@ -264,7 +264,9 @@ export const lightTheme: DefaultTheme = {
   },
   courseMenu: {
     backgroundColor: '#f8f0ff',
-    borderColor: '#f0f0f0'
+    borderColor: '#f0f0f0',
+    hrefColor: '#9254de',
+    hrefHoverColor: '#c9aaef'
   }
 };
 
@@ -366,6 +368,8 @@ export const darkTheme: DefaultTheme = {
   },
   courseMenu: {
     backgroundColor: darkBaseColors.purpleLight,
-    borderColor: '#333'
+    borderColor: '#333',
+    hrefColor: '#b384ea',
+    hrefHoverColor: '#c9aaef'
   }
 };

@@ -29,10 +29,18 @@ const AttributeConcise = styled.div`
   }
 `;
 
+const Link = styled.a`
+  color: ${({ theme }) => theme.courseMenu?.hrefColor};
+  &:hover {
+    color: ${({ theme }) => theme.courseMenu?.hrefHoverColor};
+  }
+`;
+
 export default {
   AttributeWrapper,
   AttributeText,
   TermWrapper,
   AttributesWrapperConcise,
-  AttributeConcise
+  AttributeConcise,
+  Link
 };
