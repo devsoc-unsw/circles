@@ -138,21 +138,24 @@ export const GlobalStyles = createGlobalStyle`
       background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
     }  
   }
- 
+
   // Scrollbar settings
   /* width */
   ::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px;                 /* width of the entire scrollbar */
   }
 
-  ::-webkit-scrollbar-track {
-    background: #FAFAFA;        /* color of the tracking area */
+  ::-webkit-scrollbar-track {    /* color of the tracking area */
+    background: ${({ theme }) => theme.scrollbar.trackingAreaColor};        
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #C2C2C2;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #FAFAFA;  /* creates padding around scroll thumb */
+    /* color of the scroll thumb */
+    background-color:  ${({ theme }) => theme.scrollbar.scrollbarColor};
+    /* roundness of the scroll thumb */
+    border-radius: 20px;
+    /* creates padding around scroll thumb */
+    border: 3px solid ${({ theme }) => theme.scrollbar.scollbarBorderColor}; 
   }
 `;
 
@@ -172,6 +175,11 @@ export const lightTheme: DefaultTheme = {
   ...lightBaseColors,
   body: '#ffffff',
   text: '#323739',
+  scrollbar: {
+    trackingAreaColor: '#fAfAfA',
+    scrollbarColor: '#c2c2c2',
+    scollbarBorderColor: '#fAfAfA'
+  },
   droppable: {
     backgroundColor: '#e8fef2'
   },
@@ -257,6 +265,11 @@ export const darkTheme: DefaultTheme = {
   ...darkBaseColors,
   body: '#1d1f20',
   text: '#f1f1f1',
+  scrollbar: {
+    trackingAreaColor: '#1d1f20',
+    scrollbarColor: '#666c7a',
+    scollbarBorderColor: '#1d1f20'
+  },
   droppable: {
     backgroundColor: '#373A36'
   },

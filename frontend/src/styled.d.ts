@@ -10,6 +10,11 @@ declare module 'styled-components' {
 
     body: string;
     text: string;
+    scrollbar: {
+      trackingAreaColor: string;
+      scrollbarColor: string;
+      scollbarBorderColor: string;
+    }
     droppable: {
       backgroundColor: string;
     };
