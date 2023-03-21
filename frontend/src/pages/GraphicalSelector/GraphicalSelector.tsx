@@ -13,7 +13,7 @@ const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
-  const courseResCache = useRef({} as CourseDescInfoResCache);
+  const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
 
   const items = [
     {
@@ -24,7 +24,7 @@ const GraphicalSelector = () => {
           courseCode={courseCode}
           key={courseCode}
           onCourseClick={setCourseCode}
-          courseResCache={courseResCache}
+          courseDescInfoCache={courseDescInfoCache}
         />
       ) : (
         'No course selected'

@@ -26,14 +26,14 @@ type CourseDescriptionPanelProps = {
   className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
-  courseResCache: React.MutableRefObject<CourseDescInfoResCache>;
+  courseDescInfoCache: React.MutableRefObject<CourseDescInfoResCache>;
 };
 
 const CourseDescriptionPanel = ({
   className,
   courseCode,
   onCourseClick,
-  courseResCache
+  courseDescInfoCache
 }: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -64,7 +64,7 @@ const CourseDescriptionPanel = ({
     const getCourseInfo = async () => {
       try {
         // if it's not saved already then fetch it
-        if (!courseResCache.current[courseCode]) {
+        if (!courseDescInfoCache.current[courseCode]) {
           const results = await Promise.allSettled([
             axios.get<Course>(`/courses/getCourse/${courseCode}`),
             axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
@@ -77,7 +77,7 @@ const CourseDescriptionPanel = ({
 
           const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
 
-          courseResCache.current[courseCode] = {
+          courseDescInfoCache.current[courseCode] = {
             course: unwrap(courseRes)?.data,
             pathFrom: unwrap(pathFromRes)?.data.courses,
             unlocked: unwrap(unlockedRes)?.data,
@@ -90,7 +90,7 @@ const CourseDescriptionPanel = ({
           pathFrom,
           unlocked,
           courseCap
-        } = courseResCache.current[courseCode];
+        } = courseDescInfoCache.current[courseCode];
 
         setCourse(courseData);
         setCoursesPathFrom(pathFrom);
@@ -107,7 +107,7 @@ const CourseDescriptionPanel = ({
       // gets the associated info for a course
       getCourseInfo();
     }
-  }, [courseCode, courseResCache, degree, isLoading, planner]);
+  }, [courseCode, courseDescInfoCache, degree, isLoading, planner]);
 
   if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)

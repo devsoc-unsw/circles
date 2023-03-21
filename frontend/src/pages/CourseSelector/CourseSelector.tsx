@@ -24,7 +24,7 @@ const CourseSelector = () => {
 
   const dispatch = useDispatch();
 
-  const courseResCache = useRef({} as CourseDescInfoResCache);
+  const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
   const courseCode = tabs[active];
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const CourseSelector = () => {
               <CourseDescriptionPanel
                 courseCode={courseCode}
                 onCourseClick={(code) => dispatch(addTab(code))}
-                courseResCache={courseResCache}
+                courseDescInfoCache={courseDescInfoCache}
               />
             </div>
           ) : (
