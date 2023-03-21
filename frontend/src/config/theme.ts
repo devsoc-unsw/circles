@@ -41,6 +41,9 @@ export const GlobalStyles = createGlobalStyle`
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: ${({ theme }) => theme.courseMenu?.backgroundColor} !important;
   }
+  .ant-menu-root {
+    border-right-color: ${({ theme }) => theme.courseMenu?.borderColor} !important; 
+  }
 
   .ant-notification-notice,
   .ant-notification-notice-message,
@@ -258,6 +261,10 @@ export const lightTheme: DefaultTheme = {
   courseButton: {
     backgroundColor: '#fff',
     hoverBackgroundColor: '#F9F9F9'
+  },
+  courseMenu: {
+    backgroundColor: '#f8f0ff',
+    borderColor: '#f0f0f0'
   }
 };
 
@@ -358,6 +365,7 @@ export const darkTheme: DefaultTheme = {
     hoverBackgroundColor: '#1e2021'
   },
   courseMenu: {
-    backgroundColor: darkBaseColors.purpleLight
+    backgroundColor: darkBaseColors.purpleLight,
+    borderColor: '#333'
   }
 };
