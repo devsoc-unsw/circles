@@ -75,7 +75,8 @@ disable=import-error,                     # allow import from folder.file instea
         global-statement,                 # allow use of globals. Used for filepaths and configs
         too-few-public-methods,           # need classes with zero public methods as abstract objects
         duplicate-code,                   # Code duplication due to progtype1. TODO: Fix on complete refactor
-        no-name-in-module                 # seems to be similar to import-error
+        no-name-in-module,                # seems to be similar to import-error
+        missing-module-docstring          # allow for missing module docstrings, democratially ignored
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
