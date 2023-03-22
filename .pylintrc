@@ -76,7 +76,8 @@ disable=import-error,                     # allow import from folder.file instea
         too-few-public-methods,           # need classes with zero public methods as abstract objects
         duplicate-code,                   # Code duplication due to progtype1. TODO: Fix on complete refactor
         no-name-in-module,                # seems to be similar to import-error
-        missing-module-docstring          # allow for missing module docstrings, democratially ignored
+        missing-module-docstring,         # allow for missing module docstrings, democratially ignored
+        useless-parent-delegation         # allow for methods that just return super().method()
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
