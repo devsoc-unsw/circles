@@ -5,6 +5,7 @@ import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
+import { CourseDescInfoResCache } from 'types/courseDescription';
 import { CourseList } from 'types/courses';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -25,12 +26,14 @@ type CourseDescriptionPanelProps = {
   className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
+  courseDescInfoCache: React.MutableRefObject<CourseDescInfoResCache>;
 };
 
 const CourseDescriptionPanel = ({
   className,
   courseCode,
-  onCourseClick
+  onCourseClick,
+  courseDescInfoCache
 }: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -60,22 +63,39 @@ const CourseDescriptionPanel = ({
   useEffect(() => {
     const getCourseInfo = async () => {
       try {
-        const results = await Promise.allSettled([
-          axios.get<Course>(`/courses/getCourse/${courseCode}`),
-          axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
-          axios.post<CoursesUnlockedWhenTaken>(
-            `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-            JSON.stringify(prepareUserPayload(degree, planner))
-          ),
-          axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
-        ]);
+        // if it's not saved already then fetch it
+        if (!courseDescInfoCache.current[courseCode]) {
+          const results = await Promise.allSettled([
+            axios.get<Course>(`/courses/getCourse/${courseCode}`),
+            axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
+            axios.post<CoursesUnlockedWhenTaken>(
+              `/courses/coursesUnlockedWhenTaken/${courseCode}`,
+              JSON.stringify(prepareUserPayload(degree, planner))
+            ),
+            axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
+          ]);
 
-        const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
+          const [courseRes, pathFromRes, unlockedRes, courseCapRes] = results;
 
-        setCourse(unwrap(courseRes)?.data);
-        setCoursesPathFrom(unwrap(pathFromRes)?.data.courses);
-        setCoursesUnlocked(unwrap(unlockedRes)?.data);
-        setCourseCapacity(getEnrolmentCapacity(unwrap(courseCapRes)?.data));
+          courseDescInfoCache.current[courseCode] = {
+            course: unwrap(courseRes)?.data,
+            pathFrom: unwrap(pathFromRes)?.data.courses,
+            unlocked: unwrap(unlockedRes)?.data,
+            courseCap: getEnrolmentCapacity(unwrap(courseCapRes)?.data)
+          };
+        }
+
+        const {
+          course: courseData,
+          pathFrom,
+          unlocked,
+          courseCap
+        } = courseDescInfoCache.current[courseCode];
+
+        setCourse(courseData);
+        setCoursesPathFrom(pathFrom);
+        setCoursesUnlocked(unlocked);
+        setCourseCapacity(courseCap);
         setIsLoading(false);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -87,7 +107,7 @@ const CourseDescriptionPanel = ({
       // gets the associated info for a course
       getCourseInfo();
     }
-  }, [courseCode, degree, isLoading, planner]);
+  }, [courseCode, courseDescInfoCache, degree, isLoading, planner]);
 
   if (isLoading || !course) {
     // either still loading or the course wasn't fetchable (fatal)
