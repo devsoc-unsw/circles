@@ -25,9 +25,9 @@ const SettingsMenu = () => {
     }
   }
 
-  function handleUpdateDegreeLength(value: number) {
+  async function handleUpdateDegreeLength(value: number) {
     try {
-      axios.put('/user/updateDegreeLength', { numYears: value }, { params: { token } });
+      await axios.put('/user/updateDegreeLength', { numYears: value }, { params: { token } });
     } catch {
       openNotification({
         type: 'error',

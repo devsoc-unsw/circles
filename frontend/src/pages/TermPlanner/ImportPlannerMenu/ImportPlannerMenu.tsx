@@ -55,7 +55,7 @@ const ImportPlannerMenu = () => {
     setLoading(true);
     const reader = new FileReader();
     reader.readAsText(e.target.files[0], 'UTF-8');
-    reader.onload = (ev) => {
+    reader.onload = async (ev) => {
       if (ev.target !== null) {
         const content = ev.target.result;
         e.target.value = '';
@@ -77,7 +77,7 @@ const ImportPlannerMenu = () => {
             return;
           }
           try {
-            axios.put(
+            await axios.put(
               '/user/updateDegreeLength',
               { numYears: fileInJson.numYears },
               { params: { token } }

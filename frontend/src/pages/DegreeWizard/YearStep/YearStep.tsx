@@ -40,11 +40,11 @@ const YearStep = ({ incrementStep }: Props) => {
             style={{
               width: '100%'
             }}
-            onChange={(_, [startYear, endYear]: [string, string]) => {
+            onChange={async (_, [startYear, endYear]: [string, string]) => {
               const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;
               // We can trust num years to be a valid number because the range picker only allows valid ranges
               try {
-                axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
+                await axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
               } catch {
                 openNotification({
                   type: 'error',
