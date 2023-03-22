@@ -29,6 +29,7 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["INFS2101"][PROCESSED] = INFS2101()
+    CONDITIONS["INFS3020"] = INFS_3020(CONDITIONS["INFS3020"])
 
     CONDITIONS["INFS3202"][PROCESSED] = INFS_3202()
     CONDITIONS["INFS3303"][PROCESSED] = INFS_3303()
@@ -58,6 +59,19 @@ def INFS2101():
     "processed": "plan (INFSCH3964 || INFSCH3971) && (INFS1609 || INFS2609) && INFS 2603; || plan (INFSB13554) && INFS2603"
     """
     return "(INFSCH3964 || INFSCH3971) && (INFS1609 || INFS2609) && INFS2603) || (INFSB13554 && INFS2603)"
+
+
+def INFS_3020(condition):
+    """
+        "original": "Prerequisite: Completion of 72 UOC which includes a minimum of 36UOC of INFS-coded courses and COMM1190. Students must also be in Good Academic Standing. <br/><br/>",
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": "72UOC which includes a 36UOC of INFS-coded courses && COMM1190. must also"
+    """
+    return {
+        "original": condition["original"],
+        "processed": "72UOC && 36UOC in INFS && COMM1190",
+        "handbook_note": "Students must also be in Good Academic Standing. This course is by application only. Please enquire with the School for more information."
+    }
 
 
 def INFS_3202():

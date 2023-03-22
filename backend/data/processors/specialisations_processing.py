@@ -129,7 +129,7 @@ def get_credits(container: dict) -> str:
 
     # No data in "credit_points" field, so parse plaintext "description"
     # Catches XX UOC, XX credits, XX Credit, etc.
-    credits = re.search("(\d+) UOC|[cC]redit", container["description"])
+    credits = re.search(r"(\d+) UOC|[cC]redit", container["description"])
     return credits.group(1) if credits else "0"
 
 def is_core(title: str) -> bool:
@@ -146,7 +146,7 @@ def get_levels(title: str) -> list[int]:
     """
     levels: list[int] = []
     # s? \d[^ ]* captures cases like "Level 1/2", "Levels 1,2,3" and "Level 1-2"
-    res = re.search("[Ll]evels? (\d[^ ]*)", title)
+    res = re.search(r"[Ll]evels? (\d[^ ]*)", title)
 
     if res:
         if "/" in res.group(1):
@@ -160,7 +160,7 @@ def get_levels(title: str) -> list[int]:
         levels.append(found_level)
 
         # Looks for 'higher' within 0 - 2 words of the level
-        if re.match("[Ll]evels? (\d[^ ]*) ([^ ]+ ){0,2}higher", title):
+        if re.match(r"[Ll]evels? (\d[^ ]*) ([^ ]+ ){0,2}higher", title):
             seq = list(range(found_level + 1, 10))
             levels.extend(seq)
 
@@ -245,7 +245,7 @@ def process_any_level(unprocessed_course: str) -> dict[str, str]:
     """
     # group 1 contains level number and group 2 contains program title
     # Note '?:' means inner parentheses is non-capturing group
-    res = re.search("level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
+    res = re.search(r"level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
     if not res:
         raise Exception("processing any where it doesnt exist")
     course_level = res.group(1).strip()
@@ -253,7 +253,7 @@ def process_any_level(unprocessed_course: str) -> dict[str, str]:
 
     # Removes any "(CODE)" text in program title
     # e.g. changes "Computer Science (COMP) "
-    program_title = re.sub("\([A-Z]{4}\)", "", program_title)
+    program_title = re.sub(r"\([A-Z]{4}\)", "", program_title)
 
     # Find CODE mapping; if unsuccessful, do nothing
     program_code = CODE_MAPPING.get(program_title, program_title)

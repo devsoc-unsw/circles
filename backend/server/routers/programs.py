@@ -83,6 +83,7 @@ def get_programs() -> dict[str, dict[str, str]]:
     return {
         "programs": {
             "3778": "Computer Science",
+            "3779": "Advanced Computer Science (Honours)",
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",
@@ -481,7 +482,6 @@ def compose(*functions: Callable) -> Callable:
         The functions are applied in the order they are given.
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
-
 
 def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[Dict[str, str]]:
     """
