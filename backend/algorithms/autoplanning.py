@@ -51,7 +51,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
             model.Add(v == index).OnlyEnforceIf(b)
             model.Add(v != index).OnlyEnforceIf(b.Not())
             boolean_indexes.append(b)
-        # if the course is in term 'index', only allow 0 to m UOC to exist in that term. 
+        # if the course is in term 'index', only allow 0 to m UOC to exist in that term.
         model.AddReservoirConstraintWithActive(
             variables,
             list(map_var_to_course(courses, var).uoc for var in variables), # this fills the resovoir by UoC units if active
@@ -74,10 +74,9 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         )
     solver = cp_model.CpSolver()
     status: int = solver.Solve(model)
-    if status == 3 or status == 1:
-        raise Exception(f'your courses are impossible to put in these terms! Error code: {status}')
-    else:
-        return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
+    if status in (1, 3):
+        raise ValueError(f'your courses are impossible to put in these terms! Error code: {status}')
+    return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
 
 
 if __name__ == '__main__':
@@ -115,4 +114,3 @@ if __name__ == '__main__':
         (2023, 3),
         [12, 20, 20, 20, 12, 20, 20, 20, 10, 20, 20, 20]
     ))
-

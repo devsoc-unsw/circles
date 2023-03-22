@@ -247,7 +247,7 @@ def process_any_level(unprocessed_course: str) -> dict[str, str]:
     # Note '?:' means inner parentheses is non-capturing group
     res = re.search(r"level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
     if not res:
-        raise Exception("processing any where it doesnt exist")
+        raise KeyError("processing any where it doesnt exist")
     course_level = res.group(1).strip()
     program_title = res.group(2).strip()
 

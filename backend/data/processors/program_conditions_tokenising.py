@@ -170,4 +170,3 @@ def tokenise_dependent(condition: str):
 
 if __name__ == "__main__":
     tokenise_program_conditions()
-

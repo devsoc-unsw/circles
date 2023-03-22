@@ -25,4 +25,3 @@ class Course:
                 if new_number <= (end[0] - start[0]) * 4 + end[1] - start[1]:
                     numbers.append(new_number)
         return [[number, number] for number in numbers]
-

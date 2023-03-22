@@ -101,7 +101,7 @@ def cache_mappings():
         else:
             match_object = re.search("^([\w]+)", Faculty)
         if match_object is None:
-            raise Exception(f'no match found for faculty: {Faculty}')
+            raise KeyError(f'no match found for faculty: {Faculty}')
         match = match_object.group()
         faculty_token += match
         return faculty_token
@@ -116,7 +116,7 @@ def cache_mappings():
         elif re.search("^(UC)", School):
             match_object = re.search("(?<=UC\s)[^\s\n\,]+", School)
             if match_object is None:
-                raise Exception(f'no match found for school: {School}')
+                raise KeyError(f'no match found for school: {School}')
             match = school_token + "UC-" +  match_object.group()
             return match
         elif re.search("UNSW", School):
@@ -124,7 +124,7 @@ def cache_mappings():
         else:
             match_object = re.search("^([\w]+)", School)
         if match_object is None:
-            raise Exception(f'no match found for school: {School}')
+            raise KeyError(f'no match found for school: {School}')
         match = match_object.group()
         school_token += match
         return school_token

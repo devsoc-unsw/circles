@@ -2,7 +2,8 @@
 Contains the Conditions classes
 """
 
-import json, re
+import json
+import re
 from abc import ABC, abstractmethod
 from typing import  Optional, Tuple, TypedDict
 
@@ -10,7 +11,7 @@ from algorithms.objects.categories import Category, AnyCategory
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
 from algorithms.objects.helper import Logic
-from ortools.sat.python import cp_model # type: ignore
+from ortools.sat.python import cp_model  # type: ignore
 
 # CACHED
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
@@ -180,7 +181,7 @@ class UOCCondition(Condition):
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         # find courses which match definition
         filtered_courses = [course for course in courses if self.category.match_definition(course[1].name)]
-        total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses) 
+        total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses)
         total_uoc_allowable_after_course = total_filtered_uoc - self.uoc
         # we check if there are
         # 1. enough courses matching our definition to feasibly meet the condition (ie self.uoc courses have been selected)
@@ -211,10 +212,10 @@ class UOCCondition(Condition):
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         filtered_courses = [course for course in courses if self.category.match_definition(course[1].name)]
 
-        total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses) 
+        total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses)
         if total_filtered_uoc < self.uoc:
             return [model.AddBoolAnd(True)] # if we already dont have enough UOC to meet it, our job is already done
-        
+
         boolean_indexes = []
         for variable, _ in filtered_courses:
             # b is a 'channeling constraint'. This is done to fill the resovoir only *if* the course is before the course's term
@@ -551,17 +552,17 @@ class CompositeCondition(Condition):
         if self.logic == Logic.AND:
             # just aggregate the conditions together, they are already all simutaneously asserted
             return sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
-        else:
-            or_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
-            or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
-            boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
-            # boolean_vars are a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
-            # https://developers.google.com/optimization/cp/channeling
-            for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
-                constraint.OnlyEnforceIf(boolean)
-                negation.OnlyEnforceIf(boolean.Not())
-            model.AddBoolOr(boolean_vars)
-            return or_constraints
+
+        or_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
+        or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
+        boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
+        # boolean_vars are a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
+        # https://developers.google.com/optimization/cp/channeling
+        for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
+            constraint.OnlyEnforceIf(boolean)
+            negation.OnlyEnforceIf(boolean.Not())
+        model.AddBoolOr(boolean_vars)
+        return or_constraints
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         if len(self.conditions) == 0:
@@ -571,16 +572,16 @@ class CompositeCondition(Condition):
         if self.logic == Logic.OR:
             # opposite of OR is NAND
             return sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
-        else:
-            # opposite of AND is NOR - at least one must be false
-            and_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
-            and_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
-            boolean_vars = [model.NewBoolVar("hi") for _ in and_constraints]
-            for constraint, negation, boolean in zip(and_constraints, and_opposite_constraints, boolean_vars):
-                constraint.OnlyEnforceIf(boolean)
-                negation.OnlyEnforceIf(boolean.Not())
-            model.AddBoolOr(boolean_vars)
-            return and_constraints
+
+        # opposite of AND is NOR - at least one must be false
+        and_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
+        and_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
+        boolean_vars = [model.NewBoolVar("hi") for _ in and_constraints]
+        for constraint, negation, boolean in zip(and_constraints, and_opposite_constraints, boolean_vars):
+            constraint.OnlyEnforceIf(boolean)
+            negation.OnlyEnforceIf(boolean.Not())
+        model.AddBoolOr(boolean_vars)
+        return and_constraints
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """
@@ -596,11 +597,11 @@ class CompositeCondition(Condition):
         wam_warning: list[str] = sum((warning for unlocked_cond, warning in validations if unlocked_cond), [])
 
         if self.logic == Logic.AND:
-            satisfied = all(unlocked) 
+            satisfied = all(unlocked)
             return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
-        else:
-            satisfied = any(unlocked)     
-            return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
+
+        satisfied = any(unlocked)
+        return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)

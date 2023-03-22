@@ -344,8 +344,8 @@ def get_gen_eds(
     excluded_courses = excluded_courses if excluded_courses is not None else []
     try:
         geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    except KeyError:
-        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}")
+    except KeyError as err:
+        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}") from err
 
     for course in excluded_courses:
         if course in geneds:
@@ -514,4 +514,3 @@ def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[st
     Remove edges between vertices that are not in the list of courses provided.
     """
     return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
-

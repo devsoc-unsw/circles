@@ -169,4 +169,3 @@ class GenEdCategory(Category):
 
     def __str__(self) -> str:
         return "GenEdCategory"
-

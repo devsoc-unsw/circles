@@ -35,7 +35,7 @@ from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
 # from data.scrapers.enrolment_scraper import scrape_enrolment_data
-
+.get
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
@@ -178,4 +178,3 @@ if __name__ == "__main__":
         except KeyError:
             print(f"{args.type} and {args.stage} is an invalid combination")
             parser.print_help()
-

@@ -21,8 +21,11 @@ TOTAL_SPNS = 1000
 def scrape_spn_data():
     """Retrieves data for all undergraduate specialisations"""
 
-    r = requests.post(URL, data=json.dumps(create_payload(
-        TOTAL_SPNS, content_type="unsw_paos")), headers=HEADERS)
+    r = requests.post(
+        URL, data=json.dumps(create_payload(TOTAL_SPNS, content_type="unsw_paos")),
+        headers=HEADERS,
+        timeout=60 * 5
+    )
 
     data_helpers.write_data(
         r.json()["contentlets"], "data/scrapers/specialisationsPureRaw.json"

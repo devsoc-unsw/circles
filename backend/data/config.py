@@ -27,4 +27,3 @@ CONDITIONS_TOKEN_FILE: str = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PICKLE_FILE: str = "./data/final_data/conditions.pkl"
 
 GRAPH_CACHE_FILE = "./data/final_data/graph.json"
-

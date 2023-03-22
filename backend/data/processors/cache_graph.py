@@ -55,7 +55,6 @@ def get_path_from(course: str) -> Tuple[str, List[str]]:
             list[str] : The list of courses which can be used to satisfy the original course
         )
     """
-    global CONDITIONS
     course_condition = CONDITIONS.get(course)
 
     return course, [
@@ -66,4 +65,3 @@ def get_path_from(course: str) -> Tuple[str, List[str]]:
 
 if __name__ == "__main__":
     cache_graph()
-

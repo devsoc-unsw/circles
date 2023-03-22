@@ -24,7 +24,7 @@ def create_payload(size, content_type, year = LIVE_YEAR):
     # Might get passed None as default value by the calling function
     if year is None:
         year = LIVE_YEAR
-    
+
     return {
         "query": {
             "bool": {
@@ -129,4 +129,3 @@ def create_payload_gened(size, content_type, cl_id, academic_org, year : int | N
         "sort": [{f"{content_type}.code_dotraw": "asc"}],
         "from": 0, "size": size,
     }
-    

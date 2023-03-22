@@ -200,7 +200,6 @@ class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CoursesStorage]
-    
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage
@@ -209,7 +208,6 @@ class LocalStorage(BaseModel):
 class CourseMark(BaseModel):
     course: str
     mark: int
-
 
 class CourseCodes(BaseModel):
     courses: list[str]
@@ -228,7 +226,6 @@ class CoursesPathDict(TypedDict):
 class Description(BaseModel):
     description: str
 
-
 class SpecialisationTypes(BaseModel):
     types: list[str]
 
@@ -244,7 +241,7 @@ class TermsList(BaseModel):
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
     uoc: int
-    
+
 # Used in addToUnplanned, removeCourse and unscheduleCourse routes
 class CourseCode(BaseModel):
     courseCode: str

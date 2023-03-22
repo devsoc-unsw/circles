@@ -268,4 +268,3 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
             result.add_condition(cond)
 
     return result, index
-

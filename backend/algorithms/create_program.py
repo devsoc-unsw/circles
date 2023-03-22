@@ -21,7 +21,7 @@ class UnparseableError(Exception):
     The given token cannot be parsed
     """
     def __init__(self, tokens: List[str] | Dict):
-        super().__init__("Unparseable tokens: {}".format(tokens))
+        super().__init__(f"Unparseable tokens: {tokens}")
 
 def process_program_conditions() -> None:
     """
@@ -160,4 +160,3 @@ def create_dependent_condition(tokens: List[str]) -> Category:
 
 if __name__ == "__main__":
     create_all_program_conditions()
-
