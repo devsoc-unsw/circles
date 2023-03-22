@@ -296,6 +296,9 @@ export const lightTheme: DefaultTheme = {
     boxShadow: '0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d',
     borderColor: '#d9d9d9',
     hoverBackgroundColor: '#f5f5f5'
+  },
+  courseDescription: {
+    paddingColor: '#d9d9d9'
   }
 };
 
@@ -407,5 +410,8 @@ export const darkTheme: DefaultTheme = {
     boxShadow: '0 3px 20px -10px #ffffe0, 0 5px 0px -10px #ffffeb, 0 10px 20px -25px #fffff2',
     borderColor: '#5f5a64',
     hoverBackgroundColor: '#6d6772'
+  },
+  courseDescription: {
+    paddingColor: '#444249'
   }
 };

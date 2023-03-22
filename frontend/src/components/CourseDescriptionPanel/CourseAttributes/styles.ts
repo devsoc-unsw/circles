@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AttributeWrapper = styled.div`
-  border-bottom: #d9d9d9 solid 1px; // grey-5
+  border-bottom: ${({ theme }) => theme.courseDescription.paddingColor} solid 1px; // grey-5
   padding: 10px 0;
 `;
 

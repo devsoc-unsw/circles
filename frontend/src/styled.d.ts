@@ -14,7 +14,7 @@ declare module 'styled-components' {
       trackingAreaColor: string;
       scrollbarColor: string;
       scollbarBorderColor: string;
-    }
+    };
     droppable: {
       backgroundColor: string;
     };
@@ -115,6 +115,9 @@ declare module 'styled-components' {
       boxShadow: string;
       borderColor: string;
       hoverBackgroundColor: string;
+    };
+    courseDescription: {
+      paddingColor: string;
     }
   }
 }
