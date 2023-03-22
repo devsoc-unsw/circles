@@ -8,6 +8,7 @@ import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import openNotification from 'utils/openNotification';
 
 interface PlannerButtonProps {
   course: Course;
@@ -15,6 +16,7 @@ interface PlannerButtonProps {
 
 const PlannerButton = ({ course }: PlannerButtonProps) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
+  const { token } = useSelector((state: RootState) => state.settings);
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const id = course.code;
@@ -64,11 +66,17 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
         `/courses/unselectCourse/${id}`,
         JSON.stringify(prepareUserPayload(degree, planner))
       );
+      res.data.courses.forEach((course) => {
+        axios.post(`/planner/removeCourse`, JSON.stringify({ courseCode: course }), {
+          params: { token }
+        });
+      });
       addCourseToPlannerTimeout(false);
-      dispatch(removeCourses(res.data.courses));
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at removeFromPlanner', e);
+      openNotification({
+        type: "error",
+        message: "Error at removeFromPlanner"
+      });
     }
   };
 
