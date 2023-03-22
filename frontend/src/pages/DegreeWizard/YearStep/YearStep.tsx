@@ -7,7 +7,6 @@ import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
 import { useAppDispatch } from 'hooks';
-import { updateStartYear } from 'reducers/plannerSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -41,19 +40,24 @@ const YearStep = ({ incrementStep }: Props) => {
               width: '100%'
             }}
             onChange={async (_, [startYear, endYear]: [string, string]) => {
-              const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;
+              const startYearInt = parseInt(startYear, 10);
+              const numYears = parseInt(endYear, 10) - startYearInt + 1;
               // We can trust num years to be a valid number because the range picker only allows valid ranges
               try {
                 await axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
+                await axios.put(
+                  '/user/updateStartYear',
+                  { startYear: startYearInt },
+                  { params: { token } }
+                );
               } catch {
                 openNotification({
                   type: 'error',
-                  message: 'Error updating degree length',
-                  description: 'There was an error updating the degree length.'
+                  message: 'Error setting degree start year or length',
+                  description: 'There was an error updating the degree start year or length.'
                 });
                 return;
               }
-              dispatch(updateStartYear(parseInt(startYear, 10)));
 
               if (startYear && endYear) incrementStep(Steps.DEGREE);
             }}

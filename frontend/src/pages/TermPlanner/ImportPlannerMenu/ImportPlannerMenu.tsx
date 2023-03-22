@@ -11,8 +11,7 @@ import {
   addToUnplanned,
   moveCourse,
   setUnplannedCourseToTerm,
-  toggleSummer,
-  updateStartYear
+  toggleSummer
 } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
@@ -82,15 +81,19 @@ const ImportPlannerMenu = () => {
               { numYears: fileInJson.numYears },
               { params: { token } }
             );
+            await axios.put(
+              '/user/updateStartYear',
+              { startYear: fileInJson.startYear },
+              { params: { token } }
+            );
           } catch {
             openNotification({
               type: 'error',
-              message: 'Error setting degree length',
-              description: 'There was an error updating the degree length.'
+              message: 'Error setting degree start year or length',
+              description: 'There was an error updating the degree start year or length.'
             });
             return;
           }
-          dispatch(updateStartYear(fileInJson.startYear));
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             dispatch(toggleSummer());
           }
