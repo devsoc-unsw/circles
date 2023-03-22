@@ -1,24 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ fullscreen: boolean }>`
   height: calc(100vh - var(--navbar-height));
-  padding: 25px;
   display: flex;
   gap: 20px;
+
+  ${({ fullscreen }) =>
+    !fullscreen &&
+    css`
+      padding: 25px;
+    `}
 `;
 
-const GraphPlaygroundWrapper = styled.div`
+const GraphWrapper = styled.div<{ fullscreen: boolean }>`
   height: 100%;
-  border-radius: 20px;
-  border: #c2c2c2 solid 1px;
+  width: 100%;
   overflow: hidden;
   flex: 5;
-  width: 100%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  ${({ fullscreen }) =>
+    !fullscreen &&
+    css`
+      border-radius: 20px;
+      border: #c2c2c2 solid 1px;
+    `}
 `;
 
 const SidebarWrapper = styled.div`
@@ -33,15 +40,6 @@ const SearchBarWrapper = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
-`;
-
-const ToolsWrapper = styled.div`
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 `;
 
 const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
@@ -64,9 +62,8 @@ const SpinnerWraper = styled.div`
 export default {
   CourseDescriptionPanel,
   Wrapper,
-  GraphPlaygroundWrapper,
+  GraphWrapper,
   SidebarWrapper,
   SearchBarWrapper,
-  SpinnerWraper,
-  ToolsWrapper
+  SpinnerWraper
 };
