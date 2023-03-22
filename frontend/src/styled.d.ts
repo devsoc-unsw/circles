@@ -118,6 +118,11 @@ declare module 'styled-components' {
     };
     courseDescription: {
       paddingColor: string;
+    };
+    bugIcon: {
+      backgroundColor: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
     }
   }
 }

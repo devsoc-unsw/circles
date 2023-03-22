@@ -299,6 +299,11 @@ export const lightTheme: DefaultTheme = {
   },
   courseDescription: {
     paddingColor: '#d9d9d9'
+  },
+  bugIcon: {
+    backgroundColor: '#fff',
+    borderColor: '#d9d9d9',
+    hoverBackgroundColor: '#fff'
   }
 };
 
@@ -413,5 +418,10 @@ export const darkTheme: DefaultTheme = {
   },
   courseDescription: {
     paddingColor: '#444249'
+  },
+  bugIcon: {
+    backgroundColor: '#444249',
+    borderColor: '#5f5a64',
+    hoverBackgroundColor: '#6d6772'
   }
 };
