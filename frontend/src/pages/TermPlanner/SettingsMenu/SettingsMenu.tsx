@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import { toggleSummer, updateStartYear } from 'reducers/plannerSlice';
+import { toggleSummer } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 
 const DatePicker = React.lazy(() => import('components/Datepicker'));
@@ -19,9 +19,21 @@ const SettingsMenu = () => {
 
   const dispatch = useDispatch();
 
-  function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
+  async function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
     if (dateString) {
-      dispatch(updateStartYear(parseInt(dateString, 10)));
+      try {
+        await axios.put(
+          '/user/updateStartYear',
+          { startYear: parseInt(dateString, 10) },
+          { params: { token } }
+        );
+      } catch {
+        openNotification({
+          type: 'error',
+          message: 'Error setting degree start year',
+          description: 'There was an error updating the degree start year.'
+        });
+      }
     }
   }
 
