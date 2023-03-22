@@ -10,6 +10,7 @@ import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
 import { unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
+import openNotification from 'utils/openNotification';
 
 type Props = {
   code: string;
@@ -24,14 +25,16 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      axios.post(`/planner/removeCourse`, JSON.stringify({ courseCode: code }), {
+      const res = await axios.post(`/planner/removeCourse`, JSON.stringify({ courseCode: code }), {
         params: { token }
       });
     } catch (e) {
-      // esling-disable-next-line no-console
-      console.error('Error at removeCourse', e);
+      openNotification({
+        type: 'error',
+        message: 'Error removing course',
+      });
     }
   };
   const handleUnschedule = () => {

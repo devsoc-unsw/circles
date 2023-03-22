@@ -7,6 +7,7 @@ import axios from 'axios';
 import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
+import openNotification from 'utils/openNotification';
 
 const { Text } = Typography;
 
@@ -20,13 +21,15 @@ const CourseCartCard = ({ code, title }: Props) => {
   const navigate = useNavigate();
   const { token } = useSelector((state: RootState) => state.settings);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     try {
-      axios
+      const res = await axios
         .post(`/planner/removeCourse`, JSON.stringify({ courseCode: code }), { params: { token } });
     } catch (e) {
-      // esling-disable-next-line no-console
-      console.error('Error at removeCourse', e);
+      openNotification({
+        type: 'error',
+        message: 'Error removing course',
+      });
     }
   };
 
