@@ -49,11 +49,9 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     }
     # cancer, but the FE inspired this cancer
     real_planner = localStorage.planner.copy()
-    real_planner.pop('courses')  # type: ignore
     item = {
         'degree': localStorage.degree,
         'planner': real_planner,
-        'courses': courses
     }
     set_user(token, cast(Storage, item))
 
