@@ -183,7 +183,7 @@ def reset(token: str = DUMMY_TOKEN):
             'T': 0
         },
         'unplanned': [],
-        'isSummerEnabled': True, # shoudl default be false? who knows
+        'isSummerEnabled': True, 
         'startYear': LIVE_YEAR,
         'years': [],
         'courses': {},
