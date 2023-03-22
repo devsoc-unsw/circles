@@ -32,6 +32,10 @@
     {
       "matchLanguages": ["python"],
       "addLabels": ["deps: python"]
-    }
+    },
+    {
+      "matchPackageNames": ["mypy", "mypy-extensions"],
+      "groupName": "mypy",
+    },
   ]
 }
