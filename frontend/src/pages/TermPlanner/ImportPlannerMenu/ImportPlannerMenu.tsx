@@ -109,7 +109,7 @@ const ImportPlannerMenu = () => {
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             try {
-              axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+              await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
             } catch {
               openNotification({
                 type: 'error',
