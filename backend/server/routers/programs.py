@@ -83,7 +83,7 @@ def get_programs() -> dict[str, dict[str, str]]:
     return {
         "programs": {
             "3778": "Computer Science",
-            "3779": "Advanced Computer Science (Honours)",
+            # "3779": "Advanced Computer Science (Honours)", # TODO: Fix the electives
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",
