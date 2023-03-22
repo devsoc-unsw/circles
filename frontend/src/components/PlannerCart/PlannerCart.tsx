@@ -7,6 +7,7 @@ import CourseCartCard from 'components/CourseCartCard';
 import type { RootState } from 'config/store';
 import S from './styles';
 import axios from 'axios';
+import openNotification from 'utils/openNotification';
 
 const { Text, Title } = Typography;
 
@@ -27,8 +28,10 @@ const PlannerCart = () => {
     try {
       const res = await axios.post(`/planner/removeAll`, { params: { token } });
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at plannerCart removeAllCourses', err);
+      openNotification({
+        type: "error",
+        message: "Error removing all courses"
+      })
     }
   };
 
