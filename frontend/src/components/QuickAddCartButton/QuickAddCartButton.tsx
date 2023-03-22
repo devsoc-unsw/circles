@@ -10,6 +10,7 @@ import type { RootState } from 'config/store';
 import { addToUnplanned } from 'reducers/plannerSlice';
 import S from './styles';
 import { CourseList } from 'types/courses';
+import openNotification from 'utils/openNotification';
 
 type Props = {
   courseCode: string;
@@ -61,8 +62,10 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
         });
       });
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at removeFromPlanner', err);
+      openNotification({
+        type: "error",
+        message: "Error at quickAddCartButton"
+      });
     }
   };
 

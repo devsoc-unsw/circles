@@ -8,6 +8,7 @@ import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import openNotification from 'utils/openNotification';
 
 interface PlannerButtonProps {
   course: Course;
@@ -72,8 +73,10 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
       });
       addCourseToPlannerTimeout(false);
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at removeFromPlanner', e);
+      openNotification({
+        type: "error",
+        message: "Error at removeFromPlanner"
+      });
     }
   };
 
