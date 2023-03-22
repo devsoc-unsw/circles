@@ -119,6 +119,11 @@ declare module 'styled-components' {
     courseDescription: {
       paddingColor: string;
     };
+    quickAddRemoveBtn: {
+      addBackgroundColor: string;
+      removeBackgroundColor: string;
+      addBorderColor: string;
+    };
     bugIcon: {
       backgroundColor: string;
       borderColor: string;

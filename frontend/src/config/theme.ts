@@ -300,6 +300,11 @@ export const lightTheme: DefaultTheme = {
   courseDescription: {
     paddingColor: '#d9d9d9'
   },
+  quickAddRemoveBtn: {
+    addBackgroundColor: '#fafafa',
+    removeBackgroundColor: '#fafafa',
+    addBorderColor: '#d9d9d9'
+  },
   bugIcon: {
     backgroundColor: '#fff',
     borderColor: '#d9d9d9',
@@ -418,6 +423,11 @@ export const darkTheme: DefaultTheme = {
   },
   courseDescription: {
     paddingColor: '#444249'
+  },
+  quickAddRemoveBtn: {
+    addBackgroundColor: '#262626',
+    removeBackgroundColor: '#262626',
+    addBorderColor: '#707070'
   },
   bugIcon: {
     backgroundColor: '#444249',
