@@ -32,7 +32,6 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
 
 
 # Ideally not used often.
-#
 @router.post("/saveLocalStorage/")
 def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     # TODO: turn giving no token into an error
@@ -160,6 +159,9 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
         user['planner']['years'] += ([{"T0": [],
                                      "T1": [], "T2": [], "T3": []}] * diff)
     else:
+        for year in user['planner']['years'][diff:]:
+            for term in year.values():
+                user['planner']['unplanned'].extend(term)
         user['planner']['years'] = user['planner']['years'][:diff]
     set_user(token, user, True)
 
