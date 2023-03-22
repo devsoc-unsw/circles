@@ -114,7 +114,7 @@ const ImportPlannerMenu = () => {
               openNotification({
                 type: 'error',
                 message: 'Error setting summer term',
-                description: 'An error occurred when toggling the summer term.'
+                description: 'An error occurred when trying to import summer term visibility'
               });
               return;
             }
