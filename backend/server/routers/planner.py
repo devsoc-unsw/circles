@@ -278,7 +278,7 @@ def remove_all(token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 
-@router.post("/unscheduleCourse")
+@router.post("/unscheduleCourse")  # TODO: What if someone is enrolled in the same couse twice?
 def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
     """
     Moves a course out of a term and into the user's unplanned column
@@ -289,19 +289,19 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    planner = user['planner']
 
-    removed: Set[str] = set()
-    # Remove every instance of the course from each year
-    for year in planner['years']:
+    # Remove every instance of the course from each year and add to unplanned
+    removed = False
+    for year in user['planner']['years']:
         for course_list in year.values():
             if data.courseCode in course_list:
+                removed = True
                 course_list.remove(data.courseCode)
-                removed.add(data.courseCode)
+                user['planner']['unplanned'].append(data.courseCode)
 
-    # Add the course to unplanned
-    for item in removed:
-        planner['unplanned'].append(item)
+    if not removed:
+        raise HTTPException(status_code=400, detail=f'{data.courseCode} not found in planner')
+
     set_user(token, user, True)
 
 
@@ -314,17 +314,13 @@ def unschedule_all(token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    removed: Set[str] = set()
 
-    # Remove every course from each year
+    # Remove every course from each term and add it to unplanned
     for year in user['planner']['years']:
-        for term, course_list in year.items():
-            removed = removed | set(course_list)
-            year[term] = []
+        for course_list in year.values():
+            user['planner']['unplanned'].extend(course_list)
+            course_list.clear()
 
-    # Add every removed course to unplanned column
-    for course in removed:
-        user['planner']['unplanned'].append(course)
     set_user(token, user, True)
 
 

@@ -92,7 +92,7 @@ def create_payload(size, content_type, year = LIVE_YEAR):
         },
     }
 
-def create_payload_gened(size, content_type, cl_id, academic_org, year=LIVE_YEAR):
+def create_payload_gened(size, content_type, cl_id, academic_org, year : int | None =LIVE_YEAR):
     """
     Create a payload of the given size
     content_type will be used as a prefix for the query fields

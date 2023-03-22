@@ -11,7 +11,6 @@ import {
   moveCourse,
   setUnplannedCourseToTerm,
   toggleSummer,
-  updateDegreeLength,
   updateStartYear
 } from 'reducers/plannerSlice';
 import CS from '../common/styles';
@@ -19,6 +18,7 @@ import S from './styles';
 
 const ImportPlannerMenu = () => {
   const planner = useSelector((state: RootState) => state.planner);
+  const { token } = useSelector((state: RootState) => state.settings);
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -64,7 +64,7 @@ const ImportPlannerMenu = () => {
     setLoading(true);
     const reader = new FileReader();
     reader.readAsText(e.target.files[0], 'UTF-8');
-    reader.onload = (ev) => {
+    reader.onload = async (ev) => {
       if (ev.target !== null) {
         const content = ev.target.result;
         e.target.value = '';
@@ -85,7 +85,20 @@ const ImportPlannerMenu = () => {
             });
             return;
           }
-          dispatch(updateDegreeLength(fileInJson.numYears));
+          try {
+            await axios.put(
+              '/user/updateDegreeLength',
+              { numYears: fileInJson.numYears },
+              { params: { token } }
+            );
+          } catch {
+            openNotification({
+              type: 'error',
+              message: 'Error setting degree length',
+              description: 'There was an error updating the degree length.'
+            });
+            return;
+          }
           dispatch(updateStartYear(fileInJson.startYear));
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             dispatch(toggleSummer());
