@@ -344,7 +344,7 @@ export const darkTheme: DefaultTheme = {
   },
 
   degreeCard: {
-    backgroundColor: '#17191a'
+    backgroundColor: '#131415'
   },
   draggableCourse: {
     backgroundColor: '#121212',
