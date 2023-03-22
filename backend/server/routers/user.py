@@ -32,7 +32,6 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
 
 
 # Ideally not used often.
-#
 @router.post("/saveLocalStorage/")
 def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     # TODO: turn giving no token into an error
