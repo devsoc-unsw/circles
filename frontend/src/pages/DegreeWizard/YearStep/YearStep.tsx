@@ -1,9 +1,13 @@
 import React, { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
+import axios from 'axios';
+import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
+import { RootState } from 'config/store';
 import { useAppDispatch } from 'hooks';
-import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
+import { updateStartYear } from 'reducers/plannerSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -20,6 +24,7 @@ type Props = {
 const YearStep = ({ incrementStep }: Props) => {
   const props = useSpring(springProps);
   const dispatch = useAppDispatch();
+  const { token } = useSelector((state: RootState) => state.settings);
 
   return (
     <CS.StepContentWrapper id="year">
@@ -35,9 +40,19 @@ const YearStep = ({ incrementStep }: Props) => {
             style={{
               width: '100%'
             }}
-            onChange={(_, [startYear, endYear]: [string, string]) => {
+            onChange={async (_, [startYear, endYear]: [string, string]) => {
               const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;
-              dispatch(updateDegreeLength(numYears));
+              // We can trust num years to be a valid number because the range picker only allows valid ranges
+              try {
+                await axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
+              } catch {
+                openNotification({
+                  type: 'error',
+                  message: 'Error updating degree length',
+                  description: 'There was an error updating the degree length.'
+                });
+                return;
+              }
               dispatch(updateStartYear(parseInt(startYear, 10)));
 
               if (startYear && endYear) incrementStep(Steps.DEGREE);

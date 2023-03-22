@@ -413,40 +413,41 @@ def out_of_bounds(num_years, dest_row, terms):
     return dest_row + min_row_offset < 0 or dest_row + max_row_offset > num_years - 1
 
 
-@router.post("/autoplanning/",
-             response_model=dict,
-             responses={
-                 400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
-                 200: {
-                     "description": "Successful Response",
-                     "content": {
-                         "plan": [
-                             {
-                                 "T1": [
-                                     "COMP1511",
-                                     "MATH1131"
-                                 ],
-                                 "T3": [
-                                     "COMP1521"
-                                 ]
-                             },
-                             {
-                                 "T0": [
-                                     "COMP2521"
-                                 ],
-                                 "T2": [
-                                     "COMP1531"
-                                 ],
-                                 "T1": [
-                                     "COMP3821",
-                                     "COMP3891",
-                                 ]
-                             }
-                         ]
-                     }
-                 }
-             }
-             )
+# TODO: Broken till migration is fixed; Previous planner methods are deprecated
+# @router.post("/autoplanning/",
+#              response_model=dict,
+#              responses={
+#                  400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
+#                  200: {
+#                      "description": "Successful Response",
+#                      "content": {
+#                          "plan": [
+#                              {
+#                                  "T1": [
+#                                      "COMP1511",
+#                                      "MATH1131"
+#                                  ],
+#                                  "T3": [
+#                                      "COMP1521"
+#                                  ]
+#                              },
+#                              {
+#                                  "T0": [
+#                                      "COMP2521"
+#                                  ],
+#                                  "T2": [
+#                                      "COMP1531"
+#                                  ],
+#                                  "T1": [
+#                                      "COMP3821",
+#                                      "COMP3891",
+#                                  ]
+#                              }
+#                          ]
+#                      }
+#                  }
+#              }
+#              )
 def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
     print("started to_user")
     user = plannerData.to_user()
