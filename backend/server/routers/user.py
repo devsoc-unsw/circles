@@ -4,9 +4,10 @@ from fastapi import APIRouter
 from data.config import LIVE_YEAR
 from server.database import usersDB
 from bson.objectid import ObjectId
-from server.routers.model import CourseMark, LocalStorage, PlannerLocalStorage, Storage
 import pydantic
 from server.config import DUMMY_TOKEN
+from server.routers.model import CourseMark, LocalStorage, PlannerLocalStorage, Storage
+
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
 
 router = APIRouter(
@@ -129,7 +130,7 @@ def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
 def update_start_year(startYear: int, token: str = DUMMY_TOKEN):
     """
         update the start year the user is taking. We assume that the number of years
-        will stay the same, and that the user will want their courses to be matched 
+        will stay the same, and that the user will want their courses to be matched
         *by year taken*.
     """
     user = get_user(token)
@@ -195,6 +196,7 @@ def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
 
 @router.put("/reset")
 def reset(token: str = DUMMY_TOKEN):
+    """Resets user data of a parsed token"""
     planner: PlannerLocalStorage = {
         'mostRecentPastTerm': {
             'Y': 0,
