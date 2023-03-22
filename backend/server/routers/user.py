@@ -87,7 +87,7 @@ def default_cs_user() -> Storage:
             'T': 0
         },
         'unplanned': [],
-        'isSummerEnabled': True,  # shoudl default be false? who knows
+        'isSummerEnabled': True, 
         'startYear': LIVE_YEAR,
         'years': [],
         'courses': {},
