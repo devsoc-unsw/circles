@@ -79,7 +79,7 @@
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
     "@vitejs/plugin-react": "3.0.0",
-    "@vitest/coverage-c8": "0.25.7",
+    "@vitest/coverage-c8": "0.29.7",
     "axios-mock-adapter": "1.21.2",
     "eslint": "8.30.0",
     "eslint-config-airbnb": "19.0.4",
@@ -102,6 +102,6 @@
     "vite-plugin-checker": "0.5.2",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-svgr": "2.4.0",
-    "vitest": "0.25.7"
+    "vitest": "0.29.7"
   }
 }
