@@ -1,7 +1,6 @@
 import json
 
 from fastapi import APIRouter, HTTPException
-
 from server.database import coursesCOL
 
 router = APIRouter(

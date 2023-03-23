@@ -15,8 +15,9 @@ Step in the data's journey:
 """
 
 import re
-from data.utility.data_helpers import read_data, write_data
+
 from data.processors.programs_processing import TEST_PROGS
+from data.utility.data_helpers import read_data, write_data
 
 # TODO: add more specialisations as we expand scope of Circles
 

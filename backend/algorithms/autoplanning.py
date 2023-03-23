@@ -1,10 +1,12 @@
 """ an autoplanning solver which takes in courses and spits a plan """
 from pprint import pprint
 from typing import Tuple
-from ortools.sat.python import cp_model # type: ignore
+
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
+from ortools.sat.python import cp_model  # type: ignore
 from server.routers.model import CONDITIONS
+
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
 

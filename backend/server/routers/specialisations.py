@@ -1,9 +1,10 @@
 """ Specialisations Route """
 from typing import Literal, Optional, cast
+
+from data.processors.models import Program
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import SpecialisationTypes, Specialisations
-from data.processors.models import Program
+from server.routers.model import Specialisations, SpecialisationTypes
 
 router = APIRouter(
     prefix="/specialisations",

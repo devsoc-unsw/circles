@@ -7,9 +7,9 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 """
 
-from functools import reduce
 import json
 import re
+from functools import reduce
 
 from data.utility.data_helpers import read_data, write_data
 

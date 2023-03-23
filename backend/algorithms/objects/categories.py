@@ -6,6 +6,7 @@ to a specific category
 import json
 import re
 from abc import ABC, abstractmethod
+
 from algorithms.objects.helper import Logic
 
 # Preload the mappings to school and faculty

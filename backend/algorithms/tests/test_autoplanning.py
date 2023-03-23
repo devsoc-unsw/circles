@@ -1,10 +1,12 @@
 from typing import Optional
-from pytest import raises, mark
+
 from algorithms.autoplanning import autoplan, terms_between
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
 from algorithms.validate_term_planner import validate_terms
+from pytest import mark, raises
 from server.routers.model import CONDITIONS, ValidPlannerData
+
 
 def get_uoc(course_name: str, courses: list[Course]):
     return [course.uoc for course in courses if course_name == course.name][0]

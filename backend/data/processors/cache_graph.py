@@ -8,6 +8,7 @@ Do NOT run this from it's current location.
 """
 
 from typing import Dict, List, Optional, Tuple
+
 from algorithms.objects.conditions import CompositeCondition
 from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects

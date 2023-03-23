@@ -4,8 +4,8 @@ specifically in any one function
 """
 
 from typing import Callable, Optional, TypeVar
-from algorithms.objects.course import Course
 
+from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
 

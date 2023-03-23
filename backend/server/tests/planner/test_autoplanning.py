@@ -3,6 +3,7 @@
 import requests
 from pytest import mark
 
+
 @mark.skip(reason = "Autoplanning incompatiable with migration")
 def test_autoplanning_generic():
     x = requests.post(

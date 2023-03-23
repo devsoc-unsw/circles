@@ -7,19 +7,16 @@ from contextlib import suppress
 from typing import Dict, List, Mapping, Optional, Set, Tuple
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
-from algorithms.objects.program_restrictions import (NoRestriction,
-                                                     ProgramRestriction)
+from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz  # type: ignore
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
-                                  CourseCodes, CourseDetails, CoursesPath,
-                                  CoursesPathDict, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses,
-                                  TermsList, TermsOffered, UserData)
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
+                                  CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
+                                  TermsOffered, UserData)
 from server.routers.utility import get_core_courses, map_suppressed_errors
 
 router = APIRouter(

@@ -6,10 +6,11 @@
 """
 
 import copy
-from itertools import chain
 import json
-from typing import List, Literal, Optional, Tuple
 import re
+from itertools import chain
+from typing import List, Literal, Optional, Tuple
+
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
 

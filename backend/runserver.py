@@ -3,9 +3,9 @@ api and also run the files"""
 
 import argparse
 import sys
-# https://github.com/encode/uvicorn/issues/998
-import uvicorn # type: ignore
 
+# https://github.com/encode/uvicorn/issues/998
+import uvicorn  # type: ignore
 from server.database import overwrite_all
 from server.server import app
 

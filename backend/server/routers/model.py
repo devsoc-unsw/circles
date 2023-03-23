@@ -4,10 +4,10 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
-from pydantic import BaseModel
-
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
+from pydantic import BaseModel
+
 
 class Programs(BaseModel):
     programs: dict

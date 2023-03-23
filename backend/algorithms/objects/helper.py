@@ -2,8 +2,8 @@
 
 import json
 import re
-from sys import exit
 from enum import Enum
+from sys import exit
 
 
 class Logic(Enum):

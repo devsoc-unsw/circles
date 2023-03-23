@@ -5,9 +5,10 @@ Assume everything is a maturity condition for now.
 - Tokenise the pre-processed data.
 """
 
-from contextlib import suppress
 import re
+from contextlib import suppress
 from typing import Dict, Iterator, List, Optional
+
 from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
 from data.utility.data_helpers import read_data, write_data
 

@@ -1,7 +1,7 @@
 import json
-import requests
 import random
 
+import requests
 from server.routers.model import CONDITIONS
 
 PATH="./algorithms/tests/exampleUsers.json"

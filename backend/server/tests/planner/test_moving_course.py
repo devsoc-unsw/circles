@@ -1,4 +1,5 @@
 import json
+
 import requests
 from server.config import DUMMY_TOKEN
 from server.tests.user.utility import clear

@@ -4,21 +4,17 @@ JSON files for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
-from functools import reduce
 import operator
 import re
+from functools import reduce
 from typing import Any, Literal
 
-from algorithms.cache.cache_config import (CACHE_CONFIG, CACHED_EQUIVALENTS_FILE,
-                                           CACHED_EXCLUSIONS_FILE,
-                                           CACHED_WARNINGS_FILE,
-                                           CONDITIONS_PROCESSED_FILE,
-                                           COURSE_MAPPINGS_FILE,
-                                           COURSES_PROCESSED_FILE,
-                                           MAPPINGS_FILE,
-                                           PROGRAM_MAPPINGS_FILE,
+from algorithms.cache.cache_config import (CACHE_CONFIG, CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE,
+                                           CACHED_WARNINGS_FILE, CONDITIONS_PROCESSED_FILE, COURSE_MAPPINGS_FILE,
+                                           COURSES_PROCESSED_FILE, MAPPINGS_FILE, PROGRAM_MAPPINGS_FILE,
                                            PROGRAMS_FORMATTED_FILE)
 from data.utility.data_helpers import read_data, write_data
+
 
 def cache_equivalents():
     """

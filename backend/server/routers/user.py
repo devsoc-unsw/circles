@@ -7,8 +7,7 @@ from data.config import LIVE_YEAR
 from fastapi import APIRouter
 from server.config import DUMMY_TOKEN
 from server.database import usersDB
-from server.routers.model import (CourseMark, LocalStorage,
-                                  PlannerLocalStorage, Storage)
+from server.routers.model import CourseMark, LocalStorage, PlannerLocalStorage, Storage
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
 

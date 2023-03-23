@@ -11,8 +11,7 @@ from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException
 from server.config import DUMMY_TOKEN
 from server.routers.courses import get_course
-from server.routers.model import (CourseCode, PlannedToTerm, PlannerData,
-                                  ProgramTime, UnPlannedToTerm,
+from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
                                   ValidCoursesState, ValidPlannerData)
 from server.routers.user import get_user, set_user
 from server.routers.utility import get_course_object

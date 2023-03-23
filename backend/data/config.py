@@ -14,7 +14,6 @@ Assumes that `/backend` is the current working directory.
 # The latest current handbook year that we will maintain all the algorithms for
 from typing import List
 
-
 LIVE_YEAR: int = 2023
 
 # The years for which we have archived

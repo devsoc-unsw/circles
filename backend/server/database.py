@@ -11,7 +11,6 @@ from sys import exit
 
 from data.config import ARCHIVED_YEARS
 from pymongo import MongoClient
-
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
 # Export these as needed

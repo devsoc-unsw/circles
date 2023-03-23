@@ -6,6 +6,7 @@ Converts from the tokens to actual conditions that can be made.
 import pickle
 import re
 from typing import Dict, List
+
 from algorithms.objects.categories import Category, GenEdCategory, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data

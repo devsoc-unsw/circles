@@ -5,12 +5,12 @@ Contains the Conditions classes
 import json
 import re
 from abc import ABC, abstractmethod
-from typing import  Optional, Tuple, TypedDict
+from typing import Optional, Tuple, TypedDict
 
-from algorithms.objects.categories import Category, AnyCategory
+from algorithms.objects.categories import AnyCategory, Category
 from algorithms.objects.course import Course
-from algorithms.objects.user import User
 from algorithms.objects.helper import Logic
+from algorithms.objects.user import User
 from ortools.sat.python import cp_model  # type: ignore
 
 # CACHED

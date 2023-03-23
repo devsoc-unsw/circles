@@ -1,34 +1,19 @@
 """
 API for fetching data about programs and specialisations """
-from contextlib import suppress
 import functools
 import re
+from contextlib import suppress
 from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
 
-from fastapi import APIRouter, HTTPException
-
-from data.processors.models import (
-    CourseContainer,
-    Program,
-    ProgramContainer,
-    Specialisation,
-)
+from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
+from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import get_path_from, regex_search
-from server.routers.model import (
-    CourseCodes,
-    Courses,
-    Graph,
-    Programs,
-    Structure,
-    StructureContainer,
-    StructureDict,
-    CoursesPathDict,
-)
+from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
+                                  StructureDict)
 from server.routers.utility import get_core_courses, map_suppressed_errors
-
 
 router = APIRouter(
     prefix="/programs",
