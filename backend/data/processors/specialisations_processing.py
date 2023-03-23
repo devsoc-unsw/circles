@@ -30,7 +30,7 @@ def customise_spn_data():
 
     data = read_data("data/scrapers/specialisationsFormattedRaw.json")
 
-    customised_data: dict = {}  # TODO: specify type # Dictionary for all customised data
+    customised_data: dict = {}  # TODO: specify type  # Dictionary for all customised data
     for spn in data.keys():
         if not any((prog in TEST_PROGS for prog in data[spn]["programs"])):
             continue
@@ -229,7 +229,7 @@ def get_courses(
     Adds courses from container to the customised curriculum course dict.
     """
     for course, title in container_courses.items():
-        description = description + "" # prevent unused variable error
+        description = description + ""  # prevent unused variable error
 
         if "any course" in course:
             course_processed = {"any course": "1"}

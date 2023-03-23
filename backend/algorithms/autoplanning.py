@@ -56,10 +56,10 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         # if the course is in term 'index', only allow 0 to m UOC to exist in that term.
         model.AddReservoirConstraintWithActive(
             variables,
-            list(map_var_to_course(courses, var).uoc for var in variables), # this fills the resovoir by UoC units if active
-            boolean_indexes, # a course is only active if in term 'index'
+            list(map_var_to_course(courses, var).uoc for var in variables),  # this fills the resovoir by UoC units if active
+            boolean_indexes,  # a course is only active if in term 'index'
             0,
-            m # uoc_max
+            m  # uoc_max
         )
 
     # 4. enforce prereqs, only if not locked by user

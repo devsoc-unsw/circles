@@ -28,7 +28,7 @@ NON_SPEC_KEY = f"non_{SPEC_KEY}"
 
 # List of all program codes that include a computer science degree
 CS_PROGS = (
-    "3673", # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
+    "3673",  # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
     "3674",
     "3778",
     "3779",

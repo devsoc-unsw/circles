@@ -68,7 +68,7 @@ def get_programs() -> dict[str, dict[str, str]]:
     return {
         "programs": {
             "3778": "Computer Science",
-            # "3779": "Advanced Computer Science (Honours)", # TODO: Fix the electives
+            # "3779": "Advanced Computer Science (Honours)",  # TODO: Fix the electives
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",
@@ -474,8 +474,8 @@ def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[D
     a full list of edges of form.
     [
         {
-            "source": (str) - course_code, # This is the 'original' value
-            "target": (str) - course_code, # This is the value of 'courses'
+            "source": (str) - course_code,  # This is the 'original' value
+            "target": (str) - course_code,  # This is the value of 'courses'
         }
     ]
     Effectively, turning an adjacency list into a flat list of edges

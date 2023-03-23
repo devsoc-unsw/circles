@@ -17,7 +17,7 @@ from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 try:
     client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
     print('Connected to database.')
-except: # pylint: disable=bare-except
+except:  # pylint: disable=bare-except
     print("Unable to connect to database.")
     exit(1)
 
@@ -91,7 +91,7 @@ def create_dynamic_db():
                         }
                     },
                     'courses': {
-                        'bsonType': 'object', # painful to validate properly :/
+                        'bsonType': 'object',  # painful to validate properly :/
                     },
                     'planner': {
                         'bsonType': 'object',

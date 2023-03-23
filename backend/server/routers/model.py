@@ -14,7 +14,7 @@ class Programs(BaseModel):
 
 
 class Specialisations(BaseModel):
-    spec: dict[str, dict] # cant do more specific because NotRequired doesnt work
+    spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work
 
 
 class ProgramCourses(BaseModel):
@@ -263,9 +263,9 @@ class PlannedToTerm(BaseModel):
     courseCode: str
 
 class ProgramTime(BaseModel):
-    startTime: tuple[int, int] # (Year, Term) start of program
+    startTime: tuple[int, int]  # (Year, Term) start of program
     endTime: tuple[int, int]
-    uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+    uocMax: list[int]  # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
 class TermsOffered(TypedDict):
     terms: dict[str, list[str]]

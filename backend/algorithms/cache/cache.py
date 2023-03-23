@@ -168,7 +168,7 @@ def cache_program_mappings():
 
     keyword_codes: dict[str, list[str]] = read_data(CACHE_CONFIG)
 
-    mappings : dict = { # TODO: make more strict
+    mappings : dict = {  # TODO: make more strict
         code: {} for code
         in reduce(operator.add, keyword_codes.values())
     }

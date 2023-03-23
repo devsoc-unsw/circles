@@ -145,7 +145,7 @@ def tokenise_dependent(condition: str):
     Output:
         - ["L2"]
         - ["L2", "ECON"]
-        - ["GENS"] # This *can* be generalised to take a category after but, no need (2023 handbook)
+        - ["GENS"]  # This *can* be generalised to take a category after but, no need (2023 handbook)
     As of 2023 Handbook, no other example types exist.
     Will assume only Level and Faculty Category types
     """

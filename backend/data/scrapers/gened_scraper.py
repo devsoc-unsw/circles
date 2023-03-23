@@ -57,7 +57,7 @@ def scrape_gened_data(year=None):
         )
         new_gened_courses_raw = r.json()["contentlets"]
 
-        #gen eds by program code
+        # gen eds by program code
         courses = {}
         for course in new_gened_courses_raw:
             courses[course["code"]] = course["title"]

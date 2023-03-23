@@ -37,7 +37,7 @@ def major_minor_for_program(draw):
 @given(sampled_from(programs))
 @settings(deadline=5000)
 def test_all_programs_fetched(program):
-    if program == "3779": # adv cs broken
+    if program == "3779":  # adv cs broken
         return
     structure = requests.get(f"http://127.0.0.1:8000/programs/getStructure/{program}")
     assert structure != 500

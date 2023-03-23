@@ -201,11 +201,11 @@ class UOCCondition(Condition):
             boolean_indexes.append(b)
         return [
             model.AddReservoirConstraintWithActive(
-                (course[0] for course in filtered_courses), # the variables of the filtered courses
-                (var[1].uoc for var in filtered_courses), # can fill the resovoir by some UOC
-                boolean_indexes, # if it comes after the course given
+                (course[0] for course in filtered_courses),  # the variables of the filtered courses
+                (var[1].uoc for var in filtered_courses),  # can fill the resovoir by some UOC
+                boolean_indexes,  # if it comes after the course given
                 0,
-                total_uoc_allowable_after_course # until a certain point, or fail the constraint
+                total_uoc_allowable_after_course  # until a certain point, or fail the constraint
             )
         ]
 
@@ -214,7 +214,7 @@ class UOCCondition(Condition):
 
         total_filtered_uoc = sum(filtered_course[1].uoc for filtered_course in filtered_courses)
         if total_filtered_uoc < self.uoc:
-            return [model.AddBoolAnd(True)] # if we already dont have enough UOC to meet it, our job is already done
+            return [model.AddBoolAnd(True)]  # if we already dont have enough UOC to meet it, our job is already done
 
         boolean_indexes = []
         for variable, _ in filtered_courses:
@@ -226,11 +226,11 @@ class UOCCondition(Condition):
             boolean_indexes.append(b)
         return [
             model.AddReservoirConstraintWithActive(
-                (course[0] for course in filtered_courses), # the variables of the filtered courses
-                (var[1].uoc for var in filtered_courses), # can fill the resovoir by some UOC
-                boolean_indexes, # if it comes before the course given
+                (course[0] for course in filtered_courses),  # the variables of the filtered courses
+                (var[1].uoc for var in filtered_courses),  # can fill the resovoir by some UOC
+                boolean_indexes,  # if it comes before the course given
                 0,
-                self.uoc # until a certain point, or fail the constraint
+                self.uoc  # until a certain point, or fail the constraint
             )
         ]
 

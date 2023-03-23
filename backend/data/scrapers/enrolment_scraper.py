@@ -27,7 +27,7 @@ MAX_BYTES = 2**32
 
 def scrape_enrolment_data(username:str, password:str):
     data = read_data(COURSE_CODES_INPUT_PATH)
-    enrolment_data = {} # type: ignore
+    enrolment_data = {}  # type: ignore
     hashed_enrolment_data = {}  # type: ignore
     try:
         ssh = paramiko.SSHClient()
@@ -42,7 +42,7 @@ def scrape_enrolment_data(username:str, password:str):
         sys.exit(1)
 
     stdin, stdout, stderr = ssh.exec_command('ls\n', timeout=1)
-    #stdout.channel.set_combine_stderr(True)
+    # stdout.channel.set_combine_stderr(True)
     for course_code in data:
         if not course_code.startswith("COMP"):
             continue
