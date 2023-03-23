@@ -2,7 +2,7 @@
 # pylint: disable=missing-class-docstring
 import json
 import pickle
-from typing import Literal, Optional, TypedDict
+from typing import Literal, TypedDict
 
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
@@ -28,7 +28,7 @@ class CourseDetails(BaseModel):
     level: int
     description: str
     study_level: str
-    school: Optional[str]
+    school: str | None
     campus: str
     equivalents: dict[str, str]
     raw_requirements: str
@@ -38,7 +38,7 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: Optional[bool]
+    is_multiterm: bool | None
 
 
 class ContainerContent(TypedDict):
@@ -111,13 +111,13 @@ class MostRecentPastTerm(TypedDict):
 class ValidPlannerData(BaseModel):
     programCode: str
     specialisations: list[str]
-    plan: list[list[dict[str, tuple[int, Optional[int]]]]]
+    plan: list[list[dict[str, tuple[int, int | None]]]]
     mostRecentPastTerm: MostRecentPastTerm
 
 class PlannerData(BaseModel):
     programCode: str
     specialisations: list[str]
-    plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
+    plan: list[list[dict[str, list[int | None] | None]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {
@@ -234,9 +234,9 @@ class Graph(BaseModel):
     courses: list[str]
 
 class TermsList(BaseModel):
-    terms: Optional[dict[str, Optional[list[str]]]]
+    terms: dict[str, list[str] | None] | None
     # Actually tuple(str, fastapi.exceptions.HTTPException)
-    fails: Optional[list[tuple]]
+    fails: list[tuple] | None
 
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]

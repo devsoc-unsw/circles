@@ -7,7 +7,7 @@ Assume everything is a maturity condition for now.
 
 import re
 from contextlib import suppress
-from typing import Iterator, Optional
+from typing import Iterator
 
 from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
 from data.utility.data_helpers import read_data, write_data
@@ -64,7 +64,7 @@ def tokenise_uoc_dependency(condition: str) -> list[str]:
     Example input: "Must have completed 24 UOC"
 
     """
-    num_uoc: Optional[re.Match[str]] = re.search("(\d+)", condition)
+    num_uoc: re.Match[str] | None = re.search("(\d+)", condition)
 
     return ["UOC", num_uoc.group()] if num_uoc else ["UOC", "0"]
 

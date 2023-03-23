@@ -9,7 +9,7 @@ import copy
 import json
 import re
 from itertools import chain
-from typing import Literal, Optional
+from typing import Literal
 
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
@@ -25,9 +25,9 @@ class User:
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, tuple[int, Optional[int]]] = {}
-        self.cur_courses: dict[str, tuple[int, Optional[int]]] = {}
-        self.program: Optional[str] = None
+        self.courses: dict[str, tuple[int, int | None]] = {}
+        self.cur_courses: dict[str, tuple[int, int | None]] = {}
+        self.program: str | None = None
         self.specialisations: list[str] = []
         self.year: int = 0
         self.core_courses: list[str] = []
@@ -36,7 +36,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, tuple[int, Optional[int]]]):
+    def add_courses(self, courses: dict[str, tuple[int, int | None]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -44,14 +44,14 @@ class User:
         """
         self.courses.update(courses)
 
-    def add_current_course(self, course_code: str, course: tuple[int, Optional[int]]):
+    def add_current_course(self, course_code: str, course: tuple[int, int | None]):
         """
         Given a course the user is taking in their current term,
         adds it to their cur_courses
         """
         self.cur_courses[course_code] = course
 
-    def add_current_courses(self, courses: dict[str, tuple[int, Optional[int]]]):
+    def add_current_courses(self, courses: dict[str, tuple[int, int | None]]):
         """
         Takes in a list of courses (represented as strings by course
         code) and, adds it to the list of current courses.
@@ -132,7 +132,7 @@ class User:
         """
         return self.courses.get(course, (6, None))[1]
 
-    def wam(self, category: Category = AnyCategory()) -> Optional[float]:
+    def wam(self, category: Category = AnyCategory()) -> float | None:
         """
         Calculates the user's WAM by taking the average of the sum of their
         marks, weighted by uoc per course.
@@ -180,7 +180,7 @@ class User:
         self.courses = old_courses
         return all(has_done.values()), relevant_courses
 
-    def pop_course(self, course: str) -> tuple[int, Optional[int]]:
+    def pop_course(self, course: str) -> tuple[int, int | None]:
         """
             Removes a course from done courses and returns its uoc and mark
         """

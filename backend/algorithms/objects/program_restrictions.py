@@ -3,7 +3,6 @@ Contains `ProgramRestrictions` and relevant sub-classes
 """
 
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from algorithms.objects.categories import Category
 from algorithms.objects.conditions import Condition
@@ -42,7 +41,7 @@ class CompositeRestriction(ProgramRestriction):
     restrictions. It is used to combine restrictions together.
     """
 
-    def __init__(self, logic: Logic=Logic.AND, restrictions: Optional[list[ProgramRestriction]]=None):
+    def __init__(self, logic: Logic=Logic.AND, restrictions: list[ProgramRestriction] | None = None):
         self.restrictions = restrictions if restrictions is not None else []
         self.logic = logic
 
@@ -130,7 +129,7 @@ class MaturityRestriction(ProgramRestriction):
 
     # TODO: This type signature is very messy. That course dict should have
     # a Course : Mark mapping type or, somethign similar
-    def beneficial(self, user: User, course: dict[str, tuple[int, Optional[int]]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, tuple[int, int | None]]) -> bool:
         """
         Will a course be beneficial to advancing this condition?
         More specifically, can the course be used to meet the dependency?

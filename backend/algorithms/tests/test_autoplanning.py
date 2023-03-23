@@ -1,5 +1,3 @@
-from typing import Optional
-
 from algorithms.autoplanning import autoplan, terms_between
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
@@ -136,7 +134,7 @@ def assert_autoplanning_guarantees(uoc_max: list[int], courses: list[Course], pr
         course_names = [course[0] for course in res if terms_between((2020, 0), course[1]) == index]
         assert number >= sum(get_uoc(course_name, courses) for course_name in course_names)
     # all courses valid
-    plan: list[list[dict[str, tuple[int, Optional[int]]]]] = [[{}, {}, {}, {}] for _ in range(2023-2020)]
+    plan: list[list[dict[str, tuple[int, int | None]]]] = [[{}, {}, {}, {}] for _ in range(2023-2020)]
     for course_name, (course_year, course_term) in res:
         plan[course_year - 2020][course_term][course_name] = (get_uoc(course_name, courses), get_mark(course_name, courses))
     assert all(course_state['is_accurate'] for course_state in validate_terms(ValidPlannerData(

@@ -4,7 +4,7 @@ APIs for the /courses/ route.
 import pickle
 import re
 from contextlib import suppress
-from typing import Mapping, Optional
+from typing import Mapping
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
@@ -25,7 +25,7 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES: Optional[dict[str, str]] = None
+ALL_COURSES: dict[str, str] | None = None
 CODE_MAPPING: dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 GRAPH: dict[str, dict[str, list[str]]] = read_data(GRAPH_CACHE_FILE)
 INCOMING_ADJACENCY: dict[str, list[str]] = GRAPH.get("incoming_adjacency_list", {})
@@ -633,7 +633,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
     return get_course_info(course, year_to_fetch).get("terms", [])
 
-def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
+def get_program_restriction(program_code: str | None) -> ProgramRestriction | None:
     """
     Returns the program restriction for the given program code.
     Also responsible for starting up `PROGRAM_RESTRICTIONS` the first time it is called.

@@ -7,14 +7,12 @@ From `/backend`, run this as:
 Do NOT run this from it's current location.
 """
 
-from typing import Optional
-
 from algorithms.objects.conditions import CompositeCondition
 from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects
 from data.utility.data_helpers import write_data
 
-CONDITIONS: dict[str, Optional[CompositeCondition]] = construct_conditions_objects()
+CONDITIONS: dict[str, CompositeCondition | None] = construct_conditions_objects()
 
 def cache_graph():
     graph = construct_full_graph()

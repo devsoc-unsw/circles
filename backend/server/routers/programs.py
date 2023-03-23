@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations """
 import functools
 import re
 from contextlib import suppress
-from typing import Any, Callable, Mapping, Optional, cast
+from typing import Any, Callable, Mapping, cast
 
 from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
@@ -147,7 +147,7 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
     else:
         type = "Honours"
 
-    spnResult = cast(Optional[Specialisation], specialisationsCOL.find_one({"code": code}))
+    spnResult = cast(Specialisation | None, specialisationsCOL.find_one({"code": code}))
     type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
@@ -245,7 +245,7 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
-    programCode: str, spec: Optional[str] = None, ignore: Optional[str] = None
+    programCode: str, spec: str | None = None, ignore: str | None = None
 ) -> StructureDict:
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
@@ -269,7 +269,7 @@ def get_structure(
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=CourseCodes)
 @router.get("/getStructureCourseList/{programCode}", response_model=CourseCodes)
 def get_structure_course_list(
-        programCode: str, spec: Optional[str] = None
+        programCode: str, spec: str | None = None
 ):
     """
         Similar to `/getStructure` but, returns a raw list of courses with no further
@@ -317,7 +317,7 @@ def get_gen_eds_route(programCode: str) -> dict[str, dict[str, str]]:
     return get_gen_eds(programCode, course_list)
 
 def get_gen_eds(
-        programCode: str, excluded_courses: Optional[list[str]] = None
+        programCode: str, excluded_courses: list[str] | None = None
     ) -> dict[str, dict[str, str]]:
     """
     fetches gen eds from file and removes excluded courses.
@@ -342,7 +342,7 @@ def get_gen_eds(
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
 def graph(
-        programCode: str, spec: Optional[str] = None
+        programCode: str, spec: str | None = None
     ):
     """
     Constructs a structure for the frontend to use for the graphical
@@ -366,7 +366,7 @@ def graph(
 
     failed_courses: list[tuple] = []
 
-    proto_edges: list[Optional[CoursesPathDict]] = [map_suppressed_errors(
+    proto_edges: list[CoursesPathDict | None] = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
 
@@ -415,7 +415,7 @@ def course_list_from_structure(structure: dict[str, StructureContainer]) -> list
     __recursive_course_search(dict(structure))
     return courses
 
-def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
+def add_specialisations(structure: dict[str, StructureContainer], spec: str | None) -> dict[str, StructureContainer]:
     """
         Take a string of `+` joined specialisations and add
         them to the structure
@@ -433,7 +433,7 @@ def add_program_code_details(structure: dict[str, StructureContainer], programCo
         - structure
         - uoc (int) associated with the program code.
     """
-    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
+    programsResult = cast(Program | None, programsCOL.find_one({"code": programCode}))
     if not programsResult:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
@@ -448,7 +448,7 @@ def add_geneds_to_structure(structure: dict[str, StructureContainer], programCod
         Insert geneds of the given programCode into the structure
         provided
     """
-    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
+    programsResult = cast(Program | None, programsCOL.find_one({"code": programCode}))
     if programsResult is None:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
@@ -468,7 +468,7 @@ def compose(*functions: Callable) -> Callable:
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
 
-def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> list[dict[str, str]]:
+def proto_edges_to_edges(proto_edges: list[CoursesPathDict | None]) -> list[dict[str, str]]:
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.

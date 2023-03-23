@@ -1,5 +1,5 @@
 """ Specialisations Route """
-from typing import Literal, Optional, cast
+from typing import Literal, cast
 
 from data.processors.models import Program
 from fastapi import APIRouter, HTTPException
@@ -69,7 +69,7 @@ def get_specialisation_types(programCode):
 )
 def get_specialisations(programCode: str, typeSpec: Literal["majors"] | Literal["minors"] | Literal["honours"]):
     """ Fetch all the majors known to the backend for a specific program """
-    result = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
+    result = cast(Program | None, programsCOL.find_one({"code": programCode}))
 
     if not result:
         raise HTTPException(

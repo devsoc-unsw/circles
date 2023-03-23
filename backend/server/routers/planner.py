@@ -4,7 +4,6 @@ route for planner algorithms
 
 from math import lcm
 from operator import itemgetter
-from typing import Optional
 
 from algorithms.autoplanning import autoplan
 from algorithms.validate_term_planner import validate_terms
@@ -21,7 +20,7 @@ MIN_COMPLETED_COURSE_UOC = 6
 
 def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
-    plan: list[list[dict[str, tuple[int, Optional[int]]]]] = []
+    plan: list[list[dict[str, tuple[int, int | None]]]] = []
     for year_index, year in enumerate(plannerData.plan):
         plan.append([])
         for term_index, term in enumerate(year):

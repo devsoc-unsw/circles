@@ -5,7 +5,7 @@ Contains the Conditions classes
 import json
 import re
 from abc import ABC, abstractmethod
-from typing import Optional, TypedDict
+from typing import TypedDict
 
 from algorithms.objects.categories import AnyCategory, Category
 from algorithms.objects.course import Course
@@ -24,7 +24,7 @@ with open(CACHED_PROGRAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
     CACHED_PROGRAM_MAPPINGS = json.load(f)
 
 
-def get_variable(courses: list[tuple[cp_model.IntVar, Course]], course: str) -> Optional[cp_model.IntVar]:
+def get_variable(courses: list[tuple[cp_model.IntVar, Course]], course: str) -> cp_model.IntVar | None:
     var_list = [variable[0] for variable in courses if variable[0].Name() == course]
     return None if len(var_list) == 0 else var_list[0]
 
@@ -70,7 +70,7 @@ class Condition(ABC):
         is_valid, _ = self.validate(user)
         return [model.AddBoolAnd(not is_valid)]
 
-    def beneficial(self, user: User,  course: dict[str, tuple[int, Optional[int]]]) -> bool:
+    def beneficial(self, user: User,  course: dict[str, tuple[int, int | None]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
@@ -269,7 +269,7 @@ class WAMCondition(Condition):
         warning = self.get_warning(user.wam(self.category))
         return True, [warning]
 
-    def get_warning(self, applicable_wam: Optional[float]) -> str:
+    def get_warning(self, applicable_wam: float | None) -> str:
         """ Returns an appropriate warning message or None if not needed """
         category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
         wam_warning = f"Requires {self.wam} WAM in {category}. "
@@ -610,7 +610,7 @@ class CompositeCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
 
-    def beneficial(self, user: User, course: dict[str, tuple[int, Optional[int]]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False

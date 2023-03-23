@@ -13,7 +13,6 @@ Step in the data's journey:
 
 import re
 from collections import OrderedDict
-from typing import Optional
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -217,7 +216,7 @@ def split_program_names(title: str) -> list[str]:
     return list(map(lambda s: s.strip(), program_names))
 
 
-def find_program_name(program_data: dict, item: dict) -> Optional[str] :
+def find_program_name(program_data: dict, item: dict) -> str | None :
     """
     Find the program name (if possible).
     Returns a string with the program name if found,
