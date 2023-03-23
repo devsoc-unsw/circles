@@ -6,14 +6,17 @@ import {
   DownloadOutlined,
   EyeFilled,
   QuestionCircleOutlined,
+  SaveFilled,
   SettingFilled,
   UploadOutlined,
   WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
+import axios from 'axios';
+import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
-import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
+import { unhideAllYears } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
@@ -30,14 +33,22 @@ type Props = {
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme, token } = useSelector((state: RootState) => state.settings);
   const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
-
   const iconStyles = {
     fontSize: '20px',
     color: '#323739'
+  };
+
+  const handleUnscheduleAll = async () => {
+    try {
+      await axios.post('planner/unscheduleAll', {}, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleUnscheduleAll: ', err);
+    }
   };
 
   return (
@@ -87,6 +98,11 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           placement="bottom-start"
         >
           <div>
+            <Tooltip title="Save">
+              <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
+                <SaveFilled style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
             <Tooltip title="Import">
               <S.OptionButton>
                 <UploadOutlined style={iconStyles} />
@@ -100,7 +116,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             <Popconfirm
               placement="bottomRight"
               title="Are you sure you want to unplan all your courses?"
-              onConfirm={() => dispatch(unscheduleAll())}
+              onConfirm={handleUnscheduleAll}
               style={{ width: '200px' }}
               okText="Yes"
               cancelText="No"

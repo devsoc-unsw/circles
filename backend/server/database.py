@@ -11,14 +11,13 @@ from sys import exit
 
 from data.config import ARCHIVED_YEARS
 from pymongo import MongoClient
-
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
 # Export these as needed
 try:
     client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
     print('Connected to database.')
-except: # pylint: disable=bare-except
+except:  # pylint: disable=bare-except
     print("Unable to connect to database.")
     exit(1)
 
@@ -28,6 +27,8 @@ specialisationsCOL = db["Specialisations"]
 coursesCOL = db["Courses"]
 
 archivesDB = client["Archives"]
+
+usersDB = client["Users"]
 
 
 def overwrite_collection(collection_name):
@@ -65,6 +66,127 @@ def overwrite_archives():
             except (KeyError, IOError, OSError):
                 print(f"Failed to load and overwrite {year} archive")
 
+def create_dynamic_db():
+    usersDB.create_collection('users',
+        validator={
+            '$jsonSchema': {
+                'bsonType': 'object',
+                'required': ['degree', 'planner'],
+                'properties': {
+                    'degree': {
+                        'bsonType': 'object',
+                        'required': ['programCode', 'specs'],
+                        'properties': {
+                            'programCode': {
+                                'bsonType': 'string',
+                                'description': 'the code of program taken'
+                            },
+                            'specs': {
+                                'bsonType': 'array',
+                                'description': 'an array of all the specialisations taken',
+                                'items': {
+                                    'bsonType': 'string'
+                                }
+                            },
+                        }
+                    },
+                    'courses': {
+                        'bsonType': 'object',  # painful to validate properly :/
+                    },
+                    'planner': {
+                        'bsonType': 'object',
+                        'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years'],
+                        'properties': {
+                            "unplanned": {
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'string'
+                                }
+                            },
+                            "startYear": {
+                                'bsonType': 'int'
+                            },
+                            "isSummerEnabled": {
+                                'bsonType': 'bool'
+                            },
+                            "years": {
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'object',
+                                    'properties': {
+                                        "T0": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+
+                                        "T1": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+
+                                        "T2": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+
+                                        "T3": {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    usersDB.create_collection('tokens', validator={
+        '$jsonSchema': {
+            'bsonType': 'object',
+            'required': ['token', 'objectId'],
+            'properties': {
+                'token': {
+                    'description': 'token given by FE',
+                    'bsonType': 'string'
+                },
+                'objectId': {
+                    'description': 'objectId for the user object we are storing',
+                    'bsonType': 'objectId'
+                }
+            }
+        }
+    })
+    print("finished creating user database")
+    # example insertion
+    # usersDB['users'].insert_one({
+    #     'degree': {
+    #         "programCode":"3778",
+    #         "programName":"Computer Science",
+    #         "specs":["COMPA1"]
+    #     },
+    #     'planner': {
+    #         "unplanned":[],
+    #         "startYear": 2021,
+    #         "isSummerEnabled": False,
+    #         "plan": [
+    #             {
+    #             "T0":[],
+    #             "T1":["COMP1511"],
+    #             "T2":["COMP1521"],
+    #             "T3":["COMP1531"],
+    #             }
+    #         ],
+    #     }
+    # })
 
 def overwrite_all():
     """Singular execution point to overwrite the entire database including the archives"""
@@ -72,3 +194,9 @@ def overwrite_all():
     overwrite_collection("Specialisations")
     overwrite_collection("Programs")
     overwrite_archives()
+
+def optionally_create_new_data():
+    # TODO: DELETE NEXT LINES IN PROD
+    usersDB.drop_collection('users')
+    usersDB.drop_collection('tokens')
+    create_dynamic_db()

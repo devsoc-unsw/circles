@@ -1,6 +1,6 @@
 {
     "empty_year": {
-        "program": "3707",
+        "programCode": "3707",
         "specialisations": ["COMPA1"],
         "year": 1,
         "plan": [
@@ -17,7 +17,7 @@
         }
     },
     "simple_year": {
-        "program": "3707",
+        "programCode": "3707",
         "specialisations": ["COMPA1"],
         "year": 1,
         "plan": [
@@ -43,7 +43,7 @@
         }
     },
     "no_uoc": {
-        "program": "3707",
+        "programCode": "3707",
         "specialisations": ["COMPA1"],
         "year": 1,
         "plan": [
@@ -69,7 +69,7 @@
         }
     },
     "out_of_order": {
-        "program": "3707",
+        "programCode": "3707",
         "specialisations": ["COMPA1"],
         "year": 1,
         "plan": [
@@ -91,7 +91,7 @@
         }
     },
     "suppress_warning": {
-        "program": "3707",
+        "programCode": "3707",
         "specialisations": ["COMPA1"],
         "year": 1,
         "plan": [

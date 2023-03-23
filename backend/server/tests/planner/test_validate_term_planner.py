@@ -1,8 +1,8 @@
 # pylint: disable=missing-function-docstring
 # pylint: disable=missing-module-docstring
 import json
-import requests
 
+import requests
 
 PATH = "server/example_input/example_planner_data.json"
 

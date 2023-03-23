@@ -3,10 +3,9 @@ General purpose utility functions for the server, that do not fit
 specifically in any one function
 """
 
-
 from typing import Callable, Optional, TypeVar
-from algorithms.objects.course import Course
 
+from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
 
@@ -29,15 +28,14 @@ def get_core_courses(program: str, specialisations: list[str]):
     from server.routers.programs import get_structure
 
     req = get_structure(program, "+".join(specialisations))
-    return sum(
-            (
+    return sum((
                 sum((
                     list(value["courses"].keys())
                     for sub_group, value in spec["content"].items()
                     if 'core' in sub_group.lower()
                 ), [])
-            for spec_name, spec in req["structure"].items()
-            if "Major" in spec_name or "Honours" in spec_name)
+                for spec_name, spec in req["structure"].items()
+                if "Major" in spec_name or "Honours" in spec_name)
          , [])
 
 
@@ -64,6 +62,5 @@ def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Option
             terms_possible,
             locked_offering
         )
-    except KeyError:
-        raise Exception(f"Course {code} not found (course is most likely discontinued)")
-
+    except KeyError as err:
+        raise KeyError(f"Course {code} not found (course is most likely discontinued)") from err

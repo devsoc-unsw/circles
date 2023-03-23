@@ -6,10 +6,11 @@
 """
 
 import copy
-from itertools import chain
 import json
-from typing import List, Literal, Optional, Tuple
 import re
+from itertools import chain
+from typing import List, Literal, Optional, Tuple
+
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
 
@@ -79,7 +80,6 @@ class User:
     def has_taken_course(self, course: str):
         """ Determines if the user has taken this course """
         return any(c in self.courses and (self.courses[c][1] or 50) >= 50 for c in chain([course], (CACHED_EQUIVALENTS.get(course) or [])))
-    
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """

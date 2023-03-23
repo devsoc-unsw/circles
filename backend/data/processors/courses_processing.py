@@ -6,6 +6,7 @@ Step in the course data's journey:
 """
 
 import re
+
 from data.utility import data_helpers
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json

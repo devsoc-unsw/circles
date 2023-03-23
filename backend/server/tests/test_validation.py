@@ -1,6 +1,7 @@
 # we want to assure that courses that may be accessed from a container are always accurately computed.
 from contextlib import suppress
 from itertools import chain
+
 import requests
 from server.routers.model import StructureContainer
 from server.tests.courses.test_get_all_unlocked import USERS

@@ -8,7 +8,6 @@ import argparse
 from sys import exit
 
 from data.processors.courses_processing import process_course_data
-
 from data.scrapers.courses_formatting import format_course_data
 from data.scrapers.courses_scraper import scrape_course_data
 

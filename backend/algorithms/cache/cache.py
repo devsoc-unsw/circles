@@ -4,21 +4,17 @@ JSON files for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
-from functools import reduce
 import operator
 import re
+from functools import reduce
 from typing import Any, Literal
 
-from algorithms.cache.cache_config import (CACHE_CONFIG, CACHED_EQUIVALENTS_FILE,
-                                           CACHED_EXCLUSIONS_FILE,
-                                           CACHED_WARNINGS_FILE,
-                                           CONDITIONS_PROCESSED_FILE,
-                                           COURSE_MAPPINGS_FILE,
-                                           COURSES_PROCESSED_FILE,
-                                           MAPPINGS_FILE,
-                                           PROGRAM_MAPPINGS_FILE,
+from algorithms.cache.cache_config import (CACHE_CONFIG, CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE,
+                                           CACHED_WARNINGS_FILE, CONDITIONS_PROCESSED_FILE, COURSE_MAPPINGS_FILE,
+                                           COURSES_PROCESSED_FILE, MAPPINGS_FILE, PROGRAM_MAPPINGS_FILE,
                                            PROGRAMS_FORMATTED_FILE)
 from data.utility.data_helpers import read_data, write_data
+
 
 def cache_equivalents():
     """
@@ -101,7 +97,7 @@ def cache_mappings():
         else:
             match_object = re.search("^([\w]+)", Faculty)
         if match_object is None:
-            raise Exception(f'no match found for faculty: {Faculty}')
+            raise KeyError(f'no match found for faculty: {Faculty}')
         match = match_object.group()
         faculty_token += match
         return faculty_token
@@ -116,7 +112,7 @@ def cache_mappings():
         elif re.search("^(UC)", School):
             match_object = re.search("(?<=UC\s)[^\s\n\,]+", School)
             if match_object is None:
-                raise Exception(f'no match found for school: {School}')
+                raise KeyError(f'no match found for school: {School}')
             match = school_token + "UC-" +  match_object.group()
             return match
         elif re.search("UNSW", School):
@@ -124,7 +120,7 @@ def cache_mappings():
         else:
             match_object = re.search("^([\w]+)", School)
         if match_object is None:
-            raise Exception(f'no match found for school: {School}')
+            raise KeyError(f'no match found for school: {School}')
         match = match_object.group()
         school_token += match
         return school_token
@@ -172,7 +168,7 @@ def cache_program_mappings():
 
     keyword_codes: dict[str, list[str]] = read_data(CACHE_CONFIG)
 
-    mappings : dict = { # TODO: make more strict
+    mappings : dict = {  # TODO: make more strict
         code: {} for code
         in reduce(operator.add, keyword_codes.values())
     }

@@ -5,9 +5,10 @@ Assume everything is a maturity condition for now.
 - Tokenise the pre-processed data.
 """
 
-from contextlib import suppress
 import re
+from contextlib import suppress
 from typing import Dict, Iterator, List, Optional
+
 from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
 from data.utility.data_helpers import read_data, write_data
 
@@ -144,7 +145,7 @@ def tokenise_dependent(condition: str):
     Output:
         - ["L2"]
         - ["L2", "ECON"]
-        - ["GENS"] # This *can* be generalised to take a category after but, no need (2023 handbook)
+        - ["GENS"]  # This *can* be generalised to take a category after but, no need (2023 handbook)
     As of 2023 Handbook, no other example types exist.
     Will assume only Level and Faculty Category types
     """
@@ -170,4 +171,3 @@ def tokenise_dependent(condition: str):
 
 if __name__ == "__main__":
     tokenise_program_conditions()
-

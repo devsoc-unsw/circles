@@ -4,17 +4,17 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
-from pydantic import BaseModel
-
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
+from pydantic import BaseModel
+
 
 class Programs(BaseModel):
     programs: dict
 
 
 class Specialisations(BaseModel):
-    spec: dict[str, dict] # cant do more specific because NotRequired doesnt work
+    spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work
 
 
 class ProgramCourses(BaseModel):
@@ -56,6 +56,7 @@ class Structure(BaseModel):
     uoc: int
 
 
+# TODO: This should just take a token now
 class UserData(BaseModel):
     program: str
     specialisations: list[str]
@@ -108,13 +109,13 @@ class MostRecentPastTerm(TypedDict):
 
 
 class ValidPlannerData(BaseModel):
-    program: str
+    programCode: str
     specialisations: list[str]
     plan: list[list[dict[str, tuple[int, Optional[int]]]]]
     mostRecentPastTerm: MostRecentPastTerm
 
 class PlannerData(BaseModel):
-    program: str
+    programCode: str
     specialisations: list[str]
     plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
     mostRecentPastTerm: MostRecentPastTerm
@@ -159,7 +160,7 @@ class PlannerData(BaseModel):
 
     def to_user(self) -> User:
         user = User()
-        user.program = self.program
+        user.program = self.programCode
         user.specialisations = self.specialisations[:]
 
         # prevent circular import; TODO: There has to be a better way
@@ -176,6 +177,37 @@ class PlannerData(BaseModel):
                 user.add_courses(cleaned_term)
         return user
 
+
+class DegreeLocalStorage(TypedDict):
+    programCode: str
+    specs: list[str]
+    isComplete: bool
+
+class PlannerLocalStorage(TypedDict):
+    mostRecentPastTerm: MostRecentPastTerm
+    unplanned: list[str]
+    startYear: int
+    isSummerEnabled: bool
+    years: list[dict[str, list[str]]]
+    courses: dict[str, dict]
+
+class CoursesStorage(TypedDict):
+    code: str
+    suppressed: bool
+    mark: int
+
+class Storage(TypedDict):
+    degree: DegreeLocalStorage
+    planner: PlannerLocalStorage
+    courses: dict[str, CoursesStorage]
+
+class LocalStorage(BaseModel):
+    degree: DegreeLocalStorage
+    planner: PlannerLocalStorage
+
+class CourseMark(BaseModel):
+    course: str
+    mark: int
 
 class CourseCodes(BaseModel):
     courses: list[str]
@@ -194,7 +226,6 @@ class CoursesPathDict(TypedDict):
 class Description(BaseModel):
     description: str
 
-
 class SpecialisationTypes(BaseModel):
     types: list[str]
 
@@ -207,10 +238,34 @@ class TermsList(BaseModel):
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
 
+class StructureDict(TypedDict):
+    structure: dict[str, StructureContainer]
+    uoc: int
+
+# Used in addToUnplanned, removeCourse and unscheduleCourse routes
+class CourseCode(BaseModel):
+    courseCode: str
+
+# Used in unPlannedToTerm route
+class UnPlannedToTerm(BaseModel):
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
+# used in PlannedToTerm route
+class PlannedToTerm(BaseModel):
+    srcRow: int
+    srcTerm: str
+    destRow: int
+    destTerm: str
+    destIndex: int
+    courseCode: str
+
 class ProgramTime(BaseModel):
-    startTime: tuple[int, int] # (Year, Term) start of program
+    startTime: tuple[int, int]  # (Year, Term) start of program
     endTime: tuple[int, int]
-    uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+    uocMax: list[int]  # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
 class TermsOffered(TypedDict):
     terms: dict[str, list[str]]

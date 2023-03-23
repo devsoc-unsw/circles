@@ -3,9 +3,9 @@ api and also run the files"""
 
 import argparse
 import sys
-# https://github.com/encode/uvicorn/issues/998
-import uvicorn # type: ignore
 
+# https://github.com/encode/uvicorn/issues/998
+import uvicorn  # type: ignore
 from server.database import overwrite_all
 from server.server import app
 
@@ -16,7 +16,6 @@ if __name__ == "__main__":
         action="store_true",
         help="Inclusion of option will overwrite the database",
     )
-
     try:
         args = parser.parse_args()
     except argparse.ArgumentError:

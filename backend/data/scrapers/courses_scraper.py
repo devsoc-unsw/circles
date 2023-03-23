@@ -11,7 +11,7 @@ Step in the data's journey:
 import json
 
 import requests
-from data.scrapers.payload import create_payload, URL, HEADERS
+from data.scrapers.payload import HEADERS, URL, create_payload
 from data.utility import data_helpers
 
 TOTAL_COURSES = 10000
@@ -24,11 +24,12 @@ def scrape_course_data(year = None):
     write_data to dump the json to an OUTPUT_FILE
     """
 
-    r = requests.post(URL, data=json.dumps(create_payload(
-        TOTAL_COURSES,
-        "unsw_psubject",
-        year
-    )), headers=HEADERS)
+    r = requests.post(
+        URL,
+        data=json.dumps(create_payload(TOTAL_COURSES, "unsw_psubject", year)),
+        headers=HEADERS,
+        timeout=60 * 5
+    )
 
     data_helpers.write_data(
         r.json()["contentlets"],

@@ -1,33 +1,19 @@
 """
 API for fetching data about programs and specialisations """
-from contextlib import suppress
 import functools
 import re
+from contextlib import suppress
 from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
 
-from fastapi import APIRouter, HTTPException
-
-from data.processors.models import (
-    CourseContainer,
-    Program,
-    ProgramContainer,
-    Specialisation,
-)
+from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
+from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import get_path_from, regex_search
-from server.routers.model import (
-    CourseCodes,
-    Courses,
-    Graph,
-    Programs,
-    Structure,
-    StructureContainer,
-    CoursesPathDict,
-)
+from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
+                                  StructureDict)
 from server.routers.utility import get_core_courses, map_suppressed_errors
-
 
 router = APIRouter(
     prefix="/programs",
@@ -79,11 +65,10 @@ def get_all_programs() -> Dict[Any, Any]:
 def get_programs() -> dict[str, dict[str, str]]:
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
-    # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {
         "programs": {
             "3778": "Computer Science",
-            # "3779": "Advanced Computer Science (Honours)", # TODO: Fix the electives
+            # "3779": "Advanced Computer Science (Honours)",  # TODO: Fix the electives
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",
@@ -95,7 +80,7 @@ def get_programs() -> dict[str, dict[str, str]]:
         }
     }
 
-def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> Mapping[str, str | list[str]]:
+def convert_subgroup_object_to_courses_dict(object: str, description: str | list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object and isinstance(description, list):
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
@@ -261,7 +246,7 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
     programCode: str, spec: Optional[str] = None, ignore: Optional[str] = None
-):
+) -> StructureDict:
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
 
@@ -284,14 +269,15 @@ def get_structure(
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=CourseCodes)
 @router.get("/getStructureCourseList/{programCode}", response_model=CourseCodes)
 def get_structure_course_list(
-        programCode: str, spec: Optional[str]=None
-    ):
+        programCode: str, spec: Optional[str] = None
+):
     """
         Similar to `/getStructure` but, returns a raw list of courses with no further
         nesting or categorisation.
         TODO: Add a test for this.
     """
     structure: dict[str, StructureContainer] = {}
+
     structure = add_specialisations(structure, spec)
     structure, _ = add_program_code_details(structure, programCode)
     apply_manual_fixes(structure, programCode)
@@ -327,7 +313,7 @@ def get_structure_course_list(
 )
 def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
     """ Fetches the geneds for a given program code """
-    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened"))
+    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened")["structure"])
     return get_gen_eds(programCode, course_list)
 
 def get_gen_eds(
@@ -343,8 +329,8 @@ def get_gen_eds(
     excluded_courses = excluded_courses if excluded_courses is not None else []
     try:
         geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    except KeyError:
-        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}")
+    except KeyError as err:
+        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}") from err
 
     for course in excluded_courses:
         if course in geneds:
@@ -356,7 +342,7 @@ def get_gen_eds(
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
 def graph(
-        programCode: str, spec: Optional[str]=None
+        programCode: str, spec: Optional[str] = None
     ):
     """
     Constructs a structure for the frontend to use for the graphical
@@ -377,6 +363,7 @@ def graph(
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
+
     failed_courses: list[tuple] = []
 
     proto_edges: list[Optional[CoursesPathDict]] = [map_suppressed_errors(
@@ -402,10 +389,12 @@ def get_cores(programCode: str, spec: str):
 ###############################################################
 
 
-def course_list_from_structure(structure: dict) -> list[str]:
+def course_list_from_structure(structure: Dict[str, StructureContainer]) -> list[str]:
     """
         Given a formed structure, return the list of courses
-        in that structure
+        in that structure.
+        TODO: The `__recursive_course_search` should be deprecated
+        due to better type definitions of `StructureDict`
     """
     courses = []
     def __recursive_course_search(structure: dict) -> None:
@@ -423,7 +412,7 @@ def course_list_from_structure(structure: dict) -> list[str]:
                 courses.extend(v.keys())
             __recursive_course_search(v)
         return
-    __recursive_course_search(structure)
+    __recursive_course_search(dict(structure))
     return courses
 
 def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
@@ -485,15 +474,15 @@ def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[D
     a full list of edges of form.
     [
         {
-            "source": (str) - course_code, # This is the 'original' value
-            "target": (str) - course_code, # This is the value of 'courses'
+            "source": (str) - course_code,  # This is the 'original' value
+            "target": (str) - course_code,  # This is the value of 'courses'
         }
     ]
     Effectively, turning an adjacency list into a flat list of edges
     """
-    edges: List = []
+    edges = []
     for proto_edge in proto_edges:
-        # Incoming: { original: str,  courses: List[str]}
+        # Incoming: { original: str,  courses: list[str]}
         # Outcome:  { "src": str, "target": str }
         if not proto_edge or not proto_edge["courses"]:
             continue
@@ -505,9 +494,8 @@ def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[D
             )
     return edges
 
-def prune_edges(edges: List[Dict[str, str]], courses: List[str]) -> List[Dict[str, str]]:
+def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[str, str]]:
     """
     Remove edges between vertices that are not in the list of courses provided.
     """
     return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
-

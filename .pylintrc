@@ -75,7 +75,9 @@ disable=import-error,                     # allow import from folder.file instea
         global-statement,                 # allow use of globals. Used for filepaths and configs
         too-few-public-methods,           # need classes with zero public methods as abstract objects
         duplicate-code,                   # Code duplication due to progtype1. TODO: Fix on complete refactor
-        no-name-in-module                 # seems to be similar to import-error
+        no-name-in-module,                # seems to be similar to import-error
+        missing-module-docstring,         # allow for missing module docstrings, democratially ignored
+        useless-parent-delegation         # allow for methods that just return super().method()
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
@@ -449,11 +451,12 @@ good-names=i,
            k,
            ex,
            Run,
-           _
+           _,
+           f
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
-good-names-rgxs=
+good-names-rgxs=^([A-Z]{4})_FIXES
 
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
