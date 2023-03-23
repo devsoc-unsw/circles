@@ -549,20 +549,24 @@ class CompositeCondition(Condition):
         if len(self.conditions) == 0:
             return []
 
-        if self.logic == Logic.AND:
-            # just aggregate the conditions together, they are already all simutaneously asserted
-            return sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
-
-        or_constraints: list[cp_model.Constraint] = sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
-        or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
-        boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
-        # boolean_vars are a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
-        # https://developers.google.com/optimization/cp/channeling
-        for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
-            constraint.OnlyEnforceIf(boolean)
-            negation.OnlyEnforceIf(boolean.Not())
-        model.AddBoolOr(boolean_vars)
-        return or_constraints
+        match self.logic:
+            case Logic.AND:
+                # just aggregate the conditions together, they are already all simutaneously asserted
+                return sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
+            case Logic.OR:
+                or_constraints: list[cp_model.Constraint] = sum((
+                    condition.condition_to_model(model, user, courses, course_variable)
+                    for condition in self.conditions
+                ), [])
+                or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
+                boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
+                # boolean_vars are a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
+                # https://developers.google.com/optimization/cp/channeling
+                for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
+                    constraint.OnlyEnforceIf(boolean)
+                    negation.OnlyEnforceIf(boolean.Not())
+                model.AddBoolOr(boolean_vars)
+                return or_constraints
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         if len(self.conditions) == 0:
