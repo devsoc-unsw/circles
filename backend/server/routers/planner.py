@@ -2,27 +2,19 @@
 route for planner algorithms
 """
 
-from typing import Tuple, List, Dict, Set, Optional
-from operator import itemgetter
 from math import lcm
-from fastapi import APIRouter, HTTPException
-from algorithms.validate_term_planner import validate_terms
-from algorithms.autoplanning import autoplan
-from algorithms.objects.user import User
-from server.routers.model import (ValidCoursesState, PlannerData,
-                                  ValidPlannerData, ProgramTime)
-from server.routers.courses import get_course
-from server.routers.utility import get_course_object
-from server.routers.model import (ValidCoursesState, ValidPlannerData,
-                                  PlannerData, CourseCode, UnPlannedToTerm,
-                                  PlannedToTerm, UserData, ProgramTime, CourseCodes,
-                                  CONDITIONS, CACHED_HANDBOOK_NOTE
-                                  )
-from server.routers.user import get_user, set_user
-from server.config import DUMMY_TOKEN
-from algorithms.objects.user import User
-from algorithms.autoplanning import autoplan
+from operator import itemgetter
+from typing import Dict, List, Optional, Tuple
 
+from algorithms.autoplanning import autoplan
+from algorithms.validate_term_planner import validate_terms
+from fastapi import APIRouter, HTTPException
+from server.config import DUMMY_TOKEN
+from server.routers.courses import get_course
+from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
+                                  ValidCoursesState, ValidPlannerData)
+from server.routers.user import get_user, set_user
+from server.routers.utility import get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
 
@@ -420,40 +412,41 @@ def out_of_bounds(num_years, dest_row, terms):
     return dest_row + min_row_offset < 0 or dest_row + max_row_offset > num_years - 1
 
 
-@router.post("/autoplanning/",
-             response_model=dict,
-             responses={
-                 400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
-                 200: {
-                     "description": "Successful Response",
-                     "content": {
-                         "plan": [
-                             {
-                                 "T1": [
-                                     "COMP1511",
-                                     "MATH1131"
-                                 ],
-                                 "T3": [
-                                     "COMP1521"
-                                 ]
-                             },
-                             {
-                                 "T0": [
-                                     "COMP2521"
-                                 ],
-                                 "T2": [
-                                     "COMP1531"
-                                 ],
-                                 "T1": [
-                                     "COMP3821",
-                                     "COMP3891",
-                                 ]
-                             }
-                         ]
-                     }
-                 }
-             }
-             )
+# TODO: Broken till migration is fixed; Previous planner methods are deprecated
+# @router.post("/autoplanning/",
+#              response_model=dict,
+#              responses={
+#                  400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
+#                  200: {
+#                      "description": "Successful Response",
+#                      "content": {
+#                          "plan": [
+#                              {
+#                                  "T1": [
+#                                      "COMP1511",
+#                                      "MATH1131"
+#                                  ],
+#                                  "T3": [
+#                                      "COMP1521"
+#                                  ]
+#                              },
+#                              {
+#                                  "T0": [
+#                                      "COMP2521"
+#                                  ],
+#                                  "T2": [
+#                                      "COMP1531"
+#                                  ],
+#                                  "T1": [
+#                                      "COMP3821",
+#                                      "COMP3891",
+#                                  ]
+#                              }
+#                          ]
+#                      }
+#                  }
+#              }
+#              )
 def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
     print("started to_user")
     user = plannerData.to_user()
@@ -478,7 +471,7 @@ def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: 
         autoplanned = autoplan(
             courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error: {e}")
+        raise HTTPException(status_code=400, detail=f"Error: {e}") from e
 
     result: dict[str, list[dict]] = {"plan": [{} for _ in range(
         programTime.endTime[0] - programTime.startTime[0] + 1)]}

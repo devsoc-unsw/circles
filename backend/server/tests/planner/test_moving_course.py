@@ -1,4 +1,5 @@
 import json
+
 import requests
 from server.config import DUMMY_TOKEN
 from server.tests.user.utility import clear
@@ -11,7 +12,7 @@ with open(PATH, encoding="utf8") as f:
 
 def test_add_to_unplanned():
     clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"]) # set to empty planner
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"])  # set to empty planner
 
     data = {
         'courseCode': 'COMP1511'

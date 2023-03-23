@@ -73,8 +73,8 @@ def main():
         ]
     )
     # this is actually kooky if you think about it
-    sys.stdout = LogPipe(logging.INFO) # type: ignore
-    sys.stderr = LogPipe(logging.ERROR) # type: ignore
+    sys.stdout = LogPipe(logging.INFO)  # type: ignore
+    sys.stderr = LogPipe(logging.ERROR)  # type: ignore
     username, password, python_ver = get_backend_env()
     base_url = get_frontend_env()
     os.system('docker compose run --rm init-mongo')

@@ -1,10 +1,8 @@
 """ test file for categories """
 import json
-from algorithms.objects.categories import (
-    CourseCategory,
-    LevelCategory,
-    LevelCourseCategory,
-)
+
+from algorithms.objects.categories import CourseCategory, LevelCategory, LevelCourseCategory
+
 # pylint: disable missing-function-docstring
 # need to test if the UOC and WAM mathods are correct for 1 case only
 
