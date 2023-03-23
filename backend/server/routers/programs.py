@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations """
 import functools
 import re
 from contextlib import suppress
-from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
+from typing import Any, Callable, Mapping, Optional, cast
 
 from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
@@ -29,7 +29,7 @@ def programs_index() -> str:
 
 # TODO: response model to this somehow
 @router.get("/getAllPrograms")
-def get_all_programs() -> Dict[Any, Any]:
+def get_all_programs() -> dict[Any, Any]:
     """
     Like `/getPrograms` but does not filter any programs for if they are
     production ready.
@@ -311,14 +311,14 @@ def get_structure_course_list(
         },
     },
 )
-def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
+def get_gen_eds_route(programCode: str) -> dict[str, dict[str, str]]:
     """ Fetches the geneds for a given program code """
-    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened")["structure"])
+    course_list: list[str] = course_list_from_structure(get_structure(programCode, ignore="gened")["structure"])
     return get_gen_eds(programCode, course_list)
 
 def get_gen_eds(
-        programCode: str, excluded_courses: Optional[List[str]] = None
-    ) -> Dict[str, Dict[str, str]]:
+        programCode: str, excluded_courses: Optional[list[str]] = None
+    ) -> dict[str, dict[str, str]]:
     """
     fetches gen eds from file and removes excluded courses.
         - `programCode` is the program code to fetch geneds for
@@ -328,7 +328,7 @@ def get_gen_eds(
     """
     excluded_courses = excluded_courses if excluded_courses is not None else []
     try:
-        geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+        geneds: dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
     except KeyError as err:
         raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}") from err
 
@@ -389,7 +389,7 @@ def get_cores(programCode: str, spec: str):
 ###############################################################
 
 
-def course_list_from_structure(structure: Dict[str, StructureContainer]) -> list[str]:
+def course_list_from_structure(structure: dict[str, StructureContainer]) -> list[str]:
     """
         Given a formed structure, return the list of courses
         in that structure.
@@ -426,7 +426,7 @@ def add_specialisations(structure: dict[str, StructureContainer], spec: Optional
             add_specialisation(structure, m)
     return structure
 
-def add_program_code_details(structure: dict[str, StructureContainer], programCode: str) -> Tuple[dict[str, StructureContainer], int]:
+def add_program_code_details(structure: dict[str, StructureContainer], programCode: str) -> tuple[dict[str, StructureContainer], int]:
     """
     Add the details for given program code to the structure.
     Returns:
@@ -468,7 +468,7 @@ def compose(*functions: Callable) -> Callable:
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
 
-def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[Dict[str, str]]:
+def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> list[dict[str, str]]:
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.

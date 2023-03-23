@@ -4,7 +4,7 @@ data is working.
 """
 
 import json
-from typing import Annotated, Any, Optional
+from typing import Annotated, Any
 
 import requests
 

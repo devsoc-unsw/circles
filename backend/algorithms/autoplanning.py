@@ -1,6 +1,5 @@
 """ an autoplanning solver which takes in courses and spits a plan """
 from pprint import pprint
-from typing import Tuple
 
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
@@ -10,7 +9,7 @@ from server.routers.model import CONDITIONS
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
 
-def terms_between(start: Tuple[int, int], end: Tuple[int, int]):
+def terms_between(start: tuple[int, int], end: tuple[int, int]):
     return (end[0] - start[0]) * 4 + end[1] - start[1]
 
 def map_var_to_course(courses: list[Course], var: cp_model.IntVar):
@@ -19,10 +18,10 @@ def map_var_to_course(courses: list[Course], var: cp_model.IntVar):
 def map_course_to_var(course: Course, variables: list[cp_model.IntVar]):
     return [variable for variable in variables if course.name == variable.Name()][0]
 
-def convert_to_term_year(number: int, start: Tuple[int, int]):
+def convert_to_term_year(number: int, start: tuple[int, int]):
     return (number // 4 + start[0], number % 4 + start[1])
 
-def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]) -> list[Tuple[str, Tuple[int, int]]]:
+def autoplan(courses: list[Course], user: User, start: tuple[int, int], end: tuple[int, int], uoc_max: list[int]) -> list[tuple[str, tuple[int, int]]]:
     """
     given a list of courses, we will fill our terms in a valid ordering.
     we will enforce that:

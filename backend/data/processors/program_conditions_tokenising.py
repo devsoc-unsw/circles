@@ -7,7 +7,7 @@ Assume everything is a maturity condition for now.
 
 import re
 from contextlib import suppress
-from typing import Dict, Iterator, List, Optional
+from typing import Iterator, Optional
 
 from data.processors.program_conditions_pre_processing import PRE_PROCESSED_DATA_PATH
 from data.utility.data_helpers import read_data, write_data
@@ -22,9 +22,9 @@ def tokenise_program_conditions():
         - Tokenise the data
         - Write the tokenised data to a `.json` file
     """
-    pre_processed_conditions_data: Dict[str, List[Dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
+    pre_processed_conditions_data: dict[str, list[dict[str, str]]] = read_data(PRE_PROCESSED_DATA_PATH)
 
-    tokenised_conditions: Dict[str, List[Dict[str, List[str]]]] = {
+    tokenised_conditions: dict[str, list[dict[str, list[str]]]] = {
         program: [
             tokenise_maturity_requirement(pre_processed_condition)
             for pre_processed_condition in pre_processed_conditions_list
@@ -33,13 +33,13 @@ def tokenise_program_conditions():
     }
     write_data(tokenised_conditions, FINAL_TOKENS_PATH)
 
-def tokenise_maturity_requirement(condition: Dict[str, str]):
+def tokenise_maturity_requirement(condition: dict[str, str]):
     return {
         "dependency": tokenise_dependency(condition["dependency"]),
         "dependent": tokenise_dependent(condition["dependent"]),
     }
 
-def tokenise_dependency(condition: str) -> List[str]:
+def tokenise_dependency(condition: str) -> list[str]:
     """
     This is literally just a condition. At time of writing, it follows one of the following form
         - Must have completed \d UOC
@@ -56,7 +56,7 @@ def tokenise_dependency(condition: str) -> List[str]:
     # only parseable strings passed in; TODO: raise Error
     return [condition]
 
-def tokenise_uoc_dependency(condition: str) -> List[str]:
+def tokenise_uoc_dependency(condition: str) -> list[str]:
     """
     Tokenise the UOC dependency.
     Assumes that the caller has already verified that the given condition is UOC only.
@@ -82,27 +82,27 @@ def tokenise_core_dependency(condition: str):
     The given example will be outputted as:
         ["L1", "ECON", "CORES"]
     """
-    tokens_raw: List[str] = condition.split(" ")
+    tokens_raw: list[str] = condition.split(" ")
 
     # Keep only tokens with meaning
-    tokens_filtered: List[str] = [
+    tokens_filtered: list[str] = [
         token for token in tokens_raw
         if re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", token)
     ]
 
     # Clean tokens into a regular form readable by processors
-    tokens_post_level: List[str] = compress_level_tokens(tokens_filtered)
-    tokens_post_core: List[str] = compress_cores_tokens(tokens_post_level)
+    tokens_post_level: list[str] = compress_level_tokens(tokens_filtered)
+    tokens_post_core: list[str] = compress_cores_tokens(tokens_post_level)
 
     return tokens_post_core
 
-def compress_cores_tokens(tokens: List[str]) -> List[str]:
+def compress_cores_tokens(tokens: list[str]) -> list[str]:
     """
     Take in a list of tokens [..., "prescribed", ...]
     and simplify to [..., "CORES", ...]
     """
     tokens_iter: Iterator[str] = iter(tokens)
-    tokens_out: List[str] = []
+    tokens_out: list[str] = []
 
     with suppress(StopIteration):
         while (tok := next(tokens_iter), None):
@@ -112,7 +112,7 @@ def compress_cores_tokens(tokens: List[str]) -> List[str]:
                 tokens_out.append(tok)
     return list(tokens_out)
 
-def compress_level_tokens(tokens: List[str]) -> List[str]:
+def compress_level_tokens(tokens: list[str]) -> list[str]:
     """
     Take in a list of tokens [..., "Level", "\d", ...]
     and simplify to [..., "L\d", ...]
@@ -121,7 +121,7 @@ def compress_level_tokens(tokens: List[str]) -> List[str]:
     # to not have to deal with iteration invalidation or, cringe index stuff
     # for arbitrary consumption of future tokens
     tokens_iter: Iterator[str] = iter(tokens)
-    tokens_out: List[str] = []
+    tokens_out: list[str] = []
 
     with suppress(StopIteration):
         while (tok := next(tokens_iter), None):
@@ -156,7 +156,7 @@ def tokenise_dependent(condition: str):
         return ["GENS"]
 
     # UOCRestriction
-    tokens: List[str] = condition.split(" ")
+    tokens: list[str] = condition.split(" ")
     # Keep only tokens with meaning
     tokens = list(filter(
             # Groups (left -> right): level, FacultyCode, Number

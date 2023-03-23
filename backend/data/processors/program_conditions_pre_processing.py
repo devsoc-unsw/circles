@@ -10,7 +10,6 @@ This file currently does the job of two. TODO: move stuff out
 
 
 import re
-from typing import Dict, List
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -45,7 +44,7 @@ def pre_process():
     return pre_processed_shortlist
 
 
-def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict[str, str]]:
+def pre_process_program_requirements(condition_raw: dict[str, str]) -> list[dict[str, str]]:
     """
     Do epic pre-proc (i only want to take in the relevant ones)
     If you feed me a condition with no notes, i will literally die
@@ -55,7 +54,7 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
     """
     notes_raw: str = condition_raw.get("notes", "")
     # Assumption: Only one condition per sentence. No misc. `.`
-    notes: List[str] = [
+    notes: list[str] = [
         note.strip() for note in notes_raw.split(".")
         if note
     ]
@@ -64,7 +63,7 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
         for note in notes
     ]
 
-def pre_process_maturity_condition(string: str) -> Dict[str, str]:
+def pre_process_maturity_condition(string: str) -> dict[str, str]:
     """
     Pre-processes a maturity condition.
     These conditions are constructed of two sections
@@ -73,7 +72,7 @@ def pre_process_maturity_condition(string: str) -> Dict[str, str]:
         - "dependent": This is the condition that is restricted and cannot be
                         fulfilled before the dependency is satisfied.
     """
-    components: List[str] = string.split("before")
+    components: list[str] = string.split("before")
     dependency: str = components[0].strip()
     dependent: str = components[1].strip()
     return {
@@ -86,7 +85,7 @@ def pre_process_maturity_condition(string: str) -> Dict[str, str]:
 def maturity_match(string: str):
     return re.match(r".*(maturity)+", string.lower())
 
-def pre_process_cond(condition: Dict):
+def pre_process_cond(condition: dict):
     """
     Takes a raw condition and pre-processes it.
     The condition will be a dict with atleast the following keys:
@@ -132,16 +131,16 @@ def shortlist_pre_proc(full_condition_list):
         if relevant_str_conditions != []
     }
 
-def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
+def filter_pre_processable_conditions(program_info: dict) -> list[dict]:
     """
     Filters out conditions that are not relevant to the pre_process
     pipeline for the given process.
     """
-    non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
+    non_spec_data: list[dict] = program_info.get("components", {}).get("non_spec_data", [])
     if not non_spec_data:
         return []
 
-    pre_processes_conditions: List[Dict] = []
+    pre_processes_conditions: list[dict] = []
     for condition in non_spec_data:
         pre_procced = pre_process_cond(condition)
         if pre_procced is not None:

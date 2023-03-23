@@ -7,14 +7,14 @@ From `/backend`, run this as:
 Do NOT run this from it's current location.
 """
 
-from typing import Dict, List, Optional, Tuple
+from typing import Optional
 
 from algorithms.objects.conditions import CompositeCondition
 from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects
 from data.utility.data_helpers import write_data
 
-CONDITIONS: Dict[str, Optional[CompositeCondition]] = construct_conditions_objects()
+CONDITIONS: dict[str, Optional[CompositeCondition]] = construct_conditions_objects()
 
 def cache_graph():
     graph = construct_full_graph()
@@ -36,7 +36,7 @@ def construct_full_graph():
     }
 
 
-def incoming_list(course: str) -> List[str]:
+def incoming_list(course: str) -> list[str]:
     """
     Returns a list of courses which can be used to satisfy 'course'
     eg 2521 -> 1511
@@ -45,7 +45,7 @@ def incoming_list(course: str) -> List[str]:
     """
     return get_path_from(course)[1]
 
-def get_path_from(course: str) -> Tuple[str, List[str]]:
+def get_path_from(course: str) -> tuple[str, list[str]]:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511

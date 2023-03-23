@@ -5,7 +5,6 @@ Converts from the tokens to actual conditions that can be made.
 
 import pickle
 import re
-from typing import Dict, List
 
 from algorithms.objects.categories import Category, GenEdCategory, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
@@ -21,19 +20,19 @@ class UnparseableError(Exception):
     """
     The given token cannot be parsed
     """
-    def __init__(self, tokens: List[str] | Dict):
+    def __init__(self, tokens: list[str] | dict):
         super().__init__(f"Unparseable tokens: {tokens}")
 
 def process_program_conditions() -> None:
     """
     Creates all program conditions, then serialised them and saves them to a file.
     """
-    all_program_conditions: Dict[str, CompositeRestriction] = create_all_program_conditions()
+    all_program_conditions: dict[str, CompositeRestriction] = create_all_program_conditions()
 
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "wb") as f:
         pickle.dump(all_program_conditions, f, pickle.HIGHEST_PROTOCOL)
 
-def get_all_program_restrictions() -> Dict[str, CompositeRestriction]:
+def get_all_program_restrictions() -> dict[str, CompositeRestriction]:
     """
     Reads the serialised program restrictions from a file and returns it.
     Note that this will NOT create the file if it does not exist and,
@@ -43,16 +42,16 @@ def get_all_program_restrictions() -> Dict[str, CompositeRestriction]:
         return pickle.load(f)
 
 
-def create_all_program_conditions() -> Dict[str, CompositeRestriction]:
+def create_all_program_conditions() -> dict[str, CompositeRestriction]:
     """
     Returns a dictionary that contains all the program conditions.
     """
-    programs_list: List[str] = read_data(PROGRAMS_PROCESSED_PATH)
-    tokens_data: Dict[str, List[Dict[str, List[str]]]] = read_data(FINAL_TOKENS_PATH)
+    programs_list: list[str] = read_data(PROGRAMS_PROCESSED_PATH)
+    tokens_data: dict[str, list[dict[str, list[str]]]] = read_data(FINAL_TOKENS_PATH)
 
     # Always keep top-level restriction as composite, even if it is composed
     # of a single restriction
-    program_restrictions: Dict[str, CompositeRestriction] = {
+    program_restrictions: dict[str, CompositeRestriction] = {
         program: CompositeRestriction(restrictions=[
             create_program_restriction(tokens)
             for tokens in tokens_data.get(program, {})
@@ -61,7 +60,7 @@ def create_all_program_conditions() -> Dict[str, CompositeRestriction]:
 
     return program_restrictions
 
-def create_program_restriction(tokens: Dict[str, List[str]]) -> ProgramRestriction:
+def create_program_restriction(tokens: dict[str, list[str]]) -> ProgramRestriction:
     """
     Creates a condition from the tokens.
     Currently supports:
@@ -73,18 +72,18 @@ def create_program_restriction(tokens: Dict[str, List[str]]) -> ProgramRestricti
         raise UnparseableError(tokens)
     return create_maturity_restriction(tokens)
 
-def create_maturity_restriction(tokens: Dict[str, List[str]]) -> ProgramRestriction:
+def create_maturity_restriction(tokens: dict[str, list[str]]) -> ProgramRestriction:
     """
     Creates a maturity restriction from the tokens.
     """
-    dependency_tokens: List[str] = tokens.get("dependency", [])
-    dependent_tokens: List[str] = tokens.get("dependent", [])
+    dependency_tokens: list[str] = tokens.get("dependency", [])
+    dependent_tokens: list[str] = tokens.get("dependent", [])
     return MaturityRestriction(
          create_dependency_condition(dependency_tokens),
          create_dependent_condition(dependent_tokens)
     )
 
-def create_dependency_condition(tokens: List[str]) -> Condition:
+def create_dependency_condition(tokens: list[str]) -> Condition:
     """
     Creates a dependent condition from the tokens.
 
@@ -135,7 +134,7 @@ def create_dependency_condition(tokens: List[str]) -> Condition:
     raise UnparseableError(tokens)
 
 
-def create_dependent_condition(tokens: List[str]) -> Category:
+def create_dependent_condition(tokens: list[str]) -> Category:
     """
     Creates a dependency condition from the tokens.
 

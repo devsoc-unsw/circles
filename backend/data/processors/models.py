@@ -1,8 +1,8 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-module-docstring
-from typing import TypedDict
+from typing import Literal, TypedDict
 
-from typing_extensions import Literal, NotRequired
+from typing_extensions import NotRequired
 
 
 class ProgramContainer(TypedDict):

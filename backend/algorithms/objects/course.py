@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional, Tuple
+from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
     from algorithms.objects.conditions import Condition
@@ -12,7 +12,7 @@ class Course:
     uoc: int
     terms: dict[int, list[int]]
     locked: Optional[tuple[int, int]] = None
-    def term_domain(self, start: Tuple[int, int], end: Tuple[int, int]):
+    def term_domain(self, start: tuple[int, int], end: tuple[int, int]):
         """ create a domain of terms this course can be in for autoplanning """
         if self.locked:
             locked_number = (self.locked[0] - start[0]) * 4 + self.locked[1] - start[1]

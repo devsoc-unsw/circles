@@ -4,7 +4,7 @@ APIs for the /courses/ route.
 import pickle
 import re
 from contextlib import suppress
-from typing import Dict, List, Mapping, Optional, Set, Tuple
+from typing import Mapping, Optional
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
@@ -25,12 +25,12 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES: Optional[Dict[str, str]] = None
-CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
-GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
-INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
+ALL_COURSES: Optional[dict[str, str]] = None
+CODE_MAPPING: dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+GRAPH: dict[str, dict[str, list[str]]] = read_data(GRAPH_CACHE_FILE)
+INCOMING_ADJACENCY: dict[str, list[str]] = GRAPH.get("incoming_adjacency_list", {})
 
-def fetch_all_courses() -> Dict[str, str]:
+def fetch_all_courses() -> dict[str, str]:
     """
     Returns a dictionary of all courses as a key-val pair with:
         key: course code
@@ -84,7 +84,7 @@ def get_jsonified_course(courseCode: str) -> str:
     return str(CONDITIONS[courseCode])
 
 @router.get("/dump")
-def get_courses() -> list[Dict]:
+def get_courses() -> list[dict]:
     """
     Gets all courses in the database.
     (For CSElectives), by yours truly, Aimen 💫
@@ -141,7 +141,7 @@ def get_courses() -> list[Dict]:
         },
     },
 )
-def get_course(courseCode: str) -> Dict:
+def get_course(courseCode: str) -> dict:
     """
     Get info about a course given its courseCode
     - start with the current database
@@ -198,7 +198,7 @@ def get_course(courseCode: str) -> Dict:
         }
     },
 )
-def search(userData: UserData, search_string: str) -> Dict[str, str]:
+def search(userData: UserData, search_string: str) -> dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
@@ -269,7 +269,7 @@ def regex_search(search_string: str) -> Mapping[str, str]:
         },
     },
 )
-def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
+def get_all_unlocked(userData: UserData) -> dict[str, dict]:
     """
     Given the userData and a list of locked courses, returns the state of all
     the courses. Note that locked courses always return as True with no warnings
@@ -323,7 +323,7 @@ def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
         },
     },
 )
-def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
+def get_legacy_courses(year, term) -> dict[str, dict[str, str]]:
     """
     Gets all the courses that were offered in that term for that year
     """
@@ -336,7 +336,7 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year: str, courseCode: str) -> Dict:
+def get_legacy_course(year: str, courseCode: str) -> dict:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
@@ -429,7 +429,7 @@ def get_path_from(course: str) -> CoursesPathDict:
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
-    out: List[str] = list(INCOMING_ADJACENCY.get(course, []))
+    out: list[str] = list(INCOMING_ADJACENCY.get(course, []))
     return {
         "original" : course,
         "courses" : out,
@@ -451,7 +451,7 @@ def get_path_from(course: str) -> CoursesPathDict:
                     }
                 }
             })
-def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dict[str, List[str]]:
+def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> dict[str, list[str]]:
     """ Returns all courses which are unlocked when given course is taken """
     ## initial state
     courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
@@ -537,11 +537,11 @@ def terms_offered(course: str, years:str) -> TermsOffered:
 ###############################################################################
 
 
-def unlocked_set(courses_state) -> Set[str]:
+def unlocked_set(courses_state) -> set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
-def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
+def is_course_unlocked(course: str, user: User) -> tuple[bool, list[str]]:
     """
     Returns if the course is unlocked for the given user.
     Also returns a list of warnings.
@@ -552,13 +552,13 @@ def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
     )
 
     # TODO: remove this as blank once program_restrictions return warnings
-    program_warnings: List[str] = []
+    program_warnings: list[str] = []
     program_restriction = get_program_restriction(user.program) or NoRestriction()
     program_result = program_restriction.validate_course_allowed(user, course)
 
     return (course_result and program_result), (course_warnings + program_warnings)
 
-def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
+def fuzzy_match(course: tuple[str, str], search_term: str) -> float:
     """ Gives the course a weighting based on the relevance to the search """
     code, title = course
 
@@ -617,7 +617,7 @@ def weight_course(
 
     return weight
 
-def get_course_info(course: str, year: str | int = LIVE_YEAR) -> Dict:
+def get_course_info(course: str, year: str | int = LIVE_YEAR) -> dict:
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.

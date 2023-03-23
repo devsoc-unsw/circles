@@ -5,7 +5,7 @@ to actual condition objects.
 
 import json
 import re
-from typing import Optional, Tuple
+from typing import Optional
 
 from algorithms.objects.categories import (Category, ClassCategory, CompositeCategory, CourseCategory, FacultyCategory,
                                            LevelCategory, LevelCourseCategory, SchoolCategory)
@@ -22,7 +22,7 @@ CACHED_EXCLUSIONS_PATH = "algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
-def create_category(tokens) -> Tuple[Optional[Category], int]:  # pylint: disable=too-many-return-statements
+def create_category(tokens) -> tuple[Optional[Category], int]:  # pylint: disable=too-many-return-statements
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -118,7 +118,7 @@ def create_condition(tokens, course=None) -> Optional[CompositeCondition]:
     return make_condition(tokens, True, course)[0]
 
 
-def make_condition(tokens, first=False, course=None) -> Tuple[Optional[CompositeCondition], int]:
+def make_condition(tokens, first=False, course=None) -> tuple[Optional[CompositeCondition], int]:
     """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),

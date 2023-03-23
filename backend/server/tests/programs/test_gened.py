@@ -2,8 +2,6 @@
 Testing functionality related to general education units.
 """
 
-from typing import List
-
 import requests
 
 
@@ -13,7 +11,7 @@ def test_get_gened_no_overlap():
     ... TODO:
     """
 
-    no_geneds: List[str] = []
+    no_geneds: list[str] = []
 
     program_res = requests.get('http://127.0.0.1:8000/programs/getAllPrograms')
     assert program_res.status_code == 200
