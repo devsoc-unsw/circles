@@ -1,11 +1,12 @@
 from itertools import chain
 from typing import cast
-from fastapi import APIRouter
-from data.config import LIVE_YEAR
-from server.database import usersDB
-from bson.objectid import ObjectId
+
 import pydantic
+from bson.objectid import ObjectId
+from data.config import LIVE_YEAR
+from fastapi import APIRouter
 from server.config import DUMMY_TOKEN
+from server.database import usersDB
 from server.routers.model import CourseMark, LocalStorage, PlannerLocalStorage, Storage
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
@@ -165,20 +166,17 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
         user['planner']['years'] = user['planner']['years'][:diff]
     set_user(token, user, True)
 
-
 @router.put("/setProgram")
 def setProgram(programCode: str, token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['degree']['programCode'] = programCode
     set_user(token, user, True)
 
-
 @router.put("/addSpecialisation")
 def addSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['degree']['specs'].append(specialisation)
     set_user(token, user, True)
-
 
 @router.put("/removeSpecialisation")
 def removeSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
@@ -188,13 +186,11 @@ def removeSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
         specs.remove(specialisation)
     set_user(token, user, True)
 
-
 @router.put("/setIsComplete")
 def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['degree']['isComplete'] = isComplete
     set_user(token, user, True)
-
 
 @router.put("/reset")
 def reset(token: str = DUMMY_TOKEN):

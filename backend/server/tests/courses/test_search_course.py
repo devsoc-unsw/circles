@@ -1,6 +1,7 @@
 # pylint: disable=missing-function-docstring
 # pylint: disable=missing-module-docstring
 import json
+
 import requests
 
 with open("./algorithms/tests/exampleUsers.json", encoding="utf8") as f:

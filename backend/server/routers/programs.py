@@ -1,34 +1,19 @@
 """
 API for fetching data about programs and specialisations """
-from contextlib import suppress
 import functools
 import re
+from contextlib import suppress
 from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
 
-from fastapi import APIRouter, HTTPException
-
-from data.processors.models import (
-    CourseContainer,
-    Program,
-    ProgramContainer,
-    Specialisation,
-)
+from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
+from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import get_path_from, regex_search
-from server.routers.model import (
-    CourseCodes,
-    Courses,
-    Graph,
-    Programs,
-    Structure,
-    StructureContainer,
-    StructureDict,
-    CoursesPathDict,
-)
+from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
+                                  StructureDict)
 from server.routers.utility import get_core_courses, map_suppressed_errors
-
 
 router = APIRouter(
     prefix="/programs",
@@ -83,7 +68,7 @@ def get_programs() -> dict[str, dict[str, str]]:
     return {
         "programs": {
             "3778": "Computer Science",
-            # "3779": "Advanced Computer Science (Honours)", # TODO: Fix the electives
+            # "3779": "Advanced Computer Science (Honours)",  # TODO: Fix the electives
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",
@@ -344,8 +329,8 @@ def get_gen_eds(
     excluded_courses = excluded_courses if excluded_courses is not None else []
     try:
         geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    except KeyError:
-        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}")
+    except KeyError as err:
+        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}") from err
 
     for course in excluded_courses:
         if course in geneds:
@@ -489,8 +474,8 @@ def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[D
     a full list of edges of form.
     [
         {
-            "source": (str) - course_code, # This is the 'original' value
-            "target": (str) - course_code, # This is the value of 'courses'
+            "source": (str) - course_code,  # This is the 'original' value
+            "target": (str) - course_code,  # This is the value of 'courses'
         }
     ]
     Effectively, turning an adjacency list into a flat list of edges
@@ -514,4 +499,3 @@ def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[st
     Remove edges between vertices that are not in the list of courses provided.
     """
     return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
-

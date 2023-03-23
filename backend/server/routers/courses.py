@@ -1,25 +1,23 @@
 """
 APIs for the /courses/ route.
 """
-from contextlib import suppress
 import pickle
 import re
+from contextlib import suppress
 from typing import Dict, List, Mapping, Optional, Set, Tuple
-from algorithms.objects.program_restrictions import NoRestriction
+
+from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
+from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
-from fuzzywuzzy import fuzz # type: ignore
+from fuzzywuzzy import fuzz  # type: ignore
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
-                                  CourseDetails, CoursesState, CoursesPath,
-                                  CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
-                                  UserData, TermsOffered, CoursesPathDict)
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
+                                  CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
+                                  TermsOffered, UserData)
 from server.routers.utility import get_core_courses, map_suppressed_errors
-from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
-from algorithms.objects.program_restrictions import ProgramRestriction
-
 
 router = APIRouter(
     prefix="/courses",
@@ -148,7 +146,7 @@ def get_course(courseCode: str) -> Dict:
     Get info about a course given its courseCode
     - start with the current database
     - if not found, check the archives
-    """ 
+    """
     result = coursesCOL.find_one({"code": courseCode})
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
@@ -558,7 +556,7 @@ def is_course_unlocked(course: str, user: User) -> Tuple[bool, List[str]]:
     program_restriction = get_program_restriction(user.program) or NoRestriction()
     program_result = program_restriction.validate_course_allowed(user, course)
 
-    return (course_result and program_result), (course_warnings + program_warnings),
+    return (course_result and program_result), (course_warnings + program_warnings)
 
 def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
     """ Gives the course a weighting based on the relevance to the search """

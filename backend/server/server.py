@@ -2,11 +2,10 @@
 Configure the FastAPI server
 """
 
+from data.config import LIVE_YEAR
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from data.config import LIVE_YEAR
-
-from server.routers import courses, planner, programs, specialisations, auth, user, followups
+from server.routers import auth, courses, followups, planner, programs, specialisations, user
 
 app = FastAPI()
 
