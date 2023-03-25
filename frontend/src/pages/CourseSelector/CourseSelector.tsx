@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Structure } from 'types/api';
+import { CourseDescInfoResCache } from 'types/courseDescription';
 import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
@@ -23,6 +24,7 @@ const CourseSelector = () => {
 
   const dispatch = useDispatch();
 
+  const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
   const courseCode = tabs[active];
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const CourseSelector = () => {
               <CourseDescriptionPanel
                 courseCode={courseCode}
                 onCourseClick={(code) => dispatch(addTab(code))}
+                courseDescInfoCache={courseDescInfoCache}
               />
             </div>
           ) : (
