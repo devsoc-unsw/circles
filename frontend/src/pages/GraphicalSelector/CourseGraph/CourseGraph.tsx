@@ -6,7 +6,7 @@ import {
   ZoomInOutlined,
   ZoomOutOutlined
 } from '@ant-design/icons';
-import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
+import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
@@ -16,7 +16,14 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
-import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
+import {
+  defaultEdge,
+  defaultNode,
+  mapNodeStyle,
+  nodeLabelHoverStyle,
+  nodeLabelUnhoverStyle,
+  nodeStateStyles
+} from './graph';
 import S from './styles';
 
 type Props = {
@@ -27,6 +34,8 @@ type Props = {
 };
 
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const previousTheme = useRef<typeof theme>(theme);
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
   const { degree, planner } = useSelector((state: RootState) => state);
@@ -39,6 +48,23 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const addHoverStyles = (ev: IG6GraphEvent) => {
+      const node = ev.item as Item;
+      graphRef.current?.setItemState(node, 'hover', true);
+      graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID()));
+      graphRef.current?.paint();
+    };
+
+    const addUnhoverStyles = (ev: IG6GraphEvent) => {
+      const node = ev.item as Item;
+      graphRef.current?.clearItemStates(node, 'hover');
+      graphRef.current?.updateItem(
+        node,
+        nodeLabelUnhoverStyle(node.getID(), plannedCourses, theme)
+      );
+      graphRef.current?.paint();
+    };
+
     // courses is a list of course codes
     const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
       const container = containerRef.current;
@@ -69,14 +95,14 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           easing: 'easeQuadInOut' // String, the easing function
         },
         defaultNode,
-        defaultEdge: defaultEdge(Arrow),
+        defaultEdge: defaultEdge(Arrow, theme),
         nodeStateStyles
       };
 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
+        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses, theme)),
         edges: courseEdges
       };
 
@@ -90,13 +116,11 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
 
       graphRef.current.on('node:mouseenter', async (ev) => {
-        const node = ev.item as Item;
-        graphRef.current?.setItemState(node, 'hover', true);
+        addHoverStyles(ev);
       });
 
       graphRef.current.on('node:mouseleave', async (ev) => {
-        const node = ev.item as Item;
-        graphRef.current?.clearItemStates(node, 'hover');
+        addUnhoverStyles(ev);
       });
     };
 
@@ -113,8 +137,34 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       }
     };
 
+    // Update styling for: each node, hovering state and edges
+    const repaintCanvas = async () => {
+      if (graphRef.current) {
+        const nodes = graphRef.current.getNodes();
+        nodes.map((n) =>
+          graphRef.current?.updateItem(n, mapNodeStyle(n.getID(), plannedCourses, theme))
+        );
+
+        graphRef.current.on('node:mouseenter', async (ev) => {
+          addHoverStyles(ev);
+        });
+        graphRef.current.on('node:mouseleave', async (ev) => {
+          addUnhoverStyles(ev);
+        });
+
+        const { Arrow } = await import('@antv/g6');
+        const edges = graphRef.current.getEdges();
+        edges.map((e) => graphRef.current?.updateItem(e, defaultEdge(Arrow, theme)));
+        graphRef.current.paint();
+      }
+    };
+
     if (!graphRef.current) setupGraph();
-  }, [onNodeClick, plannedCourses, programCode, specs]);
+    if (previousTheme.current !== theme) {
+      previousTheme.current = theme;
+      repaintCanvas();
+    }
+  }, [onNodeClick, plannedCourses, programCode, specs, theme]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;

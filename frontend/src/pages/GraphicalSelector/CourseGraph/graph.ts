@@ -65,19 +65,7 @@ const nodeStateStyles = {
   }
 };
 
-const nodeLabelHoverStyle = (courseCode: string, plannedCourses: Record<string, PlannerCourse>) => {
-  if (plannedCourses[courseCode]) {
-    // uses default node style
-    return {
-      id: courseCode,
-      label: courseCode,
-      labelCfg: {
-        style: {
-          fill: '#fff'
-        }
-      }
-    };
-  }
+const nodeLabelHoverStyle = (courseCode: string) => {
   return {
     id: courseCode,
     label: courseCode,
