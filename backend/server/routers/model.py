@@ -189,6 +189,7 @@ class PlannerLocalStorage(TypedDict):
     startYear: int
     isSummerEnabled: bool
     years: list[dict[str, list[str]]]
+    # todo: give `dict` its own params
     courses: dict[str, dict]
 
 class CoursesStorage(TypedDict):

@@ -4,11 +4,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
-import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
+import { JSONPlanner, Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import {
-  addToUnplanned,
   moveCourse,
   setUnplannedCourseToTerm,
   toggleSummer,
@@ -26,6 +25,15 @@ const ImportPlannerMenu = () => {
 
   const upload = () => {
     inputRef.current?.click();
+  };
+
+  const handleAddToUnplanned = async (code: string) => {
+    try {
+      await axios.post('planner/addToUnplanned', { courseCode: code }, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleAddToUnplanned: ', err);
+    }
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,25 +106,9 @@ const ImportPlannerMenu = () => {
             Object.entries(year).forEach(([term, termCourses]) => {
               termCourses.forEach(async (code, index) => {
                 const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
-                const courseData: PlannerCourse = {
-                  title: course.title,
-                  termsOffered: course.terms,
-                  UOC: course.UOC,
-                  plannedFor: null,
-                  prereqs: course.raw_requirements,
-                  isLegacy: course.is_legacy,
-                  isUnlocked: true,
-                  warnings: [],
-                  handbookNote: course.handbook_note,
-                  isAccurate: course.is_accurate,
-                  isMultiterm: course.is_multiterm,
-                  supressed: false,
-                  mark: undefined
-                };
-
                 if (plannedCourses.indexOf(course.code) === -1) {
                   plannedCourses.push(course.code);
-                  dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+                  handleAddToUnplanned(course.code);
                   const destYear = Number(yearIndex) + Number(planner.startYear);
                   const destTerm = term as Term;
                   const destRow = destYear - planner.startYear;

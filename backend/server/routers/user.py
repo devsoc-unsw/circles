@@ -6,8 +6,8 @@ from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
 from fastapi import APIRouter
 from server.config import DUMMY_TOKEN
+from server.routers.model import CourseMark, CoursesStorage, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
-from server.routers.model import CourseMark, LocalStorage, PlannerLocalStorage, Storage
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
 
@@ -39,7 +39,7 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     planned: list[str] = sum((sum(year.values(), [])
                              for year in localStorage.planner['years']), [])
     unplanned: list[str] = localStorage.planner['unplanned']
-    courses = {
+    courses: dict[str, CoursesStorage] = {
         course: {
             'code': course,
             # this is peter's fault for sucking at spelling
@@ -50,13 +50,12 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     }
     # cancer, but the FE inspired this cancer
     real_planner = localStorage.planner.copy()
-    real_planner.pop('courses')  # type: ignore
-    item = {
+    item: Storage = {
         'degree': localStorage.degree,
         'planner': real_planner,
         'courses': courses
     }
-    set_user(token, cast(Storage, item))
+    set_user(token, item)
 
 
 @router.get("/data/{token}")
@@ -217,3 +216,4 @@ def reset(token: str = DUMMY_TOKEN):
         'courses': {}
     }
     set_user(token, user, True)
+    
