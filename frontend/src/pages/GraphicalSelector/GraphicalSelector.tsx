@@ -22,11 +22,21 @@ import {
   ZOOM_IN_RATIO,
   ZOOM_OUT_RATIO
 } from './constants';
-import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
+import {
+  defaultEdge,
+  defaultNode,
+  mapNodeStyle,
+  nodeLabelHoverStyle,
+  nodeLabelUnhoverStyle,
+  nodeStateStyles
+} from './graph';
 import HowToUse from './HowToUse';
 import S from './styles';
 
 const GraphicalSelector = () => {
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const previousTheme = useRef<typeof theme>(theme);
+  const storedEdges = useRef<CourseEdge[] | null>(null);
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
   const { degree, planner } = useSelector((state: RootState) => state);
@@ -71,14 +81,14 @@ const GraphicalSelector = () => {
           easing: 'easeQuadInOut' // String, the easing function
         },
         defaultNode,
-        defaultEdge: defaultEdge(Arrow),
+        defaultEdge: defaultEdge(Arrow, theme),
         nodeStateStyles
       };
 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
+        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses, theme)),
         edges: courseEdges
       };
 
@@ -126,11 +136,24 @@ const GraphicalSelector = () => {
       graphRef.current.on('node:mouseenter', async (ev) => {
         const node = ev.item as Item;
         graphRef.current?.setItemState(node, 'hover', true);
+        // Additional styles for the label
+        graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID(), plannedCourses));
+        graphRef.current?.paint();
+        // const node2 = node as INode;
+        // const edges = node2.getInEdges();
+        // console.log(edges);
+        // graphRef.current?.setItemState(edges[0], 'hover', true);
       });
 
       graphRef.current.on('node:mouseleave', async (ev) => {
         const node = ev.item as Item;
         graphRef.current?.clearItemStates(node, 'hover');
+        // Additional styles for the label
+        graphRef.current?.updateItem(
+          node,
+          nodeLabelUnhoverStyle(node.getID(), plannedCourses, theme)
+        );
+        graphRef.current?.paint();
       });
     };
 
@@ -140,6 +163,7 @@ const GraphicalSelector = () => {
           `/programs/graph/${programCode}/${specs.join('+')}`
         );
         const { edges, courses } = res.data;
+        storedEdges.current = edges;
         if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -148,7 +172,15 @@ const GraphicalSelector = () => {
     };
 
     if (!graphRef.current) setupGraph();
-  }, [plannedCourses, programCode, specs]);
+    if (previousTheme.current !== theme) {
+      previousTheme.current = theme;
+      console.log('theme changed!');
+      // repaintCanvas();
+      if (graphRef.current) {
+        console.log(storedEdges.current);
+      }
+    }
+  }, [plannedCourses, programCode, specs, theme]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
