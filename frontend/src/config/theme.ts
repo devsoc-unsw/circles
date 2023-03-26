@@ -312,6 +312,9 @@ export const lightTheme: DefaultTheme = {
   courseDescription: {
     paddingColor: '#d9d9d9'
   },
+  collapseBtnIcon: {
+    color: '#000'
+  },
   quickAddRemoveBtn: {
     addBackgroundColor: '#fafafa',
     removeBackgroundColor: '#fafafa',
@@ -355,7 +358,7 @@ export const darkTheme: DefaultTheme = {
     backgroundColor: '#1D1F20'
   },
   courseTag: {
-    backgroundColor: '#9254de'
+    backgroundColor: '#444'
   },
 
   draggableTab: {
@@ -447,6 +450,9 @@ export const darkTheme: DefaultTheme = {
   },
   courseDescription: {
     paddingColor: '#444249'
+  },
+  collapseBtnIcon: {
+    color: '#f1f1f1'
   },
   quickAddRemoveBtn: {
     addBackgroundColor: '#262626',

@@ -120,6 +120,9 @@ declare module 'styled-components' {
     courseDescription: {
       paddingColor: string;
     };
+    collapseBtnIcon: {
+      color: string;
+    }
     quickAddRemoveBtn: {
       addBackgroundColor: string;
       removeBackgroundColor: string;

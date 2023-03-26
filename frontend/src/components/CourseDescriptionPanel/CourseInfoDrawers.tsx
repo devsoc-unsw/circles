@@ -37,14 +37,12 @@ const CourseInfoDrawers = ({
   const inPlanner = planner.courses[course.code];
 
   return (
-    <div>
+    <div className="course-info-drawers">
       <Collapsible title="Overview">
-        {/* eslint-disable-next-line react/no-danger */}
-        <p dangerouslySetInnerHTML={{ __html: course?.description || 'None' }} />
+        <S.TextBlock>{course?.description ? course?.description : 'None'}</S.TextBlock>
       </Collapsible>
       <Collapsible title="Requirements">
-        {/* eslint-disable-next-line react/no-danger */}
-        <p dangerouslySetInnerHTML={{ __html: course?.raw_requirements || 'None' }} />
+        <S.TextBlock>{course?.raw_requirements ? course?.raw_requirements : 'None'}</S.TextBlock>
       </Collapsible>
       <Collapsible title="Course Prerequisites">
         {!!pathFrom.length && !isUnlocked ? (

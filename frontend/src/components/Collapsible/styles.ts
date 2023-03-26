@@ -23,6 +23,7 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
   padding: 10px;
   transition: 200ms;
   transform: rotate(90deg);
+  color: ${({ theme }) => theme.collapseBtnIcon.color};
 
   ${({ collapsed }) =>
     collapsed &&
