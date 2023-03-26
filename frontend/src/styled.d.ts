@@ -125,6 +125,13 @@ declare module 'styled-components' {
       removeBackgroundColor: string;
       addBorderColor: string;
     };
+    graph: {
+      backgroundColor: string;
+      borderColor: string;
+      tabColor: string;
+      tabBottomBorderColor: string;
+      tabTextColor: string;
+    };
     genericButton: {
       backgroundColor: string;
       borderColor: string;

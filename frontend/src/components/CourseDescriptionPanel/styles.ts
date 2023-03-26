@@ -1,4 +1,7 @@
+import { Typography } from 'antd';
 import styled, { css } from 'styled-components';
+
+const { Text } = Typography;
 
 const Wrapper = styled.div<{ sidebar?: boolean }>`
   width: 100%;
@@ -34,9 +37,15 @@ const TitleWrapper = styled.div<{ sidebar?: boolean }>`
     `}
 `;
 
+const TextBlock = styled(Text)`
+  display: block;
+  color: ${({ theme }) => theme.graph.tabTextColor};
+`;
+
 export default {
   Wrapper,
   MainWrapper,
   SidebarWrapper,
-  TitleWrapper
+  TitleWrapper,
+  TextBlock
 };

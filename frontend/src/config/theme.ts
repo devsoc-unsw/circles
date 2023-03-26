@@ -147,7 +147,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  // Antd popconfirm
+  // Antd popconfirm customisation
   .popconfirm-unplan .ant-popover-inner,
   .popconfirm-unplan .ant-popover-arrow-content:before {
     background-color: ${({ theme }) => theme.popconfirm.backgroundColor};
@@ -162,6 +162,18 @@ export const GlobalStyles = createGlobalStyle`
     &:hover {
       background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
     }  
+  }
+
+  // Antd Tabs customisation
+  .graph-sidebar .ant-tabs-tab {
+    color: ${({ theme }) => theme.graph.tabColor};
+  }
+  .graph-sidebar .ant-tabs-nav::before {
+    border-color: ${({ theme }) => theme.graph.tabBottomBorderColor};
+  }
+  .graph-sidebar .ant-typography.text,
+  .graph-sidebar .ant-typography {
+    color: ${({ theme }) => theme.graph.tabTextColor};
   }
 
   // Scrollbar settings
@@ -305,6 +317,13 @@ export const lightTheme: DefaultTheme = {
     removeBackgroundColor: '#fafafa',
     addBorderColor: '#d9d9d9'
   },
+  graph: {
+    backgroundColor: '#fff',
+    borderColor: '#c2c2c2',
+    tabColor: '#666',
+    tabBottomBorderColor: '#f0f0f0',
+    tabTextColor: '#000'
+  },
   genericButton: {
     backgroundColor: '#fff',
     borderColor: '#cecece',
@@ -433,6 +452,13 @@ export const darkTheme: DefaultTheme = {
     addBackgroundColor: '#262626',
     removeBackgroundColor: '#262626',
     addBorderColor: '#707070'
+  },
+  graph: {
+    backgroundColor: '#1d1f20',
+    borderColor: '#5d5d5d',
+    tabColor: '#fff',
+    tabBottomBorderColor: '#5d5d5d',
+    tabTextColor: '#f1f1f1'
   },
   genericButton: {
     backgroundColor: '#444249',

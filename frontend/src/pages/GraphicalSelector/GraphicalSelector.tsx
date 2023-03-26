@@ -4,6 +4,7 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import SidebarDrawer from 'components/SidebarDrawer';
 import { CourseDescInfoResCache } from '../../types/courseDescription';
+import CS from './common/styles';
 import { COURSE_INFO_TAB, HELP_TAB, PROGRAM_STRUCTURE_TAB } from './constants';
 import CourseGraph from './CourseGraph';
 import HowToUse from './HowToUse';
@@ -27,10 +28,14 @@ const GraphicalSelector = () => {
           courseDescInfoCache={courseDescInfoCache}
         />
       ) : (
-        'No course selected'
+        <CS.TextWrapper>No course selected</CS.TextWrapper>
       )
     },
-    { label: 'Program Structure', key: PROGRAM_STRUCTURE_TAB, children: 'Program Structure' },
+    {
+      label: 'Program Structure',
+      key: PROGRAM_STRUCTURE_TAB,
+      children: <CS.TextWrapper>Program Structure</CS.TextWrapper>
+    },
     { label: 'Help', key: HELP_TAB, children: <HowToUse /> }
   ];
 
@@ -58,7 +63,12 @@ const GraphicalSelector = () => {
         </S.GraphWrapper>
         {!fullscreen && (
           <S.SidebarWrapper>
-            <Tabs items={items} activeKey={activeTab} onChange={setActiveTab} />
+            <Tabs
+              items={items}
+              activeKey={activeTab}
+              onChange={setActiveTab}
+              className="graph-sidebar"
+            />
           </S.SidebarWrapper>
         )}
       </S.Wrapper>
