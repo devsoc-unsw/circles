@@ -1,4 +1,5 @@
 // import original module declarations
+import { StringGradients } from 'antd/lib/progress/progress';
 import 'styled-components';
 
 // and extend them!
@@ -123,6 +124,11 @@ declare module 'styled-components' {
       addBackgroundColor: string;
       removeBackgroundColor: string;
       addBorderColor: string;
+    };
+    genericButton: {
+      backgroundColor: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
     };
     bugIcon: {
       backgroundColor: string;

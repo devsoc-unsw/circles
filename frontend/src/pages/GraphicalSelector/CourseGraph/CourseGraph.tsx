@@ -7,7 +7,7 @@ import {
   ZoomOutOutlined
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
-import { Button, Switch } from 'antd';
+import { Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
@@ -260,9 +260,9 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
             checked={!unlockedCourses}
             onChange={() => setUnlockedCourses((prevState) => !prevState)}
           />
-          <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
-          <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
-          <Button
+          <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
+          <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
+          <S.Button
             onClick={handleToggleFullscreen}
             icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
           />

@@ -67,7 +67,6 @@ const ButtonWrapper = styled.div`
   position: absolute;
   left: -2rem;
   top: 30%;
-  background-color: white;
 
   border-radius: 10px 0 0 10px;
   cursor: pointer;
@@ -76,8 +75,14 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  :hover {
-    background: #f0f0f0;
+  background-color: ${({ theme }) => theme.optionsHeader.buttonBackgroundColor};
+  color: ${({ theme }) => theme.text};
+  border-color: ${({ theme }) => theme.optionsHeader.borderAlternativeColor};
+  &:hover {
+    background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
+  }
+  &:focus {
+    background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
   }
 `;
 

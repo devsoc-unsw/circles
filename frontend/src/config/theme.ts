@@ -305,6 +305,11 @@ export const lightTheme: DefaultTheme = {
     removeBackgroundColor: '#fafafa',
     addBorderColor: '#d9d9d9'
   },
+  genericButton: {
+    backgroundColor: '#fff',
+    borderColor: '#cecece',
+    hoverBackgroundColor: '#fff'
+  },
   bugIcon: {
     backgroundColor: '#fff',
     borderColor: '#d9d9d9',
@@ -428,6 +433,11 @@ export const darkTheme: DefaultTheme = {
     addBackgroundColor: '#262626',
     removeBackgroundColor: '#262626',
     addBorderColor: '#707070'
+  },
+  genericButton: {
+    backgroundColor: '#444249',
+    borderColor: '#7b7481',
+    hoverBackgroundColor: '#343239'
   },
   bugIcon: {
     backgroundColor: '#444249',
