@@ -134,6 +134,12 @@ declare module 'styled-components' {
       tabColor: string;
       tabBottomBorderColor: string;
       tabTextColor: string;
+      tabBoxShadow?: string;
+    };
+    sidebarDrawer: {
+      backgroundColor: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
     };
     genericButton: {
       backgroundColor: string;

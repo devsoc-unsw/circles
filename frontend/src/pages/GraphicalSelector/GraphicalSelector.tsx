@@ -57,7 +57,12 @@ const GraphicalSelector = () => {
           </S.SearchBarWrapper>
           {fullscreen && (
             <SidebarDrawer>
-              <Tabs items={items} activeKey={activeTab} onChange={setActiveTab} />
+              <Tabs
+                items={items}
+                activeKey={activeTab}
+                onChange={setActiveTab}
+                className="graph-sidebar-fullscreen"
+              />
             </SidebarDrawer>
           )}
         </S.GraphWrapper>

@@ -24,7 +24,7 @@ const Wrapper = styled.div<{ open?: boolean }>`
 
   top: 5rem;
 
-  background-color: white;
+  background-color: ${({ theme }) => theme.sidebarDrawer.backgroundColor};
   border-radius: 10px 0 0 10px;
   filter: drop-shadow(-2px 2px 4px rgba(0, 0, 0, 0.3));
 
@@ -55,6 +55,7 @@ const ChildrenWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 12px 20px;
+  background-color: ${({ theme }) => theme.sidebarDrawer.backgroundColor};
 
   overflow-y: auto;
   overflow-x: hidden;
@@ -75,14 +76,14 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme }) => theme.optionsHeader.buttonBackgroundColor};
+  background-color: ${({ theme }) => theme.sidebarDrawer.backgroundColor};
   color: ${({ theme }) => theme.text};
-  border-color: ${({ theme }) => theme.optionsHeader.borderAlternativeColor};
+  border-color: ${({ theme }) => theme.sidebarDrawer.borderColor};
   &:hover {
-    background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
+    background-color: ${({ theme }) => theme.sidebarDrawer.hoverBackgroundColor};
   }
   &:focus {
-    background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
+    background-color: ${({ theme }) => theme.sidebarDrawer.hoverBackgroundColor};
   }
 `;
 

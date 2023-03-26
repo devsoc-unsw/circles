@@ -165,15 +165,29 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   // Antd Tabs customisation
-  .graph-sidebar .ant-tabs-tab {
+  .graph-sidebar .ant-tabs-tab,
+  .graph-sidebar-fullscreen .ant-tabs-tab {
     color: ${({ theme }) => theme.graph.tabColor};
   }
-  .graph-sidebar .ant-tabs-nav::before {
+  .graph-sidebar .ant-tabs-nav::before, 
+  .graph-sidebar-fullscreen .ant-tabs-nav::before {
     border-color: ${({ theme }) => theme.graph.tabBottomBorderColor};
   }
   .graph-sidebar .ant-typography.text,
-  .graph-sidebar .ant-typography {
+  .graph-sidebar .ant-typography,
+  .graph-sidebar-fullscreen .ant-typography.text,
+  .graph-sidebar-fullscreen .ant-typography {
     color: ${({ theme }) => theme.graph.tabTextColor};
+  }
+  .graph-sidebar .ant-tabs-nav-wrap-ping-left::before,
+  .graph-sidebar .ant-tabs-nav-wrap-ping-left::after,
+  .graph-sidebar .ant-tabs-nav-wrap-ping-right::before,
+  .graph-sidebar .ant-tabs-nav-wrap-ping-right::after,
+  .graph-sidebar-fullscreen .ant-tabs-nav-wrap-ping-left::before,
+  .graph-sidebar-fullscreen .ant-tabs-nav-wrap-ping-left::after,
+  .graph-sidebar-fullscreen .ant-tabs-nav-wrap-ping-right::before,
+  .graph-sidebar-fullscreen .ant-tabs-nav-wrap-ping-right::after {
+    box-shadow: ${({ theme }) => theme.graph?.tabBoxShadow} !important;
   }
 
   // Scrollbar settings
@@ -327,6 +341,11 @@ export const lightTheme: DefaultTheme = {
     tabBottomBorderColor: '#f0f0f0',
     tabTextColor: '#000'
   },
+  sidebarDrawer: {
+    backgroundColor: '#fff',
+    borderColor: '#cecece',
+    hoverBackgroundColor: '#fff'
+  },
   genericButton: {
     backgroundColor: '#fff',
     borderColor: '#cecece',
@@ -464,7 +483,13 @@ export const darkTheme: DefaultTheme = {
     borderColor: '#5d5d5d',
     tabColor: '#fff',
     tabBottomBorderColor: '#5d5d5d',
-    tabTextColor: '#f1f1f1'
+    tabTextColor: '#f1f1f1',
+    tabBoxShadow: 'inset 16px 0 8px -8px rgba(255, 255, 255, 0.08)'
+  },
+  sidebarDrawer: {
+    backgroundColor: '#343239',
+    borderColor: '#6b6471',
+    hoverBackgroundColor: '#242229'
   },
   genericButton: {
     backgroundColor: '#444249',
