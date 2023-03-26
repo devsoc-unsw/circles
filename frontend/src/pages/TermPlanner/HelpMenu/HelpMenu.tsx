@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
-import additionalOptionsGif from 'assets/TermPlannerHelp/additional-options.gif';
-import additionalOptionsPic from 'assets/TermPlannerHelp/additional-options.jpg';
-import dragAndDropGif from 'assets/TermPlannerHelp/drag-and-drop.gif';
-import dragAndDropPic from 'assets/TermPlannerHelp/drag-and-drop.jpg';
-import hideYearGif from 'assets/TermPlannerHelp/hide-year.gif';
-import hideYearPic from 'assets/TermPlannerHelp/hide-year.jpg';
-import unscheduleGif from 'assets/TermPlannerHelp/unschedule.gif';
-import unschedulePic from 'assets/TermPlannerHelp/unschedule.jpg';
+import { useSelector } from 'react-redux';
+import additionalOptionsGifDark from 'assets/TermPlannerHelp/additional-options-dark.gif';
+import additionalOptionsPicDark from 'assets/TermPlannerHelp/additional-options-dark.jpg';
+import additionalOptionsGifLight from 'assets/TermPlannerHelp/additional-options-light.gif';
+import additionalOptionsPicLight from 'assets/TermPlannerHelp/additional-options-light.jpg';
+import dragAndDropGifDark from 'assets/TermPlannerHelp/drag-and-drop-dark.gif';
+import dragAndDropPicDark from 'assets/TermPlannerHelp/drag-and-drop-dark.jpg';
+import dragAndDropGifLight from 'assets/TermPlannerHelp/drag-and-drop-light.gif';
+import dragAndDropPicLight from 'assets/TermPlannerHelp/drag-and-drop-light.jpg';
+import hideYearGifDark from 'assets/TermPlannerHelp/hide-year-dark.gif';
+import hideYearPicDark from 'assets/TermPlannerHelp/hide-year-dark.jpg';
+import hideYearGifLight from 'assets/TermPlannerHelp/hide-year-light.gif';
+import hideYearPicLight from 'assets/TermPlannerHelp/hide-year-light.jpg';
+import unscheduleGifDark from 'assets/TermPlannerHelp/unschedule-dark.gif';
+import unschedulePicDark from 'assets/TermPlannerHelp/unschedule-dark.jpg';
+import unscheduleGifLight from 'assets/TermPlannerHelp/unschedule-light.gif';
+import unschedulePicLight from 'assets/TermPlannerHelp/unschedule-light.jpg';
+import type { RootState } from 'config/store';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -36,29 +46,30 @@ const HelpStep = ({ title, gif, pic, altText }: HelpStepProps) => {
 };
 
 const HelpMenu = () => {
+  const { theme } = useSelector((state: RootState) => state.settings);
   const helpSteps = [
     {
       title: '1. Drag and Drop Courses',
-      pic: dragAndDropPic,
-      gif: dragAndDropGif,
+      pic: theme === 'light' ? dragAndDropPicLight : dragAndDropPicDark,
+      gif: theme === 'light' ? dragAndDropGifLight : dragAndDropGifDark,
       altText: 'drag and drop walkthrough'
     },
     {
       title: '2. Right Click Courses for More Actions',
-      pic: unschedulePic,
-      gif: unscheduleGif,
+      pic: theme === 'light' ? unschedulePicLight : unschedulePicDark,
+      gif: theme === 'light' ? unscheduleGifLight : unscheduleGifDark,
       altText: 'context menu walkthrough'
     },
     {
       title: '3. Hide Year',
-      pic: hideYearPic,
-      gif: hideYearGif,
+      pic: theme === 'light' ? hideYearPicLight : hideYearPicDark,
+      gif: theme === 'light' ? hideYearGifLight : hideYearGifDark,
       altText: 'hide year walkthrough'
     },
     {
       title: '4. Additional Features',
-      pic: additionalOptionsPic,
-      gif: additionalOptionsGif,
+      pic: theme === 'light' ? additionalOptionsPicLight : additionalOptionsPicDark,
+      gif: theme === 'light' ? additionalOptionsGifLight : additionalOptionsGifDark,
       altText: 'additional options walkthrough'
     }
   ];
