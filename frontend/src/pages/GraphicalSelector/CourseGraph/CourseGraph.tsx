@@ -18,7 +18,6 @@ import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
   defaultEdge,
-  defaultNode,
   edgeHoverStyle,
   edgeOpacity,
   edgeUnhoverStyle,
@@ -26,7 +25,8 @@ import {
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
-  nodeStateStyles
+  nodeStateStyles,
+  plannedNode
 } from './graph';
 import S from './styles';
 
@@ -74,13 +74,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
           e.toFront();
         });
-
         // Target node and neighbouring nodes remain visible
         node.toFront();
         graphRef.current?.updateItem(node as Item, mapNodeOpacity(node.getID(), 1));
         neighbours.forEach((n) => {
           graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
           n.toFront();
+          console.log(n);
         });
       } else {
         edges.forEach((e) => {
@@ -148,7 +148,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           easing: 'easeQuadInOut' // String, the easing function
         },
         groupByTypes: false,
-        defaultNode,
+        defaultNode: plannedNode,
         defaultEdge: defaultEdge(Arrow, theme),
         nodeStateStyles
       };

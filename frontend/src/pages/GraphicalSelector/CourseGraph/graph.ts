@@ -1,7 +1,7 @@
 import type { Arrow } from '@antv/g6';
 import { PlannerCourse } from 'types/planner';
 
-const defaultNode = {
+const plannedNode = {
   size: 70,
   style: {
     fill: '#9254de',
@@ -14,6 +14,37 @@ const defaultNode = {
       fontFamily: 'Arial',
       cursor: 'pointer'
     }
+  }
+};
+
+const lockedNode = (courseCode: string, theme: string) => ({
+  id: courseCode,
+  label: courseCode,
+  style: {
+    fill: theme === 'light' ? '#fff' : '#000',
+    stroke: theme === 'light' ? '#9254de' : '#d7b7fd'
+  },
+  labelCfg: {
+    style: {
+      fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+    }
+  }
+});
+
+// To keep style the same, only return the ID
+const unchangedNode = (courseCode: string) => ({
+  id: courseCode,
+  label: courseCode
+});
+
+const nodeStateStyles = {
+  hover: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
+  },
+  click: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
   }
 };
 
@@ -47,30 +78,14 @@ const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
   };
 };
 
-// plannedCourses is an object of with keys of courseCodes
 const mapNodeStyle = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
   theme: string
 ) => {
-  // determine if planned or unplanned
-  if (plannedCourses[courseCode]) {
-    // uses default node style
-    return { id: courseCode, label: courseCode };
-  }
-  return {
-    id: courseCode,
-    label: courseCode,
-    style: {
-      fill: theme === 'light' ? '#fff' : '#000',
-      stroke: theme === 'light' ? '#9254de' : '#d7b7fd'
-    },
-    labelCfg: {
-      style: {
-        fill: theme === 'light' ? '#9254de' : '#d7b7fd'
-      }
-    }
-  };
+  // If planned, keep default styling
+  if (plannedCourses[courseCode]) return unchangedNode(courseCode);
+  return lockedNode(courseCode, theme);
 };
 
 const mapNodeOpacity = (courseCode: string, opacity: number) => {
@@ -95,17 +110,6 @@ const edgeOpacity = (id: string, opacity: number) => {
       opacity
     }
   };
-};
-
-const nodeStateStyles = {
-  hover: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
-  },
-  click: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
-  }
 };
 
 const nodeLabelHoverStyle = (courseCode: string) => {
@@ -150,7 +154,6 @@ const nodeLabelUnhoverStyle = (
 
 export {
   defaultEdge,
-  defaultNode,
   edgeHoverStyle,
   edgeOpacity,
   edgeUnhoverStyle,
@@ -158,5 +161,6 @@ export {
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
-  nodeStateStyles
+  nodeStateStyles,
+  plannedNode
 };
