@@ -28,6 +28,25 @@ const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
   }
 });
 
+const edgeHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+  id,
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#999' : '#aaa',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#999' : '#aaa'
+  }
+});
+
+const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
+  return {
+    id,
+    ...defaultEdge(arrow, theme)
+  };
+};
+
 // plannedCourses is an object of with keys of courseCodes
 const mapNodeStyle = (
   courseCode: string,
@@ -50,6 +69,30 @@ const mapNodeStyle = (
       style: {
         fill: theme === 'light' ? '#9254de' : '#d7b7fd'
       }
+    }
+  };
+};
+
+const mapNodeOpacity = (courseCode: string, opacity: number) => {
+  return {
+    id: courseCode,
+    label: courseCode,
+    style: {
+      opacity
+    },
+    labelCfg: {
+      style: {
+        opacity
+      }
+    }
+  };
+};
+
+const edgeOpacity = (id: string, opacity: number) => {
+  return {
+    id,
+    style: {
+      opacity
     }
   };
 };
@@ -108,6 +151,10 @@ const nodeLabelUnhoverStyle = (
 export {
   defaultEdge,
   defaultNode,
+  edgeHoverStyle,
+  edgeOpacity,
+  edgeUnhoverStyle,
+  mapNodeOpacity,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,

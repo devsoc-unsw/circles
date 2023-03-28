@@ -19,6 +19,10 @@ import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
   defaultEdge,
   defaultNode,
+  edgeHoverStyle,
+  edgeOpacity,
+  edgeUnhoverStyle,
+  mapNodeOpacity,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
@@ -48,13 +52,61 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // On hover: add styles to adjacent nodes
+    const adjacentStyles = async (nodeItem: Item, action: string) => {
+      const node = nodeItem as INode;
+      const edges = node.getEdges();
+      const neighbours = node.getNeighbors();
+      const opacity = theme === 'light' ? 0.3 : 0.5;
+      const { Arrow } = await import('@antv/g6');
+      if (action === 'add') {
+        // Every other node and edge becomes less visible
+        graphRef.current?.getNodes().forEach((n) => {
+          graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
+          n.getEdges().forEach((e) => {
+            graphRef.current?.updateItem(e, edgeOpacity(e.getID(), opacity));
+          });
+          n.toBack();
+        });
+        // Highlight node's edges
+        edges.forEach((e) => {
+          graphRef.current?.updateItem(e, edgeHoverStyle(Arrow, theme, e.getID()));
+          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+          e.toFront();
+        });
+
+        // Target node and neighbouring nodes remain visible
+        node.toFront();
+        graphRef.current?.updateItem(node as Item, mapNodeOpacity(node.getID(), 1));
+        neighbours.forEach((n) => {
+          graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
+          n.toFront();
+        });
+      } else {
+        edges.forEach((e) => {
+          graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
+        });
+        graphRef.current?.getNodes().forEach((n) => {
+          graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
+          n.toFront();
+        });
+        graphRef.current?.getEdges().forEach((e) => {
+          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        });
+      }
+      graphRef.current?.paint();
+    };
+
+    // On hover: add styles
     const addHoverStyles = (ev: IG6GraphEvent) => {
       const node = ev.item as Item;
       graphRef.current?.setItemState(node, 'hover', true);
       graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID()));
       graphRef.current?.paint();
+      adjacentStyles(node, 'add');
     };
 
+    // On hover: add styles
     const addUnhoverStyles = (ev: IG6GraphEvent) => {
       const node = ev.item as Item;
       graphRef.current?.clearItemStates(node, 'hover');
@@ -63,6 +115,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         nodeLabelUnhoverStyle(node.getID(), plannedCourses, theme)
       );
       graphRef.current?.paint();
+      adjacentStyles(node, 'remove');
     };
 
     // courses is a list of course codes
@@ -94,6 +147,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           duration: 500, // Number, the duration of one animation
           easing: 'easeQuadInOut' // String, the easing function
         },
+        groupByTypes: false,
         defaultNode,
         defaultEdge: defaultEdge(Arrow, theme),
         nodeStateStyles
@@ -160,6 +214,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     if (!graphRef.current) setupGraph();
+    // Repaint canvas when theme is changed without re-render
     if (previousTheme.current !== theme) {
       previousTheme.current = theme;
       repaintCanvas();
