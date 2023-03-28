@@ -37,6 +37,10 @@ type Props = {
   focused?: string;
 };
 
+interface CoursePrerequisite {
+  [key: string]: string[];
+}
+
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);
@@ -49,7 +53,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const initialising = useRef(false); // prevents multiple graphs being loaded
   const [loading, setLoading] = useState(true);
   const [unlockedCourses, setUnlockedCourses] = useState(false);
-  // const [prerequisites, setPrerequisites] = useState({});
+  const [prerequisites, setPrerequisites] = useState({});
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -189,6 +193,18 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
     };
 
+    const makePrerequisitesMap = (edges: CourseEdge[]) => {
+      const prereqs: CoursePrerequisite = prerequisites;
+      edges.forEach((e) => {
+        if (!prereqs[e.target]) {
+          prereqs[e.target] = [e.source];
+        } else {
+          prereqs[e.target].push(e.source);
+        }
+      });
+      setPrerequisites(prereqs);
+    };
+
     const setupGraph = async () => {
       try {
         initialising.current = true;
@@ -196,7 +212,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           `/programs/graph/${programCode}/${specs.join('+')}`
         );
         const { edges, courses } = res.data;
-        console.log(res.data);
+        makePrerequisitesMap(edges);
         if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -232,7 +248,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       previousTheme.current = theme;
       repaintCanvas();
     }
-  }, [onNodeClick, plannedCourses, programCode, specs, theme]);
+  }, [onNodeClick, plannedCourses, programCode, specs, theme, prerequisites]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
