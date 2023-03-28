@@ -51,6 +51,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  const isCoursePrerequisite = (target: INode, neighbour: INode) => {
+    const targetsEdges = target.getInEdges().map((e) => e.getID());
+    const neighboursEdges = neighbour.getOutEdges().map((e) => e.getID());
+    return targetsEdges.some((id) => neighboursEdges.includes(id));
+  };
+
   useEffect(() => {
     // On hover: add styles to adjacent nodes
     const adjacentStyles = async (nodeItem: Item, action: string) => {
@@ -80,7 +86,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         neighbours.forEach((n) => {
           graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
           n.toFront();
-          console.log(n);
+          console.log(isCoursePrerequisite(node, n) ? n.getID() : '');
         });
       } else {
         edges.forEach((e) => {
