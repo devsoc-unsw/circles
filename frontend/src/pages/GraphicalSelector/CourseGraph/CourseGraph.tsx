@@ -53,20 +53,16 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const initialising = useRef(false); // prevents multiple graphs being loaded
   const [loading, setLoading] = useState(true);
   const [unlockedCourses, setUnlockedCourses] = useState(false);
-  const [prerequisites, setPrerequisites] = useState({});
+  const [prerequisites, setPrerequisites] = useState<CoursePrerequisite>({});
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // 1. Use graphData (gets laggy)
-  // 2. CourseDescriptionPanel's call to /courses/getPathFrom (would get laggy)
-  // 3. Rely on courseEdges info, recall it everytime useeffect is called
-  // const isCoursePrerequisite = (target: INode, neighbour: INode) => {
-  //   const targetsEdges = target.getInEdges().map((e) => e.getID());
-  //   const neighboursEdges = neighbour.getOutEdges().map((e) => e.getID());
-  //   return targetsEdges.some((id) => neighboursEdges.includes(id));
-  // };
-
   useEffect(() => {
+    const isCoursePrerequisite = (target: string, neighbour: string) => {
+      const prereqs = prerequisites[target] || [];
+      return prereqs.includes(neighbour);
+    };
+
     // On hover: add styles to adjacent nodes
     const adjacentStyles = async (nodeItem: Item, action: string) => {
       const node = nodeItem as INode;
@@ -95,7 +91,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         neighbours.forEach((n) => {
           graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
           n.toFront();
-          // console.log(isCoursePrerequisite(node, n) ? n.getID() : '');
+          // isCoursePrerequisite(node.getID(), n.getID());
+          console.log(isCoursePrerequisite(node.getID(), n.getID()) ? n.getID() : '');
         });
       } else {
         edges.forEach((e) => {
