@@ -17,9 +17,7 @@ const plannedNode = {
   }
 };
 
-const lockedNode = (courseCode: string, theme: string) => ({
-  id: courseCode,
-  label: courseCode,
+const lockedNode = (theme: string) => ({
   style: {
     fill: theme === 'light' ? '#fff' : '#000',
     stroke: theme === 'light' ? '#9254de' : '#d7b7fd'
@@ -31,8 +29,7 @@ const lockedNode = (courseCode: string, theme: string) => ({
   }
 });
 
-// To keep style the same, only return the ID
-const unchangedNode = (courseCode: string) => ({
+const sameNode = (courseCode: string) => ({
   id: courseCode,
   label: courseCode
 });
@@ -83,9 +80,9 @@ const mapNodeStyle = (
   plannedCourses: Record<string, PlannerCourse>,
   theme: string
 ) => {
-  // If planned, keep default styling
-  if (plannedCourses[courseCode]) return unchangedNode(courseCode);
-  return lockedNode(courseCode, theme);
+  // If planned, keep default styling. Otherwise apply lockedNode styling.
+  if (plannedCourses[courseCode]) return sameNode(courseCode);
+  return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
 const mapNodeOpacity = (courseCode: string, opacity: number) => {
