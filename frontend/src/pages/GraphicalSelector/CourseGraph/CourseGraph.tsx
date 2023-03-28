@@ -46,16 +46,21 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
+  const initialising = useRef(false); // prevents multiple graphs being loaded
   const [loading, setLoading] = useState(true);
   const [unlockedCourses, setUnlockedCourses] = useState(false);
+  // const [prerequisites, setPrerequisites] = useState({});
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const isCoursePrerequisite = (target: INode, neighbour: INode) => {
-    const targetsEdges = target.getInEdges().map((e) => e.getID());
-    const neighboursEdges = neighbour.getOutEdges().map((e) => e.getID());
-    return targetsEdges.some((id) => neighboursEdges.includes(id));
-  };
+  // 1. Use graphData (gets laggy)
+  // 2. CourseDescriptionPanel's call to /courses/getPathFrom (would get laggy)
+  // 3. Rely on courseEdges info, recall it everytime useeffect is called
+  // const isCoursePrerequisite = (target: INode, neighbour: INode) => {
+  //   const targetsEdges = target.getInEdges().map((e) => e.getID());
+  //   const neighboursEdges = neighbour.getOutEdges().map((e) => e.getID());
+  //   return targetsEdges.some((id) => neighboursEdges.includes(id));
+  // };
 
   useEffect(() => {
     // On hover: add styles to adjacent nodes
@@ -86,7 +91,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         neighbours.forEach((n) => {
           graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
           n.toFront();
-          console.log(isCoursePrerequisite(node, n) ? n.getID() : '');
+          // console.log(isCoursePrerequisite(node, n) ? n.getID() : '');
         });
       } else {
         edges.forEach((e) => {
@@ -186,10 +191,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
     const setupGraph = async () => {
       try {
+        initialising.current = true;
         const res = await axios.get<GraphPayload>(
           `/programs/graph/${programCode}/${specs.join('+')}`
         );
         const { edges, courses } = res.data;
+        console.log(res.data);
         if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -219,7 +226,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       }
     };
 
-    if (!graphRef.current) setupGraph();
+    if (!initialising.current) setupGraph();
     // Repaint canvas when theme is changed without re-render
     if (previousTheme.current !== theme) {
       previousTheme.current = theme;
