@@ -87,8 +87,7 @@ const mapNodeStyle = (
 
 const mapNodeOpacity = (courseCode: string, opacity: number) => {
   return {
-    id: courseCode,
-    label: courseCode,
+    ...sameNode(courseCode),
     style: {
       opacity
     },
@@ -100,26 +99,21 @@ const mapNodeOpacity = (courseCode: string, opacity: number) => {
   };
 };
 
-const edgeOpacity = (id: string, opacity: number) => {
-  return {
-    id,
-    style: {
-      opacity
-    }
-  };
-};
+const edgeOpacity = (id: string, opacity: number) => ({
+  id,
+  style: {
+    opacity
+  }
+});
 
-const nodeLabelHoverStyle = (courseCode: string) => {
-  return {
-    id: courseCode,
-    label: courseCode,
-    labelCfg: {
-      style: {
-        fill: '#fff'
-      }
+const nodeLabelHoverStyle = (courseCode: string) => ({
+  ...sameNode(courseCode),
+  labelCfg: {
+    style: {
+      fill: '#fff'
     }
-  };
-};
+  }
+});
 
 const nodeLabelUnhoverStyle = (
   courseCode: string,
@@ -129,8 +123,7 @@ const nodeLabelUnhoverStyle = (
   if (plannedCourses[courseCode]) {
     // uses default node style with label color changed
     return {
-      id: courseCode,
-      label: courseCode,
+      ...sameNode(courseCode),
       labelCfg: {
         style: {
           fill: '#fff'
@@ -139,8 +132,7 @@ const nodeLabelUnhoverStyle = (
     };
   }
   return {
-    id: courseCode,
-    label: courseCode,
+    ...sameNode(courseCode),
     labelCfg: {
       style: {
         fill: theme === 'light' ? '#9254de' : '#d7b7fd'
