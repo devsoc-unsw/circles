@@ -57,7 +57,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       const node = nodeItem as INode;
       const edges = node.getEdges();
       const neighbours = node.getNeighbors();
-      const opacity = theme === 'light' ? 0.3 : 0.5;
+      const opacity = theme === 'light' ? 0.3 : 0.4;
       const { Arrow } = await import('@antv/g6');
       if (action === 'add') {
         // Every other node and edge becomes less visible
