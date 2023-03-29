@@ -214,24 +214,24 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
     // Update styling for: each node, hovering state and edges
     const repaintCanvas = async () => {
-      if (graphRef.current) {
-        const nodes = graphRef.current.getNodes();
-        nodes.map((n) =>
-          graphRef.current?.updateItem(n, mapNodeStyle(n.getID(), plannedCourses, theme))
-        );
+      const nodes = graphRef.current?.getNodes();
+      nodes?.map((n) =>
+        graphRef.current?.updateItem(n, mapNodeStyle(n.getID(), plannedCourses, theme))
+      );
 
-        graphRef.current.on('node:mouseenter', async (ev) => {
-          addHoverStyles(ev);
-        });
-        graphRef.current.on('node:mouseleave', async (ev) => {
-          addUnhoverStyles(ev);
-        });
+      graphRef.current?.off('node:mouseenter');
+      graphRef.current?.off('node:mouseleave');
+      graphRef.current?.on('node:mouseenter', async (ev) => {
+        addHoverStyles(ev);
+      });
+      graphRef.current?.on('node:mouseleave', async (ev) => {
+        addUnhoverStyles(ev);
+      });
 
-        const { Arrow } = await import('@antv/g6');
-        const edges = graphRef.current.getEdges();
-        edges.map((e) => graphRef.current?.updateItem(e, defaultEdge(Arrow, theme)));
-        graphRef.current.paint();
-      }
+      const { Arrow } = await import('@antv/g6');
+      const edges = graphRef.current?.getEdges();
+      edges?.map((e) => graphRef.current?.updateItem(e, defaultEdge(Arrow, theme)));
+      graphRef.current?.paint();
     };
 
     const setupGraph = async () => {
