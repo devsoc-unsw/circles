@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
 import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { resetDegree, setProgram } from 'reducers/degreeSlice';
+import { useAppSelector } from 'hooks';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -21,8 +21,8 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
-  const dispatch = useAppDispatch();
   const programCode = useAppSelector((store: RootState) => store.degree.programCode);
+  const { token } = useSelector((state: RootState) => state.settings);
 
   const fetchAllDegrees = async () => {
     try {
@@ -38,9 +38,20 @@ const DegreeStep = ({ incrementStep }: Props) => {
     fetchAllDegrees();
   }, []);
 
-  const handleDegreeChange = ({ key }: { key: string }) => {
-    dispatch(resetDegree());
-    dispatch(setProgram({ programCode: key.substring(0, 4), programName: key.substring(5) }));
+  const handleDegreeChange = async ({ key }: { key: string }) => {
+    const data = { programCode: key.substring(0, 4) };
+    try {
+      await axios.post('user/reset', {}, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error resetting degree at handleDegreeChange: ' + err);
+    }
+    try {
+      await axios.post('user/setProgram', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error settingProgram at handleDegreeChange: ' + err);
+    }
     setInput(key);
     setOptions([]);
 
