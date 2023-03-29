@@ -65,56 +65,57 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       return prereqs.includes(neighbour);
     };
 
-    // On hover: add styles to adjacent nodes
-    const adjacentStyles = async (nodeItem: Item, action: string) => {
+    const addAdjacentStyles = async (nodeItem: Item) => {
       const node = nodeItem as INode;
       const edges = node.getEdges();
       const neighbours = node.getNeighbors();
       const opacity = theme === 'light' ? 0.3 : 0.4;
       const { Arrow } = await import('@antv/g6');
-      if (action === 'add') {
-        // Every other node and edge becomes less visible
-        graphRef.current?.getNodes().forEach((n) => {
-          graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
-          n.getEdges().forEach((e) => {
-            graphRef.current?.updateItem(e, edgeOpacity(e.getID(), opacity));
-          });
-          n.toBack();
+
+      // Every other node and edge becomes less visible
+      graphRef.current?.getNodes().forEach((n) => {
+        graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
+        n.getEdges().forEach((e) => {
+          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), opacity));
         });
-        // Highlight node's edges
-        edges.forEach((e) => {
-          graphRef.current?.updateItem(e, edgeHoverStyle(Arrow, theme, e.getID()));
-          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
-          e.toFront();
-        });
-        // Target node and neighbouring nodes remain visible
-        node.toFront();
-        graphRef.current?.updateItem(node as Item, mapNodeOpacity(node.getID(), 1));
-        neighbours.forEach((n) => {
-          graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
-          n.toFront();
-          // isCoursePrerequisite(node.getID(), n.getID());
-          const courseId = n.getID();
-          if (isCoursePrerequisite(node.getID(), courseId)) {
-            // graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
-            graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
-          }
-        });
-      } else {
-        edges.forEach((e) => {
-          graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
-        });
-        graphRef.current?.getNodes().forEach((n) => {
-          const courseId = n.getID();
-          graphRef.current?.updateItem(n as Item, mapNodeRestore(courseId, plannedCourses, theme));
-          graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
-          n.toFront();
-        });
-        graphRef.current?.getEdges().forEach((e) => {
-          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
-        });
-      }
-      graphRef.current?.paint();
+        n.toBack();
+      });
+      // Highlight node's edges
+      edges.forEach((e) => {
+        graphRef.current?.updateItem(e, edgeHoverStyle(Arrow, theme, e.getID()));
+        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        e.toFront();
+      });
+      // Target node and neighbouring nodes remain visible
+      node.toFront();
+      graphRef.current?.updateItem(node as Item, mapNodeOpacity(node.getID(), 1));
+      neighbours.forEach((n) => {
+        graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
+        n.toFront();
+        const courseId = n.getID();
+        if (isCoursePrerequisite(node.getID(), courseId)) {
+          graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
+        }
+      });
+    };
+
+    const removeAdjacentStyles = async (nodeItem: Item) => {
+      const node = nodeItem as INode;
+      const edges = node.getEdges();
+      const { Arrow } = await import('@antv/g6');
+
+      edges.forEach((e) => {
+        graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
+      });
+      graphRef.current?.getNodes().forEach((n) => {
+        const courseId = n.getID();
+        graphRef.current?.updateItem(n as Item, mapNodeRestore(courseId, plannedCourses, theme));
+        graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
+        n.toFront();
+      });
+      graphRef.current?.getEdges().forEach((e) => {
+        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+      });
     };
 
     // On hover: add styles
@@ -122,11 +123,11 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       const node = ev.item as Item;
       graphRef.current?.setItemState(node, 'hover', true);
       graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID()));
+      addAdjacentStyles(node);
       graphRef.current?.paint();
-      adjacentStyles(node, 'add');
     };
 
-    // On hover: add styles
+    // On hover: remove styles
     const addUnhoverStyles = (ev: IG6GraphEvent) => {
       const node = ev.item as Item;
       graphRef.current?.clearItemStates(node, 'hover');
@@ -134,8 +135,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         node,
         nodeLabelUnhoverStyle(node.getID(), plannedCourses, theme)
       );
+      removeAdjacentStyles(node);
       graphRef.current?.paint();
-      adjacentStyles(node, 'remove');
     };
 
     // courses is a list of course codes
@@ -198,6 +199,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
     };
 
+    // Store a hashmap for performance reasons when highlighting nodes
     const makePrerequisitesMap = (edges: CourseEdge[]) => {
       const prereqs: CoursePrerequisite = prerequisites;
       edges.forEach((e) => {
@@ -208,21 +210,6 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         }
       });
       setPrerequisites(prereqs);
-    };
-
-    const setupGraph = async () => {
-      try {
-        initialising.current = true;
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
-        const { edges, courses } = res.data;
-        makePrerequisitesMap(edges);
-        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at setupGraph', e);
-      }
     };
 
     // Update styling for: each node, hovering state and edges
@@ -244,6 +231,21 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         const edges = graphRef.current.getEdges();
         edges.map((e) => graphRef.current?.updateItem(e, defaultEdge(Arrow, theme)));
         graphRef.current.paint();
+      }
+    };
+
+    const setupGraph = async () => {
+      try {
+        initialising.current = true;
+        const res = await axios.get<GraphPayload>(
+          `/programs/graph/${programCode}/${specs.join('+')}`
+        );
+        const { edges, courses } = res.data;
+        makePrerequisitesMap(edges);
+        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error at setupGraph', e);
       }
     };
 
