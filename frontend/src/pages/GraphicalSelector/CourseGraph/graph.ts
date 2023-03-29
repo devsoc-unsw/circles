@@ -34,7 +34,7 @@ const lockedNode = (theme: string) => ({
 const prereqNode = (theme: string) => ({
   style: {
     stroke: theme === 'light' ? '#000' : '#fff',
-    lineWidth: 2.5
+    lineWidth: 2
   }
 });
 
@@ -65,7 +65,7 @@ const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
   }
 });
 
-const edgeHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+const edgeOutHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
   id,
   style: {
     endArrow: {
@@ -74,6 +74,18 @@ const edgeHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
       d: 25
     },
     stroke: theme === 'light' ? '#999' : '#aaa'
+  }
+});
+
+const edgeInHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+  id,
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#000' : '#fff',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#000' : '#fff'
   }
 });
 
@@ -168,8 +180,9 @@ const nodeLabelUnhoverStyle = (
 
 export {
   defaultEdge,
-  edgeHoverStyle,
+  edgeInHoverStyle,
   edgeOpacity,
+  edgeOutHoverStyle,
   edgeUnhoverStyle,
   mapNodeOpacity,
   mapNodePrereq,

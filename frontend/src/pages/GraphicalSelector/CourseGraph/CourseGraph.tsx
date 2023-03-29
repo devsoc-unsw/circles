@@ -18,8 +18,9 @@ import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
   defaultEdge,
-  edgeHoverStyle,
+  edgeInHoverStyle,
   edgeOpacity,
+  edgeOutHoverStyle,
   edgeUnhoverStyle,
   mapNodeOpacity,
   mapNodePrereq,
@@ -67,7 +68,6 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
     const addAdjacentStyles = async (nodeItem: Item) => {
       const node = nodeItem as INode;
-      const edges = node.getEdges();
       const neighbours = node.getNeighbors();
       const opacity = theme === 'light' ? 0.3 : 0.4;
       const { Arrow } = await import('@antv/g6');
@@ -81,8 +81,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         n.toBack();
       });
       // Highlight node's edges
-      edges.forEach((e) => {
-        graphRef.current?.updateItem(e, edgeHoverStyle(Arrow, theme, e.getID()));
+      node.getOutEdges().forEach((e) => {
+        graphRef.current?.updateItem(e, edgeOutHoverStyle(Arrow, theme, e.getID()));
+        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        e.toFront();
+      });
+      node.getInEdges().forEach((e) => {
+        graphRef.current?.updateItem(e, edgeInHoverStyle(Arrow, theme, e.getID()));
         graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
         e.toFront();
       });
