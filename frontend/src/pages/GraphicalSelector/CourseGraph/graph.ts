@@ -6,7 +6,8 @@ const plannedNode = {
   style: {
     fill: '#9254de',
     stroke: '#9254de',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    lineWidth: 1
   },
   labelCfg: {
     style: {
@@ -20,12 +21,20 @@ const plannedNode = {
 const lockedNode = (theme: string) => ({
   style: {
     fill: theme === 'light' ? '#fff' : '#000',
-    stroke: theme === 'light' ? '#9254de' : '#d7b7fd'
+    stroke: theme === 'light' ? '#9254de' : '#d7b7fd',
+    lineWidth: 1
   },
   labelCfg: {
     style: {
       fill: theme === 'light' ? '#9254de' : '#d7b7fd'
     }
+  }
+});
+
+const prereqNode = (theme: string) => ({
+  style: {
+    stroke: theme === 'light' ? '#000' : '#fff',
+    lineWidth: 2.5
   }
 });
 
@@ -82,6 +91,22 @@ const mapNodeStyle = (
 ) => {
   // If planned, keep default styling. Otherwise apply lockedNode styling.
   if (plannedCourses[courseCode]) return sameNode(courseCode);
+  return { ...sameNode(courseCode), ...lockedNode(theme) };
+};
+
+const mapNodePrereq = (courseCode: string, theme: string) => {
+  return {
+    ...sameNode(courseCode),
+    ...prereqNode(theme)
+  };
+};
+
+const mapNodeRestore = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) return { ...sameNode(courseCode), ...plannedNode };
   return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
@@ -147,6 +172,8 @@ export {
   edgeOpacity,
   edgeUnhoverStyle,
   mapNodeOpacity,
+  mapNodePrereq,
+  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,

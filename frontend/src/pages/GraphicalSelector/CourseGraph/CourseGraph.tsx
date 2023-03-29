@@ -22,6 +22,8 @@ import {
   edgeOpacity,
   edgeUnhoverStyle,
   mapNodeOpacity,
+  mapNodePrereq,
+  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
@@ -92,14 +94,20 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
           n.toFront();
           // isCoursePrerequisite(node.getID(), n.getID());
-          console.log(isCoursePrerequisite(node.getID(), n.getID()) ? n.getID() : '');
+          const courseId = n.getID();
+          if (isCoursePrerequisite(node.getID(), courseId)) {
+            // graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
+            graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
+          }
         });
       } else {
         edges.forEach((e) => {
           graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
         });
         graphRef.current?.getNodes().forEach((n) => {
-          graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
+          const courseId = n.getID();
+          graphRef.current?.updateItem(n as Item, mapNodeRestore(courseId, plannedCourses, theme));
+          graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
           n.toFront();
         });
         graphRef.current?.getEdges().forEach((e) => {
