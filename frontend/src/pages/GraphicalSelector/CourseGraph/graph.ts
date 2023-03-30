@@ -1,4 +1,5 @@
 import type { Arrow } from '@antv/g6';
+import { CourseValidation } from 'types/courses';
 import { PlannerCourse } from 'types/planner';
 
 const plannedNode = {
@@ -31,6 +32,19 @@ const lockedNode = (theme: string) => ({
   }
 });
 
+const unlockedNode = (theme: string) => ({
+  style: {
+    fill: theme === 'light' ? '#fbefff' : '#381f56',
+    stroke: theme === 'light' ? '#9254de' : '#d7b7fd',
+    lineWidth: 1
+  },
+  labelCfg: {
+    style: {
+      fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+    }
+  }
+});
+
 const prereqNode = (theme: string) => ({
   style: {
     stroke: theme === 'light' ? '#000' : '#fff',
@@ -41,6 +55,22 @@ const prereqNode = (theme: string) => ({
 const sameNode = (courseCode: string) => ({
   id: courseCode,
   label: courseCode
+});
+
+const plannedLabel = {
+  labelCfg: {
+    style: {
+      fill: '#fff'
+    }
+  }
+};
+
+const lockedLabel = (theme: string) => ({
+  labelCfg: {
+    style: {
+      fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+    }
+  }
 });
 
 const nodeStateStyles = {
@@ -99,10 +129,14 @@ const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
 const mapNodeStyle = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
+  courses: Record<string, CourseValidation>,
   theme: string
 ) => {
-  // If planned, keep default styling. Otherwise apply lockedNode styling.
-  if (plannedCourses[courseCode]) return sameNode(courseCode);
+  const isPlanned = plannedCourses[courseCode];
+  const isUnlocked = courses[courseCode]?.unlocked;
+
+  if (isPlanned) return sameNode(courseCode);
+  if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
   return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
@@ -116,9 +150,14 @@ const mapNodePrereq = (courseCode: string, theme: string) => {
 const mapNodeRestore = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
+  courses: Record<string, CourseValidation>,
   theme: string
 ) => {
-  if (plannedCourses[courseCode]) return { ...sameNode(courseCode), ...plannedNode };
+  const isPlanned = plannedCourses[courseCode];
+  const isUnlocked = courses[courseCode]?.unlocked;
+
+  if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
+  if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
   return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
@@ -145,11 +184,7 @@ const edgeOpacity = (id: string, opacity: number) => ({
 
 const nodeLabelHoverStyle = (courseCode: string) => ({
   ...sameNode(courseCode),
-  labelCfg: {
-    style: {
-      fill: '#fff'
-    }
-  }
+  ...plannedLabel
 });
 
 const nodeLabelUnhoverStyle = (
@@ -161,20 +196,12 @@ const nodeLabelUnhoverStyle = (
     // uses default node style with label color changed
     return {
       ...sameNode(courseCode),
-      labelCfg: {
-        style: {
-          fill: '#fff'
-        }
-      }
+      ...plannedLabel
     };
   }
   return {
     ...sameNode(courseCode),
-    labelCfg: {
-      style: {
-        fill: theme === 'light' ? '#9254de' : '#d7b7fd'
-      }
-    }
+    ...lockedLabel(theme)
   };
 };
 

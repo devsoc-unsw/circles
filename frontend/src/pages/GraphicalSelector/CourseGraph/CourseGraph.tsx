@@ -49,7 +49,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const previousTheme = useRef<typeof theme>(theme);
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner } = useSelector((state: RootState) => state);
+  const { degree, planner, courses } = useSelector((state: RootState) => state);
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
@@ -114,7 +114,10 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
       graphRef.current?.getNodes().forEach((n) => {
         const courseId = n.getID();
-        graphRef.current?.updateItem(n as Item, mapNodeRestore(courseId, plannedCourses, theme));
+        graphRef.current?.updateItem(
+          n as Item,
+          mapNodeRestore(courseId, plannedCourses, courses.courses, theme)
+        );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
         n.toFront();
       });
@@ -144,8 +147,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current?.paint();
     };
 
-    // courses is a list of course codes
-    const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
+    const initialiseGraph = async (courseCodes: string[], courseEdges: CourseEdge[]) => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -180,9 +182,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       };
 
       graphRef.current = new Graph(graphArgs);
-
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses, theme)),
+        nodes: courseCodes.map((c) => mapNodeStyle(c, plannedCourses, courses.courses, theme)),
         edges: courseEdges
       };
 
@@ -221,7 +222,10 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     const repaintCanvas = async () => {
       const nodes = graphRef.current?.getNodes();
       nodes?.map((n) =>
-        graphRef.current?.updateItem(n, mapNodeStyle(n.getID(), plannedCourses, theme))
+        graphRef.current?.updateItem(
+          n,
+          mapNodeStyle(n.getID(), plannedCourses, courses.courses, theme)
+        )
       );
 
       graphRef.current?.off('node:mouseenter');
@@ -245,9 +249,11 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         const res = await axios.get<GraphPayload>(
           `/programs/graph/${programCode}/${specs.join('+')}`
         );
-        const { edges, courses } = res.data;
+        const { edges } = res.data;
         makePrerequisitesMap(edges);
-        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+        if (res.data.courses.length !== 0 && edges.length !== 0) {
+          initialiseGraph(res.data.courses, edges);
+        }
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error at setupGraph', e);
@@ -260,7 +266,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       previousTheme.current = theme;
       repaintCanvas();
     }
-  }, [onNodeClick, plannedCourses, programCode, specs, theme, prerequisites]);
+  }, [onNodeClick, plannedCourses, programCode, specs, theme, prerequisites, courses]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
