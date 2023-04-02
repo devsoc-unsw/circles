@@ -57,6 +57,17 @@ const sameNode = (courseCode: string) => ({
   label: courseCode
 });
 
+const nodeStateStyles = {
+  hover: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
+  },
+  click: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
+  }
+};
+
 const plannedLabel = {
   labelCfg: {
     style: {
@@ -73,15 +84,26 @@ const lockedLabel = (theme: string) => ({
   }
 });
 
-const nodeStateStyles = {
-  hover: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
-  },
-  click: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
+const nodeLabelHoverStyle = (courseCode: string) => ({
+  ...sameNode(courseCode),
+  ...plannedLabel
+});
+
+const nodeLabelUnhoverStyle = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) {
+    return {
+      ...sameNode(courseCode),
+      ...plannedLabel
+    };
   }
+  return {
+    ...sameNode(courseCode),
+    ...lockedLabel(theme)
+  };
 };
 
 const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
@@ -135,7 +157,7 @@ const mapNodeStyle = (
   const isPlanned = plannedCourses[courseCode];
   const isUnlocked = courses[courseCode]?.unlocked;
 
-  if (isPlanned) return sameNode(courseCode);
+  if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
   if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
   return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
@@ -145,20 +167,6 @@ const mapNodePrereq = (courseCode: string, theme: string) => {
     ...sameNode(courseCode),
     ...prereqNode(theme)
   };
-};
-
-const mapNodeRestore = (
-  courseCode: string,
-  plannedCourses: Record<string, PlannerCourse>,
-  courses: Record<string, CourseValidation>,
-  theme: string
-) => {
-  const isPlanned = plannedCourses[courseCode];
-  const isUnlocked = courses[courseCode]?.unlocked;
-
-  if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
-  if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
-  return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
 const mapNodeOpacity = (courseCode: string, opacity: number) => {
@@ -175,45 +183,21 @@ const mapNodeOpacity = (courseCode: string, opacity: number) => {
   };
 };
 
-const edgeOpacity = (id: string, opacity: number) => ({
+const mapEdgeOpacity = (id: string, opacity: number) => ({
   id,
   style: {
     opacity
   }
 });
 
-const nodeLabelHoverStyle = (courseCode: string) => ({
-  ...sameNode(courseCode),
-  ...plannedLabel
-});
-
-const nodeLabelUnhoverStyle = (
-  courseCode: string,
-  plannedCourses: Record<string, PlannerCourse>,
-  theme: string
-) => {
-  if (plannedCourses[courseCode]) {
-    // uses default node style with label color changed
-    return {
-      ...sameNode(courseCode),
-      ...plannedLabel
-    };
-  }
-  return {
-    ...sameNode(courseCode),
-    ...lockedLabel(theme)
-  };
-};
-
 export {
   defaultEdge,
   edgeInHoverStyle,
-  edgeOpacity,
   edgeOutHoverStyle,
   edgeUnhoverStyle,
+  mapEdgeOpacity,
   mapNodeOpacity,
   mapNodePrereq,
-  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,

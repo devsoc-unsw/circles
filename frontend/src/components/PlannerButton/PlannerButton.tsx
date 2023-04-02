@@ -12,9 +12,10 @@ import S from './styles';
 
 interface PlannerButtonProps {
   course: Course;
+  hasPlannerUpdated: React.MutableRefObject<boolean>;
 }
 
-const PlannerButton = ({ course }: PlannerButtonProps) => {
+const PlannerButton = ({ course, hasPlannerUpdated }: PlannerButtonProps) => {
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -56,6 +57,7 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
       };
       dispatch(addToUnplanned({ courseCode: course.code, courseData }));
       addCourseToPlannerTimeout(true);
+      hasPlannerUpdated.current = true;
     }
   };
 
@@ -67,6 +69,7 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
       );
       addCourseToPlannerTimeout(false);
       dispatch(removeCourses(res.data.courses));
+      hasPlannerUpdated.current = true;
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at removeFromPlanner', e);

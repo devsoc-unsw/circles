@@ -19,12 +19,11 @@ import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
   defaultEdge,
   edgeInHoverStyle,
-  edgeOpacity,
   edgeOutHoverStyle,
   edgeUnhoverStyle,
+  mapEdgeOpacity,
   mapNodeOpacity,
   mapNodePrereq,
-  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
@@ -38,13 +37,20 @@ type Props = {
   handleToggleFullscreen: () => void;
   fullscreen: boolean;
   focused?: string;
+  hasPlannerUpdated: React.MutableRefObject<boolean>;
 };
 
 interface CoursePrerequisite {
   [key: string]: string[];
 }
 
-const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
+const CourseGraph = ({
+  onNodeClick,
+  handleToggleFullscreen,
+  fullscreen,
+  focused,
+  hasPlannerUpdated
+}: Props) => {
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
@@ -76,19 +82,19 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current?.getNodes().forEach((n) => {
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
         n.getEdges().forEach((e) => {
-          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), opacity));
+          graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), opacity));
         });
         n.toBack();
       });
       // Highlight node's edges
       node.getOutEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeOutHoverStyle(Arrow, theme, e.getID()));
-        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), 1));
         e.toFront();
       });
       node.getInEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeInHoverStyle(Arrow, theme, e.getID()));
-        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), 1));
         e.toFront();
       });
       // Target node and neighbouring nodes remain visible
@@ -116,13 +122,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         const courseId = n.getID();
         graphRef.current?.updateItem(
           n as Item,
-          mapNodeRestore(courseId, plannedCourses, courses.courses, theme)
+          mapNodeStyle(courseId, plannedCourses, courses.courses, theme)
         );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
         n.toFront();
       });
       graphRef.current?.getEdges().forEach((e) => {
-        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), 1));
       });
     };
 
@@ -218,7 +224,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       setPrerequisites(prereqs);
     };
 
-    // Update styling for: each node, hovering state and edges
+    // Without re-render, update styling for: each node, hovering state and edges
     const repaintCanvas = async () => {
       const nodes = graphRef.current?.getNodes();
       nodes?.map((n) =>
@@ -261,12 +267,25 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     if (!initialising.current) setupGraph();
-    // Repaint canvas when theme is changed without re-render
+    if (hasPlannerUpdated.current) {
+      hasPlannerUpdated.current = false;
+      repaintCanvas();
+    }
+    // Change theme without re-render
     if (previousTheme.current !== theme) {
       previousTheme.current = theme;
       repaintCanvas();
     }
-  }, [onNodeClick, plannedCourses, programCode, specs, theme, prerequisites, courses]);
+  }, [
+    onNodeClick,
+    plannedCourses,
+    programCode,
+    specs,
+    theme,
+    prerequisites,
+    courses,
+    hasPlannerUpdated
+  ]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
