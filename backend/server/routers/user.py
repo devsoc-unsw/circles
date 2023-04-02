@@ -58,7 +58,7 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     set_user(token, item)
 
 
-@router.get("/data/{token}")
+@router.get("/data/all/{token}")
 def get_user(token: str) -> Storage:
     data = usersDB['tokens'].find_one({'token': token})
     if data is None:

@@ -18,5 +18,5 @@ def test_updateCourseMark():
             'course': 'COMP1511',
             'mark': 75
         })
-    user = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}').json()
+    user = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}').json()
     assert user['courses']['COMP1511']['mark'] == 75
