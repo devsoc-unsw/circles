@@ -15,10 +15,10 @@ def test_toggleWarning():
         'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["out_of_order"])
     assert x.status_code == 200
     requests.put('http://127.0.0.1:8000/user/toggleWarnings', json=['MATH1241'])
-    data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
+    data = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}')
     assert data.json()['courses']['MATH1241']['suppressed']
     requests.put('http://127.0.0.1:8000/user/toggleWarnings', json=['MATH1241'])
-    data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
+    data = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}')
     assert not data.json()['courses']['MATH1241']['suppressed']
 
 def test_toggleWarningMultiple():
@@ -27,7 +27,7 @@ def test_toggleWarningMultiple():
         'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["out_of_order"])
     assert x.status_code == 200
     requests.put('http://127.0.0.1:8000/user/toggleWarnings', json=['MATH1241', 'MATH1141'])
-    data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
+    data = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}')
     assert data.json()['courses']['MATH1241']['suppressed']
     assert data.json()['courses']['MATH1141']['suppressed']
 
@@ -43,7 +43,7 @@ def test_toggleWarningMultiple():
     #     })
     # assert any(not c['unlocked'] for c in x.json()['courses_state'].values())
     # requests.put('http://127.0.0.1:8000/user/toggleWarnings', json={'courses': ['MATH1241']})
-    # data = requests.get(f'http://127.0.0.1:8000/user/data/{DUMMY_TOKEN}')
+    # data = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}')
     # # convert 'years' into plannerData
     # plan = [list({course: [6, None] for course in term} for term in year.values()) for year in data.json()['planner']['years']]
     # x = requests.post(
