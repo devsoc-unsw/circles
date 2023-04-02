@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
 from fastapi import APIRouter
 from server.config import DUMMY_TOKEN
-from server.routers.model import CourseMark, CoursesStorage, LocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
@@ -69,6 +69,17 @@ def get_user(token: str) -> Storage:
     return cast(Storage, usersDB['users'].find_one(
         {'_id': ObjectId(data['objectId'])}))
 
+@router.get("/data/degree/{token}")
+def get_user_degree(token: str) -> DegreeLocalStorage:
+    return get_user(token)['degree']
+
+@router.get("/data/planner/{token}")
+def get_user_planner(token: str) -> PlannerLocalStorage:
+    return get_user(token)['planner']
+
+@router.get("/data/courses/{token}")
+def get_user_p(token: str) -> dict[str, CoursesStorage]:
+    return get_user(token)['courses']
 
 # this is super jank - should never see prod
 @router.post("/register/{token}")
