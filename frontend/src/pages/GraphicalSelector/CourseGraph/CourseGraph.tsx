@@ -72,7 +72,7 @@ const CourseGraph = ({
       return prereqs.includes(neighbour);
     };
 
-    const addAdjacentStyles = async (nodeItem: Item) => {
+    const addNeighbourStyles = async (nodeItem: Item) => {
       const node = nodeItem as INode;
       const neighbours = node.getNeighbors();
       const opacity = theme === 'light' ? 0.3 : 0.4;
@@ -82,19 +82,17 @@ const CourseGraph = ({
       graphRef.current?.getNodes().forEach((n) => {
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
         n.getEdges().forEach((e) => {
-          graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), opacity));
+          graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), opacity));
         });
         n.toBack();
       });
       // Highlight node's edges
       node.getOutEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeOutHoverStyle(Arrow, theme, e.getID()));
-        graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), 1));
         e.toFront();
       });
       node.getInEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeInHoverStyle(Arrow, theme, e.getID()));
-        graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), 1));
         e.toFront();
       });
       // Target node and neighbouring nodes remain visible
@@ -110,7 +108,7 @@ const CourseGraph = ({
       });
     };
 
-    const removeAdjacentStyles = async (nodeItem: Item) => {
+    const removeNeighbourStyles = async (nodeItem: Item) => {
       const node = nodeItem as INode;
       const edges = node.getEdges();
       const { Arrow } = await import('@antv/g6');
@@ -128,7 +126,7 @@ const CourseGraph = ({
         n.toFront();
       });
       graphRef.current?.getEdges().forEach((e) => {
-        graphRef.current?.updateItem(e, mapEdgeOpacity(e.getID(), 1));
+        graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), 1));
       });
     };
 
@@ -137,7 +135,7 @@ const CourseGraph = ({
       const node = ev.item as Item;
       graphRef.current?.setItemState(node, 'hover', true);
       graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID()));
-      addAdjacentStyles(node);
+      addNeighbourStyles(node);
       graphRef.current?.paint();
     };
 
@@ -149,7 +147,7 @@ const CourseGraph = ({
         node,
         nodeLabelUnhoverStyle(node.getID(), plannedCourses, theme)
       );
-      removeAdjacentStyles(node);
+      removeNeighbourStyles(node);
       graphRef.current?.paint();
     };
 

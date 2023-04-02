@@ -106,14 +106,20 @@ const nodeLabelUnhoverStyle = (
   };
 };
 
+const arrowColor = (theme: string) => ({
+  default: theme === 'light' ? '#e0e0e0' : '#4a4a4a',
+  outHover: theme === 'light' ? '#999' : '#aaa',
+  inHover: theme === 'light' ? '#000' : '#fff'
+});
+
 const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
   style: {
     endArrow: {
       path: arrow.triangle(5, 5, 30),
-      fill: theme === 'light' ? '#e0e0e0' : '#4a4a4a',
+      fill: arrowColor(theme).default,
       d: 25
     },
-    stroke: theme === 'light' ? '#e0e0e0' : '#4a4a4a'
+    stroke: arrowColor(theme).default
   }
 });
 
@@ -122,10 +128,11 @@ const edgeOutHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
   style: {
     endArrow: {
       path: arrow.triangle(5, 5, 30),
-      fill: theme === 'light' ? '#999' : '#aaa',
+      fill: arrowColor(theme).outHover,
       d: 25
     },
-    stroke: theme === 'light' ? '#999' : '#aaa'
+    stroke: arrowColor(theme).outHover,
+    opacity: 1
   }
 });
 
@@ -134,10 +141,11 @@ const edgeInHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
   style: {
     endArrow: {
       path: arrow.triangle(5, 5, 30),
-      fill: theme === 'light' ? '#000' : '#fff',
+      fill: arrowColor(theme).inHover,
       d: 25
     },
-    stroke: theme === 'light' ? '#000' : '#fff'
+    stroke: arrowColor(theme).inHover,
+    opacity: 1
   }
 });
 
@@ -183,10 +191,17 @@ const mapNodeOpacity = (courseCode: string, opacity: number) => {
   };
 };
 
-const mapEdgeOpacity = (id: string, opacity: number) => ({
+// Changes opacity but also changes edge to default style due to endArrow styling
+const mapEdgeOpacity = (arrow: typeof Arrow, theme: string, id: string, opacity: number) => ({
   id,
   style: {
-    opacity
+    opacity,
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: arrowColor(theme).default,
+      opacity,
+      d: 25
+    }
   }
 });
 
