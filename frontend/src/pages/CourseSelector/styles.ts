@@ -7,7 +7,8 @@ const ContainerWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 20vw auto;
   height: var(--cs-bottom-cont-height);
 `;
 

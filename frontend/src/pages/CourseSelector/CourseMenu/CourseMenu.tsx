@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
 import axios from 'axios';
@@ -37,7 +37,7 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseMenu = ({ structure, widthOffset }: Props) => {
+const CourseMenu = forwardRef(({ structure, widthOffset }: Props, wrapperRef) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
@@ -188,7 +188,7 @@ const CourseMenu = ({ structure, widthOffset }: Props) => {
   };
 
   return (
-    <S.SidebarWrapper widthOffset={ widthOffset === undefined ? '20vw' : `${widthOffset}px` }>
+    <S.SidebarWrapper ref={wrapperRef as any} /* widthOffset={ widthOffset === undefined ? '20vw' : `${widthOffset}px` } */>
       {pageLoaded ? (
         <S.Menu
           defaultSelectedKeys={[]}
@@ -202,6 +202,6 @@ const CourseMenu = ({ structure, widthOffset }: Props) => {
       )}
     </S.SidebarWrapper>
   );
-};
+});
 
 export default CourseMenu;
