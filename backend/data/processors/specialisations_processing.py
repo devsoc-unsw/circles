@@ -15,8 +15,9 @@ Step in the data's journey:
 """
 
 import re
-from data.utility.data_helpers import read_data, write_data
+
 from data.processors.programs_processing import TEST_PROGS
+from data.utility.data_helpers import read_data, write_data
 
 # TODO: add more specialisations as we expand scope of Circles
 
@@ -29,7 +30,7 @@ def customise_spn_data():
 
     data = read_data("data/scrapers/specialisationsFormattedRaw.json")
 
-    customised_data: dict = {}  # TODO: specify type # Dictionary for all customised data
+    customised_data: dict = {}  # TODO: specify type  # Dictionary for all customised data
     for spn in data.keys():
         if not any((prog in TEST_PROGS for prog in data[spn]["programs"])):
             continue
@@ -228,7 +229,7 @@ def get_courses(
     Adds courses from container to the customised curriculum course dict.
     """
     for course, title in container_courses.items():
-        description = description + "" # prevent unused variable error
+        description = description + ""  # prevent unused variable error
 
         if "any course" in course:
             course_processed = {"any course": "1"}
@@ -247,7 +248,7 @@ def process_any_level(unprocessed_course: str) -> dict[str, str]:
     # Note '?:' means inner parentheses is non-capturing group
     res = re.search(r"level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
     if not res:
-        raise Exception("processing any where it doesnt exist")
+        raise KeyError("processing any where it doesnt exist")
     course_level = res.group(1).strip()
     program_title = res.group(2).strip()
 

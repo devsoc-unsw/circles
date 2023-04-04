@@ -18,8 +18,8 @@ type Props = {
 };
 
 const ContextMenu = ({ code, plannedFor }: Props) => {
-  const [openModal, setOpenModal] = useState(false);
   const { token } = useSelector((state: RootState) => state.settings);
+  const [openModal, setOpenModal] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

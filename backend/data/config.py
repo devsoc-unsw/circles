@@ -14,7 +14,6 @@ Assumes that `/backend` is the current working directory.
 # The latest current handbook year that we will maintain all the algorithms for
 from typing import List
 
-
 LIVE_YEAR: int = 2023
 
 # The years for which we have archived
@@ -27,4 +26,3 @@ CONDITIONS_TOKEN_FILE: str = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PICKLE_FILE: str = "./data/final_data/conditions.pkl"
 
 GRAPH_CACHE_FILE = "./data/final_data/graph.json"
-
