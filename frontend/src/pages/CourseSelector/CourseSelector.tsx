@@ -58,34 +58,34 @@ const CourseSelector = () => {
 
   const divRef = useRef<null | HTMLDivElement>(null);
   const menuRef = useRef<null | HTMLDivElement>(null);
-  // const [offset, setOffset] = useState<number | undefined>();
   useEffect(() => {
+    const minMenuWidth = 100;
+    const maxMenuWidth = 60 * window.innerWidth / 100;
+    const setNewWidth = (clientX: number) => {
+      if (clientX > minMenuWidth && clientX < maxMenuWidth) {
+        menuDiv.style.gridTemplateColumns = `${clientX}px auto`;
+        resizerDiv.style.left = `${clientX}px`;
+      }
+    };
     const resizerDiv = divRef.current as HTMLDivElement;
+    const menuDiv = menuRef.current as HTMLDivElement;
     const handleResize = (ev: globalThis.MouseEvent) => {
-      resizerDiv.style.left = `${ev.clientX}px`;
-      // setOffset(ev.clientX);
-      let x = (menuRef.current as HTMLDivElement);
-      x.style.gridTemplateColumns = `${ev.clientX}px auto`;
+      setNewWidth(ev.clientX);
     };
     const endResize = (ev: MouseEvent) => {
-      let x = (menuRef.current as HTMLDivElement);
-      x.style.gridTemplateColumns = `${ev.clientX}px auto`;
-      // setOffset(ev.clientX);
-      resizerDiv.style.backgroundColor = 'transparent';
+      // menuDiv.style.gridTemplateColumns = `max(${ev.clientX}px, 5vw) auto`;
       window.removeEventListener('mousemove', handleResize);
       window.removeEventListener('mouseup', endResize); // remove myself
     };
     const startResize = (ev: MouseEvent) => {
       ev.preventDefault(); // stops highlighting text
       resizerDiv.style.left = `${ev.clientX}px`;
-      resizerDiv.style.backgroundColor = 'gray';
       window.addEventListener('mousemove', handleResize);
       window.addEventListener('mouseup', endResize);
     };
-    resizerDiv?.addEventListener('mousedown', startResize);
+    menuDiv && resizerDiv?.addEventListener('mousedown', startResize);
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
   }, []);
-  console.log('r')
 
   return (
     <PageTemplate>
@@ -93,10 +93,10 @@ const CourseSelector = () => {
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper ref={menuRef}>
-            <CourseMenu ref={menuRef} structure={structure}/>
-          <S.ContentResizer ref={divRef} />
+          <CourseMenu structure={structure} />
+          <S.ContentResizer style={{}} ref={divRef} />
           {courseCode ? (
-            <div style={{ overflow: 'auto'}}>
+            <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel
                 courseCode={courseCode}
                 onCourseClick={(code) => dispatch(addTab(code))}

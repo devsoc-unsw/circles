@@ -19,7 +19,6 @@ import S from './styles';
 
 type Props = {
   structure: ProgramStructure;
-  widthOffset?: number,
 };
 
 type SubgroupTitleProps = {
@@ -37,7 +36,7 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseMenu = forwardRef(({ structure, widthOffset }: Props, wrapperRef) => {
+const CourseMenu = ({ structure }: Props) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
@@ -188,7 +187,7 @@ const CourseMenu = forwardRef(({ structure, widthOffset }: Props, wrapperRef) =>
   };
 
   return (
-    <S.SidebarWrapper ref={wrapperRef as any} /* widthOffset={ widthOffset === undefined ? '20vw' : `${widthOffset}px` } */>
+    <S.SidebarWrapper>
       {pageLoaded ? (
         <S.Menu
           defaultSelectedKeys={[]}
@@ -202,6 +201,6 @@ const CourseMenu = forwardRef(({ structure, widthOffset }: Props, wrapperRef) =>
       )}
     </S.SidebarWrapper>
   );
-});
+};
 
 export default CourseMenu;
