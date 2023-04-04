@@ -55,15 +55,41 @@ const CourseSelector = () => {
     if (programCode) fetchStructure();
   }, [programCode, specs]);
 
+  const divRef = useRef<null | HTMLDivElement>(null);
+  const [offset, setOffset] = useState<number | undefined>();
+  useEffect(() => {
+    const resizerDiv = divRef.current;
+    const handleResize = (ev: globalThis.MouseEvent) => {
+      (resizerDiv as HTMLDivElement).style.left = `${ev.clientX}px`;
+      setOffset(ev.clientX);
+    };
+    const endResize = (ev: MouseEvent) => {
+      setOffset(ev.clientX);
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', endResize); // remove myself
+    };
+    const startResize = (ev: MouseEvent) => {
+      ev.preventDefault(); // stops highlighting text
+      (resizerDiv as HTMLDivElement).style.left = `${ev.clientX}px`;
+      window.addEventListener('mousemove', handleResize);
+      window.addEventListener('mouseup', endResize);
+    };
+    resizerDiv?.addEventListener('mousedown', startResize);
+    return () => resizerDiv?.removeEventListener('mousedown', startResize);
+  }, []);
+
   return (
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper>
-          <CourseMenu structure={structure} />
+          <div /* very important div!!! */>
+            <CourseMenu structure={structure} widthOffset={offset} />
+          </div>
+          <S.ContentResizer ref={divRef} />
           {courseCode ? (
-            <div style={{ overflow: 'auto' }}>
+            <div style={{ overflow: 'auto', width: 'calc(100% - 50px)' }}>
               <CourseDescriptionPanel
                 courseCode={courseCode}
                 onCourseClick={(code) => dispatch(addTab(code))}

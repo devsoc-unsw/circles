@@ -1,11 +1,12 @@
 import { Menu as antdMenu } from 'antd';
 import styled, { css } from 'styled-components';
 
-const SidebarWrapper = styled.div`
+const SidebarWrapper = styled.div<{ widthOffset: string }>`
   overflow: auto;
   overflow-x: hidden;
   height: 100%;
   border-right: 1px solid #f0f0f0;
+  width: ${({ widthOffset }) => widthOffset};
 `;
 
 const SubgroupHeader = styled.div`

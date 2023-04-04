@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
@@ -18,6 +19,7 @@ import S from './styles';
 
 type Props = {
   structure: ProgramStructure;
+  widthOffset?: number,
 };
 
 type SubgroupTitleProps = {
@@ -35,7 +37,7 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseMenu = ({ structure }: Props) => {
+const CourseMenu = ({ structure, widthOffset }: Props) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
@@ -186,7 +188,7 @@ const CourseMenu = ({ structure }: Props) => {
   };
 
   return (
-    <S.SidebarWrapper>
+    <S.SidebarWrapper widthOffset={ widthOffset === undefined ? '20vw' : `${widthOffset}px` }>
       {pageLoaded ? (
         <S.Menu
           defaultSelectedKeys={[]}

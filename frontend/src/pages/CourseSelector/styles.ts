@@ -7,9 +7,19 @@ const ContainerWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 20vw auto;
+  display: flex;
   height: var(--cs-bottom-cont-height);
+`;
+
+const ContentResizer = styled.div`
+  cursor: col-resize;
+  height: 100%;
+  width: 6px;
+  background-color: transparent;
+  position: fixed;
+  left: 20vw;
+  margin-left: -3px;
+  z-index: 100;
 `;
 
 const InfographicContainer = styled.div`
@@ -40,4 +50,4 @@ const InfographicContainer = styled.div`
   }
 `;
 
-export default { ContainerWrapper, ContentWrapper, InfographicContainer };
+export default { ContainerWrapper, ContentResizer, ContentWrapper, InfographicContainer };
