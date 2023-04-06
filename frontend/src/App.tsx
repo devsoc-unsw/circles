@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React, { Suspense } from 'react';
+import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
@@ -26,31 +28,40 @@ const App = () => {
 
   const degree = useSelector((state: RootState) => state.degree);
 
+  // const queryClient = useQueryClient();
+  const queryClient: QueryClient = new QueryClient();
+
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyles />
-      <ErrorBoundary>
-        <Suspense fallback={<PageLoading />}>
-          <Router>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  !degree.isComplete ? <LandingPage /> : <Navigate to="/course-selector" replace />
-                }
-              />
-              <Route path="/degree-wizard" element={<DegreeWizard />} />
-              <Route path="/course-selector" element={<CourseSelector />} />
-              {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
-              <Route path="/term-planner" element={<TermPlanner />} />
-              <Route path="/progression-checker" element={<ProgressionChecker />} />
-              <Route path="*" element={<Page404 />} />
-              {inDev && <Route path="/login" element={<Auth />} />}
-            </Routes>
-          </Router>
-        </Suspense>
-      </ErrorBoundary>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoading />}>
+            <Router>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    !degree.isComplete ? (
+                      <LandingPage />
+                    ) : (
+                      <Navigate to="/course-selector" replace />
+                    )
+                  }
+                />
+                <Route path="/degree-wizard" element={<DegreeWizard />} />
+                <Route path="/course-selector" element={<CourseSelector />} />
+                {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                <Route path="/term-planner" element={<TermPlanner />} />
+                <Route path="/progression-checker" element={<ProgressionChecker />} />
+                <Route path="*" element={<Page404 />} />
+                {inDev && <Route path="/login" element={<Auth />} />}
+              </Routes>
+            </Router>
+          </Suspense>
+        </ErrorBoundary>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

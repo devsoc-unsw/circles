@@ -39,6 +39,15 @@ export type UnPlannedToTerm = {
   courseCode: string
 };
 
+export type PlannedToTerm = {
+  srcRow: number;
+  srcTerm: string;
+  destRow: number;
+  destTerm: string;
+  destIndex: number;
+  courseCode: string;
+};
+
 export type JSONPlanner = {
   startYear: number;
   numYears: number;

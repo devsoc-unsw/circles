@@ -5,6 +5,7 @@ data is working.
 
 import json
 from typing import Annotated, Any, Optional
+
 import requests
 
 with open(

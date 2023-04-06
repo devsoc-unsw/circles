@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
-import { Term } from 'types/planner';
+import { PlannedToTerm, Term } from 'types/planner';
 import getAllCourseOfferings from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
@@ -13,9 +13,7 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import {
   moveCourse,
-  setPlannedCourseToTerm,
   toggleWarnings,
-  unschedule,
   updateLegacyOfferings
 } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
@@ -32,14 +30,22 @@ const DragDropContext = React.lazy(() =>
 );
 
 const TermPlanner = () => {
-  const { showWarnings } = useSelector((state: RootState) => state.settings);
+  const { showWarnings, token } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
-  const { token } = useSelector((state: RootState) => state.settings);
 
   const [draggingCourse, setDraggingCourse] = useState('');
   const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
   const [multiCourse, setMultiCourse] = useState('');
+
+  const handleSetPlannedCourseToTerm = async (data: PlannedToTerm) => {
+    try {
+      await axios.post('planner/plannedToTerm', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      console.error(`Error at setPlannedCourseToTerm: ${err}`);
+    }
+  };
 
   const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
     try {
@@ -124,7 +130,7 @@ const TermPlanner = () => {
     }
   };
 
-  const handleOnDragEnd: OnDragEndResponder = (result) => {
+  const handleOnDragEnd: OnDragEndResponder = async (result) => {
     setDraggingCourse('');
     setCheckYearMultiTerm('');
     setMultiCourse('');
@@ -177,12 +183,14 @@ const TermPlanner = () => {
 
     if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
-      dispatch(
-        unschedule({
-          destIndex,
-          code: draggableId
-        })
-      );
+      try {
+        await axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }), {
+          params: { token }
+        });
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error at unscheduleCourse', e);
+      }
       return;
     }
 
@@ -204,18 +212,15 @@ const TermPlanner = () => {
       const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)?.[0] as string, 10);
       const srcTerm = source.droppableId.match(/T[0-3]/)?.[0] as Term;
       const srcRow = srcYear - planner.startYear;
-      const srcIndex = source.index;
-      dispatch(
-        setPlannedCourseToTerm({
-          srcRow,
-          srcTerm,
-          srcIndex,
-          destRow,
-          destTerm,
-          destIndex,
-          course: draggableId
-        })
-      );
+      const data = {
+        srcRow,
+        srcTerm,
+        destRow,
+        destTerm,
+        destIndex,
+        courseCode: draggableId
+      };
+      handleSetPlannedCourseToTerm(data);
     }
   };
 

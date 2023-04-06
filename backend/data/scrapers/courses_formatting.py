@@ -6,6 +6,7 @@ Step in the course data's journey:
 """
 
 import json
+
 from data.utility import data_helpers
 
 ALL_COURSES: dict = {}

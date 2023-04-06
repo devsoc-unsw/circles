@@ -4,6 +4,7 @@
 
 import re
 import sys
+
 from data.utility import data_helpers
 
 CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")

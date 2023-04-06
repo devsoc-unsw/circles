@@ -1,5 +1,6 @@
 from algorithms.objects.user import User
-from server.routers.model import CONDITIONS, CACHED_HANDBOOK_NOTE, ValidPlannerData
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, ValidPlannerData
+
 
 def validate_terms(data: ValidPlannerData):
     emptyUserData = {

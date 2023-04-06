@@ -4,17 +4,17 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
-from pydantic import BaseModel
-
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
+from pydantic import BaseModel
+
 
 class Programs(BaseModel):
     programs: dict
 
 
 class Specialisations(BaseModel):
-    spec: dict[str, dict] # cant do more specific because NotRequired doesnt work
+    spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work
 
 
 class ProgramCourses(BaseModel):
@@ -189,6 +189,7 @@ class PlannerLocalStorage(TypedDict):
     startYear: int
     isSummerEnabled: bool
     years: list[dict[str, list[str]]]
+    # todo: give `dict` its own params
     courses: dict[str, dict]
 
 class CoursesStorage(TypedDict):
@@ -200,7 +201,6 @@ class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CoursesStorage]
-    
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage
@@ -209,7 +209,6 @@ class LocalStorage(BaseModel):
 class CourseMark(BaseModel):
     course: str
     mark: int
-
 
 class CourseCodes(BaseModel):
     courses: list[str]
@@ -228,7 +227,6 @@ class CoursesPathDict(TypedDict):
 class Description(BaseModel):
     description: str
 
-
 class SpecialisationTypes(BaseModel):
     types: list[str]
 
@@ -244,7 +242,7 @@ class TermsList(BaseModel):
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
     uoc: int
-    
+
 # Used in addToUnplanned, removeCourse and unscheduleCourse routes
 class CourseCode(BaseModel):
     courseCode: str
@@ -266,9 +264,9 @@ class PlannedToTerm(BaseModel):
     courseCode: str
 
 class ProgramTime(BaseModel):
-    startTime: tuple[int, int] # (Year, Term) start of program
+    startTime: tuple[int, int]  # (Year, Term) start of program
     endTime: tuple[int, int]
-    uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+    uocMax: list[int]  # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
 class TermsOffered(TypedDict):
     terms: dict[str, list[str]]

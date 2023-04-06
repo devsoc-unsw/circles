@@ -2,27 +2,19 @@
 route for planner algorithms
 """
 
-from typing import Tuple, List, Dict, Set, Optional
-from operator import itemgetter
 from math import lcm
-from fastapi import APIRouter, HTTPException
-from algorithms.validate_term_planner import validate_terms
-from algorithms.autoplanning import autoplan
-from algorithms.objects.user import User
-from server.routers.model import (ValidCoursesState, PlannerData,
-                                  ValidPlannerData, ProgramTime)
-from server.routers.courses import get_course
-from server.routers.utility import get_course_object
-from server.routers.model import (ValidCoursesState, ValidPlannerData,
-                                  PlannerData, CourseCode, UnPlannedToTerm,
-                                  PlannedToTerm, UserData, ProgramTime, CourseCodes,
-                                  CONDITIONS, CACHED_HANDBOOK_NOTE
-                                  )
-from server.routers.user import get_user, set_user
-from server.config import DUMMY_TOKEN
-from algorithms.objects.user import User
-from algorithms.autoplanning import autoplan
+from operator import itemgetter
+from typing import Dict, List, Optional, Tuple
 
+from algorithms.autoplanning import autoplan
+from algorithms.validate_term_planner import validate_terms
+from fastapi import APIRouter, HTTPException
+from server.config import DUMMY_TOKEN
+from server.routers.courses import get_course
+from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
+                                  ValidCoursesState, ValidPlannerData)
+from server.routers.user import get_user, set_user
+from server.routers.utility import get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
 
@@ -87,9 +79,9 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
             - courseCode(str): The course to add to the unplanned column
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    # TODO: Please just check that the course is not in any other planned
-    # term - else: u die cos u have a duplicate
     user = get_user(token)
+    if data.courseCode in user['planner']['courses'].keys() or data.courseCode in user['planner']['unplanned']:
+        raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
     user['planner']['unplanned'].append(data.courseCode)
     set_user(token, user, True)
 
@@ -278,7 +270,7 @@ def remove_all(token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 
-@router.post("/unscheduleCourse")
+@router.post("/unscheduleCourse")  # TODO: What if someone is enrolled in the same couse twice?
 def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
     """
     Moves a course out of a term and into the user's unplanned column
@@ -289,19 +281,19 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    planner = user['planner']
 
-    removed: Set[str] = set()
-    # Remove every instance of the course from each year
-    for year in planner['years']:
+    # Remove every instance of the course from each year and add to unplanned
+    removed = False
+    for year in user['planner']['years']:
         for course_list in year.values():
             if data.courseCode in course_list:
+                removed = True
                 course_list.remove(data.courseCode)
-                removed.add(data.courseCode)
+                user['planner']['unplanned'].append(data.courseCode)
 
-    # Add the course to unplanned
-    for item in removed:
-        planner['unplanned'].append(item)
+    if not removed:
+        raise HTTPException(status_code=400, detail=f'{data.courseCode} not found in planner')
+
     set_user(token, user, True)
 
 
@@ -314,17 +306,13 @@ def unschedule_all(token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    removed: Set[str] = set()
 
-    # Remove every course from each year
+    # Remove every course from each term and add it to unplanned
     for year in user['planner']['years']:
-        for term, course_list in year.items():
-            removed = removed | set(course_list)
-            year[term] = []
+        for course_list in year.values():
+            user['planner']['unplanned'].extend(course_list)
+            course_list.clear()
 
-    # Add every removed course to unplanned column
-    for course in removed:
-        user['planner']['unplanned'].append(course)
     set_user(token, user, True)
 
 
@@ -424,40 +412,41 @@ def out_of_bounds(num_years, dest_row, terms):
     return dest_row + min_row_offset < 0 or dest_row + max_row_offset > num_years - 1
 
 
-@router.post("/autoplanning/",
-             response_model=dict,
-             responses={
-                 400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
-                 200: {
-                     "description": "Successful Response",
-                     "content": {
-                         "plan": [
-                             {
-                                 "T1": [
-                                     "COMP1511",
-                                     "MATH1131"
-                                 ],
-                                 "T3": [
-                                     "COMP1521"
-                                 ]
-                             },
-                             {
-                                 "T0": [
-                                     "COMP2521"
-                                 ],
-                                 "T2": [
-                                     "COMP1531"
-                                 ],
-                                 "T1": [
-                                     "COMP3821",
-                                     "COMP3891",
-                                 ]
-                             }
-                         ]
-                     }
-                 }
-             }
-             )
+# TODO: Broken till migration is fixed; Previous planner methods are deprecated
+# @router.post("/autoplanning/",
+#              response_model=dict,
+#              responses={
+#                  400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
+#                  200: {
+#                      "description": "Successful Response",
+#                      "content": {
+#                          "plan": [
+#                              {
+#                                  "T1": [
+#                                      "COMP1511",
+#                                      "MATH1131"
+#                                  ],
+#                                  "T3": [
+#                                      "COMP1521"
+#                                  ]
+#                              },
+#                              {
+#                                  "T0": [
+#                                      "COMP2521"
+#                                  ],
+#                                  "T2": [
+#                                      "COMP1531"
+#                                  ],
+#                                  "T1": [
+#                                      "COMP3821",
+#                                      "COMP3891",
+#                                  ]
+#                              }
+#                          ]
+#                      }
+#                  }
+#              }
+#              )
 def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
     print("started to_user")
     user = plannerData.to_user()
@@ -482,7 +471,7 @@ def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: 
         autoplanned = autoplan(
             courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error: {e}")
+        raise HTTPException(status_code=400, detail=f"Error: {e}") from e
 
     result: dict[str, list[dict]] = {"plan": [{} for _ in range(
         programTime.endTime[0] - programTime.startTime[0] + 1)]}

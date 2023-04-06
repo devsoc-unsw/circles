@@ -1,24 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
-import { PlannerCourse } from 'types/planner';
-import prepareUserPayload from 'utils/prepareUserPayload';
-import type { RootState } from 'config/store';
-import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { handleAddToUnplanned } from 'utils/api/plannerApi';
+import { getUserPlanner } from 'utils/api/userApi';
+import { removeCourses } from 'reducers/plannerSlice';
 
 interface PlannerButtonProps {
   course: Course;
 }
 
 const PlannerButton = ({ course }: PlannerButtonProps) => {
-  const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
-  const { degree, planner } = useSelector((state: RootState) => state);
-
   const id = course.code;
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const plannerQuery = useQuery('planner', getUserPlanner);
+
+  // TODO avoid undefined by checking loading and error state
+  // if (plannerQuery.isLoading) {
+  // }
+  // if (plannerQuery.isError) {
+  // }
+
+  const planner: PlannerResponse = plannerQuery.data || badPlanner;
+
+  const addToUnplannedMutation = useMutation(handleAddToUnplanned, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: () => {
+      // eslint-disable-next-line no-console
+      console.error('Error adding to unplanned', addToUnplannedMutation.error);
+    }
+  });
+
+  const coursesInPlanner = planner.courses;
   const [isAddedInPlanner, setIsAddedInPlanner] = useState(!!coursesInPlanner[id]);
   const [loading, setLoading] = useState(false);
 
@@ -38,31 +58,17 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
 
   const addToPlanner = () => {
     if (course) {
-      const courseData: PlannerCourse = {
-        title: course.title,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-        isMultiterm: course.is_multiterm,
-        supressed: false,
-        mark: undefined
-      };
-      dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+      addToUnplannedMutation.mutate(id);
       addCourseToPlannerTimeout(true);
     }
   };
 
+  // TODO will be deprecated
   const removeFromPlanner = async () => {
     try {
       const res = await axios.post<UnselectCourses>(
-        `/courses/unselectCourse/${id}`,
-        JSON.stringify(prepareUserPayload(degree, planner))
+        `/courses/unselectCourse/${id}`
+        // JSON.stringify(prepareUserPayload(degree, planner))
       );
       addCourseToPlannerTimeout(false);
       dispatch(removeCourses(res.data.courses));

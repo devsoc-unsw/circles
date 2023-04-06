@@ -3,10 +3,9 @@ General purpose utility functions for the server, that do not fit
 specifically in any one function
 """
 
-
 from typing import Callable, Optional, TypeVar
-from algorithms.objects.course import Course
 
+from algorithms.objects.course import Course
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
 
@@ -63,6 +62,5 @@ def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Option
             terms_possible,
             locked_offering
         )
-    except KeyError:
-        raise Exception(f"Course {code} not found (course is most likely discontinued)")
-
+    except KeyError as err:
+        raise KeyError(f"Course {code} not found (course is most likely discontinued)") from err

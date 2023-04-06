@@ -1,4 +1,5 @@
 import json
+
 import pytest
 from algorithms.objects.categories import Category, CourseCategory
 from algorithms.objects.user import User

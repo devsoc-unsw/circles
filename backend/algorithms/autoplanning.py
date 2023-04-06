@@ -1,10 +1,12 @@
 """ an autoplanning solver which takes in courses and spits a plan """
 from pprint import pprint
 from typing import Tuple
-from ortools.sat.python import cp_model # type: ignore
+
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
+from ortools.sat.python import cp_model  # type: ignore
 from server.routers.model import CONDITIONS
+
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
 
@@ -51,13 +53,13 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
             model.Add(v == index).OnlyEnforceIf(b)
             model.Add(v != index).OnlyEnforceIf(b.Not())
             boolean_indexes.append(b)
-        # if the course is in term 'index', only allow 0 to m UOC to exist in that term. 
+        # if the course is in term 'index', only allow 0 to m UOC to exist in that term.
         model.AddReservoirConstraintWithActive(
             variables,
-            list(map_var_to_course(courses, var).uoc for var in variables), # this fills the resovoir by UoC units if active
-            boolean_indexes, # a course is only active if in term 'index'
+            list(map_var_to_course(courses, var).uoc for var in variables),  # this fills the resovoir by UoC units if active
+            boolean_indexes,  # a course is only active if in term 'index'
             0,
-            m # uoc_max
+            m  # uoc_max
         )
 
     # 4. enforce prereqs, only if not locked by user
@@ -74,10 +76,9 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         )
     solver = cp_model.CpSolver()
     status: int = solver.Solve(model)
-    if status == 3 or status == 1:
-        raise Exception(f'your courses are impossible to put in these terms! Error code: {status}')
-    else:
-        return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
+    if status in [1, 3]:
+        raise ValueError(f'your courses are impossible to put in these terms! Error code: {status}')
+    return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
 
 
 if __name__ == '__main__':
@@ -115,4 +116,3 @@ if __name__ == '__main__':
         (2023, 3),
         [12, 20, 20, 20, 12, 20, 20, 20, 10, 20, 20, 20]
     ))
-
