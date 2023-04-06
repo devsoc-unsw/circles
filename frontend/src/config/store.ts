@@ -23,7 +23,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
     preloadedState
   });
 
-const persistConfig = {
+export const persistConfig = {
   key: 'root',
   version: persistVersion,
   storage,

@@ -15,7 +15,6 @@ import {
   moveCourse,
   setUnplannedCourseToTerm,
   toggleWarnings,
-  unschedule,
   updateLegacyOfferings
 } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
@@ -31,7 +30,7 @@ const DragDropContext = React.lazy(() =>
 );
 
 const TermPlanner = () => {
-  const { showWarnings } = useSelector((state: RootState) => state.settings);
+  const { showWarnings, token } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
@@ -123,7 +122,7 @@ const TermPlanner = () => {
     }
   };
 
-  const handleOnDragEnd: OnDragEndResponder = (result) => {
+  const handleOnDragEnd: OnDragEndResponder = async (result) => {
     setDraggingCourse('');
     setCheckYearMultiTerm('');
     setMultiCourse('');
@@ -176,12 +175,14 @@ const TermPlanner = () => {
 
     if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
-      dispatch(
-        unschedule({
-          destIndex,
-          code: draggableId
-        })
-      );
+      try {
+        await axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }), {
+          params: { token }
+        });
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error at unscheduleCourse', e);
+      }
       return;
     }
 
