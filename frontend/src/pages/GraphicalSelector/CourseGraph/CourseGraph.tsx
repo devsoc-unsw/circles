@@ -66,7 +66,7 @@ const CourseGraph = ({
 
   const graphRef = useRef<Graph | null>(null);
   const initialisingStart = useRef(false); // prevents multiple graphs being loaded
-  const initialisingEnd = useRef(false); // prevents multiple graphs being loaded
+  const initialisingEnd = useRef(false); // unhide graph after loading complete
   const [unlockedCourses, setUnlockedCourses] = useState(false);
   const [prerequisites, setPrerequisites] = useState<CoursePrerequisite>({});
 
