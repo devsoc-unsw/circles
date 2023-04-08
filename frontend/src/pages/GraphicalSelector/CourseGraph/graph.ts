@@ -159,11 +159,11 @@ const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
 const mapNodeStyle = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
-  courses: Record<string, CourseValidation>,
+  courses: Record<string, CourseValidation> | undefined,
   theme: string
 ) => {
   const isPlanned = plannedCourses[courseCode];
-  const isUnlocked = courses[courseCode]?.unlocked;
+  const isUnlocked = courses![courseCode]?.unlocked;
 
   if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
   if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };

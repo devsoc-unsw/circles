@@ -10,6 +10,7 @@ import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseValidation } from 'types/courses';
 import { useDebouncedCallback } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
@@ -55,7 +56,8 @@ const CourseGraph = ({
   const previousTheme = useRef<typeof theme>(theme);
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner, courses } = useSelector((state: RootState) => state);
+  const { degree, planner } = useSelector((state: RootState) => state);
+  const allUnlocked = useRef<Record<string, CourseValidation> | undefined>({});
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
@@ -65,6 +67,15 @@ const CourseGraph = ({
   const [prerequisites, setPrerequisites] = useState<CoursePrerequisite>({});
 
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
+    if (res.status === 'rejected') {
+      // eslint-disable-next-line no-console
+      console.error('Rejected request at unwrap', res.reason);
+      return undefined;
+    }
+    return res.value;
+  }
 
   useEffect(() => {
     const isCoursePrerequisite = (target: string, neighbour: string) => {
@@ -120,7 +131,7 @@ const CourseGraph = ({
         const courseId = n.getID();
         graphRef.current?.updateItem(
           n as Item,
-          mapNodeStyle(courseId, plannedCourses, courses.courses, theme)
+          mapNodeStyle(courseId, plannedCourses, allUnlocked.current, theme)
         );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
         n.toFront();
@@ -151,7 +162,10 @@ const CourseGraph = ({
       graphRef.current?.paint();
     };
 
-    const initialiseGraph = async (courseCodes: string[], courseEdges: CourseEdge[]) => {
+    const initialiseGraph = async (
+      courseCodes: string[] | undefined,
+      courseEdges: CourseEdge[] | undefined
+    ) => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -187,7 +201,7 @@ const CourseGraph = ({
 
       graphRef.current = new Graph(graphArgs);
       const data = {
-        nodes: courseCodes.map((c) => mapNodeStyle(c, plannedCourses, courses.courses, theme)),
+        nodes: courseCodes?.map((c) => mapNodeStyle(c, plannedCourses, allUnlocked.current, theme)),
         edges: courseEdges
       };
 
@@ -210,9 +224,9 @@ const CourseGraph = ({
     };
 
     // Store a hashmap for performance reasons when highlighting nodes
-    const makePrerequisitesMap = (edges: CourseEdge[]) => {
+    const makePrerequisitesMap = (edges: CourseEdge[] | undefined) => {
       const prereqs: CoursePrerequisite = prerequisites;
-      edges.forEach((e) => {
+      edges?.forEach((e) => {
         if (!prereqs[e.target]) {
           prereqs[e.target] = [e.source];
         } else {
@@ -228,7 +242,7 @@ const CourseGraph = ({
       nodes?.map((n) =>
         graphRef.current?.updateItem(
           n,
-          mapNodeStyle(n.getID(), plannedCourses, courses.courses, theme)
+          mapNodeStyle(n.getID(), plannedCourses, allUnlocked.current, theme)
         )
       );
 
@@ -247,16 +261,38 @@ const CourseGraph = ({
       graphRef.current?.paint();
     };
 
+    const getUnlocked = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.post<CoursesAllUnlocked>(
+          '/courses/getAllUnlocked/',
+          JSON.stringify(prepareUserPayload(degree, planner))
+        );
+        allUnlocked.current = res.data.courses_state;
+        repaintCanvas();
+        setLoading(false);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('Error at updating allUnlocked', err);
+      }
+    };
+
     const setupGraph = async () => {
       try {
         initialising.current = true;
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
-        const { edges } = res.data;
-        makePrerequisitesMap(edges);
-        if (res.data.courses.length !== 0 && edges.length !== 0) {
-          initialiseGraph(res.data.courses, edges);
+        const res = await Promise.allSettled([
+          axios.get<GraphPayload>(`/programs/graph/${programCode}/${specs.join('+')}`),
+          axios.post<CoursesAllUnlocked>(
+            '/courses/getAllUnlocked/',
+            JSON.stringify(prepareUserPayload(degree, planner))
+          )
+        ]);
+        const [programsRes, coursesRes] = res;
+        const programs = unwrap(programsRes)?.data;
+        allUnlocked.current = unwrap(coursesRes)?.data.courses_state;
+        makePrerequisitesMap(programs?.edges);
+        if (programs?.courses.length !== 0 && programs?.edges.length !== 0) {
+          initialiseGraph(programs?.courses, programs?.edges);
         }
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -267,7 +303,7 @@ const CourseGraph = ({
     if (!initialising.current) setupGraph();
     if (hasPlannerUpdated.current) {
       hasPlannerUpdated.current = false;
-      repaintCanvas();
+      getUnlocked();
     }
     // Change theme without re-render
     if (previousTheme.current !== theme) {
@@ -281,7 +317,8 @@ const CourseGraph = ({
     specs,
     theme,
     prerequisites,
-    courses,
+    degree,
+    planner,
     hasPlannerUpdated
   ]);
 
