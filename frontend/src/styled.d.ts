@@ -135,6 +135,8 @@ declare module 'styled-components' {
       tabBottomBorderColor: string;
       tabTextColor: string;
       tabBoxShadow?: string;
+      loadingIcon?: string;
+      loadingText: string;
     };
     sidebarDrawer: {
       backgroundColor: string;
