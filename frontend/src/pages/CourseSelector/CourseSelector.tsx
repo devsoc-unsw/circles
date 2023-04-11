@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -60,14 +59,14 @@ const CourseSelector = () => {
   const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
   useEffect(() => {
     const minMenuWidth = 100;
-    const maxMenuWidth = 60 * window.innerWidth / 100;
+    const maxMenuWidth = (60 * window.innerWidth) / 100;
+    const resizerDiv = divRef.current as HTMLDivElement;
     const setNewWidth = (clientX: number) => {
       if (clientX > minMenuWidth && clientX < maxMenuWidth) {
         resizerDiv.style.left = `${clientX}px`;
         setMenuOffset(clientX);
       }
     };
-    const resizerDiv = divRef.current as HTMLDivElement;
     const handleResize = (ev: globalThis.MouseEvent) => {
       setNewWidth(ev.clientX);
     };
@@ -85,14 +84,14 @@ const CourseSelector = () => {
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
   }, []);
 
-  const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), []);
+  const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), [dispatch]);
 
   return (
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner />
         <CourseTabs />
-        <S.ContentWrapper offset={menuOffset} >
+        <S.ContentWrapper offset={menuOffset}>
           <CourseMenu structure={structure} />
           <S.ContentResizer ref={divRef} offset={menuOffset} />
           {courseCode ? (
