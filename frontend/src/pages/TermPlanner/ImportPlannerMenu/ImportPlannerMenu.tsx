@@ -7,11 +7,7 @@ import { Course } from 'types/api';
 import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
-import {
-  moveCourse,
-  toggleSummer,
-  updateStartYear
-} from 'reducers/plannerSlice';
+import { moveCourse, toggleSummer } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -29,7 +25,7 @@ const ImportPlannerMenu = () => {
       // eslint-disable-next-line no-console
       console.error('Error at handleSetUnplannedCourseToTerm: ' + err);
     }
-  }
+  };
 
   const upload = () => {
     inputRef.current?.click();
@@ -98,15 +94,19 @@ const ImportPlannerMenu = () => {
               { numYears: fileInJson.numYears },
               { params: { token } }
             );
+            await axios.put(
+              '/user/updateStartYear',
+              { startYear: fileInJson.startYear },
+              { params: { token } }
+            );
           } catch {
             openNotification({
               type: 'error',
-              message: 'Error setting degree length',
-              description: 'There was an error updating the degree length.'
+              message: 'Error setting degree start year or length',
+              description: 'There was an error updating the degree start year or length.'
             });
             return;
           }
-          dispatch(updateStartYear(fileInJson.startYear));
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             dispatch(toggleSummer());
           }
@@ -129,11 +129,11 @@ const ImportPlannerMenu = () => {
                     })
                   );
                   const data = {
-                    'destRow': destRow,
-                    'destTerm': destTerm,
-                    'destIndex': destIndex,
-                    'courseCode': code
-                  }
+                    destRow: destRow,
+                    destTerm: destTerm,
+                    destIndex: destIndex,
+                    courseCode: code
+                  };
                   handleSetUnplannedCourseToTerm(data);
                 }
               });

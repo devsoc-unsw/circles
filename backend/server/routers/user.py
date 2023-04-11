@@ -97,7 +97,7 @@ def default_cs_user() -> Storage:
             'T': 0
         },
         'unplanned': [],
-        'isSummerEnabled': True, 
+        'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
         'years': [],
         'courses': {},
@@ -139,24 +139,11 @@ def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
 @router.put("/updateStartYear")
 def update_start_year(startYear: int, token: str = DUMMY_TOKEN):
     """
-        update the start year the user is taking. We assume that the number of years
-        will stay the same, and that the user will want their courses to be matched
-        *by year taken*.
+        Update the start year the user is taking.
+        The degree length stays the same and the contents are shifted to fit the new start year.
     """
     user = get_user(token)
-    if startYear == user['planner']['startYear']:
-        return
-    diff = abs(startYear - user['planner']['startYear'])
-    if startYear > user['planner']['startYear']:
-        # yeet the early years and add back the years to the end
-        user['planner']['years'] = \
-            user['planner']['years'][diff:] + \
-            ([{"T0": [], "T1": [], "T2": [], "T3": []}] * diff)
-    else:
-        # pad the beginning and yeet the end
-        user['planner']['years'] = \
-            ([{"T0": [], "T1": [], "T2": [], "T3": []}] * diff) + \
-            user['planner']['years'][:-diff]  # type: ignore
+    user['planner']['startYear'] = startYear
     set_user(token, user, True)
 
 
