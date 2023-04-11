@@ -6,19 +6,19 @@ const ContainerWrapper = styled.div`
   height: calc(100vh - var(--navbar-height));
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ offset?: number }>`
   display: grid;
-  grid-template-columns: 20vw auto;
+  grid-template-columns: ${({ offset }) => (offset ? `${offset}px` : '20vw')} auto;
   height: var(--cs-bottom-cont-height);
 `;
 
-const ContentResizer = styled.div`
+const ContentResizer = styled.div<{ offset?: number }>`
   cursor: col-resize;
   height: 100%;
   width: 6px;
   background-color: transparent;
   position: fixed;
-  left: 20vw;
+  left: ${({ offset }) => (offset ? `${offset}px` : '20vw')};
   margin-left: -3px;
   z-index: 100;
 `;

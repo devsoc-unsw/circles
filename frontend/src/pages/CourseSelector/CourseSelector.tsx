@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Structure } from 'types/api';
@@ -57,49 +57,49 @@ const CourseSelector = () => {
   }, [programCode, specs]);
 
   const divRef = useRef<null | HTMLDivElement>(null);
-  const menuRef = useRef<null | HTMLDivElement>(null);
+  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
   useEffect(() => {
     const minMenuWidth = 100;
     const maxMenuWidth = 60 * window.innerWidth / 100;
     const setNewWidth = (clientX: number) => {
       if (clientX > minMenuWidth && clientX < maxMenuWidth) {
-        menuDiv.style.gridTemplateColumns = `${clientX}px auto`;
         resizerDiv.style.left = `${clientX}px`;
+        setMenuOffset(clientX);
       }
     };
     const resizerDiv = divRef.current as HTMLDivElement;
-    const menuDiv = menuRef.current as HTMLDivElement;
     const handleResize = (ev: globalThis.MouseEvent) => {
       setNewWidth(ev.clientX);
     };
     const endResize = (ev: MouseEvent) => {
-      // menuDiv.style.gridTemplateColumns = `max(${ev.clientX}px, 5vw) auto`;
+      setNewWidth(ev.clientX);
       window.removeEventListener('mousemove', handleResize);
       window.removeEventListener('mouseup', endResize); // remove myself
     };
     const startResize = (ev: MouseEvent) => {
       ev.preventDefault(); // stops highlighting text
-      resizerDiv.style.left = `${ev.clientX}px`;
       window.addEventListener('mousemove', handleResize);
       window.addEventListener('mouseup', endResize);
     };
-    menuDiv && resizerDiv?.addEventListener('mousedown', startResize);
+    resizerDiv?.addEventListener('mousedown', startResize);
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
   }, []);
+
+  const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), []);
 
   return (
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner />
         <CourseTabs />
-        <S.ContentWrapper ref={menuRef}>
+        <S.ContentWrapper offset={menuOffset} >
           <CourseMenu structure={structure} />
-          <S.ContentResizer style={{}} ref={divRef} />
+          <S.ContentResizer ref={divRef} offset={menuOffset} />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel
                 courseCode={courseCode}
-                onCourseClick={(code) => dispatch(addTab(code))}
+                onCourseClick={onCourseClick}
                 courseDescInfoCache={courseDescInfoCache}
               />
             </div>

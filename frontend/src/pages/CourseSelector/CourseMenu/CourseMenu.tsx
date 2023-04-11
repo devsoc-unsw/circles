@@ -203,4 +203,4 @@ const CourseMenu = ({ structure }: Props) => {
   );
 };
 
-export default CourseMenu;
+export default React.memo(CourseMenu);
