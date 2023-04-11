@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/colors": "7.0.0",
-    "@ant-design/icons": "4.8.0",
+    "@ant-design/icons": "5.0.1",
     "@ant-design/plots": "1.2.5",
     "@antv/algorithm": "0.1.25",
     "@antv/g6": "4.8.8",
