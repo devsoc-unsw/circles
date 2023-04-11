@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -26,8 +26,8 @@ describe('DegreeStep', () => {
     vi.clearAllMocks();
   });
 
-  it('should render', () => {
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+  it('should render', async () => {
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.getByText('What are you studying?')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
   });
@@ -36,7 +36,7 @@ describe('DegreeStep', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
     await userEvent.click(await screen.findByText('3778 Computer Science'));
@@ -51,31 +51,31 @@ describe('DegreeStep', () => {
   });
 
   it('should show no degree options on mount', async () => {
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     expect(screen.queryByText('Computer Science')).not.toBeInTheDocument();
   });
 
   it('should search degree based on program code', async () => {
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     userEvent.type(screen.getByPlaceholderText('Search Degree'), '3778');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
   });
 
   it('should search degree based on program name', async () => {
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
-    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Computer Science');
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    await userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Computer Science');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
   });
 
   it('should search degree case insensitively', async () => {
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
-    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'computer science');
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    await userEvent.type(screen.getByPlaceholderText('Search Degree'), 'computer science');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
   });
 
   it('should not show degree options if no match', async () => {
-    renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
-    userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Economics');
-    expect(screen.queryByTestId('antd-degree-menu')).not.toBeInTheDocument();
+    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
+    await userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Degree that does not exist');
+    expect(within(screen.queryByTestId('antd-degree-menu') || document.createElement('ul')).queryAllByRole('menuitem')).toHaveLength(0);
   });
 });

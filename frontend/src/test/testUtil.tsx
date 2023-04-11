@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import type { PreloadedState } from '@reduxjs/toolkit';
-import type { RenderOptions } from '@testing-library/react';
+import { RenderOptions, act } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { AppStore, RootState, setupStore } from 'config/store';
@@ -17,7 +17,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const renderWithProviders = (
+export const renderWithProviders = async (
   ui: React.ReactElement,
   {
     preloadedState = {},
@@ -36,5 +36,5 @@ export const renderWithProviders = (
   );
 
   // Return an object with the store and all of RTL's query functions
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+  return { store, ...await act( async () => render(ui, { wrapper: Wrapper, ...renderOptions }) ) };
 };
