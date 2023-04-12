@@ -4,18 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
-import { PlannedToTerm, Term } from 'types/planner';
+import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
 import getAllCourseOfferings from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import {
-  moveCourse,
-  toggleWarnings,
-  updateLegacyOfferings
-} from 'reducers/plannerSlice';
+import { moveCourse, toggleWarnings, updateLegacyOfferings } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
 import OptionsHeader from './OptionsHeader';
@@ -23,7 +19,6 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { checkMultitermInBounds, isPlannerEmpty } from './utils';
-import { UnPlannedToTerm } from 'types/planner';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -42,8 +37,8 @@ const TermPlanner = () => {
     try {
       await axios.post('planner/plannedToTerm', data, { params: { token } });
     } catch (err) {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      console.error(`Error at setPlannedCourseToTerm: ${err}`);
+      // eslint-disable-next-line  no-console
+      console.error('Error at setPlannedCourseToTerm:', err);
     }
   };
 
@@ -52,9 +47,9 @@ const TermPlanner = () => {
       await axios.post('planner/unPlannedToTerm', data, { params: { token } });
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.error('Error at handleSetUnplannedCourseToTerm: ' + err);
+      console.error('Error at handleSetUnplannedCourseToTerm:', err);
     }
-  }
+  };
 
   const dispatch = useDispatch();
 
@@ -201,11 +196,11 @@ const TermPlanner = () => {
     if (source.droppableId === 'unplanned') {
       // === move unplanned course to term ===
       const data = {
-        'destRow': destRow,
-        'destTerm': destTerm,
-        'destIndex': destIndex,
-        'courseCode': draggableId
-      }
+        destRow,
+        destTerm,
+        destIndex,
+        courseCode: draggableId
+      };
       handleSetUnplannedCourseToTerm(data);
     } else {
       // === move between terms ===

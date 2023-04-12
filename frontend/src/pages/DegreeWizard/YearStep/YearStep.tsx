@@ -6,7 +6,6 @@ import axios from 'axios';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
-import { useAppDispatch } from 'hooks';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -22,7 +21,6 @@ type Props = {
 
 const YearStep = ({ incrementStep }: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useAppDispatch();
   const { token } = useSelector((state: RootState) => state.settings);
 
   return (
