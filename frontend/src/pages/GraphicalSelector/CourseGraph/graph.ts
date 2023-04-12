@@ -1,12 +1,13 @@
 import type { Arrow } from '@antv/g6';
 import { PlannerCourse } from 'types/planner';
 
-const defaultNode = {
+const plannedNode = {
   size: 70,
   style: {
     fill: '#9254de',
     stroke: '#9254de',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    lineWidth: 1
   },
   labelCfg: {
     style: {
@@ -14,6 +15,42 @@ const defaultNode = {
       fontFamily: 'Arial',
       cursor: 'pointer'
     }
+  }
+};
+
+const lockedNode = (theme: string) => ({
+  style: {
+    fill: theme === 'light' ? '#fff' : '#000',
+    stroke: theme === 'light' ? '#9254de' : '#d7b7fd',
+    lineWidth: 1
+  },
+  labelCfg: {
+    style: {
+      fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+    }
+  }
+});
+
+const prereqNode = (theme: string) => ({
+  style: {
+    stroke: theme === 'light' ? '#000' : '#fff',
+    lineWidth: 2
+  }
+});
+
+const sameNode = (courseCode: string) => ({
+  id: courseCode,
+  label: courseCode
+});
+
+const nodeStateStyles = {
+  hover: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
+  },
+  click: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
   }
 };
 
@@ -28,54 +65,92 @@ const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
   }
 });
 
-// plannedCourses is an object of with keys of courseCodes
+const edgeOutHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+  id,
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#999' : '#aaa',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#999' : '#aaa'
+  }
+});
+
+const edgeInHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+  id,
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#000' : '#fff',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#000' : '#fff'
+  }
+});
+
+const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
+  return {
+    id,
+    ...defaultEdge(arrow, theme)
+  };
+};
+
 const mapNodeStyle = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
   theme: string
 ) => {
-  // determine if planned or unplanned
-  if (plannedCourses[courseCode]) {
-    // uses default node style
-    return { id: courseCode, label: courseCode };
-  }
+  // If planned, keep default styling. Otherwise apply lockedNode styling.
+  if (plannedCourses[courseCode]) return sameNode(courseCode);
+  return { ...sameNode(courseCode), ...lockedNode(theme) };
+};
+
+const mapNodePrereq = (courseCode: string, theme: string) => {
   return {
-    id: courseCode,
-    label: courseCode,
+    ...sameNode(courseCode),
+    ...prereqNode(theme)
+  };
+};
+
+const mapNodeRestore = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) return { ...sameNode(courseCode), ...plannedNode };
+  return { ...sameNode(courseCode), ...lockedNode(theme) };
+};
+
+const mapNodeOpacity = (courseCode: string, opacity: number) => {
+  return {
+    ...sameNode(courseCode),
     style: {
-      fill: theme === 'light' ? '#fff' : '#000',
-      stroke: theme === 'light' ? '#9254de' : '#d7b7fd'
+      opacity
     },
     labelCfg: {
       style: {
-        fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+        opacity
       }
     }
   };
 };
 
-const nodeStateStyles = {
-  hover: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
-  },
-  click: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
+const edgeOpacity = (id: string, opacity: number) => ({
+  id,
+  style: {
+    opacity
   }
-};
+});
 
-const nodeLabelHoverStyle = (courseCode: string) => {
-  return {
-    id: courseCode,
-    label: courseCode,
-    labelCfg: {
-      style: {
-        fill: '#fff'
-      }
+const nodeLabelHoverStyle = (courseCode: string) => ({
+  ...sameNode(courseCode),
+  labelCfg: {
+    style: {
+      fill: '#fff'
     }
-  };
-};
+  }
+});
 
 const nodeLabelUnhoverStyle = (
   courseCode: string,
@@ -85,8 +160,7 @@ const nodeLabelUnhoverStyle = (
   if (plannedCourses[courseCode]) {
     // uses default node style with label color changed
     return {
-      id: courseCode,
-      label: courseCode,
+      ...sameNode(courseCode),
       labelCfg: {
         style: {
           fill: '#fff'
@@ -95,8 +169,7 @@ const nodeLabelUnhoverStyle = (
     };
   }
   return {
-    id: courseCode,
-    label: courseCode,
+    ...sameNode(courseCode),
     labelCfg: {
       style: {
         fill: theme === 'light' ? '#9254de' : '#d7b7fd'
@@ -107,9 +180,16 @@ const nodeLabelUnhoverStyle = (
 
 export {
   defaultEdge,
-  defaultNode,
+  edgeInHoverStyle,
+  edgeOpacity,
+  edgeOutHoverStyle,
+  edgeUnhoverStyle,
+  mapNodeOpacity,
+  mapNodePrereq,
+  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
-  nodeStateStyles
+  nodeStateStyles,
+  plannedNode
 };

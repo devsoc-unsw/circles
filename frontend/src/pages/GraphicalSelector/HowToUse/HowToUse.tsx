@@ -7,6 +7,8 @@ import step2Dark from 'assets/GraphicalSelectorHelp/step2-dark.jpg';
 import step2Light from 'assets/GraphicalSelectorHelp/step2-light.jpg';
 import step3Dark from 'assets/GraphicalSelectorHelp/step3-dark.jpg';
 import step3Light from 'assets/GraphicalSelectorHelp/step3-light.jpg';
+import step4Dark from 'assets/GraphicalSelectorHelp/step4-dark.jpg';
+import step4Light from 'assets/GraphicalSelectorHelp/step4-light.jpg';
 import type { RootState } from 'config/store';
 import CS from '../common/styles';
 import S from './styles';
@@ -21,6 +23,7 @@ const HowToUse = () => {
     if (num === 1) url = theme === 'light' ? step1Light : step1Dark;
     if (num === 2) url = theme === 'light' ? step2Light : step2Dark;
     if (num === 3) url = theme === 'light' ? step3Light : step3Dark;
+    if (num === 4) url = theme === 'light' ? step4Light : step4Dark;
     return url;
   };
 
@@ -42,9 +45,13 @@ const HowToUse = () => {
         </div>
         <S.ImageStep src={step(2)} alt="How to use the search bar infographic." />
         <div>
-          <CS.TextWrapper> 3. Click the course to view the course information! </CS.TextWrapper>
+          <CS.TextWrapper> 3. Hover over a course to see related courses. </CS.TextWrapper>
         </div>
-        <S.ImageStep src={step(3)} alt="Where to click to view course information infographic." />
+        <S.ImageStep src={step(3)} alt="How to quickly view related courses." />
+        <div>
+          <CS.TextWrapper> 4. Click the course to view the course information! </CS.TextWrapper>
+        </div>
+        <S.ImageStep src={step(4)} alt="Where to click to view course information infographic." />
       </S.ContentsWrapper>
     </S.Wrapper>
   );
