@@ -150,6 +150,7 @@ const mapNodePrereq = (courseCode: string, theme: string) => {
 const mapNodeRestore = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
+<<<<<<< HEAD
   courses: Record<string, CourseValidation>,
   theme: string
 ) => {
@@ -158,6 +159,11 @@ const mapNodeRestore = (
 
   if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
   if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
+=======
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) return { ...sameNode(courseCode), ...plannedNode };
+>>>>>>> dev
   return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
@@ -179,6 +185,7 @@ const edgeOpacity = (id: string, opacity: number) => ({
   id,
   style: {
     opacity
+<<<<<<< HEAD
   }
 });
 
@@ -202,6 +209,43 @@ const nodeLabelUnhoverStyle = (
   return {
     ...sameNode(courseCode),
     ...lockedLabel(theme)
+=======
+  }
+});
+
+const nodeLabelHoverStyle = (courseCode: string) => ({
+  ...sameNode(courseCode),
+  labelCfg: {
+    style: {
+      fill: '#fff'
+    }
+  }
+});
+
+const nodeLabelUnhoverStyle = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) {
+    // uses default node style with label color changed
+    return {
+      ...sameNode(courseCode),
+      labelCfg: {
+        style: {
+          fill: '#fff'
+        }
+      }
+    };
+  }
+  return {
+    ...sameNode(courseCode),
+    labelCfg: {
+      style: {
+        fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+      }
+    }
+>>>>>>> dev
   };
 };
 

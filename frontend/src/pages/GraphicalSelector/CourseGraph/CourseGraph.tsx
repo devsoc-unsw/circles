@@ -119,7 +119,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           mapNodeRestore(courseId, plannedCourses, courses.courses, theme)
         );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
-        n.toFront();
+       n.toFront();
       });
       graphRef.current?.getEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));

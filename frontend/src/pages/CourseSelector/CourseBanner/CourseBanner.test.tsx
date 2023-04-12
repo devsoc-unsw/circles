@@ -30,8 +30,8 @@ describe('CourseBanner', () => {
     vi.clearAllMocks();
   });
 
-  it('should render', () => {
-    renderWithProviders(<CourseBanner />, { preloadedState });
+  it('should render', async () => {
+    await renderWithProviders(<CourseBanner />, { preloadedState });
     expect(screen.getByText('3778 - Computer Science')).toBeInTheDocument();
     expect(screen.getByText('Search for a course...')).toBeInTheDocument();
   });
@@ -40,8 +40,8 @@ describe('CourseBanner', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<CourseBanner />, { preloadedState });
-    userEvent.type(screen.getByText('Search for a course...'), 'COMP1511');
+    await renderWithProviders(<CourseBanner />, { preloadedState });
+    await userEvent.type(screen.getByText('Search for a course...'), 'COMP1511');
     await userEvent.click(await screen.findByText('COMP1511: Programming Fundamentals'));
     expect(dummyDispatch).toBeCalledWith({
       payload: 'COMP1511',
