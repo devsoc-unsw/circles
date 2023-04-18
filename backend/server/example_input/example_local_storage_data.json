@@ -36,6 +36,96 @@
             "courses": {}
         }
     },
+    "summer_term": {
+        "degree": {
+            "programCode": "3707",
+            "specs": [ "COMPA1" ],
+            "isComplete": true
+        },
+        "planner": {
+            "years": [ {
+                    "T0": [
+                        "COMP1511",
+                        "MATH1141"
+                    ],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [
+                        "MATH1081"
+                    ],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0
+            },
+            "unplanned": [],
+            "startYear": 2020,
+            "numYears": 2,
+            "isSummerEnabled": true,
+            "courses": {
+                "COMP1511": {
+                    "title": "Programming Fundamentals",
+                    "termsOffered": [
+                        "T1",
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T0",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "MATH1141": {
+                    "title": "Higher Mathematics 1A",
+                    "termsOffered": [
+                        "T1",
+                        "T2"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2020T0",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                },
+                "MATH1081": {
+                    "title": "Discrete Mathematics",
+                    "termsOffered": [
+                        "T1",
+                        "T2",
+                        "T3"
+                    ],
+                    "UOC": 6,
+                    "plannedFor": "2021T1",
+                    "prereqs": "",
+                    "isLegacy": false,
+                    "isUnlocked": true,
+                    "warnings": [],
+                    "handbookNote": "",
+                    "isAccurate": true,
+                    "isMultiterm": false,
+                    "supressed": false
+                }
+            }
+        }
+    },
     "simple_year": {
         "degree": {
             "programCode": "3707",

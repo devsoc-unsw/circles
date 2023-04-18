@@ -32,6 +32,22 @@ export type PlannerYear = {
   T3: string[];
 };
 
+export type UnPlannedToTerm = {
+  destRow: number,
+  destTerm: string,
+  destIndex: number,
+  courseCode: string
+};
+
+export type PlannedToTerm = {
+  srcRow: number;
+  srcTerm: string;
+  destRow: number;
+  destTerm: string;
+  destIndex: number;
+  courseCode: string;
+};
+
 export type JSONPlanner = {
   startYear: number;
   numYears: number;

@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
 from fastapi import APIRouter
 from server.config import DUMMY_TOKEN
-from server.routers.model import CourseMark, CoursesStorage, LocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
@@ -58,7 +58,7 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     set_user(token, item)
 
 
-@router.get("/data/{token}")
+@router.get("/data/all/{token}")
 def get_user(token: str) -> Storage:
     data = usersDB['tokens'].find_one({'token': token})
     if data is None:
@@ -69,6 +69,17 @@ def get_user(token: str) -> Storage:
     return cast(Storage, usersDB['users'].find_one(
         {'_id': ObjectId(data['objectId'])}))
 
+@router.get("/data/degree/{token}")
+def get_user_degree(token: str) -> DegreeLocalStorage:
+    return get_user(token)['degree']
+
+@router.get("/data/planner/{token}")
+def get_user_planner(token: str) -> PlannerLocalStorage:
+    return get_user(token)['planner']
+
+@router.get("/data/courses/{token}")
+def get_user_p(token: str) -> dict[str, CoursesStorage]:
+    return get_user(token)['courses']
 
 # this is super jank - should never see prod
 @router.post("/register/{token}")
@@ -86,7 +97,7 @@ def default_cs_user() -> Storage:
             'T': 0
         },
         'unplanned': [],
-        'isSummerEnabled': True, 
+        'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
         'years': [],
         'courses': {},
@@ -107,6 +118,10 @@ def default_cs_user() -> Storage:
 def toggle_summer_term(token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
+    if not user['planner']['isSummerEnabled']:
+        for year in user['planner']['years']:
+            user['planner']['unplanned'].extend(year['T0'])
+            year['T0'] = []
     set_user(token, user, True)
 
 
@@ -128,24 +143,11 @@ def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
 @router.put("/updateStartYear")
 def update_start_year(startYear: int, token: str = DUMMY_TOKEN):
     """
-        update the start year the user is taking. We assume that the number of years
-        will stay the same, and that the user will want their courses to be matched
-        *by year taken*.
+        Update the start year the user is taking.
+        The degree length stays the same and the contents are shifted to fit the new start year.
     """
     user = get_user(token)
-    if startYear == user['planner']['startYear']:
-        return
-    diff = abs(startYear - user['planner']['startYear'])
-    if startYear > user['planner']['startYear']:
-        # yeet the early years and add back the years to the end
-        user['planner']['years'] = \
-            user['planner']['years'][diff:] + \
-            ([{"T0": [], "T1": [], "T2": [], "T3": []}] * diff)
-    else:
-        # pad the beginning and yeet the end
-        user['planner']['years'] = \
-            ([{"T0": [], "T1": [], "T2": [], "T3": []}] * diff) + \
-            user['planner']['years'][:-diff]  # type: ignore
+    user['planner']['startYear'] = startYear
     set_user(token, user, True)
 
 

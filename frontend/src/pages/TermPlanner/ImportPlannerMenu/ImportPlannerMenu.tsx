@@ -4,24 +4,28 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
-import { JSONPlanner, Term } from 'types/planner';
+import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
-import {
-  moveCourse,
-  setUnplannedCourseToTerm,
-  toggleSummer,
-  updateStartYear
-} from 'reducers/plannerSlice';
+import { moveCourse } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
 
 const ImportPlannerMenu = () => {
   const planner = useSelector((state: RootState) => state.planner);
-  const { token } = useSelector((state: RootState) => state.settings);
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { token } = useSelector((state: RootState) => state.settings);
+
+  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
+    try {
+      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleSetUnplannedCourseToTerm: ' + err);
+    }
+  };
 
   const upload = () => {
     inputRef.current?.click();
@@ -90,17 +94,30 @@ const ImportPlannerMenu = () => {
               { numYears: fileInJson.numYears },
               { params: { token } }
             );
+            await axios.put(
+              '/user/updateStartYear',
+              { startYear: fileInJson.startYear },
+              { params: { token } }
+            );
           } catch {
             openNotification({
               type: 'error',
-              message: 'Error setting degree length',
-              description: 'There was an error updating the degree length.'
+              message: 'Error setting degree start year or length',
+              description: 'There was an error updating the degree start year or length.'
             });
             return;
           }
-          dispatch(updateStartYear(fileInJson.startYear));
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
-            dispatch(toggleSummer());
+            try {
+              await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+            } catch {
+              openNotification({
+                type: 'error',
+                message: 'Error setting summer term',
+                description: 'An error occurred when trying to import summer term visibility'
+              });
+              return;
+            }
           }
           fileInJson.years.forEach((year, yearIndex) => {
             Object.entries(year).forEach(([term, termCourses]) => {
@@ -120,14 +137,13 @@ const ImportPlannerMenu = () => {
                       srcTerm: 'unplanned'
                     })
                   );
-                  dispatch(
-                    setUnplannedCourseToTerm({
-                      destRow,
-                      destTerm,
-                      destIndex,
-                      course: code
-                    })
-                  );
+                  const data = {
+                    destRow: destRow,
+                    destTerm: destTerm,
+                    destIndex: destIndex,
+                    courseCode: code
+                  };
+                  handleSetUnplannedCourseToTerm(data);
                 }
               });
             });
