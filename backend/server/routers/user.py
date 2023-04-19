@@ -4,7 +4,7 @@ from typing import cast
 import pydantic
 from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.config import DUMMY_TOKEN
 from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
@@ -132,11 +132,29 @@ def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
         user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
     set_user(token, user, True)
 
-
-@router.put("/updateCourseMark")
+@router.put("/updateCourseMark",
+            responses={
+        400: { "description": "if the mark is invalid or it isn't in the user's courses" },
+        200: {
+            "description": "on successful update",
+        }
+    }
+)
 def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
     user = get_user(token)
-    user['courses'][courseMark.course]['mark'] = courseMark.mark
+
+    if isinstance(courseMark.mark, int) and (courseMark.mark < 0 or courseMark.mark > 100):
+        raise HTTPException(
+            status_code=400, detail=f"Invalid mark '{courseMark.mark}'"
+        )
+
+    if courseMark.course in user['courses']:
+        user['courses'][courseMark.course]['mark'] = courseMark.mark
+    else:
+        raise HTTPException(
+            status_code=400, detail=f"Course code {courseMark.course} was not found in user's courses"
+        )
+
     set_user(token, user, True)
 
 

@@ -192,10 +192,13 @@ class PlannerLocalStorage(TypedDict):
     # todo: give `dict` its own params
     courses: dict[str, dict]
 
+LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
+Mark = Optional[int | LetterGrade]
+
 class CoursesStorage(TypedDict):
     code: str
     suppressed: bool
-    mark: int
+    mark: Mark
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage
@@ -208,7 +211,7 @@ class LocalStorage(BaseModel):
 
 class CourseMark(BaseModel):
     course: str
-    mark: int
+    mark: Mark
 
 class CourseCodes(BaseModel):
     courses: list[str]

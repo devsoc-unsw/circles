@@ -22,8 +22,8 @@ const ImportPlannerMenu = () => {
     try {
       await axios.post('planner/unPlannedToTerm', data, { params: { token } });
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at handleSetUnplannedCourseToTerm: ' + err);
+      // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
+      console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
     }
   };
 
@@ -138,9 +138,9 @@ const ImportPlannerMenu = () => {
                     })
                   );
                   const data = {
-                    destRow: destRow,
-                    destTerm: destTerm,
-                    destIndex: destIndex,
+                    destRow,
+                    destTerm,
+                    destIndex,
                     courseCode: code
                   };
                   handleSetUnplannedCourseToTerm(data);

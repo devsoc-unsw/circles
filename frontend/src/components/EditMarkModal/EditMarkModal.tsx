@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button, Input, message, Modal } from 'antd';
+import { CourseMark } from 'types/api';
 import { Grade, Mark } from 'types/planner';
-import type { RootState } from 'config/store';
-import { updateCourseMark } from 'reducers/plannerSlice';
+import { updateCourseMark } from 'utils/planner';
+import { RootState } from 'config/store';
 import S from './styles';
 
 type Props = {
@@ -13,10 +14,7 @@ type Props = {
 };
 
 const EditMarkModal = ({ code, open, onCancel }: Props) => {
-  const dispatch = useDispatch();
-  const [markValue, setMarkValue] = useState<string | number | undefined>(
-    useSelector((state: RootState) => state.planner.courses[code].mark)
-  );
+  const [markValue, setMarkValue] = useState<string | number | undefined>();
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
 
@@ -26,13 +24,9 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     setMarkValue(value);
   };
 
+  const { token } = useSelector((state: RootState) => state.settings);
   const updateMark = (mark: Mark) => {
-    dispatch(
-      updateCourseMark({
-        code,
-        mark
-      })
-    );
+    updateCourseMark({ course: code, mark } as CourseMark, token);
     setMarkValue(mark);
     onCancel();
     message.success('Mark Updated');
