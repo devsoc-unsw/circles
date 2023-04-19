@@ -8,6 +8,7 @@ import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import S from './styles';
 
 interface PlannerButtonProps {
   course: Course;
@@ -73,9 +74,9 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
   };
 
   return isAddedInPlanner ? (
-    <Button loading={loading} onClick={removeFromPlanner} icon={<StopOutlined />}>
+    <S.Button loading={loading} onClick={removeFromPlanner} icon={<StopOutlined />}>
       {!loading ? 'Remove from planner' : 'Removing from planner'}
-    </Button>
+    </S.Button>
   ) : (
     <Button loading={loading} onClick={addToPlanner} icon={<PlusOutlined />} type="primary">
       {!loading ? 'Add to planner' : 'Adding to planner'}

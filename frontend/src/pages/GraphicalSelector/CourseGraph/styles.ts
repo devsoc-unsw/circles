@@ -1,3 +1,4 @@
+import { Button as antdButton } from 'antd';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -25,4 +26,16 @@ const SpinnerWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export default { SpinnerWrapper, ToolsWrapper, Wrapper };
+const Button = styled(antdButton)`
+  background-color: ${({ theme }) => theme.genericButton.backgroundColor};
+  color: ${({ theme }) => theme.text};
+  border-color: ${({ theme }) => theme.genericButton.borderColor};
+  &:hover {
+    background-color: ${({ theme }) => theme.genericButton.hoverBackgroundColor};
+  }
+  &:focus {
+    background-color: ${({ theme }) => theme.genericButton.hoverBackgroundColor};
+  }
+`;
+
+export default { SpinnerWrapper, ToolsWrapper, Wrapper, Button };

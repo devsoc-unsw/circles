@@ -49,7 +49,7 @@ describe('SpecialisationStep', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(<SpecialisationStep incrementStep={incrementStepMock} type="majors" />, {
+    await renderWithProviders(<SpecialisationStep incrementStep={incrementStepMock} type="majors" />, {
       preloadedState
     });
     expect(screen.queryByText('Next')).not.toBeInTheDocument();
@@ -76,7 +76,7 @@ describe('SpecialisationStep', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<SpecialisationStep incrementStep={incrementStepMock} type="majors" />, {
+    await renderWithProviders(<SpecialisationStep incrementStep={incrementStepMock} type="majors" />, {
       preloadedState
     });
     await userEvent.click(await screen.findByText('COMPA1 Computer Science'));
@@ -87,7 +87,7 @@ describe('SpecialisationStep', () => {
   });
 
   it('should display "Next" button when on current step and call incrementStep', async () => {
-    renderWithProviders(
+    await renderWithProviders(
       <SpecialisationStep incrementStep={incrementStepMock} currStep type="majors" />,
       { preloadedState }
     );
@@ -96,7 +96,7 @@ describe('SpecialisationStep', () => {
   });
 
   it('should show error notification when "Next" button without selecting a spec', async () => {
-    renderWithProviders(
+    await renderWithProviders(
       <SpecialisationStep incrementStep={incrementStepMock} currStep type="majors" />,
       { preloadedState }
     );

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Button, Spin } from 'antd';
+import { Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
 import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
@@ -159,9 +159,9 @@ const ImportPlannerMenu = () => {
       <div>If you currently have courses planned, it may be merged with the imported planner.</div>
       <>
         <div style={{ display: 'flex' }}>
-          <Button style={{ width: '150px', margin: '5px' }} onClick={upload}>
+          <CS.Button style={{ width: '150px', margin: '5px' }} onClick={upload}>
             Upload a planner
-          </Button>
+          </CS.Button>
           {loading && <Spin indicator={spinIcon} />}
         </div>
         <input type="file" style={{ display: 'none' }} ref={inputRef} onChange={uploadedJSONFile} />

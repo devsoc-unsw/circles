@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Radio } from 'antd';
+import { Radio } from 'antd';
 import { JSONPlanner } from 'types/planner';
 import type { RootState } from 'config/store';
 import CS from '../common/styles';
@@ -64,9 +64,7 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
           ))}
         </Radio.Group>
       </CS.PopupEntry>
-      <Button style={{ width: '150px' }} onClick={download}>
-        Download
-      </Button>
+      <CS.Button onClick={download}> Download </CS.Button>
     </S.Wrapper>
   );
 };

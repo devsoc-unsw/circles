@@ -19,6 +19,7 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
   const progress = Math.min(Math.round((currUOC / totalUOC) * 100), 100);
 
   const { theme } = useSelector((state: RootState) => state.settings);
+  const trailColor = theme === 'light' ? '#fff' : '#444249';
 
   return (
     <Link to={type} smooth duration={2000}>
@@ -30,7 +31,7 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
         <div data-tip data-for={`card-${type}`}>
           <Progress
             percent={progress}
-            trailColor="white"
+            trailColor={trailColor}
             showInfo={false}
             strokeColor={{ '0%': purple[3], '100%': purple[4] }}
           />
