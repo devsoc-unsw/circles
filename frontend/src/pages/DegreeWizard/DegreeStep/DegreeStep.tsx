@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useMutation } from 'react-query';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
 import type { RootState } from 'config/store';
 import { useAppSelector } from 'hooks';
+import { handleDegreeChange } from 'utils/api/degreeApi';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -22,7 +23,6 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
   const programCode = useAppSelector((store: RootState) => store.degree.programCode);
-  const { token } = useSelector((state: RootState) => state.settings);
 
   const fetchAllDegrees = async () => {
     try {
@@ -38,24 +38,16 @@ const DegreeStep = ({ incrementStep }: Props) => {
     fetchAllDegrees();
   }, []);
 
-  const handleDegreeChange = async ({ key }: { key: string }) => {
-    const data = { programCode: key.substring(0, 4) };
-    try {
-      await axios.post('user/reset', {}, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error resetting degree at handleDegreeChange: ' + err);
-    }
-    try {
-      await axios.post('user/setProgram', data, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error settingProgram at handleDegreeChange: ' + err);
-    }
-    setInput(key);
-    setOptions([]);
+  const degreeChangeMutation = useMutation(handleDegreeChange, {
+    onMutate: ({ key }) => {
+      setInput(key);
+      setOptions([]);
+      if (key) incrementStep(Steps.SPECS);
+    },
+  });
 
-    if (key) incrementStep(Steps.SPECS);
+  const onDegreeChange = async (key: { key: string }) => {
+    degreeChangeMutation.mutate(key);
   };
 
   const searchDegree = (newInput: string) => {
@@ -75,7 +67,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
   }));
 
   return (
-    <CS.StepContentWrapper id="degree">
+    <CS.StepContentWrapper id="degree" >
       <animated.div style={props}>
         <Title level={4} className="text">
           What are you studying?
@@ -89,7 +81,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
         />
         {input && options && (
           <Menu
-            onClick={handleDegreeChange}
+            onClick={onDegreeChange}
             selectedKeys={programCode ? [programCode] : []}
             items={items}
             mode="inline"
@@ -97,7 +89,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
           />
         )}
       </animated.div>
-    </CS.StepContentWrapper>
+    </CS.StepContentWrapper >
   );
 };
 

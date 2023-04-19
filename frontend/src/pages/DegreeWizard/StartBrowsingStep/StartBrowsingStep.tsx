@@ -1,4 +1,5 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import openNotification from 'utils/openNotification';
@@ -6,13 +7,11 @@ import type { RootState } from 'config/store';
 import { useAppSelector } from 'hooks';
 import CS from '../common/styles';
 import S from './styles';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import { resetDegree } from 'utils/api/degreeApi';
 
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
   const { programCode, specs } = useAppSelector((state: RootState) => state.degree);
-  const { token } = useSelector((state: RootState) => state.settings);
 
   const handleSaveUserSettings = async () => {
     if (!programCode) {
@@ -26,11 +25,9 @@ const StartBrowsingStep = () => {
         message: 'Please select a specialisation'
       });
     } else {
-      try {
-        await axios.post('user/reset', true, { params: { token } });
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Error resetting degree at handleDegreeChange: ' + err);
+      const degreeQuery = useQuery('degree', resetDegree);
+      if (degreeQuery.isError) {
+        console.log('Error while resetting degree');
       }
       navigate('/course-selector');
     }
