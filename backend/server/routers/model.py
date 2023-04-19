@@ -193,7 +193,7 @@ class PlannerLocalStorage(TypedDict):
     courses: dict[str, dict]
 
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
-Mark = Optional[int|LetterGrade]
+Mark = Optional[int | LetterGrade]
 
 class CoursesStorage(TypedDict):
     code: str
