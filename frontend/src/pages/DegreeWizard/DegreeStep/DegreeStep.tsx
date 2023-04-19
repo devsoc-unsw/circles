@@ -67,7 +67,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
   }));
 
   return (
-    <CS.StepContentWrapper id="degree" >
+    <CS.StepContentWrapper id="degree">
       <animated.div style={props}>
         <Title level={4} className="text">
           What are you studying?
@@ -89,7 +89,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
           />
         )}
       </animated.div>
-    </CS.StepContentWrapper >
+    </CS.StepContentWrapper>
   );
 };
 
