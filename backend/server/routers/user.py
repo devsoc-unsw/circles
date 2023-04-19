@@ -4,7 +4,7 @@ from typing import cast
 import pydantic
 from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.config import DUMMY_TOKEN
 from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
