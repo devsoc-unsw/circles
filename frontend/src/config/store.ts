@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers, PreloadedState } from 'redux';
 import { persistReducer } from 'redux-persist';
@@ -24,7 +23,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
     preloadedState
   });
 
-const persistConfig = {
+export const persistConfig = {
   key: 'root',
   version: persistVersion,
   storage,
@@ -45,6 +44,5 @@ const store = configureStore({
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore['dispatch'];
-export const useAppDispatch: () => AppDispatch = useDispatch;
 
 export default store;

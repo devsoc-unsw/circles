@@ -7,9 +7,9 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 """
 
-from functools import reduce
 import json
 import re
+from functools import reduce
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -18,73 +18,73 @@ CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code
 
 # TODO: think of how to automate some of this
 SPECIALISATION_MAPPINGS = {
-    '7005 UNSW Global Diploma in Media and Communication Program': '7005',
-    'Academic program must be 7016, Humanities Pathway Program': '7016',
-    'the Social Research and Policy honours program': '4504',
-    '4529 Social Science \(Honours\)': '4529',
-    '4511 B Arts \(Honours\)': '4511',
-    '3880 Bachelor of International Public Health': '3880',
-    '3894 Nutrition\/Dietetics and Food Innovation': '3894',
-    '3897 Applied Exercise Science\/Clinical Exercise Physiology': '3897',
-    '3895 Pharmaceutical Medicine\/Pharmacy': '3895',
-    '3896 Exercise Science\/Physiotherapy and Exercise Physiology': '3896',
-    'FINSD1 Finance Co-Op': 'FINSD1',
-    '(a )?Politics, Philosophy, and Economics program': 'PPES#',
-    "(a )?Politics and International Relations specialisation": 'POLSG?',
-    'School of the Arts and Media honours': 'MDIA?H',
-    'Business \(Honours\) Program 4512': '4512',
-    'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
-    'Creative Writing honours': 'CRWTWH',
-    'Nanoscience Honours' : 'NANO?H',
-    '4508 Music \(Honours\)': '4508',
-    'Construction Management and Property undergraduate program or minor': 'BLDG??',
-    'Media, Culture and Technology honours': 'MECTBH',
-    'Theatre and Performance Studies honours': 'THSTBH',
-    'Environmental Humanities honours': 'ENVPEH',
-    'Physics Honours': 'ZPEMPH || PHYSGH',
-    'Fine Arts \(Visual Arts\)': 'DARTE1',
-    'Film Studies honours': 'FILMBH',
-    'FINSBH Finance Co-Op Honours': 'FINSBH',
-    'Creative Writing Major or minor': 'CRWTA1 || CRWTAH || CRWTA2',
-    'Creative Writing Major': 'CRWTA1 || CRWTAH',
-    'English honours': 'ENGLDH',
-    'Dance Studies honours': 'DANCBH',
-    'History honours': 'HISTCH || ZHSSHH',
-    'Philosophy honours': 'PHILBH',
-    'Asian Studies honours': 'ASIABH',
-    'Chinese Studies honours': 'CHINBH',
-    'French Studies honours': 'FRENBH',
-    'Spanish Studies honours': 'SPANEH',
-    'Japanese Studies honours': 'JAPNDH',
-    'Korean Studies honours': 'KORECH',
-    'Linguistics honours': 'LINGCH',
-    'Currently program 3880 Bachelor of International Public Health': '3880',
-    'German Studies honours': 'GERSBH',
-    'Neuroscience Honours': 'NEUR?H',
-    '(3831)? Science \(Medicine\) Honours': '3831',
-    'European Studies honours': 'EUROBH',
-    'Sociology and Anthropology honours': 'SOCACH',
-    'Politics and International Relations honours': 'POLSGH',
-    'Global Development honours': 'COMDFH',
-    'Media honours': 'MDIA?H',
-    'Education honours': '4509',
-    'Criminology honours': '4505',
-    'Medical Science': '3991',
-    'Medicinal Chemistry honours': 'CHEMFH',
-    'Politics, Philosophy and Economics': '3478 || 4797',
-    'single or double Music (Honours)': 'MUSC?H || 4508',
-    'development studies honours': '8942',
-    'International Relations honours': 'POLSGH',
-    'Politics honours': 'ZHSSPH || POLSGH',
-    'Music program': 'MUSC?? || 4508',
-    'Social Work': '4033',
-    'single or dual award Media': '4510 || 3454 || 3438 || 3453',
-    'single or double degree Media': '4510 || 3454 || 3438 || 3453',
-    'Social Science or Social Research and Policy': '3321 || 3420',
-    'single or double Music \(Honours\) program': '4508',
-    'Education program': '4509 || 4056',
-    'Landscape Architecture minor': 'LANDA2',
-    'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
+    r'7005 UNSW Global Diploma in Media and Communication Program': '7005',
+    r'Academic program must be 7016, Humanities Pathway Program': '7016',
+    r'the Social Research and Policy honours program': '4504',
+    r'4529 Social Science \(Honours\)': '4529',
+    r'4511 B Arts \(Honours\)': '4511',
+    r'3880 Bachelor of International Public Health': '3880',
+    r'3894 Nutrition\/Dietetics and Food Innovation': '3894',
+    r'3897 Applied Exercise Science\/Clinical Exercise Physiology': '3897',
+    r'3895 Pharmaceutical Medicine\/Pharmacy': '3895',
+    r'3896 Exercise Science\/Physiotherapy and Exercise Physiology': '3896',
+    r'FINSD1 Finance Co-Op': 'FINSD1',
+    r'(a )?Politics, Philosophy, and Economics program': 'PPES#',
+    r"(a )?Politics and International Relations specialisation": 'POLSG?',
+    r'School of the Arts and Media honours': 'MDIA?H',
+    r'Business \(Honours\) Program 4512': '4512',
+    r'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
+    r'Creative Writing honours': 'CRWTWH',
+    r'Nanoscience Honours' : 'NANO?H',
+    r'4508 Music \(Honours\)': '4508',
+    r'Construction Management and Property undergraduate program or minor': 'BLDG??',
+    r'Media, Culture and Technology honours': 'MECTBH',
+    r'Theatre and Performance Studies honours': 'THSTBH',
+    r'Environmental Humanities honours': 'ENVPEH',
+    r'Physics Honours': 'ZPEMPH || PHYSGH',
+    r'Fine Arts \(Visual Arts\)': 'DARTE1',
+    r'Film Studies honours': 'FILMBH',
+    r'FINSBH Finance Co-Op Honours': 'FINSBH',
+    r'Creative Writing Major or minor': 'CRWTA1 || CRWTAH || CRWTA2',
+    r'Creative Writing Major': 'CRWTA1 || CRWTAH',
+    r'English honours': 'ENGLDH',
+    r'Dance Studies honours': 'DANCBH',
+    r'History honours': 'HISTCH || ZHSSHH',
+    r'Philosophy honours': 'PHILBH',
+    r'Asian Studies honours': 'ASIABH',
+    r'Chinese Studies honours': 'CHINBH',
+    r'French Studies honours': 'FRENBH',
+    r'Spanish Studies honours': 'SPANEH',
+    r'Japanese Studies honours': 'JAPNDH',
+    r'Korean Studies honours': 'KORECH',
+    r'Linguistics honours': 'LINGCH',
+    r'Currently program 3880 Bachelor of International Public Health': '3880',
+    r'German Studies honours': 'GERSBH',
+    r'Neuroscience Honours': 'NEUR?H',
+    r'(3831)? Science \(Medicine\) Honours': '3831',
+    r'European Studies honours': 'EUROBH',
+    r'Sociology and Anthropology honours': 'SOCACH',
+    r'Politics and International Relations honours': 'POLSGH',
+    r'Global Development honours': 'COMDFH',
+    r'Media honours': 'MDIA?H',
+    r'Education honours': '4509',
+    r'Criminology honours': '4505',
+    r'Medical Science': '3991',
+    r'Medicinal Chemistry honours': 'CHEMFH',
+    r'Politics, Philosophy and Economics': '3478 || 4797',
+    r'single or double Music (Honours)': 'MUSC?H || 4508',
+    r'development studies honours': '8942',
+    r'International Relations honours': 'POLSGH',
+    r'Politics honours': 'ZHSSPH || POLSGH',
+    r'Music program': 'MUSC?? || 4508',
+    r'Social Work': '4033',
+    r'single or dual award Media': '4510 || 3454 || 3438 || 3453',
+    r'single or double degree Media': '4510 || 3454 || 3438 || 3453',
+    r'Social Science or Social Research and Policy': '3321 || 3420',
+    r'single or double Music \(Honours\) program': '4508',
+    r'Education program': '4509 || 4056',
+    r'Landscape Architecture minor': 'LANDA2',
+    r'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
 }
 
 def preprocess_conditions():
@@ -237,6 +237,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "Successful completion of",
         "completion of",
         "must successfully complete",
+        "should have completed",
         "must have completed",
         "completing",
         "have completed",
@@ -547,7 +548,7 @@ def strip_specialisation(processed: str) -> str:
 # Phase 5: Common patterns
 # -------------------
 def uoc_in_business_school(processed: str) -> str:
-    """Converts \d+UOC offered by the UNSW Business School to \d+UOC in F Business"""
+    """Converts {number}UOC offered by the UNSW Business School to {number}UOC in F Business"""
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
     )
@@ -588,7 +589,7 @@ def unsw_global_degrees(processed: str):
     )
 
     processed =  re.sub(
-        "\(7001 \|\| 7002 \|\| 7003 \|\| 7004\),",
+        r"\(7001 \|\| 7002 \|\| 7003 \|\| 7004\),",
         "(7001 || 7002 || 7003 || 7004) &&",
         processed,
         flags=re.IGNORECASE,
@@ -611,7 +612,7 @@ def remove_extraneous_handbook_data(processed):
     # Final 2 terms note
     processed, note = add_note_if_found(processed, r"It is strongly recommended that students only complete this course within their final 2 terms of study", note, r"", "Recommended to take this course within their final 2 terms of study.")
     # Business school students terms notes
-    terms_string = re.findall("Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", processed)
+    terms_string = re.findall(r"Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", processed)
     processed, number_of_subs = re.subn(
         r"Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", r"", processed, flags=re.IGNORECASE
     )
@@ -629,7 +630,6 @@ def remove_extraneous_handbook_data(processed):
     find = r"Its recommended to seek a progression check prior to application."
     processed, note = add_note_if_found(processed, find, note, r"", find)
     processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
-    
     processed, note = add_note_if_found(processed, r"or language placement approval", note, r"", "language placement approval can also be used.")
     processed, note = add_note_if_found(processed, r"or with Head of School approval", note, r"", "Head of school approval can also be used.")
     # Commerce degree notes

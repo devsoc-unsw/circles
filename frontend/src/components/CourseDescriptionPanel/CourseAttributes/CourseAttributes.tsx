@@ -17,7 +17,7 @@ type CourseAttributesProps = {
 
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
-  const sidebar = !!(pathname === '/course-selector');
+  const sidebar = pathname === '/course-selector';
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
 
@@ -121,8 +121,8 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
             <S.AttributeWrapper>
               <Title level={3} className="text">
                 {title}
-              </Title>{' '}
-              <S.AttributeText>{content}</S.AttributeText>{' '}
+              </Title>
+              <S.AttributeText>{content}</S.AttributeText>
             </S.AttributeWrapper>
           )
       )}

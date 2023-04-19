@@ -2,15 +2,12 @@
 
 
 from functools import wraps
-
-from fastapi import APIRouter
-from fastapi import HTTPException
-from google.auth.transport import requests # type: ignore
-from google.oauth2 import id_token # type: ignore
 from time import time
 
+from fastapi import APIRouter, HTTPException
+from google.auth.transport import requests  # type: ignore
+from google.oauth2 import id_token  # type: ignore
 from server.config import CLIENT_ID
-from server.database import usersDB
 
 router = APIRouter(
     prefix="/auth",
@@ -64,12 +61,12 @@ def validate_token(token: str):
         id_info = id_token.verify_oauth2_token(
                 token, requests.Request(), CLIENT_ID
         )
-    except ValueError:
+    except ValueError as err:
         # Invalid Token
         raise HTTPException(
             status_code=400,
             detail=f"Invalid token: {token}"
-        )
+        ) from err
     return id_info
 
 def require_login(protected_func):
@@ -115,7 +112,7 @@ def auth_new_user(token):
         Create a new user based off the token provided.
         Not its own route, as creation is indistinguishable to "/login"
     """
-    
+
     creation_time = int(time())
 
     return {
@@ -130,5 +127,3 @@ def validate_user_exists(token: dict[str, str]) -> bool:
     """
     # TODO: should actually check inside of the  database once created
     return token["sub"] not in [None, ""]
-
-

@@ -1,8 +1,9 @@
 """Testing the user class to ensure that the user data is accurately imported and updated"""
 
-from algorithms.objects.user import User
-from math import isclose
 import json
+from math import isclose
+
+from algorithms.objects.user import User
 
 PATH = "./algorithms/tests/exampleUsers.json"
 
@@ -46,9 +47,9 @@ def test_user3():
 def test_user_no_data():
     user = User()
     assert user.courses == {}
-    assert user.cur_courses == []
+    assert user.cur_courses == {}
     assert user.program == None
-    assert user.specialisations == {}
+    assert user.specialisations == []
 
 def test_user_empty():
     """

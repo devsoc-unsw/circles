@@ -4,16 +4,17 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
+from algorithms.objects.conditions import CompositeCondition
+from algorithms.objects.user import User
 from pydantic import BaseModel
 
-from algorithms.objects.conditions import CompositeCondition
 
 class Programs(BaseModel):
     programs: dict
 
 
 class Specialisations(BaseModel):
-    spec: dict[str, dict] # cant do more specific because NotRequired doesnt work
+    spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work
 
 
 class ProgramCourses(BaseModel):
@@ -58,7 +59,7 @@ class Structure(BaseModel):
 # TODO: This should just take a token now
 class UserData(BaseModel):
     program: str
-    specialisations: dict
+    specialisations: list[str]
     courses: dict
 
 
@@ -110,13 +111,13 @@ class MostRecentPastTerm(TypedDict):
 class ValidPlannerData(BaseModel):
     programCode: str
     specialisations: list[str]
-    plan: list[list[dict[str, tuple[int, int | None]]]]
+    plan: list[list[dict[str, tuple[int, Optional[int]]]]]
     mostRecentPastTerm: MostRecentPastTerm
 
 class PlannerData(BaseModel):
     programCode: str
     specialisations: list[str]
-    plan: list[list[dict[str,  None | list[int | None]]]]
+    plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {
@@ -157,6 +158,26 @@ class PlannerData(BaseModel):
             }
         }
 
+    def to_user(self) -> User:
+        user = User()
+        user.program = self.programCode
+        user.specialisations = self.specialisations[:]
+
+        # prevent circular import; TODO: There has to be a better way
+        from server.routers.courses import get_course
+
+        for year in self.plan:
+            for term in year:
+                cleaned_term = {}
+                for course_name, course_value in term.items():
+                    cleaned_term[course_name] = (
+                        (course_value[0], course_value[1]) if course_value
+                        else (get_course(course_name)["UOC"], None)
+                    )
+                user.add_courses(cleaned_term)
+        return user
+
+
 class DegreeLocalStorage(TypedDict):
     programCode: str
     specs: list[str]
@@ -168,6 +189,7 @@ class PlannerLocalStorage(TypedDict):
     startYear: int
     isSummerEnabled: bool
     years: list[dict[str, list[str]]]
+    # todo: give `dict` its own params
     courses: dict[str, dict]
 
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
@@ -182,7 +204,6 @@ class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CoursesStorage]
-    
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage
@@ -202,10 +223,12 @@ class CoursesPath(BaseModel):
     original: str
     courses: list[str]
 
+class CoursesPathDict(TypedDict):
+    original: str
+    courses: list[str]
 
 class Description(BaseModel):
     description: str
-
 
 class SpecialisationTypes(BaseModel):
     types: list[str]
@@ -222,7 +245,7 @@ class TermsList(BaseModel):
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
     uoc: int
-    
+
 # Used in addToUnplanned, removeCourse and unscheduleCourse routes
 class CourseCode(BaseModel):
     courseCode: str
@@ -244,9 +267,13 @@ class PlannedToTerm(BaseModel):
     courseCode: str
 
 class ProgramTime(BaseModel):
-    startTime: tuple[int, int] # (Year, Term) start of program
+    startTime: tuple[int, int]  # (Year, Term) start of program
     endTime: tuple[int, int]
-    uocMax: list[int] # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+    uocMax: list[int]  # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
+
+class TermsOffered(TypedDict):
+    terms: dict[str, list[str]]
+    fails: list[tuple]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

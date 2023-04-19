@@ -19,6 +19,7 @@ Step in the data's journey:
 """
 import json
 import re
+
 from data.utility import data_helpers
 
 
@@ -50,7 +51,7 @@ def init_program(programs_formatted, data):
     """
     Initialises dictionary and assigns it to main programs dictionary
     """
-    content = {
+    content = {  # type: ignore  # TODO: annotate this if you want
         "title": None,
         "code": None,
         "UOC": None,

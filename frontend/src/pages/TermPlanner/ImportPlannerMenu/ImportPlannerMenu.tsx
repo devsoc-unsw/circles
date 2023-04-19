@@ -4,17 +4,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
-import { JSONPlanner, PlannerCourse, Term } from 'types/planner';
+import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
-import {
-  addToUnplanned,
-  moveCourse,
-  setUnplannedCourseToTerm,
-  toggleSummer,
-  updateDegreeLength,
-  updateStartYear
-} from 'reducers/plannerSlice';
+import { moveCourse } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -23,9 +16,28 @@ const ImportPlannerMenu = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { token } = useSelector((state: RootState) => state.settings);
+
+  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
+    try {
+      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
+      console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
+    }
+  };
 
   const upload = () => {
     inputRef.current?.click();
+  };
+
+  const handleAddToUnplanned = async (code: string) => {
+    try {
+      await axios.post('planner/addToUnplanned', { courseCode: code }, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Error at handleAddToUnplanned: ', err);
+    }
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +67,7 @@ const ImportPlannerMenu = () => {
     setLoading(true);
     const reader = new FileReader();
     reader.readAsText(e.target.files[0], 'UTF-8');
-    reader.onload = (ev) => {
+    reader.onload = async (ev) => {
       if (ev.target !== null) {
         const content = ev.target.result;
         e.target.value = '';
@@ -76,34 +88,44 @@ const ImportPlannerMenu = () => {
             });
             return;
           }
-          dispatch(updateDegreeLength(fileInJson.numYears));
-          dispatch(updateStartYear(fileInJson.startYear));
+          try {
+            await axios.put(
+              '/user/updateDegreeLength',
+              { numYears: fileInJson.numYears },
+              { params: { token } }
+            );
+            await axios.put(
+              '/user/updateStartYear',
+              { startYear: fileInJson.startYear },
+              { params: { token } }
+            );
+          } catch {
+            openNotification({
+              type: 'error',
+              message: 'Error setting degree start year or length',
+              description: 'There was an error updating the degree start year or length.'
+            });
+            return;
+          }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
-            dispatch(toggleSummer());
+            try {
+              await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+            } catch {
+              openNotification({
+                type: 'error',
+                message: 'Error setting summer term',
+                description: 'An error occurred when trying to import summer term visibility'
+              });
+              return;
+            }
           }
           fileInJson.years.forEach((year, yearIndex) => {
             Object.entries(year).forEach(([term, termCourses]) => {
               termCourses.forEach(async (code, index) => {
                 const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
-                const courseData: PlannerCourse = {
-                  title: course.title,
-                  termsOffered: course.terms,
-                  UOC: course.UOC,
-                  plannedFor: null,
-                  prereqs: course.raw_requirements,
-                  isLegacy: course.is_legacy,
-                  isUnlocked: true,
-                  warnings: [],
-                  handbookNote: course.handbook_note,
-                  isAccurate: course.is_accurate,
-                  isMultiterm: course.is_multiterm,
-                  supressed: false,
-                  mark: undefined
-                };
-
                 if (plannedCourses.indexOf(course.code) === -1) {
                   plannedCourses.push(course.code);
-                  dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+                  handleAddToUnplanned(course.code);
                   const destYear = Number(yearIndex) + Number(planner.startYear);
                   const destTerm = term as Term;
                   const destRow = destYear - planner.startYear;
@@ -115,14 +137,13 @@ const ImportPlannerMenu = () => {
                       srcTerm: 'unplanned'
                     })
                   );
-                  dispatch(
-                    setUnplannedCourseToTerm({
-                      destRow,
-                      destTerm,
-                      destIndex,
-                      course: code
-                    })
-                  );
+                  const data = {
+                    destRow,
+                    destTerm,
+                    destIndex,
+                    courseCode: code
+                  };
+                  handleSetUnplannedCourseToTerm(data);
                 }
               });
             });

@@ -4,19 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
-import { Term } from 'types/planner';
+import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
+import getAllCourseOfferings from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import {
-  moveCourse,
-  setPlannedCourseToTerm,
-  setUnplannedCourseToTerm,
-  toggleWarnings,
-  unschedule
-} from 'reducers/plannerSlice';
+import { moveCourse, toggleWarnings, updateLegacyOfferings } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
 import OptionsHeader from './OptionsHeader';
@@ -30,14 +25,67 @@ const DragDropContext = React.lazy(() =>
 );
 
 const TermPlanner = () => {
-  const { showWarnings } = useSelector((state: RootState) => state.settings);
+  const { showWarnings, token } = useSelector((state: RootState) => state.settings);
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const [termsOffered, setTermsOffered] = useState<Term[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
+  const [draggingCourse, setDraggingCourse] = useState('');
+  const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
+  const [multiCourse, setMultiCourse] = useState('');
+
+  const handleSetPlannedCourseToTerm = async (data: PlannedToTerm) => {
+    try {
+      await axios.post('planner/plannedToTerm', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, no-console
+      console.error(`Error at setPlannedCourseToTerm: ${err}`);
+    }
+  };
+
+  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
+    try {
+      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
+    } catch (err) {
+      // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
+      console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
+    }
+  };
 
   const dispatch = useDispatch();
+
+  // needed for useEffect deps as it does not deep compare arrays well enough :c
+  // also only want it to update on new/removed course codes
+  const courses = Object.keys(planner.courses).sort().join('');
+
+  useEffect(() => {
+    // update the legacy term offered
+    const updateOfferingsData = async () => {
+      const years: string[] = [];
+      for (let i = 0; i < planner.numYears; i++) {
+        years.push((planner.startYear + i).toString());
+      }
+
+      // get the outdated legacy offerings
+      const outdated = Object.entries(planner.courses)
+        .filter(([, course]) => {
+          const oldOfferings = course.legacyOfferings;
+          // no legacy offering data, or doesn't include the wanted years
+          return !oldOfferings || years.filter((y) => !(y in oldOfferings)).length > 0;
+        })
+        .map(([code]) => code);
+
+      // update them
+      const data = await getAllCourseOfferings(outdated, years);
+      Object.entries(data).forEach(([code, offerings]) => {
+        dispatch(updateLegacyOfferings({ code, offerings }));
+      });
+    };
+
+    updateOfferingsData();
+
+    // disabled planner.courses as part of useEffect dep to avoid api double calling
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courses, dispatch, planner.numYears, planner.startYear]);
 
   const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner.years);
@@ -70,13 +118,17 @@ const TermPlanner = () => {
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
-    const terms = planner.courses[course].termsOffered;
-    setTermsOffered(terms);
-    setIsDragging(true);
+    setDraggingCourse(course);
+    if (planner.courses[course].isMultiterm) {
+      setCheckYearMultiTerm(result.source.droppableId);
+      setMultiCourse(course);
+    }
   };
 
-  const handleOnDragEnd: OnDragEndResponder = (result) => {
-    setIsDragging(false);
+  const handleOnDragEnd: OnDragEndResponder = async (result) => {
+    setDraggingCourse('');
+    setCheckYearMultiTerm('');
+    setMultiCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -126,12 +178,14 @@ const TermPlanner = () => {
 
     if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
-      dispatch(
-        unschedule({
-          destIndex,
-          code: draggableId
-        })
-      );
+      try {
+        await axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }), {
+          params: { token }
+        });
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error at unscheduleCourse', e);
+      }
       return;
     }
 
@@ -141,31 +195,27 @@ const TermPlanner = () => {
 
     if (source.droppableId === 'unplanned') {
       // === move unplanned course to term ===
-      dispatch(
-        setUnplannedCourseToTerm({
-          destRow,
-          destTerm,
-          destIndex,
-          course: draggableId
-        })
-      );
+      const data = {
+        destRow,
+        destTerm,
+        destIndex,
+        courseCode: draggableId
+      };
+      handleSetUnplannedCourseToTerm(data);
     } else {
       // === move between terms ===
       const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)?.[0] as string, 10);
       const srcTerm = source.droppableId.match(/T[0-3]/)?.[0] as Term;
       const srcRow = srcYear - planner.startYear;
-      const srcIndex = source.index;
-      dispatch(
-        setPlannedCourseToTerm({
-          srcRow,
-          srcTerm,
-          srcIndex,
-          destRow,
-          destTerm,
-          destIndex,
-          course: draggableId
-        })
-      );
+      const data = {
+        srcRow,
+        srcTerm,
+        destRow,
+        destTerm,
+        destIndex,
+        courseCode: draggableId
+      };
+      handleSetPlannedCourseToTerm(data);
     }
   };
 
@@ -217,15 +267,15 @@ const TermPlanner = () => {
                             key={key}
                             name={key}
                             coursesList={year[term as Term]}
-                            termsOffered={termsOffered}
-                            dragging={isDragging}
+                            draggingCourse={!draggingCourse ? undefined : draggingCourse}
+                            currMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
                           />
                         );
                       })}
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={isDragging} />
+                <UnplannedColumn dragging={!!draggingCourse} />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>

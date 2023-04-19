@@ -1,12 +1,13 @@
 # we want to assure that courses that may be accessed from a container are always accurately computed.
 from contextlib import suppress
 from itertools import chain
-import requests
 
+import requests
+from server.routers.model import StructureContainer
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
-# some of these should probs not be ignored
+# TODO: some of these should probs not be ignored
 ignored = [
     'ARCH1101', 'ADAD4100', 'ARTS3', 'AVIA2117', 'BABS3021',
     'BEES', 'BEIL6', 'BENV6713', 'BIOC3', 'BIOM4951',
@@ -36,12 +37,14 @@ def test_validation():
 
 
 def assert_possible_structure(unlocked, program, spec):
-    structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
+    structure: dict[str,StructureContainer] = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
+    failed_set = set()
     for container in structure:
         with suppress(KeyError):
             del structure[container]['content']['General Education']
         for container2 in structure[container]['content']:
             for course in structure[container]['content'][container2]['courses']:
                 for c in unlocked:
-                    if course in c and all(ignore not in c for ignore in ignored):
-                        assert unlocked[c]['is_accurate'], f'{c} is inaccurate'
+                    if course in c and all(ignore not in c for ignore in ignored) and not unlocked[c]['is_accurate']:
+                        failed_set.add(c)
+    assert len(failed_set) == 0, f'courses: {failed_set} are inaccurate for program: {program}, spec: {spec}'

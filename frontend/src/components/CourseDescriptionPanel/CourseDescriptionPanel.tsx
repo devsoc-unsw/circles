@@ -35,7 +35,7 @@ const CourseDescriptionPanel = ({
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const { pathname } = useLocation();
-  const sidebar = !!(pathname === '/course-selector');
+  const sidebar = pathname === '/course-selector';
 
   const [isLoading, setIsLoading] = useState(false);
   const [course, setCourse] = useState<Course>();

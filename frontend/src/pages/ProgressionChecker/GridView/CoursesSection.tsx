@@ -20,7 +20,7 @@ const CoursesSection = ({
   isCoursesOverflow,
   sortFn
 }: CoursesSectionProps) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   if (isCoursesOverflow) {
     plannedCourses.sort(sortFn);
@@ -43,13 +43,13 @@ const CoursesSection = ({
         </S.CourseGroup>
         {!!unplannedCourses.length && (
           <S.ViewAllCoursesWrapper>
-            <Button type="primary" onClick={() => setModalVisible(true)}>
+            <Button type="primary" onClick={() => setOpenModal(true)}>
               View Courses
             </Button>
             <CoursesModal
               title={title}
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
+              open={openModal}
+              onCancel={() => setOpenModal(false)}
               courses={unplannedCourses}
             />
           </S.ViewAllCoursesWrapper>

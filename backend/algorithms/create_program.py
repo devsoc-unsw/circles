@@ -6,10 +6,11 @@ Converts from the tokens to actual conditions that can be made.
 import pickle
 import re
 from typing import Dict, List
+
 from algorithms.objects.categories import Category, GenEdCategory, LevelCategory, LevelCourseCategory
 from algorithms.objects.conditions import Condition, CoresCondition, UOCCondition
 from algorithms.objects.helper import read_data
-from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, NoRestriction, ProgramRestriction
+from algorithms.objects.program_restrictions import CompositeRestriction, MaturityRestriction, ProgramRestriction
 from data.processors.program_conditions_pre_processing import PROGRAMS_PROCESSED_PATH
 from data.processors.program_conditions_tokenising import FINAL_TOKENS_PATH
 
@@ -21,7 +22,7 @@ class UnparseableError(Exception):
     The given token cannot be parsed
     """
     def __init__(self, tokens: List[str] | Dict):
-        super().__init__("Unparseable tokens: {}".format(tokens))
+        super().__init__(f"Unparseable tokens: {tokens}")
 
 def process_program_conditions() -> None:
     """
@@ -160,4 +161,3 @@ def create_dependent_condition(tokens: List[str]) -> Category:
 
 if __name__ == "__main__":
     create_all_program_conditions()
-

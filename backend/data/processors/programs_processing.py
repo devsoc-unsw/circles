@@ -13,6 +13,7 @@ Step in the data's journey:
 
 import re
 from collections import OrderedDict
+from typing import Optional
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -27,9 +28,10 @@ NON_SPEC_KEY = f"non_{SPEC_KEY}"
 
 # List of all program codes that include a computer science degree
 CS_PROGS = (
-    "3673", # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
+    "3673",  # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
     "3674",
     "3778",
+    "3779",
     "3781",
     "3782",
     "3783",
@@ -94,7 +96,7 @@ OTH_PROGS = (
 
 # Enable or disable testing, and choose what programs to test on
 TESTING_MODE = False
-TEST_PROGS = (CS_PROGS + OTH_PROGS)
+TEST_PROGS = CS_PROGS + OTH_PROGS
 
 def process_prg_data() -> None:
     """
@@ -215,7 +217,7 @@ def split_program_names(title: str) -> list[str]:
     return list(map(lambda s: s.strip(), program_names))
 
 
-def find_program_name(program_data: dict, item: dict) -> str | None:
+def find_program_name(program_data: dict, item: dict) -> Optional[str] :
     """
     Find the program name (if possible).
     Returns a string with the program name if found,
@@ -319,7 +321,7 @@ def add_general_education_data(program_data: dict, item: dict) -> None:
 
     program_data["components"][NON_SPEC_KEY].append({
         "type": "gened",
-        "credits_to_complete": get_container_credits(program_data, item),
+        "credits_to_complete": get_container_credits(program_data, item),  # TODO: Fix this
         "notes": item["description"],
     })
 
@@ -381,7 +383,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
 
             if len(single_degrees) != 1:
                 # Didn't find program name :(
-                add_warning(f"Couldn't find any of the program names for double degree", program_data, item)
+                add_warning("Couldn't find any of the program names for double degree", program_data, item)
             else:
                 program_name = single_degrees[0]
 
@@ -423,9 +425,7 @@ def compute_levels(courses: dict[str, str]) -> list[int]:
 
     # Everything has a number (that isn't wildcarded).
     # Get all levels as a set to remove duplicates
-    return list(set(
-        [ int(code[4]) for code in courses.keys() ]
-    ))
+    return list({int(code[4]) for code in courses.keys()})
 
 
 def add_course_data(program_data: dict, item: dict, req_type: str) -> None:
@@ -440,7 +440,7 @@ def add_course_data(program_data: dict, item: dict, req_type: str) -> None:
         "type": req_type,
         "courses": order_dict_alphabetically(courses),
         "title": item["title"],
-        "credits_to_complete": get_container_credits(program_data, item),
+        "credits_to_complete": get_container_credits(program_data, item),  # TODO: fix this
         "levels": compute_levels(courses),
         "notes": item["description"],
     })
@@ -472,7 +472,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     requirements_str = description_lines[1]
 
     # Process the limit rule descriptions to get credits and requirements
-    credits_to_complete = get_string_credits(program_data, item, notes)
+    credits_to_complete = get_string_credits(program_data, item, notes)  # TODO: fix this
     requirements = format_course_strings(requirements_str)
 
     courses: dict[str, str] = {}
@@ -606,8 +606,8 @@ def get_any_requirement_codes(stripped: str, level: str) -> list[str]:
 
     try:
         faculty_codes = mappings[faculty]
-    except KeyError:
-        raise ValueError(f"Can't figure out what abbreviated code(s) are for {faculty}")
+    except KeyError as err:
+        raise ValueError(f"Can't figure out what abbreviated code(s) are for {faculty}") from err
 
     return list(map(lambda c: f"{c}{level}", faculty_codes))
 

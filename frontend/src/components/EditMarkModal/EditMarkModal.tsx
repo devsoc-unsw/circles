@@ -1,22 +1,19 @@
-/* eslint-disable */
-/* eslint no-console: "error" */
-import type { Dispatch, SetStateAction } from 'react';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Button, Input, message, Modal } from 'antd';
 import { CourseMark } from 'types/api';
 import { Grade, Mark } from 'types/planner';
 import { updateCourseMark } from 'utils/planner';
-import S from './styles';
-import { useSelector } from 'react-redux';
 import { RootState } from 'config/store';
+import S from './styles';
 
 type Props = {
   code: string;
-  isVisible: boolean;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
+  open: boolean;
+  onCancel: () => void;
 };
 
-const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
+const EditMarkModal = ({ code, open, onCancel }: Props) => {
   const [markValue, setMarkValue] = useState<string | number | undefined>();
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
@@ -27,11 +24,11 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
     setMarkValue(value);
   };
 
+  const { token } = useSelector((state: RootState) => state.settings);
   const updateMark = (mark: Mark) => {
-    const { token } = useSelector((state: RootState) => state.settings);
     updateCourseMark({ course: code, mark } as CourseMark, token);
     setMarkValue(mark);
-    setIsVisible(false);
+    onCancel();
     message.success('Mark Updated');
   };
 
@@ -56,9 +53,9 @@ const EditMarkModal = ({ code, isVisible, setIsVisible }: Props) => {
   return (
     <Modal
       title={`Edit mark for ${code}`}
-      open={isVisible}
+      open={open}
       onOk={handleUpdateMark}
-      onCancel={() => setIsVisible(false)}
+      onCancel={onCancel}
       width="350px"
     >
       <S.EditMarkWrapper>

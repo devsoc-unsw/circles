@@ -6,10 +6,11 @@
 """
 
 import copy
-from itertools import chain
 import json
-from typing import List, Literal, Optional, Tuple
 import re
+from itertools import chain
+from typing import List, Literal, Optional, Tuple
+
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
 
@@ -24,10 +25,10 @@ class User:
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, Tuple[int, int | None]] = {}
-        self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
-        self.program: str = None
-        self.specialisations: dict[str, int] = {}
+        self.courses: dict[str, Tuple[int, Optional[int]]] = {}
+        self.cur_courses: dict[str, Tuple[int, Optional[int]]] = {}
+        self.program: Optional[str] = None
+        self.specialisations: list[str] = []
         self.year: int = 0
         self.core_courses: list[str] = []
 
@@ -35,7 +36,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, Tuple[int, int | None]]):
+    def add_courses(self, courses: dict[str, Tuple[int, Optional[int]]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -43,26 +44,26 @@ class User:
         """
         self.courses.update(courses)
 
-    def add_current_course(self, course: Tuple[int, int | None]):
+    def add_current_course(self, course_code: str, course: Tuple[int, Optional[int]]):
         """
         Given a course the user is taking in their current term,
         adds it to their cur_courses
         """
-        self.cur_courses.append(course)
+        self.cur_courses[course_code] = course
 
-    def add_current_courses(self, courses: dict[str, Tuple[int, int | None]]):
+    def add_current_courses(self, courses: dict[str, Tuple[int, Optional[int]]]):
         """
         Takes in a list of courses (represented as strings by course
         code) and, adds it to the list of current courses.
         """
-        self.cur_courses.extend(courses)
+        self.cur_courses = self.cur_courses | courses
 
     def empty_current_courses(self):
         """
         Empty all the current courses. Helps with moving
         on to the next term in the term planner api
         """
-        self.cur_courses.clear()
+        self.cur_courses = {}
 
     def add_program(self, program: str):
         """ Adds a program to this user """
@@ -70,7 +71,7 @@ class User:
 
     def add_specialisation(self, specialisation: str):
         """ Adds a specialisation to this user """
-        self.specialisations[specialisation] = 1
+        self.specialisations.append(specialisation)
 
     def has_taken_specific_course(self, course):
         """ taken a course directly, no equivalents """
@@ -79,7 +80,6 @@ class User:
     def has_taken_course(self, course: str):
         """ Determines if the user has taken this course """
         return any(c in self.courses and (self.courses[c][1] or 50) >= 50 for c in chain([course], (CACHED_EQUIVALENTS.get(course) or [])))
-    
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """
