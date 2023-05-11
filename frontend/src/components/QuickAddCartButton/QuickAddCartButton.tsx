@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
@@ -17,6 +17,10 @@ type Props = {
 
 const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   const dispatch = useDispatch();
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const iconStyles = {
+    color: theme === 'light' ? '#000' : '#fff'
+  };
 
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -63,12 +67,12 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
 
   return !planned ? (
     <Tooltip title="Add to Planner" placement="top">
-      <Button
+      <S.SelectButton
         data-testid="quick-add-cart-button"
         onClick={(e) => addToPlanner(e, courseCode)}
         size="small"
         shape="circle"
-        icon={<PlusOutlined />}
+        icon={<PlusOutlined style={iconStyles} />}
       />
     </Tooltip>
   ) : (
@@ -78,7 +82,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
         onClick={(e) => removeFromPlanner(e, courseCode)}
         size="small"
         shape="circle"
-        icon={<MinusOutlined />}
+        icon={<MinusOutlined style={iconStyles} />}
       />
     </Tooltip>
   );

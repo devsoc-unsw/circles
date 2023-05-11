@@ -1,12 +1,13 @@
 import type { Arrow } from '@antv/g6';
 import { PlannerCourse } from 'types/planner';
 
-export const defaultNode = {
+const plannedNode = {
   size: 70,
   style: {
     fill: '#9254de',
     stroke: '#9254de',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    lineWidth: 1
   },
   labelCfg: {
     style: {
@@ -17,39 +18,32 @@ export const defaultNode = {
   }
 };
 
-export const defaultEdge = (arrow: typeof Arrow) => ({
+const lockedNode = (theme: string) => ({
   style: {
-    endArrow: {
-      path: arrow.triangle(5, 5, 30),
-      fill: '#e0e0e0',
-      d: 25
+    fill: theme === 'light' ? '#fff' : '#000',
+    stroke: theme === 'light' ? '#9254de' : '#d7b7fd',
+    lineWidth: 1
+  },
+  labelCfg: {
+    style: {
+      fill: theme === 'light' ? '#9254de' : '#d7b7fd'
     }
   }
 });
 
-// plannedCourses is an object of with keys of courseCodes
-export const mapNodeStyle = (courseCode: string, plannedCourses: Record<string, PlannerCourse>) => {
-  // determine if planned or unplanned
-  if (plannedCourses[courseCode]) {
-    // uses default node style
-    return { id: courseCode, label: courseCode };
+const prereqNode = (theme: string) => ({
+  style: {
+    stroke: theme === 'light' ? '#000' : '#fff',
+    lineWidth: 2
   }
-  return {
-    id: courseCode,
-    label: courseCode,
-    style: {
-      fill: '#fff',
-      stroke: '#9254de'
-    },
-    labelCfg: {
-      style: {
-        fill: '#9254de'
-      }
-    }
-  };
-};
+});
 
-export const nodeStateStyles = {
+const sameNode = (courseCode: string) => ({
+  id: courseCode,
+  label: courseCode
+});
+
+const nodeStateStyles = {
   hover: {
     fill: '#b37feb',
     stroke: '#b37feb'
@@ -58,4 +52,144 @@ export const nodeStateStyles = {
     fill: '#b37feb',
     stroke: '#b37feb'
   }
+};
+
+const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#e0e0e0' : '#4a4a4a',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#e0e0e0' : '#4a4a4a'
+  }
+});
+
+const edgeOutHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+  id,
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#999' : '#aaa',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#999' : '#aaa'
+  }
+});
+
+const edgeInHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
+  id,
+  style: {
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: theme === 'light' ? '#000' : '#fff',
+      d: 25
+    },
+    stroke: theme === 'light' ? '#000' : '#fff'
+  }
+});
+
+const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
+  return {
+    id,
+    ...defaultEdge(arrow, theme)
+  };
+};
+
+const mapNodeStyle = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  // If planned, keep default styling. Otherwise apply lockedNode styling.
+  if (plannedCourses[courseCode]) return sameNode(courseCode);
+  return { ...sameNode(courseCode), ...lockedNode(theme) };
+};
+
+const mapNodePrereq = (courseCode: string, theme: string) => {
+  return {
+    ...sameNode(courseCode),
+    ...prereqNode(theme)
+  };
+};
+
+const mapNodeRestore = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) return { ...sameNode(courseCode), ...plannedNode };
+  return { ...sameNode(courseCode), ...lockedNode(theme) };
+};
+
+const mapNodeOpacity = (courseCode: string, opacity: number) => {
+  return {
+    ...sameNode(courseCode),
+    style: {
+      opacity
+    },
+    labelCfg: {
+      style: {
+        opacity
+      }
+    }
+  };
+};
+
+const edgeOpacity = (id: string, opacity: number) => ({
+  id,
+  style: {
+    opacity
+  }
+});
+
+const nodeLabelHoverStyle = (courseCode: string) => ({
+  ...sameNode(courseCode),
+  labelCfg: {
+    style: {
+      fill: '#fff'
+    }
+  }
+});
+
+const nodeLabelUnhoverStyle = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) {
+    // uses default node style with label color changed
+    return {
+      ...sameNode(courseCode),
+      labelCfg: {
+        style: {
+          fill: '#fff'
+        }
+      }
+    };
+  }
+  return {
+    ...sameNode(courseCode),
+    labelCfg: {
+      style: {
+        fill: theme === 'light' ? '#9254de' : '#d7b7fd'
+      }
+    }
+  };
+};
+
+export {
+  defaultEdge,
+  edgeInHoverStyle,
+  edgeOpacity,
+  edgeOutHoverStyle,
+  edgeUnhoverStyle,
+  mapNodeOpacity,
+  mapNodePrereq,
+  mapNodeRestore,
+  mapNodeStyle,
+  nodeLabelHoverStyle,
+  nodeLabelUnhoverStyle,
+  nodeStateStyles,
+  plannedNode
 };
