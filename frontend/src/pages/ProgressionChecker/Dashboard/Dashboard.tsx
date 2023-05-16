@@ -43,7 +43,7 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (courses[courseCode]?.plannedFor) {
+    if (courses[courseCode]?.plannedFor && !courses[courseCode]?.ignoreFromProgression) {
       completedUOC +=
         courses[courseCode].UOC *
         getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);

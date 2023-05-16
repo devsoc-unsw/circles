@@ -20,6 +20,7 @@ export type PlannerCourse = {
   handbookNote: string;
   isAccurate: boolean;
   supressed: boolean;
+  ignoreFromProgression: boolean;
   isMultiterm: boolean;
   mark: Mark;
   legacyOfferings?: CourseLegacyOfferings;

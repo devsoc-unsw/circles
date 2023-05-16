@@ -106,6 +106,8 @@ const ProgressionChecker = () => {
 
           // only consider disciplinary component courses
           Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            if (courses[courseCode]?.ignoreFromProgression) return;
+
             const isDoubleCounted =
               countedCourses.includes(courseCode) &&
               !/Core/.test(subgroup) &&
@@ -172,7 +174,11 @@ const ProgressionChecker = () => {
         .flatMap((spec) => Object.keys(spec.courses))
     );
     Object.keys(courses).forEach((courseCode) => {
-      if (!programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+      if (
+        !programCourseList.includes(courseCode) &&
+        courses[courseCode]?.plannedFor &&
+        !courses[courseCode]?.ignoreFromProgression
+      ) {
         overflowCourses[courseCode] = {
           courseCode,
           title: courses[courseCode].title,

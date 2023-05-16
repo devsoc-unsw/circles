@@ -89,6 +89,13 @@ const plannerSlice = createSlice({
         state.unplanned.push(courseCode);
       }
     },
+    toggleIgnoreFromProgression: (state, action: PayloadAction<string>) => {
+      const code = action.payload;
+
+      if (state.courses[code]) {
+        state.courses[code].ignoreFromProgression = !state.courses[code].ignoreFromProgression;
+      }
+    },
     toggleWarnings: (state, action: PayloadAction<CourseStates>) => {
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
@@ -467,6 +474,7 @@ export const {
   addToUnplanned,
   setUnplannedCourseToTerm,
   setPlannedCourseToTerm,
+  toggleIgnoreFromProgression,
   toggleWarnings,
   removeCourse,
   removeCourses,

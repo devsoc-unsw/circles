@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, PieChartOutlined, WarningOutlined } from '@ant-design/icons';
 import { Badge, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Term } from 'types/planner';
@@ -35,8 +35,17 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
   const { Text } = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
-  const { title, isUnlocked, plannedFor, isLegacy, isAccurate, handbookNote, supressed, mark } =
-    courses[code];
+  const {
+    title,
+    isUnlocked,
+    plannedFor,
+    isLegacy,
+    isAccurate,
+    handbookNote,
+    supressed,
+    ignoreFromProgression,
+    mark
+  } = courses[code];
   const warningMessage = courses[code].warnings;
 
   const isOffered = plannedFor
@@ -118,6 +127,9 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))}
+              {ignoreFromProgression && (
+                <PieChartOutlined style={{ color: theme.infoOutlined.color }} />
+              )}
               <S.CourseLabel>
                 {isSmall ? (
                   <Text className="text">{code}</Text>
@@ -157,7 +169,11 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
           )}
         </Draggable>
       </Suspense>
-      <ContextMenu code={code} plannedFor={plannedFor} />
+      <ContextMenu
+        code={code}
+        plannedFor={plannedFor}
+        ignoreFromProgression={ignoreFromProgression}
+      />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
@@ -177,7 +193,15 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
             // eslint-disable-next-line react/no-danger
             <div dangerouslySetInnerHTML={{ __html: handbookNote }} />
           )}
+          {/* TODO: Fix fullstops. example: "48 UoC required in all courses you have 36 This course will not be included ..."
+           */}
           {!isAccurate ? ' The course info may be inaccurate.' : ''}
+          {ignoreFromProgression ? ' This course will not be included in your progression.' : ''}
+        </ReactTooltip>
+      )}
+      {ignoreFromProgression && !(!isDragDisabled && shouldHaveWarning) && (
+        <ReactTooltip id={code} place="bottom">
+          This course will not be included in your progression.
         </ReactTooltip>
       )}
     </>

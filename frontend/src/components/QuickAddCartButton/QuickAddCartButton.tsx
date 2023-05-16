@@ -42,6 +42,7 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
         isAccurate: course.is_accurate,
         isMultiterm: course.is_multiterm,
         supressed: false,
+        ignoreFromProgression: false,
         mark: undefined
       };
       dispatch(addToUnplanned({ courseCode: course.code, courseData }));
