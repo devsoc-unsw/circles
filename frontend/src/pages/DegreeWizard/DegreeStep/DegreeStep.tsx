@@ -50,37 +50,21 @@ const DegreeStep = ({ incrementStep }: Props) => {
   };
 
   const searchDegree = (newInput: string) => {
-    console.log(`Starting fuzzy on ${newInput}`);
     setInput(newInput);
-    const degreeOptions = Object.keys(allDegrees);
-    console.log(`degreeOptions`, degreeOptions);
 
-    const afterCombine = degreeOptions
+    const fuzzedDegrees = Object.keys(allDegrees)
       .map((code) => `${code} ${allDegrees[code]}`)
-      .splice(0, 100);
-    console.log(`afterCombine: ${afterCombine}`);
-
-    const afterDistancce = afterCombine
       .map((title) => {
         return {
           'distance': fuzzy(newInput, title),
           'name': title
         }
-      }).splice(0, 100);
-    console.log(`afterDistancce: `, afterDistancce);
+      });
 
-    afterDistancce.sort((a, b) => a.name.length - b.name.length);
-    afterDistancce.sort((a, b) => b.distance - a.distance);
-    const afterSort = afterDistancce;
-    console.log(`afterSort: `, afterSort);
+    fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
+    fuzzedDegrees.sort((a, b) => b.distance - a.distance);
 
-    const afterSplice = afterSort.splice(0, 100);
-    console.log(`afterSplice: `, afterSplice);
-
-    const afterMap = afterSplice.map(pair => pair.name);
-    console.log(`afterMap: `, afterMap);
-
-    setOptions(afterMap);
+    setOptions(fuzzedDegrees.splice(0, 100).map(pair => pair.name));
   };
 
   const props = useSpring(springProps);
