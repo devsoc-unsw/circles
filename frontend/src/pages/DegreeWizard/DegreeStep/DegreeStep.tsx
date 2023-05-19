@@ -10,8 +10,7 @@ import { resetDegree, setProgram } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
-
-import { levenshteinEditDistance } from 'levenshtein-edit-distance';
+import { fuzzy } from 'fast-fuzzy';
 
 const { Title } = Typography;
 
@@ -57,23 +56,25 @@ const DegreeStep = ({ incrementStep }: Props) => {
     console.log(`degreeOptions`, degreeOptions);
 
     const afterCombine = degreeOptions
-      .map((code) => `${code} ${allDegrees[code]}`);
+      .map((code) => `${code} ${allDegrees[code]}`)
+      .splice(0, 100);
     console.log(`afterCombine: ${afterCombine}`);
 
     const afterDistancce = afterCombine
       .map((title) => {
         return {
-          'distance': levenshteinEditDistance(newInput, title),
+          'distance': fuzzy(newInput, title),
           'name': title
         }
-      });
+      }).splice(0, 100);
     console.log(`afterDistancce: `, afterDistancce);
 
-    afterDistancce.sort((a, b) => a.distance - b.distance);
+    afterDistancce.sort((a, b) => a.name.length - b.name.length);
+    afterDistancce.sort((a, b) => b.distance - a.distance);
     const afterSort = afterDistancce;
     console.log(`afterSort: `, afterSort);
 
-    const afterSplice = afterSort.splice(0, 10);
+    const afterSplice = afterSort.splice(0, 100);
     console.log(`afterSplice: `, afterSplice);
 
     const afterMap = afterSplice.map(pair => pair.name);
