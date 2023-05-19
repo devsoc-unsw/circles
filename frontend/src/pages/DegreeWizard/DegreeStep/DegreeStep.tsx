@@ -54,7 +54,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
     console.log(`Starting fuzzy on ${newInput}`);
     setInput(newInput);
     const degreeOptions = Object.keys(allDegrees);
-    console.log(`degreeOptions: ${degreeOptions}`);
+    console.log(`degreeOptions`, degreeOptions);
 
     const afterCombine = degreeOptions
       .map((code) => `${code} ${allDegrees[code]}`);
@@ -67,17 +67,17 @@ const DegreeStep = ({ incrementStep }: Props) => {
           'name': title
         }
       });
-    console.log(`afterDistancce: ${afterDistancce}`);
+    console.log(`afterDistancce: `, afterDistancce);
 
     afterDistancce.sort((a, b) => a.distance - b.distance);
     const afterSort = afterDistancce;
-    console.log(`afterSort: ${afterSort}`);
+    console.log(`afterSort: `, afterSort);
 
     const afterSplice = afterSort.splice(0, 10);
-    console.log(`afterSplice: ${afterSplice}`);
+    console.log(`afterSplice: `, afterSplice);
 
     const afterMap = afterSplice.map(pair => pair.name);
-    console.log(`afterMap: ${afterMap}`);
+    console.log(`afterMap: `, afterMap);
 
     setOptions(afterMap);
   };
