@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
@@ -9,6 +10,8 @@ import { resetDegree, setProgram } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
+
+import { levenshteinEditDistance } from 'levenshtein-edit-distance';
 
 const { Title } = Typography;
 
@@ -48,12 +51,35 @@ const DegreeStep = ({ incrementStep }: Props) => {
   };
 
   const searchDegree = (newInput: string) => {
+    console.log(`Starting fuzzy on ${newInput}`);
     setInput(newInput);
-    const degreeOptions = Object.keys(allDegrees)
-      .map((code) => `${code} ${allDegrees[code]}`)
-      .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
-      .splice(0, 8);
-    setOptions(degreeOptions);
+    const degreeOptions = Object.keys(allDegrees);
+    console.log(`degreeOptions: ${degreeOptions}`);
+
+    const afterCombine = degreeOptions
+      .map((code) => `${code} ${allDegrees[code]}`);
+    console.log(`afterCombine: ${afterCombine}`);
+
+    const afterDistancce = afterCombine
+      .map((title) => {
+        return {
+          'distance': levenshteinEditDistance(newInput, title),
+          'name': title
+        }
+      });
+    console.log(`afterDistancce: ${afterDistancce}`);
+
+    afterDistancce.sort((a, b) => a.distance - b.distance);
+    const afterSort = afterDistancce;
+    console.log(`afterSort: ${afterSort}`);
+
+    const afterSplice = afterSort.splice(0, 10);
+    console.log(`afterSplice: ${afterSplice}`);
+
+    const afterMap = afterSplice.map(pair => pair.name);
+    console.log(`afterMap: ${afterMap}`);
+
+    setOptions(afterMap);
   };
 
   const props = useSpring(springProps);
