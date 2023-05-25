@@ -14,6 +14,7 @@ import {
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import axios from 'axios';
+import { getUserPlanner } from 'utils/api/userApi';
 import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
 import { unhideAllYears } from 'reducers/plannerSlice';
@@ -34,7 +35,7 @@ type Props = {
 
 const OptionsHeader = ({ plannerRef }: Props) => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
-  const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
+  const planner = getUserPlanner(); // This should use a query
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const iconStyles = {
@@ -111,7 +112,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           </div>
         </Tippy>
 
-        {!isPlannerEmpty(years) && (
+        {!isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">
             <Popconfirm
               placement="bottomRight"

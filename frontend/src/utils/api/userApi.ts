@@ -14,24 +14,24 @@ export const getToken = async (): Promise<string> => {
 
 export const getUser = async (): Promise<UserResponse> => {
   const token = await getToken();
-  const user = await axios.get(`user/data/all/${token}`);
-  return user.data as UserResponse;
+  const user = await axios.get<UserResponse>(`user/data/all/${token}`);
+  return user.data;
 };
 
 export const getUserDegree = async (): Promise<DegreeResponse> => {
   const token = await getToken();
-  const degree = await axios.get(`user/data/degree/${token}`);
-  return degree.data as DegreeResponse;
+  const degree = await axios.get<DegreeResponse>(`user/data/degree/${token}`);
+  return degree.data;
 };
 
 export const getUserPlanner = async (): Promise<PlannerResponse> => {
   const token = await getToken();
-  const planner = await axios.get(`user/data/planner/${token}`);
-  return planner.data as PlannerResponse;
+  const planner = await axios.get<PlannerResponse>(`user/data/planner/${token}`);
+  return planner.data;
 };
 
 export const getUserCourses = async (): Promise<CourseResponse> => {
   const token = await getToken();
-  const courses = await axios.get(`user/data/courses/${token}`);
-  return courses.data as CourseResponse;
+  const courses = await axios.get<CourseResponse>(`user/data/courses/${token}`);
+  return courses.data;
 };

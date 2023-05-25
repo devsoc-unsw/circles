@@ -42,3 +42,10 @@ export const badPlanner = {
   years: {} as Record<string, string[]>[],
   courses: {} as Record<string, CourseResponse>
 } as PlannerResponse;
+
+// Also a temp fix ig?
+export const badDegree = {
+  programCode: '3778',
+  specs: ['COMPA1'],
+  isComplete: false
+};
