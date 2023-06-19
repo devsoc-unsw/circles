@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -13,17 +14,44 @@ import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+} from 'react-query';
+import { getUserDegree } from 'utils/api/userApi';
 
 const CourseSelector = () => {
-  const [structure, setStructure] = useState<ProgramStructure>({});
+  // const [structure, setStructure] = useState<ProgramStructure>({});
+  const queryClient = useQueryClient();
 
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
+  const { programCode, specs } = useQuery('degree', getUserDegree, {
+
+    }).data ?? {programCode: '', specs: []};
+  // replace these with useQuery with api function is userApi.ts i assume?
   const { courses } = useSelector((state: RootState) => state.planner);
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 
   const dispatch = useDispatch();
 
   const courseCode = tabs[active];
+
+
+  const fetchStructure = async (/* programCode: string, specs: string[] */) => {
+    const res = await axios.get<Structure>(
+      `/programs/getStructure/${programCode}/${specs.join('+')}`
+    );
+    return res.data.structure;
+  };
+
+  const result = useQuery('programStructure', fetchStructure, {
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at fetchStructure', err);
+    }
+  });
+
+  const structure: ProgramStructure = result.data ?? {};
 
   useEffect(() => {
     // only open for users with no courses
@@ -39,18 +67,7 @@ const CourseSelector = () => {
 
   useEffect(() => {
     // get structure of degree
-    const fetchStructure = async () => {
-      try {
-        const res = await axios.get<Structure>(
-          `/programs/getStructure/${programCode}/${specs.join('+')}`
-        );
-        setStructure(res.data.structure);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Error at fetchStructure', err);
-      }
-    };
-    if (programCode) fetchStructure();
+    if (programCode) result.refetch();
   }, [programCode, specs]);
 
   return (
