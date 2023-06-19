@@ -26,6 +26,7 @@ import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import FreeElectiveSection from './FreeElectivesSection';
 import GridView from './GridView';
+import IgnoredCoursesSection from './IgnoredCoursesSection';
 import S from './styles';
 import TableView from './TableView';
 
@@ -75,6 +76,8 @@ const ProgressionChecker = () => {
   // keeps track of courses which overflows a subgroup UOC requirements
   // these courses are appended as 'Additional Electives'
   const overflowCourses: ProgressionAdditionalCourses = {};
+
+  const ignoredCourses: ProgressionAdditionalCourses = {};
 
   const generateViewStructure = () => {
     // Example groups: Major, Minor, General, Rules
@@ -174,21 +177,24 @@ const ProgressionChecker = () => {
         .flatMap((spec) => Object.keys(spec.courses))
     );
     Object.keys(courses).forEach((courseCode) => {
-      if (
+      const course = {
+        courseCode,
+        title: courses[courseCode].title,
+        UOC: courses[courseCode].UOC,
+        plannedFor: courses[courseCode].plannedFor as string,
+        isUnplanned: unplanned.includes(courseCode),
+        isMultiterm: courses[courseCode].isMultiterm,
+        isDoubleCounted: false,
+        isOverCounted: false
+      };
+      if (courses[courseCode]?.plannedFor && courses[courseCode]?.ignoreFromProgression) {
+        ignoredCourses[courseCode] = course;
+      } else if (
         !programCourseList.includes(courseCode) &&
         courses[courseCode]?.plannedFor &&
         !courses[courseCode]?.ignoreFromProgression
       ) {
-        overflowCourses[courseCode] = {
-          courseCode,
-          title: courses[courseCode].title,
-          UOC: courses[courseCode].UOC,
-          plannedFor: courses[courseCode].plannedFor as string,
-          isUnplanned: unplanned.includes(courseCode),
-          isMultiterm: courses[courseCode].isMultiterm,
-          isDoubleCounted: false,
-          isOverCounted: false
-        };
+        overflowCourses[courseCode] = course;
       }
     });
     return newViewLayout;
@@ -287,6 +293,7 @@ const ProgressionChecker = () => {
             </Collapsible>
           ))}
           <FreeElectiveSection courses={Object.values(overflowCourses)} view={view} />
+          <IgnoredCoursesSection courses={Object.values(ignoredCourses)} view={view} />
         </S.ProgressionViewContainer>
       </S.Wrapper>
     </PageTemplate>
