@@ -1,10 +1,15 @@
+/* eslint-disable */
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
+import { useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
-import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
+import { Term } from 'types/planner';
+import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { handleSetPlannedCourseToTerm, handleSetUnplannedCourseToTerm } from 'utils/api/plannerApi';
+import { getUserPlanner, getUserDegree } from 'utils/api/userApi';
 import getAllCourseOfferings from 'utils/getAllCourseOfferings';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
@@ -19,6 +24,7 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { checkMultitermInBounds, isPlannerEmpty } from './utils';
+import { handleGetCourseInfo } from 'utils/api/courseApi';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -26,30 +32,15 @@ const DragDropContext = React.lazy(() =>
 
 const TermPlanner = () => {
   const { showWarnings, token } = useSelector((state: RootState) => state.settings);
-  const planner = useSelector((state: RootState) => state.planner);
+  // const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
+  const queryClient = useQueryClient();
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
   const [draggingCourse, setDraggingCourse] = useState('');
   const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
   const [multiCourse, setMultiCourse] = useState('');
-
-  const handleSetPlannedCourseToTerm = async (data: PlannedToTerm) => {
-    try {
-      await axios.post('planner/plannedToTerm', data, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, no-console
-      console.error(`Error at setPlannedCourseToTerm: ${err}`);
-    }
-  };
-
-  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
-    try {
-      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
-      console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
-    }
-  };
 
   const dispatch = useDispatch();
 
@@ -57,41 +48,44 @@ const TermPlanner = () => {
   // also only want it to update on new/removed course codes
   const courses = Object.keys(planner.courses).sort().join('');
 
-  useEffect(() => {
-    // update the legacy term offered
-    const updateOfferingsData = async () => {
-      const years: string[] = [];
-      for (let i = 0; i < planner.numYears; i++) {
-        years.push((planner.startYear + i).toString());
-      }
+  /// TODO: GET LEGACY OFFERINGS (doesn't seem to be stored in backend?!?)
+  // useEffect(() => {
+  //   // update the legacy term offered
+  //   const updateOfferingsData = async () => {
+  //     const years: string[] = [];
+  //     for (let i = 0; i < planner.years.length; i++) {
+  //       years.push((planner.startYear + i).toString());
+  //     }
 
-      // get the outdated legacy offerings
-      const outdated = Object.entries(planner.courses)
-        .filter(([, course]) => {
-          const oldOfferings = course.legacyOfferings;
-          // no legacy offering data, or doesn't include the wanted years
-          return !oldOfferings || years.filter((y) => !(y in oldOfferings)).length > 0;
-        })
-        .map(([code]) => code);
+  //     // get the outdated legacy offerings
+  //     const outdated = Object.entries(planner.courses)
+  //       .filter(([, course]) => {
+  //         const oldOfferings = course.legacyOfferings;
+  //         // no legacy offering data, or doesn't include the wanted years
+  //         return !oldOfferings || years.filter((y) => !(y in oldOfferings)).length > 0;
+  //       })
+  //       .map(([code]) => code);
 
-      // update them
-      const data = await getAllCourseOfferings(outdated, years);
-      Object.entries(data).forEach(([code, offerings]) => {
-        dispatch(updateLegacyOfferings({ code, offerings }));
-      });
-    };
+  //     // update them
+  //     const data = await getAllCourseOfferings(outdated, years);
+  //     Object.entries(data).forEach(([code, offerings]) => {
+  //       dispatch(updateLegacyOfferings({ code, offerings }));
+  //     });
+  //   };
 
-    updateOfferingsData();
+  //   updateOfferingsData();
 
-    // disabled planner.courses as part of useEffect dep to avoid api double calling
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [courses, dispatch, planner.numYears, planner.startYear]);
+  //   // disabled planner.courses as part of useEffect dep to avoid api double calling
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [courses, dispatch, planner.years.length, planner.startYear]);
 
-  const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
-  const plannerEmpty = isPlannerEmpty(planner.years);
+  // dont need to validate cos it should be done alrdy
+  // const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
+  const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
     const validateTermPlanner = async () => {
       try {
+        // not a thingy anymores? Should just be abased of the user token
         const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
         dispatch(toggleWarnings(res.data.courses_state));
       } catch (err) {
@@ -116,12 +110,13 @@ const TermPlanner = () => {
   /* Ref used for exporting planner to image */
   const plannerPicRef = useRef<HTMLDivElement>(null);
 
-  const handleOnDragStart: OnDragStartResponder = (result) => {
-    const course = result.draggableId.slice(0, 8);
-    setDraggingCourse(course);
-    if (planner.courses[course].isMultiterm) {
+  const handleOnDragStart: OnDragStartResponder = async (result) => {
+    const courseCode = result.draggableId.slice(0, 8);
+    setDraggingCourse(courseCode);
+    const courseInfo = await handleGetCourseInfo(courseCode);
+    if (courseInfo.is_multiterm) {
       setCheckYearMultiTerm(result.source.droppableId);
-      setMultiCourse(course);
+      setMultiCourse(courseCode);
     }
   };
 
@@ -136,26 +131,29 @@ const TermPlanner = () => {
 
     if (!destination) return; // drag outside container
 
+    // const draggableInfo = await handleGetCourseInfo(draggableId);
+
     if (destination.droppableId !== 'unplanned') {
+      // TODO: Fix check for multiterm (it's confusing)
       // Check if multiterm course extends below bottom row of term planner
-      if (
-        planner.courses[draggableId].isMultiterm &&
-        !checkMultitermInBounds({
-          destRow: Number(destination.droppableId.match(/[0-9]{4}/)?.[0]) - planner.startYear,
-          destTerm: destination.droppableId.match(/T[0-3]/)?.[0] as Term,
-          srcTerm: source.droppableId as Term,
-          course: planner.courses[draggableId],
-          isSummerTerm: planner.isSummerEnabled,
-          numYears: planner.numYears
-        })
-      ) {
-        openNotification({
-          type: 'warning',
-          message: 'Course would extend outside of the term planner',
-          description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`
-        });
-        return;
-      }
+      // if (
+      //   draggableInfo.is_multiterm &&
+      //   !checkMultitermInBounds({
+      //     destRow: Number(destination.droppableId.match(/[0-9]{4}/)?.[0]) - planner.startYear,
+      //     destTerm: destination.droppableId.match(/T[0-3]/)?.[0] as Term,
+      //     srcTerm: source.droppableId as Term,
+      //     course: draggableInfo,
+      //     isSummerTerm: planner.isSummerEnabled,
+      //     numYears: planner.numYears
+      //   })
+      // ) {
+      //   openNotification({
+      //     type: 'warning',
+      //     message: 'Course would extend outside of the term planner',
+      //     description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`
+      //   });
+      //   return;
+      // }
 
       // === moving course to unplanned doesn't require term logic ===
       if (destination.droppableId !== source.droppableId) {
@@ -242,7 +240,9 @@ const TermPlanner = () => {
                       }
                     });
                   });
-                  if (planner.hidden[iYear]) return null;
+
+                  // TODO: Mov hidden years to frontend
+                  // if (planner.hidden[iYear]) return null;
                   return (
                     <React.Fragment key={iYear}>
                       <S.YearGridBox>
