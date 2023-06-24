@@ -6,7 +6,6 @@ import axios from 'axios';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
-import { useAppDispatch } from 'hooks';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -22,7 +21,6 @@ type Props = {
 
 const YearStep = ({ incrementStep }: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useAppDispatch();
   const { token } = useSelector((state: RootState) => state.settings);
 
   return (
@@ -44,12 +42,13 @@ const YearStep = ({ incrementStep }: Props) => {
               const numYears = parseInt(endYear, 10) - startYearInt + 1;
               // We can trust num years to be a valid number because the range picker only allows valid ranges
               try {
-                await axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
-                await axios.put(
-                  '/user/updateStartYear',
-                  { startYear: startYearInt },
-                  { params: { token } }
-                );
+                await axios.put('/user/updateDegreeLength', null, { params: { numYears, token } });
+                await axios.put('/user/updateStartYear', null, {
+                  params: {
+                    startYear: startYearInt,
+                    token
+                  }
+                });
               } catch {
                 openNotification({
                   type: 'error',
