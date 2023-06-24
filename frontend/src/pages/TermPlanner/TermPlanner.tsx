@@ -280,3 +280,11 @@ const TermPlanner = () => {
 };
 
 export default TermPlanner;
+
+/// updateLegacyOfferings
+/// validateTermPlanner - cringe? BE?
+/// uoc / year -> throw this onto the BE too but, as an extra field on planner years
+/// hidden -> keep this on the FE
+/// summer terms
+/// multiterm -> check in bounds keep the FE too
+/// isSummerEnabled -> keep the FE too
