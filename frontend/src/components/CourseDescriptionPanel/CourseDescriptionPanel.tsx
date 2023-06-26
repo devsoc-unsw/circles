@@ -159,4 +159,4 @@ const CourseDescriptionPanel = ({
   );
 };
 
-export default CourseDescriptionPanel;
+export default React.memo(CourseDescriptionPanel);
