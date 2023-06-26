@@ -23,7 +23,14 @@
       "automerge": true,
       "automergeType": "branch",
       "addLabels": ["deps: ci-actions"],
-      "schedule": ["before 5am every monday"],
+      "schedule": ["before 5am every monday"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": true,
+      "matchPackageNames": ["vite", "@vitejs/plugin-react"],
+      "groupName": "vite & plugins",
+      "addLabels": ["deps: vite"]
     },
     {
       "managers": ["npm"],
