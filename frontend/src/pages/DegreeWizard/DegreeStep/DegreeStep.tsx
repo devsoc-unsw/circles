@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
 import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { resetDegree, setProgram } from 'reducers/degreeSlice';
+import { useAppSelector } from 'hooks';
+import { handleDegreeChange } from 'utils/api/degreeApi';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -21,7 +22,6 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
-  const dispatch = useAppDispatch();
   const programCode = useAppSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
@@ -38,13 +38,16 @@ const DegreeStep = ({ incrementStep }: Props) => {
     fetchAllDegrees();
   }, []);
 
-  const handleDegreeChange = ({ key }: { key: string }) => {
-    dispatch(resetDegree());
-    dispatch(setProgram({ programCode: key.substring(0, 4), programName: key.substring(5) }));
-    setInput(key);
-    setOptions([]);
+  const degreeChangeMutation = useMutation(handleDegreeChange, {
+    onMutate: ({ key }) => {
+      setInput(key);
+      setOptions([]);
+      if (key) incrementStep(Steps.SPECS);
+    },
+  });
 
-    if (key) incrementStep(Steps.SPECS);
+  const onDegreeChange = async (key: { key: string }) => {
+    degreeChangeMutation.mutate(key);
   };
 
   const searchDegree = (newInput: string) => {
@@ -78,7 +81,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
         />
         {input && options && (
           <Menu
-            onClick={handleDegreeChange}
+            onClick={onDegreeChange}
             selectedKeys={programCode ? [programCode] : []}
             items={items}
             mode="inline"

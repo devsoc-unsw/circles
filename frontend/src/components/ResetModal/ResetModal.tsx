@@ -3,8 +3,9 @@ import { Modal } from 'antd';
 import { useAppDispatch } from 'hooks';
 import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
-import { resetDegree } from 'reducers/degreeSlice';
 import { resetPlanner } from 'reducers/plannerSlice';
+import { useQuery } from 'react-query';
+import { resetDegree } from 'utils/api/degreeApi';
 
 type Props = {
   open?: boolean;
@@ -15,16 +16,16 @@ type Props = {
 // has no internal "open" state since it becomes difficult to juggle with external buttons
 const ResetModal = ({ open, onOk, onCancel }: Props) => {
   const dispatch = useAppDispatch();
-
-  const handleOk = () => {
+  const handleOk = async () => {
     dispatch(resetPlanner());
-    dispatch(resetDegree());
+    const degreeQuery = useQuery('degree', resetDegree);
+    if (degreeQuery.isError) {
+      console.log('Error while resetting degree');
+    }
     dispatch(resetTabs());
     dispatch(resetCourses());
-
     onOk?.();
   };
-
   return (
     <Modal
       title="Reset Planner?"

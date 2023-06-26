@@ -1,19 +1,19 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { setIsComplete } from 'reducers/degreeSlice';
+import { useAppSelector } from 'hooks';
 import CS from '../common/styles';
 import S from './styles';
+import { resetDegree } from 'utils/api/degreeApi';
 
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { programCode, specs } = useAppSelector((state: RootState) => state.degree);
 
-  const handleSaveUserSettings = () => {
+  const handleSaveUserSettings = async () => {
     if (!programCode) {
       openNotification({
         type: 'error',
@@ -25,7 +25,10 @@ const StartBrowsingStep = () => {
         message: 'Please select a specialisation'
       });
     } else {
-      dispatch(setIsComplete(true));
+      const degreeQuery = useQuery('degree', resetDegree);
+      if (degreeQuery.isError) {
+        console.log('Error while resetting degree');
+      }
       navigate('/course-selector');
     }
   };
