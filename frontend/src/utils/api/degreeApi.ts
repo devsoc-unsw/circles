@@ -12,9 +12,9 @@ export const resetDegree = async () => {
   }
 };
 
-export const handleDegreeChange = async ({ key }: { key: string }) => {
+export const handleDegreeChange = async ({ programCode }: { programCode: string }) => {
   const token = getToken();
-  const data = { programCode: key.substring(0, 4) };
+  const data = { programCode: programCode.substring(0, 4) };
   resetDegree();
   try {
     await axios.post('user/setProgram', data, { params: { token } });
