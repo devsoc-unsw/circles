@@ -173,7 +173,7 @@ const CourseMenu = () => {
                     <CourseMenuTitle
                       courseCode={course.courseCode}
                       title={course.title}
-                      selected={planner.courses[course.courseCode] !== undefined}
+                      selected={planner.courses[course.courseCode] !== undefined || planner.unplanned.includes(course.courseCode)}
                       accurate={course.accuracy}
                       unlocked={course.unlocked}
                     />
