@@ -16,20 +16,33 @@ import CourseTabs from './CourseTabs';
 import S from './styles';
 import {
   useQuery,
-  useMutation,
   useQueryClient,
 } from 'react-query';
-import { getUserDegree } from 'utils/api/userApi';
+import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { errLogger } from 'utils/queryUtils';
+
 
 const CourseSelector = () => {
-  // const [structure, setStructure] = useState<ProgramStructure>({});
-  const queryClient = useQueryClient();
+  useQueryClient();
 
-  const { programCode, specs } = useQuery('degree', getUserDegree, {
+  const [showedNotif, setShowedNotif] = useState(false);
+  
+  useQuery('planner', getUserPlanner, {
+      onError: errLogger("coursesQuery"),
+      onSuccess: (data) => {
+          // only open for users with no courses
+          if (!showedNotif && !Object.keys(data.courses).length) {
+            openNotification({
+              type: 'info',
+              message: 'How do I see more sidebar courses?',
+              description:
+              'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
+            });
+            setShowedNotif(true);
+          }
+        }
+    });
 
-    }).data ?? {programCode: '', specs: []};
-  // replace these with useQuery with api function is userApi.ts i assume?
-  const { courses } = useSelector((state: RootState) => state.planner);
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 
   const dispatch = useDispatch();
@@ -37,46 +50,13 @@ const CourseSelector = () => {
   const courseCode = tabs[active];
 
 
-  const fetchStructure = async (/* programCode: string, specs: string[] */) => {
-    const res = await axios.get<Structure>(
-      `/programs/getStructure/${programCode}/${specs.join('+')}`
-    );
-    return res.data.structure;
-  };
-
-  const result = useQuery('programStructure', fetchStructure, {
-    onError: (err) => {
-      // eslint-disable-next-line no-console
-      console.error('Error at fetchStructure', err);
-    }
-  });
-
-  const structure: ProgramStructure = result.data ?? {};
-
-  useEffect(() => {
-    // only open for users with no courses
-    if (!Object.keys(courses).length) {
-      openNotification({
-        type: 'info',
-        message: 'How do I see more sidebar courses?',
-        description:
-          'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
-      });
-    }
-  }, [courses]);
-
-  useEffect(() => {
-    // get structure of degree
-    if (programCode) result.refetch();
-  }, [programCode, specs]);
-
   return (
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper>
-          <CourseMenu structure={structure} />
+          <CourseMenu />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel
