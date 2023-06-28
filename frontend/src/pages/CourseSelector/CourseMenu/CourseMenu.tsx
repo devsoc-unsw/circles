@@ -113,7 +113,7 @@ const CourseMenu = () => {
     setPageLoaded(true);
   }, []);
 
-  const everythingQuery = useQuery(['degree', 'planner', 'programStructure'], getEverything, {
+  const everythingQuery = useQuery(['everything'], getEverything, {
     onError: errLogger("getEverything"),
     onSuccess: (data) => {
       if (!Object.keys(data[1]).length) return;
