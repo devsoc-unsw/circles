@@ -28,14 +28,14 @@ export type PlannerResponse = {
 };
 
 export type Term = {
-  y: string;
-  t: string;
+  Y: string;
+  T: string;
 };
 
 // null coalesced to remove `undefined`. This SHOULD NOT see production
 // temp fix while we wait for `prepareUserPayload` to be deprecated
 export const badPlanner = {
-  mostRecentPastTerm: { y: '2020', t: '2' },
+  mostRecentPastTerm: { Y: '2020', T: '2' },
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,
