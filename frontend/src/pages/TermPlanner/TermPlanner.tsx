@@ -2,7 +2,7 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useQuery, useQueryClient } from 'react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
@@ -42,7 +42,7 @@ const TermPlanner = () => {
   const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
   const [multiCourse, setMultiCourse] = useState('');
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // needed for useEffect deps as it does not deep compare arrays well enough :c
   // also only want it to update on new/removed course codes
@@ -83,16 +83,17 @@ const TermPlanner = () => {
   // const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
-    const validateTermPlanner = async () => {
-      try {
-        // not a thingy anymores? Should just be abased of the user token
-        const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
-        dispatch(toggleWarnings(res.data.courses_state));
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Error at validateTermPlanner', err);
-      }
-    };
+    // NOTE: Do we even need to validate the term planner? It's stored on the backend now.
+    // const validateTermPlanner = async () => {
+    //   try {
+    //     // not a thingy anymores? Should just be abased of the user token
+    //     const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
+    //     dispatch(toggleWarnings(res.data.courses_state));
+    //   } catch (err) {
+    //     // eslint-disable-next-line no-console
+    //     console.error('Error at validateTermPlanner', err);
+    //   }
+    // };
 
     if (plannerEmpty) {
       openNotification({
@@ -102,8 +103,8 @@ const TermPlanner = () => {
           'Add courses from the course selector to the term planner and drag courses from the unplanned column'
       });
     }
-    validateTermPlanner();
-  }, [payload, showWarnings, plannerEmpty, dispatch]);
+    // validateTermPlanner();
+  }, [showWarnings, plannerEmpty]);
 
   const currYear = new Date().getFullYear();
 
@@ -134,36 +135,19 @@ const TermPlanner = () => {
     // const draggableInfo = await handleGetCourseInfo(draggableId);
 
     if (destination.droppableId !== 'unplanned') {
-      // TODO: Fix check for multiterm (it's confusing)
-      // Check if multiterm course extends below bottom row of term planner
-      // if (
-      //   draggableInfo.is_multiterm &&
-      //   !checkMultitermInBounds({
-      //     destRow: Number(destination.droppableId.match(/[0-9]{4}/)?.[0]) - planner.startYear,
-      //     destTerm: destination.droppableId.match(/T[0-3]/)?.[0] as Term,
-      //     srcTerm: source.droppableId as Term,
-      //     course: draggableInfo,
-      //     isSummerTerm: planner.isSummerEnabled,
-      //     numYears: planner.numYears
-      //   })
-      // ) {
-      //   openNotification({
-      //     type: 'warning',
-      //     message: 'Course would extend outside of the term planner',
-      //     description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`
-      //   });
-      //   return;
-      // }
+      // Multiterm is dead 🦀🦀🦀
 
       // === moving course to unplanned doesn't require term logic ===
       if (destination.droppableId !== source.droppableId) {
-        dispatch(
-          moveCourse({
-            course: draggableId,
-            destTerm: destination.droppableId,
-            srcTerm: source.droppableId
-          })
-        );
+        // TOOD: What values do we give these?
+        await handleSetPlannedCourseToTerm({
+          srcRow: -1, // ?
+          srcTerm: source.droppableId,
+          destRow: -1, // ?
+          destTerm: destination.droppableId,
+          destIndex: -1, // ?
+          courseCode: draggableId,
+        });
       }
     }
 
@@ -236,7 +220,9 @@ const TermPlanner = () => {
                   Object.keys(year).forEach((termKey) => {
                     Object.keys(planner.courses).forEach((courseCode) => {
                       if (year[termKey as Term].includes(courseCode)) {
-                        yearUOC += planner.courses[courseCode].UOC;
+                        // UOC is going to be kinda difficult to get here,
+                        // and surely logic like this shouldn't be in the html here anyway
+                        // yearUOC += planner.courses[courseCode].UOC;
                       }
                     });
                   });

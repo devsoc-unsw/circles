@@ -144,7 +144,7 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
     Args:
         data (PlannedToTerm):
             - srcRow(int): The row in the planner the course was originally in
-            - srcTerm(int): The term in the planner the course was originally in
+            - srcTerm(str): The term in the planner the course was originally in
             - destRow(int): The row in the planner the course should be moved to
             - destTerm(str): The term in the planner the course should be moved to
             - destIndex(int): The index within the term the course should be moved to
