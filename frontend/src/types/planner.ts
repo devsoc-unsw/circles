@@ -41,7 +41,7 @@ export type UnPlannedToTerm = {
 
 export type PlannedToTerm = {
   srcRow: number;
-  srcTerm: string;
+  srcTerm: string; // TODO: Term values are ints on the backend. For why?
   destRow: number;
   destTerm: string;
   destIndex: number;
