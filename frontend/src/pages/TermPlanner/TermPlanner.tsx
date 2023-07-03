@@ -1,40 +1,32 @@
-/* eslint-disable */
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { useQuery, useQueryClient } from 'react-query';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { Badge } from 'antd';
-import axios from 'axios';
-import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { handleSetPlannedCourseToTerm, handleSetUnplannedCourseToTerm } from 'utils/api/plannerApi';
-import { getUserPlanner, getUserDegree } from 'utils/api/userApi';
-import getAllCourseOfferings from 'utils/getAllCourseOfferings';
+import { handleGetCourseInfo } from 'utils/api/courseApi';
+import {
+  handleSetPlannedCourseToTerm,
+  handleSetUnplannedCourseToTerm,
+  handleUnscheduleCourse
+} from 'utils/api/plannerApi';
+import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
-import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
-import { moveCourse, toggleWarnings, updateLegacyOfferings } from 'reducers/plannerSlice';
 import { GridItem } from './common/styles';
 import HideYearTooltip from './HideYearTooltip';
 import OptionsHeader from './OptionsHeader';
 import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
-import { checkMultitermInBounds, isPlannerEmpty } from './utils';
-import { handleGetCourseInfo } from 'utils/api/courseApi';
+import { isPlannerEmpty } from './utils';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
 );
 
 const TermPlanner = () => {
-  const { showWarnings, token } = useSelector((state: RootState) => state.settings);
-  // const planner = useSelector((state: RootState) => state.planner);
-  const degree = useSelector((state: RootState) => state.degree);
-  const queryClient = useQueryClient();
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
@@ -46,7 +38,7 @@ const TermPlanner = () => {
 
   // needed for useEffect deps as it does not deep compare arrays well enough :c
   // also only want it to update on new/removed course codes
-  const courses = Object.keys(planner.courses).sort().join('');
+  // const courses = Object.keys(planner.courses).sort().join('');
 
   /// TODO: GET LEGACY OFFERINGS (doesn't seem to be stored in backend?!?)
   // useEffect(() => {
@@ -104,7 +96,7 @@ const TermPlanner = () => {
       });
     }
     // validateTermPlanner();
-  }, [showWarnings, plannerEmpty]);
+  }, [plannerEmpty]);
 
   const currYear = new Date().getFullYear();
 
@@ -146,7 +138,7 @@ const TermPlanner = () => {
           destRow: -1, // ?
           destTerm: destination.droppableId,
           destIndex: -1, // ?
-          courseCode: draggableId,
+          courseCode: draggableId
         });
       }
     }
@@ -159,15 +151,7 @@ const TermPlanner = () => {
     const destIndex = destination.index;
 
     if (destination.droppableId === 'unplanned') {
-      // === move course to unplanned ===
-      try {
-        await axios.post('/planner/unscheduleCourse', JSON.stringify({ courseCode: draggableId }), {
-          params: { token }
-        });
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at unscheduleCourse', e);
-      }
+      handleUnscheduleCourse(draggableId);
       return;
     }
 
@@ -216,7 +200,7 @@ const TermPlanner = () => {
                 <GridItem>Term 3</GridItem>
                 {planner.years.map((year, index) => {
                   const iYear = planner.startYear + index;
-                  let yearUOC = 0;
+                  const yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
                     Object.keys(planner.courses).forEach((courseCode) => {
                       if (year[termKey as Term].includes(courseCode)) {
