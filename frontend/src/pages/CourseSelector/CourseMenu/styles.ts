@@ -5,6 +5,7 @@ const SidebarWrapper = styled.div`
   overflow: auto;
   overflow-x: hidden;
   height: 100%;
+  width: 100%;
   border-right: 1px solid ${({ theme }) => theme.courseMenu?.borderColor};
 `;
 
