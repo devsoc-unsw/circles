@@ -1,5 +1,3 @@
-/* eslint-disable */
-import openNotification from 'utils/openNotification';
 import React, { useState } from 'react';
 import { Item, Menu } from 'react-contexify';
 import { FaRegCalendarTimes } from 'react-icons/fa';
