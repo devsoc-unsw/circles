@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   DownloadOutlined,
@@ -13,7 +14,9 @@ import {
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
-import axios from 'axios';
+import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { handleUnscheduleAll } from 'utils/api/plannerApi';
+import { getUserPlanner } from 'utils/api/userApi';
 import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
 import { unhideAllYears } from 'reducers/plannerSlice';
@@ -34,21 +37,14 @@ type Props = {
 
 const OptionsHeader = ({ plannerRef }: Props) => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
-  const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner: PlannerResponse = plannerQuery.data || badPlanner;
+  const { areYearsHidden } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const iconStyles = {
     fontSize: '20px',
     color: '#323739'
-  };
-
-  const handleUnscheduleAll = async () => {
-    try {
-      await axios.post('planner/unscheduleAll', {}, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at handleUnscheduleAll: ', err);
-    }
   };
 
   return (
@@ -111,7 +107,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           </div>
         </Tippy>
 
-        {!isPlannerEmpty(years) && (
+        {!isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">
             <Popconfirm
               placement="bottomRight"

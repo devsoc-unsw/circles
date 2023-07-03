@@ -1,6 +1,5 @@
-import { Course } from "types/api";
-import { Grade, Mark, PlannerCourse, PlannerYear, Term } from 'types/planner';
-import { CourseResponse, PlannerResponse } from 'types/userResponse';
+import { Grade, Mark, PlannerCourse, Term } from 'types/planner';
+import { PlannerResponse } from 'types/userResponse';
 import getNumTerms from 'utils/getNumTerms';
 
 const parseMarkToInt = (mark: Mark): number | null => {
