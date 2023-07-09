@@ -71,14 +71,14 @@ const TermPlanner = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [courses, dispatch, planner.years.length, planner.startYear]);
 
-  // dont need to validate cos it should be done alrdy
+  // don't need to validate cos it should be done already
   // const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
     // NOTE: Do we even need to validate the term planner? It's stored on the backend now.
     // const validateTermPlanner = async () => {
     //   try {
-    //     // not a thingy anymores? Should just be abased of the user token
+    //     // not a thingy any more? Should just be abased of the user token
     //     const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
     //     dispatch(toggleWarnings(res.data.courses_state));
     //   } catch (err) {
@@ -127,11 +127,11 @@ const TermPlanner = () => {
     // const draggableInfo = await handleGetCourseInfo(draggableId);
 
     if (destination.droppableId !== 'unplanned') {
-      // Multiterm is dead 🦀🦀🦀
+      // Multi-term is dead 🦀🦀🦀
 
       // === moving course to unplanned doesn't require term logic ===
       if (destination.droppableId !== source.droppableId) {
-        // TOOD: What values do we give these?
+        // TODO: What values do we give these?
         await handleSetPlannedCourseToTerm({
           srcRow: -1, // ?
           srcTerm: source.droppableId,
