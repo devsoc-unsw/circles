@@ -39,15 +39,15 @@ const DegreeStep = ({ incrementStep }: Props) => {
   }, []);
 
   const degreeChangeMutation = useMutation(handleDegreeChange, {
-    onMutate: ({ key }) => {
-      setInput(key);
+    onMutate: ({ programCode }) => {
+      setInput(programCode);
       setOptions([]);
-      if (key) incrementStep(Steps.SPECS);
-    },
+      if (programCode) incrementStep(Steps.SPECS);
+    }
   });
 
-  const onDegreeChange = async (key: { key: string }) => {
-    degreeChangeMutation.mutate(key);
+  const onDegreeChange = async ({ key }: { key: string }) => {
+    degreeChangeMutation.mutate({ programCode: key });
   };
 
   const searchDegree = (newInput: string) => {

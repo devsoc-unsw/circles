@@ -1,11 +1,11 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { Modal } from 'antd';
+import { resetDegree } from 'utils/api/degreeApi';
 import { useAppDispatch } from 'hooks';
 import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
 import { resetPlanner } from 'reducers/plannerSlice';
-import { useQuery } from 'react-query';
-import { resetDegree } from 'utils/api/degreeApi';
 
 type Props = {
   open?: boolean;
@@ -20,6 +20,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
     dispatch(resetPlanner());
     const degreeQuery = useQuery('degree', resetDegree);
     if (degreeQuery.isError) {
+      // eslint-disable-next-line no-console
       console.log('Error while resetting degree');
     }
     dispatch(resetTabs());

@@ -1,6 +1,6 @@
 /* eslint-disable */
-import axios from "axios";
-import { getToken } from "./userApi";
+import axios from 'axios';
+import { getToken } from './userApi';
 
 export const resetDegree = async () => {
   const token = getToken();
