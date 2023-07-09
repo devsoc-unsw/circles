@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getStoredState } from 'redux-persist';
+import { CoursesAllUnlocked } from 'types/api';
 import { CourseResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
 import { persistConfig, RootState } from 'config/store';
 
@@ -34,4 +35,10 @@ export const getUserCourses = async (): Promise<CourseResponse> => {
   const token = await getToken();
   const courses = await axios.get(`user/data/courses/${token}`);
   return courses.data as CourseResponse;
+};
+
+export const getUsersUnlockedCourses = async (): Promise<CoursesAllUnlocked> => {
+  const token = await getToken();
+  const unlocked = await axios.get(`user/unlockedCourses/${token}`);
+  return unlocked.data as CoursesAllUnlocked;
 };

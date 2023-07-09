@@ -23,7 +23,7 @@ import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
 import S from './styles';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { getUser, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import { useQuery } from 'react-query';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 
@@ -111,6 +111,14 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const { programCode, specs } = degree;
 
   useEffect(() => {
+    const temp = async () => {
+      console.log('token:', getToken());
+      console.log('userdata:', await getUser());
+    };
+    temp();
+  }, [degree, planner, plannedCourses]);
+
+  useEffect(() => {
     // courses is a list of course codes
     const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
       const container = containerRef.current;
@@ -148,6 +156,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
+        // TODO: the courses do not get added to the right section on addtounplanned
         nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
         edges: courseEdges
       };
@@ -204,6 +213,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner))
       );
+      console.log('unlocked', coursesStates);
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();
         if (coursesStates[id]?.unlocked) {
