@@ -17,7 +17,6 @@ class DegreeWizardInfo(BaseModel):
     startYear: int
     endYear: int
     specs: list[str]
-    isComplete: bool
 
 class Specialisations(BaseModel):
     spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work

@@ -31,8 +31,8 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
     // We can trust num years to be a valid number because the range picker only allows valid ranges
     setDegreeInfo((prev) => ({
       ...prev,
-      start_year: parseInt(startYear, 10),
-      end_year: parseInt(endYear, 10)
+      startYear: parseInt(startYear, 10),
+      endYear: parseInt(endYear, 10)
     }));
 
     if (startYear && endYear) incrementStep(Steps.DEGREE);

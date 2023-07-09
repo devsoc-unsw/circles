@@ -21,13 +21,13 @@ const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
 
-  const [degreeInfo, setDegreeInfo] = useState({
+  const [degreeInfo, setDegreeInfo] = useState<DegreeWizardPayload>({
     programCode: '',
     isComplete: false,
     startYear: undefined,
     endYear: undefined,
     specs: []
-  } as DegreeWizardPayload);
+  });
 
   const { programCode, isComplete } = degreeInfo;
 

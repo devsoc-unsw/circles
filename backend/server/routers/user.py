@@ -251,8 +251,6 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     # validate
     if wizard.endYear < wizard.startYear:
         errors['endYear'] = "End year must be greater than or equal to start year"
-    elif not wizard.isComplete:
-        errors['isComplete'] = "Degree wizard must be complete"
     # - lookup the progr Code
     # - look up the specs - alry uhave fund - same one that the FE use
     # - compare the lists -> do a set comparison
@@ -281,7 +279,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'degree': {
             'programCode': wizard.programCode,
             'specs': wizard.specs,
-            'isComplete': wizard.isComplete,
+            'isComplete': True,
         },
         'planner': planner,
         'courses': {}
