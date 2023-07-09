@@ -8,6 +8,7 @@ import Steps from '../common/steps';
 import YearStep from './YearStep';
 
 const incrementStepMock = vi.fn();
+const setDegreeInfoMock = vi.fn();
 
 describe('YearStep', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
@@ -18,7 +19,9 @@ describe('YearStep', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(<YearStep incrementStep={incrementStepMock} />);
+    renderWithProviders(
+      <YearStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+    );
     expect(screen.getByText('What years do you start and finish?')).toBeInTheDocument();
     await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {
       timeout: 5000
@@ -29,7 +32,9 @@ describe('YearStep', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<YearStep incrementStep={incrementStepMock} />);
+    renderWithProviders(
+      <YearStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+    );
     await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {
       timeout: 5000
     });

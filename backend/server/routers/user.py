@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException
 from server.config import DUMMY_TOKEN
-from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, DegreeWizardInfo, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
@@ -17,7 +17,6 @@ router = APIRouter(
 )
 
 # keep this private
-
 
 def set_user(token: str, item: Storage, overwrite: bool = False):
     data = usersDB['tokens'].find_one({'token': token})
@@ -231,6 +230,58 @@ def reset(token: str = DUMMY_TOKEN):
             'programCode': '',
             'specs': [],
             'isComplete': False,
+        },
+        'planner': planner,
+        'courses': {}
+    }
+    set_user(token, user, True)
+
+@router.post("/setupDegreeWizard")
+def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
+    """
+    Resets user data of a parsed token
+    {
+        "startYear": "too early" ,
+        "endyear": "must be >
+    }
+    """
+
+    errors = {}
+
+    # validate
+    if wizard.endYear < wizard.startYear:
+        errors['endYear'] = "End year must be greater than or equal to start year"
+    elif not wizard.isComplete:
+        errors['isComplete'] = "Degree wizard must be complete"
+    # - lookup the progr Code
+    # - look up the specs - alry uhave fund - same one that the FE use
+    # - compare the lists -> do a set comparison
+    
+    if (errors):
+        raise HTTPException(
+            status_code=400, detail=errors
+        )
+
+    planner: PlannerLocalStorage = {
+        'mostRecentPastTerm': {
+            'Y': 0,
+            'T': 0
+        },
+        'unplanned': [],
+        'isSummerEnabled': True,
+        'startYear': wizard.startYear,
+        'years': [],
+        'courses': {},
+    }
+    
+    numYears = wizard.endYear - wizard.startYear + 1
+    planner['years'] = [{"T0": [], "T1": [], "T2": [], "T3": []} for _ in range(numYears)]
+
+    user: Storage = {
+        'degree': {
+            'programCode': wizard.programCode,
+            'specs': wizard.specs,
+            'isComplete': wizard.isComplete,
         },
         'planner': planner,
         'courses': {}

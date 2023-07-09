@@ -27,7 +27,7 @@ const DegreeWizard = () => {
     isComplete: false,
     startYear: undefined,
     endYear: undefined,
-    specs: [],
+    specs: []
   } as DegreeWizardPayload);
 
   const { programCode, isComplete } = degreeInfo;
@@ -46,7 +46,7 @@ const DegreeWizard = () => {
   useEffect(() => {
     const getSteps = async () => {
       try {
-        console.log("trying to do use effect for getSteps");
+        console.log('trying to do use effect for getSteps');
         const res = await axios.get<SpecialisationTypes>(
           `/specialisations/getSpecialisationTypes/${programCode}`
         );
@@ -70,12 +70,12 @@ const DegreeWizard = () => {
     // if spec, then thats chillll
     if (stepTo === Steps.SPECS) {
       setCurrStep(stepTo);
-    // no setep or its more than curr step
-    // then we go forwards a state?????????????
-    // not spec, or its null, kys?
-    /// not defined HOWEVER
+      // no setep or its more than curr step
+      // then we go forwards a state?????????????
+      // not spec, or its null, kys?
+      /// not defined HOWEVER
     } else if (!stepTo || stepTo > currStep) {
-      console.log('stepTo (forward edition)', stepTo)
+      console.log('stepTo (forward edition)', stepTo);
       setCurrStep((prevState) => prevState + 1);
     } else {
       console.log('stepTo, how tf is it this case', stepTo);
@@ -100,8 +100,10 @@ const DegreeWizard = () => {
         </S.Subtitle>
         <S.HorizontalLine />
         <S.StepsWrapper>
-          <YearStep incrementStep={incrementStep} />
-          {currStep >= Steps.DEGREE && <DegreeStep incrementStep={incrementStep} />}
+          <YearStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
+          {currStep >= Steps.DEGREE && (
+            <DegreeStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
+          )}
           {specs.map(
             (stepName, index) =>
               currStep - Steps.SPECS >= index && (
@@ -114,7 +116,7 @@ const DegreeWizard = () => {
                 />
               )
           )}
-          {currStep === stepList.length - 1 && <StartBrowsingStep />}
+          {currStep === stepList.length - 1 && <StartBrowsingStep degreeInfo={degreeInfo} />}
         </S.StepsWrapper>
       </S.ContainerWrapper>
     </PageTemplate>

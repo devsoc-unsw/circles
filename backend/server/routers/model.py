@@ -12,6 +12,12 @@ from pydantic import BaseModel
 class Programs(BaseModel):
     programs: dict
 
+class DegreeWizardInfo(BaseModel):
+    programCode: str
+    startYear: int
+    endYear: int
+    specs: list[str]
+    isComplete: bool
 
 class Specialisations(BaseModel):
     spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work

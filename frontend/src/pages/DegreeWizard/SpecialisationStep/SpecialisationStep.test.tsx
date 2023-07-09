@@ -38,7 +38,16 @@ const preloadedState = {
   }
 };
 
+const mockDegreeInfo = {
+  programCode: '3778',
+  isComplete: false,
+  startYear: undefined,
+  endYear: undefined,
+  specs: []
+};
+
 const incrementStepMock = vi.fn();
+const setDegreeInfoMock = vi.fn();
 
 describe('SpecialisationStep', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
@@ -49,9 +58,17 @@ describe('SpecialisationStep', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(<SpecialisationStep incrementStep={incrementStepMock} type="majors" />, {
-      preloadedState
-    });
+    renderWithProviders(
+      <SpecialisationStep
+        incrementStep={incrementStepMock}
+        type="majors"
+        degreeInfo={mockDegreeInfo}
+        setDegreeInfo={setDegreeInfoMock}
+      />,
+      {
+        preloadedState
+      }
+    );
     expect(screen.queryByText('Next')).not.toBeInTheDocument();
     expect(screen.getByText('What are your majors?')).toBeInTheDocument();
     expect(await screen.findByText('Majors for Computer Science')).toBeInTheDocument();
@@ -76,9 +93,17 @@ describe('SpecialisationStep', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<SpecialisationStep incrementStep={incrementStepMock} type="majors" />, {
-      preloadedState
-    });
+    renderWithProviders(
+      <SpecialisationStep
+        incrementStep={incrementStepMock}
+        type="majors"
+        degreeInfo={mockDegreeInfo}
+        setDegreeInfo={setDegreeInfoMock}
+      />,
+      {
+        preloadedState
+      }
+    );
     await userEvent.click(await screen.findByText('COMPA1 Computer Science'));
     expect(dummyDispatch).toBeCalledWith({
       payload: 'COMPA1',
@@ -88,7 +113,13 @@ describe('SpecialisationStep', () => {
 
   it('should display "Next" button when on current step and call incrementStep', async () => {
     renderWithProviders(
-      <SpecialisationStep incrementStep={incrementStepMock} currStep type="majors" />,
+      <SpecialisationStep
+        incrementStep={incrementStepMock}
+        currStep
+        type="majors"
+        degreeInfo={mockDegreeInfo}
+        setDegreeInfo={setDegreeInfoMock}
+      />,
       { preloadedState }
     );
     await userEvent.click(await screen.findByText('COMPA1 Computer Science'));
@@ -97,7 +128,13 @@ describe('SpecialisationStep', () => {
 
   it('should show error notification when "Next" button without selecting a spec', async () => {
     renderWithProviders(
-      <SpecialisationStep incrementStep={incrementStepMock} currStep type="majors" />,
+      <SpecialisationStep
+        incrementStep={incrementStepMock}
+        currStep
+        type="majors"
+        degreeInfo={mockDegreeInfo}
+        setDegreeInfo={setDegreeInfoMock}
+      />,
       { preloadedState }
     );
     await userEvent.click(await screen.findByText('Next'));

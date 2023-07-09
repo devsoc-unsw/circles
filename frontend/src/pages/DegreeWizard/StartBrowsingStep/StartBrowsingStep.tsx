@@ -1,23 +1,26 @@
 import React from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-import { resetDegree } from 'utils/api/degreeApi';
-import { getUser } from 'utils/api/userApi';
+import { DegreeWizardPayload } from 'types/degreeWizard';
+import { setupDegreeWizard } from 'utils/api/degreeApi';
 import openNotification from 'utils/openNotification';
 import CS from '../common/styles';
 import S from './styles';
 
-const StartBrowsingStep = () => {
+type Props = {
+  degreeInfo: DegreeWizardPayload;
+};
+
+const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const userQuery = useQuery('user', getUser);
-  // TODO: what if userQuery.data is undefined? (same as degreeWizard)
-  const { programCode, specs } = userQuery.data?.degree || { programCode: '', specs: [] };
 
-  const resetDegreeMutation = useMutation(resetDegree, {
+  const setupDegreeMutation = useMutation(setupDegreeWizard, {
     onSuccess: () => {
       queryClient.invalidateQueries('degree');
+      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('courses');
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -25,23 +28,24 @@ const StartBrowsingStep = () => {
     }
   });
 
-  const handleResetDegree = () => {
-    resetDegreeMutation.mutate();
+  const handleSetupDegree = () => {
+    setupDegreeMutation.mutate(degreeInfo);
   };
 
   const handleSaveUserSettings = async () => {
-    if (!programCode) {
+    // TODO: Are these checks necessary?
+    if (!degreeInfo.programCode) {
       openNotification({
         type: 'error',
         message: 'Please select a degree'
       });
-    } else if (!specs.length) {
+    } else if (!degreeInfo.specs.length) {
       openNotification({
         type: 'error',
         message: 'Please select a specialisation'
       });
     } else {
-      handleResetDegree();
+      handleSetupDegree();
       navigate('/course-selector');
     }
   };

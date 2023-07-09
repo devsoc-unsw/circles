@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
-import { handleDegreeChange } from 'utils/api/degreeApi';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 import type { RootState } from 'config/store';
 import { useAppSelector } from 'hooks';
 import springProps from '../common/spring';
@@ -13,11 +12,14 @@ import CS from '../common/styles';
 
 const { Title } = Typography;
 
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
+  setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
-const DegreeStep = ({ incrementStep }: Props) => {
+const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const [input, setInput] = useState('');
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
@@ -38,16 +40,13 @@ const DegreeStep = ({ incrementStep }: Props) => {
     fetchAllDegrees();
   }, []);
 
-  const degreeChangeMutation = useMutation(handleDegreeChange, {
-    onMutate: ({ programCode }) => {
-      setInput(programCode);
-      setOptions([]);
-      if (programCode) incrementStep(Steps.SPECS);
-    }
-  });
-
   const onDegreeChange = async ({ key }: { key: string }) => {
-    degreeChangeMutation.mutate({ programCode: key });
+    setDegreeInfo((prev) => ({
+      ...prev,
+      // key is of format `${programCode} - ${title}`; Need to extract code
+      programCode: key.slice(0, 4)
+    }));
+    if (key) incrementStep(Steps.SPECS);
   };
 
   const searchDegree = (newInput: string) => {
@@ -81,7 +80,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
         />
         {input && options && (
           <Menu
-            onClick={onDegreeChange}
+            onSelect={onDegreeChange}
             selectedKeys={selectedCode ? [selectedCode] : []}
             items={items}
             mode="inline"

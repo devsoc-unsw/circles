@@ -8,6 +8,14 @@ import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import StartBrowsingStep from './StartBrowsingStep';
 
+const mockDegreeInfo = {
+  programCode: '3778',
+  isComplete: false,
+  startYear: undefined,
+  endYear: undefined,
+  specs: []
+};
+
 describe('StartBrowsingStep', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
   const useNavigateMock = vi.spyOn(reactRouterDom, 'useNavigate');
@@ -19,12 +27,12 @@ describe('StartBrowsingStep', () => {
   });
 
   it('should render', () => {
-    renderWithProviders(<StartBrowsingStep />);
+    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
     expect(screen.getByText('Start browsing courses!')).toBeInTheDocument();
   });
 
   it('should call openNotification when program code is not provided', async () => {
-    renderWithProviders(<StartBrowsingStep />, {
+    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
       preloadedState: {
         degree: {
           programCode: '',
@@ -42,7 +50,7 @@ describe('StartBrowsingStep', () => {
   });
 
   it('should call openNotification when a specialisation is not provided', async () => {
-    renderWithProviders(<StartBrowsingStep />, {
+    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
       preloadedState: {
         degree: {
           programCode: '3778',
@@ -65,7 +73,7 @@ describe('StartBrowsingStep', () => {
     const dummyNavigate = vi.fn();
     useNavigateMock.mockReturnValue(dummyNavigate);
 
-    renderWithProviders(<StartBrowsingStep />, {
+    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
       preloadedState: {
         degree: {
           programCode: '3778',
