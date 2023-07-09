@@ -15,7 +15,6 @@ const StartBrowsingStep = () => {
   const queryClient = useQueryClient();
 
   const resetDegreeMutation = useMutation(resetDegree, {
-    // using your existing resetDegree
     onSuccess: () => {
       queryClient.invalidateQueries('degree');
     },

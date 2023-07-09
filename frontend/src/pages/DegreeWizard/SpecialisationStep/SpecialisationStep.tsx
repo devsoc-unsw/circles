@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { animated, useSpring } from '@react-spring/web';
 import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
+import { addSpecialisation, removeSpecialisation } from 'utils/api/degreeApi';
+import { getUser } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -32,9 +32,39 @@ type Specialisation = {
 
 const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useAppDispatch();
-  const { programCode, specs } = useAppSelector((store: RootState) => store.degree);
+  const queryClient = useQueryClient();
+  const userQuery = useQuery('user', getUser);
+  // TODO: what if userQuery.data is undefined?
+  const { programCode, specs } = userQuery.data?.degree || { programCode: '', specs: [] };
   const [options, setOptions] = useState<Specialisation | null>(null);
+
+  const addSpecialisationMutation = useMutation(addSpecialisation, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at addSpecialisationMutation: ', err);
+    }
+  });
+
+  const handleAddSpecialisation = (specialisation: string) => {
+    addSpecialisationMutation.mutate(specialisation);
+  };
+
+  const removeSpecialisationMutation = useMutation(removeSpecialisation, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at removeSpecialisationMutation: ', err);
+    }
+  });
+
+  const handleRemoveSpecialisation = (specialisation: string) => {
+    removeSpecialisationMutation.mutate(specialisation);
+  };
 
   const fetchAllSpecialisations = useCallback(async () => {
     try {
@@ -125,8 +155,8 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
         </CS.StepHeadingWrapper>
         {menuItems ? (
           <S.Menu
-            onSelect={(e) => dispatch(addSpecialisation(e.key))}
-            onDeselect={(e) => dispatch(removeSpecialisation(e.key))}
+            onSelect={(e) => handleAddSpecialisation(e.key)}
+            onDeselect={(e) => handleRemoveSpecialisation(e.key)}
             selectedKeys={specs}
             defaultOpenKeys={['0']}
             mode="inline"

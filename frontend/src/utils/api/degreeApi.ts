@@ -24,3 +24,23 @@ export const handleDegreeChange = async ({ programCode }: { programCode: string 
     console.error('Error settingProgram at handleDegreeChange: ' + err);
   }
 };
+
+export const addSpecialisation = async (specialisation: string) => {
+  const token = await getToken();
+  try {
+    await axios.put('/user/addSpecialisation', null, { params: { specialisation, token } });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Error settingProgram at handleDegreeChange: ' + err);
+  }
+};
+
+export const removeSpecialisation = async (specialisation: string) => {
+  const token = await getToken();
+  try {
+    await axios.put('user/removeSpecialisation', null, { params: { specialisation, token } });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Error settingProgram at handleDegreeChange: ' + err);
+  }
+};

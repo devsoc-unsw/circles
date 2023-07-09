@@ -19,7 +19,6 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   const dispatch = useAppDispatch();
 
   const resetDegreeMutation = useMutation(resetDegree, {
-    // using your existing resetDegree
     onSuccess: () => {
       queryClient.invalidateQueries('degree');
     },
