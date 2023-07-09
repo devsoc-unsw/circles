@@ -1,62 +1,79 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
-import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
-import type { RootState } from 'config/store';
-import { useAppSelector } from 'hooks';
 import Steps from './common/steps';
 import DegreeStep from './DegreeStep';
 import SpecialisationStep from './SpecialisationStep';
 import StartBrowsingStep from './StartBrowsingStep';
 import S from './styles';
 import YearStep from './YearStep';
+import { useQuery, useQueryClient } from 'react-query';
+import { getUser } from 'utils/api/userApi';
 
 const { Title } = Typography;
 
 const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
-  const degree = useAppSelector((state: RootState) => state.degree);
+  const queryClient = useQueryClient();
+  const userQuery = useQuery('degree', getUser);
+  const { programCode, isComplete } = userQuery.data?.degree || { programCode: '', isComplete: false };
   const navigate = useNavigate();
 
-  useEffect(() => {
-    openNotification({
-      type: 'info',
-      message: 'Disclaimer',
-      description:
-        'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
-    });
-  }, []);
+  // useEffect(() => {
+  //   openNotification({
+  //     type: 'info',
+  //     message: 'Disclaimer',
+  //     description:
+  //       'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
+  //   });
+  // }, []);
 
   useEffect(() => {
     const getSteps = async () => {
       try {
+        console.log("trying to do use effect for getSteps");
         const res = await axios.get<SpecialisationTypes>(
-          `/specialisations/getSpecialisationTypes/${degree.programCode}`
+          `/specialisations/getSpecialisationTypes/${programCode}`
         );
+        console.log('res.data', res.data);
         setSpecs(res.data.types);
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error at getSteps', e);
       }
     };
-    if (degree.programCode !== '') getSteps();
-  }, [degree.programCode]);
+    console.log('programCode', programCode);
+    if (programCode !== '') getSteps();
+    // run when we actly adda progCode
+  }, [programCode]);
 
   const [currStep, setCurrStep] = useState(Steps.YEAR);
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
+    console.log('stepTo', stepTo);
+    // if spec, then thats chillll
     if (stepTo === Steps.SPECS) {
       setCurrStep(stepTo);
+    // no setep or its more than curr step
+    // then we go forwards a state?????????????
+    // not spec, or its null, kys?
+    /// not defined HOWEVER
     } else if (!stepTo || stepTo > currStep) {
+      console.log('stepTo (forward edition)', stepTo)
       setCurrStep((prevState) => prevState + 1);
+    } else {
+      console.log('stepTo, how tf is it this case', stepTo);
     }
+    // we can increment a step IFFFF it moves forwards
+
     setTimeout(() => {
       scroller.scrollTo(step, {
         duration: 1500,
@@ -68,7 +85,7 @@ const DegreeWizard = () => {
   return (
     <PageTemplate showHeader={false}>
       <S.ContainerWrapper>
-        <ResetModal open={degree.isComplete} onCancel={() => navigate('/course-selector')} />
+        <ResetModal open={isComplete} onCancel={() => navigate('/course-selector')} />
         <Title className="text">Welcome to Circles!</Title>
         <S.Subtitle>
           Let’s start by setting up your UNSW degree, so you can make a plan that suits you.

@@ -1,18 +1,19 @@
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import { resetDegree } from 'utils/api/degreeApi';
+import { getUser } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
-import type { RootState } from 'config/store';
-import { useAppSelector } from 'hooks';
 import CS from '../common/styles';
 import S from './styles';
 
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
-  const { programCode, specs } = useAppSelector((state: RootState) => state.degree);
   const queryClient = useQueryClient();
+  const userQuery = useQuery('user', getUser);
+  // TODO: what if userQuery.data is undefined? (same as degreeWizard)
+  const { programCode, specs } = userQuery.data?.degree || { programCode: '', specs: [] };
 
   const resetDegreeMutation = useMutation(resetDegree, {
     onSuccess: () => {
