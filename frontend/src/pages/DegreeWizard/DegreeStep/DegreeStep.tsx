@@ -22,7 +22,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
-  const programCode = useAppSelector((store: RootState) => store.degree.programCode);
+  const selectedCode = useAppSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
     try {
@@ -82,7 +82,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
         {input && options && (
           <Menu
             onClick={onDegreeChange}
-            selectedKeys={programCode ? [programCode] : []}
+            selectedKeys={selectedCode ? [selectedCode] : []}
             items={items}
             mode="inline"
             data-testid="antd-degree-menu"

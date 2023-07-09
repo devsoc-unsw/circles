@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import { resetDegree } from 'utils/api/degreeApi';
@@ -12,6 +12,22 @@ import S from './styles';
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
   const { programCode, specs } = useAppSelector((state: RootState) => state.degree);
+  const queryClient = useQueryClient();
+
+  const resetDegreeMutation = useMutation(resetDegree, {
+    // using your existing resetDegree
+    onSuccess: () => {
+      queryClient.invalidateQueries('degree');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at resetDegreeMutation: ', err);
+    }
+  });
+
+  const handleResetDegree = () => {
+    resetDegreeMutation.mutate();
+  };
 
   const handleSaveUserSettings = async () => {
     if (!programCode) {
@@ -25,10 +41,7 @@ const StartBrowsingStep = () => {
         message: 'Please select a specialisation'
       });
     } else {
-      const degreeQuery = useQuery('degree', resetDegree);
-      if (degreeQuery.isError) {
-        console.log('Error while resetting degree');
-      }
+      handleResetDegree();
       navigate('/course-selector');
     }
   };

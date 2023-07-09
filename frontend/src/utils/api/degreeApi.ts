@@ -8,7 +8,7 @@ export const resetDegree = async () => {
     await axios.post('user/reset', true, { params: { token } });
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error('Error resetting degree at handleDegreeChange: ' + err);
+    console.error('Error resetting degree at resetDegree: ' + err);
   }
 };
 
