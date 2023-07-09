@@ -211,7 +211,7 @@ def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
     user['degree']['isComplete'] = isComplete
     set_user(token, user, True)
 
-@router.put("/reset")
+@router.post("/reset")
 def reset(token: str = DUMMY_TOKEN):
     """Resets user data of a parsed token"""
     planner: PlannerLocalStorage = {

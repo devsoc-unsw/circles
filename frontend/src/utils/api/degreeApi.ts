@@ -3,9 +3,9 @@ import axios from 'axios';
 import { getToken } from './userApi';
 
 export const resetDegree = async () => {
-  const token = getToken();
+  const token = await getToken();
   try {
-    await axios.post('user/reset', true, { params: { token } });
+    await axios.post('/user/reset', null, { params: { token } });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error resetting degree at resetDegree: ' + err);
@@ -13,11 +13,12 @@ export const resetDegree = async () => {
 };
 
 export const handleDegreeChange = async ({ programCode }: { programCode: string }) => {
-  const token = getToken();
-  const data = { programCode: programCode.substring(0, 4) };
+  const token = await getToken();
   resetDegree();
   try {
-    await axios.post('user/setProgram', data, { params: { token } });
+    await axios.put('user/setProgram', null, {
+      params: { programCode: programCode.substring(0, 4), token }
+    });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error settingProgram at handleDegreeChange: ' + err);

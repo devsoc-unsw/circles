@@ -1,9 +1,9 @@
 /* eslint-disable */
-import axios from "axios";
-import { getToken } from "./userApi";
+import axios from 'axios';
+import { getToken } from './userApi';
 
 export const handleAddToUnplanned = async (courseId: String) => {
-  const token = getToken();
+  const token = await getToken();
   try {
     await axios.post('planner/addToUnplanned', { courseCode: courseId }, { params: { token } });
   } catch (err) {
