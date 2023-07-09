@@ -79,6 +79,9 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   console.log('planner query', plannerQuery);
   const planner: PlannerResponse = plannerQuery.isSuccess ? plannerQuery.data : DUMMYPLANNER;
 
+  // TODO: make a non success handler
+  const queriesSuccess = degreeQuery.isSuccess && plannerQuery.isSuccess;
+
   const { courses: plannedCourses } = planner;
   const { programCode, specs } = degree;
 
@@ -183,6 +186,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     const setupGraph = async () => {
+      console.log('setting up graph');
       try {
         const res = await axios.get<GraphPayload>(
           `/programs/graph/${programCode}/${specs.join('+')}`
@@ -195,8 +199,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       }
     };
 
-    if (!graphRef.current) setupGraph();
-  }, [onNodeClick, oldPlannedCourses, programCode, specs]);
+    if (!graphRef.current && queriesSuccess) setupGraph();
+  }, [onNodeClick, oldPlannedCourses, programCode, specs, queriesSuccess]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -277,7 +281,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   useEffect(() => {
     if (unlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
+  }, [oldPlanner.courses, showUnlockedCourses, unlockedCourses]);
 
   return (
     <S.Wrapper ref={containerRef}>
