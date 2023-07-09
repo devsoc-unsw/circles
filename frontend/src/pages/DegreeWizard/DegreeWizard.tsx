@@ -13,27 +13,35 @@ import SpecialisationStep from './SpecialisationStep';
 import StartBrowsingStep from './StartBrowsingStep';
 import S from './styles';
 import YearStep from './YearStep';
-import { useQuery, useQueryClient } from 'react-query';
-import { getUser } from 'utils/api/userApi';
+import openNotification from 'utils/openNotification';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 
 const { Title } = Typography;
 
 const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
-  const queryClient = useQueryClient();
-  const userQuery = useQuery('degree', getUser);
-  const { programCode, isComplete } = userQuery.data?.degree || { programCode: '', isComplete: false };
+
+  const [degreeInfo, setDegreeInfo] = useState({
+    programCode: '',
+    isComplete: false,
+    startYear: undefined,
+    endYear: undefined,
+    specs: [],
+  } as DegreeWizardPayload);
+
+  const { programCode, isComplete } = degreeInfo;
+
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   openNotification({
-  //     type: 'info',
-  //     message: 'Disclaimer',
-  //     description:
-  //       'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
-  //   });
-  // }, []);
+  useEffect(() => {
+    openNotification({
+      type: 'info',
+      message: 'Disclaimer',
+      description:
+        'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
+    });
+  }, []);
 
   useEffect(() => {
     const getSteps = async () => {
@@ -101,6 +109,8 @@ const DegreeWizard = () => {
                   incrementStep={incrementStep}
                   currStep={currStep - Steps.SPECS === index}
                   type={stepName}
+                  degreeInfo={degreeInfo}
+                  setDegreeInfo={setDegreeInfo}
                 />
               )
           )}

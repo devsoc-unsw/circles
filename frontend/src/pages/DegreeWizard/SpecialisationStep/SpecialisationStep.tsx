@@ -1,12 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { animated, useSpring } from '@react-spring/web';
 import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
-import { addSpecialisation, removeSpecialisation } from 'utils/api/degreeApi';
-import { getUser } from 'utils/api/userApi';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
@@ -16,10 +14,14 @@ import S from './styles';
 
 const { Title } = Typography;
 
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
   currStep?: boolean;
   type: string;
+  degreeInfo: DegreeWizardPayload;
+  setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
 type Specialisation = {
@@ -30,57 +32,45 @@ type Specialisation = {
   };
 };
 
-const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
+const SpecialisationStep = ({
+  incrementStep,
+  currStep,
+  type,
+  degreeInfo,
+  setDegreeInfo
+}: Props) => {
   const props = useSpring(springProps);
-  const queryClient = useQueryClient();
-  const userQuery = useQuery('user', getUser);
-  // TODO: what if userQuery.data is undefined?
-  const { programCode, specs } = userQuery.data?.degree || { programCode: '', specs: [] };
   const [options, setOptions] = useState<Specialisation | null>(null);
 
-  const addSpecialisationMutation = useMutation(addSpecialisation, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('user');
-    },
-    onError: (err) => {
-      // eslint-disable-next-line no-console
-      console.error('Error at addSpecialisationMutation: ', err);
-    }
-  });
-
   const handleAddSpecialisation = (specialisation: string) => {
-    addSpecialisationMutation.mutate(specialisation);
+    setDegreeInfo((prev) => ({
+      ...prev,
+      specs: [...prev.specs, specialisation]
+    }));
   };
 
-  const removeSpecialisationMutation = useMutation(removeSpecialisation, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('user');
-    },
-    onError: (err) => {
-      // eslint-disable-next-line no-console
-      console.error('Error at removeSpecialisationMutation: ', err);
-    }
-  });
-
   const handleRemoveSpecialisation = (specialisation: string) => {
-    removeSpecialisationMutation.mutate(specialisation);
+    setDegreeInfo((prev) => ({
+      ...prev,
+      specs: prev.specs.filter((spec) => spec !== specialisation)
+    }));
   };
 
   const fetchAllSpecialisations = useCallback(async () => {
     try {
       const res = await axios.get<Specialisations>(
-        `/specialisations/getSpecialisations/${programCode}/${type}`
+        `/specialisations/getSpecialisations/${degreeInfo.programCode}/${type}`
       );
       setOptions(res.data.spec);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at getSteps', e);
     }
-  }, [programCode, type]);
+  }, [degreeInfo.programCode, type]);
 
   useEffect(() => {
-    if (programCode) fetchAllSpecialisations();
-  }, [fetchAllSpecialisations, programCode, type]);
+    if (degreeInfo.programCode) fetchAllSpecialisations();
+  }, [fetchAllSpecialisations, degreeInfo.programCode, type]);
 
   const menuItems: MenuProps['items'] = options
     ? Object.keys(options).map((program, index) => ({
@@ -113,7 +103,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   if (options) {
     Object.keys(options).forEach((specKey) => {
       const { is_optional: isOptional, specs: optionSpecs } = options[specKey];
-      if (!isOptional || specs.some((spec) => Object.keys(optionSpecs).includes(spec))) {
+      if (!isOptional || degreeInfo.specs.some((spec) => Object.keys(optionSpecs).includes(spec))) {
         optionalStep = false;
       }
     });
@@ -126,7 +116,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
       const { is_optional: isOptional, specs: optionSpecs } = options[specKey];
       if (
         !isOptional &&
-        !specs.some((spec) => Object.keys(optionSpecs).includes(spec)) &&
+        !degreeInfo.specs.some((spec) => Object.keys(optionSpecs).includes(spec)) &&
         !missingSpec
       ) {
         missingSpec = specKey;
@@ -157,7 +147,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
           <S.Menu
             onSelect={(e) => handleAddSpecialisation(e.key)}
             onDeselect={(e) => handleRemoveSpecialisation(e.key)}
-            selectedKeys={specs}
+            selectedKeys={degreeInfo.specs}
             defaultOpenKeys={['0']}
             mode="inline"
             style={{
