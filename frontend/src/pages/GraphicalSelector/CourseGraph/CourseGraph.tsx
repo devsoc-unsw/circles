@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable simple-import-sort/imports */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import {
   ExpandAltOutlined,
   ShrinkOutlined,
@@ -16,7 +16,6 @@ import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
 import { CourseResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { useDebouncedCallback } from 'use-debounce';
 // import { getToken, getUser } from 'utils/api/userApi';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
@@ -26,6 +25,7 @@ import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph
 import S from './styles';
 import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import { useQuery } from 'react-query';
+import { parseMarkToInt } from 'pages/TermPlanner/utils';
 
 type Props = {
   onNodeClick: (node: INode) => void;
@@ -50,17 +50,42 @@ const DUMMYPLANNER: PlannerResponse = {
   years: []
 };
 
+type UserPayloadCourse = Record<string, number | null>;
+
+type UserPayload = {
+  program: string;
+  courses: UserPayloadCourse;
+  specialisations: string[];
+};
+
+// TODO: temp remove this
+const prepareUserPayload = (degree: DegreeResponse, planner: PlannerResponse): UserPayload => {
+  const { courses } = planner;
+  const { programCode, specs } = degree;
+
+  const selectedCourses: UserPayloadCourse = {};
+  Object.entries(courses).forEach(([courseCode, courseData]) => {
+    selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
+  });
+
+  return {
+    program: programCode,
+    specialisations: specs,
+    courses: selectedCourses
+  };
+};
+
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
-  const { programCode: oldProgramCode, specs: oldSpecs } = useSelector(
-    (state: RootState) => state.degree
-  );
-  const { courses: oldPlannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree: oldDegree, planner: oldPlanner } = useSelector((state: RootState) => state);
+  // const { programCode: oldProgramCode, specs: oldSpecs } = useSelector(
+  //   (state: RootState) => state.degree
+  // );
+  // const { courses: oldPlannedCourses } = useSelector((state: RootState) => state.planner);
+  // const { degree: oldDegree, planner: oldPlanner } = useSelector((state: RootState) => state);
   const windowSize = useAppWindowSize();
 
   console.log('--------------------------');
-  console.log('old degree', oldDegree);
-  console.log('old planner', oldPlanner);
+  // console.log('old degree', oldDegree);
+  // console.log('old planner', oldPlanner);
 
   const graphRef = useRef<Graph | null>(null);
   const [loading, setLoading] = useState(true);
@@ -84,44 +109,6 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   const { courses: plannedCourses } = planner;
   const { programCode, specs } = degree;
-
-  // useEffect(() => {
-  //   const temp = async () => {
-  //     console.log('token:', await getToken());
-  //     const newDegree: DegreeResponse = {
-  //       isComplete: degree.isComplete,
-  //       programCode: degree.programCode,
-  //       specs: degree.specs
-  //     };
-  //     const newCourses: Record<string, CourseResponse> = {};
-  //     Object.entries(planner.courses).forEach(([code, course]) => {
-  //       newCourses[code] = {
-  //         code,
-  //         mark: parseMarkToInt(course.mark) ?? 0,
-  //         suppress: course.supressed
-  //       };
-  //     });
-  //     const newPlanner: PlannerResponse = {
-  //       years: planner.years,
-  //       courses: newCourses,
-  //       isSummerEnabled: planner.isSummerEnabled,
-  //       mostRecentPastTerm: { Y: '2023', T: '1' },
-  //       startYear: planner.startYear,
-  //       unplanned: planner.unplanned
-  //     };
-  //     const uploaded = JSON.stringify({ degree: newDegree, planner: newPlanner });
-  //     console.log(
-  //       'uploading data:',
-  //       uploaded
-  //       // await axios.post('user/saveLocalStorage', uploaded, {
-  //       //   params: { token: 'loltemptoken' }
-  //       // })
-  //     );
-  //     console.log('courses:', plannedCourses);
-  //     console.log('userdata:', await getUser());
-  //   };
-  //   temp();
-  // }, [degree, planner, plannedCourses]);
 
   useEffect(() => {
     // courses is a list of course codes
@@ -161,7 +148,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, oldPlannedCourses)),
+        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
         edges: courseEdges
       };
 
@@ -200,7 +187,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     if (!graphRef.current && queriesSuccess) setupGraph();
-  }, [onNodeClick, oldPlannedCourses, programCode, specs, queriesSuccess]);
+  }, [onNodeClick, plannedCourses, programCode, specs, queriesSuccess]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -215,7 +202,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         data: { courses_state: coursesStates }
       } = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(oldDegree, oldPlanner))
+        JSON.stringify(prepareUserPayload(degree, planner))
       );
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();
@@ -233,7 +220,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  }, [oldDegree, oldPlanner]);
+  }, [degree, planner]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
@@ -281,7 +268,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   useEffect(() => {
     if (unlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [oldPlanner.courses, showUnlockedCourses, unlockedCourses]);
+  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
+  // TODO: check if planner.courses is even a good change noticer
 
   return (
     <S.Wrapper ref={containerRef}>
@@ -309,3 +297,41 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 };
 
 export default CourseGraph;
+
+// useEffect(() => {
+//   const temp = async () => {
+//     console.log('token:', await getToken());
+//     const newDegree: DegreeResponse = {
+//       isComplete: degree.isComplete,
+//       programCode: degree.programCode,
+//       specs: degree.specs
+//     };
+//     const newCourses: Record<string, CourseResponse> = {};
+//     Object.entries(planner.courses).forEach(([code, course]) => {
+//       newCourses[code] = {
+//         code,
+//         mark: parseMarkToInt(course.mark) ?? 0,
+//         suppress: course.supressed
+//       };
+//     });
+//     const newPlanner: PlannerResponse = {
+//       years: planner.years,
+//       courses: newCourses,
+//       isSummerEnabled: planner.isSummerEnabled,
+//       mostRecentPastTerm: { Y: '2023', T: '1' },
+//       startYear: planner.startYear,
+//       unplanned: planner.unplanned
+//     };
+//     const uploaded = JSON.stringify({ degree: newDegree, planner: newPlanner });
+//     console.log(
+//       'uploading data:',
+//       uploaded
+//       // await axios.post('user/saveLocalStorage', uploaded, {
+//       //   params: { token: 'loltemptoken' }
+//       // })
+//     );
+//     console.log('courses:', plannedCourses);
+//     console.log('userdata:', await getUser());
+//   };
+//   temp();
+// }, [degree, planner, plannedCourses]);
