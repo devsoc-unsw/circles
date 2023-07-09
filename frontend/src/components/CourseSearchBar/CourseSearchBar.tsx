@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { Select, Spin } from 'antd';
-import axios from 'axios';
-import { SearchCourse } from 'types/api';
+import { badDegree, badPlanner, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { useDebounce } from 'use-debounce';
-import prepareUserPayload from 'utils/prepareUserPayload';
-import type { RootState } from 'config/store';
+import { handleSearchCourse } from 'utils/api/courseApi';
+import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 
 type Props = {
   onSelectCallback: (courseCode: string) => void;
@@ -16,22 +15,20 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [value, setValue] = useState<string | null>(null);
   const [courses, setCourses] = useState<{ label: string; value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [debouncedSearchTerm] = useDebounce(value, 200);
 
-  const planner = useSelector((state: RootState) => state.planner);
-  const degree = useSelector((state: RootState) => state.degree);
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const planner: PlannerResponse = plannerQuery.data || badPlanner;
+  const degree: DegreeResponse = degreeQuery.data || badDegree;
 
   useEffect(() => {
     const searchCourse = async (query: string) => {
       try {
-        const res = await axios.post<SearchCourse>(
-          `/courses/searchCourse/${query}`,
-          JSON.stringify(prepareUserPayload(degree, planner))
-        );
+        const res = await handleSearchCourse(query, degree, planner);
         setCourses(
-          Object.keys(res.data).map((course) => ({
-            label: `${course}: ${res.data[course]}`,
+          Object.keys(res).map((course) => ({
+            label: `${course}: ${res[course]}`,
             value: course
           }))
         );

@@ -42,3 +42,9 @@ export const badPlanner = {
   years: {} as Record<string, string[]>[],
   courses: {} as Record<string, CourseResponse>
 } as PlannerResponse;
+
+export const badDegree = {
+  programCode: '',
+  specs: [],
+  isComplete: false
+} as DegreeResponse;
