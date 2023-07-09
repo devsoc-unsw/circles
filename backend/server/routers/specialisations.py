@@ -11,10 +11,6 @@ router = APIRouter(
     tags=["specialisations"],
 )
 
-def dbg(arg, *args):
-    print(*args, arg)
-    return arg
-
 
 @router.get("/")
 def specialisations_index():
@@ -35,7 +31,7 @@ def get_specialisation_types(programCode):
     if not result:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
-    return dbg({"types": [*result["components"]["spec_data"].keys()]}, "spec types:\t")
+    return {"types": [*result["components"]["spec_data"].keys()]}
 
 
 @router.get(
@@ -74,7 +70,6 @@ def get_specialisation_types(programCode):
 def get_specialisations(programCode: str, typeSpec: Literal["majors"] | Literal["minors"] | Literal["honours"]):
     """ Fetch all the majors known to the backend for a specific program """
     result = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
-    print("typeSpec" + typeSpec)
 
     if not result:
         raise HTTPException(
