@@ -72,7 +72,7 @@ const ProgressionChecker = () => {
 
   const [view, setView] = useState(Views.GRID_CONCISE);
 
-  
+
   const { courses, unplanned } = useSelector((store: RootState) => store.planner);
   // const plannerQuery = useQuery('planner', getUserPlanner);
   // const plannerData = plannerQuery.data ?? badPlanner;
