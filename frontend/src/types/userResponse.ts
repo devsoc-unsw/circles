@@ -11,6 +11,12 @@ export type DegreeResponse = {
   isComplete: boolean;
 };
 
+export const badDegree = {
+  programCode: "",
+  specs: [],
+  isComplete: false
+} as DegreeResponse;
+
 export type CourseResponse = {
   code: string;
   suppress: boolean;
