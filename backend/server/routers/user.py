@@ -1,12 +1,14 @@
 from itertools import chain
-from typing import cast
+from typing import Dict, Optional, Tuple, cast
 
 import pydantic
 from bson.objectid import ObjectId
+from algorithms.objects.user import User
+from server.routers.courses import get_course
 from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException
 from server.config import DUMMY_TOKEN
-from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCode, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerData, PlannerLocalStorage, Storage
 from server.database import usersDB
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
@@ -236,4 +238,99 @@ def reset(token: str = DUMMY_TOKEN):
         'courses': {}
     }
     set_user(token, user, True)
+
+# converts storage courses into user courses
+# i dont actually know if i should be using all courses or only past courses
+# TODO: check this
+def storage_courses_to_user_courses(storage_courses: dict[str, CoursesStorage]) -> dict[str, Tuple[int, Optional[int]]]:
+    return dict(map(
+        lambda course: (
+            course['code'],
+            (
+                get_course(course['code'])['UOC'], 
+                course['mark'] if type(course['mark']) == int else 0  # TODO: fix
+            )
+        ),
+        storage_courses.values()
+    ))
+
+# converts a Storage object from get_user into a algorithm User
+def storage_to_user(user: Storage) -> User:
+    res = User()
+    res.program = user['degree']['programCode']
+    res.year = user['planner']['startYear']
+    res.specialisations = user['degree']['specs']
+    res.add_courses(storage_courses_to_user_courses(user['courses']))
+    # res.cur_courses = ?  # TODO: fix these
+    # res.core_courses = ?
+
+    return res
     
+@router.get(
+    "/unlockedCourses/{token}",
+    response_model=CoursesState,
+    responses={
+        400: {"description": "Uh oh you broke me"},
+        200: {
+            "description": "Returns the state of all the courses",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "COMP9302": {
+                            "is_accurate": True,
+                            "unlocked": True,
+                            "handbook_note": "This course can only be taken in the final term of your program.",
+                            "warnings": [],
+                        }
+                    }
+                }
+            },
+        },
+    },
+)
+def unlocked_courses(token: str = DUMMY_TOKEN) -> CoursesState:
+    """
+    Given the userData and a list of locked courses, returns the state of all
+    the courses. Note that locked courses always return as True with no warnings
+    since it doesn't make sense for us to tell the user they can't take a course
+    that they have already completed
+    """
+    token_user = get_user(token)
+    user = storage_to_user(get_user(token))
+    print("\n\nUNLOCKED USER")
+    print(token_user['courses'])
+    print(user.courses)
+    print(user.has_taken_course("COMP1511"))
+    print("\n")
+    courses_state: dict[str, CourseState] = {}
+    # user = User(fix_user_data())
+    for course, condition in CONDITIONS.items():
+        result, warnings = condition.validate(user) if condition is not None else (True, [])
+        if result:
+            courses_state[course] = CourseState(
+                is_accurate=condition is not None,
+                unlocked=result,
+                handbook_note=CACHED_HANDBOOK_NOTE.get(course, ""),
+                warnings=warnings,
+            )
+
+    return CoursesState(courses_state=courses_state)
+
+# TODO: remove
+@router.post("/setupExampleUserDEBUG")
+def setup_example_user(token: str = DUMMY_TOKEN):
+    reset(token)
+    toggle_summer_term(token)
+    setProgram("3778", token)
+    addSpecialisation("COMPA1", token)
+    update_start_year(2021, token)
+    update_degree_length(4, token)
+    setIsComplete(False, token)
+    
+# @router.post("/planSomeCoursesDEBUG")
+# def plan_some_courses(token: str = DUMMY_TOKEN):
+#     add_to_unplanned(CourseCode(courseCode="COMP1511"), token)
+#     add_to_unplanned(CourseCode(courseCode="COMP1521"), token)
+#     add_to_unplanned(CourseCode(courseCode="COMP1531"), token)
+#     add_to_unplanned(CourseCode(courseCode="COMP2521"), token)
+

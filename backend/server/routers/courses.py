@@ -268,6 +268,7 @@ def regex_search(search_string: str) -> Mapping[str, str]:
             },
         },
     },
+    deprecated=True
 )
 def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """

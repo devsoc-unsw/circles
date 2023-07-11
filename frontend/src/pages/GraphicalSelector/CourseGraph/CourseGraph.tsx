@@ -23,7 +23,7 @@ import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
 import S from './styles';
-import { getUser, getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { getUser, getUserDegree, getUserPlanner, getUsersUnlockedCourses } from 'utils/api/userApi';
 import { useQuery } from 'react-query';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 
@@ -104,8 +104,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   console.log('planner query', plannerQuery);
   const planner: PlannerResponse = plannerQuery.isSuccess ? plannerQuery.data : DUMMYPLANNER;
 
+  const coursesUnlocked = useQuery('courses', getUsersUnlockedCourses);
+  console.log('unlocked query', coursesUnlocked);
+
   // TODO: make a non success handler
-  const queriesSuccess = degreeQuery.isSuccess && plannerQuery.isSuccess;
+  const queriesSuccess =
+    degreeQuery.isSuccess && plannerQuery.isSuccess && coursesUnlocked.isSuccess;
 
   const { courses: plannedCourses } = planner;
   const { programCode, specs } = degree;
@@ -207,12 +211,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const showUnlockedCourses = useCallback(async () => {
     if (!graphRef.current) return;
     try {
-      const {
-        data: { courses_state: coursesStates }
-      } = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
+      // TODO: check this
+      if (!coursesUnlocked.data) {
+        console.error('no unlocked courses data', coursesUnlocked);
+        return;
+      }
+
+      const coursesStates = coursesUnlocked.data.courses_state;
       console.log('unlocked', coursesStates);
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();
@@ -230,7 +235,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  }, [degree, planner]);
+  }, [coursesUnlocked]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
