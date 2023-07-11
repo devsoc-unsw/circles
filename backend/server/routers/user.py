@@ -1,13 +1,24 @@
 from itertools import chain
 from typing import cast
 
-import pydantic
 from bson.objectid import ObjectId
-from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException
+import pydantic
+
+from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
-from server.routers.model import CourseMark, CoursesStorage, DegreeLocalStorage, DegreeWizardInfo, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
+from server.routers.model import (
+    CourseMark,
+    CoursesStorage,
+    DegreeLocalStorage,
+    DegreeWizardInfo,
+    LocalStorage,
+    PlannerLocalStorage,
+    Storage,
+)
+from server.routers.programs import get_programs
+from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
 
@@ -22,6 +33,7 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
     data = usersDB['tokens'].find_one({'token': token})
     if data:
         if not overwrite:
+            print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
             return
         objectID = data['objectId']
         usersDB['users'].update_one(
@@ -236,7 +248,7 @@ def reset(token: str = DUMMY_TOKEN):
     }
     set_user(token, user, True)
 
-@router.post("/setupDegreeWizard")
+@router.post("/setupDegreeWizard", response_model=None)
 def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     """
     Resets user data of a parsed token
@@ -249,17 +261,20 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     errors = {}
 
     # validate
-    if wizard.endYear < wizard.startYear:
-        errors['endYear'] = "End year must be greater than or equal to start year"
-    # - lookup the progr Code
-    # - look up the specs - alry uhave fund - same one that the FE use
-    # - compare the lists -> do a set comparison
-    
-    if (errors):
-        raise HTTPException(
-            status_code=400, detail=errors
-        )
+    num_years = wizard.endYear - wizard.startYear + 1
+    if num_years < 1:
+        raise HTTPException(status_code=400, detail="Invalid year range")
 
+    # Ensure valid prog code - done by the specialisatoin check so this is
+    # techincally redundant
+    if get_programs().get(wizard.programCode) is None:
+        raise HTTPException(status_code=400, detail="Invalid program code")
+
+    # Ensure that all specialisations are valid
+    avail_spec_types: list[str] = get_specialisation_types(wizard.programCode)["types"]
+    if any(spec not in avail_spec_types for spec in wizard.specs):
+        raise HTTPException(status_code=400, detail="Invalid specialisations")
+    
     planner: PlannerLocalStorage = {
         'mostRecentPastTerm': {
             'Y': 0,
@@ -272,8 +287,10 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'courses': {},
     }
     
-    numYears = wizard.endYear - wizard.startYear + 1
-    planner['years'] = [{"T0": [], "T1": [], "T2": [], "T3": []} for _ in range(numYears)]
+    planner['years'] = [
+        {"T0": [], "T1": [], "T2": [], "T3": []}
+        for _ in range(num_years)
+    ]
 
     user: Storage = {
         'degree': {

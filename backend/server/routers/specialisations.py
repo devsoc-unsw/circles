@@ -1,5 +1,5 @@
 """ Specialisations Route """
-from typing import Literal, Optional, cast
+from typing import Dict, Literal, Optional, cast
 
 from data.processors.models import Program
 from fastapi import APIRouter, HTTPException
@@ -24,7 +24,7 @@ def specialisations_index():
         200: {"types": ["majors", "minors"]}
     }
 )
-def get_specialisation_types(programCode):
+def get_specialisation_types(programCode: str):
     """ get the possible types of a program """
     result = programsCOL.find_one({"code": programCode})
 

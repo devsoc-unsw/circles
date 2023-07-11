@@ -4,6 +4,8 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
+import fastapi
+
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
 from pydantic import BaseModel
