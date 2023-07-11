@@ -4,7 +4,7 @@ from typing import Dict, Literal, Optional, cast
 from data.processors.models import Program
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import Specialisations, SpecialisationTypes
+from server.routers.model import SpecType, Specialisations, SpecialisationTypes
 
 router = APIRouter(
     prefix="/specialisations",
@@ -24,7 +24,7 @@ def specialisations_index():
         200: {"types": ["majors", "minors"]}
     }
 )
-def get_specialisation_types(programCode: str):
+def get_specialisation_types(programCode: str) -> Dict[str, list[SpecType]]:
     """ get the possible types of a program """
     result = programsCOL.find_one({"code": programCode})
 
@@ -67,7 +67,7 @@ def get_specialisation_types(programCode: str):
         },
     },
 )
-def get_specialisations(programCode: str, typeSpec: Literal["majors"] | Literal["minors"] | Literal["honours"]):
+def get_specialisations(programCode: str, typeSpec: SpecType):
     """ Fetch all the majors known to the backend for a specific program """
     result = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
 

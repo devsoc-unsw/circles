@@ -1,5 +1,7 @@
 from itertools import chain
-from typing import cast
+import itertools
+from pprint import pprint
+from typing import Any, cast
 
 from bson.objectid import ObjectId
 from fastapi import APIRouter, HTTPException
@@ -15,6 +17,7 @@ from server.routers.model import (
     DegreeWizardInfo,
     LocalStorage,
     PlannerLocalStorage,
+    SpecType,
     Storage,
 )
 from server.routers.programs import get_programs
@@ -248,7 +251,7 @@ def reset(token: str = DUMMY_TOKEN):
     }
     set_user(token, user, True)
 
-@router.post("/setupDegreeWizard", response_model=None)
+@router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     """
     Resets user data of a parsed token
@@ -258,8 +261,6 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     }
     """
 
-    errors = {}
-
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:
@@ -267,13 +268,54 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
 
     # Ensure valid prog code - done by the specialisatoin check so this is
     # techincally redundant
-    if get_programs().get(wizard.programCode) is None:
+    progs = get_programs()["programs"]
+    print('progs: ', progs)
+    if progs is None:
         raise HTTPException(status_code=400, detail="Invalid program code")
+    print("valid program")
 
     # Ensure that all specialisations are valid
-    avail_spec_types: list[str] = get_specialisation_types(wizard.programCode)["types"]
+    # Need a bidirectoinal validate
+    # All specs in wizard (lhs) must be in the RHS
+    # All specs in the RHS that are "required" must have an associated LHS selection
+    avail_spec_types: list[SpecType] = get_specialisation_types(wizard.programCode)["types"]
+    # Type of elemn in the following is
+    # Dict[Literal['specs'], Dict[str(programTitle), specInfo]]
+    # Keys in the specInfo
+    # - 'specs': List[str] - name of the specialisations - thing that matters
+    # - 'notes': str - dw abt this (Fe's prob tbh)
+    # - 'is_optional': bool - if true then u need to validate associated elem in LHS
+    avail_specs = list(chain.from_iterable(
+        cast(list[Any], specs) # for some bs, specs is still List[Any | None] ??????
+        for spec_type in avail_spec_types
+        if (specs := list(get_specialisations(wizard.programCode, spec_type).values())) is not None
+    ))
+    # LHS subset All specs
+    invalid_lhs_specs = set(wizard.specs).difference(
+        spec_code
+        for specs in avail_specs
+        for actl_spec in specs.values()
+        for spec_code in actl_spec.get('specs', []).keys()
+    )
+    # All compulsory in RHS has an entry in LHS
+    spec_reqs_not_met = [
+        actl_spec
+        for specs in avail_specs
+        for actl_spec in specs.values()
+        if (
+            actl_spec.get('is_optional') is False
+            and not actl_spec.get('specs', []).keys().intersection(wizard.specs)
+        )
+
+    ]
+
+    # ceebs returning the bad data because FE should be valid anyways
+    if invalid_lhs_specs or spec_reqs_not_met:
+        raise HTTPException(status_code=400, detail="Invalid specialisations")
+
     if any(spec not in avail_spec_types for spec in wizard.specs):
         raise HTTPException(status_code=400, detail="Invalid specialisations")
+    print("Valid specs")
     
     planner: PlannerLocalStorage = {
         'mostRecentPastTerm': {
@@ -302,4 +344,5 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'courses': {}
     }
     set_user(token, user, True)
+    return user
     

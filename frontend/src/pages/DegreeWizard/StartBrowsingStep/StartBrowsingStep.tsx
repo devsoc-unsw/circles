@@ -16,20 +16,27 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  /* eslint-disable */
+  const [ready, setReady] = React.useState(false);
+
   const setupDegreeMutation = useMutation(setupDegreeWizard, {
     onSuccess: () => {
       queryClient.invalidateQueries('degree');
       queryClient.invalidateQueries('planner');
       queryClient.invalidateQueries('courses');
+      // setReady(true);
     },
     onError: (err) => {
+      // TODO: Give the user a notification for stuff like this
       // eslint-disable-next-line no-console
       console.error('Error at resetDegreeMutation: ', err);
     }
   });
 
+  /* eslint-disable */
   const handleSetupDegree = () => {
     setupDegreeMutation.mutate(degreeInfo);
+    console.log('Did mutate');
   };
 
   const handleSaveUserSettings = async () => {
@@ -46,9 +53,11 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       });
     } else {
       handleSetupDegree();
-      navigate('/course-selector');
     }
   };
+  if (ready) {
+    navigate('/course-selector');
+  }
 
   return (
     <CS.StepContentWrapper id="start browsing">

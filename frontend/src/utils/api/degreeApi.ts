@@ -2,11 +2,12 @@
 import axios from 'axios';
 import { getToken } from './userApi';
 import { DegreeWizardPayload } from 'types/degreeWizard';
+import { UserResponse } from 'types/userResponse';
 
 export const resetDegree = async () => {
   const token = await getToken();
   try {
-    await axios.post('/user/reset', null, { params: { token } });
+    let res = await axios.post('/user/reset', null, { params: { token } });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error resetting degree at resetDegree: ' + err);
@@ -16,10 +17,14 @@ export const resetDegree = async () => {
 export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
   const token = await getToken();
   try {
-    await axios.post('/user/setupDegreeWizard', wizard, { params: { token } });
+    console.log('wizard', wizard);
+    const res = await axios.post('/user/setupDegreeWizard', wizard, { params: { token } });
+    console.log('res', res);
+    console.log('res.data', res.data);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error resetting degree at setupDegreeWizard: ' + err);
+    console.error(err);
   }
 };
 

@@ -235,8 +235,9 @@ class CoursesPathDict(TypedDict):
 class Description(BaseModel):
     description: str
 
+SpecType = Literal["majors"] | Literal["minors"] | Literal["honours"]
 class SpecialisationTypes(BaseModel):
-    types: list[str]
+    types: list[SpecType]
 
 class Graph(BaseModel):
     edges: list[dict[str, str]]
