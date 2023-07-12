@@ -24,7 +24,7 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       queryClient.invalidateQueries('degree');
       queryClient.invalidateQueries('planner');
       queryClient.invalidateQueries('courses');
-      // setReady(true);
+      setReady(true);
     },
     onError: (err) => {
       // TODO: Give the user a notification for stuff like this

@@ -253,14 +253,6 @@ def reset(token: str = DUMMY_TOKEN):
 
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
-    """
-    Resets user data of a parsed token
-    {
-        "startYear": "too early" ,
-        "endyear": "must be >
-    }
-    """
-
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:

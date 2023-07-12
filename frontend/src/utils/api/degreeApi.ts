@@ -25,6 +25,7 @@ export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
     // eslint-disable-next-line no-console
     console.error('Error resetting degree at setupDegreeWizard: ' + err);
     console.error(err);
+    throw err;
   }
 };
 
