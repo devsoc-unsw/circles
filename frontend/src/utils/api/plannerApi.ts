@@ -1,8 +1,7 @@
-/* eslint-disable */
 import axios from 'axios';
 import { getToken } from './userApi';
 
-export const handleAddToUnplanned = async (courseId: String) => {
+const handleAddToUnplanned = async (courseId: string) => {
   const token = await getToken();
   try {
     await axios.post('planner/addToUnplanned', { courseCode: courseId }, { params: { token } });
@@ -11,3 +10,5 @@ export const handleAddToUnplanned = async (courseId: String) => {
     console.error('Error at handleAddToUnplanned: ', err);
   }
 };
+
+export default handleAddToUnplanned;

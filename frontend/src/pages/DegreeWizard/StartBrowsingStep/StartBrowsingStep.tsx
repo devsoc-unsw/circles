@@ -16,7 +16,6 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  /* eslint-disable */
   const [ready, setReady] = React.useState(false);
 
   const setupDegreeMutation = useMutation(setupDegreeWizard, {
@@ -33,10 +32,8 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
     }
   });
 
-  /* eslint-disable */
   const handleSetupDegree = () => {
     setupDegreeMutation.mutate(degreeInfo);
-    console.log('Did mutate');
   };
 
   const handleSaveUserSettings = async () => {
