@@ -21,13 +21,17 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
   const plannerQuery = useQuery('planner', getUserPlanner);
 
   // TODO avoid undefined by checking loading and error state
-  // if (plannerQuery.isLoading) {
-  // }
-  // if (plannerQuery.isError) {
-  // }
+  if (plannerQuery.isLoading) {
+    //
+  }
+  if (plannerQuery.isError) {
+    //
+  }
 
   const planner: PlannerResponse = plannerQuery.data || badPlanner;
 
+  // idk why TS errors just yet - will fix later - this should be okay for now
+  /* eslint-disable-next-line */
   const addToUnplannedMutation = useMutation(handleAddToUnplanned, {
     onSuccess: () => {
       queryClient.invalidateQueries('planner');

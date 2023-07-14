@@ -4,11 +4,9 @@ import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -16,10 +14,14 @@ import S from './styles';
 
 const { Title } = Typography;
 
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
   currStep?: boolean;
   type: string;
+  degreeInfo: DegreeWizardPayload;
+  setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
 type Specialisation = {
@@ -30,27 +32,45 @@ type Specialisation = {
   };
 };
 
-const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
+const SpecialisationStep = ({
+  incrementStep,
+  currStep,
+  type,
+  degreeInfo,
+  setDegreeInfo
+}: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useAppDispatch();
-  const { programCode, specs } = useAppSelector((store: RootState) => store.degree);
   const [options, setOptions] = useState<Specialisation | null>(null);
+
+  const handleAddSpecialisation = (specialisation: string) => {
+    setDegreeInfo((prev) => ({
+      ...prev,
+      specs: [...prev.specs, specialisation]
+    }));
+  };
+
+  const handleRemoveSpecialisation = (specialisation: string) => {
+    setDegreeInfo((prev) => ({
+      ...prev,
+      specs: prev.specs.filter((spec) => spec !== specialisation)
+    }));
+  };
 
   const fetchAllSpecialisations = useCallback(async () => {
     try {
       const res = await axios.get<Specialisations>(
-        `/specialisations/getSpecialisations/${programCode}/${type}`
+        `/specialisations/getSpecialisations/${degreeInfo.programCode}/${type}`
       );
       setOptions(res.data.spec);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at getSteps', e);
     }
-  }, [programCode, type]);
+  }, [degreeInfo.programCode, type]);
 
   useEffect(() => {
-    if (programCode) fetchAllSpecialisations();
-  }, [fetchAllSpecialisations, programCode, type]);
+    if (degreeInfo.programCode) fetchAllSpecialisations();
+  }, [fetchAllSpecialisations, degreeInfo.programCode, type]);
 
   const menuItems: MenuProps['items'] = options
     ? Object.keys(options).map((program, index) => ({
@@ -83,7 +103,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   if (options) {
     Object.keys(options).forEach((specKey) => {
       const { is_optional: isOptional, specs: optionSpecs } = options[specKey];
-      if (!isOptional || specs.some((spec) => Object.keys(optionSpecs).includes(spec))) {
+      if (!isOptional || degreeInfo.specs.some((spec) => Object.keys(optionSpecs).includes(spec))) {
         optionalStep = false;
       }
     });
@@ -96,7 +116,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
       const { is_optional: isOptional, specs: optionSpecs } = options[specKey];
       if (
         !isOptional &&
-        !specs.some((spec) => Object.keys(optionSpecs).includes(spec)) &&
+        !degreeInfo.specs.some((spec) => Object.keys(optionSpecs).includes(spec)) &&
         !missingSpec
       ) {
         missingSpec = specKey;
@@ -125,9 +145,9 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
         </CS.StepHeadingWrapper>
         {menuItems ? (
           <S.Menu
-            onSelect={(e) => dispatch(addSpecialisation(e.key))}
-            onDeselect={(e) => dispatch(removeSpecialisation(e.key))}
-            selectedKeys={specs}
+            onSelect={(e) => handleAddSpecialisation(e.key)}
+            onDeselect={(e) => handleRemoveSpecialisation(e.key)}
+            selectedKeys={degreeInfo.specs}
             defaultOpenKeys={['0']}
             mode="inline"
             style={{

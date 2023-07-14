@@ -1,11 +1,11 @@
 import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { Modal } from 'antd';
+import { resetDegree } from 'utils/api/degreeApi';
 import { useAppDispatch } from 'hooks';
 import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
 import { resetPlanner } from 'reducers/plannerSlice';
-import { useQuery } from 'react-query';
-import { resetDegree } from 'utils/api/degreeApi';
 
 type Props = {
   open?: boolean;
@@ -15,17 +15,31 @@ type Props = {
 
 // has no internal "open" state since it becomes difficult to juggle with external buttons
 const ResetModal = ({ open, onOk, onCancel }: Props) => {
+  const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+
+  const resetDegreeMutation = useMutation(resetDegree, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('degree');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at resetDegreeMutation: ', err);
+    }
+  });
+
+  const handleResetDegree = () => {
+    resetDegreeMutation.mutate();
+  };
+
   const handleOk = async () => {
     dispatch(resetPlanner());
-    const degreeQuery = useQuery('degree', resetDegree);
-    if (degreeQuery.isError) {
-      console.log('Error while resetting degree');
-    }
+    handleResetDegree();
     dispatch(resetTabs());
     dispatch(resetCourses());
     onOk?.();
   };
+
   return (
     <Modal
       title="Reset Planner?"

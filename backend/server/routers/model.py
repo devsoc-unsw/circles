@@ -2,7 +2,7 @@
 # pylint: disable=missing-class-docstring
 import json
 import pickle
-from typing import Literal, Optional, TypedDict
+from typing import Literal, Optional, TypedDict, Union
 
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
@@ -12,6 +12,11 @@ from pydantic import BaseModel
 class Programs(BaseModel):
     programs: dict
 
+class DegreeWizardInfo(BaseModel):
+    programCode: str
+    startYear: int
+    endYear: int
+    specs: list[str]
 
 class Specialisations(BaseModel):
     spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work
@@ -230,8 +235,9 @@ class CoursesPathDict(TypedDict):
 class Description(BaseModel):
     description: str
 
+SpecType = Union[Literal["majors"], Literal["minors"], Literal["honours"]]
 class SpecialisationTypes(BaseModel):
-    types: list[str]
+    types: list[SpecType]
 
 class Graph(BaseModel):
     edges: list[dict[str, str]]
