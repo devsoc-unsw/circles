@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from './userApi';
 
-const handleAddToUnplanned = async (courseId: string) => {
+export const handleAddToUnplanned = async (courseId: string) => {
   const token = await getToken();
   try {
     await axios.post('planner/addToUnplanned', { courseCode: courseId }, { params: { token } });
@@ -11,4 +11,4 @@ const handleAddToUnplanned = async (courseId: string) => {
   }
 };
 
-export default handleAddToUnplanned;
+export default { handleAddToUnplanned };

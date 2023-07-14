@@ -254,6 +254,7 @@ def reset(token: str = DUMMY_TOKEN):
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     # validate
+    print("MADE INNER")
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:
         raise HTTPException(status_code=400, detail="Invalid year range")
@@ -296,16 +297,13 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         for actl_spec in specs.values()
         if (
             actl_spec.get('is_optional') is False
-            and not actl_spec.get('specs', []).keys().intersection(wizard.specs)
+            and not set(actl_spec.get('specs', []).keys()).intersection(wizard.specs)
         )
 
     ]
 
     # ceebs returning the bad data because FE should be valid anyways
     if invalid_lhs_specs or spec_reqs_not_met:
-        raise HTTPException(status_code=400, detail="Invalid specialisations")
-
-    if any(spec not in avail_spec_types for spec in wizard.specs):
         raise HTTPException(status_code=400, detail="Invalid specialisations")
     print("Valid specs")
     

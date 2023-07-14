@@ -14,6 +14,8 @@ export const resetDegree = async () => {
 
 export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
   const token = await getToken();
+  // eslint-disable-next-line no-console
+  console.log('wiz: ', wizard);
   try {
     await axios.post('/user/setupDegreeWizard', wizard, { params: { token } });
   } catch (err) {
