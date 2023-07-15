@@ -1,14 +1,14 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
-import { Term } from 'types/planner';
+import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
 import { handleGetCourseInfo } from 'utils/api/courseApi';
 import {
-  handleSetPlannedCourseToTerm,
-  handleSetUnplannedCourseToTerm,
-  handleUnscheduleCourse
+  setPlannedCourseToTerm,
+  setUnplannedCourseToTerm,
+  unscheduleCourse
 } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
@@ -27,12 +27,57 @@ const DragDropContext = React.lazy(() =>
 );
 
 const TermPlanner = () => {
+  const queryClient = useQueryClient();
+
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
   const [draggingCourse, setDraggingCourse] = useState('');
   const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
   const [multiCourse, setMultiCourse] = useState('');
+
+  // Mutations
+  const setPlannedCourseToTermMutation = useMutation(setPlannedCourseToTerm, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at setPlannedCourseToTermMutation: ', err);
+    }
+  });
+
+  const handleSetPlannedCourseToTerm = async (data: PlannedToTerm) => {
+    setPlannedCourseToTermMutation.mutate(data);
+  };
+
+  const setUnplannedCourseToTermMutation = useMutation(setUnplannedCourseToTerm, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at setUnplannedCourseToTermMutation: ', err);
+    }
+  });
+
+  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
+    setUnplannedCourseToTermMutation.mutate(data);
+  };
+
+  const unscheduleCourseMutation = useMutation(unscheduleCourse, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at unscheduleCourseMutation: ', err);
+    }
+  });
+
+  const handleUnscheduleCourse = async (courseid: string) => {
+    unscheduleCourseMutation.mutate(courseid);
+  };
 
   // const dispatch = useDispatch();
 

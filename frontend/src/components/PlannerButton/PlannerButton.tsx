@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { handleAddToUnplanned } from 'utils/api/plannerApi';
+import { addToUnplanned } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import { removeCourses } from 'reducers/plannerSlice';
 
@@ -15,10 +15,23 @@ interface PlannerButtonProps {
 }
 
 const PlannerButton = ({ course }: PlannerButtonProps) => {
+  const queryClient = useQueryClient();
+
+  const plannerQuery = useQuery('planner', getUserPlanner);
+
   const id = course.code;
   const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-  const plannerQuery = useQuery('planner', getUserPlanner);
+
+  // Mutations
+  const addToUnplannedMutation = useMutation(addToUnplanned, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at addToUnplannedMutation: ', err);
+    }
+  });
 
   // TODO avoid undefined by checking loading and error state
   if (plannerQuery.isLoading) {
@@ -29,18 +42,6 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
   }
 
   const planner: PlannerResponse = plannerQuery.data || badPlanner;
-
-  // idk why TS errors just yet - will fix later - this should be okay for now
-  /* eslint-disable-next-line */
-  const addToUnplannedMutation = useMutation(handleAddToUnplanned, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('planner');
-    },
-    onError: () => {
-      // eslint-disable-next-line no-console
-      console.error('Error adding to unplanned', addToUnplannedMutation.error);
-    }
-  });
 
   const coursesInPlanner = planner.courses;
   const [isAddedInPlanner, setIsAddedInPlanner] = useState(!!coursesInPlanner[id]);
