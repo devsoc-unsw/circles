@@ -3,26 +3,28 @@ import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { resetDegree, setProgram } from 'reducers/degreeSlice';
+import { useAppSelector } from 'hooks';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
 
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
+  setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
-const DegreeStep = ({ incrementStep }: Props) => {
+const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const [input, setInput] = useState('');
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
-  const dispatch = useAppDispatch();
-  const programCode = useAppSelector((store: RootState) => store.degree.programCode);
+  const selectedCode = useAppSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
     try {
@@ -38,12 +40,12 @@ const DegreeStep = ({ incrementStep }: Props) => {
     fetchAllDegrees();
   }, []);
 
-  const handleDegreeChange = ({ key }: { key: string }) => {
-    dispatch(resetDegree());
-    dispatch(setProgram({ programCode: key.substring(0, 4), programName: key.substring(5) }));
-    setInput(key);
-    setOptions([]);
-
+  const onDegreeChange = async ({ key }: { key: string }) => {
+    setDegreeInfo((prev) => ({
+      ...prev,
+      // key is of format `${programCode} - ${title}`; Need to extract code
+      programCode: key.slice(0, 4)
+    }));
     if (key) incrementStep(Steps.SPECS);
   };
 
@@ -78,8 +80,8 @@ const DegreeStep = ({ incrementStep }: Props) => {
         />
         {input && options && (
           <Menu
-            onClick={handleDegreeChange}
-            selectedKeys={programCode ? [programCode] : []}
+            onSelect={onDegreeChange}
+            selectedKeys={selectedCode ? [selectedCode] : []}
             items={items}
             mode="inline"
             data-testid="antd-degree-menu"

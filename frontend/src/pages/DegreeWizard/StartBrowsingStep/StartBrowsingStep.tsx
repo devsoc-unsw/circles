@@ -1,34 +1,60 @@
 import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
+import { DegreeWizardPayload } from 'types/degreeWizard';
+import { setupDegreeWizard } from 'utils/api/degreeApi';
 import openNotification from 'utils/openNotification';
-import type { RootState } from 'config/store';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { setIsComplete } from 'reducers/degreeSlice';
 import CS from '../common/styles';
 import S from './styles';
 
-const StartBrowsingStep = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { programCode, specs } = useAppSelector((state: RootState) => state.degree);
+type Props = {
+  degreeInfo: DegreeWizardPayload;
+};
 
-  const handleSaveUserSettings = () => {
-    if (!programCode) {
+const StartBrowsingStep = ({ degreeInfo }: Props) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const [ready, setReady] = React.useState(false);
+
+  const setupDegreeMutation = useMutation(setupDegreeWizard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('degree');
+      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('courses');
+      setReady(true);
+    },
+    onError: (err) => {
+      // TODO: Give the user a notification for stuff like this
+      // eslint-disable-next-line no-console
+      console.error('Error at resetDegreeMutation: ', err);
+    }
+  });
+
+  const handleSetupDegree = () => {
+    setupDegreeMutation.mutate(degreeInfo);
+  };
+
+  const handleSaveUserSettings = async () => {
+    // TODO: Are these checks necessary?
+    if (!degreeInfo.programCode) {
       openNotification({
         type: 'error',
         message: 'Please select a degree'
       });
-    } else if (!specs.length) {
+    } else if (!degreeInfo.specs.length) {
       openNotification({
         type: 'error',
         message: 'Please select a specialisation'
       });
     } else {
-      dispatch(setIsComplete(true));
-      navigate('/course-selector');
+      handleSetupDegree();
     }
   };
+  if (ready) {
+    navigate('/course-selector');
+  }
 
   return (
     <CS.StepContentWrapper id="start browsing">
