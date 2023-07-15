@@ -73,13 +73,20 @@ const ProgressionChecker = () => {
   const [view, setView] = useState(Views.GRID_CONCISE);
 
 
-  const { courses, unplanned } = useSelector((store: RootState) => store.planner);
-  // const plannerQuery = useQuery('planner', getUserPlanner);
-  // const plannerData = plannerQuery.data ?? badPlanner;
-  // const { unplanned } = plannerData;
-  // const coursesQuery = useQuery('plannerCourses', () => getCoursesInfo(Object.keys(plannerData.courses)));
-  // const courses = coursesQuery.data ?? {};
-  // !------------------------------------------------------------------------------
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerData = plannerQuery.data ?? badPlanner;
+  const plannedFor: Record<string, string> = {};
+
+  plannerData.years.forEach((year) => {
+    Object.entries(year).forEach((term) =>
+      term[1].forEach((course) =>
+        plannedFor[course] = term[0]
+    ));
+  });
+
+  const { unplanned } = plannerData;
+  const coursesQuery = useQuery('plannerCourses', () => getCoursesInfo(Object.keys(plannerData.courses)));
+  const courses = coursesQuery.data ?? {};
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};
@@ -127,22 +134,24 @@ const ProgressionChecker = () => {
             // additional courses can be considered to count to the subgroup progression
             // only exception is Rules where it should display all courses
             const isOverCounted =
-              !!courses[courseCode]?.plannedFor && currUOC > subgroupStructure.UOC && !isRule;
+              !!plannedFor[courseCode] && // hell jank
+              currUOC > subgroupStructure.UOC
+              && !isRule;
 
             const course: ViewSubgroupCourse = {
               courseCode,
               title: subgroupStructure.courses[courseCode],
               UOC: courses[courseCode]?.UOC || 0,
-              plannedFor: courses[courseCode]?.plannedFor || '',
+              plannedFor: plannedFor[courseCode] || '',
               isUnplanned: unplanned.includes(courseCode),
-              isMultiterm: !!courses[courseCode]?.isMultiterm,
+              isMultiterm: !!courses[courseCode]?.is_multiterm,
               isDoubleCounted,
               isOverCounted
             };
 
             newViewLayout[group][subgroup].courses.push(course);
             if (
-              courses[courseCode]?.plannedFor &&
+              plannedFor[courseCode] &&
               !isOverCounted &&
               !countedCourses.includes(courseCode)
             ) {
@@ -169,7 +178,7 @@ const ProgressionChecker = () => {
 
             currUOC +=
               (courses[courseCode]?.UOC ?? 0) *
-              getNumTerms(courses[courseCode]?.UOC, courses[courseCode]?.isMultiterm);
+              getNumTerms(courses[courseCode]?.UOC, !!courses[courseCode]?.is_multiterm);
           });
 
           newViewLayout[group][subgroup].courses.sort((a, b) =>
@@ -184,14 +193,14 @@ const ProgressionChecker = () => {
         .flatMap((spec) => Object.keys(spec.courses))
     );
     Object.keys(courses).forEach((courseCode) => {
-      if (!programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+      if (!programCourseList.includes(courseCode) && plannedFor[courseCode]) {
         overflowCourses[courseCode] = {
           courseCode,
           title: courses[courseCode].title,
           UOC: courses[courseCode].UOC,
-          plannedFor: courses[courseCode].plannedFor as string,
+          plannedFor: plannedFor[courseCode] as string,
           isUnplanned: unplanned.includes(courseCode),
-          isMultiterm: courses[courseCode].isMultiterm,
+          isMultiterm: !!courses[courseCode]?.is_multiterm,
           isDoubleCounted: false,
           isOverCounted: false
         };
