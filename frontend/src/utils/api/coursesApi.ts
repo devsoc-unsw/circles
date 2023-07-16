@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Course } from 'types/api';
+import { getUserPlanner } from './userApi';
 
 export const getCoursesInfo = async (courseIds: string[]): Promise<Record<string, Course>> => {
   const courses: Record<string, Course> = {};
@@ -8,4 +9,17 @@ export const getCoursesInfo = async (courseIds: string[]): Promise<Record<string
     courses[id] = res.data;
   });
   return courses;
+};
+
+export const getCoursesPlannedFor = async (): Promise<Record<string, string>> => {
+  const planner = await getUserPlanner();
+  const res: Record<string, string> = {};
+  planner.years.forEach((year) => {
+    Object.entries(year).forEach((term) =>
+      term[1].forEach((course) => {
+        [res[course]] = term;
+      })
+    );
+  });
+  return res;
 };

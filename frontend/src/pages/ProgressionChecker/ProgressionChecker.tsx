@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
 import {
   BorderlessTableOutlined,
   EyeFilled,
@@ -18,20 +17,19 @@ import {
   ViewSubgroupCourse
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import { badDegree, badPlanner } from 'types/userResponse';
+import { getCoursesInfo, getCoursesPlannedFor } from 'utils/api/coursesApi';
+import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
-import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import FreeElectiveSection from './FreeElectivesSection';
 import GridView from './GridView';
 import S from './styles';
 import TableView from './TableView';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import { badDegree, badPlanner } from 'types/userResponse';
-import { getCoursesInfo } from 'utils/api/coursesApi';
 
 const { Title } = Typography;
 
@@ -72,20 +70,14 @@ const ProgressionChecker = () => {
 
   const [view, setView] = useState(Views.GRID_CONCISE);
 
-
   const plannerQuery = useQuery('planner', getUserPlanner);
   const plannerData = plannerQuery.data ?? badPlanner;
-  const plannedFor: Record<string, string> = {};
-
-  plannerData.years.forEach((year) => {
-    Object.entries(year).forEach((term) =>
-      term[1].forEach((course) =>
-        plannedFor[course] = term[0]
-    ));
-  });
-
+  const plannedForQuery = useQuery('plannedFor', getCoursesPlannedFor);
+  const plannedFor = plannedForQuery.data ?? {};
   const { unplanned } = plannerData;
-  const coursesQuery = useQuery('plannerCourses', () => getCoursesInfo(Object.keys(plannerData.courses)));
+  const coursesQuery = useQuery('plannerCourses', () =>
+    getCoursesInfo(Object.keys(plannerData.courses))
+  );
   const courses = coursesQuery.data ?? {};
 
   const countedCourses: string[] = [];
@@ -135,8 +127,8 @@ const ProgressionChecker = () => {
             // only exception is Rules where it should display all courses
             const isOverCounted =
               !!plannedFor[courseCode] && // hell jank
-              currUOC > subgroupStructure.UOC
-              && !isRule;
+              currUOC > subgroupStructure.UOC &&
+              !isRule;
 
             const course: ViewSubgroupCourse = {
               courseCode,
@@ -150,11 +142,7 @@ const ProgressionChecker = () => {
             };
 
             newViewLayout[group][subgroup].courses.push(course);
-            if (
-              plannedFor[courseCode] &&
-              !isOverCounted &&
-              !countedCourses.includes(courseCode)
-            ) {
+            if (plannedFor[courseCode] && !isOverCounted && !countedCourses.includes(courseCode)) {
               countedCourses.push(courseCode);
             }
 
@@ -198,7 +186,7 @@ const ProgressionChecker = () => {
           courseCode,
           title: courses[courseCode].title,
           UOC: courses[courseCode].UOC,
-          plannedFor: plannedFor[courseCode] as string,
+          plannedFor: plannedFor[courseCode],
           isUnplanned: unplanned.includes(courseCode),
           isMultiterm: !!courses[courseCode]?.is_multiterm,
           isDoubleCounted: false,

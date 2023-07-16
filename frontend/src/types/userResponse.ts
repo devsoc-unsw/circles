@@ -12,7 +12,7 @@ export type DegreeResponse = {
 };
 
 export const badDegree = {
-  programCode: "",
+  programCode: '',
   specs: [],
   isComplete: false
 } as DegreeResponse;
