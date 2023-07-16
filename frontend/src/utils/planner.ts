@@ -1,16 +1,20 @@
-/* eslint-disable */
 import axios from 'axios';
 import { CourseMark } from 'types/api';
+import { UserResponse } from 'types/userResponse';
 
 export const updateCourseMark = async (courseMark: CourseMark, token: string) => {
   try {
-    const res = await axios.put('/user/updateCourseMark', courseMark, { params: { token } });
-  }
-  catch (e) {
-    console.log(e)
+    await axios.put('/user/updateCourseMark', courseMark, { params: { token } });
+  } catch (e) {
+    /* eslint-disable no-console */
+    console.log(e);
   }
 };
 
+// mmm not sure of the fuckyness of catching / where it should be handled
 export const getUser = async (token: string) => {
-  return axios.get(`/user/${token}`).then(res => res.data).catch(err => console.log(err));
-}
+  return axios
+    .get<UserResponse>(`/user/${token}`)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};

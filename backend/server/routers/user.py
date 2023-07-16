@@ -1,15 +1,41 @@
 from itertools import chain
+<<<<<<< HEAD
 from typing import Dict, Optional, Tuple, cast
+=======
+import itertools
+from pprint import pprint
+from typing import Any, cast
+>>>>>>> CIRCLES-331/user-data-to-backend
 
-import pydantic
 from bson.objectid import ObjectId
+<<<<<<< HEAD
 from algorithms.objects.user import User
 from server.routers.courses import get_course
 from data.config import LIVE_YEAR
+=======
+>>>>>>> CIRCLES-331/user-data-to-backend
 from fastapi import APIRouter, HTTPException
+import pydantic
+
+from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
+<<<<<<< HEAD
 from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCode, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerData, PlannerLocalStorage, Storage
+=======
+>>>>>>> CIRCLES-331/user-data-to-backend
 from server.database import usersDB
+from server.routers.model import (
+    CourseMark,
+    CoursesStorage,
+    DegreeLocalStorage,
+    DegreeWizardInfo,
+    LocalStorage,
+    PlannerLocalStorage,
+    SpecType,
+    Storage,
+)
+from server.routers.programs import get_programs
+from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
 
@@ -20,11 +46,11 @@ router = APIRouter(
 
 # keep this private
 
-
 def set_user(token: str, item: Storage, overwrite: bool = False):
     data = usersDB['tokens'].find_one({'token': token})
     if data:
         if not overwrite:
+            print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
             return
         objectID = data['objectId']
         usersDB['users'].update_one(
@@ -213,7 +239,7 @@ def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
     user['degree']['isComplete'] = isComplete
     set_user(token, user, True)
 
-@router.put("/reset")
+@router.post("/reset")
 def reset(token: str = DUMMY_TOKEN):
     """Resets user data of a parsed token"""
     planner: PlannerLocalStorage = {
@@ -238,6 +264,91 @@ def reset(token: str = DUMMY_TOKEN):
         'courses': {}
     }
     set_user(token, user, True)
+
+@router.post("/setupDegreeWizard", response_model=Storage)
+def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
+    # validate
+    print("MADE INNER")
+    num_years = wizard.endYear - wizard.startYear + 1
+    if num_years < 1:
+        raise HTTPException(status_code=400, detail="Invalid year range")
+
+    # Ensure valid prog code - done by the specialisatoin check so this is
+    # techincally redundant
+    progs = get_programs()["programs"]
+    print('progs: ', progs)
+    if progs is None:
+        raise HTTPException(status_code=400, detail="Invalid program code")
+    print("valid program")
+
+    # Ensure that all specialisations are valid
+    # Need a bidirectoinal validate
+    # All specs in wizard (lhs) must be in the RHS
+    # All specs in the RHS that are "required" must have an associated LHS selection
+    avail_spec_types: list[SpecType] = get_specialisation_types(wizard.programCode)["types"]
+    # Type of elemn in the following is
+    # Dict[Literal['specs'], Dict[str(programTitle), specInfo]]
+    # Keys in the specInfo
+    # - 'specs': List[str] - name of the specialisations - thing that matters
+    # - 'notes': str - dw abt this (Fe's prob tbh)
+    # - 'is_optional': bool - if true then u need to validate associated elem in LHS
+    avail_specs = list(chain.from_iterable(
+        cast(list[Any], specs) # for some bs, specs is still List[Any | None] ??????
+        for spec_type in avail_spec_types
+        if (specs := list(get_specialisations(wizard.programCode, spec_type).values())) is not None
+    ))
+    # LHS subset All specs
+    invalid_lhs_specs = set(wizard.specs).difference(
+        spec_code
+        for specs in avail_specs
+        for actl_spec in specs.values()
+        for spec_code in actl_spec.get('specs', []).keys()
+    )
+    # All compulsory in RHS has an entry in LHS
+    spec_reqs_not_met = [
+        actl_spec
+        for specs in avail_specs
+        for actl_spec in specs.values()
+        if (
+            actl_spec.get('is_optional') is False
+            and not set(actl_spec.get('specs', []).keys()).intersection(wizard.specs)
+        )
+
+    ]
+
+    # ceebs returning the bad data because FE should be valid anyways
+    if invalid_lhs_specs or spec_reqs_not_met:
+        raise HTTPException(status_code=400, detail="Invalid specialisations")
+    print("Valid specs")
+    
+    planner: PlannerLocalStorage = {
+        'mostRecentPastTerm': {
+            'Y': 0,
+            'T': 0
+        },
+        'unplanned': [],
+        'isSummerEnabled': True,
+        'startYear': wizard.startYear,
+        'years': [],
+        'courses': {},
+    }
+    
+    planner['years'] = [
+        {"T0": [], "T1": [], "T2": [], "T3": []}
+        for _ in range(num_years)
+    ]
+
+    user: Storage = {
+        'degree': {
+            'programCode': wizard.programCode,
+            'specs': wizard.specs,
+            'isComplete': True,
+        },
+        'planner': planner,
+        'courses': {}
+    }
+    set_user(token, user, True)
+    return user
 
 # converts storage courses into user courses
 # i dont actually know if i should be using all courses or only past courses
@@ -265,7 +376,7 @@ def storage_to_user(user: Storage) -> User:
     # res.core_courses = ?
 
     return res
-    
+
 @router.get(
     "/unlockedCourses/{token}",
     response_model=CoursesState,

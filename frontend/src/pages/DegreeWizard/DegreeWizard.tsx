@@ -4,11 +4,10 @@ import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
-import type { RootState } from 'config/store';
-import { useAppSelector } from 'hooks';
 import Steps from './common/steps';
 import DegreeStep from './DegreeStep';
 import SpecialisationStep from './SpecialisationStep';
@@ -21,7 +20,17 @@ const { Title } = Typography;
 const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
-  const degree = useAppSelector((state: RootState) => state.degree);
+
+  const [degreeInfo, setDegreeInfo] = useState<DegreeWizardPayload>({
+    programCode: '',
+    isComplete: false,
+    startYear: undefined,
+    endYear: undefined,
+    specs: []
+  });
+
+  const { programCode, isComplete } = degreeInfo;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +46,7 @@ const DegreeWizard = () => {
     const getSteps = async () => {
       try {
         const res = await axios.get<SpecialisationTypes>(
-          `/specialisations/getSpecialisationTypes/${degree.programCode}`
+          `/specialisations/getSpecialisationTypes/${programCode}`
         );
         setSpecs(res.data.types);
       } catch (e) {
@@ -45,18 +54,26 @@ const DegreeWizard = () => {
         console.error('Error at getSteps', e);
       }
     };
-    if (degree.programCode !== '') getSteps();
-  }, [degree.programCode]);
+    if (programCode !== '') getSteps();
+    // run when we actually add d programCode
+  }, [programCode]);
 
   const [currStep, setCurrStep] = useState(Steps.YEAR);
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
+    // if spec, then that's chillll
     if (stepTo === Steps.SPECS) {
       setCurrStep(stepTo);
+      // no step or its more than curr step
+      // then we go forwards a state?????????????
+      // not spec, or its null, :(
+      // not defined HOWEVER (this may falsely trigger when stepTo is 0)
     } else if (!stepTo || stepTo > currStep) {
       setCurrStep((prevState) => prevState + 1);
     }
+    // we can increment a step IF it moves forwards
+
     setTimeout(() => {
       scroller.scrollTo(step, {
         duration: 1500,
@@ -68,15 +85,17 @@ const DegreeWizard = () => {
   return (
     <PageTemplate showHeader={false}>
       <S.ContainerWrapper>
-        <ResetModal open={degree.isComplete} onCancel={() => navigate('/course-selector')} />
+        <ResetModal open={isComplete} onCancel={() => navigate('/course-selector')} />
         <Title className="text">Welcome to Circles!</Title>
         <S.Subtitle>
           Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
         </S.Subtitle>
         <S.HorizontalLine />
         <S.StepsWrapper>
-          <YearStep incrementStep={incrementStep} />
-          {currStep >= Steps.DEGREE && <DegreeStep incrementStep={incrementStep} />}
+          <YearStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
+          {currStep >= Steps.DEGREE && (
+            <DegreeStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
+          )}
           {specs.map(
             (stepName, index) =>
               currStep - Steps.SPECS >= index && (
@@ -84,10 +103,12 @@ const DegreeWizard = () => {
                   incrementStep={incrementStep}
                   currStep={currStep - Steps.SPECS === index}
                   type={stepName}
+                  degreeInfo={degreeInfo}
+                  setDegreeInfo={setDegreeInfo}
                 />
               )
           )}
-          {currStep === stepList.length - 1 && <StartBrowsingStep />}
+          {currStep === stepList.length - 1 && <StartBrowsingStep degreeInfo={degreeInfo} />}
         </S.StepsWrapper>
       </S.ContainerWrapper>
     </PageTemplate>

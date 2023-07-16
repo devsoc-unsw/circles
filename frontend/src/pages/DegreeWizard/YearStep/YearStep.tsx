@@ -1,12 +1,10 @@
 import React, { Suspense } from 'react';
-import { useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
-import axios from 'axios';
-import openNotification from 'utils/openNotification';
+import dayjs from 'dayjs';
+import { RangeValue } from 'rc-picker/lib/interface';
+import { DegreeWizardPayload } from 'types/degreeWizard';
 import Spinner from 'components/Spinner';
-import { RootState } from 'config/store';
-import { useAppDispatch } from 'hooks';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -16,14 +14,29 @@ const RangePicker = React.lazy(() =>
   import('components/Datepicker').then((d) => ({ default: d.default.RangePicker }))
 );
 
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
+  setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
-const YearStep = ({ incrementStep }: Props) => {
+const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const props = useSpring(springProps);
-  const dispatch = useAppDispatch();
-  const { token } = useSelector((state: RootState) => state.settings);
+
+  const handleOnChange = async (
+    _: RangeValue<dayjs.Dayjs>,
+    [startYear, endYear]: [string, string]
+  ) => {
+    // We can trust num years to be a valid number because the range picker only allows valid ranges
+    setDegreeInfo((prev) => ({
+      ...prev,
+      startYear: parseInt(startYear, 10),
+      endYear: parseInt(endYear, 10)
+    }));
+
+    if (startYear && endYear) incrementStep(Steps.DEGREE);
+  };
 
   return (
     <CS.StepContentWrapper id="year">
@@ -39,28 +52,7 @@ const YearStep = ({ incrementStep }: Props) => {
             style={{
               width: '100%'
             }}
-            onChange={async (_, [startYear, endYear]: [string, string]) => {
-              const startYearInt = parseInt(startYear, 10);
-              const numYears = parseInt(endYear, 10) - startYearInt + 1;
-              // We can trust num years to be a valid number because the range picker only allows valid ranges
-              try {
-                await axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
-                await axios.put(
-                  '/user/updateStartYear',
-                  { startYear: startYearInt },
-                  { params: { token } }
-                );
-              } catch {
-                openNotification({
-                  type: 'error',
-                  message: 'Error setting degree start year or length',
-                  description: 'There was an error updating the degree start year or length.'
-                });
-                return;
-              }
-
-              if (startYear && endYear) incrementStep(Steps.DEGREE);
-            }}
+            onChange={handleOnChange}
           />
         </Suspense>
       </animated.div>
