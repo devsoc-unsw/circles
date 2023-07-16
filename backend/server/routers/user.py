@@ -1,28 +1,17 @@
 from itertools import chain
-<<<<<<< HEAD
-from typing import Dict, Optional, Tuple, cast
-=======
-import itertools
-from pprint import pprint
+from typing import Optional, Tuple, cast
 from typing import Any, cast
->>>>>>> CIRCLES-331/user-data-to-backend
 
 from bson.objectid import ObjectId
-<<<<<<< HEAD
 from algorithms.objects.user import User
 from server.routers.courses import get_course
 from data.config import LIVE_YEAR
-=======
->>>>>>> CIRCLES-331/user-data-to-backend
 from fastapi import APIRouter, HTTPException
 import pydantic
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
-<<<<<<< HEAD
-from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCode, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerData, PlannerLocalStorage, Storage
-=======
->>>>>>> CIRCLES-331/user-data-to-backend
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
 from server.database import usersDB
 from server.routers.model import (
     CourseMark,
