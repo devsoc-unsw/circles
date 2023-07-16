@@ -26,6 +26,7 @@ import S from './styles';
 import { getUser, getUserDegree, getUserPlanner, getUsersUnlockedCourses } from 'utils/api/userApi';
 import { useQuery } from 'react-query';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
+import { getProgramGraph } from 'utils/api/programsApi';
 
 type Props = {
   onNodeClick: (node: INode) => void;
@@ -49,6 +50,7 @@ const DUMMYPLANNER: PlannerResponse = {
   unplanned: [],
   years: []
 };
+const DUMMYGRAPH: GraphPayload = { courses: [], edges: [] };
 
 type UserPayloadCourse = Record<string, number | null>;
 
@@ -76,16 +78,9 @@ const prepareUserPayload = (degree: DegreeResponse, planner: PlannerResponse): U
 };
 
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
-  // const { programCode: oldProgramCode, specs: oldSpecs } = useSelector(
-  //   (state: RootState) => state.degree
-  // );
-  // const { courses: oldPlannedCourses } = useSelector((state: RootState) => state.planner);
-  // const { degree: oldDegree, planner: oldPlanner } = useSelector((state: RootState) => state);
   const windowSize = useAppWindowSize();
 
   console.log('--------------------------');
-  // console.log('old degree', oldDegree);
-  // console.log('old planner', oldPlanner);
 
   const graphRef = useRef<Graph | null>(null);
   const [loading, setLoading] = useState(true);
@@ -96,6 +91,9 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const token = getToken();
   console.log('token', token);
 
+  // TODO: all of these are still firing since the graph gets rebuilt lots
+  // TODO: is there a way to cache this globally using query?
+  // TODO: we should move them out into the main page file
   const degreeQuery = useQuery('degree', getUserDegree);
   console.log('degree query', degreeQuery);
   const degree: DegreeResponse = degreeQuery.isSuccess ? degreeQuery.data : DUMMYDEGREE;
@@ -107,9 +105,22 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const coursesUnlocked = useQuery('courses', getUsersUnlockedCourses);
   console.log('unlocked query', coursesUnlocked);
 
+  const programGraphQuery = useQuery({
+    queryKey: 'graph',
+    queryFn: () => getProgramGraph(degree.programCode, degree.specs),
+    enabled: degreeQuery.isSuccess
+  });
+  console.log('graph', programGraphQuery);
+  const programGraph: GraphPayload = programGraphQuery.isSuccess
+    ? programGraphQuery.data
+    : DUMMYGRAPH;
+
   // TODO: make a non success handler
   const queriesSuccess =
-    degreeQuery.isSuccess && plannerQuery.isSuccess && coursesUnlocked.isSuccess;
+    degreeQuery.isSuccess &&
+    plannerQuery.isSuccess &&
+    coursesUnlocked.isSuccess &&
+    programGraphQuery.isSuccess;
 
   const { courses: plannedCourses } = planner;
   const { programCode, specs } = degree;
@@ -185,22 +196,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
     };
 
-    const setupGraph = async () => {
+    // setup the graph
+    if (!graphRef.current && queriesSuccess) {
       console.log('setting up graph');
-      try {
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
-        const { edges, courses } = res.data;
-        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at setupGraph', e);
-      }
-    };
-
-    if (!graphRef.current && queriesSuccess) setupGraph();
-  }, [onNodeClick, plannedCourses, programCode, specs, queriesSuccess]);
+      const { edges, courses } = programGraph;
+      if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+    }
+  }, [onNodeClick, queriesSuccess, plannedCourses, programCode, specs, programGraph]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -312,41 +314,3 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 };
 
 export default CourseGraph;
-
-// useEffect(() => {
-//   const temp = async () => {
-//     console.log('token:', await getToken());
-//     const newDegree: DegreeResponse = {
-//       isComplete: degree.isComplete,
-//       programCode: degree.programCode,
-//       specs: degree.specs
-//     };
-//     const newCourses: Record<string, CourseResponse> = {};
-//     Object.entries(planner.courses).forEach(([code, course]) => {
-//       newCourses[code] = {
-//         code,
-//         mark: parseMarkToInt(course.mark) ?? 0,
-//         suppress: course.supressed
-//       };
-//     });
-//     const newPlanner: PlannerResponse = {
-//       years: planner.years,
-//       courses: newCourses,
-//       isSummerEnabled: planner.isSummerEnabled,
-//       mostRecentPastTerm: { Y: '2023', T: '1' },
-//       startYear: planner.startYear,
-//       unplanned: planner.unplanned
-//     };
-//     const uploaded = JSON.stringify({ degree: newDegree, planner: newPlanner });
-//     console.log(
-//       'uploading data:',
-//       uploaded
-//       // await axios.post('user/saveLocalStorage', uploaded, {
-//       //   params: { token: 'loltemptoken' }
-//       // })
-//     );
-//     console.log('courses:', plannedCourses);
-//     console.log('userdata:', await getUser());
-//   };
-//   temp();
-// }, [degree, planner, plannedCourses]);
