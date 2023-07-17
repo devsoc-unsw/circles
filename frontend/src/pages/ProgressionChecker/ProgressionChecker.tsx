@@ -72,9 +72,11 @@ const ProgressionChecker = () => {
 
   const plannerQuery = useQuery('planner', getUserPlanner);
   const plannerData = plannerQuery.data ?? badPlanner;
+  const { unplanned } = plannerData;
+
   const plannedForQuery = useQuery('plannedFor', getCoursesPlannedFor);
   const plannedFor = plannedForQuery.data ?? {};
-  const { unplanned } = plannerData;
+
   const coursesQuery = useQuery('plannerCourses', () =>
     getCoursesInfo(Object.keys(plannerData.courses))
   );
@@ -126,9 +128,7 @@ const ProgressionChecker = () => {
             // additional courses can be considered to count to the subgroup progression
             // only exception is Rules where it should display all courses
             const isOverCounted =
-              !!plannedFor[courseCode] && // hell jank
-              currUOC > subgroupStructure.UOC &&
-              !isRule;
+              !!plannedFor[courseCode] && currUOC > subgroupStructure.UOC && !isRule;
 
             const course: ViewSubgroupCourse = {
               courseCode,
