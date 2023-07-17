@@ -397,14 +397,15 @@ def unlocked_courses(token: str = DUMMY_TOKEN) -> CoursesState:
     """
     token_user = get_user(token)
     user = storage_to_user(get_user(token))
+    # TODO: remove
     print("\n\nUNLOCKED USER")
     print(token_user['courses'])
     print(user.courses)
     print(user.has_taken_course("COMP1511"))
     print("\n")
     courses_state: dict[str, CourseState] = {}
-    # user = User(fix_user_data())
     for course, condition in CONDITIONS.items():
+        # TODO: check if this is still correct, taken from old route
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
             courses_state[course] = CourseState(
@@ -426,11 +427,3 @@ def setup_example_user(token: str = DUMMY_TOKEN):
     update_start_year(2021, token)
     update_degree_length(4, token)
     setIsComplete(False, token)
-    
-# @router.post("/planSomeCoursesDEBUG")
-# def plan_some_courses(token: str = DUMMY_TOKEN):
-#     add_to_unplanned(CourseCode(courseCode="COMP1511"), token)
-#     add_to_unplanned(CourseCode(courseCode="COMP1521"), token)
-#     add_to_unplanned(CourseCode(courseCode="COMP1531"), token)
-#     add_to_unplanned(CourseCode(courseCode="COMP2521"), token)
-

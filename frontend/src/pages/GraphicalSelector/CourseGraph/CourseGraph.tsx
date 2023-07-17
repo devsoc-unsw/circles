@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable simple-import-sort/imports */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-// import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import {
   ExpandAltOutlined,
   ShrinkOutlined,
@@ -11,22 +8,16 @@ import {
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
-import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
-import { CourseResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, DegreeResponse } from 'types/userResponse';
 import { useDebouncedCallback } from 'use-debounce';
-// import { getToken, getUser } from 'utils/api/userApi';
+import { getProgramGraph } from 'utils/api/programsApi';
+import { getUserCourses, getUserDegree, getUsersUnlockedCourses } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
-// import { parseMarkToInt } from 'pages/TermPlanner/utils';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
 import S from './styles';
-import { getUser, getUserDegree, getUserPlanner, getUsersUnlockedCourses } from 'utils/api/userApi';
-import { useQuery } from 'react-query';
-import { parseMarkToInt } from 'pages/TermPlanner/utils';
-import { getProgramGraph } from 'utils/api/programsApi';
 
 type Props = {
   onNodeClick: (node: INode) => void;
@@ -35,82 +26,39 @@ type Props = {
   focused?: string;
 };
 
-// TODO: make these handle better
-const getToken = () => 'loltemptoken';
+// TODO: dont use these
 const DUMMYDEGREE: DegreeResponse = {
   isComplete: false,
   programCode: '3778',
   specs: ['COMPA1']
 };
-const DUMMYPLANNER: PlannerResponse = {
-  courses: {},
-  isSummerEnabled: false,
-  mostRecentPastTerm: { Y: '2021', T: '1' },
-  startYear: 2021,
-  unplanned: [],
-  years: []
-};
 const DUMMYGRAPH: GraphPayload = { courses: [], edges: [] };
-
-type UserPayloadCourse = Record<string, number | null>;
-
-type UserPayload = {
-  program: string;
-  courses: UserPayloadCourse;
-  specialisations: string[];
-};
-
-// TODO: temp remove this
-const prepareUserPayload = (degree: DegreeResponse, planner: PlannerResponse): UserPayload => {
-  const { courses } = planner;
-  const { programCode, specs } = degree;
-
-  const selectedCourses: UserPayloadCourse = {};
-  Object.entries(courses).forEach(([courseCode, courseData]) => {
-    selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
-  });
-
-  return {
-    program: programCode,
-    specialisations: specs,
-    courses: selectedCourses
-  };
-};
+const DUMMYCOURSES: CoursesResponse = {};
 
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
   const windowSize = useAppWindowSize();
 
-  console.log('--------------------------');
-
   const graphRef = useRef<Graph | null>(null);
   const [loading, setLoading] = useState(true);
-  const [unlockedCourses, setUnlockedCourses] = useState(false);
+  const [showingUnlockedCourses, setShowingUnlockedCourses] = useState(false);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const token = getToken();
-  console.log('token', token);
-
-  // TODO: all of these are still firing since the graph gets rebuilt lots
-  // TODO: is there a way to cache this globally using query?
-  // TODO: we should move them out into the main page file
   const degreeQuery = useQuery('degree', getUserDegree);
-  console.log('degree query', degreeQuery);
   const degree: DegreeResponse = degreeQuery.isSuccess ? degreeQuery.data : DUMMYDEGREE;
 
-  const plannerQuery = useQuery('planner', getUserPlanner);
-  console.log('planner query', plannerQuery);
-  const planner: PlannerResponse = plannerQuery.isSuccess ? plannerQuery.data : DUMMYPLANNER;
+  // TODO: combine the 'courses' like queries
+  const coursesUnlockedQuery = useQuery('unlockedCourses', getUsersUnlockedCourses);
+  const coursesUnlocked: CoursesAllUnlocked | undefined = coursesUnlockedQuery.data;
 
-  const coursesUnlocked = useQuery('courses', getUsersUnlockedCourses);
-  console.log('unlocked query', coursesUnlocked);
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const selectedCourses = coursesQuery.isSuccess ? coursesQuery.data : DUMMYCOURSES;
 
   const programGraphQuery = useQuery({
     queryKey: 'graph',
     queryFn: () => getProgramGraph(degree.programCode, degree.specs),
     enabled: degreeQuery.isSuccess
   });
-  console.log('graph', programGraphQuery);
   const programGraph: GraphPayload = programGraphQuery.isSuccess
     ? programGraphQuery.data
     : DUMMYGRAPH;
@@ -118,20 +66,11 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   // TODO: make a non success handler
   const queriesSuccess =
     degreeQuery.isSuccess &&
-    plannerQuery.isSuccess &&
-    coursesUnlocked.isSuccess &&
+    coursesQuery.isSuccess &&
+    coursesUnlockedQuery.isSuccess &&
     programGraphQuery.isSuccess;
 
-  const { courses: plannedCourses } = planner;
   const { programCode, specs } = degree;
-
-  useEffect(() => {
-    const temp = async () => {
-      console.log('token:', getToken());
-      console.log('userdata:', await getUser());
-    };
-    temp();
-  }, [degree, planner, plannedCourses]);
 
   useEffect(() => {
     // courses is a list of course codes
@@ -171,8 +110,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        // TODO: the courses do not get added to the right section on addtounplanned
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
+        nodes: courses.map((c) => mapNodeStyle(c, selectedCourses)),
         edges: courseEdges
       };
 
@@ -198,11 +136,10 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
     // setup the graph
     if (!graphRef.current && queriesSuccess) {
-      console.log('setting up graph');
       const { edges, courses } = programGraph;
       if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
     }
-  }, [onNodeClick, queriesSuccess, plannedCourses, programCode, specs, programGraph]);
+  }, [onNodeClick, queriesSuccess, selectedCourses, programCode, specs, programGraph]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -211,32 +148,21 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   };
 
   const showUnlockedCourses = useCallback(async () => {
-    if (!graphRef.current) return;
-    try {
-      // TODO: check this
-      if (!coursesUnlocked.data) {
-        console.error('no unlocked courses data', coursesUnlocked);
-        return;
-      }
+    if (!graphRef.current || !coursesUnlocked) return;
 
-      const coursesStates = coursesUnlocked.data.courses_state;
-      console.log('unlocked', coursesStates);
-      graphRef.current.getNodes().forEach((n) => {
-        const id = n.getID();
-        if (coursesStates[id]?.unlocked) {
-          n.show();
-          n.getOutEdges().forEach((e) => {
-            if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
-          });
-        } else {
-          n.hide();
-          n.getEdges().forEach((e) => e.hide());
-        }
-      });
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at showUnlockedCourses', e);
-    }
+    const coursesStates = coursesUnlocked.courses_state;
+    graphRef.current.getNodes().forEach((n) => {
+      const id = n.getID();
+      if (coursesStates[id]?.unlocked) {
+        n.show();
+        n.getOutEdges().forEach((e) => {
+          if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
+        });
+      } else {
+        n.hide();
+        n.getEdges().forEach((e) => e.hide());
+      }
+    });
   }, [coursesUnlocked]);
 
   const handleZoomIn = () => {
@@ -283,10 +209,9 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
-    if (unlockedCourses) showUnlockedCourses();
+    if (showingUnlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
-  // TODO: check if planner.courses is even a good change noticer
+  }, [coursesQuery.dataUpdatedAt, showUnlockedCourses, showingUnlockedCourses]);
 
   return (
     <S.Wrapper ref={containerRef}>
@@ -298,8 +223,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         <S.ToolsWrapper>
           Show All Courses
           <Switch
-            checked={!unlockedCourses}
-            onChange={() => setUnlockedCourses((prevState) => !prevState)}
+            checked={!showingUnlockedCourses}
+            onChange={() => setShowingUnlockedCourses((prevState) => !prevState)}
           />
           <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
           <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />

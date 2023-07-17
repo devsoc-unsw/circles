@@ -11,6 +11,8 @@ export type DegreeResponse = {
   isComplete: boolean;
 };
 
+export type CoursesResponse = Record<string, CourseResponse>;
+
 export type CourseResponse = {
   code: string;
   suppress: boolean;
