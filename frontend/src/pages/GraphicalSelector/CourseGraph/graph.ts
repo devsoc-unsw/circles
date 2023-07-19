@@ -163,7 +163,7 @@ const mapNodeStyle = (
   theme: string
 ) => {
   const isPlanned = plannedCourses[courseCode];
-  const isUnlocked = courses![courseCode]?.unlocked;
+  const isUnlocked = courses && courses[courseCode] ? courses[courseCode].unlocked : false;
 
   if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
   if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
