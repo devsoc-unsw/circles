@@ -8,8 +8,9 @@ import axios from 'axios';
 import EditMarkModal from 'components/EditMarkModal';
 import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse } from 'reducers/plannerSlice';
+import { unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
+import openNotification from 'utils/openNotification';
 
 type Props = {
   code: string;
@@ -19,18 +20,30 @@ type Props = {
 const ContextMenu = ({ code, plannedFor }: Props) => {
   const { token } = useSelector((state: RootState) => state.settings);
   const [openModal, setOpenModal] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => dispatch(removeCourse(code));
-  const handleUnschedule = async () => {
+  const handleDelete = async () => {
     try {
-      await axios.post('planner/unscheduleCourse', { courseCode: code }, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at handleUnschedule:', err);
+      const res = await axios.post(`/planner/removeCourse`, JSON.stringify({ courseCode: code }), {
+        params: { token }
+      });
+    } catch (e) {
+      openNotification({
+        type: 'error',
+        message: 'Error removing course',
+      });
     }
+  };
+  const handleUnschedule = () => {
+    dispatch(
+      unschedule({
+        code,
+        destIndex: null
+      })
+    );
   };
   const handleInfo = () => {
     navigate('/course-selector');
