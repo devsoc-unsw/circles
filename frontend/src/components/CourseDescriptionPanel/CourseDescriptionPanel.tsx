@@ -27,13 +27,15 @@ type CourseDescriptionPanelProps = {
   courseCode: string;
   onCourseClick?: (code: string) => void;
   courseDescInfoCache: React.MutableRefObject<CourseDescInfoResCache>;
+  hasPlannerUpdated: React.MutableRefObject<boolean>;
 };
 
 const CourseDescriptionPanel = ({
   className,
   courseCode,
   onCourseClick,
-  courseDescInfoCache
+  courseDescInfoCache,
+  hasPlannerUpdated
 }: CourseDescriptionPanelProps) => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
@@ -127,7 +129,7 @@ const CourseDescriptionPanel = ({
               {courseCode} - {course.title}
             </Title>
           </div>
-          <PlannerButton course={course} />
+          <PlannerButton course={course} hasPlannerUpdated={hasPlannerUpdated} />
         </S.TitleWrapper>
         {/* TODO: Style this better? */}
         {course.is_legacy && (

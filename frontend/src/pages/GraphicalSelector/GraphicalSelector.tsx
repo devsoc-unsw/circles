@@ -15,6 +15,7 @@ const GraphicalSelector = () => {
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
   const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
+  const hasPlannerUpdated = useRef<boolean>(false);
 
   const items = [
     {
@@ -26,6 +27,7 @@ const GraphicalSelector = () => {
           key={courseCode}
           onCourseClick={setCourseCode}
           courseDescInfoCache={courseDescInfoCache}
+          hasPlannerUpdated={hasPlannerUpdated}
         />
       ) : (
         <CS.TextWrapper>No course selected</CS.TextWrapper>
@@ -51,6 +53,7 @@ const GraphicalSelector = () => {
             fullscreen={fullscreen}
             handleToggleFullscreen={() => setFullscreen((prevState) => !prevState)}
             focused={courseCode ?? undefined}
+            hasPlannerUpdated={hasPlannerUpdated}
           />
           <S.SearchBarWrapper>
             <CourseSearchBar onSelectCallback={setCourseCode} style={{ width: '25rem' }} />

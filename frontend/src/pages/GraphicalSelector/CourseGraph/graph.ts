@@ -57,6 +57,17 @@ const sameNode = (courseCode: string) => ({
   label: courseCode
 });
 
+const nodeStateStyles = {
+  hover: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
+  },
+  click: {
+    fill: '#b37feb',
+    stroke: '#b37feb'
+  }
+};
+
 const plannedLabel = {
   labelCfg: {
     style: {
@@ -73,25 +84,42 @@ const lockedLabel = (theme: string) => ({
   }
 });
 
-const nodeStateStyles = {
-  hover: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
-  },
-  click: {
-    fill: '#b37feb',
-    stroke: '#b37feb'
+const nodeLabelHoverStyle = (courseCode: string) => ({
+  ...sameNode(courseCode),
+  ...plannedLabel
+});
+
+const nodeLabelUnhoverStyle = (
+  courseCode: string,
+  plannedCourses: Record<string, PlannerCourse>,
+  theme: string
+) => {
+  if (plannedCourses[courseCode]) {
+    return {
+      ...sameNode(courseCode),
+      ...plannedLabel
+    };
   }
+  return {
+    ...sameNode(courseCode),
+    ...lockedLabel(theme)
+  };
 };
+
+const arrowColor = (theme: string) => ({
+  default: theme === 'light' ? '#e0e0e0' : '#4a4a4a',
+  outHover: theme === 'light' ? '#999' : '#aaa',
+  inHover: theme === 'light' ? '#000' : '#fff'
+});
 
 const defaultEdge = (arrow: typeof Arrow, theme: string) => ({
   style: {
     endArrow: {
       path: arrow.triangle(5, 5, 30),
-      fill: theme === 'light' ? '#e0e0e0' : '#4a4a4a',
+      fill: arrowColor(theme).default,
       d: 25
     },
-    stroke: theme === 'light' ? '#e0e0e0' : '#4a4a4a'
+    stroke: arrowColor(theme).default
   }
 });
 
@@ -100,10 +128,11 @@ const edgeOutHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
   style: {
     endArrow: {
       path: arrow.triangle(5, 5, 30),
-      fill: theme === 'light' ? '#999' : '#aaa',
+      fill: arrowColor(theme).outHover,
       d: 25
     },
-    stroke: theme === 'light' ? '#999' : '#aaa'
+    stroke: arrowColor(theme).outHover,
+    opacity: 1
   }
 });
 
@@ -112,10 +141,11 @@ const edgeInHoverStyle = (arrow: typeof Arrow, theme: string, id: string) => ({
   style: {
     endArrow: {
       path: arrow.triangle(5, 5, 30),
-      fill: theme === 'light' ? '#000' : '#fff',
+      fill: arrowColor(theme).inHover,
       d: 25
     },
-    stroke: theme === 'light' ? '#000' : '#fff'
+    stroke: arrowColor(theme).inHover,
+    opacity: 1
   }
 });
 
@@ -129,13 +159,13 @@ const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
 const mapNodeStyle = (
   courseCode: string,
   plannedCourses: Record<string, PlannerCourse>,
-  courses: Record<string, CourseValidation>,
+  courses: Record<string, CourseValidation> | undefined,
   theme: string
 ) => {
   const isPlanned = plannedCourses[courseCode];
-  const isUnlocked = courses[courseCode]?.unlocked;
+  const isUnlocked = courses && courses[courseCode] ? courses[courseCode].unlocked : false;
 
-  if (isPlanned) return sameNode(courseCode);
+  if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
   if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
   return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
@@ -145,20 +175,6 @@ const mapNodePrereq = (courseCode: string, theme: string) => {
     ...sameNode(courseCode),
     ...prereqNode(theme)
   };
-};
-
-const mapNodeRestore = (
-  courseCode: string,
-  plannedCourses: Record<string, PlannerCourse>,
-  courses: Record<string, CourseValidation>,
-  theme: string
-) => {
-  const isPlanned = plannedCourses[courseCode];
-  const isUnlocked = courses[courseCode]?.unlocked;
-
-  if (isPlanned) return { ...sameNode(courseCode), ...plannedNode };
-  if (isUnlocked) return { ...sameNode(courseCode), ...unlockedNode(theme) };
-  return { ...sameNode(courseCode), ...lockedNode(theme) };
 };
 
 const mapNodeOpacity = (courseCode: string, opacity: number) => {
@@ -175,45 +191,28 @@ const mapNodeOpacity = (courseCode: string, opacity: number) => {
   };
 };
 
-const edgeOpacity = (id: string, opacity: number) => ({
+// Changes opacity but also changes edge to default style due to endArrow styling
+const mapEdgeOpacity = (arrow: typeof Arrow, theme: string, id: string, opacity: number) => ({
   id,
   style: {
-    opacity
+    opacity,
+    endArrow: {
+      path: arrow.triangle(5, 5, 30),
+      fill: arrowColor(theme).default,
+      opacity,
+      d: 25
+    }
   }
 });
-
-const nodeLabelHoverStyle = (courseCode: string) => ({
-  ...sameNode(courseCode),
-  ...plannedLabel
-});
-
-const nodeLabelUnhoverStyle = (
-  courseCode: string,
-  plannedCourses: Record<string, PlannerCourse>,
-  theme: string
-) => {
-  if (plannedCourses[courseCode]) {
-    // uses default node style with label color changed
-    return {
-      ...sameNode(courseCode),
-      ...plannedLabel
-    };
-  }
-  return {
-    ...sameNode(courseCode),
-    ...lockedLabel(theme)
-  };
-};
 
 export {
   defaultEdge,
   edgeInHoverStyle,
-  edgeOpacity,
   edgeOutHoverStyle,
   edgeUnhoverStyle,
+  mapEdgeOpacity,
   mapNodeOpacity,
   mapNodePrereq,
-  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,

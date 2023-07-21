@@ -10,6 +10,7 @@ import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseValidation } from 'types/courses';
 import { useDebouncedCallback } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
@@ -19,12 +20,11 @@ import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
   defaultEdge,
   edgeInHoverStyle,
-  edgeOpacity,
   edgeOutHoverStyle,
   edgeUnhoverStyle,
+  mapEdgeOpacity,
   mapNodeOpacity,
   mapNodePrereq,
-  mapNodeRestore,
   mapNodeStyle,
   nodeLabelHoverStyle,
   nodeLabelUnhoverStyle,
@@ -38,18 +38,26 @@ type Props = {
   handleToggleFullscreen: () => void;
   fullscreen: boolean;
   focused?: string;
+  hasPlannerUpdated: React.MutableRefObject<boolean>;
 };
 
 interface CoursePrerequisite {
   [key: string]: string[];
 }
 
-const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
+const CourseGraph = ({
+  onNodeClick,
+  handleToggleFullscreen,
+  fullscreen,
+  focused,
+  hasPlannerUpdated
+}: Props) => {
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner, courses } = useSelector((state: RootState) => state);
+  const { degree, planner } = useSelector((state: RootState) => state);
+  const allUnlocked = useRef<Record<string, CourseValidation> | undefined>({});
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
@@ -60,13 +68,22 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
+    if (res.status === 'rejected') {
+      // eslint-disable-next-line no-console
+      console.error('Rejected request at unwrap', res.reason);
+      return undefined;
+    }
+    return res.value;
+  }
+
   useEffect(() => {
     const isCoursePrerequisite = (target: string, neighbour: string) => {
       const prereqs = prerequisites[target] || [];
       return prereqs.includes(neighbour);
     };
 
-    const addAdjacentStyles = async (nodeItem: Item) => {
+    const addNeighbourStyles = async (nodeItem: Item) => {
       const node = nodeItem as INode;
       const neighbours = node.getNeighbors();
       const opacity = theme === 'light' ? 0.3 : 0.4;
@@ -76,19 +93,17 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current?.getNodes().forEach((n) => {
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
         n.getEdges().forEach((e) => {
-          graphRef.current?.updateItem(e, edgeOpacity(e.getID(), opacity));
+          graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), opacity));
         });
         n.toBack();
       });
       // Highlight node's edges
       node.getOutEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeOutHoverStyle(Arrow, theme, e.getID()));
-        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
         e.toFront();
       });
       node.getInEdges().forEach((e) => {
         graphRef.current?.updateItem(e, edgeInHoverStyle(Arrow, theme, e.getID()));
-        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
         e.toFront();
       });
       // Target node and neighbouring nodes remain visible
@@ -104,7 +119,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
     };
 
-    const removeAdjacentStyles = async (nodeItem: Item) => {
+    const removeNeighbourStyles = async (nodeItem: Item) => {
       const node = nodeItem as INode;
       const edges = node.getEdges();
       const { Arrow } = await import('@antv/g6');
@@ -116,13 +131,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         const courseId = n.getID();
         graphRef.current?.updateItem(
           n as Item,
-          mapNodeRestore(courseId, plannedCourses, courses.courses, theme)
+          mapNodeStyle(courseId, plannedCourses, allUnlocked.current, theme)
         );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
         n.toFront();
       });
       graphRef.current?.getEdges().forEach((e) => {
-        graphRef.current?.updateItem(e, edgeOpacity(e.getID(), 1));
+        graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), 1));
       });
     };
 
@@ -131,7 +146,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       const node = ev.item as Item;
       graphRef.current?.setItemState(node, 'hover', true);
       graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID()));
-      addAdjacentStyles(node);
+      addNeighbourStyles(node);
       graphRef.current?.paint();
     };
 
@@ -143,11 +158,14 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         node,
         nodeLabelUnhoverStyle(node.getID(), plannedCourses, theme)
       );
-      removeAdjacentStyles(node);
+      removeNeighbourStyles(node);
       graphRef.current?.paint();
     };
 
-    const initialiseGraph = async (courseCodes: string[], courseEdges: CourseEdge[]) => {
+    const initialiseGraph = async (
+      courseCodes: string[] | undefined,
+      courseEdges: CourseEdge[] | undefined
+    ) => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -183,7 +201,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
       graphRef.current = new Graph(graphArgs);
       const data = {
-        nodes: courseCodes.map((c) => mapNodeStyle(c, plannedCourses, courses.courses, theme)),
+        nodes: courseCodes?.map((c) => mapNodeStyle(c, plannedCourses, allUnlocked.current, theme)),
         edges: courseEdges
       };
 
@@ -206,9 +224,9 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     // Store a hashmap for performance reasons when highlighting nodes
-    const makePrerequisitesMap = (edges: CourseEdge[]) => {
+    const makePrerequisitesMap = (edges: CourseEdge[] | undefined) => {
       const prereqs: CoursePrerequisite = prerequisites;
-      edges.forEach((e) => {
+      edges?.forEach((e) => {
         if (!prereqs[e.target]) {
           prereqs[e.target] = [e.source];
         } else {
@@ -218,13 +236,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       setPrerequisites(prereqs);
     };
 
-    // Update styling for: each node, hovering state and edges
+    // Without re-render, update styling for: each node, hovering state and edges
     const repaintCanvas = async () => {
       const nodes = graphRef.current?.getNodes();
       nodes?.map((n) =>
         graphRef.current?.updateItem(
           n,
-          mapNodeStyle(n.getID(), plannedCourses, courses.courses, theme)
+          mapNodeStyle(n.getID(), plannedCourses, allUnlocked.current, theme)
         )
       );
 
@@ -243,16 +261,38 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current?.paint();
     };
 
+    const getUnlocked = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.post<CoursesAllUnlocked>(
+          '/courses/getAllUnlocked/',
+          JSON.stringify(prepareUserPayload(degree, planner))
+        );
+        allUnlocked.current = res.data.courses_state;
+        repaintCanvas();
+        setLoading(false);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('Error at updating allUnlocked', err);
+      }
+    };
+
     const setupGraph = async () => {
       try {
         initialising.current = true;
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
-        const { edges } = res.data;
-        makePrerequisitesMap(edges);
-        if (res.data.courses.length !== 0 && edges.length !== 0) {
-          initialiseGraph(res.data.courses, edges);
+        const res = await Promise.allSettled([
+          axios.get<GraphPayload>(`/programs/graph/${programCode}/${specs.join('+')}`),
+          axios.post<CoursesAllUnlocked>(
+            '/courses/getAllUnlocked/',
+            JSON.stringify(prepareUserPayload(degree, planner))
+          )
+        ]);
+        const [programsRes, coursesRes] = res;
+        const programs = unwrap(programsRes)?.data;
+        allUnlocked.current = unwrap(coursesRes)?.data.courses_state;
+        makePrerequisitesMap(programs?.edges);
+        if (programs?.courses.length !== 0 && programs?.edges.length !== 0) {
+          initialiseGraph(programs?.courses, programs?.edges);
         }
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -261,12 +301,26 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     if (!initialising.current) setupGraph();
-    // Repaint canvas when theme is changed without re-render
+    if (hasPlannerUpdated.current) {
+      hasPlannerUpdated.current = false;
+      getUnlocked();
+    }
+    // Change theme without re-render
     if (previousTheme.current !== theme) {
       previousTheme.current = theme;
       repaintCanvas();
     }
-  }, [onNodeClick, plannedCourses, programCode, specs, theme, prerequisites, courses]);
+  }, [
+    onNodeClick,
+    plannedCourses,
+    programCode,
+    specs,
+    theme,
+    prerequisites,
+    degree,
+    planner,
+    hasPlannerUpdated
+  ]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;

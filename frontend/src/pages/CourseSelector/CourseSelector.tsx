@@ -21,6 +21,7 @@ const CourseSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses } = useSelector((state: RootState) => state.planner);
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
+  const hasPlannerUpdated = useRef<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -100,6 +101,7 @@ const CourseSelector = () => {
                 courseCode={courseCode}
                 onCourseClick={onCourseClick}
                 courseDescInfoCache={courseDescInfoCache}
+                hasPlannerUpdated={hasPlannerUpdated}
               />
             </div>
           ) : (
