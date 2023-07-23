@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import { Select, Spin } from 'antd';
-import { badDegree, badPlanner, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { useDebounce } from 'use-debounce';
 import { handleSearchCourse } from 'utils/api/courseApi';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 
 type Props = {
   onSelectCallback: (courseCode: string) => void;
@@ -17,15 +14,10 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm] = useDebounce(value, 200);
 
-  const plannerQuery = useQuery('planner', getUserPlanner);
-  const degreeQuery = useQuery('degree', getUserDegree);
-  const planner: PlannerResponse = plannerQuery.data || badPlanner;
-  const degree: DegreeResponse = degreeQuery.data || badDegree;
-
   useEffect(() => {
     const searchCourse = async (query: string) => {
       try {
-        const res = await handleSearchCourse(query, degree, planner);
+        const res = await handleSearchCourse(query);
         setCourses(
           Object.keys(res).map((course) => ({
             label: `${course}: ${res[course]}`,
@@ -43,7 +35,7 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
       // if debounced term changes, call API
       searchCourse(debouncedSearchTerm);
     }
-  }, [debouncedSearchTerm, degree, planner]);
+  }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode: string) => {
     setValue(null);
