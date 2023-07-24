@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Structure } from 'types/api';
@@ -56,18 +56,50 @@ const CourseSelector = () => {
     if (programCode) fetchStructure();
   }, [programCode, specs]);
 
+  const divRef = useRef<null | HTMLDivElement>(null);
+  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
+  useEffect(() => {
+    const minMenuWidth = 100;
+    const maxMenuWidth = (60 * window.innerWidth) / 100;
+    const resizerDiv = divRef.current as HTMLDivElement;
+    const setNewWidth = (clientX: number) => {
+      if (clientX > minMenuWidth && clientX < maxMenuWidth) {
+        resizerDiv.style.left = `${clientX}px`;
+        setMenuOffset(clientX);
+      }
+    };
+    const handleResize = (ev: globalThis.MouseEvent) => {
+      setNewWidth(ev.clientX);
+    };
+    const endResize = (ev: MouseEvent) => {
+      setNewWidth(ev.clientX);
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', endResize); // remove myself
+    };
+    const startResize = (ev: MouseEvent) => {
+      ev.preventDefault(); // stops highlighting text
+      window.addEventListener('mousemove', handleResize);
+      window.addEventListener('mouseup', endResize);
+    };
+    resizerDiv?.addEventListener('mousedown', startResize);
+    return () => resizerDiv?.removeEventListener('mousedown', startResize);
+  }, []);
+
+  const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), [dispatch]);
+
   return (
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner />
         <CourseTabs />
-        <S.ContentWrapper>
+        <S.ContentWrapper offset={menuOffset}>
           <CourseMenu structure={structure} />
+          <S.ContentResizer ref={divRef} offset={menuOffset} />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel
                 courseCode={courseCode}
-                onCourseClick={(code) => dispatch(addTab(code))}
+                onCourseClick={onCourseClick}
                 courseDescInfoCache={courseDescInfoCache}
                 hasPlannerUpdated={hasPlannerUpdated}
               />

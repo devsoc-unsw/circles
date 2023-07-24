@@ -44,7 +44,7 @@ const HowToUse = () => {
         <div>
           <CS.TextWrapper> 2. Courses can be planned, unlocked or locked. </CS.TextWrapper>
         </div>
-        <S.ImageStep src={step(2)} alt="How to find a course infographic." />
+        <S.ImageStep src={step(2)} alt="Icons for planned, unlocked or locked courses." />
         <div>
           <CS.TextWrapper> 3. Use the search bar to bring up the courses. </CS.TextWrapper>
         </div>
