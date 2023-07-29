@@ -14,6 +14,7 @@ const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
+  const [loading, setLoading] = useState(true);
   const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
   const hasPlannerUpdated = useRef<boolean>(false);
 
@@ -54,10 +55,14 @@ const GraphicalSelector = () => {
             handleToggleFullscreen={() => setFullscreen((prevState) => !prevState)}
             focused={courseCode ?? undefined}
             hasPlannerUpdated={hasPlannerUpdated}
+            loading={loading}
+            setLoading={setLoading}
           />
-          <S.SearchBarWrapper>
-            <CourseSearchBar onSelectCallback={setCourseCode} style={{ width: '25rem' }} />
-          </S.SearchBarWrapper>
+          {!loading && (
+            <S.SearchBarWrapper>
+              <CourseSearchBar onSelectCallback={setCourseCode} style={{ width: '25rem' }} />
+            </S.SearchBarWrapper>
+          )}
           {fullscreen && (
             <SidebarDrawer>
               <Tabs

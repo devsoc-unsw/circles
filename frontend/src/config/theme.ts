@@ -190,6 +190,20 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: ${({ theme }) => theme.graph?.tabBoxShadow} !important;
   }
 
+  // .spinner-wrapper .anticon anticon-loading anticon-spin ant-spin-dot {
+  .spinner-wrapper .ant-spin-dot {
+    color: ${({ theme }) => theme.graph.loadingIcon};
+  }
+
+  .loading-spinner p {
+    color: ${({ theme }) => theme.text};
+    text-shadow:
+      0.07em 0 ${({ theme }) => theme.graph.loadingText},
+      0 0.07em ${({ theme }) => theme.graph.loadingText},
+      -0.07em 0 ${({ theme }) => theme.graph.loadingText},
+      0 -0.07em ${({ theme }) => theme.graph.loadingText};
+  }
+
   // Scrollbar settings
   /* width */
   ::-webkit-scrollbar {
@@ -339,7 +353,8 @@ export const lightTheme: DefaultTheme = {
     borderColor: '#c2c2c2',
     tabColor: '#666',
     tabBottomBorderColor: '#f0f0f0',
-    tabTextColor: '#000'
+    tabTextColor: '#000',
+    loadingText: '#fff'
   },
   sidebarDrawer: {
     backgroundColor: '#fff',
@@ -484,7 +499,9 @@ export const darkTheme: DefaultTheme = {
     tabColor: '#fff',
     tabBottomBorderColor: '#5d5d5d',
     tabTextColor: '#f1f1f1',
-    tabBoxShadow: 'inset 16px 0 8px -8px rgba(255, 255, 255, 0.08)'
+    tabBoxShadow: 'inset 16px 0 8px -8px rgba(255, 255, 255, 0.08)',
+    loadingIcon: '#d7b7fd',
+    loadingText: '#000'
   },
   sidebarDrawer: {
     backgroundColor: '#343239',

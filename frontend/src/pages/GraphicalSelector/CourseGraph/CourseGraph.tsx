@@ -39,6 +39,8 @@ type Props = {
   fullscreen: boolean;
   focused?: string;
   hasPlannerUpdated: React.MutableRefObject<boolean>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 interface CoursePrerequisite {
@@ -50,7 +52,9 @@ const CourseGraph = ({
   handleToggleFullscreen,
   fullscreen,
   focused,
-  hasPlannerUpdated
+  hasPlannerUpdated,
+  loading,
+  setLoading
 }: Props) => {
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);
@@ -61,8 +65,8 @@ const CourseGraph = ({
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
-  const initialising = useRef(false); // prevents multiple graphs being loaded
-  const [loading, setLoading] = useState(true);
+  const initialisingStart = useRef(false); // prevents multiple graphs being loaded
+  const initialisingEnd = useRef(false); // unhide graph after loading complete
   const [unlockedCourses, setUnlockedCourses] = useState(false);
   const [prerequisites, setPrerequisites] = useState<CoursePrerequisite>({});
 
@@ -185,6 +189,7 @@ const CourseGraph = ({
           nodeStrength: 2500,
           preventOverlap: true,
           onLayoutEnd: () => {
+            initialisingEnd.current = true;
             setLoading(false);
           }
         },
@@ -205,8 +210,11 @@ const CourseGraph = ({
         edges: courseEdges
       };
 
+      // Hide graph until it's finished loaded, due to incomplete initial graph generation
       graphRef.current.data(data);
       graphRef.current.render();
+      graphRef.current.getNodes().forEach((n) => n.hide());
+      graphRef.current.getEdges().forEach((e) => e.hide());
 
       graphRef.current.on('node:click', async (ev) => {
         // Clicking a node loads up course description for the course and set active
@@ -279,7 +287,7 @@ const CourseGraph = ({
 
     const setupGraph = async () => {
       try {
-        initialising.current = true;
+        initialisingStart.current = true;
         const res = await Promise.allSettled([
           axios.get<GraphPayload>(`/programs/graph/${programCode}/${specs.join('+')}`),
           axios.post<CoursesAllUnlocked>(
@@ -300,7 +308,7 @@ const CourseGraph = ({
       }
     };
 
-    if (!initialising.current) setupGraph();
+    if (!initialisingStart.current) setupGraph();
     if (hasPlannerUpdated.current) {
       hasPlannerUpdated.current = false;
       getUnlocked();
@@ -319,8 +327,18 @@ const CourseGraph = ({
     prerequisites,
     degree,
     planner,
-    hasPlannerUpdated
+    hasPlannerUpdated,
+    setLoading
   ]);
+
+  // Show all nodes and edges once graph is initially loaded
+  useEffect(() => {
+    if (initialisingEnd.current) {
+      graphRef.current?.getNodes().forEach((n) => n.show());
+      graphRef.current?.getEdges().forEach((e) => e.show());
+      initialisingEnd.current = false;
+    }
+  }, [loading]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -331,6 +349,7 @@ const CourseGraph = ({
   const showUnlockedCourses = useCallback(async () => {
     if (!graphRef.current) return;
     try {
+      setLoading(true);
       const {
         data: { courses_state: coursesStates }
       } = await axios.post<CoursesAllUnlocked>(
@@ -349,11 +368,12 @@ const CourseGraph = ({
           n.getEdges().forEach((e) => e.hide());
         }
       });
+      setLoading(false);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  }, [degree, planner]);
+  }, [degree, planner, setLoading]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
@@ -406,7 +426,7 @@ const CourseGraph = ({
   return (
     <S.Wrapper ref={containerRef}>
       {loading ? (
-        <S.SpinnerWrapper>
+        <S.SpinnerWrapper className="spinner-wrapper">
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>
       ) : (
