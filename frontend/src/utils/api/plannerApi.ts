@@ -51,5 +51,3 @@ export const unscheduleAll = async () => {
     console.error('Error at handleUnscheduleAll: ', err);
   }
 };
-
-export default { addToUnplanned };
