@@ -11,9 +11,12 @@ const { Title } = Typography;
 type Props = {
   courses: ViewSubgroupCourse[];
   view: Views;
+  title: string;
+  subheading: string;
+  description: string;
 };
 
-const FreeElectivesSection = ({ courses, view }: Props) => {
+const GenericCoursesSection = ({ courses, view, title, subheading, description }: Props) => {
   const uoc = courses.reduce(
     (sum, course) => sum + (course.UOC ?? 0) * getNumTerms(course.UOC ?? 0, course.isMultiterm),
     0
@@ -22,18 +25,15 @@ const FreeElectivesSection = ({ courses, view }: Props) => {
   return (
     <Collapsible
       title={
-        <Title level={1} id="Free Electives" className="text">
-          Free Electives
+        <Title level={1} id={title} className="text">
+          {title}
         </Title>
       }
     >
       <Title level={4} className="text">
-        You have {uoc} UOC worth of additional courses planned
+        You have {uoc} UOC worth of {subheading}
       </Title>
-      <p>
-        These courses may or may not be counted to your program. Please manually verify your
-        progression with this information.
-      </p>
+      <p>{description}</p>
       {view === Views.TABLE ? (
         <Table
           dataSource={courses.map((c) => ({
@@ -44,14 +44,10 @@ const FreeElectivesSection = ({ courses, view }: Props) => {
           pagination={false}
         />
       ) : (
-        <CoursesSection
-          title="Additional Electives"
-          plannedCourses={courses}
-          unplannedCourses={[]}
-        />
+        <CoursesSection title="Courses" plannedCourses={courses} unplannedCourses={[]} />
       )}
     </Collapsible>
   );
 };
 
-export default FreeElectivesSection;
+export default GenericCoursesSection;

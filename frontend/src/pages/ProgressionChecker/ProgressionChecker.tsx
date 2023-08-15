@@ -24,7 +24,7 @@ import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
-import FreeElectiveSection from './FreeElectivesSection';
+import GenericCoursesSection from './GenericCoursesSection';
 import GridView from './GridView';
 import S from './styles';
 import TableView from './TableView';
@@ -76,6 +76,8 @@ const ProgressionChecker = () => {
   // these courses are appended as 'Additional Electives'
   const overflowCourses: ProgressionAdditionalCourses = {};
 
+  const ignoredCourses: ProgressionAdditionalCourses = {};
+
   const generateViewStructure = () => {
     // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {
@@ -106,6 +108,8 @@ const ProgressionChecker = () => {
 
           // only consider disciplinary component courses
           Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            if (courses[courseCode]?.ignoreFromProgression) return;
+
             const isDoubleCounted =
               countedCourses.includes(courseCode) &&
               !/Core/.test(subgroup) &&
@@ -172,17 +176,24 @@ const ProgressionChecker = () => {
         .flatMap((spec) => Object.keys(spec.courses))
     );
     Object.keys(courses).forEach((courseCode) => {
-      if (!programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
-        overflowCourses[courseCode] = {
-          courseCode,
-          title: courses[courseCode].title,
-          UOC: courses[courseCode].UOC,
-          plannedFor: courses[courseCode].plannedFor as string,
-          isUnplanned: unplanned.includes(courseCode),
-          isMultiterm: courses[courseCode].isMultiterm,
-          isDoubleCounted: false,
-          isOverCounted: false
-        };
+      const course = {
+        courseCode,
+        title: courses[courseCode].title,
+        UOC: courses[courseCode].UOC,
+        plannedFor: courses[courseCode].plannedFor as string,
+        isUnplanned: unplanned.includes(courseCode),
+        isMultiterm: courses[courseCode].isMultiterm,
+        isDoubleCounted: false,
+        isOverCounted: false
+      };
+      if (courses[courseCode]?.plannedFor && courses[courseCode]?.ignoreFromProgression) {
+        ignoredCourses[courseCode] = course;
+      } else if (
+        !programCourseList.includes(courseCode) &&
+        courses[courseCode]?.plannedFor &&
+        !courses[courseCode]?.ignoreFromProgression
+      ) {
+        overflowCourses[courseCode] = course;
       }
     });
     return newViewLayout;
@@ -280,7 +291,20 @@ const ProgressionChecker = () => {
                 )}
             </Collapsible>
           ))}
-          <FreeElectiveSection courses={Object.values(overflowCourses)} view={view} />
+          <GenericCoursesSection
+            courses={Object.values(overflowCourses)}
+            view={view}
+            title="Free Electives"
+            subheading="additional courses planned"
+            description="These courses may or may not be counted to your program. Please manually verify your progression with this information."
+          />
+          <GenericCoursesSection
+            courses={Object.values(ignoredCourses)}
+            view={view}
+            title="Progression Ignored"
+            subheading="courses ignored from your progression"
+            description="These courses have been manually ignored from the progression count. You can undo this from the Term Planner page if you wish."
+          />
         </S.ProgressionViewContainer>
       </S.Wrapper>
     </PageTemplate>

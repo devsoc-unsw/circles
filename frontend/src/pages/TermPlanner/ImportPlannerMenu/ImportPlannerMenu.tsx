@@ -98,7 +98,12 @@ const ImportPlannerMenu = () => {
                   isAccurate: course.is_accurate,
                   isMultiterm: course.is_multiterm,
                   supressed: false,
-                  mark: undefined
+                  // TODO: should actually hydrate people's mark
+                  // and also their suppressions and ignoreFromProgression
+                  // Maybe we don't need to worry about this as
+                  // exporting / importing becomes redundant with accounts
+                  ignoreFromProgression: false,
+                  mark: undefined // TODO: WTF?
                 };
 
                 if (plannedCourses.indexOf(course.code) === -1) {
