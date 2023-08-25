@@ -9,7 +9,7 @@ export const searchCourse = async (query: string): Promise<SearchCourse> => {
   return res.data as SearchCourse;
 };
 
-export const handleGetCourseInfo = async (courseId: string) => {
+export const getCourseInfo = async (courseId: string) => {
   const res = await axios.get<Course>(`course/getCourses/${courseId}`);
   return res.data;
 };
