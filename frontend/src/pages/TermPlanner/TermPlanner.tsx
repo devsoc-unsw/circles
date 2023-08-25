@@ -2,10 +2,8 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
-import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { getCourseInfo } from 'utils/api/courseApi';
 import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
@@ -150,7 +148,6 @@ const TermPlanner = () => {
   const handleOnDragStart: OnDragStartResponder = async (result) => {
     const courseCode = result.draggableId.slice(0, 8);
     setDraggingCourse(courseCode);
-    const courseInfo: Course = await getCourseInfo(courseCode);
     // if (courseInfo.is_multiterm) {
     //   setCheckYearMultiTerm(result.source.droppableId);
     //   setMultiCourse(courseCode);
