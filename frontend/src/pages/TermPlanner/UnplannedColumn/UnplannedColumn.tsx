@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
+import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { getCourseInfo } from 'utils/api/courseApi';
+import { getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
@@ -15,8 +17,10 @@ const Droppable = React.lazy(() =>
 );
 
 const UnplannedColumn = ({ dragging }: Props) => {
-  const planner = useSelector((state: RootState) => state.planner);
-  const { isSummerEnabled, unplanned } = useSelector((state: RootState) => state.planner);
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
+  const { unplanned, isSummerEnabled } = planner;
+
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
@@ -32,13 +36,11 @@ const UnplannedColumn = ({ dragging }: Props) => {
               droppable={dragging}
               isSmall={isSmall}
             >
-              {unplanned.map((course, courseIndex) => (
+              {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
-                  code={course}
+                  course={getCourseInfo(courseCode)} // TODO: How to await this within react component?
                   index={courseIndex}
-                  key={course}
                   term=""
-                  showMultiCourseBadge={planner.courses[course].isMultiterm}
                 />
               ))}
               {provided.placeholder}

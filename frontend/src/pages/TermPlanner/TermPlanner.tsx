@@ -2,9 +2,10 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
+import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { handleGetCourseInfo } from 'utils/api/courseApi';
+import { getCourseInfo } from 'utils/api/courseApi';
 import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
@@ -33,8 +34,6 @@ const TermPlanner = () => {
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
   const [draggingCourse, setDraggingCourse] = useState('');
-  const [checkYearMultiTerm, setCheckYearMultiTerm] = useState('');
-  const [multiCourse, setMultiCourse] = useState('');
 
   // Mutations
   const setPlannedCourseToTermMutation = useMutation(setPlannedCourseToTerm, {
@@ -151,17 +150,17 @@ const TermPlanner = () => {
   const handleOnDragStart: OnDragStartResponder = async (result) => {
     const courseCode = result.draggableId.slice(0, 8);
     setDraggingCourse(courseCode);
-    const courseInfo = await handleGetCourseInfo(courseCode);
-    if (courseInfo.is_multiterm) {
-      setCheckYearMultiTerm(result.source.droppableId);
-      setMultiCourse(courseCode);
-    }
+    const courseInfo: Course = await getCourseInfo(courseCode);
+    // if (courseInfo.is_multiterm) {
+    //   setCheckYearMultiTerm(result.source.droppableId);
+    //   setMultiCourse(courseCode);
+    // }
   };
 
   const handleOnDragEnd: OnDragEndResponder = async (result) => {
     setDraggingCourse('');
-    setCheckYearMultiTerm('');
-    setMultiCourse('');
+    // setCheckYearMultiTerm('');
+    // setMultiCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
@@ -172,8 +171,6 @@ const TermPlanner = () => {
     // const draggableInfo = await handleGetCourseInfo(draggableId);
 
     if (destination.droppableId !== 'unplanned') {
-      // Multi-term is dead 🦀🦀🦀
-
       // === moving course to unplanned doesn't require term logic ===
       if (destination.droppableId !== source.droppableId) {
         // TODO: What values do we give these?
@@ -283,7 +280,6 @@ const TermPlanner = () => {
                             name={key}
                             coursesList={year[term as Term]}
                             draggingCourse={!draggingCourse ? undefined : draggingCourse}
-                            currMultiCourseDrag={checkYearMultiTerm === key ? multiCourse : ''}
                           />
                         );
                       })}
