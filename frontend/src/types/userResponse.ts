@@ -39,6 +39,6 @@ export const badPlanner = {
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,
-  years: {} as Record<string, string[]>[],
+  years: [],
   courses: {} as Record<string, CourseResponse>
 } as PlannerResponse;
