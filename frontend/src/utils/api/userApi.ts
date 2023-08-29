@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getStoredState } from 'redux-persist';
-import { CourseResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
+import { CoursesAllUnlocked } from 'types/api';
+import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
 import { persistConfig, RootState } from 'config/store';
 
 // export const getToken = (): string => useSelector((state: RootState) => state.settings.token);
@@ -30,8 +31,14 @@ export const getUserPlanner = async (): Promise<PlannerResponse> => {
   return planner.data as PlannerResponse;
 };
 
-export const getUserCourses = async (): Promise<CourseResponse> => {
+export const getUserCourses = async (): Promise<CoursesResponse> => {
   const token = await getToken();
   const courses = await axios.get(`user/data/courses/${token}`);
-  return courses.data as CourseResponse;
+  return courses.data as CoursesResponse;
+};
+
+export const getUsersUnlockedCourses = async (): Promise<CoursesAllUnlocked> => {
+  const token = await getToken();
+  const unlocked = await axios.get(`user/unlockedCourses/${token}`);
+  return unlocked.data as CoursesAllUnlocked;
 };

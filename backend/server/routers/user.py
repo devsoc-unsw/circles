@@ -1,14 +1,18 @@
 from itertools import chain
-import itertools
-from pprint import pprint
+from typing import Optional, Tuple, cast
 from typing import Any, cast
 
 from bson.objectid import ObjectId
+from algorithms.objects.user import User
+from server.routers.utility import get_core_courses
+from server.routers.courses import get_course
+from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException
 import pydantic
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
 from server.database import usersDB
 from server.routers.model import (
     CourseMark,
@@ -335,4 +339,82 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     }
     set_user(token, user, True)
     return user
-    
+
+# converts storage mark type to a optional integer for algorithm usage
+LETTER_GRADES = { 'FL': 25, 'PS': 55, 'CR': 70, 'DN': 80, 'HD': 90 }
+def storage_mark_to_optional_int(mark: Mark) -> Optional[int]:
+    match mark:
+        case int() as n:
+            return n
+        case str() as g:
+            return LETTER_GRADES[g]
+        case _:
+            return None
+
+# converts storage courses into user courses
+# i dont actually know if i should be using all courses or only past courses
+def storage_courses_to_user_courses(storage_courses: dict[str, CoursesStorage]) -> dict[str, Tuple[int, Optional[int]]]:
+    return dict(map(
+        lambda course: (
+            course['code'],
+            (
+                get_course(course['code'])['UOC'], 
+                storage_mark_to_optional_int(course['mark'])
+            )
+        ),
+        storage_courses.values()
+    ))
+
+# converts a Storage object from get_user into a algorithm User
+def storage_to_user(user: Storage) -> User:
+    res = User()
+    res.program = user['degree']['programCode']
+    res.year = user['planner']['startYear']
+    res.specialisations = user['degree']['specs']
+    res.add_courses(storage_courses_to_user_courses(user['courses']))
+    res.core_courses = get_core_courses(user['degree']['programCode'], user['degree']['specs'])
+
+    return res
+
+@router.get(
+    "/unlockedCourses/{token}",
+    response_model=CoursesState,
+    responses={
+        400: {"description": "Uh oh you broke me"},
+        200: {
+            "description": "Returns the state of all the courses",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "COMP9302": {
+                            "is_accurate": True,
+                            "unlocked": True,
+                            "handbook_note": "This course can only be taken in the final term of your program.",
+                            "warnings": [],
+                        }
+                    }
+                }
+            },
+        },
+    },
+)
+def unlocked_courses(token: str = DUMMY_TOKEN) -> CoursesState:
+    """
+    Given the userData and a list of locked courses, returns the state of all
+    the courses. Note that locked courses always return as True with no warnings
+    since it doesn't make sense for us to tell the user they can't take a course
+    that they have already completed
+    """
+    user = storage_to_user(get_user(token))
+    courses_state: dict[str, CourseState] = {}
+    for course, condition in CONDITIONS.items():
+        result, warnings = condition.validate(user) if condition is not None else (True, [])
+        if result:
+            courses_state[course] = CourseState(
+                is_accurate=condition is not None,
+                unlocked=result,
+                handbook_note=CACHED_HANDBOOK_NOTE.get(course, ""),
+                warnings=warnings,
+            )
+
+    return CoursesState(courses_state=courses_state)

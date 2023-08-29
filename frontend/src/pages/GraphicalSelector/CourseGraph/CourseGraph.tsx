@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import {
   ExpandAltOutlined,
   ShrinkOutlined,
@@ -8,12 +8,11 @@ import {
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
-import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import { getProgramGraph } from 'utils/api/programsApi';
+import { getUserCourses, getUserDegree, getUsersUnlockedCourses } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
@@ -27,16 +26,31 @@ type Props = {
 };
 
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
-  const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner } = useSelector((state: RootState) => state);
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [unlockedCourses, setUnlockedCourses] = useState(false);
-
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [showingUnlockedCourses, setShowingUnlockedCourses] = useState(false);
+
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const degree = degreeQuery.data;
+
+  const programGraphQuery = useQuery({
+    queryKey: ['graph', { code: degree?.programCode, specs: degree?.specs }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    queryFn: () => getProgramGraph(degree!.programCode, degree!.specs),
+    enabled: degreeQuery.isSuccess
+  });
+  const programGraph = programGraphQuery.data;
+
+  const coursesQuery = useQuery('courses', async () =>
+    Promise.all([getUserCourses(), getUsersUnlockedCourses()])
+  );
+  const [selectedCourses, coursesUnlocked] = coursesQuery.data ?? [];
+
+  const queriesSuccess =
+    degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
 
   useEffect(() => {
     // courses is a list of course codes
@@ -76,7 +90,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        nodes: courses.map((c) => mapNodeStyle(c, selectedCourses!)),
         edges: courseEdges
       };
 
@@ -100,21 +115,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
     };
 
-    const setupGraph = async () => {
-      try {
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
-        const { edges, courses } = res.data;
-        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at setupGraph', e);
-      }
-    };
-
-    if (!graphRef.current) setupGraph();
-  }, [onNodeClick, plannedCourses, programCode, specs]);
+    // setup the graph, program graph and selected courses should always exist if queriesSuccess
+    if (!graphRef.current && queriesSuccess && programGraph && selectedCourses) {
+      const { edges, courses } = programGraph;
+      if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+    }
+  }, [onNodeClick, queriesSuccess, degree, selectedCourses, programGraph]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -123,31 +129,22 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   };
 
   const showUnlockedCourses = useCallback(async () => {
-    if (!graphRef.current) return;
-    try {
-      const {
-        data: { courses_state: coursesStates }
-      } = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
-      graphRef.current.getNodes().forEach((n) => {
-        const id = n.getID();
-        if (coursesStates[id]?.unlocked) {
-          n.show();
-          n.getOutEdges().forEach((e) => {
-            if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
-          });
-        } else {
-          n.hide();
-          n.getEdges().forEach((e) => e.hide());
-        }
-      });
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at showUnlockedCourses', e);
-    }
-  }, [degree, planner]);
+    if (!graphRef.current || !coursesUnlocked) return;
+
+    const coursesStates = coursesUnlocked.courses_state;
+    graphRef.current.getNodes().forEach((n) => {
+      const id = n.getID();
+      if (coursesStates[id]?.unlocked) {
+        n.show();
+        n.getOutEdges().forEach((e) => {
+          if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
+        });
+      } else {
+        n.hide();
+        n.getEdges().forEach((e) => e.hide());
+      }
+    });
+  }, [coursesUnlocked]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
@@ -193,13 +190,13 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
-    if (unlockedCourses) showUnlockedCourses();
+    if (showingUnlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
+  }, [coursesQuery.dataUpdatedAt, showUnlockedCourses, showingUnlockedCourses]);
 
   return (
     <S.Wrapper ref={containerRef}>
-      {loading ? (
+      {loading && queriesSuccess ? (
         <S.SpinnerWrapper>
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>
@@ -207,8 +204,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         <S.ToolsWrapper>
           Show All Courses
           <Switch
-            checked={!unlockedCourses}
-            onChange={() => setUnlockedCourses((prevState) => !prevState)}
+            checked={!showingUnlockedCourses}
+            onChange={() => setShowingUnlockedCourses((prevState) => !prevState)}
           />
           <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
           <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
