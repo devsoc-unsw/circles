@@ -12,7 +12,7 @@ import pydantic
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
-from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, CoursesStorage, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
 from server.database import usersDB
 from server.routers.model import (
     CourseMark,
@@ -340,16 +340,26 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     set_user(token, user, True)
     return user
 
+# converts storage mark type to a optional integer for algorithm usage
+LETTER_GRADES = { 'FL': 25, 'PS': 55, 'CR': 70, 'DN': 80, 'HD': 90 }
+def storage_mark_to_optional_int(mark: Mark) -> Optional[int]:
+    match mark:
+        case int() as n:
+            return n
+        case str() as g:
+            return LETTER_GRADES[g]
+        case _:
+            return None
+
 # converts storage courses into user courses
 # i dont actually know if i should be using all courses or only past courses
-# TODO: check this
 def storage_courses_to_user_courses(storage_courses: dict[str, CoursesStorage]) -> dict[str, Tuple[int, Optional[int]]]:
     return dict(map(
         lambda course: (
             course['code'],
             (
                 get_course(course['code'])['UOC'], 
-                course['mark'] if type(course['mark']) == int else 0  # TODO: fix
+                storage_mark_to_optional_int(course['mark'])
             )
         ),
         storage_courses.values()
@@ -395,17 +405,9 @@ def unlocked_courses(token: str = DUMMY_TOKEN) -> CoursesState:
     since it doesn't make sense for us to tell the user they can't take a course
     that they have already completed
     """
-    token_user = get_user(token)
     user = storage_to_user(get_user(token))
-    # TODO: remove
-    print("\n\nUNLOCKED USER")
-    print(token_user['courses'])
-    print(user.courses)
-    print(user.has_taken_course("COMP1511"))
-    print("\n")
     courses_state: dict[str, CourseState] = {}
     for course, condition in CONDITIONS.items():
-        # TODO: check if this is still correct, taken from old route
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
             courses_state[course] = CourseState(
@@ -416,14 +418,3 @@ def unlocked_courses(token: str = DUMMY_TOKEN) -> CoursesState:
             )
 
     return CoursesState(courses_state=courses_state)
-
-# TODO: remove
-@router.post("/setupExampleUserDEBUG")
-def setup_example_user(token: str = DUMMY_TOKEN):
-    reset(token)
-    toggle_summer_term(token)
-    setProgram("3778", token)
-    addSpecialisation("COMPA1", token)
-    update_start_year(2021, token)
-    update_degree_length(4, token)
-    setIsComplete(False, token)

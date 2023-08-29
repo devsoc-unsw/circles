@@ -63,7 +63,6 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     ? programGraphQuery.data
     : DUMMYGRAPH;
 
-  // TODO: make a non success handler
   const queriesSuccess =
     degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
 
@@ -212,7 +211,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   return (
     <S.Wrapper ref={containerRef}>
-      {loading ? (
+      {loading && queriesSuccess ? (
         <S.SpinnerWrapper>
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>
