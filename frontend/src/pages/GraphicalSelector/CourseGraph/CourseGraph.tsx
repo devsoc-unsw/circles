@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
-import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge, GraphPayload } from 'types/api';
 import { CoursesResponse, DegreeResponse } from 'types/userResponse';
 import { useDebouncedCallback } from 'use-debounce';
 import { getProgramGraph } from 'utils/api/programsApi';
@@ -47,12 +47,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   const degreeQuery = useQuery('degree', getUserDegree);
   const degree: DegreeResponse = degreeQuery.isSuccess ? degreeQuery.data : DUMMYDEGREE;
 
-  // TODO: combine the 'courses' like queries
-  const coursesUnlockedQuery = useQuery('unlockedCourses', getUsersUnlockedCourses);
-  const coursesUnlocked: CoursesAllUnlocked | undefined = coursesUnlockedQuery.data;
+  const coursesQuery = useQuery('courses', async () =>
+    Promise.all([getUserCourses(), getUsersUnlockedCourses()])
+  );
 
-  const coursesQuery = useQuery('courses', getUserCourses);
-  const selectedCourses = coursesQuery.isSuccess ? coursesQuery.data : DUMMYCOURSES;
+  const selectedCourses = coursesQuery.isSuccess ? coursesQuery.data[0] : DUMMYCOURSES;
+  const coursesUnlocked = coursesQuery.isSuccess ? coursesQuery.data[1] : undefined; // undefined so we can just not show if not gotten
 
   const programGraphQuery = useQuery({
     queryKey: 'graph',
@@ -65,10 +65,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   // TODO: make a non success handler
   const queriesSuccess =
-    degreeQuery.isSuccess &&
-    coursesQuery.isSuccess &&
-    coursesUnlockedQuery.isSuccess &&
-    programGraphQuery.isSuccess;
+    degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
 
   const { programCode, specs } = degree;
 

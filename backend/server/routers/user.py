@@ -4,6 +4,7 @@ from typing import Any, cast
 
 from bson.objectid import ObjectId
 from algorithms.objects.user import User
+from server.routers.utility import get_core_courses
 from server.routers.courses import get_course
 from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException
@@ -361,8 +362,7 @@ def storage_to_user(user: Storage) -> User:
     res.year = user['planner']['startYear']
     res.specialisations = user['degree']['specs']
     res.add_courses(storage_courses_to_user_courses(user['courses']))
-    # res.cur_courses = ?  # TODO: fix these
-    # res.core_courses = ?
+    res.core_courses = get_core_courses(user['degree']['programCode'], user['degree']['specs'])
 
     return res
 
