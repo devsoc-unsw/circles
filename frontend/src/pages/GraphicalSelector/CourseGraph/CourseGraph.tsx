@@ -8,8 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
-import { CourseEdge, GraphPayload } from 'types/api';
-import { CoursesResponse, DegreeResponse } from 'types/userResponse';
+import { CourseEdge } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
 import { getProgramGraph } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUsersUnlockedCourses } from 'utils/api/userApi';
@@ -26,47 +25,32 @@ type Props = {
   focused?: string;
 };
 
-// TODO: dont use these
-const DUMMYDEGREE: DegreeResponse = {
-  isComplete: false,
-  programCode: '3778',
-  specs: ['COMPA1']
-};
-const DUMMYGRAPH: GraphPayload = { courses: [], edges: [] };
-const DUMMYCOURSES: CoursesResponse = {};
-
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(true);
   const [showingUnlockedCourses, setShowingUnlockedCourses] = useState(false);
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
   const degreeQuery = useQuery('degree', getUserDegree);
-  const degree: DegreeResponse = degreeQuery.isSuccess ? degreeQuery.data : DUMMYDEGREE;
+  const degree = degreeQuery.data;
+
+  const programGraphQuery = useQuery({
+    queryKey: ['graph', { code: degree?.programCode, specs: degree?.specs }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    queryFn: () => getProgramGraph(degree!.programCode, degree!.specs),
+    enabled: degreeQuery.isSuccess
+  });
+  const programGraph = programGraphQuery.data;
 
   const coursesQuery = useQuery('courses', async () =>
     Promise.all([getUserCourses(), getUsersUnlockedCourses()])
   );
-
-  const selectedCourses = coursesQuery.isSuccess ? coursesQuery.data[0] : DUMMYCOURSES;
-  const coursesUnlocked = coursesQuery.isSuccess ? coursesQuery.data[1] : undefined; // undefined so we can just not show if not gotten
-
-  const programGraphQuery = useQuery({
-    queryKey: 'graph',
-    queryFn: () => getProgramGraph(degree.programCode, degree.specs),
-    enabled: degreeQuery.isSuccess
-  });
-  const programGraph: GraphPayload = programGraphQuery.isSuccess
-    ? programGraphQuery.data
-    : DUMMYGRAPH;
+  const [selectedCourses, coursesUnlocked] = coursesQuery.data ?? [];
 
   const queriesSuccess =
     degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
-
-  const { programCode, specs } = degree;
 
   useEffect(() => {
     // courses is a list of course codes
@@ -106,7 +90,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, selectedCourses)),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        nodes: courses.map((c) => mapNodeStyle(c, selectedCourses!)),
         edges: courseEdges
       };
 
@@ -130,12 +115,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
     };
 
-    // setup the graph
-    if (!graphRef.current && queriesSuccess) {
+    // setup the graph, program graph and selected courses should always exist if queriesSuccess
+    if (!graphRef.current && queriesSuccess && programGraph && selectedCourses) {
       const { edges, courses } = programGraph;
       if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
     }
-  }, [onNodeClick, queriesSuccess, selectedCourses, programCode, specs, programGraph]);
+  }, [onNodeClick, queriesSuccess, degree, selectedCourses, programGraph]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
