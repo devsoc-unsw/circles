@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { handleAddToUnplanned } from 'utils/api/plannerApi';
+import { addToUnplanned } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import { removeCourses } from 'reducers/plannerSlice';
 
@@ -32,7 +32,7 @@ const PlannerButton = ({ course }: PlannerButtonProps) => {
 
   // idk why TS errors just yet - will fix later - this should be okay for now
   /* eslint-disable-next-line */
-  const addToUnplannedMutation = useMutation(handleAddToUnplanned, {
+  const addToUnplannedMutation = useMutation(addToUnplanned, {
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
     },

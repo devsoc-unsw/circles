@@ -12,6 +12,7 @@ type UserPayload = {
   specialisations: string[];
 };
 
+// TODO: Remove the slice types once fully migrated
 const prepareUserPayload = (
   degree: DegreeResponse | DegreeSliceState,
   planner: PlannerResponse | PlannerSliceState

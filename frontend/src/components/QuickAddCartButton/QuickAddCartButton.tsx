@@ -1,10 +1,9 @@
-/* eslint-disable */
 import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
+import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import S from './styles';
-import { useMutation, useQueryClient } from 'react-query';
-import { handleAddToUnplanned, handleRemoveCourse } from 'utils/api/plannerApi';
 
 type Props = {
   courseCode: string;
@@ -12,23 +11,21 @@ type Props = {
 };
 
 const QuickAddCartButton = ({ courseCode, planned }: Props) => {
-
-  const handleMutation = planned ? handleRemoveCourse : handleAddToUnplanned;
+  const handleMutation = planned ? removeCourse : addToUnplanned;
 
   const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: handleMutation,
+  const mutation = useMutation(handleMutation, {
     onMutate: () => planned,
-    onSuccess: async (data: void, variables: String, context: unknown) => {
-      // waits until refetch is complete
-      await queryClient.invalidateQueries({ queryKey: ["everything"] })
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('courses');
     }
   });
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     mutation.mutate(courseCode);
-  }
+  };
 
   return !planned ? (
     <Tooltip title="Add to Planner" placement="top">

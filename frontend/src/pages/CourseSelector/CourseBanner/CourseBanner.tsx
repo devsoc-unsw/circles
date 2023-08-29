@@ -14,12 +14,11 @@ const CourseBanner = () => {
   const dispatch = useAppDispatch();
 
   const degreeQuery = useQuery('degree', getUserDegree);
-  const allProgams = useQuery('programs', fetchAllDegrees);
+  const allPrograms = useQuery('programs', fetchAllDegrees);
 
-  const getUserProgram = (): string => {
-    console.log(allProgams);
+  const getUserProgramTitle = (): string => {
     if (degreeQuery.data?.programCode) {
-      return allProgams.data?.programs[degreeQuery.data?.programCode] || '';
+      return allPrograms.data?.programs[degreeQuery.data?.programCode] || '';
     }
     return '';
   };
@@ -27,7 +26,7 @@ const CourseBanner = () => {
   return (
     <S.BannerWrapper>
       <Title level={2} className="text">
-        {degreeQuery.data?.programCode} - {getUserProgram()}
+        {degreeQuery.data?.programCode} - {getUserProgramTitle()}
       </Title>
       <CourseSearchBar onSelectCallback={(courseCode) => dispatch(addTab(courseCode))} />
     </S.BannerWrapper>

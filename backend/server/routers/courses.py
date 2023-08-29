@@ -14,7 +14,6 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz  # type: ignore
 from server.config import DUMMY_TOKEN
-from server.routers.user import get_user
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
@@ -210,6 +209,7 @@ def search(search_string: str, token: str = DUMMY_TOKEN) -> Dict[str, str]:
             ……. }
     """
     from server.routers.programs import get_structure
+    from server.routers.user import get_user
 
     all_courses = fetch_all_courses()
 

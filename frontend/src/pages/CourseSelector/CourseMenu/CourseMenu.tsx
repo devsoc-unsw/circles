@@ -36,7 +36,6 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-
 const getEverything = async () => {
   const degreePromise = getUserDegree();
   const plannerPromise = getUserPlanner();
@@ -46,13 +45,15 @@ const getEverything = async () => {
     );
     return res.data.structure;
   });
-  const coursesStatePromise = Promise.all([degreePromise, plannerPromise]).then(async ([degree, planner]) => {
-    const res = await axios.post<CoursesAllUnlocked>(
-      '/courses/getAllUnlocked/',
-      JSON.stringify(prepareUserPayload(degree, planner))
-    );
-    return res.data.courses_state;
-  });
+  const coursesStatePromise = Promise.all([degreePromise, plannerPromise]).then(
+    async ([degree, planner]) => {
+      const res = await axios.post<CoursesAllUnlocked>(
+        '/courses/getAllUnlocked/',
+        JSON.stringify(prepareUserPayload(degree, planner))
+      );
+      return res.data.courses_state;
+    }
+  );
   return Promise.all([plannerPromise, structurePromise, coursesStatePromise]);
 };
 
@@ -65,62 +66,64 @@ const CourseMenu = () => {
 
   const [pageLoaded, setPageLoaded] = useState(false);
 
-  const generateMenuData = useCallback((planner: PlannerResponse, structure: ProgramStructure, courses: Record<string, CourseValidation>) => {
-    const newMenu: MenuDataStructure = {};
-    const newCoursesUnits: CourseUnitsStructure = {};
-    // Example groups: Major, Minor, General, Rules
-    Object.keys(structure).forEach((group) => {
-      // Do not include 'Rules' group in sidebar or any other groups that do not
-      // have subgroups
-      if (group === 'Rules' || !Object.keys(structure[group].content).length) return;
-      newMenu[group] = {};
-      newCoursesUnits[group] = {};
-      // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group].content).forEach((subgroup) => {
-        const subgroupStructure = structure[group].content[subgroup];
-        newCoursesUnits[group][subgroup] = {
-          total: subgroupStructure.UOC,
-          curr: 0
-        };
-        newMenu[group][subgroup] = [];
-        if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
-          // only consider disciplinary component courses
-          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            // suppress gen ed courses if it has not been added to the planner
-            if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
-            newMenu[group][subgroup].push({
-              courseCode,
-              title: subgroupStructure.courses[courseCode],
-              unlocked: !!courses[courseCode]?.unlocked,
-              accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
+  const generateMenuData = useCallback(
+    (
+      planner: PlannerResponse,
+      structure: ProgramStructure,
+      courses: Record<string, CourseValidation>
+    ) => {
+      const newMenu: MenuDataStructure = {};
+      const newCoursesUnits: CourseUnitsStructure = {};
+      // Example groups: Major, Minor, General, Rules
+      Object.keys(structure).forEach((group) => {
+        // Do not include 'Rules' group in sidebar or any other groups that do not
+        // have subgroups
+        if (group === 'Rules' || !Object.keys(structure[group].content).length) return;
+        newMenu[group] = {};
+        newCoursesUnits[group] = {};
+        // Example subgroup: Core Courses, Computing Electives
+        Object.keys(structure[group].content).forEach((subgroup) => {
+          const subgroupStructure = structure[group].content[subgroup];
+          newCoursesUnits[group][subgroup] = {
+            total: subgroupStructure.UOC,
+            curr: 0
+          };
+          newMenu[group][subgroup] = [];
+          if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
+            // only consider disciplinary component courses
+            Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+              // suppress gen ed courses if it has not been added to the planner
+              if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
+              newMenu[group][subgroup].push({
+                courseCode,
+                title: subgroupStructure.courses[courseCode],
+                unlocked: !!courses[courseCode]?.unlocked,
+                accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
+              });
+              // add UOC to curr
+              if (planner.courses[courseCode]) {
+                const anyCourse = planner.courses[courseCode] as any; // while types get unfucked
+                newCoursesUnits[group][subgroup].curr +=
+                  anyCourse.UOC * getNumTerms(anyCourse.UOC, anyCourse.isMultiterm);
+              }
             });
-            // add UOC to curr
-            if (planner.courses[courseCode]) {
-              const anyCourse = planner.courses[courseCode] as any; // while types get unfucked
-              newCoursesUnits[group][subgroup].curr +=
-                anyCourse.UOC *
-                getNumTerms(
-                  anyCourse.UOC,
-                  anyCourse.isMultiterm
-                );
-            }
-          });
-        }
+          }
+        });
       });
-    });
-    setMenuData(newMenu);
-    setCoursesUnits(newCoursesUnits);
-    setPageLoaded(true);
-  }, []);
+      setMenuData(newMenu);
+      setCoursesUnits(newCoursesUnits);
+      setPageLoaded(true);
+    },
+    []
+  );
 
   const everythingQuery = useQuery(['everything'], getEverything, {
-    onError: errLogger("getEverything"),
+    onError: errLogger('getEverything'),
     onSuccess: (data) => {
       if (!Object.keys(data[1]).length) return;
       // should maybe be delted later or something
       dispatch(setCourses(data[2]));
       generateMenuData(...data);
-
     }
   });
 
@@ -163,25 +166,28 @@ const CourseMenu = () => {
             // check if there are courses to show collapsible submenu
             children: subGroupEntry.length
               ? subGroupEntry
-                .sort(sortCourses)
-                .filter(
-                  (course) =>
-                    course.unlocked || planner.courses[course.courseCode] || showLockedCourses
-                )
-                .map((course) => ({
-                  label: (
-                    <CourseMenuTitle
-                      courseCode={course.courseCode}
-                      title={course.title}
-                      selected={planner.courses[course.courseCode] !== undefined || planner.unplanned.includes(course.courseCode)}
-                      accurate={course.accuracy}
-                      unlocked={course.unlocked}
-                    />
-                  ),
-                  // key is course code + groupKey + subgroupKey to differentiate as unique
-                  // course items in menu
-                  key: `${course.courseCode}-${groupKey}-${subgroupKey}`
-                }))
+                  .sort(sortCourses)
+                  .filter(
+                    (course) =>
+                      course.unlocked || planner.courses[course.courseCode] || showLockedCourses
+                  )
+                  .map((course) => ({
+                    label: (
+                      <CourseMenuTitle
+                        courseCode={course.courseCode}
+                        title={course.title}
+                        selected={
+                          planner.courses[course.courseCode] !== undefined ||
+                          planner.unplanned.includes(course.courseCode)
+                        }
+                        accurate={course.accuracy}
+                        unlocked={course.unlocked}
+                      />
+                    ),
+                    // key is course code + groupKey + subgroupKey to differentiate as unique
+                    // course items in menu
+                    key: `${course.courseCode}-${groupKey}-${subgroupKey}`
+                  }))
               : null
           };
         })

@@ -1,10 +1,9 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { Structure } from 'types/api';
-import { ProgramStructure } from 'types/structure';
+import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
+import { errLogger } from 'utils/queryUtils';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
@@ -14,41 +13,31 @@ import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
-import {
-  useQuery,
-  useQueryClient,
-} from 'react-query';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import { errLogger } from 'utils/queryUtils';
-
 
 const CourseSelector = () => {
-  useQueryClient();
-
   const [showedNotif, setShowedNotif] = useState(false);
-  
+
   useQuery('planner', getUserPlanner, {
-      onError: errLogger("coursesQuery"),
-      onSuccess: (data) => {
-          // only open for users with no courses
-          if (!showedNotif && !Object.keys(data.courses).length) {
-            openNotification({
-              type: 'info',
-              message: 'How do I see more sidebar courses?',
-              description:
-              'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
-            });
-            setShowedNotif(true);
-          }
-        }
-    });
+    onError: errLogger('coursesQuery'),
+    onSuccess: (data) => {
+      // only open for users with no courses
+      if (!showedNotif && !Object.keys(data.courses).length) {
+        openNotification({
+          type: 'info',
+          message: 'How do I see more sidebar courses?',
+          description:
+            'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
+        });
+        setShowedNotif(true);
+      }
+    }
+  });
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 
   const dispatch = useDispatch();
 
   const courseCode = tabs[active];
-
 
   return (
     <PageTemplate>
