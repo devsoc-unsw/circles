@@ -77,9 +77,7 @@ const ProgressionChecker = () => {
   const plannedForQuery = useQuery('plannedFor', getCoursesPlannedFor);
   const plannedFor = plannedForQuery.data ?? {};
 
-  const coursesQuery = useQuery('plannerCourses', () =>
-    getCoursesInfo(Object.keys(plannerData.courses))
-  );
+  const coursesQuery = useQuery('plannerCourses', getCoursesInfo);
   const courses = coursesQuery.data ?? {};
 
   const countedCourses: string[] = [];

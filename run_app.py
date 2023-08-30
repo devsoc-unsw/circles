@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 
 
 class LogPipe(threading.Thread):
-    """ boilerplate abstraction for redirecting the logs of a process """
+    """boilerplate abstraction for redirecting the logs of a process"""
+
     def __init__(self, level):
         """Setup the object with a logger and a loglevel
         and start the thread
@@ -28,8 +29,8 @@ class LogPipe(threading.Thread):
 
     def run(self):
         """Run the thread, logging everything."""
-        for line in iter(self.pipeReader.readline, ''):
-            logging.log(self.level, line.strip('\n'))
+        for line in iter(self.pipeReader.readline, ""):
+            logging.log(self.level, line.strip("\n"))
 
         self.pipeReader.close()
 
@@ -38,64 +39,65 @@ class LogPipe(threading.Thread):
         os.close(self.fdWrite)
 
     def write(self, message):
-        """ do write """
+        """do write"""
         logging.log(self.level, message)
 
 
 def get_backend_env():
     """
-        reads backend.env for mongodb username and password and python
-        version.
+    reads backend.env for mongodb username and password and python
+    version.
     """
     load_dotenv("./env/backend.env")
     username = os.getenv("MONGODB_USERNAME")
     password = os.getenv("MONGODB_PASSWORD")
-    python = os.getenv("PYTHON_VERSION") or "python"
+    python = os.getenv("PYTHON_VERSION") or "python3"
     return (username, password, python)
+
 
 def get_frontend_env():
     """
-        reads frontend.env for mongodb username and password and python
-        version.
+    reads frontend.env for mongodb username and password and python
+    version.
     """
     load_dotenv("./env/frontend.env")
     baseurl = os.getenv("VITE_BACKEND_API_BASE_URL")
     return baseurl
 
+
 def main():
     if os.system("docker ps") != 0:
         print("please run docker first!")
         sys.exit(1)
-    logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',
-        handlers=[
-        logging.FileHandler("debug.log", mode='w'),
-        logging.StreamHandler()
-        ]
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(message)s",
+        handlers=[logging.FileHandler("debug.log", mode="w"), logging.StreamHandler()],
     )
     # this is actually kooky if you think about it
     sys.stdout = LogPipe(logging.INFO)  # type: ignore
     sys.stderr = LogPipe(logging.ERROR)  # type: ignore
     username, password, python_ver = get_backend_env()
     base_url = get_frontend_env()
-    os.system('docker compose run --rm init-mongo')
+    os.system("docker compose run --rm init-mongo")
     try:
         Popen(
-            f'MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec {python_ver} runserver.py',
+            f"MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec {python_ver} runserver.py",
             stdout=sys.stdout,
             stderr=sys.stderr,
             shell=True,
-            cwd='backend/'
+            cwd="backend/",
         )
         check_call(
-            f'VITE_BACKEND_API_BASE_URL={base_url} npm start',
+            f"VITE_BACKEND_API_BASE_URL={base_url} npm start",
             shell=True,
             stdout=sys.stdout,
             stderr=sys.stderr,
-            cwd='frontend/'
+            cwd="frontend/",
         )
     # pylint: disable=broad-except
     except Exception as e:
-        sys.stdout.write(f'exception - {e}')
+        sys.stdout.write(f"exception - {e}")
     finally:
         sys.stdout.close()
         sys.stderr.close()
@@ -103,5 +105,6 @@ def main():
         sys.stderr = sys.__stderr__
         logging.shutdown()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
