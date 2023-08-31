@@ -3,8 +3,9 @@
 
 from functools import wraps
 from time import time
+from typing import Annotated
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Header
 from google.auth.transport import requests  # type: ignore
 from google.oauth2 import id_token  # type: ignore
 from server.config import CLIENT_ID
@@ -127,3 +128,50 @@ def validate_user_exists(token: dict[str, str]) -> bool:
     """
     # TODO: should actually check inside of the  database once created
     return token["sub"] not in [None, ""]
+
+# TODO: all this is just dummy token validating for now
+UserID = str
+# will validate the token and return a unique user id that is used to store data against, raises 401 Unauthorized if token invalid
+VALID_TOKENS = ['loltemptoken', 'emptytoken']
+def extract_authenticated_user_id(token: str) -> UserID:
+    if token in VALID_TOKENS:  # TODO: this should check token against our oidc endpoints
+        # TODO: ideally we return something unique to the account,
+        #       so if token reveals an account id, we can pair this in a tuple with provider
+        #       and that would become our unique "UserID"?? 
+        return token
+
+    raise HTTPException(
+        status_code=401,
+        detail=f"Invalid token: {token}"
+    )
+
+# validates the token and checks if the underlying user already exists in the database, raises 403 Forbidden if user is not setup
+SETUP_TOKENS = ['loltemptoken']
+def extract_valid_user_id(token: str) -> UserID:
+    id = extract_authenticated_user_id(token)
+    if token in SETUP_TOKENS:  # TODO: actually check if the id exists in database
+        return id
+    
+    raise HTTPException(
+        status_code=403,
+        detail=f"User behind token has not yet been setup: {token}"
+    )
+
+# checks if the token is valid, in which will return 200, or 401/403 depending on how invalid the token is
+@router.get("/checkToken")
+def check_token(token: str):
+    extract_valid_user_id(token)
+
+# TODO: remove... example route, the front facing route takes a token, not a user, but we get it as a valid user only
+@router.get("/exampleTokenExtractionParams")
+def exampleTokenExtractionParams(program: str, user: UserID = Depends(extract_valid_user_id)):
+    print(user, program)
+    return user
+
+def extract_valid_user_id_from_header(x_token: Annotated[str, Header()]):
+    return extract_valid_user_id(x_token)
+
+@router.get("/exampleTokenExtractionHeader")
+def exampleTokenExtractionHeader(program: str, user: UserID = Depends(extract_valid_user_id_from_header)):
+    print(user, program)
+    return user

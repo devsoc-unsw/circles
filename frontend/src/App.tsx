@@ -12,6 +12,8 @@ import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';
+import TokenPlayground from 'pages/TokenPlayground';
+import RequireToken from 'components/RequireToken/RequireToken';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -49,13 +51,18 @@ const App = () => {
                     )
                   }
                 />
-                <Route path="/degree-wizard" element={<DegreeWizard />} />
-                <Route path="/course-selector" element={<CourseSelector />} />
-                {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
-                <Route path="/term-planner" element={<TermPlanner />} />
-                <Route path="/progression-checker" element={<ProgressionChecker />} />
-                <Route path="*" element={<Page404 />} />
                 {inDev && <Route path="/login" element={<Auth />} />}
+                {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
+                <Route element={<RequireToken />}>
+                  <Route path="/degree-wizard" element={<DegreeWizard />} />
+                </Route>
+                <Route element={<RequireToken needSetup />}>
+                  <Route path="/course-selector" element={<CourseSelector />} />
+                  {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                  <Route path="/term-planner" element={<TermPlanner />} />
+                  <Route path="/progression-checker" element={<ProgressionChecker />} />
+                </Route>
+                <Route path="*" element={<Page404 />} />
               </Routes>
             </Router>
           </Suspense>
