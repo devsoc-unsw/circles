@@ -8,10 +8,12 @@ import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
+import RequireToken from 'components/RequireToken/RequireToken';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import Auth from 'pages/Auth/Auth';
+import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
@@ -100,13 +102,20 @@ const App = () => {
                       path="/"
                       element={!token ? <LandingPage /> : <Navigate to="/degree-wizard" replace />}
                     />
-                    <Route path="/degree-wizard" element={<DegreeWizard />} />
-                    <Route path="/course-selector" element={<CourseSelector />} />
-                    {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
-                    <Route path="/term-planner" element={<TermPlanner />} />
-                    <Route path="/progression-checker" element={<ProgressionChecker />} />
-                    <Route path="*" element={<Page404 />} />
+                    <Route element={<RequireToken />}>
+                      <Route path="/degree-wizard" element={<DegreeWizard />} />
+                    </Route>
+                    <Route element={<RequireToken needSetup />}>
+                      <Route path="/course-selector" element={<CourseSelector />} />
+                      {inDev && (
+                        <Route path="/graphical-selector" element={<GraphicalSelector />} />
+                      )}
+                      <Route path="/term-planner" element={<TermPlanner />} />
+                      <Route path="/progression-checker" element={<ProgressionChecker />} />
+                    </Route>
                     {inDev && <Route path="/login" element={<Auth />} />}
+                    {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
+                    <Route path="*" element={<Page404 />} />
                   </Routes>
                 </Router>
               </Suspense>
