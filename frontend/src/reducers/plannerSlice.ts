@@ -381,10 +381,9 @@ const plannerSlice = createSlice({
         }
       }
     },
-    // this is setting?
-    toggleTermComplete: (state, action: PayloadAction<string>) => {
-      state.completedTerms[action.payload] = !state.completedTerms[action.payload];
-    },
+    // toggleTermComplete: (state, action: PayloadAction<string>) => {
+    //   state.completedTerms[action.payload] = !state.completedTerms[action.payload];
+    // },
     updateStartYear: (state, action: PayloadAction<number>) => {
       const currEndYear = state.startYear + state.numYears - 1;
       const newStartYear = action.payload;
@@ -478,7 +477,7 @@ export const {
   unschedule,
   unscheduleAll,
   toggleSummer,
-  toggleTermComplete,
+  // toggleTermComplete,
   updateStartYear,
   updateDegreeLength,
   hideYear,

@@ -8,30 +8,29 @@ import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { Term } from 'types/planner';
-import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
 import { getUserPlanner } from 'utils/api/userApi';
-import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
+import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
 import S from './styles';
+import { CourseTime } from 'types/courses';
 
 type Props = {
+  planner: PlannerResponse;
+  courses: CoursesResponse;
   course: Course;
   index: number;
-  term: string;
+  time?: CourseTime;
 };
 
 const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ course, index, term }: Props) => {
-  const plannerQuery = useQuery('planner', getUserPlanner);
-  const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
-
-  // TODO: Work out how isSummerEnabled works with the new backend
+const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
   const { isSummerEnabled } = planner;
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
@@ -46,26 +45,28 @@ const DraggableCourse = ({ course, index, term }: Props) => {
   const handbookNote = course.handbook_note;
   // const warningMessage = courses[code].warnings;
 
-  const isOffered = courseHasOfferingNew(course, term as Term);
+  const showNotOfferedWarning = time
+    ? courseHasOffering(course, time.year, time.term as Term)
+    : true;
 
   const contextMenu = useContextMenu({
     id: `${course.code}-context`
   });
 
-  // const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
+  // TODO: const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
   const isDragDisabled = false;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
   // TODO: Most of the information for these is missing now. Should it be brought back?
   // const shouldHaveWarning =
-  //   !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered);
+  //   !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
   // const errorIsInformational =
   //   shouldHaveWarning &&
   //   isUnlocked &&
   //   warningMessage.length === 0 &&
   //   !is_legacy &&
   //   is_accurate &&
-  //   isOffered;
+  //   showNotOfferedWarning;
 
   const handleContextMenu = (e: React.MouseEvent) => {
     if (!isDragDisabled) contextMenu.show({ event: e });
@@ -76,7 +77,7 @@ const DraggableCourse = ({ course, index, term }: Props) => {
       <Suspense fallback={<Spinner text="Loading Course..." />}>
         <Draggable
           isDragDisabled={isDragDisabled}
-          draggableId={`${course.code}${term}`}
+          draggableId={`${course.code}${time?.term}`}
           index={index}
         >
           {(provided) => (
@@ -85,7 +86,7 @@ const DraggableCourse = ({ course, index, term }: Props) => {
               isSmall={isSmall}
               dragDisabled={isDragDisabled}
               warningsDisabled={isDragDisabled}
-              // isWarning={!supressed && (!isUnlocked || !isOffered)}
+              // isWarning={!supressed && (!isUnlocked || !showNotOfferedWarning)}
               isWarning={false}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
@@ -105,7 +106,6 @@ const DraggableCourse = ({ course, index, term }: Props) => {
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))} */}
-              <InfoCircleOutlined style={{ color: theme.infoOutlined.color }} />
               <S.CourseLabel>
                 {isSmall ? (
                   <Text className="text">{course.code}</Text>
@@ -127,9 +127,9 @@ const DraggableCourse = ({ course, index, term }: Props) => {
                           Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                           Mark can be 0.
                         */}
-                      {/* TODO: Bring back marks */}
-                      {/* {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'} */}
-                      N/A
+                      {typeof courses[course.code].mark != undefined
+                        ? courses[course.code].mark
+                        : 'N/A'}
                     </Text>
                   </div>
                 )}
@@ -146,11 +146,11 @@ const DraggableCourse = ({ course, index, term }: Props) => {
           {title}
         </ReactTooltip>
       )}
-      {!isDragDisabled && (
+      {!isDragDisabled && shouldHaveWarning && (
         <ReactTooltip id={course.code} place="bottom">
           {isLegacy ? (
             'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
-          ) : !isOffered ? (
+          ) : !showNotOfferedWarning ? (
             'The course is not offered in this term.'
           ) : (
             // eslint-disable-next-line react/no-danger

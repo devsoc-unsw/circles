@@ -113,6 +113,7 @@ def default_cs_user() -> Storage:
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
+        'lockedTerms': {},
         'years': [],
         'courses': {},
     }
@@ -236,6 +237,7 @@ def reset(token: str = DUMMY_TOKEN):
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
+        'lockedTerms': {},
         'years': [],
         'courses': {},
     }
@@ -315,6 +317,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': wizard.startYear,
+        'lockedTerms': {},
         'years': [],
         'courses': {},
     }

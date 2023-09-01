@@ -8,9 +8,10 @@ import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
-import { toggleTermComplete } from 'reducers/plannerSlice';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
+import { CourseTime } from 'types/courses';
+import { getCourseInfo } from 'utils/api/courseApi';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
@@ -90,9 +91,9 @@ const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Pro
                 return (
                   <DraggableCourse
                     key={`${code}${term}`}
-                    code={code}
+                    course={getCourseInfo(courseCode)}
                     index={index}
-                    term={term}
+                    time={{ year, term } as CourseTime}
                     showMultiCourseBadge={currMultiCourseDrag === code}
                   />
                 );
