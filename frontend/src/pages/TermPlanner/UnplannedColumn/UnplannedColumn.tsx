@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useQuery } from 'react-query';
-import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { badCourses, badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
 import { getCourseInfo } from 'utils/api/courseApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
@@ -21,6 +21,9 @@ const UnplannedColumn = ({ dragging }: Props) => {
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
 
+  const coursesQuery = useQuery('courses', getUserPlanner);
+  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
+
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
@@ -38,9 +41,11 @@ const UnplannedColumn = ({ dragging }: Props) => {
             >
               {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
+                  planner={planner}
+                  courses={courses}
                   course={getCourseInfo(courseCode)} // TODO: How to await this within react component?
                   index={courseIndex}
-                  term=""
+                  time={undefined}
                 />
               ))}
               {provided.placeholder}

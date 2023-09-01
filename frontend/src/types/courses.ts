@@ -25,3 +25,8 @@ export type CourseStates = {
     warnings: string[];
   };
 };
+
+export type CourseTime = {
+  year: string;
+  term: string;
+};

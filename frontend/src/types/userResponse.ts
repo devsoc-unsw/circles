@@ -1,3 +1,5 @@
+import { Mark } from './planner';
+
 export type UserResponse = {
   degree: DegreeResponse;
   // TODO: NOT STRINGS
@@ -14,14 +16,17 @@ export type DegreeResponse = {
 export type CourseResponse = {
   code: string;
   suppress: boolean;
-  mark: number;
+  mark: Mark;
 };
+
+export type CoursesResponse = Record<string, CourseResponse>;
 
 export type PlannerResponse = {
   mostRecentPastTerm: Term;
   unplanned: string[];
   startYear: number;
   isSummerEnabled: boolean;
+  lockedTerms: Record<string, boolean>;
   // TODO: Type this better somehow
   years: Record<string, string[]>[];
   courses: Record<string, CourseResponse>;
@@ -39,6 +44,9 @@ export const badPlanner = {
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,
+  lockedTerms: {},
   years: [],
   courses: {} as Record<string, CourseResponse>
 } as PlannerResponse;
+
+export const badCourses = {};
