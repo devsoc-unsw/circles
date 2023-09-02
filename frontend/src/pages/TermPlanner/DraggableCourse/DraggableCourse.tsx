@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useQuery } from 'react-query';
@@ -35,6 +36,7 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
+  const shouldHaveWarning = false;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const { title } = course;

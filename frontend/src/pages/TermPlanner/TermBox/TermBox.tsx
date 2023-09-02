@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
@@ -12,6 +13,10 @@ import DraggableCourse from '../DraggableCourse';
 import S from './styles';
 import { CourseTime } from 'types/courses';
 import { getCourseInfo } from 'utils/api/courseApi';
+import axios from 'axios';
+import { getToken } from 'utils/api/userApi';
+import { useQuery, useQueryClient } from 'react-query';
+import { Course } from 'types/api';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
@@ -22,20 +27,32 @@ type Props = {
   coursesList: string[];
   draggingCourse?: string;
   currMultiCourseDrag: string;
+  isLocked: boolean;
+  courseInfo: Course;
 };
 
-const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Props) => {
+const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag, isLocked, courseInfo }: Props) => {
   const year = name.slice(0, 4);
   const term = name.match(/T[0-3]/)?.[0] as Term;
   const theme = useTheme();
+  const queryClient = useQueryClient();
 
-  const { isSummerEnabled, completedTerms, courses } = useSelector(
+const { isSummerEnabled, completedTerms, courses, /* isLocked */ } = useSelector(
     (state: RootState) => state.planner
   );
   const [totalUOC, setTotalUOC] = useState(0);
-  const dispatch = useDispatch();
-  const handleCompleteTerm = () => {
-    dispatch(toggleTermComplete(name));
+  // const dispatch = useDispatch();
+  const handleToggleLockTerm = async () => {
+    console.debug('name: ', name);
+    const token = getToken();
+    const res = await axios.post(
+      '/user/planner/toggleTermComplete',
+      { termyear: `${year}${term}` },
+      { params: { token } }
+    );
+    if (res.status == 200) {
+      queryClient.invalidateQueries('planner');
+    }
   };
 
   useEffect(() => {
@@ -46,9 +63,9 @@ const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Pro
     setTotalUOC(uoc);
   }, [courses, coursesList]);
 
-  const isCompleted = !!completedTerms[name];
+  // const isLocked = !!completedTerms[name];
   const offeredInTerm = !!draggingCourse && courseHasOffering(courses[draggingCourse], year, term);
-  const isOffered = offeredInTerm && !isCompleted;
+  const isOffered = offeredInTerm && !isLocked;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
@@ -64,17 +81,17 @@ const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Pro
 
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
-      <Droppable droppableId={name} isDropDisabled={isCompleted}>
+      <Droppable droppableId={name} isDropDisabled={isLocked}>
         {(provided) => (
           <Badge
             count={
-              <S.TermCheckboxWrapper checked={isCompleted}>
+              <S.TermCheckboxWrapper checked={isLocked}>
                 {
-                  !isCompleted ? (
-                    <UnlockFilled style={iconStyle} onClick={handleCompleteTerm} />
+                  !isLocked ? (
+                    <UnlockFilled style={iconStyle} onClick={handleToggleLockTerm} />
                   ) : (
-                    <LockFilled style={iconStyle} onClick={handleCompleteTerm} />
-                  ) //
+                    <LockFilled style={iconStyle} onClick={handleToggleLockTerm} />
+                  )
                 }
               </S.TermCheckboxWrapper>
             }
@@ -94,7 +111,8 @@ const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Pro
                     course={getCourseInfo(courseCode)}
                     index={index}
                     time={{ year, term } as CourseTime}
-                    showMultiCourseBadge={currMultiCourseDrag === code}
+                    {/* TODO: MULTITERM deprecate properly */}
+                    showMultiCourseBadge={false}
                   />
                 );
               })}
