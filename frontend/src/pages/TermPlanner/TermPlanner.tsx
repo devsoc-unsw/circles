@@ -20,6 +20,7 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
+import { getCourseInfo } from 'utils/api/courseApi';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -277,6 +278,8 @@ const TermPlanner = () => {
                             name={key}
                             coursesList={year[term as Term]}
                             draggingCourse={!draggingCourse ? undefined : draggingCourse}
+                            isLocked={planner.lockedTerms[`${iYear}${term}`]}
+                            courseInfo={await getCourseInfo()}
                           />
                         );
                       })}
