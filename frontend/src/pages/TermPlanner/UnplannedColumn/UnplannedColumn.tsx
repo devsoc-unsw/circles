@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useQuery } from 'react-query';
-import { badCourses, badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
-import { getCourseInfo } from 'utils/api/courseApi';
+import { Course } from 'types/api';
+import { badPlanner, PlannerResponse } from 'types/userResponse';
 import { getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -10,19 +10,17 @@ import S from './styles';
 
 type Props = {
   dragging: boolean;
+  courseInfos: Record<string, Course>;
 };
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
 );
 
-const UnplannedColumn = ({ dragging }: Props) => {
+const UnplannedColumn = ({ dragging, courseInfos }: Props) => {
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
-
-  const coursesQuery = useQuery('courses', getUserPlanner);
-  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
@@ -42,8 +40,7 @@ const UnplannedColumn = ({ dragging }: Props) => {
               {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
                   planner={planner}
-                  courses={courses}
-                  course={getCourseInfo(courseCode)} // TODO: How to await this within react component?
+                  courseInfo={courseInfos[courseCode]}
                   index={courseIndex}
                   time={undefined}
                 />

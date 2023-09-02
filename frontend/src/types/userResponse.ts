@@ -1,3 +1,4 @@
+import { Course } from './api';
 import { Mark } from './planner';
 
 export type UserResponse = {
@@ -39,14 +40,30 @@ export type Term = {
 
 // null coalesced to remove `undefined`. This SHOULD NOT see production
 // temp fix while we wait for `prepareUserPayload` to be deprecated
-export const badPlanner = {
+export const badPlanner: PlannerResponse = {
   mostRecentPastTerm: { y: '2020', t: '2' },
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,
   lockedTerms: {},
   years: [],
-  courses: {} as Record<string, CourseResponse>
-} as PlannerResponse;
+  courses: {}
+};
+
+export const badCourseInfo: Course = {
+  title: '',
+  code: '',
+  UOC: 0,
+  description: '',
+  study_level: '',
+  school: '',
+  campus: '',
+  raw_requirements: '',
+  terms: [],
+  is_legacy: false,
+  is_accurate: false,
+  is_multiterm: false,
+  handbook_note: ''
+};
 
 export const badCourses = {};

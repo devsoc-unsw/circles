@@ -1,28 +1,24 @@
 /* eslint-disable */
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
+import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
-import { badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
-import { getUserPlanner } from 'utils/api/userApi';
-import { courseHasOffering } from 'utils/getAllCourseOfferings';
+import { PlannerResponse } from 'types/userResponse';
+import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
 import S from './styles';
-import { CourseTime } from 'types/courses';
 
 type Props = {
   planner: PlannerResponse;
-  courses: CoursesResponse;
-  course: Course;
+  courseInfo: Course;
   index: number;
   time?: CourseTime;
 };
@@ -31,7 +27,7 @@ const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
+const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
   const { isSummerEnabled } = planner;
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
@@ -39,20 +35,18 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
   const shouldHaveWarning = false;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
-  const { title } = course;
+  const { title } = courseInfo;
   // TODO: Change the backend so that naming is universally in camelCase so we don't have to do this
   // TODO: plannedFor seemed important. What did it do? Does it matter that it is gone now?
-  const isLegacy = course.is_legacy;
-  const isAccurate = course.is_accurate;
-  const handbookNote = course.handbook_note;
+  const isLegacy = courseInfo.is_legacy;
+  const isAccurate = courseInfo.is_accurate;
+  const handbookNote = courseInfo.handbook_note;
   // const warningMessage = courses[code].warnings;
 
-  const showNotOfferedWarning = time
-    ? courseHasOffering(course, time.year, time.term as Term)
-    : true;
+  const showNotOfferedWarning = time ? courseHasOfferingNew(courseInfo, time.term as Term) : true;
 
   const contextMenu = useContextMenu({
-    id: `${course.code}-context`
+    id: `${courseInfo.code}-context`
   });
 
   // TODO: const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
@@ -79,7 +73,7 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
       <Suspense fallback={<Spinner text="Loading Course..." />}>
         <Draggable
           isDragDisabled={isDragDisabled}
-          draggableId={`${course.code}${time?.term}`}
+          draggableId={`${courseInfo.code}${time?.term}`}
           index={index}
         >
           {(provided) => (
@@ -95,8 +89,8 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
               ref={provided.innerRef}
               style={provided.draggableProps.style}
               data-tip
-              data-for={course.code}
-              id={course.code}
+              data-for={courseInfo.code}
+              id={courseInfo.code}
               onContextMenu={handleContextMenu}
             >
               {/* {!isDragDisabled &&
@@ -110,11 +104,11 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
                 ))} */}
               <S.CourseLabel>
                 {isSmall ? (
-                  <Text className="text">{course.code}</Text>
+                  <Text className="text">{courseInfo.code}</Text>
                 ) : (
                   <div>
                     <Text className="text">
-                      <strong>{course.code}: </strong>
+                      <strong>{courseInfo.code}: </strong>
                       {title}
                     </Text>
                   </div>
@@ -129,8 +123,8 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
                           Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                           Mark can be 0.
                         */}
-                      {typeof courses[course.code].mark != undefined
-                        ? courses[course.code].mark
+                      {typeof planner.courses[courseInfo.code].mark !== undefined
+                        ? planner.courses[courseInfo.code].mark
                         : 'N/A'}
                     </Text>
                   </div>
@@ -140,16 +134,16 @@ const DraggableCourse = ({ planner, courses, course, index, time }: Props) => {
           )}
         </Draggable>
       </Suspense>
-      <ContextMenu code={course.code} plannedFor={null} />
+      <ContextMenu code={courseInfo.code} plannedFor={null} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
-        <ReactTooltip id={course.code} place="top" effect="solid">
+        <ReactTooltip id={courseInfo.code} place="top" effect="solid">
           {title}
         </ReactTooltip>
       )}
       {!isDragDisabled && shouldHaveWarning && (
-        <ReactTooltip id={course.code} place="bottom">
+        <ReactTooltip id={courseInfo.code} place="bottom">
           {isLegacy ? (
             'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
           ) : !showNotOfferedWarning ? (

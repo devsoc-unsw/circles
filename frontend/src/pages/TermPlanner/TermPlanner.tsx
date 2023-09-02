@@ -1,9 +1,11 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
+import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
-import { badPlanner, PlannerResponse } from 'types/userResponse';
+import { badCourseInfo, badPlanner, PlannerResponse } from 'types/userResponse';
+import { getCourseInfo } from 'utils/api/courseApi';
 import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
@@ -20,7 +22,6 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
-import { getCourseInfo } from 'utils/api/courseApi';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -31,6 +32,20 @@ const TermPlanner = () => {
 
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
+
+  const courseQueries = useQueries(
+    Object.keys(planner.courses).map((code: string) => ({
+      queryKey: ['course', code],
+      queryFn: () => getCourseInfo(code)
+    }))
+  );
+
+  const courseInfos: Record<string, Course> = Object.fromEntries(
+    Object.keys(planner.courses).map((code: string, index: number) => [
+      code,
+      courseQueries[index].data ?? badCourseInfo
+    ])
+  );
 
   const [draggingCourse, setDraggingCourse] = useState('');
 
@@ -240,13 +255,11 @@ const TermPlanner = () => {
                 <GridItem>Term 3</GridItem>
                 {planner.years.map((year, index) => {
                   const iYear = planner.startYear + index;
-                  const yearUOC = 0;
+                  let yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
-                    Object.keys(planner.courses).forEach((courseCode) => {
+                    Object.entries(courseInfos).forEach(([courseCode, courseInfo]) => {
                       if (year[termKey as Term].includes(courseCode)) {
-                        // UOC is going to be kinda difficult to get here,
-                        // and surely logic like this shouldn't be in the html here anyway
-                        // yearUOC += planner.courses[courseCode].UOC;
+                        yearUOC += courseInfo.UOC;
                       }
                     });
                   });
@@ -276,17 +289,16 @@ const TermPlanner = () => {
                           <TermBox
                             key={key}
                             name={key}
-                            coursesList={year[term as Term]}
-                            draggingCourse={!draggingCourse ? undefined : draggingCourse}
-                            isLocked={planner.lockedTerms[`${iYear}${term}`]}
-                            courseInfo={await getCourseInfo()}
+                            courseInfos={courseInfos}
+                            termCourseCodes={year[term as Term]}
+                            draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
                           />
                         );
                       })}
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={!!draggingCourse} />
+                <UnplannedColumn dragging={!!draggingCourse} courseInfos={courseInfos} />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>
