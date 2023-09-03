@@ -133,12 +133,38 @@ def validate_user_exists(token: dict[str, str]) -> bool:
     # TODO: should actually check inside of the  database once created
     return token["sub"] not in [None, ""]
 
+
+
+
+
+
+
+
+
+
+
+
+
+def try_validate_csesoc_token(token: str):
+
+    return None
+
+def try_validate_google_token(token: str):
+    try:
+        return id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+    except ValueError:
+        # Invalid Token
+        return None
+
 # TODO: all this is just dummy token validating for now
 UserID = str
 # will validate the token and return a unique user id that is used to store data against, raises 401 Unauthorized if token invalid
 VALID_TOKENS = ['loltemptoken', 'emptytoken']
 def extract_authenticated_user_id(token: str) -> UserID:
-    if token in VALID_TOKENS:  # TODO: this should check token against our oidc endpoints
+    user_data = try_validate_google_token(token)
+    print(user_data)
+
+    if token in VALID_TOKENS or user_data is not None:  # TODO: this should check token against our oidc endpoints
         # TODO: ideally we return something unique to the account,
         #       so if token reveals an account id, we can pair this in a tuple with provider
         #       and that would become our unique "UserID"?? 
@@ -168,14 +194,14 @@ def check_token(token: str):
 
 # TODO: remove... example route, the front facing route takes a token, not a user, but we get it as a valid user only
 @router.get("/exampleTokenExtractionParams")
-def exampleTokenExtractionParams(program: str, user: UserID = Depends(extract_valid_user_id)):
-    print(user, program)
+def exampleTokenExtractionParams(user: UserID = Depends(extract_valid_user_id)):
+    print(user)
     return user
 
 def extract_valid_user_id_from_header(x_token: Annotated[str, Header()]):
     return extract_valid_user_id(x_token)
 
 @router.get("/exampleTokenExtractionHeader")
-def exampleTokenExtractionHeader(program: str, user: UserID = Depends(extract_valid_user_id_from_header)):
-    print(user, program)
+def exampleTokenExtractionHeader(user: UserID = Depends(extract_valid_user_id_from_header)):
+    print(user)
     return user
