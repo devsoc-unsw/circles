@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQueries, useQuery } from 'react-query';
 import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
@@ -41,15 +41,27 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     config: { tension: 80, friction: 60 }
   });
 
-  const degreeQuery = useQuery('degree', getUserDegree);
+  const [degreeQuery, degreesQuery, plannerQuery] = useQueries([
+    {
+      queryKey: ['degree'],
+      queryFn: getUserDegree
+    },
+    {
+      queryKey: ['programs'],
+      queryFn: getAllDegrees
+    },
+    {
+      queryKey: ['planner'],
+      queryFn: getUserPlanner
+    }
+  ]);
+
   const degreeData = degreeQuery.data ?? badDegree;
   const { programCode } = degreeData;
 
-  const degreesQuery = useQuery('programs', getAllDegrees);
   const degreesData = degreesQuery.data ?? {};
   const programName = degreesData[programCode] ?? '';
 
-  const plannerQuery = useQuery('planner', getUserPlanner);
   const plannerData = plannerQuery.data ?? badPlanner;
 
   const plannedFor: Record<string, string> = {};
