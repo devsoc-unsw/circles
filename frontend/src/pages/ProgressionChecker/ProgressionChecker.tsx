@@ -18,7 +18,7 @@ import {
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
 import { badDegree, badPlanner } from 'types/userResponse';
-import { getCoursesInfo, getCoursesPlannedFor } from 'utils/api/coursesApi';
+import { getCoursesInfo } from 'utils/api/coursesApi';
 import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
@@ -74,10 +74,19 @@ const ProgressionChecker = () => {
   const plannerData = plannerQuery.data ?? badPlanner;
   const { unplanned } = plannerData;
 
-  const plannedForQuery = useQuery('plannedFor', getCoursesPlannedFor);
-  const plannedFor = plannedForQuery.data ?? {};
+  const plannedFor: Record<string, string> = {};
+  plannerData.years.forEach((year) => {
+    Object.entries(year).forEach((term) => {
+      const [termName, courses] = term;
+      courses.forEach((course) => {
+        plannedFor[course] = termName;
+      });
+    });
+  });
 
-  const coursesQuery = useQuery('plannerCourses', getCoursesInfo);
+  const coursesQuery = useQuery('plannerCourses', () =>
+    getCoursesInfo(Object.keys(plannerData.courses))
+  );
   const courses = coursesQuery.data ?? {};
 
   const countedCourses: string[] = [];
