@@ -1,15 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
+import { badDegree, badPlanner } from 'types/userResponse';
+import { getCoursesInfo } from 'utils/api/coursesApi';
+import { getAllDegrees } from 'utils/api/degreeApi';
+import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
 import SpecialisationCard from 'components/SpecialisationCard';
-import type { RootState } from 'config/store';
 import FreeElectivesCard from './FreeElectivesCard';
 import S from './styles';
 
@@ -38,15 +41,38 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     config: { tension: 80, friction: 60 }
   });
 
-  const { courses } = useSelector((state: RootState) => state.planner);
-  const { programCode, programName } = useSelector((state: RootState) => state.degree);
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const degreeData = degreeQuery.data ?? badDegree;
+  const { programCode } = degreeData;
+
+  const degreesQuery = useQuery('programs', getAllDegrees);
+  const degreesData = degreesQuery.data ?? {};
+  const programName = degreesData[programCode] ?? '';
+
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerData = plannerQuery.data ?? badPlanner;
+
+  const plannedFor: Record<string, string> = {};
+  plannerData.years.forEach((year) => {
+    Object.entries(year).forEach((term) => {
+      const [termName, courses] = term;
+      courses.forEach((course) => {
+        plannedFor[course] = termName;
+      });
+    });
+  });
+
+  const coursesQuery = useQuery('plannerCourses', () =>
+    getCoursesInfo(Object.keys(plannerData.courses))
+  );
+  const courses = coursesQuery.data ?? {};
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (courses[courseCode]?.plannedFor) {
+    if (plannedFor[courseCode]) {
       completedUOC +=
         courses[courseCode].UOC *
-        getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+        getNumTerms(courses[courseCode].UOC, courses[courseCode].is_multiterm);
     }
   });
 
@@ -70,10 +96,10 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
         let currUOC = 0;
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
+          if (plannedFor[courseCode] && currUOC < subgroupStructure.UOC) {
             const courseUOC =
               courses[courseCode].UOC *
-              getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+              getNumTerms(courses[courseCode].UOC, courses[courseCode].is_multiterm);
             storeUOC[group].curr += courseUOC;
             currUOC += courseUOC;
           }

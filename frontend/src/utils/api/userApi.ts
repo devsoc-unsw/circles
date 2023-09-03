@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { getStoredState } from 'redux-persist';
+// import { getStoredState } from 'redux-persist';
 import { CourseResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
-import { persistConfig, RootState } from 'config/store';
+// import { persistConfig, RootState } from 'config/store';
 
 // export const getToken = (): string => useSelector((state: RootState) => state.settings.token);
 export const getToken = async (): Promise<string> => {
   // const x = window.localStorage.getItem('persi');
-  const res = await getStoredState(persistConfig);
-  const store = res as RootState;
-
-  return store.settings.token;
+  // const res = await getStoredState(persistConfig);
+  // const store = res as RootState;
+  return 'dummy';
+  // return store.settings.token;
 };
 
 export const getUser = async (): Promise<UserResponse> => {

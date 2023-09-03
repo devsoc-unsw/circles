@@ -51,7 +51,7 @@ def get_backend_env():
     load_dotenv("./env/backend.env")
     username = os.getenv("MONGODB_USERNAME")
     password = os.getenv("MONGODB_PASSWORD")
-    python = os.getenv("PYTHON_VERSION") or "python"
+    python = os.getenv("PYTHON_VERSION") or "python3"
     return (username, password, python)
 
 

@@ -38,8 +38,9 @@ const ProgressionChecker = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
 
-  const degreeQuery = useQuery('degree', getUserDegree);
-  const { programCode, specs } = degreeQuery.data ?? badDegree;
+  const degreeQuery = useQuery('program', getUserDegree);
+  const degreeData = degreeQuery.data ?? badDegree;
+  const { programCode, specs } = degreeData;
 
   useEffect(() => {
     // get structure of degree
