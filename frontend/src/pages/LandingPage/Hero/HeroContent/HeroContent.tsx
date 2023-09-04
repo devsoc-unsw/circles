@@ -10,7 +10,7 @@ const HeroContent = () => (
     <S.HeroTitle animate={{ x: [-60, 10, 0] }} transition={{ duration: 1, ease: 'easeInOut' }}>
       Degree planning made <S.HeroSubTitle src={easySubTitle} alt="Hero Subtitle" />
     </S.HeroTitle>
-    <Link to="/degree-wizard">
+    <Link to="/degree-wizard" style={{ alignSelf: 'flex-start' }}>
       <S.HeroCTA
         initial={{ scale: 0.0 }}
         animate={{ scale: 1 }}
