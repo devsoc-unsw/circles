@@ -9,8 +9,9 @@ import type { RootState } from 'config/store';
 import { setToken } from 'reducers/settingsSlice';
 
 // import MetaTags from "react-meta-tags";
-import "./index.less";
+import './index.less';
 import PageTemplate from 'components/PageTemplate';
+import Container from './Container';
 
 const Auth = () => {
   const [userObject, setUserObject] = useState({});
@@ -34,30 +35,28 @@ const Auth = () => {
   // };
 
   const handleCallbackResponse = (response: any) => {
-
     const jwt = response.credential as string;
     dispatch(setToken(jwt));
     // Should not decode jwt yourself - just for testing
 
     console.log(settings);
     console.log(jwt_decode(jwt));
-    console.log("callBackResponse with jwt: ", jwt);
+    console.log('callBackResponse with jwt: ', jwt);
     setUserObject(jwt_decode(jwt));
 
-    
     return 0;
-  }
+  };
 
   useEffect(() => {
     (window as any).google.accounts.id.initialize({
-      client_id: "1017197944285-i4ov50aak72667j31tuieffd8o2vd5md.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
+      client_id: '1017197944285-i4ov50aak72667j31tuieffd8o2vd5md.apps.googleusercontent.com',
+      callback: handleCallbackResponse
     });
 
-    (window as any).google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large" },
-    );
+    (window as any).google.accounts.id.renderButton(document.getElementById('signInDiv'), {
+      theme: 'outline',
+      size: 'large'
+    });
 
     // recent acc prompt
     if (Object.keys(userObject).length === 0) {
@@ -67,7 +66,7 @@ const Auth = () => {
 
   const LogoutButton = () => {
     const logout = () => {
-      setUserObject({})
+      setUserObject({});
     };
 
     return (
@@ -75,56 +74,40 @@ const Auth = () => {
         <h1> LOGOUT </h1>
       </div>
     );
-  }
+  };
   interface Props {
-    obj: any
+    obj: any;
   }
   const JsonObject = ({ obj }: Props) => {
     return (
       <div className="json-obj">
-        {"{"}
-          {
-            Array.from(Object.entries(obj)).map(
-              ([k, v]) => (
-                <div className="json-obj-pair">
-                  <span className="tab-char"></span>
-                  <span className="json-obj-key">"{k}"</span>
-                  :<span className="tab-char" />
-                  <span className="json-obj-val">{v as string}</span>
-                </div>
-              )
-            )
-          }
-        {"}"}
+        {'{'}
+        {Array.from(Object.entries(obj)).map(([k, v]) => (
+          <div className="json-obj-pair">
+            <span className="tab-char"></span>
+            <span className="json-obj-key">"{k}"</span>
+            :<span className="tab-char" />
+            <span className="json-obj-val">{v as string}</span>
+          </div>
+        ))}
+        {'}'}
       </div>
-    )
-  }
+    );
+  };
 
   return (
-    <PageTemplate>
-      <div>
-        {Object.keys(userObject).length === 0 ?
-          (
-            <div>
-              <h1>NOT LOGGED IN</h1>
-              <div id="signInDiv" />
-            </div>
-          )
-          :
-          (
-            <div>
-              <div> signed in </div>
-              <div>
-                <h2>Data:</h2>
-                <JsonObject
-                  obj={userObject}
-                />
-              </div>
-              <LogoutButton />
-            </div>
-          )
-        }
-      </div>
+    <PageTemplate showHeader={false}>
+      <Container />
+      {/* {Object.keys(userObject).length != 0 && (
+        <div>
+          <div> signed in </div>
+          <div>
+            <h2>Data:</h2>
+            <JsonObject obj={userObject} />
+          </div>
+          <LogoutButton />
+        </div>
+      )} */}
     </PageTemplate>
   );
 };
