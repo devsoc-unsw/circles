@@ -43,16 +43,19 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
 
   const [userQuery, degreesQuery, coursesQuery] = useQueries([
     {
-      queryKey: ['user'],
-      queryFn: getUser
+      queryKey: 'user',
+      queryFn: getUser,
+      refetchOnWindowFocus: false
     },
     {
-      queryKey: ['allPrograms'],
-      queryFn: getAllDegrees
+      queryKey: 'allPrograms',
+      queryFn: getAllDegrees,
+      refetchOnWindowFocus: false
     },
     {
-      queryKey: ['courses'],
-      queryFn: getCoursesInfo
+      queryKey: 'courses',
+      queryFn: getCoursesInfo,
+      refetchOnWindowFocus: false
     }
   ]);
 

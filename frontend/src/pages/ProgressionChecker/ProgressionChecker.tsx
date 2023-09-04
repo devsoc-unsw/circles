@@ -85,7 +85,9 @@ const ProgressionChecker = () => {
     });
   });
 
-  const coursesQuery = useQuery('plannerCourses', getCoursesInfo);
+  const coursesQuery = useQuery('plannerCourses', getCoursesInfo, {
+    refetchOnWindowFocus: false
+  });
   const courses = coursesQuery.data ?? {};
 
   const countedCourses: string[] = [];
