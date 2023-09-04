@@ -148,6 +148,7 @@ class CoreqCourseCondition(Condition):
             'id': self.course
         })
 
+
 class UOCCondition(Condition):
     """ UOC conditions such as `24UOC in COMP` """
 

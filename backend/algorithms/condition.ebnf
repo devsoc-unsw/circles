@@ -1,0 +1,68 @@
+(* A four letter program code (e.g. COMP, SENG, etc.) *)
+FACULTY_CODE = char + char + char + char ;
+
+(* A subject code, e.g. COMP1511 *)
+COURSE_CODE = FACULTY_CODE + int + int + int + int ;
+
+(* A specific program, e.g. 3707 (for computer science) *)
+PROGRAM_CODE = int + int + int + int ;
+
+(* Conditions *)
+CONDITION = '(' CONDITION ')'
+          | COURSE_CONDITION
+          | COREQ_COURSE_CONDITION
+          | UOC_CONDITION
+          | WAM_CONDITION
+          | GRADE_CONDITION
+          | CORES_CONDITION
+          | PROGRAM_CONDITION
+          | PROGRAM_TYPE_CONDITION
+          | SPECIALISATION_CONDITION
+          | COURSE_EXCLUSION_CONDITION
+          | PROGRAM_EXCLUSION_CONDITION
+          | COMPOSITE_CONDITION ;
+
+(* Must complete before the current term *)
+COURSE_CONDITION = COURSE_CODE ;
+
+(* Must complete before or during the current term *)
+COREQ_COURSE_CONDITION = '[' COURSE_CODE ']' ;
+
+(* Must have completed a specific number of UOC (optionally in a category) *)
+UOC_CONDITION = (INT + 'UOC')
+              | (INT + 'UOC') 'in' CATEGORY ;
+
+COMPOSITE_CONDITION = AND_CONDITION | OR_CONDITION ;
+
+(* Categories *)
+CATEGORY = COMPOSITE_CATEGORY
+         | CLASS_CATEGORY
+         | COURSE_CATEGORY
+         | LEVEL_CATEGORY
+         | LEVEL_COURSE_CATEGORY
+         | SCHOOL_CATEGORY
+         | FACULTY_CATEGORY
+         | GEN_ED_CATEGORY ;
+
+(* Matches a specific subject *)
+CLASS_CATEGORY = COURSE_CODE ;
+
+(* Matches subjects in a specific faculty, e.g. COMP1511 in COMP *)
+COURSE_CATEGORY = FACULTY_CODE ;
+
+(* Matches specific levels of course, e.g. COMP2041 in L2 *)
+LEVEL_CATEGORY = 'L' + int ;
+
+(* Matches specific levels of course in specific faculties *)
+LEVEL_COURSE_CATEGORY = LEVEL_CATEGORY COURSE_CATEGORY ;
+
+(* Matches subjects in a specific school, e.g. S Mechanical *)
+(* TODO: This doesn't seem to be used *)
+SCHOOL_CATEGORY = 'S' SCHOOL ;
+
+(* Matches subjects in a specific faculty *)
+(* TODO: This doesn't seem too different from COURSE_CATEGORY and also just doesn't seem to be used *)
+FACULTY_CATEGORY = 'F' FACULTY ;
+
+(* Not yet implemented in tokenizer *)
+GEN_ED_CATEGORY = 'GENS' ;
