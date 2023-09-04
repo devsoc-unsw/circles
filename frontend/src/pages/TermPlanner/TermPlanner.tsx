@@ -4,14 +4,20 @@ import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
 import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm } from 'types/planner';
-import { badCourseInfo, badPlanner, PlannerResponse } from 'types/userResponse';
+import {
+  badCourseInfo,
+  badCourses,
+  badPlanner,
+  CoursesResponse,
+  PlannerResponse
+} from 'types/userResponse';
 import { getCourseInfo } from 'utils/api/courseApi';
 import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
   unscheduleCourse
 } from 'utils/api/plannerApi';
-import { getUserPlanner } from 'utils/api/userApi';
+import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
@@ -33,15 +39,18 @@ const TermPlanner = () => {
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
+
   const courseQueries = useQueries(
-    Object.keys(planner.courses).map((code: string) => ({
+    Object.keys(courses).map((code: string) => ({
       queryKey: ['course', code],
       queryFn: () => getCourseInfo(code)
     }))
   );
 
   const courseInfos: Record<string, Course> = Object.fromEntries(
-    Object.keys(planner.courses).map((code: string, index: number) => [
+    Object.keys(courses).map((code: string, index: number) => [
       code,
       courseQueries[index].data ?? badCourseInfo
     ])
