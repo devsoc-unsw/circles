@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
-import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
-import { CourseList } from 'types/courses';
-import { PlannerResponse } from 'types/userResponse';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { CourseTimetable } from 'types/courseCapacity';
+import { DegreeResponse, PlannerResponse } from 'types/userResponse';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { errLogger } from 'utils/queryUtils';
@@ -27,44 +26,42 @@ type CourseDescriptionPanelProps = {
   className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
+  planner?: PlannerResponse;
+  degree?: DegreeResponse;
 };
 
 const CourseDescriptionPanel = ({
   className,
   courseCode,
-  onCourseClick
+  onCourseClick,
+  planner,
+  degree
 }: CourseDescriptionPanelProps) => {
-  const getCourseInfo = React.useCallback(async () => {
-    const degreePromise = getUserDegree();
-    const plannerPromise = getUserPlanner();
-    const coursesUnlocked = Promise.all([degreePromise, plannerPromise]).then(
-      async ([degree, planner]) => {
-        const res = await axios.post<CoursesUnlockedWhenTaken>(
-          `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-          JSON.stringify(prepareUserPayload(degree, planner))
-        );
-        return res;
-      }
-    );
 
+  const getCoursesUnlocked = React.useCallback(async () => {
+    if (!degree || !planner) return Promise.reject('degree or planner undefined');
+    const res = await axios.post<CoursesUnlockedWhenTaken>(
+      `/courses/coursesUnlockedWhenTaken/${courseCode}`,
+      JSON.stringify(prepareUserPayload(degree, planner))
+    );
+    return res.data;
+  }, [courseCode, degree, planner]);
+
+  const getCourseInfo = React.useCallback(async () => {
     return Promise.allSettled([
-      plannerPromise,
       axios.get<Course>(`/courses/getCourse/${courseCode}`),
       axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
-      coursesUnlocked,
       axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
     ]);
   }, [courseCode]);
 
+  const coursesUnlockedQuery = useQuery(['coursesUnlocked', courseCode, degree, planner], getCoursesUnlocked, {
+    onError: errLogger('coursesUnlockedQuery'),
+    enabled: !!degree && !!planner
+  });
+
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
-
-  const [planner, setPlanner] = useState<PlannerResponse>();
-  const [course, setCourse] = useState<Course>();
-  const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>();
-  const [coursesUnlocked, setCoursesUnlocked] = useState<CoursesUnlockedWhenTaken>();
-  const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>();
-  const [isChangingCourse, setIsChangingCourse] = useState<boolean>();
 
   function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
     if (res.status === 'rejected') {
@@ -75,37 +72,26 @@ const CourseDescriptionPanel = ({
     return res.value;
   }
 
-  const courseInfoQuery = useQuery(['courseInfo'], getCourseInfo, {
+  const courseInfoQuery = useQuery(['courseInfo', courseCode], getCourseInfo, {
     onError: errLogger('getCourseInfo'),
-    onSuccess: (data) => {
-      const [plannerRes, courseRes, pathFromRes, unlockedRes, courseCapRes] = data;
-
-      setPlanner(unwrap(plannerRes));
-      setCourse(unwrap(courseRes)?.data);
-      setCoursesPathFrom(unwrap(pathFromRes)?.data.courses);
-      setCoursesUnlocked(unwrap(unlockedRes)?.data);
-      setCourseCapacity(getEnrolmentCapacity(unwrap(courseCapRes)?.data));
-      setIsChangingCourse(false);
-    }
   });
 
-  useEffect(() => {
-    // if the course code changes, force a reload
-    setIsChangingCourse(true);
-    courseInfoQuery.refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [courseCode]);
-
-  const isLoading = courseInfoQuery.isLoading || isChangingCourse;
-
-  if (isLoading || !course) {
-    // either still loading or the course wasn't fetchable (fatal)
-    return (
+  const loadingWrapper = (
       <S.Wrapper sidebar={sidebar}>
         {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
       </S.Wrapper>
     );
-  }
+
+  const isLoading = courseInfoQuery.isLoading;// || coursesUnlockedQuery.isLoading;
+  if (isLoading || !courseInfoQuery.isSuccess) return loadingWrapper;
+
+  const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
+  const course = unwrap(courseRes)?.data;
+  const coursesPathFrom = unwrap(pathFromRes)?.data.courses;
+  const courseCapacity = getEnrolmentCapacity(unwrap(courseCapRes)?.data);
+
+  // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
+  if (!course) return loadingWrapper;
 
   return (
     <S.Wrapper sidebar={sidebar} className={className}>
@@ -141,7 +127,7 @@ const CourseDescriptionPanel = ({
         <CourseInfoDrawers
           course={course}
           pathFrom={coursesPathFrom}
-          unlocked={coursesUnlocked}
+          unlocked={coursesUnlockedQuery.data}
           onCourseClick={onCourseClick}
         />
       </S.MainWrapper>

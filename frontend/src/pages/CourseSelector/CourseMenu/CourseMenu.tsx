@@ -27,6 +27,11 @@ type SubgroupTitleProps = {
   totalUOC: number;
 };
 
+type CourseMenuProps = {
+  planner?: PlannerResponse;
+  degree?: DegreeResponse;
+};
+
 const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   <S.SubgroupHeader>
     <S.LabelTitle>{title}</S.LabelTitle>
@@ -36,28 +41,47 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const getEverything = async () => {
-  const degreePromise = getUserDegree();
-  const plannerPromise = getUserPlanner();
-  const structurePromise = degreePromise.then(async ({ programCode, specs }) => {
+const CourseMenu = ({planner, degree}: CourseMenuProps) => {
+
+  const getStructure = React.useCallback(async () => {
+    if (!degree) return Promise.reject('degree undefined');
+    const { programCode, specs } = degree;
     const res = await axios.get<Structure>(
       `/programs/getStructure/${programCode}/${specs.join('+')}`
     );
     return res.data.structure;
-  });
-  const coursesStatePromise = Promise.all([degreePromise, plannerPromise]).then(
-    async ([degree, planner]) => {
-      const res = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
-      return res.data.courses_state;
-    }
-  );
-  return Promise.all([plannerPromise, structurePromise, coursesStatePromise]);
-};
+  }, [degree]);
 
-const CourseMenu = () => {
+  const getAllUnlocked = React.useCallback(async () => {
+    if (!degree || !planner) return Promise.reject('degree or planner undefined');
+    const res = await axios.post<CoursesAllUnlocked>(
+      '/courses/getAllUnlocked/',
+      JSON.stringify(prepareUserPayload(degree, planner))
+    );
+    return res.data.courses_state;
+  }, [degree, planner]);
+
+  const structureQuery = useQuery(['structure', degree], getStructure, {
+    onError: errLogger('structureQuery'),
+    enabled: !!degree
+  });
+
+  const coursesStateQuery = useQuery(['coursesState', degree, planner], getAllUnlocked, {
+    onError: errLogger('coursesStateQuery'),
+    enabled: !!degree && !!planner
+  });
+
+  // when all the queries done, generate menu data
+  useEffect(() => {
+    if (!planner || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
+    const structure = structureQuery.data;
+    if (!Object.keys(structure).length) return;
+    const courses = coursesStateQuery.data;
+    dispatch(setCourses(courses)); // should maybe be deleted later or something
+    generateMenuData(planner, structure, courses);
+
+  }, [structureQuery, coursesStateQuery])
+
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
@@ -117,16 +141,6 @@ const CourseMenu = () => {
     []
   );
 
-  const everythingQuery = useQuery(['everything'], getEverything, {
-    onError: errLogger('getEverything'),
-    onSuccess: (data) => {
-      if (!Object.keys(data[1]).length) return;
-      // should maybe be delted later or something
-      dispatch(setCourses(data[2]));
-      generateMenuData(...data);
-    }
-  });
-
   const sortSubgroups = (
     item1: [string, MenuDataSubgroup[]],
     item2: [string, MenuDataSubgroup[]]
@@ -148,8 +162,8 @@ const CourseMenu = () => {
   const defaultOpenKeys = [Object.keys(menuData)[0]];
 
   let menuItems: MenuProps['items'];
-  if (everythingQuery.isSuccess) {
-    const [planner, structure, _] = everythingQuery.data;
+  if (pageLoaded && structureQuery.isSuccess && planner) {
+    const structure = structureQuery.data;
     menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
       label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
       key: groupKey,

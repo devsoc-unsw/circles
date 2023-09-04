@@ -19,11 +19,8 @@ const PlannerButton = ({ course, planned }: PlannerButtonProps) => {
   const mutation = useMutation(handleMutation, {
     onMutate: () => planned,
     onSuccess: async () => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('courses');
       // waits until refetch is complete
-      queryClient.invalidateQueries({ queryKey: ['everything'] });
-      await queryClient.invalidateQueries('courseInfo');
+      await queryClient.invalidateQueries('planner');
     }
   });
 

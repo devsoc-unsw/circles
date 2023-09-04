@@ -18,11 +18,11 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
     onMutate: () => planned,
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     onSuccess: async (data: void, variables: string, context: unknown) => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('courses');
+      await queryClient.invalidateQueries('planner');
+      // queryClient.invalidateQueries('courses');
       // waits until refetch is complete
-      queryClient.invalidateQueries('courseInfo');
-      await queryClient.invalidateQueries({ queryKey: ['everything'] });
+      // queryClient.invalidateQueries('courseInfo');
+      // await queryClient.invalidateQueries({ queryKey: ['everything'] });
     }
   });
 
