@@ -79,8 +79,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
   Object.keys(courses).forEach((courseCode) => {
     if (plannedFor[courseCode]) {
       completedUOC +=
-        (courses[courseCode].UOC ?? 0) *
-        getNumTerms(courses[courseCode].UOC ?? 0, courses[courseCode].is_multiterm ?? false);
+        courses[courseCode].UOC *
+        getNumTerms(courses[courseCode].UOC, courses[courseCode].is_multiterm);
     }
   });
 
@@ -106,8 +106,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
           if (plannedFor[courseCode] && currUOC < subgroupStructure.UOC) {
             const courseUOC =
-              (courses[courseCode].UOC ?? 0) *
-              getNumTerms(courses[courseCode].UOC ?? 0, courses[courseCode].is_multiterm ?? false);
+              courses[courseCode].UOC *
+              getNumTerms(courses[courseCode].UOC, courses[courseCode].is_multiterm);
             storeUOC[group].curr += courseUOC;
             currUOC += courseUOC;
           }
@@ -146,8 +146,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
                 <SpecialisationCard
                   key={group}
                   type={group}
-                  totalUOC={storeUOC[group].total ?? 0}
-                  currUOC={storeUOC[group].curr ?? 0}
+                  totalUOC={storeUOC[group].total}
+                  currUOC={storeUOC[group].curr}
                   specTitle={specialisation.name}
                 />
               ))}
