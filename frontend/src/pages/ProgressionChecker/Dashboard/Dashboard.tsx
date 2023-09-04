@@ -1,14 +1,14 @@
 import React from 'react';
-import { useQueries, useQuery } from 'react-query';
+import { useQueries } from 'react-query';
 import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
-import { badDegree, badPlanner } from 'types/userResponse';
+import { badUser } from 'types/userResponse';
 import { getCoursesInfo } from 'utils/api/coursesApi';
 import { getAllDegrees } from 'utils/api/degreeApi';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { getUser } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
@@ -41,31 +41,30 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     config: { tension: 80, friction: 60 }
   });
 
-  const [degreeQuery, degreesQuery, plannerQuery] = useQueries([
+  const [userQuery, degreesQuery, coursesQuery] = useQueries([
     {
-      queryKey: ['degree'],
-      queryFn: getUserDegree
+      queryKey: ['user'],
+      queryFn: getUser
     },
     {
-      queryKey: ['programs'],
+      queryKey: ['allPrograms'],
       queryFn: getAllDegrees
     },
     {
-      queryKey: ['planner'],
-      queryFn: getUserPlanner
+      queryKey: ['courses'],
+      queryFn: getCoursesInfo
     }
   ]);
 
-  const degreeData = degreeQuery.data ?? badDegree;
-  const { programCode } = degreeData;
+  const userData = userQuery.data ?? badUser;
+  const { degree, planner } = userData;
+  const { programCode } = degree;
 
   const degreesData = degreesQuery.data ?? {};
   const programName = degreesData[programCode] ?? '';
 
-  const plannerData = plannerQuery.data ?? badPlanner;
-
   const plannedFor: Record<string, string> = {};
-  plannerData.years.forEach((year) => {
+  planner.years.forEach((year) => {
     Object.entries(year).forEach((term) => {
       const [termName, courses] = term;
       courses.forEach((course) => {
@@ -74,17 +73,14 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     });
   });
 
-  const coursesQuery = useQuery('plannerCourses', () =>
-    getCoursesInfo(Object.keys(plannerData.courses))
-  );
   const courses = coursesQuery.data ?? {};
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
     if (plannedFor[courseCode]) {
       completedUOC +=
-        courses[courseCode].UOC *
-        getNumTerms(courses[courseCode].UOC, courses[courseCode].is_multiterm);
+        (courses[courseCode].UOC ?? 0) *
+        getNumTerms(courses[courseCode].UOC ?? 0, courses[courseCode].is_multiterm ?? false);
     }
   });
 
@@ -110,8 +106,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
           if (plannedFor[courseCode] && currUOC < subgroupStructure.UOC) {
             const courseUOC =
-              courses[courseCode].UOC *
-              getNumTerms(courses[courseCode].UOC, courses[courseCode].is_multiterm);
+              (courses[courseCode].UOC ?? 0) *
+              getNumTerms(courses[courseCode].UOC ?? 0, courses[courseCode].is_multiterm ?? false);
             storeUOC[group].curr += courseUOC;
             currUOC += courseUOC;
           }
@@ -150,8 +146,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
                 <SpecialisationCard
                   key={group}
                   type={group}
-                  totalUOC={storeUOC[group].total}
-                  currUOC={storeUOC[group].curr}
+                  totalUOC={storeUOC[group].total ?? 0}
+                  currUOC={storeUOC[group].curr ?? 0}
                   specTitle={specialisation.name}
                 />
               ))}

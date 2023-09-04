@@ -48,3 +48,9 @@ export const badPlanner = {
   years: [] as Record<string, string[]>[],
   courses: {} as Record<string, CourseResponse>
 } as PlannerResponse;
+
+export const badUser = {
+  degree: badDegree,
+  planner: badPlanner,
+  courses: {}
+} as UserResponse;
