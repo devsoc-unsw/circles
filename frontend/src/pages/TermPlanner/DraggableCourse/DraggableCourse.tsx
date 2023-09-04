@@ -92,7 +92,7 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
       <Suspense fallback={<Spinner text="Loading Course..." />}>
         <Draggable
           isDragDisabled={isTermLocked}
-          draggableId={`${courseInfo.code}${time?.term}`}
+          draggableId={`${courseInfo.code}${time?.term ?? 'unplanned'}`}
           index={index}
         >
           {(provided) => (

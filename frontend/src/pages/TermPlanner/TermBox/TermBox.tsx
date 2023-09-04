@@ -43,7 +43,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
       { termyear: `${year}${term}` },
       { params: { token } }
     );
-    if (res.status == 200) {
+    if (res.status === 200) {
       queryClient.invalidateQueries('planner');
     }
   };
