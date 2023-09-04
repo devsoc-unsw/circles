@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Programs } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getToken } from './userApi';
 
@@ -56,4 +57,9 @@ export const removeSpecialisation = async (specialisation: string) => {
     // eslint-disable-next-line no-console
     console.error('Error settingProgram at handleDegreeChange: ', err);
   }
+};
+
+export const getAllDegrees = async (): Promise<Record<string, string>> => {
+  const res = await axios.get<Programs>('/programs/getPrograms');
+  return res.data.programs;
 };

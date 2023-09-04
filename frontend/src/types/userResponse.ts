@@ -11,6 +11,12 @@ export type DegreeResponse = {
   isComplete: boolean;
 };
 
+export const badDegree = {
+  programCode: '',
+  specs: [],
+  isComplete: false
+} as DegreeResponse;
+
 export type CourseResponse = {
   code: string;
   suppress: boolean;
@@ -39,6 +45,12 @@ export const badPlanner = {
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,
-  years: {} as Record<string, string[]>[],
+  years: [] as Record<string, string[]>[],
   courses: {} as Record<string, CourseResponse>
 } as PlannerResponse;
+
+export const badUser = {
+  degree: badDegree,
+  planner: badPlanner,
+  courses: {}
+} as UserResponse;

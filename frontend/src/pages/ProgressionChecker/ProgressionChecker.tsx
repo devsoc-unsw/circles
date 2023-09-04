@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import {
   BorderlessTableOutlined,
   EyeFilled,
@@ -17,12 +17,14 @@ import {
   ViewSubgroupCourse
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import { badDegree, badPlanner } from 'types/userResponse';
+import { getCoursesInfo } from 'utils/api/coursesApi';
+import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
-import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import FreeElectiveSection from './FreeElectivesSection';
 import GridView from './GridView';
@@ -36,7 +38,9 @@ const ProgressionChecker = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
 
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
+  const degreeQuery = useQuery('program', getUserDegree);
+  const degreeData = degreeQuery.data ?? badDegree;
+  const { programCode, specs } = degreeData;
 
   useEffect(() => {
     // get structure of degree
@@ -67,7 +71,24 @@ const ProgressionChecker = () => {
 
   const [view, setView] = useState(Views.GRID_CONCISE);
 
-  const { courses, unplanned } = useSelector((store: RootState) => store.planner);
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerData = plannerQuery.data ?? badPlanner;
+  const { unplanned } = plannerData;
+
+  const plannedFor: Record<string, string> = {};
+  plannerData.years.forEach((year) => {
+    Object.entries(year).forEach((term) => {
+      const [termName, courses] = term;
+      courses.forEach((course) => {
+        plannedFor[course] = termName;
+      });
+    });
+  });
+
+  const coursesQuery = useQuery('plannerCourses', getCoursesInfo, {
+    refetchOnWindowFocus: false
+  });
+  const courses = coursesQuery.data ?? {};
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};
@@ -115,25 +136,21 @@ const ProgressionChecker = () => {
             // additional courses can be considered to count to the subgroup progression
             // only exception is Rules where it should display all courses
             const isOverCounted =
-              !!courses[courseCode]?.plannedFor && currUOC > subgroupStructure.UOC && !isRule;
+              !!plannedFor[courseCode] && currUOC > subgroupStructure.UOC && !isRule;
 
             const course: ViewSubgroupCourse = {
               courseCode,
               title: subgroupStructure.courses[courseCode],
               UOC: courses[courseCode]?.UOC || 0,
-              plannedFor: courses[courseCode]?.plannedFor || '',
+              plannedFor: plannedFor[courseCode] || '',
               isUnplanned: unplanned.includes(courseCode),
-              isMultiterm: !!courses[courseCode]?.isMultiterm,
+              isMultiterm: !!courses[courseCode]?.is_multiterm,
               isDoubleCounted,
               isOverCounted
             };
 
             newViewLayout[group][subgroup].courses.push(course);
-            if (
-              courses[courseCode]?.plannedFor &&
-              !isOverCounted &&
-              !countedCourses.includes(courseCode)
-            ) {
+            if (plannedFor[courseCode] && !isOverCounted && !countedCourses.includes(courseCode)) {
               countedCourses.push(courseCode);
             }
 
@@ -157,7 +174,7 @@ const ProgressionChecker = () => {
 
             currUOC +=
               (courses[courseCode]?.UOC ?? 0) *
-              getNumTerms(courses[courseCode]?.UOC, courses[courseCode]?.isMultiterm);
+              getNumTerms(courses[courseCode]?.UOC, !!courses[courseCode]?.is_multiterm);
           });
 
           newViewLayout[group][subgroup].courses.sort((a, b) =>
@@ -172,14 +189,14 @@ const ProgressionChecker = () => {
         .flatMap((spec) => Object.keys(spec.courses))
     );
     Object.keys(courses).forEach((courseCode) => {
-      if (!programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+      if (!programCourseList.includes(courseCode) && plannedFor[courseCode]) {
         overflowCourses[courseCode] = {
           courseCode,
           title: courses[courseCode].title,
           UOC: courses[courseCode].UOC,
-          plannedFor: courses[courseCode].plannedFor as string,
+          plannedFor: plannedFor[courseCode],
           isUnplanned: unplanned.includes(courseCode),
-          isMultiterm: courses[courseCode].isMultiterm,
+          isMultiterm: !!courses[courseCode]?.is_multiterm,
           isDoubleCounted: false,
           isOverCounted: false
         };
