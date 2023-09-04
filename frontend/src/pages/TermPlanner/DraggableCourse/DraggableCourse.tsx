@@ -1,8 +1,8 @@
-/* eslint-disable */
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
@@ -15,7 +15,6 @@ import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
 import S from './styles';
-import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 
 type Props = {
   planner: PlannerResponse;
@@ -40,7 +39,9 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
   const isLegacy = courseInfo.is_legacy;
   const isAccurate = courseInfo.is_accurate;
   const handbookNote = courseInfo.handbook_note;
+  // TODO: Fix warnings
   // const warningMessage = courses[code].warnings;
+  const warningMessage: string[] = [];
 
   const showNotOfferedWarning = time ? courseHasOfferingNew(courseInfo, time.term as Term) : true;
 
@@ -51,11 +52,13 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
   const isTermLocked = time ? planner.lockedTerms[`${time.year}T${time.term}`] : false;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
-  const shouldHaveWarning =
-    !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
+  // TODO: Fix these boolean checks for warnings
+  // const shouldHaveWarning =
+  //   !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
+  const shouldHaveWarning = isLegacy || !isAccurate || !showNotOfferedWarning;
   const errorIsInformational =
     shouldHaveWarning &&
-    isUnlocked &&
+    // isUnlocked &&
     warningMessage.length === 0 &&
     !isLegacy &&
     isAccurate &&
@@ -97,8 +100,11 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
               summerEnabled={isSummerEnabled}
               isSmall={isSmall}
               dragDisabled={isTermLocked}
+              // TODO: Fix these boolean checks for warnings
+              // warningsDisabled={isTermLocked && !isUnlocked}
               warningsDisabled={isTermLocked}
-              isWarning={!supressed && (!isUnlocked || !showNotOfferedWarning)}
+              // isWarning={!supressed && (!isUnlocked || !showNotOfferedWarning)}
+              isWarning={!showNotOfferedWarning}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
@@ -149,7 +155,7 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
           )}
         </Draggable>
       </Suspense>
-      <ContextMenu code={courseInfo.code} plannedFor={plannedFor} />
+      <ContextMenu code={courseInfo.code} scheduled={!!time} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
