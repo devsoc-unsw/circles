@@ -2,19 +2,18 @@ import React, { Suspense } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
+import axios from 'axios';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { getUserPlanner } from 'utils/api/userApi';
+import { getToken, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
-import axios from 'axios';
-import { getToken } from 'utils/api/userApi';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
@@ -38,7 +37,6 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
   const { isSummerEnabled } = planner;
 
   const handleToggleLockTerm = async () => {
-    console.debug('name: ', name);
     const token = getToken();
     const res = await axios.post(
       '/user/planner/toggleTermLocked',
@@ -95,7 +93,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
               {Object.values(courseInfos).map((info, index) => {
                 return (
                   <DraggableCourse
-                    key={`${draggingCourseCode}${term}`}
+                    key={`${draggingCourseCode ? draggingCourseCode : ''}${term}`}
                     planner={planner}
                     courseInfo={info}
                     index={index}
