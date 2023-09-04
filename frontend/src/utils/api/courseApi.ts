@@ -10,6 +10,6 @@ export const searchCourse = async (query: string): Promise<SearchCourse> => {
 };
 
 export const getCourseInfo = async (courseId: string) => {
-  const res = await axios.get<Course>(`course/getCourses/${courseId}`);
+  const res = await axios.get<Course>(`courses/getCourse/${courseId}`);
   return res.data;
 };
