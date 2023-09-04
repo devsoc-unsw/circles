@@ -194,8 +194,6 @@ class PlannerLocalStorage(TypedDict):
     startYear: int
     isSummerEnabled: bool
     years: list[dict[str, list[str]]]
-    # todo: give `dict` its own params
-    courses: dict[str, dict]
 
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
 Mark = Optional[int | LetterGrade]
