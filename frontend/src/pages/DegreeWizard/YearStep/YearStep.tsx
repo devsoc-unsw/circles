@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
