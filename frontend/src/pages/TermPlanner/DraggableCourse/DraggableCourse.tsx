@@ -15,6 +15,7 @@ import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
 import S from './styles';
+import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 
 type Props = {
   planner: PlannerResponse;
@@ -32,12 +33,10 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
-  const shouldHaveWarning = false;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const { title } = courseInfo;
   // TODO: Change the backend so that naming is universally in camelCase so we don't have to do this
-  // TODO: plannedFor seemed important. What did it do? Does it matter that it is gone now?
   const isLegacy = courseInfo.is_legacy;
   const isAccurate = courseInfo.is_accurate;
   const handbookNote = courseInfo.handbook_note;
@@ -49,30 +48,47 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
     id: `${courseInfo.code}-context`
   });
 
-  // TODO: const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
-  const isDragDisabled = false;
+  const isTermLocked = time ? planner.lockedTerms[`${time.year}T${time.term}`] : false;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
-  // TODO: Most of the information for these is missing now. Should it be brought back?
-  // const shouldHaveWarning =
-  //   !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
-  // const errorIsInformational =
-  //   shouldHaveWarning &&
-  //   isUnlocked &&
-  //   warningMessage.length === 0 &&
-  //   !is_legacy &&
-  //   is_accurate &&
-  //   showNotOfferedWarning;
+  const shouldHaveWarning =
+    !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
+  const errorIsInformational =
+    shouldHaveWarning &&
+    isUnlocked &&
+    warningMessage.length === 0 &&
+    !isLegacy &&
+    isAccurate &&
+    showNotOfferedWarning;
 
   const handleContextMenu = (e: React.MouseEvent) => {
-    if (!isDragDisabled) contextMenu.show({ event: e });
+    if (!isTermLocked) contextMenu.show({ event: e });
+  };
+
+  const stripExtraParenthesis = (warning: string): string => {
+    if (warning[0] !== '(' || warning[warning.length - 1] !== ')') {
+      return warning;
+    }
+    let openParenCount = 0;
+    // If first open brace is ever fully closed, we don't want to strip them out
+    for (let i = 0; i < warning.length - 1; i += 1) {
+      if (warning[i] === '(') {
+        openParenCount += 1;
+      } else if (warning[i] === ')') {
+        openParenCount -= 1;
+      }
+      if (openParenCount <= 0) {
+        return warning;
+      }
+    }
+    return stripExtraParenthesis(warning.slice(1, warning.length - 1));
   };
 
   return (
     <>
       <Suspense fallback={<Spinner text="Loading Course..." />}>
         <Draggable
-          isDragDisabled={isDragDisabled}
+          isDragDisabled={isTermLocked}
           draggableId={`${courseInfo.code}${time?.term}`}
           index={index}
         >
@@ -80,10 +96,9 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
             <S.CourseWrapper
               summerEnabled={isSummerEnabled}
               isSmall={isSmall}
-              dragDisabled={isDragDisabled}
-              warningsDisabled={isDragDisabled}
-              // isWarning={!supressed && (!isUnlocked || !showNotOfferedWarning)}
-              isWarning={false}
+              dragDisabled={isTermLocked}
+              warningsDisabled={isTermLocked}
+              isWarning={!supressed && (!isUnlocked || !showNotOfferedWarning)}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
@@ -93,7 +108,7 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
               id={courseInfo.code}
               onContextMenu={handleContextMenu}
             >
-              {/* {!isDragDisabled &&
+              {!isTermLocked &&
                 shouldHaveWarning &&
                 (errorIsInformational ? (
                   <InfoCircleOutlined style={{ color: theme.infoOutlined.color }} />
@@ -101,7 +116,7 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
                   <WarningOutlined
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
-                ))} */}
+                ))}
               <S.CourseLabel>
                 {isSmall ? (
                   <Text className="text">{courseInfo.code}</Text>
@@ -134,7 +149,7 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
           )}
         </Draggable>
       </Suspense>
-      <ContextMenu code={courseInfo.code} plannedFor={null} />
+      <ContextMenu code={courseInfo.code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
@@ -142,12 +157,14 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
           {title}
         </ReactTooltip>
       )}
-      {!isDragDisabled && shouldHaveWarning && (
+      {!isTermLocked && shouldHaveWarning && (
         <ReactTooltip id={courseInfo.code} place="bottom">
           {isLegacy ? (
             'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
           ) : !showNotOfferedWarning ? (
             'The course is not offered in this term.'
+          ) : warningMessage.length !== 0 ? (
+            stripExtraParenthesis(warningMessage.join('\n'))
           ) : (
             // eslint-disable-next-line react/no-danger
             <div dangerouslySetInnerHTML={{ __html: handbookNote }} />
