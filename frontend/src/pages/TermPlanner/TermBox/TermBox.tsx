@@ -7,8 +7,8 @@ import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
-import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { getToken, getUserPlanner } from 'utils/api/userApi';
+import { badCourses, badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
+import { getToken, getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -35,6 +35,9 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { isSummerEnabled } = planner;
+
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
   const handleToggleLockTerm = async () => {
     const token = getToken();
@@ -95,6 +98,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
                   <DraggableCourse
                     key={`${draggingCourseCode || ''}${term}`}
                     planner={planner}
+                    courses={courses}
                     courseInfo={info}
                     index={index}
                     time={{ year, term } as CourseTime}

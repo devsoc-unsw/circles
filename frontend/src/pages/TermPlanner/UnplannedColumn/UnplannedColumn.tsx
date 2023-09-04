@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { useQuery } from 'react-query';
 import { Course } from 'types/api';
-import { badPlanner, PlannerResponse } from 'types/userResponse';
-import { getUserPlanner } from 'utils/api/userApi';
+import { badCourses, badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
+import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
@@ -22,6 +22,9 @@ const UnplannedColumn = ({ dragging, courseInfos }: Props) => {
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
 
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
+
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
@@ -40,6 +43,7 @@ const UnplannedColumn = ({ dragging, courseInfos }: Props) => {
               {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
                   planner={planner}
+                  courses={courses}
                   courseInfo={courseInfos[courseCode]}
                   index={courseIndex}
                   time={undefined}

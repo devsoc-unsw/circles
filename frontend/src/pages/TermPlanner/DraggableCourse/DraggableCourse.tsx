@@ -8,7 +8,7 @@ import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
-import { PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, PlannerResponse } from 'types/userResponse';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -18,6 +18,7 @@ import S from './styles';
 
 type Props = {
   planner: PlannerResponse;
+  courses: CoursesResponse;
   courseInfo: Course;
   index: number;
   time?: CourseTime;
@@ -27,7 +28,7 @@ const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
+const DraggableCourse = ({ planner, courses, courseInfo, index, time }: Props) => {
   const { isSummerEnabled } = planner;
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
@@ -144,8 +145,8 @@ const DraggableCourse = ({ planner, courseInfo, index, time }: Props) => {
                           Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                           Mark can be 0.
                         */}
-                      {typeof planner.courses[courseInfo.code].mark !== undefined
-                        ? planner.courses[courseInfo.code].mark
+                      {typeof courses[courseInfo.code].mark !== undefined
+                        ? courses[courseInfo.code].mark
                         : 'N/A'}
                     </Text>
                   </div>
