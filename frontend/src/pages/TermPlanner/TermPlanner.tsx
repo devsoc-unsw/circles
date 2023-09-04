@@ -181,8 +181,6 @@ const TermPlanner = () => {
 
     if (!destination) return; // drag outside container
 
-    // const draggableInfo = await handleGetCourseInfo(draggableId);
-
     if (destination.droppableId !== 'unplanned') {
       // === moving course to unplanned doesn't require term logic ===
       if (destination.droppableId !== source.droppableId) {
