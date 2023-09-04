@@ -133,18 +133,6 @@ const TermPlanner = () => {
   // const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
-    // NOTE: Do we even need to validate the term planner? It's stored on the backend now.
-    // const validateTermPlanner = async () => {
-    //   try {
-    //     // not a thingy any more? Should just be abased of the user token
-    //     const res = await axios.post<ValidateTermPlanner>('/planner/validateTermPlanner/', payload);
-    //     dispatch(toggleWarnings(res.data.courses_state));
-    //   } catch (err) {
-    //     // eslint-disable-next-line no-console
-    //     console.error('Error at validateTermPlanner', err);
-    //   }
-    // };
-
     if (plannerEmpty) {
       openNotification({
         type: 'info',
@@ -153,7 +141,6 @@ const TermPlanner = () => {
           'Add courses from the course selector to the term planner and drag courses from the unplanned column'
       });
     }
-    // validateTermPlanner();
   }, [plannerEmpty]);
 
   const currYear = new Date().getFullYear();
@@ -164,37 +151,16 @@ const TermPlanner = () => {
   const handleOnDragStart: OnDragStartResponder = async (result) => {
     const courseCode = result.draggableId.slice(0, 8);
     setDraggingCourse(courseCode);
-    // if (courseInfo.is_multiterm) {
-    //   setCheckYearMultiTerm(result.source.droppableId);
-    //   setMultiCourse(courseCode);
-    // }
   };
 
   const handleOnDragEnd: OnDragEndResponder = async (result) => {
     setDraggingCourse('');
-    // setCheckYearMultiTerm('');
-    // setMultiCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
     const draggableId = draggableIdUnique.slice(0, 8);
 
     if (!destination) return; // drag outside container
-
-    if (destination.droppableId !== 'unplanned') {
-      // === moving course to unplanned doesn't require term logic ===
-      if (destination.droppableId !== source.droppableId) {
-        // TODO: What values do we give these?
-        await handleSetPlannedCourseToTerm({
-          srcRow: -1, // ?
-          srcTerm: source.droppableId,
-          destRow: -1, // ?
-          destTerm: destination.droppableId,
-          destIndex: -1, // ?
-          courseCode: draggableId
-        });
-      }
-    }
 
     if (destination.droppableId === source.droppableId && destination.index === source.index) {
       // drag to same place
