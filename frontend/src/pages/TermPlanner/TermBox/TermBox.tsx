@@ -50,7 +50,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
 
   const termUOC = termCourseCodes.reduce((acc, code) => acc + courseInfos[code].UOC, 0);
 
-  const isLocked = planner.lockedTerms[`${year}${term}`];
+  const isLocked: boolean = planner.lockedTerms[`${year}${term}`] ?? false;
   const offeredInTerm =
     !!draggingCourseCode && courseHasOfferingNew(courseInfos[draggingCourseCode], term);
   const isOffered = offeredInTerm && !isLocked;
@@ -93,7 +93,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
               {Object.values(courseInfos).map((info, index) => {
                 return (
                   <DraggableCourse
-                    key={`${draggingCourseCode ? draggingCourseCode : ''}${term}`}
+                    key={`${draggingCourseCode || ''}${term}`}
                     planner={planner}
                     courseInfo={info}
                     index={index}
