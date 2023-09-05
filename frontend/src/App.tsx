@@ -14,6 +14,7 @@ import './config/axios';
 import 'antd/dist/antd.less';
 import TokenPlayground from 'pages/TokenPlayground';
 import RequireToken from 'components/RequireToken/RequireToken';
+import LoginSuccess from 'pages/LoginSuccess';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -51,6 +52,7 @@ const App = () => {
                     )
                   }
                 />
+                {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
                 {inDev && <Route path="/login" element={<Auth />} />}
                 {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
                 <Route element={<RequireToken />}>
