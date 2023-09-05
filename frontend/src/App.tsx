@@ -13,6 +13,7 @@ import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import Auth from 'pages/Auth/Auth';
+import LoginSuccess from 'pages/LoginSuccess';
 import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
 // stylesheets for antd library
@@ -113,6 +114,7 @@ const App = () => {
                       <Route path="/term-planner" element={<TermPlanner />} />
                       <Route path="/progression-checker" element={<ProgressionChecker />} />
                     </Route>
+                    {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
                     {inDev && <Route path="/login" element={<Auth />} />}
                     {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
                     <Route path="*" element={<Page404 />} />
