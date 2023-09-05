@@ -7,10 +7,11 @@ import S from './styles';
 
 type Props = {
   courseCode: string;
+  runMutate?: (courseId: string) => void;
   planned?: boolean;
 };
 
-const QuickAddCartButton = ({ courseCode, planned }: Props) => {
+const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
   const handleMutation = planned ? removeCourse : addToUnplanned;
 
   const queryClient = useQueryClient();
@@ -19,16 +20,12 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     onSuccess: async (data: void, variables: string, context: unknown) => {
       await queryClient.invalidateQueries('planner');
-      // queryClient.invalidateQueries('courses');
-      // waits until refetch is complete
-      // queryClient.invalidateQueries('courseInfo');
-      // await queryClient.invalidateQueries({ queryKey: ['everything'] });
     }
   });
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    mutation.mutate(courseCode);
+    if (runMutate) runMutate(courseCode);
   };
 
   return !planned ? (

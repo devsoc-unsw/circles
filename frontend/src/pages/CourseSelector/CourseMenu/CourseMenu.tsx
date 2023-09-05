@@ -17,9 +17,10 @@ import { addTab } from 'reducers/courseTabsSlice';
 import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
 import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import { useQuery, useQueryClient } from 'react-query';
+import { QueryObserver, useMutation, useQuery, useQueryClient } from 'react-query';
 import { DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { errLogger } from 'utils/queryUtils';
+import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 
 type SubgroupTitleProps = {
   title: string;
@@ -42,6 +43,8 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
 );
 
 const CourseMenu = ({planner, degree}: CourseMenuProps) => {
+
+  const inPlanner = (courseId: string) => planner && (!!planner.courses[courseId] || planner.unplanned.includes(courseId));
 
   const getStructure = React.useCallback(async () => {
     if (!degree) return Promise.reject('degree undefined');
@@ -68,19 +71,31 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
 
   const coursesStateQuery = useQuery(['coursesState', degree, planner], getAllUnlocked, {
     onError: errLogger('coursesStateQuery'),
+    onSuccess: (courses) => {
+        dispatch(setCourses(courses)); // should maybe be deleted later or something
+      },
     enabled: !!degree && !!planner
   });
 
-  // when all the queries done, generate menu data
-  useEffect(() => {
-    if (!planner || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
-    const structure = structureQuery.data;
-    if (!Object.keys(structure).length) return;
-    const courses = coursesStateQuery.data;
-    dispatch(setCourses(courses)); // should maybe be deleted later or something
-    generateMenuData(planner, structure, courses);
+  // glorified useEffect
+  useQuery('generateMenuData', () => {
+      if (!planner || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return; 
+      generateMenuData(planner, structureQuery.data, coursesStateQuery.data);
+    }, {
+      enabled: !!planner && structureQuery.isSuccess && coursesStateQuery.isSuccess
+  });
 
-  }, [structureQuery, coursesStateQuery])
+  const queryClient = useQueryClient();
+  const courseMutation = useMutation({ 
+    mutationFn: async (courseId: string) => {
+      const handleMutation = inPlanner(courseId) ? removeCourse : addToUnplanned;
+      await handleMutation(courseId);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({queryKey: ['planner']});
+    }
+  })
+  const runMutate = (courseId: string) => courseMutation.mutate(courseId);
 
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
@@ -194,6 +209,7 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
                           planner.courses[course.courseCode] !== undefined ||
                           planner.unplanned.includes(course.courseCode)
                         }
+                        runMutate={runMutate}
                         accurate={course.accuracy}
                         unlocked={course.unlocked}
                       />
