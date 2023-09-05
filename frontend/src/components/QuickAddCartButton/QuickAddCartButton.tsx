@@ -26,6 +26,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     if (runMutate) runMutate(courseCode);
+    else mutation.mutate(courseCode);
   };
 
   return !planned ? (
