@@ -80,9 +80,10 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
     user = get_user(token)
-    if data.courseCode in user['planner']['courses'].keys() or data.courseCode in user['planner']['unplanned']:
+    if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
     user['planner']['unplanned'].append(data.courseCode)
+    user['courses'][data.courseCode] = {'code': data.courseCode, 'suppressed': False, 'mark': None}
     set_user(token, user, True)
 
 
@@ -249,6 +250,9 @@ def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
     # remove course from unplanned (if it's there)
     if data.courseCode in planner['unplanned']:
         planner['unplanned'].remove(data.courseCode)
+        
+    if data.courseCode in user['courses']:
+        del user['courses'][data.courseCode]
     set_user(token, user, True)
 
 
@@ -267,6 +271,8 @@ def remove_all(token: str = DUMMY_TOKEN):
 
     # Clear unplanned column
     user['planner']['unplanned'] = []
+    
+    user['courses'] = {}
     set_user(token, user, True)
 
 
