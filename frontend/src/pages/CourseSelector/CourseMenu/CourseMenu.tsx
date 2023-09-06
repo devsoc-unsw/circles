@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
 import axios from 'axios';
-import { CoursesAllUnlocked } from 'types/api';
+import { CoursesAllUnlocked, Structure } from 'types/api';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
@@ -15,15 +16,21 @@ import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
-
-type Props = {
-  structure: ProgramStructure;
-};
+import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { QueryObserver, useMutation, useQuery, useQueryClient } from 'react-query';
+import { DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { errLogger } from 'utils/queryUtils';
+import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 
 type SubgroupTitleProps = {
   title: string;
   currUOC: number;
   totalUOC: number;
+};
+
+type CourseMenuProps = {
+  planner?: PlannerResponse;
+  degree?: DegreeResponse;
 };
 
 const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
@@ -35,33 +42,84 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseMenu = ({ structure }: Props) => {
+const CourseMenu = ({planner, degree}: CourseMenuProps) => {
+
+  const inPlanner = (courseId: string) => planner && (!!planner.courses[courseId] || planner.unplanned.includes(courseId));
+
+  const getStructure = React.useCallback(async () => {
+    if (!degree) return Promise.reject('degree undefined');
+    const { programCode, specs } = degree;
+    const res = await axios.get<Structure>(
+      `/programs/getStructure/${programCode}/${specs.join('+')}`
+    );
+    return res.data.structure;
+  }, [degree]);
+
+  const getAllUnlocked = React.useCallback(async () => {
+    if (!degree || !planner) return Promise.reject('degree or planner undefined');
+    const res = await axios.post<CoursesAllUnlocked>(
+      '/courses/getAllUnlocked/',
+      JSON.stringify(prepareUserPayload(degree, planner))
+    );
+    return res.data.courses_state;
+  }, [degree, planner]);
+
+  const structureQuery = useQuery(['structure', degree], getStructure, {
+    onError: errLogger('structureQuery'),
+    enabled: !!degree
+  });
+
+  const coursesStateQuery = useQuery(['coursesState', degree, planner], getAllUnlocked, {
+    onError: errLogger('coursesStateQuery'),
+    onSuccess: (courses) => {
+        dispatch(setCourses(courses)); // should maybe be deleted later or something
+      },
+    enabled: !!degree && !!planner
+  });
+
+  // glorified useEffect
+  useQuery('generateMenuData', () => {
+      if (!planner || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return; 
+      generateMenuData(planner, structureQuery.data, coursesStateQuery.data);
+    }, {
+      enabled: !!planner && structureQuery.isSuccess && coursesStateQuery.isSuccess
+  });
+
+  const queryClient = useQueryClient();
+  const courseMutation = useMutation({ 
+    mutationFn: async (courseId: string) => {
+      const handleMutation = inPlanner(courseId) ? removeCourse : addToUnplanned;
+      await handleMutation(courseId);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({queryKey: ['planner']});
+    }
+  })
+  const runMutate = (courseId: string) => courseMutation.mutate(courseId);
+
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
 
-  // get courses in planner
-  const planner = useSelector((state: RootState) => state.planner);
-  const degree = useSelector((state: RootState) => state.degree);
   const { showLockedCourses } = useSelector((state: RootState) => state.settings);
 
   const [pageLoaded, setPageLoaded] = useState(false);
 
-  const getAllUnlocked = useCallback(async () => {
-    // generate menu content
-    const generateMenuData = (courses: Record<string, CourseValidation>) => {
+  const generateMenuData = useCallback(
+    (
+      planner: PlannerResponse,
+      structure: ProgramStructure,
+      courses: Record<string, CourseValidation>
+    ) => {
       const newMenu: MenuDataStructure = {};
       const newCoursesUnits: CourseUnitsStructure = {};
-
       // Example groups: Major, Minor, General, Rules
       Object.keys(structure).forEach((group) => {
         // Do not include 'Rules' group in sidebar or any other groups that do not
         // have subgroups
         if (group === 'Rules' || !Object.keys(structure[group].content).length) return;
-
         newMenu[group] = {};
         newCoursesUnits[group] = {};
-
         // Example subgroup: Core Courses, Computing Electives
         Object.keys(structure[group].content).forEach((subgroup) => {
           const subgroupStructure = structure[group].content[subgroup];
@@ -81,15 +139,11 @@ const CourseMenu = ({ structure }: Props) => {
                 unlocked: !!courses[courseCode]?.unlocked,
                 accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
               });
-
               // add UOC to curr
               if (planner.courses[courseCode]) {
+                const anyCourse = planner.courses[courseCode] as any; // while types get unfucked
                 newCoursesUnits[group][subgroup].curr +=
-                  planner.courses[courseCode].UOC *
-                  getNumTerms(
-                    planner.courses[courseCode].UOC,
-                    planner.courses[courseCode].isMultiterm
-                  );
+                  anyCourse.UOC * getNumTerms(anyCourse.UOC, anyCourse.isMultiterm);
               }
             });
           }
@@ -98,25 +152,9 @@ const CourseMenu = ({ structure }: Props) => {
       setMenuData(newMenu);
       setCoursesUnits(newCoursesUnits);
       setPageLoaded(true);
-    };
-
-    try {
-      const res = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
-      dispatch(setCourses(res.data.courses_state));
-      generateMenuData(res.data.courses_state);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at getAllUnlocked', err);
-    }
-  }, [structure, planner, degree, dispatch]);
-
-  // get all courses
-  useEffect(() => {
-    if (structure && Object.keys(structure).length) getAllUnlocked();
-  }, [structure, getAllUnlocked]);
+    },
+    []
+  );
 
   const sortSubgroups = (
     item1: [string, MenuDataSubgroup[]],
@@ -138,45 +176,53 @@ const CourseMenu = ({ structure }: Props) => {
 
   const defaultOpenKeys = [Object.keys(menuData)[0]];
 
-  const menuItems: MenuProps['items'] = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
-    label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
-    key: groupKey,
-    children: Object.entries(groupEntry)
-      .sort(sortSubgroups)
-      .map(([subgroupKey, subGroupEntry]) => {
-        const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
-        const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
-        if (subGroupEntry.length <= MAX_COURSES_OVERFLOW) defaultOpenKeys.push(subgroupKey);
-        return {
-          label: <SubgroupTitle title={subgroupKey} currUOC={currUOC} totalUOC={totalUOC} />,
-          key: subgroupKey,
-          disabled: !subGroupEntry.length, // disable submenu if there are no courses
-          // check if there are courses to show collapsible submenu
-          children: subGroupEntry.length
-            ? subGroupEntry
-                .sort(sortCourses)
-                .filter(
-                  (course) =>
-                    course.unlocked || planner.courses[course.courseCode] || showLockedCourses
-                )
-                .map((course) => ({
-                  label: (
-                    <CourseMenuTitle
-                      courseCode={course.courseCode}
-                      title={course.title}
-                      selected={planner.courses[course.courseCode] !== undefined}
-                      accurate={course.accuracy}
-                      unlocked={course.unlocked}
-                    />
-                  ),
-                  // key is course code + groupKey + subgroupKey to differentiate as unique
-                  // course items in menu
-                  key: `${course.courseCode}-${groupKey}-${subgroupKey}`
-                }))
-            : null
-        };
-      })
-  }));
+  let menuItems: MenuProps['items'];
+  if (pageLoaded && structureQuery.isSuccess && planner) {
+    const structure = structureQuery.data;
+    menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
+      label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
+      key: groupKey,
+      children: Object.entries(groupEntry)
+        .sort(sortSubgroups)
+        .map(([subgroupKey, subGroupEntry]) => {
+          const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
+          const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
+          if (subGroupEntry.length <= MAX_COURSES_OVERFLOW) defaultOpenKeys.push(subgroupKey);
+          return {
+            label: <SubgroupTitle title={subgroupKey} currUOC={currUOC} totalUOC={totalUOC} />,
+            key: subgroupKey,
+            disabled: !subGroupEntry.length, // disable submenu if there are no courses
+            // check if there are courses to show collapsible submenu
+            children: subGroupEntry.length
+              ? subGroupEntry
+                  .sort(sortCourses)
+                  .filter(
+                    (course) =>
+                      course.unlocked || planner.courses[course.courseCode] || showLockedCourses
+                  )
+                  .map((course) => ({
+                    label: (
+                      <CourseMenuTitle
+                        courseCode={course.courseCode}
+                        title={course.title}
+                        selected={
+                          planner.courses[course.courseCode] !== undefined ||
+                          planner.unplanned.includes(course.courseCode)
+                        }
+                        runMutate={runMutate}
+                        accurate={course.accuracy}
+                        unlocked={course.unlocked}
+                      />
+                    ),
+                    // key is course code + groupKey + subgroupKey to differentiate as unique
+                    // course items in menu
+                    key: `${course.courseCode}-${groupKey}-${subgroupKey}`
+                  }))
+              : null
+          };
+        })
+    }));
+  }
 
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup

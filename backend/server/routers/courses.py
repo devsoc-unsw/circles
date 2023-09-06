@@ -13,6 +13,7 @@ from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz  # type: ignore
+from server.config import DUMMY_TOKEN
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
@@ -198,7 +199,7 @@ def get_course(courseCode: str) -> Dict:
         }
     },
 )
-def search(userData: UserData, search_string: str) -> Dict[str, str]:
+def search(search_string: str, token: str = DUMMY_TOKEN) -> Dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
@@ -208,13 +209,15 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
             ……. }
     """
     from server.routers.programs import get_structure
+    from server.routers.user import get_user
 
     all_courses = fetch_all_courses()
 
-    specialisations = list(userData.specialisations)
+    user = get_user(token)
+    specialisations = list(user['degree']['specs'])
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = get_structure(userData.program, "+".join(specialisations))['structure']
+    structure = get_structure(user['degree']['programCode'], "+".join(specialisations))['structure']
 
     top_results = sorted(all_courses.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)

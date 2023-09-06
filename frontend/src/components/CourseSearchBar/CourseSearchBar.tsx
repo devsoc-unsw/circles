@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
-import axios from 'axios';
-import { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';
-import prepareUserPayload from 'utils/prepareUserPayload';
-import type { RootState } from 'config/store';
+import { searchCourse } from 'utils/api/courseApi';
 
 type Props = {
   onSelectCallback: (courseCode: string) => void;
@@ -16,37 +12,30 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [value, setValue] = useState<string | null>(null);
   const [courses, setCourses] = useState<{ label: string; value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [debouncedSearchTerm] = useDebounce(value, 200);
 
-  const planner = useSelector((state: RootState) => state.planner);
-  const degree = useSelector((state: RootState) => state.degree);
-
   useEffect(() => {
-    const searchCourse = async (query: string) => {
+    const handleSearchCourse = async (query: string) => {
       try {
-        const res = await axios.post<SearchCourse>(
-          `/courses/searchCourse/${query}`,
-          JSON.stringify(prepareUserPayload(degree, planner))
-        );
+        const res = await searchCourse(query);
         setCourses(
-          Object.keys(res.data).map((course) => ({
-            label: `${course}: ${res.data[course]}`,
+          Object.keys(res).map((course) => ({
+            label: `${course}: ${res[course]}`,
             value: course
           }))
         );
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.error('Error at searchCourse', err);
+        console.error('Error at handleSearchCourse: ', err);
       }
       setIsLoading(false);
     };
 
     if (debouncedSearchTerm) {
       // if debounced term changes, call API
-      searchCourse(debouncedSearchTerm);
+      handleSearchCourse(debouncedSearchTerm);
     }
-  }, [debouncedSearchTerm, degree, planner]);
+  }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode: string) => {
     setValue(null);

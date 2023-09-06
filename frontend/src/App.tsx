@@ -28,8 +28,7 @@ const App = () => {
 
   const degree = useSelector((state: RootState) => state.degree);
 
-  // const queryClient = useQueryClient();
-  const queryClient: QueryClient = new QueryClient();
+  const [queryClient] = React.useState(() => new QueryClient())
 
   return (
     <QueryClientProvider client={queryClient}>
