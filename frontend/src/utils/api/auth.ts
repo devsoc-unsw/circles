@@ -17,7 +17,7 @@ export const checkTokenStatus = async (): Promise<TokenStatus> => {
 
   // check token with backend
   try {
-    await axios.get('/auth/checkToken', { params: { token } });
+    await axios.get<never>('/auth/checkToken', { params: { token } });
     return TokenStatus.VALID;
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -26,4 +26,11 @@ export const checkTokenStatus = async (): Promise<TokenStatus> => {
     }
     throw e;
   }
+};
+
+export const exchangeAuthCode = async (code: string, state: string): Promise<string> => {
+  console.log(`exchanging ${state} ${code}`);
+  const res = await axios.post<string>('/auth/login', { code, state });
+  console.log('exchange result:', res);
+  return res.data;
 };

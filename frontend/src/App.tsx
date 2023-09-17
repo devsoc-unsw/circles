@@ -52,7 +52,7 @@ const App = () => {
                     )
                   }
                 />
-                {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
+                {inDev && <Route path="/login/success/csesoc" element={<LoginSuccess />} />}
                 {inDev && <Route path="/login" element={<Auth />} />}
                 {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
                 <Route element={<RequireToken />}>
