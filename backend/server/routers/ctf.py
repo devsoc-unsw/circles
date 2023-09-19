@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Tuple
 from pydantic import BaseModel
 
 from fastapi import APIRouter, HTTPException
@@ -33,27 +33,6 @@ router = APIRouter(
 10. In your `N`-th year, you can only take `N + 1` math courses
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
 """
-
-# Requirements
-# - Complete your degree plan (I think this is in the frontend?)
-# - Must take every single comp course with extended in the name (done)
-# - Must take a summer COMP course (done)
-# - For odd terms, the sum of your course codes must be odd. (done)
-#   In even terms, it must be even.
-#   Summer terms are excluded from this.
-# - Must get full marks in COMP1511 (done)
-# - Gen-Eds can't sum to more than 2200. (done)
-# - Gen-Eds must be from different faculties. (done)
-# - Must take two courses from different faculties that have the same course code. (done)
-# - Must not have any warnings - including marks! (should probably do on frontend)
-# - May take at most N + 1 math courses in the Nth year (done)
-
-# Hard Requirements
-# - Cannot take any discontinued courses (hard to check)
-# - 3 yr CS Degree - 3778
-# - Must pick a math minor
-# - Start at 2024 (can't check)
-
 
 def degree(data: PlannerData) -> bool:
     return data.program == "3778"
@@ -193,6 +172,15 @@ def six_threes_limit(data: PlannerData) -> bool:
     all_codes = "".join(str(get_code(course)) for course in all_courses(data))
     return all_codes.count("3") <= 6
 
+def comp1531_third_year(data: PlannerData) -> bool:
+    third_year = data.plan[2]
+    for term in third_year:
+        for course in term:
+            if course == "COMP1531":
+                return True
+
+    return False
+
 """
 1. Must take a summer COMP course
 2. Must take every single comp course with extended in the name
@@ -202,39 +190,32 @@ def six_threes_limit(data: PlannerData) -> bool:
 6. The course codes of Gen-Eds can't sum to more than 2200.
 7. Gen-Eds must be from different faculties.
 8. Must take two courses from different faculties that have the same course code.
-9.
+9. COMP1531 must be taken in your third year.
 10. In your `N`-th year, you can only take `N + 1` math courses
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
-
 """
-requirements: dict[int, Callable[[PlannerData], bool]] = {
-    0: hard_requirements,
-    1: summer_course,
-    2: extended_courses,
-    3: term_sums_even,
-    4: term_sums_odd,
-    5: comp1511_marks,
-    6: gen_ed_sum,
-    7: gen_ed_faculty,
-    8: same_code_diff_faculty,
-    9: lambda _: True,
-    10: math_limit,
-    11: six_threes_limit,
+requirements: dict[int, Tuple[Callable[[PlannerData], bool], str]] = {
+    0: (hard_requirements, "You have not passed the hard requirement to get your submission validated."),
+    1: (summer_course, "You must complete at least one course in the summer term."),
+    2: (extended_courses, "You must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
+    3: (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this."),
+    4: (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this."),
+    5: (comp1511_marks, "You must achieve a mark of 100 in COMP1511."),
+    6: (gen_ed_sum, "The sum of your Gen-Ed course codes must not exceed 2200."),
+    7: (gen_ed_faculty, "Each Gen-Ed unit that you take must be from a different faculty"),
+    8: (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code."),
+    9: (comp1531_third_year, "COMP1531 must be taken in your third year"),
+    10: (math_limit, "In your N-th year, you can only take N + 1 math courses."),
+    11: (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3"),
 }
 
 @router.post("/validateCtf/")
 def validate_ctf(data : PlannerData):
     print("\n"*3, "HERE================")
-    for req_num, fn in requirements.items():
+    for req_num, (fn, msg) in requirements.items():
         if not fn(data):
             print("Not ok: ", req_num)
-            return {"valid": False, "req_num": req_num}
+            return {"valid": False, "req_num": req_num, "message": msg}
         print("Ok: ", req_num)
-    return {"valid": True, "req_num": -1}
+    return {"valid": True, "req_num": -1, "message": ""}
 
-@router.post("/test")
-def test_do_validate(data: PlannerData):
-    return {
-        "valid": True,
-        "req_num": -1,
-    }
