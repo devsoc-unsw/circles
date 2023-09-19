@@ -68,7 +68,7 @@ def all_courses(data: PlannerData) -> set[str]:
     }
 
 
-def code(course: str) -> int:
+def get_code(course: str) -> int:
     return int(course[4:])
 
 
@@ -113,26 +113,39 @@ def summer_course(data: PlannerData) -> bool:
     )
 
 
+
 def term_sums_even(data: PlannerData) -> bool:
-    for year in data.plan:
-        for i, term in enumerate(year[1:], 1):  # Exclude summer term
-            if sum(map(code, term.keys())) % 2 != i % 2:
+    is_even: Callable[[int], bool] = lambda x: x % 2 == 0
+    print("Checking even")
+    for y, year in enumerate(data.plan):
+        # Exclude summer term + odd terms
+        for i, term in enumerate(year[2::2], 2):
+            term_sum = sum(map(get_code, term.keys()))
+            print(f"{y}T{i} sum: {term_sum}")
+            if not is_even(term_sum):
+                print("failed: ", term)
                 return False
 
     return True
 
 # TODO
 def term_sums_odd(data: PlannerData) -> bool:
-    for year in data.plan:
-        for i, term in enumerate(year[1:], 1):  # Exclude summer term
-            if sum(map(code, term.keys())) % 2 != i % 2:
+    is_odd: Callable[[int], bool] = lambda x: x % 2 == 1
+    print("Checking odd")
+    for y, year in enumerate(data.plan[::2]):
+        # Exclude summer term + even terms
+        for i, term in enumerate(year[1::2], 2):
+            term_sum = sum(map(get_code, term.keys()))
+            print(f"{y}T{i} sum: {sum(map(get_code, term.keys()))}")
+            if not is_odd(sum(map(get_code, term.keys()))):
+                print("failed: ", term)
                 return False
     return True
  
 def term_sums(data: PlannerData) -> bool:
     for year in data.plan:
-        for i, term in enumerate(year[1:], 1):  # Exclude summer term
-            if sum(map(code, term.keys())) % 2 != i % 2:
+        for i, term in enumerate(year[2::2], 1):
+            if sum(map(get_code, term.keys())) % 2 != i % 2:
                 return False
 
     return True
@@ -150,7 +163,7 @@ def comp1511_marks(data: PlannerData) -> bool:
 
 
 def gen_ed_sum(data: PlannerData) -> bool:
-    return sum(map(code, gen_eds(all_courses(data)))) <= 2200
+    return sum(map(get_code, gen_eds(all_courses(data)))) <= 2200
 
 
 def gen_ed_faculty(data: PlannerData) -> bool:
@@ -159,7 +172,7 @@ def gen_ed_faculty(data: PlannerData) -> bool:
 
 
 def same_code_diff_faculty(data: PlannerData) -> bool:
-    codes = list(map(code, all_courses(data)))
+    codes = list(map(get_code, all_courses(data)))
     return len(codes) != len(
         set(codes)
     )  # Can't have duplicate of a course since it's a set
@@ -206,9 +219,12 @@ requirements: dict[int, Callable[[PlannerData], bool]] = {
 
 @router.post("/validateCtf/")
 def validate_ctf(data : PlannerData):
+    print("\n"*3, "HERE================")
     for req_num, fn in requirements.items():
         if not fn(data):
+            print("Not ok: ", req_num)
             return {"valid": False, "req_num": req_num}
+        print("Ok: ", req_num)
     return {"valid": True, "req_num": -1}
 
 @router.post("/test")
