@@ -37,15 +37,6 @@ def degree(data: PlannerData) -> bool:
     return data.program == "3778"
 
 
-# Note: Didn't make this one of the requirements so not included
-def major(data: PlannerData) -> bool:
-    return "COMPA1" in data.specialisations
-
-
-def math_minor(data: PlannerData) -> bool:
-    return "MATHC2" in data.specialisations
-
-
 def all_courses(data: PlannerData) -> set[str]:
     courses = set()
     for year in data.plan:
