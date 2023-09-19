@@ -1,4 +1,4 @@
-from typing import Callable, Tuple
+from typing import Callable
 from pydantic import BaseModel
 
 from fastapi import APIRouter, HTTPException
@@ -194,7 +194,7 @@ def comp1531_third_year(data: PlannerData) -> bool:
 10. In your `N`-th year, you can only take `N + 1` math courses
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
 """
-requirements: dict[int, Tuple[Callable[[PlannerData], bool], str]] = {
+requirements: dict[int, tuple[Callable[[PlannerData], bool], str]] = {
     0: (hard_requirements, "You have not passed the hard requirement to get your submission validated."),
     1: (summer_course, "You must complete at least one course in the summer term."),
     2: (extended_courses, "You must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
