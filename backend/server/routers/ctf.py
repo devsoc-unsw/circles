@@ -72,7 +72,7 @@ def get_code(course: str) -> int:
     return int(course[4:])
 
 
-def faculty(course: str) -> str:
+def get_faculty(course: str) -> str:
     return course[:4]
 
 
@@ -167,15 +167,16 @@ def gen_ed_sum(data: PlannerData) -> bool:
 
 
 def gen_ed_faculty(data: PlannerData) -> bool:
-    gen_eds_facs = list(map(faculty, gen_eds(all_courses(data))))
+    gen_eds_facs = list(map(get_faculty, gen_eds(all_courses(data))))
     return len(gen_eds_facs) == len(set(gen_eds_facs))
 
 
 def same_code_diff_faculty(data: PlannerData) -> bool:
     codes = list(map(get_code, all_courses(data)))
+    # Can't have duplicate of a course since it's a set
     return len(codes) != len(
         set(codes)
-    )  # Can't have duplicate of a course since it's a set
+    )
 
 
 def math_limit(data: PlannerData) -> bool:
@@ -187,6 +188,10 @@ def math_limit(data: PlannerData) -> bool:
             return False
 
     return True
+
+def six_threes_limit(data: PlannerData) -> bool:
+    all_codes = "".join(str(get_code(course)) for course in all_courses(data))
+    return all_codes.count("3") <= 6
 
 """
 1. Must take a summer COMP course
@@ -206,15 +211,15 @@ requirements: dict[int, Callable[[PlannerData], bool]] = {
     0: hard_requirements,
     1: summer_course,
     2: extended_courses,
-    3: term_sums_even, # check
-    4: term_sums_odd, # check
+    3: term_sums_even,
+    4: term_sums_odd,
     5: comp1511_marks,
     6: gen_ed_sum,
     7: gen_ed_faculty,
     8: same_code_diff_faculty,
     9: lambda _: True,
     10: math_limit,
-    11: lambda _: True,
+    11: six_threes_limit,
 }
 
 @router.post("/validateCtf/")
