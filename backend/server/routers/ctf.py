@@ -1,3 +1,4 @@
+from typing import Callable
 from pydantic import BaseModel
 
 from fastapi import APIRouter, HTTPException
@@ -11,6 +12,27 @@ from server.routers.model import (
 router = APIRouter(
     prefix="/ctf", tags=["ctf"], responses={404: {"description": "Not found"}}
 )
+"""
+# Hard Requirements for valid submission
+- The Degree Plan Must be Valid and have 100% Progression
+- Cannot take any discontinued courses
+- 3 yr CS Degree - 3778
+- Start at 2024
+- Must pick a math minor
+- There must be no warnings in the degree plan. This includes warnings for marks.
+
+# Requirements
+1. Must take a summer COMP course
+2. Must take every single comp course with extended in the name
+3. For odd terms, the sum of your course codes must be odd. Summer terms are excluded from this.
+4. In even terms, it must be even. Summer terms are excluded from this.
+5. Must get full marks in COMP1511
+6. The course codes of Gen-Eds can't sum to more than 2200.
+7. Gen-Eds must be from different faculties.
+8. Must take two courses from different faculties that have the same course code.
+10. In your `N`-th year, you can only take `N + 1` math courses
+11. There must not be more than `6` occurrences of the number 3 in the entire degree.
+"""
 
 # Requirements
 # - Complete your degree plan (I think this is in the frontend?)
@@ -38,13 +60,12 @@ def degree(data: PlannerData) -> bool:
 
 
 def all_courses(data: PlannerData) -> set[str]:
-    courses = set()
-    for year in data.plan:
-        for term in year:
-            for course in term:
-                courses.add(course)
-
-    return courses
+    return {
+        course
+        for year in data.plan
+        for term in year
+        for course in term
+    }
 
 
 def code(course: str) -> int:
@@ -64,23 +85,50 @@ def gen_eds(courses: set[str]) -> set[str]:
 
 
 def hard_requirements(data: PlannerData) -> bool:
+    # NOTE: Can't check start year from this
+    # Frontend should handle most of this anyways
+    # including validity of the program
     return (
         data.program == "3778"
         and "COMPA1" in data.specialisations
         and "MATHC2" in data.specialisations
         and len(data.plan) == 3
-        # NOTE: Can't check start year from this
     )
 
 
 def extended_courses(data: PlannerData) -> bool:
-    return {"COMP3821", "COMP3891", "COMP6841", "COMP6843"} - all_courses(data) == set()
+    return {
+        "COMP3821",
+        "COMP3891",
+        "COMP6841",
+        "COMP6843"
+    }.issubset(all_courses(data))
 
 
 def summer_course(data: PlannerData) -> bool:
-    return any(course.startswith("COMP") for year in data.plan for course in year[0])
+    return any(
+        course.startswith("COMP")
+        for year in data.plan
+        for course in year[0]
+    )
 
 
+def term_sums_even(data: PlannerData) -> bool:
+    for year in data.plan:
+        for i, term in enumerate(year[1:], 1):  # Exclude summer term
+            if sum(map(code, term.keys())) % 2 != i % 2:
+                return False
+
+    return True
+
+# TODO
+def term_sums_odd(data: PlannerData) -> bool:
+    for year in data.plan:
+        for i, term in enumerate(year[1:], 1):  # Exclude summer term
+            if sum(map(code, term.keys())) % 2 != i % 2:
+                return False
+    return True
+ 
 def term_sums(data: PlannerData) -> bool:
     for year in data.plan:
         for i, term in enumerate(year[1:], 1):  # Exclude summer term
@@ -90,7 +138,7 @@ def term_sums(data: PlannerData) -> bool:
     return True
 
 
-def COMP1511_marks(data: PlannerData) -> bool:
+def comp1511_marks(data: PlannerData) -> bool:
     for year in data.plan:
         for term in year:
             for course in term:
@@ -127,16 +175,45 @@ def math_limit(data: PlannerData) -> bool:
 
     return True
 
+"""
+1. Must take a summer COMP course
+2. Must take every single comp course with extended in the name
+3. For odd terms, the sum of your course codes must be odd. Summer terms are excluded from this.
+4. In even terms, it must be even. Summer terms are excluded from this.
+5. Must get full marks in COMP1511
+6. The course codes of Gen-Eds can't sum to more than 2200.
+7. Gen-Eds must be from different faculties.
+8. Must take two courses from different faculties that have the same course code.
+9.
+10. In your `N`-th year, you can only take `N + 1` math courses
+11. There must not be more than `6` occurrences of the number 3 in the entire degree.
+
+"""
+requirements: dict[int, Callable[[PlannerData], bool]] = {
+    0: hard_requirements,
+    1: summer_course,
+    2: extended_courses,
+    3: term_sums_even, # check
+    4: term_sums_odd, # check
+    5: comp1511_marks,
+    6: gen_ed_sum,
+    7: gen_ed_faculty,
+    8: same_code_diff_faculty,
+    9: lambda _: True,
+    10: math_limit,
+    11: lambda _: True,
+}
 
 @router.post("/validateCtf/")
-def validate_ctf(data: PlannerData):
-    print(data)
-    print(f"{hard_requirements(data) = }")
-    print(f"{extended_courses(data) = }")
-    print(f"{summer_course(data) = }")
-    print(f"{term_sums(data) = }")
-    print(f"{COMP1511_marks(data) = }")
-    print(f"{gen_ed_sum(data) = }")
-    print(f"{gen_ed_faculty(data) = }")
-    print(f"{same_code_diff_faculty(data) = }")
-    print(f"{math_limit(data) = }")
+def validate_ctf(data : PlannerData):
+    for req_num, fn in requirements.items():
+        if not fn(data):
+            return {"valid": False, "req_num": req_num}
+    return {"valid": True, "req_num": -1}
+
+@router.post("/test")
+def test_do_validate(data: PlannerData):
+    return {
+        "valid": True,
+        "req_num": -1,
+    }
