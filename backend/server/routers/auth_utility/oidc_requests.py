@@ -92,7 +92,7 @@ def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str) -> O
 
     return decoded
 
-def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[str, DecodedIDToken]]:
+def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[TokenResponse, DecodedIDToken]]:
     # TODO: figure out how we ought to use state?
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
@@ -110,7 +110,7 @@ def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[str, 
     )
     try:
         # https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
-        resjson: dict = res.json()
+        resjson: TokenResponse = res.json()
         print("\n\nDEBUG: exchanged token for\n")
         pprint(resjson)
         print()
@@ -134,7 +134,7 @@ def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[str, 
         pprint(id_token)
         print()
         print()
-        return (resjson["access_token"], id_token)
+        return (resjson, id_token)
     except requests.exceptions.JSONDecodeError as e:
         # TODO: error handle this
         print(f"Error exchanging code: {code}")
@@ -166,7 +166,7 @@ def get_user_info(access_token: str, auto_error: bool) -> Optional[UserInfoRespo
             )
         return None
 
-def refresh_access_token(refresh_token: str):
+def refresh_access_token(refresh_token: str) -> RefreshResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#RefreshingAccessToken
     credentials = client_secret_basic_credentials()
     res = requests.post(
@@ -198,6 +198,13 @@ def refresh_access_token(refresh_token: str):
             status_code=res.status_code,
             detail=f"UserInfo response was not in JSON."
         )
+    
+def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Optional[Tuple[RefreshResponse, DecodedIDToken]]:
+    refreshed = refresh_access_token(refresh_token)
+    validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"])
+    if validated is None:
+        return None
+    return refreshed, validated
 
 def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"]):
     # https://www.rfc-editor.org/rfc/rfc7009

@@ -1,6 +1,6 @@
 from pprint import pprint
-from typing import Any, Dict, List, Literal, Optional, Tuple, TypedDict, cast
-from fastapi import HTTPException, Request
+from typing import Any, Dict, List, Literal, Optional, Tuple, TypeVar, TypedDict, cast
+from fastapi import HTTPException, Request, Security
 from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
 from fastapi.security.base import SecurityBase
 from fastapi.security.utils import get_authorization_scheme_param
@@ -9,19 +9,14 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 from fastapi.openapi.models import HTTPBearer as HTTPBearerModel
 from fastapi.openapi.models import OAuthFlows as OAuth2FlowsModel
 from fastapi.openapi.models import OAuth2 as OAuth2Model, OAuthFlowAuthorizationCode
+from backend.server.routers.auth_utility.session_token import SessionStorage
 
 from server.routers.auth_utility.oidc_requests import UserInfoResponse, get_user_info
 
-def extract_token(request: Request, auto_error: bool) -> Optional[str]:
+def extract_bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("Authorization")
     scheme, credentials = get_authorization_scheme_param(authorization)
     if not (authorization and scheme and credentials and scheme.lower() == "bearer" and credentials != ""):
-        if auto_error:
-            raise HTTPException(
-                status_code=HTTP_401_UNAUTHORIZED,
-                detail=f"Token was not given in correct format",
-                headers={"WWW-Authenticate": "Bearer"},
-            )
         return None
     return credentials
 
@@ -30,7 +25,8 @@ class ValidatedToken(BaseModel):
     user_id: str
     full_info: UserInfoResponse
 
-class HTTPBearerTokenVerifier(SecurityBase):
+class HTTPBearer401(SecurityBase):
+    # remake because of: https://github.com/tiangolo/fastapi/issues/10177
     def __init__(
         self,
         *,
@@ -45,19 +41,28 @@ class HTTPBearerTokenVerifier(SecurityBase):
         self, request: Request
     ) -> Optional[str]:
         # get the token out of the header
-        token = extract_token(request, self.auto_error)
+        token = extract_bearer_token(request)
         if token is None:
+            if self.auto_error:
+                raise HTTPException(
+                    status_code=HTTP_401_UNAUTHORIZED,
+                    detail=f"Token was not given in correct format.",
+                    headers={"WWW-Authenticate": "Bearer"},
+                )
             return None
-        
         return token
-        
-        # check token against userinfo route
-        # info = get_user_info(token, self.auto_error)
-        # if info is None:
-        #     return None
-        
-        # return ValidatedToken(
-        #     token=token,
-        #     user_id=info["sub"],
-        #     full_info=info,
-        # )
+
+require_token = HTTPBearer401(auto_error=True)
+class SessionTokenToValidUserID:
+    def __init__(self, *, session_store: SessionStorage, auto_error: bool = True):
+        self.auto_error = auto_error
+        self.sessions = session_store
+
+    async def __call__(self, session_token: str = Security(require_token)) -> Optional[str]:
+        # TODO: session convert
+        # TODO: is sessionstorage taking too much responsibility?
+
+        res = get_user_info("aslkjd", self.auto_error)
+        if res is None:
+            return None
+        return res["sub"]
