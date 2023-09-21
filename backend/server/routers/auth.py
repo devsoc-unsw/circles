@@ -14,14 +14,14 @@ from typing import Annotated, Dict, List, Literal, Optional, Tuple, TypedDict, c
 from fastapi import APIRouter, Depends, HTTPException, Header, Request, Security
 from pydantic import BaseModel
 
-from .auth_utility.middleware import HTTPBearerAccessToken, ValidatedToken
-from .auth_utility.oidc_requests import exchange_auth_code_for_tokens
+from .auth_utility.middleware import HTTPBearerTokenVerifier, ValidatedToken
+from .auth_utility.oidc_requests import exchange_auth_code_for_tokens, get_user_info
 
 router = APIRouter(
     prefix="/auth",
     tags=["auth"],
 )
-require_token = HTTPBearerAccessToken()
+require_token = HTTPBearerTokenVerifier()
 
 @router.post('/token')
 def create_user_token(token: str):
@@ -97,11 +97,10 @@ def exchange_authorization_code(data: ExchangeCodePayload) -> str:
     return res[0]
 
 @router.get("/info")
-def user_info(token: ValidatedToken = Security(require_token)):
-    print(token)
-    return token
+def user_info(token: str = Security(require_token)):
+    return get_user_info(token, True)
 
 @router.get("/checkToken")
-def check_token(token: ValidatedToken = Security(require_token)):
+def check_token(token: str = Security(require_token)):
     # TODO: check it is in database
     return
