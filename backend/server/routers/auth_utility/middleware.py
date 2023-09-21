@@ -30,7 +30,7 @@ class ValidatedToken(BaseModel):
     user_id: str
     full_info: UserInfoResponse
 
-class HTTPBearerAccessToken(SecurityBase):
+class HTTPBearerTokenVerifier(SecurityBase):
     def __init__(
         self,
         *,
@@ -43,19 +43,21 @@ class HTTPBearerAccessToken(SecurityBase):
 
     async def __call__(
         self, request: Request
-    ) -> Optional[ValidatedToken]:
+    ) -> Optional[str]:
         # get the token out of the header
         token = extract_token(request, self.auto_error)
         if token is None:
             return None
         
-        # check token against userinfo route
-        info = get_user_info(token, self.auto_error)
-        if info is None:
-            return None
+        return token
         
-        return ValidatedToken(
-            token=token,
-            user_id=info["sub"],
-            full_info=info,
-        )
+        # check token against userinfo route
+        # info = get_user_info(token, self.auto_error)
+        # if info is None:
+        #     return None
+        
+        # return ValidatedToken(
+        #     token=token,
+        #     user_id=info["sub"],
+        #     full_info=info,
+        # )

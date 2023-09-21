@@ -1,7 +1,5 @@
-import os
 from secrets import token_urlsafe
 from typing import Dict, Tuple, TypedDict
-from dotenv import load_dotenv
 import jwt
 from pydantic import BaseModel
 
@@ -29,7 +27,7 @@ class TokenPayload(TypedDict):
 def generate_token(uid: str) -> Tuple[SessionID, str]:
     sid = token_urlsafe(32)
     return sid, jwt.encode(
-        payload={ uid: uid, sid: sid },
+        payload={ "uid": uid, "sid": sid },
         key=JWT_SECRET,
         algorithm="HS512"
     )

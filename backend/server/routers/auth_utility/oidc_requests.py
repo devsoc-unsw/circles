@@ -11,7 +11,6 @@ import jwt
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 import requests
-from authlib.integrations.requests_client import OAuth2Session  # type: ignore
 
 from .constants import CLIENT_ID, CLIENT_SECRET
 
@@ -94,30 +93,50 @@ def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str) -> O
     return decoded
 
 def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[str, DecodedIDToken]]:
-    client = OAuth2Session(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, scope=SCOPES)
+    # TODO: figure out how we ought to use state?
+    # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
+    credentials = client_secret_basic_credentials()
+    res = requests.post(
+        TOKEN_ENDPOINT,
+        headers={ 
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": f"Basic {credentials}",
+        },
+        data={
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": REDIRECT_URI,
+        }
+    )
     try:
-        # fetch the token
-        res: TokenResponse = cast(TokenResponse, client.fetch_token(
-            TOKEN_ENDPOINT, 
-            code=code, 
-            state=state, 
-            redirect_uri=REDIRECT_URI,
-            grant_type="authorization_code"
-        ))
+        # https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
+        resjson: dict = res.json()
         print("\n\nDEBUG: exchanged token for\n")
-        pprint(res)
+        pprint(resjson)
         print()
         print()
+        if "error" in resjson:
+            # good kind of error, # TODO: handle the types of errors
+            print(resjson)
+            return None
         
+        # TODO: handle these checks better
+        if resjson.get("token_type", "").lower() != "bearer" or resjson.get("scope", "").lower() != SCOPES:
+            return None
+        if "access_token" not in resjson or "refresh_token" not in resjson or "id_token" not in resjson:
+            return None
+        
+
         # validate the id token
         # TODO: validate the access token
-        id_token = validate_id_token(res["id_token"])
+        id_token = validate_id_token(resjson["id_token"])
         print("\n\nDEBUG: validated id_token\n")
         pprint(id_token)
         print()
         print()
-        return (res["access_token"], id_token)
-    except Exception as e:
+        return (resjson["access_token"], id_token)
+    except requests.exceptions.JSONDecodeError as e:
+        # TODO: error handle this
         print(f"Error exchanging code: {code}")
         print(e)
         return None
