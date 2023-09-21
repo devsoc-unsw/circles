@@ -1,4 +1,4 @@
-import { Input as antdInput, Modal as antdModal } from 'antd';
+import { Modal as antdModal } from 'antd';
 import styled from 'styled-components';
 
 // NOTE: Very hacky way to override modal styling
