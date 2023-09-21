@@ -69,9 +69,9 @@ def hard_requirements(data: PlannerData) -> bool:
     # including validity of the program
     return (
         data.program == "3778"
-        and "COMPA1" in data.specialisations
-        and "MATHC2" in data.specialisations
-        and len(data.plan) == 3
+        # and "COMPA1" in data.specialisations
+        # and "MATHC2" in data.specialisations
+        # and len(data.plan) == 3
     )
 
 
@@ -211,11 +211,10 @@ requirements: dict[int, tuple[Callable[[PlannerData], bool], str]] = {
 
 @router.post("/validateCtf/")
 def validate_ctf(data : PlannerData):
-    print("\n"*3, "HERE================")
+    passed = []
     for req_num, (fn, msg) in requirements.items():
         if not fn(data):
-            print("Not ok: ", req_num)
-            return {"valid": False, "req_num": req_num, "message": msg}
+            return {"valid": False, "failed": req_num, "message": msg}
         print("Ok: ", req_num)
-    return {"valid": True, "req_num": -1, "message": ""}
+    return {"valid": True, "failed": -1, "message": ""}
 
