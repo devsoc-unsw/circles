@@ -17,4 +17,22 @@ const ValidateCtfButton = () => {
   return <CS.Button onClick={validateCtf}>Validate CTF</CS.Button>;
 };
 
-export default ValidateCtfButton;
+const Modal = styled(antdModal)`
+  .ant-modal-footer {
+    border: 0px;
+  }
+  .ant-modal-header {
+    border-color: ${({ theme }) => theme.editMark.borderColorHeader};
+  }
+  .ant-btn-default {
+    background-color: ${({ theme }) => theme.editMark.backgroundColor};
+    border-color: ${({ theme }) => theme.editMark.borderColor};
+    color: ${({ theme }) => theme.editMark.color};
+    &:hover {
+      background-color: ${({ theme }) => theme.editMark.backgroundColorHover};
+      border-color: ${({ theme }) => theme.purplePrimary};
+    }
+  }
+`;
+
+export default { EditMarkWrapper, LetterGradeWrapper, Input, Modal };
