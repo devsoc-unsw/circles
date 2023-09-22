@@ -194,27 +194,42 @@ def comp1531_third_year(data: PlannerData) -> bool:
 10. In your `N`-th year, you can only take `N + 1` math courses
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
 """
-requirements: dict[int, tuple[Callable[[PlannerData], bool], str]] = {
-    0: (hard_requirements, "You have not passed the hard requirement to get your submission validated."),
-    1: (summer_course, "You must complete at least one course in the summer term."),
-    2: (extended_courses, "You must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
-    3: (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this."),
-    4: (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this."),
-    5: (comp1511_marks, "You must achieve a mark of 100 in COMP1511."),
-    6: (gen_ed_sum, "The sum of your Gen-Ed course codes must not exceed 2200."),
-    7: (gen_ed_faculty, "Each Gen-Ed unit that you take must be from a different faculty"),
-    8: (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code."),
-    9: (comp1531_third_year, "COMP1531 must be taken in your third year"),
-    10: (math_limit, "In your N-th year, you can only take N + 1 math courses."),
-    11: (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3"),
-}
+requirements: list[tuple[Callable[[PlannerData], bool], str]] = [
+    # Section 0
+    (hard_requirements, "You have not passed the hard requirement to get your submission validated."),
+    # Section 1 - Some requirements
+    (summer_course, "You must complete at least one course in the summer term."),
+    (comp1511_marks, "You must achieve a mark of 100 in COMP1511."),
+    # Section 2 - 
+    (extended_courses, "You must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
+    (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this."),
+    (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this."),
+    (gen_ed_sum, "The sum of your Gen-Ed course codes must not exceed 2200."),
+    # Section 3 - wtf?
+    (gen_ed_faculty, "Each Gen-Ed unit that you take must be from a different faculty"),
+    (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code."),
+    (comp1531_third_year, "COMP1531 must be taken in your third year"),
+    (math_limit, "In your N-th year, you can only take N + 1 math courses."),
+    (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3"),
+]
 
 @router.post("/validateCtf/")
 def validate_ctf(data : PlannerData):
-    passed = []
-    for req_num, (fn, msg) in requirements.items():
+    passed: list[str] = []
+    for req_num, (fn, msg) in enumerate(requirements):
         if not fn(data):
-            return {"valid": False, "failed": req_num, "message": msg}
+            return {
+                "valid": False,
+                "passed": passed,
+                "failed": req_num,
+                "message": msg
+            }
+        passed.append(msg)
         print("Ok: ", req_num)
-    return {"valid": True, "failed": -1, "message": ""}
+    return {
+        "valid": True,
+        "failed": -1,
+        "passed": passed,
+        "message": "Congratulations! You have passed all the requirements for the CTF." 
+    }
 
