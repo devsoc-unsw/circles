@@ -195,21 +195,22 @@ def comp1531_third_year(data: PlannerData) -> bool:
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
 """
 requirements: list[tuple[Callable[[PlannerData], bool], str]] = [
-    # Section 0
-    (hard_requirements, "You have not passed the hard requirement to get your submission validated."),
-    # Section 1 - Some requirements
-    (summer_course, "You must complete at least one course in the summer term."),
-    (comp1511_marks, "You must achieve a mark of 100 in COMP1511."),
-    # Section 2 - 
-    (extended_courses, "You must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
+    # The following are conditions placed on Ollie's enrolment by the university and
+    # the providers of their scholarship.
+    (hard_requirements, "Before you can submit, you must check that you are in a 3 year CS degree and have a math minor"),
+    (summer_course, "Ollie must take one summer COMP course."),
+    (comp1511_marks, "To keep their scholarship, Ollie must achieve a mark of 100 in COMP1511."),
+    (extended_courses, "Ollie must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
+    # The following reflect changes made to University Policy after Ollie's enrolment.
+    (comp1531_third_year, "Unable to find a partner earlier, Ollie must take COMP1531 in their third year."),
+    (gen_ed_faculty, "The university has decided that General Education must be very general. As such, each Gen-Ed unit that Ollie takes must be from a different faculty."),
+    (math_limit, "The university has become a big believer in spaced repetition and want to prevent students from cramming subjects for their minors. Now, in their N-th year, Ollie can only take N + 1 math courses."),
+    (gen_ed_sum, "Course codes now reflect the difficulty of a course. To avoid extremely stressful terms, the sum of Olli's Gen-Ed course codes must not exceed 2200."),
+    # Ollie has joined the number theory club and has developed superstitions about
+    # certain numbers
+    (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code."),
     (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this."),
     (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this."),
-    (gen_ed_sum, "The sum of your Gen-Ed course codes must not exceed 2200."),
-    # Section 3 - wtf?
-    (gen_ed_faculty, "Each Gen-Ed unit that you take must be from a different faculty"),
-    (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code."),
-    (comp1531_third_year, "COMP1531 must be taken in your third year"),
-    (math_limit, "In your N-th year, you can only take N + 1 math courses."),
     (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3"),
 ]
 
