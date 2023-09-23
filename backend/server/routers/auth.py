@@ -13,11 +13,12 @@ from server.config import CLIENT_ID
 from typing import Annotated, Dict, List, Literal, Optional, Tuple, TypedDict, cast
 from fastapi import APIRouter, Depends, HTTPException, Header, Request, Security
 from pydantic import BaseModel
+from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 
 from backend.server.routers.auth_utility.session_token import SessionStorage
 
 from .auth_utility.middleware import HTTPBearer401, SessionTokenToValidUserID
-from .auth_utility.oidc_requests import UserInfoResponse, exchange_auth_code_for_tokens, get_user_info
+from .auth_utility.oidc_requests import OIDCError, UserInfoResponse, exchange_and_validate, get_user_info
 
 router = APIRouter(
     prefix="/auth",
@@ -90,11 +91,17 @@ class ExchangeCodePayload(BaseModel):
 
 @router.post("/login")
 def exchange_authorization_code(data: ExchangeCodePayload) -> str:
-    res = exchange_auth_code_for_tokens(data.code, data.state)
-    if res is None:
+    try:
+        res = exchange_and_validate(data.code)
+        if res is None:
+            raise HTTPException(
+                status_code=HTTP_401_UNAUTHORIZED,
+                detail=f"Invalid code: {data.code}"
+            )
+    except OIDCError as e:
         raise HTTPException(
-            status_code=400,
-            detail=f"Invalid code: {data.code}"
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail=e.error_description
         )
     
     # TODO: do some stuff with the id token here like user setup
@@ -102,7 +109,13 @@ def exchange_authorization_code(data: ExchangeCodePayload) -> str:
 
 @router.get("/info")
 def user_info(token: str = Security(require_token)):
-    return get_user_info(token, True)
+    try:
+        return get_user_info(token)
+    except OIDCError as e:
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail=e.error_description
+        )
 
 @router.get("/validatedUserID")
 def get_validated_user_id(user_id: Annotated[str, Security(validated_uid)]) -> str:

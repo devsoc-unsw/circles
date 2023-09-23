@@ -62,37 +62,51 @@ class UserInfoResponse(TypedDict):
     rat: int
     sub: str
 
+class OIDCError(Exception):
+    # TODO: PLACEHOLDER - do better
+    req_status_code: int
+    error: Optional[str]
+    error_description: Optional[str]
+
+    def __init__(self, req_status_code: int, error: Optional[str], error_description: Optional[str]) -> None:
+        self.req_status_code = req_status_code
+        self.error = error
+        self.error_description = error_description
+
+#
+# raw requests
+#
 def client_secret_basic_credentials() -> str:
     con = f"{CLIENT_ID}:{CLIENT_SECRET}".encode("utf-8")
     return base64.b64encode(con).decode("utf-8")
 
-def validate_id_token(token: str) -> DecodedIDToken:
-    # TODO: error check
-    jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)
-    signing_key = jwkclient.get_signing_key_from_jwt(token)
 
-    decoded: DecodedIDToken = jwt.decode(
-        token, 
-        key=signing_key.key, 
-        algorithms=["RS256"],
-        audience=CLIENT_ID,
-        issuer=ISSUER,
-        options={"verify_signature": True},
+def get_user_info(access_token: str) -> UserInfoResponse:
+    # make a request to get user info, if this fails, the token is invalid
+    res = requests.get(
+        USERINFO_ENDPOINT, 
+        headers={ "Authorization": f"Bearer {access_token}" }  # TODO: should i add accepts json
     )
-    return decoded
 
-def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str) -> Optional[DecodedIDToken]:
-    # https://openid.net/specs/openid-connect-core-1_0.html#RefreshTokenResponse
-    # TODO: error hceck
-    decoded = validate_id_token(new_token)
-    if decoded["sub"] != old_token["sub"]:
-        return None
-    if decoded["auth_time"] != old_token["auth_time"]:
-        return None
+    try:
+        resjson = res.json()
+        if res.ok:
+            return resjson
 
-    return decoded
-
-def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[TokenResponse, DecodedIDToken]]:
+        # good kind of error, # TODO: handle the types of errors
+        raise OIDCError(
+            res.status_code,
+            resjson.get("error"),
+            resjson.get("error_description"),
+        )
+    except requests.exceptions.JSONDecodeError:
+        raise OIDCError(
+            res.status_code,
+            "Response not JSON.",  # TODO: make special error
+            res.text
+        )
+    
+def exchange_tokens(code: str) -> TokenResponse:
     # TODO: figure out how we ought to use state?
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
@@ -109,62 +123,22 @@ def exchange_auth_code_for_tokens(code: str, state: str) -> Optional[Tuple[Token
         }
     )
     try:
-        # https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
-        resjson: TokenResponse = res.json()
-        print("\n\nDEBUG: exchanged token for\n")
-        pprint(resjson)
-        print()
-        print()
-        if "error" in resjson:
-            # good kind of error, # TODO: handle the types of errors
-            print(resjson)
-            return None
-        
-        # TODO: handle these checks better
-        if resjson.get("token_type", "").lower() != "bearer" or resjson.get("scope", "").lower() != SCOPES:
-            return None
-        if "access_token" not in resjson or "refresh_token" not in resjson or "id_token" not in resjson:
-            return None
-        
-
-        # validate the id token
-        # TODO: validate the access token
-        id_token = validate_id_token(resjson["id_token"])
-        print("\n\nDEBUG: validated id_token\n")
-        pprint(id_token)
-        print()
-        print()
-        return (resjson, id_token)
-    except requests.exceptions.JSONDecodeError as e:
-        # TODO: error handle this
-        print(f"Error exchanging code: {code}")
-        print(e)
-        return None
-
-def get_user_info(access_token: str, auto_error: bool) -> Optional[UserInfoResponse]:
-    # make a request to get user info, if this fails, the token is invalid
-    res = requests.get(
-        USERINFO_ENDPOINT, 
-        headers={ "Authorization": f"Bearer {access_token}" }
-    )
-    try:
         resjson = res.json()
-        if "error" in resjson:
-            # good kind of error, # TODO: handle the types of errors
-            if auto_error:
-                raise HTTPException(
-                    status_code=res.status_code,
-                    detail=f"Error getting userinfo: {resjson['error_description']}"
-                )
-            return None
-        return cast(UserInfoResponse, resjson)
+        if res.ok:
+            return resjson
+
+        # good kind of error, # TODO: handle the types of errors
+        raise OIDCError(
+            res.status_code,
+            resjson.get("error"),
+            resjson.get("error_description"),
+        )
     except requests.exceptions.JSONDecodeError:
-        if auto_error:
-            raise HTTPException(
-                status_code=res.status_code,
-                detail=f"UserInfo response was not in JSON."
-            )
-        return None
+        raise OIDCError(
+            res.status_code,
+            "Response not JSON.",  # TODO: make special error
+            res.text
+        )
 
 def refresh_access_token(refresh_token: str) -> RefreshResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#RefreshingAccessToken
@@ -181,30 +155,24 @@ def refresh_access_token(refresh_token: str) -> RefreshResponse:
             "scope": SCOPES,
         }
     )
+
     try:
         resjson = res.json()
-        if "error" in resjson:
-            # good kind of error, # TODO: handle the types of errors
-            print(resjson)
-            raise HTTPException(
-                status_code=res.status_code,
-                detail=f"Error getting refresh token: {resjson['error_description']}"
-            )
-        
-        return resjson
-    except requests.exceptions.JSONDecodeError:
-        print(res)
-        raise HTTPException(
-            status_code=res.status_code,
-            detail=f"UserInfo response was not in JSON."
+        if res.ok:
+            return resjson
+
+        # good kind of error, # TODO: handle the types of errors
+        raise OIDCError(
+            res.status_code,
+            resjson.get("error"),
+            resjson.get("error_description"),
         )
-    
-def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Optional[Tuple[RefreshResponse, DecodedIDToken]]:
-    refreshed = refresh_access_token(refresh_token)
-    validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"])
-    if validated is None:
-        return None
-    return refreshed, validated
+    except requests.exceptions.JSONDecodeError:
+        raise OIDCError(
+            res.status_code,
+            "Response not JSON.",  # TODO: make special error
+            res.text
+        )
 
 def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"]):
     # https://www.rfc-editor.org/rfc/rfc7009
@@ -220,23 +188,90 @@ def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"
             "token_type_hint": token_type,
         }
     )
-    if res.status_code == 200:
+    if res.ok:
         return
     
     try:
         resjson = res.json()
-        if "error" in resjson:
-            # good kind of error, # TODO: handle the types of errors
-            print(resjson)
-            raise HTTPException(
-                status_code=res.status_code,
-                detail=f"Error getting refresh token: {resjson['error_description']}"
-            )
-        
-        return resjson
-    except requests.exceptions.JSONDecodeError:
-        print(res)
-        raise HTTPException(
-            status_code=res.status_code,
-            detail=f"UserInfo response was not in JSON."
+
+        # good kind of error, # TODO: handle the types of errors
+        raise OIDCError(
+            res.status_code,
+            resjson.get("error"),
+            resjson.get("error_description"),
         )
+    except requests.exceptions.JSONDecodeError:
+        raise OIDCError(
+            res.status_code,
+            "Response not JSON.",  # TODO: make special error
+            res.text
+        )
+
+# 
+# validation functions
+#
+# TODO: maybe remove the optional for these in favour of OIDC validation errors
+def validate_id_token(token: str) -> Optional[DecodedIDToken]:
+    # TODO: error check
+    jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)
+    signing_key = jwkclient.get_signing_key_from_jwt(token)
+
+    try:
+        return jwt.decode(
+            token, 
+            key=signing_key.key, 
+            algorithms=["RS256"],
+            audience=CLIENT_ID,
+            issuer=ISSUER,
+            options={"verify_signature": True},
+        )
+    except jwt.exceptions.InvalidTokenError as e:
+        # TODO: handle better
+        return None
+
+def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str) -> Optional[DecodedIDToken]:
+    # https://openid.net/specs/openid-connect-core-1_0.html#RefreshTokenResponse
+    # TODO: error hceck
+    decoded = validate_id_token(new_token)
+
+    if decoded is None:
+        return None
+    if decoded["sub"] != old_token["sub"]:
+        return None
+    if decoded["auth_time"] != old_token["auth_time"]:
+        return None
+
+    return decoded
+
+def exchange_and_validate(authorization_code: str) -> Optional[Tuple[TokenResponse, DecodedIDToken]]:
+    # https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
+    tokensres = exchange_tokens(authorization_code)
+    print("\n\nDEBUG: exchanged token for\n")
+    pprint(tokensres)
+    print()
+    print()
+    
+    # TODO: handle these checks better, potentially move them too
+    if tokensres.get("token_type", "").lower() != "bearer" or tokensres.get("scope", "").lower() != SCOPES:
+        return None
+    if "access_token" not in tokensres or "refresh_token" not in tokensres or "id_token" not in tokensres:
+        return None
+
+    # validate the id token
+    # TODO: validate the access token
+    id_token = validate_id_token(tokensres["id_token"])
+    if id_token is None:
+        return None
+
+    print("\n\nDEBUG: validated id_token\n")
+    pprint(id_token)
+    print()
+    print()
+    return (tokensres, id_token)
+
+def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Optional[Tuple[RefreshResponse, DecodedIDToken]]:
+    refreshed = refresh_access_token(refresh_token)
+    validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"])
+    if validated is None:
+        return None
+    return refreshed, validated

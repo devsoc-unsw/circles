@@ -52,17 +52,17 @@ class HTTPBearer401(SecurityBase):
             return None
         return token
 
-require_token = HTTPBearer401(auto_error=True)
+require_token = HTTPBearer401(auto_error=True)  # TODO: do this better, auto_error does not get transferred through
 class SessionTokenToValidUserID:
     def __init__(self, *, session_store: SessionStorage, auto_error: bool = True):
         self.auto_error = auto_error
         self.sessions = session_store
 
-    async def __call__(self, session_token: str = Security(require_token)) -> Optional[str]:
+    async def __call__(self, token: str = Security(require_token)) -> Optional[str]:
         # TODO: session convert
         # TODO: is sessionstorage taking too much responsibility?
 
-        res = get_user_info("aslkjd", self.auto_error)
+        res = get_user_info("aslkjd")
         if res is None:
             return None
         return res["sub"]
