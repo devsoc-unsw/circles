@@ -61,8 +61,9 @@ def decode_token(token: str) -> TokenJWTPayload:
         ) from e
 
 # TODO: dummy tokens
+DEFAULT_SESSION_LENGTH = 60 * 60 * 24 * 30 
 class SessionStorage:
-    def __init__(self, session_length: PositiveInt = 60 * 60 * 24 * 30):
+    def __init__(self, session_length: PositiveInt = DEFAULT_SESSION_LENGTH):
         # map of uid,sid -> session
         self.store: DefaultDict[str, Dict[str, Session]] = defaultdict(lambda: {})
         self.__load()

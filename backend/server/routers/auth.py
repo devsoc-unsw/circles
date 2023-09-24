@@ -12,12 +12,15 @@ from google.oauth2 import id_token  # type: ignore
 from server.config import CLIENT_ID
 from typing import Annotated, Dict, List, Literal, Optional, Tuple, TypedDict, cast
 from fastapi import APIRouter, Depends, HTTPException, Header, Request, Security
+from secrets import token_urlsafe
+from typing import Annotated, Dict, Iterator, List, Literal, Optional, Tuple, TypedDict, cast
+from fastapi import APIRouter, Depends, HTTPException, Header, Request, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 
 
 
-from .auth_utility.session_token import SessionError, SessionStorage
+from .auth_utility.session_token import DEFAULT_SESSION_LENGTH, SessionError, SessionStorage
 from .auth_utility.middleware import HTTPBearer401, SessionTokenToValidUserID, ValidatedToken
 from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, get_user_info
 from .auth_utility.oidc_errors import OIDCError
@@ -90,6 +93,25 @@ def validate_token(token: str):
 class ExchangeCodePayload(BaseModel):
     code: str
     state: str
+
+class IdentityPayload(BaseModel):
+    session_token: str
+    old_cookie: str
+
+@router.get("/identity", response_model=IdentityPayload)
+def get_identity(req: Request, res: Response):
+    ret = IdentityPayload(session_token="hello", old_cookie=req.cookies.get("my_cookie", "no cookie"))
+    res.set_cookie(
+        key="my_cookie", 
+        value=f"my cookie value {token_urlsafe(32)}",
+        # secure=True,
+        httponly=True,
+        # domain="circlesapi.csesoc.app",
+        # domain="frontend:8000",
+        max_age=60 * 60,
+    )
+    return ret
+
 
 @router.post("/login")
 def exchange_authorization_code(data: ExchangeCodePayload) -> str:
