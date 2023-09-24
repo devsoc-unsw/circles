@@ -8,7 +8,8 @@ from pydantic import BaseModel, PositiveInt
 
 from .constants import JWT_SECRET
 
-from .oidc_requests import DecodedIDToken, OIDCError, TokenResponse, UserInfoResponse, refresh_and_validate, get_user_info, revoke_token
+from .oidc_requests import DecodedIDToken, TokenResponse, UserInfoResponse, refresh_and_validate, get_user_info, revoke_token
+from .oidc_errors import OIDCError, OIDCRequestError
 
 class Session(TypedDict):
     access_token: str                   # most recent access token
@@ -18,15 +19,28 @@ class Session(TypedDict):
     # token_exp: int                      # access token expiry time (best effort since not returned at refresh)
     session_exp: int                    # session expiry time
 
-
-UserID = str
-SessionID = str
-
 class TokenJWTPayload(TypedDict):
     uid: str
     sid: str
 
-def generate_token(uid: str) -> Tuple[SessionID, str]:
+class SessionError(Exception):
+    # Base error
+    def __init__(self, description: str):
+        self.description = description
+
+class SessionInvalidToken(SessionError):
+    def __init__(self, token: str):
+        super().__init__("Invalid session token, could not be decoded correctly.")
+        self.token = token
+
+class SessionExpiredToken(SessionError):
+    def __init__(self, token: str):
+        super().__init__("Expired session token, has already been destroyed.")
+        self.token = token
+
+
+
+def generate_token(uid: str) -> Tuple[str, str]:
     sid = token_urlsafe(32)
     return sid, jwt.encode(
         payload={ "uid": uid, "sid": sid },
@@ -34,7 +48,7 @@ def generate_token(uid: str) -> Tuple[SessionID, str]:
         algorithm="HS512"
     )
 
-def decode_token(token: str) -> Optional[TokenJWTPayload]:
+def decode_token(token: str) -> TokenJWTPayload:
     try:
         return jwt.decode(
             jwt=token,
@@ -42,13 +56,15 @@ def decode_token(token: str) -> Optional[TokenJWTPayload]:
             algorithms=["HS512"]
         )
     except jwt.exceptions.InvalidTokenError as e:
-        # TODO: handle better
-        return None
+        raise SessionInvalidToken(
+            token=token
+        ) from e
 
 # TODO: dummy tokens
 class SessionStorage:
-    def __init__(self, session_length: PositiveInt = 60 * 60 * 24 * 30) -> None:
-        self.store: DefaultDict[UserID, Dict[SessionID, Session]] = defaultdict(lambda: {})
+    def __init__(self, session_length: PositiveInt = 60 * 60 * 24 * 30):
+        # map of uid,sid -> session
+        self.store: DefaultDict[str, Dict[str, Session]] = defaultdict(lambda: {})
         self.__load()
         self.session_length = session_length
 
@@ -87,31 +103,23 @@ class SessionStorage:
         self.__save()
         return jwtstr
 
-    def __get_session_unchecked(self, session_token: str) -> Optional[Tuple[str, str, Session]]:
-        # NOTE: ideally do not use this method
+    def __get_session_unvalidated(self, session_token: str) -> Tuple[str, str, Session]:
         ids = decode_token(session_token)
-        if ids is None:
-            return None
+
         if ids["uid"] not in self.store or ids["sid"] not in self.store[ids["uid"]]:
-            # session did not exist
-            return None
+            raise SessionExpiredToken(token=session_token)
+
+        # TODO: make sure the session hasn't past expired time either
+
         return ids["uid"], ids["sid"], self.store[ids["uid"]][ids["sid"]]
 
     def __refresh_session(self, session_token: str):
         # NOTE: ideally dont use this directly, this is implicitly done if needed with a session_token_to_uid
         # tries to refresh the tokens behind the session, will delete it if it fails
-        if (info := self.__get_session_unchecked(session_token)) is None:
-            return
-        uid, sid, session = info
-
-        # TODO: make sure the session hasn't expired either
+        uid, sid, session = self.__get_session_unvalidated(session_token)
 
         try:
-            res = refresh_and_validate(session["validated_id_token"], session["refresh_token"])
-            if res is None:
-                # TODO: i hate none checks
-                raise Exception()
-            refreshed, validated = res
+            refreshed, validated = refresh_and_validate(session["validated_id_token"], session["refresh_token"])
 
             self.store[uid][sid] = Session(
                 access_token=refreshed["access_token"],
@@ -121,26 +129,24 @@ class SessionStorage:
                 session_exp=session["session_exp"],
             )
             self.__save()
-        except:
-            # TODO: better error checking
+        except OIDCError as e:
+            # TODO: more fine grain error checking
             self.destroy_session(session_token)
-            return
+            raise SessionExpiredToken(
+                token=session_token
+            ) from e 
 
     def destroy_session(self, session_token: str):
         # TODO: do we want abstract the first three lines?
-        if (info := self.__get_session_unchecked(session_token)) is None:
-            return
-        uid, sid, session = info
+        uid, sid, session = self.__get_session_unvalidated(session_token)
 
-        revoke_token(session["refresh_token"], 'refresh_token')
+        revoke_token(session["refresh_token"], "refresh_token")
+
         del self.store[uid][sid]
         self.__save()
 
-    def session_token_to_userinfo(self, session_token: str) -> Optional[UserInfoResponse]:
-        if (info := self.__get_session_unchecked(session_token)) is None:
-            return None
-        uid, sid, session = info
-        # TODO: make sure the session hasnt expired
+    def session_token_to_userinfo(self, session_token: str) -> UserInfoResponse:
+        uid, sid, session = self.__get_session_unvalidated(session_token)
 
         # validate their access tokens are still valid
         # TODO: should this be cached for a few seconds?
@@ -149,6 +155,7 @@ class SessionStorage:
             user_info = get_user_info(session["access_token"])
             # TODO: try refreshing
             return user_info
-        except Exception as e:
+        except OIDCError as e:
+            # TODO: more fine grain error checks 
             self.destroy_session(session_token)
             raise e
