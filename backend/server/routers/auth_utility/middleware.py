@@ -10,8 +10,10 @@ from fastapi.openapi.models import HTTPBearer as HTTPBearerModel
 from fastapi.openapi.models import OAuthFlows as OAuth2FlowsModel
 from fastapi.openapi.models import OAuth2 as OAuth2Model, OAuthFlowAuthorizationCode
 
-from .session_token import SessionStorage
-from .oidc_requests import OIDCError, UserInfoResponse, get_user_info
+
+from .session_token import SessionError, SessionStorage
+from .oidc_requests import UserInfoResponse, get_user_info
+from .oidc_errors import OIDCError
 
 def extract_bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("Authorization")
@@ -58,19 +60,21 @@ class SessionTokenToValidUserID:
         # TODO: do we want auto error?
         self.sessions = session_store
 
-    async def __call__(self, token: str = Security(require_token)) -> Optional[ValidatedToken]:
+    async def __call__(self, token: str = Security(require_token)) -> ValidatedToken:
         try:
             res = self.sessions.session_token_to_userinfo(token)
-            if res is None:
-                raise HTTPException(
-                    status_code=HTTP_401_UNAUTHORIZED,
-                    detail=f"Invalid session token: {token}"
-                )
+        except SessionError as e:
+            # TODO: more fine grained error checking
+            raise HTTPException(
+                status_code=HTTP_401_UNAUTHORIZED,
+                detail=e.description
+            ) from e
         except OIDCError as e:
+            # TODO: more fine grained error checking
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
                 detail=e.error_description
-            )
+            ) from e
 
         return ValidatedToken(
             user_id=res["sub"],
