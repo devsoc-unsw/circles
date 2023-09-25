@@ -237,17 +237,17 @@ requirements: list[tuple[Callable[[PlannerData], bool], str, Optional[str]]] = [
     (hard_requirements, "Before you can submit, you must check that you are in a 3 year CS degree and have a math minor", None),
     (summer_course, "Ollie must take one summer COMP course.", None),
     (comp1511_marks, "To keep their scholarship, Ollie must achieve a mark of 100 in COMP1511.", None),
-    (extended_courses, "Ollie must complete FOUR COMP courses with extended in the name that have not been discontinued.", "mVd3_1t_2_un1"),
+    (extended_courses, "Ollie must complete FOUR COMP courses with extended in the name that have not been discontinued.", "levelup{mVd3_1t_2_un1}"),
     # Challenge 2
     (comp1531_third_year, "Unable to find a partner earlier, Ollie must take COMP1531 in their third year.", None),
     (gen_ed_faculty, "The university has decided that General Education must be very general. As such, each Gen-Ed unit that Ollie takes must be from a different faculty.", None),
     (math_limit, "The university has become a big believer in spaced repetition and want to prevent students from cramming subjects for their minors. Now, in their N-th year, Ollie can only take N + 1 math courses.", None),
-    (gen_ed_sum, "Course codes now reflect the difficulty of a course. To avoid extremely stressful terms, the sum of Olli's Gen-Ed course codes must not exceed 2200.", "i<3TryMesters"),
+    (gen_ed_sum, "Course codes now reflect the difficulty of a course. To avoid extremely stressful terms, the sum of Olli's Gen-Ed course codes must not exceed 2200.", "levelup{i<3TryMesters}"),
     # Challenge 3
     (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code.", None),
     (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this.", None),
     (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this.", None),
-    (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3", "CU1Tur3d"),
+    (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3", "levelup{CU1Tur3d}"),
 ]
 
 @router.post("/validateCtf/")
