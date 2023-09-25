@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Optional
 from pydantic import BaseModel
 
 from fastapi import APIRouter, HTTPException
@@ -32,6 +32,10 @@ router = APIRouter(
 8. Must take two courses from different faculties that have the same course code.
 10. In your `N`-th year, you can only take `N + 1` math courses
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
+
+CTF Challenge:
+
+Description:
 """
 
 def degree(data: PlannerData) -> bool:
@@ -76,12 +80,13 @@ def hard_requirements(data: PlannerData) -> bool:
 
 
 def extended_courses(data: PlannerData) -> bool:
-    return {
+    return len({
         "COMP3821",
         "COMP3891",
         "COMP6841",
         "COMP6843"
-    }.issubset(all_courses(data))
+        "COMP6845"
+    }.intersection(all_courses(data))) >= 4
 
 
 def summer_course(data: PlannerData) -> bool:
@@ -194,43 +199,47 @@ def comp1531_third_year(data: PlannerData) -> bool:
 10. In your `N`-th year, you can only take `N + 1` math courses
 11. There must not be more than `6` occurrences of the number 3 in the entire degree.
 """
-requirements: list[tuple[Callable[[PlannerData], bool], str]] = [
-    # The following are conditions placed on Ollie's enrolment by the university and
-    # the providers of their scholarship.
-    (hard_requirements, "Before you can submit, you must check that you are in a 3 year CS degree and have a math minor"),
-    (summer_course, "Ollie must take one summer COMP course."),
-    (comp1511_marks, "To keep their scholarship, Ollie must achieve a mark of 100 in COMP1511."),
-    (extended_courses, "Ollie must complete ALL COMP courses with extended in the name that have not been discontinued. Hint: there are 4."),
-    # The following reflect changes made to University Policy after Ollie's enrolment.
-    (comp1531_third_year, "Unable to find a partner earlier, Ollie must take COMP1531 in their third year."),
-    (gen_ed_faculty, "The university has decided that General Education must be very general. As such, each Gen-Ed unit that Ollie takes must be from a different faculty."),
-    (math_limit, "The university has become a big believer in spaced repetition and want to prevent students from cramming subjects for their minors. Now, in their N-th year, Ollie can only take N + 1 math courses."),
-    (gen_ed_sum, "Course codes now reflect the difficulty of a course. To avoid extremely stressful terms, the sum of Olli's Gen-Ed course codes must not exceed 2200."),
-    # Ollie has joined the number theory club and has developed superstitions about
-    # certain numbers
-    (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code."),
-    (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this."),
-    (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this."),
-    (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3"),
+# (validtor_func, message, Optional<flag>)
+requirements: list[tuple[Callable[[PlannerData], bool], str, Optional[str]]] = [
+    # Challenge 1
+    (hard_requirements, "Before you can submit, you must check that you are in a 3 year CS degree and have a math minor", None),
+    (summer_course, "Ollie must take one summer COMP course.", None),
+    (comp1511_marks, "To keep their scholarship, Ollie must achieve a mark of 100 in COMP1511.", None),
+    (extended_courses, "Ollie must complete FOUR COMP courses with extended in the name that have not been discontinued.", "mVd3_1t_2_un1"),
+    # Challenge 2
+    (comp1531_third_year, "Unable to find a partner earlier, Ollie must take COMP1531 in their third year.", None),
+    (gen_ed_faculty, "The university has decided that General Education must be very general. As such, each Gen-Ed unit that Ollie takes must be from a different faculty.", None),
+    (math_limit, "The university has become a big believer in spaced repetition and want to prevent students from cramming subjects for their minors. Now, in their N-th year, Ollie can only take N + 1 math courses.", None),
+    (gen_ed_sum, "Course codes now reflect the difficulty of a course. To avoid extremely stressful terms, the sum of Olli's Gen-Ed course codes must not exceed 2200.", "i<3TryMesters"),
+    # Challenge 3
+    (same_code_diff_faculty, "You must take two courses from different faculties that have the same course code.", None),
+    (term_sums_even, "You must ensure that the sum of your course codes in even terms is even. Note that summer courses do not count towards this.", None),
+    (term_sums_odd, "You must ensure that the sum of your course codes in odd terms is odd. Note that summer courses do not count towards this.", None),
+    (six_threes_limit, "In all your course codes, there can be at most 6 occurrences of the number 3", "CU1Tur3d"),
 ]
 
 @router.post("/validateCtf/")
 def validate_ctf(data : PlannerData):
     passed: list[str] = []
-    for req_num, (fn, msg) in enumerate(requirements):
+    flags: list[str] = []
+    for req_num, (fn, msg, flag) in enumerate(requirements):
         if not fn(data):
             return {
                 "valid": False,
                 "passed": passed,
                 "failed": req_num,
+                "flags": flags,
                 "message": msg
             }
         passed.append(msg)
+        if flag is not None:
+            flags.append(flag)
         print("Ok: ", req_num)
     return {
         "valid": True,
         "failed": -1,
         "passed": passed,
+        "flags": flags,
         "message": "Congratulations! You have passed all the requirements for the CTF." 
     }
 

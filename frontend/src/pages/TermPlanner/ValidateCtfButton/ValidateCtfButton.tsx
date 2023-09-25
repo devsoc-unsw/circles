@@ -14,6 +14,7 @@ type CtfResult = {
   failed: number;
   passed: Array<string>;
   message: string;
+  flags: Array<string>;
 };
 
 const { Text, Title } = Typography;
@@ -28,7 +29,8 @@ const loadingResult: CtfResult = {
   valid: false,
   failed: 0,
   passed: [],
-  message: 'Loading...'
+  message: 'Loading...',
+  flags: [],
 };
 
 const ModalTitle = styled(Title)`
