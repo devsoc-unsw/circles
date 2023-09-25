@@ -80,6 +80,18 @@ const ValidateCtfButton = () => {
             </ol>
           }
         </TextBlock>
+        <ModalTitle level={4}>Unlocked Flags</ModalTitle>
+        <TextBlock>
+          <ol>
+            {(result.flags.length > 0) && result.flags.map((flag, index) => (
+              <>
+                <li>
+                  <TextBlock key={index}>{flag}</TextBlock>
+                </li>
+              </>
+            ))}
+          </ol>
+        </TextBlock>
         <ModalTitle level={4}>
           {
             result.valid ? (
