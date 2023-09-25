@@ -47,10 +47,11 @@ router = APIRouter(
     prefix="/ctf", tags=["ctf"], responses={404: {"description": "Not found"}}
 )
 
+def degree(data: PlannerData) -> bool:
+    return data.program == "3778"
+
+
 def all_courses(data: PlannerData) -> set[str]:
-    """
-    Returns all courses from a planner
-    """
     return {
         course
         for year in data.plan
@@ -60,25 +61,14 @@ def all_courses(data: PlannerData) -> set[str]:
 
 
 def get_code(course: str) -> int:
-    """
-    Returns the code of a courseCode
-    EG: COMP1511 -> 1511
-    """
     return int(course[4:])
 
 
 def get_faculty(course: str) -> str:
-    """
-    Returns the faculty of a courseCode
-    EG: COMP1511 -> COMP
-    """
     return course[:4]
 
 
 def gen_eds(courses: set[str]) -> set[str]:
-    """
-    Returns all gen eds from a set of courses
-    """
     return set(
         course
         for course in courses
@@ -99,9 +89,6 @@ def hard_requirements(data: PlannerData) -> bool:
 
 
 def extended_courses(data: PlannerData) -> bool:
-    """
-    Must take atleast 3 courses with extended in the name
-    """
     extended_courses = {
         "COMP3821",
         "COMP3891",
@@ -113,9 +100,6 @@ def extended_courses(data: PlannerData) -> bool:
 
 
 def summer_course(data: PlannerData) -> bool:
-    """
-    Must take atleast one summer course
-    """
     return any(
         course.startswith("COMP")
         for year in data.plan
@@ -157,6 +141,15 @@ def term_sums_odd(data: PlannerData) -> bool:
                 return False
     return True
  
+def term_sums(data: PlannerData) -> bool:
+    for year in data.plan:
+        for i, term in enumerate(year[2::2], 1):
+            if sum(map(get_code, term.keys())) % 2 != i % 2:
+                return False
+
+    return True
+
+
 def comp1511_marks(data: PlannerData) -> bool:
     """
     Ollie must achieve a mark of 100 in COMP1511 to keep his scholarship
