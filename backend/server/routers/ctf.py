@@ -14,6 +14,10 @@ Scenario:
     requirements. In this intriguing scenario, you must help Ollie, the otter
     scholar, chart his academic path using Circles.
 
+    Ollie is planning his 3 year Computer Science (3778) degree starting in 2024
+    and wants to take a Computer Science major and Mathematics minor. Help him set 
+    up his degree in the degree wizard!
+    
     When you are done, press the `Validate CTF` button on the term planner page
     to recieve your flags.
 
@@ -237,7 +241,7 @@ requirements: list[tuple[Callable[[PlannerData], bool], str, Optional[str]]] = [
     (hard_requirements, "Before you can submit, you must check that you are in a 3 year CS degree and have a math minor", None),
     (summer_course, "Ollie must take one summer COMP course.", None),
     (comp1511_marks, "To keep their scholarship, Ollie must achieve a mark of 100 in COMP1511.", None),
-    (extended_courses, "Ollie must complete FOUR COMP courses with extended in the name that have not been discontinued.", "levelup{mVd3_1t_2_un1}"),
+    (extended_courses, "Ollie must complete at least THREE COMP courses with extended in the name that have not been discontinued.", "levelup{mVd3_1t_2_un1}"),
     # Challenge 2
     (comp1531_third_year, "Unable to find a partner earlier, Ollie must take COMP1531 in their third year.", None),
     (gen_ed_faculty, "The university has decided that General Education must be very general. As such, each Gen-Ed unit that Ollie takes must be from a different faculty.", None),
