@@ -73,20 +73,21 @@ def hard_requirements(data: PlannerData) -> bool:
     # including validity of the program
     return (
         data.program == "3778"
-        # and "COMPA1" in data.specialisations
-        # and "MATHC2" in data.specialisations
-        # and len(data.plan) == 3
+        and "COMPA1" in data.specialisations
+        and "MATHC2" in data.specialisations
+        and len(data.plan) == 3
     )
 
 
 def extended_courses(data: PlannerData) -> bool:
-    return len({
+    extended_courses = {
         "COMP3821",
         "COMP3891",
         "COMP6841",
         "COMP6843"
         "COMP6845"
-    }.intersection(all_courses(data))) >= 4
+    }
+    return len(extended_courses & all_courses(data)) >= 3
 
 
 def summer_course(data: PlannerData) -> bool:
