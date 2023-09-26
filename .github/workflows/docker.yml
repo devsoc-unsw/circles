@@ -58,10 +58,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: csesoc/deployment
           token: ${{ secrets.GH_TOKEN }}
+          ref: migration
       - name: Install yq - portable yaml processor
         uses: mikefarah/yq@v4.32.2
       - name: Update deployment
@@ -71,8 +72,8 @@ jobs:
           git config user.name "CSESoc CD"
           git config user.email "technical@csesoc.org.au"
           git checkout -b update/circles/${{ github.sha }}
-          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/csesoc/circles-frontend:${{ github.sha }}"' apps/projects/circles/deploy-frontend.yml
-          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/csesoc/circles-backend:${{ github.sha }}"' apps/projects/circles/deploy-backend.yml
+          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/csesoc/circles-frontend:${{ github.sha }}"' projects/circles/deploy-frontend.yml
+          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/csesoc/circles-backend:${{ github.sha }}"' projects/circles/deploy-backend.yml
           git add . 
           git commit -m "feat(circles): update images" 
           git push -u origin update/circles/${{ github.sha }}
