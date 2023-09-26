@@ -76,5 +76,5 @@ jobs:
           git add . 
           git commit -m "feat(circles): update images" 
           git push -u origin update/circles/${{ github.sha }}
-          gh pr create --title "feat(circles): update image" --body "Updates the image for the circles deployment to commit csesoc/circles@${{ github.sha }}." > URL
+          gh pr create -B migration --title "feat(circles): update image" --body "Updates the image for the circles deployment to commit csesoc/circles@${{ github.sha }}." > URL
           gh pr merge $(cat URL) --squash -d
