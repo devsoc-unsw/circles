@@ -133,46 +133,33 @@ def term_sums_even(data: PlannerData) -> bool:
     Check that the sum of the course codes in even terms is even
     """
     is_even: Callable[[int], bool] = lambda x: x % 2 == 0
-    print("Checking even")
-    for y, year in enumerate(data.plan):
-        # Exclude summer term + odd terms
-        for i, term in enumerate(year[2::2], 2):
-            term_sum = sum(map(get_code, term.keys()))
-            print(f"{y}T{i} sum: {term_sum}")
-            if not is_even(term_sum):
-                print("failed: ", term)
-                return False
+    return all(
+        is_even(sum(map(get_code, term.keys())))
+        for year in data.plan[::2]
+        for term in year[1::2]
+    )
 
-    return True
-
-# TODO
 def term_sums_odd(data: PlannerData) -> bool:
     """
     Check that the sum of the course codes in odd terms is odd
     """
     is_odd: Callable[[int], bool] = lambda x: x % 2 == 1
-    print("Checking odd")
-    for year in data.plan[::2]:
-        # Exclude summer term + even terms
-        for term in year[1::2]:
-            term_sum = sum(map(get_code, term.keys()))
-            if not is_odd(term_sum):
-                print("failed: ", term)
-                return False
-    return True
+    return all(
+        is_odd(sum(map(get_code, term.keys())))
+        for year in data.plan[::2]
+        for term in year[1::2]
+    )
  
 def comp1511_marks(data: PlannerData) -> bool:
     """
     Ollie must achieve a mark of 100 in COMP1511 to keep his scholarship
     """
-    for year in data.plan:
-        for term in year:
-            for course in term:
-                _, marks = term[course]  # type: ignore
-                if course == "COMP1511":
-                    return marks == 100
-
-    return False
+    return any(
+        marks == 100 and course == "COMP1511"
+        for year in data.plan
+        for term in year
+        for (course, (_, marks)) in term.items() # type: ignore
+    )
 
 
 def gen_ed_sum(data: PlannerData) -> bool:
@@ -204,12 +191,13 @@ def math_limit(data: PlannerData) -> bool:
     In your N-th year, you can only take N + 1 math courses
     """
     for i, year in enumerate(data.plan, 1):
-        num_math = len([
-            course
+        # Use sum(1, ...) instead of len to avoid dual allocation
+        num_math = sum(
+            1
             for term in year
             for course in term
             if course.startswith("MATH")
-        ])
+        )
         if num_math > i + 1:
             return False
 
@@ -228,15 +216,16 @@ def comp1531_third_year(data: PlannerData) -> bool:
     COMP1531 must be taken in the third year
     """
     third_year = data.plan[2]
-    for term in third_year:
-        for course in term:
-            if course == "COMP1531":
-                return True
+    return any(
+        course == "COMP1531"
+        for term in third_year
+        for course in term
+    )
 
-    return False
-
-# (validator_func, message, Optional<flag>)
-requirements: list[tuple[Callable[[PlannerData], bool], str, Optional[str]]] = [
+ValidatorFn = Callable[[PlannerData], bool]
+ObjectiveMessage = str
+Flag = str
+requirements: list[tuple[ValidatorFn, ObjectiveMessage, Optional[Flag]]] = [
     # Challenge 1
     (hard_requirements, "Before you can submit, you must check that you are in a 3 year CS degree and have a math minor", None),
     (summer_course, "Ollie must take one summer COMP course.", None),
@@ -255,7 +244,7 @@ requirements: list[tuple[Callable[[PlannerData], bool], str, Optional[str]]] = [
 ]
 
 @router.post("/validateCtf/")
-def validate_ctf(data : PlannerData):
+def validate_ctf(data: PlannerData):
     """
     Validates the CTF
     """
@@ -270,10 +259,11 @@ def validate_ctf(data : PlannerData):
                 "flags": flags,
                 "message": msg
             }
+
         passed.append(msg)
         if flag is not None:
             flags.append(flag)
-        print("Ok: ", req_num)
+
     return {
         "valid": True,
         "failed": -1,
