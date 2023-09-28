@@ -135,8 +135,8 @@ def term_sums_even(data: PlannerData) -> bool:
     is_even: Callable[[int], bool] = lambda x: x % 2 == 0
     return all(
         is_even(sum(map(get_code, term.keys())))
-        for year in data.plan[::2]
-        for term in year[1::2]
+        for year in data.plan
+        for term in year[2::2]
     )
 
 def term_sums_odd(data: PlannerData) -> bool:
@@ -146,7 +146,7 @@ def term_sums_odd(data: PlannerData) -> bool:
     is_odd: Callable[[int], bool] = lambda x: x % 2 == 1
     return all(
         is_odd(sum(map(get_code, term.keys())))
-        for year in data.plan[::2]
+        for year in data.plan
         for term in year[1::2]
     )
  
@@ -155,10 +155,11 @@ def comp1511_marks(data: PlannerData) -> bool:
     Ollie must achieve a mark of 100 in COMP1511 to keep his scholarship
     """
     return any(
-        marks == 100 and course == "COMP1511"
+        course == "COMP1511" and mark == 100
         for year in data.plan
         for term in year
-        for (course, (_, marks)) in term.items() # type: ignore
+        for (course, val) in term.items()
+        if val is not None and len(val) >= 2 and (mark := val[1]) is not None
     )
 
 
