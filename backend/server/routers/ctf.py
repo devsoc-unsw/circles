@@ -155,12 +155,11 @@ def comp1511_marks(data: PlannerData) -> bool:
     Ollie must achieve a mark of 100 in COMP1511 to keep his scholarship
     """
     return any(
-        # marks == 100 and course == "COMP1511"
         course == "COMP1511" and mark == 100
         for year in data.plan
         for term in year
         for (course, val) in term.items()
-        if val is not None and len(val) >= 2  and (mark := val[1]) is not None
+        if val is not None and len(val) >= 2 and (mark := val[1]) is not None
     )
 
 
