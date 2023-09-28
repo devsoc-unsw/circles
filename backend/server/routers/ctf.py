@@ -136,7 +136,7 @@ def term_sums_even(data: PlannerData) -> bool:
     return all(
         is_even(sum(map(get_code, term.keys())))
         for year in data.plan[::2]
-        for term in year[1::2]
+        for term in year[::2]
     )
 
 def term_sums_odd(data: PlannerData) -> bool:
