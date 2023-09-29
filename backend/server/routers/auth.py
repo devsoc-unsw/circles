@@ -108,7 +108,7 @@ def get_identity(req: Request, res: Response):
         httponly=True,
         # domain="circlesapi.csesoc.app",
         # domain="frontend:8000",
-        max_age=60 * 60,
+        max_age=60,
     )
     return ret
 
