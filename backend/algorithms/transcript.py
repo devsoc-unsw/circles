@@ -1,0 +1,78 @@
+from PyPDF2 import PdfReader
+import sys
+import re
+from fastapi import UploadFile
+# from server.routers.model import LetterGrade, Mark
+
+from typing import Any, BinaryIO, Dict, Literal, Tuple
+
+
+
+
+Term = str
+YearInt = int
+CourseCode = str
+Grade = str | Any | None
+Mark = int | None
+
+CoursesByYear = Dict[YearInt, Dict[Term, Dict[CourseCode, Tuple[Mark, Grade]]]]
+
+def parse_transcript(file: BinaryIO) -> CoursesByYear:
+    reader = PdfReader(file)
+
+    page_texts = list(map(lambda p: p.extract_text(), reader.pages))
+
+    for i in range(len(page_texts)):
+        search = re.search("Student ID: [0-9]*\n", page_texts[i])
+        if not search: continue
+        page_texts[i] = page_texts[i][search.end(0):] # chop off page beginning text
+
+    text = "".join(page_texts)
+    lines = text.split('\n')
+
+    complete_exp = r"([A-Z]{4}) ([0-9]{4}) .* ([^ ]+) ([^ ]+) ([0-9]+) ([A-Z]{2})"
+    def parse_course_line(line):
+        match = re.fullmatch(complete_exp, line)
+        if match:
+            course_letters, course_number, uattempted, upassed, mark, grade = match.groups()
+            course_code = course_letters + course_number
+            mark = int(mark)
+            return course_code, mark, grade
+        match = re.fullmatch(r"([A-Z]{4}) ([0-9]{4}) .* ([0-9]+\.[0-9]+) ", line)
+        if match:
+            course_letters, course_number, uattempted = match.groups()
+            course_code = course_letters + course_number
+            return course_code, None, None
+        return None
+
+
+    years: CoursesByYear = dict()
+
+    i = 0
+    while i < len(lines):
+        year, term = None, None
+        if re.fullmatch("Summer Term [0-9]{4}", lines[i]):
+            term = '0'
+            year = lines[i].split(' ')[-1]
+        if re.fullmatch("Term [1-3] [0-9]{4}", lines[i]):
+            _, term, year = lines[i].split(' ')
+        if year != None and term != None:
+            year = int(year)
+            if year not in years:
+                years[year] = dict()
+            termStr = 'T' + term
+            years[year][termStr] = dict()
+            while lines[i] != "Course Title Attempted Passed Mark Grade":
+                i += 1
+            i += 1
+            course_tup = parse_course_line(lines[i])
+            while course_tup:
+                course_code, mark, grade = course_tup
+                years[year][termStr][course_code] = (mark, grade)
+                i += 1
+                course_tup = parse_course_line(lines[i])
+        else:
+            i += 1
+
+    return years
+

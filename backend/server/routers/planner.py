@@ -7,8 +7,9 @@ from operator import itemgetter
 from typing import Dict, List, Optional, Tuple
 
 from algorithms.autoplanning import autoplan
+from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile
 from server.config import DUMMY_TOKEN
 from server.routers.courses import get_course
 from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
@@ -312,6 +313,38 @@ def unschedule_all(token: str = DUMMY_TOKEN):
         for course_list in year.values():
             user['planner']['unplanned'].extend(course_list)
             course_list.clear()
+
+    set_user(token, user, True)
+
+
+@router.post('/addFromTranscript')
+def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
+    """
+    Adds all courses from a transcript into a user's courses
+    """
+    user = get_user(token)
+    transcript_obj = parse_transcript(file.file)
+
+    # could use either tbh but earliest transcript year would be better?
+    startYear = user['planner']['startYear']
+    startYear = min(transcript_obj)
+
+    # gen enough years if empty; ideally years list shouldve alr been gen'd
+    # TODO: remove `or True` and pad planner['years'] when user object
+    # becomes initialized better so this won't break
+    if user['planner']['years'] == [] or True: 
+        user['planner']['years'] = generate_empty_years(
+                1 + max(transcript_obj) - startYear)
+
+    for year, terms_obj in transcript_obj.items():
+        year_offset = year - startYear
+        year_data = user['planner']['years'][year_offset]
+        for term, courses_obj in terms_obj.items():
+            for course, (mark, _) in courses_obj.items():
+                year_data[term].append(course)
+                user['courses'][course] = {
+                        'code': course, 'suppressed': False, 'mark': mark
+                }
 
     set_user(token, user, True)
 
