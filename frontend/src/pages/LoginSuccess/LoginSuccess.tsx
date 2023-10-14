@@ -11,7 +11,7 @@ import { setToken } from 'reducers/settingsSlice';
 // import MetaTags from 'react-meta-tags';
 import './index.less';
 import PageTemplate from 'components/PageTemplate';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { exchangeAuthCode } from 'utils/api/auth';
 
@@ -41,7 +41,8 @@ const LoginSuccess = () => {
       // exchange the code
       let access_token = '';
       try {
-        access_token = await exchangeAuthCode(codeParam, stateParam);
+        const res = await exchangeAuthCode(codeParam, stateParam);
+        access_token = res.session_token
         localStorage.setItem('csesoc-last-token', access_token);
       } catch (e) {
         setError('auth code exchange failed');
@@ -66,6 +67,7 @@ const LoginSuccess = () => {
         <div>
           Error: '{error}'
         </div>
+        <Link to="/tokens">tokens playground</Link>
       </div>
     </PageTemplate>
   );
