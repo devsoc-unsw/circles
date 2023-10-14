@@ -8,6 +8,10 @@ export enum TokenStatus {
   VALID
 }
 
+interface IdentityPayload {
+  session_token: string;
+}
+
 export const checkTokenStatus = async (): Promise<TokenStatus> => {
   // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
   const token = await getToken();
@@ -28,9 +32,19 @@ export const checkTokenStatus = async (): Promise<TokenStatus> => {
   }
 };
 
-export const exchangeAuthCode = async (code: string, state: string): Promise<string> => {
+export const exchangeAuthCode = async (code: string, state: string): Promise<IdentityPayload> => {
   console.log(`exchanging ${state} ${code}`);
-  const res = await axios.post<string>('/auth/login', { code, state });
+  const res = await axios.post<IdentityPayload>(
+    '/auth/login',
+    { code, state },
+    { withCredentials: true }
+  );
   console.log('exchange result:', res);
+  return res.data;
+};
+
+export const getSessionToken = async (): Promise<IdentityPayload> => {
+  // TODO: try this
+  const res = await axios.get<IdentityPayload>('/auth/identity', { withCredentials: true });
   return res.data;
 };

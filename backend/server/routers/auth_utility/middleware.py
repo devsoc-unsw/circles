@@ -1,4 +1,5 @@
 from pprint import pprint
+from time import time
 from typing import Any, Dict, List, Literal, Optional, Tuple, TypeVar, TypedDict, cast
 from fastapi import HTTPException, Request, Security
 from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
@@ -17,6 +18,7 @@ from .oidc_errors import OIDCError
 
 def extract_bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("Authorization")
+    print(authorization)
     scheme, credentials = get_authorization_scheme_param(authorization)
     if not (authorization and scheme and credentials and scheme.lower() == "bearer" and credentials != ""):
         return None
@@ -25,7 +27,7 @@ def extract_bearer_token(request: Request) -> Optional[str]:
 class ValidatedToken(BaseModel):
     user_id: str
     token: str
-    full_info: UserInfoResponse
+    expires_at: int
 
 class HTTPBearer401(SecurityBase):
     # remake because of: https://github.com/tiangolo/fastapi/issues/10177
@@ -62,7 +64,7 @@ class SessionTokenToValidUserID:
 
     async def __call__(self, token: str = Security(require_token)) -> ValidatedToken:
         try:
-            res = self.sessions.session_token_to_userinfo(token)
+            uid, exp = self.sessions.check_session_token(token)
         except SessionError as e:
             # TODO: more fine grained error checking
             raise HTTPException(
@@ -77,7 +79,7 @@ class SessionTokenToValidUserID:
             ) from e
 
         return ValidatedToken(
-            user_id=res["sub"],
+            user_id=uid,
             token=token,
-            full_info=res
+            expires_at=exp,
         )
