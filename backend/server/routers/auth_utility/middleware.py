@@ -12,7 +12,7 @@ from fastapi.openapi.models import OAuthFlows as OAuth2FlowsModel
 from fastapi.openapi.models import OAuth2 as OAuth2Model, OAuthFlowAuthorizationCode
 
 
-from .session_token import SessionError, SessionStorage
+from .session_token import SessionError, SessionInvalidToken, SessionStorage
 from .oidc_requests import UserInfoResponse, get_user_info
 from .oidc_errors import OIDCError
 
@@ -57,7 +57,7 @@ class HTTPBearer401(SecurityBase):
         return token
 
 require_token = HTTPBearer401(auto_error=True)  # TODO: do this better, auto_error does not get transferred through
-class SessionTokenToValidUserID:
+class SessionTokenValidator:
     def __init__(self, *, session_store: SessionStorage):
         # TODO: do we want auto error?
         self.sessions = session_store
@@ -66,16 +66,10 @@ class SessionTokenToValidUserID:
         try:
             uid, exp = self.sessions.check_session_token(token)
         except SessionError as e:
-            # TODO: more fine grained error checking
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
-                detail=e.description
-            ) from e
-        except OIDCError as e:
-            # TODO: more fine grained error checking
-            raise HTTPException(
-                status_code=HTTP_401_UNAUTHORIZED,
-                detail=e.error_description
+                detail=e.description,
+                headers={"WWW-Authenticate": "Bearer"},
             ) from e
 
         return ValidatedToken(

@@ -251,5 +251,6 @@ def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, Decod
 
 def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tuple[RefreshResponse, DecodedIDToken]:
     refreshed = refresh_access_token(refresh_token)
+    # TODO: do i need to do bearer check?
     validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"])
     return refreshed, validated
