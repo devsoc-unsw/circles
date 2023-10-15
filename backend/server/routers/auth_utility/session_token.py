@@ -9,7 +9,7 @@ from pydantic import BaseModel, PositiveInt
 from .constants import JWT_SECRET
 
 from .oidc_requests import DecodedIDToken, TokenResponse, UserInfoResponse, refresh_and_validate, get_user_info, revoke_token
-from .oidc_errors import OIDCError, OIDCRequestError
+from .oidc_errors import OIDCInvalidGrant, OIDCInvalidToken
 
 class SessionOIDCInfo(TypedDict):
     access_token: str                   # most recent access token
@@ -46,8 +46,14 @@ class SessionInvalidToken(SessionError):
 
 class SessionExpiredToken(SessionError):
     def __init__(self, token: str):
-        super().__init__("Expired session token, is too old or has already been destroyed.")
+        super().__init__("Expired session/refresh token, is too old or has already been destroyed.")
         self.token = token
+
+class SessionExpiredOIDC(SessionError):
+    def __init__(self, uid: str, sid: str):
+        super().__init__("Could not refresh the OIDC tokens, they are expired or destroyed.")
+        self.uid = uid
+        self.sid = sid
 
 SESSION_TOKEN_LIFETIME = 60 * 15            # 15 minutes
 REFRESH_TOKEN_LIFETIME = 60 * 60 * 24 * 30  # 30 days
@@ -127,7 +133,8 @@ class SessionStorage:
         # TODO: dummy saving
         with open("sessions.json", "w") as f:
             json.dump(self.store, f)
-            print(f"Saved:\n{self.store}")
+            print(f"Saved:")
+            # print(f"{self.store}")
 
     def __load(self):
         # TODO: dummy saving
@@ -135,7 +142,8 @@ class SessionStorage:
             res = json.load(f)
             self.store = defaultdict(lambda: {})
             self.store.update(res)
-            print(f"Loaded:\n{self.store}")
+            print(f"Loaded:")
+            # print(f"{self.store}")
 
     def empty(self):
         self.store: DefaultDict[str, Dict[str, Session]] = defaultdict(lambda: {})
@@ -174,36 +182,71 @@ class SessionStorage:
         self.__save()
         return uid, sid, refresh_token, session["session_exp"]
     
+    def __refresh_oidc_session(self, uid: str, sid: str):
+        # tries to refresh the tokens behind the session
+        assert uid in self.store and sid in self.store[uid]
+        old_session = self.store[uid][sid]
+
+        try:
+            refreshed, validated = refresh_and_validate(old_session["oidc"]["validated_id_token"], old_session["oidc"]["refresh_token"])
+        except OIDCInvalidGrant as e:
+            # refresh token has expired, any other errors are bad and should be handled else ways
+            # TODO: do we want to revoke?
+            # TODO: do we want to rethrow all other OIDC errors?
+            self.__delete_session(uid, sid)
+            raise SessionExpiredOIDC(
+                uid=uid,
+                sid=sid,
+            ) from e
+        
+        # reset oidc info
+        old_session["oidc"] = SessionOIDCInfo(
+            access_token=refreshed["access_token"],
+            raw_id_token=refreshed["id_token"],
+            refresh_token=refreshed["refresh_token"],
+            validated_id_token=validated,
+        )
+        self.__save()
+
+    def __check_or_refresh_oidc_session(self, uid: str, sid: str, refetch_on_refresh: bool = False) -> Optional[UserInfoResponse]:
+        # checks if the oidc session is still valid
+        # currently achieves this by requesting user info
+        # will try also refresh if invalid
+        # set refetch_on_refresh to true if userinfo is needed, and want it to refetch after a potential refresh
+        assert uid in self.store and sid in self.store[uid]
+        session = self.store[uid][sid]
+
+        try:
+            user_info = get_user_info(session["oidc"]["access_token"])
+            return user_info
+        except OIDCInvalidToken as e:
+            # access token has expired, try refresh
+            # will raise if could not refresh
+            self.__refresh_oidc_session(uid, sid)
+
+        # expect to be refreshed, try again if we actually need the userinfo
+        if not refetch_on_refresh:
+            return None
+
+        try:
+            user_info = get_user_info(session["oidc"]["access_token"])
+            return user_info
+        except OIDCInvalidToken as e:
+            # this shouldn't really occur
+            # TODO: do we want to revoke?
+            self.__delete_session(uid, sid)
+            raise SessionExpiredOIDC(
+                uid=uid,
+                sid=sid,
+            ) from e
+
     def __delete_session(self, uid: str, sid: str):
         # deletes the underlying session, equivalent to a del and a save
         assert uid in self.store and sid in self.store[uid]
         del self.store[uid][sid]
         self.__save()
 
-    # def __refresh_oidc_session(self, session_token: str):
-    #     # NOTE: ideally dont use this directly, this is implicitly done if needed with a session_token_to_uid
-    #     # tries to refresh the tokens behind the session, will delete it if it fails
-    #     uid, sid, session = self.__get_session_unvalidated(session_token)
 
-    #     try:
-    #         refreshed, validated = refresh_and_validate(session["oidc"]["validated_id_token"], session["oidc"]["refresh_token"])
-
-    #         self.store[uid][sid] = Session(
-    #             oidc=SessionOIDCInfo(
-    #                 access_token=refreshed["access_token"],
-    #                 raw_id_token=refreshed["id_token"],
-    #                 refresh_token=refreshed["refresh_token"],
-    #                 validated_id_token=validated.copy(),
-    #             ),
-    #             session_exp=session["session_exp"],
-    #         )
-    #         self.__save()
-    #     except OIDCError as e:
-    #         # TODO: more fine grain error checking
-    #         self.destroy_session(session_token)
-    #         raise SessionExpiredToken(
-    #             token=session_token
-    #         ) from e 
 
     def new_login_session(self, token_res: TokenResponse, id_token: DecodedIDToken) -> Tuple[str, int, str]:
         # creates an entire new login session, (for when a user has just logged in) 
@@ -235,7 +278,8 @@ class SessionStorage:
             self.__delete_session(id["uid"], id["sid"])
             raise SessionExpiredToken(refresh_token)
         
-        # TODO: check the OIDC tokens are still valid, and refresh if needed
+        # make sure that the oidc session is also still valid
+        self.__check_or_refresh_oidc_session(id["uid"], id["sid"], refetch_on_refresh=False)
 
         # is a valid refresh token and session, generate new token pair and update session
         # we choose to keep the session expiry the same
@@ -269,21 +313,16 @@ class SessionStorage:
 
         # TODO: check that we dont care if the oidc and session have expired here
 
+        # TODO: revoke can error
         revoke_token(session["oidc"]["refresh_token"], "refresh_token")
 
         self.__delete_session(id["uid"], id["sid"])
 
-    # def session_token_to_userinfo(self, session_token: str) -> UserInfoResponse:
-    #     uid, sid, session = self.__get_session_unvalidated(session_token)
+    def session_token_to_userinfo(self, session_token: str) -> UserInfoResponse:
+        # returns the user info of the underlying oidc layer
+        id = decode_session_token(session_token)
+        self.__get_session_checked(id["uid"], id["sid"], session_token)  # just here to check session exists
 
-    #     # validate their access tokens are still valid
-    #     # TODO: should this be cached for a few seconds?
-    #     # TODO: do i want to check the sub against our uid
-    #     try:
-    #         user_info = get_user_info(session["oidc"]["access_token"])
-    #         # TODO: try refreshing
-    #         return user_info
-    #     except OIDCError as e:
-    #         # TODO: more fine grain error checks 
-    #         self.destroy_session(session_token)
-    #         raise e
+        info = self.__check_or_refresh_oidc_session(id["uid"], id["sid"], refetch_on_refresh=True)
+        assert info is not None  # TODO: if it fails, it throws, but still make this better 
+        return info

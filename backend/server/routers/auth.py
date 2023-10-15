@@ -14,14 +14,12 @@ from typing import Annotated, Dict, List, Literal, Optional, Tuple, TypedDict, c
 from fastapi import APIRouter, Depends, HTTPException, Header, Request, Security
 from secrets import token_urlsafe
 from typing import Annotated, Dict, Iterator, List, Literal, Optional, Tuple, TypedDict, cast
-from fastapi import APIRouter, Depends, HTTPException, Header, Request, Response, Security
+from fastapi import APIRouter, Cookie, Depends, HTTPException, Header, Request, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 
-
-
-from .auth_utility.session_token import SessionError, SessionStorage
-from .auth_utility.middleware import HTTPBearer401, SessionTokenToValidUserID, ValidatedToken
+from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
+from .auth_utility.middleware import HTTPBearer401, SessionTokenValidator, ValidatedToken
 from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, get_user_info
 from .auth_utility.oidc_errors import OIDCError
 
@@ -31,7 +29,14 @@ router = APIRouter(
 )
 sessions = SessionStorage()
 require_token = HTTPBearer401()
-validated_uid = SessionTokenToValidUserID(session_store=sessions)
+validated_uid = SessionTokenValidator(session_store=sessions)
+
+
+class UnauthorizedModel(BaseModel):
+    detail: str
+
+class ForbiddenModel(BaseModel):
+    detail: str
 
 @router.post('/token')
 def create_user_token(token: str):
@@ -101,9 +106,11 @@ class IdentityPayload(BaseModel):
 def kill_all_sessions():
     sessions.empty()
 
-@router.get("/identity", response_model=IdentityPayload)
-def get_identity(req: Request, res: Response):
-    refresh_token = req.cookies.get("refresh_token")
+@router.get(
+    "/identity", 
+    response_model=IdentityPayload
+)
+def get_identity(res: Response, refresh_token: Annotated[Optional[str], Cookie()] = None):
     if refresh_token is None:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
@@ -114,18 +121,13 @@ def get_identity(req: Request, res: Response):
     try:
         ref_tok, ref_exp, ses_tok = sessions.new_session_token(refresh_token)
     except SessionError as e:
-        # TODO: more fine grained error checking
+        # can either be invalid session token, expired session token, or expired oidc pair
+        # TODO: do we want to deal with the other random OIDC errors?
         res.delete_cookie("refresh_token")
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.description
-        ) from e
-    except OIDCError as e:
-        # TODO: more fine grained error checking
-        res.delete_cookie("refresh_token")
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.error_description
+            detail=e.description,
+            headers={ "set-cookie": res.headers["set-cookie"] },
         ) from e
 
     # set the cookies and return the identity
@@ -139,8 +141,11 @@ def get_identity(req: Request, res: Response):
     )
     return IdentityPayload(session_token=ses_tok)
 
-@router.post("/login", response_model=IdentityPayload)
-def exchange_authorization_code(req: Request, res: Response, data: ExchangeCodePayload) -> IdentityPayload:
+@router.post(
+    "/login", 
+    response_model=IdentityPayload
+)
+def exchange_authorization_code(res: Response, data: ExchangeCodePayload) -> IdentityPayload:
     try:
         token_res = exchange_and_validate(data.code)
     except OIDCError as e:
@@ -155,63 +160,73 @@ def exchange_authorization_code(req: Request, res: Response, data: ExchangeCodeP
     # TODO: do some stuff with the id token here like user database setup
 
     # set the cookies and respond with the session token
-    try:
-        ref_tok, ref_exp, ses_tok = sessions.new_login_session(token_res, id_token)
-    except SessionError as e:
-        # TODO: more fine grained error checking
-        res.delete_cookie("refresh_token")
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.description
-        ) from e
-    except OIDCError as e:
-        # TODO: more fine grained error checking
-        res.delete_cookie("refresh_token")
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.error_description
-        ) from e
+    # TODO: I believe no errors possible here?
+    ref_tok, ref_exp, ses_tok = sessions.new_login_session(token_res, id_token)
 
     # set the cookies and return the identity
-    print("setting cookie")
-    print(ref_tok)
     res.set_cookie(
         key="refresh_token", 
         value=ref_tok,
-        httponly=True,
-        # TODO: THIS IS NOT SETTING, CHECK CORS POLICY AND STUFF
         # secure=True,
+        httponly=True,
         # domain="circlesapi.csesoc.app",
-        # expires=ref_exp,
+        expires=ref_exp,
     )
     return IdentityPayload(session_token=ses_tok)
 
 @router.delete("/logout")
-def logout(token: Annotated[str, Security(require_token)]):
+def logout(res: Response, token: Annotated[str, Security(require_token)]):
     try:
         sessions.destroy_session(token)
+        res.delete_cookie("refresh_token")
     except SessionError as e:
-        # TODO: more fine grained error checking
+        # TODO: do we want to clear cookie here?
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail=e.description
         ) from e
-    except OIDCError as e:
-        # TODO: more fine grained error checking
+
+@router.get(
+    "/userinfo",
+    response_model=UserInfoResponse,
+)
+def user_info(res: Response, user: Annotated[ValidatedToken, Security(validated_uid)]):
+    try:
+        info = sessions.session_token_to_userinfo(user.token)
+        return info
+    except SessionExpiredOIDC as e:
+        # OIDC has expired and could not be refreshed, hence will be logged out
+        res.delete_cookie("refresh_token")
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.error_description
+            detail=e.description,
+            headers={ "set-cookie": res.headers["set-cookie"] },
+        ) from e
+    except SessionError as e:
+        # just the session has expired, will need to call a /identity to continue
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail=e.description
         ) from e
 
-# @router.get("/info")
-# def user_info(user: Annotated[ValidatedToken, Security(validated_uid)]):
-#     return user.full_info
-
-@router.get("/validatedUser", response_model=ValidatedToken)
+@router.get(
+    "/validatedUser", 
+    response_model=ValidatedToken,
+    responses={
+        HTTP_401_UNAUTHORIZED: { "model": UnauthorizedModel }
+    },
+)
 def get_validated_user(user: Annotated[ValidatedToken, Security(validated_uid)]):
     return user
 
-@router.get("/checkToken")
+@router.get(
+    "/checkToken", 
+    response_model=None,
+    responses={
+        HTTP_401_UNAUTHORIZED: { "model": UnauthorizedModel },
+        HTTP_403_FORBIDDEN: { "model": ForbiddenModel },
+    },
+)
 def check_token(user: Annotated[ValidatedToken, Security(validated_uid)]):
     # TODO: check it is in database
     return
