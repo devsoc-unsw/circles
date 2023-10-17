@@ -1,5 +1,4 @@
 from pprint import pprint
-from time import time
 from typing import Any, Dict, List, Literal, Optional, Tuple, TypeVar, TypedDict, cast
 from fastapi import HTTPException, Request, Security
 from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
@@ -18,7 +17,6 @@ from .oidc_errors import OIDCError
 
 def extract_bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("Authorization")
-    print(authorization)
     scheme, credentials = get_authorization_scheme_param(authorization)
     if not (authorization and scheme and credentials and scheme.lower() == "bearer" and credentials != ""):
         return None
