@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
+import { RootState } from 'config/store';
 import { setToken } from 'reducers/settingsSlice';
 
 type Props = {
@@ -15,22 +16,24 @@ const RequireToken = ({ needSetup }: Props) => {
   // TODO: do we want to navigate away from login pages too?
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const token = useSelector((state: RootState) => state.settings.token); // TODO: dont get this twice
+
   useEffect(() => {
     const determineNextPage = async () => {
-      const tokenStatus = await checkTokenStatus();
+      const tokenStatus = await checkTokenStatus(token);
       switch (tokenStatus) {
         case TokenStatus.UNSET:
-          navigate('/login');
+          navigate('/tokens');
           break;
         case TokenStatus.INVALID:
-          dispatch(setToken(''));
+          dispatch(setToken(null));
           openNotification({
             type: 'error',
             message: 'Error',
             description: 'You must be logged in before visiting this page 🙂'
           });
-          navigate('/login');
+          navigate('/tokens');
           break;
         case TokenStatus.NOTSETUP:
           if (needSetup) {
@@ -41,20 +44,20 @@ const RequireToken = ({ needSetup }: Props) => {
             });
             navigate('/degree-wizard');
           } else {
-            setLoading(true);
+            setLoading(false);
           }
           break;
         case TokenStatus.VALID:
-          setLoading(true);
+          setLoading(false);
           break;
         default:
           break;
       }
     };
     determineNextPage();
-  }, [needSetup, dispatch, navigate]);
+  }, [token, needSetup, dispatch, navigate]);
 
-  return loading ? <Outlet /> : <PageLoading />;
+  return loading ? <PageLoading /> : <Outlet />;
 };
 
 export default RequireToken;

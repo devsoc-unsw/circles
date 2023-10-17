@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import devsocLogo from 'assets/devsocLogo.svg';
 import easySubTitle from 'assets/LandingPage/easySubtitle.svg';
+import { RootState } from 'config/store';
 import S from './styles';
 
 const HeroContent = () => {
   // determine our next location
   const [nextPage, setNextPage] = useState<string>('/');
+  const token = useSelector((state: RootState) => state.settings.token);
   useEffect(() => {
     const determineNextPage = async () => {
       // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
       // const token = await getToken();
-      const tokenStatus = await checkTokenStatus();
+      const tokenStatus = await checkTokenStatus(token);
       switch (tokenStatus) {
         case TokenStatus.UNSET:
         case TokenStatus.INVALID:
@@ -31,7 +34,7 @@ const HeroContent = () => {
       }
     };
     determineNextPage();
-  }, []);
+  }, [token]);
 
   return (
     <S.HeroContent>

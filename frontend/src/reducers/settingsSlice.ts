@@ -8,15 +8,16 @@ type SettingsSliceState = {
   showMarks: boolean;
   showLockedCourses: boolean;
   showWarnings: boolean;
-  token: string;
+  token: string | null;
 };
 
+// TODO: when other slices get removed, make these base level, and blacklist the token from persist
 export const initialSettingsState: SettingsSliceState = {
   theme: 'light',
   showMarks: false,
   showLockedCourses: false,
   showWarnings: true,
-  token: ''
+  token: null
 };
 
 const settingsSlice = createSlice({
@@ -35,7 +36,7 @@ const settingsSlice = createSlice({
     toggleShowWarnings: (state) => {
       state.showWarnings = !state.showWarnings;
     },
-    setToken: (state, action: PayloadAction<string>) => {
+    setToken: (state, action: PayloadAction<string | null>) => {
       state.token = action.payload;
     }
   }

@@ -13,6 +13,7 @@ export const updateCourseMark = async (courseMark: CourseMark) => {
   }
 };
 
+// TODO: get rid of this?!
 // mmm not sure of the fuckyness of catching / where it should be handled
 export const getUser = async (token: string) => {
   return axios

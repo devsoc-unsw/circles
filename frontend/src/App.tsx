@@ -1,14 +1,15 @@
 import React, { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Navigate, Route, Routes } from 'react-router-dom';
 import { NotificationOutlined } from '@ant-design/icons';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
+import IdentityProvider from 'components/Auth/IdentityProvider';
+import RequireToken from 'components/Auth/RequireToken';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
-import RequireToken from 'components/RequireToken/RequireToken';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
@@ -27,6 +28,14 @@ const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
 const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
+
+const Dummy = () => {
+  return (
+    <div>
+      <Link to="/tokens">tokens</Link>
+    </div>
+  );
+};
 
 const App = () => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
@@ -103,17 +112,27 @@ const App = () => {
                       path="/"
                       element={!token ? <LandingPage /> : <Navigate to="/degree-wizard" replace />}
                     />
+                    <Route element={<IdentityProvider />}>
+                      <Route path="/tokens" element={<TokenPlayground />} />
+                      <Route element={<RequireToken />}>
+                        <Route path="/token-required" element={<Dummy />} />
+                      </Route>
+                      <Route element={<RequireToken needSetup />}>
+                        <Route path="/token-needsetup" element={<Dummy />} />
+                      </Route>
+                    </Route>
                     <Route element={<RequireToken />}>
                       <Route path="/degree-wizard" element={<DegreeWizard />} />
                     </Route>
-                    <Route element={<RequireToken needSetup />}>
-                      <Route path="/course-selector" element={<CourseSelector />} />
-                      {inDev && (
-                        <Route path="/graphical-selector" element={<GraphicalSelector />} />
-                      )}
-                      <Route path="/term-planner" element={<TermPlanner />} />
-                      <Route path="/progression-checker" element={<ProgressionChecker />} />
-                    </Route>
+                    {/* <Route element={<RequireToken />}> */}
+                    <Route path="/degree-wizard" element={<DegreeWizard />} />
+                    {/* </Route> */}
+                    {/* <Route element={<RequireToken needSetup />}> */}
+                    <Route path="/course-selector" element={<CourseSelector />} />
+                    {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                    <Route path="/term-planner" element={<TermPlanner />} />
+                    <Route path="/progression-checker" element={<ProgressionChecker />} />
+                    {/* </Route> */}
                     {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
                     {inDev && <Route path="/login" element={<Auth />} />}
                     {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
