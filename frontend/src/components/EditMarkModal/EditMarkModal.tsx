@@ -24,9 +24,10 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     setMarkValue(value);
   };
 
+  // TODO: fix when decide how to handle tokens into functions
   const { token } = useSelector((state: RootState) => state.settings);
   const updateMark = (mark: Mark) => {
-    updateCourseMark({ course: code, mark } as CourseMark, token);
+    updateCourseMark({ course: code, mark } as CourseMark, token as string);
     setMarkValue(mark);
     onCancel();
     message.success('Mark Updated');

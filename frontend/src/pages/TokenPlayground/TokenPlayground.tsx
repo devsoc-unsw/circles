@@ -15,11 +15,14 @@ import { getToken } from 'utils/api/userApi';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { getSessionToken } from 'utils/api/auth';
+import { Link } from 'react-router-dom';
 
 const TokenPlayground = () => {
-  const [localToken, setLocalToken] = useState<string>('NOT GOTTEN');
-  const [csesocToken, setCSESocToken] = useState<string>('NOT GOTTEN');
+  const [localToken, setLocalToken] = useState<string | null>(null);
+  const realToken = useSelector((state: RootState) => state.settings.token);
   const stateParam = useRef<string>(nanoid(24));
+  console.log('token playground load');
+  console.log(getToken());
 
   // useEffect(() => {
   //   const csesoc = localStorage.getItem('csesoc-last-token');
@@ -49,19 +52,23 @@ const TokenPlayground = () => {
   //   setLocalToken(t);
   // };
 
-  const refreshSessionToken = async () => {
-    // TODO: try this
-    const res = await getSessionToken();
-    setCSESocToken(res.session_token);
-    setLocalToken(res.session_token);
-  };
+  // const refreshSessionToken = async () => {
+  //   // TODO: try this
+  //   const res = await getSessionToken();
+  //   setCSESocToken(res.session_token);
+  //   setLocalToken(res.session_token);
+  // };
 
   const checkSessionToken = async () => {
     console.log('checking session token');
+    if (localToken === null) {
+      throw Error('lol no token');
+    }
+
     const res = await axios.get('/auth/validatedUser', {
       headers: { Authorization: `Bearer ${localToken}` }
     });
-    console.log(res);
+    console.log(res.data);
   };
 
   useEffect(() => {
@@ -70,9 +77,9 @@ const TokenPlayground = () => {
     localStorage.setItem('csesoc-state-param', stateParam.current);
   }, []);
 
-  useEffect(() => {
-    refreshSessionToken();
-  }, []);
+  // useEffect(() => {
+  //   refreshSessionToken();
+  // }, []);
 
   const cseLoginURL = new URL('https://id.csesoc.unsw.edu.au/oauth2/auth');
   cseLoginURL.searchParams.append('client_id', 'f2f0ee59-3635-4e8c-85d1-fac8afbbf7f1');
@@ -83,23 +90,33 @@ const TokenPlayground = () => {
 
   return (
     <PageTemplate>
-      <div>Token: &apos;{localToken.toString()}&apos;</div>
+      <div>RealToken: &apos;{realToken ?? 'null'}&apos;</div>
+      <div>LocalToken: &apos;{localToken ?? 'null'}&apos;</div>
       <div>
-        <button onClick={() => setLocalToken('')} type="button">
+        <button onClick={() => setLocalToken(null)} type="button">
           unset token
         </button>
-        <button onClick={() => setLocalToken(csesocToken)} type="button">
+        <button onClick={() => setLocalToken(realToken)} type="button">
           set token to my csesoc
         </button>
-        <button onClick={refreshSessionToken} type="button">
-          refresh session token
+        <button onClick={() => console.log(getToken())} type="button">
+          find token
         </button>
+        {/* <button onClick={refreshSessionToken} type="button">
+          refresh session token
+        </button> */}
         <button onClick={checkSessionToken} type="button">
           check session token
         </button>
       </div>
       <div>
         <a href={cseLoginURL.toString()}>Login with csesoc</a>
+      </div>
+      <div>
+        <Link to="/token-required">to token required page</Link>
+      </div>
+      <div>
+        <Link to="/token-needsetup">to token needsetup page</Link>
       </div>
       <div>State: &apos;{stateParam.current}&apos;</div>
     </PageTemplate>

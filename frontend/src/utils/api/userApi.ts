@@ -1,37 +1,40 @@
 import axios from 'axios';
-import { getStoredState } from 'redux-persist';
+// import { getStoredState } from 'redux-persist';
 import { CourseResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
-import { persistConfig, RootState } from 'config/store';
+import { getToken as getTokenReal } from './auth';
+// import { persistConfig, RootState } from 'config/store';
 
 // export const getToken = (): string => useSelector((state: RootState) => state.settings.token);
-export const getToken = async (): Promise<string> => {
-  // const x = window.localStorage.getItem('persi');
-  const res = await getStoredState(persistConfig);
-  const store = res as RootState;
+// export const getToken = async (): Promise<string> => {
+//   // const x = window.localStorage.getItem('persi');
+//   const res = await getStoredState(persistConfig);
+//   const store = res as RootState;
 
-  return store.settings.token;
-};
+//   return store.settings.token;
+// };
+
+export const getToken = async (): Promise<string> => Promise.resolve(getTokenReal());
 
 export const getUser = async (): Promise<UserResponse> => {
-  const token = await getToken();
+  const token = getTokenReal();
   const user = await axios.get(`user/data/all/${token}`);
   return user.data as UserResponse;
 };
 
 export const getUserDegree = async (): Promise<DegreeResponse> => {
-  const token = await getToken();
+  const token = getTokenReal();
   const degree = await axios.get(`user/data/degree/${token}`);
   return degree.data as DegreeResponse;
 };
 
 export const getUserPlanner = async (): Promise<PlannerResponse> => {
-  const token = await getToken();
+  const token = getTokenReal();
   const planner = await axios.get(`user/data/planner/${token}`);
   return planner.data as PlannerResponse;
 };
 
 export const getUserCourses = async (): Promise<CourseResponse> => {
-  const token = await getToken();
+  const token = getTokenReal();
   const courses = await axios.get(`user/data/courses/${token}`);
   return courses.data as CourseResponse;
 };

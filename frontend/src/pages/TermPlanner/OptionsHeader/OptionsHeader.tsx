@@ -99,7 +99,8 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         >
           <div>
             <Tooltip title="Save">
-              <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
+              {/* TODO: fix this and dont pass token here? */}
+              <S.OptionButton onClick={() => migrateLocalStorageData(token as string)}>
                 <SaveFilled style={iconStyles} />
               </S.OptionButton>
             </Tooltip>
