@@ -1,5 +1,7 @@
 """ Routes to deal with user Authentication. """
+from datetime import datetime, timezone
 from secrets import token_urlsafe
+from time import time
 from typing import Annotated, Dict, Iterator, List, Literal, Optional, Tuple, TypedDict, cast
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Header, Request, Response, Security
 from pydantic import BaseModel
@@ -7,7 +9,7 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 
 from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
 from .auth_utility.middleware import HTTPBearer401, SessionTokenValidator, ValidatedToken
-from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, get_user_info
+from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info
 from .auth_utility.oidc_errors import OIDCError
 
 router = APIRouter(
@@ -27,7 +29,6 @@ class ForbiddenModel(BaseModel):
 
 class ExchangeCodePayload(BaseModel):
     code: str
-    state: str
 
 class IdentityPayload(BaseModel):
     session_token: str
@@ -67,9 +68,30 @@ def get_identity(res: Response, refresh_token: Annotated[Optional[str], Cookie()
         # secure=True,
         httponly=True,
         # domain="circlesapi.csesoc.app",
-        expires=ref_exp,
+        expires=datetime.fromtimestamp(ref_exp, tz=timezone.utc),
     )
     return IdentityPayload(session_token=ses_tok)
+
+@router.get(
+    "/auth_url",
+    response_model=str
+)
+def create_auth_url(res: Response) -> str:
+    # TODO: check if we want to encrypt this?
+    # TODO: make the login page actually use this
+    state = token_urlsafe(32)
+    auth_url = generate_oidc_auth_url(state)
+    expires_at = int(time()) + (5 * 60)
+
+    res.set_cookie(
+        key="next_auth_state", 
+        value=state,
+        # secure=True,
+        httponly=True,
+        # domain="circlesapi.csesoc.app",
+        expires=datetime.fromtimestamp(expires_at, tz=timezone.utc),
+    )
+    return auth_url
 
 @router.post(
     "/login", 
@@ -100,7 +122,7 @@ def exchange_authorization_code(res: Response, data: ExchangeCodePayload) -> Ide
         # secure=True,
         httponly=True,
         # domain="circlesapi.csesoc.app",
-        expires=ref_exp,
+        expires=datetime.fromtimestamp(ref_exp, tz=timezone.utc),
     )
     return IdentityPayload(session_token=ses_tok)
 

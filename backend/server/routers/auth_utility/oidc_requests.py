@@ -8,6 +8,7 @@ from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
 from fastapi.security.base import SecurityBase
 from fastapi.security.utils import get_authorization_scheme_param
 import jwt
+from urllib.parse import urlencode
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 import requests
@@ -72,6 +73,15 @@ def client_secret_basic_credentials() -> str:
     con = f"{CLIENT_ID}:{CLIENT_SECRET}".encode("utf-8")
     return base64.b64encode(con).decode("utf-8")
 
+def generate_oidc_auth_url(state: str) -> str:
+    params = urlencode({
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "scope": SCOPES,
+        "redirect_uri": REDIRECT_URI,
+        "state": state,
+    })
+    return f"{AUTH_ENDPOINT}?{params}"
 
 def get_user_info(access_token: str) -> UserInfoResponse:
     # make a request to get user info, if this fails, the token is invalid
