@@ -1,5 +1,5 @@
 from pprint import pprint
-from typing import Any, Dict, List, Literal, Optional, Tuple, TypeVar, TypedDict, cast
+from typing import Any, Callable, Dict, List, Literal, Optional, Tuple, TypeVar, TypedDict, cast
 from fastapi import HTTPException, Request, Security
 from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
 from fastapi.security.base import SecurityBase
@@ -55,10 +55,12 @@ class HTTPBearer401(SecurityBase):
         return token
 
 require_token = HTTPBearer401(auto_error=True)  # TODO: do this better, auto_error does not get transferred through
+CheckUserSetupFunc = Callable[[str], bool]
 class SessionTokenValidator:
-    def __init__(self, *, session_store: SessionStorage):
+    def __init__(self, *, session_store: SessionStorage, check_user_is_setup: Optional[CheckUserSetupFunc] = None):
         # TODO: do we want auto error?
         self.sessions = session_store
+        self.check_user_is_setup = check_user_is_setup
 
     async def __call__(self, token: str = Security(require_token)) -> ValidatedToken:
         try:
@@ -69,6 +71,14 @@ class SessionTokenValidator:
                 detail=e.description,
                 headers={"WWW-Authenticate": "Bearer"},
             ) from e
+        
+        # check the user is setup, if we want to
+        if self.check_user_is_setup is not None and not self.check_user_is_setup(uid):
+            raise HTTPException(
+                status_code=HTTP_403_FORBIDDEN,
+                detail="User has not yet set up their degree.",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
 
         return ValidatedToken(
             user_id=uid,

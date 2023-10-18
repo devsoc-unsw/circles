@@ -36,6 +36,9 @@ router = APIRouter(
 
 # keep this private
 
+def user_is_setup(uid: str) -> bool:
+    return False
+
 def set_user(token: str, item: Storage, overwrite: bool = False):
     data = usersDB['tokens'].find_one({'token': token})
     if data:

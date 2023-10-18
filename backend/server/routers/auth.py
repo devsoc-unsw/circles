@@ -20,6 +20,8 @@ from fastapi import APIRouter, Cookie, Depends, HTTPException, Header, Request, 
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN, HTTP_400_BAD_REQUEST
 
+from server.routers.user import user_is_setup
+
 from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
 from .auth_utility.middleware import HTTPBearer401, SessionTokenValidator, ValidatedToken
 from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info, validate_authorization_response
@@ -32,6 +34,7 @@ router = APIRouter(
 sessions = SessionStorage()
 require_token = HTTPBearer401()
 validated_uid = SessionTokenValidator(session_store=sessions)
+setup_uid = SessionTokenValidator(session_store=sessions, check_user_is_setup=user_is_setup)
 
 
 class UnauthorizedModel(BaseModel):
@@ -162,6 +165,7 @@ def create_auth_url(res: Response) -> str:
         # domain="circlesapi.csesoc.app",
         expires=datetime.fromtimestamp(expires_at, tz=timezone.utc),
     )
+    # TODO: sometimes this empty reponses?!
     return auth_url
 
 @router.post(
@@ -195,6 +199,7 @@ def exchange_authorization_code(res: Response, data: ExchangeCodePayload, next_a
     ref_tok, ref_exp, ses_tok = sessions.new_login_session(token_res, id_token)
 
     # set the cookies and return the identity
+    # TODO: delete old state cookie?
     res.set_cookie(
         key="refresh_token", 
         value=ref_tok,
@@ -258,6 +263,6 @@ def get_validated_user(user: Annotated[ValidatedToken, Security(validated_uid)])
         HTTP_403_FORBIDDEN: { "model": ForbiddenModel },
     },
 )
-def check_token(user: Annotated[ValidatedToken, Security(validated_uid)]):
+def check_token(user: Annotated[ValidatedToken, Security(setup_uid)]):
     # TODO: check it is in database
     return
