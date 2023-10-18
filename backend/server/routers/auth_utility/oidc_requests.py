@@ -97,6 +97,7 @@ def get_user_info(access_token: str) -> UserInfoResponse:
         
         # TODO: make sure issuer is correct 5.3.4
 
+        # print(resjson)
         raise OIDCUserInfoError.from_dict(resjson)
     except requests.exceptions.JSONDecodeError as e:
         print(res.status_code, res.text)
@@ -107,7 +108,6 @@ def get_user_info(access_token: str) -> UserInfoResponse:
         ) from e
     
 def exchange_tokens(code: str) -> TokenResponse:
-    # TODO: figure out how we ought to use state?
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
     res = requests.post(
@@ -212,13 +212,20 @@ def validate_authorization_response(exp_state: str, query_params: Dict[str, str]
         raise OIDCValidationError("Scope param was not correct.", scope)
     
     return code
+    
+def compute_at_hash(access_token: str) -> str:
+    # https://pyjwt.readthedocs.io/en/stable/usage.html#oidc-login-flow
+    alg = jwt.get_algorithm_by_name("RS256")
+    digest = alg.compute_hash_digest(access_token.encode())
+    computed = base64.urlsafe_b64encode(digest[:(len(digest) // 2)]).rstrip(b"=")
+    return computed.decode()
 
-def validate_id_token(token: str) -> DecodedIDToken:
+def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
     jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)  # TODO: move this out?
     signing_key = jwkclient.get_signing_key_from_jwt(token)
 
     try:
-        return jwt.decode(
+        decoded: DecodedIDToken = jwt.decode(
             token, 
             key=signing_key.key, 
             algorithms=["RS256"],
@@ -230,10 +237,18 @@ def validate_id_token(token: str) -> DecodedIDToken:
         raise OIDCValidationError(
             error_description="Could not validate id_token",
         ) from e
+    
+    # validate at_hash
+    computed_at_hash = compute_at_hash(access_token)
+    if decoded["at_hash"] != computed_at_hash:
+         raise OIDCValidationError(
+            error_description=f"Computed at_hash did not match, {decoded['at_hash']} != {computed_at_hash}",
+        )
+    return decoded
 
-def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str) -> DecodedIDToken:
+def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str, new_access_token: str) -> DecodedIDToken:
     # https://openid.net/specs/openid-connect-core-1_0.html#RefreshTokenResponse
-    decoded = validate_id_token(new_token)
+    decoded = validate_id_token(new_token, new_access_token)
 
     if decoded["sub"] != old_token["sub"] or decoded["auth_time"] != old_token["auth_time"]:
         raise OIDCValidationError(
@@ -264,7 +279,7 @@ def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, Decod
 
     # validate the id token
     # TODO: validate the access token
-    id_token = validate_id_token(tokensres["id_token"])
+    id_token = validate_id_token(tokensres["id_token"], tokensres["access_token"])
 
     # print("\n\nDEBUG: validated id_token\n")
     # pprint(id_token)
@@ -275,5 +290,5 @@ def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, Decod
 def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tuple[RefreshResponse, DecodedIDToken]:
     refreshed = refresh_access_token(refresh_token)
     # TODO: do i need to do bearer check?
-    validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"])
+    validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"], refreshed["access_token"])
     return refreshed, validated

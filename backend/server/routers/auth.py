@@ -168,9 +168,8 @@ def create_auth_url(res: Response) -> str:
     "/login", 
     response_model=IdentityPayload
 )
-def exchange_authorization_code(req: Request, res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie()] = None) -> IdentityPayload:
+def exchange_authorization_code(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie()] = None) -> IdentityPayload:
     # TODO: i believe there can be errors before getting here?
-    print(req.cookies)
     if next_auth_state is None:
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST,
