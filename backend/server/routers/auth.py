@@ -18,12 +18,12 @@ from time import time
 from typing import Annotated, Dict, Iterator, List, Literal, Optional, Tuple, TypedDict, cast
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Header, Request, Response, Security
 from pydantic import BaseModel
-from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
+from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN, HTTP_400_BAD_REQUEST
 
 from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
 from .auth_utility.middleware import HTTPBearer401, SessionTokenValidator, ValidatedToken
-from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info
-from .auth_utility.oidc_errors import OIDCError
+from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info, validate_authorization_response
+from .auth_utility.oidc_errors import OIDCError, OIDCValidationError
 
 router = APIRouter(
     prefix="/auth",
@@ -98,7 +98,7 @@ def validate_token(token: str):
     return id_info
 
 class ExchangeCodePayload(BaseModel):
-    code: str
+    query_params: Dict[str, str]
 
 class IdentityPayload(BaseModel):
     session_token: str
@@ -143,7 +143,7 @@ def get_identity(res: Response, refresh_token: Annotated[Optional[str], Cookie()
     return IdentityPayload(session_token=ses_tok)
 
 @router.get(
-    "/auth_url",
+    "/authorization_url",
     response_model=str
 )
 def create_auth_url(res: Response) -> str:
@@ -151,13 +151,14 @@ def create_auth_url(res: Response) -> str:
     # TODO: make the login page actually use this
     state = token_urlsafe(32)
     auth_url = generate_oidc_auth_url(state)
-    expires_at = int(time()) + (5 * 60)
+    expires_at = int(time()) + (10 * 60)
 
     res.set_cookie(
         key="next_auth_state", 
         value=state,
         # secure=True,
         httponly=True,
+        # path="/authorization_url",
         # domain="circlesapi.csesoc.app",
         expires=datetime.fromtimestamp(expires_at, tz=timezone.utc),
     )
@@ -167,14 +168,23 @@ def create_auth_url(res: Response) -> str:
     "/login", 
     response_model=IdentityPayload
 )
-def exchange_authorization_code(res: Response, data: ExchangeCodePayload) -> IdentityPayload:
+def exchange_authorization_code(req: Request, res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie()] = None) -> IdentityPayload:
+    # TODO: i believe there can be errors before getting here?
+    print(req.cookies)
+    if next_auth_state is None:
+        raise HTTPException(
+            status_code=HTTP_400_BAD_REQUEST,
+            detail="Cookie 'next_auth_state' was missing from request."
+        )
+    
     try:
-        token_res = exchange_and_validate(data.code)
+        code = validate_authorization_response(next_auth_state, data.query_params)
+        token_res = exchange_and_validate(code)
     except OIDCError as e:
-        # TODO: finer grain error checks
+        # TODO: finer grain error checks, there are many validation errors possible
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail=f"Invalid code: {data.code}. Extra info: {e.error_description}"
+            detail=f"Invalid code. Extra info: {e.error_description}"
         ) from e
     
     token_res, id_token = token_res

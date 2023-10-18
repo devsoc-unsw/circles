@@ -20,7 +20,8 @@ import { Link } from 'react-router-dom';
 const TokenPlayground = () => {
   const [localToken, setLocalToken] = useState<string | null>(null);
   const realToken = useSelector((state: RootState) => state.settings.token);
-  const stateParam = useRef<string>(nanoid(24));
+  // const stateParam = useRef<string>(nanoid(24));
+  const [authURL, setAuthURL] = useState<string>('');
   console.log('token playground load');
   console.log(getToken());
 
@@ -72,21 +73,13 @@ const TokenPlayground = () => {
   };
 
   useEffect(() => {
-    console.log('state:');
-    console.log(stateParam.current);
-    localStorage.setItem('csesoc-state-param', stateParam.current);
+    const getAuthURL = async () => {
+      const res = await axios.get<string>('/auth/authorization_url', { withCredentials: true });
+      setAuthURL(res.data);
+    };
+
+    getAuthURL();
   }, []);
-
-  // useEffect(() => {
-  //   refreshSessionToken();
-  // }, []);
-
-  const cseLoginURL = new URL('https://id.csesoc.unsw.edu.au/oauth2/auth');
-  cseLoginURL.searchParams.append('client_id', 'f2f0ee59-3635-4e8c-85d1-fac8afbbf7f1');
-  cseLoginURL.searchParams.append('response_type', 'code');
-  cseLoginURL.searchParams.append('scope', 'openid offline_access');
-  cseLoginURL.searchParams.append('redirect_uri', 'http://localhost:3000/login/success/csesoc');
-  cseLoginURL.searchParams.append('state', stateParam.current);
 
   return (
     <PageTemplate>
@@ -110,7 +103,7 @@ const TokenPlayground = () => {
         </button>
       </div>
       <div>
-        <a href={cseLoginURL.toString()}>Login with csesoc</a>
+        <a href={authURL}>Login with csesoc</a>
       </div>
       <div>
         <Link to="/token-required">to token required page</Link>
@@ -118,7 +111,6 @@ const TokenPlayground = () => {
       <div>
         <Link to="/token-needsetup">to token needsetup page</Link>
       </div>
-      <div>State: &apos;{stateParam.current}&apos;</div>
     </PageTemplate>
   );
 };

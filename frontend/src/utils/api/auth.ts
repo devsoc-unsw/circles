@@ -45,11 +45,13 @@ export const checkTokenStatus = async (token: string | null): Promise<TokenStatu
   }
 };
 
-export const exchangeAuthCode = async (code: string, state: string): Promise<IdentityPayload> => {
-  console.log(`exchanging ${state} ${code}`);
+export const exchangeAuthCode = async (
+  query_params: Record<string, string>
+): Promise<IdentityPayload> => {
+  console.log(`exchanging`);
   const res = await axios.post<IdentityPayload>(
     '/auth/login',
-    { code, state },
+    { query_params },
     { withCredentials: true }
   );
   console.log('exchange result:', res);

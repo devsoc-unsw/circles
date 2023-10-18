@@ -128,6 +128,7 @@ class SessionStorage:
         # map of uid,sid -> session
         self.store: DefaultDict[str, Dict[str, Session]] = defaultdict(lambda: {})
         self.__load()
+        # self.__save()
 
     def __save(self):
         # TODO: dummy saving
@@ -135,6 +136,7 @@ class SessionStorage:
             json.dump(self.store, f)
             print(f"Saved:")
             # print(f"{self.store}")
+        pass
 
     def __load(self):
         # TODO: dummy saving
@@ -144,6 +146,7 @@ class SessionStorage:
             self.store.update(res)
             print(f"Loaded:")
             # print(f"{self.store}")
+        pass
 
     def empty(self):
         self.store: DefaultDict[str, Dict[str, Session]] = defaultdict(lambda: {})
