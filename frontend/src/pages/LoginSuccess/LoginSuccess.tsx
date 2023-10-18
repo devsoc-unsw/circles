@@ -24,26 +24,24 @@ const LoginSuccess = () => {
   useEffect(() => {
     const exchangeCode = async () => {
       // get the state param and compare it
-      const expectedState = localStorage.getItem('csesoc-state-param');
-      localStorage.removeItem('csesoc-state-param');
+      // localStorage.removeItem('csesoc-state-param');
 
-      const stateParam = query.get('state');
-      const codeParam = query.get('code');
-      const scopeParam = query.get('scope');
-      if (!expectedState || expectedState !== stateParam) {
-        setError(`state doesnt match: ${expectedState} != ${stateParam}`);
-        return;
-      } else if (!codeParam || scopeParam !== 'openid offline_access') {
-        setError(`other params are wrong: ${codeParam}, ${scopeParam}`);
-        return;
-      }
+      // const stateParam = query.get('state');
+      // const codeParam = query.get('code');
+      // const scopeParam = query.get('scope');
+      // if (!expectedState || expectedState !== stateParam) {
+      //   setError(`state doesnt match: ${expectedState} != ${stateParam}`);
+      //   return;
+      // } else if (!codeParam || scopeParam !== 'openid offline_access') {
+      //   setError(`other params are wrong: ${codeParam}, ${scopeParam}`);
+      //   return;
+      // }
 
       // exchange the code
-      let access_token = '';
+      let session_token = '';
       try {
-        const res = await exchangeAuthCode(codeParam, stateParam);
-        access_token = res.session_token
-        localStorage.setItem('csesoc-last-token', access_token);
+        const res = await exchangeAuthCode(Object.fromEntries(query.entries()));
+        session_token = res.session_token
       } catch (e) {
         setError('auth code exchange failed');
         console.error(e);
@@ -51,8 +49,8 @@ const LoginSuccess = () => {
       }
 
       // we now have a access token, set it as our token
-      dispatch(setToken(access_token));
-      setError(`NONE: ${access_token}`);
+      dispatch(setToken(session_token));
+      setError(`NONE: ${session_token}`);
     }
 
     exchangeCode();

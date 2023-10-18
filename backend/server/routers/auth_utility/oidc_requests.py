@@ -200,6 +200,19 @@ def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"
 # validation functions
 #
 # TODO: do we want to convert these all to Optional responses?
+def validate_authorization_response(exp_state: str, query_params: Dict[str, str]) -> str:
+    state = query_params.get("state")
+    code = query_params.get("code")
+    scope = query_params.get("scope")
+    if state is None or state != exp_state:
+        raise OIDCValidationError("State param was not as expected.", state)
+    if code is None:
+        raise OIDCValidationError("Code param was not present.")
+    if scope is None or scope != SCOPES:
+        raise OIDCValidationError("Scope param was not correct.", scope)
+    
+    return code
+
 def validate_id_token(token: str) -> DecodedIDToken:
     jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)  # TODO: move this out?
     signing_key = jwkclient.get_signing_key_from_jwt(token)
@@ -233,10 +246,10 @@ def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str) -> D
 def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, DecodedIDToken]:
     # https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
     tokensres = exchange_tokens(authorization_code)
-    print("\n\nDEBUG: exchanged token for\n")
-    pprint(tokensres)
-    print()
-    print()
+    # print("\n\nDEBUG: exchanged token for\n")
+    # pprint(tokensres)
+    # print()
+    # print()
     
     # TODO: handle these checks better, potentially move them too
     if tokensres.get("token_type", "").lower() != "bearer" or tokensres.get("scope", "").lower() != SCOPES:
@@ -253,10 +266,10 @@ def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, Decod
     # TODO: validate the access token
     id_token = validate_id_token(tokensres["id_token"])
 
-    print("\n\nDEBUG: validated id_token\n")
-    pprint(id_token)
-    print()
-    print()
+    # print("\n\nDEBUG: validated id_token\n")
+    # pprint(id_token)
+    # print()
+    # print()
     return (tokensres, id_token)
 
 def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tuple[RefreshResponse, DecodedIDToken]:
