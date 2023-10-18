@@ -6,6 +6,10 @@ class OIDCError(Exception):
     def __init__(self, error_description: Optional[str] = None) -> None:
         self.error_description: Optional[str] = error_description
 
+    def __str__(self) -> str:
+        desc = self.error_description or "No description."
+        return f"{super().__str__()}\n  Description: {desc}"
+
 #
 # errors coming from requests
 #
