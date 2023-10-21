@@ -44,8 +44,8 @@ const TermPlanner = () => {
   // The user's actual courses obj???????
   const coursesQuery = useQuery('courses', getUserCourses);
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
-  console.log('courses', courses);
-  console.log('planner', planner);
+  // console.log('courses', courses);
+  // console.log('planner', planner);
 
   const courseQueries = useQueries(
     Object.keys(courses).map((code: string) => ({
@@ -163,11 +163,14 @@ const TermPlanner = () => {
   const plannerPicRef = useRef<HTMLDivElement>(null);
 
   const handleOnDragStart: OnDragStartResponder = async (result) => {
+    console.log("STARTING DRAG", result);
     const courseCode = result.draggableId.slice(0, 8);
+    console.log('courseCode', courseCode);
     setDraggingCourse(courseCode);
   };
 
   const handleOnDragEnd: OnDragEndResponder = async (result) => {
+    console.log("ENDING DRAG", result);
     setDraggingCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
@@ -265,7 +268,7 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
-                        console.log('Making termbox for', iYear, term);
+                        // console.log('Making termbox for', iYear, term);
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL
                         const courseInfoForThisTerm = Object.fromEntries(codesForThisTerm.map(
