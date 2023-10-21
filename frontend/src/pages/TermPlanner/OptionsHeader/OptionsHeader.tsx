@@ -13,7 +13,6 @@ import {
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
-import { badPlanner, PlannerResponse } from 'types/userResponse';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import type { RootState } from 'config/store';
@@ -37,7 +36,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const queryClient = useQueryClient();
 
   const plannerQuery = useQuery('planner', getUserPlanner);
-  const planner: PlannerResponse = plannerQuery.data || badPlanner;
+  const planner = plannerQuery.data;
 
   const { theme } = useSelector((state: RootState) => state.settings);
   const { areYearsHidden } = useSelector((state: RootState) => state.planner);
@@ -66,13 +65,14 @@ const OptionsHeader = ({ plannerRef }: Props) => {
     <S.OptionsHeaderWrapper>
       <S.OptionSection>
         <Tippy
-          content={<SettingsMenu />}
+          content={<SettingsMenu planner={planner} />}
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
           theme={theme}
           zIndex={1}
           placement="bottom-start"
+          disabled={!planner}
         >
           <div>
             <Tooltip title="Settings">
@@ -117,7 +117,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           </div>
         </Tippy>
 
-        {!isPlannerEmpty(planner) && (
+        {planner && !isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">
             <Popconfirm
               placement="bottomRight"

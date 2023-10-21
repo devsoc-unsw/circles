@@ -68,7 +68,9 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
         />
         <S.LetterGradeWrapper>
           {letterGrades.map((letterGrade) => (
-            <Button onClick={() => updateMark(letterGrade)}>{letterGrade}</Button>
+            <Button key={letterGrade} onClick={() => updateMark(letterGrade)}>
+              {letterGrade}
+            </Button>
           ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>

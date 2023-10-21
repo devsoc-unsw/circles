@@ -23,7 +23,7 @@ const CourseSelector = () => {
     onError: errLogger('coursesQuery'),
     onSuccess: (data) => {
       // only open for users with no courses
-      if (!showedNotif && !Object.keys(data.courses).length) {
+      if (!showedNotif && !Object.keys(data).length) {
         openNotification({
           type: 'info',
           message: 'How do I see more sidebar courses?',

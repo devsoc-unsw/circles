@@ -44,6 +44,7 @@ const UnplannedColumn = ({ dragging, courseInfos }: Props) => {
             >
               {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
+                  key={courseCode}
                   planner={planner}
                   courses={courses}
                   courseInfo={courseInfos[courseCode]}

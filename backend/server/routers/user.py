@@ -129,7 +129,7 @@ def default_cs_user() -> Storage:
     return user
 
 
-@router.put("/toggleSummerTerm")
+@router.post("/toggleSummerTerm")
 def toggle_summer_term(token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']

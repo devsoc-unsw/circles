@@ -163,14 +163,14 @@ const TermPlanner = () => {
   const plannerPicRef = useRef<HTMLDivElement>(null);
 
   const handleOnDragStart: OnDragStartResponder = async (result) => {
-    console.log("STARTING DRAG", result);
+    console.log('STARTING DRAG', result);
     const courseCode = result.draggableId.slice(0, 8);
     console.log('courseCode', courseCode);
     setDraggingCourse(courseCode);
   };
 
   const handleOnDragEnd: OnDragEndResponder = async (result) => {
-    console.log("ENDING DRAG", result);
+    console.log('ENDING DRAG', result);
     setDraggingCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
@@ -271,9 +271,9 @@ const TermPlanner = () => {
                         // console.log('Making termbox for', iYear, term);
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL
-                        const courseInfoForThisTerm = Object.fromEntries(codesForThisTerm.map(
-                          code => [code, courseInfos[code]]
-                        ));
+                        const courseInfoForThisTerm = Object.fromEntries(
+                          codesForThisTerm.map((code) => [code, courseInfos[code]])
+                        );
                         return (
                           <TermBox
                             key={key}
@@ -287,11 +287,12 @@ const TermPlanner = () => {
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={!!draggingCourse} courseInfos={
-                  Object.fromEntries(
-                    planner.unplanned.map(code => [code, courseInfos[code]])
-                  )
-                } />
+                <UnplannedColumn
+                  dragging={!!draggingCourse}
+                  courseInfos={Object.fromEntries(
+                    planner.unplanned.map((code) => [code, courseInfos[code]])
+                  )}
+                />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>

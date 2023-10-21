@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { PlannerResponse } from 'types/userResponse';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -11,9 +13,15 @@ import CS from '../common/styles';
 
 const DatePicker = React.lazy(() => import('components/Datepicker'));
 
-const SettingsMenu = () => {
+type Props = {
+  planner?: PlannerResponse;
+};
+
+const SettingsMenu = ({ planner }: Props) => {
+  const queryClient = useQueryClient();
+
   const { Option } = Select;
-  const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
+  // const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
   const { token } = useSelector((state: RootState) => state.settings);
 
   async function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
@@ -46,7 +54,7 @@ const SettingsMenu = () => {
     }
   }
 
-  async function handleSummerToggle() {
+  async function summerToggle() {
     try {
       await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
     } catch {
@@ -57,7 +65,7 @@ const SettingsMenu = () => {
       });
       return;
     }
-    if (isSummerEnabled) {
+    if (planner && planner.isSummerEnabled) {
       openNotification({
         type: 'info',
         message: 'Your summer term courses have been unplanned',
@@ -67,7 +75,26 @@ const SettingsMenu = () => {
     }
   }
 
+  const summerToggleMutation = useMutation(summerToggle, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at summerToggleMutationMutation: ', err);
+    }
+  });
+
+  const handleSummerToggle = async () => {
+    summerToggleMutation.mutate();
+  };
+
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  // The settings menu *should* be disabled a layer up if there is no planner
+  if (!planner) {
+    return null;
+  }
 
   return (
     <CS.MenuPopup>
@@ -76,7 +103,7 @@ const SettingsMenu = () => {
       <CS.PopupEntry>
         <CS.MenuText>Summer Term</CS.MenuText>
         <Switch
-          defaultChecked={isSummerEnabled}
+          defaultChecked={planner.isSummerEnabled}
           onChange={handleSummerToggle}
           checkedChildren={<CheckOutlined />}
           unCheckedChildren={<CloseOutlined />}
@@ -89,13 +116,17 @@ const SettingsMenu = () => {
             onChange={handleUpdateStartYear}
             picker="year"
             style={{ width: 105 }}
-            value={dayjs().year(startYear)}
+            value={dayjs().year(planner.startYear)}
           />
         </Suspense>
       </CS.PopupEntry>
       <CS.PopupEntry>
         <CS.MenuText>Degree Length</CS.MenuText>
-        <Select value={numYears} style={{ width: 70 }} onChange={handleUpdateDegreeLength}>
+        <Select
+          value={planner.years.length}
+          style={{ width: 70 }}
+          onChange={handleUpdateDegreeLength}
+        >
           {years.map((num) => (
             <Option key={num} value={num}>
               {num}
