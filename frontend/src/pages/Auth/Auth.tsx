@@ -12,9 +12,14 @@ import { setToken } from 'reducers/settingsSlice';
 import './index.less';
 import PageTemplate from 'components/PageTemplate';
 import Container from './Container';
+import { inDev } from 'config/constants';
+import S from './styles';
+import axios from 'axios';
+import { generateUserToken, userLogin, userLogout } from 'utils/api/userApi';
 
 const Auth = () => {
   const [userObject, setUserObject] = useState({});
+  const [dummyToken, setDummyToken] = useState('');
   const { settings } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
@@ -63,18 +68,6 @@ const Auth = () => {
       (window as any).google.accounts.id.prompt();
     }
   }, []);
-
-  const LogoutButton = () => {
-    const logout = () => {
-      setUserObject({});
-    };
-
-    return (
-      <div onClick={logout}>
-        <h1> LOGOUT </h1>
-      </div>
-    );
-  };
   interface Props {
     obj: any;
   }
@@ -97,17 +90,15 @@ const Auth = () => {
 
   return (
     <PageTemplate showHeader={false}>
-      <Container />
-      {/* {Object.keys(userObject).length != 0 && (
-        <div>
-          <div> signed in </div>
-          <div>
-            <h2>Data:</h2>
-            <JsonObject obj={userObject} />
-          </div>
-          <LogoutButton />
-        </div>
-      )} */}
+      <Container onLoginHandle={userLogin}/>
+      {inDev && (
+        <>
+          <S.TestButton onClick={() => generateUserToken(1)}>Set User #1</S.TestButton>
+          <S.TestButton onClick={() => generateUserToken(2)}>Set User #2</S.TestButton>
+          <S.TestButton onClick={() => generateUserToken(3)}>Set User #3</S.TestButton>
+          <S.TestButton onClick={userLogout}>Logout</S.TestButton>
+        </>
+      )}
     </PageTemplate>
   );
 };
