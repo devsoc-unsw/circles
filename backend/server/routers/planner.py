@@ -325,19 +325,20 @@ def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
     user = get_user(token)
     transcript_obj = parse_transcript(file.file)
 
-    # could use either tbh but earliest transcript year would be better?
-    startYear = user['planner']['startYear']
-    startYear = min(transcript_obj)
+    # pad start with more years
+    savedStartYear = user['planner']['startYear']
+    transStartYear = min(transcript_obj)
+    if savedStartYear > transStartYear:
+        user['planner']['years'] = generate_empty_years(savedStartYear - transStartYear) + user['planner']['years']
+        user['planner']['startYear'] = transStartYear
 
-    # gen enough years if empty; ideally years list shouldve alr been gen'd
-    # TODO: remove `or True` and pad planner['years'] when user object
-    # becomes initialized better so this won't break
-    if user['planner']['years'] == [] or True: 
-        user['planner']['years'] = generate_empty_years(
-                1 + max(transcript_obj) - startYear)
+    # pad end with more years
+    transEndYear = max(transcript_obj)
+    if transEndYear > user['planner']['startYear'] + len(user['planner']['years']) - 1:
+        user['planner']['years'] += generate_empty_years(transEndYear - user['planner']['startYear'] - len(user['planner']['years']) + 1)
 
     for year, terms_obj in transcript_obj.items():
-        year_offset = year - startYear
+        year_offset = year - user['planner']['startYear']
         year_data = user['planner']['years'][year_offset]
         for term, courses_obj in terms_obj.items():
             for course, (mark, _) in courses_obj.items():
