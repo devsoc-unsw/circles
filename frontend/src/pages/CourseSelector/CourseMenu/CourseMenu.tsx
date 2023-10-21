@@ -63,19 +63,19 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
       JSON.stringify(prepareUserPayload(degree, planner, courses))
     );
     return res.data.courses_state;
-  }, [degree, planner]);
+  }, [degree, planner, courses]);
 
   const structureQuery = useQuery(['structure', degree], getStructure, {
     onError: errLogger('structureQuery'),
     enabled: !!degree
   });
 
-  const coursesStateQuery = useQuery(['coursesState', degree, planner], getAllUnlocked, {
+  const coursesStateQuery = useQuery(['coursesState', degree, planner, courses], getAllUnlocked, {
     onError: errLogger('coursesStateQuery'),
     onSuccess: (courses) => {
       dispatch(setCourses(courses)); // should maybe be deleted later or something
     },
-    enabled: !!degree && !!planner
+    enabled: !!degree && !!planner && !!courses
   });
 
   // glorified useEffect
@@ -86,7 +86,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
       generateMenuData(courses, structureQuery.data, coursesStateQuery.data);
     },
     {
-      enabled: !!planner && structureQuery.isSuccess && coursesStateQuery.isSuccess
+      enabled: !!planner && structureQuery.isSuccess && coursesStateQuery.isSuccess && !!courses
     }
   );
 
@@ -97,6 +97,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
       await handleMutation(courseId);
     },
     onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['courses'] });
       await queryClient.invalidateQueries({ queryKey: ['planner'] });
     }
   });

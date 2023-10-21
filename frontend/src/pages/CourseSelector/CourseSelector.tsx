@@ -17,7 +17,7 @@ import S from './styles';
 const CourseSelector = () => {
   const [showedNotif, setShowedNotif] = useState(false);
 
-  const plannerQuery = useQuery('planner', getUserPlanner, { onError: errLogger('coursesQuery') });
+  const plannerQuery = useQuery('planner', getUserPlanner, { onError: errLogger('plannerQuery') });
 
   const coursesQuery = useQuery('courses', getUserCourses, {
     onError: errLogger('coursesQuery'),
@@ -60,6 +60,7 @@ const CourseSelector = () => {
                 courseCode={courseCode}
                 onCourseClick={(code) => dispatch(addTab(code))}
                 planner={plannerQuery.data}
+                courses={coursesQuery.data}
                 degree={degreeQuery.data}
               />
             </div>

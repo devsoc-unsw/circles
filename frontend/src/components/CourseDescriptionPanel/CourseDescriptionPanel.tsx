@@ -47,7 +47,7 @@ const CourseDescriptionPanel = ({
       JSON.stringify(prepareUserPayload(degree, planner, courses))
     );
     return res.data;
-  }, [courseCode, degree, planner]);
+  }, [courseCode, degree, planner, courses]);
 
   const getCourseInfo = React.useCallback(async () => {
     return Promise.allSettled([
@@ -58,11 +58,11 @@ const CourseDescriptionPanel = ({
   }, [courseCode]);
 
   const coursesUnlockedQuery = useQuery(
-    ['coursesUnlocked', courseCode, degree, planner],
+    ['coursesUnlocked', courseCode, degree, planner, courses],
     getCoursesUnlocked,
     {
       onError: errLogger('coursesUnlockedQuery'),
-      enabled: !!degree && !!planner
+      enabled: !!degree && !!planner && !!courses
     }
   );
 
