@@ -45,5 +45,11 @@ def assert_possible_structure(unlocked, program, spec):
             for course in structure[container]['content'][container2]['courses']:
                 for c in unlocked:
                     if course in c and all(ignore not in c for ignore in ignored) and not unlocked[c]['is_accurate']:
+                        print(
+                            "Failing Possible Structure:"
+                            f"\n\t{c}"
+                            f"\n\tCourse: {course}"
+                            f"\n\tUnlocked: {unlocked[c]}"
+                        )
                         failed_set.add(c)
     assert len(failed_set) == 0, f'courses: {failed_set} are inaccurate for program: {program}, spec: {spec}'
