@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
@@ -36,11 +37,15 @@ const DragDropContext = React.lazy(() =>
 const TermPlanner = () => {
   const queryClient = useQueryClient();
 
+  // Planer obj
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
+  // The user's actual courses obj???????
   const coursesQuery = useQuery('courses', getUserCourses);
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
+  console.log('courses', courses);
+  console.log('planner', planner);
 
   const courseQueries = useQueries(
     Object.keys(courses).map((code: string) => ({
@@ -213,6 +218,7 @@ const TermPlanner = () => {
     }
   };
 
+  console.log('\n\ndragg', draggingCourse, '-');
   return (
     <PageTemplate>
       <OptionsHeader plannerRef={plannerPicRef} />
@@ -228,6 +234,7 @@ const TermPlanner = () => {
                 <GridItem>Term 3</GridItem>
                 {planner.years.map((year, index) => {
                   const iYear = planner.startYear + index;
+                  // console.log('planner year + index', iYear, year, iYear);
                   let yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
                     Object.entries(courseInfos).forEach(([courseCode, courseInfo]) => {
@@ -258,12 +265,18 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
+                        console.log('Making termbox for', iYear, term);
+                        const codesForThisTerm = year[term];
+                        // probs map this at TOP-LEVEL
+                        const courseInfoForThisTerm = Object.fromEntries(codesForThisTerm.map(
+                          code => [code, courseInfos[code]]
+                        ));
                         return (
                           <TermBox
                             key={key}
                             name={key}
-                            courseInfos={courseInfos}
-                            termCourseCodes={year[term as Term]}
+                            courseInfos={courseInfoForThisTerm}
+                            termCourseCodes={codesForThisTerm}
                             draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
                           />
                         );
@@ -271,7 +284,11 @@ const TermPlanner = () => {
                     </React.Fragment>
                   );
                 })}
-                <UnplannedColumn dragging={!!draggingCourse} courseInfos={courseInfos} />
+                <UnplannedColumn dragging={!!draggingCourse} courseInfos={
+                  Object.fromEntries(
+                    planner.unplanned.map(code => [code, courseInfos[code]])
+                  )
+                } />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>
