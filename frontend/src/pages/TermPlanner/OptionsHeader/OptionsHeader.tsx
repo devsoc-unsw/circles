@@ -7,7 +7,6 @@ import {
   DownloadOutlined,
   EyeFilled,
   QuestionCircleOutlined,
-  SaveFilled,
   SettingFilled,
   UploadOutlined,
   WarningFilled
@@ -17,7 +16,6 @@ import { Popconfirm, Switch, Tooltip } from 'antd';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
-import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
 import { unhideAllYears } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
@@ -41,7 +39,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data || badPlanner;
 
-  const { theme, token } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
   const { areYearsHidden } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
@@ -111,11 +109,6 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           placement="bottom-start"
         >
           <div>
-            <Tooltip title="Save">
-              <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
-                <SaveFilled style={iconStyles} />
-              </S.OptionButton>
-            </Tooltip>
             <Tooltip title="Import">
               <S.OptionButton>
                 <UploadOutlined style={iconStyles} />

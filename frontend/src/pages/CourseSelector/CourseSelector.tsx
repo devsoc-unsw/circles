@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import { errLogger } from 'utils/queryUtils';
 import infographic from 'assets/infographicFontIndependent.svg';
@@ -17,7 +17,9 @@ import S from './styles';
 const CourseSelector = () => {
   const [showedNotif, setShowedNotif] = useState(false);
 
-  const plannerQuery = useQuery('planner', getUserPlanner, {
+  const plannerQuery = useQuery('planner', getUserPlanner, { onError: errLogger('coursesQuery') });
+
+  const coursesQuery = useQuery('courses', getUserCourses, {
     onError: errLogger('coursesQuery'),
     onSuccess: (data) => {
       // only open for users with no courses
@@ -33,9 +35,7 @@ const CourseSelector = () => {
     }
   });
 
-  const degreeQuery = useQuery('degree', getUserDegree, {
-    onError: errLogger('degreeQuery')
-  });
+  const degreeQuery = useQuery('degree', getUserDegree, { onError: errLogger('degreeQuery') });
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 
@@ -49,7 +49,11 @@ const CourseSelector = () => {
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper>
-          <CourseMenu planner={plannerQuery.data} degree={degreeQuery.data} />
+          <CourseMenu
+            planner={plannerQuery.data}
+            courses={coursesQuery.data}
+            degree={degreeQuery.data}
+          />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel

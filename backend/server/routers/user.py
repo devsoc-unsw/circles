@@ -23,7 +23,8 @@ from server.routers.model import (
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
-pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
+from pydantic.json import ENCODERS_BY_TYPE
+ENCODERS_BY_TYPE[ObjectId] = str
 
 router = APIRouter(
     prefix="/user",
@@ -115,7 +116,6 @@ def default_cs_user() -> Storage:
         'startYear': LIVE_YEAR,
         'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
     user: Storage = {
         'degree': {
@@ -239,7 +239,6 @@ def reset(token: str = DUMMY_TOKEN):
         'startYear': LIVE_YEAR,
         'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
 
     user: Storage = {
@@ -319,7 +318,6 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'startYear': wizard.startYear,
         'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
     
     planner['years'] = [
@@ -351,4 +349,3 @@ def toggleLocked(termyear: str, token: str = DUMMY_TOKEN):
     locked_map = user['planner']['lockedTerms']
     locked_map[termyear] = not locked_map.get(termyear, False)
     set_user(token, user, True)
-

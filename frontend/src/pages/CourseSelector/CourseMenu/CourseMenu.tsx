@@ -18,7 +18,7 @@ import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
 import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import { QueryObserver, useMutation, useQuery, useQueryClient } from 'react-query';
-import { DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { errLogger } from 'utils/queryUtils';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 
@@ -30,6 +30,7 @@ type SubgroupTitleProps = {
 
 type CourseMenuProps = {
   planner?: PlannerResponse;
+  courses?: CoursesResponse;
   degree?: DegreeResponse;
 };
 
@@ -42,9 +43,8 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseMenu = ({planner, degree}: CourseMenuProps) => {
-
-  const inPlanner = (courseId: string) => planner && (!!planner.courses[courseId] || planner.unplanned.includes(courseId));
+const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
+  const inPlanner = (courseId: string) => courses && !!courses[courseId];
 
   const getStructure = React.useCallback(async () => {
     if (!degree) return Promise.reject('degree undefined');
@@ -56,10 +56,11 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
   }, [degree]);
 
   const getAllUnlocked = React.useCallback(async () => {
-    if (!degree || !planner) return Promise.reject('degree or planner undefined');
+    if (!degree || !planner || !courses)
+      return Promise.reject('degree, planner or courses undefined');
     const res = await axios.post<CoursesAllUnlocked>(
       '/courses/getAllUnlocked/',
-      JSON.stringify(prepareUserPayload(degree, planner))
+      JSON.stringify(prepareUserPayload(degree, planner, courses))
     );
     return res.data.courses_state;
   }, [degree, planner]);
@@ -72,29 +73,33 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
   const coursesStateQuery = useQuery(['coursesState', degree, planner], getAllUnlocked, {
     onError: errLogger('coursesStateQuery'),
     onSuccess: (courses) => {
-        dispatch(setCourses(courses)); // should maybe be deleted later or something
-      },
+      dispatch(setCourses(courses)); // should maybe be deleted later or something
+    },
     enabled: !!degree && !!planner
   });
 
   // glorified useEffect
-  useQuery('generateMenuData', () => {
-      if (!planner || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return; 
-      generateMenuData(planner, structureQuery.data, coursesStateQuery.data);
-    }, {
+  useQuery(
+    'generateMenuData',
+    () => {
+      if (!courses || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
+      generateMenuData(courses, structureQuery.data, coursesStateQuery.data);
+    },
+    {
       enabled: !!planner && structureQuery.isSuccess && coursesStateQuery.isSuccess
-  });
+    }
+  );
 
   const queryClient = useQueryClient();
-  const courseMutation = useMutation({ 
+  const courseMutation = useMutation({
     mutationFn: async (courseId: string) => {
       const handleMutation = inPlanner(courseId) ? removeCourse : addToUnplanned;
       await handleMutation(courseId);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({queryKey: ['planner']});
+      await queryClient.invalidateQueries({ queryKey: ['planner'] });
     }
-  })
+  });
   const runMutate = (courseId: string) => courseMutation.mutate(courseId);
 
   const dispatch = useDispatch();
@@ -107,9 +112,9 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
 
   const generateMenuData = useCallback(
     (
-      planner: PlannerResponse,
+      courses: CoursesResponse,
       structure: ProgramStructure,
-      courses: Record<string, CourseValidation>
+      coursesState: Record<string, CourseValidation>
     ) => {
       const newMenu: MenuDataStructure = {};
       const newCoursesUnits: CourseUnitsStructure = {};
@@ -132,18 +137,17 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               // suppress gen ed courses if it has not been added to the planner
-              if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
+              if (subgroupStructure.type === 'gened' && !coursesState[courseCode]) return;
               newMenu[group][subgroup].push({
                 courseCode,
                 title: subgroupStructure.courses[courseCode],
-                unlocked: !!courses[courseCode]?.unlocked,
-                accuracy: courses[courseCode] ? courses[courseCode].is_accurate : true
+                unlocked: !!coursesState[courseCode]?.unlocked,
+                accuracy: coursesState[courseCode] ? coursesState[courseCode].is_accurate : true
               });
               // add UOC to curr
-              if (planner.courses[courseCode]) {
-                const anyCourse = planner.courses[courseCode] as any; // while types get unfucked
-                newCoursesUnits[group][subgroup].curr +=
-                  anyCourse.UOC * getNumTerms(anyCourse.UOC, anyCourse.isMultiterm);
+              if (courses[courseCode] !== undefined) {
+                const anyCourse = courses[courseCode] as any; // while types get unfucked
+                newCoursesUnits[group][subgroup].curr += anyCourse.UOC;
               }
             });
           }
@@ -177,7 +181,7 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
   const defaultOpenKeys = [Object.keys(menuData)[0]];
 
   let menuItems: MenuProps['items'];
-  if (pageLoaded && structureQuery.isSuccess && planner) {
+  if (pageLoaded && structureQuery.isSuccess && courses) {
     const structure = structureQuery.data;
     menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
       label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
@@ -198,17 +202,16 @@ const CourseMenu = ({planner, degree}: CourseMenuProps) => {
                   .sort(sortCourses)
                   .filter(
                     (course) =>
-                      course.unlocked || planner.courses[course.courseCode] || showLockedCourses
+                      course.unlocked ||
+                      courses[course.courseCode] !== undefined ||
+                      showLockedCourses
                   )
                   .map((course) => ({
                     label: (
                       <CourseMenuTitle
                         courseCode={course.courseCode}
                         title={course.title}
-                        selected={
-                          planner.courses[course.courseCode] !== undefined ||
-                          planner.unplanned.includes(course.courseCode)
-                        }
+                        selected={courses[course.courseCode] !== undefined}
                         runMutate={runMutate}
                         accurate={course.accuracy}
                         unlocked={course.unlocked}

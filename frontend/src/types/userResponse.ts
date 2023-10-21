@@ -30,7 +30,6 @@ export type PlannerResponse = {
   lockedTerms: Record<string, boolean>;
   // TODO: Type this better somehow
   years: Record<string, string[]>[];
-  courses: Record<string, CourseResponse>;
 };
 
 export type Term = {
@@ -46,8 +45,7 @@ export const badPlanner: PlannerResponse = {
   startYear: 2021,
   isSummerEnabled: false,
   lockedTerms: {},
-  years: [],
-  courses: {}
+  years: []
 };
 
 export const badCourseInfo: Course = {
