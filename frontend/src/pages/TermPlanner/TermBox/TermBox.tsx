@@ -22,11 +22,18 @@ const Droppable = React.lazy(() =>
 type Props = {
   name: string; // Ideally replace this with a proper term type later
   courseInfos: Record<string, Course>; // All courses in planner
+  termCourseInfos: Record<string, Course>; // All courses in term
   termCourseCodes: string[]; // Course codes in the current term
   draggingCourseCode?: string;
 };
 
-const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Props) => {
+const TermBox = ({
+  name,
+  courseInfos,
+  termCourseInfos,
+  termCourseCodes,
+  draggingCourseCode
+}: Props) => {
   const year = name.slice(0, 4);
   const term = name.match(/T[0-3]/)?.[0] as Term;
   const theme = useTheme();
@@ -51,7 +58,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
     }
   };
 
-  const termUOC = termCourseCodes.reduce((acc, code) => acc + courseInfos[code].UOC, 0);
+  const termUOC = termCourseCodes.reduce((acc, code) => acc + termCourseInfos[code].UOC, 0);
 
   const isLocked: boolean = planner.lockedTerms[`${year}${term}`] ?? false;
   const offeredInTerm =
@@ -93,7 +100,7 @@ const TermBox = ({ name, courseInfos, termCourseCodes, draggingCourseCode }: Pro
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {Object.values(courseInfos).map((info, index) => {
+              {Object.values(termCourseInfos).map((info, index) => {
                 return (
                   <DraggableCourse
                     key={`${draggingCourseCode || ''}${term}`}

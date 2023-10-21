@@ -278,7 +278,8 @@ const TermPlanner = () => {
                           <TermBox
                             key={key}
                             name={key}
-                            courseInfos={courseInfoForThisTerm}
+                            courseInfos={courseInfos}
+                            termCourseInfos={courseInfoForThisTerm}
                             termCourseCodes={codesForThisTerm}
                             draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
                           />
