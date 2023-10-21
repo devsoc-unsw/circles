@@ -19510,7 +19510,6 @@
                     "type": "limit_rule",
                     "courses": {
                         "AERO": "any Faculty of Engineering course",
-                        "AVEN": "any Faculty of Engineering course",
                         "AVIA": "any Faculty of Science course",
                         "BABS": "any Faculty of Science course",
                         "BEES": "any Faculty of Science course",
