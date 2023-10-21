@@ -145,7 +145,7 @@ const DraggableCourse = ({ planner, courses, courseInfo, index, time }: Props) =
                           Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                           Mark can be 0.
                         */}
-                      {typeof courses[courseInfo.code].mark !== undefined
+                      {courses[courseInfo.code].mark !== null
                         ? courses[courseInfo.code].mark
                         : 'N/A'}
                     </Text>
