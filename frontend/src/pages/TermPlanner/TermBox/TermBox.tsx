@@ -114,7 +114,7 @@ const TermBox = ({
               {Object.values(termCourseInfos).map((info, index) => {
                 return (
                   <DraggableCourse
-                    key={`${draggingCourseCode || ''}${term}`}
+                    key={`${info.title || ''}${term}`}
                     planner={planner}
                     courses={courses}
                     courseInfo={info}
