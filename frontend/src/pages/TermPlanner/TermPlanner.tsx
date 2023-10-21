@@ -221,7 +221,6 @@ const TermPlanner = () => {
     }
   };
 
-  console.log('\n\ndragg', draggingCourse, '-');
   return (
     <PageTemplate>
       <OptionsHeader plannerRef={plannerPicRef} />

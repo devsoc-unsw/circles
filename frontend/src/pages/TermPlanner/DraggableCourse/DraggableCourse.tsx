@@ -50,7 +50,7 @@ const DraggableCourse = ({ planner, courses, courseInfo, index, time }: Props) =
     id: `${courseInfo.code}-context`
   });
 
-  const isTermLocked = time ? planner.lockedTerms[`${time.year}T${time.term}`] : false;
+  const isTermLocked = time ? planner.lockedTerms[`${time.year}${time.term}`] : false;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
   // TODO: Fix these boolean checks for warnings

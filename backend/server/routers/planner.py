@@ -321,6 +321,18 @@ def unschedule_all(token: str = DUMMY_TOKEN):
 
     set_user(token, user, True)
 
+@router.post("/toggleTermLocked")
+def toggleLocked(termyear: str, token: str = DUMMY_TOKEN):
+    (term_str, year_str) = termyear.split('T')
+    try:
+        year = int(year_str)
+        term = int(term_str)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid term/year")
+    user = get_user(token)
+    locked_map = user['planner']['lockedTerms']
+    locked_map[termyear] = not locked_map.get(termyear, False)
+    set_user(token, user, True)
 
 def generate_empty_years(num_years: int):
     """

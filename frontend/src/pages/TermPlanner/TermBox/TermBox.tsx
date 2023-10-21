@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import axios from 'axios';
@@ -46,16 +46,27 @@ const TermBox = ({
   const coursesQuery = useQuery('courses', getUserCourses);
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
-  const handleToggleLockTerm = async () => {
-    const token = getToken();
-    const res = await axios.post(
-      '/user/planner/toggleTermLocked',
-      { termyear: `${year}${term}` },
-      { params: { token } }
+  const toggleLockTerm = async () => {
+    const token = await getToken();
+    await axios.post(
+      '/planner/toggleTermLocked',
+      {},
+      { params: { token, termyear: `${year}${term}` } }
     );
-    if (res.status === 200) {
+  };
+
+  const toggleLockTermMutation = useMutation(toggleLockTerm, {
+    onSuccess: () => {
       queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at toggleLockTermMutation: ', err);
     }
+  });
+
+  const handleToggleLockTerm = async () => {
+    toggleLockTermMutation.mutate();
   };
 
   const termUOC = termCourseCodes.reduce((acc, code) => acc + termCourseInfos[code].UOC, 0);
