@@ -97,7 +97,7 @@
     "prettier": "2.8.6",
     "react-is": "18.2.0",
     "typescript": "5.0.4",
-    "vite": "4.0.1",
+    "vite": "4.0.5",
     "vite-plugin-checker": "0.5.6",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-svgr": "2.4.0",
