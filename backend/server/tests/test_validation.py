@@ -6,6 +6,8 @@ from server.routers.model import StructureContainer
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
+FAILS = []
+
 # TODO: some of these should probs not be ignored
 ignored = [
     'ARCH1101', 'ADAD4100', 'ARTS3', 'AVIA2117', 'BABS3021', 'BEES', 'BEIL6',
@@ -15,11 +17,12 @@ ignored = [
     'GMAT4061', 'HESC3541', 'HUMS1007', 'LAWS', 'MDIA', 'MICR3621', 'MMAN4951',
     'MUSC', 'NEUR2201', 'PHAR2011', 'PHAR3102', 'PHAR3251', 'PHCM1001',
     'PHSL','3199', '3299', 'SDES', 'SOCW', 'SOLA49', 'SOSS', 'SRAP',
-    'ZHSS3501', 'FOOD6804', 'PATH3209', 'SOMS', 'YMED', 'LAND1351', "MFAC1526",
-    "LAND1351", "SCIF1000", "MFAC1501", "COMM1140", "MFAC1524", "MFAC1527",
-    "ANAT1452", "MFAC1525", "MFAC1522", "COMM1120", "MFAC1521", "MFAC1523",
-    "FINS3647", "ACTL3143", "COMM3000", 'CHEM4508', 'PHYS3118', 'AVIA2225',
-    'AVIA3025', 'CHEM4516', 'PHYS2116', 'BIOS3171', 'AVIA2125'
+    'ZHSS3501', 'FOOD6804', 'PATH3209', 'SOMS', 'YMED',
+    # 'LAND1351', "MFAC1526",
+    # "LAND1351", "SCIF1000", "MFAC1501", "COMM1140", "MFAC1524", "MFAC1527",
+    # "ANAT1452", "MFAC1525", "MFAC1522", "COMM1120", "MFAC1521", "MFAC1523",
+    # "FINS3647", "ACTL3143", "COMM3000", 'CHEM4508', 'PHYS3118', 'AVIA2225',
+    # 'AVIA3025', 'CHEM4516', 'PHYS2116', 'BIOS3171', 'AVIA2125'
 ]
 
 def test_validation():
@@ -36,7 +39,7 @@ def test_validation():
                 if spec not in fake_specs:
                     assert_possible_structure(unlocked, program, spec)
 
-    assert False
+    assert FAILS == [], f"Failed possible structure tests: {FAILS}"
 
 
 def assert_possible_structure(unlocked, program, spec):
@@ -58,4 +61,6 @@ def assert_possible_structure(unlocked, program, spec):
                             f"\n\tUnlocked: {unlocked[unlocked_course]}"
                         )
                         failed_set.add(unlocked_course)
-    assert len(failed_set) == 0, f'courses: {failed_set} are inaccurate for program: {program}, spec: {spec}'
+    if failed_set.__len__() > 0:
+        FAILS.append((program, spec, failed_set))
+    # assert len(failed_set) == 0, f'courses: {failed_set} are inaccurate for program: {program}, spec: {spec}'
