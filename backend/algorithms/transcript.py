@@ -50,25 +50,27 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
 
     i = 0
     while i < len(lines):
-        year, term = None, None
+        year_raw, term_raw = None, None
         if re.fullmatch("Summer Term [0-9]{4}", lines[i]):
             term = '0'
             year = lines[i].split(' ')[-1]
         if re.fullmatch("Term [1-3] [0-9]{4}", lines[i]):
-            _, term, year = lines[i].split(' ')
-        if year != None and term != None:
-            year = int(year)
-            if year not in years:
-                years[year] = dict()
-            termStr = 'T' + term
-            years[year][termStr] = dict()
+            _, term_raw, year = lines[i].split(' ')
+        if year_raw is not None and term_raw is not None:
+            year = int(year_raw)
+            term = 'T' + term_raw
+
+            years[year] = years.get(year, dict())
+            years[year][term] = dict()
+
             while lines[i] != "Course Title Attempted Passed Mark Grade":
                 i += 1
             i += 1
+
             course_tup = parse_course_line(lines[i])
             while course_tup:
                 course_code, mark, grade = course_tup
-                years[year][termStr][course_code] = (mark, grade)
+                years[year][term][course_code] = (mark, grade)
                 i += 1
                 course_tup = parse_course_line(lines[i])
         else:
