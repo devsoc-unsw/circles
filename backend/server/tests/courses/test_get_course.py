@@ -48,4 +48,5 @@ def test_get_course_all_courses():
         'PHCM9612', # Not offered this year
     }
     failed_courses = failed_courses.difference(known_failed_courses)
+    print(failed_courses)
     assert failed_courses == set(), f"Total of {len(failed_courses)} courses failed.\n{failed_courses}"
