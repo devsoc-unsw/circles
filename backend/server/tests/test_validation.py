@@ -1,12 +1,13 @@
 # we want to assure that courses that may be accessed from a container are always accurately computed.
 from contextlib import suppress
 from itertools import chain
+from typing import Any
 import requests
 from server.routers.model import StructureContainer
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
-FAILS = []
+FAILS: list[Any] = []
 
 # TODO: some of these should probs not be ignored
 ignored = [
