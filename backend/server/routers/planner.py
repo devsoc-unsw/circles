@@ -7,8 +7,9 @@ from operator import itemgetter
 from typing import Dict, List, Optional, Tuple
 
 from algorithms.autoplanning import autoplan
+from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile
 from server.config import DUMMY_TOKEN
 from server.routers.courses import get_course
 from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
@@ -318,6 +319,39 @@ def unschedule_all(token: str = DUMMY_TOKEN):
         for course_list in year.values():
             user['planner']['unplanned'].extend(course_list)
             course_list.clear()
+
+    set_user(token, user, True)
+
+
+@router.post('/addFromTranscript')
+def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
+    """
+    Adds all courses from a transcript into a user's courses
+    """
+    user = get_user(token)
+    transcript_obj = parse_transcript(file.file)
+
+    # pad start with more years
+    savedStartYear = user['planner']['startYear']
+    transStartYear = min(transcript_obj)
+    if savedStartYear > transStartYear:
+        user['planner']['years'] = generate_empty_years(savedStartYear - transStartYear) + user['planner']['years']
+        user['planner']['startYear'] = transStartYear
+
+    # pad end with more years
+    transEndYear = max(transcript_obj)
+    if transEndYear > user['planner']['startYear'] + len(user['planner']['years']) - 1:
+        user['planner']['years'] += generate_empty_years(transEndYear - user['planner']['startYear'] - len(user['planner']['years']) + 1)
+
+    for year, terms_obj in transcript_obj.items():
+        year_offset = year - user['planner']['startYear']
+        year_data = user['planner']['years'][year_offset]
+        for term, courses_obj in terms_obj.items():
+            for course, (mark, _) in courses_obj.items():
+                year_data[term].append(course)
+                user['courses'][course] = {
+                        'code': course, 'suppressed': False, 'mark': mark
+                }
 
     set_user(token, user, True)
 
