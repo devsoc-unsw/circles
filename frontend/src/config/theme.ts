@@ -130,6 +130,10 @@ export const lightTheme: DefaultTheme = {
   courseButton: {
     backgroundColor: '#fff',
     hoverBackgroundColor: '#F9F9F9'
+  },
+  loginSplash: {
+    svgColor: '#9453e6',
+    backgroundColor: '#f8f8f9'
   }
 };
 
@@ -192,5 +196,9 @@ export const darkTheme: DefaultTheme = {
   },
   courseMenu: {
     backgroundColor: darkBaseColors.purpleLight
+  },
+  loginSplash: {
+    svgColor: '#332643',
+    backgroundColor: '#191b1b'
   }
 };

@@ -12,7 +12,11 @@ const HeroHeader = () => (
         <S.HeaderTitle>Circles</S.HeaderTitle>
       </S.LogoWrapper>
     </Link>
-    {inDev && <S.LoginButton>Login</S.LoginButton>}
+    {inDev && (
+      <Link to="/login">
+        <S.LoginButton>Login</S.LoginButton>
+      </Link>
+    )}
   </S.Header>
 );
 
