@@ -65,9 +65,5 @@ declare module 'styled-components' {
     courseMenu?: {
       backgroundColor: string;
     };
-    loginSplash?: {
-      svgColor: string;
-      backgroundColor: string;
-    };
   }
 }

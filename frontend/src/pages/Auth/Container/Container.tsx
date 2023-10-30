@@ -4,11 +4,7 @@ import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
 import S from './styles';
 
-interface AuthProps {
-  onLoginHandle: () => unknown;
-}
-
-const Container = ({ onLoginHandle }: AuthProps) => {
+const Container = () => {
   return (
     <S.LoginContainer>
       <S.Wrapper>
@@ -20,10 +16,9 @@ const Container = ({ onLoginHandle }: AuthProps) => {
             <Link to="/">
               <S.Back src={BackButton} />
             </Link>
-            <h2>Login to Circles</h2>
+            <h2>Login to circles</h2>
             <p>For current UNSW Students</p>
-            <S.LoginButton onClick={onLoginHandle}>Login with zID</S.LoginButton>
-            <S.GuestButton>Continue as guest</S.GuestButton>
+            <button type="button">Login with zID</button>
           </S.Login>
         </S.Right>
       </S.Wrapper>
