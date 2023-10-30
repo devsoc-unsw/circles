@@ -6,7 +6,7 @@ import './index.less';
 import PageTemplate from 'components/PageTemplate';
 import Container from './Container';
 import { inDev } from 'config/constants';
-import S from './styles';
+import S from './styles'
 import { generateUserToken, userLogin, userLogout } from 'utils/api/userApi';
 
 const Auth = () => {
