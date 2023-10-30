@@ -15,5 +15,5 @@ const TestButton = styled.button`
 `;
 
 export default {
-    TestButton
+  TestButton
 };

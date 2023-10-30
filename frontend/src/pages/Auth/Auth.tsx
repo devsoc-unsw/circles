@@ -7,18 +7,18 @@ import PageTemplate from 'components/PageTemplate';
 import Container from './Container';
 import { inDev } from 'config/constants';
 import S from './styles'
-import { generateUserToken, userLogin, userLogout } from 'utils/api/userApi';
+import { GenerateUserToken, UserLogin, UserLogout } from 'utils/api/userApi';
 
 const Auth = () => {
   return (
     <PageTemplate showHeader={false}>
-      <Container onLoginHandle={userLogin} />
+      <Container onLoginHandle={UserLogin} />
       {inDev && (
         <>
-          <S.TestButton onClick={() => generateUserToken(1)}>Set User #1</S.TestButton>
-          <S.TestButton onClick={() => generateUserToken(2)}>Set User #2</S.TestButton>
-          <S.TestButton onClick={() => generateUserToken(3)}>Set User #3</S.TestButton>
-          <S.TestButton onClick={userLogout}>Logout</S.TestButton>
+          <S.TestButton onClick={() => GenerateUserToken(1)}>Set User #1</S.TestButton>
+          <S.TestButton onClick={() => GenerateUserToken(2)}>Set User #2</S.TestButton>
+          <S.TestButton onClick={() => GenerateUserToken(3)}>Set User #3</S.TestButton>
+          <S.TestButton onClick={UserLogout}>Logout</S.TestButton>
         </>
       )}
     </PageTemplate>

@@ -1,9 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getStoredState } from 'redux-persist';
 import { CourseResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
 import { persistConfig, RootState } from 'config/store';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { setToken } from 'reducers/settingsSlice';
 
 // export const getToken = (): string => useSelector((state: RootState) => state.settings.token);
@@ -15,21 +15,25 @@ export const getToken = async (): Promise<string> => {
   return store.settings.token;
 };
 
-export const userLogout = async (): Promise<void> => {
+export const UserLogout = async (): Promise<void> => {
   const navigate = useNavigate();
   const token = await getToken();
-  await axios.post('/auth/logout', token, { withCredentials: true }).then(() => navigate('/'))
-}
+  await axios.post('/auth/logout', token, { withCredentials: true }).then(() => navigate('/'));
+};
 
-export const userLogin = async (): Promise<void> => {
+export const UserLogin = async (): Promise<void> => {
   // Login to redirect link
-  await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => window.location.href = res.data);
-}
+  await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => {
+    window.location.href = res.data;
+  });
+};
 
-export const generateUserToken = async (token: number): Promise<void> => {
+export const GenerateUserToken = async (token: number): Promise<void> => {
   const dispatch = useDispatch();
-  await axios.get<string>(`/auth/dev_token/${token}`, { withCredentials: true }).then(res => dispatch(setToken(res.data)))
-}
+  await axios
+    .get<string>(`/auth/dev_token/${token}`, { withCredentials: true })
+    .then((res) => dispatch(setToken(res.data)));
+};
 
 export const getUser = async (): Promise<UserResponse> => {
   const token = await getToken();

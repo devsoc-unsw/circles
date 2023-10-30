@@ -79,15 +79,15 @@ const LoginButton = styled.button`
   transition: all 0.3s;
   &:hover {
     ${({ theme }) =>
-    theme.loginSplash &&
-    css`
+      theme.loginSplash &&
+      css`
         background: linear-gradient(270deg, #b47cfb 32.03%, #8d48f6 87.53%, #8037f4 106.41%);
       `}
   }
   &:active {
     ${({ theme }) =>
-    theme.loginSplash &&
-    css`
+      theme.loginSplash &&
+      css`
         transform: translateY(5%);
       `}
   }
@@ -109,16 +109,16 @@ const GuestButton = styled.button`
   transition: all 0.3s;
   &:hover {
     ${({ theme }) =>
-    theme.loginSplash &&
-    css`
+      theme.loginSplash &&
+      css`
         background-color: #191b1b;
       `}
     color: #fff;
   }
   &:active {
     ${({ theme }) =>
-    theme.loginSplash &&
-    css`
+      theme.loginSplash &&
+      css`
         transform: translateY(5%);
       `}
   }
