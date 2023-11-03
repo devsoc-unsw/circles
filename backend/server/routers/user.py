@@ -10,6 +10,7 @@ import pydantic
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
 from server.database import usersDB
+from server.routers.courses import get_course
 from server.routers.model import (
     CourseMark,
     CoursesStorage,
@@ -59,7 +60,8 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
             'code': course,
             # this is peter's fault for sucking at spelling
             'suppressed': localStorage.planner['courses'][course]['supressed'],
-            'mark': localStorage.planner['courses'][course].get('mark', None)
+            'mark': localStorage.planner['courses'][course].get('mark', None),
+            'uoc': get_course(course)['UOC']
         }
         for course in chain(planned, unplanned)
     }

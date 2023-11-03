@@ -18,6 +18,7 @@ export type CourseResponse = {
   code: string;
   suppress: boolean;
   mark: Mark;
+  uoc: number;
 };
 
 export type CoursesResponse = Record<string, CourseResponse>;

@@ -78,17 +78,10 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
     enabled: !!degree && !!planner && !!courses
   });
 
-  // glorified useEffect
-  useQuery(
-    'generateMenuData',
-    () => {
+  useEffect(() => {
       if (!courses || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
       generateMenuData(courses, structureQuery.data, coursesStateQuery.data);
-    },
-    {
-      enabled: !!planner && structureQuery.isSuccess && coursesStateQuery.isSuccess && !!courses
-    }
-  );
+  }, [planner, structureQuery, coursesStateQuery, courses])
 
   const queryClient = useQueryClient();
   const courseMutation = useMutation({
@@ -147,8 +140,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
               });
               // add UOC to curr
               if (courses[courseCode] !== undefined) {
-                const anyCourse = courses[courseCode] as any; // while types get unfucked
-                newCoursesUnits[group][subgroup].curr += anyCourse.UOC;
+                newCoursesUnits[group][subgroup].curr += courses[courseCode].uoc;
               }
             });
           }

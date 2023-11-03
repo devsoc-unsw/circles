@@ -82,8 +82,10 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
     user = get_user(token)
     if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
+    
+    course = get_course(data.courseCode) # raises exception anyway when unfound
     user['planner']['unplanned'].append(data.courseCode)
-    user['courses'][data.courseCode] = {'code': data.courseCode, 'suppressed': False, 'mark': None}
+    user['courses'][data.courseCode] = {'code': data.courseCode, 'suppressed': False, 'mark': None, 'uoc': course['UOC']}
     set_user(token, user, True)
 
 

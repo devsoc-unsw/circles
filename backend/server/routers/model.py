@@ -204,6 +204,7 @@ class CoursesStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
+    uoc: int
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage
