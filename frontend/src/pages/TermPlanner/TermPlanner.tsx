@@ -64,7 +64,6 @@ const TermPlanner = () => {
       courseQueries[index].data ?? validYears.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
     ])
   );
-  console.log(courseInfoFlipped);
   let courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
     Object.entries(yearData).forEach(([year, courseData]) => {
@@ -284,7 +283,6 @@ const TermPlanner = () => {
                 <GridItem>Term 3</GridItem>
                 {planner.years.map((year, index) => {
                   const iYear = planner.startYear + index;
-                  // console.log('planner year + index', iYear, year, iYear);
                   let yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
                     Object.entries(courseInfoFlipped).forEach(([courseCode, courseInfo]) => {
