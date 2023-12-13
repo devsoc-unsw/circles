@@ -7,8 +7,7 @@ import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
-import { Term } from 'types/planner';
-import { CoursesResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, PlannerResponse, ValidateResponse } from 'types/userResponse';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -19,6 +18,7 @@ import S from './styles';
 type Props = {
   planner: PlannerResponse;
   courses: CoursesResponse;
+  validate?: ValidateResponse;
   courseInfo: Course;
   index: number;
   time?: CourseTime;
@@ -28,38 +28,46 @@ const Draggable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
 );
 
-const DraggableCourse = ({ planner, courses, courseInfo, index, time }: Props) => {
+const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }: Props) => {
   const { isSummerEnabled } = planner;
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
-  const { title } = courseInfo;
+  const { title, code } = courseInfo;
   // TODO: Change the backend so that naming is universally in camelCase so we don't have to do this
-  const isLegacy = courseInfo.is_legacy;
-  const isAccurate = courseInfo.is_accurate;
-  const handbookNote = courseInfo.handbook_note;
-  // TODO: Fix warnings
-  // const warningMessage = courses[code].warnings;
-  const warningMessage: string[] = [];
+  const { is_legacy: isLegacy, handbook_note: handbookNote } = courseInfo;
+  const {
+    suppressed,
+    is_accurate: isAccurate,
+    unlocked: isUnlocked,
+    warnings: warningMessage
+  } = validate || {
+    suppressed: true,
+    is_accurate: true,
+    warnings: [],
+    unlocked: true,
+    handbook_note: ''
+  };
 
-  const showNotOfferedWarning = time ? courseHasOfferingNew(courseInfo, time.term as Term) : true;
+  const showNotOfferedWarning = time ? courseHasOfferingNew(courseInfo, time.term) : true;
 
   const contextMenu = useContextMenu({
-    id: `${courseInfo.code}-context`
+    id: `${code}-context`
   });
 
-  const isTermLocked = time ? planner.lockedTerms[`${time.year}${time.term}`] : false;
+  const BEwarnings = handbookNote !== '' || !!warningMessage.length;
+
+  const isTermLocked = time ? planner.lockedTerms[`${time.year}${time.term}`] ?? false : false;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
   // TODO: Fix these boolean checks for warnings
-  // const shouldHaveWarning =
-  //   !supressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
-  const shouldHaveWarning = isLegacy || !isAccurate || !showNotOfferedWarning;
+  const shouldHaveWarning =
+    !suppressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
   const errorIsInformational =
     shouldHaveWarning &&
-    // isUnlocked &&
+    isUnlocked &&
     warningMessage.length === 0 &&
     !isLegacy &&
     isAccurate &&
@@ -101,11 +109,8 @@ const DraggableCourse = ({ planner, courses, courseInfo, index, time }: Props) =
               summerEnabled={isSummerEnabled}
               isSmall={isSmall}
               dragDisabled={isTermLocked}
-              // TODO: Fix these boolean checks for warnings
-              // warningsDisabled={isTermLocked && !isUnlocked}
-              warningsDisabled={isTermLocked}
-              // isWarning={!supressed && (!isUnlocked || !showNotOfferedWarning)}
-              isWarning={!showNotOfferedWarning}
+              warningsDisabled={isTermLocked && !isUnlocked}
+              isWarning={!suppressed && (!isUnlocked || !showNotOfferedWarning)}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}

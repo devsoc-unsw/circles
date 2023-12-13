@@ -1,11 +1,8 @@
 from itertools import chain
-import itertools
-from pprint import pprint
 from typing import Any, cast
 
 from bson.objectid import ObjectId
 from fastapi import APIRouter, HTTPException
-import pydantic
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN

@@ -9,11 +9,14 @@ import {
   badCourseInfo,
   badCourses,
   badPlanner,
+  badValidations,
   CoursesResponse,
-  PlannerResponse
+  PlannerResponse,
+  ValidatesResponse
 } from 'types/userResponse';
 import { getCourseInfo } from 'utils/api/courseApi';
 import {
+  validateTermPlanner,
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
   unscheduleCourse
@@ -44,9 +47,10 @@ const TermPlanner = () => {
   // The user's actual courses obj???????
   const coursesQuery = useQuery('courses', getUserCourses);
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
-  // console.log('courses', courses);
-  // console.log('planner', planner);
 
+  const validateQuery = useQuery('validate', validateTermPlanner);
+  const validations: ValidatesResponse = validateQuery.data ?? badValidations;
+  console.log(validateQuery);
   const courseQueries = useQueries(
     Object.keys(courses).map((code: string) => ({
       queryKey: ['course', code],
@@ -67,6 +71,7 @@ const TermPlanner = () => {
   const setPlannedCourseToTermMutation = useMutation(setPlannedCourseToTerm, {
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('validate');
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -81,6 +86,7 @@ const TermPlanner = () => {
   const setUnplannedCourseToTermMutation = useMutation(setUnplannedCourseToTerm, {
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('validate');
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -95,6 +101,7 @@ const TermPlanner = () => {
   const unscheduleCourseMutation = useMutation(unscheduleCourse, {
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('validate');
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -278,6 +285,7 @@ const TermPlanner = () => {
                             key={key}
                             name={key}
                             courseInfos={courseInfos}
+                            validateInfos={validations.courses_state}
                             termCourseInfos={courseInfoForThisTerm}
                             termCourseCodes={codesForThisTerm}
                             draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
@@ -292,6 +300,7 @@ const TermPlanner = () => {
                   courseInfos={Object.fromEntries(
                     planner.unplanned.map((code) => [code, courseInfos[code]])
                   )}
+                  validateInfos={validations.courses_state}
                 />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>

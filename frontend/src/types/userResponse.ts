@@ -21,7 +21,19 @@ export type CourseResponse = {
   uoc: number;
 };
 
+export type ValidateResponse = {
+  is_accurate: boolean;
+  handbook_note: string;
+  unlocked: boolean;
+  warnings: string[];
+  suppressed: boolean;
+};
+
 export type CoursesResponse = Record<string, CourseResponse>;
+
+export type ValidatesResponse = {
+  courses_state: Record<string, ValidateResponse>;
+};
 
 export type PlannerResponse = {
   mostRecentPastTerm: Term;
@@ -47,6 +59,10 @@ export const badPlanner: PlannerResponse = {
   isSummerEnabled: false,
   lockedTerms: {},
   years: []
+};
+
+export const badValidations: ValidatesResponse = {
+  courses_state: {}
 };
 
 export const badCourseInfo: Course = {
