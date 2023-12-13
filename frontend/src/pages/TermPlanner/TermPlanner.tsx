@@ -3,7 +3,6 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
-import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import {
   badCourseInfo,
@@ -14,7 +13,7 @@ import {
   PlannerResponse,
   ValidatesResponse
 } from 'types/userResponse';
-import { getCourseInfo } from 'utils/api/courseApi';
+import { getCourseForYearsInfo } from 'utils/api/courseApi';
 import {
   validateTermPlanner,
   setPlannedCourseToTerm,
@@ -32,7 +31,7 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
-import { P } from 'vitest/dist/types-fafda418';
+import { Course } from 'types/api';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -51,21 +50,27 @@ const TermPlanner = () => {
 
   const validateQuery = useQuery('validate', validateTermPlanner);
   const validations: ValidatesResponse = validateQuery.data ?? badValidations;
-  console.log(validateQuery);
+  const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);
   const courseQueries = useQueries(
     Object.keys(courses).map((code: string) => ({
       queryKey: ['course', code],
-      queryFn: () => getCourseInfo(code)
+      queryFn: () => getCourseForYearsInfo(code, validYears)
     }))
   );
 
-  const courseInfos: Record<string, Course> = Object.fromEntries(
+  const courseInfoFlipped: Record<string, Record<number, Course>> = Object.fromEntries(
     Object.keys(courses).map((code: string, index: number) => [
       code,
-      courseQueries[index].data ?? badCourseInfo
+      courseQueries[index].data ?? validYears.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
     ])
   );
-
+  console.log(courseInfoFlipped);
+  let courseInfos: any = {};
+  Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
+    Object.entries(yearData).forEach(([year, courseData]) => {
+      courseInfos[year] = {...courseInfos[year], [course]: courseData};
+    })
+  });
   const [draggingCourse, setDraggingCourse] = useState('');
 
   // Mutations
@@ -282,9 +287,9 @@ const TermPlanner = () => {
                   // console.log('planner year + index', iYear, year, iYear);
                   let yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
-                    Object.entries(courseInfos).forEach(([courseCode, courseInfo]) => {
+                    Object.entries(courseInfoFlipped).forEach(([courseCode, courseInfo]) => {
                       if (year[termKey as Term].includes(courseCode)) {
-                        yearUOC += courseInfo.UOC;
+                        yearUOC += courseInfo[iYear].UOC;
                       }
                     });
                   });
@@ -314,13 +319,13 @@ const TermPlanner = () => {
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL
                         const courseInfoForThisTerm = Object.fromEntries(
-                          codesForThisTerm.map((code) => [code, courseInfos[code]])
+                          codesForThisTerm.map((code) => [code, courseInfos[iYear][code]])
                         );
                         return (
                           <TermBox
                             key={key}
                             name={key}
-                            courseInfos={courseInfos}
+                            courseInfos={courseInfos[iYear]}
                             validateInfos={validations.courses_state}
                             termCourseInfos={courseInfoForThisTerm}
                             termCourseCodes={codesForThisTerm}
@@ -334,7 +339,7 @@ const TermPlanner = () => {
                 <UnplannedColumn
                   dragging={!!draggingCourse}
                   courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [code, courseInfos[code]])
+                    planner.unplanned.map((code) => [code, courseInfos[currYear][code]])
                   )}
                   validateInfos={validations.courses_state}
                 />

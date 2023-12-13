@@ -57,7 +57,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
     id: `${code}-context`
   });
 
-  const BEwarnings = handbookNote !== '' || !!warningMessage.length;
+  const BEwarnings = handbookNote || warningMessage.length !== 0;
 
   const isTermLocked = time ? planner.lockedTerms[`${time.year}${time.term}`] ?? false : false;
 
