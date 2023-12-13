@@ -380,7 +380,10 @@ def get_terms_list(
 
     # Remove any unavailable terms
     terms = sorted(list(set(all_terms) & set(terms_offered)))
-    index = terms.index(current_term) - 1
+    try:
+        index = terms.index(current_term) - 1
+    except ValueError:
+        return []
     row_offset = 0
 
     num_terms = lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc
