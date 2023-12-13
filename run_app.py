@@ -1,10 +1,27 @@
 # pylint: disable=cyclic-import
 """ run all of circles in one terminal, assuming a unix environment """
-import logging
+
 import os
+from subprocess import Popen, check_call, run
+
+
+# also crazy - autoconfigure the environment if it is borked
+if not os.path.exists(".venv"):
+    run("./create_venv.sh", shell=True)
+
+run(". .venv/bin/activate", shell=True)
+
+if run("nodemon --help > /dev/null", shell=True).returncode != 0:
+    print("You must install npm and nodemon. Please follow the onboarding instructions to install npm, then run 'npm install -g nodemon'")
+    exit(1)
+
+if not os.path.exists("frontend/node_modules"):
+    run("cd frontend; npm install", shell=True)
+
+
+import logging
 import sys
 import threading
-from subprocess import Popen, check_call
 
 from dotenv import load_dotenv
 

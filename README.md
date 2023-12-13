@@ -18,7 +18,7 @@ You can find a live build of Circles at [https://circles.csesoc.app](https://cir
 
 ![Features Help Image](https://raw.githubusercontent.com/csesoc/Circles/dev/frontend/src/assets/infographic.png)
 
-NOTE: we currently only support the Computer Science (3778) degree - but we will add more!
+NOTE: we currently only support a subset of courses that have the highest enrolments, such as Engineering, Commerce, Computer Science, and Science. We do plan to add more!
 
 - Adaptive course selector:
   - Allows you to explore your currently unlocked courses
@@ -30,13 +30,14 @@ NOTE: we currently only support the Computer Science (3778) degree - but we will
   - Validates your progression to make sure you've met the requirements for future courses
   - Allows you to generate a saveable and sharable image of your plan
 
+- Progression checker:
+  - Lets you understand which requirements you have met and which you still need to complete
+  - Shows you what courses you can do to complete your degree
+
 ## Future Plans
 
 This project is rapidly expanding and our roadmap includes features such as:
 
-- Progression checker: (NEW PAGE!)
-  - Lets you understand which requirements you have met and which you still need to complete
-  - Shows you what courses you can do to complete your degree
 - Graphical view:
   - A graphical model of your degree plan, to show you a beautiful dependency tree of courses relevant to your degree
   - Will adapt to your degree structure

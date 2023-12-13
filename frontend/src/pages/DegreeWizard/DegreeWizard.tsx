@@ -94,7 +94,11 @@ const DegreeWizard = () => {
         <S.StepsWrapper>
           <YearStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
           {currStep >= Steps.DEGREE && (
-            <DegreeStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
+            <DegreeStep
+              incrementStep={incrementStep}
+              degreeInfo={degreeInfo}
+              setDegreeInfo={setDegreeInfo}
+            />
           )}
           {specs.map(
             (stepName, index) =>

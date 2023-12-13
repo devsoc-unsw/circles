@@ -4,8 +4,6 @@ import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
-import type { RootState } from 'config/store';
-import { useAppSelector } from 'hooks';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -16,15 +14,14 @@ type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
+  degreeInfo: DegreeWizardPayload;
   setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
-const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
+const DegreeStep = ({ incrementStep, degreeInfo, setDegreeInfo }: Props) => {
   const [input, setInput] = useState('');
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
-
-  const selectedCode = useAppSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
     try {
@@ -41,6 +38,7 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
   }, []);
 
   const onDegreeChange = async ({ key }: { key: string }) => {
+    setInput(key);
     setDegreeInfo((prev) => ({
       ...prev,
       // key is of format `${programCode} - ${title}`; Need to extract code
@@ -51,6 +49,10 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
 
   const searchDegree = (newInput: string) => {
     setInput(newInput);
+    setDegreeInfo((prev) => ({
+      ...prev,
+      programCode: '' // reset the code
+    }));
     const degreeOptions = Object.keys(allDegrees)
       .map((code) => `${code} ${allDegrees[code]}`)
       .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
@@ -81,8 +83,12 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
         {input && options && (
           <Menu
             onSelect={onDegreeChange}
-            selectedKeys={selectedCode ? [selectedCode] : []}
-            items={items}
+            selectedKeys={
+              degreeInfo.programCode
+                ? [`${degreeInfo.programCode} ${allDegrees[degreeInfo.programCode]}`]
+                : []
+            }
+            items={degreeInfo.programCode ? [] : items}
             mode="inline"
             data-testid="antd-degree-menu"
           />

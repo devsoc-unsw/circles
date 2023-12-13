@@ -29,7 +29,17 @@ describe('DegreeStep', () => {
 
   it('should render', () => {
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     expect(screen.getByText('What are you studying?')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
@@ -40,7 +50,17 @@ describe('DegreeStep', () => {
     useDispatchMock.mockReturnValue(dummyDispatch);
 
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
@@ -57,14 +77,34 @@ describe('DegreeStep', () => {
 
   it('should show no degree options on mount', async () => {
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     expect(screen.queryByText('Computer Science')).not.toBeInTheDocument();
   });
 
   it('should search degree based on program code', async () => {
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), '3778');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
@@ -72,7 +112,17 @@ describe('DegreeStep', () => {
 
   it('should search degree based on program name', async () => {
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Computer Science');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
@@ -80,7 +130,17 @@ describe('DegreeStep', () => {
 
   it('should search degree case insensitively', async () => {
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'computer science');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
@@ -88,7 +148,17 @@ describe('DegreeStep', () => {
 
   it('should not show degree options if no match', async () => {
     renderWithProviders(
-      <DegreeStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
+      <DegreeStep
+        incrementStep={incrementStepMock}
+        setDegreeInfo={setDegreeInfoMock}
+        degreeInfo={{
+          programCode: '',
+          isComplete: false,
+          startYear: undefined,
+          endYear: undefined,
+          specs: []
+        }}
+      />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Economics');
     expect(screen.queryByTestId('antd-degree-menu')).not.toBeInTheDocument();
