@@ -14,7 +14,6 @@ def validate_terms(data: ValidPlannerData):
 
     currYear = data.mostRecentPastTerm["Y"]
     pastTerm = data.mostRecentPastTerm["T"]
-
     for yearIndex, year in enumerate(data.plan):
         # Go through all the years
         for termIndex, term in enumerate(year):

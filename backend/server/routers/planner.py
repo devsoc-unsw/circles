@@ -66,7 +66,7 @@ def validate_term_planner(token: str = DUMMY_TOKEN):
     user = get_user(token)
     data = convert_to_planner_data(user)
     coursesState = validate_terms(data)
-
+    print(coursesState)
     return {"courses_state": coursesState}
 
 
@@ -121,7 +121,7 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
         raise HTTPException(status_code=400,
                             detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
-
+    print(planner)
     planner['unplanned'].remove(data.courseCode)
 
     # If multiterm add multiple instances of course
