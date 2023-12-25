@@ -101,7 +101,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
       <Suspense fallback={<Spinner text="Loading Course..." />}>
         <Draggable
           isDragDisabled={isTermLocked}
-          draggableId={`${courseInfo.code}${time?.term ?? 'unplanned'}`}
+          draggableId={`${code}${time?.term ?? 'unplanned'}`}
           index={index}
         >
           {(provided) => (
@@ -116,8 +116,8 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
               ref={provided.innerRef}
               style={provided.draggableProps.style}
               data-tip
-              data-for={courseInfo.code}
-              id={courseInfo.code}
+              data-for={code}
+              id={code}
               onContextMenu={handleContextMenu}
             >
               {!isTermLocked &&
@@ -131,11 +131,11 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                 ))}
               <S.CourseLabel>
                 {isSmall ? (
-                  <Text className="text">{courseInfo.code}</Text>
+                  <Text className="text">{code}</Text>
                 ) : (
                   <div>
                     <Text className="text">
-                      <strong>{courseInfo.code}: </strong>
+                      <strong>{code}: </strong>
                       {title}
                     </Text>
                   </div>
@@ -150,8 +150,8 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                           Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                           Mark can be 0.
                         */}
-                      {courses[courseInfo.code].mark !== null
-                        ? courses[courseInfo.code].mark
+                      {courses[code]?.mark || courses[code]?.mark === 0
+                        ? courses[code].mark
                         : 'N/A'}
                     </Text>
                   </div>
@@ -161,11 +161,11 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
           )}
         </Draggable>
       </Suspense>
-      <ContextMenu code={courseInfo.code} scheduled={!!time} />
+      <ContextMenu code={code} scheduled={!!time} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
-        <ReactTooltip id={courseInfo.code} place="top" effect="solid">
+        <ReactTooltip id={code} place="top" effect="solid">
           {title}
         </ReactTooltip>
       )}
