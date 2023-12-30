@@ -77,7 +77,7 @@ describe('CourseSelector', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(<CourseSelector />, { preloadedState });
+    await renderWithProviders(<CourseSelector />, { preloadedState });
     expect(screen.getByText('3778 - Computer Science')).toBeInTheDocument();
     expect(await screen.findByText('Major - COMPA1 - Computer Science')).toBeInTheDocument();
     expect(await screen.findByText('Core Courses')).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe('CourseSelector', () => {
   });
 
   it('should toggle locked courses', async () => {
-    renderWithProviders(<CourseSelector />, { preloadedState });
+    await renderWithProviders(<CourseSelector />, { preloadedState });
     expect(await screen.findByText('COMP1511: Programming Fundamentals')).toBeInTheDocument();
     expect(screen.queryByText('COMP2521: Data Structures and Algorithms')).not.toBeInTheDocument();
     await userEvent.click(screen.getByTestId('show-all-courses'));
@@ -93,7 +93,7 @@ describe('CourseSelector', () => {
   });
 
   it('should be able to quick add and remove a course from the course menu', async () => {
-    const { store } = renderWithProviders(<CourseSelector />, { preloadedState });
+    const { store } = await renderWithProviders(<CourseSelector />, { preloadedState });
     expect(await screen.findByText('COMP1511: Programming Fundamentals')).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('quick-add-cart-button'));
     expect(store.getState().planner.unplanned).toEqual(['COMP1511']);

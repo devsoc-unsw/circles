@@ -1,3 +1,5 @@
+import { Term } from './planner';
+
 export type CourseCodes = {
   [courseKey: string]: string;
 };
@@ -24,4 +26,9 @@ export type CourseStates = {
     unlocked: boolean;
     warnings: string[];
   };
+};
+
+export type CourseTime = {
+  year: string;
+  term: Term;
 };

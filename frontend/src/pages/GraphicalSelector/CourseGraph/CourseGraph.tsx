@@ -29,7 +29,7 @@ type Props = {
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner } = useSelector((state: RootState) => state);
+  const { degree, planner, courses } = useSelector((state: RootState) => state);
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
@@ -129,7 +129,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         data: { courses_state: coursesStates }
       } = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
+        JSON.stringify(prepareUserPayload(degree, planner, courses))
       );
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();

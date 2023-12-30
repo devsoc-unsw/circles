@@ -1,15 +1,13 @@
 from itertools import chain
-import itertools
-from pprint import pprint
 from typing import Any, cast
 
 from bson.objectid import ObjectId
 from fastapi import APIRouter, HTTPException
-import pydantic
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
 from server.database import usersDB
+from server.routers.courses import get_course
 from server.routers.model import (
     CourseMark,
     CoursesStorage,
@@ -23,7 +21,8 @@ from server.routers.model import (
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
-pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
+from pydantic.json import ENCODERS_BY_TYPE
+ENCODERS_BY_TYPE[ObjectId] = str
 
 router = APIRouter(
     prefix="/user",
@@ -47,7 +46,7 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
 
 
 # Ideally not used often.
-@router.post("/saveLocalStorage/")
+@router.post("/saveLocalStorage")
 def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     # TODO: turn giving no token into an error
     planned: list[str] = sum((sum(year.values(), [])
@@ -57,8 +56,9 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
         course: {
             'code': course,
             # this is peter's fault for sucking at spelling
-            'suppressed': localStorage.planner['courses'][course]['supressed'],
-            'mark': localStorage.planner['courses'][course].get('mark', None)
+            'suppressed': False, # guess we also nuke this
+            'mark': None, # wtf we nuking marks?
+            'uoc': get_course(course)['UOC']
         }
         for course in chain(planned, unplanned)
     }
@@ -113,8 +113,8 @@ def default_cs_user() -> Storage:
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
+        'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
     user: Storage = {
         'degree': {
@@ -128,7 +128,7 @@ def default_cs_user() -> Storage:
     return user
 
 
-@router.put("/toggleSummerTerm")
+@router.post("/toggleSummerTerm")
 def toggle_summer_term(token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
@@ -236,8 +236,8 @@ def reset(token: str = DUMMY_TOKEN):
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
+        'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
 
     user: Storage = {
@@ -315,8 +315,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': wizard.startYear,
+        'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
     
     planner['years'] = [
@@ -335,4 +335,3 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     }
     set_user(token, user, True)
     return user
-    

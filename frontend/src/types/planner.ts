@@ -39,6 +39,12 @@ export type UnPlannedToTerm = {
   courseCode: string;
 };
 
+export type UnscheduleCourse = {
+  srcRow: number;
+  srcTerm: string;
+  courseCode: string;
+};
+
 export type PlannedToTerm = {
   srcRow: number;
   srcTerm: string;

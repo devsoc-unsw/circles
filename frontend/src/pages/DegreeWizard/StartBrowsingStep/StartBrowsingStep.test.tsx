@@ -26,13 +26,13 @@ describe('StartBrowsingStep', () => {
     vi.clearAllMocks();
   });
 
-  it('should render', () => {
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
+  it('should render', async () => {
+    await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
     expect(screen.getByText('Start browsing courses!')).toBeInTheDocument();
   });
 
   it('should call openNotification when program code is not provided', async () => {
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
+    await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
       preloadedState: {
         degree: {
           programCode: '',
@@ -50,7 +50,7 @@ describe('StartBrowsingStep', () => {
   });
 
   it('should call openNotification when a specialisation is not provided', async () => {
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
+    await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
       preloadedState: {
         degree: {
           programCode: '3778',
@@ -73,7 +73,7 @@ describe('StartBrowsingStep', () => {
     const dummyNavigate = vi.fn();
     useNavigateMock.mockReturnValue(dummyNavigate);
 
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
+    await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
       preloadedState: {
         degree: {
           programCode: '3778',

@@ -2,6 +2,8 @@
 The driver for running our processors for legacy years.
 if you need to bash this, use
 python3 -m data.final_data.archive.runprocessors_archive --year <year> --stage data-fix
+if you are making a new year for the archive, use
+python3 -m data.final_data.archive.runprocessors_archive --year <year> --stage all
 """
 
 import argparse

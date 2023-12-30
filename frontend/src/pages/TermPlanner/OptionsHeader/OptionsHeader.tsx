@@ -1,20 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   DownloadOutlined,
   EyeFilled,
   QuestionCircleOutlined,
-  SaveFilled,
   SettingFilled,
   UploadOutlined,
   WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
-import axios from 'axios';
-import migrateLocalStorageData from 'utils/migrateLocalStorageData';
+import { unscheduleAll } from 'utils/api/plannerApi';
+import { getUserPlanner } from 'utils/api/userApi';
 import type { RootState } from 'config/store';
 import { unhideAllYears } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
@@ -33,8 +33,13 @@ type Props = {
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {
-  const { theme, token } = useSelector((state: RootState) => state.settings);
-  const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
+  const queryClient = useQueryClient();
+
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner = plannerQuery.data;
+
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const { areYearsHidden } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const iconStyles = {
@@ -42,26 +47,32 @@ const OptionsHeader = ({ plannerRef }: Props) => {
     color: '#323739'
   };
 
-  const handleUnscheduleAll = async () => {
-    try {
-      await axios.post('planner/unscheduleAll', {}, { params: { token } });
-    } catch (err) {
+  const unscheduleAllMutation = useMutation(unscheduleAll, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
       // eslint-disable-next-line no-console
-      console.error('Error at handleUnscheduleAll: ', err);
+      console.error('Error at unscheduleAllMutation: ', err);
     }
+  });
+
+  const handleUnscheduleAll = async () => {
+    unscheduleAllMutation.mutate();
   };
 
   return (
     <S.OptionsHeaderWrapper>
       <S.OptionSection>
         <Tippy
-          content={<SettingsMenu />}
+          content={<SettingsMenu planner={planner} />}
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
           theme={theme}
           zIndex={1}
           placement="bottom-start"
+          disabled={!planner}
         >
           <div>
             <Tooltip title="Settings">
@@ -98,11 +109,6 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           placement="bottom-start"
         >
           <div>
-            <Tooltip title="Save">
-              <S.OptionButton onClick={() => migrateLocalStorageData(token)}>
-                <SaveFilled style={iconStyles} />
-              </S.OptionButton>
-            </Tooltip>
             <Tooltip title="Import">
               <S.OptionButton>
                 <UploadOutlined style={iconStyles} />
@@ -111,7 +117,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           </div>
         </Tippy>
 
-        {!isPlannerEmpty(years) && (
+        {planner && !isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">
             <Popconfirm
               placement="bottomRight"

@@ -58,7 +58,7 @@ describe('SpecialisationStep', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(
+    await renderWithProviders(
       <SpecialisationStep
         incrementStep={incrementStepMock}
         type="majors"
@@ -93,7 +93,7 @@ describe('SpecialisationStep', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(
+    await renderWithProviders(
       <SpecialisationStep
         incrementStep={incrementStepMock}
         type="majors"
@@ -112,7 +112,7 @@ describe('SpecialisationStep', () => {
   });
 
   it('should display "Next" button when on current step and call incrementStep', async () => {
-    renderWithProviders(
+    await renderWithProviders(
       <SpecialisationStep
         incrementStep={incrementStepMock}
         currStep
@@ -127,7 +127,7 @@ describe('SpecialisationStep', () => {
   });
 
   it('should show error notification when "Next" button without selecting a spec', async () => {
-    renderWithProviders(
+    await renderWithProviders(
       <SpecialisationStep
         incrementStep={incrementStepMock}
         currStep

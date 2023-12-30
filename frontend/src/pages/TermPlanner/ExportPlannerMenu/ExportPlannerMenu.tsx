@@ -58,7 +58,7 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
         <CS.MenuText>File Type</CS.MenuText>
         <Radio.Group onChange={(e) => setFormat(e.target.value as string)} defaultValue="png">
           {exportFormats.map((form) => (
-            <Radio value={form} className="text">
+            <Radio key={form} value={form} className="text">
               {form}
             </Radio>
           ))}

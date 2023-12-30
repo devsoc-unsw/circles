@@ -348,7 +348,7 @@ def get_legacy_course(year: str, courseCode: str) -> Dict:
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
-    result["is_legacy"] = True
+    result["is_legacy"] = False # not a legacy, assuming you know what you are doing
     return result
 
 

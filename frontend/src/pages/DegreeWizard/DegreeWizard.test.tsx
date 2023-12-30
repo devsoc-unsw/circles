@@ -53,7 +53,7 @@ describe('DegreeWizard', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(<DegreeWizard />);
+    await renderWithProviders(<DegreeWizard />);
     expect(screen.getByText('Welcome to Circles!')).toBeInTheDocument();
   });
 
@@ -61,7 +61,7 @@ describe('DegreeWizard', () => {
     const dummyNavigate = vi.fn();
     useNavigateMock.mockReturnValue(dummyNavigate);
 
-    const { store } = renderWithProviders(<DegreeWizard />);
+    const { store } = await renderWithProviders(<DegreeWizard />);
     expect(screen.getByText('Welcome to Circles!')).toBeInTheDocument();
 
     expect(store.getState().degree).toEqual(initialDegreeState);

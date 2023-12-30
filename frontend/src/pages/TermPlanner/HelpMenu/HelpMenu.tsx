@@ -70,7 +70,7 @@ const HelpMenu = () => {
         <CS.MenuDivider />
       </S.HeaderWrapper>
       {helpSteps.map(({ title, pic, gif, altText }) => (
-        <HelpStep title={title} gif={gif} pic={pic} altText={altText} />
+        <HelpStep key={title} title={title} gif={gif} pic={pic} altText={altText} />
       ))}
     </S.HelpMenuWrapper>
   );
