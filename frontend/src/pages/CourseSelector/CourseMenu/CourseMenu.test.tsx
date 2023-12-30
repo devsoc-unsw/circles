@@ -50,7 +50,7 @@ describe('CourseMenu', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(<CourseMenu />);
+    await renderWithProviders(<CourseMenu />);
     expect(await screen.findByText('Major - COMPA1 - Computer Science')).toBeInTheDocument();
     expect(screen.getByText('Core Courses')).toBeInTheDocument();
     expect(screen.getByText('0 / 66')).toBeInTheDocument();

@@ -13,3 +13,13 @@ export const getCourseInfo = async (courseId: string) => {
   const res = await axios.get<Course>(`courses/getCourse/${courseId}`);
   return res.data;
 };
+
+export const getCourseForYearsInfo = async (
+  courseId: string,
+  years: number[]
+): Promise<Record<number, Course>> => {
+  const promises = await Promise.all(
+    years.map((year) => axios.get<Course>(`courses/getLegacyCourse/${year}/${courseId}`))
+  );
+  return years.reduce((prev, year, index) => ({ ...prev, [year]: promises[index].data }), {});
+};

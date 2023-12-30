@@ -1,7 +1,13 @@
 import React, { Suspense } from 'react';
 import { useQuery } from 'react-query';
 import { Course } from 'types/api';
-import { badCourses, badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
+import {
+  badCourses,
+  badPlanner,
+  CoursesResponse,
+  PlannerResponse,
+  ValidateResponse
+} from 'types/userResponse';
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -11,6 +17,7 @@ import S from './styles';
 type Props = {
   dragging: boolean;
   courseInfos: Record<string, Course>;
+  validateInfos: Record<string, ValidateResponse>;
 };
 
 const Droppable = React.lazy(() =>
@@ -19,7 +26,7 @@ const Droppable = React.lazy(() =>
 
 /* eslint-disable */
 
-const UnplannedColumn = ({ dragging, courseInfos }: Props) => {
+const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
   const plannerQuery = useQuery('planner', getUserPlanner);
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
@@ -47,6 +54,7 @@ const UnplannedColumn = ({ dragging, courseInfos }: Props) => {
                   key={courseCode}
                   planner={planner}
                   courses={courses}
+                  validate={validateInfos[courseCode]}
                   courseInfo={courseInfos[courseCode]}
                   index={courseIndex}
                   time={undefined}

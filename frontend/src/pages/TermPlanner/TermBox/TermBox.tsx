@@ -7,7 +7,13 @@ import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
-import { badCourses, badPlanner, CoursesResponse, PlannerResponse } from 'types/userResponse';
+import {
+  badCourses,
+  badPlanner,
+  CoursesResponse,
+  PlannerResponse,
+  ValidateResponse
+} from 'types/userResponse';
 import { getToken, getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
@@ -22,6 +28,7 @@ const Droppable = React.lazy(() =>
 type Props = {
   name: string; // Ideally replace this with a proper term type later
   courseInfos: Record<string, Course>; // All courses in planner
+  validateInfos: Record<string, ValidateResponse>; // All courses in planner
   termCourseInfos: Record<string, Course>; // All courses in term
   termCourseCodes: string[]; // Course codes in the current term
   draggingCourseCode?: string;
@@ -30,6 +37,7 @@ type Props = {
 const TermBox = ({
   name,
   courseInfos,
+  validateInfos,
   termCourseInfos,
   termCourseCodes,
   draggingCourseCode
@@ -87,7 +95,6 @@ const TermBox = ({
     backgroundColor: theme.uocBadge.backgroundColor,
     boxShadow: 'none'
   };
-
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isLocked}>
@@ -117,6 +124,7 @@ const TermBox = ({
                     key={`${info.title || ''}${term}`}
                     planner={planner}
                     courses={courses}
+                    validate={validateInfos[info.code]}
                     courseInfo={info}
                     index={index}
                     time={{ year, term } as CourseTime}

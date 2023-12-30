@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { PlannedToTerm, UnPlannedToTerm } from 'types/planner';
+import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
+import { ValidatesResponse } from 'types/userResponse';
 import { getToken } from './userApi';
 
 export const addToUnplanned = async (courseId: string) => {
@@ -32,10 +33,14 @@ export const setUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
   }
 };
 
-export const unscheduleCourse = async (courseid: string) => {
+export const unscheduleCourse = async (data: UnscheduleCourse) => {
   const token = await getToken();
   try {
-    await axios.post('planner/unscheduleCourse', { courseCode: courseid }, { params: { token } });
+    await axios.post(
+      'planner/unscheduleCourse',
+      { courseCode: data.courseCode },
+      { params: { token } }
+    );
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error at handleUnscheduleCourse: ', err);
@@ -60,4 +65,10 @@ export const removeCourse = async (courseId: string) => {
     // eslint-disable-next-line no-console
     console.error('Error at removeCourse: ', err);
   }
+};
+
+export const validateTermPlanner = async (): Promise<ValidatesResponse> => {
+  const token = await getToken();
+  const res = await axios.get('planner/validateTermPlanner', { params: { token } });
+  return res.data as ValidatesResponse;
 };

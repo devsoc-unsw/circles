@@ -11,33 +11,33 @@ from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException
 from server.config import DUMMY_TOKEN
 from server.routers.courses import get_course
-from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
-                                  ValidCoursesState, ValidPlannerData)
+from server.routers.model import (CourseCode, Mark, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
+                                  ValidCoursesState, ValidPlannerData, markMap)
 from server.routers.user import get_user, set_user
 from server.routers.utility import get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
 
 
-def fix_planner_data(plannerData: PlannerData) -> ValidPlannerData:
+def convert_to_planner_data(user: Storage) -> ValidPlannerData:
     """ fixes the planner data to add missing UOC info """
     plan: list[list[dict[str, Tuple[int, Optional[int]]]]] = []
-    for year_index, year in enumerate(plannerData.plan):
+    for year_index, year in enumerate(user['planner']['years']):
         plan.append([])
-        for term_index, term in enumerate(year):
+        for term_index, term in enumerate(year.values()):
             plan[year_index].append({})
-            for courseName, course in term.items():
-                if not isinstance(course, list):
-                    plan[year_index][term_index][courseName] = (
-                        get_course(courseName)["UOC"], course)
-                elif course[0] is not None:
-                    plan[year_index][term_index][courseName] = (
-                        course[0], course[1])
+            for courseName in term:
+                c = user['courses'][courseName]
+                mark = c['mark']
+                if not isinstance(mark, int) and mark is not None:
+                    mark = markMap.get(mark, None)
+                plan[year_index][term_index][courseName] = (
+                    int(c["uoc"]), mark)
     return ValidPlannerData(
-        programCode=plannerData.programCode,
-        specialisations=plannerData.specialisations,
+        programCode=user['degree']['programCode'],
+        specialisations=user['degree']['specs'],
         plan=plan,
-        mostRecentPastTerm=plannerData.mostRecentPastTerm
+        mostRecentPastTerm=user['planner']['mostRecentPastTerm']
     )
 
 
@@ -52,8 +52,8 @@ def planner_index() -> str:
     return "Index of planner"
 
 
-@router.post("/validateTermPlanner/", response_model=ValidCoursesState)
-def validate_term_planner(plannerData: PlannerData):
+@router.get("/validateTermPlanner", response_model=ValidCoursesState)
+def validate_term_planner(token: str = DUMMY_TOKEN):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
@@ -63,9 +63,10 @@ def validate_term_planner(plannerData: PlannerData):
 
     Returns the state of all the courses on the term planner
     """
-    data = fix_planner_data(plannerData)
+    user = get_user(token)
+    data = convert_to_planner_data(user)
     coursesState = validate_terms(data)
-
+    print(coursesState)
     return {"courses_state": coursesState}
 
 
@@ -120,7 +121,7 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
         raise HTTPException(status_code=400,
                             detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
-
+    print(planner)
     planner['unplanned'].remove(data.courseCode)
 
     # If multiterm add multiple instances of course
@@ -379,7 +380,10 @@ def get_terms_list(
 
     # Remove any unavailable terms
     terms = sorted(list(set(all_terms) & set(terms_offered)))
-    index = terms.index(current_term) - 1
+    try:
+        index = terms.index(current_term) - 1
+    except ValueError:
+        return []
     row_offset = 0
 
     num_terms = lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc

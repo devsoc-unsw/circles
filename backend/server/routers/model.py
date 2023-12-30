@@ -199,6 +199,15 @@ class PlannerLocalStorage(TypedDict):
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
 Mark = Optional[int | LetterGrade]
 
+markMap = {
+    "SY": 50,
+    "FL": 25,
+    "PS": 50,
+    "CR": 65,
+    "DN": 75,
+    "HD": 85,
+}
+
 # TODO: Rename to CourseStorage
 class CoursesStorage(TypedDict):
     code: str
