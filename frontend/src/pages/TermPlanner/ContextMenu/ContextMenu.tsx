@@ -13,10 +13,10 @@ import 'react-contexify/ReactContexify.css';
 
 type Props = {
   code: string;
-  plannedFor: string | null;
+  scheduled: boolean;
 };
 
-const ContextMenu = ({ code, plannedFor }: Props) => {
+const ContextMenu = ({ code, scheduled }: Props) => {
   const { token } = useSelector((state: RootState) => state.settings);
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
   return (
     <>
       <Menu id={`${code}-context`} theme="dark">
-        {plannedFor && (
+        {scheduled && (
           <Item onClick={handleUnschedule}>
             <FaRegCalendarTimes style={iconStyle} /> Unschedule
           </Item>

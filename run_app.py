@@ -80,7 +80,7 @@ def get_frontend_env():
     return baseurl
 
 def main():
-    if os.system("docker ps") != 0:
+    if os.system("docker ps > /dev/null") != 0:
         print("please run docker first!")
         sys.exit(1)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',

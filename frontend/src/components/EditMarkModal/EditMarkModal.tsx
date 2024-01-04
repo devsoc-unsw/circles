@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useMutation, useQueryClient } from 'react-query';
 import { Button, Input, message, Modal } from 'antd';
-import { CourseMark } from 'types/api';
-import { Grade, Mark } from 'types/planner';
+import { Grade } from 'types/planner';
 import { updateCourseMark } from 'utils/planner';
-import { RootState } from 'config/store';
 import S from './styles';
 
 type Props = {
@@ -14,6 +12,7 @@ type Props = {
 };
 
 const EditMarkModal = ({ code, open, onCancel }: Props) => {
+  const queryClient = useQueryClient();
   const [markValue, setMarkValue] = useState<string | number | undefined>();
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
@@ -24,27 +23,33 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     setMarkValue(value);
   };
 
-  const { token } = useSelector((state: RootState) => state.settings);
-  const updateMark = (mark: Mark) => {
-    updateCourseMark({ course: code, mark } as CourseMark, token);
-    setMarkValue(mark);
-    onCancel();
-    message.success('Mark Updated');
-  };
+  const updateMarkMutation = useMutation(updateCourseMark, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries('courses');
+      queryClient.invalidateQueries('validate');
+      onCancel();
+      message.success('Mark Updated');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at unscheduleCourseMutation: ', err);
+    }
+  });
 
   const handleUpdateMark = () => {
     if (!Number.isNaN(parseInt(markValue as string, 10))) {
       if (Number(markValue) >= 0 && Number(markValue) <= 100) {
-        updateMark(Number(markValue));
+        updateMarkMutation.mutate({ course: code, mark: Number(markValue) });
       } else {
         // number is not in range
         message.error('Not a valid mark. Enter a mark between 0 and 100.');
       }
-    } else if ((letterGrades as string[]).includes(markValue as string)) {
+    } else if (letterGrades.includes(markValue as Grade)) {
       // mark is a letter grade
-      updateMark(markValue as Grade);
+      updateMarkMutation.mutate({ course: code, mark: markValue as Grade });
     } else if (markValue === '') {
-      updateMark(undefined);
+      updateMarkMutation.mutate({ course: code, mark: undefined });
     } else {
       message.error('Could not update mark. Please enter a valid mark or letter grade');
     }
@@ -68,7 +73,12 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
         />
         <S.LetterGradeWrapper>
           {letterGrades.map((letterGrade) => (
-            <Button onClick={() => updateMark(letterGrade)}>{letterGrade}</Button>
+            <Button
+              key={letterGrade}
+              onClick={() => updateMarkMutation.mutate({ course: code, mark: letterGrade })}
+            >
+              {letterGrade}
+            </Button>
           ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>

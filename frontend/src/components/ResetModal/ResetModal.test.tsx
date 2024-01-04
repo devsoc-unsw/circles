@@ -23,13 +23,13 @@ describe('ResetModal', () => {
     vi.clearAllMocks();
   });
 
-  it('should render', () => {
-    renderWithProviders(<ResetModal />);
+  it('should render', async () => {
+    await renderWithProviders(<ResetModal />);
     expect(screen.queryByText('Reset Planner?')).not.toBeInTheDocument();
   });
 
-  it('should show modal when degree wizard is complete', () => {
-    renderWithProviders(<ResetModal open />, { preloadedState });
+  it('should show modal when degree wizard is complete', async () => {
+    await renderWithProviders(<ResetModal open />, { preloadedState });
     expect(screen.getByText('Reset Planner?')).toBeInTheDocument();
   });
 
@@ -37,7 +37,7 @@ describe('ResetModal', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<ResetModal open />, {
+    await renderWithProviders(<ResetModal open />, {
       preloadedState: {
         degree: {
           programCode: '3778',
@@ -50,7 +50,6 @@ describe('ResetModal', () => {
     await userEvent.click(screen.getByText('Reset'));
     expect(dummyDispatch.mock.calls).toEqual([
       [{ payload: undefined, type: 'planner/resetPlanner' }],
-      [{ payload: undefined, type: 'degree/resetDegree' }],
       [{ payload: undefined, type: 'courseTabs/resetTabs' }],
       [{ payload: undefined, type: 'courses/resetCourses' }]
     ]);
@@ -59,7 +58,7 @@ describe('ResetModal', () => {
   it('should call the OnCancel callback when the Go Back button is clicked', async () => {
     const dummyOnCancel = vi.fn();
 
-    renderWithProviders(<ResetModal open onCancel={dummyOnCancel} />, { preloadedState });
+    await renderWithProviders(<ResetModal open onCancel={dummyOnCancel} />, { preloadedState });
     await userEvent.click(screen.getByText('Go back'));
     expect(dummyOnCancel).toBeCalled();
   });
@@ -67,7 +66,7 @@ describe('ResetModal', () => {
   it('should call the OnOk callback when the Reset button is clicked', async () => {
     const dummyOnOk = vi.fn();
 
-    renderWithProviders(<ResetModal open onOk={dummyOnOk} />, { preloadedState });
+    await renderWithProviders(<ResetModal open onOk={dummyOnOk} />, { preloadedState });
     await userEvent.click(screen.getByText('Reset'));
     expect(dummyOnOk).toBeCalled();
   });

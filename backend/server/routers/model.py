@@ -193,15 +193,27 @@ class PlannerLocalStorage(TypedDict):
     unplanned: list[str]
     startYear: int
     isSummerEnabled: bool
+    lockedTerms: dict[str, bool]
     years: list[dict[str, list[str]]]
 
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
 Mark = Optional[int | LetterGrade]
 
+markMap = {
+    "SY": 50,
+    "FL": 25,
+    "PS": 50,
+    "CR": 65,
+    "DN": 75,
+    "HD": 85,
+}
+
+# TODO: Rename to CourseStorage
 class CoursesStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
+    uoc: int
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage

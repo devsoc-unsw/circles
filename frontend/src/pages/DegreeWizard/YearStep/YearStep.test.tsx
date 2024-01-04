@@ -19,7 +19,7 @@ describe('YearStep', () => {
   });
 
   it('should render', async () => {
-    renderWithProviders(
+    await renderWithProviders(
       <YearStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
     );
     expect(screen.getByText('What years do you start and finish?')).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('YearStep', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(
+    await renderWithProviders(
       <YearStep incrementStep={incrementStepMock} setDegreeInfo={setDegreeInfoMock} />
     );
     await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {

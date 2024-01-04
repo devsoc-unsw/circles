@@ -31,9 +31,8 @@
             },
             "unplanned": [],
             "startYear": 2020,
-            "numYears": 3,
             "isSummerEnabled": true,
-            "courses": {}
+            "lockedTerms": {}
         }
     },
     "summer_term": {
@@ -67,63 +66,70 @@
             },
             "unplanned": [],
             "startYear": 2020,
-            "numYears": 2,
             "isSummerEnabled": true,
-            "courses": {
-                "COMP1511": {
-                    "title": "Programming Fundamentals",
-                    "termsOffered": [
-                        "T1",
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T0",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "MATH1141": {
-                    "title": "Higher Mathematics 1A",
-                    "termsOffered": [
-                        "T1",
-                        "T2"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T0",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "MATH1081": {
-                    "title": "Discrete Mathematics",
-                    "termsOffered": [
-                        "T1",
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2021T1",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                }
-            }
+            "lockedTerms": {}
+        }
+    },
+    "no_uoc": {
+        "degree": {
+            "programCode": "3707",
+            "specs": [ "COMPA1" ],
+            "isComplete": true
+        },
+        "planner": {
+            "years": [{
+                "T0": [],
+                "T1": [
+                    "COMP1511",
+                    "MATH1141",
+                    "MATH1081"
+                ],
+                "T2": [
+                    "COMP1521",
+                    "COMP2511",
+                    "COMP4128"
+                ],
+                "T3": []
+            }],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0
+            },
+            "unplanned": [],
+            "startYear": 2020,
+            "isSummerEnabled": false,
+            "lockedTerms": {}
+        }
+    },
+    "suppress_warning": {
+        "degree": {
+            "programCode": "3707",
+            "specs": [ "COMPA1" ],
+            "isComplete": true
+        },
+        "planner": {
+            "years": [{
+                "T0": [],
+                "T1": [
+                    "COMP1511",
+                    "MATH1141",
+                    "MATH1081"
+                ],
+                "T2": [
+                    "COMP1521",
+                    "COMP2511",
+                    "COMP4128"
+                ],
+                "T3": []
+            }],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 2
+            },
+            "unplanned": [],
+            "startYear": 2020,
+            "isSummerEnabled": false,
+            "lockedTerms": {}
         }
     },
     "simple_year": {
@@ -166,151 +172,8 @@
             },
             "unplanned": [ "COMP6447" ],
             "startYear": 2020,
-            "numYears": 3,
             "isSummerEnabled": false,
-            "courses": {
-                "COMP1511": {
-                    "title": "Programming Fundamentals",
-                    "termsOffered": [
-                        "T1",
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T1",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "MATH1141": {
-                    "title": "Higher Mathematics 1A",
-                    "termsOffered": [
-                        "T1",
-                        "T2"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T1",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "MATH1081": {
-                    "title": "Discrete Mathematics",
-                    "termsOffered": [
-                        "T1",
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T1",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "COMP1521": {
-                    "title": "Computer Hardware Fundamentals",
-                    "termsOffered": [
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T2",
-                    "prereqs": "Prerequsite: COMP1511",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "COMP1531": {
-                    "title": "Software Engineering Fundamentals",
-                    "termsOffered": [
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T2",
-                    "prereqs": "Prerequsite: COMP1511",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "COMP2521": {
-                    "title": "Data Structures and Algorithms",
-                    "termsOffered": [
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T2",
-                    "prereqs": "Prerequsite: COMP1511",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "COMP6447": {
-                    "title": "terrible sec course",
-                    "termsOffered": [
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": null,
-                    "prereqs": "Prerequsite: COMP6841",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": true,
-                    "mark": 67
-                },
-                "ENGG2600": {
-                    "title": "Vertically Integrated Project",
-                    "termsOffered": [
-                        "T2",
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 2,
-                    "plannedFor": null,
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": true,
-                    "supressed": true,
-                    "mark": 100
-                }
-            }
+            "lockedTerms": {}
         }
     },
     "out_of_order": {
@@ -349,44 +212,8 @@
             },
             "unplanned": [],
             "startYear": 2020,
-            "numYears": 3,
             "isSummerEnabled": false,
-            "courses": {
-                "MATH1141": {
-                    "title": "Higher Mathematics 1A",
-                    "termsOffered": [
-                        "T1",
-                        "T2"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T2",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                },
-                "MATH1241": {
-                    "title": "Higher Mathematics 1B",
-                    "termsOffered": [
-                        "T2",
-                        "T3"
-                    ],
-                    "UOC": 6,
-                    "plannedFor": "2020T1",
-                    "prereqs": "",
-                    "isLegacy": false,
-                    "isUnlocked": true,
-                    "warnings": [],
-                    "handbookNote": "",
-                    "isAccurate": true,
-                    "isMultiterm": false,
-                    "supressed": false
-                }
-            }
+            "lockedTerms": {}
         }
     }
 }

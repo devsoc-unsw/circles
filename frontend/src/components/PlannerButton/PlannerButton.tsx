@@ -20,6 +20,7 @@ const PlannerButton = ({ course, planned }: PlannerButtonProps) => {
     onMutate: () => planned,
     onSuccess: async () => {
       // waits until refetch is complete
+      await queryClient.invalidateQueries('courses');
       await queryClient.invalidateQueries('planner');
     }
   });

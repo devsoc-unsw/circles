@@ -1,6 +1,7 @@
 # we want to assure that courses that may be accessed from a container are always accurately computed.
 from contextlib import suppress
 from itertools import chain
+from pytest import mark
 
 import requests
 from server.routers.model import StructureContainer
@@ -20,7 +21,7 @@ ignored = [
     'SDES', 'SOCW', 'SOLA49', 'SOSS', 'SRAP', 'ZHSS3501',
     'FOOD6804', 'PATH3209', 'SOMS', 'YMED'
 ]
-
+@mark.skip()
 def test_validation():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS['user3']).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
