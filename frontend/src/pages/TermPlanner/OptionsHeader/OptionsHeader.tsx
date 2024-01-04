@@ -5,7 +5,6 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   DownloadOutlined,
-  EyeFilled,
   QuestionCircleOutlined,
   SettingFilled,
   UploadOutlined,
@@ -16,7 +15,6 @@ import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import type { RootState } from 'config/store';
-import { unhideAllYears } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
@@ -39,7 +37,6 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const planner = plannerQuery.data;
 
   const { theme } = useSelector((state: RootState) => state.settings);
-  const { areYearsHidden } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const iconStyles = {
@@ -131,14 +128,6 @@ const OptionsHeader = ({ plannerRef }: Props) => {
                 <FaRegCalendarTimes style={iconStyles} />
               </S.OptionButton>
             </Popconfirm>
-          </Tooltip>
-        )}
-
-        {areYearsHidden && (
-          <Tooltip title="Show all hidden years">
-            <S.OptionButton onClick={() => dispatch(unhideAllYears())}>
-              <EyeFilled style={iconStyles} />
-            </S.OptionButton>
           </Tooltip>
         )}
         <Tooltip title="Toggle warnings for previous terms">

@@ -1,20 +1,22 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
 import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
+import { badPlanner } from 'types/userResponse';
+import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
-import { moveCourse } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 import S from './styles';
 
 const ImportPlannerMenu = () => {
-  const planner = useSelector((state: RootState) => state.planner);
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner = plannerQuery.data || badPlanner;
   const inputRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state: RootState) => state.settings);
 
@@ -130,13 +132,6 @@ const ImportPlannerMenu = () => {
                   const destTerm = term as Term;
                   const destRow = destYear - planner.startYear;
                   const destIndex = index;
-                  dispatch(
-                    moveCourse({
-                      course: code,
-                      destTerm: `${destYear}${destTerm}`,
-                      srcTerm: 'unplanned'
-                    })
-                  );
                   const data = {
                     destRow,
                     destTerm,

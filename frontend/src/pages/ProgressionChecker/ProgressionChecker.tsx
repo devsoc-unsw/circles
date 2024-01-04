@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   BorderlessTableOutlined,
   EyeFilled,
@@ -28,6 +27,9 @@ import FreeElectiveSection from './FreeElectivesSection';
 import GridView from './GridView';
 import S from './styles';
 import TableView from './TableView';
+import { useQuery } from 'react-query';
+import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { badCourses, badDegree, badPlanner } from 'types/userResponse';
 
 const { Title } = Typography;
 
@@ -36,7 +38,13 @@ const ProgressionChecker = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
 
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const degree = degreeQuery.data || badDegree;
+  const { programCode, specs } = degree;
+
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner = plannerQuery.data || badPlanner;
+  const { unplanned } = planner;
 
   useEffect(() => {
     // get structure of degree
@@ -66,8 +74,8 @@ const ProgressionChecker = () => {
   }, []);
 
   const [view, setView] = useState(Views.GRID_CONCISE);
-
-  const { courses, unplanned } = useSelector((store: RootState) => store.planner);
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses = coursesQuery.data || badCourses;
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};

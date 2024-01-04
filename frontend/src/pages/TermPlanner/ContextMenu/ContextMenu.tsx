@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Item, Menu } from 'react-contexify';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { DeleteFilled, EditFilled, InfoCircleFilled } from '@ant-design/icons';
-import axios from 'axios';
+import { removeCourse, unscheduleCourse } from 'utils/api/plannerApi';
 import EditMarkModal from 'components/EditMarkModal';
-import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
 
 type Props = {
@@ -17,21 +16,18 @@ type Props = {
 };
 
 const ContextMenu = ({ code, scheduled }: Props) => {
-  const { token } = useSelector((state: RootState) => state.settings);
+  const queryClient = useQueryClient();
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => dispatch(removeCourse(code));
-  const handleUnschedule = async () => {
-    try {
-      await axios.post('planner/unscheduleCourse', { courseCode: code }, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at handleUnschedule:', err);
-    }
-  };
+  const handleUnschedule = useMutation(unscheduleCourse, {
+    onSuccess: () => queryClient.invalidateQueries('planner')
+  });
+  const handleDelete = useMutation(removeCourse, {
+    onSuccess: () => queryClient.invalidateQueries('planner')
+  });
   const handleInfo = () => {
     navigate('/course-selector');
     dispatch(addTab(code));
@@ -46,11 +42,17 @@ const ContextMenu = ({ code, scheduled }: Props) => {
     <>
       <Menu id={`${code}-context`} theme="dark">
         {scheduled && (
-          <Item onClick={handleUnschedule}>
+          <Item
+            onClick={() =>
+              handleUnschedule.mutate({
+                courseCode: code
+              })
+            }
+          >
             <FaRegCalendarTimes style={iconStyle} /> Unschedule
           </Item>
         )}
-        <Item onClick={handleDelete}>
+        <Item onClick={() => handleDelete.mutate(code)}>
           <DeleteFilled style={iconStyle} /> Delete from Planner
         </Item>
         <Item onClick={showEditMark}>

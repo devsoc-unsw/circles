@@ -1,5 +1,5 @@
-/* eslint-disable */
 import React, { useCallback, useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
 import axios from 'axios';
@@ -7,20 +7,16 @@ import { CoursesAllUnlocked, Structure } from 'types/api';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
-import getNumTerms from 'utils/getNumTerms';
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import { errLogger } from 'utils/queryUtils';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
-import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
-import { getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import { QueryObserver, useMutation, useQuery, useQueryClient } from 'react-query';
-import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
-import { errLogger } from 'utils/queryUtils';
-import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 
 type SubgroupTitleProps = {
   title: string;
@@ -47,6 +43,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   const inPlanner = (courseId: string) => courses && !!courses[courseId];
 
   const getStructure = React.useCallback(async () => {
+    // eslint-disable-next-line prefer-promise-reject-errors
     if (!degree) return Promise.reject('degree undefined');
     const { programCode, specs } = degree;
     const res = await axios.get<Structure>(
@@ -57,6 +54,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
 
   const getAllUnlocked = React.useCallback(async () => {
     if (!degree || !planner || !courses)
+      // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject('degree, planner or courses undefined');
     const res = await axios.post<CoursesAllUnlocked>(
       '/courses/getAllUnlocked/',
@@ -72,16 +70,8 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
 
   const coursesStateQuery = useQuery(['coursesState', degree, planner, courses], getAllUnlocked, {
     onError: errLogger('coursesStateQuery'),
-    onSuccess: (courses) => {
-      dispatch(setCourses(courses)); // should maybe be deleted later or something
-    },
     enabled: !!degree && !!planner && !!courses
   });
-
-  useEffect(() => {
-      if (!courses || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
-      generateMenuData(courses, structureQuery.data, coursesStateQuery.data);
-  }, [planner, structureQuery, coursesStateQuery, courses])
 
   const queryClient = useQueryClient();
   const courseMutation = useMutation({
@@ -105,11 +95,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   const [pageLoaded, setPageLoaded] = useState(false);
 
   const generateMenuData = useCallback(
-    (
-      courses: CoursesResponse,
-      structure: ProgramStructure,
-      coursesState: Record<string, CourseValidation>
-    ) => {
+    (structure: ProgramStructure, coursesState: Record<string, CourseValidation>) => {
       const newMenu: MenuDataStructure = {};
       const newCoursesUnits: CourseUnitsStructure = {};
       // Example groups: Major, Minor, General, Rules
@@ -139,8 +125,8 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
                 accuracy: coursesState[courseCode] ? coursesState[courseCode].is_accurate : true
               });
               // add UOC to curr
-              if (courses[courseCode] !== undefined) {
-                newCoursesUnits[group][subgroup].curr += courses[courseCode].uoc;
+              if (courses && courses[courseCode] !== undefined) {
+                newCoursesUnits[group][subgroup].curr += courses[courseCode].UOC;
               }
             });
           }
@@ -150,8 +136,13 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
       setCoursesUnits(newCoursesUnits);
       setPageLoaded(true);
     },
-    []
+    [courses]
   );
+
+  useEffect(() => {
+    if (!courses || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
+    generateMenuData(structureQuery.data, coursesStateQuery.data);
+  }, [planner, structureQuery, coursesStateQuery, generateMenuData, courses]);
 
   const sortSubgroups = (
     item1: [string, MenuDataSubgroup[]],

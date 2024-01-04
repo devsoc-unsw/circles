@@ -66,7 +66,7 @@ def fix_user_data(userData: dict):
         if not isinstance(userData["courses"][course], list)
     ]
     filledInCourses = {
-        course: [get_course(course)["UOC"], userData["courses"][course]]
+        course: [get_course(course).UOC, userData["courses"][course]]
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
@@ -142,7 +142,7 @@ def get_courses() -> list[Dict]:
         },
     },
 )
-def get_course(courseCode: str) -> Dict:
+def get_course(courseCode: str) -> CourseDetails:
     """
     Get info about a course given its courseCode
     - start with the current database
@@ -339,7 +339,7 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year: str, courseCode: str) -> Dict:
+def get_legacy_course(year: str, courseCode: str) -> CourseDetails:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
@@ -459,7 +459,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
     ## initial state
     courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
-    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken)['UOC'], None]
+    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken).UOC, None]
     ## final state
     courses_now_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked
@@ -620,7 +620,7 @@ def weight_course(
 
     return weight
 
-def get_course_info(course: str, year: str | int = LIVE_YEAR) -> Dict:
+def get_course_info(course: str, year: str | int = LIVE_YEAR) -> CourseDetails:
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.
@@ -634,7 +634,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     If the year is from the future then, backfill the LIVE_YEAR's results
     """
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
-    return get_course_info(course, year_to_fetch).get("terms", [])
+    return get_course_info(course, year_to_fetch).terms or []
 
 def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """

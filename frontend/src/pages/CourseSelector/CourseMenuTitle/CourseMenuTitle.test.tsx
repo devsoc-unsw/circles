@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { renderWithProviders } from 'test/testUtil';
+import { getUserPlanner } from 'utils/api/userApi';
 import CourseMenuTitle from './CourseMenuTitle';
 
 const defaultProps = {
@@ -38,8 +39,9 @@ describe('CourseMenuTitle', () => {
   });
 
   it('should add course to planner', async () => {
-    const { store } = await renderWithProviders(<CourseMenuTitle {...defaultProps} accurate={false} />);
+    await renderWithProviders(<CourseMenuTitle {...defaultProps} accurate={false} />);
     await userEvent.click(screen.getByTestId('quick-add-cart-button'));
-    expect(store.getState().planner.unplanned).toEqual(['COMP1511']);
+    const planner = await getUserPlanner();
+    expect(planner.unplanned).toEqual(['COMP1511']);
   });
 });

@@ -18,7 +18,11 @@ export type CourseResponse = {
   code: string;
   suppress: boolean;
   mark: Mark;
-  uoc: number;
+  plannedFor: string | null;
+  unlocked: boolean;
+  title: string;
+  isMultiterm: boolean;
+  UOC: number;
 };
 
 export type ValidateResponse = {
@@ -48,6 +52,12 @@ export type PlannerResponse = {
 export type Term = {
   y: string;
   t: string;
+};
+
+export const badDegree: DegreeResponse = {
+  programCode: '3778',
+  specs: [],
+  isComplete: false
 };
 
 // null coalesced to remove `undefined`. This SHOULD NOT see production
@@ -81,4 +91,4 @@ export const badCourseInfo: Course = {
   handbook_note: ''
 };
 
-export const badCourses = {};
+export const badCourses: Record<string, CourseResponse> = {};

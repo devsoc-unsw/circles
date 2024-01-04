@@ -16,14 +16,12 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [ready, setReady] = React.useState(false);
-
   const setupDegreeMutation = useMutation(setupDegreeWizard, {
     onSuccess: () => {
       queryClient.invalidateQueries('degree');
       queryClient.invalidateQueries('planner');
       queryClient.invalidateQueries('courses');
-      setReady(true);
+      navigate('/course-selector');
     },
     onError: (err) => {
       // TODO: Give the user a notification for stuff like this
@@ -52,9 +50,6 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       handleSetupDegree();
     }
   };
-  if (ready) {
-    navigate('/course-selector');
-  }
 
   return (
     <CS.StepContentWrapper id="start browsing">

@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
+import { badCourses, badValidations } from 'types/userResponse';
+import { validateTermPlanner } from 'utils/api/plannerApi';
+import { getUserCourses } from 'utils/api/userApi';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import { inDev } from 'config/constants';
-import type { RootState } from 'config/store';
 
 type CourseInfoDrawersProps = {
   course: Course;
@@ -21,17 +23,18 @@ const CourseInfoDrawers = ({
   pathFrom = [],
   unlocked
 }: CourseInfoDrawersProps) => {
-  const { planner, courses } = useSelector((state: RootState) => state);
+  const courses = useQuery('courses', getUserCourses).data || badCourses;
 
   const pathFromInPlanner = pathFrom.filter((courseCode) =>
-    Object.keys(planner.courses).includes(courseCode)
+    Object.keys(courses).includes(courseCode)
   );
   const pathFromNotInPlanner = pathFrom.filter(
-    (courseCode) => !Object.keys(planner.courses).includes(courseCode)
+    (courseCode) => !Object.keys(courses).includes(courseCode)
   );
-  const isUnlocked = courses.courses[course.code]?.unlocked;
-  const inPlanner = planner.courses[course.code];
-
+  const inPlanner = courses[course.code];
+  const validateQuery = useQuery('validate', validateTermPlanner);
+  const validations = validateQuery.data ?? badValidations;
+  const isUnlocked = validations.courses_state[course.code];
   return (
     <div>
       <Collapsible title="Overview">

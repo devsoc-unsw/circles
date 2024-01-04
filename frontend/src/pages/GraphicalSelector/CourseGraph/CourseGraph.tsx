@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import {
   ExpandAltOutlined,
   ShrinkOutlined,
@@ -10,10 +10,11 @@ import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
 import { Button, Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { badCourses, badDegree, badPlanner } from 'types/userResponse';
 import { useDebouncedCallback } from 'use-debounce';
+import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
@@ -27,9 +28,14 @@ type Props = {
 };
 
 const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
-  const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner, courses } = useSelector((state: RootState) => state);
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const degree = degreeQuery.data || badDegree;
+  const { programCode, specs } = degree;
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner = plannerQuery.data || badPlanner;
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses = coursesQuery.data || badCourses;
+
   const windowSize = useAppWindowSize();
 
   const graphRef = useRef<Graph | null>(null);
@@ -40,7 +46,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   useEffect(() => {
     // courses is a list of course codes
-    const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
+    const initialiseGraph = async (co: string[], courseEdges: CourseEdge[]) => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -76,7 +82,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
+        nodes: co.map((c) =>
+          mapNodeStyle(
+            c,
+            planner.years.some((y) => Object.keys(y).some((code) => c === code))
+          )
+        ),
         edges: courseEdges
       };
 
@@ -105,8 +116,8 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
         const res = await axios.get<GraphPayload>(
           `/programs/graph/${programCode}/${specs.join('+')}`
         );
-        const { edges, courses } = res.data;
-        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+        const { edges, courses: c } = res.data;
+        if (c.length !== 0 && edges.length !== 0) initialiseGraph(c, edges);
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error at setupGraph', e);
@@ -114,7 +125,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     if (!graphRef.current) setupGraph();
-  }, [onNodeClick, plannedCourses, programCode, specs]);
+  }, [onNodeClick, planner.years, programCode, specs]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -147,7 +158,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  }, [degree, planner]);
+  }, [courses, degree, planner]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
@@ -195,7 +206,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   useEffect(() => {
     if (unlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
+  }, [showUnlockedCourses, unlockedCourses]);
 
   return (
     <S.Wrapper ref={containerRef}>

@@ -40,8 +40,8 @@ export type UnPlannedToTerm = {
 };
 
 export type UnscheduleCourse = {
-  srcRow: number;
-  srcTerm: string;
+  srcRow?: number;
+  srcTerm?: string;
   courseCode: string;
 };
 

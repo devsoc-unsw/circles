@@ -177,7 +177,7 @@ class PlannerData(BaseModel):
                 for course_name, course_value in term.items():
                     cleaned_term[course_name] = (
                         (course_value[0], course_value[1]) if course_value
-                        else (get_course(course_name)["UOC"], None)
+                        else (get_course(course_name)["UOC"], None) # type: ignore
                     )
                 user.add_courses(cleaned_term)
         return user
@@ -214,6 +214,15 @@ class CoursesStorage(TypedDict):
     suppressed: bool
     mark: Mark
     uoc: int
+
+class CourseType(BaseModel):
+    code: str
+    suppressed: bool
+    mark: Mark
+    plannedFor: str | None
+    title: str
+    isMultiterm: bool
+    UOC: int
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage

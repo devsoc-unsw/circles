@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Suspense } from 'react';
-import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+import { QueryClient, QueryClientProvider, useQuery, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -12,6 +12,7 @@ import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';
+import { getUserDegree } from 'utils/api/userApi';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -26,7 +27,7 @@ const Auth = React.lazy(() => import('./pages/Auth'));
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
-  const degree = useSelector((state: RootState) => state.degree);
+  const degree = useQuery('degree', getUserDegree).data;
 
   const [queryClient] = React.useState(() => new QueryClient())
 
@@ -41,7 +42,7 @@ const App = () => {
                 <Route
                   path="/"
                   element={
-                    !degree.isComplete ? (
+                    !degree?.isComplete ? (
                       <LandingPage />
                     ) : (
                       <Navigate to="/course-selector" replace />

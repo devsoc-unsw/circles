@@ -67,6 +67,16 @@ export const removeCourse = async (courseId: string) => {
   }
 };
 
+export const removeAll = async () => {
+  const token = await getToken();
+  try {
+    await axios.post('planner/removeAll', {}, { params: { token } });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Error at removeAll: ', err);
+  }
+};
+
 export const validateTermPlanner = async (): Promise<ValidatesResponse> => {
   const token = await getToken();
   const res = await axios.get('planner/validateTermPlanner', { params: { token } });

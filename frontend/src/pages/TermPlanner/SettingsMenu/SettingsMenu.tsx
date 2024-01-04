@@ -21,7 +21,6 @@ const SettingsMenu = ({ planner }: Props) => {
   const queryClient = useQueryClient();
 
   const { Option } = Select;
-  // const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
   const { token } = useSelector((state: RootState) => state.settings);
 
   async function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {

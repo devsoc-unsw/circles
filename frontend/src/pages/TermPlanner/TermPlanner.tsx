@@ -25,7 +25,6 @@ import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import { GridItem } from './common/styles';
-import HideYearTooltip from './HideYearTooltip';
 import OptionsHeader from './OptionsHeader';
 import S from './styles';
 import TermBox from './TermBox';
@@ -126,7 +125,7 @@ const TermPlanner = () => {
       queryClient.setQueryData('planner', (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
         const curr: PlannerResponse = JSON.parse(JSON.stringify(prev));
-        curr.years[data.srcRow][data.srcTerm].splice(curr.years[data.srcRow][data.srcTerm].indexOf(data.courseCode), 1);
+        curr.years[data.srcRow as number][data.srcTerm as string].splice(curr.years[data.srcRow as number][data.srcTerm as string].indexOf(data.courseCode), 1);
         curr.unplanned.push(data.courseCode);
         return curr;
       })
@@ -145,45 +144,6 @@ const TermPlanner = () => {
     unscheduleCourseMutation.mutate(data);
   };
 
-  // const dispatch = useDispatch();
-
-  // needed for useEffect deps as it does not deep compare arrays well enough :c
-  // also only want it to update on new/removed course codes
-  // const courses = Object.keys(planner.courses).sort().join('');
-
-  /// TODO: GET LEGACY OFFERINGS (doesn't seem to be stored in backend?!?)
-  // useEffect(() => {
-  //   // update the legacy term offered
-  //   const updateOfferingsData = async () => {
-  //     const years: string[] = [];
-  //     for (let i = 0; i < planner.years.length; i++) {
-  //       years.push((planner.startYear + i).toString());
-  //     }
-
-  //     // get the outdated legacy offerings
-  //     const outdated = Object.entries(planner.courses)
-  //       .filter(([, course]) => {
-  //         const oldOfferings = course.legacyOfferings;
-  //         // no legacy offering data, or doesn't include the wanted years
-  //         return !oldOfferings || years.filter((y) => !(y in oldOfferings)).length > 0;
-  //       })
-  //       .map(([code]) => code);
-
-  //     // update them
-  //     const data = await getAllCourseOfferings(outdated, years);
-  //     Object.entries(data).forEach(([code, offerings]) => {
-  //       dispatch(updateLegacyOfferings({ code, offerings }));
-  //     });
-  //   };
-
-  //   updateOfferingsData();
-
-  //   // disabled planner.courses as part of useEffect dep to avoid api double calling
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [courses, dispatch, planner.years.length, planner.startYear]);
-
-  // don't need to validate cos it should be done already
-  // const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
     if (plannerEmpty) {
@@ -299,7 +259,6 @@ const TermPlanner = () => {
                       <S.YearGridBox>
                         <S.YearWrapper>
                           <S.YearText currYear={currYear === iYear}>{iYear}</S.YearText>
-                          <HideYearTooltip year={iYear} />
                         </S.YearWrapper>
                         <Badge
                           style={{

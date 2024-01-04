@@ -3,9 +3,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Modal } from 'antd';
 import { resetDegree } from 'utils/api/degreeApi';
 import { useAppDispatch } from 'hooks';
-import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
-import { resetPlanner } from 'reducers/plannerSlice';
 
 type Props = {
   open?: boolean;
@@ -33,10 +31,8 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   };
 
   const handleOk = async () => {
-    dispatch(resetPlanner());
     handleResetDegree();
     dispatch(resetTabs());
-    dispatch(resetCourses());
     onOk?.();
   };
 

@@ -1,5 +1,4 @@
 import type { Arrow } from '@antv/g6';
-import { PlannerCourse } from 'types/planner';
 
 export const defaultNode = {
   size: 70,
@@ -28,9 +27,9 @@ export const defaultEdge = (arrow: typeof Arrow) => ({
 });
 
 // plannedCourses is an object of with keys of courseCodes
-export const mapNodeStyle = (courseCode: string, plannedCourses: Record<string, PlannerCourse>) => {
+export const mapNodeStyle = (courseCode: string, unplanned: boolean) => {
   // determine if planned or unplanned
-  if (plannedCourses[courseCode]) {
+  if (!unplanned) {
     // uses default node style
     return { id: courseCode, label: courseCode };
   }

@@ -3,12 +3,9 @@ import { getStoredState } from 'redux-persist';
 import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
 import { persistConfig, RootState } from 'config/store';
 
-// export const getToken = (): string => useSelector((state: RootState) => state.settings.token);
 export const getToken = async (): Promise<string> => {
-  // const x = window.localStorage.getItem('persi');
   const res = await getStoredState(persistConfig);
   const store = res as RootState;
-
   return store.settings.token;
 };
 
@@ -22,6 +19,12 @@ export const getUserDegree = async (): Promise<DegreeResponse> => {
   const token = await getToken();
   const degree = await axios.get(`user/data/degree/${token}`);
   return degree.data as DegreeResponse;
+};
+
+export const setIsComplete = async (isComplete: boolean): Promise<Record<never, never>> => {
+  const token = await getToken();
+  await axios.put(`user/setIsComplete`, {}, { params: { token, isComplete } });
+  return {};
 };
 
 export const getUserPlanner = async (): Promise<PlannerResponse> => {

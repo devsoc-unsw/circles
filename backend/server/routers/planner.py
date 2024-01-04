@@ -12,7 +12,7 @@ from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, UploadFile
 from server.config import DUMMY_TOKEN
 from server.routers.courses import get_course
-from server.routers.model import (CourseCode, Mark, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
+from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
                                   ValidCoursesState, ValidPlannerData, markMap)
 from server.routers.user import get_user, set_user
 from server.routers.utility import get_course_object

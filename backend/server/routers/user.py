@@ -1,5 +1,5 @@
 from itertools import chain
-from typing import Any, cast
+from typing import Any, Dict, cast
 
 from bson.objectid import ObjectId
 from fastapi import APIRouter, HTTPException
@@ -9,6 +9,7 @@ from server.config import DUMMY_TOKEN
 from server.database import usersDB
 from server.routers.courses import get_course
 from server.routers.model import (
+    CONDITIONS,
     CourseMark,
     CoursesStorage,
     DegreeLocalStorage,
@@ -58,7 +59,7 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
             # this is peter's fault for sucking at spelling
             'suppressed': False, # guess we also nuke this
             'mark': None, # wtf we nuking marks?
-            'uoc': get_course(course)['UOC']
+            'uoc': get_course(course).UOC
         }
         for course in chain(planned, unplanned)
     }
@@ -93,7 +94,26 @@ def get_user_planner(token: str) -> PlannerLocalStorage:
 
 @router.get("/data/courses/{token}")
 def get_user_p(token: str) -> dict[str, CoursesStorage]:
-    return get_user(token)['courses']
+    # expects to also get the
+    # title: str
+    # plannedFor: string of form "year term"
+    # isMultiterm
+    # uoc -> UOC
+    res = get_user(token)['courses']
+    planner = get_user_planner(token)
+    for c in res.values():
+        c = cast(Dict, c)
+        course = get_course(c['code'])
+        c['title'] = course.title
+        c['isMultiterm'] = course.is_multiterm
+        for index, year in enumerate(planner['years']):
+            for termIndex, term in year.items():
+                if c['code'] in term:
+                    c['plannedFor'] = f"{index + planner['startYear']} {termIndex}"
+                    break
+        c['plannedFor'] = c.get('plannedFor') # set to None if need be
+        c['UOC'] = c.pop('uoc')
+    return res
 
 # this is super jank - should never see prod
 @router.post("/register/{token}")
@@ -306,7 +326,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     if invalid_lhs_specs or spec_reqs_not_met:
         raise HTTPException(status_code=400, detail="Invalid specialisations")
     print("Valid specs")
-    
+
     planner: PlannerLocalStorage = {
         'mostRecentPastTerm': {
             'Y': 0,
