@@ -59,7 +59,7 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
             # this is peter's fault for sucking at spelling
             'suppressed': False, # guess we also nuke this
             'mark': None, # wtf we nuking marks?
-            'uoc': get_course(course).UOC
+            'uoc': get_course(course)['UOC']
         }
         for course in chain(planned, unplanned)
     }
@@ -104,13 +104,15 @@ def get_user_p(token: str) -> dict[str, CoursesStorage]:
     for c in res.values():
         c = cast(Dict, c)
         course = get_course(c['code'])
-        c['title'] = course.title
-        c['isMultiterm'] = course.is_multiterm
+        c['title'] = course['title']
+        c['isMultiterm'] = course['is_multiterm']
         for index, year in enumerate(planner['years']):
             for termIndex, term in year.items():
                 if c['code'] in term:
                     c['plannedFor'] = f"{index + planner['startYear']} {termIndex}"
                     break
+        if c['code'] in planner['unplanned']:
+            c['plannedFor'] = "unplanned"
         c['plannedFor'] = c.get('plannedFor') # set to None if need be
         c['UOC'] = c.pop('uoc')
     return res

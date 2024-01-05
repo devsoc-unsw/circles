@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import {
   BorderlessTableOutlined,
   EyeFilled,
@@ -16,20 +17,18 @@ import {
   ViewSubgroupCourse
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import { badCourses, badDegree, badPlanner } from 'types/userResponse';
+import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
-import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import FreeElectiveSection from './FreeElectivesSection';
 import GridView from './GridView';
 import S from './styles';
 import TableView from './TableView';
-import { useQuery } from 'react-query';
-import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import { badCourses, badDegree, badPlanner } from 'types/userResponse';
 
 const { Title } = Typography;
 

@@ -98,7 +98,6 @@ const CourseDescriptionPanel = ({
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
-
   return (
     <S.Wrapper sidebar={sidebar} className={className}>
       <S.MainWrapper>

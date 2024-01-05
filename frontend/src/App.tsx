@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Suspense } from 'react';
-import { QueryClient, QueryClientProvider, useQuery, useQueryClient } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -12,7 +12,6 @@ import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/antd.less';
-import { getUserDegree } from 'utils/api/userApi';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -22,14 +21,12 @@ const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
 const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
-const Auth = React.lazy(() => import('./pages/Auth'));
 
 const App = () => {
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme, token } = useSelector((state: RootState) => state.settings);
 
-  const degree = useQuery('degree', getUserDegree).data;
-
-  const [queryClient] = React.useState(() => new QueryClient())
+  
+  const [queryClient] = React.useState(() => new QueryClient());
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -42,10 +39,10 @@ const App = () => {
                 <Route
                   path="/"
                   element={
-                    !degree?.isComplete ? (
+                    !token ? (
                       <LandingPage />
                     ) : (
-                      <Navigate to="/course-selector" replace />
+                      <Navigate to="/degree-wizard" replace />
                     )
                   }
                 />
@@ -55,7 +52,6 @@ const App = () => {
                 <Route path="/term-planner" element={<TermPlanner />} />
                 <Route path="/progression-checker" element={<ProgressionChecker />} />
                 <Route path="*" element={<Page404 />} />
-                {inDev && <Route path="/login" element={<Auth />} />}
               </Routes>
             </Router>
           </Suspense>

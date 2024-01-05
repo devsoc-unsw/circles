@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { Tabs } from 'antd';
+import { badCourses } from 'types/userResponse';
+import { getUserCourses } from 'utils/api/userApi';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import SidebarDrawer from 'components/SidebarDrawer';
@@ -12,6 +15,8 @@ const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses = coursesQuery.data || badCourses;
 
   const items = [
     {
@@ -22,6 +27,7 @@ const GraphicalSelector = () => {
           courseCode={courseCode}
           key={courseCode}
           onCourseClick={setCourseCode}
+          courses={courses}
         />
       ) : (
         'No course selected'

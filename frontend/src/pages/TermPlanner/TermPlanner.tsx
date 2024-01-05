@@ -56,13 +56,13 @@ const TermPlanner = () => {
       queryFn: () => getCourseForYearsInfo(code, validYears)
     }))
   );
-
-  const courseInfoFlipped: Record<string, Record<number, Course>> = Object.fromEntries(
+  const validYearsAndCurrent = (validYears as (number | 'current')[]).concat(['current']);
+  const courseInfoFlipped = Object.fromEntries(
     Object.keys(courses).map((code: string, index: number) => [
       code,
-      courseQueries[index].data ?? validYears.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
+      courseQueries[index].data ?? validYearsAndCurrent.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
     ])
-  );
+  ) as Record<string, Record<number | 'current', Course>>;
   let courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
     Object.entries(yearData).forEach(([year, courseData]) => {
@@ -243,11 +243,12 @@ const TermPlanner = () => {
                 <GridItem>Term 3</GridItem>
                 {planner.years.map((year, index) => {
                   const iYear = planner.startYear + index;
+                  const fetchingYear = iYear >= currYear ? 'current' : iYear;
                   let yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
                     Object.entries(courseInfoFlipped).forEach(([courseCode, courseInfo]) => {
                       if (year[termKey as Term].includes(courseCode)) {
-                        yearUOC += courseInfo[iYear].UOC;
+                        yearUOC += courseInfo[fetchingYear].UOC;
                       }
                     });
                   });
@@ -296,7 +297,7 @@ const TermPlanner = () => {
                 <UnplannedColumn
                   dragging={!!draggingCourse}
                   courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [code, courseInfos[currYear][code]])
+                    planner.unplanned.map((code) => [code, courseInfos['current'][code]])
                   )}
                   validateInfos={validations.courses_state}
                 />

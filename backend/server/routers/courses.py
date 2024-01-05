@@ -66,7 +66,7 @@ def fix_user_data(userData: dict):
         if not isinstance(userData["courses"][course], list)
     ]
     filledInCourses = {
-        course: [get_course(course).UOC, userData["courses"][course]]
+        course: [get_course(course)['UOC'], userData["courses"][course]]
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
@@ -142,7 +142,7 @@ def get_courses() -> list[Dict]:
         },
     },
 )
-def get_course(courseCode: str) -> CourseDetails:
+def get_course(courseCode: str):
     """
     Get info about a course given its courseCode
     - start with the current database
@@ -339,7 +339,7 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year: str, courseCode: str) -> CourseDetails:
+def get_legacy_course(year: str, courseCode: str):
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
@@ -459,7 +459,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
     ## initial state
     courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
-    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken).UOC, None]
+    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken)['UOC'], None]
     ## final state
     courses_now_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked

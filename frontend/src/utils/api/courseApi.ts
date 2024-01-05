@@ -17,9 +17,14 @@ export const getCourseInfo = async (courseId: string) => {
 export const getCourseForYearsInfo = async (
   courseId: string,
   years: number[]
-): Promise<Record<number, Course>> => {
+): Promise<Record<number | 'current', Course>> => {
   const promises = await Promise.all(
     years.map((year) => axios.get<Course>(`courses/getLegacyCourse/${year}/${courseId}`))
   );
-  return years.reduce((prev, year, index) => ({ ...prev, [year]: promises[index].data }), {});
+  const legacy = years.reduce(
+    (prev, year, index) => ({ ...prev, [year]: promises[index].data }),
+    {}
+  );
+  const current = (await axios.get<Course>(`courses/getCourse/${courseId}`)).data;
+  return { ...legacy, current };
 };

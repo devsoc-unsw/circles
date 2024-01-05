@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { setupDegreeWizard } from 'utils/api/degreeApi';
+import { setIsComplete } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import CS from '../common/styles';
 import S from './styles';
@@ -22,6 +23,7 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       queryClient.invalidateQueries('planner');
       queryClient.invalidateQueries('courses');
       navigate('/course-selector');
+      setIsComplete(true);
     },
     onError: (err) => {
       // TODO: Give the user a notification for stuff like this

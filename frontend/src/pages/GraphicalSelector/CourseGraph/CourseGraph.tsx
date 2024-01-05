@@ -82,12 +82,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       graphRef.current = new Graph(graphArgs);
 
       const data = {
-        nodes: co.map((c) =>
-          mapNodeStyle(
-            c,
-            planner.years.some((y) => Object.keys(y).some((code) => c === code))
-          )
-        ),
+        nodes: co.map((c) => mapNodeStyle(c, !courses[c]?.plannedFor)),
         edges: courseEdges
       };
 
@@ -125,7 +120,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
     };
 
     if (!graphRef.current) setupGraph();
-  }, [onNodeClick, planner.years, programCode, specs]);
+  }, [courses, onNodeClick, planner.years, programCode, specs]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
