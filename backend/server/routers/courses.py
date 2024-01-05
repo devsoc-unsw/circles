@@ -344,7 +344,7 @@ def get_legacy_course(year: str, courseCode: str):
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = archivesDB[year].find_one({"code": courseCode})
+    result = archivesDB.get_collection(year).find_one({"code": courseCode})
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
@@ -620,13 +620,13 @@ def weight_course(
 
     return weight
 
-def get_course_info(course: str, year: str | int = LIVE_YEAR) -> CourseDetails:
+def get_course_info(course: str, year: str | int = LIVE_YEAR):
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.
     If the year is not the LIVE_YEAR, then uses legacy information
     """
-    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(str(year), course)
+    return get_course(course) if int(year) >= int(LIVE_YEAR) else get_legacy_course(str(year), course)
 
 def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     """
@@ -634,7 +634,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     If the year is from the future then, backfill the LIVE_YEAR's results
     """
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
-    return get_course_info(course, year_to_fetch).terms or []
+    return get_course_info(course, year_to_fetch)['terms'] or []
 
 def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """
