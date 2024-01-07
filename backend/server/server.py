@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from data.config import LIVE_YEAR
 
-from server.routers import courses, planner, programs, specialisations, followups, ctf
+from server.routers import courses, planner, programs, specialisations, followups
 
 app = FastAPI()
 
@@ -45,7 +45,8 @@ app.include_router(courses.router)
 app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(followups.router)
-app.include_router(ctf.router)
+# TODO: hide this behind a feature flag?
+# app.include_router(ctf.router)
 
 
 @app.get("/")

@@ -37,6 +37,7 @@ const ModalTitle = styled(Title)`
   color: ${({ theme }) => theme.text} !important;
 `;
 
+// TODO: hide this behind a feature flag?
 const ValidateCtfButton = () => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);

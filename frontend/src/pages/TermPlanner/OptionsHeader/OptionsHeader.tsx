@@ -20,7 +20,6 @@ import HelpMenu from '../HelpMenu/HelpMenu';
 import ImportPlannerMenu from '../ImportPlannerMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
-import ValidateCtfButton from '../ValidateCtfButton/ValidateCtfButton';
 import S from './styles';
 // Used for tippy stylings
 import 'tippy.js/dist/tippy.css';
@@ -93,11 +92,6 @@ const OptionsHeader = ({ plannerRef }: Props) => {
                 <UploadOutlined style={iconStyles} />
               </S.OptionButton>
             </Tooltip>
-          </div>
-        </Tippy>
-        <Tippy>
-          <div>
-            <ValidateCtfButton />
           </div>
         </Tippy>
 
