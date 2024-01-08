@@ -80,7 +80,7 @@ class ValidCourseState(BaseModel):
     unlocked: bool
     handbook_note: str
     warnings: list
-    supressed: bool
+    suppressed: bool
 
 
 class CoursesState(BaseModel):
@@ -208,12 +208,12 @@ markMap = {
     "HD": 85,
 }
 
-# TODO: Rename to CourseStorage
-class CoursesStorage(TypedDict):
+class CourseStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
     uoc: int
+    ignoreFromProgression: bool
 
 class CourseType(BaseModel):
     code: str
@@ -227,7 +227,7 @@ class CourseType(BaseModel):
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
-    courses: dict[str, CoursesStorage]
+    courses: dict[str, CourseStorage]
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage

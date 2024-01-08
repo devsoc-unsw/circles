@@ -23,6 +23,7 @@ export type CourseResponse = {
   title: string;
   isMultiterm: boolean;
   UOC: number;
+  ignoreFromProgression: boolean;
 };
 
 export type ValidateResponse = {

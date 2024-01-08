@@ -109,7 +109,7 @@ const CourseDescriptionPanel = ({
           </div>
           <PlannerButton
             course={course}
-            planned={courses !== undefined && courses[course.code] !== undefined}
+            isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
           />
         </S.TitleWrapper>
         {/* TODO: Style this better? */}
@@ -142,4 +142,4 @@ const CourseDescriptionPanel = ({
   );
 };
 
-export default CourseDescriptionPanel;
+export default React.memo(CourseDescriptionPanel);

@@ -1,10 +1,6 @@
 from PyPDF2 import PdfReader
-import sys
 import re
-from fastapi import UploadFile
-# from server.routers.model import LetterGrade, Mark
-
-from typing import Any, BinaryIO, Dict, Literal, Tuple
+from typing import Any, BinaryIO, Dict, Tuple
 
 
 
@@ -14,8 +10,9 @@ YearInt = int
 CourseCode = str
 Grade = str | Any | None
 Mark = int | None
+UOC = int | None
 
-CoursesByYear = Dict[YearInt, Dict[Term, Dict[CourseCode, Tuple[Mark, Grade]]]]
+CoursesByYear = Dict[YearInt, Dict[Term, Dict[CourseCode, Tuple[UOC, Mark, Grade]]]]
 
 def parse_transcript(file: BinaryIO) -> CoursesByYear:
     reader = PdfReader(file)
@@ -37,12 +34,20 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
             course_letters, course_number, uattempted, upassed, mark, grade = match.groups()
             course_code = course_letters + course_number
             mark = int(mark)
-            return course_code, mark, grade
+            try:
+                uattempted = int(uattempted)
+            except:
+                uattempted = None
+            return course_code, mark, uattempted, grade
         match = re.fullmatch(r"([A-Z]{4}) ([0-9]{4}) .* ([0-9]+\.[0-9]+) ", line)
         if match:
             course_letters, course_number, uattempted = match.groups()
             course_code = course_letters + course_number
-            return course_code, None, None
+            try:
+                uattempted = int(uattempted)
+            except:
+                uattempted = None
+            return course_code, None, uattempted, None
         return None
 
 
@@ -69,8 +74,8 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
 
             course_tup = parse_course_line(lines[i])
             while course_tup:
-                course_code, mark, grade = course_tup
-                years[year][term][course_code] = (mark, grade)
+                course_code, mark, uoc, grade = course_tup
+                years[year][term][course_code] = (uoc, mark, grade)
                 i += 1
                 course_tup = parse_course_line(lines[i])
         else:

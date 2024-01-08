@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Radio } from 'antd';
+import { Radio } from 'antd';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -38,9 +38,7 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
           ))}
         </Radio.Group>
       </CS.PopupEntry>
-      <Button style={{ width: '150px' }} onClick={download}>
-        Download
-      </Button>
+      <CS.Button onClick={download}> Download </CS.Button>
     </S.Wrapper>
   );
 };

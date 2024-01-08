@@ -19,6 +19,14 @@ axiosMock.onGet('/programs/getPrograms').reply(200, {
 const incrementStepMock = vi.fn();
 const setDegreeInfoMock = vi.fn();
 
+const degreeInfo = {
+  programCode: '',
+  isComplete: false,
+  startYear: undefined,
+  endYear: undefined,
+  specs: []
+};
+
 describe('DegreeStep', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
 
@@ -32,13 +40,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     expect(screen.getByText('What are you studying?')).toBeInTheDocument();
@@ -53,13 +55,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
@@ -80,13 +76,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     expect(screen.queryByText('Computer Science')).not.toBeInTheDocument();
@@ -97,13 +87,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), '3778');
@@ -115,13 +99,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Computer Science');
@@ -133,13 +111,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'computer science');
@@ -151,13 +123,7 @@ describe('DegreeStep', () => {
       <DegreeStep
         incrementStep={incrementStepMock}
         setDegreeInfo={setDegreeInfoMock}
-        degreeInfo={{
-          programCode: '',
-          isComplete: false,
-          startYear: undefined,
-          endYear: undefined,
-          specs: []
-        }}
+        degreeInfo={degreeInfo}
       />
     );
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Economics');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { Button, Input, message, Modal } from 'antd';
+import { Button, message } from 'antd';
 import { Grade } from 'types/planner';
 import { updateCourseMark } from 'utils/planner';
 import S from './styles';
@@ -56,7 +56,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
   };
 
   return (
-    <Modal
+    <S.Modal
       title={`Edit mark for ${code}`}
       open={open}
       onOk={handleUpdateMark}
@@ -64,12 +64,11 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
       width="350px"
     >
       <S.EditMarkWrapper>
-        <Input
+        <S.Input
           value={markValue}
           onChange={handleInputChange}
           onPressEnter={handleUpdateMark}
           placeholder="Enter Mark"
-          style={{ width: '100%' }}
         />
         <S.LetterGradeWrapper>
           {letterGrades.map((letterGrade) => (
@@ -82,7 +81,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
           ))}
         </S.LetterGradeWrapper>
       </S.EditMarkWrapper>
-    </Modal>
+    </S.Modal>
   );
 };
 

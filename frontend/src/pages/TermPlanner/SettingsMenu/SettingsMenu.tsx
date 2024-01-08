@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Select, Switch } from 'antd';
+import { Select, Switch, theme } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
@@ -108,7 +108,7 @@ const SettingsMenu = ({ planner }: Props) => {
           unCheckedChildren={<CloseOutlined />}
         />
       </CS.PopupEntry>
-      <CS.PopupEntry>
+      <CS.PopupEntry className="settings-start-year-popup">
         <CS.MenuText>Start Year</CS.MenuText>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
           <DatePicker
@@ -119,15 +119,20 @@ const SettingsMenu = ({ planner }: Props) => {
           />
         </Suspense>
       </CS.PopupEntry>
-      <CS.PopupEntry>
+      <CS.PopupEntry className="settings-degree-length-popup">
         <CS.MenuText>Degree Length</CS.MenuText>
         <Select
           value={planner.years.length}
           style={{ width: 70 }}
+          dropdownStyle={{
+            backgroundColor: theme === 'light' ? '#fff' : '#444249',
+            color: theme === 'light' ? '#444249' : '#fff'
+          }}
           onChange={handleUpdateDegreeLength}
+          className="settings-degree-length-popup"
         >
           {years.map((num) => (
-            <Option key={num} value={num}>
+            <Option key={num} value={num} className="settings-degree-length-popup">
               {num}
             </Option>
           ))}

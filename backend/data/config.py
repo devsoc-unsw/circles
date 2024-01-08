@@ -17,7 +17,7 @@ from typing import List
 LIVE_YEAR: int = 2024
 
 # The years for which we have archived
-ARCHIVED_YEARS: List[int] = [2019, 2020, 2021, 2022, 2023, 2024]
+ARCHIVED_YEARS: List[int] = list(range(2019, LIVE_YEAR + 1))
 
 # TODO: Consider adding file paths to this file so we don't have to type out
 # the exact path to write to every time

@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
-import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import { InfoCircleOutlined, PieChartOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
@@ -129,6 +129,9 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                     style={{ fontSize: '16px', color: theme.warningOutlined.color }}
                   />
                 ))}
+              {courses[code].ignoreFromProgression && (
+                <PieChartOutlined style={{ color: theme.infoOutlined.color }} />
+              )}
               <S.CourseLabel>
                 {isSmall ? (
                   <Text className="text">{code}</Text>
@@ -161,11 +164,15 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
           )}
         </Draggable>
       </Suspense>
-      <ContextMenu code={code} scheduled={!!time} />
+      <ContextMenu
+        code={code}
+        ignoreFromProgression={courses[code].ignoreFromProgression}
+        plannedFor={courses[code].plannedFor}
+      />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
-        <ReactTooltip id={code} place="top" effect="solid">
+        <ReactTooltip id={code} place="top">
           {title}
         </ReactTooltip>
       )}
@@ -181,7 +188,17 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
             // eslint-disable-next-line react/no-danger
             <div dangerouslySetInnerHTML={{ __html: handbookNote }} />
           )}
+          {/* TODO: Fix fullstops. example: "48 UoC required in all courses you have 36 This course will not be included ..."
+           */}
           {!isAccurate ? ' The course info may be inaccurate.' : ''}
+          {courses[code].ignoreFromProgression
+            ? ' This course will not be included in your progression.'
+            : ''}
+        </ReactTooltip>
+      )}
+      {courses[code].ignoreFromProgression && !(!isTermLocked && shouldHaveWarning) && (
+        <ReactTooltip id={code} place="bottom">
+          This course will not be included in your progression.
         </ReactTooltip>
       )}
     </>

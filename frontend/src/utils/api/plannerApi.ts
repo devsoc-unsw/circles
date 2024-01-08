@@ -67,6 +67,20 @@ export const removeCourse = async (courseId: string) => {
   }
 };
 
+export const toggleIgnoreFromProgression = async (courseId: string) => {
+  const token = await getToken();
+  try {
+    await axios.post(
+      'planner/toggleIgnotoggleIgnoreFromProgression',
+      { courseCode: courseId },
+      { params: { token } }
+    );
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Error at toggleIgnotoggleIgnoreFromProgression: ', err);
+  }
+};
+
 export const removeAll = async () => {
   const token = await getToken();
   try {

@@ -41,7 +41,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const dispatch = useDispatch();
   const iconStyles = {
     fontSize: '20px',
-    color: '#323739'
+    color: theme === 'light' ? '#323739' : '#f1f1f1'
   };
 
   const unscheduleAllMutation = useMutation(unscheduleAll, {
@@ -123,6 +123,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
               style={{ width: '200px' }}
               okText="Yes"
               cancelText="No"
+              overlayClassName="popconfirm-unplan"
             >
               <S.OptionButton>
                 <FaRegCalendarTimes style={iconStyles} />
@@ -132,7 +133,12 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         )}
         <Tooltip title="Toggle warnings for previous terms">
           <S.OptionButton onClick={() => dispatch(toggleShowWarnings())}>
-            <WarningFilled style={{ ...iconStyles, ...(showWarnings && { color: '#9254de' }) }} />
+            <WarningFilled
+              style={{
+                ...iconStyles,
+                ...(showWarnings && { color: theme === 'light' ? '#9254de' : '#c198ef' })
+              }}
+            />
           </S.OptionButton>
         </Tooltip>
       </S.OptionSection>

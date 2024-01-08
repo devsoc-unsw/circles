@@ -235,4 +235,4 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   );
 };
 
-export default CourseMenu;
+export default React.memo(CourseMenu);

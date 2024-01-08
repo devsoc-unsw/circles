@@ -87,7 +87,7 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
     
     course = get_course(data.courseCode) # raises exception anyway when unfound
     user['planner']['unplanned'].append(data.courseCode)
-    user['courses'][data.courseCode] = {'code': data.courseCode, 'suppressed': False, 'mark': None, 'uoc': course['UOC']}
+    user['courses'][data.courseCode] = {'code': data.courseCode, 'suppressed': False, 'mark': None, 'uoc': course['UOC'], 'ignoreFromProgression': False}
     set_user(token, user, True)
 
 
@@ -259,6 +259,12 @@ def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
         del user['courses'][data.courseCode]
     set_user(token, user, True)
 
+@router.post('/toggleIgnoreFromProgression')
+def toggle_ignore_from_progression(data: CourseCode, token: str = DUMMY_TOKEN):
+    user = get_user(token)
+    user['courses'][data.courseCode]['ignoreFromProgression'] = not user['courses'][data.courseCode]['ignoreFromProgression']
+    set_user(token, user, True)
+
 
 @router.post("/removeAll")
 def remove_all(token: str = DUMMY_TOKEN):
@@ -362,10 +368,14 @@ def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
         year_offset = year - user['planner']['startYear']
         year_data = user['planner']['years'][year_offset]
         for term, courses_obj in terms_obj.items():
-            for course, (mark, _) in courses_obj.items():
+            for course, (uoc, mark, _) in courses_obj.items():
                 year_data[term].append(course)
                 user['courses'][course] = {
-                        'code': course, 'suppressed': False, 'mark': mark
+                        'code': course,
+                        'suppressed': False,
+                        'mark': mark,
+                        'ignoreFromProgression': False,
+                        'uoc': uoc or 6 # guess normal uoc
                 }
 
     set_user(token, user, True)

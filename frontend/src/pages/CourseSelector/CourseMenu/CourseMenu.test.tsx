@@ -25,22 +25,6 @@ axiosMock.onPost('/courses/getAllUnlocked/').reply(200, {
   }
 });
 
-const structure = {
-  'Major - COMPA1': {
-    name: 'Computer Science',
-    content: {
-      'Core Courses': {
-        UOC: 66,
-        courses: {
-          COMP1511: 'Programming Fundamentals'
-        },
-        type: '',
-        notes: ''
-      }
-    }
-  }
-};
-
 describe('CourseMenu', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
 

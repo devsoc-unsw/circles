@@ -51,7 +51,7 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (courses[courseCode]?.plannedFor) {
+    if (courses[courseCode]?.plannedFor && !courses[courseCode]?.ignoreFromProgression) {
       completedUOC +=
         courses[courseCode].UOC *
         getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
@@ -78,7 +78,11 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
         let currUOC = 0;
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
+          if (
+            courses[courseCode]?.plannedFor &&
+            currUOC < subgroupStructure.UOC &&
+            !courses[courseCode]?.ignoreFromProgression
+          ) {
             const courseUOC =
               courses[courseCode].UOC *
               getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);

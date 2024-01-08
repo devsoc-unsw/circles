@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers, PreloadedState } from 'redux';
+import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import courseTabsReducer from 'reducers/courseTabsSlice';
 import settingsReducer from 'reducers/settingsSlice';
@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
   settings: settingsReducer
 });
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
+export const setupStore = (preloadedState?: RootState) =>
   configureStore({
     reducer: rootReducer,
     preloadedState

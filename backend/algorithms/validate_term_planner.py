@@ -31,7 +31,7 @@ def validate_terms(data: ValidPlannerData):
                     "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                     "unlocked": unlocked,
                     "warnings": warnings,
-                    "supressed": yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
+                    "suppressed": yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
                 }
             # Add all these courses to the user in preparation for the next term
             user.empty_current_courses()

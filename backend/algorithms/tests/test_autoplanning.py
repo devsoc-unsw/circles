@@ -1,5 +1,5 @@
 from typing import Optional
-
+from pytest import raises
 from algorithms.autoplanning import autoplan, terms_between
 from algorithms.objects.course import Course
 from algorithms.objects.user import User

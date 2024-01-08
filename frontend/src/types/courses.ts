@@ -22,7 +22,7 @@ export type CourseStates = {
   [courseKey: string]: {
     handbook_note: string;
     is_accurate: boolean;
-    supressed: boolean;
+    suppressed: boolean;
     unlocked: boolean;
     warnings: string[];
   };

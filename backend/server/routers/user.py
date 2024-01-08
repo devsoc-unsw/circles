@@ -11,7 +11,7 @@ from server.routers.courses import get_course
 from server.routers.model import (
     CONDITIONS,
     CourseMark,
-    CoursesStorage,
+    CourseStorage,
     DegreeLocalStorage,
     DegreeWizardInfo,
     LocalStorage,
@@ -53,13 +53,13 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     planned: list[str] = sum((sum(year.values(), [])
                              for year in localStorage.planner['years']), [])
     unplanned: list[str] = localStorage.planner['unplanned']
-    courses: dict[str, CoursesStorage] = {
+    courses: dict[str, CourseStorage] = {
         course: {
             'code': course,
-            # this is peter's fault for sucking at spelling
-            'suppressed': False, # guess we also nuke this
+            'suppressed': False, # guess we will nuke this config
             'mark': None, # wtf we nuking marks?
-            'uoc': get_course(course)['UOC']
+            'uoc': get_course(course)['UOC'],
+            'ignoreFromProgression': False
         }
         for course in chain(planned, unplanned)
     }
@@ -93,7 +93,7 @@ def get_user_planner(token: str) -> PlannerLocalStorage:
     return get_user(token)['planner']
 
 @router.get("/data/courses/{token}")
-def get_user_p(token: str) -> dict[str, CoursesStorage]:
+def get_user_p(token: str) -> dict[str, CourseStorage]:
     # expects to also get the
     # title: str
     # plannedFor: string of form "year term"

@@ -12,11 +12,25 @@
       "addLabels": ["deps: patches"]
     },
     {
+      "matchUpdateTypes": ["minor"],
+      "groupName": "weekly minor updates",
+      "schedule": ["before 5am every monday"],
+      "addLabels": ["deps: minor"]
+    },
+    {
       "groupName": "ci-actions",
       "managers": ["github-actions", "dockerfile"],
       "automerge": true,
       "automergeType": "branch",
-      "addLabels": ["deps: ci-actions"]
+      "addLabels": ["deps: ci-actions"],
+      "schedule": ["before 5am every monday"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": true,
+      "matchPackageNames": ["vite", "@vitejs/plugin-react"],
+      "groupName": "vite & plugins",
+      "addLabels": ["deps: vite"]
     },
     {
       "managers": ["npm"],
@@ -25,6 +39,10 @@
     {
       "matchLanguages": ["python"],
       "addLabels": ["deps: python"]
-    }
+    },
+    {
+      "matchPackageNames": ["mypy", "mypy-extensions"],
+      "groupName": "mypy",
+    },
   ]
 }
