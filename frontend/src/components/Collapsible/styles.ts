@@ -32,8 +32,8 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
     `}
 `;
 
-const CollapsibleContent = styled.div(
-  ({ collapsed }: { collapsed: boolean }) => css`
+const CollapsibleContent = styled.div<{ collapsed: boolean }>(
+  ({ collapsed }) => css`
     width: 100%;
     margin: 10px;
     max-height: ${collapsed ? 0 : 4000}px;

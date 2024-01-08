@@ -45,13 +45,16 @@ Scenario:
 from typing import Callable, Optional
 
 from fastapi import APIRouter
-from server.routers.model import PlannerData
+from backend.server.config import DUMMY_TOKEN
+from backend.server.routers.user import get_user
+from backend.server.routers.planner import convert_to_planner_data
+from server.routers.model import ValidPlannerData
 
 router = APIRouter(
     prefix="/ctf", tags=["ctf"], responses={404: {"description": "Not found"}}
 )
 
-def all_courses(data: PlannerData) -> set[str]:
+def all_courses(data: ValidPlannerData) -> set[str]:
     """
     Returns all courses from a planner
     """
@@ -90,19 +93,19 @@ def gen_eds(courses: set[str]) -> set[str]:
     )
 
 
-def hard_requirements(data: PlannerData) -> bool:
+def hard_requirements(data: ValidPlannerData) -> bool:
     # NOTE: Can't check start year from this
     # Frontend should handle most of this anyways
     # including validity of the program
     return (
-        data.program == "3778"
+        data.programCode == "3778"
         and "COMPA1" in data.specialisations
         and "MATHC2" in data.specialisations
         and len(data.plan) == 3
     )
 
 
-def extended_courses(data: PlannerData) -> bool:
+def extended_courses(data: ValidPlannerData) -> bool:
     """
     Must take atleast 3 courses with extended in the name
     """
@@ -116,7 +119,7 @@ def extended_courses(data: PlannerData) -> bool:
     return len(extended_courses & all_courses(data)) >= 3
 
 
-def summer_course(data: PlannerData) -> bool:
+def summer_course(data: ValidPlannerData) -> bool:
     """
     Must take atleast one summer course
     """
@@ -128,7 +131,7 @@ def summer_course(data: PlannerData) -> bool:
 
 
 
-def term_sums_even(data: PlannerData) -> bool:
+def term_sums_even(data: ValidPlannerData) -> bool:
     """
     Check that the sum of the course codes in even terms is even
     """
@@ -139,7 +142,7 @@ def term_sums_even(data: PlannerData) -> bool:
         for term in year[2::2]
     )
 
-def term_sums_odd(data: PlannerData) -> bool:
+def term_sums_odd(data: ValidPlannerData) -> bool:
     """
     Check that the sum of the course codes in odd terms is odd
     """
@@ -150,7 +153,7 @@ def term_sums_odd(data: PlannerData) -> bool:
         for term in year[1::2]
     )
  
-def comp1511_marks(data: PlannerData) -> bool:
+def comp1511_marks(data: ValidPlannerData) -> bool:
     """
     Ollie must achieve a mark of 100 in COMP1511 to keep his scholarship
     """
@@ -163,14 +166,14 @@ def comp1511_marks(data: PlannerData) -> bool:
     )
 
 
-def gen_ed_sum(data: PlannerData) -> bool:
+def gen_ed_sum(data: ValidPlannerData) -> bool:
     """
     The sum of GENED course codes must not exceed 2200
     """
     return sum(map(get_code, gen_eds(all_courses(data)))) <= 2200
 
 
-def gen_ed_faculty(data: PlannerData) -> bool:
+def gen_ed_faculty(data: ValidPlannerData) -> bool:
     """
     Gen-Eds must all be from different faculties
     """
@@ -178,7 +181,7 @@ def gen_ed_faculty(data: PlannerData) -> bool:
     return len(gen_eds_facs) == len(set(gen_eds_facs))
 
 
-def same_code_diff_faculty(data: PlannerData) -> bool:
+def same_code_diff_faculty(data: ValidPlannerData) -> bool:
     """
     Must take two courses with the same code but, from different faculties
     """
@@ -187,7 +190,7 @@ def same_code_diff_faculty(data: PlannerData) -> bool:
     return len(codes) != len(set(codes))
 
 
-def math_limit(data: PlannerData) -> bool:
+def math_limit(data: ValidPlannerData) -> bool:
     """
     In your N-th year, you can only take N + 1 math courses
     """
@@ -204,7 +207,7 @@ def math_limit(data: PlannerData) -> bool:
 
     return True
 
-def six_threes_limit(data: PlannerData) -> bool:
+def six_threes_limit(data: ValidPlannerData) -> bool:
     """
     There can by at most 6 occurrences of the number 3 in the entire
     planner
@@ -212,7 +215,7 @@ def six_threes_limit(data: PlannerData) -> bool:
     all_codes = "".join(str(get_code(course)) for course in all_courses(data))
     return all_codes.count("3") <= 6
 
-def comp1531_third_year(data: PlannerData) -> bool:
+def comp1531_third_year(data: ValidPlannerData) -> bool:
     """
     COMP1531 must be taken in the third year
     """
@@ -223,7 +226,7 @@ def comp1531_third_year(data: PlannerData) -> bool:
         for course in term
     )
 
-ValidatorFn = Callable[[PlannerData], bool]
+ValidatorFn = Callable[[ValidPlannerData], bool]
 ObjectiveMessage = str
 Flag = str
 requirements: list[tuple[ValidatorFn, ObjectiveMessage, Optional[Flag]]] = [
@@ -245,10 +248,11 @@ requirements: list[tuple[ValidatorFn, ObjectiveMessage, Optional[Flag]]] = [
 ]
 
 @router.post("/validateCtf/")
-def validate_ctf(data: PlannerData):
+def validate_ctf(token: str = DUMMY_TOKEN):
     """
     Validates the CTF
     """
+    data = convert_to_planner_data(get_user(token))
     passed: list[str] = []
     flags: list[str] = []
     for req_num, (fn, msg, flag) in enumerate(requirements):

@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Select, Switch, theme } from 'antd';
+import { Select, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
@@ -21,7 +21,7 @@ const SettingsMenu = ({ planner }: Props) => {
   const queryClient = useQueryClient();
 
   const { Option } = Select;
-  const { token } = useSelector((state: RootState) => state.settings);
+  const { token, theme } = useSelector((state: RootState) => state.settings);
 
   async function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
     if (dateString) {

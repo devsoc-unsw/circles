@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-scroll';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { purple } from '@ant-design/colors';
 import { Progress, Typography } from 'antd';
 import type { RootState } from 'config/store';
@@ -36,7 +36,11 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
             strokeColor={{ '0%': purple[3], '100%': purple[4] }}
           />
         </div>
-        <ReactTooltip id={`card-${type}`} place="bottom" type={theme === 'dark' ? 'light' : 'dark'}>
+        <ReactTooltip
+          id={`card-${type}`}
+          place="bottom"
+          variant={theme === 'dark' ? 'light' : 'dark'}
+        >
           <S.TooltipText>
             <div>{progress}%</div>
             <div>

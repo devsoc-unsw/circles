@@ -1,10 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
 import styled from 'styled-components';
-import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
-import { RootState } from 'config/store';
+import { getToken } from 'utils/api/userApi';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -39,17 +37,13 @@ const ModalTitle = styled(Title)`
 
 // TODO: hide this behind a feature flag?
 const ValidateCtfButton = () => {
-  const planner = useSelector((state: RootState) => state.planner);
-  const degree = useSelector((state: RootState) => state.degree);
   const [open, setOpen] = React.useState(false);
   const [result, setResult] = React.useState(loadingResult);
 
   const validateCtf = async () => {
+    const token = await getToken();
     setOpen(true);
-    const res = await axios.post<CtfResult>(
-      '/ctf/validateCtf/',
-      prepareCoursesForValidationPayload(planner, degree, false)
-    );
+    const res = await axios.post<CtfResult>('/ctf/validateCtf/', {}, { params: { token } });
     setResult(res.data);
   };
 

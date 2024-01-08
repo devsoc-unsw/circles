@@ -9,6 +9,13 @@ const preloadedState = {
   courseTabs: {
     tabs: ['COMP1511', 'COMP1521', 'COMP1531'],
     active: 0
+  },
+  settings: {
+    theme: 'dark',
+    showMarks: false,
+    showLockedCourses: false,
+    showWarnings: false,
+    token: ''
   }
 };
 

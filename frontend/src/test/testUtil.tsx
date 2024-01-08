@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import type { PreloadedState } from '@reduxjs/toolkit';
 import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { vi } from 'vitest';
@@ -13,13 +12,28 @@ import '@testing-library/jest-dom/extend-expect';
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: PreloadedState<RootState>;
+  preloadedState?: RootState;
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export const renderWithProviders = async (
   ui: React.ReactElement,
-  { preloadedState = {}, ...renderOptions }: ExtendedRenderOptions = {}
+  {
+    preloadedState = {
+      courseTabs: {
+        tabs: [], // list of course codes i.e. ['COMP1511', 'COMP1521']
+        active: 0 // index of the active tab in the tabs array
+      },
+      settings: {
+        theme: 'dark',
+        showMarks: false,
+        showLockedCourses: false,
+        showWarnings: false,
+        token: ''
+      }
+    },
+    ...renderOptions
+  }: ExtendedRenderOptions = {}
 ) => {
   const queryClient = new QueryClient();
   await axios.post('user/reset');
