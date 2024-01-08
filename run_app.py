@@ -1,15 +1,34 @@
 # pylint: disable=cyclic-import
 """ run all of circles in one terminal, assuming a unix environment """
-import logging
+
 import os
+from subprocess import Popen, check_call, run
+
+
+# also crazy - autoconfigure the environment if it is borked
+if not os.path.exists(".venv"):
+    run("./create_venv.sh", shell=True)
+
+run(". .venv/bin/activate", shell=True)
+
+if run("nodemon --help > /dev/null", shell=True).returncode != 0:
+    print("You must install npm and nodemon. Please follow the onboarding instructions to install npm, then run 'npm install -g nodemon'")
+    exit(1)
+
+if not os.path.exists("frontend/node_modules"):
+    run("cd frontend; npm install", shell=True)
+
+
+import logging
 import sys
 import threading
 from subprocess import Popen, check_call
+from typing import TextIO
 
 from dotenv import load_dotenv
 
 
-class LogPipe(threading.Thread):
+class LogPipe(threading.Thread, TextIO):
     """ boilerplate abstraction for redirecting the logs of a process """
     def __init__(self, level):
         """Setup the object with a logger and a loglevel
@@ -63,7 +82,7 @@ def get_frontend_env():
     return baseurl
 
 def main():
-    if os.system("docker ps") != 0:
+    if os.system("docker ps > /dev/null") != 0:
         print("please run docker first!")
         sys.exit(1)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',
@@ -73,8 +92,8 @@ def main():
         ]
     )
     # this is actually kooky if you think about it
-    sys.stdout = LogPipe(logging.INFO)  # type: ignore
-    sys.stderr = LogPipe(logging.ERROR)  # type: ignore
+    sys.stdout = LogPipe(logging.INFO)
+    sys.stderr = LogPipe(logging.ERROR)
     username, password, python_ver = get_backend_env()
     base_url = get_frontend_env()
     os.system('docker compose run --rm init-mongo')

@@ -35,6 +35,9 @@ vi.mock('hooks/useIntersectionObserver', () => ({
   default: vi.fn()
 }));
 
+vi.stubEnv('VITE_BACKEND_API_BASE_URL', 'http://localhost:8000/');
+vi.stubEnv('VITE_ENV', 'dev');
+
 const dummyNavigate = vi.fn();
 const useNavigateMock = vi.spyOn(reactRouterDom, 'useNavigate');
 useNavigateMock.mockReturnValue(dummyNavigate);

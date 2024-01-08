@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-scroll';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { purple } from '@ant-design/colors';
 import { Progress, Typography } from 'antd';
 import type { RootState } from 'config/store';
@@ -19,6 +19,7 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
   const progress = Math.min(Math.round((currUOC / totalUOC) * 100), 100);
 
   const { theme } = useSelector((state: RootState) => state.settings);
+  const trailColor = theme === 'light' ? '#fff' : '#444249';
 
   return (
     <Link to={type} smooth duration={2000}>
@@ -30,12 +31,16 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
         <div data-tip data-for={`card-${type}`}>
           <Progress
             percent={progress}
-            trailColor="white"
+            trailColor={trailColor}
             showInfo={false}
             strokeColor={{ '0%': purple[3], '100%': purple[4] }}
           />
         </div>
-        <ReactTooltip id={`card-${type}`} place="bottom" type={theme === 'dark' ? 'light' : 'dark'}>
+        <ReactTooltip
+          id={`card-${type}`}
+          place="bottom"
+          variant={theme === 'dark' ? 'light' : 'dark'}
+        >
           <S.TooltipText>
             <div>{progress}%</div>
             <div>

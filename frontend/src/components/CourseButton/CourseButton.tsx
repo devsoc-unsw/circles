@@ -1,7 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
 type Props = {
@@ -11,13 +9,11 @@ type Props = {
 };
 
 const CourseButton = ({ courseCode, title, planned }: Props) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleCourseLink = (e: React.MouseEvent<HTMLElement>): void => {
     e.stopPropagation();
     navigate('/course-selector');
-    dispatch(addTab(courseCode));
   };
 
   return (

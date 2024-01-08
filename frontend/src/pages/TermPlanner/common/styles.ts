@@ -1,4 +1,4 @@
-import { Divider } from 'antd';
+import { Button as antdButton, Divider } from 'antd';
 import styled, { css, keyframes } from 'styled-components';
 
 export const GridItem = styled.div`
@@ -70,11 +70,22 @@ const MenuText = styled.span`
   font-weight: 500;
 `;
 
+const Button = styled(antdButton)`
+  width: 150px;
+  background-color: ${({ theme }) => theme.optionsHeader.buttonBackgroundColor};
+  color: ${({ theme }) => theme.text};
+  border-color: ${({ theme }) => theme.optionsHeader.borderAlternativeColor};
+  &:hover {
+    background-color: ${({ theme }) => theme.optionsHeader.buttonHoverAlternativeColor};
+  }
+`;
+
 export default {
   MenuPopup,
   PopupEntry,
   MenuWrapper,
   MenuDivider,
   MenuHeader,
-  MenuText
+  MenuText,
+  Button
 };

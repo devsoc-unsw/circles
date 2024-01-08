@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import S from './styles';
 
@@ -31,7 +31,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
 
   return !planned ? (
     <Tooltip title="Add to Planner" placement="top">
-      <Button
+      <S.SelectButton
         data-testid="quick-add-cart-button"
         onClick={handleClick}
         size="small"

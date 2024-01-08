@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import type { LiquidConfig } from '@ant-design/plots';
 import Spinner from 'components/Spinner';
 import { darkGrey, lightGrey, lightYellow, purple, yellow } from 'config/constants';
@@ -39,11 +39,10 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
 
   const config: LiquidConfig = {
     percent,
-    radius: 1,
     width: 320,
     height: 320,
     autoFit: false,
-    statistic: {
+    style: {
       title: {
         formatter: () => 'Progress',
         style: () => ({
@@ -57,12 +56,12 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
           fill: textColor
         },
         formatter: () => `${(percent * 100).toFixed(0)}%`
-      }
-    },
-    liquidStyle: () => ({
-      fill: percent > 0.45 ? purple : yellow,
-      stroke: percent > 0.45 ? purple : yellow
-    })
+      },
+      liquid: () => ({
+        fill: percent > 0.45 ? purple : yellow,
+        stroke: percent > 0.45 ? purple : yellow
+      })
+    }
   };
   // increment percentage from 0 to fillValue
   useEffect(() => {
@@ -80,7 +79,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
 
   return (
     <div>
-      <ReactTooltip place="bottom" type={theme === 'dark' ? 'light' : 'dark'}>
+      <ReactTooltip place="bottom" variant={theme === 'dark' ? 'light' : 'dark'}>
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>

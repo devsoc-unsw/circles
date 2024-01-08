@@ -1,15 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
+import { badCourses, badDegree } from 'types/userResponse';
+import { fetchAllDegrees } from 'utils/api/programApi';
+import { getUserCourses, getUserDegree } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
 import SpecialisationCard from 'components/SpecialisationCard';
-import type { RootState } from 'config/store';
 import FreeElectivesCard from './FreeElectivesCard';
 import S from './styles';
 
@@ -37,13 +39,19 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     reset: true,
     config: { tension: 80, friction: 60 }
   });
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses = coursesQuery.data || badCourses;
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const degree = degreeQuery.data || badDegree;
+  const { programCode } = degree;
 
-  const { courses } = useSelector((state: RootState) => state.planner);
-  const { programCode, programName } = useSelector((state: RootState) => state.degree);
+  const programName = (useQuery('progam', fetchAllDegrees).data?.programs || { [programCode]: '' })[
+    programCode
+  ];
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (courses[courseCode]?.plannedFor) {
+    if (courses[courseCode]?.plannedFor && !courses[courseCode]?.ignoreFromProgression) {
       completedUOC +=
         courses[courseCode].UOC *
         getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
@@ -70,7 +78,11 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
         let currUOC = 0;
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
+          if (
+            courses[courseCode]?.plannedFor &&
+            currUOC < subgroupStructure.UOC &&
+            !courses[courseCode]?.ignoreFromProgression
+          ) {
             const courseUOC =
               courses[courseCode].UOC *
               getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);

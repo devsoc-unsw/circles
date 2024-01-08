@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable } from 'types/courseCapacity';
-import { DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { errLogger } from 'utils/queryUtils';
@@ -27,6 +27,7 @@ type CourseDescriptionPanelProps = {
   courseCode: string;
   onCourseClick?: (code: string) => void;
   planner?: PlannerResponse;
+  courses?: CoursesResponse;
   degree?: DegreeResponse;
 };
 
@@ -35,17 +36,18 @@ const CourseDescriptionPanel = ({
   courseCode,
   onCourseClick,
   planner,
+  courses,
   degree
 }: CourseDescriptionPanelProps) => {
-
   const getCoursesUnlocked = React.useCallback(async () => {
-    if (!degree || !planner) return Promise.reject('degree or planner undefined');
+    if (!degree || !planner || !courses)
+      return Promise.reject('degree, planner or courses undefined');
     const res = await axios.post<CoursesUnlockedWhenTaken>(
       `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-      JSON.stringify(prepareUserPayload(degree, planner))
+      JSON.stringify(prepareUserPayload(degree, planner, courses))
     );
     return res.data;
-  }, [courseCode, degree, planner]);
+  }, [courseCode, degree, planner, courses]);
 
   const getCourseInfo = React.useCallback(async () => {
     return Promise.allSettled([
@@ -55,10 +57,14 @@ const CourseDescriptionPanel = ({
     ]);
   }, [courseCode]);
 
-  const coursesUnlockedQuery = useQuery(['coursesUnlocked', courseCode, degree, planner], getCoursesUnlocked, {
-    onError: errLogger('coursesUnlockedQuery'),
-    enabled: !!degree && !!planner
-  });
+  const coursesUnlockedQuery = useQuery(
+    ['coursesUnlocked', courseCode, degree, planner, courses],
+    getCoursesUnlocked,
+    {
+      onError: errLogger('coursesUnlockedQuery'),
+      enabled: !!degree && !!planner && !!courses
+    }
+  );
 
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
@@ -73,16 +79,16 @@ const CourseDescriptionPanel = ({
   }
 
   const courseInfoQuery = useQuery(['courseInfo', courseCode], getCourseInfo, {
-    onError: errLogger('getCourseInfo'),
+    onError: errLogger('getCourseInfo')
   });
 
   const loadingWrapper = (
-      <S.Wrapper sidebar={sidebar}>
-        {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
-      </S.Wrapper>
-    );
+    <S.Wrapper sidebar={sidebar}>
+      {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
+    </S.Wrapper>
+  );
 
-  const isLoading = courseInfoQuery.isLoading;// || coursesUnlockedQuery.isLoading;
+  const isLoading = courseInfoQuery.isLoading; // || coursesUnlockedQuery.isLoading;
   if (isLoading || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
@@ -92,7 +98,6 @@ const CourseDescriptionPanel = ({
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
-
   return (
     <S.Wrapper sidebar={sidebar} className={className}>
       <S.MainWrapper>
@@ -104,11 +109,7 @@ const CourseDescriptionPanel = ({
           </div>
           <PlannerButton
             course={course}
-            planned={
-              planner !== undefined &&
-              (planner.courses[course.code] !== undefined ||
-                planner.unplanned.includes(course.code))
-            }
+            isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
           />
         </S.TitleWrapper>
         {/* TODO: Style this better? */}
@@ -141,4 +142,4 @@ const CourseDescriptionPanel = ({
   );
 };
 
-export default CourseDescriptionPanel;
+export default React.memo(CourseDescriptionPanel);

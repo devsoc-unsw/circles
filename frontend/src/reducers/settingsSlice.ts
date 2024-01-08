@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 type Theme = 'light' | 'dark';
 
 type SettingsSliceState = {
-  theme: Theme;
+  theme: string;
   showMarks: boolean;
   showLockedCourses: boolean;
   showWarnings: boolean;

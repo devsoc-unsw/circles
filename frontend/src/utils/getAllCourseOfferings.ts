@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Course } from 'types/api';
 import { CourseLegacyOfferings, PlannerCourse, Term } from 'types/planner';
 
 export type ManyCoursesOfferings = {
@@ -51,6 +52,11 @@ export const courseHasOffering = (course: PlannerCourse, year: string, term: Ter
   }
 
   return year in course.legacyOfferings && course.legacyOfferings[year].includes(term);
+};
+
+export const courseHasOfferingNew = (course: Course, term: Term): boolean => {
+  // TODO: Work out how legacy offerings work now
+  return course.terms.includes(term);
 };
 
 export default getAllCourseOfferings;

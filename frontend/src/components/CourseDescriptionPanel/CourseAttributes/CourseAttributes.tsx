@@ -67,13 +67,13 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
         {
           title: 'UNSW Handbook',
           content: studyLevel ? (
-            <a
+            <S.Link
               href={`https://www.handbook.unsw.edu.au/${studyLevel.toLowerCase()}/courses/2023/${code}/`}
               target="_blank"
               rel="noreferrer"
             >
               View {code} in handbook
-            </a>
+            </S.Link>
           ) : null
         },
         {

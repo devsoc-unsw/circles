@@ -1,38 +1,33 @@
-/* eslint-disable */
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Course } from 'types/api';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
+import S from './styles';
 
 interface PlannerButtonProps {
   course: Course;
-  planned: boolean;
+  isAddedInPlanner: boolean;
 }
 
-const PlannerButton = ({ course, planned }: PlannerButtonProps) => {
-  const courseCode = course.code;
-  const handleMutation = planned ? removeCourse : addToUnplanned;
-
+const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
+  const handleMutation = isAddedInPlanner ? addToUnplanned : removeCourse;
   const queryClient = useQueryClient();
   const mutation = useMutation(handleMutation, {
-    onMutate: () => planned,
-    onSuccess: async () => {
-      // waits until refetch is complete
-      await queryClient.invalidateQueries('planner');
+    onSuccess: () => {
+      queryClient.invalidateQueries('courses');
+      queryClient.invalidateQueries('planner');
     }
   });
-
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    mutation.mutate(courseCode);
+    mutation.mutate(course.code);
   };
-
-  return planned ? (
-    <Button loading={mutation.isLoading} onClick={handleClick} icon={<StopOutlined />}>
+  return isAddedInPlanner ? (
+    <S.Button loading={mutation.isLoading} onClick={handleClick} icon={<StopOutlined />}>
       {!mutation.isLoading ? 'Remove from planner' : 'Removing from planner'}
-    </Button>
+    </S.Button>
   ) : (
     <Button
       loading={mutation.isLoading}
