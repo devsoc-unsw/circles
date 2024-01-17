@@ -80,7 +80,11 @@ const CourseSelector = () => {
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper offset={menuOffset}>
-          <CourseMenu />
+          <CourseMenu
+            planner={plannerQuery.data}
+            courses={coursesQuery.data}
+            degree={degreeQuery.data}
+          />
           <S.ContentResizer ref={divRef} offset={menuOffset} />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>

@@ -11,10 +11,10 @@ import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
-import { badCourses, badDegree, badPlanner } from 'types/userResponse';
 import { useDebouncedCallback } from 'use-debounce';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
@@ -57,12 +57,8 @@ const CourseGraph = ({
   setLoading
 }: Props) => {
   const degreeQuery = useQuery('degree', getUserDegree);
-  const degree = degreeQuery.data || badDegree;
-  const { programCode, specs } = degree;
   const plannerQuery = useQuery('planner', getUserPlanner);
-  const planner = plannerQuery.data || badPlanner;
   const coursesQuery = useQuery('courses', getUserCourses);
-  const courses = coursesQuery.data || badCourses;
   const windowSize = useAppWindowSize();
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);
@@ -121,7 +117,7 @@ const CourseGraph = ({
       const node = nodeItem as INode;
       const edges = node.getEdges();
       const { Arrow } = await import('@antv/g6');
-
+      const courses = unwrapQuery(coursesQuery.data);
       edges.forEach((e) => {
         graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
       });
@@ -150,6 +146,7 @@ const CourseGraph = ({
 
     // On hover: remove styles
     const addUnhoverStyles = (ev: IG6GraphEvent) => {
+      const courses = unwrapQuery(coursesQuery.data);
       const node = ev.item as Item;
       graphRef.current?.clearItemStates(node, 'hover');
       graphRef.current?.updateItem(
@@ -166,7 +163,7 @@ const CourseGraph = ({
     ) => {
       const container = containerRef.current;
       if (!container) return;
-
+      const courses = unwrapQuery(coursesQuery.data);
       const { Graph, Arrow } = await import('@antv/g6');
 
       const graphArgs: GraphOptions = {
@@ -201,7 +198,7 @@ const CourseGraph = ({
       graphRef.current = new Graph(graphArgs);
       const data = {
         nodes: courseCodes?.map((c) =>
-          mapNodeStyle(c, courses[c].plannedFor, courses[c].unlocked, theme)
+          mapNodeStyle(c, courses[c]?.plannedFor, courses[c]?.unlocked, theme)
         ),
         edges: courseEdges
       };
@@ -243,6 +240,7 @@ const CourseGraph = ({
     // Without re-render, update styling for: each node, hovering state and edges
     const repaintCanvas = async () => {
       const nodes = graphRef.current?.getNodes();
+      const courses = unwrapQuery(coursesQuery.data);
       nodes?.map(
         (n) =>
           graphRef.current?.updateItem(
@@ -273,9 +271,10 @@ const CourseGraph = ({
 
     const setupGraph = async () => {
       try {
+        if (!degreeQuery.data || !coursesQuery.data || !plannerQuery.data) return;
         initialisingStart.current = true;
         const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
+          `/programs/graph/${degreeQuery.data.programCode}/${degreeQuery.data.specs.join('+')}`
         );
         const programs = res?.data;
         makePrerequisitesMap(programs?.edges);
@@ -294,7 +293,15 @@ const CourseGraph = ({
       previousTheme.current = theme;
       repaintCanvas();
     }
-  }, [onNodeClick, courses, programCode, specs, theme, prerequisites, degree, planner, setLoading]);
+  }, [
+    onNodeClick,
+    degreeQuery,
+    theme,
+    prerequisites,
+    setLoading,
+    coursesQuery.data,
+    plannerQuery.data
+  ]);
 
   // Show all nodes and edges once graph is initially loaded
   useEffect(() => {
@@ -313,6 +320,9 @@ const CourseGraph = ({
 
   const showUnlockedCourses = useCallback(async () => {
     if (!graphRef.current) return;
+    const degree = unwrapQuery(degreeQuery.data);
+    const planner = unwrapQuery(plannerQuery.data);
+    const courses = unwrapQuery(coursesQuery.data);
     try {
       setLoading(true);
       const {
@@ -338,7 +348,7 @@ const CourseGraph = ({
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  }, [courses, degree, planner, setLoading]);
+  }, [degreeQuery.data, plannerQuery.data, coursesQuery.data, setLoading]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();

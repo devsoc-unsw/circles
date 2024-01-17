@@ -168,7 +168,7 @@ const ProgressionChecker = () => {
 
             currUOC +=
               (courses[courseCode]?.UOC ?? 0) *
-              getNumTerms(courses[courseCode]?.UOC, courses[courseCode]?.isMultiterm);
+              getNumTerms(courses[courseCode]?.UOC, !!courses[courseCode]?.isMultiterm);
           });
 
           newViewLayout[group][subgroup].courses.sort((a, b) =>
@@ -185,11 +185,11 @@ const ProgressionChecker = () => {
     Object.keys(courses).forEach((courseCode) => {
       const course = {
         courseCode,
-        title: courses[courseCode].title,
-        UOC: courses[courseCode].UOC,
-        plannedFor: courses[courseCode].plannedFor as string,
+        title: courses[courseCode]?.title,
+        UOC: courses[courseCode]?.UOC,
+        plannedFor: courses[courseCode]?.plannedFor as string,
         isUnplanned: unplanned.includes(courseCode),
-        isMultiterm: courses[courseCode].isMultiterm,
+        isMultiterm: courses[courseCode]?.isMultiterm,
         isDoubleCounted: false,
         isOverCounted: false
       };

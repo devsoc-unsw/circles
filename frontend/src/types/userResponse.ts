@@ -93,3 +93,9 @@ export const badCourseInfo: Course = {
 };
 
 export const badCourses: Record<string, CourseResponse> = {};
+
+export const badUser = {
+  degree: badDegree,
+  planner: badPlanner,
+  courses: {}
+} as UserResponse;

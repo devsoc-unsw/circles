@@ -1,10 +1,10 @@
 [![CSEsoc](https://img.shields.io/badge/-CSESoc-blue)](https://www.csesoc.unsw.edu.au/)
 ![Status](https://img.shields.io/website?label=status&up_message=online&url=https%3A%2F%2Fcircles.csesoc.unsw.edu.au%2F)
-[![Frontend Build](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml)
-[![Backend Tests](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml)
-[![Pylint](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml)
-![Lines of code](https://img.shields.io/tokei/lines/github/csesoc/Circles)
-![GitHub Repo Size](https://img.shields.io/github/repo-size/csesoc/Circles)
+[![Frontend Build](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_FE.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_FE.yml)
+[![Backend Tests](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_BE.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_BE.yml)
+[![Pylint](https://github.com/devsoc-unsw/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/pylinter.yml)
+![Lines of code](https://img.shields.io/tokei/lines/github/devsoc-unsw/Circles)
+![GitHub Repo Size](https://img.shields.io/github/repo-size/devsoc-unsw/Circles)
 
 # Circles
 
@@ -16,7 +16,7 @@ You can find a live build of Circles at [https://circles.csesoc.app](https://cir
 
 ## Features
 
-![Features Help Image](https://raw.githubusercontent.com/csesoc/Circles/dev/frontend/src/assets/infographic.png)
+![Features Help Image](https://raw.githubusercontent.com/devsoc-unsw/Circles/dev/frontend/src/assets/infographic.png)
 
 NOTE: we currently only support a subset of courses that have the highest enrolments, such as Engineering, Commerce, Computer Science, and Science. We do plan to add more!
 
