@@ -7,9 +7,12 @@ from subprocess import Popen, check_call, run
 
 # also crazy - autoconfigure the environment if it is borked
 if not os.path.exists(".venv"):
-    run("./create_venv.sh", shell=True)
+    if run("./create_venv.sh", shell=True).returncode != 0:
+        print("please follow the above instructions to set up venv correctly")
+        exit(1)
 
-run(". .venv/bin/activate", shell=True)
+
+os.system(". .venv/bin/activate")
 
 if run("nodemon --help > /dev/null", shell=True).returncode != 0:
     print("You must install npm and nodemon. Please follow the onboarding instructions to install npm, then run 'npm install -g nodemon'")
@@ -24,9 +27,11 @@ import sys
 import threading
 from subprocess import Popen, check_call
 from typing import TextIO
-
-from dotenv import load_dotenv
-
+try:
+    from dotenv import load_dotenv
+except:
+    print("failed to load from venv correctly. Please run '. .venv/bin/activate' and try again")
+    exit(1)
 
 class LogPipe(threading.Thread, TextIO):
     """ boilerplate abstraction for redirecting the logs of a process """

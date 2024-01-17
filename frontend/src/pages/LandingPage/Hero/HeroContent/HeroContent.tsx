@@ -8,7 +8,6 @@ import S from './styles';
 
 const HeroContent = () => {
   const [startTrigger, setStartTrigger] = useState(false);
-  console.log(startTrigger);
   return (
     <S.HeroContent>
       <S.HeroTitle animate={{ x: [-60, 10, 0] }} transition={{ duration: 1, ease: 'easeInOut' }}>

@@ -10,8 +10,6 @@ import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './config/axios';
-// stylesheets for antd library
-import 'antd/dist/antd.less';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
