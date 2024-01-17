@@ -227,7 +227,9 @@ const TermPlanner = () => {
       handleSetPlannedCourseToTerm(data);
     }
   };
-
+  if (courseQueries.some((c) => !c.data)) {
+    return <div>Loading page...</div>
+  }
   return (
     <PageTemplate>
       <OptionsHeader plannerRef={plannerPicRef} />
@@ -297,7 +299,7 @@ const TermPlanner = () => {
                 <UnplannedColumn
                   dragging={!!draggingCourse}
                   courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [code, courseInfos['current'][code]])
+                    planner.unplanned.map((code) => [code, courseInfos.current[code]])
                   )}
                   validateInfos={validations.courses_state}
                 />

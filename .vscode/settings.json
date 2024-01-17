@@ -14,5 +14,6 @@
     "python.analysis.typeCheckingMode": "basic",
     "[python]": {
         "editor.formatOnSave": false
-    }
+    },
+    "python.analysis.autoImportCompletions": true
 }

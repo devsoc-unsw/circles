@@ -7,13 +7,7 @@ import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
-import {
-  badCourses,
-  badPlanner,
-  CoursesResponse,
-  PlannerResponse,
-  ValidateResponse
-} from 'types/userResponse';
+import { ValidateResponse } from 'types/userResponse';
 import { getToken, getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
@@ -47,13 +41,6 @@ const TermBox = ({
   const theme = useTheme();
   const queryClient = useQueryClient();
 
-  const plannerQuery = useQuery('planner', getUserPlanner);
-  const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
-  const { isSummerEnabled } = planner;
-
-  const coursesQuery = useQuery('courses', getUserCourses);
-  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
-
   const toggleLockTerm = async () => {
     const token = await getToken();
     await axios.post(
@@ -62,7 +49,7 @@ const TermBox = ({
       { params: { token, termyear: `${year}${term}` } }
     );
   };
-
+  const plannerQuery = useQuery('planner', getUserPlanner);
   const toggleLockTermMutation = useMutation(toggleLockTerm, {
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
@@ -72,6 +59,15 @@ const TermBox = ({
       console.error('Error at toggleLockTermMutation: ', err);
     }
   });
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const isSmall = useMediaQuery('(max-width: 1400px)');
+
+  if (!coursesQuery.data || !plannerQuery.data) {
+    return <div>loading page...</div>;
+  }
+  const planner = plannerQuery.data;
+  const { isSummerEnabled } = planner;
+  const courses = coursesQuery.data;
 
   const handleToggleLockTerm = async () => {
     toggleLockTermMutation.mutate();
@@ -83,8 +79,6 @@ const TermBox = ({
   const offeredInTerm =
     !!draggingCourseCode && courseHasOfferingNew(courseInfos[draggingCourseCode], term);
   const isOffered = offeredInTerm && !isLocked;
-
-  const isSmall = useMediaQuery('(max-width: 1400px)');
 
   const iconStyle = {
     fontSize: '12px',

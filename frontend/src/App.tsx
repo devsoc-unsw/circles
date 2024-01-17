@@ -8,6 +8,7 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
+import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './config/axios';
 // stylesheets for antd library
@@ -29,35 +30,45 @@ const App = () => {
   const [queryClient] = React.useState(() => new QueryClient());
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-        <GlobalStyles />
-        <ErrorBoundary>
-          <Suspense fallback={<PageLoading />}>
-            <Router>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    !token ? (
-                      <LandingPage />
-                    ) : (
-                      <Navigate to="/degree-wizard" replace />
-                    )
-                  }
-                />
-                <Route path="/degree-wizard" element={<DegreeWizard />} />
-                <Route path="/course-selector" element={<CourseSelector />} />
-                {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
-                <Route path="/term-planner" element={<TermPlanner />} />
-                <Route path="/progression-checker" element={<ProgressionChecker />} />
-                <Route path="*" element={<Page404 />} />
-              </Routes>
-            </Router>
-          </Suspense>
-        </ErrorBoundary>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ConfigProvider theme={{
+      token: {
+        colorPrimary: '#51258f',
+      },
+      algorithm: theme === 'dark' ? antdTheme.darkAlgorithm: antdTheme.defaultAlgorithm,
+      
+    }}>
+      <AntdApp>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyles />
+            <ErrorBoundary>
+              <Suspense fallback={<PageLoading />}>
+                <Router>
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={
+                        !token ? (
+                          <LandingPage />
+                          ) : (
+                            <Navigate to="/degree-wizard" replace />
+                            )
+                          }
+                          />
+                    <Route path="/degree-wizard" element={<DegreeWizard />} />
+                    <Route path="/course-selector" element={<CourseSelector />} />
+                    {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                    <Route path="/term-planner" element={<TermPlanner />} />
+                    <Route path="/progression-checker" element={<ProgressionChecker />} />
+                    <Route path="*" element={<Page404 />} />
+                  </Routes>
+                </Router>
+              </Suspense>
+            </ErrorBoundary>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </AntdApp>
+    </ConfigProvider>
   );
 };
 
