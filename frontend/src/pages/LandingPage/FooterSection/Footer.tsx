@@ -1,6 +1,6 @@
 import React from 'react';
 import PageContainer from 'styles/PageContainer';
-import csesocLogoSrc from 'assets/csesocLogo.png';
+import devsocLogo from 'assets/devsocLogo.svg';
 import footerBlobSrc from 'assets/LandingPage/footerBlob.svg';
 import { CURR_YEAR } from 'config/constants';
 import S from './styles';
@@ -13,13 +13,14 @@ const Footer = () => {
         <PageContainer>
           <S.FooterContentContainer>
             <S.FooterLogoWrapper>
-              <S.CSELogo src={csesocLogoSrc} alt="CSESoc Logo" />
-              <b>© {CURR_YEAR} — CSESoc UNSW</b>
+              <S.CSELogo src={devsocLogo} alt="DevSoc Logo" />
+              <b>© {CURR_YEAR} — Software Development Society</b>
             </S.FooterLogoWrapper>
             <S.FooterDisclaimer>
               <div>
-                CSESoc is the constituent student society of UNSW&apos;s School of Computer Science
-                and Engineering. We do not represent the School, Faculty, or University.
+                Software Development Society (DevSoc) is a student society comprised of interested
+                developers, inventors and tech enthusiasts. We do not represent the School, Faculty,
+                or University (UNSW).
               </div>
               <div>
                 This website seeks to be a general guide for degree planning and course selection,
@@ -34,7 +35,7 @@ const Footer = () => {
                 Engineering Society have no responsibility on whether the information shown is
                 accurate.
               </div>
-              <div>Circles was made with love by CSE students for CSE students.</div>
+              <div>Circles was made with love by students for students.</div>
             </S.FooterDisclaimer>
           </S.FooterContentContainer>
         </PageContainer>
