@@ -21,7 +21,7 @@ const HeroContent = () => (
         <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
       </S.HeroCTA>
     </Link>
-    <S.CSESocLogo
+    <S.DevSocLogo
       src={devsocLogo}
       alt="DevSoc Logo"
       initial={{ opacity: 0, scale: 0.5, x: 100 }}
