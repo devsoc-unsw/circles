@@ -14,7 +14,7 @@ const Footer = () => {
           <S.FooterContentContainer>
             <S.FooterLogoWrapper>
               <S.DevSocLogo src={devsocLogo} alt="DevSoc Logo" />
-              <b>© {CURR_YEAR} — Software Development Society</b>
+              <b>© {CURR_YEAR} — Software Development Society UNSW</b>
             </S.FooterLogoWrapper>
             <S.FooterDisclaimer>
               <div>
