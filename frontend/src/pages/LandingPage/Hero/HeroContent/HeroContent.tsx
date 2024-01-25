@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import cseLogo from 'assets/csesocLogo.png';
+import devsocLogo from 'assets/devsocLogo.svg';
 import easySubTitle from 'assets/LandingPage/easySubtitle.svg';
 import S from './styles';
 
@@ -21,9 +21,9 @@ const HeroContent = () => (
         <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
       </S.HeroCTA>
     </Link>
-    <S.CSESocLogo
-      src={cseLogo}
-      alt="CSE Logo"
+    <S.DevSocLogo
+      src={devsocLogo}
+      alt="DevSoc Logo"
       initial={{ opacity: 0, scale: 0.5, x: 100 }}
       animate={{ opacity: 1, scale: 1, x: 0 }}
       transition={{ duration: 1 }}
