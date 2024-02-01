@@ -23,7 +23,7 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
 
   return (
     <Link to={type} smooth duration={2000}>
-      <S.Card hoverable bordered={false}>
+      <S.Card hoverable bordered={false} id={`#${specTitle || type}SpecCard`}>
         <Title className="text" level={5}>
           {specTitle || type}
         </Title>
@@ -36,19 +36,20 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
             strokeColor={{ '0%': purple[3], '100%': purple[4] }}
           />
         </div>
-        <ReactTooltip
-          id={`card-${type}`}
-          place="bottom"
-          variant={theme === 'dark' ? 'light' : 'dark'}
-        >
-          <S.TooltipText>
-            <div>{progress}%</div>
-            <div>
-              ({currUOC} / {totalUOC} UOC)
-            </div>
-          </S.TooltipText>
-        </ReactTooltip>
       </S.Card>
+      <ReactTooltip
+        id={`card-${type}`}
+        anchorSelect={`#${specTitle || type}SpecCard`}
+        place="bottom"
+        variant={theme === 'dark' ? 'light' : 'dark'}
+      >
+        <S.TooltipText>
+          <div>{progress}%</div>
+          <div>
+            ({currUOC} / {totalUOC} UOC)
+          </div>
+        </S.TooltipText>
+      </ReactTooltip>
     </Link>
   );
 };

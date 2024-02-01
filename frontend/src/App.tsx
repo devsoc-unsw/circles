@@ -62,7 +62,7 @@ const App = () => {
                     <Route path="/term-planner" element={<TermPlanner />} />
                     <Route path="/progression-checker" element={<ProgressionChecker />} />
                     <Route path="*" element={<Page404 />} />
-                    {inDev && <Route path="/auth" element={<Auth />} />}
+                    {inDev && <Route path="/login" element={<Auth />} />}
                   </Routes>
                 </Router>
               </Suspense>

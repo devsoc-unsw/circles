@@ -78,16 +78,22 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   }, [fillValue]);
 
   return (
-    <div>
-      <ReactTooltip place="bottom" variant={theme === 'dark' ? 'light' : 'dark'}>
+    <>
+      <div id="liquidChart">
+        <div data-tip>
+          <Suspense fallback={<Spinner text="Loading Progress..." />}>
+            <Liquid {...config} />
+          </Suspense>
+        </div>
+      </div>
+      <ReactTooltip
+        anchorSelect="#liquidChart"
+        place="bottom"
+        variant={theme === 'dark' ? 'light' : 'dark'}
+      >
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
-      <div data-tip>
-        <Suspense fallback={<Spinner text="Loading Progress..." />}>
-          <Liquid {...config} />
-        </Suspense>
-      </div>
-    </div>
+    </>
   );
 };
 

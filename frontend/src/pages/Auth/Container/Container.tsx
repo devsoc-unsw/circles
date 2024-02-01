@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { generateUserToken, userLogin } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
+import { setToken } from 'reducers/settingsSlice';
 import S from './styles';
 
-interface AuthProps {
-  onLoginHandle: () => unknown;
-}
-
-const Container = ({ onLoginHandle }: AuthProps) => {
+const Container = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <S.LoginContainer>
       <S.Wrapper>
@@ -22,8 +23,16 @@ const Container = ({ onLoginHandle }: AuthProps) => {
             </Link>
             <h2>Login to Circles</h2>
             <p>For current UNSW Students</p>
-            <S.LoginButton onClick={onLoginHandle}>Login with zID</S.LoginButton>
-            <S.GuestButton>Continue as guest</S.GuestButton>
+            <S.LoginButton onClick={userLogin}>Login with zID</S.LoginButton>
+            <S.GuestButton
+              onClick={async () => {
+                const res = await generateUserToken();
+                dispatch(setToken(res));
+                navigate('/degree-wizard');
+              }}
+            >
+              Continue as guest
+            </S.GuestButton>
           </S.Login>
         </S.Right>
       </S.Wrapper>

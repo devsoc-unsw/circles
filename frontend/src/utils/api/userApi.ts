@@ -1,10 +1,8 @@
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getStoredState } from 'redux-persist';
 import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
+import { v4 } from 'uuid';
 import { persistConfig, RootState } from 'config/store';
-import { setToken } from 'reducers/settingsSlice';
 
 export const getToken = async (): Promise<string> => {
   const res = await getStoredState(persistConfig);
@@ -12,24 +10,16 @@ export const getToken = async (): Promise<string> => {
   return store.settings.token;
 };
 
-export const UserLogout = async (): Promise<void> => {
-  const navigate = useNavigate();
-  const token = await getToken();
-  await axios.post('/auth/logout', token, { withCredentials: true }).then(() => navigate('/'));
-};
-
-export const UserLogin = async (): Promise<void> => {
+export const userLogin = async (): Promise<void> => {
   // Login to redirect link
   await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => {
     window.location.href = res.data;
   });
 };
 
-export const GenerateUserToken = async (token: number): Promise<void> => {
-  const dispatch = useDispatch();
-  await axios
-    .get<string>(`/auth/dev_token/${token}`, { withCredentials: true })
-    .then((res) => dispatch(setToken(res.data)));
+export const generateUserToken = async (token: string = v4()): Promise<string> => {
+  await axios.post<string>(`/auth/token`, {}, { params: { token }, withCredentials: true });
+  return token;
 };
 
 export const getUser = async (): Promise<UserResponse> => {

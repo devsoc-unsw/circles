@@ -172,12 +172,12 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (
-        <ReactTooltip id={code} place="top">
+        <ReactTooltip anchorSelect={`#${code}`} place="top" style={{ zIndex: 10 }}>
           {title}
         </ReactTooltip>
       )}
       {!isTermLocked && shouldHaveWarning && (
-        <ReactTooltip id={courseInfo.code} place="bottom">
+        <ReactTooltip anchorSelect={`#${code}`} place="bottom" style={{ zIndex: 10 }}>
           {isLegacy ? (
             'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
           ) : !showNotOfferedWarning ? (
@@ -194,11 +194,6 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
           {courses[code].ignoreFromProgression
             ? ' This course will not be included in your progression.'
             : ''}
-        </ReactTooltip>
-      )}
-      {courses[code].ignoreFromProgression && !(!isTermLocked && shouldHaveWarning) && (
-        <ReactTooltip id={code} place="bottom">
-          This course will not be included in your progression.
         </ReactTooltip>
       )}
     </>

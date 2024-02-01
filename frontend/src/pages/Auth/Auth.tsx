@@ -2,24 +2,22 @@
 /* eslint no-console: "error" */
 
 import React from 'react';
-import './index.less';
 import PageTemplate from 'components/PageTemplate';
 import Container from './Container';
 import { inDev } from 'config/constants';
 import S from './styles'
-import { GenerateUserToken, UserLogin, UserLogout } from 'utils/api/userApi';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setToken } from 'reducers/settingsSlice';
 
 const Auth = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <PageTemplate showHeader={false}>
-      <Container onLoginHandle={UserLogin} />
+      <Container />
       {inDev && (
-        <>
-          <S.TestButton onClick={() => GenerateUserToken(1)}>Set User #1</S.TestButton>
-          <S.TestButton onClick={() => GenerateUserToken(2)}>Set User #2</S.TestButton>
-          <S.TestButton onClick={() => GenerateUserToken(3)}>Set User #3</S.TestButton>
-          <S.TestButton onClick={UserLogout}>Logout</S.TestButton>
-        </>
+        <S.TestButton onClick={async () => { await dispatch(setToken('')); navigate('/'); }} >Logout</S.TestButton>
       )}
     </PageTemplate>
   );

@@ -250,17 +250,11 @@ const CourseGraph = ({
     const repaintCanvas = async () => {
       const nodes = graphRef.current?.getNodes();
       const courses = unwrapQuery(coursesQuery.data);
-      nodes?.map(
-        (n) =>
-          graphRef.current?.updateItem(
-            n,
-            mapNodeStyle(
-              n.getID(),
-              courses[n.getID()].plannedFor,
-              courses[n.getID()].unlocked,
-              theme
-            )
-          )
+      nodes?.map((n) =>
+        graphRef.current?.updateItem(
+          n,
+          mapNodeStyle(n.getID(), courses[n.getID()].plannedFor, courses[n.getID()].unlocked, theme)
+        )
       );
 
       graphRef.current?.off('node:mouseenter');
