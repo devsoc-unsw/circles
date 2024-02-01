@@ -62,7 +62,7 @@ export const badDegree: DegreeResponse = {
 
 // null coalesced to remove `undefined`. This SHOULD NOT see production
 // temp fix while we wait for `prepareUserPayload` to be deprecated
-export const badPlanner = {
+export const badPlanner: PlannerResponse = {
   mostRecentPastTerm: { Y: '2020', T: '2' },
   unplanned: [],
   startYear: 2021,
