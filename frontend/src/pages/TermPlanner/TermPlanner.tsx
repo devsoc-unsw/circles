@@ -227,7 +227,7 @@ const TermPlanner = () => {
       handleSetPlannedCourseToTerm(data);
     }
   };
-  if (courseQueries.some((c) => !c.data)) {
+  if (courseQueries.some((c) => !c.data) || Object.entries(courseInfos).length == 0) {
     return <div>Loading page...</div>
   }
   return (
