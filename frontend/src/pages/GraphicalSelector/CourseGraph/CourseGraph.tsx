@@ -10,8 +10,9 @@ import {
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Switch } from 'antd';
 import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge, CoursesAllUnlocked } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
+import { getProgramGraph } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { unwrapQuery } from 'utils/queryUtils';
@@ -66,10 +67,20 @@ const CourseGraph = ({
   const graphRef = useRef<Graph | null>(null);
   const initialisingStart = useRef(false); // prevents multiple graphs being loaded
   const initialisingEnd = useRef(false); // unhide graph after loading complete
-  const [unlockedCourses, setUnlockedCourses] = useState(false);
   const [prerequisites, setPrerequisites] = useState<CoursePrerequisite>({});
 
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [showingUnlockedCourses, setShowingUnlockedCourses] = useState(false);
+
+  const programGraphQuery = useQuery({
+    queryKey: ['graph', { code: degreeQuery.data!.programCode, specs: degreeQuery.data!.specs }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    queryFn: () => getProgramGraph(degreeQuery.data!.programCode, degreeQuery.data!.specs),
+    enabled: degreeQuery.isSuccess
+  });
+
+  const queriesSuccess =
+    degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
 
   useEffect(() => {
     const isCoursePrerequisite = (target: string, neighbour: string) => {
@@ -157,13 +168,25 @@ const CourseGraph = ({
       graphRef.current?.paint();
     };
 
-    const initialiseGraph = async (
-      courseCodes: string[] | undefined,
-      courseEdges: CourseEdge[] | undefined
-    ) => {
+    // Store a hashmap for performance reasons when highlighting nodes
+    const makePrerequisitesMap = (edges: CourseEdge[] | undefined) => {
+      const prereqs: CoursePrerequisite = prerequisites;
+      edges?.forEach((e) => {
+        if (!prereqs[e.target]) {
+          prereqs[e.target] = [e.source];
+        } else {
+          prereqs[e.target].push(e.source);
+        }
+      });
+      setPrerequisites(prereqs);
+    };
+
+    const initialiseGraph = async () => {
       const container = containerRef.current;
       if (!container) return;
       const courses = unwrapQuery(coursesQuery.data);
+      const programs = unwrapQuery(programGraphQuery.data);
+      makePrerequisitesMap(programs?.edges);
       const { Graph, Arrow } = await import('@antv/g6');
 
       const graphArgs: GraphOptions = {
@@ -194,13 +217,12 @@ const CourseGraph = ({
         defaultEdge: defaultEdge(Arrow, theme),
         nodeStateStyles
       };
-
       graphRef.current = new Graph(graphArgs);
       const data = {
-        nodes: courseCodes?.map((c) =>
+        nodes: programs.courses?.map((c) =>
           mapNodeStyle(c, courses[c]?.plannedFor, courses[c]?.unlocked, theme)
         ),
-        edges: courseEdges
+        edges: programs.edges
       };
 
       // Hide graph until it's finished loaded, due to incomplete initial graph generation
@@ -222,19 +244,6 @@ const CourseGraph = ({
       graphRef.current.on('node:mouseleave', async (ev) => {
         addUnhoverStyles(ev);
       });
-    };
-
-    // Store a hashmap for performance reasons when highlighting nodes
-    const makePrerequisitesMap = (edges: CourseEdge[] | undefined) => {
-      const prereqs: CoursePrerequisite = prerequisites;
-      edges?.forEach((e) => {
-        if (!prereqs[e.target]) {
-          prereqs[e.target] = [e.source];
-        } else {
-          prereqs[e.target].push(e.source);
-        }
-      });
-      setPrerequisites(prereqs);
     };
 
     // Without re-render, update styling for: each node, hovering state and edges
@@ -271,16 +280,15 @@ const CourseGraph = ({
 
     const setupGraph = async () => {
       try {
-        if (!degreeQuery.data || !coursesQuery.data || !plannerQuery.data) return;
+        if (
+          !degreeQuery.data ||
+          !coursesQuery.data ||
+          !plannerQuery.data ||
+          !programGraphQuery.data
+        )
+          return;
         initialisingStart.current = true;
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${degreeQuery.data.programCode}/${degreeQuery.data.specs.join('+')}`
-        );
-        const programs = res?.data;
-        makePrerequisitesMap(programs?.edges);
-        if (programs?.courses.length !== 0 && programs?.edges.length !== 0) {
-          initialiseGraph(programs?.courses, programs?.edges);
-        }
+        initialiseGraph();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error at setupGraph', e);
@@ -300,7 +308,8 @@ const CourseGraph = ({
     prerequisites,
     setLoading,
     coursesQuery.data,
-    plannerQuery.data
+    plannerQuery.data,
+    programGraphQuery.data
   ]);
 
   // Show all nodes and edges once graph is initially loaded
@@ -394,13 +403,13 @@ const CourseGraph = ({
   }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
-    if (unlockedCourses) showUnlockedCourses();
+    if (showingUnlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [showUnlockedCourses, unlockedCourses]);
+  }, [showUnlockedCourses, showingUnlockedCourses]);
 
   return (
     <S.Wrapper ref={containerRef}>
-      {loading ? (
+      {loading && queriesSuccess && queriesSuccess ? (
         <S.SpinnerWrapper className="spinner-wrapper">
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>
@@ -408,8 +417,8 @@ const CourseGraph = ({
         <S.ToolsWrapper>
           Show All Courses
           <Switch
-            checked={!unlockedCourses}
-            onChange={() => setUnlockedCourses((prevState) => !prevState)}
+            checked={!showingUnlockedCourses}
+            onChange={() => setShowingUnlockedCourses((prevState) => !prevState)}
           />
           <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
           <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />

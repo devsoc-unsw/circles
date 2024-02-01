@@ -25,6 +25,7 @@ export type CourseResponse = {
   UOC: number;
   ignoreFromProgression: boolean;
 };
+export type CoursesResponse = Record<string, CourseResponse>;
 
 export type ValidateResponse = {
   is_accurate: boolean;
@@ -33,8 +34,6 @@ export type ValidateResponse = {
   warnings: string[];
   suppressed: boolean;
 };
-
-export type CoursesResponse = Record<string, CourseResponse>;
 
 export type ValidatesResponse = {
   courses_state: Record<string, ValidateResponse>;
@@ -51,8 +50,8 @@ export type PlannerResponse = {
 };
 
 export type Term = {
-  y: string;
-  t: string;
+  Y: string;
+  T: string;
 };
 
 export const badDegree: DegreeResponse = {
@@ -63,8 +62,8 @@ export const badDegree: DegreeResponse = {
 
 // null coalesced to remove `undefined`. This SHOULD NOT see production
 // temp fix while we wait for `prepareUserPayload` to be deprecated
-export const badPlanner: PlannerResponse = {
-  mostRecentPastTerm: { y: '2020', t: '2' },
+export const badPlanner = {
+  mostRecentPastTerm: { Y: '2020', T: '2' },
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,

@@ -26,7 +26,7 @@ export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
 
 export const handleDegreeChange = async ({ programCode }: { programCode: string }) => {
   const token = await getToken();
-  resetDegree();
+  await resetDegree();
   try {
     await axios.put('user/setProgram', null, {
       params: { programCode: programCode.substring(0, 4), token }
