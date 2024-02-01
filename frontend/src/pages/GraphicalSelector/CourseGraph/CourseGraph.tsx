@@ -73,10 +73,10 @@ const CourseGraph = ({
   const [showingUnlockedCourses, setShowingUnlockedCourses] = useState(false);
 
   const programGraphQuery = useQuery({
-    queryKey: ['graph', { code: degreeQuery.data!.programCode, specs: degreeQuery.data!.specs }],
+    queryKey: ['graph', { code: degreeQuery.data?.programCode, specs: degreeQuery.data?.specs }],
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     queryFn: () => getProgramGraph(degreeQuery.data!.programCode, degreeQuery.data!.specs),
-    enabled: degreeQuery.isSuccess
+    enabled: !degreeQuery.isLoading && degreeQuery.data && degreeQuery.isSuccess
   });
 
   const queriesSuccess =
@@ -403,9 +403,10 @@ const CourseGraph = ({
   }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
+    if (!queriesSuccess) return;
     if (showingUnlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [showUnlockedCourses, showingUnlockedCourses]);
+  }, [showUnlockedCourses, showingUnlockedCourses, queriesSuccess]);
 
   return (
     <S.Wrapper ref={containerRef}>
