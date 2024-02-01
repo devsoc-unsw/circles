@@ -152,5 +152,9 @@ declare module 'styled-components' {
       borderColor: string;
       hoverBackgroundColor: string;
     };
+    loginSplash?: {
+      svgColor: string;
+      backgroundColor: string;
+    };
   }
 }

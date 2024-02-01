@@ -13,6 +13,7 @@ import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
+import Auth from 'pages/Auth/Auth';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -61,6 +62,7 @@ const App = () => {
                     <Route path="/term-planner" element={<TermPlanner />} />
                     <Route path="/progression-checker" element={<ProgressionChecker />} />
                     <Route path="*" element={<Page404 />} />
+                    {inDev && <Route path="/auth" element={<Auth />} />}
                   </Routes>
                 </Router>
               </Suspense>
