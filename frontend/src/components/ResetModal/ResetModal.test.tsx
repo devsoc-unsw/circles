@@ -2,18 +2,10 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
+import { setIsComplete } from 'utils/api/userApi';
 import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import ResetModal from './ResetModal';
-
-const preloadedState = {
-  degree: {
-    programCode: '3778',
-    programName: 'Computer Science',
-    specs: ['COMPA1'],
-    isComplete: true
-  }
-};
 
 describe('ResetModal', () => {
   const useDispatchMock = vi.spyOn(hooks, 'useAppDispatch');
@@ -23,13 +15,14 @@ describe('ResetModal', () => {
     vi.clearAllMocks();
   });
 
-  it('should render', () => {
-    renderWithProviders(<ResetModal />);
+  it('should render', async () => {
+    await renderWithProviders(<ResetModal />);
     expect(screen.queryByText('Reset Planner?')).not.toBeInTheDocument();
   });
 
-  it('should show modal when degree wizard is complete', () => {
-    renderWithProviders(<ResetModal open />, { preloadedState });
+  it('should show modal when degree wizard is complete', async () => {
+    await renderWithProviders(<ResetModal open />);
+    await setIsComplete(true);
     expect(screen.getByText('Reset Planner?')).toBeInTheDocument();
   });
 
@@ -37,29 +30,18 @@ describe('ResetModal', () => {
     const dummyDispatch = vi.fn();
     useDispatchMock.mockReturnValue(dummyDispatch);
 
-    renderWithProviders(<ResetModal open />, {
-      preloadedState: {
-        degree: {
-          programCode: '3778',
-          programName: 'Computer Science',
-          specs: ['COMPA1'],
-          isComplete: true
-        }
-      }
-    });
+    await renderWithProviders(<ResetModal open />);
+    await setIsComplete(true);
     await userEvent.click(screen.getByText('Reset'));
     expect(dummyDispatch.mock.calls).toEqual([
-      [{ payload: undefined, type: 'planner/resetPlanner' }],
-      [{ payload: undefined, type: 'degree/resetDegree' }],
-      [{ payload: undefined, type: 'courseTabs/resetTabs' }],
-      [{ payload: undefined, type: 'courses/resetCourses' }]
+      [{ payload: undefined, type: 'courseTabs/resetTabs' }]
     ]);
   });
 
   it('should call the OnCancel callback when the Go Back button is clicked', async () => {
     const dummyOnCancel = vi.fn();
 
-    renderWithProviders(<ResetModal open onCancel={dummyOnCancel} />, { preloadedState });
+    await renderWithProviders(<ResetModal open onCancel={dummyOnCancel} />);
     await userEvent.click(screen.getByText('Go back'));
     expect(dummyOnCancel).toBeCalled();
   });
@@ -67,7 +49,7 @@ describe('ResetModal', () => {
   it('should call the OnOk callback when the Reset button is clicked', async () => {
     const dummyOnOk = vi.fn();
 
-    renderWithProviders(<ResetModal open onOk={dummyOnOk} />, { preloadedState });
+    await renderWithProviders(<ResetModal open onOk={dummyOnOk} />);
     await userEvent.click(screen.getByText('Reset'));
     expect(dummyOnOk).toBeCalled();
   });

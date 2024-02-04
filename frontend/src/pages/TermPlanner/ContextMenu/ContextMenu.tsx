@@ -1,40 +1,49 @@
 import React, { useState } from 'react';
 import { Item, Menu } from 'react-contexify';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { DeleteFilled, EditFilled, InfoCircleFilled } from '@ant-design/icons';
-import axios from 'axios';
+import {
+  DeleteFilled,
+  EditFilled,
+  InfoCircleFilled,
+  PieChartFilled,
+  PieChartOutlined
+} from '@ant-design/icons';
+import { removeCourse, toggleIgnoreFromProgression, unscheduleCourse } from 'utils/api/plannerApi';
 import EditMarkModal from 'components/EditMarkModal';
-import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
 
 type Props = {
   code: string;
   plannedFor: string | null;
+  ignoreFromProgression: boolean;
 };
 
-const ContextMenu = ({ code, plannedFor }: Props) => {
-  const { token } = useSelector((state: RootState) => state.settings);
+const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
+  const queryClient = useQueryClient();
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => dispatch(removeCourse(code));
-  const handleUnschedule = async () => {
-    try {
-      await axios.post('planner/unscheduleCourse', { courseCode: code }, { params: { token } });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at handleUnschedule:', err);
-    }
-  };
+  const handleUnschedule = useMutation(unscheduleCourse, {
+    onSuccess: () => queryClient.invalidateQueries('planner')
+  });
+  const handleDelete = useMutation(removeCourse, {
+    onSuccess: () => queryClient.invalidateQueries('planner')
+  });
   const handleInfo = () => {
     navigate('/course-selector');
     dispatch(addTab(code));
+  };
+  const ignoreFromProgressionMutation = useMutation(toggleIgnoreFromProgression, {
+    onSuccess: () => queryClient.invalidateQueries('courses')
+  });
+  const handleToggleProgression = () => {
+    ignoreFromProgressionMutation.mutate(code);
   };
 
   const iconStyle = {
@@ -46,16 +55,31 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
     <>
       <Menu id={`${code}-context`} theme="dark">
         {plannedFor && (
-          <Item onClick={handleUnschedule}>
+          <Item
+            onClick={() =>
+              handleUnschedule.mutate({
+                courseCode: code
+              })
+            }
+          >
             <FaRegCalendarTimes style={iconStyle} /> Unschedule
           </Item>
         )}
-        <Item onClick={handleDelete}>
+        <Item onClick={() => handleDelete.mutate(code)}>
           <DeleteFilled style={iconStyle} /> Delete from Planner
         </Item>
         <Item onClick={showEditMark}>
           <EditFilled style={iconStyle} /> Edit mark
         </Item>
+        {ignoreFromProgression ? (
+          <Item onClick={handleToggleProgression}>
+            <PieChartFilled style={iconStyle} /> Acknowledge Progression
+          </Item>
+        ) : (
+          <Item onClick={handleToggleProgression}>
+            <PieChartOutlined style={iconStyle} /> Ignore Progression
+          </Item>
+        )}
         <Item onClick={handleInfo}>
           <InfoCircleFilled style={iconStyle} /> View Info
         </Item>

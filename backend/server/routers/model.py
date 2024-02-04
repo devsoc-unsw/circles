@@ -80,7 +80,7 @@ class ValidCourseState(BaseModel):
     unlocked: bool
     handbook_note: str
     warnings: list
-    supressed: bool
+    suppressed: bool
 
 
 class CoursesState(BaseModel):
@@ -177,7 +177,7 @@ class PlannerData(BaseModel):
                 for course_name, course_value in term.items():
                     cleaned_term[course_name] = (
                         (course_value[0], course_value[1]) if course_value
-                        else (get_course(course_name)["UOC"], None)
+                        else (get_course(course_name)["UOC"], None) # type: ignore
                     )
                 user.add_courses(cleaned_term)
         return user
@@ -193,20 +193,41 @@ class PlannerLocalStorage(TypedDict):
     unplanned: list[str]
     startYear: int
     isSummerEnabled: bool
+    lockedTerms: dict[str, bool]
     years: list[dict[str, list[str]]]
 
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
 Mark = Optional[int | LetterGrade]
 
-class CoursesStorage(TypedDict):
+markMap = {
+    "SY": 50,
+    "FL": 25,
+    "PS": 50,
+    "CR": 65,
+    "DN": 75,
+    "HD": 85,
+}
+
+class CourseStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
+    uoc: int
+    ignoreFromProgression: bool
+
+class CourseType(BaseModel):
+    code: str
+    suppressed: bool
+    mark: Mark
+    plannedFor: str | None
+    title: str
+    isMultiterm: bool
+    UOC: int
 
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
-    courses: dict[str, CoursesStorage]
+    courses: dict[str, CourseStorage]
 
 class LocalStorage(BaseModel):
     degree: DegreeLocalStorage

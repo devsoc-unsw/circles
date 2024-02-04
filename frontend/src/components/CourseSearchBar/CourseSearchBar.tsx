@@ -63,7 +63,8 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
       style={{ width: '30rem', ...style }}
-      showArrow={!!value}
+      suffixIcon={!value}
+      className="course-search-bar"
     />
   );
 };

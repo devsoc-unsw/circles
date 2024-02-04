@@ -1,7 +1,5 @@
-import { DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
-import { DegreeSliceState } from 'reducers/degreeSlice';
-import { PlannerSliceState } from 'reducers/plannerSlice';
 
 // key = course code, value = mark of course (number | null)
 type UserPayloadCourse = Record<string, number | null>;
@@ -14,10 +12,10 @@ type UserPayload = {
 
 // TODO: Remove the slice types once fully migrated
 const prepareUserPayload = (
-  degree: DegreeResponse | DegreeSliceState,
-  planner: PlannerResponse | PlannerSliceState
+  degree: DegreeResponse,
+  planner: PlannerResponse,
+  courses: CoursesResponse
 ): UserPayload => {
-  const { courses } = planner;
   const { programCode, specs } = degree;
 
   const selectedCourses: UserPayloadCourse = {};

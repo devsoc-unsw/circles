@@ -1,22 +1,39 @@
 import React, { Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
+import { Course } from 'types/api';
+import {
+  badCourses,
+  badPlanner,
+  CoursesResponse,
+  PlannerResponse,
+  ValidateResponse
+} from 'types/userResponse';
+import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
 
 type Props = {
   dragging: boolean;
+  courseInfos: Record<string, Course>;
+  validateInfos: Record<string, ValidateResponse>;
 };
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
 );
 
-const UnplannedColumn = ({ dragging }: Props) => {
-  const planner = useSelector((state: RootState) => state.planner);
-  const { isSummerEnabled, unplanned } = useSelector((state: RootState) => state.planner);
+/* eslint-disable */
+
+const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
+  const { unplanned, isSummerEnabled } = planner;
+
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const courses: CoursesResponse = coursesQuery.data ?? badCourses;
+
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
@@ -32,13 +49,15 @@ const UnplannedColumn = ({ dragging }: Props) => {
               droppable={dragging}
               isSmall={isSmall}
             >
-              {unplanned.map((course, courseIndex) => (
+              {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
-                  code={course}
+                  key={courseCode}
+                  planner={planner}
+                  courses={courses}
+                  validate={validateInfos[courseCode]}
+                  courseInfo={courseInfos[courseCode]}
                   index={courseIndex}
-                  key={course}
-                  term=""
-                  showMultiCourseBadge={planner.courses[course].isMultiterm}
+                  time={undefined}
                 />
               ))}
               {provided.placeholder}

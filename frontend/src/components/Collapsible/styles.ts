@@ -6,7 +6,7 @@ const CollapsibleHeader = styled.div`
   flex-direction: row;
   align-items: center;
   vertical-align: bottom;
-  border-bottom: #d9d9d9c0 solid 1px; //grey-5
+  border-bottom: ${({ theme }) => theme.courseDescription.paddingColor} solid 1px; //grey-5
   margin-top: 10px;
   margin-bottom: 7px;
   transition: 250ms;
@@ -23,6 +23,7 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
   padding: 10px;
   transition: 200ms;
   transform: rotate(90deg);
+  color: ${({ theme }) => theme.collapseBtnIcon.color};
 
   ${({ collapsed }) =>
     collapsed &&
@@ -31,8 +32,8 @@ const CollapseButton = styled(RightOutlined)<{ collapsed: boolean }>`
     `}
 `;
 
-const CollapsibleContent = styled.div(
-  ({ collapsed }: { collapsed: boolean }) => css`
+const CollapsibleContent = styled.div<{ collapsed: boolean }>(
+  ({ collapsed }) => css`
     width: 100%;
     margin: 10px;
     max-height: ${collapsed ? 0 : 4000}px;

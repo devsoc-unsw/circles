@@ -1,14 +1,17 @@
-import React, { Suspense, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Suspense } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
+import axios from 'axios';
 import { useTheme } from 'styled-components';
+import { Course } from 'types/api';
+import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
-import { courseHasOffering } from 'utils/getAllCourseOfferings';
+import { ValidateResponse } from 'types/userResponse';
+import { getToken, getUserCourses, getUserPlanner } from 'utils/api/userApi';
+import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
-import { toggleTermComplete } from 'reducers/plannerSlice';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
 
@@ -17,39 +20,65 @@ const Droppable = React.lazy(() =>
 );
 
 type Props = {
-  name: string;
-  coursesList: string[];
-  draggingCourse?: string;
-  currMultiCourseDrag: string;
+  name: string; // Ideally replace this with a proper term type later
+  courseInfos: Record<string, Course>; // All courses in planner
+  validateInfos: Record<string, ValidateResponse>; // All courses in planner
+  termCourseInfos: Record<string, Course>; // All courses in term
+  termCourseCodes: string[]; // Course codes in the current term
+  draggingCourseCode?: string;
 };
 
-const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Props) => {
+const TermBox = ({
+  name,
+  courseInfos,
+  validateInfos,
+  termCourseInfos,
+  termCourseCodes,
+  draggingCourseCode
+}: Props) => {
   const year = name.slice(0, 4);
   const term = name.match(/T[0-3]/)?.[0] as Term;
   const theme = useTheme();
+  const queryClient = useQueryClient();
 
-  const { isSummerEnabled, completedTerms, courses } = useSelector(
-    (state: RootState) => state.planner
-  );
-  const [totalUOC, setTotalUOC] = useState(0);
-  const dispatch = useDispatch();
-  const handleCompleteTerm = () => {
-    dispatch(toggleTermComplete(name));
+  const toggleLockTerm = async () => {
+    const token = await getToken();
+    await axios.post(
+      '/planner/toggleTermLocked',
+      {},
+      { params: { token, termyear: `${year}${term}` } }
+    );
+  };
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const toggleLockTermMutation = useMutation(toggleLockTerm, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('planner');
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at toggleLockTermMutation: ', err);
+    }
+  });
+  const coursesQuery = useQuery('courses', getUserCourses);
+  const isSmall = useMediaQuery('(max-width: 1400px)');
+
+  if (!coursesQuery.data || !plannerQuery.data) {
+    return <div>loading page...</div>;
+  }
+  const planner = plannerQuery.data;
+  const { isSummerEnabled } = planner;
+  const courses = coursesQuery.data;
+
+  const handleToggleLockTerm = async () => {
+    toggleLockTermMutation.mutate();
   };
 
-  useEffect(() => {
-    let uoc = 0;
-    Object.keys(courses).forEach((c) => {
-      if (coursesList.includes(c)) uoc += courses[c].UOC;
-    });
-    setTotalUOC(uoc);
-  }, [courses, coursesList]);
+  const termUOC = termCourseCodes.reduce((acc, code) => acc + termCourseInfos[code].UOC, 0);
 
-  const isCompleted = !!completedTerms[name];
-  const offeredInTerm = !!draggingCourse && courseHasOffering(courses[draggingCourse], year, term);
-  const isOffered = offeredInTerm && !isCompleted;
-
-  const isSmall = useMediaQuery('(max-width: 1400px)');
+  const isLocked: boolean = planner.lockedTerms[`${year}${term}`] ?? false;
+  const offeredInTerm =
+    !!draggingCourseCode && courseHasOfferingNew(courseInfos[draggingCourseCode], term);
+  const isOffered = offeredInTerm && !isLocked;
 
   const iconStyle = {
     fontSize: '12px',
@@ -60,40 +89,39 @@ const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Pro
     backgroundColor: theme.uocBadge.backgroundColor,
     boxShadow: 'none'
   };
-
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
-      <Droppable droppableId={name} isDropDisabled={isCompleted}>
+      <Droppable droppableId={name} isDropDisabled={isLocked}>
         {(provided) => (
           <Badge
             count={
-              <S.TermCheckboxWrapper checked={isCompleted}>
-                {
-                  !isCompleted ? (
-                    <UnlockFilled style={iconStyle} onClick={handleCompleteTerm} />
-                  ) : (
-                    <LockFilled style={iconStyle} onClick={handleCompleteTerm} />
-                  ) //
-                }
+              <S.TermCheckboxWrapper checked={isLocked}>
+                {!isLocked ? (
+                  <UnlockFilled style={iconStyle} onClick={handleToggleLockTerm} />
+                ) : (
+                  <LockFilled style={iconStyle} onClick={handleToggleLockTerm} />
+                )}
               </S.TermCheckboxWrapper>
             }
             offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
           >
             <S.TermBoxWrapper
-              droppable={isOffered && !!draggingCourse}
+              droppable={isOffered && !!draggingCourseCode}
               summerEnabled={isSummerEnabled}
               isSmall={isSmall}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {coursesList.map((code, index) => {
+              {Object.values(termCourseInfos).map((info, index) => {
                 return (
                   <DraggableCourse
-                    key={`${code}${term}`}
-                    code={code}
+                    key={`${info.title || ''}${term}`}
+                    planner={planner}
+                    courses={courses}
+                    validate={validateInfos[info.code]}
+                    courseInfo={info}
                     index={index}
-                    term={term}
-                    showMultiCourseBadge={currMultiCourseDrag === code}
+                    time={{ year, term } as CourseTime}
                   />
                 );
               })}
@@ -102,7 +130,7 @@ const TermBox = ({ name, coursesList, draggingCourse, currMultiCourseDrag }: Pro
                 <Badge
                   style={uocBadgeStyle}
                   size="small"
-                  count={`${totalUOC} UOC`}
+                  count={`${termUOC} UOC`}
                   offset={[0, 0]}
                 />
               </S.UOCBadgeWrapper>

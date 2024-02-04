@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
+import { getUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
@@ -29,8 +31,8 @@ const DegreeWizard = () => {
     specs: []
   });
 
-  const { programCode, isComplete } = degreeInfo;
-
+  const { programCode } = degreeInfo;
+  const isComplete = useQuery('degree', getUserDegree).data?.isComplete;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,7 +87,11 @@ const DegreeWizard = () => {
   return (
     <PageTemplate showHeader={false}>
       <S.ContainerWrapper>
-        <ResetModal open={isComplete} onCancel={() => navigate('/course-selector')} />
+        <ResetModal
+          open={isComplete}
+          onCancel={() => navigate('/course-selector')}
+          onOk={() => navigate('/')}
+        />
         <Title className="text">Welcome to Circles!</Title>
         <S.Subtitle>
           Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
@@ -94,7 +100,11 @@ const DegreeWizard = () => {
         <S.StepsWrapper>
           <YearStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
           {currStep >= Steps.DEGREE && (
-            <DegreeStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
+            <DegreeStep
+              incrementStep={incrementStep}
+              degreeInfo={degreeInfo}
+              setDegreeInfo={setDegreeInfo}
+            />
           )}
           {specs.map(
             (stepName, index) =>
@@ -108,7 +118,7 @@ const DegreeWizard = () => {
                 />
               )
           )}
-          {currStep === stepList.length - 1 && <StartBrowsingStep degreeInfo={degreeInfo} />}
+          {currStep >= Steps.DONE && <StartBrowsingStep degreeInfo={degreeInfo} />}
         </S.StepsWrapper>
       </S.ContainerWrapper>
     </PageTemplate>

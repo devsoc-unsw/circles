@@ -1,5 +1,5 @@
 from typing import Optional
-
+from pytest import raises
 from algorithms.autoplanning import autoplan, terms_between
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
@@ -14,7 +14,6 @@ def get_uoc(course_name: str, courses: list[Course]):
 def get_mark(course_name: str, courses: list[Course]):
     return [course.mark for course in courses if course_name == course.name][0]
 
-@mark.skip(reason = "Autoplanning incompatiable with migration")
 def test_basic_CS_autoplanning():
     assert_autoplanning_guarantees(
         [
@@ -48,7 +47,6 @@ def test_basic_CS_autoplanning():
         ["COMPA1"]
     )
 
-@mark.skip(reason = "Autoplanning incompatiable with migration")
 def test_more_complex_prereqs():
     # pick courses with cancerous prereqs and check that it all makes sense
     assert_autoplanning_guarantees(
@@ -82,7 +80,6 @@ def test_more_complex_prereqs():
         ["COMPBH"]
     )
 
-@mark.skip(reason = "Autoplanning incompatiable with migration")
 def test_infeasable():
     with raises(Exception):
         # no terms have space
@@ -115,7 +112,6 @@ def test_infeasable():
             ]
         )
 
-@mark.skip(reason = "Autoplanning incompatiable with migration")
 def assert_autoplanning_guarantees(uoc_max: list[int], courses: list[Course], program: str, specialisations: list[str]):
     res = autoplan(
         courses,

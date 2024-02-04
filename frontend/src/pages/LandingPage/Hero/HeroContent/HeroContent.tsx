@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { Space } from 'antd';
 import cseLogo from 'assets/csesocLogo.png';
 import easySubTitle from 'assets/LandingPage/easySubtitle.svg';
 import S from './styles';
@@ -10,14 +11,14 @@ const HeroContent = () => (
     <S.HeroTitle animate={{ x: [-60, 10, 0] }} transition={{ duration: 1, ease: 'easeInOut' }}>
       Degree planning made <S.HeroSubTitle src={easySubTitle} alt="Hero Subtitle" />
     </S.HeroTitle>
-    <Link to="/degree-wizard">
+    <Link to="/login">
       <S.HeroCTA
         initial={{ scale: 0.0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         whileHover={{ scale: 1.1 }}
       >
-        START
+        START WITH CSESOC <Space size="large" />
         <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
       </S.HeroCTA>
     </Link>
@@ -30,5 +31,4 @@ const HeroContent = () => (
     />
   </S.HeroContent>
 );
-
 export default HeroContent;

@@ -5,7 +5,7 @@ const SidebarWrapper = styled.div`
   overflow: auto;
   overflow-x: hidden;
   height: 100%;
-  border-right: 1px solid #f0f0f0;
+  border-right: 1px solid ${({ theme }) => theme.courseMenu?.borderColor};
 `;
 
 const SubgroupHeader = styled.div`

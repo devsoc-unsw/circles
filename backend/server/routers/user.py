@@ -1,18 +1,21 @@
 from itertools import chain
-import itertools
-from pprint import pprint
-from typing import Any, cast
-
+from typing import Any, Dict, cast
 from bson.objectid import ObjectId
+from algorithms.objects.user import User
+from server.routers.utility import get_core_courses
+from server.routers.courses import get_course
+from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException
-import pydantic
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
 from server.database import usersDB
+from server.routers.courses import get_course
 from server.routers.model import (
+    CONDITIONS,
     CourseMark,
-    CoursesStorage,
+    CourseStorage,
     DegreeLocalStorage,
     DegreeWizardInfo,
     LocalStorage,
@@ -23,7 +26,8 @@ from server.routers.model import (
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
-pydantic.json.ENCODERS_BY_TYPE[ObjectId] = str
+from pydantic.json import ENCODERS_BY_TYPE
+ENCODERS_BY_TYPE[ObjectId] = str
 
 router = APIRouter(
     prefix="/user",
@@ -47,18 +51,19 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
 
 
 # Ideally not used often.
-@router.post("/saveLocalStorage/")
+@router.post("/saveLocalStorage")
 def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     # TODO: turn giving no token into an error
     planned: list[str] = sum((sum(year.values(), [])
                              for year in localStorage.planner['years']), [])
     unplanned: list[str] = localStorage.planner['unplanned']
-    courses: dict[str, CoursesStorage] = {
+    courses: dict[str, CourseStorage] = {
         course: {
             'code': course,
-            # this is peter's fault for sucking at spelling
-            'suppressed': localStorage.planner['courses'][course]['supressed'],
-            'mark': localStorage.planner['courses'][course].get('mark', None)
+            'suppressed': False, # guess we will nuke this config
+            'mark': None, # wtf we nuking marks?
+            'uoc': get_course(course)['UOC'],
+            'ignoreFromProgression': False
         }
         for course in chain(planned, unplanned)
     }
@@ -92,8 +97,29 @@ def get_user_planner(token: str) -> PlannerLocalStorage:
     return get_user(token)['planner']
 
 @router.get("/data/courses/{token}")
-def get_user_p(token: str) -> dict[str, CoursesStorage]:
-    return get_user(token)['courses']
+def get_user_p(token: str) -> dict[str, CourseStorage]:
+    # expects to also get the
+    # title: str
+    # plannedFor: string of form "year term"
+    # isMultiterm
+    # uoc -> UOC
+    res = get_user(token)['courses']
+    planner = get_user_planner(token)
+    for c in res.values():
+        c = cast(Dict, c)
+        course = get_course(c['code'])
+        c['title'] = course['title']
+        c['isMultiterm'] = course['is_multiterm']
+        for index, year in enumerate(planner['years']):
+            for termIndex, term in year.items():
+                if c['code'] in term:
+                    c['plannedFor'] = f"{index + planner['startYear']} {termIndex}"
+                    break
+        if c['code'] in planner['unplanned']:
+            c['plannedFor'] = "unplanned"
+        c['plannedFor'] = c.get('plannedFor') # set to None if need be
+        c['UOC'] = c.pop('uoc')
+    return res
 
 # this is super jank - should never see prod
 @router.post("/register/{token}")
@@ -113,8 +139,8 @@ def default_cs_user() -> Storage:
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
+        'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
     user: Storage = {
         'degree': {
@@ -128,7 +154,7 @@ def default_cs_user() -> Storage:
     return user
 
 
-@router.put("/toggleSummerTerm")
+@router.post("/toggleSummerTerm")
 def toggle_summer_term(token: str = DUMMY_TOKEN):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
@@ -236,8 +262,8 @@ def reset(token: str = DUMMY_TOKEN):
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
+        'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
 
     user: Storage = {
@@ -306,7 +332,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     if invalid_lhs_specs or spec_reqs_not_met:
         raise HTTPException(status_code=400, detail="Invalid specialisations")
     print("Valid specs")
-    
+
     planner: PlannerLocalStorage = {
         'mostRecentPastTerm': {
             'Y': 0,
@@ -315,8 +341,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': wizard.startYear,
+        'lockedTerms': {},
         'years': [],
-        'courses': {},
     }
     
     planner['years'] = [
@@ -335,4 +361,3 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     }
     set_user(token, user, True)
     return user
-    

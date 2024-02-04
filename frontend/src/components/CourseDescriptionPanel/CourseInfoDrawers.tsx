@@ -1,12 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
+import { Typography } from 'antd';
 import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
+import { badCourses, badValidations } from 'types/userResponse';
+import { validateTermPlanner } from 'utils/api/plannerApi';
+import { getUserCourses } from 'utils/api/userApi';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import { inDev } from 'config/constants';
-import type { RootState } from 'config/store';
+import S from './styles';
+
+const { Text } = Typography;
 
 type CourseInfoDrawersProps = {
   course: Course;
@@ -21,95 +27,98 @@ const CourseInfoDrawers = ({
   pathFrom = [],
   unlocked
 }: CourseInfoDrawersProps) => {
-  const { planner, courses } = useSelector((state: RootState) => state);
+  const courses = useQuery('courses', getUserCourses).data || badCourses;
 
   const pathFromInPlanner = pathFrom.filter((courseCode) =>
-    Object.keys(planner.courses).includes(courseCode)
+    Object.keys(courses).includes(courseCode)
   );
   const pathFromNotInPlanner = pathFrom.filter(
-    (courseCode) => !Object.keys(planner.courses).includes(courseCode)
+    (courseCode) => !Object.keys(courses).includes(courseCode)
   );
-  const isUnlocked = courses.courses[course.code]?.unlocked;
-  const inPlanner = planner.courses[course.code];
-
+  const inPlanner = courses[course.code];
+  const validateQuery = useQuery('validate', validateTermPlanner);
+  const validations = validateQuery.data ?? badValidations;
+  const isUnlocked = validations.courses_state[course.code];
   return (
-    <div>
+    <div className="course-info-drawers">
       <Collapsible title="Overview">
-        {/* eslint-disable-next-line react/no-danger */}
-        <p dangerouslySetInnerHTML={{ __html: course?.description || 'None' }} />
+        <S.TextBlock>{course?.description ? course?.description : 'None'}</S.TextBlock>
       </Collapsible>
       <Collapsible title="Requirements">
-        {/* eslint-disable-next-line react/no-danger */}
-        <p dangerouslySetInnerHTML={{ __html: course?.raw_requirements || 'None' }} />
+        <S.TextBlock>{course?.raw_requirements ? course?.raw_requirements : 'None'}</S.TextBlock>
       </Collapsible>
       <Collapsible title="Course Prerequisites">
         {!!pathFrom.length && !isUnlocked ? (
           <>
-            <p>
+            <S.TextBlock>
               These courses in your planner have helped unlocked this course:
               {!pathFromInPlanner.length && ' None'}
-            </p>
+            </S.TextBlock>
             {!!pathFromInPlanner.length && (
-              <p>
+              <S.TextBlock>
                 {pathFromInPlanner.map((code) => (
                   <CourseTag key={code} onCourseClick={onCourseClick} name={code} />
                 ))}
-              </p>
+              </S.TextBlock>
             )}
-            <p>
+            <S.TextBlock>
               You may need to complete these courses to unlock this course:
-              {!pathFromNotInPlanner.length && ' None'}
-            </p>
+              {!pathFromNotInPlanner.length && <Text> None</Text>}
+            </S.TextBlock>
             {!!pathFromNotInPlanner.length && (
-              <p>
+              <S.TextBlock>
                 {pathFromNotInPlanner.map((code) => (
                   <CourseTag key={code} onCourseClick={onCourseClick} name={code} />
                 ))}
-              </p>
+              </S.TextBlock>
             )}
           </>
         ) : (
-          <p>
+          <S.TextBlock>
             {isUnlocked
               ? 'You have already unlocked this course.'
               : 'This course does not have any prerequisite that needs to be met.'}
-          </p>
+          </S.TextBlock>
         )}
       </Collapsible>
       <Collapsible title="Courses unlocked after doing this course">
         {!!unlocked?.direct_unlock?.length && !inPlanner ? (
           <>
-            <p>These courses are directly unlocked after completing this course:</p>
-            <p>
+            <S.TextBlock>
+              These courses are directly unlocked after completing this course:
+            </S.TextBlock>
+            <S.TextBlock>
               {unlocked.direct_unlock.map((code) => (
                 <CourseTag key={code} name={code} onCourseClick={onCourseClick} />
               ))}
-            </p>
+            </S.TextBlock>
           </>
         ) : (
-          <p>
+          <S.TextBlock>
             {inPlanner
-              ? "This course have already been added to your planner and hence can't unlock anymore courses."
+              ? "This course have already been added to your planner and hence can't unlock any more courses."
               : 'No courses will be unlocked after completing this course.'}
-          </p>
+          </S.TextBlock>
         )}
       </Collapsible>
       <Collapsible title="Courses indirectly unlocked after doing this course" initiallyCollapsed>
         {!!unlocked?.indirect_unlock?.length && !inPlanner ? (
           <>
-            <p>These courses are indirectly unlocked after completing this course:</p>
-            <p>
+            <S.TextBlock>
+              These courses are indirectly unlocked after completing this course:
+            </S.TextBlock>
+            <S.TextBlock>
               {unlocked.indirect_unlock.map((code) => (
                 <CourseTag key={code} name={code} onCourseClick={onCourseClick} />
               ))}
-            </p>
+            </S.TextBlock>
           </>
         ) : (
-          <p>
+          <S.TextBlock>
             {inPlanner
-              ? "This course have already been added to your planner and hence can't unlock anymore courses."
+              ? "This course have already been added to your planner and hence can't unlock any more courses."
               : 'No courses will be indirectly unlocked after completing this course.'}
-          </p>
+          </S.TextBlock>
         )}
       </Collapsible>
       {inDev && (

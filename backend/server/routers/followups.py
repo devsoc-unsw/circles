@@ -17,6 +17,7 @@ def get_next_term(term: str) -> str:
         return "invalid_term"
 
 
+EnrolmentDataT = dict[str, dict[str, list[str]]]
 @router.get(
     "/getFollowups/{origin_course}/{origin_term}",
     responses={
@@ -67,9 +68,12 @@ def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[
         raise HTTPException(400, f"Invalid COMP course {origin_course}")
 
     # get enrolment data
+    # TODO: Add Enrolment Data back
     with open("./data/final_data/enrolmentData.json", "r", encoding="utf8") as enrolment_data_file:
-        enrolment_data = json.load(enrolment_data_file)
-    origin_course_members = enrolment_data[origin_course][origin_term]
+        enrolment_data: EnrolmentDataT = json.load(enrolment_data_file)
+
+    origin_course_members = enrolment_data.get(origin_course, {}).get(origin_term, [])
+    # origin_course_members = enrolment_data[origin_course][origin_term]
 
     # calculate followups
     followups = {}
@@ -77,7 +81,12 @@ def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[
         # count duplicates between:
         #  people who took the origin_course in origin_term
         #  people who took this course in the following term.
-        num_followups = len(set(enrolment_data[course][next_term]) & set(origin_course_members))
+        # TODO: this is NOT how next term works!
+        # Need to wrap around to next year and whatnot, need better tracking
+        # Also, maybe add an inverted index?
+        num_followups = len(set(
+            get_set_enrolled_in_term(enrolment_data, course, next_term) & set(origin_course_members)
+        ))
 
         if num_followups != 0:
             followups.update({ course: { next_term: num_followups } })
@@ -89,3 +98,11 @@ def get_followups(origin_course: str, origin_term: str) -> dict[str, str | dict[
         "originTerm": origin_term,
         "followups": dict(top_followups),
     }
+
+def get_set_enrolled_in_term(
+    enrolment_data: EnrolmentDataT,
+    course: str,
+    term: str
+) -> set[str]:
+    return set(enrolment_data.get(course, {}).get(term, []))
+

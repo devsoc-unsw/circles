@@ -3,9 +3,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { Modal } from 'antd';
 import { resetDegree } from 'utils/api/degreeApi';
 import { useAppDispatch } from 'hooks';
-import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
-import { resetPlanner } from 'reducers/plannerSlice';
+import { setToken } from 'reducers/settingsSlice';
 
 type Props = {
   open?: boolean;
@@ -33,10 +32,9 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   };
 
   const handleOk = async () => {
-    dispatch(resetPlanner());
     handleResetDegree();
     dispatch(resetTabs());
-    dispatch(resetCourses());
+    dispatch(setToken(''));
     onOk?.();
   };
 
@@ -46,13 +44,14 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
       open={open ?? false}
       closable={false}
       onOk={handleOk}
-      okText="Reset"
+      okText="Reset Data"
       okButtonProps={{ type: 'primary', danger: true }}
       onCancel={onCancel}
-      cancelText="Go back"
+      cancelText="Go to Degree Planner"
     >
       <div>
-        Are you sure want to reset your planner? Your existing data will be permanently removed.
+        You can navigate to the Degree Wizard to reset your data. By clicking Ok, Your existing data
+        will be permanently removed.
       </div>
     </Modal>
   );
