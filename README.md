@@ -12,7 +12,7 @@ Tired of using a poorly laid out spreadsheet to cobble together a plan to follow
 
 Circles is a UNSW degree planner where you can explore and validate your degree structure.
 
-You can find a live build of Circles at [https://circles.csesoc.app](https://circles.csesoc.app/).
+You can find a live build of Circles at [https://circles.devsoc.app](https://circles.devsoc.app/).
 
 ## Features
 

@@ -7,7 +7,7 @@ export const CURR_YEAR = new Date().getFullYear();
 export const TERM = `${CURR_YEAR + (getMostRecentPastTerm(CURR_YEAR).T === 3 ? 1 : 0)}-T${
   (getMostRecentPastTerm(CURR_YEAR).T + 1) % 3
 }`;
-export const TIMETABLE_API_URL = `https://timetable.csesoc.app/api/terms/${TERM}/courses`;
+export const TIMETABLE_API_URL = `https://timetable.devsoc.app/api/terms/${TERM}/courses`;
 
 // Global colors - currently only being used in LiquidProgressChart
 export const lightYellow = '#f9b01e';
