@@ -1,5 +1,4 @@
-.github/ @csesoc/technical
-renovate.json @csesoc/technical
+.github/ @devsoc-unsw/platform
+renovate.json @devsoc-unsw/platform
 
-backend/ @imagine-hussain
-frontend/ @leonardo-fan
+* @martanman @ollibowers
