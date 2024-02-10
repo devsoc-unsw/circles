@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import store from 'config/store';
+// import store from 'config/store';
 
 export enum TokenStatus {
   UNSET,
@@ -12,16 +12,16 @@ interface IdentityPayload {
   session_token: string;
 }
 
-export const getToken = (): string => {
-  console.log('-- getting token from storage: ');
-  const state = store.getState(); // TODO: this seems to go to default on first load? check this though
-  console.log('-- token:', state.settings.token);
-  if (state.settings.token === null) {
-    throw Error('TODO: token was not set'); // TODO: rethink how to handle this
-  }
+// export const getToken = (): string => {
+//   console.log('-- getting token from storage: ');
+//   const state = store.getState(); // TODO: this seems to go to default on first load? check this though
+//   console.log('-- token:', state.settings.token);
+//   if (state.settings.token === null) {
+//     throw Error('TODO: token was not set'); // TODO: rethink how to handle this
+//   }
 
-  return state.settings.token;
-};
+//   return state.settings.token;
+// };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const checkTokenStatus = async (token: string | null): Promise<TokenStatus> => {

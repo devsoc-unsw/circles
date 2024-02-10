@@ -100,12 +100,13 @@ def get_user_planner(token: str) -> PlannerLocalStorage:
     return get_user(token)['planner']
 
 @router.get("/data/courses/{token}")
-def get_user_p(token: str) -> dict[str, CourseStorage]:
+def get_user_p(token: str):
     # expects to also get the
     # title: str
     # plannedFor: string of form "year term"
     # isMultiterm
     # uoc -> UOC
+    # TODO: fix return type up omg
     res = get_user(token)['courses']
     planner = get_user_planner(token)
     for c in res.values():

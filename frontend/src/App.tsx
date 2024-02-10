@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Suspense } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientConfig, QueryClientProvider } from 'react-query';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes, Link } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -34,11 +34,18 @@ const Dummy = () => {
   </div>
 }
 
+const CLIENT_CONFIG: QueryClientConfig = { 
+  defaultOptions: { 
+    queries: { 
+      refetchOnWindowFocus: false,
+    } 
+  } 
+}
+
 const App = () => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
 
-  
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(() => new QueryClient(CLIENT_CONFIG));
 
   return (
     <ConfigProvider theme={{
