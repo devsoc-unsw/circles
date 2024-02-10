@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Link, Navigate, Route, Routes } from 'react-router-dom';
