@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { Structure } from 'types/api';
-import { ProgramStructure } from 'types/structure';
+import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
+import { errLogger } from 'utils/queryUtils';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
@@ -15,56 +15,85 @@ import CourseTabs from './CourseTabs';
 import S from './styles';
 
 const CourseSelector = () => {
-  const [structure, setStructure] = useState<ProgramStructure>({});
+  const [showedNotif, setShowedNotif] = useState(false);
 
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
-  const { courses } = useSelector((state: RootState) => state.planner);
+  const plannerQuery = useQuery('planner', getUserPlanner, { onError: errLogger('plannerQuery') });
+
+  const coursesQuery = useQuery('courses', getUserCourses, {
+    onError: errLogger('coursesQuery'),
+    onSuccess: (data) => {
+      // only open for users with no courses
+      if (!showedNotif && !Object.keys(data).length) {
+        openNotification({
+          type: 'info',
+          message: 'How do I see more sidebar courses?',
+          description:
+            'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
+        });
+        setShowedNotif(true);
+      }
+    }
+  });
+
+  const degreeQuery = useQuery('degree', getUserDegree, { onError: errLogger('degreeQuery') });
+
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 
   const dispatch = useDispatch();
 
   const courseCode = tabs[active];
 
+  const divRef = useRef<null | HTMLDivElement>(null);
+  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
   useEffect(() => {
-    // only open for users with no courses
-    if (!Object.keys(courses).length) {
-      openNotification({
-        type: 'info',
-        message: 'How do I see more sidebar courses?',
-        description:
-          'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
-      });
-    }
-  }, [courses]);
-
-  useEffect(() => {
-    // get structure of degree
-    const fetchStructure = async () => {
-      try {
-        const res = await axios.get<Structure>(
-          `/programs/getStructure/${programCode}/${specs.join('+')}`
-        );
-        setStructure(res.data.structure);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Error at fetchStructure', err);
+    const minMenuWidth = 100;
+    const maxMenuWidth = (60 * window.innerWidth) / 100;
+    const resizerDiv = divRef.current as HTMLDivElement;
+    const setNewWidth = (clientX: number) => {
+      if (clientX > minMenuWidth && clientX < maxMenuWidth) {
+        resizerDiv.style.left = `${clientX}px`;
+        setMenuOffset(clientX);
       }
     };
-    if (programCode) fetchStructure();
-  }, [programCode, specs]);
+    const handleResize = (ev: globalThis.MouseEvent) => {
+      setNewWidth(ev.clientX);
+    };
+    const endResize = (ev: MouseEvent) => {
+      setNewWidth(ev.clientX);
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', endResize); // remove myself
+    };
+    const startResize = (ev: MouseEvent) => {
+      ev.preventDefault(); // stops highlighting text
+      window.addEventListener('mousemove', handleResize);
+      window.addEventListener('mouseup', endResize);
+    };
+    resizerDiv?.addEventListener('mousedown', startResize);
+    return () => resizerDiv?.removeEventListener('mousedown', startResize);
+  }, []);
+
+  const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), [dispatch]);
 
   return (
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner />
         <CourseTabs />
-        <S.ContentWrapper>
-          <CourseMenu structure={structure} />
+        <S.ContentWrapper offset={menuOffset}>
+          <CourseMenu
+            planner={plannerQuery.data}
+            courses={coursesQuery.data}
+            degree={degreeQuery.data}
+          />
+          <S.ContentResizer ref={divRef} offset={menuOffset} />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel
                 courseCode={courseCode}
-                onCourseClick={(code) => dispatch(addTab(code))}
+                planner={plannerQuery.data}
+                courses={coursesQuery.data}
+                degree={degreeQuery.data}
+                onCourseClick={onCourseClick}
               />
             </div>
           ) : (

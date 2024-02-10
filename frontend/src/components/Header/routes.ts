@@ -23,9 +23,8 @@ const routes: Route[] = [
     link: '/progression-checker'
   },
   {
-    label: 'Login',
-    link: '/login',
-    dev: true
+    label: 'Logout',
+    link: '/'
   }
 ];
 

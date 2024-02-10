@@ -10,7 +10,7 @@ const GetInvolved = () => {
       <S.Title>Interested in Circles?</S.Title>
       <S.ContentWrapper>
         If you&apos;re a CSE student with a keen interest in Circles and looking to get involved,
-        keep an eye out for our recruitment announcements on CSESoc&apos;s socials. Otherwise, you
+        keep an eye out for our recruitment announcements on DevSoc&apos;s socials. Otherwise, you
         can also contribute by suggesting cool new features, report any bugs or even make a pull
         request on the Circles repo.
       </S.ContentWrapper>
@@ -19,7 +19,7 @@ const GetInvolved = () => {
           Feedback
         </Button>
         <Button
-          href="https://github.com/csesoc/circles"
+          href="https://github.com/devsoc-unsw/circles"
           target="_blank"
           rel="noreferrer"
           size="large"

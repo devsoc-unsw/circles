@@ -62,7 +62,7 @@ export type CoursesUnlockedWhenTaken = {
 
 /* Programs api */
 export type Programs = {
-  programs: Record<string, string>;
+  programs: Record<string, string>; // of shape {code: name}
 };
 
 export type Structure = {

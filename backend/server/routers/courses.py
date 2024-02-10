@@ -13,6 +13,7 @@ from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz  # type: ignore
+from server.config import DUMMY_TOKEN
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
@@ -65,7 +66,7 @@ def fix_user_data(userData: dict):
         if not isinstance(userData["courses"][course], list)
     ]
     filledInCourses = {
-        course: [get_course(course)["UOC"], userData["courses"][course]]
+        course: [get_course(course)['UOC'], userData["courses"][course]]
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
@@ -141,7 +142,7 @@ def get_courses() -> list[Dict]:
         },
     },
 )
-def get_course(courseCode: str) -> Dict:
+def get_course(courseCode: str):
     """
     Get info about a course given its courseCode
     - start with the current database
@@ -198,7 +199,7 @@ def get_course(courseCode: str) -> Dict:
         }
     },
 )
-def search(userData: UserData, search_string: str) -> Dict[str, str]:
+def search(search_string: str, token: str = DUMMY_TOKEN) -> Dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
@@ -208,13 +209,15 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
             ……. }
     """
     from server.routers.programs import get_structure
+    from server.routers.user import get_user
 
     all_courses = fetch_all_courses()
 
-    specialisations = list(userData.specialisations)
+    user = get_user(token)
+    specialisations = list(user['degree']['specs'])
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = get_structure(userData.program, "+".join(specialisations))['structure']
+    structure = get_structure(user['degree']['programCode'], "+".join(specialisations))['structure']
 
     top_results = sorted(all_courses.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -268,6 +271,7 @@ def regex_search(search_string: str) -> Mapping[str, str]:
             },
         },
     },
+    deprecated=True
 )
 def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """
@@ -336,16 +340,16 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year: str, courseCode: str) -> Dict:
+def get_legacy_course(year: str, courseCode: str):
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = archivesDB[year].find_one({"code": courseCode})
+    result = archivesDB.get_collection(year).find_one({"code": courseCode})
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
-    result["is_legacy"] = True
+    result["is_legacy"] = False # not a legacy, assuming you know what you are doing
     return result
 
 
@@ -617,13 +621,13 @@ def weight_course(
 
     return weight
 
-def get_course_info(course: str, year: str | int = LIVE_YEAR) -> Dict:
+def get_course_info(course: str, year: str | int = LIVE_YEAR):
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.
     If the year is not the LIVE_YEAR, then uses legacy information
     """
-    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(str(year), course)
+    return get_course(course) if int(year) >= int(LIVE_YEAR) else get_legacy_course(str(year), course)
 
 def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     """
@@ -631,7 +635,7 @@ def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     If the year is from the future then, backfill the LIVE_YEAR's results
     """
     year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
-    return get_course_info(course, year_to_fetch).get("terms", [])
+    return get_course_info(course, year_to_fetch)['terms'] or []
 
 def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """

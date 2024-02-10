@@ -8,9 +8,9 @@ type Props = {
 };
 
 const Spinner = ({ text }: Props) => (
-  <S.Wrapper>
+  <S.Wrapper className="loading-spinner">
     <Spin indicator={<LoadingOutlined style={{ fontSize: '2.5rem' }} spin />} />
-    <div>{text}</div>
+    <p>{text}</p>
   </S.Wrapper>
 );
 

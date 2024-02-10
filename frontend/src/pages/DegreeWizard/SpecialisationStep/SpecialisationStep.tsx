@@ -145,6 +145,7 @@ const SpecialisationStep = ({
         </CS.StepHeadingWrapper>
         {menuItems ? (
           <S.Menu
+            data-testid="menu"
             onSelect={(e) => handleAddSpecialisation(e.key)}
             onDeselect={(e) => handleRemoveSpecialisation(e.key)}
             selectedKeys={degreeInfo.specs}

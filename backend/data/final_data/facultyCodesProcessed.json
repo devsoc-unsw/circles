@@ -20,10 +20,10 @@
         "MATS",
         "MICR",
         "MSCI",
+        "NANO",
         "PHYS",
         "PSYC",
-        "SCIF",
-        "NANO"
+        "SCIF"
     ],
     "Civil and Environmental Engineering": [
         "CVEN"
@@ -473,8 +473,8 @@
         "INFS",
         "MARK",
         "MGMT",
-        "TABL",
-        "RISK"
+        "RISK",
+        "TABL"
     ],
     "F Arts": [
         "ADAD",
@@ -500,16 +500,14 @@
         "SART",
         "SDES",
         "SOCW",
-        "SOMA",
-        "SOSS",
-        "SRAP"
+        "SOSS"
     ],
     "F Engineering": [
         "AERO",
-        "AVEN",
         "BINF",
         "BIOM",
         "CEIC",
+        "CHEN",
         "COMP",
         "CVEN",
         "DESN",
@@ -526,12 +524,11 @@
         "MMAN",
         "MTRN",
         "NAVL",
+        "PHTN",
         "PTRL",
         "SENG",
         "SOLA",
-        "TELE",
-        "CHEN",
-        "PHTN"
+        "TELE"
     ],
     "F Medicine": [
         "ANAT",
@@ -550,11 +547,11 @@
         "PHCM",
         "PHRM",
         "PHSL",
-        "SOMS",
-        "VISN",
-        "YMED",
         "PSCY",
-        "SWCH"
+        "SOMS",
+        "SWCH",
+        "VISN",
+        "YMED"
     ],
     "F DVC": [
         "ATSI",
@@ -569,7 +566,7 @@
         "HUMS",
         "LAWS"
     ],
-    "F Global": [
+    "F College": [
         "DPBS",
         "DPDE",
         "DPGE",
@@ -582,7 +579,8 @@
         "ZGEN",
         "ZHSS",
         "ZINT",
-        "ZPEM"
+        "ZPEM",
+        "ZSPS"
     ],
     "S Accounting": [
         "ACCT",
@@ -599,12 +597,10 @@
         "DDES",
         "FADA",
         "SART",
-        "SDES",
-        "SOMA"
+        "SDES"
     ],
     "S Mechanical": [
         "AERO",
-        "AVEN",
         "ENGG",
         "GSOE",
         "MANF",
@@ -629,6 +625,7 @@
         "BENV",
         "BLDG",
         "CODE",
+        "FADA",
         "IDES",
         "INTA",
         "LAND",
@@ -649,11 +646,8 @@
     ],
     "S Social": [
         "ARTS",
-        "FADA",
-        "HUMS",
         "SOCW",
-        "SOSS",
-        "SRAP"
+        "SOSS"
     ],
     "S Nura": [
         "ATSI"
@@ -686,18 +680,22 @@
     ],
     "S Chemical": [
         "CEIC",
+        "CHEN",
         "ENGG",
-        "FOOD",
-        "CHEN"
+        "FOOD"
     ],
     "S Chemistry": [
         "CHEM",
-        "SCIF",
-        "NANO"
+        "NANO",
+        "SCIF"
     ],
     "S Information": [
         "COMM",
         "INFS"
+    ],
+    "S Economics": [
+        "COMM",
+        "ECON"
     ],
     "S Management": [
         "COMM",
@@ -727,27 +725,21 @@
         "HLTH",
         "PHRM"
     ],
-    "S Global": [
+    "S College": [
         "DPBS",
         "DPDE",
         "DPGE",
         "DPHU",
-        "DPST",
-        "GENL",
-        "LAWS"
-    ],
-    "S Economics": [
-        "ECON"
+        "DPST"
     ],
     "S Education": [
         "EDST"
     ],
     "S Electrical": [
         "ELEC",
-        "ENGG",
         "GENE",
-        "TELE",
-        "PHTN"
+        "PHTN",
+        "TELE"
     ],
     "S Division": [
         "EXCH"
@@ -757,6 +749,10 @@
         "GENC"
     ],
     "S Private": [
+        "GENL",
+        "LAWS"
+    ],
+    "S Global": [
         "GENL",
         "LAWS"
     ],
@@ -789,6 +785,10 @@
         "OPTM",
         "VISN"
     ],
+    "S Clinical": [
+        "PSCY",
+        "SWCH"
+    ],
     "S Psychology": [
         "PSYC"
     ],
@@ -799,16 +799,19 @@
         "ZBUS",
         "ZGEN"
     ],
-    "S UC-Engineering": [
+    "S Systems": [
+        "ZEIT",
+        "ZINT"
+    ],
+    "S Engineering": [
         "ZEIT",
         "ZINT"
     ],
     "S UC-Science": [
-        "ZINT",
+        "ZEIT",
         "ZPEM"
     ],
-    "S Clinical": [
-        "PSCY",
-        "SWCH"
+    "S Professional": [
+        "ZSPS"
     ]
 }

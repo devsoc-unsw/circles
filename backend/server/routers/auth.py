@@ -7,12 +7,13 @@ from fastapi import APIRouter, Cookie, Depends, HTTPException, Header, Request, 
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN, HTTP_400_BAD_REQUEST
 
-from server.routers.user import user_is_setup
+from server.routers.user import user_is_setup, default_cs_user, reset, set_user
 
 from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
 from .auth_utility.middleware import HTTPBearer401, SessionTokenValidator, ValidatedToken
 from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info, validate_authorization_response
 from .auth_utility.oidc_errors import OIDCError, OIDCValidationError
+
 
 router = APIRouter(
     prefix="/auth",
@@ -196,3 +197,9 @@ def get_validated_user(user: Annotated[ValidatedToken, Security(validated_uid)])
 def check_token(user: Annotated[ValidatedToken, Security(setup_uid)]):
     # TODO: check it is in database
     return
+
+@router.post('/token')
+def create_user_token(token: str):
+    print("\n\n\n\n/token called\n\n\n\n")
+    set_user(token, default_cs_user())
+    reset(token)

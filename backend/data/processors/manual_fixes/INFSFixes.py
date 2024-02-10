@@ -43,8 +43,7 @@ def fix_conditions():
     CONDITIONS["INFS4854"][PROCESSED] = INFS_4831_4854_4886()
     CONDITIONS["INFS4886"][PROCESSED] = INFS_4831_4854_4886()
 
-    CONDITIONS["INFS4858"][PROCESSED] = INFS_4858_4907()
-    CONDITIONS["INFS4907"][PROCESSED] = INFS_4858_4907()
+    CONDITIONS["INFS4858"][PROCESSED] = INFS_4858()
 
     CONDITIONS["INFS4887"][PROCESSED] = INFS4887()
 
@@ -119,7 +118,7 @@ def INFS_4831_4854_4886():
     return "INFS?H"
 
 
-def INFS_4858_4907():
+def INFS_4858():
     """
     "original": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
     "processed": "Enrolment in Streams: an Honours Program majoring in Information Systems (INFSAH || INFSBH || INFSCH)"

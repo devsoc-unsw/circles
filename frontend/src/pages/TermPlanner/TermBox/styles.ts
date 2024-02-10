@@ -10,7 +10,7 @@ type TermBoxWrapperProps = {
 const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
   margin: 1em;
   min-height: 18em;
-  min-width: 20em;
+  min-width: 21em;
   color: white;
   list-style: none;
   padding: 1.2em;
@@ -26,7 +26,7 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
     css`
       margin: 0.5em;
       min-height: 18em;
-      min-width: 15em;
+      min-width: 21em;
       padding: 1em;
       padding-top: 0.5em;
       border-radius: 1em;

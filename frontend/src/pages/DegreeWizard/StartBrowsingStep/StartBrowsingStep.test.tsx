@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import * as reactRouterDom from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,9 +12,9 @@ import StartBrowsingStep from './StartBrowsingStep';
 const mockDegreeInfo = {
   programCode: '3778',
   isComplete: false,
-  startYear: undefined,
-  endYear: undefined,
-  specs: []
+  startYear: 2020,
+  endYear: 2024,
+  specs: ['COMPA1']
 };
 
 describe('StartBrowsingStep', () => {
@@ -26,22 +27,15 @@ describe('StartBrowsingStep', () => {
     vi.clearAllMocks();
   });
 
-  it('should render', () => {
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
+  it('should render', async () => {
+    await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
     expect(screen.getByText('Start browsing courses!')).toBeInTheDocument();
   });
 
   it('should call openNotification when program code is not provided', async () => {
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
-      preloadedState: {
-        degree: {
-          programCode: '',
-          programName: '',
-          specs: [],
-          isComplete: false
-        }
-      }
-    });
+    const degreeInfo = { ...mockDegreeInfo };
+    degreeInfo.programCode = '';
+    await renderWithProviders(<StartBrowsingStep degreeInfo={degreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
     expect(openNotification).toBeCalledWith({
       message: 'Please select a degree',
@@ -50,16 +44,9 @@ describe('StartBrowsingStep', () => {
   });
 
   it('should call openNotification when a specialisation is not provided', async () => {
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
-      preloadedState: {
-        degree: {
-          programCode: '3778',
-          programName: 'Computer Science',
-          specs: [],
-          isComplete: false
-        }
-      }
-    });
+    const degreeInfo = { ...mockDegreeInfo };
+    degreeInfo.specs = [];
+    await renderWithProviders(<StartBrowsingStep degreeInfo={degreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
     expect(openNotification).toBeCalledWith({
       message: 'Please select a specialisation',
@@ -67,27 +54,13 @@ describe('StartBrowsingStep', () => {
     });
   });
 
-  it('should set setIsComplete and navigate to course selector', async () => {
-    const dummyDispatch = vi.fn();
-    useDispatchMock.mockReturnValue(dummyDispatch);
+  it('should navigate to course selector', async () => {
     const dummyNavigate = vi.fn();
     useNavigateMock.mockReturnValue(dummyNavigate);
-
-    renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />, {
-      preloadedState: {
-        degree: {
-          programCode: '3778',
-          programName: 'Computer Science',
-          specs: ['COMPA1'],
-          isComplete: false
-        }
-      }
-    });
+    await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
-    expect(dummyDispatch).toBeCalledWith({
-      payload: true,
-      type: 'degree/setIsComplete'
+    await act(async () => {
+      await vi.waitFor(() => expect(dummyNavigate).toBeCalledWith('/course-selector'));
     });
-    expect(dummyNavigate).toBeCalledWith('/course-selector');
   });
 });

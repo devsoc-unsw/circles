@@ -10,6 +10,11 @@ declare module 'styled-components' {
 
     body: string;
     text: string;
+    scrollbar: {
+      trackingAreaColor: string;
+      scrollbarColor: string;
+      scollbarBorderColor: string;
+    };
     droppable: {
       backgroundColor: string;
     };
@@ -42,9 +47,45 @@ declare module 'styled-components' {
     termBoxWrapper: {
       borderColor: string;
     };
+
     optionsHeader: {
       borderColor: string;
+      borderAlternativeColor: string;
+      buttonBorderColor: string;
+      buttonBackgroundColor: string;
+      buttonHoverColor: string;
+      buttonHoverAlternativeColor: string;
     };
+    editMark: {
+      backgroundColor: string;
+      color: string;
+      borderColor: string;
+      borderColorHeader: string;
+      backgroundColorHover: string;
+    };
+    settingsMenuSelect: {
+      selectBackgroundColor: string;
+      selectBorderColor: string;
+      selectArrowColor: string;
+      optionBackgroundColor: string;
+      optionTextColor: string;
+      optionHoverBackgroundColor: string;
+    };
+    datePicker: {
+      inputBackgroundColor: string;
+      inputBorderColor: string;
+      calendarSvgFill: string;
+      clearSvgFill: string;
+      clearBackgroundColor: string;
+      bodyBackgroundColor: string;
+      arrowColor: string;
+      yearHoverBackgroundColor: string;
+      cellNotInViewColor: string;
+    };
+    popconfirm: {
+      backgroundColor: string;
+    };
+
     infoOutlined: {
       color: string;
     };
@@ -63,6 +104,56 @@ declare module 'styled-components' {
       hoverBackgroundColor: string;
     };
     courseMenu?: {
+      backgroundColor: string;
+      borderColor: string;
+      hrefColor: string;
+      hrefHoverColor: string;
+    };
+    searchBar: {
+      spinBackgroundColor: string;
+      backgroundColor: string;
+      boxShadow: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
+    };
+    courseDescription: {
+      paddingColor: string;
+    };
+    collapseBtnIcon: {
+      color: string;
+    };
+    quickAddRemoveBtn: {
+      addBackgroundColor: string;
+      removeBackgroundColor: string;
+      addBorderColor: string;
+    };
+    graph: {
+      backgroundColor: string;
+      borderColor: string;
+      tabColor: string;
+      tabBottomBorderColor: string;
+      tabTextColor: string;
+      tabBoxShadow?: string;
+      loadingIcon?: string;
+      loadingText: string;
+    };
+    sidebarDrawer: {
+      backgroundColor: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
+    };
+    genericButton: {
+      backgroundColor: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
+    };
+    bugIcon: {
+      backgroundColor: string;
+      borderColor: string;
+      hoverBackgroundColor: string;
+    };
+    loginSplash?: {
+      svgColor: string;
       backgroundColor: string;
     };
   }

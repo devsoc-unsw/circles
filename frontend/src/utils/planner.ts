@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { CourseMark } from 'types/api';
 import { UserResponse } from 'types/userResponse';
+import { getToken } from './api/userApi';
 
-// TODO: move this into api folder, and dont take a token??
-export const updateCourseMark = async (courseMark: CourseMark, token: string) => {
+// TODO: move this into api folder
+export const updateCourseMark = async (courseMark: CourseMark) => {
+  const token = await getToken();
   try {
     await axios.put('/user/updateCourseMark', courseMark, { params: { token } });
   } catch (e) {

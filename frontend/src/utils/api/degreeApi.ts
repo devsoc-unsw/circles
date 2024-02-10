@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Programs } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getToken } from './userApi';
 
@@ -14,8 +15,6 @@ export const resetDegree = async () => {
 
 export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
   const token = await getToken();
-  // eslint-disable-next-line no-console
-  console.log('wiz: ', wizard);
   try {
     await axios.post('/user/setupDegreeWizard', wizard, { params: { token } });
   } catch (err) {
@@ -27,7 +26,7 @@ export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
 
 export const handleDegreeChange = async ({ programCode }: { programCode: string }) => {
   const token = await getToken();
-  resetDegree();
+  await resetDegree();
   try {
     await axios.put('user/setProgram', null, {
       params: { programCode: programCode.substring(0, 4), token }
@@ -56,4 +55,9 @@ export const removeSpecialisation = async (specialisation: string) => {
     // eslint-disable-next-line no-console
     console.error('Error settingProgram at handleDegreeChange: ', err);
   }
+};
+
+export const getAllDegrees = async (): Promise<Record<string, string>> => {
+  const res = await axios.get<Programs>('/programs/getPrograms');
+  return res.data.programs;
 };

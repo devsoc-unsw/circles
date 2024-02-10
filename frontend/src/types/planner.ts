@@ -19,7 +19,8 @@ export type PlannerCourse = {
   warnings: string[];
   handbookNote: string;
   isAccurate: boolean;
-  supressed: boolean;
+  suppressed: boolean;
+  ignoreFromProgression: boolean;
   isMultiterm: boolean;
   mark: Mark;
   legacyOfferings?: CourseLegacyOfferings;
@@ -36,6 +37,12 @@ export type UnPlannedToTerm = {
   destRow: number;
   destTerm: string;
   destIndex: number;
+  courseCode: string;
+};
+
+export type UnscheduleCourse = {
+  srcRow?: number;
+  srcTerm?: string;
   courseCode: string;
 };
 

@@ -61,5 +61,4 @@ const HeroContent = () => {
     </S.HeroContent>
   );
 };
-
 export default HeroContent;

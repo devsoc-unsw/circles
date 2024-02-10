@@ -1,6 +1,5 @@
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
-import { DegreeSliceState } from 'reducers/degreeSlice';
-import { PlannerSliceState } from 'reducers/plannerSlice';
 
 // key = course code, value = mark of course (number | null)
 type UserPayloadCourse = Record<string, number | null>;
@@ -11,13 +10,21 @@ type UserPayload = {
   specialisations: string[];
 };
 
-const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): UserPayload => {
-  const { courses } = planner;
+// TODO: Remove the slice types once fully migrated
+const prepareUserPayload = (
+  degree: DegreeResponse,
+  planner: PlannerResponse,
+  courses: CoursesResponse
+): UserPayload => {
   const { programCode, specs } = degree;
 
   const selectedCourses: UserPayloadCourse = {};
   Object.entries(courses).forEach(([courseCode, courseData]) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
+  });
+  planner.unplanned.forEach((courseCode) => {
+    selectedCourses[courseCode] = null;
   });
 
   return {

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import {
   ExpandAltOutlined,
@@ -6,17 +7,33 @@ import {
   ZoomInOutlined,
   ZoomOutOutlined
 } from '@ant-design/icons';
-import type { Graph, GraphOptions, INode, Item } from '@antv/g6';
-import { Button, Switch } from 'antd';
+import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
+import { Switch } from 'antd';
 import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked, GraphPayload } from 'types/api';
+import { CourseEdge, CoursesAllUnlocked } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
+import { getProgramGraph } from 'utils/api/programsApi';
+import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
+import { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
-import { defaultEdge, defaultNode, mapNodeStyle, nodeStateStyles } from './graph';
+import {
+  defaultEdge,
+  edgeInHoverStyle,
+  edgeOutHoverStyle,
+  edgeUnhoverStyle,
+  mapEdgeOpacity,
+  mapNodeOpacity,
+  mapNodePrereq,
+  mapNodeStyle,
+  nodeLabelHoverStyle,
+  nodeLabelUnhoverStyle,
+  nodeStateStyles,
+  plannedNode
+} from './graph';
 import S from './styles';
 
 type Props = {
@@ -24,26 +41,152 @@ type Props = {
   handleToggleFullscreen: () => void;
   fullscreen: boolean;
   focused?: string;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused }: Props) => {
-  const { programCode, specs } = useSelector((state: RootState) => state.degree);
-  const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
-  const { degree, planner } = useSelector((state: RootState) => state);
+interface CoursePrerequisite {
+  [key: string]: string[];
+}
+
+const CourseGraph = ({
+  onNodeClick,
+  handleToggleFullscreen,
+  fullscreen,
+  focused,
+  loading,
+  setLoading
+}: Props) => {
+  const degreeQuery = useQuery('degree', getUserDegree);
+  const plannerQuery = useQuery('planner', getUserPlanner);
+  const coursesQuery = useQuery('courses', getUserCourses);
   const windowSize = useAppWindowSize();
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const previousTheme = useRef<typeof theme>(theme);
 
   const graphRef = useRef<Graph | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [unlockedCourses, setUnlockedCourses] = useState(false);
+  const initialisingStart = useRef(false); // prevents multiple graphs being loaded
+  const initialisingEnd = useRef(false); // unhide graph after loading complete
+  const [prerequisites, setPrerequisites] = useState<CoursePrerequisite>({});
 
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [showingUnlockedCourses, setShowingUnlockedCourses] = useState(false);
+
+  const programGraphQuery = useQuery({
+    queryKey: ['graph', { code: degreeQuery.data?.programCode, specs: degreeQuery.data?.specs }],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    queryFn: () => getProgramGraph(degreeQuery.data!.programCode, degreeQuery.data!.specs),
+    enabled: !degreeQuery.isLoading && degreeQuery.data && degreeQuery.isSuccess
+  });
+
+  const queriesSuccess =
+    degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
 
   useEffect(() => {
-    // courses is a list of course codes
-    const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
+    const isCoursePrerequisite = (target: string, neighbour: string) => {
+      const prereqs = prerequisites[target] || [];
+      return prereqs.includes(neighbour);
+    };
+
+    const addNeighbourStyles = async (nodeItem: Item) => {
+      const node = nodeItem as INode;
+      const neighbours = node.getNeighbors();
+      const opacity = theme === 'light' ? 0.3 : 0.4;
+      const { Arrow } = await import('@antv/g6');
+
+      // Every other node and edge becomes less visible
+      graphRef.current?.getNodes().forEach((n) => {
+        graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
+        n.getEdges().forEach((e) => {
+          graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), opacity));
+        });
+        n.toBack();
+      });
+      // Highlight node's edges
+      node.getOutEdges().forEach((e) => {
+        graphRef.current?.updateItem(e, edgeOutHoverStyle(Arrow, theme, e.getID()));
+        e.toFront();
+      });
+      node.getInEdges().forEach((e) => {
+        graphRef.current?.updateItem(e, edgeInHoverStyle(Arrow, theme, e.getID()));
+        e.toFront();
+      });
+      // Target node and neighbouring nodes remain visible
+      node.toFront();
+      graphRef.current?.updateItem(node as Item, mapNodeOpacity(node.getID(), 1));
+      neighbours.forEach((n) => {
+        graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
+        n.toFront();
+        const courseId = n.getID();
+        if (isCoursePrerequisite(node.getID(), courseId)) {
+          graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
+        }
+      });
+    };
+
+    const removeNeighbourStyles = async (nodeItem: Item) => {
+      const node = nodeItem as INode;
+      const edges = node.getEdges();
+      const { Arrow } = await import('@antv/g6');
+      const courses = unwrapQuery(coursesQuery.data);
+      edges.forEach((e) => {
+        graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
+      });
+      graphRef.current?.getNodes().forEach((n) => {
+        const courseId = n.getID();
+        graphRef.current?.updateItem(
+          n as Item,
+          mapNodeStyle(courseId, courses[courseId].plannedFor, courses[courseId].unlocked, theme)
+        );
+        graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
+        n.toFront();
+      });
+      graphRef.current?.getEdges().forEach((e) => {
+        graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), 1));
+      });
+    };
+
+    // On hover: add styles
+    const addHoverStyles = (ev: IG6GraphEvent) => {
+      const node = ev.item as Item;
+      graphRef.current?.setItemState(node, 'hover', true);
+      graphRef.current?.updateItem(node, nodeLabelHoverStyle(node.getID()));
+      addNeighbourStyles(node);
+      graphRef.current?.paint();
+    };
+
+    // On hover: remove styles
+    const addUnhoverStyles = (ev: IG6GraphEvent) => {
+      const courses = unwrapQuery(coursesQuery.data);
+      const node = ev.item as Item;
+      graphRef.current?.clearItemStates(node, 'hover');
+      graphRef.current?.updateItem(
+        node,
+        nodeLabelUnhoverStyle(node.getID(), courses[node.getID()].plannedFor, theme)
+      );
+      removeNeighbourStyles(node);
+      graphRef.current?.paint();
+    };
+
+    // Store a hashmap for performance reasons when highlighting nodes
+    const makePrerequisitesMap = (edges: CourseEdge[] | undefined) => {
+      const prereqs: CoursePrerequisite = prerequisites;
+      edges?.forEach((e) => {
+        if (!prereqs[e.target]) {
+          prereqs[e.target] = [e.source];
+        } else {
+          prereqs[e.target].push(e.source);
+        }
+      });
+      setPrerequisites(prereqs);
+    };
+
+    const initialiseGraph = async () => {
       const container = containerRef.current;
       if (!container) return;
-
+      const courses = unwrapQuery(coursesQuery.data);
+      const programs = unwrapQuery(programGraphQuery.data);
+      makePrerequisitesMap(programs?.edges);
       const { Graph, Arrow } = await import('@antv/g6');
 
       const graphArgs: GraphOptions = {
@@ -60,6 +203,7 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           nodeStrength: 2500,
           preventOverlap: true,
           onLayoutEnd: () => {
+            initialisingEnd.current = true;
             setLoading(false);
           }
         },
@@ -68,20 +212,24 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           duration: 500, // Number, the duration of one animation
           easing: 'easeQuadInOut' // String, the easing function
         },
-        defaultNode,
-        defaultEdge: defaultEdge(Arrow),
+        groupByTypes: false,
+        defaultNode: plannedNode,
+        defaultEdge: defaultEdge(Arrow, theme),
         nodeStateStyles
       };
-
       graphRef.current = new Graph(graphArgs);
-
       const data = {
-        nodes: courses.map((c) => mapNodeStyle(c, plannedCourses)),
-        edges: courseEdges
+        nodes: programs.courses?.map((c) =>
+          mapNodeStyle(c, courses[c]?.plannedFor, courses[c]?.unlocked, theme)
+        ),
+        edges: programs.edges
       };
 
+      // Hide graph until it's finished loaded, due to incomplete initial graph generation
       graphRef.current.data(data);
       graphRef.current.render();
+      graphRef.current.getNodes().forEach((n) => n.hide());
+      graphRef.current.getEdges().forEach((e) => e.hide());
 
       graphRef.current.on('node:click', async (ev) => {
         // Clicking a node loads up course description for the course and set active
@@ -90,31 +238,82 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
       });
 
       graphRef.current.on('node:mouseenter', async (ev) => {
-        const node = ev.item as Item;
-        graphRef.current?.setItemState(node, 'hover', true);
+        addHoverStyles(ev);
       });
 
       graphRef.current.on('node:mouseleave', async (ev) => {
-        const node = ev.item as Item;
-        graphRef.current?.clearItemStates(node, 'hover');
+        addUnhoverStyles(ev);
       });
+    };
+
+    // Without re-render, update styling for: each node, hovering state and edges
+    const repaintCanvas = async () => {
+      const nodes = graphRef.current?.getNodes();
+      const courses = unwrapQuery(coursesQuery.data);
+      nodes?.map((n) =>
+        graphRef.current?.updateItem(
+          n,
+          mapNodeStyle(n.getID(), courses[n.getID()].plannedFor, courses[n.getID()].unlocked, theme)
+        )
+      );
+
+      graphRef.current?.off('node:mouseenter');
+      graphRef.current?.off('node:mouseleave');
+      graphRef.current?.on('node:mouseenter', async (ev) => {
+        addHoverStyles(ev);
+      });
+      graphRef.current?.on('node:mouseleave', async (ev) => {
+        addUnhoverStyles(ev);
+      });
+
+      const { Arrow } = await import('@antv/g6');
+      const edges = graphRef.current?.getEdges();
+      edges?.map((e) => graphRef.current?.updateItem(e, defaultEdge(Arrow, theme)));
+      graphRef.current?.paint();
     };
 
     const setupGraph = async () => {
       try {
-        const res = await axios.get<GraphPayload>(
-          `/programs/graph/${programCode}/${specs.join('+')}`
-        );
-        const { edges, courses } = res.data;
-        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+        if (
+          !degreeQuery.data ||
+          !coursesQuery.data ||
+          !plannerQuery.data ||
+          !programGraphQuery.data
+        )
+          return;
+        initialisingStart.current = true;
+        initialiseGraph();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Error at setupGraph', e);
       }
     };
 
-    if (!graphRef.current) setupGraph();
-  }, [onNodeClick, plannedCourses, programCode, specs]);
+    if (!initialisingStart.current) setupGraph();
+    // Change theme without re-render
+    if (previousTheme.current !== theme) {
+      previousTheme.current = theme;
+      repaintCanvas();
+    }
+  }, [
+    onNodeClick,
+    degreeQuery,
+    theme,
+    prerequisites,
+    setLoading,
+    coursesQuery.data,
+    plannerQuery.data,
+    programGraphQuery.data
+  ]);
+
+  // Show all nodes and edges once graph is initially loaded
+  useEffect(() => {
+    if (initialisingEnd.current) {
+      graphRef.current?.getNodes().forEach((n) => n.show());
+      graphRef.current?.getEdges().forEach((e) => e.show());
+      initialisingEnd.current = false;
+    }
+  }, [loading]);
 
   const showAllCourses = () => {
     if (!graphRef.current) return;
@@ -124,12 +323,16 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
 
   const showUnlockedCourses = useCallback(async () => {
     if (!graphRef.current) return;
+    const degree = unwrapQuery(degreeQuery.data);
+    const planner = unwrapQuery(plannerQuery.data);
+    const courses = unwrapQuery(coursesQuery.data);
     try {
+      setLoading(true);
       const {
         data: { courses_state: coursesStates }
       } = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner))
+        JSON.stringify(prepareUserPayload(degree, planner, courses))
       );
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();
@@ -143,11 +346,12 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
           n.getEdges().forEach((e) => e.hide());
         }
       });
+      setLoading(false);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at showUnlockedCourses', e);
     }
-  }, [degree, planner]);
+  }, [degreeQuery.data, plannerQuery.data, coursesQuery.data, setLoading]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
@@ -193,26 +397,27 @@ const CourseGraph = ({ onNodeClick, handleToggleFullscreen, fullscreen, focused 
   }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
-    if (unlockedCourses) showUnlockedCourses();
+    if (!queriesSuccess) return;
+    if (showingUnlockedCourses) showUnlockedCourses();
     else showAllCourses();
-  }, [planner.courses, showUnlockedCourses, unlockedCourses]);
+  }, [showUnlockedCourses, showingUnlockedCourses, queriesSuccess]);
 
   return (
     <S.Wrapper ref={containerRef}>
-      {loading ? (
-        <S.SpinnerWrapper>
+      {loading && queriesSuccess && queriesSuccess ? (
+        <S.SpinnerWrapper className="spinner-wrapper">
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>
       ) : (
         <S.ToolsWrapper>
           Show All Courses
           <Switch
-            checked={!unlockedCourses}
-            onChange={() => setUnlockedCourses((prevState) => !prevState)}
+            checked={!showingUnlockedCourses}
+            onChange={() => setShowingUnlockedCourses((prevState) => !prevState)}
           />
-          <Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
-          <Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
-          <Button
+          <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
+          <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
+          <S.Button
             onClick={handleToggleFullscreen}
             icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
           />

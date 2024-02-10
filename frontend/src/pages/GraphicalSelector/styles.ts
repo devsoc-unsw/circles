@@ -24,16 +24,17 @@ const GraphWrapper = styled.div<{ fullscreen: boolean }>`
     !fullscreen &&
     css`
       border-radius: 20px;
-      border: #c2c2c2 solid 1px;
+      border: ${({ theme }) => theme.graph.borderColor} solid 1px;
     `}
 `;
 
 const SidebarWrapper = styled.div`
   border-radius: 20px;
-  border: #c2c2c2 solid 1px;
+  border: ${({ theme }) => theme.graph.borderColor} solid 1px;
   padding: 10px;
   flex: 2;
   overflow-y: auto;
+  background-color: ${({ theme }) => theme.graph.backgroundColor};
 `;
 
 const SearchBarWrapper = styled.div`

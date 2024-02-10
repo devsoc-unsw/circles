@@ -17,18 +17,20 @@ const OptionSection = styled.div`
 `;
 
 const OptionButton = styled.button`
-  border: 1px solid #cecece;
+  border-color: ${({ theme }) => theme.optionsHeader.buttonBorderColor};
+  border-width: 1px;
+  border-style: solid;
   border-radius: 20%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.optionsHeader.buttonBackgroundColor};
 
   &:hover {
     cursor: pointer;
-    background-color: #e3e3e3;
+    background-color: ${({ theme }) => theme.optionsHeader.buttonHoverColor};
   }
 `;
 
