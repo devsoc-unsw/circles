@@ -1,7 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { SmileOutlined } from '@ant-design/icons';
 import { ThemeProvider } from 'styled-components';
+import openNotification from 'utils/openNotification';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
@@ -24,6 +26,38 @@ const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
   const degree = useSelector((state: RootState) => state.degree);
+
+  // temporary subcommittee recruitment drive notification
+  // TODO: either remove or productionise this later
+  useEffect(() => {
+    // using local storage since I don't want to risk invalidating the redux state right now
+    const cooldownMs = 1000 * 60 * 60 * 23; // every 23 hours
+    const lastSeen = localStorage.getItem('last-seen-recruitment');
+    if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) {
+      return;
+    }
+
+    localStorage.setItem('last-seen-recruitment', Date.now().toString());
+
+    openNotification({
+      type: 'info',
+      message: 'Subcommittee Recruitment!',
+      description: (
+        <>
+          Interested in working on Circles or one of our other student-led projects? DevSoc is
+          currently recruiting members for our 2024 subcommittee!
+          <br />
+          <br />
+          Find out more at{' '}
+          <a href="https://devsoc.app/get-involved" target="_blank" rel="noopener noreferrer">
+            devsoc.app/get-involved
+          </a>
+        </>
+      ),
+      duration: 0,
+      icon: <SmileOutlined style={{ color: lightTheme.purplePrimary }} />
+    });
+  }, []);
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
