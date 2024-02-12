@@ -30,6 +30,15 @@ const App = () => {
   // temporary subcommittee recruitment drive notification
   // TODO: either remove or productionise this later
   useEffect(() => {
+    // using local storage since I don't want to risk invalidating the redux state right now
+    const cooldownMs = 1000 * 60 * 60 * 23; // every 23 hours
+    const lastSeen = localStorage.getItem('last-seen-recruitment');
+    if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) {
+      return;
+    }
+
+    localStorage.setItem('last-seen-recruitment', Date.now().toString());
+
     openNotification({
       type: 'info',
       message: 'Subcommittee Recruitment!',
