@@ -91,11 +91,11 @@ def cache_mappings():
     def tokeniseFaculty(Faculty):
         faculty_token = "F "
         if re.search("Faculty of.+", Faculty):
-            match_object = re.search("(?<=Faculty\sof\s)[^\s\n\,]+", Faculty)
+            match_object = re.search(r"(?<=Faculty\sof\s)[^\s\n\,]+", Faculty)
         elif re.search("UNSW", Faculty):
             match_object = re.search(r"(?<=UNSW\s)[^\s\n\,]+", Faculty)
         else:
-            match_object = re.search("^([\w]+)", Faculty)
+            match_object = re.search(r"^([\w]+)", Faculty)
         if match_object is None:
             raise KeyError(f'no match found for faculty: {Faculty}')
         match = match_object.group()
@@ -105,20 +105,20 @@ def cache_mappings():
     # Tokenise faculty using regex, e.g 'School of Psychology' -> 'S Psychology'
     def tokeniseSchool(School):
         school_token = "S "
-        if re.search("School\sof\sthe.+", School):
+        if re.search(r"School\sof\sthe.+", School):
             match_object = re.search("(?<=School\sof\sthe\s)[^\s\n\,]+", School)
-        elif re.search("School\sof\s.+", School):
-            match_object = re.search("(?<=School\sof\s)[^\s\n\,]+", School)
+        elif re.search(r"School\sof\s.+", School):
+            match_object = re.search(r"(?<=School\sof\s)[^\s\n\,]+", School)
         elif re.search("^(UC)", School):
-            match_object = re.search("(?<=UC\s)[^\s\n\,]+", School)
+            match_object = re.search(r"(?<=UC\s)[^\s\n\,]+", School)
             if match_object is None:
                 raise KeyError(f'no match found for school: {School}')
             match = school_token + "UC-" +  match_object.group()
             return match
         elif re.search("UNSW", School):
-            match_object = re.search("(?<=UNSW\s)[^\s\n\,]+", School)
+            match_object = re.search(r"(?<=UNSW\s)[^\s\n\,]+", School)
         else:
-            match_object = re.search("^([\w]+)", School)
+            match_object = re.search(r"^([\w]+)", School)
         if match_object is None:
             raise KeyError(f'no match found for school: {School}')
         match = match_object.group()
