@@ -40,7 +40,7 @@ def tokenise_maturity_requirement(condition: Dict[str, str]):
     }
 
 def tokenise_dependency(condition: str) -> List[str]:
-    """
+    r"""
     This is literally just a condition. At time of writing, it follows one of the following form
         - Must have completed \d UOC
         - Must complete all level \d [CATEGORY] courses
@@ -64,12 +64,12 @@ def tokenise_uoc_dependency(condition: str) -> List[str]:
     Example input: "Must have completed 24 UOC"
 
     """
-    num_uoc: Optional[re.Match[str]] = re.search("(\d+)", condition)
+    num_uoc: Optional[re.Match[str]] = re.search(r"(\d+)", condition)
 
     return ["UOC", num_uoc.group()] if num_uoc else ["UOC", "0"]
 
 def tokenise_core_dependency(condition: str):
-    """
+    r"""
     Tokenise the core dependency.
     Assumes that the caller has already verified that the given condition is core only.
 
@@ -87,7 +87,7 @@ def tokenise_core_dependency(condition: str):
     # Keep only tokens with meaning
     tokens_filtered: List[str] = [
         token for token in tokens_raw
-        if re.search("([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", token)
+        if re.search(r"([lL]evel)|(\d+)|(prescribed)|([A-Z]{4})", token)
     ]
 
     # Clean tokens into a regular form readable by processors
@@ -113,7 +113,7 @@ def compress_cores_tokens(tokens: List[str]) -> List[str]:
     return list(tokens_out)
 
 def compress_level_tokens(tokens: List[str]) -> List[str]:
-    """
+    r"""
     Take in a list of tokens [..., "Level", "\d", ...]
     and simplify to [..., "L\d", ...]
     """
@@ -160,7 +160,7 @@ def tokenise_dependent(condition: str):
     # Keep only tokens with meaning
     tokens = list(filter(
             # Groups (left -> right): level, FacultyCode, Number
-            lambda tok: re.search("([Ll]evel)|(^[A-Za-z]{4}$)|(\d+)", tok),
+            lambda tok: re.search(r"([Ll]evel)|(^[A-Za-z]{4}$)|(\d+)", tok),
             tokens
         ))
     # Clean tokens into a regular form readable by processors
