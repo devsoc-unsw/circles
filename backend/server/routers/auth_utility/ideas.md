@@ -1,0 +1,22 @@
+- redis is just `session_token -> { sid, uid, exp }` (or eventually just use inbuilt TTL)
+  - the sid is not just that token, its for all sessions that came from that refresh chain
+  - to logout a session, kill all session_tokens that have the sid
+  - index on sid and uid so we can do so
+- tokens are just UNIQUE random strings
+- in persisted somewhere
+  - we store `refresh_token -> { sid, uid, exp }`
+    - this needs to persist as we dont want to log out if server restarts
+  - we store `sid -> { oidc_info, curr_refresh_token }`
+    - this is used to refresh the oidc info when needed
+    - and check that their oidc session is still up to date
+  - we store `uid -> { sessions: sid[], user_info, ... }`
+
+- a session token lasts 15 minutes
+- a refresh token lasts 7-30 days (or as long as the oidc token does)
+- sessions last as long as they are refreshed for
+
+- now that tokens are opaque, on identity endpoint, we return
+  - body: `{ session_token, exp, uid }`
+    - use the uid for caching against
+    - use the exp to figure out if we should do a preflight request for a new pair
+  - cookies: `{ refresh_token }`

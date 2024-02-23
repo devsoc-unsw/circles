@@ -14,7 +14,7 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
 import requests
 
 from .constants import CLIENT_ID, CLIENT_SECRET
-from .oidc_errors import OIDCTokenError, OIDCValidationError, OIDCUnknownError, OIDCUserInfoError
+from .errors import OIDCTokenError, OIDCValidationError, OIDCUnknownError, OIDCUserInfoError
 
 # csesoc_issuer_info = requests.get("https://id.csesoc.unsw.edu.au/.well-known/openid-configuration")
 ISSUER = "https://id.csesoc.unsw.edu.au"
