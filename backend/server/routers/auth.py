@@ -9,20 +9,20 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN, HTTP_400
 
 from server.routers.user import user_is_setup, default_cs_user, reset, set_user
 
-from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
-from .auth_utility.middleware import HTTPBearer401, SessionTokenValidator, ValidatedToken
-from .auth_utility.oidc_requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info, validate_authorization_response
-from .auth_utility.oidc_errors import OIDCError, OIDCValidationError
+# from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
+from .auth_utility.middleware import HTTPBearer401
+from .auth_utility.oidc.requests import UserInfoResponse, exchange_and_validate, generate_oidc_auth_url, get_user_info, validate_authorization_response
+from .auth_utility.oidc.errors import OIDCError, OIDCValidationError
 
 
 router = APIRouter(
     prefix="/auth",
     tags=["auth"],
 )
-sessions = SessionStorage()
+# sessions = SessionStorage()
 require_token = HTTPBearer401()
-validated_uid = SessionTokenValidator(session_store=sessions)
-setup_uid = SessionTokenValidator(session_store=sessions, check_user_is_setup=user_is_setup)
+# validated_uid = SessionTokenValidator(session_store=sessions)
+# setup_uid = SessionTokenValidator(session_store=sessions, check_user_is_setup=user_is_setup)
 
 
 class UnauthorizedModel(BaseModel):
@@ -37,9 +37,9 @@ class ExchangeCodePayload(BaseModel):
 class IdentityPayload(BaseModel):
     session_token: str
 
-@router.delete("/killallsessions")
-def kill_all_sessions():
-    sessions.empty()
+# @router.delete("/killallsessions")
+# def kill_all_sessions():
+#     sessions.empty()
 
 @router.get(
     "/identity", 

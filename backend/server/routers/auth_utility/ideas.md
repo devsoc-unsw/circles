@@ -14,6 +14,8 @@
 - a session token lasts 15 minutes
 - a refresh token lasts 7-30 days (or as long as the oidc token does)
 - sessions last as long as they are refreshed for
+  - so give them a TTL of `ref_tok_TTL + 1` so if all refresh tokens get lost, they still die eventually
+  - refresh this TTL everytime its refreshed
 
 - now that tokens are opaque, on identity endpoint, we return
   - body: `{ session_token, exp, uid }`
