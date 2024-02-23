@@ -157,7 +157,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           content: rating ? (
             <>
               <S.RatingWrapper>
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center', width: '85px' }}>
                   <Progress
                     type="dashboard"
                     percent={rating.enjoyability ? (rating.enjoyability / 5) * 100 : 0}
@@ -168,7 +168,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                   />
                   <p style={{ fontSize: 'small' }}>Enjoyability</p>
                 </div>
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center', width: '85px' }}>
                   <Progress
                     type="dashboard"
                     percent={rating.usefulness ? (rating.usefulness / 5) * 100 : 0}
@@ -177,7 +177,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                   />
                   <p style={{ fontSize: 'small' }}>Usefulness</p>
                 </div>
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center', width: '85px' }}>
                   <Progress
                     type="dashboard"
                     percent={rating.manageability ? (rating.manageability / 5) * 100 : 0}
@@ -195,7 +195,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                   defaultValue={rating.overallRating ? rating.overallRating : 0}
                   allowHalf
                 />
-                <p>Overall Rating</p>
+                <p>Overall</p>
               </div>
               <S.Link
                 href={`https://unilectives.csesoc.app/course/${code}/`}
