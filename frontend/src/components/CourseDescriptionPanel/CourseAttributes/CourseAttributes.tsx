@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Progress, Rate, Typography } from 'antd';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
 import ProgressBar from 'components/ProgressBar';
@@ -15,9 +15,51 @@ type CourseAttributesProps = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
+interface UnilectivesCourse {
+  courseCode: string;
+  archived: boolean;
+  // attributes: any[];
+  calendar: string;
+  campus: string;
+  description: string;
+  enrolmentRules: string;
+  equivalents: string[];
+  exclusions: string[];
+  faculty: string;
+  fieldOfEducation: string;
+  genEd: boolean;
+  level: number;
+  school: string;
+  studyLevel: string;
+  terms: number[];
+  title: string;
+  uoc: number;
+  overallRating: number;
+  manageability: number;
+  usefulness: number;
+  enjoyability: number;
+  reviewCount: number;
+}
+
+const getCourseRating = async (code: string) => {
+  const res = await fetch(`https://unilectives.devsoc.app/api/v1/course/${code}`);
+  if (res.status !== 200) return undefined;
+  return ((await res.json()) as { course: UnilectivesCourse }).course;
+};
+
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
+
+  const [rating, setRating] = React.useState<UnilectivesCourse | undefined>(undefined);
+
+  React.useEffect(() => {
+    const fetchRating = async () => {
+      const r = await getCourseRating(course.code);
+      if (r) setRating(r);
+    };
+    fetchRating();
+  }, [course.code]);
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
 
@@ -109,6 +151,63 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
         {
           title: 'Units of Credit',
           content: UOC
+        },
+        {
+          title: 'Unilectives Rating',
+          content: rating ? (
+            <>
+              <S.RatingWrapper>
+                <div style={{ textAlign: 'center' }}>
+                  <Progress
+                    type="dashboard"
+                    percent={rating.enjoyability ? (rating.enjoyability / 5) * 100 : 0}
+                    format={() =>
+                      `${rating.enjoyability ? rating.enjoyability.toFixed(1) : '?'} / 5`
+                    }
+                    width={65}
+                  />
+                  <p style={{ fontSize: 'small' }}>Enjoyability</p>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Progress
+                    type="dashboard"
+                    percent={rating.usefulness ? (rating.usefulness / 5) * 100 : 0}
+                    format={() => `${rating.usefulness ? rating.usefulness.toFixed(1) : '?'} / 5`}
+                    width={65}
+                  />
+                  <p style={{ fontSize: 'small' }}>Usefulness</p>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Progress
+                    type="dashboard"
+                    percent={rating.manageability ? (rating.manageability / 5) * 100 : 0}
+                    format={() =>
+                      `${rating.manageability ? rating.manageability.toFixed(1) : '?'} / 5`
+                    }
+                    width={65}
+                  />
+                  <p style={{ fontSize: 'small' }}>Manageability</p>
+                </div>
+              </S.RatingWrapper>
+              <div style={{ textAlign: 'center' }}>
+                <Rate
+                  disabled
+                  defaultValue={rating.overallRating ? rating.overallRating : 0}
+                  allowHalf
+                />
+                <p>Overall Rating</p>
+              </div>
+              <S.Link
+                href={`https://unilectives.csesoc.app/course/${code}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View full reviews on Unilectives
+              </S.Link>
+            </>
+          ) : (
+            <p>N/A</p>
+          )
         }
       ]
     : [];
