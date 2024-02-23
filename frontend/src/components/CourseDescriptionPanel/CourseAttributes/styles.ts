@@ -43,10 +43,6 @@ const RatingWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const RatingDial = styled.div`
-  text-align: center;
-`;
-
 export default {
   AttributeWrapper,
   AttributeText,
@@ -54,6 +50,5 @@ export default {
   AttributesWrapperConcise,
   AttributeConcise,
   Link,
-  RatingWrapper,
-  RatingDial
+  RatingWrapper
 };
