@@ -22,3 +22,59 @@
     - use the uid for caching against
     - use the exp to figure out if we should do a preflight request for a new pair
   - cookies: `{ refresh_token }`
+
+- TODO: what happens if we kill a session in mongo, but dont manage to kill its session tokens in redis
+  - we should know, if this happens we can handle?
+  - wont be able to refresh anyway so at MOST they get 15 minutes of play
+
+
+### Current MongoDB userdb Schema
+```
+users {
+  degree! { ... },
+  courses { ... },
+  planner! { ... },
+}
+
+tokens {
+  token! string,
+  objectId! objectId,
+}
+```
+
+### New MongoDB+Redis Schema
+
+#### Mongo
+```
+users {
+  uid! string,     // unique indexed, the uid we get back from the oidc
+  info! object,    // extra info that we gather from oidc
+  sessions uuid[], // potentially dont use this and just index on sid
+  degree! { ... },
+  courses! { ... },
+  planner! { ... },
+}
+
+refreshTokens {
+  tok! string,     // unique indexed
+  sid! uuid,       // indexed
+  uid! string,     // indexed
+  expiresAt! Date, // ttl indexed
+}
+
+sessions {
+  sid! uuid,       // unique indexed
+  uid! string,     // index on if we dont have the reverse lookup
+  oidcInfo! object,
+  currRefTok! string,
+  expiresAt! Date, // ttl indexed (should be same as the currRefTok expiry time, or +1 day)
+}
+```
+
+#### Redis
+```
+session_token:<token> {
+  sid! uuid,       // indexed
+  uid! string,     // indexed
+} with TTL
+```
