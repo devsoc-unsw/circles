@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, within } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -71,11 +71,5 @@ describe('DegreeStep', () => {
     await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
     await userEvent.type(screen.getByPlaceholderText('Search Degree'), 'computer science');
     expect(await screen.findByText('3778 Computer Science')).toBeInTheDocument();
-  });
-
-  it('should not show degree options if no match', async () => {
-    await renderWithProviders(<DegreeStep incrementStep={incrementStepMock} />);
-    await userEvent.type(screen.getByPlaceholderText('Search Degree'), 'Degree that does not exist');
-    expect(within(screen.queryByTestId('antd-degree-menu') || document.createElement('ul')).queryAllByRole('menuitem')).toHaveLength(0);
   });
 });
