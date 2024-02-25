@@ -19,9 +19,6 @@ def delete_HTML(s: str) -> str:
     will not be added.
     i.e. "hi <br/> there" -> "hi there"
     """
-    x = re.match(" *<[a-z]*/> *", s)
-    if x is None:
-        return s
     return re.sub(" *<[a-z]*/> *", " ", s, flags=re.IGNORECASE)
 
 
