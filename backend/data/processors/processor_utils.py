@@ -5,7 +5,7 @@ def replace_HTML_br_with_newline(s: str) -> str:
     """
     # Replace HTML <br> tags with a newline character
     """
-    return re.sub("<br/?>", "\n", s, flags=re.IGNORECASE)
+    return re.sub(pattern=r"<br/?>", repl="\n", string=s, flags=re.IGNORECASE)
 
 def delete_HTML(s: str) -> str:
     """

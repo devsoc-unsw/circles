@@ -1,4 +1,4 @@
-"""
+"""decripition
 Step in the course data's journey:
     [   ] Scrape raw data (coursesScraper.py)
     [   ] Format scraped data (coursesFormatting.py)

@@ -35,12 +35,6 @@ def format_course_data(year = None):
         get_exclusions(formatted_course, course_data)
         get_enrolment_rules(formatted_course, course_data)
 
-        smart_html_delete = lambda s: delete_HTML(replace_HTML_br_with_newline(s))
-        formatted_course = {
-            k: smart_html_delete(v)
-            for k, v in formatted_course.items()
-        }
-
         ALL_COURSES[course["code"]] = formatted_course
 
     data_helpers.write_data(
@@ -63,6 +57,8 @@ def initialise_course(raw: dict) -> dict:
         "study_level": raw.get("studyLevel"),
     }
 
+def smart_delete_html(s: str) -> str:
+    return delete_HTML(replace_HTML_br_with_newline(s))
 
 def get_faculty(formatted: dict, raw: dict) -> None:
     """Retrieves faculty details for course"""
@@ -133,7 +129,7 @@ def get_enrolment_rules(formatted: dict, raw: dict) -> None:
         for rule in raw["enrolment_rules"]:
             formatted_rule += rule.get("description")
 
-        formatted["enrolment_rules"] = formatted_rule
+        formatted["enrolment_rules"] = smart_delete_html(formatted_rule)
 
 
 if __name__ == "__main__":
