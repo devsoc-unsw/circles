@@ -6,6 +6,7 @@ Step in the course data's journey:
 """
 
 import re
+from data.processors.processor_utils import delete_HTML, replace_HTML_br_with_newline
 from data.utility import data_helpers
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json
@@ -62,8 +63,10 @@ def process_course_data(year = None):
 def process_description(processed: dict, formatted: dict) -> None:
     """Removes HTML tags from descriptions"""
     if formatted["description"]:
-        processed["description"] = re.sub(
-            r"<[^>]*?>", "", formatted["description"])
+        decripition = formatted["description"]
+        decripition = replace_HTML_br_with_newline(decripition)
+        decripition = delete_HTML(decripition)
+        processed["description"] = decripition
 
 
 def format_types(processed: dict) -> None:

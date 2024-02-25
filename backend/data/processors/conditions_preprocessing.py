@@ -12,6 +12,7 @@ import json
 import re
 
 from data.utility.data_helpers import read_data, write_data
+from data.processors.processor_utils import delete_HTML, replace_HTML_br_with_newline
 
 PREPROCESSED_CONDITIONS: dict[str, dict[str, str]] = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
@@ -115,6 +116,7 @@ def preprocess_condition(code, course=None):
 
     # Phase 1: Deletions
     processed = delete_exclusions_and_equivalents(processed)
+    processed = replace_HTML_br_with_newline(processed)
     processed = delete_HTML(processed)
     note, processed = remove_extraneous_handbook_data(processed)
     if note != "":
@@ -186,13 +188,6 @@ def delete_exclusions_and_equivalents(processed: str) -> str:
     processed = re.sub(r"((\.|,)?\s)?equiv.*?:.*", "", processed, flags=re.IGNORECASE)
 
     return processed
-
-
-def delete_HTML(processed: str) -> str:
-    """Remove HTML tags"""
-    # Will replace with a space because they sometimes appear in the middle of the text
-    # so "and<br/>12 UOC" would turn into and12 UOC
-    return re.sub("<[a-z]*/>", " ", processed, flags=re.IGNORECASE)
 
 
 def delete_self_referencing(code, processed):

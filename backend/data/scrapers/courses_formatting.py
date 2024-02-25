@@ -6,6 +6,7 @@ Step in the course data's journey:
 """
 
 import json
+from data.processors.processor_utils import delete_HTML, replace_HTML_br_with_newline
 from data.utility import data_helpers
 
 ALL_COURSES: dict = {}
@@ -33,6 +34,12 @@ def format_course_data(year = None):
         get_equivalents(formatted_course, course_data)
         get_exclusions(formatted_course, course_data)
         get_enrolment_rules(formatted_course, course_data)
+
+        smart_html_delete = lambda s: delete_HTML(replace_HTML_br_with_newline(s))
+        formatted_course = {
+            k: smart_html_delete(v)
+            for k, v in formatted_course.items()
+        }
 
         ALL_COURSES[course["code"]] = formatted_course
 
