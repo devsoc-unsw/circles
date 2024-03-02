@@ -28,12 +28,11 @@ const Footer = () => {
                 correction. This is not official advice, and you should confirm any statements are
                 correct before relying on it. You should confirm with official resources endorsed by
                 UNSW and any information found here may not necessarily represent those of the
-                University, Faculty, School, or the Computer Science and Engineering Society.
+                University, Faculty, School, or the Software Development Society.
               </div>
               <div>
-                You are responsible for planning your degree and the Computer Science and
-                Engineering Society have no responsibility on whether the information shown is
-                accurate.
+                You are responsible for planning your degree and the Software Development Society
+                has no responsibility on whether the information shown is accurate.
               </div>
               <div>Circles was made with love by students for students.</div>
             </S.FooterDisclaimer>
