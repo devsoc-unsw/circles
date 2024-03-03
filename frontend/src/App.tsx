@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import { SmileOutlined } from '@ant-design/icons';
+import { NotificationOutlined } from '@ant-design/icons';
 import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
 import ErrorBoundary from 'components/ErrorBoundary';
@@ -70,7 +70,7 @@ const App = () => {
         </>
       ),
       duration: 20,
-      icon: <SmileOutlined style={{ color: lightTheme.purplePrimary }} />
+      icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
     });
   }, []);
 
