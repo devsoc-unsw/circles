@@ -2,9 +2,10 @@ import json
 from secrets import token_urlsafe
 from time import time
 from typing import Dict, NewType, Optional, Tuple
+from uuid import uuid4
 from pydantic import BaseModel, PositiveInt
 
-SessionID = NewType('SessionID', int)
+SessionID = NewType('SessionID', str)
 SessionToken = NewType('SessionToken', str)
 RefreshToken = NewType('RefreshToken', str)
 
@@ -36,7 +37,6 @@ class Database(BaseModel):
     session_tokens: Dict[SessionToken, SessionTokenInfo]
     refresh_tokens: Dict[RefreshToken, RefreshTokenInfo]
     sessions: Dict[SessionID, Optional[SessionInfo]]
-    next_sid: int
 
 # TODO: DUMMY JSON LOADING
 # MOVE TO A SPLIT BETWEEN REDIS AND MONGO
@@ -50,7 +50,6 @@ def load_db() -> Database:
             session_tokens={},
             refresh_tokens={},
             sessions={},
-            next_sid=1,
         )
 
 def save_db(db: Database) -> None:
@@ -134,11 +133,10 @@ def setup_new_session() -> SessionID:
     # allocates a new session, generating the id
     # does not setup the info, as this should be run before we have the curr token
     db = load_db()
-    sid = SessionID(db.next_sid)  # TODO: this will be a INCR command to keep mutex
-    # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
 
-    db.next_sid += 1
+    sid = SessionID(str(uuid4()))  # TODO: this should be unique
     db.sessions[sid] = None  # indicate not yet setup
+    # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
 
     save_db(db)
     return sid
@@ -151,7 +149,7 @@ def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken
     db = load_db()
     if sid not in db.sessions:
         return False
-    
+  
     db.sessions[sid] = SessionInfo(
         oidc_info=info,
         curr_ref_token=curr_ref
