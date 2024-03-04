@@ -1,7 +1,7 @@
 import json
 from secrets import token_urlsafe
 from time import time
-from typing import Dict, NewType, Optional, Tuple
+from typing import Dict, NewType, Optional, Tuple, Union
 from uuid import uuid4
 from pydantic import BaseModel, PositiveInt
 
@@ -19,7 +19,7 @@ class SessionTokenInfo(BaseModel):
 class RefreshTokenInfo(BaseModel):
     # object stored against the refresh token
     sid: SessionID              # id of the session behind this token
-    uid: str                    # user who owns the session
+    # uid: str                    # user who owns the session
     _exp: int                   # time of expiry, will be replaced with a TTL on the cache
 
 class SessionOIDCInfo(BaseModel):
@@ -28,15 +28,20 @@ class SessionOIDCInfo(BaseModel):
     refresh_token: str          # most recent refresh token
     # validated_id_token: dict  # most recent valid id token object
 
+class NotSetupSession(BaseModel):
+    # object stored against the sid when session is not yet setup (brief time between during token generation)
+    uid: str                    # for validation and back lookup
+
 class SessionInfo(BaseModel):
     # object stored against the sid
+    uid: str                      # for validation and back lookup
     oidc_info: SessionOIDCInfo
     curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
 
 class Database(BaseModel):
     session_tokens: Dict[SessionToken, SessionTokenInfo]
     refresh_tokens: Dict[RefreshToken, RefreshTokenInfo]
-    sessions: Dict[SessionID, Optional[SessionInfo]]
+    sessions: Dict[SessionID, Union[NotSetupSession, SessionInfo]]
 
 # TODO: DUMMY JSON LOADING
 # MOVE TO A SPLIT BETWEEN REDIS AND MONGO
@@ -85,7 +90,12 @@ def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
 
 def get_session_info(sid: SessionID) -> Optional[SessionInfo]:
     db = load_db()
-    return db.sessions.get(sid)
+
+    info = db.sessions.get(sid)
+    if info is None or not isinstance(info, SessionInfo):
+        return None  # wasn't setup or doesnt exist
+
+    return info
 
 def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) -> Tuple[SessionToken, int]:
     # creates a new session, returning (token, expires_at)
@@ -108,7 +118,7 @@ def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: Positiv
     save_db(db)
     return (token, expires_at)
 
-def insert_new_refresh_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) -> RefreshToken:
+def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> RefreshToken:
     # creates a new session, returning (token, expires_at)
     assert ttl_seconds > 0
     db = load_db()
@@ -122,20 +132,19 @@ def insert_new_refresh_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) 
     expires_at = int(time()) + ttl_seconds
     db.refresh_tokens[token] = RefreshTokenInfo(
         sid=sid,
-        uid=uid,
         _exp=expires_at,
     )
     save_db(db)
 
     return token
 
-def setup_new_session() -> SessionID:
+def setup_new_session(uid: str) -> SessionID:
     # allocates a new session, generating the id
     # does not setup the info, as this should be run before we have the curr token
     db = load_db()
 
     sid = SessionID(str(uuid4()))  # TODO: this should be unique
-    db.sessions[sid] = None  # indicate not yet setup
+    db.sessions[sid] = NotSetupSession(uid=uid)
     # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
 
     save_db(db)
@@ -149,10 +158,11 @@ def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken
     db = load_db()
     if sid not in db.sessions:
         return False
-  
+
     db.sessions[sid] = SessionInfo(
+        uid=db.sessions[sid].uid,
         oidc_info=info,
-        curr_ref_token=curr_ref
+        curr_ref_token=curr_ref,
     )
     save_db(db)
 
