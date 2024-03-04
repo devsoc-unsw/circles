@@ -26,7 +26,7 @@ class SessionOIDCInfo(BaseModel):
     access_token: str           # most recent access token
     raw_id_token: str           # most recent id token string
     refresh_token: str          # most recent refresh token
-    # validated_id_token: dict  # most recent valid id token object
+    validated_id_token: dict    # most recent valid id token object
 
 class NotSetupSession(BaseModel):
     # object stored against the sid when session is not yet setup (brief time between during token generation)
@@ -118,7 +118,7 @@ def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: Positiv
     save_db(db)
     return (token, expires_at)
 
-def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> RefreshToken:
+def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[RefreshToken, int]:
     # creates a new session, returning (token, expires_at)
     assert ttl_seconds > 0
     db = load_db()
@@ -136,7 +136,7 @@ def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Refresh
     )
     save_db(db)
 
-    return token
+    return (token, expires_at)
 
 def setup_new_session(uid: str) -> SessionID:
     # allocates a new session, generating the id
