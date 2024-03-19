@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import { SmileOutlined } from '@ant-design/icons';
+import { NotificationOutlined } from '@ant-design/icons';
 import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
 import ErrorBoundary from 'components/ErrorBoundary';
@@ -27,35 +27,50 @@ const App = () => {
 
   const degree = useSelector((state: RootState) => state.degree);
 
-  // temporary subcommittee recruitment drive notification
-  // TODO: either remove or productionise this later
   useEffect(() => {
     // using local storage since I don't want to risk invalidating the redux state right now
-    const cooldownMs = 1000 * 60 * 60 * 23; // every 23 hours
-    const lastSeen = localStorage.getItem('last-seen-recruitment');
-    if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) {
-      return;
-    }
+    const cooldownMs = 1000 * 60 * 60 * 24 * 7; // every 7 days
+    const lastSeen = localStorage.getItem('last-seen-contribution');
+    if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) return;
 
-    localStorage.setItem('last-seen-recruitment', Date.now().toString());
+    localStorage.setItem('last-seen-contribution', Date.now().toString());
 
     openNotification({
       type: 'info',
-      message: 'Subcommittee Recruitment!',
+      message: 'Want to contribute?',
       description: (
         <>
-          Interested in working on Circles or one of our other student-led projects? DevSoc is
-          currently recruiting members for our 2024 subcommittee!
-          <br />
-          <br />
-          Find out more at{' '}
-          <a href="https://devsoc.app/get-involved" target="_blank" rel="noopener noreferrer">
-            devsoc.app/get-involved
+          Found a bug or have feedback? Open an issue on{' '}
+          <a
+            href="https://github.com/devsoc-unsw/circles/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>{' '}
+          or share your thoughts on{' '}
+          <a href="https://discord.gg/u9p34WUTcs" target="_blank" rel="noopener noreferrer">
+            Discord
           </a>
+          !
+          <br />
+          <br />
+          Feeling brave? You can even fix it yourself by submitting a{' '}
+          <a
+            href="https://github.com/devsoc-unsw/circles/pulls"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            pull request
+          </a>
+          !
+          <br />
+          <br />
+          Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
         </>
       ),
-      duration: 0,
-      icon: <SmileOutlined style={{ color: lightTheme.purplePrimary }} />
+      duration: 20,
+      icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
     });
   }, []);
 
