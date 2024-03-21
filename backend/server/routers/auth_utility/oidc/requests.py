@@ -1,16 +1,7 @@
 import base64
-import os
-from pprint import pprint
-from typing import Any, Dict, List, Literal, Optional, Tuple, TypedDict, cast
-from dotenv import load_dotenv
-from fastapi import HTTPException, Request
-from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
-from fastapi.security.base import SecurityBase
-from fastapi.security.utils import get_authorization_scheme_param
-import jwt
+from typing import Dict, List, Literal, Tuple, TypedDict
 from urllib.parse import urlencode
-from pydantic import BaseModel
-from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_403_FORBIDDEN
+import jwt
 import requests
 
 from .constants import CLIENT_ID, CLIENT_SECRET
@@ -28,7 +19,12 @@ JWKS_ENDPOINT = "https://id.csesoc.unsw.edu.au/.well-known/jwks.json"
 
 SCOPES = "openid offline_access"
 
+REQUEST_TIMEOUT = 5
+
 # TODO: move to pydantic and handle as validation errors
+# TODO: should i add accepts json
+# TODO: move the above constants to a request to the config endpoint
+# TODO: handle the raw request errors like timeout and cannot establish connection
 
 class TokenResponse(TypedDict):
     access_token: str
@@ -48,7 +44,7 @@ class RefreshResponse(TypedDict):
     token_type: Literal["bearer"]
 
 class DecodedIDToken(TypedDict):
-    at_hash: str                # partial hash of access token  # TODO: read 3.2.2.9
+    at_hash: str                # partial hash of access token
     aud: list[str]              # audiences that token was intended for, seems to be hashed
     auth_time: int              # end user first authentication time
     exp: int                    # expiry time
@@ -57,7 +53,7 @@ class DecodedIDToken(TypedDict):
     jti: str                    # unique id of the JWT
     rat: int                    # token request time
     sid: str                    # session id
-    sub: str                    # unique identifier 
+    sub: str                    # unique identifier
 
 class UserInfoResponse(TypedDict):
     aud: List[str]
@@ -87,15 +83,16 @@ def generate_oidc_auth_url(state: str) -> str:
 def get_user_info(access_token: str) -> UserInfoResponse:
     # make a request to get user info, if this fails, the token is invalid
     res = requests.get(
-        USERINFO_ENDPOINT, 
-        headers={ "Authorization": f"Bearer {access_token}" }  # TODO: should i add accepts json
+        USERINFO_ENDPOINT,
+        headers={ "Authorization": f"Bearer {access_token}" },
+        timeout=REQUEST_TIMEOUT
     )
 
     try:
         resjson = res.json()
         if res.ok:
             return resjson
-        
+
         # TODO: make sure issuer is correct 5.3.4
 
         # print(resjson)
@@ -107,13 +104,13 @@ def get_user_info(access_token: str) -> UserInfoResponse:
             extra_info=res.text,
             status_code=res.status_code
         ) from e
-    
+
 def exchange_tokens(code: str) -> TokenResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
     res = requests.post(
         TOKEN_ENDPOINT,
-        headers={ 
+        headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
         },
@@ -121,7 +118,8 @@ def exchange_tokens(code: str) -> TokenResponse:
             "grant_type": "authorization_code",
             "code": code,
             "redirect_uri": REDIRECT_URI,
-        }
+        },
+        timeout=REQUEST_TIMEOUT
     )
     try:
         resjson = res.json()
@@ -142,7 +140,7 @@ def refresh_access_token(refresh_token: str) -> RefreshResponse:
     credentials = client_secret_basic_credentials()
     res = requests.post(
         TOKEN_ENDPOINT,
-        headers={ 
+        headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
         },
@@ -150,7 +148,8 @@ def refresh_access_token(refresh_token: str) -> RefreshResponse:
             "grant_type": "refresh_token",
             "refresh_token": refresh_token,
             "scope": SCOPES,
-        }
+        },
+        timeout=REQUEST_TIMEOUT
     )
 
     try:
@@ -171,16 +170,17 @@ def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"
     credentials = client_secret_basic_credentials()
     res = requests.post(
         REVOCATION_ENDPOINT,
-        headers={ 
+        headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
         },
         data={
             "token": token,
             "token_type_hint": token_type,
-        }
+        },
+        timeout=REQUEST_TIMEOUT
     )
-    
+
     try:
         if res.ok:
             return
@@ -197,10 +197,9 @@ def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"
             status_code=res.status_code
         ) from e
 
-# 
+#
 # validation functions
 #
-# TODO: do we want to convert these all to Optional responses?
 def validate_authorization_response(exp_state: str, query_params: Dict[str, str]) -> str:
     state = query_params.get("state")
     code = query_params.get("code")
@@ -211,9 +210,9 @@ def validate_authorization_response(exp_state: str, query_params: Dict[str, str]
         raise OIDCValidationError("Code param was not present.")
     if scope is None or scope != SCOPES:
         raise OIDCValidationError("Scope param was not correct.", scope)
-    
+
     return code
-    
+
 def compute_at_hash(access_token: str) -> str:
     # https://pyjwt.readthedocs.io/en/stable/usage.html#oidc-login-flow
     alg = jwt.get_algorithm_by_name("RS256")
@@ -222,13 +221,14 @@ def compute_at_hash(access_token: str) -> str:
     return computed.decode()
 
 def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
-    jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)  # TODO: move this out?
+    # NOTE: we could move the jwkclient out but it is fine
+    jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)
     signing_key = jwkclient.get_signing_key_from_jwt(token)
 
     try:
         decoded: DecodedIDToken = jwt.decode(
-            token, 
-            key=signing_key.key, 
+            token,
+            key=signing_key.key,
             algorithms=["RS256"],
             audience=CLIENT_ID,
             issuer=ISSUER,
@@ -238,11 +238,11 @@ def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
         raise OIDCValidationError(
             error_description="Could not validate id_token",
         ) from e
-    
+
     # validate at_hash
     computed_at_hash = compute_at_hash(access_token)
     if decoded["at_hash"] != computed_at_hash:
-         raise OIDCValidationError(
+        raise OIDCValidationError(
             error_description=f"Computed at_hash did not match, {decoded['at_hash']} != {computed_at_hash}",
         )
     return decoded
@@ -262,12 +262,7 @@ def validated_refreshed_id_token(old_token: DecodedIDToken, new_token: str, new_
 def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, DecodedIDToken]:
     # https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
     tokensres = exchange_tokens(authorization_code)
-    # print("\n\nDEBUG: exchanged token for\n")
-    # pprint(tokensres)
-    # print()
-    # print()
-    
-    # TODO: handle these checks better, potentially move them too
+
     if tokensres.get("token_type", "").lower() != "bearer" or tokensres.get("scope", "").lower() != SCOPES:
         raise OIDCValidationError(
             error_description="Invalid token_type/scopes in exchange response.",
@@ -279,17 +274,15 @@ def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, Decod
         )
 
     # validate the id token
-    # TODO: validate the access token
     id_token = validate_id_token(tokensres["id_token"], tokensres["access_token"])
 
-    # print("\n\nDEBUG: validated id_token\n")
-    # pprint(id_token)
-    # print()
-    # print()
     return (tokensres, id_token)
 
 def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tuple[RefreshResponse, DecodedIDToken]:
     refreshed = refresh_access_token(refresh_token)
-    # TODO: do i need to do bearer check?
+
+    # NOTE: do i need to do bearer check? i get token_type from refresh but idc, 
+    # it should be the same as the initial exchange, and that is already validated
+    # does not mention anywhere on the spec I should
     validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"], refreshed["access_token"])
     return refreshed, validated
