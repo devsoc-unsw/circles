@@ -54,13 +54,16 @@ def set_refresh_token_cookie(res: Response, token: Optional[str] = None, expiry:
         # nothing was given, delete it instead
         res.delete_cookie("refresh_token")
 
-def set_next_state_cookie(res: Response, state: str, expiry: int) -> None:
-    res.set_cookie(
-        key="next_auth_state",
-        value=state,
-        # secure=True,
-        httponly=True,
-        # path="/authorization_url",
-        # domain="circlesapi.csesoc.app",
-        expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
-    )
+def set_next_state_cookie(res: Response, state: Optional[str] = None, expiry: Optional[int] = None) -> None:
+    if state is not None and expiry is not None:
+        res.set_cookie(
+            key="next_auth_state",
+            value=state,
+            # secure=True,
+            httponly=True,
+            # path="/authorization_url",
+            # domain="circlesapi.csesoc.app",
+            expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
+        )
+    else:
+        res.delete_cookie("next_auth_state")

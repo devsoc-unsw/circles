@@ -18,9 +18,7 @@ from time import time
 from typing import Annotated, Dict, Optional, cast
 from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
-
-from server.routers.user import user_is_setup
-from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
+from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 from urllib.parse import parse_qs
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
@@ -129,7 +127,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
         sid, uid, oidc_info = get_oidc_info(refresh_token)
     except (SessionExpiredRefreshToken, SessionOldRefreshToken) as e:
         # if old refresh token, will destroy the session on the backend
-        res.delete_cookie("refresh_token")
+        set_refresh_token_cookie(res, None)
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail=e.description,
@@ -156,7 +154,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
             # refresh token has expired, any other errors are bad and should be handled else ways
             revoke_token(oidc_info.refresh_token, "refresh_token")
             logout_session(sid)
-            res.delete_cookie("refresh_token")
+            set_refresh_token_cookie(res, None)
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
                 detail=e.error_description,
@@ -208,11 +206,30 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
     try:
         # validate params given in the payload
         auth_code = validate_authorization_response(next_auth_state, data.query_params)
+    except OIDCValidationError as e:
+        raise HTTPException(
+            status_code=HTTP_400_BAD_REQUEST,
+            detail="Could not validate your params, please try again."
+        ) from e
+
+    try:
         # exchange the auth code for tokens and validate them
         tokens, id_token = exchange_and_validate(auth_code)
-    except (OIDCValidationError, OIDCTokenError) as e:
-        # TODO: refine these error checks
-        raise e from e
+    except OIDCInvalidGrant as e:
+        # the auth code was invalid
+        set_next_state_cookie(res, None)
+        raise HTTPException(
+            status_code=HTTP_400_BAD_REQUEST,
+            detail="Invalid request, please try again.",
+            headers={ "set-cookie": res.headers["set-cookie"] },
+        ) from e
+    except (OIDCTokenError, OIDCValidationError) as e:
+        # might want to refine these error checks, but all are pretty bad
+        print(e)
+        raise HTTPException(
+            status_code=HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Could not exchange tokens, contact admin please.",
+        ) from e
 
     # create new login session for user in db, generating new tokens
     uid = id_token["sub"]
@@ -226,14 +243,12 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
 
     # TODO: do some stuff with the id token here like user database setup
 
-    # set token cookies and return the identity response
     print("\n\nnew login", uid)
     print(datetime.now())
     print("session expires:", datetime.fromtimestamp(session_expiry))
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
-    # TODO: delete old state cookie?
     set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
