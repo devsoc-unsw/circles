@@ -38,11 +38,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
 app.include_router(planner.router)
 app.include_router(courses.router)
 app.include_router(programs.router)
 app.include_router(specialisations.router)
-app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(followups.router)
 # TODO: hide this behind a feature flag?

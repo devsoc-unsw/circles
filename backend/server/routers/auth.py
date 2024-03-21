@@ -21,9 +21,10 @@ from pydantic import BaseModel
 
 from server.routers.user import user_is_setup
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
+from urllib.parse import parse_qs
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
-from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken, get_session_info as get_session_info_from_sid
+from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken, clear_db, get_session_info as get_session_info_from_sid
 from .auth_utility.sessions.interface import get_oidc_info, get_token_info, logout_session, new_login_session, new_token_pair
 
 from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie
@@ -179,15 +180,18 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     response_model=str
 )
 def create_auth_url(res: Response) -> str:
-    # TODO: check if we want to encrypt this?
-    # TODO: make the login page actually use this
     state = token_urlsafe(32)
     auth_url = generate_oidc_auth_url(state)
     expires_at = int(time()) + STATE_TTL
 
-    # TODO: sometimes this empty reponses?!
     set_next_state_cookie(res, state, expires_at)
     return auth_url
+
+@router.post(
+    "/lolol"
+)
+def swap(ps: str) -> dict:
+    return {k: v[0] for k, v in parse_qs(ps).items()}
 
 @router.post(
     "/login", 
@@ -265,3 +269,21 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
 
     # revoke the oidc session and kill the session
     assert logout_session(sid)
+
+@router.get(
+    "/test_token"
+)
+def test_token(token: Annotated[SessionToken, Security(require_token)]):
+    try:
+        return get_token_info(token)
+    except SessionExpiredToken as e:
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail=e.description,
+        ) from e
+
+@router.delete(
+    "/clear_sessions"
+)
+def clear_sessions():
+    clear_db()
