@@ -1,7 +1,7 @@
 import json
 from secrets import token_urlsafe
 from time import time
-from typing import Dict, NewType, Optional, Tuple, Union
+from typing import Dict, Literal, NewType, Optional, Tuple, Union
 from uuid import uuid4
 from pydantic import BaseModel, PositiveInt
 
@@ -14,13 +14,13 @@ class SessionTokenInfo(BaseModel):
     # the object stored against a session token in cache
     sid: SessionID              # id of the session behind this token
     uid: str                    # user who owns the session
-    _exp: int                   # time of expiry, will be replaced with a TTL on the cache
+    REMOVE_exp: int                   # time of expiry, will be replaced with a TTL on the cache
 
 class RefreshTokenInfo(BaseModel):
     # object stored against the refresh token
     sid: SessionID              # id of the session behind this token
     # uid: str                    # user who owns the session
-    _exp: int                   # time of expiry, will be replaced with a TTL on the cache
+    REMOVE_exp: int                   # time of expiry, will be replaced with a TTL on the cache
 
 class SessionOIDCInfo(BaseModel):
     access_token: str           # most recent access token
@@ -31,12 +31,14 @@ class SessionOIDCInfo(BaseModel):
 class NotSetupSession(BaseModel):
     # object stored against the sid when session is not yet setup (brief time between during token generation)
     uid: str                    # for validation and back lookup
+    setup: Literal[False]       # ensure that this can get parsed correctly
 
 class SessionInfo(BaseModel):
     # object stored against the sid
     uid: str                      # for validation and back lookup
     oidc_info: SessionOIDCInfo
     curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
+    setup: Literal[True]          # ensure that this can get parsed correctly
 
 class Database(BaseModel):
     session_tokens: Dict[SessionToken, SessionTokenInfo]
@@ -49,7 +51,9 @@ def load_db() -> Database:
     try:
         with open("sessions.json", "r", encoding="utf8") as f:
             res: dict = json.load(f)
-            return Database.parse_obj(res)
+            db = Database.parse_obj(res)
+            print(db)
+            return db
     except:
         return Database(
             session_tokens={},
@@ -59,8 +63,17 @@ def load_db() -> Database:
 
 def save_db(db: Database) -> None:
     with open("sessions.json", "w", encoding="utf8") as f:
-        json.dump(db.dict(), f)
+        json.dump(db.dict(), f, indent=2)
         print("Saved:")
+
+def clear_db() -> None:
+    with open("sessions.json", "w", encoding="utf8") as f:
+        json.dump(Database(
+            session_tokens={},
+            refresh_tokens={},
+            sessions={},
+        ).dict(), f, indent=2)
+        print("Cleared:")
 
 
 # db interface function
@@ -73,7 +86,7 @@ def get_session_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
     info = db.session_tokens.get(token)
     if info is None:
         return None
-    if info._exp <= int(time()):
+    if info.REMOVE_exp <= int(time()):
         del db.session_tokens[token]
         return None
     return info
@@ -83,7 +96,7 @@ def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
     info = db.refresh_tokens.get(token)
     if info is None:
         return None
-    if info._exp <= int(time()):
+    if info.REMOVE_exp <= int(time()):
         del db.refresh_tokens[token]
         return None
     return info
@@ -112,7 +125,7 @@ def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: Positiv
     db.session_tokens[token] = SessionTokenInfo(
         sid=sid,
         uid=uid,
-        _exp=expires_at,
+        REMOVE_exp=expires_at,
     )
 
     save_db(db)
@@ -132,7 +145,7 @@ def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[R
     expires_at = int(time()) + ttl_seconds
     db.refresh_tokens[token] = RefreshTokenInfo(
         sid=sid,
-        _exp=expires_at,
+        REMOVE_exp=expires_at,
     )
     save_db(db)
 
@@ -144,7 +157,7 @@ def setup_new_session(uid: str) -> SessionID:
     db = load_db()
 
     sid = SessionID(str(uuid4()))  # TODO: this should be unique
-    db.sessions[sid] = NotSetupSession(uid=uid)
+    db.sessions[sid] = NotSetupSession(uid=uid, setup=False)
     # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
 
     save_db(db)
@@ -163,6 +176,7 @@ def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken
         uid=db.sessions[sid].uid,
         oidc_info=info,
         curr_ref_token=curr_ref,
+        setup=True
     )
     save_db(db)
 
