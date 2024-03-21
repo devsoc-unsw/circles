@@ -54,7 +54,7 @@ def load_db() -> Database:
             db = Database.parse_obj(res)
             print(db)
             return db
-    except:
+    except Exception:
         return Database(
             session_tokens={},
             refresh_tokens={},
