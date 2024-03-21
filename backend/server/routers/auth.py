@@ -152,7 +152,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
             )
         except OIDCInvalidGrant as e:
             # refresh token has expired, any other errors are bad and should be handled else ways
-            revoke_token(oidc_info.refresh_token, "refresh_token")
+            # revoke_token(oidc_info.refresh_token, "refresh_token")  # NOTE: if the fresh token is invalid, i give up
             logout_session(sid)
             set_refresh_token_cookie(res, None)
             raise HTTPException(
@@ -196,7 +196,6 @@ def swap(ps: str) -> dict:
     response_model=IdentityPayload
 )
 def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie()] = None) -> IdentityPayload:
-    # TODO: i believe there can be errors before getting here?
     if next_auth_state is None:
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST,
@@ -249,6 +248,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
+    set_next_state_cookie(res, None)
     set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
@@ -266,7 +266,6 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
         session_info = get_session_info_from_sid(sid)
         assert session_info is not None
 
-        # TODO: revoke can error
         revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
     except SessionExpiredToken as e:
         raise HTTPException(
@@ -274,11 +273,19 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
             detail=e.description,
             headers={ "set-cookie": res.headers["set-cookie"] },
         ) from e
-    except OIDCTokenError as e:
-        # TODO: refine this error check
+    except OIDCInvalidGrant as e:
+        # invalid grant could happen if its expired thats fine
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail=e.error_description,
+            headers={ "set-cookie": res.headers["set-cookie"] },
+        ) from e
+    except OIDCTokenError as e:
+        # cant imagine what error this could be, but if it happens, its bad
+        print(e)
+        raise HTTPException(
+            status_code=HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Please contact server admin,something went wrong",
             headers={ "set-cookie": res.headers["set-cookie"] },
         ) from e
 
