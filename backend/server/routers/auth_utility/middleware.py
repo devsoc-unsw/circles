@@ -40,12 +40,27 @@ class HTTPBearer401(SecurityBase):
             return None
         return token
 
-def set_refresh_token_cookie(res: Response, token: str, expiry: int) -> None:
+def set_refresh_token_cookie(res: Response, token: Optional[str] = None, expiry: Optional[int] = None) -> None:
+    if token is not None and expiry is not None:
+        res.set_cookie(
+            key="refresh_token",
+            value=token,
+            # secure=True,
+            httponly=True,
+            # domain="circlesapi.csesoc.app",
+            expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
+        )
+    else:
+        # nothing was given, delete it instead
+        res.delete_cookie("refresh_token")
+
+def set_next_state_cookie(res: Response, state: str, expiry: int) -> None:
     res.set_cookie(
-        key="refresh_token", 
-        value=token,
+        key="next_auth_state",
+        value=state,
         # secure=True,
         httponly=True,
+        # path="/authorization_url",
         # domain="circlesapi.csesoc.app",
         expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
     )

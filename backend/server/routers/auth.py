@@ -1,17 +1,21 @@
 """ Routes to deal with user Authentication. """
-from datetime import datetime, timezone
+from datetime import datetime
+from secrets import token_urlsafe
+from time import time
 from typing import Annotated, Dict, Optional, cast
-from fastapi import APIRouter, Cookie, HTTPException, Response
+from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
 
-from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionOldRefreshToken
-from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo
-from .auth_utility.sessions.interface import get_oidc_info, logout_session, new_login_session, new_token_pair
+from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
+from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken, get_session_info as get_session_info_from_sid
+from .auth_utility.sessions.interface import get_oidc_info, get_token_info, logout_session, new_login_session, new_token_pair
 
-from .auth_utility.middleware import HTTPBearer401, set_refresh_token_cookie
-from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
+from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie
+from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
 from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
+
+STATE_TTL = 10 * 60
 
 class UnauthorizedErrorModel(BaseModel):
     detail: str
@@ -98,6 +102,21 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
+@router.get(
+    "/authorization_url",
+    response_model=str
+)
+def create_auth_url(res: Response) -> str:
+    # TODO: check if we want to encrypt this?
+    # TODO: make the login page actually use this
+    state = token_urlsafe(32)
+    auth_url = generate_oidc_auth_url(state)
+    expires_at = int(time()) + STATE_TTL
+
+    # TODO: sometimes this empty reponses?!
+    set_next_state_cookie(res, state, expires_at)
+    return auth_url
+
 @router.post(
     "/login", 
     response_model=IdentityPayload
@@ -129,6 +148,8 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
     )
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = new_login_session(uid, new_oidc_info)
 
+    # TODO: do some stuff with the id token here like user database setup
+
     # set token cookies and return the identity response
     print("\n\nnew login", uid)
     print(datetime.now())
@@ -136,5 +157,39 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
+    # TODO: delete old state cookie?
     set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
+
+@router.delete(
+    "/logout",
+    response_model=None
+)
+def logout(res: Response, token: Annotated[SessionToken, Security(require_token)]):
+    # delete the cookie first since this will always happen
+    set_refresh_token_cookie(res, None)
+
+    try:
+        # get the user id and the session id from the token
+        _, sid = get_token_info(token)
+        session_info = get_session_info_from_sid(sid)
+        assert session_info is not None
+
+        # TODO: revoke can error
+        revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
+    except SessionExpiredToken as e:
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail=e.description,
+            headers={ "set-cookie": res.headers["set-cookie"] },
+        ) from e
+    except OIDCTokenError as e:
+        # TODO: refine this error check
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail=e.error_description,
+            headers={ "set-cookie": res.headers["set-cookie"] },
+        ) from e
+
+    # revoke the oidc session and kill the session
+    assert logout_session(sid)
