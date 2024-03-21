@@ -16,7 +16,8 @@ import requests
 from .constants import CLIENT_ID, CLIENT_SECRET
 from .errors import OIDCTokenError, OIDCValidationError, OIDCUnknownError, OIDCUserInfoError
 
-# csesoc_issuer_info = requests.get("https://id.csesoc.unsw.edu.au/.well-known/openid-configuration")
+OPENID_CONFIG = "https://id.csesoc.unsw.edu.au/.well-known/openid-configuration"
+# csesoc_issuer_info = requests.get(OPENID_CONFIG)
 ISSUER = "https://id.csesoc.unsw.edu.au"
 AUTH_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/auth"
 TOKEN_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/token"

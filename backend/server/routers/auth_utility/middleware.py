@@ -1,5 +1,6 @@
+from datetime import datetime, timezone
 from typing import Optional
-from fastapi import HTTPException, Request
+from fastapi import HTTPException, Request, Response
 from fastapi.security.base import SecurityBase
 from fastapi.security.utils import get_authorization_scheme_param
 from fastapi.openapi.models import HTTPBearer as HTTPBearerModel
@@ -38,3 +39,13 @@ class HTTPBearer401(SecurityBase):
                 )
             return None
         return token
+
+def set_refresh_token_cookie(res: Response, token: str, expiry: int) -> None:
+    res.set_cookie(
+        key="refresh_token", 
+        value=token,
+        # secure=True,
+        httponly=True,
+        # domain="circlesapi.csesoc.app",
+        expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
+    )

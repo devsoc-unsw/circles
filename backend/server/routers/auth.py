@@ -13,24 +13,20 @@ from server.config import CLIENT_ID
 from typing import Annotated, Dict, List, Literal, Optional, Tuple, TypedDict, cast
 from fastapi import APIRouter, Depends, HTTPException, Header, Request, Security
 from datetime import datetime, timezone
-from time import time
 from typing import Annotated, Dict, Optional, cast
 from fastapi import APIRouter, Cookie, HTTPException, Response
 from pydantic import BaseModel
-from starlette.status import HTTP_401_UNAUTHORIZED
 
 from server.routers.user import user_is_setup
+from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionOldRefreshToken
 from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo
-from .auth_utility.sessions.interface import get_oidc_info, logout_session, new_token_pair
+from .auth_utility.sessions.interface import get_oidc_info, logout_session, new_login_session, new_token_pair
 
-# from server.routers.user import user_is_setup, default_cs_user, reset, set_user
-
-# from .auth_utility.session_token import SessionError, SessionExpiredOIDC, SessionStorage
-from .auth_utility.middleware import HTTPBearer401
-from .auth_utility.oidc.requests import DecodedIDToken, get_user_info, refresh_and_validate, revoke_token
-from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken
+from .auth_utility.middleware import HTTPBearer401, set_refresh_token_cookie
+from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
+from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
 
 router = APIRouter(
     prefix="/auth",
@@ -121,10 +117,10 @@ router = APIRouter(
 require_token = HTTPBearer401()
 
 @router.get(
-    "/identity", 
+    "/refresh", 
     response_model=IdentityPayload
 )
-def get_identity(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cookie()] = None) -> IdentityPayload:
+def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cookie()] = None) -> IdentityPayload:
     # refresh flow - returns a new identity given the circles refresh token
     if refresh_token is None or len(refresh_token) == 0:
         raise HTTPException(
@@ -175,19 +171,52 @@ def get_identity(res: Response, refresh_token: Annotated[Optional[RefreshToken],
     # if here, the oidc session was still valid. Create the new token pair
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = new_token_pair(sid, new_oidc_info)
 
-    print("new identity")
+    print("\n\nnew identity", uid, sid)
     print(datetime.now())
     print("session expires:", datetime.fromtimestamp(session_expiry))
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
-    res.set_cookie(
-        key="refresh_token",
-        value=new_refresh_token,
-        # secure=True,
-        httponly=True,
-        # domain="circlesapi.csesoc.app",
-        expires=datetime.fromtimestamp(refresh_expiry, tz=timezone.utc),  
+    set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
+    return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
+
+@router.post(
+    "/login", 
+    response_model=IdentityPayload
+)
+def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie()] = None) -> IdentityPayload:
+    # TODO: i believe there can be errors before getting here?
+    if next_auth_state is None:
+        raise HTTPException(
+            status_code=HTTP_400_BAD_REQUEST,
+            detail="Cookie 'next_auth_state' was missing from request."
+        )
+
+    try:
+        # validate params given in the payload
+        auth_code = validate_authorization_response(next_auth_state, data.query_params)
+        # exchange the auth code for tokens and validate them
+        tokens, id_token = exchange_and_validate(auth_code)
+    except (OIDCValidationError, OIDCTokenError) as e:
+        # TODO: refine these error checks
+        raise e from e
+
+    # create new login session for user in db, generating new tokens
+    uid = id_token["sub"]
+    new_oidc_info = SessionOIDCInfo(
+        access_token=tokens["access_token"],
+        raw_id_token=tokens["id_token"],
+        refresh_token=tokens["refresh_token"],
+        validated_id_token=cast(dict, id_token),
     )
-    time()
+    new_session_token, session_expiry, new_refresh_token, refresh_expiry = new_login_session(uid, new_oidc_info)
+
+    # set token cookies and return the identity response
+    print("\n\nnew login", uid)
+    print(datetime.now())
+    print("session expires:", datetime.fromtimestamp(session_expiry))
+    print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
+
+    # set the cookies and return the identity
+    set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
