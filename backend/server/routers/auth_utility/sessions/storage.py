@@ -5,7 +5,15 @@ from typing import Dict, Literal, NewType, Optional, Tuple, Union
 from uuid import uuid4
 from pydantic import BaseModel, PositiveInt
 
-SessionID = NewType('SessionID', str)
+from server.sessionsdb import sdb
+from redis.commands.search.query import Query
+
+# FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
+# FT.SEARCH idx:uid "@uid:{z5362383}" NOCONTENT VERBATIM
+# FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM
+# HMGET stoken:Nj-C2n8JYS4imxlVn7WhSX5Pa0uRZ1awa1w_YA-vnN4jMXXqqKVb7HW9rNhfGako sid uid
+
+SessionID = NewType('SessionID', str)  # TODO: make this back into a uuid
 SessionToken = NewType('SessionToken', str)
 RefreshToken = NewType('RefreshToken', str)
 
@@ -41,7 +49,6 @@ class SessionInfo(BaseModel):
     setup: Literal[True]          # ensure that this can get parsed correctly
 
 class Database(BaseModel):
-    session_tokens: Dict[SessionToken, SessionTokenInfo]
     refresh_tokens: Dict[RefreshToken, RefreshTokenInfo]
     sessions: Dict[SessionID, Union[NotSetupSession, SessionInfo]]
 
@@ -52,11 +59,9 @@ def load_db() -> Database:
         with open("sessions.json", "r", encoding="utf8") as f:
             res: dict = json.load(f)
             db = Database.parse_obj(res)
-            print(db)
             return db
     except Exception:
         return Database(
-            session_tokens={},
             refresh_tokens={},
             sessions={},
         )
@@ -69,11 +74,73 @@ def save_db(db: Database) -> None:
 def clear_db() -> None:
     with open("sessions.json", "w", encoding="utf8") as f:
         json.dump(Database(
-            session_tokens={},
             refresh_tokens={},
             sessions={},
         ).dict(), f, indent=2)
         print("Cleared:")
+
+
+def form_key(token: SessionToken) -> str:
+    return f"token:{token}"
+
+def redis_get_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
+    res = sdb.hmget(form_key(token), ["sid", "uid", "exp"])
+    assert isinstance(res, list) and len(res) == 3
+
+    sid, uid, exp = res[0], res[1], res[2]
+    if sid is None or uid is None or exp is None:
+        return None
+    if int(exp) <= int(time()):
+        return None
+
+    return SessionTokenInfo(
+        # sid=SessionID(UUID(hex=sid)),
+        sid=sid,
+        uid=uid,
+        REMOVE_exp=int(exp)
+    )
+
+def redis_delete_token(token: SessionToken) -> bool:
+    res = sdb.delete(token)
+    assert isinstance(res, int)
+    return res == 1
+
+def redis_set_token_nx(token: SessionToken, info: SessionTokenInfo) -> bool:
+    # tries and sets the information, returning whether it was successful
+    # if can set first one, assume can set them all
+    # TODO: figure out how to make this a transaction and/or redis func so it dont get deleted midway
+    key = form_key(token)
+    exists = sdb.hsetnx(name=key, key="sid", value=info.sid)
+
+    assert isinstance(exists, int)
+    if exists == 0:
+        return False
+
+    res = sdb.hset(name=key, mapping={
+        "uid": info.uid,
+        "exp": info.REMOVE_exp,
+    })
+    assert isinstance(res, int) and res == 2
+    return True
+
+def redis_delete_all_tokens(sid: SessionID) -> None:
+    # FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM
+    # TODO: functionize this
+    # look up all the keys
+    all_matches = sdb.ft("idx:sid").search(
+        # query=Query(f"@sid:{{{sid.hex}}}").no_content().verbatim(),
+        query=Query(f"@sid:{{{sid}}}").no_content().verbatim(),
+    )
+
+    # the type bindings are wrong, the result has the shape
+    #  {'attributes': [], 'total_results': 1, 'format': 'STRING', 'results': [{'id': '...', 'values': [...]}], 'warning': []}
+    assert isinstance(all_matches, dict)
+    if all_matches['total_results'] == 0:
+        return
+
+    # delete them all
+    # NOTE: potentially this wont work after 1GB worth of keys...
+    sdb.delete(*(m["id"] for m in all_matches["results"]))
 
 
 # db interface function
@@ -82,12 +149,8 @@ def new_token() -> str:
     return token_urlsafe(48)
 
 def get_session_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
-    db = load_db()
-    info = db.session_tokens.get(token)
+    info = redis_get_token_info(token)
     if info is None:
-        return None
-    if info.REMOVE_exp <= int(time()):
-        del db.session_tokens[token]
         return None
     return info
 
@@ -113,22 +176,19 @@ def get_session_info(sid: SessionID) -> Optional[SessionInfo]:
 def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) -> Tuple[SessionToken, int]:
     # creates a new session, returning (token, expires_at)
     assert ttl_seconds > 0
-    db = load_db()
 
-    token = SessionToken(new_token())
-    while token in db.session_tokens:
-        print("session token collision:", token)
-        token = SessionToken(new_token())
-
-    # TODO: use set with NX instead of pregenerating the token, so we can ensure no race condition
     expires_at = int(time()) + ttl_seconds
-    db.session_tokens[token] = SessionTokenInfo(
+    info = SessionTokenInfo(
         sid=sid,
         uid=uid,
         REMOVE_exp=expires_at,
     )
 
-    save_db(db)
+    token = SessionToken(new_token())
+    while not redis_set_token_nx(token, info):
+        print("token collision", token)
+        token = SessionToken(new_token())
+
     return (token, expires_at)
 
 def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[RefreshToken, int]:
@@ -137,7 +197,7 @@ def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[R
     db = load_db()
 
     token = RefreshToken(new_token())
-    while token in db.session_tokens:
+    while token in db.refresh_tokens:
         print("refresh token collision:", token)
         token = RefreshToken(new_token())
 
@@ -156,7 +216,8 @@ def setup_new_session(uid: str) -> SessionID:
     # does not setup the info, as this should be run before we have the curr token
     db = load_db()
 
-    sid = SessionID(str(uuid4()))  # TODO: this should be unique
+    # sid = SessionID(uuid4())  # TODO: this should be unique
+    sid = SessionID(uuid4().hex)
     db.sessions[sid] = NotSetupSession(uid=uid, setup=False)
     # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
 
@@ -191,10 +252,9 @@ def destroy_session(sid: SessionID) -> bool:
 
     # delete all the related tokens
     # redis will be secondary indexed on the sid, so this wont be too horrible
+    redis_delete_all_tokens(sid)
     for rt in list(map(lambda e: e[0], filter(lambda e: e[1].sid == sid, db.refresh_tokens.items()))):
         del db.refresh_tokens[rt]
-    for st in list(map(lambda e: e[0], filter(lambda e: e[1].sid == sid, db.session_tokens.items()))):
-        del db.session_tokens[st]
     del db.sessions[sid]
 
     save_db(db)
