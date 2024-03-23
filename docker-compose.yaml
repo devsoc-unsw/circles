@@ -13,6 +13,29 @@ services:
       - circles-net
     ports:
       - '27017:27017'
+
+  sessionsdb:
+    image: redis/redis-stack:7.2.0-v9
+    container_name: sessionsdb
+    ports:
+      - '8001:8001'
+      - '6379:6379'
+    volumes:
+      - ./backend/redis.conf:/redis-stack.conf
+    networks:
+      - circles-net
+
+  init-redis:
+    # populates the session db
+    build:
+      context: ./backend
+      dockerfile: init-redis.dockerfile
+    container_name: init-redis
+    depends_on:
+      - sessionsdb
+    networks:
+      - circles-net
+
   backend:
     build:
       context: ./backend
@@ -24,11 +47,13 @@ services:
       - ./env/backend.env
     depends_on:
       - init-mongo
+      - init-redis
     networks:
       - circles-net
     volumes:
       # Bind mount volume for live backend updates while developing
       - ./backend:/backend
+
   backend-prod:
     build:
       context: ./backend
@@ -42,6 +67,7 @@ services:
       - mongodb
     networks:
       - circles-net
+
   frontend:
     build:
       context: ./frontend
@@ -60,6 +86,7 @@ services:
       - backend
     networks:
       - circles-net
+
   frontend-prod:
     build:
       context: ./frontend
@@ -75,6 +102,7 @@ services:
       - backend-prod
     networks:
       - circles-net
+
   init-mongo:
     # Utility container to populate / overwrite database
     # Run after build or when you need to overwrite data
@@ -88,6 +116,7 @@ services:
       - mongodb
     networks:
       - circles-net
+
   ci-backend:
     # Utility container to populate / overwrite database
     # Run after build or when you need to overwrite data
