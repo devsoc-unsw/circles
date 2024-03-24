@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Input, Menu, Typography } from 'antd';
 import axios from 'axios';
+import { fuzzy } from 'fast-fuzzy';
 import { Programs } from 'types/api';
 import type { RootState } from 'config/store';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -49,11 +50,20 @@ const DegreeStep = ({ incrementStep }: Props) => {
 
   const searchDegree = (newInput: string) => {
     setInput(newInput);
-    const degreeOptions = Object.keys(allDegrees)
+
+    const fuzzedDegrees = Object.keys(allDegrees)
       .map((code) => `${code} ${allDegrees[code]}`)
-      .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
-      .splice(0, 8);
-    setOptions(degreeOptions);
+      .map((title) => {
+        return {
+          distance: fuzzy(newInput, title),
+          name: title
+        };
+      });
+
+    fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
+    fuzzedDegrees.sort((a, b) => b.distance - a.distance);
+
+    setOptions(fuzzedDegrees.splice(0, 8).map((pair) => pair.name));
   };
 
   const props = useSpring(springProps);
