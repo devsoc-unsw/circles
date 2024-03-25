@@ -232,7 +232,7 @@ const TermPlanner = () => {
   }
   return (
     <PageTemplate>
-      <OptionsHeader plannerRef={plannerPicRef} />
+      <OptionsHeader />
       <S.ContainerWrapper>
         <Suspense fallback={<Spinner text="Loading Table..." />}>
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>

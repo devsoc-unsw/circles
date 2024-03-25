@@ -18,11 +18,7 @@ import S from './styles';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
-type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>;
-};
-
-const OptionsHeader = ({ plannerRef }: Props) => {
+const OptionsHeader = () => {
   const queryClient = useQueryClient();
 
   const plannerQuery = useQuery('planner', getUserPlanner);
