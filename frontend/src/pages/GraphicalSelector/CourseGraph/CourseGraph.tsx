@@ -82,15 +82,6 @@ const CourseGraph = ({
   const queriesSuccess =
     degreeQuery.isSuccess && coursesQuery.isSuccess && programGraphQuery.isSuccess;
 
-  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
-    if (res.status === 'rejected') {
-      // eslint-disable-next-line no-console
-      console.error('Rejected request at unwrap', res.reason);
-      return undefined;
-    }
-    return res.value;
-  }
-
   useEffect(() => {
     const isCoursePrerequisite = (target: string, neighbour: string) => {
       const prereqs = prerequisites[target] || [];

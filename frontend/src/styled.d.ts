@@ -1,5 +1,4 @@
 // import original module declarations
-import { StringGradients } from 'antd/lib/progress/progress';
 import 'styled-components';
 
 // and extend them!
@@ -168,7 +167,7 @@ declare module 'styled-components' {
     };
     collapseBtnIcon: {
       color: string;
-    }
+    };
     quickAddRemoveBtn: {
       addBackgroundColor: string;
       removeBackgroundColor: string;
@@ -198,6 +197,6 @@ declare module 'styled-components' {
       backgroundColor: string;
       borderColor: string;
       hoverBackgroundColor: string;
-    }
+    };
   }
 }

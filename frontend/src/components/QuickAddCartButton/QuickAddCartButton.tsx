@@ -1,11 +1,11 @@
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
-import S from './styles';
-import { useSelector } from 'react-redux';
 import { RootState } from 'config/store';
+import S from './styles';
 
 type Props = {
   courseCode: string;
@@ -15,7 +15,7 @@ type Props = {
 
 const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
   const handleMutation = planned ? removeCourse : addToUnplanned;
-  
+
   const { theme } = useSelector((state: RootState) => state.settings);
   const iconStyles = {
     color: theme === 'light' ? '#000' : '#fff'

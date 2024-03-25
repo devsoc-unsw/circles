@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
-import dayjs from 'dayjs';
-import { RangeValue } from 'rc-picker/lib/interface';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
@@ -24,10 +22,7 @@ type Props = {
 const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const props = useSpring(springProps);
 
-  const handleOnChange = async (
-    _: RangeValue<dayjs.Dayjs>,
-    [startYear, endYear]: [string, string]
-  ) => {
+  const handleOnChange = async (_: unknown, [startYear, endYear]: [string, string]) => {
     // We can trust num years to be a valid number because the range picker only allows valid ranges
     setDegreeInfo((prev) => ({
       ...prev,

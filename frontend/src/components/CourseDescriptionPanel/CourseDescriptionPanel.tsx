@@ -6,7 +6,6 @@ import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable } from 'types/courseCapacity';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
-import { EnrolmentCapacityData } from 'types/courseCapacity';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { errLogger } from 'utils/queryUtils';
@@ -41,7 +40,7 @@ const CourseDescriptionPanel = ({
 }: CourseDescriptionPanelProps) => {
   const getCoursesUnlocked = React.useCallback(async () => {
     if (!degree || !planner || !courses)
-      return Promise.reject('degree, planner or courses undefined');
+      return Promise.reject(new Error('degree, planner or courses undefined'));
     const res = await axios.post<CoursesUnlockedWhenTaken>(
       `/courses/coursesUnlockedWhenTaken/${courseCode}`,
       JSON.stringify(prepareUserPayload(degree, planner, courses))
@@ -88,7 +87,7 @@ const CourseDescriptionPanel = ({
     </S.Wrapper>
   );
 
-  const isLoading = courseInfoQuery.isLoading; // || coursesUnlockedQuery.isLoading;
+  const { isLoading } = courseInfoQuery; // || coursesUnlockedQuery.isLoading;
   if (isLoading || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;

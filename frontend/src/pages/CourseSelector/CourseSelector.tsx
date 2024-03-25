@@ -13,7 +13,6 @@ import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
-import { CourseDescInfoResCache } from 'types/courseDescription';
 
 const CourseSelector = () => {
   const [showedNotif, setShowedNotif] = useState(false);
@@ -39,11 +38,9 @@ const CourseSelector = () => {
   const degreeQuery = useQuery('degree', getUserDegree, { onError: errLogger('degreeQuery') });
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
-  const hasPlannerUpdated = useRef<boolean>(false);
 
   const dispatch = useDispatch();
 
-  const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
   const courseCode = tabs[active];
 
   const divRef = useRef<null | HTMLDivElement>(null);

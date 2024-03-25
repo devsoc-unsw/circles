@@ -3,13 +3,7 @@ import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  DownloadOutlined,
-  QuestionCircleOutlined,
-  SettingFilled,
-  UploadOutlined,
-  WarningFilled
-} from '@ant-design/icons';
+import { QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';

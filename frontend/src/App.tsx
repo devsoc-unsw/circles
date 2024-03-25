@@ -3,18 +3,18 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { NotificationOutlined } from '@ant-design/icons';
+import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
-import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import Auth from 'pages/Auth/Auth';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
-import Auth from 'pages/Auth/Auth';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -28,7 +28,6 @@ const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 const App = () => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
 
-  
   const [queryClient] = React.useState(() => new QueryClient());
 
   useEffect(() => {
@@ -79,13 +78,14 @@ const App = () => {
   }, []);
 
   return (
-    <ConfigProvider theme={{
-      token: {
-        colorPrimary: '#51258f',
-      },
-      algorithm: theme === 'dark' ? antdTheme.darkAlgorithm: antdTheme.defaultAlgorithm,
-      
-    }}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#51258f'
+        },
+        algorithm: theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm
+      }}
+    >
       <AntdApp>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -96,14 +96,8 @@ const App = () => {
                   <Routes>
                     <Route
                       path="/"
-                      element={
-                        !token ? (
-                          <LandingPage />
-                          ) : (
-                            <Navigate to="/degree-wizard" replace />
-                            )
-                          }
-                          />
+                      element={!token ? <LandingPage /> : <Navigate to="/degree-wizard" replace />}
+                    />
                     <Route path="/degree-wizard" element={<DegreeWizard />} />
                     <Route path="/course-selector" element={<CourseSelector />} />
                     {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}

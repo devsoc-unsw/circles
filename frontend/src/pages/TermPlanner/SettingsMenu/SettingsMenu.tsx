@@ -23,8 +23,8 @@ const SettingsMenu = ({ planner }: Props) => {
   const { Option } = Select;
   const { token, theme } = useSelector((state: RootState) => state.settings);
 
-  async function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
-    if (dateString) {
+  async function handleUpdateStartYear(_: unknown, dateString: string | string[]) {
+    if (dateString && typeof dateString === 'string') {
       try {
         await axios.put(
           '/user/updateStartYear',

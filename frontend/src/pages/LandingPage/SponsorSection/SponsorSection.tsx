@@ -8,7 +8,7 @@ type LogoProps = { src: string; href: string };
 
 const Logo = ({ src, href }: LogoProps) => (
   <a href={href} target="_blank" rel="noopener noreferrer">
-    <S.LogoImg src={src} />
+    <S.LogoImg src={src} alt={`navigate to ${href}`} />
   </a>
 );
 
