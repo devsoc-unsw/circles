@@ -1,9 +1,10 @@
-/* eslint-disable */
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { NotificationOutlined } from '@ant-design/icons';
 import { ThemeProvider } from 'styled-components';
+import openNotification from 'utils/openNotification';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
@@ -29,6 +30,53 @@ const App = () => {
 
   
   const [queryClient] = React.useState(() => new QueryClient());
+
+  useEffect(() => {
+    // using local storage since I don't want to risk invalidating the redux state right now
+    const cooldownMs = 1000 * 60 * 60 * 24 * 7; // every 7 days
+    const lastSeen = localStorage.getItem('last-seen-contribution');
+    if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) return;
+
+    localStorage.setItem('last-seen-contribution', Date.now().toString());
+
+    openNotification({
+      type: 'info',
+      message: 'Want to contribute?',
+      description: (
+        <>
+          Found a bug or have feedback? Open an issue on{' '}
+          <a
+            href="https://github.com/devsoc-unsw/circles/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>{' '}
+          or share your thoughts on{' '}
+          <a href="https://discord.gg/u9p34WUTcs" target="_blank" rel="noopener noreferrer">
+            Discord
+          </a>
+          !
+          <br />
+          <br />
+          Feeling brave? You can even fix it yourself by submitting a{' '}
+          <a
+            href="https://github.com/devsoc-unsw/circles/pulls"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            pull request
+          </a>
+          !
+          <br />
+          <br />
+          Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
+        </>
+      ),
+      duration: 20,
+      icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
+    });
+  }, []);
 
   return (
     <ConfigProvider theme={{

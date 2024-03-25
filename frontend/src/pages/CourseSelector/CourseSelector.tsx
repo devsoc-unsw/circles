@@ -13,6 +13,7 @@ import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
+import { CourseDescInfoResCache } from 'types/courseDescription';
 
 const CourseSelector = () => {
   const [showedNotif, setShowedNotif] = useState(false);
@@ -38,13 +39,42 @@ const CourseSelector = () => {
   const degreeQuery = useQuery('degree', getUserDegree, { onError: errLogger('degreeQuery') });
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
+  const hasPlannerUpdated = useRef<boolean>(false);
 
   const dispatch = useDispatch();
 
+  const courseDescInfoCache = useRef({} as CourseDescInfoResCache);
   const courseCode = tabs[active];
 
   const divRef = useRef<null | HTMLDivElement>(null);
   const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
+  useEffect(() => {
+    const minMenuWidth = 100;
+    const maxMenuWidth = (60 * window.innerWidth) / 100;
+    const resizerDiv = divRef.current as HTMLDivElement;
+    const setNewWidth = (clientX: number) => {
+      if (clientX > minMenuWidth && clientX < maxMenuWidth) {
+        resizerDiv.style.left = `${clientX}px`;
+        setMenuOffset(clientX);
+      }
+    };
+    const handleResize = (ev: globalThis.MouseEvent) => {
+      setNewWidth(ev.clientX);
+    };
+    const endResize = (ev: MouseEvent) => {
+      setNewWidth(ev.clientX);
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', endResize); // remove myself
+    };
+    const startResize = (ev: MouseEvent) => {
+      ev.preventDefault(); // stops highlighting text
+      window.addEventListener('mousemove', handleResize);
+      window.addEventListener('mouseup', endResize);
+    };
+    resizerDiv?.addEventListener('mousedown', startResize);
+    return () => resizerDiv?.removeEventListener('mousedown', startResize);
+  }, []);
+
   useEffect(() => {
     const minMenuWidth = 100;
     const maxMenuWidth = (60 * window.innerWidth) / 100;

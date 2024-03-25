@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
@@ -7,6 +6,7 @@ import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable } from 'types/courseCapacity';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { EnrolmentCapacityData } from 'types/courseCapacity';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { errLogger } from 'utils/queryUtils';
