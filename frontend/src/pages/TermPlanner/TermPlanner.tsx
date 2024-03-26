@@ -63,7 +63,7 @@ const TermPlanner = () => {
       courseQueries[index].data ?? validYearsAndCurrent.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
     ])
   ) as Record<string, Record<number | 'current', Course>>;
-  let courseInfos: any = {};
+  const courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
     Object.entries(yearData).forEach(([year, courseData]) => {
       courseInfos[year] = {...courseInfos[year], [course]: courseData};
@@ -227,9 +227,11 @@ const TermPlanner = () => {
       handleSetPlannedCourseToTerm(data);
     }
   };
-  if (courseQueries.some((c) => !c.data) || Object.entries(courseInfos).length == 0) {
+
+  if (courseQueries.some((c) => !c.data)) {
     return <div>Loading page...</div>
   }
+
   return (
     <PageTemplate>
       <OptionsHeader />

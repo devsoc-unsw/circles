@@ -28,7 +28,9 @@ const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 const App = () => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
 
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(
+    () => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
+  );
 
   useEffect(() => {
     // using local storage since I don't want to risk invalidating the redux state right now
@@ -81,7 +83,7 @@ const App = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#51258f'
+          colorPrimary: '#9254de'
         },
         algorithm: theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm
       }}
