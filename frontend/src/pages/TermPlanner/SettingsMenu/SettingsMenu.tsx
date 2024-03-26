@@ -11,7 +11,7 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import CS from '../common/styles';
 
-const DatePicker = React.lazy(() => import('components/Datepicker'));
+const DatePicker = React.lazy(() => import('antd').then((d) => ({default: d.DatePicker})));
 
 type Props = {
   planner?: PlannerResponse;
