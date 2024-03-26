@@ -9,7 +9,7 @@ const FeatureTitle = styled.h1`
   position: relative;
   margin-bottom: 75px;
   font-weight: 650;
-  margin-top: 200px;
+  margin-top: 90px;
 `;
 
 const CardsSection = styled.div`

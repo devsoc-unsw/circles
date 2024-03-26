@@ -1,5 +1,4 @@
-.github/ @csesoc/technical
-renovate.json @csesoc/technical
+*              @devsoc-unsw/circles-leads
 
-backend/ @imagine-hussain
-frontend/ @leonardo-fan
+.github/       @devsoc-unsw/platform
+renovate.json  @devsoc-unsw/platform

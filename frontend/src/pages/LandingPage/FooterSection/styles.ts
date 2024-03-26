@@ -28,7 +28,7 @@ const FooterLogoWrapper = styled.div`
   gap: 50px;
 `;
 
-const CSELogo = styled.img`
+const DevSocLogo = styled.img`
   width: 100%;
 `;
 
@@ -45,5 +45,5 @@ export default {
   FooterLogoWrapper,
   FooterDisclaimer,
   FooterWrapper,
-  CSELogo
+  DevSocLogo
 };

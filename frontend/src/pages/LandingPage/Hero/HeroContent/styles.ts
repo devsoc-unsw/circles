@@ -35,12 +35,12 @@ const HeroCTA = motion(styled.button`
   color: #9453e6;
 `);
 
-const CSESocLogo = motion(styled.img`
+const DevSocLogo = motion(styled.img`
   width: 160px;
 `);
 
 export default {
-  CSESocLogo,
+  DevSocLogo,
   HeroContent,
   HeroCTA,
   HeroSubTitle,

@@ -4,7 +4,7 @@ import { ProgramStructure } from './structure';
 
 // types are layed out from the BE api routes
 // more info can be found on the /docs on the BE url
-// https://circlesapi.csesoc.app/docs
+// https://circlesapi.devsoc.app/docs
 
 /* Planner api */
 

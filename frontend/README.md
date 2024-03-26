@@ -15,7 +15,7 @@
 
 If you are doing superficial work with the frontend and do not need to communicate with the backend, you can `cd` to the `frontend` folder, run `npm install` to install required packages locally, and then `npm start`. This is faster than running docker compose since you avoid having to set up the backend and mongodb containers.
 
-> NOTE: Your frontend requests will be fetching from `https://circlesapi.csesoc.app` and the production version of the Circles API will be used to handle your backend requests.
+> NOTE: Your frontend requests will be fetching from `https://circlesapi.devsoc.app` and the production version of the Circles API will be used to handle your backend requests.
 
 ### Option 2: Using Docker
 
@@ -46,7 +46,7 @@ In `frontend.env`, add:
 
 - `VITE_BACKEND_API_BASE_URL=http://localhost:8000/`
 
-> NOTE: The `VITE_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `https://circlesapi.csesoc.app/` as the base url when calling the API endpoint.
+> NOTE: The `VITE_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `https://circlesapi.devsoc.app/` as the base url when calling the API endpoint.
 
 Feel free to replace username and password to any value. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo.
 

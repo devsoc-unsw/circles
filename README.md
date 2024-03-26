@@ -1,7 +1,6 @@
-[![CSEsoc](https://img.shields.io/badge/-CSESoc-blue)](https://www.csesoc.unsw.edu.au/)
-![Status](https://img.shields.io/website?label=status&up_message=online&url=https%3A%2F%2Fcircles.csesoc.unsw.edu.au%2F)
-[![Frontend Build](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_FE.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_FE.yml)
-[![Backend Tests](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_BE.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/ci_BE.yml)
+[![DevSoc](https://img.shields.io/badge/Devsoc-dark?color=3c424b)](https://devsoc.app/)
+[![Status](https://img.shields.io/website?url=https%3A%2F%2Fcircles.devsoc.app%2F&up_message=online&label=status)](https://circles.devsoc.app/)
+[![Unit Tests](https://github.com/devsoc-unsw/Circles/actions/workflows/ci.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/ci.yml)
 [![Pylint](https://github.com/devsoc-unsw/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/pylinter.yml)
 ![Lines of code](https://img.shields.io/tokei/lines/github/devsoc-unsw/Circles)
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/devsoc-unsw/Circles)
@@ -12,13 +11,13 @@ Tired of using a poorly laid out spreadsheet to cobble together a plan to follow
 
 Circles is a UNSW degree planner where you can explore and validate your degree structure.
 
-You can find a live build of Circles at [https://circles.csesoc.app](https://circles.csesoc.app/).
+You can find a live build of Circles at [https://circles.devsoc.app](https://circles.devsoc.app/).
 
 ## Features
 
-![Features Help Image](https://raw.githubusercontent.com/devsoc-unsw/Circles/dev/frontend/src/assets/infographic.png)
+![Features Help Image](./frontend/src/assets/infographic.png)
 
-NOTE: we currently only support a subset of courses that have the highest enrolments, such as Engineering, Commerce, Computer Science, and Science. We do plan to add more!
+NOTE: we currently only support a selection of degrees - but we will add more!
 
 - Adaptive course selector:
   - Allows you to explore your currently unlocked courses
@@ -30,7 +29,7 @@ NOTE: we currently only support a subset of courses that have the highest enrolm
   - Validates your progression to make sure you've met the requirements for future courses
   - Allows you to generate a saveable and sharable image of your plan
 
-- Progression checker:
+- Progression checker: (NEW PAGE!)
   - Lets you understand which requirements you have met and which you still need to complete
   - Shows you what courses you can do to complete your degree
 
@@ -44,8 +43,8 @@ This project is rapidly expanding and our roadmap includes features such as:
 
 # Our team
 
-We are a team that is part of CSESoc Projects! See [TEAM.md](./TEAM.md) for more information on the current and previous team that contributed to the development of Circles.
+We are a team that is part of DevSoc! See [TEAM.md](./TEAM.md) for more information on the current and previous team that contributed to the development of Circles.
 
 Also, special thanks to James Ji, Vincent Xiao, Hayes Choy for being the first team to work on and inspire Circles :)
 
-[For further development documentation, a linktree to our jira boards and more!](https://compclub.atlassian.net/wiki/spaces/C/pages/1664385928/About+Circles)
+[For further development documentation, visit our confluence page!](https://devsoc.atlassian.net/wiki/spaces/C/pages/756966/About+Circles)

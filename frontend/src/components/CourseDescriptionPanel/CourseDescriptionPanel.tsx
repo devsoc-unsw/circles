@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
@@ -41,7 +40,7 @@ const CourseDescriptionPanel = ({
 }: CourseDescriptionPanelProps) => {
   const getCoursesUnlocked = React.useCallback(async () => {
     if (!degree || !planner || !courses)
-      return Promise.reject('degree, planner or courses undefined');
+      return Promise.reject(new Error('degree, planner or courses undefined'));
     const res = await axios.post<CoursesUnlockedWhenTaken>(
       `/courses/coursesUnlockedWhenTaken/${courseCode}`,
       JSON.stringify(prepareUserPayload(degree, planner, courses))
@@ -88,7 +87,7 @@ const CourseDescriptionPanel = ({
     </S.Wrapper>
   );
 
-  const isLoading = courseInfoQuery.isLoading; // || coursesUnlockedQuery.isLoading;
+  const { isLoading } = courseInfoQuery; // || coursesUnlockedQuery.isLoading;
   if (isLoading || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;

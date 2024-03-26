@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
-import dayjs from 'dayjs';
-import { RangeValue } from 'rc-picker/lib/interface';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
@@ -10,8 +8,8 @@ import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
-const RangePicker = React.lazy(() =>
-  import('components/Datepicker').then((d) => ({ default: d.default.RangePicker }))
+const YearPicker = React.lazy(() =>
+  import('antd').then((d) => ({ default: d.DatePicker.RangePicker }))
 );
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
@@ -24,10 +22,7 @@ type Props = {
 const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const props = useSpring(springProps);
 
-  const handleOnChange = async (
-    _: RangeValue<dayjs.Dayjs>,
-    [startYear, endYear]: [string, string]
-  ) => {
+  const handleOnChange = async (_: unknown, [startYear, endYear]: string | string[]) => {
     // We can trust num years to be a valid number because the range picker only allows valid ranges
     setDegreeInfo((prev) => ({
       ...prev,
@@ -45,9 +40,9 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
           What years do you start and finish?
         </Title>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
-          <RangePicker
-            data-testid="antd-rangepicker"
+          <YearPicker
             picker="year"
+            data-testid="antd-rangepicker"
             size="large"
             style={{
               width: '100%'

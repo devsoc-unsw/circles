@@ -18,7 +18,7 @@ jobs:
           - component: frontend
             dockerfile: production.dockerfile
             args: |
-              "API_URL=https://circlesapi.csesoc.app"
+              "API_URL=https://circlesapi.devsoc.app"
           - component: backend
             dockerfile: production.dockerfile
     steps:
