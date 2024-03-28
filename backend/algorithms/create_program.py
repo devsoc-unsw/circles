@@ -85,7 +85,7 @@ def create_maturity_restriction(tokens: Dict[str, List[str]]) -> ProgramRestrict
     )
 
 def create_dependency_condition(tokens: List[str]) -> Condition:
-    """
+    r"""
     Creates a dependent condition from the tokens.
 
     Dependency Types:
@@ -108,7 +108,7 @@ def create_dependency_condition(tokens: List[str]) -> Condition:
         # Maybe assert that this is the end?
 
     # Matching LevelCategory
-    if re.match("L\d", base_token):
+    if re.match(r"L\d", base_token):
         index += 1
         level = int(base_token[1:])
         level_category = LevelCategory(level)
@@ -136,7 +136,7 @@ def create_dependency_condition(tokens: List[str]) -> Condition:
 
 
 def create_dependent_condition(tokens: List[str]) -> Category:
-    """
+    r"""
     Creates a dependency condition from the tokens.
 
     Need to worry about:
