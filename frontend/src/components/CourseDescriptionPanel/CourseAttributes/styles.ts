@@ -36,11 +36,19 @@ const Link = styled.a`
   }
 `;
 
+const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
 export default {
   AttributeWrapper,
   AttributeText,
   TermWrapper,
   AttributesWrapperConcise,
   AttributeConcise,
-  Link
+  Link,
+  RatingWrapper
 };
