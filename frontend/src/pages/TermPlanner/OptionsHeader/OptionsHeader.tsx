@@ -3,22 +3,14 @@ import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  DownloadOutlined,
-  QuestionCircleOutlined,
-  SettingFilled,
-  UploadOutlined,
-  WarningFilled
-} from '@ant-design/icons';
+import { QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import type { RootState } from 'config/store';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
-import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
-import ImportPlannerMenu from '../ImportPlannerMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
 import S from './styles';
@@ -26,11 +18,7 @@ import S from './styles';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
-type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>;
-};
-
-const OptionsHeader = ({ plannerRef }: Props) => {
+const OptionsHeader = () => {
   const queryClient = useQueryClient();
 
   const plannerQuery = useQuery('planner', getUserPlanner);
@@ -79,7 +67,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
             </Tooltip>
           </div>
         </Tippy>
-        <Tippy
+        {/* <Tippy
           content={<ExportPlannerMenu plannerRef={plannerRef} />}
           moveTransition="transform 0.2s ease-out"
           interactive
@@ -112,7 +100,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
               </S.OptionButton>
             </Tooltip>
           </div>
-        </Tippy>
+        </Tippy> */}
 
         {planner && !isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">

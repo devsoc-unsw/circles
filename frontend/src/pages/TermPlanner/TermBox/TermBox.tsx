@@ -104,6 +104,7 @@ const TermBox = ({
               </S.TermCheckboxWrapper>
             }
             offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
+            styles={{ root: { width: 'unset' } }}
           >
             <S.TermBoxWrapper
               droppable={isOffered && !!draggingCourseCode}

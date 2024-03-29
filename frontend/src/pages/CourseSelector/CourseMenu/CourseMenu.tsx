@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import type { MenuProps } from 'antd';
@@ -84,7 +84,6 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
       await queryClient.invalidateQueries({ queryKey: ['planner'] });
     }
   });
-  const runMutate = (courseId: string) => courseMutation.mutate(courseId);
 
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
@@ -142,7 +141,14 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   useEffect(() => {
     if (!courses || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
     generateMenuData(structureQuery.data, coursesStateQuery.data);
-  }, [planner, structureQuery, coursesStateQuery, generateMenuData, courses]);
+  }, [
+    courses,
+    coursesStateQuery.data,
+    coursesStateQuery.isSuccess,
+    generateMenuData,
+    structureQuery.data,
+    structureQuery.isSuccess
+  ]);
 
   const sortSubgroups = (
     item1: [string, MenuDataSubgroup[]],
@@ -162,54 +168,65 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   const sortCourses = (item1: MenuDataSubgroup, item2: MenuDataSubgroup) =>
     item1.courseCode > item2.courseCode ? 1 : -1;
 
-  const defaultOpenKeys = [Object.keys(menuData)[0]];
-
-  let menuItems: MenuProps['items'];
-  if (pageLoaded && structureQuery.isSuccess && courses) {
-    const structure = structureQuery.data;
-    menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
-      label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
-      key: groupKey,
-      children: Object.entries(groupEntry)
-        .sort(sortSubgroups)
-        .map(([subgroupKey, subGroupEntry]) => {
-          const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
-          const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
-          if (subGroupEntry.length <= MAX_COURSES_OVERFLOW) defaultOpenKeys.push(subgroupKey);
-          return {
-            label: <SubgroupTitle title={subgroupKey} currUOC={currUOC} totalUOC={totalUOC} />,
-            key: subgroupKey,
-            disabled: !subGroupEntry.length, // disable submenu if there are no courses
-            // check if there are courses to show collapsible submenu
-            children: subGroupEntry.length
-              ? subGroupEntry
-                  .sort(sortCourses)
-                  .filter(
-                    (course) =>
-                      course.unlocked ||
-                      courses[course.courseCode] !== undefined ||
-                      showLockedCourses
-                  )
-                  .map((course) => ({
-                    label: (
-                      <CourseMenuTitle
-                        courseCode={course.courseCode}
-                        title={course.title}
-                        selected={courses[course.courseCode] !== undefined}
-                        runMutate={runMutate}
-                        accurate={course.accuracy}
-                        unlocked={course.unlocked}
-                      />
-                    ),
-                    // key is course code + groupKey + subgroupKey to differentiate as unique
-                    // course items in menu
-                    key: `${course.courseCode}-${groupKey}-${subgroupKey}`
-                  }))
-              : null
-          };
-        })
-    }));
-  }
+  const defaultOpenKeys = useMemo(() => [Object.keys(menuData)[0]], [menuData]);
+  const menuItems: MenuProps['items'] = useMemo((): MenuProps['items'] => {
+    if (pageLoaded && structureQuery.isSuccess && courses) {
+      const structure = structureQuery.data;
+      return Object.entries(menuData).map(([groupKey, groupEntry]) => ({
+        label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
+        key: groupKey,
+        children: Object.entries(groupEntry)
+          .sort(sortSubgroups)
+          .map(([subgroupKey, subGroupEntry]) => {
+            const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
+            const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
+            if (subGroupEntry.length <= MAX_COURSES_OVERFLOW) defaultOpenKeys.push(subgroupKey);
+            return {
+              label: <SubgroupTitle title={subgroupKey} currUOC={currUOC} totalUOC={totalUOC} />,
+              key: subgroupKey,
+              disabled: !subGroupEntry.length, // disable submenu if there are no courses
+              // check if there are courses to show collapsible submenu
+              children: subGroupEntry.length
+                ? subGroupEntry
+                    .sort(sortCourses)
+                    .filter(
+                      (course) =>
+                        course.unlocked ||
+                        courses[course.courseCode] !== undefined ||
+                        showLockedCourses
+                    )
+                    .map((course) => ({
+                      label: (
+                        <CourseMenuTitle
+                          courseCode={course.courseCode}
+                          title={course.title}
+                          selected={courses[course.courseCode] !== undefined}
+                          runMutate={courseMutation.mutate}
+                          accurate={course.accuracy}
+                          unlocked={course.unlocked}
+                        />
+                      ),
+                      // key is course code + groupKey + subgroupKey to differentiate as unique
+                      // course items in menu
+                      key: `${course.courseCode}-${groupKey}-${subgroupKey}`
+                    }))
+                : null
+            };
+          })
+      }));
+    }
+    return [];
+  }, [
+    courses,
+    coursesUnits,
+    defaultOpenKeys,
+    menuData,
+    pageLoaded,
+    courseMutation.mutate,
+    showLockedCourses,
+    structureQuery.data,
+    structureQuery.isSuccess
+  ]);
 
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup

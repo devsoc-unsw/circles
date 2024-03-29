@@ -1,8 +1,10 @@
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
+import { RootState } from 'config/store';
 import S from './styles';
 
 type Props = {
@@ -14,6 +16,10 @@ type Props = {
 const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
   const handleMutation = planned ? removeCourse : addToUnplanned;
 
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const iconStyles = {
+    color: theme === 'light' ? '#000' : '#fff'
+  };
   const queryClient = useQueryClient();
   const mutation = useMutation(handleMutation, {
     onMutate: () => planned,
@@ -37,7 +43,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
         size="small"
         loading={mutation.isLoading}
         shape="circle"
-        icon={<PlusOutlined />}
+        icon={<PlusOutlined style={iconStyles} />}
       />
     </Tooltip>
   ) : (
@@ -48,7 +54,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
         size="small"
         loading={mutation.isLoading}
         shape="circle"
-        icon={<MinusOutlined />}
+        icon={<MinusOutlined style={iconStyles} />}
       />
     </Tooltip>
   );

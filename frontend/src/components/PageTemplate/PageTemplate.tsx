@@ -13,7 +13,10 @@ const PageTemplate = ({ children, showHeader = true }: Props) => (
     <Helmet>
       <title>Circles</title>
       <meta name="description" content="Circles UNSW Degree Planner" />
-      <meta name="keywords" content="circles, unsw, csesoc, degree, planner, course, plan" />
+      <meta
+        name="keywords"
+        content="circles, unsw, csesoc, devsoc, degree, planner, course, plan"
+      />
     </Helmet>
     {showHeader && <Header />}
     <div>

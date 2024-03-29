@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
@@ -58,41 +58,43 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     }
   });
 
-  const storeUOC: StoreUOC = {};
-
   // Example groups: Major, Minor, General, Rules
-  Object.keys(structure).forEach((group) => {
-    storeUOC[group] = {
-      total: 0,
-      curr: 0
-    };
+  const storeUOC: StoreUOC = useMemo(() => {
+    const res: StoreUOC = {};
+    Object.keys(structure).forEach((group) => {
+      res[group] = {
+        total: 0,
+        curr: 0
+      };
 
-    // Example subgroup: Core Courses, Computing Electives
-    Object.keys(structure[group].content).forEach((subgroup) => {
-      storeUOC[group].total += structure[group].content[subgroup].UOC;
-      const subgroupStructure = structure[group].content[subgroup];
+      // Example subgroup: Core Courses, Computing Electives
+      Object.keys(structure[group].content).forEach((subgroup) => {
+        res[group].total += structure[group].content[subgroup].UOC;
+        const subgroupStructure = structure[group].content[subgroup];
 
-      const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
+        const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
 
-      if (subgroupStructure.courses && !isRule) {
-        let currUOC = 0;
-        // only consider disciplinary component courses
-        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (
-            courses[courseCode]?.plannedFor &&
-            currUOC < subgroupStructure.UOC &&
-            !courses[courseCode]?.ignoreFromProgression
-          ) {
-            const courseUOC =
-              courses[courseCode].UOC *
-              getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
-            storeUOC[group].curr += courseUOC;
-            currUOC += courseUOC;
-          }
-        });
-      }
+        if (subgroupStructure.courses && !isRule) {
+          let currUOC = 0;
+          // only consider disciplinary component courses
+          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            if (
+              courses[courseCode]?.plannedFor &&
+              currUOC < subgroupStructure.UOC &&
+              !courses[courseCode]?.ignoreFromProgression
+            ) {
+              const courseUOC =
+                courses[courseCode].UOC *
+                getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+              res[group].curr += courseUOC;
+              currUOC += courseUOC;
+            }
+          });
+        }
+      });
     });
-  });
+    return res;
+  }, [courses, structure]);
 
   const handleClick = () => {
     scroller.scrollTo('divider', {

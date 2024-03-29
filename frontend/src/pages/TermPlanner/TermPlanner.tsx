@@ -63,7 +63,7 @@ const TermPlanner = () => {
       courseQueries[index].data ?? validYearsAndCurrent.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
     ])
   ) as Record<string, Record<number | 'current', Course>>;
-  let courseInfos: any = {};
+  const courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
     Object.entries(yearData).forEach(([year, courseData]) => {
       courseInfos[year] = {...courseInfos[year], [course]: courseData};
@@ -227,12 +227,14 @@ const TermPlanner = () => {
       handleSetPlannedCourseToTerm(data);
     }
   };
-  if (courseQueries.some((c) => !c.data) || Object.entries(courseInfos).length == 0) {
+
+  if (courseQueries.some((c) => !c.data)) {
     return <div>Loading page...</div>
   }
+
   return (
     <PageTemplate>
-      <OptionsHeader plannerRef={plannerPicRef} />
+      <OptionsHeader />
       <S.ContainerWrapper>
         <Suspense fallback={<Spinner text="Loading Table..." />}>
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
@@ -275,6 +277,7 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
+                        if (!courseInfos[iYear]) return null; // not yet ready // TODO: write better
                         // console.log('Making termbox for', iYear, term);
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL

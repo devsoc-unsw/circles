@@ -11,7 +11,7 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import CS from '../common/styles';
 
-const DatePicker = React.lazy(() => import('components/Datepicker'));
+const DatePicker = React.lazy(() => import('antd').then((d) => ({ default: d.DatePicker })));
 
 type Props = {
   planner?: PlannerResponse;
@@ -23,8 +23,8 @@ const SettingsMenu = ({ planner }: Props) => {
   const { Option } = Select;
   const { token, theme } = useSelector((state: RootState) => state.settings);
 
-  async function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
-    if (dateString) {
+  async function handleUpdateStartYear(_: unknown, dateString: string | string[]) {
+    if (dateString && typeof dateString === 'string') {
       try {
         await axios.put(
           '/user/updateStartYear',

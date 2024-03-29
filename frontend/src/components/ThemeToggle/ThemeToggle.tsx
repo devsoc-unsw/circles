@@ -15,8 +15,8 @@ const ThemeToggle = () => {
 
   return (
     <Switch
-      checkedChildren={<IoMdMoon display="flex" />}
-      unCheckedChildren={<IoIosSunny display="flex" />}
+      checkedChildren={<IoMdMoon />}
+      unCheckedChildren={<IoIosSunny />}
       defaultChecked={theme === 'dark'}
       onChange={() => dispatch(toggleTheme(theme === 'light' ? 'dark' : 'light'))}
       style={toggleStyle}

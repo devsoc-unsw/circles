@@ -61,7 +61,7 @@ const CourseTabs = () => {
                 {...droppableProvided.droppableProps}
               >
                 {tabs.map((tab, index) => (
-                  <DraggableTab tabName={tab} index={index} />
+                  <DraggableTab tabName={tab} index={index} key={`draggable-tab-${tab}`} />
                 ))}
                 {droppableProvided.placeholder}
               </S.CourseTabsSection>

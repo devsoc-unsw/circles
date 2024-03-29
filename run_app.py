@@ -37,8 +37,7 @@ from dotenv import load_dotenv
 
 
 class LogPipe(threading.Thread, TextIO):
-    """boilerplate abstraction for redirecting the logs of a process"""
-
+    """ boilerplate abstraction for redirecting the logs of a process """
     def __init__(self, level):
         """Setup the object with a logger and a loglevel
         and start the thread
