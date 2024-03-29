@@ -67,6 +67,40 @@ const OptionsHeader = () => {
             </Tooltip>
           </div>
         </Tippy>
+        {/* <Tippy
+          content={<ExportPlannerMenu plannerRef={plannerRef} />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme}
+          zIndex={1}
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Export">
+              <S.OptionButton>
+                <DownloadOutlined style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+          </div>
+        </Tippy>
+        <Tippy
+          content={<ImportPlannerMenu />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme}
+          zIndex={1}
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Import">
+              <S.OptionButton>
+                <UploadOutlined style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+          </div>
+        </Tippy> */}
 
         {planner && !isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">
