@@ -72,33 +72,6 @@ const CourseSelector = () => {
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
   }, []);
 
-  useEffect(() => {
-    const minMenuWidth = 100;
-    const maxMenuWidth = (60 * window.innerWidth) / 100;
-    const resizerDiv = divRef.current as HTMLDivElement;
-    const setNewWidth = (clientX: number) => {
-      if (clientX > minMenuWidth && clientX < maxMenuWidth) {
-        resizerDiv.style.left = `${clientX}px`;
-        setMenuOffset(clientX);
-      }
-    };
-    const handleResize = (ev: globalThis.MouseEvent) => {
-      setNewWidth(ev.clientX);
-    };
-    const endResize = (ev: MouseEvent) => {
-      setNewWidth(ev.clientX);
-      window.removeEventListener('mousemove', handleResize);
-      window.removeEventListener('mouseup', endResize); // remove myself
-    };
-    const startResize = (ev: MouseEvent) => {
-      ev.preventDefault(); // stops highlighting text
-      window.addEventListener('mousemove', handleResize);
-      window.addEventListener('mouseup', endResize);
-    };
-    resizerDiv?.addEventListener('mousedown', startResize);
-    return () => resizerDiv?.removeEventListener('mousedown', startResize);
-  }, []);
-
   const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), [dispatch]);
 
   return (
