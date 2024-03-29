@@ -118,7 +118,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
       {courseAttributesData.map(
         ({ title, content }) =>
           content && (
-            <S.AttributeWrapper>
+            <S.AttributeWrapper key={`course-attribute-${title}`}>
               <Title level={3} className="text">
                 {title}
               </Title>
