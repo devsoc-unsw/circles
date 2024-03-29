@@ -136,7 +136,12 @@ const CourseGraph = ({
         const courseId = n.getID();
         graphRef.current?.updateItem(
           n as Item,
-          mapNodeStyle(courseId, courses[courseId].plannedFor, courses[courseId].unlocked, theme)
+          mapNodeStyle(
+            courseId,
+            !!courses[courseId]?.plannedFor,
+            courses[courseId]?.unlocked,
+            theme
+          )
         );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
         n.toFront();
@@ -162,7 +167,7 @@ const CourseGraph = ({
       graphRef.current?.clearItemStates(node, 'hover');
       graphRef.current?.updateItem(
         node,
-        nodeLabelUnhoverStyle(node.getID(), courses[node.getID()].plannedFor, theme)
+        nodeLabelUnhoverStyle(node.getID(), !!courses[node.getID()]?.plannedFor, theme)
       );
       removeNeighbourStyles(node);
       graphRef.current?.paint();
@@ -220,7 +225,7 @@ const CourseGraph = ({
       graphRef.current = new Graph(graphArgs);
       const data = {
         nodes: programs.courses?.map((c) =>
-          mapNodeStyle(c, courses[c]?.plannedFor, courses[c]?.unlocked, theme)
+          mapNodeStyle(c, !!courses[c]?.plannedFor, courses[c]?.unlocked, theme)
         ),
         edges: programs.edges
       };
@@ -253,7 +258,12 @@ const CourseGraph = ({
       nodes?.map((n) =>
         graphRef.current?.updateItem(
           n,
-          mapNodeStyle(n.getID(), courses[n.getID()].plannedFor, courses[n.getID()].unlocked, theme)
+          mapNodeStyle(
+            n.getID(),
+            !!courses[n.getID()]?.plannedFor,
+            courses[n.getID()]?.unlocked,
+            theme
+          )
         )
       );
 

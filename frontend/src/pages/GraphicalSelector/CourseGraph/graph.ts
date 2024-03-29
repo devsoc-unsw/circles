@@ -87,7 +87,7 @@ const nodeLabelHoverStyle = (courseCode: string) => ({
   ...plannedLabel
 });
 
-const nodeLabelUnhoverStyle = (courseCode: string, isPlanned: string | null, theme: string) => {
+const nodeLabelUnhoverStyle = (courseCode: string, isPlanned: boolean, theme: string) => {
   if (isPlanned) {
     return {
       ...sameNode(courseCode),
@@ -152,7 +152,7 @@ const edgeUnhoverStyle = (arrow: typeof Arrow, theme: string, id: string) => {
 
 const mapNodeStyle = (
   courseCode: string,
-  isPlanned: string | null,
+  isPlanned: boolean,
   isUnlocked: boolean,
   theme: string
 ) => {
