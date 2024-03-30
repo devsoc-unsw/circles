@@ -120,6 +120,7 @@ def redis_set_token_nx(token: SessionToken, info: SessionTokenInfo) -> bool:
         "uid": info.uid,
         "exp": info.REMOVE_exp,
     })
+    # TODO: set a TTL on the index
     assert isinstance(res, int) and res == 2
     return True
 

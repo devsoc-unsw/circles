@@ -8,6 +8,7 @@ NOTE: The helper functions must be run from the backend directory due to their p
 import json
 import os
 from sys import exit
+from typing import Optional
 
 from data.config import ARCHIVED_YEARS
 from pymongo import MongoClient
@@ -66,7 +67,7 @@ def overwrite_archives():
             except (KeyError, IOError, OSError):
                 print(f"Failed to load and overwrite {year} archive")
 
-def create_dynamic_db():
+def create_users_collection():
     usersDB.create_collection('users',
         validator={
             '$jsonSchema': {
@@ -149,6 +150,8 @@ def create_dynamic_db():
                 }
             }
         })
+
+def create_tokens_collection():
     usersDB.create_collection('tokens', validator={
         '$jsonSchema': {
             'bsonType': 'object',
@@ -165,6 +168,14 @@ def create_dynamic_db():
             }
         }
     })
+
+def create_dynamic_db(drop_old: bool):
+    if drop_old:
+        usersDB.drop_collection('users')
+        usersDB.drop_collection('tokens')
+
+    create_users_collection()
+    create_tokens_collection()
     print("finished creating user database")
     # example insertion
     # usersDB['users'].insert_one({
@@ -196,7 +207,5 @@ def overwrite_all():
     overwrite_archives()
 
 def optionally_create_new_data():
-    # TODO: DELETE NEXT LINES IN PROD
-    usersDB.drop_collection('users')
-    usersDB.drop_collection('tokens')
-    create_dynamic_db()
+    # TODO: DO NOT DROP OLD COLLECTIONS IN PROD
+    create_dynamic_db(drop_old=True)
