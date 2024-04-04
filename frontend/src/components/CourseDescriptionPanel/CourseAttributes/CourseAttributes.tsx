@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import { Progress, Rate, Typography } from 'antd';
+import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
 import { getCourseRating } from 'utils/api/unilectivesApi';
@@ -20,6 +21,7 @@ type CourseAttributesProps = {
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
+  const theme = useTheme();
 
   const ratingQuery = useQuery(['courseRating', course.code], () => getCourseRating(course.code));
   const rating = ratingQuery.data;
@@ -127,7 +129,8 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                     format={() =>
                       `${rating.enjoyability ? rating.enjoyability.toFixed(1) : '?'} / 5`
                     }
-                    width={65}
+                    strokeColor={theme.purplePrimary}
+                    size={65}
                   />
                   <p style={{ fontSize: 'small' }}>Enjoyability</p>
                 </div>
@@ -136,7 +139,8 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                     type="dashboard"
                     percent={rating.usefulness ? (rating.usefulness / 5) * 100 : 0}
                     format={() => `${rating.usefulness ? rating.usefulness.toFixed(1) : '?'} / 5`}
-                    width={65}
+                    strokeColor={theme.purplePrimary}
+                    size={65}
                   />
                   <p style={{ fontSize: 'small' }}>Usefulness</p>
                 </div>
@@ -147,17 +151,14 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                     format={() =>
                       `${rating.manageability ? rating.manageability.toFixed(1) : '?'} / 5`
                     }
-                    width={65}
+                    strokeColor={theme.purplePrimary}
+                    size={65}
                   />
                   <p style={{ fontSize: 'small' }}>Manageability</p>
                 </div>
               </S.RatingWrapper>
               <div style={{ textAlign: 'center' }}>
-                <Rate
-                  disabled
-                  defaultValue={rating.overallRating ? rating.overallRating : 0}
-                  allowHalf
-                />
+                <Rate disabled value={rating.overallRating ? rating.overallRating : 0} allowHalf />
                 <p>Overall</p>
               </div>
               <S.Link
