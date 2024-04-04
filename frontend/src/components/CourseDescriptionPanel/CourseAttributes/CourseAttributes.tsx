@@ -1,8 +1,10 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import { Progress, Rate, Typography } from 'antd';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
+import { getCourseRating } from 'utils/api/unilectivesApi';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { TERM } from 'config/constants';
@@ -15,51 +17,12 @@ type CourseAttributesProps = {
   courseCapacity?: EnrolmentCapacityData;
 };
 
-interface UnilectivesCourse {
-  courseCode: string;
-  archived: boolean;
-  // attributes: any[];
-  calendar: string;
-  campus: string;
-  description: string;
-  enrolmentRules: string;
-  equivalents: string[];
-  exclusions: string[];
-  faculty: string;
-  fieldOfEducation: string;
-  genEd: boolean;
-  level: number;
-  school: string;
-  studyLevel: string;
-  terms: number[];
-  title: string;
-  uoc: number;
-  overallRating: number;
-  manageability: number;
-  usefulness: number;
-  enjoyability: number;
-  reviewCount: number;
-}
-
-const getCourseRating = async (code: string) => {
-  const res = await fetch(`https://unilectives.devsoc.app/api/v1/course/${code}`);
-  if (res.status !== 200) return undefined;
-  return ((await res.json()) as { course: UnilectivesCourse }).course;
-};
-
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
 
-  const [rating, setRating] = React.useState<UnilectivesCourse | undefined>(undefined);
-
-  React.useEffect(() => {
-    const fetchRating = async () => {
-      const r = await getCourseRating(course.code);
-      if (r) setRating(r);
-    };
-    fetchRating();
-  }, [course.code]);
+  const ratingQuery = useQuery(['courseRating', course.code], () => getCourseRating(course.code));
+  const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
 
