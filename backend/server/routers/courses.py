@@ -88,17 +88,34 @@ def get_jsonified_course(courseCode: str) -> str:
 def get_courses() -> list[Dict]:
     """
     Gets all courses in the database.
-    (For CSElectives), by yours truly, Aimen 💫
+    (For CSElectives)
     """
-    courses = []
-    for course in coursesCOL.find():
-        course["is_legacy"] = False
+    
+    def generate_course(course, is_legacy):
+        course["is_legacy"] = is_legacy
         course.setdefault("school", None)
         del course["_id"]
         with suppress(KeyError):
             del course["exclusions"]["leftover_plaintext"]
-        courses.append(course)
-    return courses
+        return course
+
+    all_courses = fetch_all_courses()
+
+    courses = dict()
+    for course in coursesCOL.find():
+        courses[course["code"]] = generate_course(course, False)
+
+    years = list(map(str, sorted(ARCHIVED_YEARS, reverse=True)))
+    for course_code in all_courses:
+        if course_code in courses:
+            continue
+        for year in years:
+            course = archivesDB[year].find_one({"code": course_code})
+            if course:
+                courses[course["code"]] = generate_course(course, True)
+                break
+
+    return list(courses.values())
 
 @router.get(
     "/getCourse/{courseCode}",
