@@ -122,7 +122,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           content: rating ? (
             <>
               <S.RatingWrapper>
-                <div style={{ textAlign: 'center', width: '85px' }}>
+                <S.DialWrapper>
                   <Progress
                     type="dashboard"
                     percent={rating.enjoyability ? (rating.enjoyability / 5) * 100 : 0}
@@ -132,9 +132,9 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                     strokeColor={theme.purplePrimary}
                     size={65}
                   />
-                  <p style={{ fontSize: 'small' }}>Enjoyability</p>
-                </div>
-                <div style={{ textAlign: 'center', width: '85px' }}>
+                  <S.DialLabel>Enjoyability</S.DialLabel>
+                </S.DialWrapper>
+                <S.DialWrapper>
                   <Progress
                     type="dashboard"
                     percent={rating.usefulness ? (rating.usefulness / 5) * 100 : 0}
@@ -142,9 +142,9 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                     strokeColor={theme.purplePrimary}
                     size={65}
                   />
-                  <p style={{ fontSize: 'small' }}>Usefulness</p>
-                </div>
-                <div style={{ textAlign: 'center', width: '85px' }}>
+                  <S.DialLabel>Usefulness</S.DialLabel>
+                </S.DialWrapper>
+                <S.DialWrapper>
                   <Progress
                     type="dashboard"
                     percent={rating.manageability ? (rating.manageability / 5) * 100 : 0}
@@ -154,8 +154,8 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                     strokeColor={theme.purplePrimary}
                     size={65}
                   />
-                  <p style={{ fontSize: 'small' }}>Manageability</p>
-                </div>
+                  <S.DialLabel>Manageability</S.DialLabel>
+                </S.DialWrapper>
               </S.RatingWrapper>
               <div style={{ textAlign: 'center' }}>
                 <Rate disabled value={rating.overallRating ? rating.overallRating : 0} allowHalf />

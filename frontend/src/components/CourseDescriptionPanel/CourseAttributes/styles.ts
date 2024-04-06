@@ -43,6 +43,15 @@ const RatingWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const DialWrapper = styled.div`
+  text-align: center;
+  width: 85px;
+`;
+
+const DialLabel = styled.p`
+  font-size: small;
+`;
+
 export default {
   AttributeWrapper,
   AttributeText,
@@ -50,5 +59,7 @@ export default {
   AttributesWrapperConcise,
   AttributeConcise,
   Link,
-  RatingWrapper
+  RatingWrapper,
+  DialWrapper,
+  DialLabel
 };
