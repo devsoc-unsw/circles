@@ -17,7 +17,7 @@ const SponsorSection = () => (
     <S.SponsorsText>Our sponsors</S.SponsorsText>
     <S.LogosWrapper>
       <Logo href="https://www.janestreet.com" src={janestreetLogo} />
-      <Logo href="https://www.tiktok.com" src={tiktokLogo} />
+      <Logo href="https://careers.tiktok.com/" src={tiktokLogo} />
     </S.LogosWrapper>
   </PageContainer>
 );
