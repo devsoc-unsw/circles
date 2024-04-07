@@ -1,8 +1,11 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Progress, Rate, Typography } from 'antd';
+import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
+import { getCourseRating } from 'utils/api/unilectivesApi';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { TERM } from 'config/constants';
@@ -18,6 +21,10 @@ type CourseAttributesProps = {
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
+  const theme = useTheme();
+
+  const ratingQuery = useQuery(['courseRating', course.code], () => getCourseRating(course.code));
+  const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
 
@@ -109,6 +116,62 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
         {
           title: 'Units of Credit',
           content: UOC
+        },
+        {
+          title: 'Unilectives Rating',
+          content: rating ? (
+            <>
+              <S.RatingWrapper>
+                <S.DialWrapper>
+                  <Progress
+                    type="dashboard"
+                    percent={rating.enjoyability ? (rating.enjoyability / 5) * 100 : 0}
+                    format={() =>
+                      `${rating.enjoyability ? rating.enjoyability.toFixed(1) : '?'} / 5`
+                    }
+                    strokeColor={theme.purplePrimary}
+                    size={65}
+                  />
+                  <S.DialLabel>Enjoyability</S.DialLabel>
+                </S.DialWrapper>
+                <S.DialWrapper>
+                  <Progress
+                    type="dashboard"
+                    percent={rating.usefulness ? (rating.usefulness / 5) * 100 : 0}
+                    format={() => `${rating.usefulness ? rating.usefulness.toFixed(1) : '?'} / 5`}
+                    strokeColor={theme.purplePrimary}
+                    size={65}
+                  />
+                  <S.DialLabel>Usefulness</S.DialLabel>
+                </S.DialWrapper>
+                <S.DialWrapper>
+                  <Progress
+                    type="dashboard"
+                    percent={rating.manageability ? (rating.manageability / 5) * 100 : 0}
+                    format={() =>
+                      `${rating.manageability ? rating.manageability.toFixed(1) : '?'} / 5`
+                    }
+                    strokeColor={theme.purplePrimary}
+                    size={65}
+                  />
+                  <S.DialLabel>Manageability</S.DialLabel>
+                </S.DialWrapper>
+              </S.RatingWrapper>
+              <div style={{ textAlign: 'center' }}>
+                <Rate disabled value={rating.overallRating ? rating.overallRating : 0} allowHalf />
+                <p>Overall</p>
+              </div>
+              <S.Link
+                href={`https://unilectives.csesoc.app/course/${code}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View full reviews on Unilectives
+              </S.Link>
+            </>
+          ) : (
+            <p>N/A</p>
+          )
         }
       ]
     : [];

@@ -25,10 +25,9 @@ origins = [
     "http://frontend:8000",
     "http://frontend:3000",
     "http://frontend:3001",
-    "https://circles.csesoc.unsw.edu.au",
     "https://circles.devsoc.app",
-    "https://cselectives.staging.csesoc.unsw.edu.au",
-    "https://cselectives.csesoc.unsw.edu.au",
+    "https://unilectives.devsoc.app",
+    "https://unilectives.staging.devsoc.app",
 ]
 
 app.add_middleware(
@@ -52,10 +51,11 @@ app.include_router(followups.router)
 
 @app.get("/")
 async def index() -> str:
-    """ sanity test that this file is loaded """
+    """sanity test that this file is loaded"""
     return "At index inside server.py"
+
 
 @app.get("/live_year")
 def live_year() -> int:
-    """ sanity check for the live year """
+    """sanity check for the live year"""
     return LIVE_YEAR
