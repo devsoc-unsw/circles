@@ -3,7 +3,7 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
-import { PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
+import { LiveYear, PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import {
   badCourseInfo,
   badCourses,
@@ -53,21 +53,26 @@ const TermPlanner = () => {
   const courseQueries = useQueries(
     Object.keys(courses).map((code: string) => ({
       queryKey: ['course', code],
-      queryFn: () => getCourseForYearsInfo(code, validYears)
+      queryFn: () =>
+        getCourseForYearsInfo(
+          code,
+          validYears.filter((year) => year < LiveYear)
+        )
     }))
   );
   const validYearsAndCurrent = (validYears as (number | 'current')[]).concat(['current']);
   const courseInfoFlipped = Object.fromEntries(
     Object.keys(courses).map((code: string, index: number) => [
       code,
-      courseQueries[index].data ?? validYearsAndCurrent.reduce((prev, curr) => ({...prev, [curr] : badCourseInfo}), {})
+      courseQueries[index].data ??
+        validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
     ])
   ) as Record<string, Record<number | 'current', Course>>;
   const courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
     Object.entries(yearData).forEach(([year, courseData]) => {
-      courseInfos[year] = {...courseInfos[year], [course]: courseData};
-    })
+      courseInfos[year] = { ...courseInfos[year], [course]: courseData };
+    });
   });
   const [draggingCourse, setDraggingCourse] = useState('');
 
@@ -77,10 +82,13 @@ const TermPlanner = () => {
       queryClient.setQueryData('planner', (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
         const curr: PlannerResponse = JSON.parse(JSON.stringify(prev));
-        curr.years[data.srcRow][data.srcTerm].splice(curr.years[data.srcRow][data.srcTerm].indexOf(data.courseCode), 1);
+        curr.years[data.srcRow][data.srcTerm].splice(
+          curr.years[data.srcRow][data.srcTerm].indexOf(data.courseCode),
+          1
+        );
         curr.years[data.destRow][data.destTerm].splice(data.destIndex, 0, data.courseCode);
         return curr;
-      })
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
@@ -104,7 +112,7 @@ const TermPlanner = () => {
         curr.unplanned.splice(curr.unplanned.indexOf(data.courseCode), 1);
         curr.years[data.destRow][data.destTerm].splice(data.destIndex, 0, data.courseCode);
         return curr;
-      })
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
@@ -125,10 +133,13 @@ const TermPlanner = () => {
       queryClient.setQueryData('planner', (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
         const curr: PlannerResponse = JSON.parse(JSON.stringify(prev));
-        curr.years[data.srcRow as number][data.srcTerm as string].splice(curr.years[data.srcRow as number][data.srcTerm as string].indexOf(data.courseCode), 1);
+        curr.years[data.srcRow as number][data.srcTerm as string].splice(
+          curr.years[data.srcRow as number][data.srcTerm as string].indexOf(data.courseCode),
+          1
+        );
         curr.unplanned.push(data.courseCode);
         return curr;
-      })
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries('planner');
@@ -155,8 +166,6 @@ const TermPlanner = () => {
       });
     }
   }, [plannerEmpty]);
-
-  const currYear = new Date().getFullYear();
 
   /* Ref used for exporting planner to image */
   const plannerPicRef = useRef<HTMLDivElement>(null);
@@ -228,15 +237,19 @@ const TermPlanner = () => {
     }
   };
 
-  if (courseQueries.some((c) => !c.data)) {
-    return <div>Loading page...</div>
-  }
+  const yearToFetch = (year: number) => (year >= LiveYear ? LiveYear : year);
 
   return (
     <PageTemplate>
       <OptionsHeader />
       <S.ContainerWrapper>
-        <Suspense fallback={<Spinner text="Loading Table..." />}>
+        {
+          // TODO: Fix Suspense by updating to react-query v5
+          /* <Suspense fallback={<Spinner text="Loading Table..." />}> */
+        }
+        {courseQueries.some((c) => c.isLoading) || !courseInfos[LiveYear] ? (
+          <Spinner text="Loading Table..." />
+        ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
             <S.PlannerContainer>
               <S.PlannerGridWrapper summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
@@ -247,12 +260,11 @@ const TermPlanner = () => {
                 <GridItem>Term 3</GridItem>
                 {planner.years.map((year, index) => {
                   const iYear = planner.startYear + index;
-                  const fetchingYear = iYear >= currYear ? 'current' : iYear;
                   let yearUOC = 0;
                   Object.keys(year).forEach((termKey) => {
                     Object.entries(courseInfoFlipped).forEach(([courseCode, courseInfo]) => {
                       if (year[termKey as Term].includes(courseCode)) {
-                        yearUOC += courseInfo[fetchingYear].UOC;
+                        yearUOC += courseInfo[yearToFetch(iYear)].UOC;
                       }
                     });
                   });
@@ -263,7 +275,7 @@ const TermPlanner = () => {
                     <React.Fragment key={iYear}>
                       <S.YearGridBox>
                         <S.YearWrapper>
-                          <S.YearText currYear={currYear === iYear}>{iYear}</S.YearText>
+                          <S.YearText currYear={LiveYear === iYear}>{iYear}</S.YearText>
                         </S.YearWrapper>
                         <Badge
                           style={{
@@ -277,18 +289,21 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
-                        if (!courseInfos[iYear]) return null; // not yet ready // TODO: write better
+                        if (!courseInfos[yearToFetch(iYear)]) return null; // not yet ready // TODO: write better
                         // console.log('Making termbox for', iYear, term);
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL
                         const courseInfoForThisTerm = Object.fromEntries(
-                          codesForThisTerm.map((code) => [code, courseInfos[iYear][code]])
+                          codesForThisTerm.map((code) => [
+                            code,
+                            courseInfos[yearToFetch(iYear)][code]
+                          ])
                         );
                         return (
                           <TermBox
                             key={key}
                             name={key}
-                            courseInfos={courseInfos[iYear]}
+                            courseInfos={courseInfos[yearToFetch(iYear)]}
                             validateInfos={validations.courses_state}
                             termCourseInfos={courseInfoForThisTerm}
                             termCourseCodes={codesForThisTerm}
@@ -302,14 +317,15 @@ const TermPlanner = () => {
                 <UnplannedColumn
                   dragging={!!draggingCourse}
                   courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [code, courseInfos.current[code]])
+                    planner.unplanned.map((code) => [code, courseInfos[LiveYear][code]])
                   )}
                   validateInfos={validations.courses_state}
                 />
               </S.PlannerGridWrapper>
             </S.PlannerContainer>
           </DragDropContext>
-        </Suspense>
+        )}
+        {/* </Suspense> */}
       </S.ContainerWrapper>
     </PageTemplate>
   );
