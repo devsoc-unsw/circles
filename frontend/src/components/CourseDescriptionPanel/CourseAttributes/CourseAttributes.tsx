@@ -75,7 +75,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           title: 'UNSW Handbook',
           content: studyLevel ? (
             <S.Link
-              href={`https://www.handbook.unsw.edu.au/${studyLevel.toLowerCase()}/courses/2024/${code}/`}
+              href={`https://www.handbook.unsw.edu.au/${studyLevel.toLowerCase()}/courses/2023/${code}/`}
               target="_blank"
               rel="noreferrer"
             >
@@ -87,7 +87,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           title: 'UNSW Course Outline',
           content: studyLevel ? (
             <S.Link
-              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=2024&term=Term%201&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=T1&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
+              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=2024&term=Term%201&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=${terms[0]}&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
               target="_blank"
               rel="noreferrer"
             >
