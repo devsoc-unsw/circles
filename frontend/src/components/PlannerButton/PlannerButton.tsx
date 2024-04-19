@@ -12,7 +12,7 @@ interface PlannerButtonProps {
 }
 
 const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
-  const handleMutation = isAddedInPlanner ? addToUnplanned : removeCourse;
+  const handleMutation = isAddedInPlanner ? removeCourse : addToUnplanned;
   const queryClient = useQueryClient();
   const mutation = useMutation(handleMutation, {
     onSuccess: () => {
