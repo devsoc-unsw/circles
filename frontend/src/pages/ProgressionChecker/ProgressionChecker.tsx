@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import {
   BorderlessTableOutlined,
   EyeFilled,
   EyeInvisibleOutlined,
   TableOutlined
 } from '@ant-design/icons';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Divider, Typography } from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
@@ -37,11 +37,11 @@ const ProgressionChecker = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
 
-  const degreeQuery = useQuery('degree', getUserDegree);
+  const degreeQuery = useQuery(['degree'], getUserDegree);
   const degree = degreeQuery.data || badDegree;
   const { programCode, specs } = degree;
 
-  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerQuery = useQuery(['planner'], getUserPlanner);
   const planner = plannerQuery.data || badPlanner;
   const { unplanned } = planner;
 
@@ -73,7 +73,7 @@ const ProgressionChecker = () => {
   }, []);
 
   const [view, setView] = useState(Views.GRID_CONCISE);
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const coursesQuery = useQuery(['courses'], getUserCourses);
   const courses = coursesQuery.data || badCourses;
 
   const countedCourses: string[] = [];

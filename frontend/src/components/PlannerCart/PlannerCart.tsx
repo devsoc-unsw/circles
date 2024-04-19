@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Tooltip, Typography } from 'antd';
 import { badCourses } from 'types/userResponse';
 import { removeAll } from 'utils/api/plannerApi';
@@ -13,8 +13,8 @@ const { Text, Title } = Typography;
 
 const PlannerCart = () => {
   const navigate = useNavigate();
-  const courses = useQuery('courses', getUserCourses).data || badCourses;
-  const removeAllCourses = useMutation('removeCourses', removeAll);
+  const courses = useQuery(['courses'], getUserCourses).data || badCourses;
+  const removeAllCourses = useMutation(['removeCourses'], removeAll);
   const [showMenu, setShowMenu] = useState(false);
 
   const pathname = useLocation();

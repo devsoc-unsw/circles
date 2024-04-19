@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';

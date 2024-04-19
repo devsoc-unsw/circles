@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { useQuery } from 'react-query';
 import { scroller } from 'react-scroll';
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import { badCourses, badDegree } from 'types/userResponse';
@@ -39,15 +39,15 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     reset: true,
     config: { tension: 80, friction: 60 }
   });
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const coursesQuery = useQuery(['courses'], getUserCourses);
   const courses = coursesQuery.data || badCourses;
-  const degreeQuery = useQuery('degree', getUserDegree);
+  const degreeQuery = useQuery(['degree'], getUserDegree);
   const degree = degreeQuery.data || badDegree;
   const { programCode } = degree;
 
-  const programName = (useQuery('progam', fetchAllDegrees).data?.programs || { [programCode]: '' })[
-    programCode
-  ];
+  const programName = (useQuery(['program'], fetchAllDegrees).data?.programs || {
+    [programCode]: ''
+  })[programCode];
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {

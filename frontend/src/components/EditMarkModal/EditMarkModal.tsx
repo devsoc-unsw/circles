@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, message } from 'antd';
 import { Grade } from 'types/planner';
 import { updateCourseMark } from 'utils/planner';
@@ -25,9 +25,9 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
 
   const updateMarkMutation = useMutation(updateCourseMark, {
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('courses');
-      queryClient.invalidateQueries('validate');
+      queryClient.invalidateQueries(['planner']);
+      queryClient.invalidateQueries(['courses']);
+      queryClient.invalidateQueries(['validate']);
       onCancel();
       message.success('Mark Updated');
     },

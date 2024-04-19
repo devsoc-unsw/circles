@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
+import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
 import axios from 'axios';
 import { Course } from 'types/api';
@@ -14,7 +14,7 @@ import CS from '../common/styles';
 import S from './styles';
 
 const ImportPlannerMenu = () => {
-  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerQuery = useQuery(['planner'], getUserPlanner);
   const planner = plannerQuery.data || badPlanner;
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);

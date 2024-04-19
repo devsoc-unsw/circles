@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Badge } from 'antd';
 import axios from 'axios';
 import { useTheme } from 'styled-components';
@@ -49,17 +49,17 @@ const TermBox = ({
       { params: { token, termyear: `${year}${term}` } }
     );
   };
-  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerQuery = useQuery(['planner'], getUserPlanner);
   const toggleLockTermMutation = useMutation(toggleLockTerm, {
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries(['planner']);
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
       console.error('Error at toggleLockTermMutation: ', err);
     }
   });
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const coursesQuery = useQuery(['courses'], getUserCourses);
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   if (!coursesQuery.data || !plannerQuery.data) {

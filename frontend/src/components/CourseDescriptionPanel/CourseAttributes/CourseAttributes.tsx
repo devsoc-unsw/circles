@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Progress, Rate, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';

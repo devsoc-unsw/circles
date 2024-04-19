@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import { errLogger } from 'utils/queryUtils';
@@ -17,9 +17,11 @@ import S from './styles';
 const CourseSelector = () => {
   const [showedNotif, setShowedNotif] = useState(false);
 
-  const plannerQuery = useQuery('planner', getUserPlanner, { onError: errLogger('plannerQuery') });
+  const plannerQuery = useQuery(['planner'], getUserPlanner, {
+    onError: errLogger('plannerQuery')
+  });
 
-  const coursesQuery = useQuery('courses', getUserCourses, {
+  const coursesQuery = useQuery(['courses'], getUserCourses, {
     onError: errLogger('coursesQuery'),
     onSuccess: (data) => {
       // only open for users with no courses
@@ -35,7 +37,7 @@ const CourseSelector = () => {
     }
   });
 
-  const degreeQuery = useQuery('degree', getUserDegree, { onError: errLogger('degreeQuery') });
+  const degreeQuery = useQuery(['degree'], getUserDegree, { onError: errLogger('degreeQuery') });
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 

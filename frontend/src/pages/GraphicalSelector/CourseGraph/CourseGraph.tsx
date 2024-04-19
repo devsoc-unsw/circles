@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import {
   ExpandAltOutlined,
@@ -8,6 +7,7 @@ import {
   ZoomOutOutlined
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
+import { useQuery } from '@tanstack/react-query';
 import { Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked } from 'types/api';
@@ -57,9 +57,9 @@ const CourseGraph = ({
   loading,
   setLoading
 }: Props) => {
-  const degreeQuery = useQuery('degree', getUserDegree);
-  const plannerQuery = useQuery('planner', getUserPlanner);
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const degreeQuery = useQuery(['degree'], getUserDegree);
+  const plannerQuery = useQuery(['planner'], getUserPlanner);
+  const coursesQuery = useQuery(['courses'], getUserCourses);
   const windowSize = useAppWindowSize();
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);

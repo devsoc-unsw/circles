@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from 'antd';
 import { resetDegree } from 'utils/api/degreeApi';
 import { useAppDispatch } from 'hooks';
@@ -19,7 +19,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
 
   const resetDegreeMutation = useMutation(resetDegree, {
     onSuccess: () => {
-      queryClient.invalidateQueries('degree');
+      queryClient.invalidateQueries(['degree']);
     },
     onError: (err) => {
       // eslint-disable-next-line no-console

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { Course } from 'types/api';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
@@ -16,8 +16,8 @@ const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
   const queryClient = useQueryClient();
   const mutation = useMutation(handleMutation, {
     onSuccess: () => {
-      queryClient.invalidateQueries('courses');
-      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries(['courses']);
+      queryClient.invalidateQueries(['planner']);
     }
   });
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {

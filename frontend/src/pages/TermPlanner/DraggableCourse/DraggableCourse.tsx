@@ -150,9 +150,9 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                     </Text>
                     <Text className="text">
                       {/*
-                          Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
-                          Mark can be 0.
-                        */}
+                        Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
+                        Mark can be 0.
+                      */}
                       {courses[code]?.mark || courses[code]?.mark === 0
                         ? courses[code].mark
                         : 'N/A'}
@@ -170,7 +170,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
         plannedFor={courses[code].plannedFor}
       />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
-        and the course has no warning, then disable the tooltip */}
+      and the course has no warning, then disable the tooltip */}
       {isSmall && (
         <ReactTooltip anchorSelect={`#${code}`} place="top" style={{ zIndex: 10 }}>
           {title}

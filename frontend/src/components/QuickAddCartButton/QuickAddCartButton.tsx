@@ -1,7 +1,7 @@
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import { RootState } from 'config/store';
@@ -25,7 +25,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
     onMutate: () => planned,
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     onSuccess: async (data: void, variables: string, context: unknown) => {
-      await queryClient.invalidateQueries('planner');
+      await queryClient.invalidateQueries(['planner']);
     }
   });
 

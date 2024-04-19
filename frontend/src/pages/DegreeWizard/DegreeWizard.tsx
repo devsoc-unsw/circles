@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
+import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
@@ -32,7 +32,7 @@ const DegreeWizard = () => {
   });
 
   const { programCode } = degreeInfo;
-  const isComplete = useQuery('degree', getUserDegree).data?.isComplete;
+  const isComplete = useQuery(['degree'], getUserDegree).data?.isComplete;
   const navigate = useNavigate();
 
   useEffect(() => {
