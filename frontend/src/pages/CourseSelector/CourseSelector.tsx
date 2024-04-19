@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
-import { errLogger } from 'utils/queryUtils';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
@@ -17,27 +16,20 @@ import S from './styles';
 const CourseSelector = () => {
   const [showedNotif, setShowedNotif] = useState(false);
 
-  const plannerQuery = useQuery(['planner'], getUserPlanner, {
-    onError: errLogger('plannerQuery')
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
   });
 
-  const coursesQuery = useQuery(['courses'], getUserCourses, {
-    onError: errLogger('coursesQuery'),
-    onSuccess: (data) => {
-      // only open for users with no courses
-      if (!showedNotif && !Object.keys(data).length) {
-        openNotification({
-          type: 'info',
-          message: 'How do I see more sidebar courses?',
-          description:
-            'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
-        });
-        setShowedNotif(true);
-      }
-    }
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
   });
 
-  const degreeQuery = useQuery(['degree'], getUserDegree, { onError: errLogger('degreeQuery') });
+  const degreeQuery = useQuery({
+    queryKey: ['degree'],
+    queryFn: getUserDegree
+  });
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 
@@ -48,6 +40,16 @@ const CourseSelector = () => {
   const divRef = useRef<null | HTMLDivElement>(null);
   const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
   useEffect(() => {
+    if (coursesQuery.isSuccess && !showedNotif && !Object.keys(coursesQuery.data).length) {
+      openNotification({
+        type: 'info',
+        message: 'How do I see more sidebar courses?',
+        description:
+          'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
+      });
+      setShowedNotif(true);
+    }
+
     const minMenuWidth = 100;
     const maxMenuWidth = (60 * window.innerWidth) / 100;
     const resizerDiv = divRef.current as HTMLDivElement;
@@ -72,7 +74,7 @@ const CourseSelector = () => {
     };
     resizerDiv?.addEventListener('mousedown', startResize);
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
-  }, []);
+  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data]);
 
   const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), [dispatch]);
 

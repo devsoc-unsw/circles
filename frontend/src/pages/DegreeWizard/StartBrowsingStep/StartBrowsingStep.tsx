@@ -17,11 +17,18 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const setupDegreeMutation = useMutation(setupDegreeWizard, {
+  const setupDegreeMutation = useMutation({
+    mutationFn: setupDegreeWizard,
     onSuccess: () => {
-      queryClient.invalidateQueries(['degree']);
-      queryClient.invalidateQueries(['planner']);
-      queryClient.invalidateQueries(['courses']);
+      queryClient.invalidateQueries({
+        queryKey: ['degree']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
       navigate('/course-selector');
       setIsComplete(true);
     },

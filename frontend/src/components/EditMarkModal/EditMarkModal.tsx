@@ -23,11 +23,18 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     setMarkValue(value);
   };
 
-  const updateMarkMutation = useMutation(updateCourseMark, {
+  const updateMarkMutation = useMutation({
+    mutationFn: updateCourseMark,
     onSuccess: () => {
-      queryClient.invalidateQueries(['planner']);
-      queryClient.invalidateQueries(['courses']);
-      queryClient.invalidateQueries(['validate']);
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
       onCancel();
       message.success('Mark Updated');
     },

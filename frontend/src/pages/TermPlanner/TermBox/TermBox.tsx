@@ -49,17 +49,26 @@ const TermBox = ({
       { params: { token, termyear: `${year}${term}` } }
     );
   };
-  const plannerQuery = useQuery(['planner'], getUserPlanner);
-  const toggleLockTermMutation = useMutation(toggleLockTerm, {
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
+  const toggleLockTermMutation = useMutation({
+    mutationFn: toggleLockTerm,
     onSuccess: () => {
-      queryClient.invalidateQueries(['planner']);
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
       console.error('Error at toggleLockTermMutation: ', err);
     }
   });
-  const coursesQuery = useQuery(['courses'], getUserCourses);
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   if (!coursesQuery.data || !plannerQuery.data) {

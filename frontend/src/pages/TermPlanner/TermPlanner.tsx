@@ -41,14 +41,23 @@ const TermPlanner = () => {
   const queryClient = useQueryClient();
 
   // Planer obj
-  const plannerQuery = useQuery(['planner'], getUserPlanner);
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
   // The user's actual courses obj???????
-  const coursesQuery = useQuery(['courses'], getUserCourses);
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
-  const validateQuery = useQuery(['validate'], validateTermPlanner);
+  const validateQuery = useQuery({
+    queryKey: ['validate'],
+    queryFn: validateTermPlanner
+  });
   const validations: ValidatesResponse = validateQuery.data ?? badValidations;
   const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);
   const courseQueries = useQueries({
@@ -78,7 +87,8 @@ const TermPlanner = () => {
   const [draggingCourse, setDraggingCourse] = useState('');
 
   // Mutations
-  const setPlannedCourseToTermMutation = useMutation(setPlannedCourseToTerm, {
+  const setPlannedCourseToTermMutation = useMutation({
+    mutationFn: setPlannedCourseToTerm,
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -92,8 +102,12 @@ const TermPlanner = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['planner']);
-      queryClient.invalidateQueries(['validate']);
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -105,7 +119,8 @@ const TermPlanner = () => {
     setPlannedCourseToTermMutation.mutate(data);
   };
 
-  const setUnplannedCourseToTermMutation = useMutation(setUnplannedCourseToTerm, {
+  const setUnplannedCourseToTermMutation = useMutation({
+    mutationFn: setUnplannedCourseToTerm,
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -116,8 +131,12 @@ const TermPlanner = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['planner']);
-      queryClient.invalidateQueries(['validate']);
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -129,7 +148,8 @@ const TermPlanner = () => {
     setUnplannedCourseToTermMutation.mutate(data);
   };
 
-  const unscheduleCourseMutation = useMutation(unscheduleCourse, {
+  const unscheduleCourseMutation = useMutation({
+    mutationFn: unscheduleCourse,
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -143,8 +163,12 @@ const TermPlanner = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['planner']);
-      queryClient.invalidateQueries(['validate']);
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -248,7 +272,7 @@ const TermPlanner = () => {
           // TODO: Fix Suspense by updating to react-query v5
           /* <Suspense fallback={<Spinner text="Loading Table..." />}> */
         }
-        {courseQueries.some((c) => c.isLoading) || !courseInfos[LIVE_YEAR] ? (
+        {courseQueries.some((c) => c.isPending) || !courseInfos[LIVE_YEAR] ? (
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>

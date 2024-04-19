@@ -13,8 +13,14 @@ const { Title } = Typography;
 const CourseBanner = () => {
   const dispatch = useAppDispatch();
 
-  const degreeQuery = useQuery(['degree'], getUserDegree);
-  const allPrograms = useQuery(['programs'], fetchAllDegrees);
+  const degreeQuery = useQuery({
+    queryKey: ['degree'],
+    queryFn: getUserDegree
+  });
+  const allPrograms = useQuery({
+    queryKey: ['programs'],
+    queryFn: fetchAllDegrees
+  });
 
   const getUserProgramTitle = (): string => {
     if (degreeQuery.data?.programCode) {

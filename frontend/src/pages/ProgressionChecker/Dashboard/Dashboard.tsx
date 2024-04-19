@@ -39,13 +39,22 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
     reset: true,
     config: { tension: 80, friction: 60 }
   });
-  const coursesQuery = useQuery(['courses'], getUserCourses);
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const courses = coursesQuery.data || badCourses;
-  const degreeQuery = useQuery(['degree'], getUserDegree);
+  const degreeQuery = useQuery({
+    queryKey: ['degree'],
+    queryFn: getUserDegree
+  });
   const degree = degreeQuery.data || badDegree;
   const { programCode } = degree;
 
-  const programName = (useQuery(['program'], fetchAllDegrees).data?.programs || {
+  const programName = (useQuery({
+    queryKey: ['program'],
+    queryFn: fetchAllDegrees
+  }).data?.programs || {
     [programCode]: ''
   })[programCode];
 

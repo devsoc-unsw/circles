@@ -14,7 +14,10 @@ import CS from '../common/styles';
 import S from './styles';
 
 const ImportPlannerMenu = () => {
-  const plannerQuery = useQuery(['planner'], getUserPlanner);
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
   const planner = plannerQuery.data || badPlanner;
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);

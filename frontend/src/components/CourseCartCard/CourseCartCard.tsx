@@ -25,10 +25,15 @@ const CourseCartCard = ({ code, title }: Props) => {
     dispatch(addTab(code));
   };
 
-  const remove = useMutation(removeCourse, {
+  const remove = useMutation({
+    mutationFn: removeCourse,
     onSuccess: () => {
-      queryClient.invalidateQueries(['courses']);
-      queryClient.invalidateQueries(['planner']);
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     }
   });
 

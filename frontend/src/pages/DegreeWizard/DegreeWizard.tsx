@@ -32,7 +32,10 @@ const DegreeWizard = () => {
   });
 
   const { programCode } = degreeInfo;
-  const isComplete = useQuery(['degree'], getUserDegree).data?.isComplete;
+  const isComplete = useQuery({
+    queryKey: ['degree'],
+    queryFn: getUserDegree
+  }).data?.isComplete;
   const navigate = useNavigate();
 
   useEffect(() => {

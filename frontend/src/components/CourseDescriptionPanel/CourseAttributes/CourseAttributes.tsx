@@ -23,7 +23,10 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
   const sidebar = pathname === '/course-selector';
   const theme = useTheme();
 
-  const ratingQuery = useQuery(['courseRating', course.code], () => getCourseRating(course.code));
+  const ratingQuery = useQuery({
+    queryKey: ['courseRating', course.code],
+    queryFn: () => getCourseRating(course.code)
+  });
   const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;

@@ -16,7 +16,10 @@ const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
-  const coursesQuery = useQuery(['courses'], getUserCourses);
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const [loading, setLoading] = useState(true);
   const courses = coursesQuery.data || badCourses;
 

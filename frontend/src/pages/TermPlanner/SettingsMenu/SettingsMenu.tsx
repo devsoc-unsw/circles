@@ -74,9 +74,12 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   }
 
-  const summerToggleMutation = useMutation(summerToggle, {
+  const summerToggleMutation = useMutation({
+    mutationFn: summerToggle,
     onSuccess: () => {
-      queryClient.invalidateQueries(['planner']);
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console

@@ -14,10 +14,15 @@ interface PlannerButtonProps {
 const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
   const handleMutation = isAddedInPlanner ? removeCourse : addToUnplanned;
   const queryClient = useQueryClient();
-  const mutation = useMutation(handleMutation, {
+  const mutation = useMutation({
+    mutationFn: handleMutation,
     onSuccess: () => {
-      queryClient.invalidateQueries(['courses']);
-      queryClient.invalidateQueries(['planner']);
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     }
   });
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -25,17 +30,17 @@ const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
     mutation.mutate(course.code);
   };
   return isAddedInPlanner ? (
-    <S.Button loading={mutation.isLoading} onClick={handleClick} icon={<StopOutlined />}>
-      {!mutation.isLoading ? 'Remove from planner' : 'Removing from planner'}
+    <S.Button loading={mutation.isPending} onClick={handleClick} icon={<StopOutlined />}>
+      {!mutation.isPending ? 'Remove from planner' : 'Removing from planner'}
     </S.Button>
   ) : (
     <Button
-      loading={mutation.isLoading}
+      loading={mutation.isPending}
       onClick={handleClick}
       icon={<PlusOutlined />}
       type="primary"
     >
-      {!mutation.isLoading ? 'Add to planner' : 'Adding to planner'}
+      {!mutation.isPending ? 'Add to planner' : 'Adding to planner'}
     </Button>
   );
 };

@@ -21,11 +21,14 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
     color: theme === 'light' ? '#000' : '#fff'
   };
   const queryClient = useQueryClient();
-  const mutation = useMutation(handleMutation, {
+  const mutation = useMutation({
+    mutationFn: handleMutation,
     onMutate: () => planned,
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     onSuccess: async (data: void, variables: string, context: unknown) => {
-      await queryClient.invalidateQueries(['planner']);
+      await queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     }
   });
 
@@ -41,7 +44,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
         data-testid="quick-add-cart-button"
         onClick={handleClick}
         size="small"
-        loading={mutation.isLoading}
+        loading={mutation.isPending}
         shape="circle"
         icon={<PlusOutlined style={iconStyles} />}
       />
@@ -52,7 +55,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
         data-testid="quick-remove-cart-button"
         onClick={handleClick}
         size="small"
-        loading={mutation.isLoading}
+        loading={mutation.isPending}
         shape="circle"
         icon={<MinusOutlined style={iconStyles} />}
       />
