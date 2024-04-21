@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Select, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -74,9 +74,12 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   }
 
-  const summerToggleMutation = useMutation(summerToggle, {
+  const summerToggleMutation = useMutation({
+    mutationFn: summerToggle,
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console

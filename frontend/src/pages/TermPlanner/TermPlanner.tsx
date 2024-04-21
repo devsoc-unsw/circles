@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Badge } from 'antd';
 import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
@@ -41,18 +41,27 @@ const TermPlanner = () => {
   const queryClient = useQueryClient();
 
   // Planer obj
-  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
   // The user's actual courses obj???????
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
-  const validateQuery = useQuery('validate', validateTermPlanner);
+  const validateQuery = useQuery({
+    queryKey: ['validate'],
+    queryFn: validateTermPlanner
+  });
   const validations: ValidatesResponse = validateQuery.data ?? badValidations;
   const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);
-  const courseQueries = useQueries(
-    Object.keys(courses).map((code: string) => ({
+  const courseQueries = useQueries({
+    queries: Object.keys(courses).map((code: string) => ({
       queryKey: ['course', code],
       queryFn: () =>
         getCourseForYearsInfo(
@@ -60,7 +69,7 @@ const TermPlanner = () => {
           validYears.filter((year) => year < LIVE_YEAR)
         )
     }))
-  );
+  });
   const validYearsAndCurrent = (validYears as (number | 'current')[]).concat(['current']);
   const courseInfoFlipped = Object.fromEntries(
     Object.keys(courses).map((code: string, index: number) => [
@@ -78,9 +87,10 @@ const TermPlanner = () => {
   const [draggingCourse, setDraggingCourse] = useState('');
 
   // Mutations
-  const setPlannedCourseToTermMutation = useMutation(setPlannedCourseToTerm, {
+  const setPlannedCourseToTermMutation = useMutation({
+    mutationFn: setPlannedCourseToTerm,
     onMutate: (data) => {
-      queryClient.setQueryData('planner', (prev: PlannerResponse | undefined) => {
+      queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
         const curr: PlannerResponse = JSON.parse(JSON.stringify(prev));
         curr.years[data.srcRow][data.srcTerm].splice(
@@ -92,8 +102,12 @@ const TermPlanner = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('validate');
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -105,9 +119,10 @@ const TermPlanner = () => {
     setPlannedCourseToTermMutation.mutate(data);
   };
 
-  const setUnplannedCourseToTermMutation = useMutation(setUnplannedCourseToTerm, {
+  const setUnplannedCourseToTermMutation = useMutation({
+    mutationFn: setUnplannedCourseToTerm,
     onMutate: (data) => {
-      queryClient.setQueryData('planner', (prev: PlannerResponse | undefined) => {
+      queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
         const curr: PlannerResponse = JSON.parse(JSON.stringify(prev));
         curr.unplanned.splice(curr.unplanned.indexOf(data.courseCode), 1);
@@ -116,8 +131,12 @@ const TermPlanner = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('validate');
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -129,9 +148,10 @@ const TermPlanner = () => {
     setUnplannedCourseToTermMutation.mutate(data);
   };
 
-  const unscheduleCourseMutation = useMutation(unscheduleCourse, {
+  const unscheduleCourseMutation = useMutation({
+    mutationFn: unscheduleCourse,
     onMutate: (data) => {
-      queryClient.setQueryData('planner', (prev: PlannerResponse | undefined) => {
+      queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
         const curr: PlannerResponse = JSON.parse(JSON.stringify(prev));
         curr.years[data.srcRow as number][data.srcTerm as string].splice(
@@ -143,8 +163,12 @@ const TermPlanner = () => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('validate');
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
@@ -248,7 +272,7 @@ const TermPlanner = () => {
           // TODO: Fix Suspense by updating to react-query v5
           /* <Suspense fallback={<Spinner text="Loading Table..." />}> */
         }
-        {courseQueries.some((c) => c.isLoading) || !courseInfos[LIVE_YEAR] ? (
+        {courseQueries.some((c) => c.isPending) || !courseInfos[LIVE_YEAR] ? (
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>

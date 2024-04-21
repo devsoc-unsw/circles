@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { setupDegreeWizard } from 'utils/api/degreeApi';
@@ -17,11 +17,18 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const setupDegreeMutation = useMutation(setupDegreeWizard, {
+  const setupDegreeMutation = useMutation({
+    mutationFn: setupDegreeWizard,
     onSuccess: () => {
-      queryClient.invalidateQueries('degree');
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('courses');
+      queryClient.invalidateQueries({
+        queryKey: ['degree']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
       navigate('/course-selector');
       setIsComplete(true);
     },

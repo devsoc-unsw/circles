@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Course } from 'types/api';
 import {
   badCourses,
@@ -27,11 +27,17 @@ const Droppable = React.lazy(() =>
 /* eslint-disable */
 
 const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
-  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
 
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');

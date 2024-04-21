@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';
@@ -21,7 +21,10 @@ import 'tippy.js/themes/light.css';
 const OptionsHeader = () => {
   const queryClient = useQueryClient();
 
-  const plannerQuery = useQuery('planner', getUserPlanner);
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
   const planner = plannerQuery.data;
 
   const { theme } = useSelector((state: RootState) => state.settings);
@@ -32,9 +35,12 @@ const OptionsHeader = () => {
     color: theme === 'light' ? '#323739' : '#f1f1f1'
   };
 
-  const unscheduleAllMutation = useMutation(unscheduleAll, {
+  const unscheduleAllMutation = useMutation({
+    mutationFn: unscheduleAll,
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console

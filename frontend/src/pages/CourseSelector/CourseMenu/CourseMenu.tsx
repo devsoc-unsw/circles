@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { MenuProps } from 'antd';
 import axios from 'axios';
 import { CoursesAllUnlocked, Structure } from 'types/api';
@@ -10,7 +10,6 @@ import { ProgramStructure } from 'types/structure';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import { errLogger } from 'utils/queryUtils';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
@@ -63,13 +62,15 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
     return res.data.courses_state;
   }, [degree, planner, courses]);
 
-  const structureQuery = useQuery(['structure', degree], getStructure, {
-    onError: errLogger('structureQuery'),
+  const structureQuery = useQuery({
+    queryKey: ['structure', degree],
+    queryFn: getStructure,
     enabled: !!degree
   });
 
-  const coursesStateQuery = useQuery(['coursesState', degree, planner, courses], getAllUnlocked, {
-    onError: errLogger('coursesStateQuery'),
+  const coursesStateQuery = useQuery({
+    queryKey: ['coursesState', degree, planner, courses],
+    queryFn: getAllUnlocked,
     enabled: !!degree && !!planner && !!courses
   });
 

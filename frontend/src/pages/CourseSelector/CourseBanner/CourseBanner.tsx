@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import { fetchAllDegrees } from 'utils/api/programApi';
 import { getUserDegree } from 'utils/api/userApi';
@@ -13,8 +13,14 @@ const { Title } = Typography;
 const CourseBanner = () => {
   const dispatch = useAppDispatch();
 
-  const degreeQuery = useQuery('degree', getUserDegree);
-  const allPrograms = useQuery('programs', fetchAllDegrees);
+  const degreeQuery = useQuery({
+    queryKey: ['degree'],
+    queryFn: getUserDegree
+  });
+  const allPrograms = useQuery({
+    queryKey: ['programs'],
+    queryFn: fetchAllDegrees
+  });
 
   const getUserProgramTitle = (): string => {
     if (degreeQuery.data?.programCode) {
