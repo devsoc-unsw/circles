@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Course, SearchCourse } from 'types/api';
-import { LiveYear } from 'types/planner';
+import { LIVE_YEAR } from 'config/constants';
 import { getToken } from './userApi';
 
 // TODO: Should error handling be done here?
@@ -27,6 +27,6 @@ export const getCourseForYearsInfo = async (
     {}
   );
   const current = (await axios.get<Course>(`courses/getCourse/${courseId}`)).data;
-  legacy[LiveYear] = current;
+  legacy[LIVE_YEAR] = current;
   return legacy;
 };

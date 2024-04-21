@@ -1,9 +1,10 @@
 /* eslint-disable */
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import { Badge } from 'antd';
-import { LiveYear, PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
+import { Course } from 'types/api';
+import { PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import {
   badCourseInfo,
   badCourses,
@@ -15,22 +16,22 @@ import {
 } from 'types/userResponse';
 import { getCourseForYearsInfo } from 'utils/api/courseApi';
 import {
-  validateTermPlanner,
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,
-  unscheduleCourse
+  unscheduleCourse,
+  validateTermPlanner
 } from 'utils/api/plannerApi';
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
+import { LIVE_YEAR } from 'config/constants';
 import { GridItem } from './common/styles';
 import OptionsHeader from './OptionsHeader';
 import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
-import { Course } from 'types/api';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -56,7 +57,7 @@ const TermPlanner = () => {
       queryFn: () =>
         getCourseForYearsInfo(
           code,
-          validYears.filter((year) => year < LiveYear)
+          validYears.filter((year) => year < LIVE_YEAR)
         )
     }))
   );
@@ -237,7 +238,7 @@ const TermPlanner = () => {
     }
   };
 
-  const yearToFetch = (year: number) => (year >= LiveYear ? LiveYear : year);
+  const yearToFetch = (year: number) => (year >= LIVE_YEAR ? LIVE_YEAR : year);
 
   return (
     <PageTemplate>
@@ -247,7 +248,7 @@ const TermPlanner = () => {
           // TODO: Fix Suspense by updating to react-query v5
           /* <Suspense fallback={<Spinner text="Loading Table..." />}> */
         }
-        {courseQueries.some((c) => c.isLoading) || !courseInfos[LiveYear] ? (
+        {courseQueries.some((c) => c.isLoading) || !courseInfos[LIVE_YEAR] ? (
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
@@ -275,7 +276,7 @@ const TermPlanner = () => {
                     <React.Fragment key={iYear}>
                       <S.YearGridBox>
                         <S.YearWrapper>
-                          <S.YearText currYear={LiveYear === iYear}>{iYear}</S.YearText>
+                          <S.YearText currYear={LIVE_YEAR === iYear}>{iYear}</S.YearText>
                         </S.YearWrapper>
                         <Badge
                           style={{
@@ -317,7 +318,7 @@ const TermPlanner = () => {
                 <UnplannedColumn
                   dragging={!!draggingCourse}
                   courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [code, courseInfos[LiveYear][code]])
+                    planner.unplanned.map((code) => [code, courseInfos[LIVE_YEAR][code]])
                   )}
                   validateInfos={validations.courses_state}
                 />

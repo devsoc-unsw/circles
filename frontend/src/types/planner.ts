@@ -1,6 +1,3 @@
-type LiveYearType = 2024;
-export const LiveYear: LiveYearType = 2024;
-
 export type Term = 'T0' | 'T1' | 'T2' | 'T3';
 
 export type Mark = number | Grade | undefined;
