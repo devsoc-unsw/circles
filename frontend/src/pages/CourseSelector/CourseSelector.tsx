@@ -14,8 +14,6 @@ import CourseTabs from './CourseTabs';
 import S from './styles';
 
 const CourseSelector = () => {
-  const [showedNotif, setShowedNotif] = useState(false);
-
   const plannerQuery = useQuery({
     queryKey: ['planner'],
     queryFn: getUserPlanner
@@ -31,14 +29,7 @@ const CourseSelector = () => {
     queryFn: getUserDegree
   });
 
-  const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
-
-  const dispatch = useDispatch();
-
-  const courseCode = tabs[active];
-
-  const divRef = useRef<null | HTMLDivElement>(null);
-  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
+  const [showedNotif, setShowedNotif] = useState(false);
   useEffect(() => {
     if (coursesQuery.isSuccess && !showedNotif && !Object.keys(coursesQuery.data).length) {
       openNotification({
@@ -49,7 +40,17 @@ const CourseSelector = () => {
       });
       setShowedNotif(true);
     }
+  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data]);
 
+  const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
+
+  const dispatch = useDispatch();
+
+  const courseCode = tabs[active];
+
+  const divRef = useRef<null | HTMLDivElement>(null);
+  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
+  useEffect(() => {
     const minMenuWidth = 100;
     const maxMenuWidth = (60 * window.innerWidth) / 100;
     const resizerDiv = divRef.current as HTMLDivElement;
@@ -74,7 +75,7 @@ const CourseSelector = () => {
     };
     resizerDiv?.addEventListener('mousedown', startResize);
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
-  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data]);
+  }, []);
 
   const onCourseClick = useCallback((code: string) => dispatch(addTab(code)), [dispatch]);
 
