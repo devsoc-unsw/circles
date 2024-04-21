@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Course, SearchCourse } from 'types/api';
+import { LIVE_YEAR } from 'config/constants';
 import { getToken } from './userApi';
 
 // TODO: Should error handling be done here?
@@ -17,14 +18,15 @@ export const getCourseInfo = async (courseId: string) => {
 export const getCourseForYearsInfo = async (
   courseId: string,
   years: number[]
-): Promise<Record<number | 'current', Course>> => {
+): Promise<Record<number, Course>> => {
   const promises = await Promise.all(
     years.map((year) => axios.get<Course>(`courses/getLegacyCourse/${year}/${courseId}`))
   );
-  const legacy = years.reduce(
+  const legacy: Record<number, Course> = years.reduce(
     (prev, year, index) => ({ ...prev, [year]: promises[index].data }),
     {}
   );
   const current = (await axios.get<Course>(`courses/getCourse/${courseId}`)).data;
-  return { ...legacy, current };
+  legacy[LIVE_YEAR] = current;
+  return legacy;
 };
