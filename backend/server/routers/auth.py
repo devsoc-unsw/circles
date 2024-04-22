@@ -1,25 +1,14 @@
 """ Routes to deal with user Authentication. """
-from fastapi import APIRouter
-
-from server.routers.user import default_cs_user, reset, set_user
-
-from functools import wraps
-from time import time
-
-from google.auth.transport import requests  # type: ignore
-from google.oauth2 import id_token  # type: ignore
-from server.config import CLIENT_ID
-from typing import Annotated, Dict, List, Literal, Optional, Tuple, TypedDict, cast
-from fastapi import APIRouter, Depends, HTTPException, Header, Request, Security
-from datetime import datetime, timezone
+from typing import Annotated, Dict, Optional, cast
 from datetime import datetime
 from secrets import token_urlsafe
 from time import time
-from typing import Annotated, Dict, Optional, cast
+from urllib.parse import parse_qs
 from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
-from urllib.parse import parse_qs
+
+from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken, clear_db, get_session_info as get_session_info_from_sid
@@ -56,58 +45,6 @@ require_token = HTTPBearer401()
 def create_user_token(token: str):
     set_user(token, default_cs_user())
     reset(token)
-
-def validate_login(token) -> bool:
-    """
-        Take a token and validate a login off the following criteria
-            - token i
-            - token has not expired (given in unix time)
-            - email verified
-            - email exists in our BE
-    """
-    return token
-
-
-def validate_token(token: str):
-    """
-        Take a token and validate it using the google library.
-        - NEVER trust the FE to validate the token.
-        - NEVER manually decode the token w/ other libraries
-        Note: This does not check if the user exists in our database,
-            only that the token is of valid form
-
-        Returns - Decoded token as dictionary with user info
-        {
-            # These fields are ALWAYS included
-            "iss": (str) - "https://accounts.google.com" # 'https' optional,
-            "sub": (str(int)) - google account ID,
-            "azp": (str) - client_id of authorized presenter
-            "aud": (str) - CLIENT_ID that the token is intended for,
-            "iat": (int) - unix time for when token was issued
-            "exp": (int) - unix time integer for expiry date of token
-            # These fields *should* be included if use grants 'profile' and 'email' scope
-            "email": (str) - user's email,
-            "email_vefified": (bool) - had the user verified their email,
-            "picture": (str) - url of user's profile picture,
-            "given_name": (str) - user's given name,
-            "family_name": (str) - user's family name,
-            "locale": (str): 
-        }
-        More info at: "https://developers.google.com/identity/protocols/oauth2/openid-connect"
-    """
-    try:
-        # TODO: if using multiple CLIENT_IDs then, must validate
-        # that aud is valid
-        id_info = id_token.verify_oauth2_token(
-                token, requests.Request(), CLIENT_ID
-        )
-    except ValueError as err:
-        # Invalid Token
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid token: {token}"
-        ) from err
-    return id_info
 
 @router.get(
     "/refresh", 
