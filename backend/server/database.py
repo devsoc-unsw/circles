@@ -5,13 +5,36 @@ initialisation.
 NOTE: The helper functions must be run from the backend directory due to their paths
 """
 
+import datetime
 import json
 import os
 from sys import exit
+from typing import TypedDict
+
+from bson import CodecOptions
 
 from data.config import ARCHIVED_YEARS
 from pymongo import MongoClient
+from pymongo.collection import Collection
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
+
+class RefreshTokenInfoDict(TypedDict):
+    token: str
+    sid: str
+    expiresAt: datetime.datetime
+
+class SessionInfoOIDCInfoDict(TypedDict):
+    accessToken: str
+    refreshToken: str
+    rawIdToken: str
+    validatedIdToken: dict
+
+class SessionInfoDict(TypedDict):
+    sid: str
+    uid: str
+    currRefreshToken: str
+    oidcInfo: SessionInfoOIDCInfoDict
+    expiresAt: datetime.datetime
 
 # Export these as needed
 try:
@@ -29,6 +52,14 @@ coursesCOL = db["Courses"]
 archivesDB = client["Archives"]
 
 usersDB = client["Users"]
+sessionsNewCOL: Collection[SessionInfoDict] = usersDB["sessionsNEW"]
+refreshTokensNewCOL: Collection[RefreshTokenInfoDict] = usersDB["refreshTokensNEW"].with_options(
+    codec_options=CodecOptions(
+        tz_aware=True,
+        tzinfo=datetime.timezone.utc
+    )
+)
+usersNewCOL = usersDB["userNEW"]
 
 
 def overwrite_collection(collection_name):

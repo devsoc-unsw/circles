@@ -1,11 +1,15 @@
+import datetime
 import json
 from secrets import token_urlsafe
 from time import time
 from typing import Dict, Literal, NewType, Optional, Tuple, Union
 from uuid import uuid4
 from pydantic import BaseModel, PositiveInt
+import pymongo
+import pymongo.errors
 
 from server.sessionsdb import sdb
+from server.database import sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
 from redis.commands.search.query import Query
 
 # FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
@@ -22,14 +26,14 @@ class SessionTokenInfo(BaseModel):
     # the object stored against a session token in cache
     sid: SessionID              # id of the session behind this token
     uid: str                    # user who owns the session
-    REMOVE_exp: int                   # time of expiry, will be replaced with a TTL on the cache
+    REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
 # in mongo
 class RefreshTokenInfo(BaseModel):
     # object stored against the refresh token
     sid: SessionID              # id of the session behind this token
-    # uid: str                    # user who owns the session
-    REMOVE_exp: int                   # time of expiry, will be replaced with a TTL on the cache
+    # uid: str                  # user who owns the session
+    REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
 # in mongo
 class SessionOIDCInfo(BaseModel):
@@ -54,7 +58,6 @@ class SessionInfo(BaseModel):
 
 # in mongo
 class Database(BaseModel):
-    refresh_tokens: Dict[RefreshToken, RefreshTokenInfo]
     sessions: Dict[SessionID, Union[NotSetupSession, SessionInfo]]
 
 # TODO: DUMMY JSON LOADING
@@ -67,7 +70,6 @@ def load_db() -> Database:
             return db
     except Exception:
         return Database(
-            refresh_tokens={},
             sessions={},
         )
 
@@ -79,7 +81,6 @@ def save_db(db: Database) -> None:
 def clear_db() -> None:
     with open("sessions.json", "w", encoding="utf8") as f:
         json.dump(Database(
-            refresh_tokens={},
             sessions={},
         ).dict(), f, indent=2)
         print("Cleared:")
@@ -148,6 +149,34 @@ def redis_delete_all_tokens(sid: SessionID) -> None:
     # NOTE: potentially this wont work after 1GB worth of keys...
     sdb.delete(*(m["id"] for m in all_matches["results"]))
 
+def mongo_get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
+    info = refreshTokensNewCOL.find_one({ 'token': token })
+
+    if info is None:
+        return None
+
+    exp = int(info["expiresAt"].timestamp())
+    if exp <= int(time()):
+        return None
+
+    return RefreshTokenInfo(
+        sid=SessionID(info["sid"]),
+        REMOVE_exp=exp,
+    )
+
+def mongo_insert_refresh_token_info(token: RefreshToken, info: RefreshTokenInfo) -> bool:
+    try:
+        refreshTokensNewCOL.insert_one({
+            "token": token,
+            "sid": info.sid,
+            "expiresAt": datetime.datetime.fromtimestamp(info.REMOVE_exp, tz=datetime.timezone.utc),
+        })
+        return True
+    except pymongo.errors.DuplicateKeyError:
+        return False
+    
+def mongo_delete_all_refresh_tokens(sid: SessionID) -> None:
+    refreshTokensNewCOL.delete_many({ "sid": sid })
 
 # db interface function
 # WARNING: these do not do any validation (other than ensuring the properties expected)
@@ -156,18 +185,10 @@ def new_token() -> str:
 
 def get_session_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
     info = redis_get_token_info(token)
-    if info is None:
-        return None
     return info
 
 def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
-    db = load_db()
-    info = db.refresh_tokens.get(token)
-    if info is None:
-        return None
-    if info.REMOVE_exp <= int(time()):
-        del db.refresh_tokens[token]
-        return None
+    info = mongo_get_refresh_token_info(token)
     return info
 
 def get_session_info(sid: SessionID) -> Optional[SessionInfo]:
@@ -192,7 +213,7 @@ def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: Positiv
 
     token = SessionToken(new_token())
     while not redis_set_token_nx(token, info):
-        print("token collision", token)
+        print("session token collision", token)
         token = SessionToken(new_token())
 
     return (token, expires_at)
@@ -200,20 +221,17 @@ def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: Positiv
 def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[RefreshToken, int]:
     # creates a new session, returning (token, expires_at)
     assert ttl_seconds > 0
-    db = load_db()
 
-    token = RefreshToken(new_token())
-    while token in db.refresh_tokens:
-        print("refresh token collision:", token)
-        token = RefreshToken(new_token())
-
-    # TODO: use set with NX instead of pregenerating the token, so we can ensure no race condition
     expires_at = int(time()) + ttl_seconds
-    db.refresh_tokens[token] = RefreshTokenInfo(
+    info = RefreshTokenInfo(
         sid=sid,
         REMOVE_exp=expires_at,
     )
-    save_db(db)
+
+    token = RefreshToken(new_token())
+    while not mongo_insert_refresh_token_info(token, info):
+        print("refresh token collision:", token)
+        token = RefreshToken(new_token())
 
     return (token, expires_at)
 
@@ -259,8 +277,7 @@ def destroy_session(sid: SessionID) -> bool:
     # delete all the related tokens
     # redis will be secondary indexed on the sid, so this wont be too horrible
     redis_delete_all_tokens(sid)
-    for rt in list(map(lambda e: e[0], filter(lambda e: e[1].sid == sid, db.refresh_tokens.items()))):
-        del db.refresh_tokens[rt]
+    mongo_delete_all_refresh_tokens(sid)
     del db.sessions[sid]
 
     save_db(db)

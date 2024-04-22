@@ -46,7 +46,7 @@ def create_user_token(token: str):
     set_user(token, default_cs_user())
     reset(token)
 
-@router.get(
+@router.post(
     "/refresh", 
     response_model=IdentityPayload
 )

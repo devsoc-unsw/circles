@@ -18,3 +18,5 @@ class SessionOldRefreshToken(SessionError):
         super().__init__("Exhausted refresh token, likely a replay attack, should deestroy the OIDC session.")
         self.token = token
         self.oidc_ref_token = oidc_refresh_token
+
+# TODO: rename these
