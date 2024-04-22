@@ -17,30 +17,34 @@ SessionID = NewType('SessionID', str)  # TODO: make this back into a uuid
 SessionToken = NewType('SessionToken', str)
 RefreshToken = NewType('RefreshToken', str)
 
-
+# in redis
 class SessionTokenInfo(BaseModel):
     # the object stored against a session token in cache
     sid: SessionID              # id of the session behind this token
     uid: str                    # user who owns the session
     REMOVE_exp: int                   # time of expiry, will be replaced with a TTL on the cache
 
+# in mongo
 class RefreshTokenInfo(BaseModel):
     # object stored against the refresh token
     sid: SessionID              # id of the session behind this token
     # uid: str                    # user who owns the session
     REMOVE_exp: int                   # time of expiry, will be replaced with a TTL on the cache
 
+# in mongo
 class SessionOIDCInfo(BaseModel):
     access_token: str           # most recent access token
     raw_id_token: str           # most recent id token string
     refresh_token: str          # most recent refresh token
     validated_id_token: dict    # most recent valid id token object
 
+# in mongo
 class NotSetupSession(BaseModel):
     # object stored against the sid when session is not yet setup (brief time between during token generation)
     uid: str                    # for validation and back lookup
     setup: Literal[False]       # ensure that this can get parsed correctly
 
+# in mongo
 class SessionInfo(BaseModel):
     # object stored against the sid
     uid: str                      # for validation and back lookup
@@ -48,6 +52,7 @@ class SessionInfo(BaseModel):
     curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
     setup: Literal[True]          # ensure that this can get parsed correctly
 
+# in mongo
 class Database(BaseModel):
     refresh_tokens: Dict[RefreshToken, RefreshTokenInfo]
     sessions: Dict[SessionID, Union[NotSetupSession, SessionInfo]]

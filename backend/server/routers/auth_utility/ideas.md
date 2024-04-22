@@ -49,7 +49,7 @@ tokens {
 users {
   uid! string,     // unique indexed, the uid we get back from the oidc
   info! object,    // extra info that we gather from oidc
-  sessions uuid[], // potentially dont use this and just index on sid
+  sessions uuid[], // (removed, can be inferred) potentially dont use this and just index on sid
   degree! { ... },
   courses! { ... },
   planner! { ... },
@@ -58,7 +58,7 @@ users {
 refreshTokens {
   tok! string,     // unique indexed
   sid! uuid,       // indexed
-  uid! string,     // indexed
+  uid! string,     // indexed (removed, can be inferred)
   expiresAt! Date, // ttl indexed
 }
 

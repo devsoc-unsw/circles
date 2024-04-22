@@ -8,7 +8,6 @@ NOTE: The helper functions must be run from the backend directory due to their p
 import json
 import os
 from sys import exit
-from typing import Optional
 
 from data.config import ARCHIVED_YEARS
 from pymongo import MongoClient
@@ -169,14 +168,231 @@ def create_tokens_collection():
         }
     })
 
+# TODO: add no extra keys, and ttls, and indexes
+def create_new_users_collection():
+    # users {
+    #     uid! string,     // unique indexed, the uid we get back from the oidc
+    #     info! object,    // extra info that we gather from oidc
+    #     degree! { ... },
+    #     courses! { ... },
+    #     planner! { ... },
+    # }
+    usersDB.create_collection('usersNEW', validator={
+        '$jsonSchema': {
+            # 'oneOf': [
+            #     {
+                    'bsonType': 'object',
+                    'required': ['uid', 'info', 'degree', 'planner', 'courses'],
+                    'additionalProperties': False,
+                    'properties': {
+                        '_id': { 'bsonType': 'objectId' },
+                        'uid': {
+                            'bsonType': 'string',
+                            'description': 'unique user id of the user'
+                        },
+                        'info': {
+                            'bsonType': 'object',  # placeholder for future, not sure what this shape will be
+                            'description': 'Any extra information gathered about the user, such as name'
+                        },
+                        'degree': {
+                            'bsonType': 'object',
+                            'required': ['programCode', 'specs'],
+                            'properties': {
+                                'programCode': {
+                                    'bsonType': 'string',
+                                    'description': 'the code of program taken'
+                                },
+                                'specs': {
+                                    'bsonType': 'array',
+                                    'description': 'an array of all the specialisations taken',
+                                    'items': {
+                                        'bsonType': 'string'
+                                    }
+                                },
+                            }
+                        },
+                        'courses': {
+                            'bsonType': 'object',  # painful to validate properly :/
+                        },
+                        'planner': {
+                            'bsonType': 'object',
+                            'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years'],
+                            'properties': {
+                                "unplanned": {
+                                    'bsonType': 'array',
+                                    'items': {
+                                        'bsonType': 'string'
+                                    }
+                                },
+                                "startYear": {
+                                    'bsonType': 'int'
+                                },
+                                "isSummerEnabled": {
+                                    'bsonType': 'bool'
+                                },
+                                "years": {
+                                    'bsonType': 'array',
+                                    'items': {
+                                        'bsonType': 'object',
+                                        'properties': {
+                                            "T0": {
+                                                'bsonType': 'array',
+                                                'items': {
+                                                    'bsonType': 'string'
+                                                }
+                                            },
+
+                                            "T1": {
+                                                'bsonType': 'array',
+                                                'items': {
+                                                    'bsonType': 'string'
+                                                }
+                                            },
+
+                                            "T2": {
+                                                'bsonType': 'array',
+                                                'items': {
+                                                    'bsonType': 'string'
+                                                }
+                                            },
+
+                                            "T3": {
+                                                'bsonType': 'array',
+                                                'items': {
+                                                    'bsonType': 'string'
+                                                }
+                                            }
+                                        }
+                                    },
+                                }
+                            }
+                        }
+                    }
+            #     }
+            # ]
+        }
+    })
+
+def create_new_refresh_tokens_collection():
+    # refreshTokens {
+    #     tok! string,     // unique indexed
+    #     sid! uuid,       // indexed
+    #     expiresAt! Date, // ttl indexed // TODO: make this proper with a ttl
+    # }
+    usersDB.create_collection('refreshTokensNEW', validator={
+        '$jsonSchema': {
+            'bsonType': 'object',
+            'required': ['token', 'sid', 'expiresAt'],
+            'additionalProperties': False,
+            'properties': {
+                '_id': { 'bsonType': 'objectId' },
+                'token': {
+                    'description': 'The refresh token associated with a user session',
+                    'bsonType': 'string',
+                },
+                'sid': {
+                    'description': 'Session ID',
+                    'bsonType': 'string', # TODO: make into a UUID
+                },
+                'expiresAt': {
+                    'description': 'Expiry time of this refresh token document',
+                    'bsonType': 'date',
+                },
+            }
+        }
+    })
+
+def create_new_sessions_collection():
+    # sessions {
+    #     sid! uuid,       // unique indexed
+    #     uid! string,     // index on if we dont have the reverse lookup
+    #     oidcInfo? {
+    #         access_token string         # most recent access token
+    #         raw_id_token string         # most recent id token string
+    #         refresh_token string        # most recent refresh token
+    #         validated_id_token: object  # most recent valid id token object,
+    #     },
+    #     currRefTok? string,
+    #     expiresAt! Date, // ttl indexed (should be same as the currRefTok expiry time, or +1 day)
+    # }
+    usersDB.create_collection('sessionsNEW', validator={
+        '$jsonSchema': {
+            'oneOf': [
+                {
+                    'bsonType': 'object',
+                    'required': ['sid', 'uid', 'currRefreshToken', 'oidcInfo', 'expiresAt'],
+                    'additionalProperties': False,
+                    'properties': {
+                        '_id': { 'bsonType': 'objectId' },
+                        'sid': {
+                            'description': 'Session ID',
+                            'bsonType': 'string', # TODO: make into a UUID
+                        },
+                        'uid': {
+                            'description': 'User ID',
+                            'bsonType': 'string',
+                        },
+                        'currRefreshToken': {
+                            'description': 'For protection against replay attacks',
+                            'bsonType': 'string',
+                        },
+                        'oidcInfo': {
+                            'description': 'The required oidc tokens for refreshing',
+                            'bsonType': 'object',
+                            'required': ['accessToken', 'refreshToken', 'rawIdToken', 'validatedIdToken'],
+                            'additionalProperties': False,
+                            'properties': {
+                                'accessToken': { 'bsonType': 'string' },
+                                'refreshToken': { 'bsonType': 'string' },
+                                'rawIdToken': { 'bsonType': 'string' },
+                                'validatedIdToken': { 'bsonType': 'object' },
+                            },
+                        },
+                        'expiresAt': {
+                            'description': 'Expiry time of this session document',
+                            'bsonType': 'date',  # TODO: make an actual ttl
+                        },
+                    },
+                },
+                {
+                    'bsonType': 'object',
+                    'required': ['sid', 'uid', 'expiresAt'],
+                    'additionalProperties': False,
+                    'properties': {
+                        '_id': { 'bsonType': 'objectId' },
+                        'sid': {
+                            'description': 'Session ID',
+                            'bsonType': 'string', # TODO: make into a UUID
+                        },
+                        'uid': {
+                            'description': 'User ID',
+                            'bsonType': 'string',
+                        },
+                        'expiresAt': {
+                            'description': 'Expiry time of this session document',
+                            'bsonType': 'date',  # TODO: make an actual ttl
+                        },
+                    },
+                },
+            ]
+        }
+    })
+
 def create_dynamic_db(drop_old: bool):
     if drop_old:
+        print("Dropping user collections")
         usersDB.drop_collection('users')
         usersDB.drop_collection('tokens')
+        usersDB.drop_collection('usersNEW')
+        usersDB.drop_collection('refreshTokensNEW')
+        usersDB.drop_collection('sessionsNEW')
 
     create_users_collection()
     create_tokens_collection()
-    print("finished creating user database")
+    create_new_users_collection()
+    create_new_refresh_tokens_collection()
+    create_new_sessions_collection()
+    print("Finished creating user database")
     # example insertion
     # usersDB['users'].insert_one({
     #     'degree': {
