@@ -1,15 +1,14 @@
 import datetime
-import json
 from secrets import token_urlsafe
 from time import time
-from typing import Dict, Literal, NewType, Optional, Tuple, Union
+from typing import Literal, NewType, Optional, Tuple
 from uuid import uuid4
 from pydantic import BaseModel, PositiveInt
 import pymongo
 import pymongo.errors
 
 from server.sessionsdb import sdb
-from server.database import sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
+from server.database import sessionsNewCOL, refreshTokensNewCOL
 from redis.commands.search.query import Query
 
 # FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
@@ -47,6 +46,7 @@ class NotSetupSession(BaseModel):
     # object stored against the sid when session is not yet setup (brief time between during token generation)
     uid: str                    # for validation and back lookup
     setup: Literal[False]       # ensure that this can get parsed correctly
+    REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
 # in mongo
 class SessionInfo(BaseModel):
@@ -55,35 +55,7 @@ class SessionInfo(BaseModel):
     oidc_info: SessionOIDCInfo
     curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
     setup: Literal[True]          # ensure that this can get parsed correctly
-
-# in mongo
-class Database(BaseModel):
-    sessions: Dict[SessionID, Union[NotSetupSession, SessionInfo]]
-
-# TODO: DUMMY JSON LOADING
-# MOVE TO A SPLIT BETWEEN REDIS AND MONGO
-def load_db() -> Database:
-    try:
-        with open("sessions.json", "r", encoding="utf8") as f:
-            res: dict = json.load(f)
-            db = Database.parse_obj(res)
-            return db
-    except Exception:
-        return Database(
-            sessions={},
-        )
-
-def save_db(db: Database) -> None:
-    with open("sessions.json", "w", encoding="utf8") as f:
-        json.dump(db.dict(), f, indent=2)
-        print("Saved:")
-
-def clear_db() -> None:
-    with open("sessions.json", "w", encoding="utf8") as f:
-        json.dump(Database(
-            sessions={},
-        ).dict(), f, indent=2)
-        print("Cleared:")
+    REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
 
 def form_key(token: SessionToken) -> str:
@@ -105,11 +77,6 @@ def redis_get_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
         uid=uid,
         REMOVE_exp=int(exp)
     )
-
-def redis_delete_token(token: SessionToken) -> bool:
-    res = sdb.delete(token)
-    assert isinstance(res, int)
-    return res == 1
 
 def redis_set_token_nx(token: SessionToken, info: SessionTokenInfo) -> bool:
     # tries and sets the information, returning whether it was successful
@@ -147,6 +114,7 @@ def redis_delete_all_tokens(sid: SessionID) -> None:
 
     # delete them all
     # NOTE: potentially this wont work after 1GB worth of keys...
+    # TODO: it does not work with more than 10 keys...
     sdb.delete(*(m["id"] for m in all_matches["results"]))
 
 def mongo_get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
@@ -173,10 +141,75 @@ def mongo_insert_refresh_token_info(token: RefreshToken, info: RefreshTokenInfo)
         })
         return True
     except pymongo.errors.DuplicateKeyError:
+        # token already existed
         return False
-    
+
 def mongo_delete_all_refresh_tokens(sid: SessionID) -> None:
     refreshTokensNewCOL.delete_many({ "sid": sid })
+
+def mongo_get_session_info(sid: SessionID) -> Optional[SessionInfo]:
+    session = sessionsNewCOL.find_one({ "sid": sid })
+
+    if session is None or "currRefreshToken" not in session:
+        # TODO: tag the dicts when we do guest tokens
+        return None
+
+    exp = int(session["expiresAt"].timestamp())
+    if exp <= int(time()):
+        return None
+
+    return SessionInfo(
+        uid=session["uid"],
+        curr_ref_token=RefreshToken(session["currRefreshToken"]),
+        oidc_info=SessionOIDCInfo(
+            access_token=session["oidcInfo"]["accessToken"],
+            raw_id_token=session["oidcInfo"]["rawIdToken"],
+            refresh_token=session["oidcInfo"]["refreshToken"],
+            validated_id_token=session["oidcInfo"]["validatedIdToken"],
+        ),
+        REMOVE_exp=exp,
+        setup=True,
+    )
+
+def mongo_insert_not_setup_session(sid: SessionID, info: NotSetupSession) -> bool:
+    # NOTE: should only be used to reserve the sid,
+    # needed since we need a unique session id allocated before setting refresh token info
+    # and we need a refresh token to set a full session info
+    try:
+        sessionsNewCOL.insert_one({
+            "sid": sid,
+            "uid": info.uid,
+            "expiresAt": datetime.datetime.fromtimestamp(info.REMOVE_exp, tz=datetime.timezone.utc),
+        })
+        return True
+    except pymongo.errors.DuplicateKeyError:
+        # sid already existed
+        return False
+
+def mongo_update_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfo) -> bool:
+    res = sessionsNewCOL.update_one(
+        { "sid": sid },
+        {
+            "$set": {
+                "expiresAt": datetime.datetime.fromtimestamp(expires_at, tz=datetime.timezone.utc), 
+                "currRefreshToken": curr_ref_token,
+                "oidcInfo": {
+                    "accessToken": info.access_token,
+                    "rawIdToken": info.raw_id_token,
+                    "refreshToken": info.refresh_token,
+                    "validatedIdToken": info.validated_id_token,
+                }
+            },
+        },
+        upsert=False,
+    )
+
+    return res.modified_count == 1
+
+def mongo_delete_all_sessions(sid: SessionID) -> bool:
+    res = sessionsNewCOL.delete_many({ "sid": sid })
+    return res.deleted_count > 0 
+
 
 # db interface function
 # WARNING: these do not do any validation (other than ensuring the properties expected)
@@ -192,12 +225,7 @@ def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
     return info
 
 def get_session_info(sid: SessionID) -> Optional[SessionInfo]:
-    db = load_db()
-
-    info = db.sessions.get(sid)
-    if info is None or not isinstance(info, SessionInfo):
-        return None  # wasn't setup or doesnt exist
-
+    info = mongo_get_session_info(sid)
     return info
 
 def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) -> Tuple[SessionToken, int]:
@@ -235,50 +263,38 @@ def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[R
 
     return (token, expires_at)
 
-def setup_new_session(uid: str) -> SessionID:
+def setup_new_session(uid: str, ttl_seconds: PositiveInt) -> SessionID:
     # allocates a new session, generating the id
     # does not setup the info, as this should be run before we have the curr token
-    db = load_db()
+    # the ttl should be specifically how long this fake session lasts, not the future real session
+    assert ttl_seconds > 0
+
+    # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
+    expires_at = int(time()) + ttl_seconds
+    info = NotSetupSession(
+        uid=uid,
+        setup=False,
+        REMOVE_exp=expires_at,
+    )
 
     # sid = SessionID(uuid4())  # TODO: this should be unique
     sid = SessionID(uuid4().hex)
-    db.sessions[sid] = NotSetupSession(uid=uid, setup=False)
-    # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
+    while not mongo_insert_not_setup_session(sid, info):
+        print("session id collision:", sid)
+        sid = SessionID(uuid4().hex)
 
-    save_db(db)
     return sid
 
-def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken) -> bool:
+def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken, ttl_seconds: PositiveInt) -> bool:
     # overwrites the session info for a given session id, returning whether it was successful
     # useful when refreshing a session (or a brand new session isnt setup yet)
     # does not work when the sid doesnt exist
-    # TODO: can just use XX, also upgrade the TTL to REFRESH TTL + 1 day (for leeway)
-    db = load_db()
-    if sid not in db.sessions:
-        return False
-
-    db.sessions[sid] = SessionInfo(
-        uid=db.sessions[sid].uid,
-        oidc_info=info,
-        curr_ref_token=curr_ref,
-        setup=True
-    )
-    save_db(db)
-
-    return True
+    assert ttl_seconds > 0
+    return mongo_update_session(sid, int(time()) + ttl_seconds, curr_ref, info)
 
 def destroy_session(sid: SessionID) -> bool:
-    # destroys all refresh tokens, session tokens, and the session 
-    # TODO: detach it from the user
-    db = load_db()
-    if sid not in db.sessions:
-        return False
-
-    # delete all the related tokens
+    # destroys all refresh tokens, session tokens, and the session
     # redis will be secondary indexed on the sid, so this wont be too horrible
     redis_delete_all_tokens(sid)
     mongo_delete_all_refresh_tokens(sid)
-    del db.sessions[sid]
-
-    save_db(db)
-    return True
+    return mongo_delete_all_sessions(sid)

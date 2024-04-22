@@ -9,7 +9,7 @@ import datetime
 import json
 import os
 from sys import exit
-from typing import TypedDict
+from typing import TypedDict, Union
 
 from bson import CodecOptions
 
@@ -36,6 +36,11 @@ class SessionInfoDict(TypedDict):
     oidcInfo: SessionInfoOIDCInfoDict
     expiresAt: datetime.datetime
 
+class NotSetupSessionInfoDict(TypedDict):
+    sid: str
+    uid: str
+    expiresAt: datetime.datetime
+
 # Export these as needed
 try:
     client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
@@ -52,7 +57,12 @@ coursesCOL = db["Courses"]
 archivesDB = client["Archives"]
 
 usersDB = client["Users"]
-sessionsNewCOL: Collection[SessionInfoDict] = usersDB["sessionsNEW"]
+sessionsNewCOL: Collection[Union[SessionInfoDict, NotSetupSessionInfoDict]] = usersDB["sessionsNEW"].with_options(
+    codec_options=CodecOptions(
+        tz_aware=True,
+        tzinfo=datetime.timezone.utc
+    )
+)
 refreshTokensNewCOL: Collection[RefreshTokenInfoDict] = usersDB["refreshTokensNEW"].with_options(
     codec_options=CodecOptions(
         tz_aware=True,

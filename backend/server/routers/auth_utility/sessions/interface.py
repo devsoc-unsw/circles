@@ -37,12 +37,12 @@ def new_login_session(uid: str, oidc_info: SessionOIDCInfo) -> Tuple[SessionToke
     # assumes the OIDC info is valid, otherwise the session will just collapse next refresh
 
     # if we get a faulty oidc token triple, then the session will just collapse next time we try
-    sid = setup_new_session(uid)
+    sid = setup_new_session(uid, 120)  # only make it last very briefly
     refresh_token, refresh_expiry = insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)
     session_token, session_expiry = insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
 
-    # bind the tokens to the session and return
-    assert update_session(sid, oidc_info, refresh_token)
+    # bind the tokens to the session and return, with a session ttl of abit over refresh token for autocleanup
+    assert update_session(sid, oidc_info, refresh_token, REFRESH_TOKEN_LIFETIME * 2)
     return (session_token, session_expiry, refresh_token, refresh_expiry)
 
 def new_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfo) -> Tuple[SessionToken, int, RefreshToken, int]:
@@ -56,7 +56,7 @@ def new_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfo) -> Tuple[Sess
     # all is good, generate new pair, bind tokens and return
     refresh_token, refresh_expiry = insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)
     session_token, session_expiry = insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
-    assert update_session(sid, new_oidc_info, refresh_token)
+    assert update_session(sid, new_oidc_info, refresh_token, REFRESH_TOKEN_LIFETIME * 2)
     return (session_token, session_expiry, refresh_token, refresh_expiry)
 
 def logout_session(sid: SessionID) -> bool:
