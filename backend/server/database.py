@@ -10,8 +10,10 @@ import json
 import os
 from sys import exit
 from typing import TypedDict, Union
+from uuid import UUID
 
 from bson import CodecOptions
+from bson.binary import UuidRepresentation
 
 from data.config import ARCHIVED_YEARS
 from pymongo import MongoClient
@@ -20,7 +22,7 @@ from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
 class RefreshTokenInfoDict(TypedDict):
     token: str
-    sid: str
+    sid: UUID
     expiresAt: datetime.datetime
 
 class SessionInfoOIDCInfoDict(TypedDict):
@@ -30,14 +32,14 @@ class SessionInfoOIDCInfoDict(TypedDict):
     validatedIdToken: dict
 
 class SessionInfoDict(TypedDict):
-    sid: str
+    sid: UUID
     uid: str
     currRefreshToken: str
     oidcInfo: SessionInfoOIDCInfoDict
     expiresAt: datetime.datetime
 
 class NotSetupSessionInfoDict(TypedDict):
-    sid: str
+    sid: UUID
     uid: str
     expiresAt: datetime.datetime
 
@@ -60,17 +62,18 @@ usersDB = client["Users"]
 sessionsNewCOL: Collection[Union[SessionInfoDict, NotSetupSessionInfoDict]] = usersDB["sessionsNEW"].with_options(
     codec_options=CodecOptions(
         tz_aware=True,
-        tzinfo=datetime.timezone.utc
-    )
+        tzinfo=datetime.timezone.utc,
+        uuid_representation=UuidRepresentation.STANDARD,
+    ),
 )
 refreshTokensNewCOL: Collection[RefreshTokenInfoDict] = usersDB["refreshTokensNEW"].with_options(
     codec_options=CodecOptions(
         tz_aware=True,
-        tzinfo=datetime.timezone.utc
+        tzinfo=datetime.timezone.utc,
+        uuid_representation=UuidRepresentation.STANDARD,
     )
 )
 usersNewCOL = usersDB["userNEW"]
-
 
 def overwrite_collection(collection_name):
     """Overwrites the specific database via reading from the json files.
@@ -209,7 +212,6 @@ def create_tokens_collection():
         }
     })
 
-# TODO: add no extra keys, and ttls, and indexes
 def create_new_users_collection():
     # users {
     #     uid! string,     // unique indexed, the uid we get back from the oidc
@@ -318,7 +320,7 @@ def create_new_refresh_tokens_collection():
     # refreshTokens {
     #     tok! string,     // unique indexed
     #     sid! uuid,       // indexed
-    #     expiresAt! Date, // ttl indexed // TODO: make this proper with a ttl
+    #     expiresAt! Date, // ttl indexed
     # }
     usersDB.create_collection('refreshTokensNEW', validator={
         '$jsonSchema': {
@@ -332,8 +334,8 @@ def create_new_refresh_tokens_collection():
                     'bsonType': 'string',
                 },
                 'sid': {
-                    'description': 'Session ID',
-                    'bsonType': 'string', # TODO: make into a UUID
+                    'description': 'Session ID - UUID',
+                    'bsonType': 'binData',
                 },
                 'expiresAt': {
                     'description': 'Expiry time of this refresh token document',
@@ -370,8 +372,8 @@ def create_new_sessions_collection():
                     'properties': {
                         '_id': { 'bsonType': 'objectId' },
                         'sid': {
-                            'description': 'Session ID',
-                            'bsonType': 'string', # TODO: make into a UUID
+                            'description': 'Session ID - UUID',
+                            'bsonType': 'binData',
                         },
                         'uid': {
                             'description': 'User ID',
@@ -395,7 +397,7 @@ def create_new_sessions_collection():
                         },
                         'expiresAt': {
                             'description': 'Expiry time of this session document',
-                            'bsonType': 'date',  # TODO: make an actual ttl
+                            'bsonType': 'date',
                         },
                     },
                 },
@@ -406,8 +408,8 @@ def create_new_sessions_collection():
                     'properties': {
                         '_id': { 'bsonType': 'objectId' },
                         'sid': {
-                            'description': 'Session ID',
-                            'bsonType': 'string', # TODO: make into a UUID
+                            'description': 'Session ID - UUID',
+                            'bsonType': 'binData',
                         },
                         'uid': {
                             'description': 'User ID',
@@ -415,7 +417,7 @@ def create_new_sessions_collection():
                         },
                         'expiresAt': {
                             'description': 'Expiry time of this session document',
-                            'bsonType': 'date',  # TODO: make an actual ttl
+                            'bsonType': 'date',
                         },
                     },
                 },
@@ -424,7 +426,7 @@ def create_new_sessions_collection():
     })
 
     usersDB['sessionsNEW'].create_index("expiresAt", expireAfterSeconds=0)
-    usersDB['sessionsNEW'].create_index("sid", unique=0)
+    usersDB['sessionsNEW'].create_index("sid", unique=True)
     usersDB['sessionsNEW'].create_index("uid")
 
 def create_dynamic_db(drop_old: bool):

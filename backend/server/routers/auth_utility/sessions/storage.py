@@ -2,7 +2,7 @@ import datetime
 from secrets import token_urlsafe
 from time import time
 from typing import Literal, NewType, Optional, Tuple
-from uuid import uuid4
+from uuid import UUID, uuid4
 from pydantic import BaseModel, PositiveInt
 import pymongo
 import pymongo.errors
@@ -16,7 +16,7 @@ from redis.commands.search.query import Query
 # FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM
 # HMGET stoken:Nj-C2n8JYS4imxlVn7WhSX5Pa0uRZ1awa1w_YA-vnN4jMXXqqKVb7HW9rNhfGako sid uid
 
-SessionID = NewType('SessionID', str)  # TODO: make this back into a uuid
+SessionID = NewType('SessionID', UUID)
 SessionToken = NewType('SessionToken', str)
 RefreshToken = NewType('RefreshToken', str)
 
@@ -31,7 +31,6 @@ class SessionTokenInfo(BaseModel):
 class RefreshTokenInfo(BaseModel):
     # object stored against the refresh token
     sid: SessionID              # id of the session behind this token
-    # uid: str                  # user who owns the session
     REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
 # in mongo
@@ -72,8 +71,7 @@ def redis_get_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
         return None
 
     return SessionTokenInfo(
-        # sid=SessionID(UUID(hex=sid)),
-        sid=sid,
+        sid=SessionID(UUID(hex=sid)),
         uid=uid,
         REMOVE_exp=int(exp)
     )
@@ -83,7 +81,7 @@ def redis_set_token_nx(token: SessionToken, info: SessionTokenInfo) -> bool:
     # if can set first one, assume can set them all
     # TODO: figure out how to make this a transaction and/or redis func so it dont get deleted midway
     key = form_key(token)
-    exists = sdb.hsetnx(name=key, key="sid", value=info.sid)
+    exists = sdb.hsetnx(name=key, key="sid", value=info.sid.hex)
 
     assert isinstance(exists, int)
     if exists == 0:
@@ -107,8 +105,7 @@ def redis_delete_all_tokens(sid: SessionID) -> None:
     # look up all the keys, do in patches of BATCH_SIZE
     while True:
         all_matches = sdb.ft("idx:sid").search(
-            # query=Query(f"@sid:{{{sid.hex}}}").no_content().verbatim(),
-            query=Query(f"@sid:{{{sid}}}").no_content().verbatim().paging(0, BATCH_SIZE),
+            query=Query(f"@sid:{{{sid.hex}}}").no_content().verbatim().paging(0, BATCH_SIZE),
         )
 
         # the type bindings are wrong, the result has the shape
@@ -213,7 +210,7 @@ def mongo_update_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token
 
 def mongo_delete_all_sessions(sid: SessionID) -> bool:
     res = sessionsNewCOL.delete_many({ "sid": sid })
-    return res.deleted_count > 0 
+    return res.deleted_count > 0
 
 
 # db interface function
@@ -274,7 +271,6 @@ def setup_new_session(uid: str, ttl_seconds: PositiveInt) -> SessionID:
     # the ttl should be specifically how long this fake session lasts, not the future real session
     assert ttl_seconds > 0
 
-    # TODO: also setup with a TTL, so that if we never get to setting it up, it dies
     expires_at = int(time()) + ttl_seconds
     info = NotSetupSession(
         uid=uid,
@@ -282,11 +278,10 @@ def setup_new_session(uid: str, ttl_seconds: PositiveInt) -> SessionID:
         REMOVE_exp=expires_at,
     )
 
-    # sid = SessionID(uuid4())  # TODO: this should be unique
-    sid = SessionID(uuid4().hex)
+    sid = SessionID(uuid4())
     while not mongo_insert_not_setup_session(sid, info):
         print("session id collision:", sid)
-        sid = SessionID(uuid4().hex)
+        sid = SessionID(uuid4())
 
     return sid
 
