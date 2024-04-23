@@ -343,6 +343,10 @@ def create_new_refresh_tokens_collection():
         }
     })
 
+    usersDB['refreshTokensNEW'].create_index("expiresAt", expireAfterSeconds=0)
+    usersDB['refreshTokensNEW'].create_index("token", unique=True)
+    usersDB['refreshTokensNEW'].create_index("sid")
+
 def create_new_sessions_collection():
     # sessions {
     #     sid! uuid,       // unique indexed
@@ -418,6 +422,10 @@ def create_new_sessions_collection():
             ]
         }
     })
+
+    usersDB['sessionsNEW'].create_index("expiresAt", expireAfterSeconds=0)
+    usersDB['sessionsNEW'].create_index("sid", unique=0)
+    usersDB['sessionsNEW'].create_index("uid")
 
 def create_dynamic_db(drop_old: bool):
     if drop_old:
