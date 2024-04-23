@@ -93,8 +93,11 @@ def redis_set_token_nx(token: SessionToken, info: SessionTokenInfo) -> bool:
         "uid": info.uid,
         "exp": info.REMOVE_exp,
     })
-    # TODO: set a TTL on the index
     assert isinstance(res, int) and res == 2
+
+    exp_res = sdb.expireat(key, info.REMOVE_exp)
+    assert isinstance(exp_res, bool) and exp_res
+
     return True
 
 BATCH_SIZE = 100
