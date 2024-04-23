@@ -97,25 +97,27 @@ def redis_set_token_nx(token: SessionToken, info: SessionTokenInfo) -> bool:
     assert isinstance(res, int) and res == 2
     return True
 
+BATCH_SIZE = 100
 def redis_delete_all_tokens(sid: SessionID) -> None:
     # FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM
     # TODO: functionize this
-    # look up all the keys
-    all_matches = sdb.ft("idx:sid").search(
-        # query=Query(f"@sid:{{{sid.hex}}}").no_content().verbatim(),
-        query=Query(f"@sid:{{{sid}}}").no_content().verbatim(),
-    )
+    # look up all the keys, do in patches of BATCH_SIZE
+    while True:
+        all_matches = sdb.ft("idx:sid").search(
+            # query=Query(f"@sid:{{{sid.hex}}}").no_content().verbatim(),
+            query=Query(f"@sid:{{{sid}}}").no_content().verbatim().paging(0, BATCH_SIZE),
+        )
 
-    # the type bindings are wrong, the result has the shape
-    #  {'attributes': [], 'total_results': 1, 'format': 'STRING', 'results': [{'id': '...', 'values': [...]}], 'warning': []}
-    assert isinstance(all_matches, dict)
-    if all_matches['total_results'] == 0:
-        return
+        # the type bindings are wrong, the result has the shape
+        #  {'attributes': [], 'total_results': 1, 'format': 'STRING', 'results': [{'id': '...', 'values': [...]}], 'warning': []}
+        assert isinstance(all_matches, dict)
+        if all_matches['total_results'] > 0:
+            # delete them all
+            # NOTE: potentially this wont work after 1GB worth of keys...
+            sdb.delete(*(m["id"] for m in all_matches["results"]))
 
-    # delete them all
-    # NOTE: potentially this wont work after 1GB worth of keys...
-    # TODO: it does not work with more than 10 keys...
-    sdb.delete(*(m["id"] for m in all_matches["results"]))
+        if all_matches['total_results'] <= BATCH_SIZE:
+            return  # no more to delete
 
 def mongo_get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
     info = refreshTokensNewCOL.find_one({ 'token': token })
