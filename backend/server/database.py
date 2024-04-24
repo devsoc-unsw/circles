@@ -34,9 +34,9 @@ class SessionInfoOIDCInfoDict(TypedDict):
 class SessionInfoDict(TypedDict):
     sid: UUID
     uid: str
+    expiresAt: datetime.datetime
     currRefreshToken: str
     oidcInfo: SessionInfoOIDCInfoDict
-    expiresAt: datetime.datetime
 
 class NotSetupSessionInfoDict(TypedDict):
     sid: UUID
@@ -73,7 +73,7 @@ refreshTokensNewCOL: Collection[RefreshTokenInfoDict] = usersDB["refreshTokensNE
         uuid_representation=UuidRepresentation.STANDARD,
     )
 )
-usersNewCOL = usersDB["userNEW"]
+usersNewCOL = usersDB["usersNEW"]
 
 def overwrite_collection(collection_name):
     """Overwrites the specific database via reading from the json files.
@@ -222,99 +222,150 @@ def create_new_users_collection():
     # }
     usersDB.create_collection('usersNEW', validator={
         '$jsonSchema': {
-            # 'oneOf': [
-            #     {
+            'bsonType': 'object',
+            'required': ['uid', 'degree', 'planner', 'courses'],
+            'additionalProperties': False,
+            'properties': {
+                '_id': { 'bsonType': 'objectId' },
+                'uid': {
+                    'bsonType': 'string',
+                    'description': 'unique user id of the user'
+                },
+                'info': {
+                    'bsonType': 'object',  # placeholder for future, not sure what this shape will be
+                    'description': 'Any extra information gathered about the user, such as name'
+                },
+                'degree': {
                     'bsonType': 'object',
-                    'required': ['uid', 'info', 'degree', 'planner', 'courses'],
+                    'required': ['programCode', 'specs', 'isComplete'],
                     'additionalProperties': False,
                     'properties': {
-                        '_id': { 'bsonType': 'objectId' },
-                        'uid': {
+                        'programCode': {
                             'bsonType': 'string',
-                            'description': 'unique user id of the user'
+                            'description': 'the code of program taken'
                         },
-                        'info': {
-                            'bsonType': 'object',  # placeholder for future, not sure what this shape will be
-                            'description': 'Any extra information gathered about the user, such as name'
-                        },
-                        'degree': {
-                            'bsonType': 'object',
-                            'required': ['programCode', 'specs'],
-                            'properties': {
-                                'programCode': {
-                                    'bsonType': 'string',
-                                    'description': 'the code of program taken'
-                                },
-                                'specs': {
-                                    'bsonType': 'array',
-                                    'description': 'an array of all the specialisations taken',
-                                    'items': {
-                                        'bsonType': 'string'
-                                    }
-                                },
+                        'specs': {
+                            'bsonType': 'array',
+                            'description': 'an array of all the specialisations taken',
+                            'items': {
+                                'bsonType': 'string'
                             }
                         },
-                        'courses': {
-                            'bsonType': 'object',  # painful to validate properly :/
-                        },
-                        'planner': {
-                            'bsonType': 'object',
-                            'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years'],
-                            'properties': {
-                                "unplanned": {
-                                    'bsonType': 'array',
-                                    'items': {
-                                        'bsonType': 'string'
-                                    }
-                                },
-                                "startYear": {
-                                    'bsonType': 'int'
-                                },
-                                "isSummerEnabled": {
-                                    'bsonType': 'bool'
-                                },
-                                "years": {
-                                    'bsonType': 'array',
-                                    'items': {
-                                        'bsonType': 'object',
-                                        'properties': {
-                                            "T0": {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            },
-
-                                            "T1": {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            },
-
-                                            "T2": {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            },
-
-                                            "T3": {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            }
-                                        }
-                                    },
-                                }
+                        'isComplete': {
+                            'bsonType': 'bool',
+                            'description': 'Whether their degree is complete',
+                        }
+                    }
+                },
+                'courses': {
+                    'bsonType': 'object',
+                    'description': 'an object of CourseCode -> CourseInformation mapping',
+                    'properties': {},
+                    'additionalProperties': {
+                        'bsonType': 'object',
+                        'required': ['code', 'suppressed', 'mark', 'uoc', 'ignoreFromProgression'],
+                        'additionalProperties': False,
+                        'properties': {
+                            'code': {
+                                'bsonType': 'string',
+                                'description': 'Course code repeated',
+                            },
+                            'suppressed': {
+                                'bsonType': 'bool',
+                                'description': 'Whether or not the warnings are suppressed',
+                            },
+                            'mark': {
+                                'oneOf': [
+                                    { 'enum': ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'] },
+                                    { 'bsonType': ['int', 'null'] },
+                                ],
+                                'description': 'Mark entered for this course'
+                            },
+                            'uoc': {
+                                'bsonType': 'int',
+                                'description': 'UOC of this course',
+                            },
+                            'ignoreFromProgression': {
+                                'bsonType': 'bool',
+                                'description': 'Whether the course is ignored from progression checking',
                             }
                         }
                     }
-            #     }
-            # ]
+                },
+                'planner': {
+                    'bsonType': 'object',
+                    'required': ['unplanned', 'startYear', 'isSummerEnabled', 'mostRecentPastTerm', 'years', 'lockedTerms'],
+                    'additionalProperties': False,
+                    'properties': {
+                        'lockedTerms': {
+                            'bsonType': 'object',
+                            'properties': {},
+                            'additionalProperties': { 'bsonType': 'bool' },
+                            'description': 'A map of <YEAR><TERM> -> boolean of which terms are locked. Example: 2024T1 -> True',
+                        },
+                        'mostRecentPastTerm': {
+                            'bsonType': 'object',
+                            'required': ['Y', 'T'],
+                            'additionalProperties': False,
+                            'properties': {
+                                'Y': { 'bsonType': 'int' },
+                                'T': { 'bsonType': 'int' },
+                            },
+                            'description': 'Used for planner validation?!'
+                        },
+                        'unplanned': {
+                            'bsonType': 'array',
+                            'items': {
+                                'bsonType': 'string'
+                            }
+                        },
+                        'startYear': {
+                            'bsonType': 'int'
+                        },
+                        'isSummerEnabled': {
+                            'bsonType': 'bool'
+                        },
+                        'years': {
+                            'bsonType': 'array',
+                            'items': {
+                                'bsonType': 'object',
+                                'required': ['T0', 'T1', 'T2', 'T3'],
+                                'additionalProperties': False,
+                                'properties': {
+                                    'T0': {
+                                        'bsonType': 'array',
+                                        'items': {
+                                            'bsonType': 'string'
+                                        }
+                                    },
+                                    'T1': {
+                                        'bsonType': 'array',
+                                        'items': {
+                                            'bsonType': 'string'
+                                        }
+                                    },
+                                    'T2': {
+                                        'bsonType': 'array',
+                                        'items': {
+                                            'bsonType': 'string'
+                                        }
+                                    },
+                                    'T3': {
+                                        'bsonType': 'array',
+                                        'items': {
+                                            'bsonType': 'string'
+                                        }
+                                    }
+                                }
+                            },
+                        }
+                    }
+                }
+            }
         }
     })
+
+    usersDB['usersNEW'].create_index("uid", unique=True)
 
 def create_new_refresh_tokens_collection():
     # refreshTokens {
