@@ -1,8 +1,7 @@
 import datetime
-from secrets import token_urlsafe
 from time import time
-from typing import Literal, NewType, Optional, Tuple
-from uuid import UUID, uuid4
+from typing import Literal, NewType, Optional
+from uuid import UUID
 from pydantic import BaseModel, PositiveInt
 import pymongo
 import pymongo.errors
@@ -214,90 +213,3 @@ def mongo_update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_re
 def mongo_delete_all_sessions(sid: SessionID) -> bool:
     res = sessionsNewCOL.delete_many({ "sid": sid })
     return res.deleted_count > 0
-
-
-# db interface function
-# WARNING: these do not do any validation (other than ensuring the properties expected)
-def new_token() -> str:
-    return token_urlsafe(48)
-
-def get_session_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
-    info = redis_get_token_info(token)
-    return info
-
-def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
-    info = mongo_get_refresh_token_info(token)
-    return info
-
-def get_session_info(sid: SessionID) -> Optional[SessionInfo]:
-    info = mongo_get_session_info(sid)
-    return info
-
-def insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) -> Tuple[SessionToken, int]:
-    # creates a new session, returning (token, expires_at)
-    assert ttl_seconds > 0
-
-    expires_at = int(time()) + ttl_seconds
-    info = SessionTokenInfo(
-        sid=sid,
-        uid=uid,
-        REMOVE_exp=expires_at,
-    )
-
-    token = SessionToken(new_token())
-    while not redis_set_token_nx(token, info):
-        print("session token collision", token)
-        token = SessionToken(new_token())
-
-    return (token, expires_at)
-
-def insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[RefreshToken, int]:
-    # creates a new session, returning (token, expires_at)
-    assert ttl_seconds > 0
-
-    expires_at = int(time()) + ttl_seconds
-    info = RefreshTokenInfo(
-        sid=sid,
-        REMOVE_exp=expires_at,
-    )
-
-    token = RefreshToken(new_token())
-    while not mongo_insert_refresh_token_info(token, info):
-        print("refresh token collision:", token)
-        token = RefreshToken(new_token())
-
-    return (token, expires_at)
-
-def setup_new_session(uid: str, ttl_seconds: PositiveInt) -> SessionID:
-    # allocates a new session, generating the id
-    # does not setup the info, as this should be run before we have the curr token
-    # the ttl should be specifically how long this fake session lasts, not the future real session
-    assert ttl_seconds > 0
-
-    expires_at = int(time()) + ttl_seconds
-    info = NotSetupSession(
-        uid=uid,
-        setup=False,
-        REMOVE_exp=expires_at,
-    )
-
-    sid = SessionID(uuid4())
-    while not mongo_insert_not_setup_session(sid, info):
-        print("session id collision:", sid)
-        sid = SessionID(uuid4())
-
-    return sid
-
-def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken, ttl_seconds: PositiveInt) -> bool:
-    # overwrites the session info for a given session id, returning whether it was successful
-    # useful when refreshing a session (or a brand new session isnt setup yet)
-    # does not work when the sid doesnt exist
-    assert ttl_seconds > 0
-    return mongo_update_csesoc_session(sid, int(time()) + ttl_seconds, curr_ref, info)
-
-def destroy_session(sid: SessionID) -> bool:
-    # destroys all refresh tokens, session tokens, and the session
-    # redis will be secondary indexed on the sid, so this wont be too horrible
-    redis_delete_all_tokens(sid)
-    mongo_delete_all_refresh_tokens(sid)
-    return mongo_delete_all_sessions(sid)

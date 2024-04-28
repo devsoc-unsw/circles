@@ -11,8 +11,8 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_5
 from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
-from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken, get_session_info as get_session_info_from_sid
-from .auth_utility.sessions.interface import get_oidc_info, get_token_info, logout_session, new_login_session, new_token_pair
+from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken
+from .auth_utility.sessions.interface import get_oidc_info, get_oidc_info_from_session_token, get_token_info, logout_session, new_login_session, new_token_pair
 
 from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie
 from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
@@ -199,12 +199,9 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
 
     try:
         # get the user id and the session id from the token
-        _, sid = get_token_info(token)
-        session_info = get_session_info_from_sid(sid)  # bypass refresh token checks
-        # TODO: throw error here if removed from mongo but not redis...
-        assert session_info is not None
+        sid, oidc_info = get_oidc_info_from_session_token(token)
 
-        revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
+        revoke_token(oidc_info.refresh_token, "refresh_token")
     except SessionExpiredToken as e:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
