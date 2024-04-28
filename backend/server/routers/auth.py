@@ -201,7 +201,7 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
         # get the user id and the session id from the token
         _, sid = get_token_info(token)
         session_info = get_session_info_from_sid(sid)  # bypass refresh token checks
-        # TODO: throw error here if expired
+        # TODO: throw error here if removed from mongo but not redis...
         assert session_info is not None
 
         revoke_token(session_info.oidc_info.refresh_token, "refresh_token")

@@ -3,8 +3,11 @@ from typing import Tuple
 from .storage import RefreshToken, SessionID, SessionOIDCInfo, SessionToken, destroy_session, get_refresh_token_info, get_session_info, get_session_token_info, insert_new_refresh_info, insert_new_session_token_info, setup_new_session, update_session
 from .errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 
-SESSION_TOKEN_LIFETIME = 60 * 15            # 15 minutes
-REFRESH_TOKEN_LIFETIME = 60 * 60 * 24 * 30  # 30 days
+DAY = 60 * 60 * 24
+SESSION_TOKEN_LIFETIME = 60 * 15   # 15 minutes
+REFRESH_TOKEN_LIFETIME = DAY * 30  # 30 days
+SESSION_LIFETIME = REFRESH_TOKEN_LIFETIME + DAY
+
 
 def get_token_info(session_token: SessionToken) -> Tuple[str, SessionID]:
     info = get_session_token_info(session_token)
@@ -42,7 +45,7 @@ def new_login_session(uid: str, oidc_info: SessionOIDCInfo) -> Tuple[SessionToke
     session_token, session_expiry = insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
 
     # bind the tokens to the session and return, with a session ttl of abit over refresh token for autocleanup
-    assert update_session(sid, oidc_info, refresh_token, REFRESH_TOKEN_LIFETIME * 2)
+    assert update_session(sid, oidc_info, refresh_token, SESSION_LIFETIME)
     return (session_token, session_expiry, refresh_token, refresh_expiry)
 
 def new_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfo) -> Tuple[SessionToken, int, RefreshToken, int]:
@@ -56,7 +59,7 @@ def new_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfo) -> Tuple[Sess
     # all is good, generate new pair, bind tokens and return
     refresh_token, refresh_expiry = insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)
     session_token, session_expiry = insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
-    assert update_session(sid, new_oidc_info, refresh_token, REFRESH_TOKEN_LIFETIME * 2)
+    assert update_session(sid, new_oidc_info, refresh_token, SESSION_LIFETIME)
     return (session_token, session_expiry, refresh_token, refresh_expiry)
 
 def logout_session(sid: SessionID) -> bool:

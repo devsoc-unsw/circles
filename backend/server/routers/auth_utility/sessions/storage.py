@@ -152,8 +152,8 @@ def mongo_delete_all_refresh_tokens(sid: SessionID) -> None:
 def mongo_get_session_info(sid: SessionID) -> Optional[SessionInfo]:
     session = sessionsNewCOL.find_one({ "sid": sid })
 
-    if session is None or "currRefreshToken" not in session:
-        # TODO: tag the dicts when we do guest tokens
+    if session is None or session["type"] != "csesoc":
+        # TODO: deal with guest sessions here
         return None
 
     exp = int(session["expiresAt"].timestamp())
@@ -182,28 +182,31 @@ def mongo_insert_not_setup_session(sid: SessionID, info: NotSetupSession) -> boo
             "sid": sid,
             "uid": info.uid,
             "expiresAt": datetime.datetime.fromtimestamp(info.REMOVE_exp, tz=datetime.timezone.utc),
+            "type": "notsetup",
         })
         return True
     except pymongo.errors.DuplicateKeyError:
         # sid already existed
         return False
 
-def mongo_update_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfo) -> bool:
+def mongo_update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfo) -> bool:
     res = sessionsNewCOL.update_one(
-        { "sid": sid },
+        { "sid": sid, "type": { "$in": [ "csesoc", "notsetup" ] } },
         {
             "$set": {
                 "expiresAt": datetime.datetime.fromtimestamp(expires_at, tz=datetime.timezone.utc), 
                 "currRefreshToken": curr_ref_token,
+                "type": "csesoc",
                 "oidcInfo": {
                     "accessToken": info.access_token,
                     "rawIdToken": info.raw_id_token,
                     "refreshToken": info.refresh_token,
                     "validatedIdToken": info.validated_id_token,
-                }
+                },
             },
         },
         upsert=False,
+        hint="sidIndex",
     )
 
     return res.modified_count == 1
@@ -290,7 +293,7 @@ def update_session(sid: SessionID, info: SessionOIDCInfo, curr_ref: RefreshToken
     # useful when refreshing a session (or a brand new session isnt setup yet)
     # does not work when the sid doesnt exist
     assert ttl_seconds > 0
-    return mongo_update_session(sid, int(time()) + ttl_seconds, curr_ref, info)
+    return mongo_update_csesoc_session(sid, int(time()) + ttl_seconds, curr_ref, info)
 
 def destroy_session(sid: SessionID) -> bool:
     # destroys all refresh tokens, session tokens, and the session

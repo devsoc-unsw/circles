@@ -9,7 +9,7 @@ import datetime
 import json
 import os
 from sys import exit
-from typing import TypedDict, Union
+from typing import Literal, TypedDict, Union
 from uuid import UUID
 
 from bson import CodecOptions
@@ -37,11 +37,20 @@ class SessionInfoDict(TypedDict):
     expiresAt: datetime.datetime
     currRefreshToken: str
     oidcInfo: SessionInfoOIDCInfoDict
+    type: Literal['csesoc']
 
 class NotSetupSessionInfoDict(TypedDict):
     sid: UUID
     uid: str
     expiresAt: datetime.datetime
+    type: Literal['notsetup']
+
+class GuestSessionInfoDict(TypedDict):
+    sid: UUID
+    uid: str
+    expiresAt: datetime.datetime
+    currRefreshToken: str
+    type: Literal['guest']
 
 # Export these as needed
 try:
@@ -59,7 +68,7 @@ coursesCOL = db["Courses"]
 archivesDB = client["Archives"]
 
 usersDB = client["Users"]
-sessionsNewCOL: Collection[Union[SessionInfoDict, NotSetupSessionInfoDict]] = usersDB["sessionsNEW"].with_options(
+sessionsNewCOL: Collection[Union[NotSetupSessionInfoDict, SessionInfoDict, GuestSessionInfoDict]] = usersDB["sessionsNEW"].with_options(
     codec_options=CodecOptions(
         tz_aware=True,
         tzinfo=datetime.timezone.utc,
@@ -365,7 +374,7 @@ def create_new_users_collection():
         }
     })
 
-    usersDB['usersNEW'].create_index("uid", unique=True)
+    usersDB['usersNEW'].create_index("uid", unique=True, name="uidIndex")
 
 def create_new_refresh_tokens_collection():
     # refreshTokens {
@@ -397,28 +406,29 @@ def create_new_refresh_tokens_collection():
     })
 
     usersDB['refreshTokensNEW'].create_index("expiresAt", expireAfterSeconds=0)
-    usersDB['refreshTokensNEW'].create_index("token", unique=True)
-    usersDB['refreshTokensNEW'].create_index("sid")
+    usersDB['refreshTokensNEW'].create_index("token", unique=True, name="tokenIndex")
+    usersDB['refreshTokensNEW'].create_index("sid", name="sidIndex")
 
 def create_new_sessions_collection():
     # sessions {
     #     sid! uuid,       // unique indexed
     #     uid! string,     // index on if we dont have the reverse lookup
+    #     expiresAt! Date, // ttl indexed (should be same as the currRefTok expiry time, or +1 day)
+    #     type! notsetup | csesoc | guest,
+    #     currRefTok? string,
     #     oidcInfo? {
     #         access_token string         # most recent access token
     #         raw_id_token string         # most recent id token string
     #         refresh_token string        # most recent refresh token
     #         validated_id_token: object  # most recent valid id token object,
     #     },
-    #     currRefTok? string,
-    #     expiresAt! Date, // ttl indexed (should be same as the currRefTok expiry time, or +1 day)
     # }
     usersDB.create_collection('sessionsNEW', validator={
         '$jsonSchema': {
             'oneOf': [
                 {
                     'bsonType': 'object',
-                    'required': ['sid', 'uid', 'currRefreshToken', 'oidcInfo', 'expiresAt'],
+                    'required': ['sid', 'uid', 'currRefreshToken', 'oidcInfo', 'expiresAt', 'type'],
                     'additionalProperties': False,
                     'properties': {
                         '_id': { 'bsonType': 'objectId' },
@@ -450,11 +460,37 @@ def create_new_sessions_collection():
                             'description': 'Expiry time of this session document',
                             'bsonType': 'date',
                         },
+                        'type': { 'enum': ['csesoc'] },
                     },
                 },
                 {
                     'bsonType': 'object',
-                    'required': ['sid', 'uid', 'expiresAt'],
+                    'required': ['sid', 'uid', 'currRefreshToken', 'expiresAt', 'type'],
+                    'additionalProperties': False,
+                    'properties': {
+                        '_id': { 'bsonType': 'objectId' },
+                        'sid': {
+                            'description': 'Session ID - UUID',
+                            'bsonType': 'binData',
+                        },
+                        'uid': {
+                            'description': 'User ID',
+                            'bsonType': 'string',
+                        },
+                        'currRefreshToken': {
+                            'description': 'For protection against replay attacks',
+                            'bsonType': 'string',
+                        },
+                        'expiresAt': {
+                            'description': 'Expiry time of this session document',
+                            'bsonType': 'date',
+                        },
+                        'type': { 'enum': ['guest'] },
+                    },
+                },
+                {
+                    'bsonType': 'object',
+                    'required': ['sid', 'uid', 'expiresAt', 'type'],
                     'additionalProperties': False,
                     'properties': {
                         '_id': { 'bsonType': 'objectId' },
@@ -470,6 +506,7 @@ def create_new_sessions_collection():
                             'description': 'Expiry time of this session document',
                             'bsonType': 'date',
                         },
+                        'type': { 'enum': ['notsetup'] },
                     },
                 },
             ]
@@ -477,8 +514,8 @@ def create_new_sessions_collection():
     })
 
     usersDB['sessionsNEW'].create_index("expiresAt", expireAfterSeconds=0)
-    usersDB['sessionsNEW'].create_index("sid", unique=True)
-    usersDB['sessionsNEW'].create_index("uid")
+    usersDB['sessionsNEW'].create_index("sid", unique=True, name="sidIndex")
+    usersDB['sessionsNEW'].create_index("uid", name="uidIndex")
 
 def create_dynamic_db(drop_old: bool):
     if drop_old:
