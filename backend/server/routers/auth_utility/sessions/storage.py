@@ -1,6 +1,6 @@
 import datetime
 from time import time
-from typing import Literal, NewType, Optional
+from typing import Literal, NewType, Optional, Union
 from uuid import UUID
 from pydantic import BaseModel, PositiveInt
 import pymongo
@@ -55,6 +55,13 @@ class SessionInfo(BaseModel):
     setup: Literal[True]          # ensure that this can get parsed correctly
     REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
+# in mongo
+class GuestSessionInfo(BaseModel):
+    # object stored against the sid
+    uid: str                      # for validation and back lookup
+    curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
+    setup: Literal[True]          # ensure that this can get parsed correctly
+    REMOVE_exp: int             # time of expiry, will be replaced with a TTL on the cache
 
 def form_key(token: SessionToken) -> str:
     return f"token:{token}"
@@ -148,10 +155,10 @@ def mongo_insert_refresh_token_info(token: RefreshToken, info: RefreshTokenInfo)
 def mongo_delete_all_refresh_tokens(sid: SessionID) -> None:
     refreshTokensNewCOL.delete_many({ "sid": sid })
 
-def mongo_get_session_info(sid: SessionID) -> Optional[SessionInfo]:
+def mongo_get_session_info(sid: SessionID) -> Optional[Union[SessionInfo, GuestSessionInfo]]:
     session = sessionsNewCOL.find_one({ "sid": sid })
 
-    if session is None or session["type"] != "csesoc":
+    if session is None or session["type"] == "notsetup":
         # TODO: deal with guest sessions here
         return None
 
@@ -159,6 +166,15 @@ def mongo_get_session_info(sid: SessionID) -> Optional[SessionInfo]:
     if exp <= int(time()):
         return None
 
+    if session["type"] == "guest":
+        return GuestSessionInfo(
+            uid=session["uid"],
+            curr_ref_token=RefreshToken(session["currRefreshToken"]),
+            REMOVE_exp=exp,
+            setup=True,
+        )
+
+    assert session["type"] == "csesoc"
     return SessionInfo(
         uid=session["uid"],
         curr_ref_token=RefreshToken(session["currRefreshToken"]),
@@ -202,6 +218,22 @@ def mongo_update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_re
                     "refreshToken": info.refresh_token,
                     "validatedIdToken": info.validated_id_token,
                 },
+            },
+        },
+        upsert=False,
+        hint="sidIndex",
+    )
+
+    return res.modified_count == 1
+
+def mongo_update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken) -> bool:
+    res = sessionsNewCOL.update_one(
+        { "sid": sid, "type": { "$in": [ "guest", "notsetup" ] } },
+        {
+            "$set": {
+                "expiresAt": datetime.datetime.fromtimestamp(expires_at, tz=datetime.timezone.utc), 
+                "currRefreshToken": curr_ref_token,
+                "type": "guest",
             },
         },
         upsert=False,

@@ -1,7 +1,7 @@
 """ Routes to deal with user Authentication. """
 from typing import Annotated, Dict, Optional, cast
 from datetime import datetime
-from secrets import token_urlsafe
+from secrets import token_hex, token_urlsafe
 from time import time
 from urllib.parse import parse_qs
 from fastapi import APIRouter, Cookie, HTTPException, Response, Security
@@ -11,8 +11,8 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_5
 from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
-from .auth_utility.sessions.storage import RefreshToken, SessionOIDCInfo, SessionToken
-from .auth_utility.sessions.interface import get_oidc_info, get_oidc_info_from_session_token, get_token_info, logout_session, new_login_session, new_token_pair
+from .auth_utility.sessions.storage import GuestSessionInfo, RefreshToken, SessionInfo, SessionOIDCInfo, SessionToken
+from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
 from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie
 from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
@@ -41,10 +41,49 @@ router = APIRouter(
 
 require_token = HTTPBearer401()
 
-@router.post('/token')
+def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfo) -> Optional[SessionOIDCInfo]:
+    try:
+        _ = get_user_info(oidc_info.access_token)  # TODO: update user details with this info
+        return oidc_info  # no need for new info
+    except OIDCInvalidToken:
+        # access token has expired, try refresh
+        # will raise if could not refresh
+        try:
+            refreshed, validated = refresh_and_validate(cast(DecodedIDToken, oidc_info.validated_id_token), oidc_info.refresh_token)
+            return SessionOIDCInfo(
+                access_token=refreshed["access_token"],
+                raw_id_token=refreshed["id_token"],
+                refresh_token=refreshed["refresh_token"],
+                validated_id_token=cast(dict, validated),
+            )
+        except OIDCInvalidGrant:
+            # TODO: retrieve this error some how
+            # refresh token has expired, any other errors are bad and should be handled else ways
+            # revoke_token(oidc_info.refresh_token, "refresh_token")  # NOTE: if the fresh token is invalid, i give up
+            return None
+
+@router.post('/token', deprecated=True)
 def create_user_token(token: str):
     set_user(token, default_cs_user())
     reset(token)
+
+@router.post('/guest_login')
+def create_guest_session(res: Response) -> IdentityPayload:
+    # create new login session for user in db, generating new tokens
+    # TODO: generate this uid based on database
+    uid = f"guest-{token_hex(4)}"
+    new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_guest_session(uid)
+
+    # TODO: do some stuff with the id token here like user database setup
+
+    print("\n\nnew guest login", uid)
+    print(datetime.now())
+    print("session expires:", datetime.fromtimestamp(session_expiry))
+    print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
+
+    # set the cookies and return the identity
+    set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
+    return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
 @router.post(
     "/refresh", 
@@ -61,7 +100,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     # generate the token pair
     # first get the oidc session details, this will check if it hasnt expired
     try:
-        sid, uid, oidc_info = get_oidc_info(refresh_token)
+        sid, session_info = get_session_info_from_refresh_token(refresh_token)
     except (SessionExpiredRefreshToken, SessionOldRefreshToken) as e:
         # if old refresh token, will destroy the session on the backend
         set_refresh_token_cookie(res, None)
@@ -71,44 +110,35 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
             headers={ "set-cookie": res.headers["set-cookie"] },
         ) from e
 
-    # then check if it is still valid with federated auth
-    #   if not, refresh it and update the oidc session details
-    new_oidc_info = oidc_info
-    try:
-        _ = get_user_info(oidc_info.access_token)  # TODO: update user details with this info
-    except OIDCInvalidToken:
-        # access token has expired, try refresh
-        # will raise if could not refresh
-        try:
-            refreshed, validated = refresh_and_validate(cast(DecodedIDToken, oidc_info.validated_id_token), oidc_info.refresh_token)
-            new_oidc_info = SessionOIDCInfo(
-                access_token=refreshed["access_token"],
-                raw_id_token=refreshed["id_token"],
-                refresh_token=refreshed["refresh_token"],
-                validated_id_token=cast(dict, validated),
-            )
-        except OIDCInvalidGrant as e:
-            # refresh token has expired, any other errors are bad and should be handled else ways
-            # revoke_token(oidc_info.refresh_token, "refresh_token")  # NOTE: if the fresh token is invalid, i give up
+    if isinstance(session_info, SessionInfo):
+        # then check if it is still valid with federated auth
+        #   if not, refresh it and update the oidc session details
+        new_oidc_info = _check_csesoc_oidc_session(session_info.oidc_info)
+        if new_oidc_info is None:
             logout_session(sid)
             set_refresh_token_cookie(res, None)
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
-                detail=e.error_description,
+                detail="Session could not be refreshed, please log in again.",
                 headers={ "set-cookie": res.headers["set-cookie"] },
-            ) from e
+            )
 
-    # if here, the oidc session was still valid. Create the new token pair
-    new_session_token, session_expiry, new_refresh_token, refresh_expiry = new_token_pair(sid, new_oidc_info)
+        # if here, the oidc session was still valid. Create the new token pair
+        new_session_token, session_expiry, new_refresh_token, refresh_expiry = create_new_csesoc_token_pair(sid, new_oidc_info)
+    else:
+        # guest sessions don't have any external authorization linked to them, so easy
+        assert isinstance(session_info, GuestSessionInfo)
+        new_session_token, session_expiry, new_refresh_token, refresh_expiry = create_new_guest_token_pair(sid)
 
-    print("\n\nnew identity", uid, sid)
+
+    print("\n\nnew identity", session_info.uid, sid)
     print(datetime.now())
     print("session expires:", datetime.fromtimestamp(session_expiry))
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
     set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
-    return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
+    return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=session_info.uid)
 
 @router.get(
     "/authorization_url",
@@ -175,7 +205,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
         refresh_token=tokens["refresh_token"],
         validated_id_token=cast(dict, id_token),
     )
-    new_session_token, session_expiry, new_refresh_token, refresh_expiry = new_login_session(uid, new_oidc_info)
+    new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_csesoc_session(uid, new_oidc_info)
 
     # TODO: do some stuff with the id token here like user database setup
 
@@ -199,9 +229,11 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
 
     try:
         # get the user id and the session id from the token
-        sid, oidc_info = get_oidc_info_from_session_token(token)
+        sid, session_info = get_session_info_from_session_token(token)
 
-        revoke_token(oidc_info.refresh_token, "refresh_token")
+        if isinstance(session_info, SessionInfo):
+            # only need to revoke a token for fed auth sessions
+            revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
     except SessionExpiredToken as e:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
