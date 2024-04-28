@@ -1,11 +1,11 @@
 from secrets import token_urlsafe
 from time import time
-from typing import Optional, Tuple
+from typing import Tuple
 from uuid import uuid4
 
 from pydantic import PositiveInt
 
-from .storage import NotSetupSession, RefreshToken, RefreshTokenInfo, SessionID, SessionInfo, SessionOIDCInfo, SessionToken, SessionTokenInfo, mongo_delete_all_refresh_tokens, mongo_delete_all_sessions, mongo_get_refresh_token_info, mongo_get_session_info, mongo_insert_not_setup_session, mongo_insert_refresh_token_info, mongo_update_csesoc_session, redis_delete_all_tokens, redis_get_token_info, redis_set_token_nx
+from .storage import NotSetupSession, RefreshToken, RefreshTokenInfo, SessionID, SessionOIDCInfo, SessionToken, SessionTokenInfo, mongo_delete_all_refresh_tokens, mongo_delete_all_sessions, mongo_get_refresh_token_info, mongo_get_session_info, mongo_insert_not_setup_session, mongo_insert_refresh_token_info, mongo_update_csesoc_session, redis_delete_all_tokens, redis_get_token_info, redis_set_token_nx
 from .errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 
 DAY = 60 * 60 * 24
@@ -17,18 +17,6 @@ SESSION_LIFETIME = REFRESH_TOKEN_LIFETIME + DAY
 # WARNING: these do not do any validation (other than ensuring the properties expected)
 def _new_token() -> str:
     return token_urlsafe(48)
-
-def _get_session_token_info(token: SessionToken) -> Optional[SessionTokenInfo]:
-    info = redis_get_token_info(token)
-    return info
-
-def _get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfo]:
-    info = mongo_get_refresh_token_info(token)
-    return info
-
-def _get_session_info(sid: SessionID) -> Optional[SessionInfo]:
-    info = mongo_get_session_info(sid)
-    return info
 
 def _insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: PositiveInt) -> Tuple[SessionToken, int]:
     # creates a new session, returning (token, expires_at)
@@ -101,7 +89,7 @@ def _destroy_session(sid: SessionID) -> bool:
 
 
 def get_token_info(session_token: SessionToken) -> Tuple[str, SessionID]:
-    info = _get_session_token_info(session_token)
+    info = redis_get_token_info(session_token)
     if info is None:
         raise SessionExpiredToken(session_token)
 
@@ -109,12 +97,12 @@ def get_token_info(session_token: SessionToken) -> Tuple[str, SessionID]:
 
 def get_oidc_info(refresh_token: RefreshToken) -> Tuple[SessionID, str, SessionOIDCInfo]:
     # useful to check oidc status before refreshing the session
-    ref_info = _get_refresh_token_info(refresh_token)
+    ref_info = mongo_get_refresh_token_info(refresh_token)
     if ref_info is None:
         raise SessionExpiredRefreshToken(refresh_token)
 
     sid = ref_info.sid
-    session_info = _get_session_info(sid)
+    session_info = mongo_get_session_info(sid)
     assert session_info is not None
 
     if session_info.curr_ref_token != refresh_token:
@@ -125,11 +113,11 @@ def get_oidc_info(refresh_token: RefreshToken) -> Tuple[SessionID, str, SessionO
     return (sid, session_info.uid, session_info.oidc_info)
 
 def get_oidc_info_from_session_token(session_token: SessionToken) -> Tuple[SessionID, SessionOIDCInfo]:
-    info = _get_session_token_info(session_token)
+    info = redis_get_token_info(session_token)
     if info is None:
         raise SessionExpiredToken(session_token)
 
-    session_info = _get_session_info(info.sid)
+    session_info = mongo_get_session_info(info.sid)
     # TODO: assertion error here if removed from mongo but not redis...
     assert session_info is not None
 
@@ -154,7 +142,7 @@ def new_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfo) -> Tuple[Sess
     # generates a new token pair given an existing session
     # again, assumes oidc info is valid, otherwise it will collapse
     # TODO: do we want to make sure the sid still attached to uid?
-    session_info = _get_session_info(sid)
+    session_info = mongo_get_session_info(sid)
     assert session_info is not None  # TODO: might happen if they log out before this and after an sid is gotten
     uid = session_info.uid
 
