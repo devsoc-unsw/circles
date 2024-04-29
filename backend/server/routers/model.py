@@ -182,16 +182,12 @@ class PlannerData(BaseModel):
         return user
 
 
-class DegreeLocalStorage(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
+class DegreeLocalStorage(TypedDict):
     programCode: str
     specs: list[str]
     isComplete: bool
 
-class PlannerLocalStorage(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
+class PlannerLocalStorage(TypedDict):
     mostRecentPastTerm: MostRecentPastTerm
     unplanned: list[str]
     startYear: int
@@ -211,19 +207,17 @@ markMap = {
     "HD": 85,
 }
 
-class CourseStorage(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
+class CourseStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
     uoc: int
     title: str
-    plannedFor: str | None = None
+    plannedFor: str | None
     isMultiterm: bool
     ignoreFromProgression: bool
 
-class Storage(BaseModel):
+class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CourseStorage]
