@@ -16,13 +16,13 @@ export type DegreeResponse = {
 
 export type CourseResponse = {
   code: string;
-  suppress: boolean;
+  suppressed: boolean;
   mark: Mark;
   plannedFor: string | null;
   unlocked: boolean;
   title: string;
   isMultiterm: boolean;
-  UOC: number;
+  uoc: number;
   ignoreFromProgression: boolean;
 };
 export type CoursesResponse = Record<string, CourseResponse>;

@@ -214,15 +214,6 @@ class CourseStorage(TypedDict):
     uoc: int
     ignoreFromProgression: bool
 
-class CourseType(BaseModel):
-    code: str
-    suppressed: bool
-    mark: Mark
-    plannedFor: str | None = None
-    title: str
-    isMultiterm: bool
-    UOC: int
-
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage

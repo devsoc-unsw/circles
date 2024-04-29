@@ -126,7 +126,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
               });
               // add UOC to curr
               if (courses && courses[courseCode] !== undefined) {
-                newCoursesUnits[group][subgroup].curr += courses[courseCode].UOC;
+                newCoursesUnits[group][subgroup].curr += courses[courseCode].uoc;
               }
             });
           }
