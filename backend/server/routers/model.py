@@ -211,7 +211,7 @@ class CourseStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
-    UOC: int
+    uoc: int
     ignoreFromProgression: bool
 
 class CourseType(BaseModel):

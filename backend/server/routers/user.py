@@ -118,7 +118,6 @@ def get_user_p(token: str) -> dict[str, CourseStorage]:
         if c['code'] in planner['unplanned']:
             c['plannedFor'] = "unplanned"
         c['plannedFor'] = c.get('plannedFor') # set to None if need be
-        c['UOC'] = c.pop('uoc')
     return res
 
 # this is super jank - should never see prod
