@@ -26,8 +26,8 @@ from server.routers.model import (
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
-from pydantic.json import ENCODERS_BY_TYPE
-ENCODERS_BY_TYPE[ObjectId] = str
+from pydantic import BaseModel
+BaseModel.model_config["json_encoders"] = {ObjectId: str}
 
 router = APIRouter(
     prefix="/user",

@@ -6,7 +6,7 @@ from typing import Literal, Optional, TypedDict, Union
 
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
-from pydantic import BaseModel
+from pydantic import ConfigDict, BaseModel
 
 
 class Programs(BaseModel):
@@ -33,9 +33,9 @@ class CourseDetails(BaseModel):
     level: int
     description: str
     study_level: str
-    school: Optional[str]
+    school: Optional[str] = None
     campus: str
-    equivalents: dict[str, str]
+    equivalents: dict[str, Literal[1]]
     raw_requirements: str
     exclusions: dict[str, Literal[1]]
     handbook_note: str
@@ -43,7 +43,7 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: Optional[bool]
+    is_multiterm: Optional[bool] = None
 
 
 class ContainerContent(TypedDict):
@@ -124,44 +124,43 @@ class PlannerData(BaseModel):
     specialisations: list[str]
     plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
     mostRecentPastTerm: MostRecentPastTerm
-    class Config:
-        schema_extra = {
-            "example": {
-                "program": "3707",
-                "specialisations": ["COMPA1"],
-                "plan": [
-                    [
-                        {},
-                        {
-                            "COMP1511": [6, None],
-                            "MATH1141": [6, None],
-                            "MATH1081": [6, None],
-                        },
-                        {
-                            "COMP1521": [6, None],
-                            "COMP9444": [6, None],
-                        },
-                        {
-                            "COMP2521": [6, None],
-                            "MATH1241": [6, None],
-                            "COMP3331": [6, None],
-                        },
-                    ],
-                    [
-                        {},
-                        {
-                            "COMP1531": [6, None],
-                            "COMP6080": [6, None],
-                            "COMP3821": [6, None],
-                        },
-                    ],
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "program": "3707",
+            "specialisations": ["COMPA1"],
+            "plan": [
+                [
+                    {},
+                    {
+                        "COMP1511": [6, None],
+                        "MATH1141": [6, None],
+                        "MATH1081": [6, None],
+                    },
+                    {
+                        "COMP1521": [6, None],
+                        "COMP9444": [6, None],
+                    },
+                    {
+                        "COMP2521": [6, None],
+                        "MATH1241": [6, None],
+                        "COMP3331": [6, None],
+                    },
                 ],
-                "mostRecentPastTerm": {
-                    "Y": 1,
-                    "T": 0,
-                },
-            }
+                [
+                    {},
+                    {
+                        "COMP1531": [6, None],
+                        "COMP6080": [6, None],
+                        "COMP3821": [6, None],
+                    },
+                ],
+            ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0,
+            },
         }
+    })
 
     def to_user(self) -> User:
         user = User()
@@ -212,14 +211,14 @@ class CourseStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
-    uoc: int
+    UOC: int
     ignoreFromProgression: bool
 
 class CourseType(BaseModel):
     code: str
     suppressed: bool
     mark: Mark
-    plannedFor: str | None
+    plannedFor: str | None = None
     title: str
     isMultiterm: bool
     UOC: int
@@ -263,9 +262,9 @@ class Graph(BaseModel):
     courses: list[str]
 
 class TermsList(BaseModel):
-    terms: Optional[dict[str, Optional[list[str]]]]
+    terms: Optional[dict[str, Optional[list[str]]]] = None
     # Actually tuple(str, fastapi.exceptions.HTTPException)
-    fails: Optional[list[tuple]]
+    fails: Optional[list[tuple]] = None
 
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
