@@ -285,10 +285,6 @@ def create_new_users_collection():
                             'bsonType': 'string',
                             'description': 'unique user id of the user'
                         },
-                        'info': {
-                            'bsonType': 'object',  # placeholder for future, not sure what this shape will be
-                            'description': 'Any extra information gathered about the user, such as name'
-                        },
                         'setup': { 'enum': [False] },
                         'guest': { 'bsonType': 'bool' },
                     }
@@ -302,10 +298,6 @@ def create_new_users_collection():
                         'uid': {
                             'bsonType': 'string',
                             'description': 'unique user id of the user'
-                        },
-                        'info': {
-                            'bsonType': 'object',  # placeholder for future, not sure what this shape will be
-                            'description': 'Any extra information gathered about the user, such as name'
                         },
                         'setup': { 'enum': [True] },
                         'guest': { 'bsonType': 'bool' },
@@ -442,6 +434,12 @@ def create_new_users_collection():
     })
 
     usersDB['usersNEW'].create_index("uid", unique=True, name="uidIndex")
+
+    # TODO: add later when we actually have a use for it, otherwise right now its just added pain
+    # 'info': {
+    #     'bsonType': 'object',  # placeholder for future, not sure what this shape will be
+    #     'description': 'Any extra information gathered about the user, such as name'
+    # },
 
 def create_new_refresh_tokens_collection():
     # refreshTokens {
