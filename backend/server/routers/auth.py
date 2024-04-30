@@ -11,7 +11,7 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_5
 from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
-from .auth_utility.sessions.storage import GuestSessionInfoModel, RefreshToken, SessionInfoModel, SessionOIDCInfoModel, SessionToken
+from .auth_utility.sessions.storage import GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
 from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie
@@ -110,10 +110,10 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
             headers={ "set-cookie": res.headers["set-cookie"] },
         ) from e
 
-    if isinstance(session_info, SessionInfoModel):
+    if session_info.type == "csesoc":
         # then check if it is still valid with federated auth
         #   if not, refresh it and update the oidc session details
-        new_oidc_info = _check_csesoc_oidc_session(session_info.oidc_info)
+        new_oidc_info = _check_csesoc_oidc_session(session_info.oidc_info)  # pylint: disable=no-member
         if new_oidc_info is None:
             logout_session(sid)
             set_refresh_token_cookie(res, None)
@@ -231,9 +231,9 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
         # get the user id and the session id from the token
         sid, session_info = get_session_info_from_session_token(token)
 
-        if isinstance(session_info, SessionInfoModel):
+        if session_info.type == "csesoc":
             # only need to revoke a token for fed auth sessions
-            revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
+            revoke_token(session_info.oidc_info.refresh_token, "refresh_token")  # pylint: disable=no-member
     except SessionExpiredToken as e:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,

@@ -130,10 +130,9 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
 
     return res.modified_count == 1
 
-def default_cs_user(uid: str, guest: bool, start_year: int) -> UserStorage:
+def default_cs_user(_uid: str, guest: bool, start_year: int) -> UserStorage:
     # TODO: remove this later
     return UserStorage(
-        uid=uid,
         guest=guest,
         courses={},
         planner=UserPlannerStorage(

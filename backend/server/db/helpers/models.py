@@ -36,7 +36,7 @@ class UserPlannerStorage(BaseModel):
     lockedTerms: Dict[str, bool]
 
 class _BaseUserStorage(BaseModel):
-    uid: str
+    # uid: str  # TODO: add aliases in new pydantic
     guest: bool
 
 class UserStorage(_BaseUserStorage):
