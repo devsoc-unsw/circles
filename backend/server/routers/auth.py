@@ -8,6 +8,8 @@ from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
+from server.db.helpers.models import NotSetupUserStorage
+from server.db.helpers.users import insert_new_user
 from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
@@ -41,6 +43,18 @@ router = APIRouter(
 
 require_token = HTTPBearer401()
 
+def insert_new_guest_user() -> str:
+    # returns the claimed uid
+    # TODO: i could use uuid, but they long as hell
+    data = NotSetupUserStorage(guest=True)
+
+    uid = f"guest{token_hex(4)}"
+    while not insert_new_user(uid, data):
+        print("guest uid collision", uid)
+        uid = f"guest{token_hex(4)}"
+
+    return uid
+
 def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfoModel) -> Optional[SessionOIDCInfoModel]:
     try:
         _ = get_user_info(oidc_info.access_token)  # TODO: update user details with this info
@@ -70,11 +84,8 @@ def create_user_token(token: str):
 @router.post('/guest_login')
 def create_guest_session(res: Response) -> IdentityPayload:
     # create new login session for user in db, generating new tokens
-    # TODO: generate this uid based on database
-    uid = f"guest-{token_hex(4)}"
+    uid = insert_new_guest_user()
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_guest_session(uid)
-
-    # TODO: do some stuff with the id token here like user database setup
 
     print("\n\nnew guest login", uid)
     print(datetime.now())
@@ -197,8 +208,12 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
             detail="Could not exchange tokens, contact admin please.",
         ) from e
 
-    # create new login session for user in db, generating new tokens
+    # insert new user into database if it does not exist, will collide if it already does which is good
+    # TODO: actually test this, auth is currently down
     uid = id_token["sub"]
+    insert_new_user(uid, NotSetupUserStorage(guest=False))
+
+    # create new login session for user in db, generating new tokens
     new_oidc_info = SessionOIDCInfoModel(
         access_token=tokens["access_token"],
         raw_id_token=tokens["id_token"],
@@ -206,8 +221,6 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
         validated_id_token=cast(dict, id_token),
     )
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_csesoc_session(uid, new_oidc_info)
-
-    # TODO: do some stuff with the id token here like user database setup
 
     print("\n\nnew login", uid)
     print(datetime.now())
