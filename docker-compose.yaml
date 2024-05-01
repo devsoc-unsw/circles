@@ -17,20 +17,8 @@ services:
     container_name: sessionsdb
     ports:
       - '8001:8001'
-      - '6379:6379'
     volumes:
       - ./backend/redis.conf:/redis-stack.conf
-    networks:
-      - circles-net
-
-  init-redis:
-    # populates the session db
-    build:
-      context: ./backend
-      dockerfile: init-redis.dockerfile
-    container_name: init-redis
-    depends_on:
-      - sessionsdb
     networks:
       - circles-net
 
@@ -45,7 +33,6 @@ services:
       - ./env/backend.env
     depends_on:
       - init-mongo
-      - init-redis
     networks:
       - circles-net
     volumes:
@@ -112,6 +99,7 @@ services:
       - ./env/backend.env
     depends_on:
       - mongodb
+      - sessionsdb
     networks:
       - circles-net
 

@@ -1,17 +1,20 @@
-import redis
 from redis.exceptions import ResponseError
 from redis.commands.search.field import TagField
 from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 
+from .conn import sdb
 
+def create_uid_index(drop: bool):
+    if drop:
+        try:
+            print("dropping uid index")
+            print(sdb.ft("idx:uid").dropindex(True))
+        except ResponseError as e:
+            print("drop uid index failed:", e)
 
-r = redis.Redis(host="sessionsdb", port=6379, protocol=3)
-print("connected", r.ping())
-
-# FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
-try:
+    # FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
     print("creating uid index")
-    print(r.ft("idx:uid").create_index(
+    print(sdb.ft("idx:uid").create_index(
         fields=(TagField("uid", case_sensitive=True), ),
         definition=IndexDefinition(
             prefix=["token:"],
@@ -23,13 +26,18 @@ try:
         no_term_frequencies=True,
         stopwords=[],
     ))
-except ResponseError as e:
-    print(e)
 
-# FT.CREATE idx:sid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA sid TAG CASESENSITIVE
-try:
+def create_sid_index(drop: bool):
+    if drop:
+        try:
+            print("dropping sid index")
+            print(sdb.ft("idx:sid").dropindex(True))
+        except ResponseError as e:
+            print("drop sid index failed:", e)
+
+    # FT.CREATE idx:sid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA sid TAG CASESENSITIVE
     print("creating sid index")
-    print(r.ft("idx:sid").create_index(
+    print(sdb.ft("idx:sid").create_index(
         fields=TagField("sid", case_sensitive=True),
         definition=IndexDefinition(
             prefix=["token:"],
@@ -41,7 +49,7 @@ try:
         no_term_frequencies=True,
         stopwords=[],
     ))
-except ResponseError as e:
-    print(e)
 
-r.close()
+def setup_redis_sessionsdb():
+    # create_uid_index(True)  # NOTE: don't really have a use for this yet
+    create_sid_index(True)
