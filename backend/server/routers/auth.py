@@ -8,12 +8,11 @@ from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
-from server.db.helpers.models import NotSetupUserStorage
+from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
 from server.db.helpers.users import insert_new_user
 from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
-from .auth_utility.sessions.storage import GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
 from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie

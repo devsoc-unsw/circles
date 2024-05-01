@@ -1,6 +1,17 @@
-from typing import Dict, List, Literal, Union
+from typing import Dict, List, Literal, NewType, Union
+from uuid import UUID
 from pydantic import BaseModel
 
+#
+# NewTypes
+#
+SessionID = NewType('SessionID', UUID)
+SessionToken = NewType('SessionToken', str)
+RefreshToken = NewType('RefreshToken', str)
+
+#
+# User Storage Models
+#
 class UserDegreeStorage(BaseModel):
     programCode: str
     specs: List[str]
@@ -47,3 +58,49 @@ class UserStorage(_BaseUserStorage):
 
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
+
+#
+# Session Token Models (redis)
+#
+class SessionTokenInfoModel(BaseModel):
+    sid: SessionID              # id of the session behind this token
+    uid: str                    # user who owns the session
+    exp: int                    # time of expiry, will be replaced with a TTL on the cache
+
+#
+# Refresh Token Models (mongo)
+#
+class RefreshTokenInfoModel(BaseModel):
+    # object stored against the refresh token
+    sid: SessionID              # id of the session behind this token
+    expires_at: int             # time of expiry, will be replaced with a TTL on the cache
+
+#
+# Session Models (mongo)
+#
+class SessionOIDCInfoModel(BaseModel):
+    access_token: str           # most recent access token
+    raw_id_token: str           # most recent id token string
+    refresh_token: str          # most recent refresh token
+    validated_id_token: dict    # most recent valid id token object
+
+class NotSetupSessionModel(BaseModel):
+    # object stored against the sid when session is not yet setup (brief time between during token generation)
+    uid: str                    # for validation and back lookup
+    type: Literal['notsetup']   # ensure that this can get parsed correctly
+    expires_at: int             # time of expiry, will be replaced with a TTL on the cache
+
+class SessionInfoModel(BaseModel):
+    # object stored against the sid
+    uid: str                      # for validation and back lookup
+    oidc_info: SessionOIDCInfoModel
+    curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
+    type: Literal['csesoc']       # ensure that this can get parsed correctly
+    expires_at: int               # time of expiry, will be replaced with a TTL on the cache
+
+class GuestSessionInfoModel(BaseModel):
+    # object stored against the sid
+    uid: str                      # for validation and back lookup
+    curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
+    type: Literal['guest']        # ensure that this can get parsed correctly
+    expires_at: int               # time of expiry, will be replaced with a TTL on the cache
