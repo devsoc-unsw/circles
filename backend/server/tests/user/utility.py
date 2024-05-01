@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv("../env/backend.env")
 os.environ["MONGODB_SERVICE_HOSTNAME"] = "localhost"
 
-from server.database import create_dynamic_db
+from server.db.mongo.setup import create_dynamic_db
 
 
 def clear():

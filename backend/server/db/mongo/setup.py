@@ -7,44 +7,10 @@ NOTE: The helper functions must be run from the backend directory due to their p
 
 import json
 
-from server.db.mongo.conn import db, archivesDB, usersDB
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
-def overwrite_collection(collection_name):
-    """Overwrites the specific database via reading from the json files.
-    Collection names can be: Programs, Specialisations, Courses"""
-    file_name = FINAL_DATA_PATH + collection_name.lower() + "Processed.json"
-
-    with open(file_name, encoding="utf8") as f:
-        try:
-            db[collection_name].drop()
-
-            file_data = json.load(f)
-            for key in file_data:
-                db[collection_name].insert_one(file_data[key])
-
-            print(f"Finished overwriting {collection_name}")
-        except (KeyError, IOError, OSError):
-            print(f"Failed to load and overwrite {collection_name}")
-
-
-def overwrite_archives():
-    """Overwrite all the archived data for all the years that we have archived"""
-    for year in ARCHIVED_YEARS:
-        file_name = ARCHIVED_DATA_PATH + str(year) + ".json"
-
-        with open(file_name, encoding="utf8") as f:
-            try:
-                archivesDB[str(year)].drop()
-
-                file_data = json.load(f)
-                for key in file_data:
-                    archivesDB[str(year)].insert_one(file_data[key])
-
-                print(f"Finished overwriting {year} archive")
-            except (KeyError, IOError, OSError):
-                print(f"Failed to load and overwrite {year} archive")
+from .conn import db, archivesDB, usersDB
 
 def create_users_collection():
     usersDB.create_collection('users',
@@ -466,6 +432,42 @@ def create_new_sessions_collection():
     usersDB['sessionsNEW'].create_index("sid", unique=True, name="sidIndex")
     usersDB['sessionsNEW'].create_index("uid", name="uidIndex")
 
+def overwrite_main_collection(collection_name):
+    """Overwrites the specific core database via reading from the json files.
+    Collection names can be: Programs, Specialisations, Courses"""
+    file_name = FINAL_DATA_PATH + collection_name.lower() + "Processed.json"
+
+    with open(file_name, encoding="utf8") as f:
+        try:
+            db[collection_name].drop()
+
+            file_data = json.load(f)
+            for key in file_data:
+                db[collection_name].insert_one(file_data[key])
+
+            print(f"Finished overwriting {collection_name}")
+        except (KeyError, IOError, OSError):
+            print(f"Failed to load and overwrite {collection_name}")
+
+
+def overwrite_archives():
+    """Overwrite all the archived data for all the years that we have archived"""
+    for year in ARCHIVED_YEARS:
+        file_name = ARCHIVED_DATA_PATH + str(year) + ".json"
+
+        with open(file_name, encoding="utf8") as f:
+            try:
+                archivesDB[str(year)].drop()
+
+                file_data = json.load(f)
+                for key in file_data:
+                    archivesDB[str(year)].insert_one(file_data[key])
+
+                print(f"Finished overwriting {year} archive")
+            except (KeyError, IOError, OSError):
+                print(f"Failed to load and overwrite {year} archive")
+
+
 def create_dynamic_db(drop_old: bool):
     if drop_old:
         print("Dropping user collections")
@@ -504,10 +506,10 @@ def create_dynamic_db(drop_old: bool):
     # })
 
 def overwrite_all():
-    """Singular execution point to overwrite the entire database including the archives"""
-    overwrite_collection("Courses")
-    overwrite_collection("Specialisations")
-    overwrite_collection("Programs")
+    """Singular execution point to overwrite the entire main database including the archives"""
+    overwrite_main_collection("Courses")
+    overwrite_main_collection("Specialisations")
+    overwrite_main_collection("Programs")
     overwrite_archives()
 
 def optionally_create_new_data():

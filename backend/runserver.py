@@ -6,7 +6,7 @@ import sys
 
 # https://github.com/encode/uvicorn/issues/998
 import uvicorn  # type: ignore
-from server.database import overwrite_all
+from server.db.mongo.setup import overwrite_all
 from server.server import app
 
 if __name__ == "__main__":
