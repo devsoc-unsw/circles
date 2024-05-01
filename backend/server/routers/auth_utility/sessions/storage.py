@@ -6,7 +6,7 @@ from pydantic import BaseModel, PositiveInt
 import pymongo
 import pymongo.errors
 
-from server.sessionsdb import sdb
+from server.db.redis.conn import sdb
 from server.database import sessionsNewCOL, refreshTokensNewCOL
 from redis.commands.search.query import Query
 
