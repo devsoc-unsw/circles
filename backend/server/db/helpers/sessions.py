@@ -8,7 +8,7 @@ import pymongo.errors
 from server.database import sessionsNewCOL
 from .models import GuestSessionInfoModel, NotSetupSessionModel, RefreshToken, SessionID, SessionInfoModel, SessionOIDCInfoModel
 
-def mongo_get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSessionInfoModel]]:
+def get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSessionInfoModel]]:
     session = sessionsNewCOL.find_one({ "sid": sid })
 
     if session is None or session["type"] == "notsetup":
@@ -41,7 +41,7 @@ def mongo_get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, G
         type="csesoc",
     )
 
-def mongo_insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -> bool:
+def insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -> bool:
     # NOTE: should only be used to reserve the sid,
     # needed since we need a unique session id allocated before setting refresh token info
     # and we need a refresh token to set a full session info
@@ -57,7 +57,7 @@ def mongo_insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -
         # sid already existed
         return False
 
-def mongo_update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfoModel) -> bool:
+def update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfoModel) -> bool:
     res = sessionsNewCOL.update_one(
         { "sid": sid, "type": { "$in": [ "csesoc", "notsetup" ] } },
         {
@@ -79,7 +79,7 @@ def mongo_update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_re
 
     return res.modified_count == 1
 
-def mongo_update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken) -> bool:
+def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken) -> bool:
     res = sessionsNewCOL.update_one(
         { "sid": sid, "type": { "$in": [ "guest", "notsetup" ] } },
         {
@@ -95,6 +95,6 @@ def mongo_update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref
 
     return res.modified_count == 1
 
-def mongo_delete_all_sessions(sid: SessionID) -> bool:
+def delete_all_sessions(sid: SessionID) -> bool:
     res = sessionsNewCOL.delete_many({ "sid": sid })
     return res.deleted_count > 0

@@ -16,7 +16,7 @@ DELETE_BATCH_SIZE = 100
 def form_key(token: SessionToken) -> str:
     return f"token:{token}"
 
-def redis_get_token_info(token: SessionToken) -> Optional[SessionTokenInfoModel]:
+def get_token_info(token: SessionToken) -> Optional[SessionTokenInfoModel]:
     res = sdb.hmget(form_key(token), ["sid", "uid", "exp"])
     assert isinstance(res, list) and len(res) == 3
 
@@ -32,7 +32,7 @@ def redis_get_token_info(token: SessionToken) -> Optional[SessionTokenInfoModel]
         exp=int(exp)
     )
 
-def redis_set_token_nx(token: SessionToken, info: SessionTokenInfoModel) -> bool:
+def set_token_nx(token: SessionToken, info: SessionTokenInfoModel) -> bool:
     # tries and sets the information, returning whether it was successful
     # if can set first one, assume can set them all
     # TODO: figure out how to make this a transaction and/or redis func so it dont get deleted midway
@@ -54,7 +54,7 @@ def redis_set_token_nx(token: SessionToken, info: SessionTokenInfoModel) -> bool
 
     return True
 
-def redis_delete_all_tokens(sid: SessionID) -> None:
+def delete_all_tokens(sid: SessionID) -> None:
     # FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM
     # TODO: functionize this
     # look up all the keys, do in patches of DELETE_BATCH_SIZE

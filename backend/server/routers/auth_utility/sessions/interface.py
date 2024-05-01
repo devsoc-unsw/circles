@@ -6,9 +6,7 @@ from uuid import uuid4
 from pydantic import PositiveInt
 
 from server.db.helpers.models import GuestSessionInfoModel, NotSetupSessionModel, RefreshToken, RefreshTokenInfoModel, SessionID, SessionInfoModel, SessionOIDCInfoModel, SessionToken, SessionTokenInfoModel
-from server.db.helpers.sessions import mongo_delete_all_sessions, mongo_get_session_info, mongo_insert_not_setup_session, mongo_update_csesoc_session, mongo_update_guest_session
-from server.db.helpers.refresh_tokens import mongo_delete_all_refresh_tokens, mongo_get_refresh_token_info, mongo_insert_refresh_token_info
-from server.db.helpers.session_tokens import redis_delete_all_tokens, redis_get_token_info, redis_set_token_nx
+from server.db.helpers import sessions, refresh_tokens, session_tokens
 
 from .errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 
@@ -33,7 +31,7 @@ def _insert_new_session_token_info(sid: SessionID, uid: str, ttl_seconds: Positi
     )
 
     token = SessionToken(_new_token())
-    while not redis_set_token_nx(token, info):
+    while not session_tokens.set_token_nx(token, info):
         print("session token collision", token)
         token = SessionToken(_new_token())
 
@@ -50,7 +48,7 @@ def _insert_new_refresh_info(sid: SessionID, ttl_seconds: PositiveInt) -> Tuple[
     )
 
     token = RefreshToken(_new_token())
-    while not mongo_insert_refresh_token_info(token, info):
+    while not refresh_tokens.insert_refresh_token_info(token, info):
         print("refresh token collision:", token)
         token = RefreshToken(_new_token())
 
@@ -70,7 +68,7 @@ def _setup_new_session(uid: str, ttl_seconds: PositiveInt) -> SessionID:
     )
 
     sid = SessionID(uuid4())
-    while not mongo_insert_not_setup_session(sid, info):
+    while not sessions.insert_not_setup_session(sid, info):
         print("session id collision:", sid)
         sid = SessionID(uuid4())
 
@@ -79,13 +77,13 @@ def _setup_new_session(uid: str, ttl_seconds: PositiveInt) -> SessionID:
 def _destroy_session(sid: SessionID) -> bool:
     # destroys all refresh tokens, session tokens, and the session
     # redis will be secondary indexed on the sid, so this wont be too horrible
-    redis_delete_all_tokens(sid)
-    mongo_delete_all_refresh_tokens(sid)
-    return mongo_delete_all_sessions(sid)
+    session_tokens.delete_all_tokens(sid)
+    refresh_tokens.delete_all_refresh_tokens(sid)
+    return sessions.delete_all_sessions(sid)
 
 
 def get_token_info(session_token: SessionToken) -> Tuple[str, SessionID]:
-    info = redis_get_token_info(session_token)
+    info = session_tokens.get_token_info(session_token)
     if info is None:
         raise SessionExpiredToken(session_token)
 
@@ -93,13 +91,13 @@ def get_token_info(session_token: SessionToken) -> Tuple[str, SessionID]:
 
 def get_session_info_from_refresh_token(refresh_token: RefreshToken) -> Tuple[SessionID, Union[SessionInfoModel, GuestSessionInfoModel]]:
     # useful to check oidc status before refreshing the session
-    ref_info = mongo_get_refresh_token_info(refresh_token)
+    ref_info = refresh_tokens.get_refresh_token_info(refresh_token)
     if ref_info is None:
         raise SessionExpiredRefreshToken(refresh_token)
 
     # TODO: create an aggregate query for these two steps
     sid = ref_info.sid
-    session_info = mongo_get_session_info(sid)
+    session_info = sessions.get_session_info(sid)
     assert session_info is not None
 
     if session_info.curr_ref_token != refresh_token:
@@ -111,11 +109,11 @@ def get_session_info_from_refresh_token(refresh_token: RefreshToken) -> Tuple[Se
 
 def get_session_info_from_session_token(session_token: SessionToken) -> Tuple[SessionID, Union[SessionInfoModel, GuestSessionInfoModel]]:
     # NOTE: only should be used for logout, NOT for refreshing
-    info = redis_get_token_info(session_token)
+    info = session_tokens.get_token_info(session_token)
     if info is None:
         raise SessionExpiredToken(session_token)
 
-    session_info = mongo_get_session_info(info.sid)
+    session_info = sessions.get_session_info(info.sid)
     # TODO: assertion error here if removed from mongo but not redis...
     assert session_info is not None
 
@@ -133,7 +131,7 @@ def setup_new_csesoc_session(uid: str, oidc_info: SessionOIDCInfoModel) -> Tuple
     session_token, session_token_expiry = _insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
 
     # bind the tokens to the session and return, with a session ttl of abit over refresh token for autocleanup
-    assert mongo_update_csesoc_session(sid, refresh_expiry + DAY, refresh_token, oidc_info)
+    assert sessions.update_csesoc_session(sid, refresh_expiry + DAY, refresh_token, oidc_info)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
 def setup_new_guest_session(uid: str) -> Tuple[SessionToken, int, RefreshToken, int]:
@@ -146,34 +144,34 @@ def setup_new_guest_session(uid: str) -> Tuple[SessionToken, int, RefreshToken, 
     session_token, session_token_expiry = _insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
 
     # bind the tokens to the session and return, with a session ttl of abit over refresh token for autocleanup
-    assert mongo_update_guest_session(sid, refresh_expiry + DAY, refresh_token)
+    assert sessions.update_guest_session(sid, refresh_expiry + DAY, refresh_token)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
 def create_new_csesoc_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfoModel) -> Tuple[SessionToken, int, RefreshToken, int]:
     # generates a new token pair given an existing session
     # again, assumes oidc info is valid, otherwise it will collapse
     # TODO: do we want to convert this to a single find_one_and_update?
-    session_info = mongo_get_session_info(sid)
+    session_info = sessions.get_session_info(sid)
     assert session_info is not None  # TODO: might happen if they log out before this and after an sid is gotten
     uid = session_info.uid
 
     # all is good, generate new pair, bind tokens and return
     refresh_token, refresh_expiry = _insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)
     session_token, session_token_expiry = _insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
-    assert mongo_update_csesoc_session(sid, refresh_expiry + DAY, refresh_token, new_oidc_info)
+    assert sessions.update_csesoc_session(sid, refresh_expiry + DAY, refresh_token, new_oidc_info)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
 def create_new_guest_token_pair(sid: SessionID) -> Tuple[SessionToken, int, RefreshToken, int]:
     # generates a new token pair given an existing session
     # TODO: do we want to convert this to a single find_one_and_update?
-    session_info = mongo_get_session_info(sid)
+    session_info = sessions.get_session_info(sid)
     assert session_info is not None  # TODO: might happen if they log out before this and after an sid is gotten
     uid = session_info.uid
 
     # all is good, generate new pair, bind tokens and return
     refresh_token, refresh_expiry = _insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)
     session_token, session_token_expiry = _insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
-    assert mongo_update_guest_session(sid, refresh_expiry + DAY, refresh_token)
+    assert sessions.update_guest_session(sid, refresh_expiry + DAY, refresh_token)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
 def logout_session(sid: SessionID) -> bool:
