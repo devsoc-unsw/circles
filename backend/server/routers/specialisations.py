@@ -3,7 +3,7 @@ from typing import Dict, Literal, Optional, cast
 
 from data.processors.models import Program
 from fastapi import APIRouter, HTTPException
-from server.database import programsCOL, specialisationsCOL
+from server.db.mongo.conn import programsCOL, specialisationsCOL
 from server.routers.model import SpecType, Specialisations, SpecialisationTypes
 
 router = APIRouter(

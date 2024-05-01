@@ -3,7 +3,8 @@ from typing import Optional, Union
 import pymongo
 import pymongo.errors
 
-from server.database import usersNewCOL
+from server.db.mongo.conn import usersNewCOL
+
 from .models import NotSetupUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
 
 # TODO: remove type ignores by constructing dictionaries properly

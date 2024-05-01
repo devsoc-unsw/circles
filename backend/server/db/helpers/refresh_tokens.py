@@ -5,7 +5,7 @@ from typing import Optional
 import pymongo
 import pymongo.errors
 
-from server.database import refreshTokensNewCOL
+from server.db.mongo.conn import refreshTokensNewCOL
 
 from .models import RefreshToken, RefreshTokenInfoModel, SessionID
 

@@ -5,7 +5,8 @@ from pydantic import PositiveInt
 import pymongo
 import pymongo.errors
 
-from server.database import sessionsNewCOL
+from server.db.mongo.conn import sessionsNewCOL
+
 from .models import GuestSessionInfoModel, NotSetupSessionModel, RefreshToken, SessionID, SessionInfoModel, SessionOIDCInfoModel
 
 def get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSessionInfoModel]]:

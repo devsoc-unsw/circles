@@ -14,7 +14,7 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz  # type: ignore
 from server.config import DUMMY_TOKEN
-from server.database import archivesDB, coursesCOL
+from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
