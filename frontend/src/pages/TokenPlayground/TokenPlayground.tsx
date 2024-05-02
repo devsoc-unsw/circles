@@ -13,14 +13,12 @@ import './index.less';
 import PageTemplate from 'components/PageTemplate';
 import { getToken } from 'utils/api/userApi';
 import axios from 'axios';
-import { nanoid } from 'nanoid';
 import { getSessionToken } from 'utils/api/auth';
 import { Link } from 'react-router-dom';
 
 const TokenPlayground = () => {
   const [localToken, setLocalToken] = useState<string | null>(null);
   const realToken = useSelector((state: RootState) => state.settings.token);
-  // const stateParam = useRef<string>(nanoid(24));
   const [authURL, setAuthURL] = useState<string>('');
   console.log('token playground load');
   console.log(getToken());
