@@ -29,6 +29,9 @@ export const renderWithProviders = async (
         showLockedCourses: false,
         showPastWarnings: false
       },
+      notifications: {
+        notifications: []
+      },
       identity: null
     },
     ...renderOptions

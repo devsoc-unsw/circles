@@ -16,6 +16,9 @@ const preloadedState: RootState = {
     showLockedCourses: false,
     showPastWarnings: false
   },
+  notifications: {
+    notifications: []
+  },
   identity: null
 };
 

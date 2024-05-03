@@ -1,10 +1,9 @@
 import React, { Suspense, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { NotificationOutlined } from '@ant-design/icons';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { ThemeProvider } from 'styled-components';
-import openNotification from 'utils/openNotification';
 import IdentityProvider from 'components/Auth/IdentityProvider';
 import PreventToken from 'components/Auth/PreventToken';
 import RequireToken from 'components/Auth/RequireToken';
@@ -12,6 +11,7 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import useNotification from 'hooks/useNotification';
 import useSettings from 'hooks/useSettings';
 import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
@@ -36,52 +36,46 @@ const App = () => {
 
   const { theme } = useSettings(queryClient);
 
-  useEffect(() => {
-    // using local storage since I don't want to risk invalidating the redux state right now
-    const cooldownMs = 1000 * 60 * 60 * 24 * 7; // every 7 days
-    const lastSeen = localStorage.getItem('last-seen-contribution');
-    if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) return;
-
-    localStorage.setItem('last-seen-contribution', Date.now().toString());
-
-    openNotification({
-      type: 'info',
-      message: 'Want to contribute?',
-      description: (
-        <>
-          Found a bug or have feedback? Open an issue on{' '}
-          <a
-            href="https://github.com/devsoc-unsw/circles/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>{' '}
-          or share your thoughts on{' '}
-          <a href="https://discord.gg/u9p34WUTcs" target="_blank" rel="noopener noreferrer">
-            Discord
-          </a>
-          !
-          <br />
-          <br />
-          Feeling brave? You can even fix it yourself by submitting a{' '}
-          <a
-            href="https://github.com/devsoc-unsw/circles/pulls"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            pull request
-          </a>
-          !
-          <br />
-          <br />
-          Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
-        </>
-      ),
-      duration: 20,
-      icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
-    });
-  }, []);
+  useNotification({
+    name: 'contribute-notification',
+    type: 'info',
+    message: 'Want to contribute?',
+    description: (
+      <>
+        Found a bug or have feedback? Open an issue on{' '}
+        <a
+          href="https://github.com/devsoc-unsw/circles/issues"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>{' '}
+        or share your thoughts on{' '}
+        <a href="https://discord.gg/u9p34WUTcs" target="_blank" rel="noopener noreferrer">
+          Discord
+        </a>
+        !
+        <br />
+        <br />
+        Feeling brave? You can even fix it yourself by submitting a{' '}
+        <a
+          href="https://github.com/devsoc-unsw/circles/pulls"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          pull request
+        </a>
+        !
+        <br />
+        <br />
+        Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
+      </>
+    ),
+    duration: 20,
+    cooldown: 5,
+    clicksTillExpire: 3,
+    icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
+  });
 
   return (
     <ConfigProvider

@@ -3,7 +3,7 @@ import * as reactRouterDom from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
-import openNotification from 'utils/openNotification';
+import openNotification from 'utils/useNotification';
 import { vi } from 'vitest';
 import * as hooks from 'hooks';
 import StartBrowsingStep from './StartBrowsingStep';

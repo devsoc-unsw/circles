@@ -3,6 +3,7 @@ import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-d
 import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Badge } from 'antd';
 import { Course } from 'types/api';
+import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import {
   badCourseInfo,
@@ -21,10 +22,10 @@ import {
   validateTermPlanner
 } from 'utils/api/plannerApi';
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import { LIVE_YEAR } from 'config/constants';
+import useNotification from 'hooks/useNotification';
 import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import { GridItem } from './common/styles';
@@ -225,7 +226,8 @@ const TermPlanner = () => {
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
     if (plannerEmpty) {
-      openNotification({
+      useNotification({
+        name: 'empty-planner',
         type: 'info',
         message: 'Your terms are looking a little empty',
         description:
