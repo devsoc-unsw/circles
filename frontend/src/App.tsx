@@ -122,9 +122,6 @@ const App = () => {
                         <Route path="/token-needsetup" element={<Dummy />} />
                       </Route>
                     </Route>
-                    <Route element={<RequireToken />}>
-                      <Route path="/degree-wizard" element={<DegreeWizard />} />
-                    </Route>
                     {/* <Route element={<RequireToken />}> */}
                     <Route path="/degree-wizard" element={<DegreeWizard />} />
                     {/* </Route> */}

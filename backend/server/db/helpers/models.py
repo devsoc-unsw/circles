@@ -1,4 +1,4 @@
-from typing import Dict, List, Literal, NewType, Union
+from typing import Dict, List, Literal, NewType, Optional, Union
 from uuid import UUID
 from pydantic import BaseModel
 
@@ -58,6 +58,12 @@ class UserStorage(_BaseUserStorage):
 
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
+
+class PartialUserStorage(BaseModel):
+    # for batch user storage update
+    degree: Optional[UserDegreeStorage] = None
+    courses: Optional[UserCoursesStorage] = None
+    planner: Optional[UserPlannerStorage] = None
 
 #
 # Session Token Models (redis)

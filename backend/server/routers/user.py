@@ -1,5 +1,5 @@
 from itertools import chain
-from typing import Any, Dict, cast
+from typing import Any, Dict, Optional, cast
 from bson.objectid import ObjectId
 from algorithms.objects.user import User
 from server.routers.utility import get_core_courses
@@ -10,7 +10,12 @@ from fastapi import APIRouter, HTTPException
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
 from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
-from server.db.mongo.conn import usersDB
+
+# from server.db.mongo.conn import usersDB
+import server.db.helpers.users as udb
+import server.db.helpers.session_tokens as stdb
+from server.db.helpers.models import PartialUserStorage, SessionToken, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage
+
 from server.routers.courses import get_course
 from server.routers.model import (
     CONDITIONS,
@@ -34,23 +39,85 @@ router = APIRouter(
     tags=["user"],
 )
 
+def _token_to_uid(token: str) -> Optional[str]:
+    if (res := stdb.get_token_info(SessionToken(token))) is not None:
+        return res.uid
+    return None
+
+def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
+    return NEWUserPlannerStorage.parse_obj(s)
+
+def _otn_degree(s: DegreeLocalStorage) -> NEWUserDegreeStorage:
+    return NEWUserDegreeStorage.parse_obj(s)
+
+def _otn_courses(s: dict[str, CourseStorage]) -> NEWUserCoursesStorage:
+    return { code: NEWUserCourseStorage.parse_obj(info) for code, info in s.items() }
+
+def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
+    return { 
+        code: {
+            'code': info.code,
+            'ignoreFromProgression': info.ignoreFromProgression,
+            'mark': info.mark,
+            'suppressed': info.suppressed,
+            'uoc': info.uoc,
+        } for code, info in s.items()
+    }
+
+def _nto_planner(s: NEWUserPlannerStorage) -> PlannerLocalStorage:
+    return {
+        'isSummerEnabled': s.isSummerEnabled,
+        'lockedTerms': s.lockedTerms,
+        'mostRecentPastTerm': {
+            'T': s.mostRecentPastTerm.T,
+            'Y': s.mostRecentPastTerm.Y,
+        },
+        'startYear': s.startYear,
+        'unplanned': s.unplanned,
+        'years': [{ 
+            'T0': y.T0,
+            'T1': y.T1,
+            'T2': y.T2,
+            'T3': y.T3,
+        } for y in s.years],
+    }
+
+def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
+    return {
+        'isComplete': s.isComplete,
+        'programCode': s.programCode,
+        'specs': s.specs,
+    }
+
+def _nto_storage(s: NEWUserStorage) -> Storage:
+    return {
+        'courses': _nto_courses(s.courses),
+        'degree': _nto_degree(s.degree),
+        'planner': _nto_planner(s.planner),
+    }
+
 # keep this private
-
-def user_is_setup(uid: str) -> bool:
-    return False
-
 def set_user(token: str, item: Storage, overwrite: bool = False):
-    data = usersDB['tokens'].find_one({'token': token})
-    if data:
-        if not overwrite:
+    uid = _token_to_uid(token)
+
+    if uid is not None:
+        if not overwrite and udb.user_is_setup(uid):
             print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
-            return
-        objectID = data['objectId']
-        usersDB['users'].update_one(
-            {'_id': ObjectId(objectID)}, {'$set': item})
+            print("++ ABOUT TO ASSERT FALSE:", token, uid)
+            assert False  # want to remove these cases too
+
+        res = udb.update_user_batch(uid, PartialUserStorage(
+            courses=_otn_courses(item['courses']),
+            degree=_otn_degree(item['degree']),
+            planner=_otn_planner(item['planner']),
+        ))
+
+        assert res
     else:
-        objectID = usersDB['users'].insert_one(dict(item)).inserted_id
-        usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})
+        print("++ ABOUT TO ASSERT FALSE:", token)
+        assert False  # want to remove any of these cases
+        # objectID = usersDB['users'].insert_one(dict(item)).inserted_id
+        # usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})
 
 
 # Ideally not used often.
@@ -82,14 +149,20 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
 
 @router.get("/data/all/{token}")
 def get_user(token: str) -> Storage:
-    data = usersDB['tokens'].find_one({'token': token})
-    if data is None:
+    uid = _token_to_uid(token)
+    if uid is None:
+        print("++ ABOUT TO ASSERT FALSE:", token, uid)
+        assert False  # try find this
+
+    data = udb.get_user(uid)
+    if data is None or data.setup is False:
         # TODO: this is so jank - add actual register / checking process when it comes
         # should error and prompt a registration - at some point ;)
-        return default_cs_user()
-        # raise HTTPException(400,f"Invalid token: {token}")
-    return cast(Storage, usersDB['users'].find_one(
-        {'_id': ObjectId(data['objectId'])}))
+        print("++ ABOUT TO ASSERT FALSE:", token, uid)
+        assert False  # try find this
+        # return default_cs_user()
+
+    return _nto_storage(data)
 
 @router.get("/data/degree/{token}")
 def get_user_degree(token: str) -> DegreeLocalStorage:

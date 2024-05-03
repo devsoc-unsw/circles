@@ -5,7 +5,7 @@ import pymongo.errors
 
 from server.db.mongo.conn import usersNewCOL
 
-from .models import NotSetupUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
+from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
 
 # TODO: remove type ignores by constructing dictionaries properly
 
@@ -30,6 +30,10 @@ def get_user_courses(uid: str) -> Optional[UserCoursesStorage]:
 def get_user_planner(uid: str) -> Optional[UserPlannerStorage]:
     res = get_user(uid)
     return res.planner if res is not None and res.setup is True else None
+
+def user_is_setup(uid: str) -> bool:
+    res = usersNewCOL.find_one({ 'uid': uid, 'setup': { "$eq": True } })
+    return res is not None
 
 def insert_new_user(uid: str, data: NotSetupUserStorage) -> bool:
     try:
@@ -125,6 +129,20 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
                 "planner": data.dict(),
             },
         },
+        upsert=False,
+        hint="uidIndex",
+    )
+
+    return res.modified_count == 1
+
+def update_user_batch(uid: str, data: PartialUserStorage) -> bool:
+    payload = data.dict(exclude_unset=True, exclude_none=True)
+    if len(payload) == 0:
+        return False
+
+    res = usersNewCOL.update_one(
+        { "uid": uid, "setup": True },
+        { "$set": payload },
         upsert=False,
         hint="uidIndex",
     )
