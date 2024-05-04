@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import courseTabsReducer from 'reducers/courseTabsSlice';
+import identityReducer from 'reducers/identitySlice';
 import settingsReducer from 'reducers/settingsSlice';
 import persistMigrate, { persistVersion } from './migrations';
 
 export const rootReducer = combineReducers({
   courseTabs: courseTabsReducer,
-  settings: settingsReducer
+  settings: settingsReducer,
+  identity: identityReducer
 });
 
 export const setupStore = (preloadedState?: RootState) =>

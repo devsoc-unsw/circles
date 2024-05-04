@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 // import store from 'config/store';
 
 export enum TokenStatus {
@@ -12,7 +12,7 @@ interface OldIdentityPayload {
   session_token: string;
 }
 
-type IdentityPayload = {
+export type IdentityResponse = {
   session_token: string;
   exp: number;
   uid: string;
@@ -29,32 +29,37 @@ type IdentityPayload = {
 //   return state.settings.token;
 // };
 
-export const guestLogin = async (): Promise<IdentityPayload> => {
-  const res = await axios.post<IdentityPayload>('/auth/guest_login', {}, { withCredentials: true });
+export const guestLogin = async (): Promise<IdentityResponse> => {
+  const res = await axios.post<IdentityResponse>(
+    '/auth/guest_login',
+    {},
+    { withCredentials: true }
+  );
 
   return res.data;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const checkTokenStatus = async (token: string | null): Promise<TokenStatus> => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+export const checkTokenStatus = async (token: string | undefined): Promise<TokenStatus> => {
   // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
   console.log('-- checking token status');
+  return TokenStatus.VALID; // TODO: properly
   // const token: string | null = getToken();
-  if (token === null) {
-    return TokenStatus.UNSET;
-  }
+  // if (token === undefined) {
+  //   return TokenStatus.UNSET;
+  // }
 
-  // check token with backend
-  try {
-    await axios.get<never>('/auth/checkToken', { headers: { Authorization: `Bearer ${token}` } });
-    return TokenStatus.VALID;
-  } catch (e) {
-    if (e instanceof AxiosError) {
-      if (e.response?.status === 401) return TokenStatus.INVALID;
-      if (e.response?.status === 403) return TokenStatus.NOTSETUP;
-    }
-    throw e;
-  }
+  // // check token with backend
+  // try {
+  //   await axios.get<never>('/auth/checkToken', { headers: { Authorization: `Bearer ${token}` } });
+  //   return TokenStatus.VALID;
+  // } catch (e) {
+  //   if (e instanceof AxiosError) {
+  //     if (e.response?.status === 401) return TokenStatus.INVALID;
+  //     if (e.response?.status === 403) return TokenStatus.NOTSETUP;
+  //   }
+  //   throw e;
+  // }
 };
 
 export const exchangeAuthCode = async (
@@ -70,10 +75,10 @@ export const exchangeAuthCode = async (
   return res.data;
 };
 
-export const refreshTokens = async (): Promise<IdentityPayload> => {
+export const refreshTokens = async (): Promise<IdentityResponse> => {
   // NOTE: will raise a 401 if could not refresh
   console.log('-- refreshing tokens');
-  const res = await axios.post<IdentityPayload>('/auth/refresh', {}, { withCredentials: true });
+  const res = await axios.post<IdentityResponse>('/auth/refresh', {}, { withCredentials: true });
 
   return res.data;
 };

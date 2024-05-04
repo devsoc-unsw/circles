@@ -20,6 +20,7 @@ import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
+import { selectToken } from 'reducers/identitySlice';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -39,7 +40,8 @@ const Dummy = () => {
 };
 
 const App = () => {
-  const { theme, token } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const token = useSelector(selectToken);
 
   const [queryClient] = React.useState(
     () => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })

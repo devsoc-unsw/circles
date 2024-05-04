@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
-import { RootState } from 'config/store';
-import { setToken } from 'reducers/settingsSlice';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { selectToken, unsetIdentity } from 'reducers/identitySlice';
 
 type Props = {
   needSetup?: boolean;
@@ -15,9 +14,9 @@ const RequireToken = ({ needSetup }: Props) => {
   // TODO: do we want to move this to loading?
   // TODO: do we want to navigate away from login pages too?
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
-  const token = useSelector((state: RootState) => state.settings.token); // TODO: dont get this twice
+  const token = useAppSelector(selectToken); // TODO: dont get this twice
 
   useEffect(() => {
     const determineNextPage = async () => {
@@ -27,7 +26,7 @@ const RequireToken = ({ needSetup }: Props) => {
           navigate('/tokens');
           break;
         case TokenStatus.INVALID:
-          dispatch(setToken(null));
+          dispatch(unsetIdentity());
           openNotification({
             type: 'error',
             message: 'Error',

@@ -6,13 +6,13 @@ import { Space } from 'antd';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import devsocLogo from 'assets/devsocLogo.svg';
 import easySubTitle from 'assets/LandingPage/easySubtitle.svg';
-import { RootState } from 'config/store';
+import { selectToken } from 'reducers/identitySlice';
 import S from './styles';
 
 const HeroContent = () => {
   // determine our next location
   const [nextPage, setNextPage] = useState<string>('/');
-  const token = useSelector((state: RootState) => state.settings.token);
+  const token = useSelector(selectToken);
   useEffect(() => {
     const determineNextPage = async () => {
       // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors

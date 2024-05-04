@@ -8,7 +8,7 @@ import { inDev } from 'config/constants';
 import S from './styles'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken } from 'reducers/settingsSlice';
+import { unsetIdentity } from 'reducers/identitySlice';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Auth = () => {
     <PageTemplate showHeader={false}>
       <Container />
       {inDev && (
-        <S.TestButton onClick={async () => { await dispatch(setToken('')); navigate('/'); }} >Logout</S.TestButton>
+        <S.TestButton onClick={() => { dispatch(unsetIdentity()); navigate('/'); }} >Logout</S.TestButton>
       )}
     </PageTemplate>
   );

@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
-import { setToken } from 'reducers/settingsSlice';
 
 // import MetaTags from 'react-meta-tags';
 import './index.less';
@@ -49,7 +48,7 @@ const LoginSuccess = () => {
       }
 
       // we now have a access token, set it as our token
-      dispatch(setToken(session_token));
+      // dispatch(setToken(session_token));
       setError(`NONE: ${session_token}`);
     }
 

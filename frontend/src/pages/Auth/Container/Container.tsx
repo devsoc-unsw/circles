@@ -5,7 +5,7 @@ import { guestLogin } from 'utils/api/auth';
 import { userLogin } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
-import { setToken } from 'reducers/settingsSlice';
+import { updateIdentityWithAPIRes } from 'reducers/identitySlice';
 import S from './styles';
 
 const Container = () => {
@@ -28,7 +28,8 @@ const Container = () => {
             <S.GuestButton
               onClick={async () => {
                 const res = await guestLogin();
-                dispatch(setToken(res.session_token));
+
+                dispatch(updateIdentityWithAPIRes(res));
                 navigate('/degree-wizard');
               }}
             >

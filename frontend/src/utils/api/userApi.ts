@@ -2,13 +2,14 @@ import axios from 'axios';
 import { getStoredState } from 'redux-persist';
 import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
 import { persistConfig, RootState } from 'config/store';
+
 // import { getToken as getTokenReal } from './auth';
 
 // export const getToken = async (): Promise<string> => Promise.resolve(getTokenReal());
-export const getToken = async (): Promise<string | null> => {
+export const getToken = async (): Promise<string | undefined> => {
   const res = await getStoredState(persistConfig);
   const store = res as RootState;
-  return store.settings.token;
+  return store.identity?.token; // TODO: THIS WILL NOT WORK, MAKE THEM TAKE IN TOKEN AS PARAM
 };
 
 export const userLogin = async (): Promise<void> => {

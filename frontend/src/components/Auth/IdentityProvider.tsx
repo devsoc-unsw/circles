@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 import { refreshTokens } from 'utils/api/auth';
 import PageLoading from 'components/PageLoading';
-import { setToken } from 'reducers/settingsSlice';
+import { useAppDispatch } from 'hooks';
+import { unsetIdentity, updateIdentityWithAPIRes } from 'reducers/identitySlice';
 
 const IdentityProvider = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,10 +15,10 @@ const IdentityProvider = () => {
       try {
         const identity = await refreshTokens();
 
-        dispatch(setToken(identity.session_token));
+        dispatch(updateIdentityWithAPIRes(identity));
       } catch (e) {
         if (isAxiosError(e) && e.response?.status === 401) {
-          dispatch(setToken(null));
+          dispatch(unsetIdentity());
           return;
         }
 

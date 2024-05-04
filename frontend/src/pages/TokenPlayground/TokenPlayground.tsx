@@ -6,7 +6,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
-import { setToken } from 'reducers/settingsSlice';
 
 // import MetaTags from "react-meta-tags";
 import './index.less';
@@ -15,11 +14,14 @@ import { getToken } from 'utils/api/userApi';
 import axios from 'axios';
 import { guestLogin, refreshTokens } from 'utils/api/auth';
 import { Link, useOutletContext } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { selectToken, updateIdentityWithAPIRes } from 'reducers/identitySlice';
 
 const TokenPlayground = () => {
-  const [localToken, setLocalToken] = useState<string | null>(null);
-  const realToken = useSelector((state: RootState) => state.settings.token);
+  const [localToken, setLocalToken] = useState<string | undefined>(undefined);
+  const realToken = useAppSelector(selectToken);
   const [authURL, setAuthURL] = useState<string>('');
+  const dispatch = useAppDispatch();
 
   const scope = useOutletContext();
   console.log('scope', scope);
@@ -48,8 +50,6 @@ const TokenPlayground = () => {
   //   tokener();
   // }, []);
 
-  const dispatch = useDispatch();
-
   // const setGlobalToken = (t: string) => {
   //   dispatch(setToken(t));
   //   setLocalToken(t);
@@ -58,7 +58,7 @@ const TokenPlayground = () => {
   const newGuestToken = async () => {
     const res = await guestLogin();
 
-    dispatch(setToken(res.session_token));
+    dispatch(updateIdentityWithAPIRes(res));
   };
 
   const refreshSessionToken = async () => {
@@ -67,7 +67,7 @@ const TokenPlayground = () => {
     // setCSESocToken(res.session_token);
     // setLocalToken(res.session_token);
 
-    dispatch(setToken(res.session_token));
+    dispatch(updateIdentityWithAPIRes(res));
   };
 
   const checkSessionToken = async () => {
@@ -96,7 +96,7 @@ const TokenPlayground = () => {
       <div>RealToken: &apos;{realToken ?? 'null'}&apos;</div>
       <div>LocalToken: &apos;{localToken ?? 'null'}&apos;</div>
       <div>
-        <button onClick={() => setLocalToken(null)} type="button">
+        <button onClick={() => setLocalToken(undefined)} type="button">
           unset token
         </button>
         <button onClick={() => setLocalToken(realToken)} type="button">
