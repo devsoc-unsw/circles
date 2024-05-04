@@ -59,8 +59,10 @@ class UserStorage(_BaseUserStorage):
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
 
+# https://github.com/pydantic/pydantic/issues/1223#issuecomment-1152323275
 class PartialUserStorage(BaseModel):
     # for batch user storage update
+    # TODO: remove this and use keyword args since they cannot be None
     degree: Optional[UserDegreeStorage] = None
     courses: Optional[UserCoursesStorage] = None
     planner: Optional[UserPlannerStorage] = None
