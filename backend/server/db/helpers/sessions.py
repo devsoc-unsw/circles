@@ -78,7 +78,7 @@ def update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_toke
         hint="sidIndex",
     )
 
-    return res.modified_count == 1
+    return res.matched_count == 1
 
 def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken) -> bool:
     res = sessionsNewCOL.update_one(
@@ -94,7 +94,7 @@ def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token
         hint="sidIndex",
     )
 
-    return res.modified_count == 1
+    return res.matched_count == 1
 
 def delete_all_sessions(sid: SessionID) -> bool:
     res = sessionsNewCOL.delete_many({ "sid": sid })

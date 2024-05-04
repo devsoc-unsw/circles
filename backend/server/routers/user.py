@@ -159,9 +159,10 @@ def get_user(token: str) -> Storage:
     if data is None or data.setup is False:
         # TODO: this is so jank - add actual register / checking process when it comes
         # should error and prompt a registration - at some point ;)
-        print("++ ABOUT TO ASSERT FALSE:", token, uid)
-        assert False  # try find this
-        # return default_cs_user()
+        print("-- USING DEFAULT CS USER:", token, uid, data)
+        # PLACES USING:
+        # - degree wizard to check if we need to open modal -> sol is allow notsetup results in main user query
+        return default_cs_user()
 
     return _nto_storage(data)
 
@@ -326,28 +327,10 @@ def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
 @router.post("/reset")
 def reset(token: str = DUMMY_TOKEN):
     """Resets user data of a parsed token"""
-    planner: PlannerLocalStorage = {
-        'mostRecentPastTerm': {
-            'Y': 0,
-            'T': 0
-        },
-        'unplanned': [],
-        'isSummerEnabled': True,
-        'startYear': LIVE_YEAR,
-        'lockedTerms': {},
-        'years': [],
-    }
+    uid = _token_to_uid(token)
+    assert uid is not None  # TODO: fix this
 
-    user: Storage = {
-        'degree': {
-            'programCode': '',
-            'specs': [],
-            'isComplete': False,
-        },
-        'planner': planner,
-        'courses': {}
-    }
-    set_user(token, user, True)
+    assert udb.reset_user(uid)
 
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):

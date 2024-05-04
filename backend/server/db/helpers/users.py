@@ -64,7 +64,7 @@ def reset_user(uid: str) -> bool:
         hint="uidIndex",
     )
 
-    return res.modified_count == 1
+    return res.matched_count == 1
 
 def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
     if overwrite:
@@ -83,7 +83,7 @@ def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
             hint="uidIndex",
         )
 
-        return res.modified_count == 1
+        return res.matched_count == 1
 
     # just try insert
     try:
@@ -105,7 +105,7 @@ def update_user_degree(uid: str, data: UserDegreeStorage) -> bool:
         hint="uidIndex",
     )
 
-    return res.modified_count == 1
+    return res.matched_count == 1
 
 def update_user_courses(uid: str, data: UserCoursesStorage) -> bool:
     res = usersNewCOL.update_one(
@@ -119,7 +119,7 @@ def update_user_courses(uid: str, data: UserCoursesStorage) -> bool:
         hint="uidIndex",
     )
 
-    return res.modified_count == 1
+    return res.matched_count == 1
 
 def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
     res = usersNewCOL.update_one(
@@ -133,7 +133,8 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
         hint="uidIndex",
     )
 
-    return res.modified_count == 1
+    return res.matched_count == 1
+
 
 def update_user(uid: str, data: PartialUserStorage) -> bool:
     # updates certain properties of the user
@@ -144,12 +145,16 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         exclude_none=True
     )
 
+    # print(payload)
+
     if len(payload) == 0:
         # most semantically correct
+        # print("++ empty update payload")
         return user_is_setup(uid)
 
     if "courses" in payload and "degree" in payload and "planner" in payload:
         # enough to declare user as setup
+        # print("++ full payload")
         payload["setup"] = True
 
     res = usersNewCOL.update_one(
@@ -159,7 +164,9 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         hint="uidIndex",
     )
 
-    return res.modified_count == 1
+    # print(res)
+
+    return res.matched_count == 1
 
 def default_cs_user(guest: bool, start_year: int) -> UserStorage:
     # TODO: remove this later
