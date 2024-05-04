@@ -70,14 +70,10 @@ export const exchangeAuthCode = async (
   return res.data;
 };
 
-export const getSessionToken = async (): Promise<OldIdentityPayload | null> => {
-  // TODO: try this, handle errors
-  console.log('-- getting token from identity');
-  try {
-    const res = await axios.get<OldIdentityPayload>('/auth/identity', { withCredentials: true });
-    return res.data;
-  } catch {
-    // TODO: handle this properly
-    return null;
-  }
+export const refreshTokens = async (): Promise<IdentityPayload> => {
+  // NOTE: will raise a 401 if could not refresh
+  console.log('-- refreshing tokens');
+  const res = await axios.post<IdentityPayload>('/auth/refresh', {}, { withCredentials: true });
+
+  return res.data;
 };

@@ -13,16 +13,20 @@ const { Text, Title } = Typography;
 
 const PlannerCart = () => {
   const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false);
+
   const courses =
     useQuery({
       queryKey: ['courses'],
-      queryFn: getUserCourses
-    }).data || badCourses;
+      queryFn: getUserCourses,
+      enabled: showMenu,
+      staleTime: 100000
+    }).data ?? badCourses;
+
   const removeAllCourses = useMutation({
     mutationKey: ['removeCourses'],
     mutationFn: removeAll
   });
-  const [showMenu, setShowMenu] = useState(false);
 
   const pathname = useLocation();
 

@@ -6,22 +6,26 @@ import React, { useState, useEffect, useRef } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
-// import { setToken } from 'reducers/settingsSlice';
+import { setToken } from 'reducers/settingsSlice';
 
 // import MetaTags from "react-meta-tags";
 import './index.less';
 import PageTemplate from 'components/PageTemplate';
 import { getToken } from 'utils/api/userApi';
 import axios from 'axios';
-import { getSessionToken } from 'utils/api/auth';
-import { Link } from 'react-router-dom';
+import { guestLogin, refreshTokens } from 'utils/api/auth';
+import { Link, useOutletContext } from 'react-router-dom';
 
 const TokenPlayground = () => {
   const [localToken, setLocalToken] = useState<string | null>(null);
   const realToken = useSelector((state: RootState) => state.settings.token);
   const [authURL, setAuthURL] = useState<string>('');
+
+  const scope = useOutletContext();
+  console.log('scope', scope);
+
   console.log('token playground load');
-  console.log(getToken());
+  // console.log(getToken());
 
   // useEffect(() => {
   //   const csesoc = localStorage.getItem('csesoc-last-token');
@@ -44,19 +48,27 @@ const TokenPlayground = () => {
   //   tokener();
   // }, []);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // const setGlobalToken = (t: string) => {
   //   dispatch(setToken(t));
   //   setLocalToken(t);
   // };
 
-  // const refreshSessionToken = async () => {
-  //   // TODO: try this
-  //   const res = await getSessionToken();
-  //   setCSESocToken(res.session_token);
-  //   setLocalToken(res.session_token);
-  // };
+  const newGuestToken = async () => {
+    const res = await guestLogin();
+
+    dispatch(setToken(res.session_token));
+  };
+
+  const refreshSessionToken = async () => {
+    // TODO: try this
+    const res = await refreshTokens();
+    // setCSESocToken(res.session_token);
+    // setLocalToken(res.session_token);
+
+    dispatch(setToken(res.session_token));
+  };
 
   const checkSessionToken = async () => {
     console.log('checking session token');
@@ -70,14 +82,14 @@ const TokenPlayground = () => {
     console.log(res.data);
   };
 
-  useEffect(() => {
-    const getAuthURL = async () => {
-      const res = await axios.get<string>('/auth/authorization_url', { withCredentials: true });
-      setAuthURL(res.data);
-    };
+  // useEffect(() => {
+  //   const getAuthURL = async () => {
+  //     const res = await axios.get<string>('/auth/authorization_url', { withCredentials: true });
+  //     setAuthURL(res.data);
+  //   };
 
-    getAuthURL();
-  }, []);
+  //   getAuthURL();
+  // }, []);
 
   return (
     <PageTemplate>
@@ -90,12 +102,12 @@ const TokenPlayground = () => {
         <button onClick={() => setLocalToken(realToken)} type="button">
           set token to my csesoc
         </button>
-        <button onClick={() => console.log(getToken())} type="button">
-          find token
+        <button onClick={newGuestToken} type="button">
+          new guest token
         </button>
-        {/* <button onClick={refreshSessionToken} type="button">
+        <button onClick={refreshSessionToken} type="button">
           refresh session token
-        </button> */}
+        </button>
         <button onClick={checkSessionToken} type="button">
           check session token
         </button>

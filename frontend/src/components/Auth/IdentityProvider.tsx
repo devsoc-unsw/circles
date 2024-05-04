@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { getSessionToken } from 'utils/api/auth';
+import { isAxiosError } from 'axios';
+import { refreshTokens } from 'utils/api/auth';
 import PageLoading from 'components/PageLoading';
 import { setToken } from 'reducers/settingsSlice';
 
@@ -10,16 +11,21 @@ const IdentityProvider = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('fetching identity:');
     const updateToken = async () => {
-      const identity = await getSessionToken();
-      console.log(identity);
-      setLoading(false);
-      if (identity === null) {
-        dispatch(setToken(null));
-      } else {
+      try {
+        const identity = await refreshTokens();
+
         dispatch(setToken(identity.session_token));
+      } catch (e) {
+        if (isAxiosError(e) && e.response?.status === 401) {
+          dispatch(setToken(null));
+          return;
+        }
+
+        throw e;
       }
+
+      setLoading(false);
     };
 
     updateToken();
