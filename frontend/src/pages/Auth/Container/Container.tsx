@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { generateUserToken, userLogin } from 'utils/api/userApi';
+import { guestLogin } from 'utils/api/auth';
+import { userLogin } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
 import { setToken } from 'reducers/settingsSlice';
@@ -26,8 +27,8 @@ const Container = () => {
             <S.LoginButton onClick={userLogin}>Login with zID</S.LoginButton>
             <S.GuestButton
               onClick={async () => {
-                const res = await generateUserToken();
-                dispatch(setToken(res));
+                const res = await guestLogin();
+                dispatch(setToken(res.session_token));
                 navigate('/degree-wizard');
               }}
             >

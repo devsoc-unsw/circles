@@ -135,13 +135,25 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
 
     return res.modified_count == 1
 
-def update_user_batch(uid: str, data: PartialUserStorage) -> bool:
-    payload = data.dict(exclude_unset=True, exclude_none=True)
+def update_user(uid: str, data: PartialUserStorage) -> bool:
+    # updates certain properties of the user
+    # if enough are given, declares it as setup
+    payload = data.dict(
+        include={ "courses", "degree", "planner" }, 
+        exclude_unset=True,
+        exclude_none=True
+    )
+
     if len(payload) == 0:
-        return False
+        # most semantically correct
+        return user_is_setup(uid)
+
+    if "courses" in payload and "degree" in payload and "planner" in payload:
+        # enough to declare user as setup
+        payload["setup"] = True
 
     res = usersNewCOL.update_one(
-        { "uid": uid, "setup": True },
+        { "uid": uid, "setup": True } if "setup" not in payload else { "uid": uid },
         { "$set": payload },
         upsert=False,
         hint="uidIndex",
@@ -149,7 +161,7 @@ def update_user_batch(uid: str, data: PartialUserStorage) -> bool:
 
     return res.modified_count == 1
 
-def default_cs_user(_uid: str, guest: bool, start_year: int) -> UserStorage:
+def default_cs_user(guest: bool, start_year: int) -> UserStorage:
     # TODO: remove this later
     return UserStorage(
         guest=guest,

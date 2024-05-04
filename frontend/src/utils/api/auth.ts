@@ -8,9 +8,15 @@ export enum TokenStatus {
   VALID
 }
 
-interface IdentityPayload {
+interface OldIdentityPayload {
   session_token: string;
 }
+
+type IdentityPayload = {
+  session_token: string;
+  exp: number;
+  uid: string;
+};
 
 // export const getToken = (): string => {
 //   console.log('-- getting token from storage: ');
@@ -22,6 +28,12 @@ interface IdentityPayload {
 
 //   return state.settings.token;
 // };
+
+export const guestLogin = async (): Promise<IdentityPayload> => {
+  const res = await axios.post<IdentityPayload>('/auth/guest_login', {}, { withCredentials: true });
+
+  return res.data;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const checkTokenStatus = async (token: string | null): Promise<TokenStatus> => {
@@ -47,9 +59,9 @@ export const checkTokenStatus = async (token: string | null): Promise<TokenStatu
 
 export const exchangeAuthCode = async (
   query_params: Record<string, string>
-): Promise<IdentityPayload> => {
+): Promise<OldIdentityPayload> => {
   console.log(`exchanging`);
-  const res = await axios.post<IdentityPayload>(
+  const res = await axios.post<OldIdentityPayload>(
     '/auth/login',
     { query_params },
     { withCredentials: true }
@@ -58,11 +70,11 @@ export const exchangeAuthCode = async (
   return res.data;
 };
 
-export const getSessionToken = async (): Promise<IdentityPayload | null> => {
+export const getSessionToken = async (): Promise<OldIdentityPayload | null> => {
   // TODO: try this, handle errors
   console.log('-- getting token from identity');
   try {
-    const res = await axios.get<IdentityPayload>('/auth/identity', { withCredentials: true });
+    const res = await axios.get<OldIdentityPayload>('/auth/identity', { withCredentials: true });
     return res.data;
   } catch {
     // TODO: handle this properly

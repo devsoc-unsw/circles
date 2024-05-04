@@ -10,7 +10,6 @@ from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_5
 
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
 from server.db.helpers.users import insert_new_user
-from server.routers.user import default_cs_user, reset, set_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
@@ -74,11 +73,6 @@ def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfoModel) -> Optional[Sess
             # refresh token has expired, any other errors are bad and should be handled else ways
             # revoke_token(oidc_info.refresh_token, "refresh_token")  # NOTE: if the fresh token is invalid, i give up
             return None
-
-@router.post('/token', deprecated=True)
-def create_user_token(token: str):
-    set_user(token, default_cs_user())
-    reset(token)
 
 @router.post('/guest_login')
 def create_guest_session(res: Response) -> IdentityPayload:

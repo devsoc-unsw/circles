@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { getStoredState } from 'redux-persist';
 import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
-import { v4 } from 'uuid';
 import { persistConfig, RootState } from 'config/store';
 // import { getToken as getTokenReal } from './auth';
 
@@ -17,11 +16,6 @@ export const userLogin = async (): Promise<void> => {
   await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => {
     window.location.href = res.data;
   });
-};
-
-export const generateUserToken = async (token: string = v4()): Promise<string> => {
-  await axios.post<string>(`/auth/token`, {}, { params: { token }, withCredentials: true });
-  return token;
 };
 
 export const getUser = async (): Promise<UserResponse> => {

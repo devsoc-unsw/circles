@@ -106,7 +106,7 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
             print("++ ABOUT TO ASSERT FALSE:", token, uid)
             assert False  # want to remove these cases too
 
-        res = udb.update_user_batch(uid, PartialUserStorage(
+        res = udb.update_user(uid, PartialUserStorage(
             courses=_otn_courses(item['courses']),
             degree=_otn_degree(item['degree']),
             planner=_otn_planner(item['planner']),
@@ -151,6 +151,7 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
 def get_user(token: str) -> Storage:
     uid = _token_to_uid(token)
     if uid is None:
+        # TODO: token does not exist, 401
         print("++ ABOUT TO ASSERT FALSE:", token, uid)
         assert False  # try find this
 
@@ -197,12 +198,6 @@ def get_user_p(token: str):
         c['plannedFor'] = c.get('plannedFor') # set to None if need be
         c['UOC'] = c.pop('uoc')
     return res
-
-# this is super jank - should never see prod
-@router.post("/register/{token}")
-def register_user(token: str):
-    user = default_cs_user()
-    set_user(token, user)
 
 # makes an empty CS Student
 
