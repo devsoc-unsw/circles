@@ -19,8 +19,7 @@ export const userLogin = async (): Promise<void> => {
   });
 };
 
-export const getUser = async (): Promise<UserResponse> => {
-  const token = await getToken();
+export const getUser = async (token: string): Promise<UserResponse> => {
   const user = await axios.get(`user/data/all/${token}`);
   return user.data as UserResponse;
 };

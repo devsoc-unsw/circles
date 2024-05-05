@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CourseMark } from 'types/api';
 import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import { ValidatesResponse } from 'types/userResponse';
 
@@ -85,4 +86,13 @@ export const removeAll = async (token: string) => {
 export const validateTermPlanner = async (token: string): Promise<ValidatesResponse> => {
   const res = await axios.get('planner/validateTermPlanner', { params: { token } });
   return res.data as ValidatesResponse;
+};
+
+export const updateCourseMark = async (token: string, courseMark: CourseMark) => {
+  try {
+    await axios.put('/user/updateCourseMark', courseMark, { params: { token } });
+  } catch (e) {
+    /* eslint-disable no-console */
+    console.log(e);
+  }
 };
