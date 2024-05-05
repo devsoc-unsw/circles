@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import { ValidatesResponse } from 'types/userResponse';
-import { getToken } from './userApi';
 
 export const addToUnplanned = async (token: string, courseId: string) => {
   try {
@@ -74,8 +73,7 @@ export const toggleIgnoreFromProgression = async (token: string, courseId: strin
   }
 };
 
-export const removeAll = async () => {
-  const token = await getToken();
+export const removeAll = async (token: string) => {
   try {
     await axios.post('planner/removeAll', {}, { params: { token } });
   } catch (err) {
@@ -84,8 +82,7 @@ export const removeAll = async () => {
   }
 };
 
-export const validateTermPlanner = async (): Promise<ValidatesResponse> => {
-  const token = await getToken();
+export const validateTermPlanner = async (token: string): Promise<ValidatesResponse> => {
   const res = await axios.get('planner/validateTermPlanner', { params: { token } });
   return res.data as ValidatesResponse;
 };

@@ -58,7 +58,7 @@ const TermPlanner = () => {
 
   const validateQuery = useQuery({
     queryKey: ['validate'],
-    queryFn: validateTermPlanner
+    queryFn: () => validateTermPlanner(token)
   });
   const validations: ValidatesResponse = validateQuery.data ?? badValidations;
   const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);

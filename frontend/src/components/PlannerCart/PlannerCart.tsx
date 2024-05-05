@@ -7,6 +7,7 @@ import { badCourses } from 'types/userResponse';
 import { removeAll } from 'utils/api/plannerApi';
 import { getUserCourses } from 'utils/api/userApi';
 import CourseCartCard from 'components/CourseCartCard';
+import useToken from 'hooks/useToken';
 import S from './styles';
 
 const { Text, Title } = Typography;
@@ -14,6 +15,7 @@ const { Text, Title } = Typography;
 const PlannerCart = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const token = useToken();
 
   const courses =
     useQuery({
@@ -25,7 +27,7 @@ const PlannerCart = () => {
 
   const removeAllCourses = useMutation({
     mutationKey: ['removeCourses'],
-    mutationFn: removeAll
+    mutationFn: () => removeAll(token)
   });
 
   const pathname = useLocation();
