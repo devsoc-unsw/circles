@@ -33,7 +33,7 @@ const CourseInfoDrawers = ({
   const courses =
     useQuery({
       queryKey: ['courses'],
-      queryFn: getUserCourses
+      queryFn: () => getUserCourses(token)
     }).data || badCourses;
 
   const pathFromInPlanner = pathFrom.filter((courseCode) =>

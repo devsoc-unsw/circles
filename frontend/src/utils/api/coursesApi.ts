@@ -3,9 +3,9 @@ import { Course } from 'types/api';
 import { getUserPlanner } from './userApi';
 
 /* eslint-disable import/prefer-default-export */
-export const getCoursesInfo = async (): Promise<Record<string, Course>> => {
+export const getCoursesInfo = async (token: string): Promise<Record<string, Course>> => {
   const courses: Record<string, Course> = {};
-  const planner = await getUserPlanner();
+  const planner = await getUserPlanner(token);
 
   planner.years
     .flatMap((x) => Object.values(x))

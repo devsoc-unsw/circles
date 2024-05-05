@@ -29,20 +29,20 @@ export const getUserDegree = async (token: string): Promise<DegreeResponse> => {
   return degree.data as DegreeResponse;
 };
 
-export const setIsComplete = async (isComplete: boolean): Promise<Record<never, never>> => {
-  const token = await getToken();
+export const setIsComplete = async (
+  token: string,
+  isComplete: boolean
+): Promise<Record<never, never>> => {
   await axios.put(`user/setIsComplete`, {}, { params: { token, isComplete } });
   return {};
 };
 
-export const getUserPlanner = async (): Promise<PlannerResponse> => {
-  const token = await getToken();
+export const getUserPlanner = async (token: string): Promise<PlannerResponse> => {
   const planner = await axios.get(`user/data/planner/${token}`);
   return planner.data as PlannerResponse;
 };
 
-export const getUserCourses = async (): Promise<CoursesResponse> => {
-  const token = await getToken();
+export const getUserCourses = async (token: string): Promise<CoursesResponse> => {
   const courses = await axios.get(`user/data/courses/${token}`);
   return courses.data as CoursesResponse;
 };

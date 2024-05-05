@@ -41,7 +41,8 @@ describe('CourseMenuTitle', () => {
   it('should add course to planner', async () => {
     await renderWithProviders(<CourseMenuTitle {...defaultProps} accurate={false} />);
     await userEvent.click(screen.getByTestId('quick-add-cart-button'));
-    const planner = await getUserPlanner();
+    // TODO: idk how to get token in here
+    const planner = await getUserPlanner('');
     expect(planner.unplanned).toEqual(['COMP1511']);
   });
 });

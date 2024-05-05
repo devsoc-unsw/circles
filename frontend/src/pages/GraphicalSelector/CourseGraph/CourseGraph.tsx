@@ -66,11 +66,11 @@ const CourseGraph = ({
   });
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const windowSize = useAppWindowSize();
   const { theme } = useSelector((state: RootState) => state.settings);

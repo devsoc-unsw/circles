@@ -25,7 +25,7 @@ const OptionsHeader = () => {
 
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner = plannerQuery.data;
 

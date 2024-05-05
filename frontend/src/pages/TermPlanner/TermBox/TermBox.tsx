@@ -52,7 +52,7 @@ const TermBox = ({
   };
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const toggleLockTermMutation = useMutation({
     mutationFn: toggleLockTerm,
@@ -68,7 +68,7 @@ const TermBox = ({
   });
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const isSmall = useMediaQuery('(max-width: 1400px)');
 

@@ -32,7 +32,7 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
         queryKey: ['courses']
       });
       navigate('/course-selector');
-      setIsComplete(true);
+      setIsComplete(token, true);
     },
     onError: (err) => {
       // TODO: Give the user a notification for stuff like this

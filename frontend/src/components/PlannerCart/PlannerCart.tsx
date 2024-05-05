@@ -20,7 +20,7 @@ const PlannerCart = () => {
   const courses =
     useQuery({
       queryKey: ['courses'],
-      queryFn: getUserCourses,
+      queryFn: () => getUserCourses(token),
       enabled: showMenu,
       staleTime: 100000
     }).data ?? badCourses;

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
@@ -9,19 +8,19 @@ import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
 import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
-import { selectToken } from 'reducers/identitySlice';
+import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
 
 const ImportPlannerMenu = () => {
+  const token = useToken();
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner = plannerQuery.data || badPlanner;
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const token = useSelector(selectToken);
 
   const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
     try {

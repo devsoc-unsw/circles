@@ -13,6 +13,7 @@ import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
+import useToken from 'hooks/useToken';
 
 type Props = {
   dragging: boolean;
@@ -27,16 +28,17 @@ const Droppable = React.lazy(() =>
 /* eslint-disable */
 
 const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
+  const token = useToken();
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
 
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 

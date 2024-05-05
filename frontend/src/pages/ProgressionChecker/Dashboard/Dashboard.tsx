@@ -43,7 +43,7 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
   });
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const courses = coursesQuery.data || badCourses;
   const degreeQuery = useQuery({

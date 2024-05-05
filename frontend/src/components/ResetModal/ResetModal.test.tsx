@@ -22,7 +22,8 @@ describe('ResetModal', () => {
 
   it('should show modal when degree wizard is complete', async () => {
     await renderWithProviders(<ResetModal open />);
-    await setIsComplete(true);
+    // TODO: idk what to do with token here
+    await setIsComplete('', true);
     expect(screen.getByText('Reset Planner?')).toBeInTheDocument();
   });
 
@@ -31,7 +32,8 @@ describe('ResetModal', () => {
     useDispatchMock.mockReturnValue(dummyDispatch);
 
     await renderWithProviders(<ResetModal open />);
-    await setIsComplete(true);
+    // TODO: idk what to do with token here
+    await setIsComplete('', true);
     await userEvent.click(screen.getByText('Reset'));
     expect(dummyDispatch.mock.calls).toEqual([
       [{ payload: undefined, type: 'courseTabs/resetTabs' }]

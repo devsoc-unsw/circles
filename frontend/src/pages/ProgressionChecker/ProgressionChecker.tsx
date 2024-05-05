@@ -48,7 +48,7 @@ const ProgressionChecker = () => {
 
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner = plannerQuery.data || badPlanner;
   const { unplanned } = planner;
@@ -83,7 +83,7 @@ const ProgressionChecker = () => {
   const [view, setView] = useState(Views.GRID_CONCISE);
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const courses = coursesQuery.data || badCourses;
 
