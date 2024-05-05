@@ -65,7 +65,8 @@ describe('DegreeWizard', () => {
     await userEvent.click(screen.getByText('Start browsing courses!'));
 
     // check final states
-    expect(await getUserDegree()).toEqual({
+    // TODO: FIGURE OUT TOKEN HERE
+    expect(await getUserDegree('')).toEqual({
       programCode: '3778',
       programName: 'Computer Science',
       specs: ['COMPA1'],

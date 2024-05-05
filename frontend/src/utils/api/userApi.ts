@@ -24,8 +24,7 @@ export const getUser = async (token: string): Promise<UserResponse> => {
   return user.data as UserResponse;
 };
 
-export const getUserDegree = async (): Promise<DegreeResponse> => {
-  const token = await getToken();
+export const getUserDegree = async (token: string): Promise<DegreeResponse> => {
   const degree = await axios.get(`user/data/degree/${token}`);
   return degree.data as DegreeResponse;
 };

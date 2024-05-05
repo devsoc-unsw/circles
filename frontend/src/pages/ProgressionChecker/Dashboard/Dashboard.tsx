@@ -12,6 +12,7 @@ import getNumTerms from 'utils/getNumTerms';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
 import SpecialisationCard from 'components/SpecialisationCard';
+import useToken from 'hooks/useToken';
 import FreeElectivesCard from './FreeElectivesCard';
 import S from './styles';
 
@@ -32,6 +33,7 @@ type Props = {
 const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
+  const token = useToken();
 
   const props = useSpring({
     from: { opacity: 0 },
@@ -46,7 +48,7 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
   const courses = coursesQuery.data || badCourses;
   const degreeQuery = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   });
   const degree = degreeQuery.data || badDegree;
   const { programCode } = degree;

@@ -24,6 +24,7 @@ import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
+import useToken from 'hooks/useToken';
 import Dashboard from './Dashboard';
 import GenericCoursesSection from './GenericCoursesSection';
 import GridView from './GridView';
@@ -36,10 +37,11 @@ const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
+  const token = useToken();
 
   const degreeQuery = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   });
   const degree = degreeQuery.data || badDegree;
   const { programCode, specs } = degree;

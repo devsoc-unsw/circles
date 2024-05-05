@@ -19,6 +19,7 @@ import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
+import useToken from 'hooks/useToken';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
   defaultEdge,
@@ -57,9 +58,11 @@ const CourseGraph = ({
   loading,
   setLoading
 }: Props) => {
+  const token = useToken();
+
   const degreeQuery = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   });
   const plannerQuery = useQuery({
     queryKey: ['planner'],

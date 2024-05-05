@@ -5,17 +5,19 @@ import { fetchAllDegrees } from 'utils/api/programApi';
 import { getUserDegree } from 'utils/api/userApi';
 import CourseSearchBar from 'components/CourseSearchBar';
 import { useAppDispatch } from 'hooks';
+import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
 const { Title } = Typography;
 
 const CourseBanner = () => {
+  const token = useToken();
   const dispatch = useAppDispatch();
 
   const degreeQuery = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   });
   const allPrograms = useQuery({
     queryKey: ['programs'],

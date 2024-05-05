@@ -10,6 +10,7 @@ import { getUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
+import useToken from 'hooks/useToken';
 import Steps from './common/steps';
 import DegreeStep from './DegreeStep';
 import SpecialisationStep from './SpecialisationStep';
@@ -22,6 +23,7 @@ const { Title } = Typography;
 const DegreeWizard = () => {
   const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
+  const token = useToken();
 
   const [degreeInfo, setDegreeInfo] = useState<DegreeWizardPayload>({
     programCode: '',
@@ -34,7 +36,7 @@ const DegreeWizard = () => {
   const { programCode } = degreeInfo;
   const isComplete = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   }).data?.isComplete;
   const navigate = useNavigate();
 
