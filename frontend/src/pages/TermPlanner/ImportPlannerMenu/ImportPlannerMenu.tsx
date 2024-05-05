@@ -9,7 +9,7 @@ import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
 import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
-import type { RootState } from 'config/store';
+import { selectToken } from 'reducers/identitySlice';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -21,7 +21,7 @@ const ImportPlannerMenu = () => {
   const planner = plannerQuery.data || badPlanner;
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const { token } = useSelector((state: RootState) => state.settings);
+  const token = useSelector(selectToken);
 
   const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
     try {

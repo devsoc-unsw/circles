@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { vi } from 'vitest';
@@ -28,8 +28,12 @@ export const renderWithProviders = async (
         theme: 'dark',
         showMarks: false,
         showLockedCourses: false,
-        showWarnings: false,
-        token: ''
+        showWarnings: false
+      },
+      identity: {
+        token: undefined,
+        expiresAt: undefined,
+        userId: undefined
       }
     },
     ...renderOptions

@@ -14,8 +14,12 @@ const preloadedState = {
     theme: 'dark',
     showMarks: false,
     showLockedCourses: false,
-    showWarnings: false,
-    token: ''
+    showWarnings: false
+  },
+  identity: {
+    token: undefined,
+    expiresAt: undefined,
+    userId: undefined
   }
 };
 
