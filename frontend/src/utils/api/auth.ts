@@ -18,17 +18,6 @@ export type IdentityResponse = {
   uid: string;
 };
 
-// export const getToken = (): string => {
-//   console.log('-- getting token from storage: ');
-//   const state = store.getState(); // TODO: this seems to go to default on first load? check this though
-//   console.log('-- token:', state.settings.token);
-//   if (state.settings.token === null) {
-//     throw Error('TODO: token was not set'); // TODO: rethink how to handle this
-//   }
-
-//   return state.settings.token;
-// };
-
 export const guestLogin = async (): Promise<IdentityResponse> => {
   const res = await axios.post<IdentityResponse>(
     '/auth/guest_login',
@@ -44,7 +33,6 @@ export const checkTokenStatus = async (token: string | undefined): Promise<Token
   // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
   console.log('-- checking token status');
   return TokenStatus.VALID; // TODO: properly
-  // const token: string | null = getToken();
   // if (token === undefined) {
   //   return TokenStatus.UNSET;
   // }

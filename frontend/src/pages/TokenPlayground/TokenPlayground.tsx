@@ -10,7 +10,6 @@ import type { RootState } from 'config/store';
 // import MetaTags from "react-meta-tags";
 import './index.less';
 import PageTemplate from 'components/PageTemplate';
-import { getToken } from 'utils/api/userApi';
 import axios from 'axios';
 import { guestLogin, refreshTokens } from 'utils/api/auth';
 import { Link, useOutletContext } from 'react-router-dom';
@@ -27,7 +26,6 @@ const TokenPlayground = () => {
   console.log('scope', scope);
 
   console.log('token playground load');
-  // console.log(getToken());
 
   // useEffect(() => {
   //   const csesoc = localStorage.getItem('csesoc-last-token');
@@ -36,7 +34,6 @@ const TokenPlayground = () => {
   //   }
 
   //   const tokener = async () => {
-  //     const t = await getToken();
   //     try {
   //       const tokenRes = await axios.get<string>('/auth/exampleTokenExtractionHeader', {
   //         headers: { Authentication: `Bearer ${t}` }

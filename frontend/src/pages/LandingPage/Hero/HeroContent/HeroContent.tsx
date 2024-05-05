@@ -16,7 +16,6 @@ const HeroContent = () => {
   useEffect(() => {
     const determineNextPage = async () => {
       // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
-      // const token = await getToken();
       const tokenStatus = await checkTokenStatus(token);
       switch (tokenStatus) {
         case TokenStatus.UNSET:
