@@ -19,10 +19,9 @@ const IdentityProvider = () => {
       } catch (e) {
         if (isAxiosError(e) && e.response?.status === 401) {
           dispatch(unsetIdentity());
-          return;
+        } else {
+          throw e;
         }
-
-        throw e;
       }
 
       setLoading(false);

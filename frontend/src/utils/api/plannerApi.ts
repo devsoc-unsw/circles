@@ -3,8 +3,7 @@ import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner'
 import { ValidatesResponse } from 'types/userResponse';
 import { getToken } from './userApi';
 
-export const addToUnplanned = async (courseId: string) => {
-  const token = await getToken();
+export const addToUnplanned = async (token: string, courseId: string) => {
   try {
     await axios.post('planner/addToUnplanned', { courseCode: courseId }, { params: { token } });
   } catch (err) {
@@ -57,8 +56,7 @@ export const unscheduleAll = async () => {
   }
 };
 
-export const removeCourse = async (courseId: string) => {
-  const token = await getToken();
+export const removeCourse = async (token: string, courseId: string) => {
   try {
     await axios.post('planner/removeCourse', { courseCode: courseId }, { params: { token } });
   } catch (err) {

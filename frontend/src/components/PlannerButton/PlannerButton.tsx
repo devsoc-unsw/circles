@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { Course } from 'types/api';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
+import useToken from 'hooks/useToken';
 import S from './styles';
 
 interface PlannerButtonProps {
@@ -12,7 +13,11 @@ interface PlannerButtonProps {
 }
 
 const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
-  const handleMutation = isAddedInPlanner ? removeCourse : addToUnplanned;
+  const token = useToken();
+
+  const handleMutation = isAddedInPlanner
+    ? (code: string) => removeCourse(token, code)
+    : (code: string) => addToUnplanned(token, code);
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: handleMutation,
@@ -25,10 +30,12 @@ const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
       });
     }
   });
+
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     mutation.mutate(course.code);
   };
+
   return isAddedInPlanner ? (
     <S.Button loading={mutation.isPending} onClick={handleClick} icon={<StopOutlined />}>
       {!mutation.isPending ? 'Remove from planner' : 'Removing from planner'}

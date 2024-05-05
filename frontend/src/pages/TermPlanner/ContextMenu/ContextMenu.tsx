@@ -13,6 +13,7 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { removeCourse, toggleIgnoreFromProgression, unscheduleCourse } from 'utils/api/plannerApi';
 import EditMarkModal from 'components/EditMarkModal';
+import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import 'react-contexify/ReactContexify.css';
 
@@ -23,6 +24,8 @@ type Props = {
 };
 
 const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
+  const token = useToken();
+
   const queryClient = useQueryClient();
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
       })
   });
   const handleDelete = useMutation({
-    mutationFn: removeCourse,
+    mutationFn: (courseCode: string) => removeCourse(token, courseCode),
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ['planner']

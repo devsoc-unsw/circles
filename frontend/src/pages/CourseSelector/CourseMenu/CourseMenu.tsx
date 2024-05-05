@@ -13,6 +13,7 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
+import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseMenuTitle from '../CourseMenuTitle';
 import S from './styles';
@@ -39,6 +40,8 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
 );
 
 const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
+  const token = useToken();
+
   const inPlanner = (courseId: string) => courses && !!courses[courseId];
 
   const getStructure = React.useCallback(async () => {
@@ -76,10 +79,8 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
 
   const queryClient = useQueryClient();
   const courseMutation = useMutation({
-    mutationFn: async (courseId: string) => {
-      const handleMutation = inPlanner(courseId) ? removeCourse : addToUnplanned;
-      await handleMutation(courseId);
-    },
+    mutationFn: async (courseId: string) =>
+      inPlanner(courseId) ? removeCourse(token, courseId) : addToUnplanned(token, courseId),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['courses'] });
       await queryClient.invalidateQueries({ queryKey: ['planner'] });
