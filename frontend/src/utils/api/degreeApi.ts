@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { Programs } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
-import { getToken } from './userApi';
 
-export const resetDegree = async () => {
-  const token = await getToken();
+export const resetDegree = async (token: string) => {
   try {
     await axios.post('/user/reset', null, { params: { token } });
   } catch (err) {
@@ -13,8 +11,7 @@ export const resetDegree = async () => {
   }
 };
 
-export const setupDegreeWizard = async (wizard: DegreeWizardPayload) => {
-  const token = await getToken();
+export const setupDegreeWizard = async (token: string, wizard: DegreeWizardPayload) => {
   try {
     await axios.post('/user/setupDegreeWizard', wizard, { params: { token } });
   } catch (err) {
