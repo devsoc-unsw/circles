@@ -32,10 +32,11 @@ export const guestLogin = async (): Promise<IdentityResponse> => {
 export const checkTokenStatus = async (token: string | undefined): Promise<TokenStatus> => {
   // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
   console.log('-- checking token status');
-  return TokenStatus.VALID; // TODO: properly
-  // if (token === undefined) {
-  //   return TokenStatus.UNSET;
-  // }
+  if (token === undefined) {
+    return TokenStatus.UNSET;
+  }
+
+  return TokenStatus.VALID;
 
   // // check token with backend
   // try {

@@ -11,9 +11,9 @@ import {
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
+import useToken from 'hooks/useToken';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
-import useToken from 'hooks/useToken';
 
 type Props = {
   dragging: boolean;

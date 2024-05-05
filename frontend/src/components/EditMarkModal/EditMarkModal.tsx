@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, message } from 'antd';
 import { CourseMark } from 'types/api';
 import { Grade } from 'types/planner';
-import { updateCourseMark } from 'utils/planner';
+import { updateCourseMark } from 'utils/api/plannerApi';
 import useToken from 'hooks/useToken';
 import S from './styles';
 

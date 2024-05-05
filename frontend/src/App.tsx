@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React, { Suspense, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Suspense, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Link, Navigate, Route, Routes } from 'react-router-dom';
 import { NotificationOutlined } from '@ant-design/icons';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
@@ -20,7 +20,9 @@ import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
-import { selectToken } from 'reducers/identitySlice';
+import useToken from 'hooks/useToken';
+import { refreshIdentity, updateIdentity } from 'reducers/identitySlice';
+import { useAppDispatch } from 'hooks';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -41,7 +43,6 @@ const Dummy = () => {
 
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
-  const token = useSelector(selectToken);
 
   const [queryClient] = React.useState(
     () => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
@@ -111,11 +112,19 @@ const App = () => {
               <Suspense fallback={<PageLoading />}>
                 <Router>
                   <Routes>
-                    <Route
-                      path="/"
-                      element={!token ? <LandingPage /> : <Navigate to="/degree-wizard" replace />}
-                    />
                     <Route element={<IdentityProvider />}>
+                      <Route path="/" element={<LandingPage />} />
+                      {/* <Route element={<RequireToken />}> */}
+                      <Route path="/degree-wizard" element={<DegreeWizard />} />
+                      {/* </Route> */}
+                      {/* <Route element={<RequireToken needSetup />}> */}
+                      <Route path="/course-selector" element={<CourseSelector />} />
+                      {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                      <Route path="/term-planner" element={<TermPlanner />} />
+                      <Route path="/progression-checker" element={<ProgressionChecker />} />
+                      {/* </Route> */}
+                      {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
+                      {inDev && <Route path="/login" element={<Auth />} />}
                       <Route path="/tokens" element={<TokenPlayground />} />
                       <Route element={<RequireToken />}>
                         <Route path="/token-required" element={<Dummy />} />
@@ -123,20 +132,8 @@ const App = () => {
                       <Route element={<RequireToken needSetup />}>
                         <Route path="/token-needsetup" element={<Dummy />} />
                       </Route>
+                      <Route path="*" element={<Page404 />} />
                     </Route>
-                    {/* <Route element={<RequireToken />}> */}
-                    <Route path="/degree-wizard" element={<DegreeWizard />} />
-                    {/* </Route> */}
-                    {/* <Route element={<RequireToken needSetup />}> */}
-                    <Route path="/course-selector" element={<CourseSelector />} />
-                    {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
-                    <Route path="/term-planner" element={<TermPlanner />} />
-                    <Route path="/progression-checker" element={<ProgressionChecker />} />
-                    {/* </Route> */}
-                    {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
-                    {inDev && <Route path="/login" element={<Auth />} />}
-                    {inDev && <Route path="/tokens" element={<TokenPlayground />} />}
-                    <Route path="*" element={<Page404 />} />
                   </Routes>
                 </Router>
               </Suspense>

@@ -9,7 +9,7 @@ import { PlannerResponse } from 'types/userResponse';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import { selectToken } from 'reducers/identitySlice';
+import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 
 const DatePicker = React.lazy(() => import('antd').then((d) => ({ default: d.DatePicker })));
@@ -23,7 +23,7 @@ const SettingsMenu = ({ planner }: Props) => {
 
   const { Option } = Select;
   const { theme } = useSelector((state: RootState) => state.settings);
-  const token = useSelector(selectToken);
+  const token = useToken();
 
   async function handleUpdateStartYear(_: unknown, dateString: string | string[]) {
     if (dateString && typeof dateString === 'string') {

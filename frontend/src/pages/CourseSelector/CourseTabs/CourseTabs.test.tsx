@@ -3,9 +3,10 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
 import { vi } from 'vitest';
+import { RootState } from 'config/store';
 import CourseTabs from './CourseTabs';
 
-const preloadedState = {
+const preloadedState: RootState = {
   courseTabs: {
     tabs: ['COMP1511', 'COMP1521', 'COMP1531'],
     active: 0
@@ -17,9 +18,7 @@ const preloadedState = {
     showWarnings: false
   },
   identity: {
-    token: undefined,
-    expiresAt: undefined,
-    userId: undefined
+    data: undefined
   }
 };
 

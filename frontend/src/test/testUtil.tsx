@@ -31,9 +31,7 @@ export const renderWithProviders = async (
         showWarnings: false
       },
       identity: {
-        token: undefined,
-        expiresAt: undefined,
-        userId: undefined
+        data: undefined
       }
     },
     ...renderOptions
