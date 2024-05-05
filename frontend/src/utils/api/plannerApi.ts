@@ -12,8 +12,7 @@ export const addToUnplanned = async (token: string, courseId: string) => {
   }
 };
 
-export const setPlannedCourseToTerm = async (data: PlannedToTerm) => {
-  const token = await getToken();
+export const setPlannedCourseToTerm = async (token: string, data: PlannedToTerm) => {
   try {
     await axios.post('planner/plannedToTerm', data, { params: { token } });
   } catch (err) {
@@ -22,8 +21,7 @@ export const setPlannedCourseToTerm = async (data: PlannedToTerm) => {
   }
 };
 
-export const setUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
-  const token = await getToken();
+export const setUnplannedCourseToTerm = async (token: string, data: UnPlannedToTerm) => {
   try {
     await axios.post('planner/unPlannedToTerm', data, { params: { token } });
   } catch (err) {
@@ -32,8 +30,7 @@ export const setUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
   }
 };
 
-export const unscheduleCourse = async (data: UnscheduleCourse) => {
-  const token = await getToken();
+export const unscheduleCourse = async (token: string, data: UnscheduleCourse) => {
   try {
     await axios.post(
       'planner/unscheduleCourse',
@@ -46,8 +43,7 @@ export const unscheduleCourse = async (data: UnscheduleCourse) => {
   }
 };
 
-export const unscheduleAll = async () => {
-  const token = await getToken();
+export const unscheduleAll = async (token: string) => {
   try {
     await axios.post('planner/unscheduleAll', {}, { params: { token } });
   } catch (err) {
@@ -65,8 +61,7 @@ export const removeCourse = async (token: string, courseId: string) => {
   }
 };
 
-export const toggleIgnoreFromProgression = async (courseId: string) => {
-  const token = await getToken();
+export const toggleIgnoreFromProgression = async (token: string, courseId: string) => {
   try {
     await axios.post(
       'planner/toggleIgnoreFromProgression',

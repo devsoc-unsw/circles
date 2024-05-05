@@ -9,6 +9,7 @@ import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import type { RootState } from 'config/store';
+import useToken from 'hooks/useToken';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import HelpMenu from '../HelpMenu/HelpMenu';
 import SettingsMenu from '../SettingsMenu';
@@ -19,6 +20,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 const OptionsHeader = () => {
+  const token = useToken();
   const queryClient = useQueryClient();
 
   const plannerQuery = useQuery({
@@ -36,7 +38,7 @@ const OptionsHeader = () => {
   };
 
   const unscheduleAllMutation = useMutation({
-    mutationFn: unscheduleAll,
+    mutationFn: () => unscheduleAll(token),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']

@@ -11,6 +11,7 @@ import {
   PieChartOutlined
 } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UnscheduleCourse } from 'types/planner';
 import { removeCourse, toggleIgnoreFromProgression, unscheduleCourse } from 'utils/api/plannerApi';
 import EditMarkModal from 'components/EditMarkModal';
 import useToken from 'hooks/useToken';
@@ -33,7 +34,7 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
 
   const showEditMark = () => setOpenModal(true);
   const handleUnschedule = useMutation({
-    mutationFn: unscheduleCourse,
+    mutationFn: (data: UnscheduleCourse) => unscheduleCourse(token, data),
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ['planner']
@@ -51,7 +52,7 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
     dispatch(addTab(code));
   };
   const ignoreFromProgressionMutation = useMutation({
-    mutationFn: toggleIgnoreFromProgression,
+    mutationFn: (courseId: string) => toggleIgnoreFromProgression(token, courseId),
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ['courses']

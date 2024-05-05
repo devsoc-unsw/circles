@@ -32,12 +32,14 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
+import useToken from 'hooks/useToken';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
 );
 
 const TermPlanner = () => {
+  const token = useToken();
   const queryClient = useQueryClient();
 
   // Planer obj
@@ -88,7 +90,7 @@ const TermPlanner = () => {
 
   // Mutations
   const setPlannedCourseToTermMutation = useMutation({
-    mutationFn: setPlannedCourseToTerm,
+    mutationFn: (data: PlannedToTerm) => setPlannedCourseToTerm(token, data),
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -120,7 +122,7 @@ const TermPlanner = () => {
   };
 
   const setUnplannedCourseToTermMutation = useMutation({
-    mutationFn: setUnplannedCourseToTerm,
+    mutationFn: (data: UnPlannedToTerm) => setUnplannedCourseToTerm(token, data),
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -149,7 +151,7 @@ const TermPlanner = () => {
   };
 
   const unscheduleCourseMutation = useMutation({
-    mutationFn: unscheduleCourse,
+    mutationFn: (data: UnscheduleCourse) => unscheduleCourse(token, data),
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
