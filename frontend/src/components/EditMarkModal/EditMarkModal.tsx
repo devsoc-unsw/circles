@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, message } from 'antd';
+import { CourseMark } from 'types/api';
 import { Grade } from 'types/planner';
 import { updateCourseMark } from 'utils/planner';
+import useToken from 'hooks/useToken';
 import S from './styles';
 
 type Props = {
@@ -14,6 +16,7 @@ type Props = {
 const EditMarkModal = ({ code, open, onCancel }: Props) => {
   const queryClient = useQueryClient();
   const [markValue, setMarkValue] = useState<string | number | undefined>();
+  const token = useToken();
 
   const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
 
@@ -24,7 +27,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
   };
 
   const updateMarkMutation = useMutation({
-    mutationFn: updateCourseMark,
+    mutationFn: (courseMark: CourseMark) => updateCourseMark(token, courseMark),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']

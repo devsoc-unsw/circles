@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from 'antd';
 import axios from 'axios';
 import styled from 'styled-components';
-import { getToken } from 'utils/api/userApi';
+import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
 
@@ -39,9 +39,9 @@ const ModalTitle = styled(Title)`
 const ValidateCtfButton = () => {
   const [open, setOpen] = React.useState(false);
   const [result, setResult] = React.useState(loadingResult);
+  const token = useToken();
 
   const validateCtf = async () => {
-    const token = await getToken();
     setOpen(true);
     const res = await axios.post<CtfResult>('/ctf/validateCtf/', {}, { params: { token } });
     setResult(res.data);

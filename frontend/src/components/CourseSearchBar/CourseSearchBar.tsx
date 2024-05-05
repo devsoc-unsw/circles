@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Select, Spin } from 'antd';
 import { useDebounce } from 'use-debounce';
 import { searchCourse } from 'utils/api/courseApi';
+import useToken from 'hooks/useToken';
 
 type Props = {
   onSelectCallback: (courseCode: string) => void;
@@ -13,11 +14,12 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [courses, setCourses] = useState<{ label: string; value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm] = useDebounce(value, 200);
+  const token = useToken();
 
   useEffect(() => {
     const handleSearchCourse = async (query: string) => {
       try {
-        const res = await searchCourse(query);
+        const res = await searchCourse(token, query);
         setCourses(
           Object.keys(res).map((course) => ({
             label: `${course}: ${res[course]}`,
@@ -35,7 +37,7 @@ const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
       // if debounced term changes, call API
       handleSearchCourse(debouncedSearchTerm);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, token]);
 
   const handleSelect = (courseCode: string) => {
     setValue(null);

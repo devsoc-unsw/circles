@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { CourseMark } from 'types/api';
 import { UserResponse } from 'types/userResponse';
-import { getToken } from './api/userApi';
 
-export const updateCourseMark = async (courseMark: CourseMark) => {
-  const token = await getToken();
+export const updateCourseMark = async (token: string, courseMark: CourseMark) => {
   try {
     await axios.put('/user/updateCourseMark', courseMark, { params: { token } });
   } catch (e) {
