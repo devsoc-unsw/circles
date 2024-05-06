@@ -33,14 +33,6 @@ const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 
-const Dummy = () => {
-  return (
-    <div>
-      <Link to="/tokens">tokens</Link>
-    </div>
-  );
-};
-
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
@@ -114,23 +106,19 @@ const App = () => {
                   <Routes>
                     <Route element={<IdentityProvider />}>
                       <Route path="/" element={<LandingPage />} />
-                      {/* <Route element={<RequireToken />}> */}
                       <Route path="/degree-wizard" element={<DegreeWizard />} />
-                      {/* </Route> */}
-                      {/* <Route element={<RequireToken needSetup />}> */}
                       <Route path="/course-selector" element={<CourseSelector />} />
                       {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
                       <Route path="/term-planner" element={<TermPlanner />} />
                       <Route path="/progression-checker" element={<ProgressionChecker />} />
-                      {/* </Route> */}
                       {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
                       {inDev && <Route path="/login" element={<Auth />} />}
-                      <Route path="/tokens" element={<TokenPlayground />} />
+                      <Route path="/tokens" element={<TokenPlayground allowUnset />} />
                       <Route element={<RequireToken />}>
-                        <Route path="/token-required" element={<Dummy />} />
+                        <Route path="/token-required" element={<TokenPlayground />} />
                       </Route>
                       <Route element={<RequireToken needSetup />}>
-                        <Route path="/token-needsetup" element={<Dummy />} />
+                        <Route path="/token-needsetup" element={<TokenPlayground />} />
                       </Route>
                       <Route path="*" element={<Page404 />} />
                     </Route>

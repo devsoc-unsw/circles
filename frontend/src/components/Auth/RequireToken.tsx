@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
@@ -11,52 +12,53 @@ type Props = {
 };
 
 const RequireToken = ({ needSetup }: Props) => {
-  // TODO: do we want to move this to loading?
   // TODO: do we want to navigate away from login pages too?
-  const navigate = useNavigate();
+  // TODO: maybe we could merge this into useToken??
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(true);
-  const token = useAppSelector(selectToken); // TODO: dont get this twice
+  const token = useAppSelector(selectToken);
+
+  const { isPending, data: tokenStatus } = useQuery({
+    queryFn: () => checkTokenStatus(token),
+    queryKey: ['degree', 'user', 'state', { token }], // TODO: temporary key
+    throwOnError: true
+    // staleTime: 60 * 5 * 1000 // TODO: re add when everything is done
+  });
 
   useEffect(() => {
-    const determineNextPage = async () => {
-      const tokenStatus = await checkTokenStatus(token);
-      switch (tokenStatus) {
-        case TokenStatus.UNSET:
-          navigate('/tokens');
-          break;
-        case TokenStatus.INVALID:
-          dispatch(unsetIdentity());
-          openNotification({
-            type: 'error',
-            message: 'Error',
-            description: 'You must be logged in before visiting this page 🙂'
-          });
-          navigate('/tokens');
-          break;
-        case TokenStatus.NOTSETUP:
-          if (needSetup) {
-            openNotification({
-              type: 'warning',
-              message: 'Warning',
-              description: 'You must setup your degree before visiting this page 🙂'
-            });
-            navigate('/degree-wizard');
-          } else {
-            setLoading(false);
-          }
-          break;
-        case TokenStatus.VALID:
-          setLoading(false);
-          break;
-        default:
-          break;
-      }
-    };
-    determineNextPage();
-  }, [token, needSetup, dispatch, navigate]);
+    // TODO: wont need this when we get new notification hook
+    if (tokenStatus === TokenStatus.UNSET || tokenStatus === TokenStatus.EXPIRED) {
+      openNotification({
+        type: 'error',
+        message: 'Error',
+        description: 'You must be logged in before visiting this page 🙂'
+      });
+    } else if (tokenStatus === TokenStatus.NOTSETUP && needSetup) {
+      openNotification({
+        type: 'warning',
+        message: 'Warning',
+        description: 'You must setup your degree before visiting this page 🙂'
+      });
+    }
+  }, [tokenStatus, needSetup]);
 
-  return loading ? <PageLoading /> : <Outlet />;
+  if (isPending || tokenStatus === undefined) {
+    return <PageLoading />;
+  }
+
+  if (tokenStatus === TokenStatus.UNSET) {
+    return <Navigate to="/tokens" />;
+  }
+
+  if (tokenStatus === TokenStatus.EXPIRED) {
+    dispatch(unsetIdentity());
+    return <Navigate to="/tokens" />;
+  }
+
+  if (tokenStatus === TokenStatus.NOTSETUP && needSetup) {
+    return <Navigate to="/tokens" />;
+  }
+
+  return <Outlet />;
 };
 
 export default RequireToken;

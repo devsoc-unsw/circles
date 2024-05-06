@@ -1,24 +1,29 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { refreshIdentity, selectIdentity } from 'reducers/identitySlice';
+import { refreshIdentity, selectIdentity, selectToken } from 'reducers/identitySlice';
 
 type AllowUnsetOptions = {
   allowUnset: true;
 };
 
-type NoOptions = {
+type BaseOptions = {
   allowUnset?: false;
 };
 
-type Options = AllowUnsetOptions | NoOptions;
+type Options = AllowUnsetOptions | BaseOptions | undefined;
 
-function useToken(options?: NoOptions): string;
 function useToken(options: AllowUnsetOptions): string | undefined;
+function useToken(options: BaseOptions): string;
+function useToken(): string;
+function useToken(options?: Options): string | undefined;
+// need this general one to allow for dynamically-created params to still match a type
+// since something like { allowUnset: 100 === 200 } will be type boolean, and thus no return value can be inferred
 
 function useToken(options?: Options): string | undefined {
   // TODO: handle refreshing if expired in here, and handle navigation or throwing errors
-  const { token, expiresAt } = useAppSelector(selectIdentity) ?? {};
+  // const { token, expiresAt } = useAppSelector(selectIdentity) ?? {};
+  const token = useAppSelector(selectToken);
   // console.log('-- useToken called', token);
 
   // TODO: major flaw - what if there are no rerenders before it expires
@@ -30,10 +35,20 @@ function useToken(options?: Options): string | undefined {
   //     .catch((e) => console.info('lolol error', e));
   // }
 
-  if (options?.allowUnset) {
-    return token;
+  if (token === undefined && options?.allowUnset !== true) {
+    // This shouldn't occur of useToken is used inside a RequireToken
+    // NOTE: error boundary cannot catch this :|
+    throw TypeError('useToken: allowUnset was false when token was undefined.', {
+      cause: { token, allowUnset: !!options?.allowUnset }
+    });
   }
-  return token ?? 'DUMMY_TOKEN';
+
+  return token;
+
+  // if (options?.allowUnset) {
+  //   return token;
+  // }
+  // return token ?? 'DUMMY_TOKEN';
 }
 
 export default useToken;

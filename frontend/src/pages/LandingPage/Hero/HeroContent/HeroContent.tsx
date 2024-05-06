@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { useQuery } from '@tanstack/react-query';
 import { Space } from 'antd';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import devsocLogo from 'assets/devsocLogo.svg';
@@ -10,30 +11,27 @@ import S from './styles';
 
 const HeroContent = () => {
   // determine our next location
-  const [nextPage, setNextPage] = useState<string>('/');
   const token = useToken({ allowUnset: true });
 
-  useEffect(() => {
-    const determineNextPage = async () => {
-      // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
-      const tokenStatus = await checkTokenStatus(token);
-      switch (tokenStatus) {
-        case TokenStatus.UNSET:
-        case TokenStatus.INVALID:
-          setNextPage('/login');
-          break;
-        case TokenStatus.NOTSETUP:
-          setNextPage('/degree-wizard');
-          break;
-        case TokenStatus.VALID:
-          setNextPage('/term-planner');
-          break;
-        default:
-          break;
-      }
-    };
-    determineNextPage();
-  }, [token]);
+  const { data: tokenStatus } = useQuery({
+    queryFn: () => checkTokenStatus(token),
+    queryKey: ['degree', 'user', 'state', { token }] // TODO: temporary key
+    // staleTime: 60 * 5 * 1000 // TODO: re add when everything is done
+  });
+
+  const nextPage = useMemo(() => {
+    switch (tokenStatus) {
+      case TokenStatus.UNSET:
+      case TokenStatus.EXPIRED:
+        return '/login';
+      case TokenStatus.NOTSETUP:
+        return '/degree-wizard';
+      case TokenStatus.SETUP:
+        return '/term-planner';
+      default:
+        return '/'; // should never be the case
+    }
+  }, [tokenStatus]);
 
   return (
     <S.HeroContent>

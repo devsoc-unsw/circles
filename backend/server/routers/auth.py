@@ -1,5 +1,5 @@
 """ Routes to deal with user Authentication. """
-from typing import Annotated, Dict, Optional, cast
+from typing import Annotated, Dict, Literal, Optional, cast
 from datetime import datetime
 from secrets import token_hex, token_urlsafe
 from time import time
@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
-from server.db.helpers.users import insert_new_user
+from server.db.helpers.users import insert_new_user, user_is_setup
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
@@ -33,6 +33,8 @@ class IdentityPayload(BaseModel):
     session_token: str
     exp: int
     uid: str
+
+UserTokenState = Literal["expired", "notsetup", "setup"]
 
 router = APIRouter(
     prefix="/auth",
@@ -276,3 +278,15 @@ def test_token(token: Annotated[SessionToken, Security(require_token)]):
             status_code=HTTP_401_UNAUTHORIZED,
             detail=e.description,
         ) from e
+
+# TODO: move into user router file
+@router.get(
+    "/tokenUserState"
+)
+def get_user_state(token: Annotated[SessionToken, Security(require_token)]) -> UserTokenState:
+    try:
+        uid, _ = get_token_info(token)
+
+        return "setup" if user_is_setup(uid) else "notsetup"
+    except SessionExpiredToken:
+        return "expired"

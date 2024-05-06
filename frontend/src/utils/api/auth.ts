@@ -1,11 +1,10 @@
 import axios from 'axios';
-// import store from 'config/store';
 
 export enum TokenStatus {
-  UNSET,
-  INVALID,
-  NOTSETUP,
-  VALID
+  UNSET = 'unset',
+  EXPIRED = 'expired',
+  NOTSETUP = 'notsetup',
+  SETUP = 'setup'
 }
 
 interface OldIdentityPayload {
@@ -30,25 +29,15 @@ export const guestLogin = async (): Promise<IdentityResponse> => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export const checkTokenStatus = async (token: string | undefined): Promise<TokenStatus> => {
-  // TODO: on very first load since storage hasnt yet finished setting up, will get undefined errors
-  console.log('-- checking token status');
   if (token === undefined) {
     return TokenStatus.UNSET;
   }
 
-  return TokenStatus.VALID;
+  const res = await axios.get<TokenStatus>('/auth/tokenUserState', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
 
-  // // check token with backend
-  // try {
-  //   await axios.get<never>('/auth/checkToken', { headers: { Authorization: `Bearer ${token}` } });
-  //   return TokenStatus.VALID;
-  // } catch (e) {
-  //   if (e instanceof AxiosError) {
-  //     if (e.response?.status === 401) return TokenStatus.INVALID;
-  //     if (e.response?.status === 403) return TokenStatus.NOTSETUP;
-  //   }
-  //   throw e;
-  // }
+  return res.data;
 };
 
 export const exchangeAuthCode = async (
