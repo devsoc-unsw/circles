@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { guestLogin } from 'utils/api/auth';
+import { guestLogin as guestLoginRequest } from 'utils/api/auth';
 import { userLogin } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
@@ -11,6 +11,13 @@ import S from './styles';
 const Container = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const guestLogin = useCallback(async () => {
+    const res = await guestLoginRequest();
+
+    dispatch(updateIdentityWithAPIRes(res));
+    navigate('/degree-wizard');
+  }, [navigate, dispatch]);
+
   return (
     <S.LoginContainer>
       <S.Wrapper>
@@ -25,16 +32,7 @@ const Container = () => {
             <h2>Login to Circles</h2>
             <p>For current UNSW Students</p>
             <S.LoginButton onClick={userLogin}>Login with zID</S.LoginButton>
-            <S.GuestButton
-              onClick={async () => {
-                const res = await guestLogin();
-
-                dispatch(updateIdentityWithAPIRes(res));
-                navigate('/degree-wizard');
-              }}
-            >
-              Continue as guest
-            </S.GuestButton>
+            <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
           </S.Login>
         </S.Right>
       </S.Wrapper>

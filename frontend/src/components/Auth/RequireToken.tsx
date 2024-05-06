@@ -44,6 +44,7 @@ const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
     }
   }, [tokenStatus, needSetup]);
 
+  // TODO: make sure that all navigates across entire app point to correct locations now
   if (isPending || tokenStatus === undefined) {
     return <PageLoading />;
   }

@@ -31,6 +31,7 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       queryClient.invalidateQueries({
         queryKey: ['courses']
       });
+      queryClient.clear();
       navigate('/course-selector');
       setIsComplete(token, true);
     },

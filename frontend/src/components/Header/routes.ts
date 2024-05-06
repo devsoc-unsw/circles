@@ -6,6 +6,10 @@ type Route = {
 
 const routes: Route[] = [
   {
+    label: 'Degree Wizard',
+    link: '/degree-wizard'
+  },
+  {
     label: 'Course Selector',
     link: '/course-selector'
   },

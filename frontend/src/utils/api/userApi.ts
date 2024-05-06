@@ -35,3 +35,7 @@ export const getUserCourses = async (token: string): Promise<CoursesResponse> =>
   const courses = await axios.get(`user/data/courses/${token}`);
   return courses.data as CoursesResponse;
 };
+
+export const resetUserDegree = async (token: string): Promise<void> => {
+  await axios.post(`user/reset`, {}, { params: { token } });
+};

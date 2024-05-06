@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
-import { getUserDegree } from 'utils/api/userApi';
+import { getUserDegree, resetUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
@@ -39,6 +39,24 @@ const DegreeWizard = () => {
     queryFn: () => getUserDegree(token)
   }).data?.isComplete;
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const resetDegree = useMutation({
+    mutationFn: () => resetUserDegree(token),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['degree']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.clear();
+    }
+  });
 
   useEffect(() => {
     openNotification({
@@ -95,7 +113,7 @@ const DegreeWizard = () => {
         <ResetModal
           open={isComplete}
           onCancel={() => navigate('/course-selector')}
-          onOk={() => navigate('/')}
+          onOk={() => resetDegree.mutate()}
         />
         <Title className="text">Welcome to Circles!</Title>
         <S.Subtitle>
