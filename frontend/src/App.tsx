@@ -23,6 +23,7 @@ import 'antd/dist/reset.css';
 import useToken from 'hooks/useToken';
 import { refreshIdentity, updateIdentity } from 'reducers/identitySlice';
 import { useAppDispatch } from 'hooks';
+import PreventToken from 'components/Auth/PreventToken';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -106,22 +107,32 @@ const App = () => {
                   <Routes>
                     <Route element={<IdentityProvider />}>
                       <Route path="/" element={<LandingPage />} />
-                      <Route path="/degree-wizard" element={<DegreeWizard />} />
-                      <Route path="/course-selector" element={<CourseSelector />} />
-                      {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
-                      <Route path="/term-planner" element={<TermPlanner />} />
-                      <Route path="/progression-checker" element={<ProgressionChecker />} />
-                      {inDev && <Route path="/login/success/:provider" element={<LoginSuccess />} />}
-                      {inDev && <Route path="/login" element={<Auth />} />}
-                      <Route path="/tokens" element={<TokenPlayground allowUnset />} />
+                      <Route element={<PreventToken />}>
+                        <Route path="/login" element={<Auth />} />
+                      </Route>
                       <Route element={<RequireToken />}>
-                        <Route path="/token-required" element={<TokenPlayground />} />
+                        <Route path="/degree-wizard" element={<DegreeWizard />} />
                       </Route>
                       <Route element={<RequireToken needSetup />}>
+                        <Route path="/course-selector" element={<CourseSelector />} />
+                        {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                        <Route path="/term-planner" element={<TermPlanner />} />
+                        <Route path="/progression-checker" element={<ProgressionChecker />} />
+                      </Route>
+
+                      <Route path="/tokens" element={<TokenPlayground allowUnset />} />
+                      <Route element={<PreventToken setTo='/tokens' />}>
+                        <Route path="/token-notallowed" element={<TokenPlayground allowUnset />} />
+                      </Route>
+                      <Route element={<RequireToken expiredTo='/tokens' unsetTo='/tokens' />}>
+                        <Route path="/token-required" element={<TokenPlayground />} />
+                      </Route>
+                      <Route element={<RequireToken needSetup expiredTo='/tokens' unsetTo='/tokens' notsetupTo='/tokens' />}>
                         <Route path="/token-needsetup" element={<TokenPlayground />} />
                       </Route>
-                      <Route path="*" element={<Page404 />} />
                     </Route>
+                    <Route path="/login/success/:provider" element={<LoginSuccess />} />
+                    <Route path="*" element={<Page404 />} />
                   </Routes>
                 </Router>
               </Suspense>

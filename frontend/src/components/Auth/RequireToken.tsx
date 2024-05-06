@@ -9,9 +9,12 @@ import { selectToken, unsetIdentity } from 'reducers/identitySlice';
 
 type Props = {
   needSetup?: boolean;
+  unsetTo?: string;
+  expiredTo?: string;
+  notsetupTo?: string;
 };
 
-const RequireToken = ({ needSetup }: Props) => {
+const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
   // TODO: do we want to navigate away from login pages too?
   // TODO: maybe we could merge this into useToken??
   const dispatch = useAppDispatch();
@@ -46,16 +49,17 @@ const RequireToken = ({ needSetup }: Props) => {
   }
 
   if (tokenStatus === TokenStatus.UNSET) {
-    return <Navigate to="/tokens" />;
+    return <Navigate to={unsetTo ?? '/login'} />;
   }
 
   if (tokenStatus === TokenStatus.EXPIRED) {
+    // should rarely happen since tokens should be auto-refreshed
     dispatch(unsetIdentity());
-    return <Navigate to="/tokens" />;
+    return <Navigate to={expiredTo ?? unsetTo ?? '/login'} />;
   }
 
   if (tokenStatus === TokenStatus.NOTSETUP && needSetup) {
-    return <Navigate to="/tokens" />;
+    return <Navigate to={notsetupTo ?? '/degree-wizard'} />;
   }
 
   return <Outlet />;

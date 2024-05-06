@@ -19,7 +19,7 @@ import useToken from 'hooks/useToken';
 
 const TokenPlayground = ({ allowUnset }: { allowUnset?: boolean }) => {
   // const realToken = useAppSelector(selectToken);
-  const realToken = useToken({ allowUnset: !!allowUnset });
+  const realToken = useToken({ allowUnset });
   const [authURL, setAuthURL] = useState<string>('');
   const dispatch = useAppDispatch();
 
@@ -66,6 +66,9 @@ const TokenPlayground = ({ allowUnset }: { allowUnset?: boolean }) => {
       </div>
       <div>
         <Link to="/token-needsetup">to token needsetup page</Link>
+      </div>
+      <div>
+        <Link to="/token-notallowed">to no token allowed page</Link>
       </div>
     </>
   );

@@ -9,7 +9,7 @@ const Page404 = () => {
   const navigate = useNavigate();
 
   return (
-    <PageTemplate>
+    <PageTemplate showHeader={false}>
       <S.PageWrapper>
         <S.GridCircleWrapper>
           <S.LogoBox>
