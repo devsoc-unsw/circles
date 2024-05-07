@@ -1,22 +1,25 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { guestLogin as guestLoginRequest } from 'utils/api/auth';
 import { userLogin } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
+import { useAppDispatch } from 'hooks';
 import { updateIdentityWithAPIRes } from 'reducers/identitySlice';
 import S from './styles';
 
 const Container = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
+
   const guestLogin = useCallback(async () => {
     const res = await guestLoginRequest();
 
+    queryClient.clear();
     dispatch(updateIdentityWithAPIRes(res));
-    navigate('/degree-wizard');
-  }, [navigate, dispatch]);
+    // NOTE: rely on the PreventToken to do the redirecting
+  }, [dispatch, queryClient]);
 
   return (
     <S.LoginContainer>

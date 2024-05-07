@@ -28,7 +28,7 @@ const routes: Route[] = [
   },
   {
     label: 'Logout',
-    link: '/'
+    link: '/logout'
   }
 ];
 

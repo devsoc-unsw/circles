@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
 
 // import MetaTags from 'react-meta-tags';
-import './index.less';
 import PageTemplate from 'components/PageTemplate';
 import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
