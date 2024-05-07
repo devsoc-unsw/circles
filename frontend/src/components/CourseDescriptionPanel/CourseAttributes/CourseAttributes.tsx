@@ -13,6 +13,18 @@ import S from './styles';
 
 const { Title, Text } = Typography;
 
+interface TermMap {
+  [key: string]: string;
+}
+
+const termMapping: TermMap = {
+  T1: 'Term%201',
+  T2: 'Term%202',
+  T3: 'Term%203',
+  Summer: 'Summer',
+  T0: 'Summer'
+};
+
 type CourseAttributesProps = {
   course: Course;
   courseCapacity?: EnrolmentCapacityData;
@@ -27,6 +39,10 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
   const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
+
+  const termCode = terms[0];
+
+  const termMod = termMapping[termCode];
 
   const termTags = terms?.length
     ? terms.map((term) => {
@@ -87,7 +103,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           title: 'UNSW Course Outline',
           content: studyLevel ? (
             <S.Link
-              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=2024&term=Term%201&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=${terms[0]}&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
+              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=2024&term=${termMod}&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=${terms[0]}&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
               target="_blank"
               rel="noreferrer"
             >
