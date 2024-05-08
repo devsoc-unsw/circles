@@ -10,7 +10,7 @@ type Props = {
 
 const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [value, setValue] = useState<string | null>(null);
-  const [courses, setCourses] = useState<{ label: string; value: string }[]>([]);
+  const [courses, setCourses] = useState<Array<{ label: string; value: string }>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm] = useDebounce(value, 200);
 
