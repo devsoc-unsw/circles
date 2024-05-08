@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
@@ -27,7 +27,11 @@ const CourseInfoDrawers = ({
   pathFrom = [],
   unlocked
 }: CourseInfoDrawersProps) => {
-  const courses = useQuery('courses', getUserCourses).data || badCourses;
+  const courses =
+    useQuery({
+      queryKey: ['courses'],
+      queryFn: getUserCourses
+    }).data || badCourses;
 
   const pathFromInPlanner = pathFrom.filter((courseCode) =>
     Object.keys(courses).includes(courseCode)
@@ -36,7 +40,10 @@ const CourseInfoDrawers = ({
     (courseCode) => !Object.keys(courses).includes(courseCode)
   );
   const inPlanner = courses[course.code];
-  const validateQuery = useQuery('validate', validateTermPlanner);
+  const validateQuery = useQuery({
+    queryKey: ['validate'],
+    queryFn: validateTermPlanner
+  });
   const validations = validateQuery.data ?? badValidations;
   const isUnlocked = validations.courses_state[course.code];
   return (

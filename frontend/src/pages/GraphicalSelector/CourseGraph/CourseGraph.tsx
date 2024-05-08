@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import {
   ExpandAltOutlined,
@@ -8,6 +7,7 @@ import {
   ZoomOutOutlined
 } from '@ant-design/icons';
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
+import { useQuery } from '@tanstack/react-query';
 import { Switch } from 'antd';
 import axios from 'axios';
 import { CourseEdge, CoursesAllUnlocked } from 'types/api';
@@ -57,9 +57,18 @@ const CourseGraph = ({
   loading,
   setLoading
 }: Props) => {
-  const degreeQuery = useQuery('degree', getUserDegree);
-  const plannerQuery = useQuery('planner', getUserPlanner);
-  const coursesQuery = useQuery('courses', getUserCourses);
+  const degreeQuery = useQuery({
+    queryKey: ['degree'],
+    queryFn: getUserDegree
+  });
+  const plannerQuery = useQuery({
+    queryKey: ['planner'],
+    queryFn: getUserPlanner
+  });
+  const coursesQuery = useQuery({
+    queryKey: ['courses'],
+    queryFn: getUserCourses
+  });
   const windowSize = useAppWindowSize();
   const { theme } = useSelector((state: RootState) => state.settings);
   const previousTheme = useRef<typeof theme>(theme);
@@ -76,7 +85,7 @@ const CourseGraph = ({
     queryKey: ['graph', { code: degreeQuery.data?.programCode, specs: degreeQuery.data?.specs }],
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     queryFn: () => getProgramGraph(degreeQuery.data!.programCode, degreeQuery.data!.specs),
-    enabled: !degreeQuery.isLoading && degreeQuery.data && degreeQuery.isSuccess
+    enabled: !degreeQuery.isPending && degreeQuery.data && degreeQuery.isSuccess
   });
 
   const queriesSuccess =
