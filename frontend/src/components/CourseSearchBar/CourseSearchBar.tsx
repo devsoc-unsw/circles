@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Select, Spin, Typography } from 'antd';
+import { Flex, Select, Spin, Typography } from 'antd';
 import { SearchCourse } from 'types/api';
 import { CoursesResponse } from 'types/userResponse';
 import { useDebounce } from 'use-debounce';
@@ -24,17 +24,12 @@ const SearchResultLabel = ({
   const codeAndTitleText = `${courseCode}: ${courseTitle}`;
 
   return (
-    <div
-      style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem' }}
-      title={codeAndTitleText}
-    >
+    <Flex justify="space-between" gap="0.5rem" title={codeAndTitleText}>
       <div style={{ overflow: 'hidden' }}>
-        <Typography.Text style={{ maxWidth: '100%' }} ellipsis>
-          {codeAndTitleText}
-        </Typography.Text>
+        <Typography.Text ellipsis>{codeAndTitleText}</Typography.Text>
       </div>
       <QuickAddCartButton courseCode={courseCode} runMutate={runMutate} planned={isPlanned} />
-    </div>
+    </Flex>
   );
 };
 
