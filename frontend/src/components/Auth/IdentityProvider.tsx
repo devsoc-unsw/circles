@@ -11,6 +11,7 @@ const IdentityProvider = () => {
   const dispatch = useAppDispatch();
   const { expiresAt, userId } = useAppSelector(selectIdentity) ?? {};
   const [initialLoad, setInitialLoad] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const queryClient = useQueryClient();
 
   const updateToken = useCallback(async () => {
@@ -37,10 +38,11 @@ const IdentityProvider = () => {
   useEffect(() => {
     const initialRefresh = async () => {
       await updateToken();
-      setInitialLoad(false);
+      setIsLoading(false);
     };
 
     if (initialLoad) {
+      setInitialLoad(false);
       initialRefresh();
     }
   }, [updateToken, initialLoad]);
@@ -60,7 +62,7 @@ const IdentityProvider = () => {
     };
   }, [updateToken, expiresAt]);
 
-  return initialLoad ? <PageLoading /> : <Outlet />;
+  return isLoading ? <PageLoading /> : <Outlet />;
 };
 
 export default IdentityProvider;

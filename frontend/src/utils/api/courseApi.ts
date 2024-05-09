@@ -4,7 +4,7 @@ import { LIVE_YEAR } from 'config/constants';
 
 // TODO: Should error handling be done here?
 export const searchCourse = async (token: string, query: string): Promise<SearchCourse> => {
-  const res = await axios.post(`/courses/searchCourse/${query}`, { params: { token } });
+  const res = await axios.post(`/courses/searchCourse/${query}`, {}, { params: { token } });
   return res.data as SearchCourse;
 };
 
