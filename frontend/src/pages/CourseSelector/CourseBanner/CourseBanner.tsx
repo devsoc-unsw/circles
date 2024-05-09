@@ -1,14 +1,13 @@
-/* eslint-disable */
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
+import { CoursesResponse } from 'types/userResponse';
 import { fetchAllDegrees } from 'utils/api/programApi';
 import { getUserDegree } from 'utils/api/userApi';
 import CourseSearchBar from 'components/CourseSearchBar';
 import { useAppDispatch } from 'hooks';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
-import { CoursesResponse } from 'types/userResponse';
 
 const { Title } = Typography;
 
