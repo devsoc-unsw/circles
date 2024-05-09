@@ -67,7 +67,6 @@ def validate_term_planner(token: str = DUMMY_TOKEN):
     user = get_user(token)
     data = convert_to_planner_data(user)
     coursesState = validate_terms(data)
-    print(coursesState)
     return {"courses_state": coursesState}
 
 
@@ -87,7 +86,16 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
     
     course = get_course(data.courseCode) # raises exception anyway when unfound
     user['planner']['unplanned'].append(data.courseCode)
-    user['courses'][data.courseCode] = {'code': data.courseCode, 'suppressed': False, 'mark': None, 'uoc': course['UOC'], 'ignoreFromProgression': False}
+    user['courses'][data.courseCode] = {
+        'code': data.courseCode,
+        'suppressed': False,
+        'mark': None,
+        'uoc': course['UOC'],
+        'title': course['title'],
+        'plannedFor': 'unplanned',
+        'isMultiterm': course['is_multiterm'],
+        'ignoreFromProgression': False
+    }
     set_user(token, user, True)
 
 
@@ -122,7 +130,6 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
         raise HTTPException(status_code=400,
                             detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
-    print(planner)
     planner['unplanned'].remove(data.courseCode)
 
     # If multiterm add multiple instances of course
@@ -369,13 +376,17 @@ def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
         year_data = user['planner']['years'][year_offset]
         for term, courses_obj in terms_obj.items():
             for course, (uoc, mark, _) in courses_obj.items():
+                course_data = get_course(course)
                 year_data[term].append(course)
                 user['courses'][course] = {
-                        'code': course,
-                        'suppressed': False,
-                        'mark': mark,
-                        'ignoreFromProgression': False,
-                        'uoc': uoc or 6 # guess normal uoc
+                    'code': course,
+                    'suppressed': False,
+                    'mark': mark,
+                    'uoc': uoc or 6, # guess normal uoc
+                    'title': course_data['title'],
+                    'plannedFor': f'{year} T{term}',
+                    'isMultiterm': course_data['is_multiterm'],
+                    'ignoreFromProgression': False
                 }
 
     set_user(token, user, True)

@@ -6,36 +6,47 @@ from typing import Literal, Optional, TypedDict, Union
 
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, with_config
 
 
 class Programs(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     programs: dict
 
 class DegreeWizardInfo(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     programCode: str
     startYear: int
     endYear: int
     specs: list[str]
 
 class Specialisations(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     spec: dict[str, dict]  # cant do more specific because NotRequired doesnt work
 
 
 class ProgramCourses(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courses: dict[str, str]
 
 
 class CourseDetails(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     title: str
     code: str
     UOC: int
     level: int
     description: str
     study_level: str
-    school: Optional[str]
+    faculty: Optional[str] = None
+    school: Optional[str] = None
     campus: str
-    equivalents: dict[str, str]
+    equivalents: dict[str, Literal[1]]
     raw_requirements: str
     exclusions: dict[str, Literal[1]]
     handbook_note: str
@@ -43,32 +54,39 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: Optional[bool]
+    is_multiterm: Optional[bool] = None
 
-
+@with_config(ConfigDict(extra='forbid'))
 class ContainerContent(TypedDict):
     UOC: int
     courses: dict[str, str | list[str]]
     type: str
     notes: str
 
+@with_config(ConfigDict(extra='forbid'))
 class StructureContainer(TypedDict):
     name: str
     content: dict[str, ContainerContent]
 
 class Structure(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     structure: dict[str, StructureContainer]
     uoc: int
 
 
 # TODO: This should just take a token now
 class UserData(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     program: str
     specialisations: list[str]
     courses: dict
 
 
 class CourseState(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     is_accurate: bool
     unlocked: bool
     handbook_note: str
@@ -76,6 +94,8 @@ class CourseState(BaseModel):
 
 
 class ValidCourseState(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     is_accurate: bool
     unlocked: bool
     handbook_note: str
@@ -84,19 +104,27 @@ class ValidCourseState(BaseModel):
 
 
 class CoursesState(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courses_state: dict[str, CourseState] = {}
 
 
 class ValidCoursesState(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courses_state: dict[str, ValidCourseState] = {}
 
 
 class CoursesUnlockedWhenTaken (BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     direct_unlock: list[str]
     indirect_unlock: list[str]
 
 
 class CourseTypeState(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     is_accurate: bool
     unlocked: bool
     handbook_note: str
@@ -105,15 +133,20 @@ class CourseTypeState(BaseModel):
 
 
 class CoursesTypeState(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courses_state: dict[str, CourseTypeState] = {}
 
 
+@with_config(ConfigDict(extra='forbid'))
 class MostRecentPastTerm(TypedDict):
     Y: int
     T: int
 
 
 class ValidPlannerData(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     programCode: str
     specialisations: list[str]
     plan: list[list[dict[str, tuple[int, Optional[int]]]]]
@@ -124,44 +157,43 @@ class PlannerData(BaseModel):
     specialisations: list[str]
     plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
     mostRecentPastTerm: MostRecentPastTerm
-    class Config:
-        schema_extra = {
-            "example": {
-                "program": "3707",
-                "specialisations": ["COMPA1"],
-                "plan": [
-                    [
-                        {},
-                        {
-                            "COMP1511": [6, None],
-                            "MATH1141": [6, None],
-                            "MATH1081": [6, None],
-                        },
-                        {
-                            "COMP1521": [6, None],
-                            "COMP9444": [6, None],
-                        },
-                        {
-                            "COMP2521": [6, None],
-                            "MATH1241": [6, None],
-                            "COMP3331": [6, None],
-                        },
-                    ],
-                    [
-                        {},
-                        {
-                            "COMP1531": [6, None],
-                            "COMP6080": [6, None],
-                            "COMP3821": [6, None],
-                        },
-                    ],
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "program": "3707",
+            "specialisations": ["COMPA1"],
+            "plan": [
+                [
+                    {},
+                    {
+                        "COMP1511": [6, None],
+                        "MATH1141": [6, None],
+                        "MATH1081": [6, None],
+                    },
+                    {
+                        "COMP1521": [6, None],
+                        "COMP9444": [6, None],
+                    },
+                    {
+                        "COMP2521": [6, None],
+                        "MATH1241": [6, None],
+                        "COMP3331": [6, None],
+                    },
                 ],
-                "mostRecentPastTerm": {
-                    "Y": 1,
-                    "T": 0,
-                },
-            }
+                [
+                    {},
+                    {
+                        "COMP1531": [6, None],
+                        "COMP6080": [6, None],
+                        "COMP3821": [6, None],
+                    },
+                ],
+            ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0,
+            },
         }
+    }, extra='forbid')
 
     def to_user(self) -> User:
         user = User()
@@ -183,11 +215,13 @@ class PlannerData(BaseModel):
         return user
 
 
+@with_config(ConfigDict(extra='forbid'))
 class DegreeLocalStorage(TypedDict):
     programCode: str
     specs: list[str]
     isComplete: bool
 
+@with_config(ConfigDict(extra='forbid'))
 class PlannerLocalStorage(TypedDict):
     mostRecentPastTerm: MostRecentPastTerm
     unplanned: list[str]
@@ -208,42 +242,48 @@ markMap = {
     "HD": 85,
 }
 
+@with_config(ConfigDict(extra='forbid'))
 class CourseStorage(TypedDict):
     code: str
     suppressed: bool
     mark: Mark
     uoc: int
+    title: str
+    plannedFor: str | None
+    isMultiterm: bool
     ignoreFromProgression: bool
 
-class CourseType(BaseModel):
-    code: str
-    suppressed: bool
-    mark: Mark
-    plannedFor: str | None
-    title: str
-    isMultiterm: bool
-    UOC: int
-
+@with_config(ConfigDict(extra='forbid'))
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CourseStorage]
 
 class LocalStorage(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
 
 class CourseMark(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     course: str
     mark: Mark
 
 class CourseCodes(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courses: list[str]
 
 class Courses(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courses: dict[str, str] = {}
 
 class CoursesPath(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     original: str
     courses: list[str]
 
@@ -252,31 +292,44 @@ class CoursesPathDict(TypedDict):
     courses: list[str]
 
 class Description(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     description: str
 
 SpecType = Union[Literal["majors"], Literal["minors"], Literal["honours"]]
 class SpecialisationTypes(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     types: list[SpecType]
 
 class Graph(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     edges: list[dict[str, str]]
     courses: list[str]
 
 class TermsList(BaseModel):
-    terms: Optional[dict[str, Optional[list[str]]]]
-    # Actually tuple(str, fastapi.exceptions.HTTPException)
-    fails: Optional[list[tuple]]
+    model_config = ConfigDict(extra='forbid')
 
+    terms: Optional[dict[str, Optional[list[str]]]] = None
+    # Actually tuple(str, fastapi.exceptions.HTTPException)
+    fails: Optional[list[tuple]] = None
+
+@with_config(ConfigDict(extra='forbid'))
 class StructureDict(TypedDict):
     structure: dict[str, StructureContainer]
     uoc: int
 
 # Used in addToUnplanned, removeCourse and unscheduleCourse routes
 class CourseCode(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     courseCode: str
 
 # Used in unPlannedToTerm route
 class UnPlannedToTerm(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     destRow: int
     destTerm: str
     destIndex: int
@@ -284,6 +337,8 @@ class UnPlannedToTerm(BaseModel):
 
 # used in PlannedToTerm route
 class PlannedToTerm(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     srcRow: int
     srcTerm: str
     destRow: int
@@ -292,10 +347,13 @@ class PlannedToTerm(BaseModel):
     courseCode: str
 
 class ProgramTime(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
     startTime: tuple[int, int]  # (Year, Term) start of program
     endTime: tuple[int, int]
     uocMax: list[int]  # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
+@with_config(ConfigDict(extra='forbid'))
 class TermsOffered(TypedDict):
     terms: dict[str, list[str]]
     fails: list[tuple]

@@ -1,4 +1,4 @@
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 import re
 from typing import Any, BinaryIO, Dict, Tuple
 
@@ -82,4 +82,3 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
             i += 1
 
     return years
-
