@@ -14,7 +14,6 @@ import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
-import Auth from 'pages/Auth/Auth';
 import LoginSuccess from 'pages/LoginSuccess';
 import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
@@ -24,6 +23,7 @@ import useToken from 'hooks/useToken';
 import { refreshIdentity, updateIdentity } from 'reducers/identitySlice';
 import { useAppDispatch } from 'hooks';
 import PreventToken from 'components/Auth/PreventToken';
+import Login from 'pages/Login';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -108,7 +108,7 @@ const App = () => {
                     <Route element={<IdentityProvider />}>
                       <Route path="/" element={<LandingPage />} />
                       <Route element={<PreventToken />}>
-                        <Route path="/login" element={<Auth />} />
+                        <Route path="/login" element={<Login />} />
                       </Route>
                       <Route element={<RequireToken />}>
                         <Route path="/degree-wizard" element={<DegreeWizard />} />
