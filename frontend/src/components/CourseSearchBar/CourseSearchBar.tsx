@@ -21,13 +21,13 @@ const SearchResultLabel = ({
   runMutate,
   isPlanned
 }: SearchResultLabelProps) => {
+  const codeAndTitleText = `${courseCode}: ${courseTitle}`;
+
   return (
-    <div>
+    <div title={codeAndTitleText}>
       <QuickAddCartButton courseCode={courseCode} runMutate={runMutate} planned={isPlanned} />
-      <span style={{ 'marginLeft': '1ch' }}>
-        {courseCode}: {courseTitle}
-      </span>
-    </div >
+      <span style={{ marginLeft: '1ch' }}> {codeAndTitleText} </span>
+    </div>
   );
 };
 
