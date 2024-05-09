@@ -20,10 +20,9 @@ import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
 import useToken from 'hooks/useToken';
-import { refreshIdentity, updateIdentity } from 'reducers/identitySlice';
-import { useAppDispatch } from 'hooks';
 import PreventToken from 'components/Auth/PreventToken';
 import Login from 'pages/Login';
+import Logout from 'pages/Logout';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -119,6 +118,7 @@ const App = () => {
                         <Route path="/term-planner" element={<TermPlanner />} />
                         <Route path="/progression-checker" element={<ProgressionChecker />} />
                       </Route>
+                      <Route path="/logout" element={<Logout />} />
 
                       <Route path="/tokens" element={<TokenPlayground allowUnset />} />
                       <Route element={<PreventToken setTo='/tokens' />}>

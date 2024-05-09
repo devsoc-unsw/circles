@@ -27,6 +27,13 @@ export const guestLogin = async (): Promise<IdentityResponse> => {
   return res.data;
 };
 
+export const logout = async (token: string): Promise<void> => {
+  await axios.delete<void>('/auth/logout', {
+    withCredentials: true,
+    headers: { Authorization: `Bearer ${token}` }
+  });
+};
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export const checkTokenStatus = async (token: string | undefined): Promise<TokenStatus> => {
   if (token === undefined) {

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { refreshTokens } from 'utils/api/auth';
 import PageLoading from 'components/PageLoading';
@@ -8,32 +9,41 @@ import { selectIdentity, unsetIdentity, updateIdentityWithAPIRes } from 'reducer
 
 const IdentityProvider = () => {
   const dispatch = useAppDispatch();
-  const { expiresAt } = useAppSelector(selectIdentity) ?? {};
-  const [loading, setLoading] = useState(true);
+  const { expiresAt, userId } = useAppSelector(selectIdentity) ?? {};
+  const [initialLoad, setInitialLoad] = useState(true);
+  const queryClient = useQueryClient();
 
   const updateToken = useCallback(async () => {
     try {
       const newIdentity = await refreshTokens();
+      if (newIdentity.uid !== userId) {
+        // only clear if its a new user id
+        // TODO: dont actually need to clear entire queryClient, just user storage
+        queryClient.clear();
+      }
 
       dispatch(updateIdentityWithAPIRes(newIdentity));
     } catch (e) {
       if (isAxiosError(e) && e.response?.status === 401) {
+        queryClient.clear();
+
         dispatch(unsetIdentity());
       } else {
         throw e;
       }
     }
-  }, [dispatch]);
+  }, [dispatch, queryClient, userId]);
 
   useEffect(() => {
     const initialRefresh = async () => {
-      setLoading(true);
       await updateToken();
-      setLoading(false);
+      setInitialLoad(false);
     };
 
-    initialRefresh();
-  }, [updateToken]);
+    if (initialLoad) {
+      initialRefresh();
+    }
+  }, [updateToken, initialLoad]);
 
   useEffect(() => {
     // silent refresh, don't set loading
@@ -50,7 +60,7 @@ const IdentityProvider = () => {
     };
   }, [updateToken, expiresAt]);
 
-  return loading ? <PageLoading /> : <Outlet />;
+  return initialLoad ? <PageLoading /> : <Outlet />;
 };
 
 export default IdentityProvider;

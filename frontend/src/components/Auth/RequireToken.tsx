@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { selectToken, unsetIdentity } from 'reducers/identitySlice';
+import { useAppSelector } from 'hooks';
+import { selectIdentity } from 'reducers/identitySlice';
 
 type Props = {
   needSetup?: boolean;
@@ -17,12 +17,12 @@ type Props = {
 const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
   // TODO: do we want to navigate away from login pages too?
   // TODO: maybe we could merge this into useToken??
-  const dispatch = useAppDispatch();
-  const token = useAppSelector(selectToken);
+  const { token, userId } = useAppSelector(selectIdentity) ?? {};
 
+  // TODO: strip out undefined check from checkTokenStatus
   const { isPending, data: tokenStatus } = useQuery({
     queryFn: () => checkTokenStatus(token),
-    queryKey: ['degree', 'user', 'state', { token }], // TODO: temporary key
+    queryKey: ['degree', 'user', 'state', { userId }], // TODO: temporary key
     throwOnError: true
     // staleTime: 60 * 5 * 1000 // TODO: re add when everything is done
   });
@@ -55,8 +55,7 @@ const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
 
   if (tokenStatus === TokenStatus.EXPIRED) {
     // should rarely happen since tokens should be auto-refreshed
-    dispatch(unsetIdentity());
-    return <Navigate to={expiredTo ?? unsetTo ?? '/login'} />;
+    return <Navigate to={expiredTo ?? '/logout'} />;
   }
 
   if (tokenStatus === TokenStatus.NOTSETUP && needSetup) {

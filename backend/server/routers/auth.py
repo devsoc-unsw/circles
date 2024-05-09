@@ -233,6 +233,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
 )
 def logout(res: Response, token: Annotated[SessionToken, Security(require_token)]):
     # delete the cookie first since this will always happen
+    # TODO: maybe this requires refresh_token instead, and then no need for a refresh first
     set_refresh_token_cookie(res, None)
 
     try:

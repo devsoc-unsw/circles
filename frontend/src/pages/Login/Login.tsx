@@ -10,7 +10,7 @@ import { useAppDispatch } from 'hooks';
 import { updateIdentityWithAPIRes } from 'reducers/identitySlice';
 import S from './styles';
 
-const Container = () => {
+const Login = () => {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
 
@@ -46,4 +46,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default Login;

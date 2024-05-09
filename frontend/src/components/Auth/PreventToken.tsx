@@ -25,7 +25,11 @@ const PreventToken = ({ setTo }: Props) => {
     return <PageLoading />;
   }
 
-  // TODO: figure out what to do on expired
+  if (tokenStatus === TokenStatus.EXPIRED) {
+    // shouldnt really happen
+    return <Navigate to={setTo ?? '/logout'} />;
+  }
+
   if (tokenStatus === TokenStatus.NOTSETUP) {
     return <Navigate to={setTo ?? '/degree-wizard'} />;
   }
