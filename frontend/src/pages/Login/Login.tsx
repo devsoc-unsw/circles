@@ -5,6 +5,7 @@ import { guestLogin as guestLoginRequest } from 'utils/api/auth';
 import { userLogin } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
+import PageTemplate from 'components/PageTemplate';
 import { useAppDispatch } from 'hooks';
 import { updateIdentityWithAPIRes } from 'reducers/identitySlice';
 import S from './styles';
@@ -22,24 +23,26 @@ const Container = () => {
   }, [dispatch, queryClient]);
 
   return (
-    <S.LoginContainer>
-      <S.Wrapper>
-        <S.Left>
-          <S.SplashArt src={SplashArt} />
-        </S.Left>
-        <S.Right>
-          <S.Login>
-            <Link to="/">
-              <S.Back src={BackButton} />
-            </Link>
-            <h2>Login to Circles</h2>
-            <p>For current UNSW Students</p>
-            <S.LoginButton onClick={userLogin}>Login with zID</S.LoginButton>
-            <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
-          </S.Login>
-        </S.Right>
-      </S.Wrapper>
-    </S.LoginContainer>
+    <PageTemplate showHeader={false}>
+      <S.LoginContainer>
+        <S.Wrapper>
+          <S.Left>
+            <S.SplashArt src={SplashArt} />
+          </S.Left>
+          <S.Right>
+            <S.Login>
+              <Link to="/">
+                <S.Back src={BackButton} />
+              </Link>
+              <h2>Login to Circles</h2>
+              <p>For current UNSW Students</p>
+              <S.LoginButton onClick={userLogin}>Login with zID</S.LoginButton>
+              <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
+            </S.Login>
+          </S.Right>
+        </S.Wrapper>
+      </S.LoginContainer>
+    </PageTemplate>
   );
 };
 
