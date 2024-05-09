@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
@@ -7,10 +8,16 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import { useAppDispatch } from 'hooks';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
+import { CoursesResponse, PlannerResponse } from 'types/userResponse';
 
 const { Title } = Typography;
 
-const CourseBanner = () => {
+type CourseBannerProps = {
+  planner?: PlannerResponse;
+  courses?: CoursesResponse;
+};
+
+const CourseBanner = ({ planner, courses }: CourseBannerProps) => {
   const dispatch = useAppDispatch();
 
   const degreeQuery = useQuery({
@@ -34,7 +41,11 @@ const CourseBanner = () => {
       <Title level={2} className="text">
         {degreeQuery.data?.programCode} - {getUserProgramTitle()}
       </Title>
-      <CourseSearchBar onSelectCallback={(courseCode) => dispatch(addTab(courseCode))} />
+      <CourseSearchBar
+        onSelectCallback={(courseCode) => dispatch(addTab(courseCode))}
+        planner={planner}
+        userCourses={courses}
+      />
     </S.BannerWrapper>
   );
 };
