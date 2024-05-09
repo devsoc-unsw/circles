@@ -15,7 +15,6 @@ type SearchResultLabelProps = {
   runMutate?: (courseId: string) => void;
 };
 
-/* eslint-disable */
 const SearchResultLabel = ({
   courseCode,
   courseTitle,
