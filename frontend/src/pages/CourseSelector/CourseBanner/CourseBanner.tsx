@@ -8,16 +8,15 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import { useAppDispatch } from 'hooks';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
-import { CoursesResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse } from 'types/userResponse';
 
 const { Title } = Typography;
 
 type CourseBannerProps = {
-  planner?: PlannerResponse;
   courses?: CoursesResponse;
 };
 
-const CourseBanner = ({ planner, courses }: CourseBannerProps) => {
+const CourseBanner = ({ courses }: CourseBannerProps) => {
   const dispatch = useAppDispatch();
 
   const degreeQuery = useQuery({
@@ -43,7 +42,6 @@ const CourseBanner = ({ planner, courses }: CourseBannerProps) => {
       </Title>
       <CourseSearchBar
         onSelectCallback={(courseCode) => dispatch(addTab(courseCode))}
-        planner={planner}
         userCourses={courses}
       />
     </S.BannerWrapper>

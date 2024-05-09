@@ -28,12 +28,13 @@ const SearchResultLabel = ({ courseCode, courseTitle, runMutate, isPlanned }: Se
 type CourseSearchBarProps = {
   onSelectCallback: (courseCode: string) => void;
   style?: React.CSSProperties;
+  // TODO: planner not required here
   planner?: PlannerResponse;
   userCourses?: CoursesResponse;
 };
 
 
-const CourseSearchBar = ({ onSelectCallback, style, planner: _, userCourses }: CourseSearchBarProps) => {
+const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchBarProps) => {
   const [value, setValue] = useState<string | null>(null);
   const [searchResults, setSearchResults] = useState<SearchCourse>({});
   const [isLoading, setIsLoading] = useState(false);

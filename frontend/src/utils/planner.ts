@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CourseMark } from 'types/api';
-import { CoursesResponse, UserResponse } from 'types/userResponse';
+import { UserResponse } from 'types/userResponse';
 import { getToken } from './api/userApi';
 
 export const updateCourseMark = async (courseMark: CourseMark) => {
