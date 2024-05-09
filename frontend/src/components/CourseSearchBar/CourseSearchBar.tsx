@@ -15,6 +15,7 @@ type SearchResultLabelProps = {
   runMutate?: (courseId: string) => void;
 };
 
+/* eslint-disable */
 const SearchResultLabel = ({
   courseCode,
   courseTitle,
@@ -24,8 +25,10 @@ const SearchResultLabel = ({
   return (
     <div>
       <QuickAddCartButton courseCode={courseCode} runMutate={runMutate} planned={isPlanned} />
-      {courseCode}: {courseTitle}
-    </div>
+      <span style={{ 'marginLeft': '1ch' }}>
+        {courseCode}: {courseTitle}
+      </span>
+    </div >
   );
 };
 
@@ -111,7 +114,7 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
       onSearch={handleSearch}
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
-      style={{ width: '30rem', ...style }}
+      style={{ width: '55ch', ...style }}
       suffixIcon={!value}
       className="course-search-bar"
     />
