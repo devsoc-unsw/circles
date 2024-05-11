@@ -187,7 +187,7 @@ def get_user_p(token: str) -> Dict[str, CourseStorageWithExtra]:
     # flatten the planner
     planner = get_user_planner(token)
     # TODO: check if they were expecting None or 'unplanned'
-    flattened: Dict[str, str] = { code: 'unplanned' for code in planner['unplanned'] }
+    flattened: Dict[str, Optional[str]] = { code: None for code in planner['unplanned'] }
     for index, year in enumerate(planner['years']):
         for termIndex, term in year.items():
             for course in term:
@@ -209,7 +209,7 @@ def get_user_p(token: str) -> Dict[str, CourseStorageWithExtra]:
             'title': course_info['title'],
             'plannedFor': flattened.get(raw_course['code']),
         }
-        assert with_extra_info['plannedFor'] is not None, with_extra_info  # ensure it was somewhere
+        assert raw_course['code'] in flattened, with_extra_info  # ensure it was somewhere
 
         res[raw_course['code']] = with_extra_info
 
