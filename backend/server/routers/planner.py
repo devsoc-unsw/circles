@@ -91,9 +91,6 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
         'suppressed': False,
         'mark': None,
         'uoc': course['UOC'],
-        'title': course['title'],
-        'plannedFor': 'unplanned',
-        'isMultiterm': course['is_multiterm'],
         'ignoreFromProgression': False
     }
     set_user(token, user, True)
@@ -383,9 +380,6 @@ def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
                     'suppressed': False,
                     'mark': mark,
                     'uoc': uoc or 6, # guess normal uoc
-                    'title': course_data['title'],
-                    'plannedFor': f'{year} T{term}',
-                    'isMultiterm': course_data['is_multiterm'],
                     'ignoreFromProgression': False
                 }
 

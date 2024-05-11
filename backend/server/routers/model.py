@@ -248,6 +248,14 @@ class CourseStorage(TypedDict):
     suppressed: bool
     mark: Mark
     uoc: int
+    ignoreFromProgression: bool
+
+@with_config(ConfigDict(extra='forbid'))
+class CourseStorageWithExtra(TypedDict):
+    code: str
+    suppressed: bool
+    mark: Mark
+    uoc: int
     title: str
     plannedFor: str | None
     isMultiterm: bool

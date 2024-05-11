@@ -9,7 +9,7 @@ from fastapi import APIRouter, HTTPException
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
-from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CourseStorageWithExtra, CoursesState, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
 
 # from server.db.mongo.conn import usersDB
 import server.db.helpers.users as udb
@@ -45,13 +45,13 @@ def _token_to_uid(token: str) -> Optional[str]:
     return None
 
 def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
-    return NEWUserPlannerStorage.parse_obj(s)
+    return NEWUserPlannerStorage.model_validate(s)
 
 def _otn_degree(s: DegreeLocalStorage) -> NEWUserDegreeStorage:
-    return NEWUserDegreeStorage.parse_obj(s)
+    return NEWUserDegreeStorage.model_validate(s)
 
 def _otn_courses(s: dict[str, CourseStorage]) -> NEWUserCoursesStorage:
-    return { code: NEWUserCourseStorage.parse_obj(info) for code, info in s.items() }
+    return { code: NEWUserCourseStorage.model_validate(info) for code, info in s.items() }
 
 def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
     return { 
@@ -133,9 +133,6 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
             'suppressed': False, # guess we will nuke this config
             'mark': None, # wtf we nuking marks?
             'uoc': get_course(course)['UOC'],
-            'title': get_course(course)['title'],
-            'plannedFor': 'unplanned', # Oof
-            'isMultiterm': get_course(course)['is_multiterm'],
             'ignoreFromProgression': False
         }
         for course in chain(planned, unplanned)
@@ -178,28 +175,44 @@ def get_user_planner(token: str) -> PlannerLocalStorage:
     return get_user(token)['planner']
 
 @router.get("/data/courses/{token}")
-def get_user_p(token: str):
+def get_user_p(token: str) -> Dict[str, CourseStorageWithExtra]:
     # expects to also get the
     # title: str
     # plannedFor: string of form "year term"
     # isMultiterm
     # uoc -> UOC
     # TODO: fix return type up omg
-    res = get_user(token)['courses']
+    raw_courses = get_user(token)['courses']
+
+    # flatten the planner
     planner = get_user_planner(token)
-    for c in res.values():
-        c = cast(Dict, c)
-        course = get_course(c['code'])
-        c['title'] = course['title']
-        c['isMultiterm'] = course['is_multiterm']
-        for index, year in enumerate(planner['years']):
-            for termIndex, term in year.items():
-                if c['code'] in term:
-                    c['plannedFor'] = f"{index + planner['startYear']} {termIndex}"
-                    break
-        if c['code'] in planner['unplanned']:
-            c['plannedFor'] = "unplanned"
-        c['plannedFor'] = c.get('plannedFor') # set to None if need be
+    # TODO: check if they were expecting None or 'unplanned'
+    flattened: Dict[str, str] = { code: 'unplanned' for code in planner['unplanned'] }
+    for index, year in enumerate(planner['years']):
+        for termIndex, term in year.items():
+            for course in term:
+                assert course not in flattened  # makes sure its not double storred
+                flattened[course] = f"{index + planner['startYear']} {termIndex}"
+
+    res: Dict[str, CourseStorageWithExtra] = {}
+
+    for raw_course in raw_courses.values():
+        course_info = get_course(raw_course['code'])
+
+        with_extra_info: CourseStorageWithExtra = {
+            'code': raw_course['code'],
+            'ignoreFromProgression': raw_course['ignoreFromProgression'],
+            'mark': raw_course['mark'],
+            'uoc': raw_course['uoc'],
+            'suppressed': raw_course['suppressed'],
+            'isMultiterm': course_info['is_multiterm'],
+            'title': course_info['title'],
+            'plannedFor': flattened.get(raw_course['code']),
+        }
+        assert with_extra_info['plannedFor'] is not None, with_extra_info  # ensure it was somewhere
+
+        res[raw_course['code']] = with_extra_info
+
     return res
 
 # makes an empty CS Student

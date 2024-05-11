@@ -26,7 +26,7 @@ class UserCourseStorage(BaseModel):
     ignoreFromProgression: bool
 
 # TODO: https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types
-UserCoursesStorage = Dict[str, UserCourseStorage]
+type UserCoursesStorage = Dict[str, UserCourseStorage]
 
 class YearTerm(BaseModel):
     Y: int

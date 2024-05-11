@@ -14,7 +14,7 @@ def get_user(uid: str) -> Optional[Union[NotSetupUserStorage, UserStorage]]:
     if res is None:
         return res
 
-    return UserStorage.parse_obj(res) if res["setup"] else NotSetupUserStorage.parse_obj(res)
+    return UserStorage.model_validate(res) if res["setup"] else NotSetupUserStorage.model_validate(res)
 
 def get_user_degree(uid: str) -> Optional[UserDegreeStorage]:
     # TODO: mayb do osmething funky with aggregate

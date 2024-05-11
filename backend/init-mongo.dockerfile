@@ -2,7 +2,7 @@
 # speeds up development, since we can rebuild and create new containers without
 # overwriting every time.
 
-FROM python:3.11.5
+FROM python:3.12.3-slim
 
 WORKDIR /util
 
