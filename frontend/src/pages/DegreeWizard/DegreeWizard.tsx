@@ -27,7 +27,6 @@ const DegreeWizard = () => {
 
   const [degreeInfo, setDegreeInfo] = useState<DegreeWizardPayload>({
     programCode: '',
-    isComplete: false,
     startYear: undefined,
     endYear: undefined,
     specs: []

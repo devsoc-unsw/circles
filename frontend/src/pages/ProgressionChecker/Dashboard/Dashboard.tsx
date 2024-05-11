@@ -64,8 +64,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
   Object.keys(courses).forEach((courseCode) => {
     if (courses[courseCode]?.plannedFor && !courses[courseCode]?.ignoreFromProgression) {
       completedUOC +=
-        courses[courseCode].UOC *
-        getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+        courses[courseCode].uoc *
+        getNumTerms(courses[courseCode].uoc, courses[courseCode].isMultiterm);
     }
   });
 
@@ -95,8 +95,8 @@ const Dashboard = ({ isLoading, structure, totalUOC, freeElectivesUOC }: Props) 
               !courses[courseCode]?.ignoreFromProgression
             ) {
               const courseUOC =
-                courses[courseCode].UOC *
-                getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+                courses[courseCode].uoc *
+                getNumTerms(courses[courseCode].uoc, courses[courseCode].isMultiterm);
               res[group].curr += courseUOC;
               currUOC += courseUOC;
             }

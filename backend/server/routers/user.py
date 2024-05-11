@@ -31,8 +31,8 @@ from server.routers.model import (
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
-from pydantic.json import ENCODERS_BY_TYPE
-ENCODERS_BY_TYPE[ObjectId] = str
+from pydantic import BaseModel
+BaseModel.model_config["json_encoders"] = {ObjectId: str}
 
 router = APIRouter(
     prefix="/user",
@@ -133,6 +133,9 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
             'suppressed': False, # guess we will nuke this config
             'mark': None, # wtf we nuking marks?
             'uoc': get_course(course)['UOC'],
+            'title': get_course(course)['title'],
+            'plannedFor': 'unplanned', # Oof
+            'isMultiterm': get_course(course)['is_multiterm'],
             'ignoreFromProgression': False
         }
         for course in chain(planned, unplanned)
@@ -197,7 +200,6 @@ def get_user_p(token: str):
         if c['code'] in planner['unplanned']:
             c['plannedFor'] = "unplanned"
         c['plannedFor'] = c.get('plannedFor') # set to None if need be
-        c['UOC'] = c.pop('uoc')
     return res
 
 # makes an empty CS Student
@@ -335,7 +337,6 @@ def reset(token: str = DUMMY_TOKEN):
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     # validate
-    print("MADE INNER")
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:
         raise HTTPException(status_code=400, detail="Invalid year range")
@@ -343,10 +344,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     # Ensure valid prog code - done by the specialisatoin check so this is
     # techincally redundant
     progs = get_programs()["programs"]
-    print('progs: ', progs)
     if progs is None:
         raise HTTPException(status_code=400, detail="Invalid program code")
-    print("valid program")
 
     # Ensure that all specialisations are valid
     # Need a bidirectoinal validate
