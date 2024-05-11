@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
+import { CoursesResponse } from 'types/userResponse';
 import { fetchAllDegrees } from 'utils/api/programApi';
 import { getUserDegree } from 'utils/api/userApi';
 import CourseSearchBar from 'components/CourseSearchBar';
@@ -10,7 +11,11 @@ import S from './styles';
 
 const { Title } = Typography;
 
-const CourseBanner = () => {
+type CourseBannerProps = {
+  courses?: CoursesResponse;
+};
+
+const CourseBanner = ({ courses }: CourseBannerProps) => {
   const dispatch = useAppDispatch();
 
   const degreeQuery = useQuery({
@@ -34,7 +39,10 @@ const CourseBanner = () => {
       <Title level={2} className="text">
         {degreeQuery.data?.programCode} - {getUserProgramTitle()}
       </Title>
-      <CourseSearchBar onSelectCallback={(courseCode) => dispatch(addTab(courseCode))} />
+      <CourseSearchBar
+        onSelectCallback={(courseCode) => dispatch(addTab(courseCode))}
+        userCourses={courses}
+      />
     </S.BannerWrapper>
   );
 };
