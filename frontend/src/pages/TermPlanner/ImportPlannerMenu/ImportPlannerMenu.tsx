@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Course } from 'types/api';
 import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
+import { withAuthorization } from 'utils/api/auth';
 import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import useToken from 'hooks/useToken';
@@ -24,7 +25,9 @@ const ImportPlannerMenu = () => {
 
   const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
     try {
-      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
+      await axios.post('planner/unPlannedToTerm', data, {
+        headers: { ...withAuthorization(token) }
+      });
     } catch (err) {
       // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
       console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
@@ -37,7 +40,11 @@ const ImportPlannerMenu = () => {
 
   const handleAddToUnplanned = async (code: string) => {
     try {
-      await axios.post('planner/addToUnplanned', { courseCode: code }, { params: { token } });
+      await axios.post(
+        'planner/addToUnplanned',
+        { courseCode: code },
+        { headers: { ...withAuthorization(token) } }
+      );
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Error at handleAddToUnplanned: ', err);
@@ -96,12 +103,12 @@ const ImportPlannerMenu = () => {
             await axios.put(
               '/user/updateDegreeLength',
               { numYears: fileInJson.numYears },
-              { params: { token } }
+              { headers: { ...withAuthorization(token) } }
             );
             await axios.put(
               '/user/updateStartYear',
               { startYear: fileInJson.startYear },
-              { params: { token } }
+              { headers: { ...withAuthorization(token) } }
             );
           } catch {
             openNotification({
@@ -113,7 +120,11 @@ const ImportPlannerMenu = () => {
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             try {
-              await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+              await axios.post(
+                '/user/toggleSummerTerm',
+                {},
+                { headers: { ...withAuthorization(token) } }
+              );
             } catch {
               openNotification({
                 type: 'error',

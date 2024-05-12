@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from 'antd';
 import axios from 'axios';
 import styled from 'styled-components';
+import { withAuthorization } from 'utils/api/auth';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
@@ -43,7 +44,11 @@ const ValidateCtfButton = () => {
 
   const validateCtf = async () => {
     setOpen(true);
-    const res = await axios.post<CtfResult>('/ctf/validateCtf/', {}, { params: { token } });
+    const res = await axios.post<CtfResult>(
+      '/ctf/validateCtf/',
+      {},
+      { headers: { ...withAuthorization(token) } }
+    );
     setResult(res.data);
   };
 

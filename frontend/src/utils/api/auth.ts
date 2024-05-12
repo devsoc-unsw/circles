@@ -17,6 +17,15 @@ export type IdentityResponse = {
   uid: string;
 };
 
+export const withAuthorization = (token: string) => {
+  if (typeof token !== 'string' || token.length === 0) {
+    // TODO: could probably remove this later
+    throw TypeError('Token must be a string of length > 0', { cause: { token } });
+  }
+
+  return { Authorization: `Bearer ${token}` };
+};
+
 export const guestLogin = async (): Promise<IdentityResponse> => {
   const res = await axios.post<IdentityResponse>(
     '/auth/guest_login',
@@ -30,7 +39,7 @@ export const guestLogin = async (): Promise<IdentityResponse> => {
 export const logout = async (token: string): Promise<void> => {
   await axios.delete<void>('/auth/logout', {
     withCredentials: true,
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { ...withAuthorization(token) }
   });
 };
 
@@ -41,7 +50,7 @@ export const checkTokenStatus = async (token: string | undefined): Promise<Token
   }
 
   const res = await axios.get<TokenStatus>('/auth/tokenUserState', {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { ...withAuthorization(token) }
   });
 
   return res.data;

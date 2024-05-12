@@ -6,6 +6,7 @@ import { Select, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
+import { withAuthorization } from 'utils/api/auth';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -31,7 +32,7 @@ const SettingsMenu = ({ planner }: Props) => {
         await axios.put(
           '/user/updateStartYear',
           { startYear: parseInt(dateString, 10) },
-          { params: { token } }
+          { headers: { ...withAuthorization(token) } }
         );
       } catch {
         openNotification({
@@ -45,7 +46,11 @@ const SettingsMenu = ({ planner }: Props) => {
 
   async function handleUpdateDegreeLength(value: number) {
     try {
-      await axios.put('/user/updateDegreeLength', { numYears: value }, { params: { token } });
+      await axios.put(
+        '/user/updateDegreeLength',
+        { numYears: value },
+        { headers: { ...withAuthorization(token) } }
+      );
     } catch {
       openNotification({
         type: 'error',
@@ -57,7 +62,7 @@ const SettingsMenu = ({ planner }: Props) => {
 
   async function summerToggle() {
     try {
-      await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+      await axios.post('/user/toggleSummerTerm', {}, { headers: { ...withAuthorization(token) } });
     } catch {
       openNotification({
         type: 'error',

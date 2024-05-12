@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from 'antd';
-import { resetDegree } from 'utils/api/degreeApi';
+import { resetUserDegree } from 'utils/api/userApi';
 import { useAppDispatch } from 'hooks';
 import useToken from 'hooks/useToken';
 import { resetTabs } from 'reducers/courseTabsSlice';
@@ -19,7 +19,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   const token = useToken();
 
   const resetDegreeMutation = useMutation({
-    mutationFn: () => resetDegree(token),
+    mutationFn: () => resetUserDegree(token),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['degree']

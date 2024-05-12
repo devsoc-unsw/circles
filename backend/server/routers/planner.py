@@ -4,13 +4,14 @@ route for planner algorithms
 
 from math import lcm
 from operator import itemgetter
-from typing import Dict, List, Optional, Tuple
+from typing import Annotated, Dict, List, Optional, Tuple
 
 from algorithms.autoplanning import autoplan
 from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
-from fastapi import APIRouter, HTTPException, UploadFile
-from server.config import DUMMY_TOKEN
+from fastapi import APIRouter, HTTPException, Security, UploadFile
+from server.db.helpers.models import SessionToken
+from server.routers.auth_utility.middleware import HTTPBearer401
 from server.routers.courses import get_course
 from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
                                   ValidCoursesState, ValidPlannerData, markMap)
@@ -46,6 +47,7 @@ router = APIRouter(
     prefix="/planner", tags=["planner"], responses={404: {"description": "Not found"}}
 )
 
+require_token = HTTPBearer401()
 
 @router.get("/")
 def planner_index() -> str:
@@ -54,7 +56,7 @@ def planner_index() -> str:
 
 
 @router.get("/validateTermPlanner", response_model=ValidCoursesState)
-def validate_term_planner(token: str = DUMMY_TOKEN):
+def validate_term_planner(token: Annotated[SessionToken, Security(require_token)]):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
@@ -71,7 +73,7 @@ def validate_term_planner(token: str = DUMMY_TOKEN):
 
 
 @router.post("/addToUnplanned")
-def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
+def add_to_unplanned(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
     """
     Adds a course to the user's unplanned column within their planner
 
@@ -97,7 +99,7 @@ def add_to_unplanned(data: CourseCode, token: str = DUMMY_TOKEN):
 
 
 @router.post("/unPlannedToTerm")
-def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN):
+def set_unplanned_course_to_term(data: UnPlannedToTerm, token: Annotated[SessionToken, Security(require_token)]):
     """
     Moved a course out of the user's unplanned column and into the specified course on their planner
 
@@ -146,7 +148,7 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: str = DUMMY_TOKEN
 
 
 @router.post("/plannedToTerm")
-def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
+def set_planned_course_to_term(data: PlannedToTerm, token: Annotated[SessionToken, Security(require_token)]):
     """
     Moves a course out of one term and into a second term.
 
@@ -237,7 +239,7 @@ def set_planned_course_to_term(data: PlannedToTerm, token: str = DUMMY_TOKEN):
 
 
 @router.post('/removeCourse')
-def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
+def remove_course(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
     """
     Removes a course from the user's planner data
 
@@ -264,14 +266,14 @@ def remove_course(data: CourseCode, token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 @router.post('/toggleIgnoreFromProgression')
-def toggle_ignore_from_progression(data: CourseCode, token: str = DUMMY_TOKEN):
+def toggle_ignore_from_progression(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     user['courses'][data.courseCode]['ignoreFromProgression'] = not user['courses'][data.courseCode]['ignoreFromProgression']
     set_user(token, user, True)
 
 
 @router.post("/removeAll")
-def remove_all(token: str = DUMMY_TOKEN):
+def remove_all(token: Annotated[SessionToken, Security(require_token)]):
     """
     Removes all courses from the user's planner data
 
@@ -291,7 +293,7 @@ def remove_all(token: str = DUMMY_TOKEN):
 
 
 @router.post("/unscheduleCourse")  # TODO: What if someone is enrolled in the same couse twice?
-def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
+def unschedule(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
     """
     Moves a course out of a term and into the user's unplanned column
 
@@ -318,7 +320,7 @@ def unschedule(data: CourseCode, token: str = DUMMY_TOKEN):
 
 
 @router.post('/unscheduleAll')
-def unschedule_all(token: str = DUMMY_TOKEN):
+def unschedule_all(token: Annotated[SessionToken, Security(require_token)]):
     """
     Removes all courses from every term and moves then into the user's unplanned column.
 
@@ -336,7 +338,7 @@ def unschedule_all(token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 @router.post("/toggleTermLocked")
-def toggleLocked(termyear: str, token: str = DUMMY_TOKEN):
+def toggleLocked(termyear: str, token: Annotated[SessionToken, Security(require_token)]):
     (term_str, year_str) = termyear.split('T')
     try:
         year = int(year_str)
@@ -349,7 +351,7 @@ def toggleLocked(termyear: str, token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 @router.post('/addFromTranscript')
-def add_from_transcript(file: UploadFile, token: str = DUMMY_TOKEN):
+def add_from_transcript(file: UploadFile, token: Annotated[SessionToken, Security(require_token)]):
     """
     Adds all courses from a transcript into a user's courses
     """

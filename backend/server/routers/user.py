@@ -1,35 +1,20 @@
 from itertools import chain
-from typing import Any, Dict, Optional, cast
+from typing import Annotated, Any, Dict, Optional, cast
 from bson.objectid import ObjectId
-from algorithms.objects.user import User
-from server.routers.utility import get_core_courses
+from server.routers.auth_utility.middleware import HTTPBearer401
 from server.routers.courses import get_course
 from data.config import LIVE_YEAR
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Security
 
-from data.config import LIVE_YEAR
-from server.config import DUMMY_TOKEN
-from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CourseStorageWithExtra, CoursesState, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, CourseStorage, DegreeWizardInfo, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
+from server.routers.programs import get_programs
+from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 # from server.db.mongo.conn import usersDB
 import server.db.helpers.users as udb
 import server.db.helpers.session_tokens as stdb
 from server.db.helpers.models import PartialUserStorage, SessionToken, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage
 
-from server.routers.courses import get_course
-from server.routers.model import (
-    CONDITIONS,
-    CourseMark,
-    CourseStorage,
-    DegreeLocalStorage,
-    DegreeWizardInfo,
-    LocalStorage,
-    PlannerLocalStorage,
-    SpecType,
-    Storage,
-)
-from server.routers.programs import get_programs
-from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 from pydantic import BaseModel
 BaseModel.model_config["json_encoders"] = {ObjectId: str}
@@ -38,6 +23,8 @@ router = APIRouter(
     prefix="/user",
     tags=["user"],
 )
+
+require_token = HTTPBearer401()
 
 def _token_to_uid(token: str) -> Optional[str]:
     if (res := stdb.get_token_info(SessionToken(token))) is not None:
@@ -122,7 +109,7 @@ def set_user(token: str, item: Storage, overwrite: bool = False):
 
 # Ideally not used often.
 @router.post("/saveLocalStorage")
-def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
+def save_local_storage(localStorage: LocalStorage, token: Annotated[SessionToken, Security(require_token)]):
     # TODO: turn giving no token into an error
     planned: list[str] = sum((sum(year.values(), [])
                              for year in localStorage.planner['years']), [])
@@ -147,8 +134,8 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     set_user(token, item)
 
 
-@router.get("/data/all/{token}")
-def get_user(token: str) -> Storage:
+@router.get("/data/all")
+def get_user(token: Annotated[SessionToken, Security(require_token)]) -> Storage:
     uid = _token_to_uid(token)
     if uid is None:
         # TODO: token does not exist, 401
@@ -166,16 +153,16 @@ def get_user(token: str) -> Storage:
 
     return _nto_storage(data)
 
-@router.get("/data/degree/{token}")
-def get_user_degree(token: str) -> DegreeLocalStorage:
+@router.get("/data/degree")
+def get_user_degree(token: Annotated[SessionToken, Security(require_token)]) -> DegreeLocalStorage:
     return get_user(token)['degree']
 
-@router.get("/data/planner/{token}")
-def get_user_planner(token: str) -> PlannerLocalStorage:
+@router.get("/data/planner")
+def get_user_planner(token: Annotated[SessionToken, Security(require_token)]) -> PlannerLocalStorage:
     return get_user(token)['planner']
 
-@router.get("/data/courses/{token}")
-def get_user_p(token: str) -> Dict[str, CourseStorageWithExtra]:
+@router.get("/data/courses")
+def get_user_p(token: Annotated[SessionToken, Security(require_token)]) -> Dict[str, CourseStorageWithExtra]:
     # expects to also get the
     # title: str
     # plannedFor: string of form "year term"
@@ -243,7 +230,7 @@ def default_cs_user() -> Storage:
 
 
 @router.post("/toggleSummerTerm")
-def toggle_summer_term(token: str = DUMMY_TOKEN):
+def toggle_summer_term(token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
     if not user['planner']['isSummerEnabled']:
@@ -254,7 +241,7 @@ def toggle_summer_term(token: str = DUMMY_TOKEN):
 
 
 @router.put("/toggleWarnings")
-def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
+def toggle_warnings(courses: list[str], token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     for course in courses:
         user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
@@ -268,7 +255,7 @@ def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
         }
     }
 )
-def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
+def update_course_mark(courseMark: CourseMark, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
 
     if isinstance(courseMark.mark, int) and (courseMark.mark < 0 or courseMark.mark > 100):
@@ -287,7 +274,7 @@ def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
 
 
 @router.put("/updateStartYear")
-def update_start_year(startYear: int, token: str = DUMMY_TOKEN):
+def update_start_year(startYear: int, token: Annotated[SessionToken, Security(require_token)]):
     """
         Update the start year the user is taking.
         The degree length stays the same and the contents are shifted to fit the new start year.
@@ -298,7 +285,7 @@ def update_start_year(startYear: int, token: str = DUMMY_TOKEN):
 
 
 @router.put("/updateDegreeLength")
-def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
+def update_degree_length(numYears: int, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     if len(user['planner']['years']) == numYears:
         return
@@ -314,19 +301,19 @@ def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 @router.put("/setProgram")
-def setProgram(programCode: str, token: str = DUMMY_TOKEN):
+def setProgram(programCode: str, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     user['degree']['programCode'] = programCode
     set_user(token, user, True)
 
 @router.put("/addSpecialisation")
-def addSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
+def addSpecialisation(specialisation: str, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     user['degree']['specs'].append(specialisation)
     set_user(token, user, True)
 
 @router.put("/removeSpecialisation")
-def removeSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
+def removeSpecialisation(specialisation: str, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     specs = user['degree']['specs']
     if specialisation in specs:
@@ -334,13 +321,13 @@ def removeSpecialisation(specialisation: str, token: str = DUMMY_TOKEN):
     set_user(token, user, True)
 
 @router.put("/setIsComplete")
-def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
+def setIsComplete(isComplete: bool, token: Annotated[SessionToken, Security(require_token)]):
     user = get_user(token)
     user['degree']['isComplete'] = isComplete
     set_user(token, user, True)
 
 @router.post("/reset")
-def reset(token: str = DUMMY_TOKEN):
+def reset(token: Annotated[SessionToken, Security(require_token)]):
     """Resets user data of a parsed token"""
     uid = _token_to_uid(token)
     assert uid is not None  # TODO: fix this
@@ -348,7 +335,7 @@ def reset(token: str = DUMMY_TOKEN):
     assert udb.reset_user(uid)
 
 @router.post("/setupDegreeWizard", response_model=Storage)
-def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
+def setup_degree_wizard(wizard: DegreeWizardInfo, token: Annotated[SessionToken, Security(require_token)]):
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:

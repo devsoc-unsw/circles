@@ -8,6 +8,7 @@ import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
+import { withAuthorization } from 'utils/api/auth';
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
@@ -47,7 +48,7 @@ const TermBox = ({
     await axios.post(
       '/planner/toggleTermLocked',
       {},
-      { params: { token, termyear: `${year}${term}` } }
+      { params: { termyear: `${year}${term}` }, headers: { ...withAuthorization(token) } }
     );
   };
   const plannerQuery = useQuery({

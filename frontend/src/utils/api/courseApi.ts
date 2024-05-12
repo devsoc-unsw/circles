@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { Course, SearchCourse } from 'types/api';
 import { LIVE_YEAR } from 'config/constants';
+import { withAuthorization } from './auth';
 
 // TODO: Should error handling be done here?
 export const searchCourse = async (token: string, query: string): Promise<SearchCourse> => {
-  const res = await axios.post(`/courses/searchCourse/${query}`, {}, { params: { token } });
+  const res = await axios.post(
+    `/courses/searchCourse/${query}`,
+    {},
+    { headers: { ...withAuthorization(token) } }
+  );
   return res.data as SearchCourse;
 };
 
