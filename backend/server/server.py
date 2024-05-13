@@ -2,12 +2,19 @@
 Configure the FastAPI server
 """
 
+from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from server.routers import auth, courses, followups, planner, programs, specialisations, user
 
-app = FastAPI()
+@asynccontextmanager
+async def on_setup_and_shutdown(_app: FastAPI):
+    print("\n\nstartup\n\n")
+    yield
+    print("\n\nshutdown\n\n")
+
+app = FastAPI(lifespan=on_setup_and_shutdown)
 
 origins = [
     "http://host.docker.internal",

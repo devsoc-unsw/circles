@@ -27,7 +27,7 @@ usersNewCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
 def connect():
     try:
         client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
-        print('Connected to mongo database.')
+        print('Connected to mongo database.', client["Main"].command("ping"))
 
         # setup global variables
         global db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsNewCOL, refreshTokensNewCOL, usersNewCOL

@@ -4,10 +4,8 @@ api and also run the files"""
 import argparse
 import sys
 
-# https://github.com/encode/uvicorn/issues/998
-import uvicorn  # type: ignore
+import uvicorn
 from server.db.mongo.setup import overwrite_all
-from server.server import app
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -25,4 +23,4 @@ if __name__ == "__main__":
     if args.overwrite:
         overwrite_all()
 
-    uvicorn.run(app, host='0.0.0.0')
+    uvicorn.run("server.server:app", host='0.0.0.0', reload=True, lifespan="on", reload_excludes="*.json")
