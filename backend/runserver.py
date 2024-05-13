@@ -5,7 +5,6 @@ import argparse
 import sys
 
 import uvicorn
-from server.db.mongo.setup import overwrite_all
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -21,6 +20,16 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if args.overwrite:
-        overwrite_all()
+        # TODO: abstract this
+        from server.db.mongo.setup import optionally_create_new_data, overwrite_all
+        from server.db.redis.setup import setup_redis_sessionsdb
 
+        overwrite_all()
+        optionally_create_new_data()
+        print("-- Finished Mongo Setup")
+
+        setup_redis_sessionsdb()
+        print("-- Finished Redis Setup")
+
+    print("\n\n-- Starting uvicorn")
     uvicorn.run("server.server:app", host='0.0.0.0', reload=True, lifespan="on", reload_excludes="*.json")

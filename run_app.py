@@ -105,14 +105,24 @@ def main():
     sys.stderr = LogPipe(logging.ERROR)
     username, password, python_ver = get_backend_env()
     base_url = get_frontend_env()
-    os.system("docker compose run --rm init-mongo")
+    os.system("docker compose up -d sessionsdb mongodb")
     try:
+        modified_backend_env = {
+            **os.environ.copy(),
+            "MONGODB_SERVICE_HOSTNAME": "localhost",
+            "MONGODB_PASSWORD": f"{password}",
+            "MONGODB_USERNAME": f"{username}",
+            "SESSIONSDB_SERVICE_HOSTNAME": "localhost",
+            "PYTHONUNBUFFERED": "1",
+        }
+
         Popen(
-            f"MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec {python_ver} runserver.py",
+            f"{python_ver} -u runserver.py --overwrite",
             stdout=sys.stdout,
             stderr=sys.stderr,
             shell=True,
             cwd="backend/",
+            env=modified_backend_env
         )
         check_call(
             f"VITE_BACKEND_API_BASE_URL={base_url} npm start",

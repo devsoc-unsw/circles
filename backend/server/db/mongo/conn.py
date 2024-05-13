@@ -12,6 +12,8 @@ from pymongo.database import Database
 
 from .col_types import GuestSessionInfoDict, NotSetupSessionInfoDict, NotSetupUserInfoDict, RefreshTokenInfoDict, SessionInfoDict, UserInfoDict
 
+client: MongoClient
+
 db: Database
 archivesDB: Database
 usersDB: Database
@@ -25,39 +27,40 @@ refreshTokensNewCOL: Collection[RefreshTokenInfoDict]
 usersNewCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
 
 def connect():
-    try:
-        client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
-        print('Connected to mongo database.', client["Main"].command("ping"))
+    # TODO: this global list is horrible...
+    global client, db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
+    print("Trying to connect to mongo database.")
 
-        # setup global variables
-        global db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
-        db = client["Main"]
-        archivesDB = client["Archives"]
-        usersDB = client["Users"]
+    # this should raise error if this fails, this is better than exit(1)
+    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
+    print('Connected to mongo database.', client["Main"].command("ping"))
 
-        programsCOL = db["Programs"]
-        specialisationsCOL = db["Specialisations"]
-        coursesCOL = db["Courses"]
+    # setup global variables
+    db = client["Main"]
+    archivesDB = client["Archives"]
+    usersDB = client["Users"]
 
-        sessionsNewCOL = usersDB["sessionsNEW"].with_options(
-            codec_options=CodecOptions(
-                tz_aware=True,
-                tzinfo=datetime.timezone.utc,
-                uuid_representation=UuidRepresentation.STANDARD,
-            ),
+    programsCOL = db["Programs"]
+    specialisationsCOL = db["Specialisations"]
+    coursesCOL = db["Courses"]
+
+    sessionsNewCOL = usersDB["sessionsNEW"].with_options(
+        codec_options=CodecOptions(
+            tz_aware=True,
+            tzinfo=datetime.timezone.utc,
+            uuid_representation=UuidRepresentation.STANDARD,
+        ),
+    )
+
+    refreshTokensNewCOL = usersDB["refreshTokensNEW"].with_options(
+        codec_options=CodecOptions(
+            tz_aware=True,
+            tzinfo=datetime.timezone.utc,
+            uuid_representation=UuidRepresentation.STANDARD,
         )
+    )
 
-        refreshTokensNewCOL = usersDB["refreshTokensNEW"].with_options(
-            codec_options=CodecOptions(
-                tz_aware=True,
-                tzinfo=datetime.timezone.utc,
-                uuid_representation=UuidRepresentation.STANDARD,
-            )
-        )
+    usersNewCOL = usersDB["usersNEW"]
 
-        usersNewCOL = usersDB["usersNEW"]
-    except:  # pylint: disable=bare-except
-        print("Unable to connect to mongo database.")
-        exit(1)
 
 connect()

@@ -35,7 +35,8 @@ services:
       - ./env/backend.env
     # tty: true
     depends_on:
-      - init-mongo
+      - mongodb
+      - sessionsdb
     networks:
       - circles-net
     volumes:

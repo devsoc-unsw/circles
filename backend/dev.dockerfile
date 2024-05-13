@@ -17,9 +17,9 @@ EXPOSE 8000
 
 # At time of writing this, uvicorn reload wouldn't pass through stdout
 # https://testdriven.io/blog/fastapi-docker-traefik/
-ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Run the server
 # https://forums.docker.com/t/docker-run-cannot-be-killed-with-ctrl-c/13108/2
-ENTRYPOINT ["python3", "-u", "runserver.py"]
+ENTRYPOINT ["python3", "-u", "runserver.py", "--overwrite"]
