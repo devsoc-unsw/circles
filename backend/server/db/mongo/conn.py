@@ -8,39 +8,56 @@ from bson.binary import UuidRepresentation
 
 from pymongo import MongoClient
 from pymongo.collection import Collection
+from pymongo.database import Database
 
 from .col_types import GuestSessionInfoDict, NotSetupSessionInfoDict, NotSetupUserInfoDict, RefreshTokenInfoDict, SessionInfoDict, UserInfoDict
 
-# Export these as needed
-try:
-    client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
-    print('Connected to database.')
-except:  # pylint: disable=bare-except
-    print("Unable to connect to database.")
-    exit(1)
+db: Database
+archivesDB: Database
+usersDB: Database
 
-db = client["Main"]
-archivesDB = client["Archives"]
-usersDB = client["Users"]
+programsCOL: Collection
+specialisationsCOL: Collection
+coursesCOL: Collection
 
-programsCOL = db["Programs"]
-specialisationsCOL = db["Specialisations"]
-coursesCOL = db["Courses"]
+sessionsNewCOL: Collection[Union[NotSetupSessionInfoDict, SessionInfoDict, GuestSessionInfoDict]]
+refreshTokensNewCOL: Collection[RefreshTokenInfoDict]
+usersNewCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
 
-sessionsNewCOL: Collection[Union[NotSetupSessionInfoDict, SessionInfoDict, GuestSessionInfoDict]] = usersDB["sessionsNEW"].with_options(
-    codec_options=CodecOptions(
-        tz_aware=True,
-        tzinfo=datetime.timezone.utc,
-        uuid_representation=UuidRepresentation.STANDARD,
-    ),
-)
+def connect():
+    try:
+        client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
+        print('Connected to mongo database.')
 
-refreshTokensNewCOL: Collection[RefreshTokenInfoDict] = usersDB["refreshTokensNEW"].with_options(
-    codec_options=CodecOptions(
-        tz_aware=True,
-        tzinfo=datetime.timezone.utc,
-        uuid_representation=UuidRepresentation.STANDARD,
-    )
-)
+        # setup global variables
+        global db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
+        db = client["Main"]
+        archivesDB = client["Archives"]
+        usersDB = client["Users"]
 
-usersNewCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]] = usersDB["usersNEW"]
+        programsCOL = db["Programs"]
+        specialisationsCOL = db["Specialisations"]
+        coursesCOL = db["Courses"]
+
+        sessionsNewCOL = usersDB["sessionsNEW"].with_options(
+            codec_options=CodecOptions(
+                tz_aware=True,
+                tzinfo=datetime.timezone.utc,
+                uuid_representation=UuidRepresentation.STANDARD,
+            ),
+        )
+
+        refreshTokensNewCOL = usersDB["refreshTokensNEW"].with_options(
+            codec_options=CodecOptions(
+                tz_aware=True,
+                tzinfo=datetime.timezone.utc,
+                uuid_representation=UuidRepresentation.STANDARD,
+            )
+        )
+
+        usersNewCOL = usersDB["usersNEW"]
+    except:  # pylint: disable=bare-except
+        print("Unable to connect to mongo database.")
+        exit(1)
+
+connect()
