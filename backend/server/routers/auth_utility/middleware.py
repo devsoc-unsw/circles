@@ -6,6 +6,11 @@ from fastapi.security.utils import get_authorization_scheme_param
 from fastapi.openapi.models import HTTPBearer as HTTPBearerModel
 from starlette.status import HTTP_401_UNAUTHORIZED
 
+from server.db.helpers.models import SessionToken
+
+from .sessions.errors import SessionExpiredToken
+from .sessions.interface import get_token_info
+
 def extract_bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("Authorization")
     scheme, credentials = get_authorization_scheme_param(authorization)
@@ -25,9 +30,7 @@ class HTTPBearer401(SecurityBase):
         self.scheme_name = scheme_name or self.__class__.__name__
         self.auto_error = auto_error
 
-    async def __call__(
-        self, request: Request
-    ) -> Optional[str]:
+    async def __call__(self, request: Request) -> Optional[str]:
         # get the token out of the header
         token = extract_bearer_token(request)
         if token is None:
@@ -37,8 +40,30 @@ class HTTPBearer401(SecurityBase):
                     detail="Token was not given in correct format.",
                     headers={"WWW-Authenticate": "Bearer"},
                 )
+
             return None
+
         return token
+
+class HTTPBearerToUserID(HTTPBearer401):
+    def __init__(self):
+        super().__init__(scheme_name="HTTPBearer401", auto_error=True)
+
+    async def __call__(self, request: Request) -> str:
+        token = await super().__call__(request)
+        assert token is not None
+
+        try:
+            uid, _ = get_token_info(SessionToken(token))
+        except SessionExpiredToken as e:
+            raise HTTPException(
+                status_code=HTTP_401_UNAUTHORIZED,
+                detail=e.description,
+            ) from e
+
+        return uid
+
+
 
 def set_refresh_token_cookie(res: Response, token: Optional[str] = None, expiry: Optional[int] = None) -> None:
     if token is not None and expiry is not None:

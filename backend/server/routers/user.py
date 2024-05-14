@@ -1,19 +1,17 @@
 from itertools import chain
 from typing import Annotated, Any, Dict, Optional, cast
 from bson.objectid import ObjectId
-from server.routers.auth_utility.middleware import HTTPBearer401
-from server.routers.courses import get_course
 from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException, Security
 
+from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.courses import get_course
 from server.routers.model import CourseMark, CourseStorage, DegreeWizardInfo, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
-# from server.db.mongo.conn import usersDB
 import server.db.helpers.users as udb
-import server.db.helpers.session_tokens as stdb
-from server.db.helpers.models import PartialUserStorage, SessionToken, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage
+from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage
 
 
 from pydantic import BaseModel
@@ -25,12 +23,7 @@ router = APIRouter(
     tags=["user"],
 )
 
-require_token = HTTPBearer401()
-
-def _token_to_uid(token: str) -> Optional[str]:
-    if (res := stdb.get_token_info(SessionToken(token))) is not None:
-        return res.uid
-    return None
+require_uid = HTTPBearerToUserID()
 
 def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
     return NEWUserPlannerStorage.model_validate(s)
@@ -84,33 +77,38 @@ def _nto_storage(s: NEWUserStorage) -> Storage:
         'planner': _nto_planner(s.planner),
     }
 
+
+def get_setup_user(uid: str) -> Storage:
+    data = udb.get_user(uid)
+    if data is None or data.setup is False:
+        # TODO: this is so jank - add actual register / checking process when it comes
+        # should error and prompt a registration - at some point ;)
+        print("-- USING DEFAULT CS USER:", uid, data)
+        # PLACES USING:
+        # - degree wizard to check if we need to open modal -> sol is allow notsetup results in main user query
+        return default_cs_user()
+
+    return _nto_storage(data)
+
 # keep this private
-def set_user(token: str, item: Storage, overwrite: bool = False):
-    uid = _token_to_uid(token)
+def set_user(uid: str, item: Storage, overwrite: bool = False):
+    if not overwrite and udb.user_is_setup(uid):
+        print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
+        print("++ ABOUT TO ASSERT FALSE:", uid)
+        assert False  # want to remove these cases too
 
-    if uid is not None:
-        if not overwrite and udb.user_is_setup(uid):
-            print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
-            print("++ ABOUT TO ASSERT FALSE:", token, uid)
-            assert False  # want to remove these cases too
+    res = udb.update_user(uid, PartialUserStorage(
+        courses=_otn_courses(item['courses']),
+        degree=_otn_degree(item['degree']),
+        planner=_otn_planner(item['planner']),
+    ))
 
-        res = udb.update_user(uid, PartialUserStorage(
-            courses=_otn_courses(item['courses']),
-            degree=_otn_degree(item['degree']),
-            planner=_otn_planner(item['planner']),
-        ))
-
-        assert res
-    else:
-        print("++ ABOUT TO ASSERT FALSE:", token)
-        assert False  # want to remove any of these cases
-        # objectID = usersDB['users'].insert_one(dict(item)).inserted_id
-        # usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})
+    assert res
 
 
 # Ideally not used often.
 @router.post("/saveLocalStorage")
-def save_local_storage(localStorage: LocalStorage, token: Annotated[SessionToken, Security(require_token)]):
+def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(require_uid)]):
     # TODO: turn giving no token into an error
     planned: list[str] = sum((sum(year.values(), [])
                              for year in localStorage.planner['years']), [])
@@ -132,49 +130,34 @@ def save_local_storage(localStorage: LocalStorage, token: Annotated[SessionToken
         'planner': real_planner,
         'courses': courses
     }
-    set_user(token, item)
+    set_user(uid, item)
 
 
 @router.get("/data/all")
-def get_user(token: Annotated[SessionToken, Security(require_token)]) -> Storage:
-    uid = _token_to_uid(token)
-    if uid is None:
-        # TODO: token does not exist, 401
-        print("++ ABOUT TO ASSERT FALSE:", token, uid)
-        assert False  # try find this
-
-    data = udb.get_user(uid)
-    if data is None or data.setup is False:
-        # TODO: this is so jank - add actual register / checking process when it comes
-        # should error and prompt a registration - at some point ;)
-        print("-- USING DEFAULT CS USER:", token, uid, data)
-        # PLACES USING:
-        # - degree wizard to check if we need to open modal -> sol is allow notsetup results in main user query
-        return default_cs_user()
-
-    return _nto_storage(data)
+def get_user(uid: Annotated[str, Security(require_uid)]) -> Storage:
+    return get_setup_user(uid)
 
 @router.get("/data/degree")
-def get_user_degree(token: Annotated[SessionToken, Security(require_token)]) -> DegreeLocalStorage:
-    return get_user(token)['degree']
+def get_user_degree(uid: Annotated[str, Security(require_uid)]) -> DegreeLocalStorage:
+    return get_setup_user(uid)['degree']
 
 @router.get("/data/planner")
-def get_user_planner(token: Annotated[SessionToken, Security(require_token)]) -> PlannerLocalStorage:
-    return get_user(token)['planner']
+def get_user_planner(uid: Annotated[str, Security(require_uid)]) -> PlannerLocalStorage:
+    return get_setup_user(uid)['planner']
 
 @router.get("/data/courses")
-def get_user_p(token: Annotated[SessionToken, Security(require_token)]) -> Dict[str, CourseStorageWithExtra]:
+def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseStorageWithExtra]:
     # expects to also get the
     # title: str
     # plannedFor: string of form "year term"
     # isMultiterm
     # uoc -> UOC
     # TODO: fix return type up omg
-    raw_courses = get_user(token)['courses']
+    user = get_setup_user(uid)
+    raw_courses = user['courses']
+    planner = user['planner']
 
     # flatten the planner
-    planner = get_user_planner(token)
-    # TODO: check if they were expecting None or 'unplanned'
     flattened: Dict[str, Optional[str]] = { code: None for code in planner['unplanned'] }
     for index, year in enumerate(planner['years']):
         for termIndex, term in year.items():
@@ -231,22 +214,22 @@ def default_cs_user() -> Storage:
 
 
 @router.post("/toggleSummerTerm")
-def toggle_summer_term(token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def toggle_summer_term(uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     user['planner']['isSummerEnabled'] = not user['planner']['isSummerEnabled']
     if not user['planner']['isSummerEnabled']:
         for year in user['planner']['years']:
             user['planner']['unplanned'].extend(year['T0'])
             year['T0'] = []
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.put("/toggleWarnings")
-def toggle_warnings(courses: list[str], token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def toggle_warnings(courses: list[str], uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     for course in courses:
         user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.put("/updateCourseMark",
             responses={
@@ -256,8 +239,8 @@ def toggle_warnings(courses: list[str], token: Annotated[SessionToken, Security(
         }
     }
 )
-def update_course_mark(courseMark: CourseMark, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def update_course_mark(courseMark: CourseMark, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
 
     if isinstance(courseMark.mark, int) and (courseMark.mark < 0 or courseMark.mark > 100):
         raise HTTPException(
@@ -271,23 +254,23 @@ def update_course_mark(courseMark: CourseMark, token: Annotated[SessionToken, Se
             status_code=400, detail=f"Course code {courseMark.course} was not found in user's courses"
         )
 
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.put("/updateStartYear")
-def update_start_year(startYear: int, token: Annotated[SessionToken, Security(require_token)]):
+def update_start_year(startYear: int, uid: Annotated[str, Security(require_uid)]):
     """
         Update the start year the user is taking.
         The degree length stays the same and the contents are shifted to fit the new start year.
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
     user['planner']['startYear'] = startYear
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.put("/updateDegreeLength")
-def update_degree_length(numYears: int, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def update_degree_length(numYears: int, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     if len(user['planner']['years']) == numYears:
         return
     diff = numYears - len(user['planner']['years'])
@@ -299,44 +282,42 @@ def update_degree_length(numYears: int, token: Annotated[SessionToken, Security(
             for term in year.values():
                 user['planner']['unplanned'].extend(term)
         user['planner']['years'] = user['planner']['years'][:diff]
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.put("/setProgram")
-def setProgram(programCode: str, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def setProgram(programCode: str, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     user['degree']['programCode'] = programCode
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.put("/addSpecialisation")
-def addSpecialisation(specialisation: str, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def addSpecialisation(specialisation: str, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     user['degree']['specs'].append(specialisation)
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.put("/removeSpecialisation")
-def removeSpecialisation(specialisation: str, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def removeSpecialisation(specialisation: str, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     specs = user['degree']['specs']
     if specialisation in specs:
         specs.remove(specialisation)
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.put("/setIsComplete")
-def setIsComplete(isComplete: bool, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def setIsComplete(isComplete: bool, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     user['degree']['isComplete'] = isComplete
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.post("/reset")
-def reset(token: Annotated[SessionToken, Security(require_token)]):
+def reset(uid: Annotated[str, Security(require_uid)]):
     """Resets user data of a parsed token"""
-    uid = _token_to_uid(token)
-    assert uid is not None  # TODO: fix this
 
     assert udb.reset_user(uid)
 
 @router.post("/setupDegreeWizard", response_model=Storage)
-def setup_degree_wizard(wizard: DegreeWizardInfo, token: Annotated[SessionToken, Security(require_token)]):
+def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(require_uid)]):
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:
@@ -399,7 +380,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: Annotated[SessionToken,
         'lockedTerms': {},
         'years': [],
     }
-    
+
     planner['years'] = [
         {"T0": [], "T1": [], "T2": [], "T3": []}
         for _ in range(num_years)
@@ -414,5 +395,5 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: Annotated[SessionToken,
         'planner': planner,
         'courses': {}
     }
-    set_user(token, user, True)
+    set_user(uid, user, True)
     return user

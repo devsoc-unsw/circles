@@ -10,12 +10,11 @@ from algorithms.autoplanning import autoplan
 from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
-from server.db.helpers.models import SessionToken
-from server.routers.auth_utility.middleware import HTTPBearer401
+from server.routers.auth_utility.middleware import HTTPBearerToUserID
 from server.routers.courses import get_course
 from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
                                   ValidCoursesState, ValidPlannerData, markMap)
-from server.routers.user import get_user, set_user
+from server.routers.user import get_setup_user, set_user
 from server.routers.utility import get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
@@ -47,7 +46,7 @@ router = APIRouter(
     prefix="/planner", tags=["planner"], responses={404: {"description": "Not found"}}
 )
 
-require_token = HTTPBearer401()
+require_uid = HTTPBearerToUserID()
 
 @router.get("/")
 def planner_index() -> str:
@@ -56,7 +55,7 @@ def planner_index() -> str:
 
 
 @router.get("/validateTermPlanner", response_model=ValidCoursesState)
-def validate_term_planner(token: Annotated[SessionToken, Security(require_token)]):
+def validate_term_planner(uid: Annotated[str, Security(require_uid)]):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
@@ -66,14 +65,14 @@ def validate_term_planner(token: Annotated[SessionToken, Security(require_token)
 
     Returns the state of all the courses on the term planner
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
     data = convert_to_planner_data(user)
     coursesState = validate_terms(data)
     return {"courses_state": coursesState}
 
 
 @router.post("/addToUnplanned")
-def add_to_unplanned(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
+def add_to_unplanned(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
     """
     Adds a course to the user's unplanned column within their planner
 
@@ -82,7 +81,7 @@ def add_to_unplanned(data: CourseCode, token: Annotated[SessionToken, Security(r
             - courseCode(str): The course to add to the unplanned column
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
     if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
     
@@ -95,11 +94,11 @@ def add_to_unplanned(data: CourseCode, token: Annotated[SessionToken, Security(r
         'uoc': course['UOC'],
         'ignoreFromProgression': False
     }
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.post("/unPlannedToTerm")
-def set_unplanned_course_to_term(data: UnPlannedToTerm, token: Annotated[SessionToken, Security(require_token)]):
+def set_unplanned_course_to_term(data: UnPlannedToTerm, uid: Annotated[str, Security(require_uid)]):
     """
     Moved a course out of the user's unplanned column and into the specified course on their planner
 
@@ -118,7 +117,7 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: Annotated[Session
     """
     course = get_course(data.courseCode)
     uoc, terms = itemgetter('UOC', 'terms')(course)
-    user = get_user(token)
+    user = get_setup_user(uid)
     planner = user['planner']
     instance_num = 0
     terms_list = get_terms_list(
@@ -144,11 +143,11 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, token: Annotated[Session
     else:
         planner['years'][data.destRow][data.destTerm].insert(
             data.destIndex, data.courseCode)
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.post("/plannedToTerm")
-def set_planned_course_to_term(data: PlannedToTerm, token: Annotated[SessionToken, Security(require_token)]):
+def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security(require_uid)]):
     """
     Moves a course out of one term and into a second term.
 
@@ -169,7 +168,7 @@ def set_planned_course_to_term(data: PlannedToTerm, token: Annotated[SessionToke
             course being placed before or after the planner
     """
     course = get_course(data.courseCode)
-    user = get_user(token)
+    user = get_setup_user(uid)
 
     uoc, terms_offered, is_multiterm = itemgetter(
         'UOC', 'terms', 'is_multiterm')(course)
@@ -182,7 +181,7 @@ def set_planned_course_to_term(data: PlannedToTerm, token: Annotated[SessionToke
             data.courseCode)
         user['planner']['years'][data.srcRow][data.srcTerm].insert(
             data.destIndex, data.courseCode)
-        set_user(token, user, True)
+        set_user(uid, user, True)
         return
 
     # Remove every instance of the course from the planner
@@ -235,11 +234,11 @@ def set_planned_course_to_term(data: PlannedToTerm, token: Annotated[SessionToke
         index = previous_index[term_id] if term_id in previous_index else len(
             target_term)
         target_term.insert(index, data.courseCode)
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.post('/removeCourse')
-def remove_course(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
+def remove_course(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
     """
     Removes a course from the user's planner data
 
@@ -248,7 +247,7 @@ def remove_course(data: CourseCode, token: Annotated[SessionToken, Security(requ
             - courseCode(str): The course to add to the unplanned column
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
     planner = user['planner']
 
     # remove course from years (if it's there)
@@ -263,24 +262,24 @@ def remove_course(data: CourseCode, token: Annotated[SessionToken, Security(requ
         
     if data.courseCode in user['courses']:
         del user['courses'][data.courseCode]
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.post('/toggleIgnoreFromProgression')
-def toggle_ignore_from_progression(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
-    user = get_user(token)
+def toggle_ignore_from_progression(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
     user['courses'][data.courseCode]['ignoreFromProgression'] = not user['courses'][data.courseCode]['ignoreFromProgression']
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.post("/removeAll")
-def remove_all(token: Annotated[SessionToken, Security(require_token)]):
+def remove_all(uid: Annotated[str, Security(require_uid)]):
     """
     Removes all courses from the user's planner data
 
     Args:
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
 
     # Replace each year with an empty year
     user['planner']['years'] = generate_empty_years(len(user['planner']))
@@ -289,11 +288,11 @@ def remove_all(token: Annotated[SessionToken, Security(require_token)]):
     user['planner']['unplanned'] = []
     
     user['courses'] = {}
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.post("/unscheduleCourse")  # TODO: What if someone is enrolled in the same couse twice?
-def unschedule(data: CourseCode, token: Annotated[SessionToken, Security(require_token)]):
+def unschedule(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
     """
     Moves a course out of a term and into the user's unplanned column
 
@@ -302,7 +301,7 @@ def unschedule(data: CourseCode, token: Annotated[SessionToken, Security(require
             - courseCode(str): The course to add to the unplanned column
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
 
     # Remove every instance of the course from each year and add to unplanned
     removed = False
@@ -316,18 +315,18 @@ def unschedule(data: CourseCode, token: Annotated[SessionToken, Security(require
     if not removed:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} not found in planner')
 
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 @router.post('/unscheduleAll')
-def unschedule_all(token: Annotated[SessionToken, Security(require_token)]):
+def unschedule_all(uid: Annotated[str, Security(require_uid)]):
     """
     Removes all courses from every term and moves then into the user's unplanned column.
 
     Args:
         token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
 
     # Remove every course from each term and add it to unplanned
     for year in user['planner']['years']:
@@ -335,27 +334,27 @@ def unschedule_all(token: Annotated[SessionToken, Security(require_token)]):
             user['planner']['unplanned'].extend(course_list)
             course_list.clear()
 
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.post("/toggleTermLocked")
-def toggleLocked(termyear: str, token: Annotated[SessionToken, Security(require_token)]):
+def toggleLocked(termyear: str, uid: Annotated[str, Security(require_uid)]):
     (term_str, year_str) = termyear.split('T')
     try:
         year = int(year_str)
         term = int(term_str)
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid term/year")
-    user = get_user(token)
+    user = get_setup_user(uid)
     locked_map = user['planner']['lockedTerms']
     locked_map[termyear] = not locked_map.get(termyear, False)
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 @router.post('/addFromTranscript')
-def add_from_transcript(file: UploadFile, token: Annotated[SessionToken, Security(require_token)]):
+def add_from_transcript(file: UploadFile, uid: Annotated[str, Security(require_uid)]):
     """
     Adds all courses from a transcript into a user's courses
     """
-    user = get_user(token)
+    user = get_setup_user(uid)
     transcript_obj = parse_transcript(file.file)
 
     # pad start with more years
@@ -375,7 +374,6 @@ def add_from_transcript(file: UploadFile, token: Annotated[SessionToken, Securit
         year_data = user['planner']['years'][year_offset]
         for term, courses_obj in terms_obj.items():
             for course, (uoc, mark, _) in courses_obj.items():
-                course_data = get_course(course)
                 year_data[term].append(course)
                 user['courses'][course] = {
                     'code': course,
@@ -385,7 +383,7 @@ def add_from_transcript(file: UploadFile, token: Annotated[SessionToken, Securit
                     'ignoreFromProgression': False
                 }
 
-    set_user(token, user, True)
+    set_user(uid, user, True)
 
 
 def generate_empty_years(num_years: int):

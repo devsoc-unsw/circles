@@ -13,8 +13,7 @@ from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz
-from server.routers.auth_utility.middleware import HTTPBearer401
-from server.db.helpers.models import SessionToken
+from server.routers.auth_utility.middleware import HTTPBearerToUserID
 from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
@@ -26,7 +25,7 @@ router = APIRouter(
     tags=["courses"],
 )
 
-require_token = HTTPBearer401()
+require_uid = HTTPBearerToUserID()
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
 ALL_COURSES: Optional[Dict[str, str]] = None
@@ -219,7 +218,7 @@ def get_course(courseCode: str):
         }
     },
 )
-def search(search_string: str, token: Annotated[SessionToken, Security(require_token)]) -> Dict[str, str]:
+def search(search_string: str, uid: Annotated[str, Security(require_uid)]) -> Dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
@@ -228,12 +227,12 @@ def search(search_string: str, token: Annotated[SessionToken, Security(require_t
           "COMP1531": "SoftEng Fundamentals",
             ……. }
     """
+    # TODO: remove these because circular imports
+    from server.routers.user import get_setup_user
     from server.routers.programs import get_structure
-    from server.routers.user import get_user
-
     all_courses = fetch_all_courses()
 
-    user = get_user(token)
+    user = get_setup_user(uid)
     specialisations = list(user['degree']['specs'])
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))

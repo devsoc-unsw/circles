@@ -45,9 +45,8 @@ Scenario:
 from typing import Annotated, Callable, Optional
 
 from fastapi import APIRouter, Security
-from server.db.helpers.models import SessionToken
-from server.routers.auth_utility.middleware import HTTPBearer401
-from server.routers.user import get_user
+from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.user import get_setup_user
 from server.routers.planner import convert_to_planner_data
 from server.routers.model import ValidPlannerData
 
@@ -55,7 +54,8 @@ router = APIRouter(
     prefix="/ctf", tags=["ctf"], responses={404: {"description": "Not found"}}
 )
 
-require_token = HTTPBearer401()
+require_uid = HTTPBearerToUserID()
+
 
 def all_courses(data: ValidPlannerData) -> set[str]:
     """
@@ -251,11 +251,11 @@ requirements: list[tuple[ValidatorFn, ObjectiveMessage, Optional[Flag]]] = [
 ]
 
 @router.post("/validateCtf/")
-def validate_ctf(token: Annotated[SessionToken, Security(require_token)]):
+def validate_ctf(uid: Annotated[str, Security(require_uid)]):
     """
     Validates the CTF
     """
-    data = convert_to_planner_data(get_user(token))
+    data = convert_to_planner_data(get_setup_user(uid))
     passed: list[str] = []
     flags: list[str] = []
     for req_num, (fn, msg, flag) in enumerate(requirements):

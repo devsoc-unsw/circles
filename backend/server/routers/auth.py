@@ -268,21 +268,9 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
     # revoke the oidc session and kill the session
     assert logout_session(sid)
 
-@router.get(
-    "/test_token"
-)
-def test_token(token: Annotated[SessionToken, Security(require_token)]):
-    try:
-        return get_token_info(token)
-    except SessionExpiredToken as e:
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.description,
-        ) from e
-
 # TODO: move into user router file
 @router.get(
-    "/tokenUserState"
+    "/token_user_state"
 )
 def get_user_state(token: Annotated[SessionToken, Security(require_token)]) -> UserTokenState:
     try:
