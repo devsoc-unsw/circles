@@ -12,108 +12,6 @@ from data.config import ARCHIVED_YEARS
 
 from .conn import db, archivesDB, usersDB
 
-def create_users_collection():
-    usersDB.create_collection('users',
-        validator={
-            '$jsonSchema': {
-                'bsonType': 'object',
-                'required': ['degree', 'planner'],
-                'properties': {
-                    'degree': {
-                        'bsonType': 'object',
-                        'required': ['programCode', 'specs'],
-                        'properties': {
-                            'programCode': {
-                                'bsonType': 'string',
-                                'description': 'the code of program taken'
-                            },
-                            'specs': {
-                                'bsonType': 'array',
-                                'description': 'an array of all the specialisations taken',
-                                'items': {
-                                    'bsonType': 'string'
-                                }
-                            },
-                        }
-                    },
-                    'courses': {
-                        'bsonType': 'object',  # painful to validate properly :/
-                    },
-                    'planner': {
-                        'bsonType': 'object',
-                        'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years'],
-                        'properties': {
-                            "unplanned": {
-                                'bsonType': 'array',
-                                'items': {
-                                    'bsonType': 'string'
-                                }
-                            },
-                            "startYear": {
-                                'bsonType': 'int'
-                            },
-                            "isSummerEnabled": {
-                                'bsonType': 'bool'
-                            },
-                            "years": {
-                                'bsonType': 'array',
-                                'items': {
-                                    'bsonType': 'object',
-                                    'properties': {
-                                        "T0": {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        },
-
-                                        "T1": {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        },
-
-                                        "T2": {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        },
-
-                                        "T3": {
-                                            'bsonType': 'array',
-                                            'items': {
-                                                'bsonType': 'string'
-                                            }
-                                        }
-                                    }
-                                },
-                            }
-                        }
-                    }
-                }
-            }
-        })
-
-def create_tokens_collection():
-    usersDB.create_collection('tokens', validator={
-        '$jsonSchema': {
-            'bsonType': 'object',
-            'required': ['token', 'objectId'],
-            'properties': {
-                'token': {
-                    'description': 'token given by FE',
-                    'bsonType': 'string'
-                },
-                'objectId': {
-                    'description': 'objectId for the user object we are storing',
-                    'bsonType': 'objectId'
-                }
-            }
-        }
-    })
-
 def create_new_users_collection():
     # users {
     #     uid! string,     // unique indexed, the uid we get back from the oidc
@@ -471,14 +369,10 @@ def overwrite_archives():
 def create_dynamic_db(drop_old: bool):
     if drop_old:
         print("Dropping user collections")
-        usersDB.drop_collection('users')
-        usersDB.drop_collection('tokens')
         usersDB.drop_collection('usersNEW')
         usersDB.drop_collection('refreshTokensNEW')
         usersDB.drop_collection('sessionsNEW')
 
-    create_users_collection()
-    create_tokens_collection()
     create_new_users_collection()
     create_new_refresh_tokens_collection()
     create_new_sessions_collection()

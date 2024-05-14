@@ -17,6 +17,7 @@ from server.db.helpers.models import PartialUserStorage, SessionToken, UserStora
 
 
 from pydantic import BaseModel
+# TODO: i think we can get rid of this now
 BaseModel.model_config["json_encoders"] = {ObjectId: str}
 
 router = APIRouter(
