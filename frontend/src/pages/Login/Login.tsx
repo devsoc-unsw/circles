@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { guestLogin as guestLoginRequest } from 'utils/api/auth';
-import { userLogin } from 'utils/api/userApi';
+import { initiateCSEAuth } from 'utils/api/userApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
 import PageTemplate from 'components/PageTemplate';
@@ -36,7 +36,7 @@ const Login = () => {
               </Link>
               <h2>Login to Circles</h2>
               <p>For current UNSW Students</p>
-              <S.LoginButton onClick={userLogin}>Login with zID</S.LoginButton>
+              <S.LoginButton onClick={initiateCSEAuth}>Login with zID</S.LoginButton>
               <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
             </S.Login>
           </S.Right>

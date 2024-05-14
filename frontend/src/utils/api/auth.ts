@@ -49,7 +49,7 @@ export const checkTokenStatus = async (token: string | undefined): Promise<Token
     return TokenStatus.UNSET;
   }
 
-  const res = await axios.get<TokenStatus>('/auth/tokenUserState', {
+  const res = await axios.get<TokenStatus>('/auth/token_user_state', {
     headers: { ...withAuthorization(token) }
   });
 
