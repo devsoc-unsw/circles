@@ -1,7 +1,6 @@
 from itertools import chain
 from typing import Annotated, Any, Dict, Optional, cast
 from bson.objectid import ObjectId
-from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException, Security
 from starlette.status import HTTP_403_FORBIDDEN
 

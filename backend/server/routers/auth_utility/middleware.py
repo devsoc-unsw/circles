@@ -35,10 +35,11 @@ class HTTPBearer401(SecurityBase):
         token = extract_bearer_token(request)
         if token is None:
             if self.auto_error:
+                # https://www.rfc-editor.org/rfc/rfc9110#name-401-unauthorized
                 raise HTTPException(
                     status_code=HTTP_401_UNAUTHORIZED,
                     detail="Token was not given in correct format.",
-                    headers={"WWW-Authenticate": "Bearer"},
+                    headers={ "WWW-Authenticate": "Bearer" },
                 )
 
             return None
@@ -58,7 +59,8 @@ class HTTPBearerToUserID(HTTPBearer401):
         except SessionExpiredToken as e:
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
-                detail=e.description,
+                detail="Provided token was expired, please re-authenticate.",
+                headers={ "WWW-Authenticate": "Bearer" },
             ) from e
 
         return uid

@@ -100,7 +100,8 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     if refresh_token is None or len(refresh_token) == 0:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail="User is not logged in."
+            detail="User is not logged in.",
+            headers={ "WWW-Authenticate": "Bearer" },
         )
 
     # generate the token pair
@@ -112,21 +113,21 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
         set_refresh_token_cookie(res, None)
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.description,
-            headers={ "set-cookie": res.headers["set-cookie"] },
+            detail="This refresh token was invalid.",
+            headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
         ) from e
 
     if session_info.type == "csesoc":
         # then check if it is still valid with federated auth
         #   if not, refresh it and update the oidc session details
-        new_oidc_info = _check_csesoc_oidc_session(session_info.oidc_info)  # pylint: disable=no-member
+        new_oidc_info = _check_csesoc_oidc_session(session_info.oidc_info)
         if new_oidc_info is None:
             logout_session(sid)
             set_refresh_token_cookie(res, None)
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
                 detail="Session could not be refreshed, please log in again.",
-                headers={ "set-cookie": res.headers["set-cookie"] },
+                headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
             )
 
         # if here, the oidc session was still valid. Create the new token pair
@@ -239,34 +240,37 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
     try:
         # get the user id and the session id from the token
         sid, session_info = get_session_info_from_session_token(token)
-
-        if session_info.type == "csesoc":
-            # only need to revoke a token for fed auth sessions
-            revoke_token(session_info.oidc_info.refresh_token, "refresh_token")  # pylint: disable=no-member
     except SessionExpiredToken as e:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.description,
-            headers={ "set-cookie": res.headers["set-cookie"] },
-        ) from e
-    except OIDCInvalidGrant as e:
-        # invalid grant could happen if its expired thats fine
-        raise HTTPException(
-            status_code=HTTP_401_UNAUTHORIZED,
-            detail=e.error_description,
-            headers={ "set-cookie": res.headers["set-cookie"] },
-        ) from e
-    except OIDCTokenError as e:
-        # cant imagine what error this could be, but if it happens, its bad
-        print(e)
-        raise HTTPException(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Please contact server admin,something went wrong",
-            headers={ "set-cookie": res.headers["set-cookie"] },
+            detail="Provided token was expired, please re-authenticate.",
+            headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
         ) from e
 
-    # revoke the oidc session and kill the session
+    # kill our session, then revoke the oidc tokens
+    # done in this order since once our session is destroyed, their oidc tokens are gone anyway
     assert logout_session(sid)
+
+    if session_info.type == "csesoc":
+        # only need to revoke a token for fed auth sessions
+        try:
+            revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
+        except OIDCInvalidGrant as e:
+            # invalid grant could happen if the oidc token is expired, thats fine
+            # TODO: i dont think we want to throw error if it is invalid? but its fine i guess
+            raise HTTPException(
+                status_code=HTTP_401_UNAUTHORIZED,
+                detail="Your csesoc session has expired, please re-login.",
+                headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
+            ) from e
+        except OIDCTokenError as e:
+            # cant imagine what error this could be, but if it happens, its bad
+            print(e)
+            raise HTTPException(
+                status_code=HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Please contact server admin, something went wrong",
+                headers={ "set-cookie": res.headers["set-cookie"] },
+            ) from e
 
 # TODO: move into user router file
 @router.get(
