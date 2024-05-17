@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
-import { getUserDegree, resetUserDegree } from 'utils/api/userApi';
+import { getUserIsSetup, resetUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
@@ -33,10 +33,10 @@ const DegreeWizard = () => {
   });
 
   const { programCode } = degreeInfo;
-  const isComplete = useQuery({
-    queryKey: ['degree'],
-    queryFn: () => getUserDegree(token)
-  }).data?.isComplete;
+  const isSetup = useQuery({
+    queryKey: ['degree', 'isSetup'], // TODO: fix this key
+    queryFn: () => getUserIsSetup(token)
+  }).data;
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
@@ -110,7 +110,7 @@ const DegreeWizard = () => {
     <PageTemplate showHeader={false}>
       <S.ContainerWrapper>
         <ResetModal
-          open={isComplete}
+          open={isSetup}
           onCancel={() => navigate('/course-selector')}
           onOk={() => resetDegree.mutate()}
         />

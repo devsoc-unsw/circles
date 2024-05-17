@@ -9,7 +9,6 @@ import SpecialisationStep from './SpecialisationStep';
 
 const mockDegreeInfo = {
   programCode: '3778',
-  isComplete: false,
   startYear: undefined,
   endYear: undefined,
   specs: []

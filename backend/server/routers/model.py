@@ -214,12 +214,11 @@ class PlannerData(BaseModel):
                 user.add_courses(cleaned_term)
         return user
 
-
+# TODO: get rid of these user models in favour of the database models
 @with_config(ConfigDict(extra='forbid'))
 class DegreeLocalStorage(TypedDict):
     programCode: str
     specs: list[str]
-    isComplete: bool
 
 @with_config(ConfigDict(extra='forbid'))
 class PlannerLocalStorage(TypedDict):

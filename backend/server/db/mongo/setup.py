@@ -51,7 +51,7 @@ def create_new_users_collection():
                         'guest': { 'bsonType': 'bool' },
                         'degree': {
                             'bsonType': 'object',
-                            'required': ['programCode', 'specs', 'isComplete'],
+                            'required': ['programCode', 'specs'],
                             'additionalProperties': False,
                             'properties': {
                                 'programCode': {
@@ -65,10 +65,6 @@ def create_new_users_collection():
                                         'bsonType': 'string'
                                     }
                                 },
-                                'isComplete': {
-                                    'bsonType': 'bool',
-                                    'description': 'Whether their degree is complete',
-                                }
                             }
                         },
                         'courses': {

@@ -148,8 +148,6 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         if v is not None  # cannot exclude_none since subclasses use None
     }
 
-    # print("\n\n\n\n", payload, "\n\n\n\n")
-
     if len(payload) == 0:
         # most semantically correct
         # print("++ empty update payload")
@@ -167,11 +165,9 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         hint="uidIndex",
     )
 
-    # print(res)
-
     return res.matched_count == 1
 
-def default_cs_user(guest: bool, start_year: int) -> UserStorage:
+def _default_cs_user(guest: bool, start_year: int) -> UserStorage:
     # TODO: remove this later
     return UserStorage(
         guest=guest,
@@ -185,7 +181,6 @@ def default_cs_user(guest: bool, start_year: int) -> UserStorage:
             years=[]
         ),
         degree=UserDegreeStorage(
-            isComplete=False,
             programCode="3778",
             specs=["COMPA1"],
         )

@@ -42,7 +42,6 @@ class NotSetupUserInfoDict(TypedDict):
 class UserDegreeInfoDict(TypedDict):
     programCode: str
     specs: List[str]
-    isComplete: bool
 
 class UserCourseInfoDict(TypedDict):
     code: str

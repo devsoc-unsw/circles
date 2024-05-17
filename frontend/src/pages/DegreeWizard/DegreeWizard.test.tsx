@@ -69,8 +69,7 @@ describe('DegreeWizard', () => {
     expect(await getUserDegree('')).toEqual({
       programCode: '3778',
       programName: 'Computer Science',
-      specs: ['COMPA1'],
-      isComplete: true
+      specs: ['COMPA1']
     });
     expect(dummyNavigate).toBeCalledWith('/course-selector');
   });

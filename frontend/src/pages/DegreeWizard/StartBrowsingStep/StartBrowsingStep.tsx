@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { setupDegreeWizard } from 'utils/api/degreeApi';
-import { setIsComplete } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
@@ -33,7 +32,6 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       });
       queryClient.clear();
       navigate('/course-selector');
-      setIsComplete(token, true);
     },
     onError: (err) => {
       // TODO: Give the user a notification for stuff like this

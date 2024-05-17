@@ -19,16 +19,12 @@ export const getUserDegree = async (token: string): Promise<DegreeResponse> => {
   return degree.data as DegreeResponse;
 };
 
-export const setIsComplete = async (
-  token: string,
-  isComplete: boolean
-): Promise<Record<never, never>> => {
-  await axios.put(
-    `user/setIsComplete`,
-    {},
-    { params: { isComplete }, headers: { ...withAuthorization(token) } }
-  );
-  return {};
+export const getUserIsSetup = async (token: string): Promise<boolean> => {
+  const res = await axios.get<boolean>('/user/isSetup', {
+    headers: { ...withAuthorization(token) }
+  });
+
+  return res.data;
 };
 
 export const getUserPlanner = async (token: string): Promise<PlannerResponse> => {

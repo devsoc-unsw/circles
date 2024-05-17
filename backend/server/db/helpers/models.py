@@ -15,7 +15,6 @@ RefreshToken = NewType('RefreshToken', str)
 class UserDegreeStorage(BaseModel):
     programCode: str
     specs: List[str]
-    isComplete: bool
 
 
 class UserCourseStorage(BaseModel):

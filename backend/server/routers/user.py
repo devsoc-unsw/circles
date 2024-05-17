@@ -3,6 +3,7 @@ from typing import Annotated, Any, Dict, Optional, cast
 from bson.objectid import ObjectId
 from data.config import LIVE_YEAR
 from fastapi import APIRouter, HTTPException, Security
+from starlette.status import HTTP_403_FORBIDDEN
 
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
 from server.routers.courses import get_course
@@ -25,6 +26,7 @@ router = APIRouter(
 
 require_uid = HTTPBearerToUserID()
 
+# TODO: remove these underwrite helpers once we get rid of the old TypedDicts
 def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
     return NEWUserPlannerStorage.model_validate(s)
 
@@ -65,7 +67,6 @@ def _nto_planner(s: NEWUserPlannerStorage) -> PlannerLocalStorage:
 
 def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
     return {
-        'isComplete': s.isComplete,
         'programCode': s.programCode,
         'specs': s.specs,
     }
@@ -80,19 +81,19 @@ def _nto_storage(s: NEWUserStorage) -> Storage:
 
 def get_setup_user(uid: str) -> Storage:
     data = udb.get_user(uid)
-    if data is None or data.setup is False:
-        # TODO: this is so jank - add actual register / checking process when it comes
-        # should error and prompt a registration - at some point ;)
-        print("-- USING DEFAULT CS USER:", uid, data)
-        # PLACES USING:
-        # - degree wizard to check if we need to open modal -> sol is allow notsetup results in main user query
-        return default_cs_user()
+    assert data is not None  # this should not happen since this uid should only come from a token exchange
+    if data.setup is False:
+        raise HTTPException(
+            status_code=HTTP_403_FORBIDDEN,
+            detail="User must be setup to access this resource.",
+        )
 
     return _nto_storage(data)
 
 # keep this private
 def set_user(uid: str, item: Storage, overwrite: bool = False):
     if not overwrite and udb.user_is_setup(uid):
+        # TODO: get rid of the overwrite field when we get rid of this function all together
         print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
         print("++ ABOUT TO ASSERT FALSE:", uid)
         assert False  # want to remove these cases too
@@ -186,33 +187,6 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
 
     return res
 
-# makes an empty CS Student
-
-
-def default_cs_user() -> Storage:
-    planner: PlannerLocalStorage = {
-        'mostRecentPastTerm': {
-            'Y': 0,
-            'T': 0
-        },
-        'unplanned': [],
-        'isSummerEnabled': True,
-        'startYear': LIVE_YEAR,
-        'lockedTerms': {},
-        'years': [],
-    }
-    user: Storage = {
-        'degree': {
-            'programCode': '3778',
-            'specs': ['COMPA1'],
-            'isComplete': False,
-        },
-        'planner': planner,
-        'courses': {}
-    }
-    return user
-
-
 @router.post("/toggleSummerTerm")
 def toggle_summer_term(uid: Annotated[str, Security(require_uid)]):
     user = get_setup_user(uid)
@@ -304,20 +278,19 @@ def removeSpecialisation(specialisation: str, uid: Annotated[str, Security(requi
         specs.remove(specialisation)
     set_user(uid, user, True)
 
-@router.put("/setIsComplete")
-def setIsComplete(isComplete: bool, uid: Annotated[str, Security(require_uid)]):
-    user = get_setup_user(uid)
-    user['degree']['isComplete'] = isComplete
-    set_user(uid, user, True)
-
 @router.post("/reset")
 def reset(uid: Annotated[str, Security(require_uid)]):
     """Resets user data of a parsed token"""
-
     assert udb.reset_user(uid)
+
+@router.get("/isSetup")
+def is_setup(uid: Annotated[str, Security(require_uid)]) -> bool:
+    """Returns whether the user has been setup with a degree yet, replacing old `isComplete` field."""
+    return udb.user_is_setup(uid)
 
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(require_uid)]):
+    # TODO: do we want to throw 403 if they are already setup???
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:
@@ -390,7 +363,6 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         'degree': {
             'programCode': wizard.programCode,
             'specs': wizard.specs,
-            'isComplete': True,
         },
         'planner': planner,
         'courses': {}
