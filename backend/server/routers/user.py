@@ -80,7 +80,7 @@ def _nto_storage(s: NEWUserStorage) -> Storage:
 
 def get_setup_user(uid: str) -> Storage:
     data = udb.get_user(uid)
-    assert data is not None  # this should not happen since this uid should only come from a token exchange
+    assert data is not None  # this uid should only come from a token exchange, and we only delete users after logout
     if data.setup is False:
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN,

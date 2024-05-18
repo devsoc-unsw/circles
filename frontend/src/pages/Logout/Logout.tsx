@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { logout } from 'utils/api/auth';
+import PageLoading from 'components/PageLoading';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectToken, unsetIdentity } from 'reducers/identitySlice';
 
@@ -26,7 +27,7 @@ const Logout = () => {
     performLogout();
   }, [token, dispatch, queryClient, navigate]);
 
-  return <div>logging out</div>;
+  return <PageLoading />;
 };
 
 export default Logout;

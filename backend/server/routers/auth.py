@@ -3,13 +3,12 @@ from typing import Annotated, Dict, Literal, Optional, cast
 from datetime import datetime
 from secrets import token_hex, token_urlsafe
 from time import time
-from urllib.parse import parse_qs
 from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
-from server.db.helpers.users import insert_new_user, user_is_setup
+from server.db.helpers.users import delete_user, insert_new_user, user_is_setup
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
@@ -43,6 +42,7 @@ router = APIRouter(
 
 require_token = HTTPBearer401()
 
+# TODO: make a auth helper file
 def insert_new_guest_user() -> str:
     # returns the claimed uid
     # TODO: i could use uuid, but they long as hell
@@ -160,12 +160,6 @@ def create_auth_url(res: Response) -> str:
     return auth_url
 
 @router.post(
-    "/lolol"
-)
-def swap(ps: str) -> dict:
-    return {k: v[0] for k, v in parse_qs(ps).items()}
-
-@router.post(
     "/login", 
     response_model=IdentityPayload
 )
@@ -251,6 +245,9 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
     # done in this order since once our session is destroyed, their oidc tokens are gone anyway
     assert logout_session(sid)
 
+    if session_info.type == "guest":
+        # a guest user only ever gets one login session, so we can safely drop their data after a successful logout
+        assert delete_user(session_info.uid)
     if session_info.type == "csesoc":
         # only need to revoke a token for fed auth sessions
         try:

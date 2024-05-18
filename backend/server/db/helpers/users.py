@@ -167,6 +167,14 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
 
     return res.matched_count == 1
 
+def delete_user(uid: str) -> bool:
+    res = usersNewCOL.delete_one(
+        { "uid": uid },
+        hint="uidIndex",
+    )
+
+    return res.deleted_count == 1
+
 def _default_cs_user(guest: bool, start_year: int) -> UserStorage:
     # TODO: remove this later
     return UserStorage(
