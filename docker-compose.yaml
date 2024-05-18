@@ -54,6 +54,7 @@ services:
       - ./env/backend.env
     depends_on:
       - mongodb
+      - sessionsdb
     networks:
       - circles-net
 

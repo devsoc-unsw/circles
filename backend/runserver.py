@@ -12,16 +12,23 @@ if __name__ == "__main__":
     parser.add_argument(
         "--overwrite",
         action="store_true",
-        help="Inclusion of option will overwrite the database",
+        help="Inclusion of option will force overwrite the database",
     )
+    parser.add_argument(
+        "--dev",
+        action="store_true",
+        help="Inclusion of option will enable hot-reloading and smart-overwrite"
+    )
+
     try:
         args = parser.parse_args()
     except argparse.ArgumentError:
         parser.print_help()
         sys.exit(0)
 
-    if args.overwrite:
-        # TODO: abstract this
+    if args.overwrite or args.dev:
+        # TODO: abstract this, and remove these local imports once we have proper connection handling
+        # TODO: also do overwrite checks for dev mode using a timestamp
         from server.db.mongo.setup import optionally_create_new_data, overwrite_all
         from server.db.redis.setup import setup_redis_sessionsdb
 
@@ -32,5 +39,12 @@ if __name__ == "__main__":
         setup_redis_sessionsdb()
         print("-- Finished Redis Setup")
 
-    print("\n\n-- Starting uvicorn")
-    uvicorn.run("server.server:app", host='0.0.0.0', reload=True, lifespan="on", reload_excludes="*.json")
+    print(f"-- Starting uvicorn(reload={args.dev})")
+    print("*.json" if args.dev else None)
+    uvicorn.run(
+        "server.server:app",
+        host='0.0.0.0',
+        lifespan="on",
+        reload=args.dev,
+        reload_excludes="*.json" if args.dev else None
+    )

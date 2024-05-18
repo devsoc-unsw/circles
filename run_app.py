@@ -117,7 +117,7 @@ def main():
         }
 
         Popen(
-            f"{python_ver} -u runserver.py --overwrite",
+            f"{python_ver} -u runserver.py --dev",
             stdout=sys.stdout,
             stderr=sys.stderr,
             shell=True,
