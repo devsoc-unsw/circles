@@ -7,7 +7,7 @@ from server.db.mongo.conn import usersNewCOL
 
 from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
 
-# TODO: remove type ignores by constructing dictionaries properly
+# TODO-OLLI: remove type ignores by constructing dictionaries properly
 
 def get_user(uid: str) -> Optional[Union[NotSetupUserStorage, UserStorage]]:
     res = usersNewCOL.find_one({ 'uid': uid })
@@ -17,13 +17,12 @@ def get_user(uid: str) -> Optional[Union[NotSetupUserStorage, UserStorage]]:
     return UserStorage.model_validate(res) if res["setup"] else NotSetupUserStorage.model_validate(res)
 
 def get_user_degree(uid: str) -> Optional[UserDegreeStorage]:
-    # TODO: mayb do osmething funky with aggregate
-    # TODO: figure out some error raising for when storage is not setup
+    # TODO-OLLI: figure out some error raising for when storage is not setup
     res = get_user(uid)
     return res.degree if res is not None and res.setup is True else None
 
 def get_user_courses(uid: str) -> Optional[UserCoursesStorage]:
-    # TODO: https://stackoverflow.com/questions/55762673/how-to-parse-list-of-models-with-pydantic
+    # TODO-OLLI: https://stackoverflow.com/questions/55762673/how-to-parse-list-of-models-with-pydantic
     res = get_user(uid)
     return res.courses if res is not None and res.setup is True else None
 
@@ -176,7 +175,7 @@ def delete_user(uid: str) -> bool:
     return res.deleted_count == 1
 
 def _default_cs_user(guest: bool, start_year: int) -> UserStorage:
-    # TODO: remove this later
+    # TODO-OLLI: remove this later
     return UserStorage(
         guest=guest,
         courses={},
