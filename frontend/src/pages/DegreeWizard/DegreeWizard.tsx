@@ -34,7 +34,7 @@ const DegreeWizard = () => {
 
   const { programCode } = degreeInfo;
   const isSetup = useQuery({
-    queryKey: ['degree', 'isSetup'], // TODO: fix this key
+    queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key
     queryFn: () => getUserIsSetup(token)
   }).data;
   const navigate = useNavigate();

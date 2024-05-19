@@ -19,7 +19,6 @@ export type IdentityResponse = {
 
 export const withAuthorization = (token: string) => {
   if (typeof token !== 'string' || token.length === 0) {
-    // TODO: could probably remove this later
     throw TypeError('Token must be a string of length > 0', { cause: { token } });
   }
 

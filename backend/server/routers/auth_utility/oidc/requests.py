@@ -21,10 +21,10 @@ SCOPES = "openid offline_access"
 
 REQUEST_TIMEOUT = 5
 
-# TODO: move to pydantic and handle as validation errors
-# TODO: should i add accepts json
-# TODO: move the above constants to a request to the config endpoint
-# TODO: handle the raw request errors like timeout and cannot establish connection
+# TODO-OLLI: move to pydantic and handle as validation errors
+# TODO-OLLI: should i add accepts json
+# TODO-OLLI: move the above constants to a request to the config endpoint
+# TODO-OLLI: handle the raw request errors like timeout and cannot establish connection
 
 class TokenResponse(TypedDict):
     access_token: str
@@ -93,7 +93,7 @@ def get_user_info(access_token: str) -> UserInfoResponse:
         if res.ok:
             return resjson
 
-        # TODO: make sure issuer is correct 5.3.4
+        # TODO-OLLI: make sure issuer is correct 5.3.4
 
         # print(resjson)
         raise OIDCUserInfoError.from_dict(resjson)

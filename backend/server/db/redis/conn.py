@@ -4,7 +4,7 @@ import redis
 sdb: redis.Redis
 
 def connect():
-    # TODO: make this not use ft.search and use our own secondary index
+    # TODO-OLLI: make this not use ft.search and use our own secondary index
     global sdb
     print("Trying to connect to sessions db.")
 
@@ -13,5 +13,5 @@ def connect():
     print('Connected to sessions database.', sdb.ping())
 
 
-# TODO: call this in the fastapi lifetime function
+# TODO-OLLI: call this in the fastapi lifetime function
 connect()

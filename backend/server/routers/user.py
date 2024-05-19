@@ -15,7 +15,7 @@ from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserS
 
 
 from pydantic import BaseModel
-# TODO: i think we can get rid of this now
+# TODO-OLLI: i think we can get rid of this now since we do not use ObjectId anywhere
 BaseModel.model_config["json_encoders"] = {ObjectId: str}
 
 router = APIRouter(
@@ -25,7 +25,7 @@ router = APIRouter(
 
 require_uid = HTTPBearerToUserID()
 
-# TODO: remove these underwrite helpers once we get rid of the old TypedDicts
+# TODO-OLLI: remove these underwrite helpers once we get rid of the old TypedDicts
 def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
     return NEWUserPlannerStorage.model_validate(s)
 
@@ -92,7 +92,7 @@ def get_setup_user(uid: str) -> Storage:
 # keep this private
 def set_user(uid: str, item: Storage, overwrite: bool = False):
     if not overwrite and udb.user_is_setup(uid):
-        # TODO: get rid of the overwrite field when we get rid of this function all together
+        # TODO-OLLI: get rid of the overwrite field when we get rid of this function all together
         print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
         print("++ ABOUT TO ASSERT FALSE:", uid)
         assert False  # want to remove these cases too
@@ -109,7 +109,6 @@ def set_user(uid: str, item: Storage, overwrite: bool = False):
 # Ideally not used often.
 @router.post("/saveLocalStorage")
 def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(require_uid)]):
-    # TODO: turn giving no token into an error
     planned: list[str] = sum((sum(year.values(), [])
                              for year in localStorage.planner['years']), [])
     unplanned: list[str] = localStorage.planner['unplanned']
@@ -152,7 +151,7 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
     # plannedFor: string of form "year term"
     # isMultiterm
     # uoc -> UOC
-    # TODO: fix return type up omg
+    # TODO-OLLI: remove the additional data here and get frontend to request it itself
     user = get_setup_user(uid)
     raw_courses = user['courses']
     planner = user['planner']
@@ -289,7 +288,7 @@ def is_setup(uid: Annotated[str, Security(require_uid)]) -> bool:
 
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(require_uid)]):
-    # TODO: do we want to throw 403 if they are already setup???
+    # TODO-OLLI: do we want to throw 403 if they are already setup???
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:

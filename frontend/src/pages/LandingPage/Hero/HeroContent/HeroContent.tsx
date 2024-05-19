@@ -15,8 +15,8 @@ const HeroContent = () => {
 
   const { data: tokenStatus } = useQuery({
     queryFn: () => checkTokenStatus(token),
-    queryKey: ['degree', 'user', 'state', { token }] // TODO: temporary key
-    // staleTime: 60 * 5 * 1000 // TODO: re add when everything is done
+    queryKey: ['degree', 'user', 'state', { token }] // TODO-OLLI: temporary key
+    // staleTime: 60 * 5 * 1000 // TODO-OLLI: re add when everything is done
   });
 
   const nextPage = useMemo(() => {

@@ -66,7 +66,7 @@ class HTTPBearerToUserID(HTTPBearer401):
         return uid
 
 
-# TODO: rename these tokens to use __Secure and approriate names
+# TODO-OLLI: rename these tokens to use __Secure and approriate names
 def set_refresh_token_cookie(res: Response, token: Optional[str] = None, expiry: Optional[int] = None) -> None:
     if token is not None and expiry is not None:
         res.set_cookie(

@@ -13,12 +13,12 @@ type Props = {
 const PreventToken = ({ setTo }: Props) => {
   const token = useAppSelector(selectToken);
 
-  // TODO: should we separate out the undefined check from this?
+  // TODO-OLLI: should we separate out the undefined check from this?
   const { isPending, data: tokenStatus } = useQuery({
     queryFn: () => checkTokenStatus(token),
-    queryKey: ['degree', 'user', 'state', { token }], // TODO: temporary key
+    queryKey: ['degree', 'user', 'state', { token }], // TODO-OLLI: temporary key
     throwOnError: true
-    // staleTime: 60 * 5 * 1000 // TODO: re add when everything is done
+    // staleTime: 60 * 5 * 1000 // TODO-OLLI: re add when everything is done
   });
 
   if (isPending || tokenStatus === undefined) {

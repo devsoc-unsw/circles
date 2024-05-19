@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectToken, unsetIdentity } from 'reducers/identitySlice';
 
 const Logout = () => {
-  // TODO: dont make this a page
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const token = useAppSelector(selectToken);

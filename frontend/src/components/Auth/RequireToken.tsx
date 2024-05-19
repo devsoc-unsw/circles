@@ -15,20 +15,18 @@ type Props = {
 };
 
 const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
-  // TODO: do we want to navigate away from login pages too?
-  // TODO: maybe we could merge this into useToken??
   const { token, userId } = useAppSelector(selectIdentity) ?? {};
 
-  // TODO: strip out undefined check from checkTokenStatus
+  // TODO-OLLI: strip out undefined check from checkTokenStatus
   const { isPending, data: tokenStatus } = useQuery({
     queryFn: () => checkTokenStatus(token),
-    queryKey: ['degree', 'user', 'state', { userId }], // TODO: temporary key
+    queryKey: ['degree', 'user', 'state', { userId }], // TODO-OLLI: temporary key
     throwOnError: true
-    // staleTime: 60 * 5 * 1000 // TODO: re add when everything is done
+    // staleTime: 60 * 5 * 1000 // TODO-OLLI: re add when everything is done
   });
 
   useEffect(() => {
-    // TODO: wont need this when we get new notification hook
+    // TODO-OLLI: wont need this when we get new notification hook
     if (tokenStatus === TokenStatus.UNSET || tokenStatus === TokenStatus.EXPIRED) {
       openNotification({
         type: 'error',
@@ -44,7 +42,7 @@ const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
     }
   }, [tokenStatus, needSetup]);
 
-  // TODO: make sure that all navigates across entire app point to correct locations now
+  // TODO-OLLI: make sure that all navigates across entire app point to correct locations now
   if (isPending || tokenStatus === undefined) {
     return <PageLoading />;
   }

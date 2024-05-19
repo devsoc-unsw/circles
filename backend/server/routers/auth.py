@@ -42,10 +42,10 @@ router = APIRouter(
 
 require_token = HTTPBearer401()
 
-# TODO: make a auth helper file
+# TODO-OLLI: make a auth helper file
 def insert_new_guest_user() -> str:
     # returns the claimed uid
-    # TODO: i could use uuid, but they long as hell
+    # TODO-OLLI: i could use uuid, but they long as hell
     data = NotSetupUserStorage(guest=True)
 
     uid = f"guest{token_hex(4)}"
@@ -57,7 +57,8 @@ def insert_new_guest_user() -> str:
 
 def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfoModel) -> Optional[SessionOIDCInfoModel]:
     try:
-        _ = get_user_info(oidc_info.access_token)  # TODO: update user details with this info
+        # TODO: update user's personal details with this info once we have stuff to store
+        _ = get_user_info(oidc_info.access_token)
         return oidc_info  # no need for new info
     except OIDCInvalidToken:
         # access token has expired, try refresh
@@ -71,7 +72,6 @@ def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfoModel) -> Optional[Sess
                 validated_id_token=cast(dict, validated),
             )
         except OIDCInvalidGrant:
-            # TODO: retrieve this error some how
             # refresh token has expired, any other errors are bad and should be handled else ways
             # revoke_token(oidc_info.refresh_token, "refresh_token")  # NOTE: if the fresh token is invalid, i give up
             return None
@@ -199,7 +199,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
         ) from e
 
     # insert new user into database if it does not exist, will collide if it already does which is good
-    # TODO: actually test this, auth is currently down
+    # TODO-OLLI: actually test this, auth is currently down
     uid = id_token["sub"]
     insert_new_user(uid, NotSetupUserStorage(guest=False))
 
@@ -228,7 +228,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
 )
 def logout(res: Response, token: Annotated[SessionToken, Security(require_token)]):
     # delete the cookie first since this will always happen
-    # TODO: maybe this requires refresh_token instead, and then no need for a refresh first
+    # TODO-OLLI: maybe this requires refresh_token instead, and then no need for a refresh first
     set_refresh_token_cookie(res, None)
 
     try:
@@ -254,7 +254,7 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
             revoke_token(session_info.oidc_info.refresh_token, "refresh_token")
         except OIDCInvalidGrant as e:
             # invalid grant could happen if the oidc token is expired, thats fine
-            # TODO: i dont think we want to throw error if it is invalid? but its fine i guess
+            # NOTE: i dont think we want to throw error if it is invalid? but its fine i guess
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
                 detail="Your csesoc session has expired, please re-login.",
@@ -269,7 +269,7 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
                 headers={ "set-cookie": res.headers["set-cookie"] },
             ) from e
 
-# TODO: move into user router file
+# TODO-OLLI: move into user router file (or remove all together in place for just isSetup)
 @router.get(
     "/token_user_state"
 )

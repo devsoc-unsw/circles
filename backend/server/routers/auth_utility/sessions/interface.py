@@ -95,7 +95,7 @@ def get_session_info_from_refresh_token(refresh_token: RefreshToken) -> Tuple[Se
     if ref_info is None:
         raise SessionExpiredRefreshToken(refresh_token)
 
-    # TODO: create an aggregate query for these two steps
+    # TODO-OLLI: maybe create an aggregate query for these two steps
     sid = ref_info.sid
     session_info = sessions.get_session_info(sid)
     assert session_info is not None
@@ -114,7 +114,7 @@ def get_session_info_from_session_token(session_token: SessionToken) -> Tuple[Se
         raise SessionExpiredToken(session_token)
 
     session_info = sessions.get_session_info(info.sid)
-    # TODO: assertion error here if removed from mongo but not redis...
+    # TODO-OLLI: assertion error here if removed from mongo but not redis...
     assert session_info is not None
 
     return (info.sid, session_info)
@@ -150,9 +150,9 @@ def setup_new_guest_session(uid: str) -> Tuple[SessionToken, int, RefreshToken, 
 def create_new_csesoc_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfoModel) -> Tuple[SessionToken, int, RefreshToken, int]:
     # generates a new token pair given an existing session
     # again, assumes oidc info is valid, otherwise it will collapse
-    # TODO: do we want to convert this to a single find_one_and_update?
+    # TODO-OLLI: do we want to convert this to a single find_one_and_update?
     session_info = sessions.get_session_info(sid)
-    assert session_info is not None  # TODO: might happen if they log out before this and after an sid is gotten
+    assert session_info is not None  # TODO-OLLI: might happen if they log out before this and after an sid is gotten
     uid = session_info.uid
 
     # all is good, generate new pair, bind tokens and return
@@ -163,9 +163,9 @@ def create_new_csesoc_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfoM
 
 def create_new_guest_token_pair(sid: SessionID) -> Tuple[SessionToken, int, RefreshToken, int]:
     # generates a new token pair given an existing session
-    # TODO: do we want to convert this to a single find_one_and_update?
+    # TODO-OLLI: do we want to convert this to a single find_one_and_update?
     session_info = sessions.get_session_info(sid)
-    assert session_info is not None  # TODO: might happen if they log out before this and after an sid is gotten
+    assert session_info is not None  # TODO-OLLI: might happen if they log out before this and after an sid is gotten
     uid = session_info.uid
 
     # all is good, generate new pair, bind tokens and return

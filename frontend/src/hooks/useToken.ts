@@ -21,12 +21,12 @@ function useToken(options?: Options): string | undefined;
 // since something like { allowUnset: 100 === 200 } will be type boolean, and thus no return value can be inferred
 
 function useToken(options?: Options): string | undefined {
-  // TODO: handle refreshing if expired in here, and handle navigation or throwing errors
+  // TODO-OLLI: handle refreshing if expired in here, and handle navigation or throwing errors
   // const { token, expiresAt } = useAppSelector(selectIdentity) ?? {};
   const token = useAppSelector(selectToken);
   // console.log('-- useToken called', token);
 
-  // TODO: major flaw - what if there are no rerenders before it expires
+  // TODO-OLLI: major flaw - what if there are no rerenders before it expires
   // const dispatch = useAppDispatch();
   // if (expiresAt !== undefined && expiresAt < Date.now()) {
   //   console.log('++ dispatching a refresh identity');

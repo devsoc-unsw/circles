@@ -28,7 +28,7 @@ export const initialIdentityState: IdentitySliceState = {
 // it goes condition -> pending action -> async call
 // so if we reject in condition on isRefreshing, currRefresh and expiry time (if not forced)
 // and then set these up in the first pending, and ideally nothing else makes it through the condition
-// TODO: is there risk that two make it through condition before pending sets up the first?
+// TODO-OLLI: is there risk that two make it through condition before pending sets up the first?
 export const refreshIdentity = createAsyncThunk<
   IdentityResponse,
   boolean | undefined,

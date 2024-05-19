@@ -19,13 +19,14 @@ const IdentityProvider = () => {
       const newIdentity = await refreshTokens();
       if (newIdentity.uid !== userId) {
         // only clear if its a new user id
-        // TODO: dont actually need to clear entire queryClient, just user storage
+        // TODO-OLLI: dont actually need to clear entire queryClient, just user storage
         queryClient.clear();
       }
 
       dispatch(updateIdentityWithAPIRes(newIdentity));
     } catch (e) {
       if (isAxiosError(e) && e.response?.status === 401) {
+        // TODO-OLLI: maybe make this a interceptor for all 401 requests
         queryClient.clear();
 
         dispatch(unsetIdentity());
