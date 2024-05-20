@@ -1,8 +1,8 @@
 import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, Popconfirm, Tooltip, Typography } from 'antd';
 import { removeCourse } from 'utils/api/plannerApi';
 import { addTab } from 'reducers/courseTabsSlice';
@@ -25,10 +25,15 @@ const CourseCartCard = ({ code, title }: Props) => {
     dispatch(addTab(code));
   };
 
-  const remove = useMutation(removeCourse, {
+  const remove = useMutation({
+    mutationFn: removeCourse,
     onSuccess: () => {
-      queryClient.invalidateQueries('courses');
-      queryClient.invalidateQueries('planner');
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     }
   });
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
@@ -8,7 +8,6 @@ import { CourseTimetable } from 'types/courseCapacity';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import { errLogger } from 'utils/queryUtils';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
@@ -56,14 +55,11 @@ const CourseDescriptionPanel = ({
     ]);
   }, [courseCode]);
 
-  const coursesUnlockedQuery = useQuery(
-    ['coursesUnlocked', courseCode, degree, planner, courses],
-    getCoursesUnlocked,
-    {
-      onError: errLogger('coursesUnlockedQuery'),
-      enabled: !!degree && !!planner && !!courses
-    }
-  );
+  const coursesUnlockedQuery = useQuery({
+    queryKey: ['coursesUnlocked', courseCode, degree, planner, courses],
+    queryFn: getCoursesUnlocked,
+    enabled: !!degree && !!planner && !!courses
+  });
 
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
@@ -77,8 +73,9 @@ const CourseDescriptionPanel = ({
     return res.value;
   }
 
-  const courseInfoQuery = useQuery(['courseInfo', courseCode], getCourseInfo, {
-    onError: errLogger('getCourseInfo')
+  const courseInfoQuery = useQuery({
+    queryKey: ['courseInfo', courseCode],
+    queryFn: getCourseInfo
   });
 
   const loadingWrapper = (
@@ -87,8 +84,7 @@ const CourseDescriptionPanel = ({
     </S.Wrapper>
   );
 
-  const { isLoading } = courseInfoQuery; // || coursesUnlockedQuery.isLoading;
-  if (isLoading || !courseInfoQuery.isSuccess) return loadingWrapper;
+  if (courseInfoQuery.isPending || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
   const course = unwrap(courseRes)?.data;

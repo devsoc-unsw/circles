@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Item, Menu } from 'react-contexify';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,6 +10,7 @@ import {
   PieChartFilled,
   PieChartOutlined
 } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { removeCourse, toggleIgnoreFromProgression, unscheduleCourse } from 'utils/api/plannerApi';
 import EditMarkModal from 'components/EditMarkModal';
 import { addTab } from 'reducers/courseTabsSlice';
@@ -29,18 +29,30 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleUnschedule = useMutation(unscheduleCourse, {
-    onSuccess: () => queryClient.invalidateQueries('planner')
+  const handleUnschedule = useMutation({
+    mutationFn: unscheduleCourse,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      })
   });
-  const handleDelete = useMutation(removeCourse, {
-    onSuccess: () => queryClient.invalidateQueries('planner')
+  const handleDelete = useMutation({
+    mutationFn: removeCourse,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      })
   });
   const handleInfo = () => {
     navigate('/course-selector');
     dispatch(addTab(code));
   };
-  const ignoreFromProgressionMutation = useMutation(toggleIgnoreFromProgression, {
-    onSuccess: () => queryClient.invalidateQueries('courses')
+  const ignoreFromProgressionMutation = useMutation({
+    mutationFn: toggleIgnoreFromProgression,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      })
   });
   const handleToggleProgression = () => {
     ignoreFromProgressionMutation.mutate(code);

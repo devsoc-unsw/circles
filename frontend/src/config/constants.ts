@@ -3,6 +3,8 @@ import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 export const FEEDBACK_LINK =
   'https://docs.google.com/forms/d/e/1FAIpQLSdGoxb-1fRRLySEi5j4Gy_ERWt3XWTBwyKJaDWlTqhy8Xdlxw/viewform?usp=sf_link';
 
+// Don't forget to update live year in the backend too
+export const LIVE_YEAR = 2024;
 export const CURR_YEAR = new Date().getFullYear();
 export const TERM = `${CURR_YEAR + (getMostRecentPastTerm(CURR_YEAR).T === 3 ? 1 : 0)}-T${
   (getMostRecentPastTerm(CURR_YEAR).T + 0) % 3

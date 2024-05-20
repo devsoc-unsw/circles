@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, message } from 'antd';
 import { Grade } from 'types/planner';
 import { updateCourseMark } from 'utils/planner';
@@ -23,11 +23,18 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     setMarkValue(value);
   };
 
-  const updateMarkMutation = useMutation(updateCourseMark, {
+  const updateMarkMutation = useMutation({
+    mutationFn: updateCourseMark,
     onSuccess: () => {
-      queryClient.invalidateQueries('planner');
-      queryClient.invalidateQueries('courses');
-      queryClient.invalidateQueries('validate');
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
       onCancel();
       message.success('Mark Updated');
     },

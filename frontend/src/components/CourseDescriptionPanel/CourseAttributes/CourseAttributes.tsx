@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Progress, Rate, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
@@ -35,7 +35,10 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
   const sidebar = pathname === '/course-selector';
   const theme = useTheme();
 
-  const ratingQuery = useQuery(['courseRating', course.code], () => getCourseRating(course.code));
+  const ratingQuery = useQuery({
+    queryKey: ['courseRating', course.code],
+    queryFn: () => getCourseRating(course.code)
+  });
   const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
