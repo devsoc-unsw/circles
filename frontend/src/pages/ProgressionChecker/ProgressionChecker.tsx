@@ -140,7 +140,7 @@ const ProgressionChecker = () => {
             const course: ViewSubgroupCourse = {
               courseCode,
               title: subgroupStructure.courses[courseCode],
-              UOC: courses[courseCode]?.UOC || 0,
+              UOC: courses[courseCode]?.uoc || 0,
               plannedFor: courses[courseCode]?.plannedFor || '',
               isUnplanned: unplanned.includes(courseCode),
               isMultiterm: !!courses[courseCode]?.isMultiterm,
@@ -176,8 +176,8 @@ const ProgressionChecker = () => {
             }
 
             currUOC +=
-              (courses[courseCode]?.UOC ?? 0) *
-              getNumTerms(courses[courseCode]?.UOC, !!courses[courseCode]?.isMultiterm);
+              (courses[courseCode]?.uoc ?? 0) *
+              getNumTerms(courses[courseCode]?.uoc, !!courses[courseCode]?.isMultiterm);
           });
 
           newViewLayout[group][subgroup].courses.sort((a, b) =>
@@ -195,7 +195,7 @@ const ProgressionChecker = () => {
       const course = {
         courseCode,
         title: courses[courseCode]?.title,
-        UOC: courses[courseCode]?.UOC,
+        UOC: courses[courseCode]?.uoc,
         plannedFor: courses[courseCode]?.plannedFor as string,
         isUnplanned: unplanned.includes(courseCode),
         isMultiterm: courses[courseCode]?.isMultiterm,

@@ -82,7 +82,7 @@ const CourseSelector = () => {
   return (
     <PageTemplate>
       <S.ContainerWrapper>
-        <CourseBanner />
+        <CourseBanner courses={coursesQuery.data} />
         <CourseTabs />
         <S.ContentWrapper offset={menuOffset}>
           <CourseMenu

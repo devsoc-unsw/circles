@@ -63,7 +63,11 @@ const GraphicalSelector = () => {
           />
           {!loading && (
             <S.SearchBarWrapper>
-              <CourseSearchBar onSelectCallback={setCourseCode} style={{ width: '25rem' }} />
+              <CourseSearchBar
+                userCourses={coursesQuery.data}
+                onSelectCallback={setCourseCode}
+                style={{ width: '25rem' }}
+              />
             </S.SearchBarWrapper>
           )}
           {fullscreen && (
