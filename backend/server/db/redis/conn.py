@@ -9,7 +9,14 @@ def connect():
     print("Trying to connect to sessions db.")
 
     # should throw an error, better than exit(1)
-    sdb = redis.Redis(host=os.environ["SESSIONSDB_SERVICE_HOSTNAME"], port=6379, protocol=3, decode_responses=True)
+    sdb = redis.Redis(
+        host=os.environ["SESSIONSDB_SERVICE_HOSTNAME"],
+        port=6379,
+        protocol=3,
+        decode_responses=True,
+        username=os.environ["SESSIONSDB_USERNAME"],
+        password=os.environ["SESSIONSDB_PASSWORD"]
+    )
     print('Connected to sessions database.', sdb.ping())
 
 

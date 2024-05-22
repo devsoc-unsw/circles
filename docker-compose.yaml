@@ -18,7 +18,8 @@ services:
     ports:
       - '8001:8001'
       - '6379:6379'
-      # TODO-OLLI: setup a password for redis
+    env_file:
+      - ./env/sessionsdb.env
     volumes:
       - ./backend/redis.conf:/redis-stack.conf
     networks:
