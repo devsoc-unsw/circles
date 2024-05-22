@@ -39,11 +39,10 @@ if __name__ == "__main__":
         print("-- Finished Redis Setup")
 
     print(f"-- Starting uvicorn(reload={args.dev})")
-    print("*.json" if args.dev else None)
     uvicorn.run(
         "server.server:app",
         host='0.0.0.0',
         lifespan="on",
         reload=args.dev,
-        reload_excludes="*.json" if args.dev else None
+        reload_excludes="*.json" if args.dev else None,
     )

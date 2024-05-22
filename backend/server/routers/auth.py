@@ -7,17 +7,22 @@ from fastapi import APIRouter, Cookie, HTTPException, Response, Security
 from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
+from server.config import SECURE_COOKIES
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
 from server.db.helpers.users import delete_user, insert_new_user, user_is_setup
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
-from .auth_utility.middleware import HTTPBearer401, set_next_state_cookie, set_refresh_token_cookie
+from .auth_utility.middleware import HTTPBearer401, set_secure_cookie
 from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
 from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
 
 STATE_TTL = 10 * 60
+
+REFRESH_TOKEN_COOKIE = f"{"__Secure-" if SECURE_COOKIES else ""}refresh-token"
+AUTH_STATE_COOKIE = f"{"__Secure-" if SECURE_COOKIES else ""}next-auth-state"
+
 
 class UnauthorizedErrorModel(BaseModel):
     detail: str
@@ -88,14 +93,14 @@ def create_guest_session(res: Response) -> IdentityPayload:
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
-    set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
+    set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
 @router.post(
-    "/refresh", 
+    "/refresh",
     response_model=IdentityPayload
 )
-def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cookie()] = None) -> IdentityPayload:
+def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cookie(alias=REFRESH_TOKEN_COOKIE)] = None) -> IdentityPayload:
     # refresh flow - returns a new identity given the circles refresh token
     if refresh_token is None or len(refresh_token) == 0:
         raise HTTPException(
@@ -110,7 +115,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
         sid, session_info = get_session_info_from_refresh_token(refresh_token)
     except (SessionExpiredRefreshToken, SessionOldRefreshToken) as e:
         # if old refresh token, will destroy the session on the backend
-        set_refresh_token_cookie(res, None)
+        set_secure_cookie(res, REFRESH_TOKEN_COOKIE, None)
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail="This refresh token was invalid.",
@@ -123,7 +128,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
         new_oidc_info = _check_csesoc_oidc_session(session_info.oidc_info)
         if new_oidc_info is None:
             logout_session(sid)
-            set_refresh_token_cookie(res, None)
+            set_secure_cookie(res, REFRESH_TOKEN_COOKIE, None)
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
                 detail="Session could not be refreshed, please log in again.",
@@ -144,7 +149,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
-    set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
+    set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=session_info.uid)
 
 @router.get(
@@ -156,14 +161,14 @@ def create_auth_url(res: Response) -> str:
     auth_url = generate_oidc_auth_url(state)
     expires_at = int(time()) + STATE_TTL
 
-    set_next_state_cookie(res, state, expires_at)
+    set_secure_cookie(res, AUTH_STATE_COOKIE, state, expires_at)
     return auth_url
 
 @router.post(
     "/login", 
     response_model=IdentityPayload
 )
-def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie()] = None) -> IdentityPayload:
+def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie(alias=AUTH_STATE_COOKIE)] = None) -> IdentityPayload:
     if next_auth_state is None:
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST,
@@ -184,7 +189,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
         tokens, id_token = exchange_and_validate(auth_code)
     except OIDCInvalidGrant as e:
         # the auth code was invalid
-        set_next_state_cookie(res, None)
+        set_secure_cookie(res, AUTH_STATE_COOKIE, None)
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST,
             detail="Invalid request, please try again.",
@@ -218,8 +223,8 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
     print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
-    set_next_state_cookie(res, None)
-    set_refresh_token_cookie(res, new_refresh_token, refresh_expiry)
+    set_secure_cookie(res, AUTH_STATE_COOKIE, None)
+    set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
 @router.delete(
@@ -229,7 +234,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
 def logout(res: Response, token: Annotated[SessionToken, Security(require_token)]):
     # delete the cookie first since this will always happen
     # TODO-OLLI: maybe this requires refresh_token instead, and then no need for a refresh first
-    set_refresh_token_cookie(res, None)
+    set_secure_cookie(res, REFRESH_TOKEN_COOKIE, None)
 
     try:
         # get the user id and the session id from the token

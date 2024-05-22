@@ -6,6 +6,7 @@ from fastapi.security.utils import get_authorization_scheme_param
 from fastapi.openapi.models import HTTPBearer as HTTPBearerModel
 from starlette.status import HTTP_401_UNAUTHORIZED
 
+from server.config import SECURE_COOKIES
 from server.db.helpers.models import SessionToken
 
 from .sessions.errors import SessionExpiredToken
@@ -65,32 +66,16 @@ class HTTPBearerToUserID(HTTPBearer401):
 
         return uid
 
-
-# TODO-OLLI: rename these tokens to use __Secure and approriate names
-def set_refresh_token_cookie(res: Response, token: Optional[str] = None, expiry: Optional[int] = None) -> None:
-    if token is not None and expiry is not None:
+def set_secure_cookie(res: Response, key: str, value: Optional[str], expiry: Optional[int] = None) -> None:
+    if value is not None and expiry is not None:
         res.set_cookie(
-            key="refresh_token",
-            value=token,
-            # secure=True,
+            key=key,
+            value=value,
+            secure=SECURE_COOKIES,
             httponly=True,
-            # domain="circlesapi.csesoc.app",
             expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
+            # domain="circlesapi.olllli.app",
         )
     else:
         # nothing was given, delete it instead
         res.delete_cookie("refresh_token")
-
-def set_next_state_cookie(res: Response, state: Optional[str] = None, expiry: Optional[int] = None) -> None:
-    if state is not None and expiry is not None:
-        res.set_cookie(
-            key="next_auth_state",
-            value=state,
-            # secure=True,
-            httponly=True,
-            # path="/authorization_url",
-            # domain="circlesapi.csesoc.app",
-            expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
-        )
-    else:
-        res.delete_cookie("next_auth_state")
