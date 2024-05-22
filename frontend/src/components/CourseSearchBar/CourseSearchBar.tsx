@@ -47,10 +47,7 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
   const [debouncedSearchTerm] = useDebounce(value, 200);
   const token = useToken();
 
-  const isInPlanner = (courseCode: string) =>
-    userCourses !== undefined &&
-    userCourses[courseCode] !== undefined &&
-    userCourses[courseCode].plannedFor !== null;
+  const isInPlanner = (courseCode: string) => userCourses?.[courseCode] !== undefined;
 
   const queryClient = useQueryClient();
   const courseMutation = useMutation({
