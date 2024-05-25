@@ -17,12 +17,10 @@ def get_user(uid: str) -> Optional[Union[NotSetupUserStorage, UserStorage]]:
     return UserStorage.model_validate(res) if res["setup"] else NotSetupUserStorage.model_validate(res)
 
 def get_user_degree(uid: str) -> Optional[UserDegreeStorage]:
-    # TODO-OLLI: figure out some error raising for when storage is not setup
     res = get_user(uid)
     return res.degree if res is not None and res.setup is True else None
 
 def get_user_courses(uid: str) -> Optional[UserCoursesStorage]:
-    # TODO-OLLI: https://stackoverflow.com/questions/55762673/how-to-parse-list-of-models-with-pydantic
     res = get_user(uid)
     return res.courses if res is not None and res.setup is True else None
 
@@ -175,7 +173,7 @@ def delete_user(uid: str) -> bool:
     return res.deleted_count == 1
 
 def _default_cs_user(guest: bool, start_year: int) -> UserStorage:
-    # TODO-OLLI: remove this later
+    # TODO-OLLI(pm): remove this later
     return UserStorage(
         guest=guest,
         courses={},

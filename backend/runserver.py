@@ -26,8 +26,8 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if args.overwrite or args.dev:
-        # TODO-OLLI: abstract this, and remove these local imports once we have proper connection handling
-        # TODO-OLLI: also do overwrite checks for dev mode using a timestamp
+        # TODO-OLLI(pm): abstract this, and remove these local imports once we have proper connection handling
+        # TODO-OLLI(pm): also do overwrite checks for dev mode using a timestamp
         from server.db.mongo.setup import optionally_create_new_data, overwrite_all
         from server.db.redis.setup import setup_redis_sessionsdb
 

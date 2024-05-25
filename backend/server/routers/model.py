@@ -214,7 +214,7 @@ class PlannerData(BaseModel):
                 user.add_courses(cleaned_term)
         return user
 
-# TODO-OLLI: get rid of these user models in favour of the database models
+# TODO-OLLI(pm): get rid of these user models in favour of the database models
 @with_config(ConfigDict(extra='forbid'))
 class DegreeLocalStorage(TypedDict):
     programCode: str

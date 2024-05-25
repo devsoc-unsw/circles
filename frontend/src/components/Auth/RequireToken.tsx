@@ -26,7 +26,7 @@ const RequireToken = ({ needSetup, unsetTo, expiredTo, notsetupTo }: Props) => {
   });
 
   useEffect(() => {
-    // TODO-OLLI: wont need this when we get new notification hook
+    // TODO-OLLI(pm): wont need this when we get new notification hook
     if (tokenStatus === TokenStatus.UNSET || tokenStatus === TokenStatus.EXPIRED) {
       openNotification({
         type: 'error',

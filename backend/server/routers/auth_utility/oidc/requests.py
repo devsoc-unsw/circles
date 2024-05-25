@@ -21,10 +21,10 @@ SCOPES = "openid offline_access"
 
 REQUEST_TIMEOUT = 5
 
-# TODO-OLLI: move to pydantic and handle as validation errors
-# TODO-OLLI: should i add accepts json
+# TODO-OLLI(pm): should i move to pydantic and handle as validation errors
+# TODO-OLLI(pm): should i add accepts json
 # TODO-OLLI: move the above constants to a request to the config endpoint
-# TODO-OLLI: handle the raw request errors like timeout and cannot establish connection
+# TODO-OLLI(pm): handle the raw request errors like timeout and cannot establish connection
 
 class TokenResponse(TypedDict):
     access_token: str

@@ -25,6 +25,7 @@ class UserCourseStorage(BaseModel):
     ignoreFromProgression: bool
 
 # TODO-OLLI: https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types
+# OR use a type adapter
 type UserCoursesStorage = Dict[str, UserCourseStorage]
 
 class YearTerm(BaseModel):
@@ -61,7 +62,7 @@ class NotSetupUserStorage(_BaseUserStorage):
 # https://github.com/pydantic/pydantic/issues/1223#issuecomment-1152323275
 class PartialUserStorage(BaseModel):
     # for batch user storage update
-    # TODO-OLLI: remove this and use keyword args since they cannot be None
+    # TODO-OLLI(pm): remove this and use keyword args since they cannot be None
     degree: Optional[UserDegreeStorage] = None
     courses: Optional[UserCoursesStorage] = None
     planner: Optional[UserPlannerStorage] = None

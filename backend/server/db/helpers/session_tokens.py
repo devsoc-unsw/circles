@@ -35,7 +35,7 @@ def get_token_info(token: SessionToken) -> Optional[SessionTokenInfoModel]:
 def set_token_nx(token: SessionToken, info: SessionTokenInfoModel) -> bool:
     # tries and sets the information, returning whether it was successful
     # if can set first one, assume can set them all
-    # TODO-OLLI: figure out how to make this a transaction and/or redis func so it dont get deleted midway
+    # TODO-OLLI(pm): figure out how to make this a transaction and/or redis func so it dont get deleted midway
     key = form_key(token)
     exists = sdb.hsetnx(name=key, key="sid", value=info.sid.hex)
 
@@ -56,7 +56,7 @@ def set_token_nx(token: SessionToken, info: SessionTokenInfoModel) -> bool:
 
 def delete_all_tokens(sid: SessionID) -> None:
     # FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM
-    # TODO-OLLI: functionize this
+    # TODO-OLLI(pm): functionize this
     # look up all the keys, do in patches of DELETE_BATCH_SIZE
     while True:
         all_matches = sdb.ft("idx:sid").search(

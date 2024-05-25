@@ -50,7 +50,7 @@ require_token = HTTPBearer401()
 # TODO-OLLI: make a auth helper file
 def insert_new_guest_user() -> str:
     # returns the claimed uid
-    # TODO-OLLI: i could use uuid, but they long as hell
+    # TODO-OLLI(pm): i could use uuid, but they long as hell
     data = NotSetupUserStorage(guest=True)
 
     uid = f"guest{token_hex(4)}"

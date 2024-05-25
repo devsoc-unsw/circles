@@ -27,7 +27,7 @@ refreshTokensNewCOL: Collection[RefreshTokenInfoDict]
 usersNewCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
 
 def connect():
-    # TODO-OLLI: this global list is horrible...
+    # TODO-OLLI(pm): this global list is horrible...
     global client, db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
     print("Trying to connect to mongo database.")
 

@@ -665,7 +665,7 @@ def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRest
     # TODO: This loading should not be here; very slow
     # making it global causes some errors
     # There needs to be a startup event for routers to load data
-    # TODO-OLLI: ^ we now have a global startup event, we can setup and cache pickle data there
+    # TODO-OLLI(pm): ^ we now have a global startup event, we can setup and cache pickle data there
     if not program_code:
         return None
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:

@@ -15,7 +15,7 @@ from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserS
 
 
 from pydantic import BaseModel
-# TODO-OLLI: i think we can get rid of this now since we do not use ObjectId anywhere
+# TODO-OLLI(pm): i think we can get rid of this now since we do not use ObjectId anywhere
 BaseModel.model_config["json_encoders"] = {ObjectId: str}
 
 router = APIRouter(
@@ -25,7 +25,7 @@ router = APIRouter(
 
 require_uid = HTTPBearerToUserID()
 
-# TODO-OLLI: remove these underwrite helpers once we get rid of the old TypedDicts
+# TODO-OLLI(pm): remove these underwrite helpers once we get rid of the old TypedDicts
 def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
     return NEWUserPlannerStorage.model_validate(s)
 
@@ -92,7 +92,7 @@ def get_setup_user(uid: str) -> Storage:
 # keep this private
 def set_user(uid: str, item: Storage, overwrite: bool = False):
     if not overwrite and udb.user_is_setup(uid):
-        # TODO-OLLI: get rid of the overwrite field when we get rid of this function all together
+        # TODO-OLLI(pm): get rid of the overwrite field when we get rid of this function all together
         print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
         print("++ ABOUT TO ASSERT FALSE:", uid)
         assert False  # want to remove these cases too
@@ -151,7 +151,7 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
     # plannedFor: string of form "year term"
     # isMultiterm
     # uoc -> UOC
-    # TODO-OLLI: remove the additional data here and get frontend to request it itself
+    # TODO-OLLI(pm): remove the additional data here and get frontend to request it itself
     user = get_setup_user(uid)
     raw_courses = user['courses']
     planner = user['planner']
