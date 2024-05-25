@@ -3,8 +3,8 @@ from typing import Annotated, Dict, Literal, Optional, cast
 from datetime import datetime
 from secrets import token_hex, token_urlsafe
 from time import time
-from fastapi import APIRouter, Cookie, HTTPException, Response, Security
-from pydantic import BaseModel
+from fastapi import APIRouter, Body, Cookie, HTTPException, Response, Security
+from pydantic import BaseModel, RootModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 from server.config import SECURE_COOKIES
@@ -31,7 +31,7 @@ class ForbiddenErrorModel(BaseModel):
     detail: str
 
 class ExchangeCodePayload(BaseModel):
-    query_params: Dict[str, str]
+    oidc_response: Dict[str, str]
 
 class IdentityPayload(BaseModel):
     session_token: str
@@ -96,10 +96,7 @@ def create_guest_session(res: Response) -> IdentityPayload:
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
-@router.post(
-    "/refresh",
-    response_model=IdentityPayload
-)
+@router.post("/refresh", response_model=IdentityPayload)
 def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cookie(alias=REFRESH_TOKEN_COOKIE)] = None) -> IdentityPayload:
     # refresh flow - returns a new identity given the circles refresh token
     if refresh_token is None or len(refresh_token) == 0:
@@ -152,10 +149,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=session_info.uid)
 
-@router.get(
-    "/authorization_url",
-    response_model=str
-)
+@router.get("/authorization_url", response_model=str)
 def create_auth_url(res: Response) -> str:
     state = token_urlsafe(32)
     auth_url = generate_oidc_auth_url(state)
@@ -164,11 +158,8 @@ def create_auth_url(res: Response) -> str:
     set_secure_cookie(res, AUTH_STATE_COOKIE, state, expires_at)
     return auth_url
 
-@router.post(
-    "/login", 
-    response_model=IdentityPayload
-)
-def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie(alias=AUTH_STATE_COOKIE)] = None) -> IdentityPayload:
+@router.post("/login", response_model=IdentityPayload)
+def login(res: Response, payload: ExchangeCodePayload, next_auth_state: Annotated[Optional[str], Cookie(alias=AUTH_STATE_COOKIE)] = None) -> IdentityPayload:
     if next_auth_state is None:
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST,
@@ -177,7 +168,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
 
     try:
         # validate params given in the payload
-        auth_code = validate_authorization_response(next_auth_state, data.query_params)
+        auth_code = validate_authorization_response(next_auth_state, payload.oidc_response)
     except OIDCValidationError as e:
         raise HTTPException(
             status_code=HTTP_400_BAD_REQUEST,
@@ -227,10 +218,7 @@ def login(res: Response, data: ExchangeCodePayload, next_auth_state: Annotated[O
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
-@router.delete(
-    "/logout",
-    response_model=None
-)
+@router.delete("/logout", response_model=None)
 def logout(res: Response, token: Annotated[SessionToken, Security(require_token)]):
     # delete the cookie first since this will always happen
     # TODO-OLLI: maybe this requires refresh_token instead, and then no need for a refresh first

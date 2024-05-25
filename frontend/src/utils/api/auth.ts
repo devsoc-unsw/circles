@@ -7,10 +7,6 @@ export enum TokenStatus {
   SETUP = 'setup'
 }
 
-interface OldIdentityPayload {
-  session_token: string;
-}
-
 export type IdentityResponse = {
   session_token: string;
   exp: number;
@@ -55,16 +51,13 @@ export const checkTokenStatus = async (token: string | undefined): Promise<Token
   return res.data;
 };
 
-export const exchangeAuthCode = async (
-  query_params: Record<string, string>
-): Promise<OldIdentityPayload> => {
-  console.log(`exchanging`);
-  const res = await axios.post<OldIdentityPayload>(
+export const CSELogin = async (query_params: Record<string, string>): Promise<IdentityResponse> => {
+  const res = await axios.post<IdentityResponse>(
     '/auth/login',
-    { query_params },
+    { oidc_response: query_params },
     { withCredentials: true }
   );
-  console.log('exchange result:', res);
+
   return res.data;
 };
 
