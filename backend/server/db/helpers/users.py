@@ -69,7 +69,7 @@ def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
         res = usersNewCOL.update_one(
             { "uid": uid },
             {
-                "$set": data.dict(include={ "degree", "courses", "planner", "setup" }),
+                "$set": data.model_dump(include={ "degree", "courses", "planner", "setup" }),
                 "$setOnInsert": {
                     # The fields that are usually immutable
                     "uid": uid,
@@ -84,7 +84,7 @@ def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
 
     # just try insert
     try:
-        usersNewCOL.insert_one(data.dict()) # type: ignore
+        usersNewCOL.insert_one(data.model_dump()) # type: ignore
         return True
     except pymongo.errors.DuplicateKeyError:
         # uid already existed
@@ -95,7 +95,7 @@ def update_user_degree(uid: str, data: UserDegreeStorage) -> bool:
         { "uid": uid, "setup": True },
         {
             "$set": {
-                "degree": data.dict(),
+                "degree": data.model_dump(),
             },
         },
         upsert=False,
@@ -109,7 +109,7 @@ def update_user_courses(uid: str, data: UserCoursesStorage) -> bool:
         { "uid": uid, "setup": True },
         {
             "$set": {
-                "courses": { code: info.dict() for code, info in data.items() },
+                "courses": { code: info.model_dump() for code, info in data.items() },
             },
         },
         upsert=False,
@@ -123,7 +123,7 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
         { "uid": uid, "setup": True },
         {
             "$set": {
-                "planner": data.dict(),
+                "planner": data.model_dump(),
             },
         },
         upsert=False,
@@ -138,7 +138,7 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
     payload = {
         k: v
         for k, v
-        in data.dict(
+        in data.model_dump(
             include={ "courses", "degree", "planner" }, 
             exclude_unset=True,
         ).items()

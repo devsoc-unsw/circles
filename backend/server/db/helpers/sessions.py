@@ -13,7 +13,6 @@ def get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSe
     session = sessionsNewCOL.find_one({ "sid": sid })
 
     if session is None or session["type"] == "notsetup":
-        # TODO-OLLI: deal with guest sessions here
         return None
 
     exp = int(session["expiresAt"].timestamp())
