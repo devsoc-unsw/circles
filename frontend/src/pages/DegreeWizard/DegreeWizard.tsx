@@ -66,7 +66,7 @@ const DegreeWizard = () => {
   };
 
   return (
-    <PageTemplate showHeader={false}>
+    <PageTemplate showHeader={false} showBugButton={false}>
       <S.ContainerWrapper>
         <ResetModal open={degree.isComplete} onCancel={() => navigate('/course-selector')} />
         <Title className="text">Welcome to Circles!</Title>
