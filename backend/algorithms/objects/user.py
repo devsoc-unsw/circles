@@ -83,6 +83,10 @@ class User:
             c in self.courses and (self.courses[c][1] or 50) >= 50 
             for c in chain([course], (CACHED_EQUIVALENTS.get(course) or []))
         )
+        
+    def is_taking_specific_course(self, course):
+        """ taking a course directly, no equivalents """
+        return course in self.cur_courses
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """
@@ -135,19 +139,21 @@ class User:
         """
         return self.courses.get(course, (6, None))[1]
 
-    def wam(self, category: Category = AnyCategory()) -> Optional[float]:
+    def wam(self, category: Category = AnyCategory()) -> Tuple[Optional[float], bool]:
         """
         Calculates the user's WAM by taking the average of the sum of their
         marks, weighted by uoc per course.
-        Will return `None` is the user has taken no uoc.
+        Will return `None` is the user has taken no uoc, and a boolean indicating if all uoc have an associated mark.
         """
-        total_wam, total_uoc = 0, 0
+        total_mark, total_uoc, counted_uoc = 0, 0, 0
         for course, (uoc, grade) in self.courses.items():
-            if grade is not None and category.match_definition(course):
+            if category.match_definition(course):
                 total_uoc += uoc
-                total_wam += uoc * grade
+                if grade is not None:
+                    counted_uoc += uoc
+                    total_mark += uoc * grade
 
-        return None if total_uoc == 0 else total_wam / total_uoc
+        return (None if counted_uoc == 0 else total_mark / counted_uoc, total_uoc == counted_uoc)
 
     def uoc(self, category: Category = AnyCategory()):
         """ Given a user, returns the number of units they have taken for this uoc category """
