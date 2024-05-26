@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
+import { isAxiosError } from 'axios';
+import { getUserIsSetup } from 'utils/api/userApi';
 import PageLoading from 'components/PageLoading';
 import { useAppSelector } from 'hooks';
 import { selectToken } from 'reducers/identitySlice';
@@ -14,31 +15,41 @@ const PreventToken = ({ setTo }: Props) => {
   const token = useAppSelector(selectToken);
 
   // TODO-OLLI: should we separate out the undefined check from this?
-  const { isPending, data: tokenStatus } = useQuery({
-    queryFn: () => checkTokenStatus(token),
-    queryKey: ['degree', 'user', 'state', { token }], // TODO-OLLI: temporary key
-    throwOnError: true
-    // staleTime: 60 * 5 * 1000 // TODO-OLLI: re add when everything is done
+  const {
+    isPending,
+    data: isSetup,
+    error
+  } = useQuery({
+    queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key, including userId
+    queryFn: () => getUserIsSetup(token!),
+    enabled: token !== undefined,
+    refetchOnWindowFocus: 'always'
   });
 
-  if (isPending || tokenStatus === undefined) {
+  if (token === undefined) {
+    // good
+    return <Outlet />;
+  }
+
+  if (error) {
+    // api call failed, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
+    // TODO-OLLI: do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
+    if (isAxiosError(error) && error.response?.status === 401) {
+      window.location.reload();
+    } else {
+      throw error;
+    }
+  }
+
+  if (isPending || isSetup === undefined) {
     return <PageLoading />;
   }
 
-  if (tokenStatus === TokenStatus.EXPIRED) {
-    // shouldnt really happen
-    return <Navigate to={setTo ?? '/logout'} />;
-  }
-
-  if (tokenStatus === TokenStatus.NOTSETUP) {
-    return <Navigate to={setTo ?? '/degree-wizard'} />;
-  }
-
-  if (tokenStatus === TokenStatus.SETUP) {
-    return <Navigate to={setTo ?? '/course-selector'} />;
-  }
-
-  return <Outlet />;
+  return isSetup ? (
+    <Navigate to={setTo ?? '/course-selector'} />
+  ) : (
+    <Navigate to={setTo ?? '/degree-wizard'} />
+  );
 };
 
 export default PreventToken;

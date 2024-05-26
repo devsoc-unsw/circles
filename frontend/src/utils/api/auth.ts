@@ -1,12 +1,5 @@
 import axios from 'axios';
 
-export enum TokenStatus {
-  UNSET = 'unset',
-  EXPIRED = 'expired',
-  NOTSETUP = 'notsetup',
-  SETUP = 'setup'
-}
-
 export type IdentityResponse = {
   session_token: string;
   exp: number;
@@ -36,19 +29,6 @@ export const logout = async (token: string): Promise<void> => {
     withCredentials: true,
     headers: { ...withAuthorization(token) }
   });
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-export const checkTokenStatus = async (token: string | undefined): Promise<TokenStatus> => {
-  if (token === undefined) {
-    return TokenStatus.UNSET;
-  }
-
-  const res = await axios.get<TokenStatus>('/auth/token_user_state', {
-    headers: { ...withAuthorization(token) }
-  });
-
-  return res.data;
 };
 
 export const CSELogin = async (query_params: Record<string, string>): Promise<IdentityResponse> => {

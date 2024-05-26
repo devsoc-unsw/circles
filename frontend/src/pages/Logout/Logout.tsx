@@ -15,6 +15,7 @@ const Logout = () => {
   useEffect(() => {
     const performLogout = async () => {
       if (token !== undefined) {
+        // TODO-OLLI: we want to redirect even if this 401s, so catch error
         await logout(token);
       }
 

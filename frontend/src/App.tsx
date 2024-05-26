@@ -124,10 +124,10 @@ const App = () => {
                       <Route element={<PreventToken setTo='/tokens' />}>
                         <Route path="/token-notallowed" element={<TokenPlayground allowUnset />} />
                       </Route>
-                      <Route element={<RequireToken expiredTo='/tokens' unsetTo='/tokens' />}>
+                      <Route element={<RequireToken unsetTo='/tokens' />}>
                         <Route path="/token-required" element={<TokenPlayground />} />
                       </Route>
-                      <Route element={<RequireToken needSetup expiredTo='/tokens' unsetTo='/tokens' notsetupTo='/tokens' />}>
+                      <Route element={<RequireToken needSetup unsetTo='/tokens' notsetupTo='/tokens' />}>
                         <Route path="/token-needsetup" element={<TokenPlayground />} />
                       </Route>
                     </Route>

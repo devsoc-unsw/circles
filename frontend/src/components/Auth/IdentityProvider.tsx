@@ -18,7 +18,7 @@ const IdentityProvider = () => {
     try {
       const newIdentity = await refreshTokens();
       if (newIdentity.uid !== userId) {
-        // only clear if its a new user id
+        // only clear if its a new user id, although this shouldnt really happen...
         // TODO-OLLI(pm): dont actually need to clear entire queryClient, just user storage
         queryClient.clear();
       }

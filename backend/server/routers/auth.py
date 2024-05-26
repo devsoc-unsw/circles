@@ -38,8 +38,6 @@ class IdentityPayload(BaseModel):
     exp: int
     uid: str
 
-UserTokenState = Literal["expired", "notsetup", "setup"]
-
 router = APIRouter(
     prefix="/auth",
     tags=["auth"],
@@ -261,15 +259,3 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
                 detail="Please contact server admin, something went wrong",
                 headers={ "set-cookie": res.headers["set-cookie"] },
             ) from e
-
-# TODO-OLLI: move into user router file (or remove all together in place for just isSetup)
-@router.get(
-    "/token_user_state"
-)
-def get_user_state(token: Annotated[SessionToken, Security(require_token)]) -> UserTokenState:
-    try:
-        uid, _ = get_token_info(token)
-
-        return "setup" if user_is_setup(uid) else "notsetup"
-    except SessionExpiredToken:
-        return "expired"

@@ -1,44 +1,22 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { useQuery } from '@tanstack/react-query';
 import { Space } from 'antd';
-import { checkTokenStatus, TokenStatus } from 'utils/api/auth';
 import devsocLogo from 'assets/devsocLogo.svg';
 import easySubTitle from 'assets/LandingPage/easySubtitle.svg';
-import useToken from 'hooks/useToken';
 import S from './styles';
 
-const HeroContent = () => {
-  // determine our next location
-  const token = useToken({ allowUnset: true });
+type Props = {
+  startLocation: string;
+};
 
-  const { data: tokenStatus } = useQuery({
-    queryFn: () => checkTokenStatus(token),
-    queryKey: ['degree', 'user', 'state', { token }] // TODO-OLLI: temporary key
-    // staleTime: 60 * 5 * 1000 // TODO-OLLI: re add when everything is done
-  });
-
-  const nextPage = useMemo(() => {
-    switch (tokenStatus) {
-      case TokenStatus.UNSET:
-      case TokenStatus.EXPIRED:
-        return '/login';
-      case TokenStatus.NOTSETUP:
-        return '/degree-wizard';
-      case TokenStatus.SETUP:
-        return '/term-planner';
-      default:
-        return '/'; // should never be the case
-    }
-  }, [tokenStatus]);
-
+const HeroContent = ({ startLocation }: Props) => {
   return (
     <S.HeroContent>
       <S.HeroTitle animate={{ x: [-60, 10, 0] }} transition={{ duration: 1, ease: 'easeInOut' }}>
         Degree planning made <S.HeroSubTitle src={easySubTitle} alt="Hero Subtitle" />
       </S.HeroTitle>
-      <Link to={nextPage}>
+      <Link to={startLocation}>
         <S.HeroCTA
           initial={{ scale: 0.0 }}
           animate={{ scale: 1 }}

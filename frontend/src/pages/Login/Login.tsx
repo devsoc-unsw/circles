@@ -14,6 +14,7 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
 
+  // TODO-OLLI: what if a user has two tabs open, logs in with one and then logs in with other??
   const guestLogin = useCallback(async () => {
     const res = await guestLoginRequest();
 
