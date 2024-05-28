@@ -1,21 +1,21 @@
 """ Routes to deal with user Authentication. """
-from typing import Annotated, Dict, Literal, Optional, cast
+from typing import Annotated, Dict, Optional, cast
 from datetime import datetime
 from secrets import token_hex, token_urlsafe
 from time import time
-from fastapi import APIRouter, Body, Cookie, HTTPException, Response, Security
-from pydantic import BaseModel, RootModel
+from fastapi import APIRouter, Cookie, HTTPException, Response, Security
+from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 from server.config import SECURE_COOKIES
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
-from server.db.helpers.users import delete_user, insert_new_user, user_is_setup
+from server.db.helpers.users import delete_user, insert_new_user
 
 from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
-from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, get_token_info, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
+from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
 from .auth_utility.middleware import HTTPBearer401, set_secure_cookie
-from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_user_info, refresh_and_validate, revoke_token, validate_authorization_response
+from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_userinfo_and_validate, refresh_and_validate, revoke_token, validate_authorization_response
 from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
 
 STATE_TTL = 10 * 60
@@ -61,13 +61,15 @@ def insert_new_guest_user() -> str:
 def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfoModel) -> Optional[SessionOIDCInfoModel]:
     try:
         # TODO: update user's personal details with this info once we have stuff to store
-        _ = get_user_info(oidc_info.access_token)
+        _ = get_userinfo_and_validate(cast(DecodedIDToken, oidc_info.validated_id_token), oidc_info.access_token)
+
         return oidc_info  # no need for new info
     except OIDCInvalidToken:
         # access token has expired, try refresh
         # will raise if could not refresh
         try:
             refreshed, validated = refresh_and_validate(cast(DecodedIDToken, oidc_info.validated_id_token), oidc_info.refresh_token)
+
             return SessionOIDCInfoModel(
                 access_token=refreshed["access_token"],
                 raw_id_token=refreshed["id_token"],

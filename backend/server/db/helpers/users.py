@@ -7,7 +7,7 @@ from server.db.mongo.conn import usersNewCOL
 
 from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
 
-# TODO-OLLI: remove type ignores by constructing dictionaries properly
+# TODO-OLLI(pm): decide if we want to remove type ignores by constructing dictionaries manually
 
 def get_user(uid: str) -> Optional[Union[NotSetupUserStorage, UserStorage]]:
     res = usersNewCOL.find_one({ 'uid': uid })

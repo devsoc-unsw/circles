@@ -93,9 +93,6 @@ def get_user_info(access_token: str) -> UserInfoResponse:
         if res.ok:
             return resjson
 
-        # TODO-OLLI: make sure issuer is correct 5.3.4
-
-        # print(resjson)
         raise OIDCUserInfoError.from_dict(resjson)
     except requests.exceptions.JSONDecodeError as e:
         print(res.status_code, res.text)
@@ -286,3 +283,14 @@ def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tu
     # does not mention anywhere on the spec I should
     validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"], refreshed["access_token"])
     return refreshed, validated
+
+def get_userinfo_and_validate(id_token: DecodedIDToken, access_token: str) -> UserInfoResponse:
+    info_res = get_user_info(access_token)
+
+    # TODO-OLLI: make sure ~iss~, aud and ~sub~ are correct 5.3.2
+    if info_res["sub"] != id_token["sub"] or info_res["iss"] != ISSUER:
+        raise OIDCValidationError(
+            error_description="UserInfo response sub or issuer were wrong"
+        )
+
+    return info_res

@@ -24,8 +24,8 @@ class UserCourseStorage(BaseModel):
     uoc: int
     ignoreFromProgression: bool
 
-# TODO-OLLI: https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types
-# OR use a type adapter
+# TODO-OLLI(pm): https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types
+# we can make this a RootModel or use a TypeAdapter if we want stronger type checks here
 type UserCoursesStorage = Dict[str, UserCourseStorage]
 
 class YearTerm(BaseModel):
@@ -47,7 +47,7 @@ class UserPlannerStorage(BaseModel):
     lockedTerms: Dict[str, bool]
 
 class _BaseUserStorage(BaseModel):
-    # uid: str  # TODO-OLLI: add aliases in new pydantic
+    # NOTE: could also put uid here if we want
     guest: bool
 
 class UserStorage(_BaseUserStorage):
@@ -86,6 +86,7 @@ class RefreshTokenInfoModel(BaseModel):
 #
 # Session Models (mongo)
 #
+# TODO-OLLI(pm): figure out if we want to actually annotate id token type so no casts needed
 class SessionOIDCInfoModel(BaseModel):
     access_token: str           # most recent access token
     raw_id_token: str           # most recent id token string
