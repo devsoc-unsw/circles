@@ -26,7 +26,8 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
     queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
-    refetchOnWindowFocus: 'always'
+    refetchOnWindowFocus: 'always',
+    throwOnError: (e) => !isAxiosError(e) || e.response?.status !== 401
   });
 
   useEffect(() => {
@@ -52,13 +53,10 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
   }
 
   if (error) {
-    // api call failed, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
+    // must be a 401 axios error, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
     // TODO-OLLI: do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
-    if (isAxiosError(error) && error.response?.status === 401) {
-      window.location.reload();
-    } else {
-      throw error;
-    }
+    // TODO-OLLI: especially this could just lead to infinite reloading if backend bugs and never gives good session token
+    window.location.reload();
   }
 
   if (isPending || isSetup === undefined) {

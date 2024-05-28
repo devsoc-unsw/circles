@@ -25,7 +25,8 @@ const LandingPage = () => {
     queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
-    refetchOnWindowFocus: 'always'
+    refetchOnWindowFocus: 'always',
+    throwOnError: (e) => !isAxiosError(e) || e.response?.status !== 401
   });
 
   const nextPage = useMemo(() => {
@@ -36,15 +37,11 @@ const LandingPage = () => {
     return userIsSetup ? '/term-planner' : '/degree-wizard';
   }, [token, userIsSetup]);
 
+  // TODO-OLLI: do we actually want to refresh here? or just silently move on, mayb bad ux
   if (error) {
-    // api call failed, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
+    // must be a 401 axios error, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
     // TODO-OLLI: do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
-    // TODO-OLLI: we can also use throwOnError here... o:
-    if (isAxiosError(error) && error.response?.status === 401) {
-      window.location.reload();
-    } else {
-      throw error;
-    }
+    window.location.reload();
   }
 
   if (isPending && token !== undefined) {
