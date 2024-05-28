@@ -288,7 +288,7 @@ def is_setup(uid: Annotated[str, Security(require_uid)]) -> bool:
 
 @router.post("/setupDegreeWizard", response_model=Storage)
 def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(require_uid)]):
-    # TODO-OLLI: do we want to throw 403 if they are already setup???
+    # NOTE: is allowed to be called on a already setup user
     # validate
     num_years = wizard.endYear - wizard.startYear + 1
     if num_years < 1:

@@ -14,7 +14,14 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
 
-  // TODO-OLLI: what if a user has two tabs open, logs in with one and then logs in with other??
+  // TODO-OLLI(pm): what if a user has two tabs open, logs in with one and then logs in with other??
+  // similarly with logout and other authentication events
+  // https://www.reddit.com/r/howdidtheycodeit/comments/wj9c65/you_signed_in_with_another_tab_or_window_reload/
+  // ideas:
+  // - broadcastchannel for all auth events
+  // - a special cookie/localstorage state to indicate that we are already logged in
+  // - onFocus
+  // - quick api call before login, although this is probs BAD
   const guestLogin = useCallback(async () => {
     const res = await guestLoginRequest();
 

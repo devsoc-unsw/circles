@@ -87,6 +87,7 @@ def create_guest_session(res: Response) -> IdentityPayload:
     uid = insert_new_guest_user()
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_guest_session(uid)
 
+    # TODO-OLLI(pm): setting up proper logging
     print("\n\nnew guest login", uid)
     print(datetime.now())
     print("session expires:", datetime.fromtimestamp(session_expiry))
@@ -219,9 +220,12 @@ def login(res: Response, payload: ExchangeCodePayload, next_auth_state: Annotate
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
 @router.delete("/logout", response_model=None)
-def logout(res: Response, token: Annotated[SessionToken, Security(require_token)]):
+def logout(res: Response, token: Annotated[SessionToken, Security(require_token)], refresh_token: Annotated[Optional[RefreshToken], Cookie(alias=REFRESH_TOKEN_COOKIE)] = None):
+    # TODO-OLLI: if this fails, usually browser is cleared anyway, 
+    #   in which case, to the user the session is dead, but not to us...
+    #   BUT, this is normally performed with credentials, 
+    #   so may as well pull from refresh_token anyway to save us on the rare hanging sessions.
     # delete the cookie first since this will always happen
-    # TODO-OLLI: maybe this requires refresh_token instead, and then no need for a refresh first
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, None)
 
     try:

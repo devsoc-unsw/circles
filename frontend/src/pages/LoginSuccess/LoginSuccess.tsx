@@ -19,7 +19,7 @@ const LoginSuccess = () => {
         const identity = await CSELogin(Object.fromEntries(query.entries()));
 
         dispatch(updateIdentityWithAPIRes(identity));
-        // TODO-OLLI: could use a conditional useQuery too
+        // TODO-OLLI(pm): could use a conditional useQuery too
         const userIsSetup = await queryClient.fetchQuery({
           queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key
           queryFn: () => getUserIsSetup(identity.session_token)
@@ -28,6 +28,7 @@ const LoginSuccess = () => {
         navigate(userIsSetup ? '/course-selector' : '/degree-wizard', { replace: true });
       } catch (e) {
         dispatch(unsetIdentity());
+        queryClient.clear();
 
         throw e;
       }

@@ -14,14 +14,18 @@ const Logout = () => {
 
   useEffect(() => {
     const performLogout = async () => {
-      if (token !== undefined) {
-        // TODO-OLLI: we want to redirect even if this 401s, so catch error
-        await logout(token);
+      try {
+        if (token !== undefined) {
+          await logout(token);
+        }
+      } catch (e) {
+        // NOTE: this is ok i guess...
+        console.error(e);
+      } finally {
+        queryClient.clear();
+        dispatch(unsetIdentity());
+        navigate('/', { replace: true });
       }
-
-      queryClient.clear();
-      dispatch(unsetIdentity());
-      navigate('/', { replace: true });
     };
 
     performLogout();
