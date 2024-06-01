@@ -64,5 +64,7 @@ export default useToken;
 // - set up a interceptor for axios that auto refreshes on a 401 and retries
 //   - would also need to be setup in the IdentityProvider, want to becareful to not double set this up
 //   - would need a custom client to be created as well for user related axios
+//   - works, but becomes quite difficult to prevent double refreshes from happening
+//     - would just need to keep track of current promise and the token it was fetched for
 
 // currently got timeout setup just for debug sake
