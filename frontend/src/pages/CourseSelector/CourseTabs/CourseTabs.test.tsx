@@ -17,9 +17,7 @@ const preloadedState: RootState = {
     showLockedCourses: false,
     showWarnings: false
   },
-  identity: {
-    data: undefined
-  }
+  identity: null
 };
 
 vi.mock('components/DraggableTab', () => ({

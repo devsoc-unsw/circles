@@ -30,9 +30,7 @@ export const renderWithProviders = async (
         showLockedCourses: false,
         showWarnings: false
       },
-      identity: {
-        data: undefined
-      }
+      identity: null
     },
     ...renderOptions
   }: ExtendedRenderOptions = {}

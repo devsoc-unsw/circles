@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { refreshIdentity, selectIdentity, selectToken } from 'reducers/identitySlice';
+import { useAppSelector } from 'hooks';
+import { selectToken } from 'reducers/identitySlice';
 
 type AllowUnsetOptions = {
   allowUnset: true;
@@ -21,19 +19,7 @@ function useToken(options?: Options): string | undefined;
 // since something like { allowUnset: 100 === 200 } will be type boolean, and thus no return value can be inferred
 
 function useToken(options?: Options): string | undefined {
-  // TODO-OLLI: handle refreshing if expired in here, and handle navigation or throwing errors
-  // const { token, expiresAt } = useAppSelector(selectIdentity) ?? {};
   const token = useAppSelector(selectToken);
-  // console.log('-- useToken called', token);
-
-  // TODO-OLLI: major flaw - what if there are no rerenders before it expires
-  // const dispatch = useAppDispatch();
-  // if (expiresAt !== undefined && expiresAt < Date.now()) {
-  //   console.log('++ dispatching a refresh identity');
-  //   dispatch(refreshIdentity())
-  //     .unwrap()
-  //     .catch((e) => console.info('lolol error', e));
-  // }
 
   if (token === undefined && options?.allowUnset !== true) {
     // This shouldn't occur of useToken is used inside a RequireToken
@@ -44,11 +30,6 @@ function useToken(options?: Options): string | undefined {
   }
 
   return token;
-
-  // if (options?.allowUnset) {
-  //   return token;
-  // }
-  // return token ?? 'DUMMY_TOKEN';
 }
 
 export default useToken;
@@ -68,3 +49,5 @@ export default useToken;
 //     - would just need to keep track of current promise and the token it was fetched for
 
 // currently got timeout setup just for debug sake
+// tried out the useToken one, but its too heavy and complicated
+// tried out interceptors a bit, abit messy to prevent two refreshes from happening at once though
