@@ -65,6 +65,8 @@ def customise_spn_data():
                     get_credits(container))
                 curriculum_item["core"] = is_core(
                     curriculum_item["title"].lower())
+
+                # print(spn, curriculum_item["title"], curriculum_item["courses"])
                 curriculum_item["levels"] = get_levels(
                     curriculum_item["title"].lower())
                 curriculum_item["notes"] = get_notes(container["description"])
@@ -145,6 +147,8 @@ def get_levels(title: str) -> list[int]:
     Parses 'title' to get curriculum levels of specialisation item.
     Level can be any combination of {1, 2, 3, 4, 5, 6, 7, 8, 9}.
     """
+    if title == "any level 3 Mathematics course":
+        print("!!!!!!!")
     levels: list[int] = []
     # s? \d[^ ]* captures cases like "Level 1/2", "Levels 1,2,3" and "Level 1-2"
     res = re.search(r"[Ll]evels? (\d[^ ]*)", title)

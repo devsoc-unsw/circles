@@ -10,24 +10,19 @@ Step in the data's journey:
 import json
 
 import requests
-from data.scrapers.payload import HEADERS, URL, create_payload
+from data.scrapers.payload import HEADERS, URL, do_requests
 from data.utility import data_helpers
 
-TOTAL_PGRMS = 249
+TOTAL_PGRMS = 700 # slighly less than this
 
 
 def scrape_prg_data():
     """
     Retrieves data for all undergraduate programs
     """
-    r = requests.post(
-        URL,
-        data=json.dumps(create_payload(TOTAL_PGRMS, content_type="unsw_pcourse")),
-        headers=HEADERS,
-        timeout=60 * 5
-    )
+    data = do_requests("course", items_per_req=20, max_items=TOTAL_PGRMS)
     data_helpers.write_data(
-        r.json()["contentlets"], "data/scrapers/programsPureRaw.json"
+        data, "data/scrapers/programsPureRaw.json"
     )
 
 

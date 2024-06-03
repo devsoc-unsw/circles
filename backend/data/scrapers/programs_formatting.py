@@ -33,6 +33,8 @@ def format_prg_data() -> None:
     # Initialise formatted data
     programs_formatted: dict[str, dict] = {}
     for program in raw_content:
+        # if program['studyLevelValue'] != 'ugrd':
+        #     continue
         # Load summary infomation about program
         data = json.loads(program["data"])
         # Load infomation about program structure
@@ -40,7 +42,13 @@ def format_prg_data() -> None:
 
         # Setup dictionary and add data
         course_code = init_program(programs_formatted, data)
-        add_data(programs_formatted, course_code, program, data, curriculum_structure)
+        try:
+            add_data(programs_formatted, course_code, program, data, curriculum_structure)
+        except KeyError as key_err:
+            # we only care if it's not a research course lacking a program structure (there are about 100 such courses)
+            if str(key_err) != "'container'" or program['studyLevelValue'] != 'rsch':
+                raise key_err
+            programs_formatted.pop(course_code)
 
     data_helpers.write_data(
         programs_formatted, "data/scrapers/programsFormattedRaw.json"

@@ -425,9 +425,11 @@ def compute_levels(courses: dict[str, str]) -> list[int]:
     ):
         return list(range(1, 10))
 
+    # For some program structures `courses` may actually contain specialisations
+    # such as Commerce International (3558).
     # Everything has a number (that isn't wildcarded).
     # Get all levels as a set to remove duplicates
-    return list({int(code[4]) for code in courses.keys()})
+    return list({int(code[4]) for code in courses.keys() if code[4].isdecimal()})
 
 
 def add_course_data(program_data: dict, item: dict, req_type: str) -> None:

@@ -172,7 +172,10 @@ if __name__ == "__main__":
     else:
         # Run the specific process
         try:
-            run[args.type][args.stage]()
+            run[args.type][args.stage]
         except KeyError:
             print(f"{args.type} and {args.stage} is an invalid combination")
             parser.print_help()
+            exit(1)
+
+        run[args.type][args.stage]()
