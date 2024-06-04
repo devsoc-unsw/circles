@@ -74,8 +74,9 @@ def set_secure_cookie(res: Response, key: str, value: Optional[str], expiry: Opt
             secure=SECURE_COOKIES,
             httponly=True,
             expires=datetime.fromtimestamp(expiry, tz=timezone.utc),
+            samesite="strict",
             # domain="circlesapi.olllli.app",
         )
     else:
         # nothing was given, delete it instead
-        res.delete_cookie("refresh_token")
+        res.delete_cookie(key)

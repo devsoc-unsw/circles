@@ -20,8 +20,8 @@ from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTo
 
 STATE_TTL = 10 * 60
 
-REFRESH_TOKEN_COOKIE = f"{"__Secure-" if SECURE_COOKIES else ""}refresh-token"
-AUTH_STATE_COOKIE = f"{"__Secure-" if SECURE_COOKIES else ""}next-auth-state"
+REFRESH_TOKEN_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}refresh-token"
+AUTH_STATE_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}next-auth-state"
 
 
 class UnauthorizedErrorModel(BaseModel):
