@@ -272,7 +272,7 @@ const TermPlanner = () => {
           // TODO: Fix Suspense by updating to react-query v5
           /* <Suspense fallback={<Spinner text="Loading Table..." />}> */
         }
-        {courseQueries.some((c) => c.isPending) || !courseInfos[LIVE_YEAR] ? (
+        {courseQueries.some((c) => c.isPending || coursesQuery.isPending || plannerQuery.isPending )  ? (
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
@@ -314,7 +314,7 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
-                        if (!courseInfos[yearToFetch(iYear)]) return null; // not yet ready // TODO: write better
+                        // if (!courseInfos[yearToFetch(iYear)]) return null; // not yet ready // TODO: write better
                         // console.log('Making termbox for', iYear, term);
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL
