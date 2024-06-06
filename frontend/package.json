@@ -6,7 +6,7 @@
   "dependencies": {
     "@ant-design/colors": "7.0.2",
     "@ant-design/icons": "5.3.7",
-    "@ant-design/plots": "2.1.15",
+    "@ant-design/plots": "2.2.2",
     "@antv/algorithm": "0.1.26",
     "@antv/g6": "4.8.24",
     "@react-spring/web": "9.7.3",
