@@ -364,7 +364,11 @@ class CoresCondition(Condition):
             # if you can never match the core, gg
             return [model.AddBoolAnd(False)]
         # else we find the relevant courses and assert that they need to happen first
-        return [model.Add(get_variable(courses, course) < course_variable) for course in relevant_courses]
+        return [
+            model.Add(var < course_variable)
+            for course in relevant_courses
+            if (var := get_variable(courses, course)) is not None
+        ]
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         course_names = [var[0].Name() for var in courses]
@@ -373,8 +377,16 @@ class CoresCondition(Condition):
             # if you cant match the core, youre good
             return [model.AddBoolAnd(True)]
 
-        or_constraints: list[cp_model.Constraint] = [model.Add(get_variable(courses, course) >= course_variable) for course in relevant_courses]
-        or_opposite_constraints: list[cp_model.Constraint] = [model.Add(get_variable(courses, course) < course_variable) for course in relevant_courses]
+        or_constraints: list[cp_model.Constraint] = [
+            model.Add(var >= course_variable)
+            for course in relevant_courses
+            if (var := get_variable(courses, course)) is not None
+        ]
+        or_opposite_constraints: list[cp_model.Constraint] = [
+            model.Add(var < course_variable)
+            for course in relevant_courses
+            if (var := get_variable(courses, course)) is not None
+        ]
         boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
         for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
             # b is a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
