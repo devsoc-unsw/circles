@@ -8,7 +8,7 @@ import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { CoursesResponse, PlannerResponse, ValidateResponse } from 'types/userResponse';
-import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
+import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -51,7 +51,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
     handbook_note: ''
   };
 
-  const showNotOfferedWarning = time ? courseHasOfferingNew(courseInfo, time.term) : true;
+  const showNotOfferedWarning = time ? courseHasOffering(courseInfo, time.term) : true;
 
   const contextMenu = useContextMenu({
     id: `${code}-context`
