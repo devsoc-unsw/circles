@@ -1,7 +1,7 @@
 # Sets up the backend, without writing data into the database.
 
 # Python image
-FROM python:3.12.3-slim
+FROM python:3.12-slim
 
 # gcc required for python-Levenshtein
 RUN apt-get update \
