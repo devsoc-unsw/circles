@@ -1,5 +1,4 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import * as reactRouterDom from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -31,14 +30,14 @@ describe('DegreeWizard', () => {
     await waitFor(() => expect(screen.getByTestId('antd-rangepicker')).toBeInTheDocument(), {
       timeout: 5000
     });
-    await act(async () => {
+    await React.act(async () => {
       await userEvent.click(screen.getByTestId('antd-rangepicker'));
     });
-    await act(async () => {
+    await React.act(async () => {
       await userEvent.click(screen.getByText('2020'));
       await userEvent.click(screen.getByText('2022'));
     });
-    await act(async () => {
+    await React.act(async () => {
       // select degree
       await waitFor(
         () => expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument(),
