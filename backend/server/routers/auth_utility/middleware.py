@@ -79,4 +79,10 @@ def set_secure_cookie(res: Response, key: str, value: Optional[str], expiry: Opt
         )
     else:
         # nothing was given, delete it instead
-        res.delete_cookie(key)
+        # need all the attributes so prefix actually allows it to be set
+        res.delete_cookie(
+            key=key,
+            secure=SECURE_COOKIES,
+            httponly=True,
+            samesite="strict",
+        )
