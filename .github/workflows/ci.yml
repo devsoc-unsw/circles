@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
   pull_request:
-    branches: [dev, main, CIRCLES-331/user-data-to-backend]
+    branches: [dev, main, CIRCLES-331/user-data-to-backend, 331-staging]
 
 jobs:
   event_file:
