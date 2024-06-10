@@ -52,7 +52,7 @@ class DecodedIDToken(TypedDict):
     iss: str                    # issuer identifier ("https://id.csesoc.unsw.edu.au")
     jti: str                    # unique id of the JWT
     rat: int                    # token request time
-    sid: str                    # session id
+    sid: str                    # session id (NOTE: not necessarily unique)
     sub: str                    # unique identifier
 
 class UserInfoResponse(TypedDict):
@@ -71,6 +71,7 @@ def client_secret_basic_credentials() -> str:
     return base64.b64encode(con).decode("utf-8")
 
 def generate_oidc_auth_url(state: str) -> str:
+    # TODO-OLLI(pm): include nonce here one day
     params = urlencode({
         "client_id": CLIENT_ID,
         "response_type": "code",
@@ -164,6 +165,8 @@ def refresh_access_token(refresh_token: str) -> RefreshResponse:
 
 def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"]):
     # https://www.rfc-editor.org/rfc/rfc7009
+    # TODO: use oidc logout endpoints if we want.
+    #       Currently at time of writing, fedauth does not fully support.
     credentials = client_secret_basic_credentials()
     res = requests.post(
         REVOCATION_ENDPOINT,
@@ -278,7 +281,7 @@ def exchange_and_validate(authorization_code: str) -> Tuple[TokenResponse, Decod
 def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tuple[RefreshResponse, DecodedIDToken]:
     refreshed = refresh_access_token(refresh_token)
 
-    # NOTE: do i need to do bearer check? i get token_type from refresh but idc, 
+    # NOTE: do i need to do bearer check? i get token_type from refresh but idc,
     # it should be the same as the initial exchange, and that is already validated
     # does not mention anywhere on the spec I should
     validated = validated_refreshed_id_token(old_id_token, refreshed["id_token"], refreshed["access_token"])
