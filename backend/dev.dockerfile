@@ -1,6 +1,6 @@
 # Sets up the backend, opening it to reload on change
 # Python image
-FROM python:3.12-slim
+FROM python:3.12.3-slim
 
 # install nodemon
 
