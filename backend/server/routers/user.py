@@ -109,7 +109,6 @@ def get_user_p(token: str) -> dict[str, CourseStorage]:
     res = get_user(token)['courses']
     planner = get_user_planner(token)
     for c in res.values():
-        c = cast(Dict, c)
         course = get_course(c['code'])
         c['title'] = course['title']
         c['isMultiterm'] = course['is_multiterm']

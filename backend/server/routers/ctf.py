@@ -45,10 +45,10 @@ Scenario:
 from typing import Callable, Optional
 
 from fastapi import APIRouter
-from backend.server.config import DUMMY_TOKEN
-from backend.server.routers.user import get_user
-from backend.server.routers.planner import convert_to_planner_data
+from server.config import DUMMY_TOKEN
 from server.routers.model import ValidPlannerData
+from server.routers.planner import convert_to_planner_data
+from server.routers.user import get_user
 
 router = APIRouter(
     prefix="/ctf", tags=["ctf"], responses={404: {"description": "Not found"}}
