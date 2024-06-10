@@ -8,7 +8,7 @@ import { vi } from 'vitest';
 import axios from 'config/axios';
 import { RootState, setupStore } from 'config/store';
 import { lightTheme } from 'config/theme';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
