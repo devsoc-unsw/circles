@@ -11,7 +11,7 @@ from server.config import SECURE_COOKIES
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
 from server.db.helpers.users import delete_user, insert_new_user
 
-from .auth_utility.sessions.errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
+from .auth_utility.sessions.errors import ExpiredRefreshTokenError, ExpiredSessionTokenError, OldRefreshTokenError
 from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
 from .auth_utility.middleware import HTTPBearer401, set_secure_cookie
@@ -111,7 +111,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     # first get the oidc session details, this will check if it hasnt expired
     try:
         sid, session_info = get_session_info_from_refresh_token(refresh_token)
-    except (SessionExpiredRefreshToken, SessionOldRefreshToken) as e:
+    except (ExpiredRefreshTokenError, OldRefreshTokenError) as e:
         # if old refresh token, will destroy the session on the backend
         set_secure_cookie(res, REFRESH_TOKEN_COOKIE, None)
         raise HTTPException(
@@ -231,7 +231,7 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
     try:
         # get the user id and the session id from the token
         sid, session_info = get_session_info_from_session_token(token)
-    except SessionExpiredToken as e:
+    except ExpiredSessionTokenError as e:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
             detail="Provided token was expired, please re-authenticate.",

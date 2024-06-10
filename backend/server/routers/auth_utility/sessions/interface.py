@@ -8,7 +8,7 @@ from pydantic import PositiveInt
 from server.db.helpers.models import GuestSessionInfoModel, NotSetupSessionModel, RefreshToken, RefreshTokenInfoModel, SessionID, SessionInfoModel, SessionOIDCInfoModel, SessionToken, SessionTokenInfoModel
 from server.db.helpers import sessions, refresh_tokens, session_tokens
 
-from .errors import SessionExpiredRefreshToken, SessionExpiredToken, SessionOldRefreshToken
+from .errors import ExpiredRefreshTokenError, ExpiredSessionTokenError, OldRefreshTokenError
 
 DAY = 60 * 60 * 24
 SESSION_TOKEN_LIFETIME = 60 * 15   # 15 minutes
@@ -85,7 +85,7 @@ def _destroy_session(sid: SessionID) -> bool:
 def get_token_info(session_token: SessionToken) -> Tuple[str, SessionID]:
     info = session_tokens.get_token_info(session_token)
     if info is None:
-        raise SessionExpiredToken(session_token)
+        raise ExpiredSessionTokenError(session_token)
 
     return (info.uid, info.sid)
 
@@ -93,7 +93,7 @@ def get_session_info_from_refresh_token(refresh_token: RefreshToken) -> Tuple[Se
     # useful to check oidc status before refreshing the session
     ref_info = refresh_tokens.get_refresh_token_info(refresh_token)
     if ref_info is None:
-        raise SessionExpiredRefreshToken(refresh_token)
+        raise ExpiredRefreshTokenError(refresh_token)
 
     # TODO-OLLI(pm): maybe create an aggregate query for these two steps
     sid = ref_info.sid
@@ -103,7 +103,7 @@ def get_session_info_from_refresh_token(refresh_token: RefreshToken) -> Tuple[Se
     if session_info.curr_ref_token != refresh_token:
         # replay attack, destroy entire session
         assert _destroy_session(sid)
-        raise SessionOldRefreshToken(refresh_token)
+        raise OldRefreshTokenError(refresh_token)
 
     return (sid, session_info)
 
@@ -111,7 +111,7 @@ def get_session_info_from_session_token(session_token: SessionToken) -> Tuple[Se
     # NOTE: only should be used for logout, NOT for refreshing
     info = session_tokens.get_token_info(session_token)
     if info is None:
-        raise SessionExpiredToken(session_token)
+        raise ExpiredSessionTokenError(session_token)
 
     session_info = sessions.get_session_info(info.sid)
     # TODO-OLLI: assertion error here if removed from mongo but not redis...

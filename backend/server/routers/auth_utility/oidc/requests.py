@@ -287,7 +287,7 @@ def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tu
 def get_userinfo_and_validate(id_token: DecodedIDToken, access_token: str) -> UserInfoResponse:
     info_res = get_user_info(access_token)
 
-    # TODO-OLLI: make sure ~iss~, aud and ~sub~ are correct 5.3.2
+    # TODO-OLLI(pm): make sure aud is correct 5.3.2
     if info_res["sub"] != id_token["sub"] or info_res["iss"] != ISSUER:
         raise OIDCValidationError(
             error_description="UserInfo response sub or issuer were wrong"

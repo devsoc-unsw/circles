@@ -9,7 +9,7 @@ from starlette.status import HTTP_401_UNAUTHORIZED
 from server.config import SECURE_COOKIES
 from server.db.helpers.models import SessionToken
 
-from .sessions.errors import SessionExpiredToken
+from .sessions.errors import ExpiredSessionTokenError
 from .sessions.interface import get_token_info
 
 def extract_bearer_token(request: Request) -> Optional[str]:
@@ -57,7 +57,7 @@ class HTTPBearerToUserID(HTTPBearer401):
 
         try:
             uid, _ = get_token_info(SessionToken(token))
-        except SessionExpiredToken as e:
+        except ExpiredSessionTokenError as e:
             raise HTTPException(
                 status_code=HTTP_401_UNAUTHORIZED,
                 detail="Provided token was expired, please re-authenticate.",
