@@ -23,12 +23,13 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
     data: isSetup,
     error
   } = useQuery({
-    queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key, including userId
+    queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
     refetchOnWindowFocus: 'always',
     throwOnError: (e) => !isAxiosError(e) || e.response?.status !== 401
   });
+  // TODO-OLLI(pm): multitab support is hard
 
   useEffect(() => {
     // TODO-OLLI(pm): wont need this when we get new notification hook
@@ -47,13 +48,13 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
     }
   }, [token, isSetup, error, needSetup]);
 
-  // TODO-OLLI: make sure that all navigates across entire app point to correct locations now
   if (token === undefined) {
     return <Navigate to={unsetTo ?? '/login'} />;
   }
 
   if (error) {
     // must be a 401 axios error, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
+    // something like a logout from another tab
     // TODO-OLLI: do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
     // TODO-OLLI: especially this could just lead to infinite reloading if backend bugs and never gives good session token
     window.location.reload();

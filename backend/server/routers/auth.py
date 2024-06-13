@@ -48,7 +48,7 @@ require_token = HTTPBearer401()
 # TODO-OLLI: make a auth helper file
 def insert_new_guest_user() -> str:
     # returns the claimed uid
-    # TODO-OLLI(pm): i could use uuid, but they long as hell
+    # TODO-OLLI(pm): i could use uuid, but they long as hell, happy to change this
     data = NotSetupUserStorage(guest=True)
 
     uid = f"guest{token_hex(4)}"
@@ -88,10 +88,6 @@ def create_guest_session(res: Response) -> IdentityPayload:
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_guest_session(uid)
 
     # TODO-OLLI(pm): setting up proper logging
-    print("\n\nnew guest login", uid)
-    print(datetime.now())
-    print("session expires:", datetime.fromtimestamp(session_expiry))
-    print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
@@ -139,12 +135,6 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
         # guest sessions don't have any external authorization linked to them, so easy
         assert isinstance(session_info, GuestSessionInfoModel)
         new_session_token, session_expiry, new_refresh_token, refresh_expiry = create_new_guest_token_pair(sid)
-
-
-    print("\n\nnew identity", session_info.uid, sid)
-    print(datetime.now())
-    print("session expires:", datetime.fromtimestamp(session_expiry))
-    print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
@@ -196,7 +186,6 @@ def login(res: Response, payload: ExchangeCodePayload, next_auth_state: Annotate
         ) from e
 
     # insert new user into database if it does not exist, will collide if it already does which is good
-    # TODO-OLLI: actually test this, auth is currently down
     uid = id_token["sub"]
     insert_new_user(uid, NotSetupUserStorage(guest=False))
 
@@ -208,11 +197,6 @@ def login(res: Response, payload: ExchangeCodePayload, next_auth_state: Annotate
         validated_id_token=cast(dict, id_token),
     )
     new_session_token, session_expiry, new_refresh_token, refresh_expiry = setup_new_csesoc_session(uid, new_oidc_info)
-
-    print("\n\nnew login", uid)
-    print(datetime.now())
-    print("session expires:", datetime.fromtimestamp(session_expiry))
-    print("refresh expires:", datetime.fromtimestamp(refresh_expiry))
 
     # set the cookies and return the identity
     set_secure_cookie(res, AUTH_STATE_COOKIE, None)

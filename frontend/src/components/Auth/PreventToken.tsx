@@ -19,7 +19,7 @@ const PreventToken = ({ setTo }: Props) => {
     data: isSetup,
     error
   } = useQuery({
-    queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key, including userId
+    queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
     refetchOnWindowFocus: 'always',
@@ -41,11 +41,7 @@ const PreventToken = ({ setTo }: Props) => {
     return <PageLoading />;
   }
 
-  return isSetup ? (
-    <Navigate to={setTo ?? '/course-selector'} />
-  ) : (
-    <Navigate to={setTo ?? '/degree-wizard'} />
-  );
+  return <Navigate to={setTo ?? isSetup ? '/course-selector' : '/degree-wizard'} />;
 };
 
 export default PreventToken;

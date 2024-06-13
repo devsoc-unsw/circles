@@ -114,8 +114,7 @@ def get_session_info_from_session_token(session_token: SessionToken) -> Tuple[Se
         raise ExpiredSessionTokenError(session_token)
 
     session_info = sessions.get_session_info(info.sid)
-    # TODO-OLLI: assertion error here if removed from mongo but not redis...
-    assert session_info is not None
+    assert session_info is not None  # NOTE: assertion error here if removed from mongo but not redis...
 
     return (info.sid, session_info)
 

@@ -21,7 +21,7 @@ const LoginSuccess = () => {
         dispatch(updateIdentityWithAPIRes(identity));
         // TODO-OLLI(pm): could use a conditional useQuery too
         const userIsSetup = await queryClient.fetchQuery({
-          queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key
+          queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key
           queryFn: () => getUserIsSetup(identity.session_token)
         });
 
@@ -34,7 +34,7 @@ const LoginSuccess = () => {
       }
     };
 
-    queryClient.clear(); // TODO-OLLI: only need to clear user stuff
+    queryClient.clear(); // TODO-OLLI(pm): only need to clear user stuff
     exchangeCode();
   }, [query, dispatch, navigate, queryClient]);
 

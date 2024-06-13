@@ -22,7 +22,7 @@ const LandingPage = () => {
     isPending,
     error
   } = useQuery({
-    queryKey: ['degree', 'isSetup'], // TODO-OLLI: fix this key, including userId
+    queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
     refetchOnWindowFocus: 'always',
