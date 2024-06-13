@@ -265,6 +265,16 @@ class LocalStorage(BaseModel):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
 
+class StartYear(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    startYear: int
+    
+class DegreeLength(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    numYears: int
+
 class CourseMark(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
