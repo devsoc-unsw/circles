@@ -1,25 +1,11 @@
 import base64
-from typing import Dict, List, Literal, Tuple, TypedDict
+from typing import Dict, List, Literal, Tuple, TypedDict, cast
 from urllib.parse import urlencode
 import jwt
 import requests
 
-from .constants import CLIENT_ID, CLIENT_SECRET
+from .constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, OPENID_CONFIG_URL
 from .errors import OIDCTokenError, OIDCValidationError, OIDCUnknownError, OIDCUserInfoError
-
-OPENID_CONFIG = "https://id.csesoc.unsw.edu.au/.well-known/openid-configuration"
-# csesoc_issuer_info = requests.get(OPENID_CONFIG)
-ISSUER = "https://id.csesoc.unsw.edu.au"
-AUTH_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/auth"
-TOKEN_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/token"
-USERINFO_ENDPOINT = "https://id.csesoc.unsw.edu.au/userinfo"
-REVOCATION_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/revoke"
-REDIRECT_URI = "http://localhost:3000/login/success/csesoc"
-JWKS_ENDPOINT = "https://id.csesoc.unsw.edu.au/.well-known/jwks.json"
-
-SCOPES = "openid offline_access"
-
-REQUEST_TIMEOUT = 5
 
 # TODO-OLLI(pm): should i move to pydantic and handle as validation errors
 # TODO-OLLI(pm): should i add accepts json
@@ -62,6 +48,48 @@ class UserInfoResponse(TypedDict):
     iss: str
     rat: int
     sub: str
+
+# mayb dict isnt the best type to keep it as..?
+class OIDCConfig(TypedDict):
+    issuer: str
+    authorization_endpoint: str
+    token_endpoint: str
+    userinfo_endpoint: str
+    revocation_endpoint: str
+    jwks_uri: str
+    response_types_supported: List[str]
+    grant_types_supported: List[str]
+    scopes_supported: List[str]
+    # ...
+
+# not in constants.py since I only really built this for these settings
+SCOPES = "openid offline_access"
+REQUEST_TIMEOUT = 5
+
+def get_oidc_config() -> OIDCConfig:
+    # TODO-OLLI(pm): move this to be called in startup function
+    res = requests.get(
+        OPENID_CONFIG_URL,
+        headers={ "Accept": "application/json" },
+        timeout=REQUEST_TIMEOUT,
+    )
+
+    # TODO-OLLI(pm): check that all the keys are there, and make these asserts actual errors
+    config_dict = cast(OIDCConfig, res.json())
+    assert "code" in config_dict["response_types_supported"]
+    assert "authorization_code" in config_dict["grant_types_supported"] and "refresh_token" in config_dict["grant_types_supported"]
+    assert all(scope in config_dict["scopes_supported"] for scope in SCOPES.split())
+
+    print(config_dict)
+    return config_dict
+
+# TODO-OLLI: convert these to use the output from the above function instead
+ISSUER = "https://id.csesoc.unsw.edu.au"
+AUTH_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/auth"
+TOKEN_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/token"
+USERINFO_ENDPOINT = "https://id.csesoc.unsw.edu.au/userinfo"
+REVOCATION_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/revoke"
+JWKS_ENDPOINT = "https://id.csesoc.unsw.edu.au/.well-known/jwks.json"
 
 #
 # raw requests
@@ -232,7 +260,7 @@ def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
             algorithms=["RS256"],
             audience=CLIENT_ID,
             issuer=ISSUER,
-            options={"verify_signature": True},
+            options={ "verify_signature": True },
         )
     except jwt.exceptions.InvalidTokenError as e:
         raise OIDCValidationError(

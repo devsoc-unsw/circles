@@ -10,6 +10,7 @@ from server.routers import auth, courses, followups, planner, programs, speciali
 
 @asynccontextmanager
 async def on_setup_and_shutdown(_app: FastAPI):
+    # TODO-OLLI(pm): actually use these
     print("\n\nstartup\n\n")
     yield
     print("\n\nshutdown\n\n")
