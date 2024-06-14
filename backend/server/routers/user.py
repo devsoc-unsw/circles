@@ -346,7 +346,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
             'T': 0
         },
         'unplanned': [],
-        'isSummerEnabled': True,
+        'isSummerEnabled': False,
         'startYear': wizard.startYear,
         'lockedTerms': {},
         'years': [],
