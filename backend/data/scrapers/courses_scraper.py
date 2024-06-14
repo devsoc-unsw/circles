@@ -25,8 +25,9 @@ def scrape_course_data(year = None):
     """
 
     data = do_requests("subject", items_per_req=100, max_items=TOTAL_COURSES)
-    # if filtering courses is needed to make file small
-    # data = [obj for obj in data if obj["studyLevelValue"] == "ugrd"]
+
+    # for now, filter courses to get only undergrad (remove later)
+    data = [obj for obj in data if obj["studyLevelValue"] == "ugrd"]
 
     data_helpers.write_data(
         data,
