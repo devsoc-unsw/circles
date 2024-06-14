@@ -9,7 +9,6 @@ from .errors import OIDCTokenError, OIDCValidationError, OIDCUnknownError, OIDCU
 
 # TODO-OLLI(pm): should i move to pydantic and handle as validation errors
 # TODO-OLLI(pm): should i add accepts json
-# TODO-OLLI: move the above constants to a request to the config endpoint
 # TODO-OLLI(pm): handle the raw request errors like timeout and cannot establish connection
 
 class TokenResponse(TypedDict):
@@ -49,7 +48,7 @@ class UserInfoResponse(TypedDict):
     rat: int
     sub: str
 
-# mayb dict isnt the best type to keep it as..?
+# TODO-OLLI(pm): convert this to a class later? then we can do this in startup function and attach these all as methods
 class OIDCConfig(TypedDict):
     issuer: str
     authorization_endpoint: str
@@ -80,16 +79,11 @@ def get_oidc_config() -> OIDCConfig:
     assert "authorization_code" in config_dict["grant_types_supported"] and "refresh_token" in config_dict["grant_types_supported"]
     assert all(scope in config_dict["scopes_supported"] for scope in SCOPES.split())
 
-    print(config_dict)
     return config_dict
 
-# TODO-OLLI: convert these to use the output from the above function instead
-ISSUER = "https://id.csesoc.unsw.edu.au"
-AUTH_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/auth"
-TOKEN_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/token"
-USERINFO_ENDPOINT = "https://id.csesoc.unsw.edu.au/userinfo"
-REVOCATION_ENDPOINT = "https://id.csesoc.unsw.edu.au/oauth2/revoke"
-JWKS_ENDPOINT = "https://id.csesoc.unsw.edu.au/.well-known/jwks.json"
+# TODO-OLLI(pm): we need to do something to deal with if these actually change?? Whappens to our refreshing??
+config = get_oidc_config()
+
 
 #
 # raw requests
@@ -107,12 +101,12 @@ def generate_oidc_auth_url(state: str) -> str:
         "redirect_uri": REDIRECT_URI,
         "state": state,
     })
-    return f"{AUTH_ENDPOINT}?{params}"
+    return f"{config['authorization_endpoint']}?{params}"
 
 def get_user_info(access_token: str) -> UserInfoResponse:
     # make a request to get user info, if this fails, the token is invalid
     res = requests.get(
-        USERINFO_ENDPOINT,
+        config["userinfo_endpoint"],
         headers={ "Authorization": f"Bearer {access_token}" },
         timeout=REQUEST_TIMEOUT
     )
@@ -135,7 +129,7 @@ def exchange_tokens(code: str) -> TokenResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
     res = requests.post(
-        TOKEN_ENDPOINT,
+        config["token_endpoint"],
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
@@ -165,7 +159,7 @@ def refresh_access_token(refresh_token: str) -> RefreshResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#RefreshingAccessToken
     credentials = client_secret_basic_credentials()
     res = requests.post(
-        TOKEN_ENDPOINT,
+        config["token_endpoint"],
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
@@ -197,7 +191,7 @@ def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"
     #       Currently at time of writing, fedauth does not fully support.
     credentials = client_secret_basic_credentials()
     res = requests.post(
-        REVOCATION_ENDPOINT,
+        config["revocation_endpoint"],
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
@@ -249,8 +243,8 @@ def compute_at_hash(access_token: str) -> str:
     return computed.decode()
 
 def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
-    # NOTE: we could move the jwkclient out but it is fine
-    jwkclient = jwt.PyJWKClient(JWKS_ENDPOINT)
+    # NOTE: we might not want to fetch these jwks on every login?
+    jwkclient = jwt.PyJWKClient(config["jwks_uri"])
     signing_key = jwkclient.get_signing_key_from_jwt(token)
 
     try:
@@ -259,7 +253,7 @@ def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
             key=signing_key.key,
             algorithms=["RS256"],
             audience=CLIENT_ID,
-            issuer=ISSUER,
+            issuer=config["issuer"],
             options={ "verify_signature": True },
         )
     except jwt.exceptions.InvalidTokenError as e:
@@ -319,7 +313,7 @@ def get_userinfo_and_validate(id_token: DecodedIDToken, access_token: str) -> Us
     info_res = get_user_info(access_token)
 
     # TODO-OLLI(pm): make sure aud is correct 5.3.2
-    if info_res["sub"] != id_token["sub"] or info_res["iss"] != ISSUER:
+    if info_res["sub"] != id_token["sub"] or info_res["iss"] != config["issuer"]:
         raise OIDCValidationError(
             error_description="UserInfo response sub or issuer were wrong"
         )

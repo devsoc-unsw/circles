@@ -203,6 +203,7 @@ def login(res: Response, payload: ExchangeCodePayload, next_auth_state: Annotate
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=uid)
 
+# TODO-OLLI: make this POST
 @router.delete("/logout", response_model=None)
 def logout(res: Response, token: Annotated[SessionToken, Security(require_token)], refresh_token: Annotated[Optional[RefreshToken], Cookie(alias=REFRESH_TOKEN_COOKIE)] = None):
     # TODO-OLLI: if this fails, usually browser is cleared anyway, 
