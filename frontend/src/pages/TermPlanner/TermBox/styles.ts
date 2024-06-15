@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { Droppable } from '../common/styles';
 
 type TermBoxWrapperProps = {
-  droppable: boolean;
-  summerEnabled: boolean;
-  isSmall: boolean;
+  $droppable: boolean;
+  $summerEnabled: boolean;
+  $isSmall: boolean;
 };
 
 const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
@@ -19,10 +19,10 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
   border: 0.5px solid ${({ theme }) => theme.termBoxWrapper.borderColor};
   position: relative;
 
-  ${({ droppable }) => droppable && Droppable}
+  ${({ $droppable }) => $droppable && Droppable}
 
-  ${({ summerEnabled }) =>
-    summerEnabled &&
+  ${({ $summerEnabled }) =>
+    $summerEnabled &&
     css`
       margin: 0.5em;
       min-height: 18em;
@@ -32,25 +32,25 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
       border-radius: 1em;
     `}
 
-  ${({ isSmall }) =>
-    isSmall &&
+  ${({ $isSmall }) =>
+    $isSmall &&
     css`
       min-width: 12em;
       min-height: 14em;
       border-radius: 1em;
     `}
 
-  ${({ isSmall, summerEnabled }) =>
-    isSmall &&
-    summerEnabled &&
+  ${({ $isSmall, $summerEnabled }) =>
+    $isSmall &&
+    $summerEnabled &&
     css`
       min-height: 13.5em;
       min-width: 13em;
     `}
 `;
 
-const TermCheckboxWrapper = styled.div<{ checked: boolean }>`
-  background-color: ${({ checked }) => (checked ? '#9685f3' : '#D9D9D9')};
+const TermCheckboxWrapper = styled.div<{ $checked: boolean }>`
+  background-color: ${({ $checked }) => ($checked ? '#9685f3' : '#D9D9D9')};
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -62,7 +62,7 @@ const TermCheckboxWrapper = styled.div<{ checked: boolean }>`
   &:hover {
     cursor: pointer;
     color: #bfbbbb;
-    background-color: ${({ checked }) => (checked ? '#b4a9f4' : '#bfbbbb')};
+    background-color: ${({ $checked }) => ($checked ? '#b4a9f4' : '#bfbbbb')};
   }
 `;
 

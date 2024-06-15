@@ -50,12 +50,12 @@ const IconContainer = styled.div`
   background: ${({ color }) => color};
 `;
 
-const FeatureSubtitle = styled.h3<{ startColor: string; endColor: string }>`
+const FeatureSubtitle = styled.h3<{ $startColor: string; $endColor: string }>`
   font-size: 20px;
   background: -webkit-linear-gradient(
     45deg,
-    ${({ startColor }) => startColor},
-    ${({ endColor }) => endColor}
+    ${({ $startColor }) => $startColor},
+    ${({ $endColor }) => $endColor}
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

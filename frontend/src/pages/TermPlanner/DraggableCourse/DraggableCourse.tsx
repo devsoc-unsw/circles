@@ -118,11 +118,11 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
         >
           {(provided) => (
             <S.CourseWrapper
-              summerEnabled={isSummerEnabled}
-              isSmall={isSmall}
-              dragDisabled={isTermLocked}
-              warningsDisabled={isTermLocked && !isUnlocked}
-              isWarning={!ignoreWarnings && (!isUnlocked || !hasOffering)}
+              $summerEnabled={isSummerEnabled}
+              $isSmall={isSmall}
+              $dragDisabled={isTermLocked}
+              $warningsDisabled={isTermLocked && !isUnlocked}
+              $isWarning={!ignoreWarnings && (!isUnlocked || !hasOffering)}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
