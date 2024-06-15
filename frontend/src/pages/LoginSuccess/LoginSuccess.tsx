@@ -39,20 +39,6 @@ const LoginSuccess = () => {
   }, [query, dispatch, navigate, queryClient]);
 
   return <PageLoading />;
-
-  // return (
-  //   <PageTemplate>
-  //     <div>
-  //       <div>
-  //         '{query.get('code')}'
-  //       </div>
-  //       <div>
-  //         Error: '{error}'
-  //       </div>
-  //       <Link to="/tokens">tokens playground</Link>
-  //     </div>
-  //   </PageTemplate>
-  // );
 };
 
 export default LoginSuccess;

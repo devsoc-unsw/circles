@@ -34,7 +34,7 @@ const LandingPage = () => {
       return '/login';
     }
 
-    return userIsSetup ? '/term-planner' : '/degree-wizard';
+    return userIsSetup ? '/course-selector' : '/degree-wizard';
   }, [token, userIsSetup]);
 
   // TODO-OLLI: do we actually want to refresh here? or just silently move on, mayb bad ux

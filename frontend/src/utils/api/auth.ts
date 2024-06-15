@@ -25,10 +25,14 @@ export const guestLogin = async (): Promise<IdentityResponse> => {
 };
 
 export const logout = async (token: string): Promise<void> => {
-  await axios.delete<void>('/auth/logout', {
-    withCredentials: true,
-    headers: { ...withAuthorization(token) }
-  });
+  await axios.post<void>(
+    '/auth/logout',
+    {},
+    {
+      withCredentials: true,
+      headers: { ...withAuthorization(token) }
+    }
+  );
 };
 
 export const CSELogin = async (query_params: Record<string, string>): Promise<IdentityResponse> => {
