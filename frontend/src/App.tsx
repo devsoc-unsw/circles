@@ -24,6 +24,7 @@ const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
 const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
+const ChangeLog = React.lazy(() => import('./pages/ChangeLog'));
 
 const App = () => {
   const { theme, token } = useSelector((state: RootState) => state.settings);
@@ -100,6 +101,7 @@ const App = () => {
                       path="/"
                       element={!token ? <LandingPage /> : <Navigate to="/degree-wizard" replace />}
                     />
+                    <Route path="/changelog" element={<ChangeLog />} />
                     <Route path="/degree-wizard" element={<DegreeWizard />} />
                     <Route path="/course-selector" element={<CourseSelector />} />
                     {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
