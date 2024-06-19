@@ -23,6 +23,10 @@ const routes: Route[] = [
     link: '/progression-checker'
   },
   {
+    label: 'ChangeLog',
+    link: '/changelog'
+  },
+  {
     label: 'Logout',
     link: '/'
   }
