@@ -45,7 +45,7 @@ router = APIRouter(
 
 require_token = HTTPBearer401()
 
-# TODO-OLLI(pm): make a auth helper file
+# TODO-OLLI(pm): do i want to make a auth helper file
 def insert_new_guest_user() -> str:
     # returns the claimed uid
     # TODO-OLLI(pm): i could use uuid, but they long as hell, happy to change this
@@ -142,6 +142,7 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
 
 @router.get("/authorization_url", response_model=str)
 def create_auth_url(res: Response) -> str:
+    # TODO-OLLI(pm): do i want to make this into a proper redirect?
     state = token_urlsafe(32)
     auth_url = generate_oidc_auth_url(state)
     expires_at = int(time()) + STATE_TTL
