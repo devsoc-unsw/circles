@@ -33,7 +33,7 @@ const PreventToken = ({ setTo }: Props) => {
 
   if (error) {
     // must be a 401 axios error, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
-    // TODO-OLLI: do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
+    // TODO-OLLI(pm): do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
     window.location.reload();
   }
 

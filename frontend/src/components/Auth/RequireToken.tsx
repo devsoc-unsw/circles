@@ -55,8 +55,9 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
   if (error) {
     // must be a 401 axios error, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
     // something like a logout from another tab
-    // TODO-OLLI: do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
-    // TODO-OLLI: especially this could just lead to infinite reloading if backend bugs and never gives good session token
+    // TODO-OLLI(pm): do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
+    // TODO-OLLI(pm): especially this could just lead to infinite reloading if backend bugs and never gives good session token
+    // potential solution is just a dismissable popup, once we have proper error support for all other queries.
     window.location.reload();
   }
 
