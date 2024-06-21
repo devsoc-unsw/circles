@@ -7,11 +7,7 @@ import PageLoading from 'components/PageLoading';
 import { useAppSelector } from 'hooks';
 import { selectToken } from 'reducers/identitySlice';
 
-type Props = {
-  setTo?: string;
-};
-
-const PreventToken = ({ setTo }: Props) => {
+const PreventToken = () => {
   const token = useAppSelector(selectToken);
 
   const {
@@ -43,7 +39,7 @@ const PreventToken = ({ setTo }: Props) => {
     return <PageLoading />;
   }
 
-  return <Navigate to={setTo ?? isSetup ? '/course-selector' : '/degree-wizard'} />;
+  return <Navigate to={isSetup ? '/course-selector' : '/degree-wizard'} />;
 };
 
 export default PreventToken;

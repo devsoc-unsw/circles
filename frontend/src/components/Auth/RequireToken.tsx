@@ -8,14 +8,11 @@ import PageLoading from 'components/PageLoading';
 import { useAppSelector } from 'hooks';
 import { selectIdentity } from 'reducers/identitySlice';
 
-// TODO-OLLI: remove these unsetTo props
 type Props = {
   needSetup?: boolean;
-  unsetTo?: string;
-  notsetupTo?: string;
 };
 
-const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
+const RequireToken = ({ needSetup }: Props) => {
   const { token } = useAppSelector(selectIdentity) ?? {};
 
   const {
@@ -48,7 +45,7 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
   }, [token, isSetup, error, needSetup]);
 
   if (token === undefined) {
-    return <Navigate to={unsetTo ?? '/login'} />;
+    return <Navigate to="/login" />;
   }
 
   if (error) {
@@ -70,7 +67,7 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
   }
 
   if (!isSetup && !!needSetup) {
-    return <Navigate to={notsetupTo ?? '/degree-wizard'} />;
+    return <Navigate to="/degree-wizard" />;
   }
 
   return <Outlet />;

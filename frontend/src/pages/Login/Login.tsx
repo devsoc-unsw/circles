@@ -22,7 +22,7 @@ const Login = () => {
   // - a special cookie/localstorage state to indicate that we are already logged in
   // - onFocus
   // - quick api call before login, although this is probs BAD
-  // - can just check if a refresh token is given at the login routes
+  // -- can just check if a refresh token is given at the login routes
   const guestLogin = useCallback(async () => {
     const res = await guestLoginRequest();
 

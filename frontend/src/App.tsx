@@ -1,28 +1,26 @@
-/* eslint-disable */
-import React, { Suspense, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Link, Navigate, Route, Routes } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NotificationOutlined } from '@ant-design/icons';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
 import { ThemeProvider } from 'styled-components';
 import openNotification from 'utils/openNotification';
 import IdentityProvider from 'components/Auth/IdentityProvider';
+import PreventToken from 'components/Auth/PreventToken';
 import RequireToken from 'components/Auth/RequireToken';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
+import Logout from 'pages/Logout';
 import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
-import useToken from 'hooks/useToken';
-import PreventToken from 'components/Auth/PreventToken';
-import Login from 'pages/Login';
-import Logout from 'pages/Logout';
 
 // Lazy load in pages
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
@@ -114,20 +112,23 @@ const App = () => {
                       </Route>
                       <Route element={<RequireToken needSetup />}>
                         <Route path="/course-selector" element={<CourseSelector />} />
-                        {inDev && <Route path="/graphical-selector" element={<GraphicalSelector />} />}
+                        {inDev && (
+                          <Route path="/graphical-selector" element={<GraphicalSelector />} />
+                        )}
                         <Route path="/term-planner" element={<TermPlanner />} />
                         <Route path="/progression-checker" element={<ProgressionChecker />} />
                       </Route>
                       <Route path="/logout" element={<Logout />} />
 
+                      {/* TODO-OLLI: remove these routes when im ready */}
                       <Route path="/tokens" element={<TokenPlayground allowUnset />} />
-                      <Route element={<PreventToken setTo='/tokens' />}>
+                      <Route element={<PreventToken />}>
                         <Route path="/token-notallowed" element={<TokenPlayground allowUnset />} />
                       </Route>
-                      <Route element={<RequireToken unsetTo='/tokens' />}>
+                      <Route element={<RequireToken />}>
                         <Route path="/token-required" element={<TokenPlayground />} />
                       </Route>
-                      <Route element={<RequireToken needSetup unsetTo='/tokens' notsetupTo='/tokens' />}>
+                      <Route element={<RequireToken needSetup />}>
                         <Route path="/token-needsetup" element={<TokenPlayground />} />
                       </Route>
                     </Route>
