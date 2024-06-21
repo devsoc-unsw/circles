@@ -19,7 +19,7 @@ const Logout = () => {
           await logout(token);
         }
       } catch (e) {
-        // NOTE: this is ok i guess...
+        // NOTE: this is ok i guess... can happen if logged out on other tab before
         console.error(e);
       } finally {
         queryClient.clear();
