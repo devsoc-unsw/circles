@@ -52,7 +52,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
       okText="Reset Data"
       okButtonProps={{ type: 'primary', danger: true }}
       onCancel={onCancel}
-      cancelText="Go to Degree Planner"
+      cancelText="Go to Course Selector"
     >
       <div>
         You can navigate to the Degree Wizard to reset your data. By clicking Ok, Your existing data

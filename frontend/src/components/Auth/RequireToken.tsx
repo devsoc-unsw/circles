@@ -26,8 +26,7 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
     queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
-    refetchOnWindowFocus: 'always',
-    throwOnError: (e) => !isAxiosError(e) || e.response?.status !== 401
+    refetchOnWindowFocus: 'always'
   });
   // TODO-OLLI(pm): multitab support is hard
 
@@ -57,8 +56,13 @@ const RequireToken = ({ needSetup, unsetTo, notsetupTo }: Props) => {
     // something like a logout from another tab
     // TODO-OLLI(pm): do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
     // TODO-OLLI(pm): especially this could just lead to infinite reloading if backend bugs and never gives good session token
-    // potential solution is just a dismissable popup, once we have proper error support for all other queries.
-    window.location.reload();
+    // ideal solution: make all other querys and mutations have proper error handling,
+    // and then this component only really helps with redirect, and doesn't handle the 401 errors (since they shouldn't really happen)
+    if (isAxiosError(error) && error.response?.status === 401) {
+      window.location.reload();
+    } else {
+      throw error; // NOTE: not using `throwOnError` from reactQuery, since this seems to override `retryOnMount`
+    }
   }
 
   if (isPending || isSetup === undefined) {

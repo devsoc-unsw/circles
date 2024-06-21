@@ -22,8 +22,7 @@ const PreventToken = ({ setTo }: Props) => {
     queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key, including userId
     queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
-    refetchOnWindowFocus: 'always',
-    throwOnError: (e) => !isAxiosError(e) || e.response?.status !== 401
+    refetchOnWindowFocus: 'always'
   });
 
   if (token === undefined) {
@@ -32,9 +31,12 @@ const PreventToken = ({ setTo }: Props) => {
   }
 
   if (error) {
-    // must be a 401 axios error, even though it should be auto refreshing, so likely session died for other reasons and couldnt notice it...
-    // TODO-OLLI(pm): do we want to do better handling here like redirect, clear cache and unset? maybe redirect to logout when that is robust
-    window.location.reload();
+    // TODO-OLLI(pm): check RequireToken for relevant comments
+    if (isAxiosError(error) && error.response?.status === 401) {
+      window.location.reload();
+    } else {
+      throw error;
+    }
   }
 
   if (isPending || isSetup === undefined) {
