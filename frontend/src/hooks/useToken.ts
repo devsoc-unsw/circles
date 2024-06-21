@@ -23,7 +23,6 @@ function useToken(options?: Options): string | undefined {
 
   if (token === undefined && options?.allowUnset !== true) {
     // This shouldn't occur of useToken is used inside a RequireToken
-    // NOTE: error boundary cannot catch this :|
     throw TypeError('useToken: allowUnset was false when token was undefined.', {
       cause: { token, allowUnset: !!options?.allowUnset }
     });

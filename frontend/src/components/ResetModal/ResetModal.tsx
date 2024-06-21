@@ -16,10 +16,10 @@ type Props = {
 const ResetModal = ({ open, onOk, onCancel }: Props) => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
-  const token = useToken();
+  const token = useToken({ allowUnset: true }); // NOTE: must allow unset since this is used in ErrorBoundary itself
 
   const resetDegreeMutation = useMutation({
-    mutationFn: () => resetUserDegree(token),
+    mutationFn: (definedToken: string) => resetUserDegree(definedToken),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['degree']
@@ -32,7 +32,9 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   });
 
   const handleResetDegree = () => {
-    resetDegreeMutation.mutate();
+    if (token !== undefined) {
+      resetDegreeMutation.mutate(token);
+    }
   };
 
   const handleOk = async () => {
