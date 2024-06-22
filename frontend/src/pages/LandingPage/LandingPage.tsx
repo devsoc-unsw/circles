@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { getUserIsSetup } from 'utils/api/userApi';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import useToken from 'hooks/useToken';
@@ -21,10 +22,7 @@ const LandingPage = () => {
     error
   } = useQuery({
     queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key, including userId
-    // queryFn: () => getUserIsSetup(token!),
-    queryFn: () => {
-      throw Error('alksjdlaksd');
-    },
+    queryFn: () => getUserIsSetup(token!),
     enabled: token !== undefined,
     refetchOnWindowFocus: 'always'
   });
