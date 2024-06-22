@@ -56,11 +56,8 @@ const IdentityProvider = () => {
 
     const refreshPeriod = Math.floor((expiresAt * 1000 - Date.now()) * 0.9);
     const timeout = setTimeout(updateToken, Math.max(refreshPeriod, 60000));
-    // const timeout = setTimeout(updateToken, 5000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
+    return () => clearTimeout(timeout);
   }, [updateToken, expiresAt]);
 
   return isLoading ? <PageLoading /> : <Outlet />;
