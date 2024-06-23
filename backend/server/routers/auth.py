@@ -1,5 +1,5 @@
 """ Routes to deal with user Authentication. """
-from typing import Annotated, Dict, Optional, Tuple, cast
+from typing import Annotated, Dict, Optional, Tuple, Union, cast
 from datetime import datetime
 from secrets import token_hex, token_urlsafe
 from time import time
@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 from server.config import SECURE_COOKIES
-from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionOIDCInfoModel, SessionToken
+from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionID, SessionInfoModel, SessionOIDCInfoModel, SessionToken
 from server.db.helpers.users import delete_user, insert_new_user
 
 from .auth_utility.sessions.errors import ExpiredRefreshTokenError, ExpiredSessionTokenError, OldRefreshTokenError
@@ -81,6 +81,25 @@ def _check_csesoc_oidc_session(oidc_info: SessionOIDCInfoModel) -> Optional[Sess
             # revoke_token(oidc_info.refresh_token, "refresh_token")  # NOTE: if the fresh token is invalid, i give up
             return None
 
+def _try_get_session_info_for_logout(session_token: SessionToken, refresh_token: Optional[RefreshToken] = None) -> Optional[Tuple[SessionID, Union[SessionInfoModel, GuestSessionInfoModel]]]:
+    try:
+        # get the user id and the session id from the session token first
+        return get_session_info_from_session_token(session_token)
+    except ExpiredSessionTokenError:
+        pass
+
+    if refresh_token is not None:
+        try:
+            # Session token failed, we can give up here if we want since cookie will die...
+            # but since we might get the refresh_token regardless due to credentials, try use this instead.
+            # Thus this is only necessary if we care about removing the rare hanging session...
+            return get_session_info_from_refresh_token(refresh_token)
+        except (ExpiredRefreshTokenError, OldRefreshTokenError):
+            pass
+
+    return None
+
+
 
 
 @router.post('/guest_login')
@@ -143,6 +162,8 @@ def refresh(res: Response, refresh_token: Annotated[Optional[RefreshToken], Cook
     # set the cookies and return the identity
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, new_refresh_token, refresh_expiry)
     return IdentityPayload(session_token=new_session_token, exp=session_expiry, uid=session_info.uid)
+
+
 
 @router.get("/authorization_url", response_model=str)
 def create_auth_url(res: Response) -> str:
@@ -217,32 +238,17 @@ def logout(res: Response, token: Annotated[SessionToken, Security(require_token)
     # delete the cookie first since this should always happen
     set_secure_cookie(res, REFRESH_TOKEN_COOKIE, None)
 
-    # TODO-OLLI: work on making this mess prettier, i hate this whole function
-    try:
-        # get the user id and the session id from the session token first
-        sid, session_info = get_session_info_from_session_token(token)
-    except ExpiredSessionTokenError as e:
-        if refresh_token is not None:
-            try:
-                # Session token failed, we can give up here if we want since cookie will die...
-                # but since we might get the refresh_token regardless due to credentials, try use this instead.
-                # Thus this is only necessary if we care about removing the rare hanging session...
-                sid, session_info = get_session_info_from_refresh_token(refresh_token)
-            except (ExpiredRefreshTokenError, OldRefreshTokenError):
-                raise HTTPException(
-                    status_code=HTTP_401_UNAUTHORIZED,
-                    detail="Provided token was expired, please re-authenticate.",
-                    headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
-                ) from e
-        else:
-            raise HTTPException(
-                status_code=HTTP_401_UNAUTHORIZED,
-                detail="Provided token was expired, please re-authenticate.",
-                headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
-            ) from e
+    session = _try_get_session_info_for_logout(token, refresh_token)
+    if session is None:
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED,
+            detail="Provided token was expired, please re-authenticate.",
+            headers={ "WWW-Authenticate": "Bearer", "set-cookie": res.headers["set-cookie"] },
+        )
 
     # kill our session, then revoke the oidc tokens
     # done in this order since once our session is destroyed, their oidc tokens are gone anyway
+    sid, session_info = session
     assert logout_session(sid)
 
     if session_info.type == "guest":
