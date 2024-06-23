@@ -59,7 +59,6 @@ const IdentityProvider = () => {
       return () => {};
     }
 
-    // TODO-OLLI(pm): figure out how to cancel this timeout if user logs out...
     const refreshPeriod = Math.floor((expiresAt * 1000 - Date.now()) * 0.9);
     const timeout = setTimeout(updateToken, Math.max(refreshPeriod, 60000));
 

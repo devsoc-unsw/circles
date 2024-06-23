@@ -19,12 +19,16 @@ const Logout = () => {
           await logout(token);
         }
       } catch (e) {
-        // NOTE: this is ok i guess... can happen if logged out on other tab before
+        // NOTE: this is ok, can happen if logged out on other tab before
+        // eslint-disable-next-line no-console
         console.error(e);
       } finally {
         queryClient.clear();
         dispatch(unsetIdentity());
-        navigate('/', { replace: true });
+
+        // use window.location.replace over navigate to try delete all data/effects
+        // this is very important for the refresh timeouts
+        window.location.replace('/');
       }
     };
 
