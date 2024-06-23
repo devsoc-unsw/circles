@@ -53,7 +53,7 @@ const Page404 = () => {
       <S.TextWrapper>
         <S.Title404>404</S.Title404>
         <S.Text404>PAGE NOT FOUND</S.Text404>
-        <Button type="primary" size="large" onClick={() => navigate('/course-selector')}>
+        <Button type="primary" size="large" onClick={() => navigate('/')}>
           Go Back Home
         </Button>
       </S.TextWrapper>

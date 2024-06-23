@@ -38,7 +38,12 @@ const IdentityProvider = () => {
 
   useEffect(() => {
     const initialRefresh = async () => {
-      await updateToken();
+      if (expiresAt === undefined || expiresAt * 1000 <= Date.now()) {
+        // we can enter the IdentityProvider from a page that already setup an identity (LoginSuccess)
+        // thus we don't have to do the initial refresh if token isn't yet expired. (let the token boundaries check validity)
+        await updateToken();
+      }
+
       setIsLoading(false);
     };
 
@@ -46,7 +51,7 @@ const IdentityProvider = () => {
       setInitialLoad(false);
       initialRefresh();
     }
-  }, [updateToken, initialLoad]);
+  }, [updateToken, initialLoad, expiresAt]);
 
   useEffect(() => {
     // silent refresh, don't set loading
@@ -54,6 +59,7 @@ const IdentityProvider = () => {
       return () => {};
     }
 
+    // TODO-OLLI(pm): figure out how to cancel this timeout if user logs out...
     const refreshPeriod = Math.floor((expiresAt * 1000 - Date.now()) * 0.9);
     const timeout = setTimeout(updateToken, Math.max(refreshPeriod, 60000));
 

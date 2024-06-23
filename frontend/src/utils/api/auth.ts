@@ -47,7 +47,6 @@ export const CSELogin = async (query_params: Record<string, string>): Promise<Id
 
 export const refreshTokens = async (): Promise<IdentityResponse> => {
   // NOTE: will raise a 401 if could not refresh
-  console.log('-- refreshing tokens');
   const res = await axios.post<IdentityResponse>('/auth/refresh', {}, { withCredentials: true });
 
   return res.data;
