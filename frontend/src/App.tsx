@@ -17,7 +17,6 @@ import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
 import Logout from 'pages/Logout';
-import TokenPlayground from 'pages/TokenPlayground';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
@@ -119,18 +118,6 @@ const App = () => {
                         <Route path="/progression-checker" element={<ProgressionChecker />} />
                       </Route>
                       <Route path="/logout" element={<Logout />} />
-
-                      {/* TODO-OLLI: remove these routes when im ready */}
-                      <Route path="/tokens" element={<TokenPlayground allowUnset />} />
-                      <Route element={<PreventToken />}>
-                        <Route path="/token-notallowed" element={<TokenPlayground allowUnset />} />
-                      </Route>
-                      <Route element={<RequireToken />}>
-                        <Route path="/token-required" element={<TokenPlayground />} />
-                      </Route>
-                      <Route element={<RequireToken needSetup />}>
-                        <Route path="/token-needsetup" element={<TokenPlayground />} />
-                      </Route>
                     </Route>
                     <Route path="/login/success/:provider" element={<LoginSuccess />} />
                     <Route path="*" element={<Page404 />} />
