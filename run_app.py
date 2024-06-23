@@ -28,12 +28,12 @@ import threading
 from subprocess import Popen, check_call
 from typing import TextIO
 try:
-    from dotenv import load_dotenv
+    from dotenv import dotenv_values
 except:
     print("failed to load from venv correctly. Please run '. .venv/bin/activate' and try again")
     exit(1)
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
 
 class LogPipe(threading.Thread, TextIO):
@@ -69,32 +69,34 @@ class LogPipe(threading.Thread, TextIO):
         logging.log(self.level, message)
 
 
-def get_backend_env():
+def get_backend_env() -> dict[str, str]:
     """
-    reads backend.env for mongodb username and password and python
-    version.
+    Reads backend.env and merges it with a copy of the os environment.
+    Also overwrites the database service names to be localhost, since the processes are running outside of the docker network.
     """
-    load_dotenv("./env/backend.env")
-    username = os.getenv("MONGODB_USERNAME")
-    password = os.getenv("MONGODB_PASSWORD")
-    python = os.getenv("PYTHON_VERSION") or "python"
-    return (username, password, python)
+    res = os.environ.copy()
+    res.update((k, v) for (k, v) in dotenv_values("./env/backend.env").items() if v is not None)
+    res["MONGODB_SERVICE_HOSTNAME"] = "localhost"
+    res["SESSIONSDB_SERVICE_HOSTNAME"] = "localhost"
+    res["PYTHONUNBUFFERED"] = "1"  # this is necessary for the uvicorn worker to send through output
 
+    return res
 
-def get_frontend_env():
+def get_frontend_env() -> dict[str, str]:
     """
-    reads frontend.env for mongodb username and password and python
-    version.
+    reads frontend.env and merges it with a copy of the os environment.
     """
-    load_dotenv("./env/frontend.env")
-    baseurl = os.getenv("VITE_BACKEND_API_BASE_URL")
-    return baseurl
+    res = os.environ.copy()
+    res.update((k, v) for (k, v) in dotenv_values("./env/frontend.env").items() if v is not None)
+
+    return res
 
 
 def main():
     if os.system("docker ps > /dev/null") != 0:
         print("please run docker first!")
         sys.exit(1)
+
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(message)s",
@@ -103,33 +105,30 @@ def main():
     # this is actually kooky if you think about it
     sys.stdout = LogPipe(logging.INFO)
     sys.stderr = LogPipe(logging.ERROR)
-    username, password, python_ver = get_backend_env()
-    base_url = get_frontend_env()
-    os.system("docker compose up -d sessionsdb mongodb")
-    try:
-        modified_backend_env = {
-            **os.environ.copy(),
-            "MONGODB_SERVICE_HOSTNAME": "localhost",
-            "MONGODB_PASSWORD": f"{password}",
-            "MONGODB_USERNAME": f"{username}",
-            "SESSIONSDB_SERVICE_HOSTNAME": "localhost",
-            "PYTHONUNBUFFERED": "1",
-        }
 
+    backend_env = get_backend_env()
+    frontend_env = get_frontend_env()
+    python_ver = backend_env.get("PYTHON_VERSION", "python")
+
+    os.system("docker compose up -d sessionsdb mongodb")
+
+    try:
         Popen(
             f"{python_ver} -u runserver.py --dev",
             stdout=sys.stdout,
             stderr=sys.stderr,
             shell=True,
             cwd="backend/",
-            env=modified_backend_env
+            env=backend_env,
         )
+
         check_call(
-            f"VITE_BACKEND_API_BASE_URL={base_url} npm start",
-            shell=True,
+            "npm start",
             stdout=sys.stdout,
             stderr=sys.stderr,
+            shell=True,
             cwd="frontend/",
+            env=frontend_env,
         )
     # pylint: disable=broad-except
     except Exception as e:
