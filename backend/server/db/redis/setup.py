@@ -4,6 +4,10 @@ from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 
 from .conn import sdb
 
+def _drop_all_keys():
+    print("dropping all redis keys")
+    print(sdb.flushdb())
+
 def _create_uid_index(drop: bool):
     if drop:
         try:
@@ -51,8 +55,8 @@ def _create_sid_index(drop: bool):
     ))
 
 def setup_redis_sessionsdb():
-    # TODO-OLLI: redis could still have stuff inside of it at this setup, if we never docker downed the container
+    # redis could still have stuff inside of it at this setup, if we never docker downed the container
     # so we should always drop everything here first, and then also always try drop indexes
-
-    # create_uid_index(True)  # NOTE: don't really have a use for this yet
+    _drop_all_keys()
     _create_sid_index(True)
+    # create_uid_index(True)  # don't really have a use for this yet...
