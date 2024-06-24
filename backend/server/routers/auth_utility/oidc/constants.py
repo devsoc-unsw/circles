@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv("./env/backend.env")
 
+# TODO-OLLI: what if someone doesnt have these and wants to still dev?????
 CLIENT_ID = os.getenv("AUTH_CSE_CLIENT_ID")
 CLIENT_SECRET = os.getenv("AUTH_CSE_CLIENT_SECRET")
 

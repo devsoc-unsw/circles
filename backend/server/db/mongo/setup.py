@@ -12,7 +12,9 @@ from data.config import ARCHIVED_YEARS
 
 from .conn import db, archivesDB, usersDB
 
-def create_new_users_collection():
+
+
+def _create_users_collection():
     # users {
     #     uid! string,     // unique indexed, the uid we get back from the oidc
     #     info! object,    // extra info that we gather from oidc
@@ -185,7 +187,7 @@ def create_new_users_collection():
     #     'description': 'Any extra information gathered about the user, such as name'
     # },
 
-def create_new_refresh_tokens_collection():
+def _create_refresh_tokens_collection():
     # refreshTokens {
     #     tok! string,     // unique indexed
     #     sid! uuid,       // indexed
@@ -218,7 +220,7 @@ def create_new_refresh_tokens_collection():
     usersDB['refreshTokensNEW'].create_index("token", unique=True, name="tokenIndex")
     usersDB['refreshTokensNEW'].create_index("sid", name="sidIndex")
 
-def create_new_sessions_collection():
+def _create_sessions_collection():
     # sessions {
     #     sid! uuid,       // unique indexed
     #     uid! string,     // index on if we dont have the reverse lookup
@@ -326,7 +328,7 @@ def create_new_sessions_collection():
     usersDB['sessionsNEW'].create_index("sid", unique=True, name="sidIndex")
     usersDB['sessionsNEW'].create_index("uid", name="uidIndex")
 
-def overwrite_main_collection(collection_name):
+def _overwrite_main_collection(collection_name):
     """Overwrites the specific core database via reading from the json files.
     Collection names can be: Programs, Specialisations, Courses"""
     file_name = FINAL_DATA_PATH + collection_name.lower() + "Processed.json"
@@ -344,7 +346,7 @@ def overwrite_main_collection(collection_name):
             print(f"Failed to load and overwrite {collection_name}")
 
 
-def overwrite_archives():
+def _overwrite_archives():
     """Overwrite all the archived data for all the years that we have archived"""
     for year in ARCHIVED_YEARS:
         file_name = ARCHIVED_DATA_PATH + str(year) + ".json"
@@ -362,46 +364,53 @@ def overwrite_archives():
                 print(f"Failed to load and overwrite {year} archive")
 
 
-def create_dynamic_db(drop_old: bool):
-    if drop_old:
-        print("Dropping user collections")
+def _setup_user_related_collections(drop: bool):
+    """Sets up all the user related collections to store users, refresh tokens and sessions"""
+    # tear down if needed
+    if drop:
+        print("Dropping user and session related collections")
         usersDB.drop_collection('usersNEW')
         usersDB.drop_collection('refreshTokensNEW')
         usersDB.drop_collection('sessionsNEW')
 
-    create_new_users_collection()
-    create_new_refresh_tokens_collection()
-    create_new_sessions_collection()
-    print("Finished creating user database")
-    # example insertion
-    # usersDB['users'].insert_one({
-    #     'degree': {
-    #         "programCode":"3778",
-    #         "programName":"Computer Science",
-    #         "specs":["COMPA1"]
-    #     },
-    #     'planner': {
-    #         "unplanned":[],
-    #         "startYear": 2021,
-    #         "isSummerEnabled": False,
-    #         "plan": [
-    #             {
-    #             "T0":[],
-    #             "T1":["COMP1511"],
-    #             "T2":["COMP1521"],
-    #             "T3":["COMP1531"],
-    #             }
-    #         ],
-    #     }
-    # })
+    # try prevent any mismatches of data if not dropped (probably over the top but just in case)
+    existing = usersDB.list_collection_names()
+    if "usersNEW" not in existing and ("refreshTokensNEW" in existing or "sessionsNEW" in existing):
+        # make sure there are no sessions or refresh tokens alive that could be pointing to non existent users
+        print("Dropping session related collections because users was not present...")
+        usersDB.drop_collection('refreshTokensNEW')
+        usersDB.drop_collection('sessionsNEW')
 
-def overwrite_all():
+    if "sessionsNEW" not in existing and "refreshTokensNEW" in existing:
+        # dont want any refresh tokens that point to non existent sessions
+        print("Dropping refresh tokens because it was present without sessions...")
+        usersDB.drop_collection('refreshTokensNEW')
+    
+    # build up
+    # TODO: setup data versioning so we migrate shapes if needed
+    existing = usersDB.list_collection_names()
+    if "usersNEW" not in existing:
+        _create_users_collection()
+
+    if "sessionsNEW" not in existing:
+        _create_sessions_collection()
+
+    if "refreshTokensNEW" not in existing:
+        _create_refresh_tokens_collection()
+
+    print("Finished setting up user database")
+
+
+def _overwrite_all_static_data():
     """Singular execution point to overwrite the entire main database including the archives"""
-    overwrite_main_collection("Courses")
-    overwrite_main_collection("Specialisations")
-    overwrite_main_collection("Programs")
-    overwrite_archives()
+    _overwrite_main_collection("Courses")
+    _overwrite_main_collection("Specialisations")
+    _overwrite_main_collection("Programs")
+    _overwrite_archives()
 
-def optionally_create_new_data():
-    # TODO-OLLI: FIX THIS UP SO WE DO NOT DROP OLD COLLECTIONS IN PROD
-    create_dynamic_db(drop_old=True)
+
+def setup_mongo_collections(clear_users=False):
+    """Main function to setup all collections"""
+    # TODO: setup smart overwrite of static data
+    _setup_user_related_collections(clear_users)
+    _overwrite_all_static_data()

@@ -4,7 +4,7 @@ from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 
 from .conn import sdb
 
-def create_uid_index(drop: bool):
+def _create_uid_index(drop: bool):
     if drop:
         try:
             print("dropping uid index")
@@ -27,7 +27,7 @@ def create_uid_index(drop: bool):
         stopwords=[],
     ))
 
-def create_sid_index(drop: bool):
+def _create_sid_index(drop: bool):
     if drop:
         try:
             print("dropping sid index")
@@ -51,5 +51,8 @@ def create_sid_index(drop: bool):
     ))
 
 def setup_redis_sessionsdb():
+    # TODO-OLLI: redis could still have stuff inside of it at this setup, if we never docker downed the container
+    # so we should always drop everything here first, and then also always try drop indexes
+
     # create_uid_index(True)  # NOTE: don't really have a use for this yet
-    create_sid_index(True)
+    _create_sid_index(True)
