@@ -5,6 +5,7 @@ from pydantic import PositiveInt
 import pymongo
 import pymongo.errors
 
+from server.db.mongo.constants import SID_INDEX_NAME
 from server.db.mongo.conn import sessionsNewCOL
 
 from .models import GuestSessionInfoModel, NotSetupSessionModel, RefreshToken, SessionID, SessionInfoModel, SessionOIDCInfoModel
@@ -74,7 +75,7 @@ def update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_toke
             },
         },
         upsert=False,
-        hint="sidIndex",
+        hint=SID_INDEX_NAME,
     )
 
     return res.matched_count == 1
@@ -90,7 +91,7 @@ def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token
             },
         },
         upsert=False,
-        hint="sidIndex",
+        hint=SID_INDEX_NAME,
     )
 
     return res.matched_count == 1

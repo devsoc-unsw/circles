@@ -10,6 +10,7 @@ import json
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
+from .constants import COURSES_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SID_INDEX_NAME, SPECS_COL_NAME, TOKEN_INDEX_NAME, UID_INDEX_NAME, USERS_COL_NAME
 from .conn import db, archivesDB, usersDB
 
 
@@ -22,7 +23,7 @@ def _create_users_collection():
     #     courses! { ... },
     #     planner! { ... },
     # }
-    usersDB.create_collection('usersNEW', validator={
+    usersDB.create_collection(USERS_COL_NAME, validator={
         '$jsonSchema': {
             'oneOf': [
                 {
@@ -179,7 +180,7 @@ def _create_users_collection():
         }
     })
 
-    usersDB['usersNEW'].create_index("uid", unique=True, name="uidIndex")
+    usersDB[USERS_COL_NAME].create_index("uid", unique=True, name=UID_INDEX_NAME)
 
     # TODO: add later when we actually have a use for it, otherwise right now its just added pain
     # 'info': {
@@ -193,7 +194,7 @@ def _create_refresh_tokens_collection():
     #     sid! uuid,       // indexed
     #     expiresAt! Date, // ttl indexed
     # }
-    usersDB.create_collection('refreshTokensNEW', validator={
+    usersDB.create_collection(REFRESH_TOKENS_COL_NAME, validator={
         '$jsonSchema': {
             'bsonType': 'object',
             'required': ['token', 'sid', 'expiresAt'],
@@ -216,9 +217,9 @@ def _create_refresh_tokens_collection():
         }
     })
 
-    usersDB['refreshTokensNEW'].create_index("expiresAt", expireAfterSeconds=0)
-    usersDB['refreshTokensNEW'].create_index("token", unique=True, name="tokenIndex")
-    usersDB['refreshTokensNEW'].create_index("sid", name="sidIndex")
+    usersDB[REFRESH_TOKENS_COL_NAME].create_index("expiresAt", expireAfterSeconds=0)
+    usersDB[REFRESH_TOKENS_COL_NAME].create_index("token", unique=True, name=TOKEN_INDEX_NAME)
+    usersDB[REFRESH_TOKENS_COL_NAME].create_index("sid", name=SID_INDEX_NAME)
 
 def _create_sessions_collection():
     # sessions {
@@ -234,7 +235,7 @@ def _create_sessions_collection():
     #         validated_id_token: object  # most recent valid id token object,
     #     },
     # }
-    usersDB.create_collection('sessionsNEW', validator={
+    usersDB.create_collection(SESSIONS_COL_NAME, validator={
         '$jsonSchema': {
             'oneOf': [
                 {
@@ -324,9 +325,9 @@ def _create_sessions_collection():
         }
     })
 
-    usersDB['sessionsNEW'].create_index("expiresAt", expireAfterSeconds=0)
-    usersDB['sessionsNEW'].create_index("sid", unique=True, name="sidIndex")
-    usersDB['sessionsNEW'].create_index("uid", name="uidIndex")
+    usersDB[SESSIONS_COL_NAME].create_index("expiresAt", expireAfterSeconds=0)
+    usersDB[SESSIONS_COL_NAME].create_index("sid", unique=True, name=SID_INDEX_NAME)
+    usersDB[SESSIONS_COL_NAME].create_index("uid", name=UID_INDEX_NAME)
 
 def _overwrite_main_collection(collection_name):
     """Overwrites the specific core database via reading from the json files.
@@ -369,33 +370,33 @@ def _setup_user_related_collections(drop: bool):
     # tear down if needed
     if drop:
         print("Dropping user and session related collections")
-        usersDB.drop_collection('usersNEW')
-        usersDB.drop_collection('refreshTokensNEW')
-        usersDB.drop_collection('sessionsNEW')
+        usersDB.drop_collection(USERS_COL_NAME)
+        usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
+        usersDB.drop_collection(SESSIONS_COL_NAME)
 
     # try prevent any mismatches of data if not dropped (probably over the top but just in case)
     existing = usersDB.list_collection_names()
-    if "usersNEW" not in existing and ("refreshTokensNEW" in existing or "sessionsNEW" in existing):
+    if USERS_COL_NAME not in existing and (REFRESH_TOKENS_COL_NAME in existing or SESSIONS_COL_NAME in existing):
         # make sure there are no sessions or refresh tokens alive that could be pointing to non existent users
         print("Dropping session related collections because users was not present...")
-        usersDB.drop_collection('refreshTokensNEW')
-        usersDB.drop_collection('sessionsNEW')
+        usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
+        usersDB.drop_collection(SESSIONS_COL_NAME)
 
-    if "sessionsNEW" not in existing and "refreshTokensNEW" in existing:
+    if SESSIONS_COL_NAME not in existing and REFRESH_TOKENS_COL_NAME in existing:
         # dont want any refresh tokens that point to non existent sessions
         print("Dropping refresh tokens because it was present without sessions...")
-        usersDB.drop_collection('refreshTokensNEW')
+        usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
     
     # build up
     # TODO: setup data versioning so we migrate shapes if needed
     existing = usersDB.list_collection_names()
-    if "usersNEW" not in existing:
+    if USERS_COL_NAME not in existing:
         _create_users_collection()
 
-    if "sessionsNEW" not in existing:
+    if SESSIONS_COL_NAME not in existing:
         _create_sessions_collection()
 
-    if "refreshTokensNEW" not in existing:
+    if REFRESH_TOKENS_COL_NAME not in existing:
         _create_refresh_tokens_collection()
 
     print("Finished setting up user database")
@@ -403,9 +404,9 @@ def _setup_user_related_collections(drop: bool):
 
 def _overwrite_all_static_data():
     """Singular execution point to overwrite the entire main database including the archives"""
-    _overwrite_main_collection("Courses")
-    _overwrite_main_collection("Specialisations")
-    _overwrite_main_collection("Programs")
+    _overwrite_main_collection(COURSES_COL_NAME)
+    _overwrite_main_collection(SPECS_COL_NAME)
+    _overwrite_main_collection(PROGRAMS_COL_NAME)
     _overwrite_archives()
 
 

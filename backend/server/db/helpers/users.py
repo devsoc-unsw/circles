@@ -3,6 +3,7 @@ from typing import Optional, Union
 import pymongo
 import pymongo.errors
 
+from server.db.mongo.constants import UID_INDEX_NAME
 from server.db.mongo.conn import usersNewCOL
 
 from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
@@ -46,7 +47,7 @@ def reset_user(uid: str) -> bool:
             },
         },
         upsert=False,
-        hint="uidIndex",
+        hint=UID_INDEX_NAME,
     )
 
     return res.matched_count == 1
@@ -65,7 +66,7 @@ def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
                 },
             },
             upsert=True,
-            hint="uidIndex",
+            hint=UID_INDEX_NAME,
         )
 
         return res.matched_count == 1
@@ -87,7 +88,7 @@ def update_user_degree(uid: str, data: UserDegreeStorage) -> bool:
             },
         },
         upsert=False,
-        hint="uidIndex",
+        hint=UID_INDEX_NAME,
     )
 
     return res.matched_count == 1
@@ -101,7 +102,7 @@ def update_user_courses(uid: str, data: UserCoursesStorage) -> bool:
             },
         },
         upsert=False,
-        hint="uidIndex",
+        hint=UID_INDEX_NAME,
     )
 
     return res.matched_count == 1
@@ -115,7 +116,7 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
             },
         },
         upsert=False,
-        hint="uidIndex",
+        hint=UID_INDEX_NAME,
     )
 
     return res.matched_count == 1
@@ -145,7 +146,7 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         { "uid": uid, "setup": True } if "setup" not in payload else { "uid": uid },
         { "$set": payload },
         upsert=False,
-        hint="uidIndex",
+        hint=UID_INDEX_NAME,
     )
 
     return res.matched_count == 1
@@ -153,7 +154,7 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
 def delete_user(uid: str) -> bool:
     res = usersNewCOL.delete_one(
         { "uid": uid },
-        hint="uidIndex",
+        hint=UID_INDEX_NAME,
     )
 
     return res.deleted_count == 1

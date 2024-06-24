@@ -10,6 +10,7 @@ from pymongo import MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
 
+from .constants import COURSES_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SPECS_COL_NAME, USERS_COL_NAME
 from .col_types import GuestSessionInfoDict, NotSetupSessionInfoDict, NotSetupUserInfoDict, RefreshTokenInfoDict, SessionInfoDict, UserInfoDict
 
 client: MongoClient
@@ -40,11 +41,11 @@ def connect():
     archivesDB = client["Archives"]
     usersDB = client["Users"]
 
-    programsCOL = db["Programs"]
-    specialisationsCOL = db["Specialisations"]
-    coursesCOL = db["Courses"]
+    programsCOL = db[PROGRAMS_COL_NAME]
+    specialisationsCOL = db[SPECS_COL_NAME]
+    coursesCOL = db[COURSES_COL_NAME]
 
-    sessionsNewCOL = usersDB["sessionsNEW"].with_options(
+    sessionsNewCOL = usersDB[SESSIONS_COL_NAME].with_options(
         codec_options=CodecOptions(
             tz_aware=True,
             tzinfo=datetime.timezone.utc,
@@ -52,7 +53,7 @@ def connect():
         ),
     )
 
-    refreshTokensNewCOL = usersDB["refreshTokensNEW"].with_options(
+    refreshTokensNewCOL = usersDB[REFRESH_TOKENS_COL_NAME].with_options(
         codec_options=CodecOptions(
             tz_aware=True,
             tzinfo=datetime.timezone.utc,
@@ -60,7 +61,7 @@ def connect():
         )
     )
 
-    usersNewCOL = usersDB["usersNEW"]
+    usersNewCOL = usersDB[USERS_COL_NAME]
 
 
 connect()
