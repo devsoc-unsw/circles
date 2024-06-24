@@ -12,21 +12,9 @@ from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage,
 def get_user(uid: str) -> Optional[Union[NotSetupUserStorage, UserStorage]]:
     res = usersNewCOL.find_one({ 'uid': uid })
     if res is None:
-        return res
+        return None
 
     return UserStorage.model_validate(res) if res["setup"] else NotSetupUserStorage.model_validate(res)
-
-def get_user_degree(uid: str) -> Optional[UserDegreeStorage]:
-    res = get_user(uid)
-    return res.degree if res is not None and res.setup is True else None
-
-def get_user_courses(uid: str) -> Optional[UserCoursesStorage]:
-    res = get_user(uid)
-    return res.courses if res is not None and res.setup is True else None
-
-def get_user_planner(uid: str) -> Optional[UserPlannerStorage]:
-    res = get_user(uid)
-    return res.planner if res is not None and res.setup is True else None
 
 def user_is_setup(uid: str) -> bool:
     res = usersNewCOL.find_one({ 'uid': uid, 'setup': { "$eq": True } })
@@ -147,12 +135,10 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
 
     if len(payload) == 0:
         # most semantically correct
-        # print("++ empty update payload")
         return user_is_setup(uid)
 
     if "courses" in payload and "degree" in payload and "planner" in payload:
         # enough to declare user as setup
-        # print("++ full payload")
         payload["setup"] = True
 
     res = usersNewCOL.update_one(
@@ -171,22 +157,3 @@ def delete_user(uid: str) -> bool:
     )
 
     return res.deleted_count == 1
-
-def _default_cs_user(guest: bool, start_year: int) -> UserStorage:
-    # TODO-OLLI(pm): remove this later
-    return UserStorage(
-        guest=guest,
-        courses={},
-        planner=UserPlannerStorage(
-            isSummerEnabled=False,
-            lockedTerms={},
-            mostRecentPastTerm=YearTerm(Y=0, T=0),
-            startYear=start_year,
-            unplanned=[],
-            years=[]
-        ),
-        degree=UserDegreeStorage(
-            programCode="3778",
-            specs=["COMPA1"],
-        )
-    )

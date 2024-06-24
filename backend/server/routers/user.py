@@ -26,6 +26,7 @@ router = APIRouter(
 require_uid = HTTPBearerToUserID()
 
 # TODO-OLLI(pm): remove these underwrite helpers once we get rid of the old TypedDicts
+# nto and otn means new-to-old and old-to-new
 def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
     return NEWUserPlannerStorage.model_validate(s)
 
