@@ -28,6 +28,7 @@ if __name__ == "__main__":
     if args.overwrite or args.dev:
         # TODO-OLLI(pm): abstract this, and remove these local imports once we have proper connection handling
         # TODO-OLLI(pm): also do overwrite checks for dev mode using a timestamp
+        # TODO-OLLI: dont we always want to atleast setup the dbs???
         from server.db.mongo.setup import setup_mongo_collections
         from server.db.redis.setup import setup_redis_sessionsdb
 

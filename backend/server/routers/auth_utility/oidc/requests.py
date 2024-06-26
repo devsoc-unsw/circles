@@ -89,10 +89,17 @@ config = get_oidc_config()
 # raw requests
 #
 def client_secret_basic_credentials() -> str:
+    if CLIENT_ID is None or CLIENT_SECRET is None:
+        # TODO-OLLI(pm): when we convert this all to a class or whatever, dont throw these mid route
+        raise ValueError("OIDC client credentials have not been specified.")
+
     con = f"{CLIENT_ID}:{CLIENT_SECRET}".encode("utf-8")
     return base64.b64encode(con).decode("utf-8")
 
 def generate_oidc_auth_url(state: str) -> str:
+    if CLIENT_ID is None:
+        raise ValueError("OIDC client ID has not been specified.")
+
     # TODO-OLLI(pm): include nonce here one day
     params = urlencode({
         "client_id": CLIENT_ID,
@@ -101,6 +108,7 @@ def generate_oidc_auth_url(state: str) -> str:
         "redirect_uri": REDIRECT_URI,
         "state": state,
     })
+
     return f"{config['authorization_endpoint']}?{params}"
 
 def get_user_info(access_token: str) -> UserInfoResponse:
@@ -243,6 +251,9 @@ def compute_at_hash(access_token: str) -> str:
     return computed.decode()
 
 def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
+    if CLIENT_ID is None:
+        raise ValueError("OIDC client ID has not been specified.")
+
     # NOTE: we might not want to fetch these jwks on every login?
     jwkclient = jwt.PyJWKClient(config["jwks_uri"])
     signing_key = jwkclient.get_signing_key_from_jwt(token)
