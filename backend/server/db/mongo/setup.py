@@ -365,7 +365,7 @@ def _overwrite_archives():
                 print(f"Failed to load and overwrite {year} archive")
 
 
-def _setup_user_related_collections(drop: bool):
+def setup_user_related_collections(drop: bool):
     """Sets up all the user related collections to store users, refresh tokens and sessions"""
     # tear down if needed
     if drop:
@@ -373,19 +373,19 @@ def _setup_user_related_collections(drop: bool):
         usersDB.drop_collection(USERS_COL_NAME)
         usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
         usersDB.drop_collection(SESSIONS_COL_NAME)
+    else:
+        # try prevent any mismatches of data if not dropped (probably over the top but just in case)
+        existing = usersDB.list_collection_names()
+        if USERS_COL_NAME not in existing and (REFRESH_TOKENS_COL_NAME in existing or SESSIONS_COL_NAME in existing):
+            # make sure there are no sessions or refresh tokens alive that could be pointing to non existent users
+            print("Dropping session related collections because users was not present...")
+            usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
+            usersDB.drop_collection(SESSIONS_COL_NAME)
 
-    # try prevent any mismatches of data if not dropped (probably over the top but just in case)
-    existing = usersDB.list_collection_names()
-    if USERS_COL_NAME not in existing and (REFRESH_TOKENS_COL_NAME in existing or SESSIONS_COL_NAME in existing):
-        # make sure there are no sessions or refresh tokens alive that could be pointing to non existent users
-        print("Dropping session related collections because users was not present...")
-        usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
-        usersDB.drop_collection(SESSIONS_COL_NAME)
-
-    if SESSIONS_COL_NAME not in existing and REFRESH_TOKENS_COL_NAME in existing:
-        # dont want any refresh tokens that point to non existent sessions
-        print("Dropping refresh tokens because it was present without sessions...")
-        usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
+        if SESSIONS_COL_NAME not in existing and REFRESH_TOKENS_COL_NAME in existing:
+            # dont want any refresh tokens that point to non existent sessions
+            print("Dropping refresh tokens because it was present without sessions...")
+            usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
     
     # build up
     # TODO: setup data versioning so we migrate shapes if needed
@@ -402,7 +402,7 @@ def _setup_user_related_collections(drop: bool):
     print("Finished setting up user database")
 
 
-def _overwrite_all_static_data():
+def overwrite_all_static_data():
     """Singular execution point to overwrite the entire main database including the archives"""
     _overwrite_main_collection(COURSES_COL_NAME)
     _overwrite_main_collection(SPECS_COL_NAME)
@@ -413,5 +413,5 @@ def _overwrite_all_static_data():
 def setup_mongo_collections(clear_users=False):
     """Main function to setup all collections"""
     # TODO: setup smart overwrite of static data
-    _setup_user_related_collections(clear_users)
-    _overwrite_all_static_data()
+    setup_user_related_collections(clear_users)
+    overwrite_all_static_data()
