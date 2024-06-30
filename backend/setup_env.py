@@ -1,19 +1,5 @@
 """
 Script built on dotenv to set up the required environment variables
-
-Required functionality:
-
-for env variables such as mongo password, where it lives in both backend env and mongodb env, you only need to input it in once
-if the files already exist, when the user is prompted to enter, suggests them to use the old one instead
-this is because we dont want to accidently overwrite the files and be painful to find the auth env vars again
-certain fields allow for empty input, where it will auto generate
-also can specify as keyword command line arguments for easy use in the ci file
-otherwise if no CL argument or existing, will prompt user to enter each
-Main usecases:
-
-in ci, replaces all the echos
-must leave files that are compatible with ci and docker compose env
-python3 setup_env.py --mongodb-pass="ollipass
 """
 
 from os import write
@@ -30,62 +16,6 @@ BACKEND_ENV: Path = ENV_DIR.joinpath("backend.env")
 FRONTEND_ENV: Path = ENV_DIR.joinpath("frontend.env")
 MONGO_ENV: Path = ENV_DIR.joinpath('mongodb.env')
 SESSIONSDB_ENV: Path = ENV_DIR.joinpath('sessionsdb.env')
-
-"""
-- name of the variable
-- files to insert it in
-- file to read it from
-- default value (if any)
-"""
-
-"""
-Creating Environment Variables
-MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called env and add three files: backend.env, mongodb.env and frontend.env.
-
-In backend.env, add the environment variables:
-
-MONGODB_USERNAME=name
-MONGODB_PASSWORD=name
-MONGODB_SERVICE_HOSTNAME=mongodb
-FOR PRODUCTION, also add:
-
-FORWARDED_ALLOW_IPS=*
-In mongodb.env, add:
-
-MONGO_INITDB_ROOT_USERNAME=name
-MONGO_INITDB_ROOT_PASSWORD=name
-In frontend.env, add:
-
-VITE_BACKEND_API_BASE_URL=http://localhost:8000/
-NOTE: The VITE_BACKEND_API_BASE_URL environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using http://localhost:8000/ as the base url when calling the API endpoint.
-
-You can use any random username and password. The username and password in backend.env must match the values in mongodb.env. The env folder has been added to .giti
-"""
-
-def prompt_variable(name: str, default_value: Optional[str] = None) -> str:
-    if default_value is not None:
-        print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
-        entered_value = input().strip()
-        return entered_value or default_value
-    else:
-        print(f"Enter value for {name}")
-        return input().strip()
-
-def in_production() -> bool:
-    # TODO: get from the args
-
-    return False
-
-def write_env_file(env: dict[str, str], file: Path):
-    print(f"Attempting to write env to {file}")
-    content = "\n".join(
-        f"{key}={value}\n"
-        for key, value in env.items()
-    )
-    with open(file, mode='w') as f:
-        f.write(content)
-
-    print(f"Succesfully wrote {len(env)} items to {file}")
     
 
 def main() -> None:
@@ -160,6 +90,30 @@ def main() -> None:
     write_env_file(sessionsdb_env, SESSIONSDB_ENV)
     print("Done. Exiting Successfully")
 
+def prompt_variable(name: str, default_value: Optional[str] = None) -> str:
+    if default_value is not None:
+        print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
+        entered_value = input().strip()
+        return entered_value or default_value
+    else:
+        print(f"Enter value for {name}")
+        return input().strip()
+
+def in_production() -> bool:
+    # TODO: get from the args
+
+    return False
+
+def write_env_file(env: dict[str, str], file: Path):
+    print(f"Attempting to write env to {file}")
+    content = "\n".join(
+        f"{key}={value}\n"
+        for key, value in env.items()
+    )
+    with open(file, mode='w') as f:
+        f.write(content)
+
+    print(f"Succesfully wrote {len(env)} items to {file}")
 if __name__ == "__main__":
     main()
     pass
