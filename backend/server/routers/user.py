@@ -60,7 +60,6 @@ def save_local_storage(localStorage: LocalStorage, token: str = DUMMY_TOKEN):
     courses: dict[str, CourseStorage] = {
         course: {
             'code': course,
-            'suppressed': False, # guess we will nuke this config
             'mark': None, # wtf we nuking marks?
             'uoc': get_course(course)['UOC'],
             'title': get_course(course)['title'],
@@ -133,10 +132,6 @@ def register_user(token: str):
 
 def default_cs_user() -> Storage:
     planner: PlannerLocalStorage = {
-        'mostRecentPastTerm': {
-            'Y': 0,
-            'T': 0
-        },
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
@@ -165,13 +160,6 @@ def toggle_summer_term(token: str = DUMMY_TOKEN):
             year['T0'] = []
     set_user(token, user, True)
 
-
-@router.put("/toggleWarnings")
-def toggle_warnings(courses: list[str], token: str = DUMMY_TOKEN):
-    user = get_user(token)
-    for course in courses:
-        user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
-    set_user(token, user, True)
 
 @router.put("/updateCourseMark",
             responses={
@@ -256,10 +244,6 @@ def setIsComplete(isComplete: bool, token: str = DUMMY_TOKEN):
 def reset(token: str = DUMMY_TOKEN):
     """Resets user data of a parsed token"""
     planner: PlannerLocalStorage = {
-        'mostRecentPastTerm': {
-            'Y': 0,
-            'T': 0
-        },
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': LIVE_YEAR,
@@ -332,10 +316,6 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, token: str = DUMMY_TOKEN):
     print("Valid specs")
 
     planner: PlannerLocalStorage = {
-        'mostRecentPastTerm': {
-            'Y': 0,
-            'T': 0
-        },
         'unplanned': [],
         'isSummerEnabled': True,
         'startYear': wizard.startYear,

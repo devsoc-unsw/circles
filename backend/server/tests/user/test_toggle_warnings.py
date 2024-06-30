@@ -38,7 +38,6 @@ def test_toggleWarningMultiple():
     #     'http://127.0.0.1:8000/planner/validateTermPlanner', json={
     #         'programCode': data.json()['degree']['programCode'],
     #         'specialisations': data.json()['degree']['specs'],
-    #         'mostRecentPastTerm': { 'Y': 0, 'T': 0 },
     #         'plan': plan
     #     })
     # assert any(not c['unlocked'] for c in x.json()['courses_state'].values())
@@ -50,7 +49,6 @@ def test_toggleWarningMultiple():
     #     'http://127.0.0.1:8000/planner/validateTermPlanner', json={
     #         'programCode': data.json()['degree']['programCode'],
     #         'specialisations': data.json()['degree']['specs'],
-    #         'mostRecentPastTerm': { 'Y': 1, 'T': 0 },
     #         'plan': plan
     #     })
     # assert all(c['unlocked'] for c in x.json()['courses_state'].values())

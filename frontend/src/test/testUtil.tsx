@@ -28,7 +28,7 @@ export const renderWithProviders = async (
         theme: 'dark',
         showMarks: false,
         showLockedCourses: false,
-        showWarnings: false,
+        showPastWarnings: false,
         token: ''
       }
     },
