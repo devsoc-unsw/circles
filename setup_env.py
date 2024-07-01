@@ -92,7 +92,6 @@ def main() -> None:
     print("Finished writing all env files. Exiting successfully")
 
 class EnvReader():
-
     def __init__(self, *, env_files: list[Path]) -> None:
         cli_args = vars(parse_cli_args())
 
@@ -101,7 +100,6 @@ class EnvReader():
             k: str(v) for k, v in cli_args.items() if v is not None
         }
 
-        print("in prod", self.in_production)
         self.preexisting_env: dict[str, str] = {}
 
         for env_file in env_files:
@@ -124,7 +122,7 @@ class EnvReader():
             except EOFError:
                 return ""
 
-        if (default_value := self.preexisting_env.get(name)) is not None:
+        if (default_value := self.preexisting_env.get(name, default)) is not None:
             print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
             entered_value = read_input()
             return entered_value or default_value
@@ -149,15 +147,6 @@ def parse_cli_args() -> argparse.Namespace:
 
     return parser.parse_args()
 
-
-def prompt_variable(name: str, default_value: Optional[str] = None) -> str:
-    if default_value is not None:
-        print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
-        entered_value = input().strip()
-        return entered_value or default_value
-    else:
-        print(f"Enter value for {name}")
-        return input().strip()
 
 def write_env_file(env: dict[str, str], file: Path):
     print(f"Attempting to write env to {file}")
