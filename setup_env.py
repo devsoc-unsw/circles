@@ -3,14 +3,14 @@ Script built on dotenv to set up the required environment variables
 """
 
 import argparse
-from os import write
 import os
 from pathlib import Path
 from typing import Any, Optional
 
 import dotenv
 
-# Assumes this file is in `/`
+# Assuming the file is in `/`, allows this to be run from anywhere and
+# not worry about relative paths / the user's CWD
 PROJECT_ROOT: Path = Path(__file__).parent
 ENV_DIR: Path = PROJECT_ROOT.joinpath('env')
 
@@ -19,8 +19,8 @@ FRONTEND_ENV: Path = ENV_DIR.joinpath("frontend.env")
 MONGO_ENV: Path = ENV_DIR.joinpath('mongodb.env')
 SESSIONSDB_ENV: Path = ENV_DIR.joinpath('sessionsdb.env')
 
-def main() -> None:
 
+def main() -> None:
     cli_args = vars(parse_cli_args())
     if bool(cli_args.get("clean")):
         for file in ENV_DIR.iterdir():
@@ -185,5 +185,6 @@ def write_env_file(env: dict[str, Optional[str]], file: Path):
         f.write(content)
 
     print(f"Successfully wrote {len(env)} items to {file}")
+
 if __name__ == "__main__":
     main()
