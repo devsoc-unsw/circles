@@ -9,8 +9,8 @@ from typing import Optional
 
 import dotenv
 
-# Assumes this file is in `/backend/setup_env.py`
-PROJECT_ROOT: Path = Path(__file__).parent.parent
+# Assumes this file is in `/`
+PROJECT_ROOT: Path = Path(__file__).parent
 ENV_DIR: Path = PROJECT_ROOT.joinpath('env')
 
 BACKEND_ENV: Path = ENV_DIR.joinpath("backend.env")
