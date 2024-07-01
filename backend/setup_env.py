@@ -2,13 +2,12 @@
 Script built on dotenv to set up the required environment variables
 """
 
+import argparse
 from os import write
 from pathlib import Path
-from typing import Any, Literal, Optional
+from typing import Optional
 
-from click import Option
 import dotenv
-import argparse
 
 # Assumes this file is in `/backend/setup_env.py`
 PROJECT_ROOT: Path = Path(__file__).parent.parent
@@ -21,7 +20,6 @@ SESSIONSDB_ENV: Path = ENV_DIR.joinpath('sessionsdb.env')
     
 
 def main() -> None:
-    # TODO: also accept CLI arguments
     if not ENV_DIR.exists():
         ENV_DIR.mkdir()
 
@@ -62,7 +60,7 @@ def main() -> None:
     python_version = env.get_variable("PYTHON_VERSION", "python3")
     backend_env["PYTHON_VERSION"] = python_version
 
-    if in_production():
+    if env.in_production:
         backend_env["FORWARDED_ALLOWED_IPS"] = "*"
 
     # mongodb - backend + mongodb
@@ -96,12 +94,12 @@ def main() -> None:
 class EnvReader():
 
     def __init__(self, *, env_files: list[Path]) -> None:
-        cli_args = parse_cli_args()
+        cli_args = vars(parse_cli_args())
 
+        self.in_production = bool(cli_args.get("prod"))
         self.cli_args: dict[str, str] = {
-            k: str(v) for k, v in vars(cli_args).items() if v is not None
+            k: str(v) for k, v in cli_args.items() if v is not None
         }
-        self.in_production = self.cli_args.get("production") == str(True)
 
         print("in prod", self.in_production)
         self.preexisting_env: dict[str, str] = {}
@@ -127,7 +125,6 @@ class EnvReader():
         else:
             print(f"Enter value for {name}")
             return input().strip()
-
 
 def parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Set up env/ folder and required env files")
@@ -155,11 +152,6 @@ def prompt_variable(name: str, default_value: Optional[str] = None) -> str:
     else:
         print(f"Enter value for {name}")
         return input().strip()
-
-def in_production() -> bool:
-    # TODO: get from the args
-
-    return False
 
 def write_env_file(env: dict[str, str], file: Path):
     print(f"Attempting to write env to {file}")
