@@ -4,8 +4,9 @@ Script built on dotenv to set up the required environment variables
 
 import argparse
 from os import write
+import os
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import dotenv
 
@@ -19,10 +20,17 @@ MONGO_ENV: Path = ENV_DIR.joinpath('mongodb.env')
 SESSIONSDB_ENV: Path = ENV_DIR.joinpath('sessionsdb.env')
 
 def main() -> None:
+
+    cli_args = vars(parse_cli_args())
+    if bool(cli_args.get("clean")):
+        for file in ENV_DIR.iterdir():
+            os.remove(file)
+        os.rmdir(ENV_DIR)
+
     if not ENV_DIR.exists():
         ENV_DIR.mkdir()
 
-    env = EnvReader(env_files=[BACKEND_ENV, FRONTEND_ENV, SESSIONSDB_ENV])
+    env = EnvReader(env_files=[BACKEND_ENV, FRONTEND_ENV, SESSIONSDB_ENV], cli_args=cli_args)
 
     backend_env: dict[str, Optional[str]] = {}
     frontend_env: dict[str, Optional[str]] = {}
@@ -91,9 +99,7 @@ def main() -> None:
     print("Finished writing all env files. Exiting successfully")
 
 class EnvReader():
-    def __init__(self, *, env_files: list[Path]) -> None:
-        cli_args = vars(parse_cli_args())
-
+    def __init__(self, *, env_files: list[Path], cli_args: dict[str, Any]) -> None:
         self.in_production = bool(cli_args.get("prod"))
         self.default_mode = bool(cli_args.get("default"))
         self.cli_args: dict[str, str] = {
@@ -152,6 +158,11 @@ def parse_cli_args() -> argparse.Namespace:
         "--default",
         action="store_true",
         help="Don't read from stdin and use only the default values"
+    )
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="Force remove the pre-existing env folder if it exists. Do not use old env values as a fallback"
     )
 
     return parser.parse_args()
