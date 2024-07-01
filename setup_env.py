@@ -25,10 +25,10 @@ def main() -> None:
 
     env = EnvReader(env_files=[BACKEND_ENV, FRONTEND_ENV, SESSIONSDB_ENV])
 
-    backend_env: dict[str, str] = {}
-    frontend_env: dict[str, str] = {}
-    mongo_env: dict[str, str] = {}
-    sessionsdb_env: dict[str, str] = {}
+    backend_env: dict[str, Optional[str]] = {}
+    frontend_env: dict[str, Optional[str]] = {}
+    mongo_env: dict[str, Optional[str]] = {}
+    sessionsdb_env: dict[str, Optional[str]] = {}
 
     # sessionsdb - backend
     sessionsdb_username = env.get_variable('SESSIONSDB_USERNAME', "name")
@@ -36,8 +36,8 @@ def main() -> None:
     sessionsdb_hostname = env.get_variable("SESSIONSDB_SERVICE_HOSTNAME", "sessionsdb")
 
     # cse auth - backend
-    auth_cse_client_id = env.get_variable("AUTH_CSE_CLIENT_ID", "...")
-    auth_cse_client_secret = env.get_variable("AUTH_CSE_CLIENT_SECRET", "...")
+    auth_cse_client_id = env.get_variable("AUTH_CSE_CLIENT_ID", None)
+    auth_cse_client_secret = env.get_variable("AUTH_CSE_CLIENT_SECRET", None)
     auth_cse_redirect_base_uri = env.get_variable("AUTH_REDIRECT_BASE_URI", "http://localhost:3000")
 
     backend_env["AUTH_CSE_CLIENT_ID"] = auth_cse_client_id
@@ -85,10 +85,10 @@ def main() -> None:
     frontend_env["VITE_ENV"] = vite_env
 
     # Finished reading - save all changes
-    write_env_file(backend_env, BACKEND_ENV)
-    write_env_file(frontend_env, FRONTEND_ENV)
-    write_env_file(mongo_env, MONGO_ENV)
-    write_env_file(sessionsdb_env, SESSIONSDB_ENV)
+    write_env_file(backend_env, BACKEND_ENV, require_complete=True)
+    write_env_file(frontend_env, FRONTEND_ENV, require_complete=False)
+    write_env_file(mongo_env, MONGO_ENV, require_complete=False)
+    write_env_file(sessionsdb_env, SESSIONSDB_ENV, require_complete=True)
     print("Finished writing all env files. Exiting successfully")
 
 class EnvReader():
@@ -110,24 +110,25 @@ class EnvReader():
             }
             self.preexisting_env.update(parsed_env)
 
-    def get_variable(self, name: str, default: Optional[str] = None) -> str:
+    def get_variable(self, name: str, default: Optional[str] = None) -> Optional[str]:
         # CLI arguments have highest priority. If provided, dont ask for value
         if (value_from_cli := self.cli_args.get(name.lower())) is not None:
             print(f"Successfully read value from args. Using {name}={value_from_cli}")
             return value_from_cli
 
-        def read_input():
+        def read_input() -> Optional[str]:
             try:
-                return input().strip()
+                entered_line = input().strip()
+                return None if not entered_line else entered_line
             except EOFError:
-                return ""
+                return None
 
         if (default_value := self.preexisting_env.get(name, default)) is not None:
             print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
             entered_value = read_input()
             return entered_value or default_value
         else:
-            print(f"Enter value for {name}")
+            print(f"Enter value for {name} (press [enter] to skip)")
             return read_input()
 
 def parse_cli_args() -> argparse.Namespace:
@@ -148,11 +149,30 @@ def parse_cli_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def write_env_file(env: dict[str, str], file: Path):
+def write_env_file(env: dict[str, Optional[str]], file: Path, *, require_complete: bool):
+    """
+    Tries to write `env` to `file` in the `.env` format.
+    Skips any `None` valued elements.
+
+    If `required_complete` is `True`, then we only write if ALL values
+    are present.
+    """
     print(f"Attempting to write env to {file}")
+
+    if require_complete:
+        missing_values = [k for k, v in env.items() if v is None]
+        if missing_values and missing_values == len(env):
+            print(f"No values given. Skipping write of {file}")
+            return
+        if missing_values and missing_values != len(env):
+            print(f"ERROR writing env to {file}. Require all or no keys to be populated.")
+            print(f"The following {len(missing_values)} keys were required but not provided: {missing_values}")
+            return
+
     content = "\n".join(
         f"{key}={value}\n"
         for key, value in env.items()
+        if value is not None
     )
     with open(file, mode='w') as f:
         f.write(content)
