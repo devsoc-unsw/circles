@@ -92,10 +92,10 @@ def main() -> None:
     frontend_env["VITE_ENV"] = vite_env
 
     # Finished reading - save all changes
-    write_env_file(backend_env, BACKEND_ENV, require_complete=True)
-    write_env_file(frontend_env, FRONTEND_ENV, require_complete=False)
-    write_env_file(mongo_env, MONGO_ENV, require_complete=False)
-    write_env_file(sessionsdb_env, SESSIONSDB_ENV, require_complete=True)
+    write_env_file(backend_env, BACKEND_ENV)
+    write_env_file(frontend_env, FRONTEND_ENV)
+    write_env_file(mongo_env, MONGO_ENV)
+    write_env_file(sessionsdb_env, SESSIONSDB_ENV)
     print("Finished writing all env files. Exiting successfully")
 
 class EnvReader():
@@ -168,25 +168,13 @@ def parse_cli_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def write_env_file(env: dict[str, Optional[str]], file: Path, *, require_complete: bool):
+def write_env_file(env: dict[str, Optional[str]], file: Path):
     """
     Tries to write `env` to `file` in the `.env` format.
     Skips any `None` valued elements.
-
-    If `required_complete` is `True`, then we only write if ALL values
-    are present.
     """
-    print(f"Attempting to write env to {file}")
 
-    if require_complete:
-        missing_values = [k for k, v in env.items() if v is None]
-        if missing_values and missing_values == len(env):
-            print(f"No values given. Skipping write of {file}")
-            return
-        if missing_values and missing_values != len(env):
-            print(f"ERROR writing env to {file}. Require all or no keys to be populated.")
-            print(f"The following {len(missing_values)} keys were required but not provided: {missing_values}")
-            return
+    print(f"Attempting to write env to {file}")
 
     content = "\n".join(
         f"{key}={value}\n"
