@@ -33,7 +33,7 @@ def main() -> None:
     # sessionsdb - backend
     sessionsdb_username = env.get_variable('SESSIONSDB_USERNAME', "name")
     sessionsdb_pass = env.get_variable('SESSIONSDB_PASSWORD', "pass123")
-    sessionsdb_hostname = env.get_variable("SESSIONSDB_SERVICE_HOSTNAME", "sessiondb")
+    sessionsdb_hostname = env.get_variable("SESSIONSDB_SERVICE_HOSTNAME", "sessionsdb")
 
     # cse auth - backend
     auth_cse_client_id = env.get_variable("AUTH_CSE_CLIENT_ID", "...")
