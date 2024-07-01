@@ -9,7 +9,7 @@ from fastapi import APIRouter, HTTPException
 
 from data.config import LIVE_YEAR
 from server.config import DUMMY_TOKEN
-from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, Storage
+from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseMark, CourseState, CoursesState, DegreeLength, DegreeLocalStorage, LocalStorage, Mark, PlannerLocalStorage, StartYear, Storage
 from server.database import usersDB
 from server.routers.courses import get_course
 from server.routers.model import (
@@ -200,22 +200,22 @@ def update_course_mark(courseMark: CourseMark, token: str = DUMMY_TOKEN):
 
 
 @router.put("/updateStartYear")
-def update_start_year(startYear: int, token: str = DUMMY_TOKEN):
+def update_start_year(startYear: StartYear, token: str = DUMMY_TOKEN):
     """
         Update the start year the user is taking.
         The degree length stays the same and the contents are shifted to fit the new start year.
     """
     user = get_user(token)
-    user['planner']['startYear'] = startYear
+    user['planner']['startYear'] = startYear.startYear
     set_user(token, user, True)
 
 
 @router.put("/updateDegreeLength")
-def update_degree_length(numYears: int, token: str = DUMMY_TOKEN):
+def update_degree_length(degreeLength: DegreeLength, token: str = DUMMY_TOKEN):
     user = get_user(token)
-    if len(user['planner']['years']) == numYears:
+    if len(user['planner']['years']) == degreeLength.numYears:
         return
-    diff = numYears - len(user['planner']['years'])
+    diff = degreeLength.numYears - len(user['planner']['years'])
     if diff > 0:
         user['planner']['years'] += ([{"T0": [],
                                      "T1": [], "T2": [], "T3": []}] * diff)
