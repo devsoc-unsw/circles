@@ -168,7 +168,7 @@ def write_env_file(env: dict[str, str], file: Path):
     with open(file, mode='w') as f:
         f.write(content)
 
-    print(f"Succesfully wrote {len(env)} items to {file}")
+    print(f"Successfully wrote {len(env)} items to {file}")
 if __name__ == "__main__":
     main()
     pass
