@@ -171,4 +171,3 @@ def write_env_file(env: dict[str, str], file: Path):
     print(f"Successfully wrote {len(env)} items to {file}")
 if __name__ == "__main__":
     main()
-    pass
