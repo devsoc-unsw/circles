@@ -118,13 +118,19 @@ class EnvReader():
             print(f"Successfully read value from args. Using {name}={value_from_cli}")
             return value_from_cli
 
+        def read_input():
+            try:
+                return input().strip()
+            except EOFError:
+                return ""
+
         if (default_value := self.preexisting_env.get(name)) is not None:
             print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
-            entered_value = input().strip()
+            entered_value = read_input()
             return entered_value or default_value
         else:
             print(f"Enter value for {name}")
-            return input().strip()
+            return read_input()
 
 def parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Set up env/ folder and required env files")
