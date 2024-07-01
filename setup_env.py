@@ -17,7 +17,6 @@ BACKEND_ENV: Path = ENV_DIR.joinpath("backend.env")
 FRONTEND_ENV: Path = ENV_DIR.joinpath("frontend.env")
 MONGO_ENV: Path = ENV_DIR.joinpath('mongodb.env')
 SESSIONSDB_ENV: Path = ENV_DIR.joinpath('sessionsdb.env')
-    
 
 def main() -> None:
     if not ENV_DIR.exists():
@@ -96,6 +95,7 @@ class EnvReader():
         cli_args = vars(parse_cli_args())
 
         self.in_production = bool(cli_args.get("prod"))
+        self.default_mode = bool(cli_args.get("default"))
         self.cli_args: dict[str, str] = {
             k: str(v) for k, v in cli_args.items() if v is not None
         }
@@ -117,6 +117,8 @@ class EnvReader():
             return value_from_cli
 
         def read_input() -> Optional[str]:
+            if self.default_mode:
+                return None
             try:
                 entered_line = input().strip()
                 return None if not entered_line else entered_line
@@ -145,6 +147,12 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--additional_redis_args", type=str)
     parser.add_argument("--python_version", type=str)
     parser.add_argument("--prod", "--production", action="store_true")
+
+    parser.add_argument(
+        "--default",
+        action="store_true",
+        help="Don't read from stdin and use only the default values"
+    )
 
     return parser.parse_args()
 
