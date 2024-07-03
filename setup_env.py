@@ -71,8 +71,8 @@ def main() -> None:
         backend_env["FORWARDED_ALLOWED_IPS"] = "*"
 
     # mongodb - backend + mongodb
-    mongo_username = env.get_variable('MONGODB_USERNAME', "name")
-    mongo_pass = env.get_variable('MONGODB_PASSWORD', "pass123")
+    mongo_username = env.get_variable("MONGODB_USERNAME", "name")
+    mongo_pass = env.get_variable("MONGODB_PASSWORD", "pass123")
     mongo_hostname = env.get_variable("MONGODB_SERVICE_HOSTNAME", "mongodb")
 
     backend_env["MONGODB_USERNAME"] = mongo_username
@@ -153,6 +153,8 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--python_version", type=str)
     parser.add_argument("--prod", "--production", action="store_true")
 
+    parser.add_argument("--MONGODB_USERNAME", type=str)
+    parser.add_argument("--MONGODB_PASSWORD", type=str)
     parser.add_argument("--mongodb_service_hostname", type=str)
 
     parser.add_argument(
