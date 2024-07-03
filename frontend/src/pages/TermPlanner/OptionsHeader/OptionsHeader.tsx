@@ -28,9 +28,7 @@ const OptionsHeader = () => {
   const planner = plannerQuery.data;
 
   const { theme } = useSelector((state: RootState) => state.settings);
-  const { showMarks, showPastWarnings: showWarnings } = useSelector(
-    (state: RootState) => state.settings
-  );
+  const { showMarks, showPastWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const iconStyles = {
     fontSize: '20px',
@@ -132,7 +130,7 @@ const OptionsHeader = () => {
             <WarningFilled
               style={{
                 ...iconStyles,
-                ...(showWarnings && { color: theme === 'light' ? '#9254de' : '#c198ef' })
+                ...(showPastWarnings && { color: theme === 'light' ? '#9254de' : '#c198ef' })
               }}
             />
           </S.OptionButton>

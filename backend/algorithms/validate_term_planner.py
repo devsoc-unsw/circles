@@ -12,9 +12,9 @@ def validate_terms(data: ValidPlannerData):
     # State of courses on the term planner
     coursesState = {}
 
-    for yearIndex, year in enumerate(data.plan):
+    for year in data.plan:
         # Go through all the years
-        for termIndex, term in enumerate(year):
+        for term in year:
             user.add_current_courses(term)
 
             for course in term:
