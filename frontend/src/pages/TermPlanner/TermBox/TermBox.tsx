@@ -104,7 +104,7 @@ const TermBox = ({
         {(provided) => (
           <Badge
             count={
-              <S.TermCheckboxWrapper checked={isLocked}>
+              <S.TermCheckboxWrapper $checked={isLocked}>
                 {!isLocked ? (
                   <UnlockFilled style={iconStyle} onClick={handleToggleLockTerm} />
                 ) : (
