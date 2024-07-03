@@ -30,7 +30,7 @@ def main() -> None:
     if not ENV_DIR.exists():
         ENV_DIR.mkdir()
 
-    env = EnvReader(env_files=[BACKEND_ENV, FRONTEND_ENV, SESSIONSDB_ENV], cli_args=cli_args)
+    env = EnvReader(env_files=[BACKEND_ENV, FRONTEND_ENV, SESSIONSDB_ENV, MONGO_ENV], cli_args=cli_args)
 
     backend_env: dict[str, Optional[str]] = {}
     frontend_env: dict[str, Optional[str]] = {}
@@ -153,6 +153,8 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--python_version", type=str)
     parser.add_argument("--prod", "--production", action="store_true")
 
+    parser.add_argument("--mongodb_service_hostname", type=str)
+
     parser.add_argument(
         "--default",
         action="store_true",
@@ -163,6 +165,7 @@ def parse_cli_args() -> argparse.Namespace:
         action="store_true",
         help="Force remove the pre-existing env folder if it exists. Do not use old env values as a fallback"
     )
+
 
     return parser.parse_args()
 
