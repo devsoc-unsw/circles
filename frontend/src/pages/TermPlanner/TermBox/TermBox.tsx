@@ -104,7 +104,7 @@ const TermBox = ({
         {(provided) => (
           <Badge
             count={
-              <S.TermCheckboxWrapper checked={isLocked}>
+              <S.TermCheckboxWrapper $checked={isLocked}>
                 {!isLocked ? (
                   <UnlockFilled style={iconStyle} onClick={handleToggleLockTerm} />
                 ) : (
@@ -116,9 +116,9 @@ const TermBox = ({
             styles={{ root: { width: 'unset' } }}
           >
             <S.TermBoxWrapper
-              droppable={isOffered && !!draggingCourseCode}
-              summerEnabled={isSummerEnabled}
-              isSmall={isSmall}
+              $droppable={isOffered && !!draggingCourseCode}
+              $summerEnabled={isSummerEnabled}
+              $isSmall={isSmall}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

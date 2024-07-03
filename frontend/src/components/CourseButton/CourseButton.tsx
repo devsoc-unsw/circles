@@ -21,7 +21,7 @@ const CourseButton = ({ courseCode, title, planned }: Props) => {
   };
 
   return (
-    <S.CourseButton planned={planned} type="primary" onClick={handleCourseLink}>
+    <S.CourseButton $planned={planned} type="primary" onClick={handleCourseLink}>
       {courseCode}: {title}
     </S.CourseButton>
   );

@@ -79,7 +79,7 @@ const CourseDescriptionPanel = ({
   });
 
   const loadingWrapper = (
-    <S.Wrapper sidebar={sidebar}>
+    <S.Wrapper $sidebar={sidebar}>
       {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
     </S.Wrapper>
   );
@@ -94,9 +94,9 @@ const CourseDescriptionPanel = ({
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
   return (
-    <S.Wrapper sidebar={sidebar} className={className}>
+    <S.Wrapper $sidebar={sidebar} className={className}>
       <S.MainWrapper>
-        <S.TitleWrapper sidebar={sidebar}>
+        <S.TitleWrapper $sidebar={sidebar}>
           <div>
             <Title level={2} className="text">
               {courseCode} - {course.title}
