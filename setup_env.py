@@ -153,8 +153,8 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--python_version", type=str)
     parser.add_argument("--prod", "--production", action="store_true")
 
-    parser.add_argument("--MONGODB_USERNAME", type=str)
-    parser.add_argument("--MONGODB_PASSWORD", type=str)
+    parser.add_argument("--mongodb_username", type=str)
+    parser.add_argument("--mongodb_password", type=str)
     parser.add_argument("--mongodb_service_hostname", type=str)
 
     parser.add_argument(
