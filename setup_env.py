@@ -83,7 +83,6 @@ def main() -> None:
     mongo_env["MONGO_INITDB_ROOT_PASSWORD"] = mongo_pass
 
 
-
     # frontend
     vite_backend_base_url = env.get_variable("VITE_BACKEND_API_BASE_URL", "http://localhost:8000/")
     vite_env = env.get_variable("VITE_ENV", "dev")
