@@ -21,6 +21,8 @@ In `backend.env`, add the environment variables:
 wherever you see "name", the value is not actually important.
 
 FOR **PRODUCTION**, also add:
+- `AUTH_CSE_CLIENT_SECRET=********` (redacted, contact CSE or one of the faculty societies for this secret)
+- `AUTH_CSE_CLIENT_ID=********` (redacted, contact CSE or one of the faculty societies for this secret)
 - `FORWARDED_ALLOW_IPS=*`
 
 In `mongodb.env`, add:
@@ -40,9 +42,6 @@ In `frontend.env`, add:
 
 > NOTE: The `VITE_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `http://localhost:8000/` as the base url when calling the API endpoint.
 
-FOR **PRODUCTION**, also add:
-- AUTH_CSE_CLIENT_SECRET=******** (redacted, contact CSE or one of the faculty societies for this secret)
-- AUTH_CSE_CLIENT_ID=******** (redacted, contact CSE or one of the faculty societies for this secret)
 
 You can use any random username and password wherever `name` has been used. The username and password in `backend.env` must match the values in `mongodb.env`, as indicated. The `env` folder has been added to `.gitignore` and will not be committed to the repo.
 
