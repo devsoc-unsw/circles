@@ -41,13 +41,13 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
 
   const currentTerm = getMostRecentPastTerm(CURR_YEAR).T;
 
-  const recentTermNumber = parseInt(terms[0].slice(1), 10);
-
-  const termMod = termMapping[recentTermNumber];
+  const recentTermNumber = terms?.length ? parseInt(terms[0].slice(1), 10) : currentTerm;
 
   const yearCourseAvaliable = recentTermNumber > currentTerm ? CURR_YEAR - 1 : CURR_YEAR;
 
   const updatedTerm = recentTermNumber > currentTerm ? recentTermNumber : currentTerm;
+
+  const termMod = termMapping[updatedTerm];
 
   const termTags = terms?.length
     ? terms.map((term) => {
