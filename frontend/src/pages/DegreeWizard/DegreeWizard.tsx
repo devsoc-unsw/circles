@@ -87,7 +87,7 @@ const DegreeWizard = () => {
   };
 
   return (
-    <PageTemplate showHeader={false}>
+    <PageTemplate showHeader={false} showBugButton={false}>
       <S.ContainerWrapper>
         <ResetModal
           open={isComplete}

@@ -261,23 +261,25 @@ class WAMCondition(Condition):
         return False
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        """
-        Determines if the user has met the WAM condition for this category.
+        wam, marks_complete = user.wam(self.category)
+        warning = self.get_warning(wam, marks_complete)
 
-        Will always return False and a warning since WAM can fluctuate
-        """
-        warning = self.get_warning(user.wam(self.category))
-        return True, [warning]
+        # If the user has not entered their marks, we allow the course to be unlocked and just display warning as info instead
+        return not marks_complete or warning is None, [warning] if warning is not None else []
 
-    def get_warning(self, applicable_wam: Optional[float]) -> str:
+    def get_warning(self, wam: Optional[float], marks_complete: bool) -> str | None:
         """ Returns an appropriate warning message or None if not needed """
         category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
         wam_warning = f"Requires {self.wam} WAM in {category}. "
-        if applicable_wam is None:
+        if not marks_complete:
             return f"{wam_warning} Your WAM in {category} has not been recorded"
-        if applicable_wam >= self.wam:
+
+        # Any string returned here should be a warning (i.e. course is not unlocked)
+        if wam is None:
             return wam_warning
-        return f"{wam_warning} Your WAM in {category} is currently {applicable_wam:.3f}"
+        if wam >= self.wam:
+            return None
+        return f"{wam_warning} Your WAM in {category} is currently {wam:.3f}"
 
     def condition_to_model(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         # straight up true or false if the user's current wam supports the course
@@ -364,7 +366,11 @@ class CoresCondition(Condition):
             # if you can never match the core, gg
             return [model.AddBoolAnd(False)]
         # else we find the relevant courses and assert that they need to happen first
-        return [model.Add(get_variable(courses, course) < course_variable) for course in relevant_courses]
+        return [
+            model.Add(var < course_variable)
+            for course in relevant_courses
+            if (var := get_variable(courses, course)) is not None
+        ]
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         course_names = [var[0].Name() for var in courses]
@@ -373,8 +379,16 @@ class CoresCondition(Condition):
             # if you cant match the core, youre good
             return [model.AddBoolAnd(True)]
 
-        or_constraints: list[cp_model.Constraint] = [model.Add(get_variable(courses, course) >= course_variable) for course in relevant_courses]
-        or_opposite_constraints: list[cp_model.Constraint] = [model.Add(get_variable(courses, course) < course_variable) for course in relevant_courses]
+        or_constraints: list[cp_model.Constraint] = [
+            model.Add(var >= course_variable)
+            for course in relevant_courses
+            if (var := get_variable(courses, course)) is not None
+        ]
+        or_opposite_constraints: list[cp_model.Constraint] = [
+            model.Add(var < course_variable)
+            for course in relevant_courses
+            if (var := get_variable(courses, course)) is not None
+        ]
         boolean_vars = [model.NewBoolVar("hi") for _ in or_constraints]
         for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
             # b is a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
@@ -481,7 +495,7 @@ class CourseExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
 
-        is_valid = not user.has_taken_specific_course(self.course)
+        is_valid = not (user.has_taken_specific_course(self.course) or user.is_taking_specific_course(self.course))
         return is_valid, ([] if is_valid else [f"Exclusion: {self.course}"])
 
     def is_path_to(self, course: str) -> bool:

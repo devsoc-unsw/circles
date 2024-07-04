@@ -19,13 +19,15 @@ export const getCourseForYearsInfo = async (
   courseId: string,
   years: number[]
 ): Promise<Record<number, Course>> => {
-  const promises = await Promise.all(
+  const promises = await Promise.allSettled(
     years.map((year) => axios.get<Course>(`courses/getLegacyCourse/${year}/${courseId}`))
   );
-  const legacy: Record<number, Course> = years.reduce(
-    (prev, year, index) => ({ ...prev, [year]: promises[index].data }),
-    {}
-  );
+  const legacy: Record<number, Course> = {};
+  promises.forEach((promise, index) => {
+    if (promise.status === 'fulfilled') {
+      legacy[years[index]] = promise.value.data;
+    }
+  });
   const current = (await axios.get<Course>(`courses/getCourse/${courseId}`)).data;
   legacy[LIVE_YEAR] = current;
   return legacy;

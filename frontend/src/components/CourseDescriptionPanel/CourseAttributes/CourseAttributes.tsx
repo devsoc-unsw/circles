@@ -15,6 +15,7 @@ import S from './styles';
 const { Title, Text } = Typography;
 
 const termMapping: Record<number, string> = {
+  0: 'Summer',
   1: 'Term%201',
   2: 'Term%202',
   3: 'Term%203'
@@ -194,7 +195,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                 <p>Overall</p>
               </div>
               <S.Link
-                href={`https://unilectives.csesoc.app/course/${code}/`}
+                href={`https://unilectives.devsoc.app/course/${code}/`}
                 target="_blank"
                 rel="noreferrer"
               >

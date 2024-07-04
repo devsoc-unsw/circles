@@ -24,12 +24,12 @@ const CourseMenuTitle = ({ courseCode, runMutate, selected, accurate, unlocked, 
     <S.Wrapper>
       {isSmall ? (
         <Tooltip title={title} placement="topLeft">
-          <S.CourseTitleWrapper selected={selected} locked={locked}>
+          <S.CourseTitleWrapper $selected={selected} $locked={locked}>
             {courseCode}
           </S.CourseTitleWrapper>
         </Tooltip>
       ) : (
-        <S.CourseTitleWrapper selected={selected} locked={locked}>
+        <S.CourseTitleWrapper $selected={selected} $locked={locked}>
           {courseCode}: {title}
         </S.CourseTitleWrapper>
       )}
