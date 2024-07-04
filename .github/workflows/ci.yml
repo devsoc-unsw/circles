@@ -36,10 +36,19 @@ jobs:
           mkdir env
           echo "MONGODB_USERNAME=github-ci" >> env/backend.env
           echo "MONGODB_PASSWORD=github-ci" >> env/backend.env
+          echo "SESSIONSDB_USERNAME=github-ci" >> env/backend.env
+          echo "SESSIONSDB_PASSWORD=github-ci" >> env/backend.env
           echo "MONGODB_SERVICE_HOSTNAME=mongodb" >> env/backend.env
+
           echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
           echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
+
           echo "VITE_BACKEND_API_BASE_URL=http://localhost:8000/" >> env/frontend.env
+
+          echo REDIS_USERNAME=github-ci >> env/sessionsdb.env
+          echo REDIS_PASSWORD=github-ci >> env/sessionsdb.env
+          echo REDIS_ARGS="--user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* allcommands" >> env/sessionsdb.env
+
           docker compose run ci-backend
       - name: Run mypy checks
         run: cd backend && python -m mypy . && cd ..
@@ -78,8 +87,17 @@ jobs:
           mkdir env
           echo "MONGODB_USERNAME=github-ci" >> env/backend.env
           echo "MONGODB_PASSWORD=github-ci" >> env/backend.env
+          echo "SESSIONSDB_USERNAME=github-ci" >> env/backend.env
+          echo "SESSIONSDB_PASSWORD=github-ci" >> env/backend.env
           echo "MONGODB_SERVICE_HOSTNAME=mongodb" >> env/backend.env
+
           echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
           echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
+
           echo "VITE_BACKEND_API_BASE_URL=http://localhost:8000/" >> env/frontend.env
+
+          echo REDIS_USERNAME=github-ci >> env/sessionsdb.env
+          echo REDIS_PASSWORD=github-ci >> env/sessionsdb.env
+          echo REDIS_ARGS="--user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* allcommands" >> env/sessionsdb.env
+
           docker compose up -d frontend-prod
