@@ -8,7 +8,8 @@ import {
   EditFilled,
   InfoCircleFilled,
   PieChartFilled,
-  PieChartOutlined
+  PieChartOutlined,
+  StarOutlined
 } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { removeCourse, toggleIgnoreFromProgression, unscheduleCourse } from 'utils/api/plannerApi';
@@ -58,6 +59,10 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
     ignoreFromProgressionMutation.mutate(code);
   };
 
+  const handleUnilective = () => {
+    window.open(`https://unilectives.devsoc.app/course/${code}`, '_blank');
+  };
+
   const iconStyle = {
     fontSize: '14px',
     marginRight: '5px'
@@ -94,6 +99,9 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
         )}
         <Item onClick={handleInfo}>
           <InfoCircleFilled style={iconStyle} /> View Info
+        </Item>
+        <Item onClick={handleUnilective}>
+          <StarOutlined style={iconStyle} /> View on unilectives
         </Item>
       </Menu>
       <EditMarkModal code={code} open={openModal} onCancel={() => setOpenModal(false)} />
