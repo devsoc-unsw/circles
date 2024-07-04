@@ -138,9 +138,5 @@ def assert_autoplanning_guarantees(uoc_max: list[int], courses: list[Course], pr
     assert all(course_state['is_accurate'] for course_state in validate_terms(ValidPlannerData(
         programCode="3778",
         specialisations=["COMPA1"],
-        mostRecentPastTerm={
-            "Y": 1,
-            "T": 0
-        },
         plan=plan
     )).values())

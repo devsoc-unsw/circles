@@ -16,7 +16,6 @@ export type DegreeResponse = {
 
 export type CourseResponse = {
   code: string;
-  suppressed: boolean;
   mark: Mark;
   plannedFor: string | null;
   unlocked: boolean;
@@ -32,7 +31,6 @@ export type ValidateResponse = {
   handbook_note: string;
   unlocked: boolean;
   warnings: string[];
-  suppressed: boolean;
 };
 
 export type ValidatesResponse = {
@@ -40,7 +38,6 @@ export type ValidatesResponse = {
 };
 
 export type PlannerResponse = {
-  mostRecentPastTerm: Term;
   unplanned: string[];
   startYear: number;
   isSummerEnabled: boolean;
@@ -63,7 +60,6 @@ export const badDegree: DegreeResponse = {
 // null coalesced to remove `undefined`. This SHOULD NOT see production
 // temp fix while we wait for `prepareUserPayload` to be deprecated
 export const badPlanner: PlannerResponse = {
-  mostRecentPastTerm: { Y: '2020', T: '2' },
   unplanned: [],
   startYear: 2021,
   isSummerEnabled: false,

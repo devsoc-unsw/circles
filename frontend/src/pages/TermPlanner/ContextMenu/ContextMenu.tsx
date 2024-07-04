@@ -61,7 +61,6 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
 
   const handleUnilective = () => {
     window.open(`https://unilectives.devsoc.app/course/${code}`, '_blank');
-    dispatch(addTab(code));
   };
 
   const iconStyle = {

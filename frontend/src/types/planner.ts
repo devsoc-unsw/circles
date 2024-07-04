@@ -19,7 +19,6 @@ export type PlannerCourse = {
   warnings: string[];
   handbookNote: string;
   isAccurate: boolean;
-  suppressed: boolean;
   ignoreFromProgression: boolean;
   isMultiterm: boolean;
   mark: Mark;

@@ -9,7 +9,7 @@ import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import type { RootState } from 'config/store';
-import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
+import { toggleShowMarks, toggleShowPastWarnings } from 'reducers/settingsSlice';
 import HelpMenu from '../HelpMenu/HelpMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
@@ -28,7 +28,7 @@ const OptionsHeader = () => {
   const planner = plannerQuery.data;
 
   const { theme } = useSelector((state: RootState) => state.settings);
-  const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
+  const { showMarks, showPastWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const iconStyles = {
     fontSize: '20px',
@@ -126,11 +126,11 @@ const OptionsHeader = () => {
           </Tooltip>
         )}
         <Tooltip title="Toggle warnings for previous terms">
-          <S.OptionButton onClick={() => dispatch(toggleShowWarnings())}>
+          <S.OptionButton onClick={() => dispatch(toggleShowPastWarnings())}>
             <WarningFilled
               style={{
                 ...iconStyles,
-                ...(showWarnings && { color: theme === 'light' ? '#9254de' : '#c198ef' })
+                ...(showPastWarnings && { color: theme === 'light' ? '#9254de' : '#c198ef' })
               }}
             />
           </S.OptionButton>

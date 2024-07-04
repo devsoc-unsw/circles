@@ -43,7 +43,7 @@ const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
-    <S.UnplannedContainer summerEnabled={isSummerEnabled}>
+    <S.UnplannedContainer $summerEnabled={isSummerEnabled}>
       <S.UnplannedTitle>Unplanned</S.UnplannedTitle>
       <Suspense fallback={<Spinner text="Loading unplanned column..." />}>
         <Droppable droppableId="unplanned">
@@ -51,9 +51,9 @@ const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
             <S.UnplannedBox
               ref={provided.innerRef}
               {...provided.droppableProps}
-              summerEnabled={isSummerEnabled}
-              droppable={dragging}
-              isSmall={isSmall}
+              $summerEnabled={isSummerEnabled}
+              $droppable={dragging}
+              $isSmall={isSmall}
             >
               {unplanned.map((courseCode, courseIndex) => (
                 <DraggableCourse
