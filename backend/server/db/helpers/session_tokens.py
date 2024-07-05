@@ -6,6 +6,7 @@ from server.db.redis.conn import sdb
 from redis.commands.search.query import Query
 from .models import SessionID, SessionToken, SessionTokenInfoModel
 
+# TODO-OLLI(pm): remove these comments
 # FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
 # FT.SEARCH idx:uid "@uid:{z5362383}" NOCONTENT VERBATIM
 # FT.SEARCH idx:sid "@sid:{bf362dd3\\-046a\\-49e4\\-8d63\\-fd379f06a40f}" NOCONTENT VERBATIM

@@ -18,10 +18,10 @@ from .auth_utility.middleware import HTTPBearer401, set_secure_cookie
 from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_userinfo_and_validate, refresh_and_validate, revoke_token, validate_authorization_response
 from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
 
-STATE_TTL = 10 * 60
 
 REFRESH_TOKEN_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}refresh-token"
-AUTH_STATE_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}next-auth-state"
+AUTH_STATE_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}auth-state"
+AUTH_STATE_COOKIE_TTL = 10 * 60 # seconds
 
 
 class UnauthorizedErrorModel(BaseModel):
@@ -170,7 +170,7 @@ def create_auth_url(res: Response) -> str:
     # TODO-OLLI(pm): do i want to make this into a proper redirect?
     state = token_urlsafe(32)
     auth_url = generate_oidc_auth_url(state)
-    expires_at = int(time()) + STATE_TTL
+    expires_at = int(time()) + AUTH_STATE_COOKIE_TTL
 
     set_secure_cookie(res, AUTH_STATE_COOKIE, state, expires_at)
     return auth_url

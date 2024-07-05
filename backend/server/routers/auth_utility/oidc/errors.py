@@ -8,7 +8,7 @@ class OIDCError(Exception):
 
     def __str__(self) -> str:
         desc = self.error_description or "No description."
-        return f"{super().__str__()}\n  Description: {desc}"
+        return f"{super().__str__()}\n\tDescription: {desc}"
 
 #
 # errors coming from requests

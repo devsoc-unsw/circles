@@ -1,6 +1,5 @@
 from itertools import chain
 from typing import Annotated, Any, Dict, Optional, cast
-from bson.objectid import ObjectId
 from fastapi import APIRouter, HTTPException, Security
 from starlette.status import HTTP_403_FORBIDDEN
 
@@ -13,10 +12,6 @@ from server.routers.specialisations import get_specialisation_types, get_special
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage
 
-
-from pydantic import BaseModel
-# TODO-OLLI(pm): i think we can get rid of this now since we do not use ObjectId anywhere
-BaseModel.model_config["json_encoders"] = {ObjectId: str}
 
 router = APIRouter(
     prefix="/user",

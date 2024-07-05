@@ -36,6 +36,6 @@ def insert_refresh_token_info(token: RefreshToken, info: RefreshTokenInfoModel) 
         # token already existed
         return False
 
-def delete_all_refresh_tokens(sid: SessionID) -> None:
-    refreshTokensNewCOL.delete_many({ "sid": sid })
-
+def delete_all_refresh_tokens(sid: SessionID) -> int:
+    res = refreshTokensNewCOL.delete_many({ "sid": sid })
+    return res.deleted_count

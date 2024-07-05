@@ -97,5 +97,6 @@ def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token
     return res.matched_count == 1
 
 def delete_all_sessions(sid: SessionID) -> bool:
-    res = sessionsNewCOL.delete_many({ "sid": sid })
-    return res.deleted_count > 0
+    # should only need to delete one as the session id should be unique
+    res = sessionsNewCOL.delete_one({ "sid": sid })
+    return res.deleted_count == 1
