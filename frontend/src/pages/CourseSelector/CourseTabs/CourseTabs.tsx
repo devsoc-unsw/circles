@@ -52,7 +52,7 @@ const CourseTabs = () => {
           onChange={() => dispatch(toggleLockedCourses())}
         />
       </S.ShowAllCourses>
-      <Suspense fallback={<Spinner text="Loading tabs..." />}>
+      <Suspense fallback={<Spinner text="loading tabs..." size="small" />}>
         <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
           <Droppable droppableId="droppable" direction="horizontal">
             {(droppableProvided) => (
