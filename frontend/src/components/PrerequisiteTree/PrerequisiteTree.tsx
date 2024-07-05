@@ -123,7 +123,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
   }, [courseCode, loading, onCourseClick]);
 
   return (
-    <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
+    <S.PrereqTreeContainer ref={ref} $height={calcHeight(coursesRequires, courseUnlocks)}>
       {loading && <Spinner text="Loading tree..." />}
       {!loading && graphRef.current && !graphRef.current.getEdges().length && (
         <p> No prerequisite visualisation is needed for this course </p>

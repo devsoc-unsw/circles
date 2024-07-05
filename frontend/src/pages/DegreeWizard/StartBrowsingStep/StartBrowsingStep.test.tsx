@@ -1,5 +1,4 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import * as reactRouterDom from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -59,7 +58,7 @@ describe('StartBrowsingStep', () => {
     useNavigateMock.mockReturnValue(dummyNavigate);
     await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
-    await act(async () => {
+    await React.act(async () => {
       await vi.waitFor(() => expect(dummyNavigate).toBeCalledWith('/course-selector'));
     });
   });

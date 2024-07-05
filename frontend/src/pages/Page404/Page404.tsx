@@ -15,34 +15,34 @@ const Page404 = () => {
           <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
-          <S.LogoBox alt>
+          <S.LogoBox $alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
           <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
-          <S.LogoBox alt>
+          <S.LogoBox $alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
-          <S.LogoBox alt>
-            <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </S.LogoBox>
-          <S.LogoBox>
-            <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </S.LogoBox>
-          <S.LogoBox alt>
+          <S.LogoBox $alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
           <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
-          <S.LogoBox alt>
+          <S.LogoBox $alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
           <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
-          <S.LogoBox alt>
+          <S.LogoBox $alt>
+            <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
+          </S.LogoBox>
+          <S.LogoBox>
+            <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
+          </S.LogoBox>
+          <S.LogoBox $alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
           </S.LogoBox>
           <S.LogoBox>

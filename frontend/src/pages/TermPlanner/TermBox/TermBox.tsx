@@ -9,7 +9,7 @@ import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
 import { getToken, getUserCourses, getUserPlanner } from 'utils/api/userApi';
-import { courseHasOfferingNew } from 'utils/getAllCourseOfferings';
+import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
@@ -86,7 +86,7 @@ const TermBox = ({
 
   const isLocked: boolean = planner.lockedTerms[`${year}${term}`] ?? false;
   const offeredInTerm =
-    !!draggingCourseCode && courseHasOfferingNew(courseInfos[draggingCourseCode], term);
+    !!draggingCourseCode && courseHasOffering(courseInfos[draggingCourseCode], term);
   const isOffered = offeredInTerm && !isLocked;
 
   const iconStyle = {
@@ -104,7 +104,7 @@ const TermBox = ({
         {(provided) => (
           <Badge
             count={
-              <S.TermCheckboxWrapper checked={isLocked}>
+              <S.TermCheckboxWrapper $checked={isLocked}>
                 {!isLocked ? (
                   <UnlockFilled style={iconStyle} onClick={handleToggleLockTerm} />
                 ) : (
@@ -116,9 +116,9 @@ const TermBox = ({
             styles={{ root: { width: 'unset' } }}
           >
             <S.TermBoxWrapper
-              droppable={isOffered && !!draggingCourseCode}
-              summerEnabled={isSummerEnabled}
-              isSmall={isSmall}
+              $droppable={isOffered && !!draggingCourseCode}
+              $summerEnabled={isSummerEnabled}
+              $isSmall={isSmall}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

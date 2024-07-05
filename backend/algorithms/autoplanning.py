@@ -75,8 +75,8 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
             map_course_to_var(course, variables)
         )
     solver = cp_model.CpSolver()
-    status: int = solver.Solve(model)
-    if status in [1, 3]:
+    status = solver.Solve(model)
+    if status in [cp_model.MODEL_INVALID, cp_model.INFEASIBLE]:
         raise ValueError(f'your courses are impossible to put in these terms! Error code: {status}')
     return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
 

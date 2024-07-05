@@ -165,7 +165,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
                 <p>Overall</p>
               </div>
               <S.Link
-                href={`https://unilectives.csesoc.app/course/${code}/`}
+                href={`https://unilectives.devsoc.app/course/${code}/`}
                 target="_blank"
                 rel="noreferrer"
               >

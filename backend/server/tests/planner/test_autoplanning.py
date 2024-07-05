@@ -40,10 +40,6 @@ def test_autoplanning_generic():
                         {},
                     ],
                 ],
-                "mostRecentPastTerm": {
-                    "Y": 1,
-                    "T": 0,
-                },
             },
             'programTime': {
                 'startTime': [2020, 1],

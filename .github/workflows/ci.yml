@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
   pull_request:
-    branches: [dev, main, CIRCLES-331/user-data-to-backend]
+    branches: [dev, main, CIRCLES-331/user-data-to-backend, 331-staging]
 
 jobs:
   event_file:
@@ -23,10 +23,10 @@ jobs:
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
-      - name: Set up Python (latest)
+      - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10.5"
+          python-version: "3.12"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -59,10 +59,10 @@ jobs:
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
-      - name: Set up Python (latest)
+      - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
+          python-version: "3.12"
       - name: Run frontend tests
         run: |
           cd frontend

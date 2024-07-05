@@ -3,7 +3,7 @@ fuzzywuzzy==0.18.0
 hypothesis==6.61.0
 mypy-extensions==1.0.0
 mypy==1.10.0
-ortools==9.9.3963
+ortools==9.10.4067
 paramiko==3.4.0
 pydantic==2.7.1
 pymongo==4.7.0

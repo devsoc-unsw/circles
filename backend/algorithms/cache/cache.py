@@ -106,7 +106,7 @@ def cache_mappings():
     def tokeniseSchool(School):
         school_token = "S "
         if re.search(r"School\sof\sthe.+", School):
-            match_object = re.search("(?<=School\sof\sthe\s)[^\s\n\,]+", School)
+            match_object = re.search(r"(?<=School\sof\sthe\s)[^\s\n\,]+", School)
         elif re.search(r"School\sof\s.+", School):
             match_object = re.search(r"(?<=School\sof\s)[^\s\n\,]+", School)
         elif re.search("^(UC)", School):
