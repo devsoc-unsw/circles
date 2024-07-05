@@ -6,12 +6,12 @@ import pymongo
 import pymongo.errors
 
 from server.db.mongo.constants import SID_INDEX_NAME
-from server.db.mongo.conn import sessionsNewCOL
+from server.db.mongo.conn import sessionsCOL
 
 from .models import GuestSessionInfoModel, NotSetupSessionModel, RefreshToken, SessionID, SessionInfoModel, SessionOIDCInfoModel
 
 def get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSessionInfoModel]]:
-    session = sessionsNewCOL.find_one({ "sid": sid })
+    session = sessionsCOL.find_one({ "sid": sid })
 
     if session is None or session["type"] == "notsetup":
         return None
@@ -47,7 +47,7 @@ def insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -> bool
     # needed since we need a unique session id allocated before setting refresh token info
     # and we need a refresh token to set a full session info
     try:
-        sessionsNewCOL.insert_one({
+        sessionsCOL.insert_one({
             "sid": sid,
             "uid": info.uid,
             "expiresAt": datetime.datetime.fromtimestamp(info.expires_at, tz=datetime.timezone.utc),
@@ -59,7 +59,7 @@ def insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -> bool
         return False
 
 def update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfoModel) -> bool:
-    res = sessionsNewCOL.update_one(
+    res = sessionsCOL.update_one(
         { "sid": sid, "type": { "$in": [ "csesoc", "notsetup" ] } },
         {
             "$set": {
@@ -81,7 +81,7 @@ def update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_toke
     return res.matched_count == 1
 
 def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken) -> bool:
-    res = sessionsNewCOL.update_one(
+    res = sessionsCOL.update_one(
         { "sid": sid, "type": { "$in": [ "guest", "notsetup" ] } },
         {
             "$set": {
@@ -98,5 +98,5 @@ def update_guest_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token
 
 def delete_all_sessions(sid: SessionID) -> bool:
     # should only need to delete one as the session id should be unique
-    res = sessionsNewCOL.delete_one({ "sid": sid })
+    res = sessionsCOL.delete_one({ "sid": sid })
     return res.deleted_count == 1

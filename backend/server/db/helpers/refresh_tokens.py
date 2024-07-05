@@ -5,12 +5,12 @@ from typing import Optional
 import pymongo
 import pymongo.errors
 
-from server.db.mongo.conn import refreshTokensNewCOL
+from server.db.mongo.conn import refreshTokensCOL
 
 from .models import RefreshToken, RefreshTokenInfoModel, SessionID
 
 def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfoModel]:
-    info = refreshTokensNewCOL.find_one({ 'token': token })
+    info = refreshTokensCOL.find_one({ 'token': token })
 
     if info is None:
         return None
@@ -26,7 +26,7 @@ def get_refresh_token_info(token: RefreshToken) -> Optional[RefreshTokenInfoMode
 
 def insert_refresh_token_info(token: RefreshToken, info: RefreshTokenInfoModel) -> bool:
     try:
-        refreshTokensNewCOL.insert_one({
+        refreshTokensCOL.insert_one({
             "token": token,
             "sid": info.sid,
             "expiresAt": datetime.datetime.fromtimestamp(info.expires_at, tz=datetime.timezone.utc),
@@ -37,5 +37,5 @@ def insert_refresh_token_info(token: RefreshToken, info: RefreshTokenInfoModel) 
         return False
 
 def delete_all_refresh_tokens(sid: SessionID) -> int:
-    res = refreshTokensNewCOL.delete_many({ "sid": sid })
+    res = refreshTokensCOL.delete_many({ "sid": sid })
     return res.deleted_count

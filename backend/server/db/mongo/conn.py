@@ -23,13 +23,13 @@ programsCOL: Collection
 specialisationsCOL: Collection
 coursesCOL: Collection
 
-sessionsNewCOL: Collection[Union[NotSetupSessionInfoDict, SessionInfoDict, GuestSessionInfoDict]]
-refreshTokensNewCOL: Collection[RefreshTokenInfoDict]
-usersNewCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
+sessionsCOL: Collection[Union[NotSetupSessionInfoDict, SessionInfoDict, GuestSessionInfoDict]]
+refreshTokensCOL: Collection[RefreshTokenInfoDict]
+usersCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
 
 def connect():
     # TODO-OLLI(pm): this global list is horrible...
-    global client, db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsNewCOL, refreshTokensNewCOL, usersNewCOL
+    global client, db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsCOL, refreshTokensCOL, usersCOL
     print("Trying to connect to mongo database.")
 
     # this should raise error if this fails, this is better than exit(1)
@@ -45,7 +45,7 @@ def connect():
     specialisationsCOL = db[SPECS_COL_NAME]
     coursesCOL = db[COURSES_COL_NAME]
 
-    sessionsNewCOL = usersDB[SESSIONS_COL_NAME].with_options(
+    sessionsCOL = usersDB[SESSIONS_COL_NAME].with_options(
         codec_options=CodecOptions(
             tz_aware=True,
             tzinfo=datetime.timezone.utc,
@@ -53,7 +53,7 @@ def connect():
         ),
     )
 
-    refreshTokensNewCOL = usersDB[REFRESH_TOKENS_COL_NAME].with_options(
+    refreshTokensCOL = usersDB[REFRESH_TOKENS_COL_NAME].with_options(
         codec_options=CodecOptions(
             tz_aware=True,
             tzinfo=datetime.timezone.utc,
@@ -61,7 +61,7 @@ def connect():
         )
     )
 
-    usersNewCOL = usersDB[USERS_COL_NAME]
+    usersCOL = usersDB[USERS_COL_NAME]
 
 
 connect()
