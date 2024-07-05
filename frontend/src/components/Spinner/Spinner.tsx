@@ -18,17 +18,12 @@ const Spinner = ({ text, size = 'large' }: Props) => {
       </S.SmallWrapper>
     );
   }
-  // Large Spinner (Default)
-  if (size === 'large') {
-    return (
-      <S.LargeWrapper className="loading-spinner">
-        <Spin indicator={<LoadingOutlined spin />} size="large" />
-        <p>{text}</p>
-      </S.LargeWrapper>
-    );
-  }
-
-  return null;
+  return (
+    <S.LargeWrapper className="loading-spinner">
+      <Spin indicator={<LoadingOutlined spin />} size="large" />
+      <p>{text}</p>
+    </S.LargeWrapper>
+  );
 };
 
 export default Spinner;
