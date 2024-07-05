@@ -93,23 +93,25 @@ class SessionOIDCInfoModel(BaseModel):
     refresh_token: str          # most recent refresh token
     validated_id_token: dict    # most recent valid id token object
 
+# TODO-OLLI(pm): use literal around enum values for the discriminators
+# (currently pydantic doesn't properly support the enum value serialization)
 class NotSetupSessionModel(BaseModel):
     # object stored against the sid when session is not yet setup (brief time between during token generation)
-    uid: str                    # for validation and back lookup
-    type: Literal['notsetup']   # ensure that this can get parsed correctly
-    expires_at: int             # time of expiry, will be replaced with a TTL on the cache
+    uid: str                                # for validation and back lookup
+    type: Literal['notsetup'] = 'notsetup'  # ensure that this can get parsed correctly
+    expires_at: int                         # time of expiry, will be replaced with a TTL on the cache
 
 class SessionInfoModel(BaseModel):
     # object stored against the sid
-    uid: str                      # for validation and back lookup
+    uid: str                            # for validation and back lookup
     oidc_info: SessionOIDCInfoModel
-    curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
-    type: Literal['csesoc']       # ensure that this can get parsed correctly
-    expires_at: int               # time of expiry, will be replaced with a TTL on the cache
+    curr_ref_token: RefreshToken        # the most recent refresh token, only one that should be accepted
+    type: Literal['csesoc'] = 'csesoc'  # ensure that this can get parsed correctly
+    expires_at: int                     # time of expiry, will be replaced with a TTL on the cache
 
 class GuestSessionInfoModel(BaseModel):
     # object stored against the sid
-    uid: str                      # for validation and back lookup
-    curr_ref_token: RefreshToken  # the most recent refresh token, only one that should be accepted
-    type: Literal['guest']        # ensure that this can get parsed correctly
-    expires_at: int               # time of expiry, will be replaced with a TTL on the cache
+    uid: str                          # for validation and back lookup
+    curr_ref_token: RefreshToken      # the most recent refresh token, only one that should be accepted
+    type: Literal['guest'] = 'guest'  # ensure that this can get parsed correctly
+    expires_at: int                   # time of expiry, will be replaced with a TTL on the cache
