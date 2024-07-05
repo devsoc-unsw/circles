@@ -11,6 +11,7 @@ import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { CURR_YEAR, TERM } from 'config/constants';
 import S from './styles';
+import { c } from 'vite/dist/node/types.d-aGj9QkWt';
 
 const { Title, Text } = Typography;
 
@@ -46,6 +47,8 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
   const yearCourseAvaliable = recentTermNumber > currentTerm ? CURR_YEAR - 1 : CURR_YEAR;
 
   const updatedTerm = recentTermNumber > currentTerm ? recentTermNumber : currentTerm;
+
+  const teachingPeriod = updatedTerm > 0 ? 'T' + updatedTerm : 'U0';
 
   const termMod = termMapping[updatedTerm];
 
@@ -108,7 +111,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           title: 'UNSW Course Outline',
           content: studyLevel ? (
             <S.Link
-              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=${yearCourseAvaliable}&term=${termMod}&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=T${updatedTerm}&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
+              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=${yearCourseAvaliable}&term=${termMod}&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=${teachingPeriod}&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
               target="_blank"
               rel="noreferrer"
             >
