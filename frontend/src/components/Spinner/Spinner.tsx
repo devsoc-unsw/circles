@@ -5,25 +5,30 @@ import S from './styles';
 
 type Props = {
   text: string;
-  component?: string;
+  size?: string;
 };
 
-const Spinner = ({ text, component = '' }: Props) => {
-  // modify spinner css for course tab loads
-  if (component === 'course-tab') {
+const Spinner = ({ text, size = 'large' }: Props) => {
+  // Small Spinner
+  if (size === 'small') {
     return (
-      <S.Wrapper className="loading-spinner" style={{ gap: '1px' }}>
-        <Spin indicator={<LoadingOutlined style={{ fontSize: '1rem' }} spin />} />
-        <p style={{ fontSize: '0.5rem' }}>{text}</p>
-      </S.Wrapper>
+      <S.SmallWrapper className="loading-spinner">
+        <Spin indicator={<LoadingOutlined spin />} size="small" />
+        <p>{text}</p>
+      </S.SmallWrapper>
     );
   }
-  return (
-    <S.Wrapper className="loading-spinner">
-      <Spin indicator={<LoadingOutlined style={{ fontSize: '2.5rem' }} spin />} />
-      <p>{text}</p>
-    </S.Wrapper>
-  );
+  // Large Spinner (Default)
+  if (size === 'large') {
+    return (
+      <S.LargeWrapper className="loading-spinner">
+        <Spin indicator={<LoadingOutlined spin />} size="large" />
+        <p>{text}</p>
+      </S.LargeWrapper>
+    );
+  }
+
+  return null;
 };
 
 export default Spinner;
