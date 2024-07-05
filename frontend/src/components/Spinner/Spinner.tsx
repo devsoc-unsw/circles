@@ -5,7 +5,7 @@ import S from './styles';
 
 type Props = {
   text: string;
-  size?: string;
+  size?: 'small' | 'large';
 };
 
 const Spinner = ({ text, size = 'large' }: Props) => {
