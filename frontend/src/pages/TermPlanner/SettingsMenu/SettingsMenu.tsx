@@ -32,7 +32,7 @@ const SettingsMenu = ({ planner }: Props) => {
         await axios.put(
           '/user/updateStartYear',
           { startYear: parseInt(dateString, 10) },
-          { headers: { ...withAuthorization(token) } }
+          { headers: withAuthorization(token) }
         );
       } catch {
         openNotification({
@@ -49,7 +49,7 @@ const SettingsMenu = ({ planner }: Props) => {
       await axios.put(
         '/user/updateDegreeLength',
         { numYears: value },
-        { headers: { ...withAuthorization(token) } }
+        { headers: withAuthorization(token) }
       );
     } catch {
       openNotification({
@@ -62,7 +62,7 @@ const SettingsMenu = ({ planner }: Props) => {
 
   async function summerToggle() {
     try {
-      await axios.post('/user/toggleSummerTerm', {}, { headers: { ...withAuthorization(token) } });
+      await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
     } catch {
       openNotification({
         type: 'error',

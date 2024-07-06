@@ -6,7 +6,7 @@ import { withAuthorization } from './auth';
 export const setupDegreeWizard = async (token: string, wizard: DegreeWizardPayload) => {
   try {
     await axios.post('/user/setupDegreeWizard', wizard, {
-      headers: { ...withAuthorization(token) }
+      headers: withAuthorization(token)
     });
   } catch (err) {
     // eslint-disable-next-line no-console

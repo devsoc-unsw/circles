@@ -47,7 +47,7 @@ const ValidateCtfButton = () => {
     const res = await axios.post<CtfResult>(
       '/ctf/validateCtf/',
       {},
-      { headers: { ...withAuthorization(token) } }
+      { headers: withAuthorization(token) }
     );
     setResult(res.data);
   };

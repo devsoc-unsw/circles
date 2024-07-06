@@ -8,7 +8,7 @@ export const searchCourse = async (token: string, query: string): Promise<Search
   const res = await axios.post(
     `/courses/searchCourse/${query}`,
     {},
-    { headers: { ...withAuthorization(token) } }
+    { headers: withAuthorization(token) }
   );
   return res.data as SearchCourse;
 };

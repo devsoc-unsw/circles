@@ -48,7 +48,7 @@ const TermBox = ({
     await axios.post(
       '/planner/toggleTermLocked',
       {},
-      { params: { termyear: `${year}${term}` }, headers: { ...withAuthorization(token) } }
+      { params: { termyear: `${year}${term}` }, headers: withAuthorization(token) }
     );
   };
   const plannerQuery = useQuery({

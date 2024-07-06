@@ -26,7 +26,7 @@ const ImportPlannerMenu = () => {
   const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
     try {
       await axios.post('planner/unPlannedToTerm', data, {
-        headers: { ...withAuthorization(token) }
+        headers: withAuthorization(token)
       });
     } catch (err) {
       // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
@@ -43,7 +43,7 @@ const ImportPlannerMenu = () => {
       await axios.post(
         'planner/addToUnplanned',
         { courseCode: code },
-        { headers: { ...withAuthorization(token) } }
+        { headers: withAuthorization(token) }
       );
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -103,12 +103,12 @@ const ImportPlannerMenu = () => {
             await axios.put(
               '/user/updateDegreeLength',
               { numYears: fileInJson.numYears },
-              { headers: { ...withAuthorization(token) } }
+              { headers: withAuthorization(token) }
             );
             await axios.put(
               '/user/updateStartYear',
               { startYear: fileInJson.startYear },
-              { headers: { ...withAuthorization(token) } }
+              { headers: withAuthorization(token) }
             );
           } catch {
             openNotification({
@@ -120,11 +120,7 @@ const ImportPlannerMenu = () => {
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             try {
-              await axios.post(
-                '/user/toggleSummerTerm',
-                {},
-                { headers: { ...withAuthorization(token) } }
-              );
+              await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
             } catch {
               openNotification({
                 type: 'error',

@@ -30,7 +30,7 @@ export const logout = async (token: string): Promise<void> => {
     {},
     {
       withCredentials: true,
-      headers: { ...withAuthorization(token) }
+      headers: withAuthorization(token)
     }
   );
 };

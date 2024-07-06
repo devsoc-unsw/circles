@@ -9,7 +9,7 @@ export const addToUnplanned = async (token: string, courseId: string) => {
     await axios.post(
       'planner/addToUnplanned',
       { courseCode: courseId },
-      { headers: { ...withAuthorization(token) } }
+      { headers: withAuthorization(token) }
     );
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -19,7 +19,7 @@ export const addToUnplanned = async (token: string, courseId: string) => {
 
 export const setPlannedCourseToTerm = async (token: string, data: PlannedToTerm) => {
   try {
-    await axios.post('planner/plannedToTerm', data, { headers: { ...withAuthorization(token) } });
+    await axios.post('planner/plannedToTerm', data, { headers: withAuthorization(token) });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error at setPlannedCourseToTerm: ', err);
@@ -28,7 +28,7 @@ export const setPlannedCourseToTerm = async (token: string, data: PlannedToTerm)
 
 export const setUnplannedCourseToTerm = async (token: string, data: UnPlannedToTerm) => {
   try {
-    await axios.post('planner/unPlannedToTerm', data, { headers: { ...withAuthorization(token) } });
+    await axios.post('planner/unPlannedToTerm', data, { headers: withAuthorization(token) });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error at handleSetUnplannedCourseToTerm: ', err);
@@ -40,7 +40,7 @@ export const unscheduleCourse = async (token: string, data: UnscheduleCourse) =>
     await axios.post(
       'planner/unscheduleCourse',
       { courseCode: data.courseCode },
-      { headers: { ...withAuthorization(token) } }
+      { headers: withAuthorization(token) }
     );
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -50,7 +50,7 @@ export const unscheduleCourse = async (token: string, data: UnscheduleCourse) =>
 
 export const unscheduleAll = async (token: string) => {
   try {
-    await axios.post('planner/unscheduleAll', {}, { headers: { ...withAuthorization(token) } });
+    await axios.post('planner/unscheduleAll', {}, { headers: withAuthorization(token) });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error at handleUnscheduleAll: ', err);
@@ -62,7 +62,7 @@ export const removeCourse = async (token: string, courseId: string) => {
     await axios.post(
       'planner/removeCourse',
       { courseCode: courseId },
-      { headers: { ...withAuthorization(token) } }
+      { headers: withAuthorization(token) }
     );
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -75,7 +75,7 @@ export const toggleIgnoreFromProgression = async (token: string, courseId: strin
     await axios.post(
       'planner/toggleIgnoreFromProgression',
       { courseCode: courseId },
-      { headers: { ...withAuthorization(token) } }
+      { headers: withAuthorization(token) }
     );
   } catch (err) {
     // eslint-disable-next-line no-console
@@ -85,7 +85,7 @@ export const toggleIgnoreFromProgression = async (token: string, courseId: strin
 
 export const removeAll = async (token: string) => {
   try {
-    await axios.post('planner/removeAll', {}, { headers: { ...withAuthorization(token) } });
+    await axios.post('planner/removeAll', {}, { headers: withAuthorization(token) });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Error at removeAll: ', err);
@@ -94,7 +94,7 @@ export const removeAll = async (token: string) => {
 
 export const validateTermPlanner = async (token: string): Promise<ValidatesResponse> => {
   const res = await axios.get('planner/validateTermPlanner', {
-    headers: { ...withAuthorization(token) }
+    headers: withAuthorization(token)
   });
   return res.data as ValidatesResponse;
 };
@@ -102,7 +102,7 @@ export const validateTermPlanner = async (token: string): Promise<ValidatesRespo
 export const updateCourseMark = async (token: string, courseMark: CourseMark) => {
   try {
     await axios.put('/user/updateCourseMark', courseMark, {
-      headers: { ...withAuthorization(token) }
+      headers: withAuthorization(token)
     });
   } catch (e) {
     /* eslint-disable no-console */
