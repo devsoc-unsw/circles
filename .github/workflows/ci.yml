@@ -49,7 +49,7 @@ jobs:
           echo REDIS_PASSWORD=github-ci >> env/sessionsdb.env
           echo REDIS_ARGS="--user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* allcommands" >> env/sessionsdb.env
 
-          docker compose run ci-backend
+          docker compose up -d ci-backend
       - name: Run mypy checks
         run: cd backend && python -m mypy . && cd ..
       - name: Test algorithm with pytest
