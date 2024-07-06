@@ -100,7 +100,6 @@ class ValidCourseState(BaseModel):
     unlocked: bool
     handbook_note: str
     warnings: list
-    suppressed: bool
 
 
 class CoursesState(BaseModel):
@@ -138,25 +137,17 @@ class CoursesTypeState(BaseModel):
     courses_state: dict[str, CourseTypeState] = {}
 
 
-@with_config(ConfigDict(extra='forbid'))
-class MostRecentPastTerm(TypedDict):
-    Y: int
-    T: int
-
-
 class ValidPlannerData(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
     programCode: str
     specialisations: list[str]
     plan: list[list[dict[str, tuple[int, Optional[int]]]]]
-    mostRecentPastTerm: MostRecentPastTerm
 
 class PlannerData(BaseModel):
     programCode: str
     specialisations: list[str]
     plan: list[list[dict[str, Optional[list[Optional[int]]]]]]
-    mostRecentPastTerm: MostRecentPastTerm
     model_config = ConfigDict(json_schema_extra={
         "example": {
             "program": "3707",
@@ -188,10 +179,6 @@ class PlannerData(BaseModel):
                     },
                 ],
             ],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0,
-            },
         }
     }, extra='forbid')
 
@@ -222,7 +209,6 @@ class DegreeLocalStorage(TypedDict):
 
 @with_config(ConfigDict(extra='forbid'))
 class PlannerLocalStorage(TypedDict):
-    mostRecentPastTerm: MostRecentPastTerm
     unplanned: list[str]
     startYear: int
     isSummerEnabled: bool
@@ -244,7 +230,6 @@ markMap = {
 @with_config(ConfigDict(extra='forbid'))
 class CourseStorage(TypedDict):
     code: str
-    suppressed: bool
     mark: Mark
     uoc: int
     ignoreFromProgression: bool
@@ -271,6 +256,16 @@ class LocalStorage(BaseModel):
 
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
+
+class StartYear(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    startYear: int
+    
+class DegreeLength(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    numYears: int
 
 class CourseMark(BaseModel):
     model_config = ConfigDict(extra='forbid')

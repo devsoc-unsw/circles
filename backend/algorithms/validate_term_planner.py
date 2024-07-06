@@ -12,11 +12,9 @@ def validate_terms(data: ValidPlannerData):
     # State of courses on the term planner
     coursesState = {}
 
-    currYear = data.mostRecentPastTerm["Y"]
-    pastTerm = data.mostRecentPastTerm["T"]
-    for yearIndex, year in enumerate(data.plan):
+    for year in data.plan:
         # Go through all the years
-        for termIndex, term in enumerate(year):
+        for term in year:
             user.add_current_courses(term)
 
             for course in term:
@@ -30,8 +28,7 @@ def validate_terms(data: ValidPlannerData):
                     "is_accurate": is_answer_accurate,
                     "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                     "unlocked": unlocked,
-                    "warnings": warnings,
-                    "suppressed": yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
+                    "warnings": warnings
                 }
             # Add all these courses to the user in preparation for the next term
             user.empty_current_courses()

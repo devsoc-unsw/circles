@@ -21,7 +21,10 @@ def test_user1():
     assert user.in_specialisation("ACCTA2")
     assert user.has_taken_course("COMP1511")
     assert user.has_taken_course("COMP1521")
-    assert isclose(user.wam(), 70.5)
+    
+    wam, marks_complete = user.wam()
+    assert wam is not None and isclose(wam, 70.5)
+    assert marks_complete
     assert user.uoc() == 12
 
 def test_user2():
@@ -32,7 +35,9 @@ def test_user2():
     assert user.has_taken_course("COMP1511")
     assert user.has_taken_course("MATH1131")
     assert user.has_taken_course("MATH1081")
-    assert user.wam() == None
+    wam, marks_complete = user.wam()
+    assert wam == None
+    assert not marks_complete
     assert user.uoc() == 18
 
 
@@ -41,7 +46,9 @@ def test_user3():
 
     assert user.in_program("3778")
     assert user.in_specialisation("COMPA1")
-    assert user.wam() == None
+    wam, marks_complete = user.wam()
+    assert wam == None
+    assert marks_complete
     assert user.uoc() == 0
 
 def test_user_no_data():

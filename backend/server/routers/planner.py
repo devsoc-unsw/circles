@@ -38,7 +38,6 @@ def convert_to_planner_data(user: Storage) -> ValidPlannerData:
         programCode=user['degree']['programCode'],
         specialisations=user['degree']['specs'],
         plan=plan,
-        mostRecentPastTerm=user['planner']['mostRecentPastTerm']
     )
 
 
@@ -59,9 +58,6 @@ def validate_term_planner(uid: Annotated[str, Security(require_uid)]):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
-
-    The mostRecentPastTerm will show the latest term (and current year) that has
-    passed and all warnings will be suppressed until after this term
 
     Returns the state of all the courses on the term planner
     """
@@ -89,7 +85,6 @@ def add_to_unplanned(data: CourseCode, uid: Annotated[str, Security(require_uid)
     user['planner']['unplanned'].append(data.courseCode)
     user['courses'][data.courseCode] = {
         'code': data.courseCode,
-        'suppressed': False,
         'mark': None,
         'uoc': course['UOC'],
         'ignoreFromProgression': False
@@ -377,7 +372,6 @@ def add_from_transcript(file: UploadFile, uid: Annotated[str, Security(require_u
                 year_data[term].append(course)
                 user['courses'][course] = {
                     'code': course,
-                    'suppressed': False,
                     'mark': mark,
                     'uoc': uoc or 6, # guess normal uoc
                     'ignoreFromProgression': False

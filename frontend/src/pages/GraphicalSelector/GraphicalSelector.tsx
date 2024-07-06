@@ -50,8 +50,8 @@ const GraphicalSelector = () => {
 
   return (
     <PageTemplate>
-      <S.Wrapper fullscreen={fullscreen}>
-        <S.GraphWrapper fullscreen={fullscreen}>
+      <S.Wrapper $fullscreen={fullscreen}>
+        <S.GraphWrapper $fullscreen={fullscreen}>
           <CourseGraph
             onNodeClick={(node) => {
               setCourseCode(node.getID());

@@ -25,10 +25,6 @@
                     "T3": []
                 }
             ],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0
-            },
             "unplanned": [],
             "startYear": 2020,
             "isSummerEnabled": true,
@@ -60,10 +56,6 @@
                     "T3": []
                 }
             ],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0
-            },
             "unplanned": [],
             "startYear": 2020,
             "isSummerEnabled": true,
@@ -91,10 +83,6 @@
                 ],
                 "T3": []
             }],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0
-            },
             "unplanned": [],
             "startYear": 2020,
             "isSummerEnabled": false,
@@ -122,10 +110,6 @@
                 ],
                 "T3": []
             }],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 2
-            },
             "unplanned": [],
             "startYear": 2020,
             "isSummerEnabled": false,
@@ -166,10 +150,6 @@
                     "T3": []
                 }
             ],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0
-            },
             "unplanned": [ "COMP6447" ],
             "startYear": 2020,
             "isSummerEnabled": false,
@@ -206,10 +186,6 @@
                     "T3": []
                 }
             ],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0
-            },
             "unplanned": [],
             "startYear": 2020,
             "isSummerEnabled": false,

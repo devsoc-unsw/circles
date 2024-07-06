@@ -28,7 +28,7 @@ export const renderWithProviders = async (
         theme: 'dark',
         showMarks: false,
         showLockedCourses: false,
-        showWarnings: false
+        showPastWarnings: false
       },
       identity: null
     },
@@ -47,7 +47,7 @@ export const renderWithProviders = async (
           theme: 'dark',
           showLockedCourses: true,
           showMarks: true,
-          showWarnings: true,
+          showPastWarnings: true,
           token: 'token' // force token to be dummy
         }
       })

@@ -15,7 +15,7 @@ const preloadedState: RootState = {
     theme: 'dark',
     showMarks: false,
     showLockedCourses: false,
-    showWarnings: false
+    showPastWarnings: false
   },
   identity: null
 };

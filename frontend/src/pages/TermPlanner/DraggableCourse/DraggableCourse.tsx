@@ -9,6 +9,7 @@ import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { CoursesResponse, PlannerResponse, ValidateResponse } from 'types/userResponse';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -30,28 +31,39 @@ const Draggable = React.lazy(() =>
 
 const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }: Props) => {
   const { isSummerEnabled } = planner;
-  const { showMarks } = useSelector((state: RootState) => state.settings);
+  const { showMarks, showPastWarnings } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const { Text } = Typography;
+
+  const courseIsPastTerm = (t: CourseTime): boolean => {
+    const mostRecentPastTerm = getMostRecentPastTerm(planner.startYear);
+    const courseYear = parseInt(t.year, 10) - planner.startYear + 1;
+    const courseTerm = parseInt(t.term.slice(1), 10);
+    return (
+      courseYear < mostRecentPastTerm.Y ||
+      (courseYear === mostRecentPastTerm.Y && courseTerm <= mostRecentPastTerm.T)
+    );
+  };
+
+  // If the user has asked to ignore warnings for past terms, check if the course is in a past term
+  const ignoreWarnings = time && !showPastWarnings && courseIsPastTerm(time);
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const { title, code } = courseInfo;
   // TODO: Change the backend so that naming is universally in camelCase so we don't have to do this
   const { is_legacy: isLegacy, handbook_note: handbookNote } = courseInfo;
   const {
-    suppressed,
     is_accurate: isAccurate,
     unlocked: isUnlocked,
     warnings: warningMessage
   } = validate || {
-    suppressed: true,
     is_accurate: true,
     warnings: [],
     unlocked: true,
     handbook_note: ''
   };
 
-  const showNotOfferedWarning = time ? courseHasOffering(courseInfo, time.term) : true;
+  const hasOffering = time ? courseHasOffering(courseInfo, time.term) : true;
 
   const contextMenu = useContextMenu({
     id: `${code}-context`
@@ -64,14 +76,14 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
   const isSmall = useMediaQuery('(max-width: 1400px)');
   // TODO: Fix these boolean checks for warnings
   const shouldHaveWarning =
-    !suppressed && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !showNotOfferedWarning);
+    !ignoreWarnings && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !hasOffering);
   const errorIsInformational =
     shouldHaveWarning &&
     isUnlocked &&
     warningMessage.length === 0 &&
     !isLegacy &&
     isAccurate &&
-    showNotOfferedWarning;
+    hasOffering;
 
   const handleContextMenu = (e: React.MouseEvent) => {
     if (!isTermLocked) contextMenu.show({ event: e });
@@ -106,11 +118,11 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
         >
           {(provided) => (
             <S.CourseWrapper
-              summerEnabled={isSummerEnabled}
-              isSmall={isSmall}
-              dragDisabled={isTermLocked}
-              warningsDisabled={isTermLocked && !isUnlocked}
-              isWarning={!suppressed && (!isUnlocked || !showNotOfferedWarning)}
+              $summerEnabled={isSummerEnabled}
+              $isSmall={isSmall}
+              $dragDisabled={isTermLocked}
+              $warningsDisabled={isTermLocked && !isUnlocked}
+              $isWarning={!ignoreWarnings && (!isUnlocked || !hasOffering)}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
@@ -180,7 +192,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
         <ReactTooltip anchorSelect={`#${code}`} place="bottom" style={{ zIndex: 10 }}>
           {isLegacy ? (
             'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
-          ) : !showNotOfferedWarning ? (
+          ) : !hasOffering ? (
             'The course is not offered in this term.'
           ) : warningMessage.length !== 0 ? (
             stripExtraParenthesis(warningMessage.join('\n'))

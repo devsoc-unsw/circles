@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import styled, { css } from 'styled-components';
 
-const CourseButton = styled(Button)<{ planned?: boolean }>`
+const CourseButton = styled(Button)<{ $planned?: boolean }>`
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.purpleLight};
   display: flex;
@@ -11,8 +11,8 @@ const CourseButton = styled(Button)<{ planned?: boolean }>`
   height: 80px;
   white-space: normal;
 
-  ${({ planned, theme }) =>
-    !planned &&
+  ${({ $planned, theme }) =>
+    !$planned &&
     css`
       background-color: ${theme.courseButton.backgroundColor};
       color: #9254de !important;

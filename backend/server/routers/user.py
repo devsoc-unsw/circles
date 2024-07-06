@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, Security
 from starlette.status import HTTP_403_FORBIDDEN
 
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.model import CourseMark, DegreeLength, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, StartYear, Storage
 from server.routers.courses import get_course
 from server.routers.model import CourseMark, CourseStorage, DegreeWizardInfo, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 from server.routers.programs import get_programs
@@ -111,7 +112,6 @@ def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(
     courses: dict[str, CourseStorage] = {
         course: {
             'code': course,
-            'suppressed': False, # guess we will nuke this config
             'mark': None, # wtf we nuking marks?
             'uoc': get_course(course)['UOC'],
             'ignoreFromProgression': False
@@ -192,13 +192,6 @@ def toggle_summer_term(uid: Annotated[str, Security(require_uid)]):
     set_user(uid, user, True)
 
 
-@router.put("/toggleWarnings")
-def toggle_warnings(courses: list[str], uid: Annotated[str, Security(require_uid)]):
-    user = get_setup_user(uid)
-    for course in courses:
-        user['courses'][course]['suppressed'] = not user['courses'][course]['suppressed']
-    set_user(uid, user, True)
-
 @router.put("/updateCourseMark",
             responses={
         400: { "description": "if the mark is invalid or it isn't in the user's courses" },
@@ -224,24 +217,22 @@ def update_course_mark(courseMark: CourseMark, uid: Annotated[str, Security(requ
 
     set_user(uid, user, True)
 
-
 @router.put("/updateStartYear")
-def update_start_year(startYear: int, uid: Annotated[str, Security(require_uid)]):
+def update_start_year(startYear: StartYear, uid: Annotated[str, Security(require_uid)]):
     """
         Update the start year the user is taking.
         The degree length stays the same and the contents are shifted to fit the new start year.
     """
     user = get_setup_user(uid)
-    user['planner']['startYear'] = startYear
+    user['planner']['startYear'] = startYear.startYear
     set_user(uid, user, True)
 
-
 @router.put("/updateDegreeLength")
-def update_degree_length(numYears: int, uid: Annotated[str, Security(require_uid)]):
+def update_degree_length(degreeLength: DegreeLength, uid: Annotated[str, Security(require_uid)]):
     user = get_setup_user(uid)
-    if len(user['planner']['years']) == numYears:
+    if len(user['planner']['years']) == degreeLength.numYears:
         return
-    diff = numYears - len(user['planner']['years'])
+    diff = degreeLength.numYears - len(user['planner']['years'])
     if diff > 0:
         user['planner']['years'] += ([{"T0": [],
                                      "T1": [], "T2": [], "T3": []}] * diff)
@@ -337,10 +328,6 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
     print("Valid specs")
 
     planner: PlannerLocalStorage = {
-        'mostRecentPastTerm': {
-            'Y': 0,
-            'T': 0
-        },
         'unplanned': [],
         'isSummerEnabled': False,
         'startYear': wizard.startYear,

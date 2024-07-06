@@ -31,48 +31,41 @@ def test_validateTermPlanner_valid_progress():
             "is_accurate": True,
             "handbook_note": "",
             "unlocked": True,
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "MATH1141": {
             "is_accurate": True,
             "handbook_note": "",
             "unlocked": True,
-            "warnings": [],
-            "suppressed": False,
+            "warnings": []
         },
         "MATH1081": {
             "is_accurate": True,
             "handbook_note": "",
             "unlocked": True,
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "COMP1521": {
             "is_accurate": True,
             "handbook_note": "",
             "unlocked": True,
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "COMP1531": {
             "is_accurate": True,
             "handbook_note": "",
             "unlocked": True,
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "COMP2521": {
             "is_accurate": True,
             "handbook_note": "",
             "unlocked": True,
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "ENGG2600": {
             'handbook_note': 'Please refer to the course overview section for further information on requirements',
             'is_accurate': True,
-            'suppressed': False,
             'unlocked': False,
             'warnings': ['((((DESN1000) OR you need to do a program of type COMP OR you need to do a program of type FOOD OR you need to do a program of type MEDC) AND 42 UOC required in all courses you have 38 UOC))']
         }
@@ -91,36 +84,31 @@ def test_validateTermPlanner_invalid_progress():
             "is_accurate": True,
             "unlocked": True,
             "handbook_note": "",
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "MATH1141": {
             "is_accurate": True,
             "unlocked": True,
             "handbook_note": "",
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "MATH1081": {
             "is_accurate": True,
             "unlocked": True,
             "handbook_note": "",
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "COMP1521": {
             "is_accurate": True,
             "unlocked": True,
             "handbook_note": "",
-            "warnings": [],
-            "suppressed": False
+            "warnings": []
         },
         "COMP2511": {
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": ['((COMP1531 AND (COMP2521 OR COMP1927)))'],
-            "suppressed": False
+            "warnings": ['((COMP1531 AND (COMP2521 OR COMP1927)))']
         },
         "COMP4128": {
             "is_accurate": True,
@@ -128,8 +116,7 @@ def test_validateTermPlanner_invalid_progress():
             "handbook_note": "",
             "warnings": [
                 '((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses.  Your WAM in all courses has not been recorded)))'
-            ],
-            "suppressed": False
+            ]
         }
     }
 
@@ -146,66 +133,12 @@ def test_validateTermPlanner_out_of_order_progress():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": ['((Need 65 in MATH1131 for this course OR Need 65 in MATH1141 for this course OR Need 65 in DPST1013 for this course))'],
-            "suppressed": False
+            "warnings": ['((Need 65 in MATH1131 for this course OR Need 65 in MATH1141 for this course OR Need 65 in DPST1013 for this course))']
         },
         "MATH1141": {
             "is_accurate": True,
             "unlocked": True,
             "handbook_note": "",
-            "warnings": [],
-            "suppressed": False
-        }
-    }
-
-
-def test_validateTermPlanner_past_term_suppress_warnings():
-    clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["suppress_warning"])
-    x = requests.get(
-        'http://127.0.0.1:8000/planner/validateTermPlanner')
-    assert x.status_code == 200
-    assert x.json()['courses_state'] == {
-        "COMP1511": {
-            "is_accurate": True,
-            "unlocked": True,
-            "handbook_note": "",
-            "warnings": [],
-            "suppressed": True
-        },
-        "MATH1141": {
-            "is_accurate": True,
-            "unlocked": True,
-            "handbook_note": "",
-            "warnings": [],
-            "suppressed": True
-        },
-        "MATH1081": {
-            "is_accurate": True,
-            "unlocked": True,
-            "handbook_note": "",
-            "warnings": [],
-            "suppressed": True
-        },
-        "COMP1521": {
-            "is_accurate": True,
-            "unlocked": True,
-            "handbook_note": "",
-            "warnings": [],
-            "suppressed": True
-        },
-        "COMP2511": {
-            "is_accurate": True,
-            "unlocked": False,
-            "handbook_note": "",
-            "warnings": ['((COMP1531 AND (COMP2521 OR COMP1927)))'],
-            "suppressed": True
-        },
-        "COMP4128": {
-            "is_accurate": True,
-            "unlocked": False,
-            "handbook_note": "",
-            "warnings": ['((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses.  Your WAM in all courses has not been recorded)))'],
-            "suppressed": True
+            "warnings": []
         }
     }

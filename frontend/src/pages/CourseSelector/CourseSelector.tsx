@@ -87,13 +87,13 @@ const CourseSelector = () => {
       <S.ContainerWrapper>
         <CourseBanner courses={coursesQuery.data} />
         <CourseTabs />
-        <S.ContentWrapper offset={menuOffset}>
+        <S.ContentWrapper $offset={menuOffset}>
           <CourseMenu
             planner={plannerQuery.data}
             courses={coursesQuery.data}
             degree={degreeQuery.data}
           />
-          <S.ContentResizer ref={divRef} offset={menuOffset} />
+          <S.ContentResizer ref={divRef} $offset={menuOffset} />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel

@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Select, Switch } from 'antd';
+import { DatePicker, Modal, Select, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
@@ -12,8 +12,6 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
-
-const DatePicker = React.lazy(() => import('antd').then((d) => ({ default: d.DatePicker })));
 
 type Props = {
   planner?: PlannerResponse;
@@ -26,39 +24,87 @@ const SettingsMenu = ({ planner }: Props) => {
   const { theme } = useSelector((state: RootState) => state.settings);
   const token = useToken();
 
-  async function handleUpdateStartYear(_: unknown, dateString: string | string[]) {
-    if (dateString && typeof dateString === 'string') {
-      try {
-        await axios.put(
-          '/user/updateStartYear',
-          { startYear: parseInt(dateString, 10) },
-          { headers: withAuthorization(token) }
-        );
-      } catch {
-        openNotification({
-          type: 'error',
-          message: 'Error setting degree start year',
-          description: 'There was an error updating the degree start year.'
-        });
+  function willUnplanCourses(numYears: number) {
+    if (!planner) return false;
+
+    if (numYears < planner.years.length) {
+      for (let i = numYears; i < planner.years.length; i++) {
+        if (Object.values(planner.years[i]).flat().length > 0) return true;
       }
     }
+
+    return false;
   }
 
-  async function handleUpdateDegreeLength(value: number) {
-    try {
-      await axios.put(
-        '/user/updateDegreeLength',
-        { numYears: value },
-        { headers: withAuthorization(token) }
-      );
-    } catch {
+  async function updateStartYear(year: string) {
+    await axios.put(
+      '/user/updateStartYear',
+      { startYear: parseInt(year, 10) },
+      { headers: withAuthorization(token) }
+    );
+  }
+
+  const updateStartYearMutation = useMutation({
+    mutationFn: updateStartYear,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+    },
+    onError: () => {
+      openNotification({
+        type: 'error',
+        message: 'Error setting degree start year',
+        description: 'There was an error updating the degree start year.'
+      });
+    }
+  });
+
+  const handleUpdateStartYear = async (_: unknown, dateString: string | string[]) => {
+    if (dateString && typeof dateString === 'string') {
+      updateStartYearMutation.mutate(dateString);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('Error updating start year. Invalid date string:', dateString);
+    }
+  };
+
+  async function updateDegreeLength(numYears: number) {
+    await axios.put(
+      '/user/updateDegreeLength',
+      { numYears },
+      { headers: withAuthorization(token) }
+    );
+  }
+
+  const updateDegreeLengthMutation = useMutation({
+    mutationFn: updateDegreeLength,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+    },
+    onError: () => {
       openNotification({
         type: 'error',
         message: 'Error setting degree length',
         description: 'There was an error updating the degree length.'
       });
     }
-  }
+  });
+
+  const handleUpdateDegreeLength = async (value: number) => {
+    if (willUnplanCourses(value)) {
+      Modal.confirm({
+        title: 'Unplanned Courses',
+        content:
+          'Changing the degree length will unplan courses. Are you sure you want to continue?',
+        onOk: () => updateDegreeLengthMutation.mutate(value)
+      });
+    } else {
+      updateDegreeLengthMutation.mutate(value);
+    }
+  };
 
   async function summerToggle() {
     try {

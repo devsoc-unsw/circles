@@ -279,7 +279,7 @@ const TermPlanner = () => {
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
             <S.PlannerContainer>
-              <S.PlannerGridWrapper summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
+              <S.PlannerGridWrapper $summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
                 <GridItem /> {/* Empty grid item for the year */}
                 {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
                 <GridItem>Term 1</GridItem>
@@ -302,7 +302,7 @@ const TermPlanner = () => {
                     <React.Fragment key={iYear}>
                       <S.YearGridBox>
                         <S.YearWrapper>
-                          <S.YearText currYear={LIVE_YEAR === iYear}>{iYear}</S.YearText>
+                          <S.YearText $currYear={LIVE_YEAR === iYear}>{iYear}</S.YearText>
                         </S.YearWrapper>
                         <Badge
                           style={{
