@@ -45,14 +45,9 @@ class UserDegreeInfoDict(TypedDict):
 
 class UserCourseInfoDict(TypedDict):
     code: str
-    suppressed: bool
     mark: Union[Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD'], int, None]
     uoc: int
     ignoreFromProgression: bool
-
-class YearTermDict(TypedDict):
-    Y: int
-    T: int
 
 class PlannerYearDict(TypedDict):
     T0: List[str]
@@ -64,7 +59,6 @@ class UserPlannerInfoDict(TypedDict):
     unplanned: List[str]
     startYear: int
     isSummerEnabled: bool
-    mostRecentPastTerm: YearTermDict
     years: List[PlannerYearDict]
     lockedTerms: Dict[str, bool]
 

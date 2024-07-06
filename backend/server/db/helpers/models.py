@@ -19,7 +19,6 @@ class UserDegreeStorage(BaseModel):
 
 class UserCourseStorage(BaseModel):
     code: str
-    suppressed: bool
     mark: Union[Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD'], int, None]
     uoc: int
     ignoreFromProgression: bool
@@ -27,10 +26,6 @@ class UserCourseStorage(BaseModel):
 # TODO-OLLI(pm): https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types
 # we can make this a RootModel or use a TypeAdapter if we want stronger type checks here
 type UserCoursesStorage = Dict[str, UserCourseStorage]
-
-class YearTerm(BaseModel):
-    Y: int
-    T: int
 
 class PlannerYear(BaseModel):
     T0: List[str]
@@ -42,7 +37,6 @@ class UserPlannerStorage(BaseModel):
     unplanned: List[str]
     startYear: int
     isSummerEnabled: bool
-    mostRecentPastTerm: YearTerm
     years: List[PlannerYear]
     lockedTerms: Dict[str, bool]
 

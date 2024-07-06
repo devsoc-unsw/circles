@@ -38,7 +38,6 @@ def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
             'code': info.code,
             'ignoreFromProgression': info.ignoreFromProgression,
             'mark': info.mark,
-            'suppressed': info.suppressed,
             'uoc': info.uoc,
         } for code, info in s.items()
     }
@@ -47,10 +46,6 @@ def _nto_planner(s: NEWUserPlannerStorage) -> PlannerLocalStorage:
     return {
         'isSummerEnabled': s.isSummerEnabled,
         'lockedTerms': s.lockedTerms,
-        'mostRecentPastTerm': {
-            'T': s.mostRecentPastTerm.T,
-            'Y': s.mostRecentPastTerm.Y,
-        },
         'startYear': s.startYear,
         'unplanned': s.unplanned,
         'years': [{ 
@@ -170,7 +165,6 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
             'ignoreFromProgression': raw_course['ignoreFromProgression'],
             'mark': raw_course['mark'],
             'uoc': raw_course['uoc'],
-            'suppressed': raw_course['suppressed'],
             'isMultiterm': course_info['is_multiterm'],
             'title': course_info['title'],
             'plannedFor': flattened.get(raw_course['code']),

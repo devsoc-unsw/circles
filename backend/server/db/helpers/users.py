@@ -6,7 +6,7 @@ import pymongo.errors
 from server.db.mongo.constants import UID_INDEX_NAME
 from server.db.mongo.conn import usersCOL
 
-from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage, YearTerm
+from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage
 
 # TODO-OLLI(pm): decide if we want to remove type ignores by constructing dictionaries manually
 

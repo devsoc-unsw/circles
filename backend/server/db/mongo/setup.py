@@ -76,16 +76,12 @@ def _create_users_collection():
                             'properties': {},
                             'additionalProperties': {
                                 'bsonType': 'object',
-                                'required': ['code', 'suppressed', 'mark', 'uoc', 'ignoreFromProgression'],
+                                'required': ['code', 'mark', 'uoc', 'ignoreFromProgression'],
                                 'additionalProperties': False,
                                 'properties': {
                                     'code': {
                                         'bsonType': 'string',
                                         'description': 'Course code repeated',
-                                    },
-                                    'suppressed': {
-                                        'bsonType': 'bool',
-                                        'description': 'Whether or not the warnings are suppressed',
                                     },
                                     'mark': {
                                         'oneOf': [
@@ -107,7 +103,7 @@ def _create_users_collection():
                         },
                         'planner': {
                             'bsonType': 'object',
-                            'required': ['unplanned', 'startYear', 'isSummerEnabled', 'mostRecentPastTerm', 'years', 'lockedTerms'],
+                            'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years', 'lockedTerms'],
                             'additionalProperties': False,
                             'properties': {
                                 'lockedTerms': {
@@ -115,16 +111,6 @@ def _create_users_collection():
                                     'properties': {},
                                     'additionalProperties': { 'bsonType': 'bool' },
                                     'description': 'A map of <YEAR><TERM> -> boolean of which terms are locked. Example: 2024T1 -> True',
-                                },
-                                'mostRecentPastTerm': {
-                                    'bsonType': 'object',
-                                    'required': ['Y', 'T'],
-                                    'additionalProperties': False,
-                                    'properties': {
-                                        'Y': { 'bsonType': 'int' },
-                                        'T': { 'bsonType': 'int' },
-                                    },
-                                    'description': 'Used for planner validation?!'
                                 },
                                 'unplanned': {
                                     'bsonType': 'array',

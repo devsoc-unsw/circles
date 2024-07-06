@@ -237,7 +237,6 @@ class CourseStorage(TypedDict):
 @with_config(ConfigDict(extra='forbid'))
 class CourseStorageWithExtra(TypedDict):
     code: str
-    suppressed: bool
     mark: Mark
     uoc: int
     title: str
