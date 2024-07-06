@@ -8,7 +8,7 @@ export type IdentityResponse = {
 
 export const withAuthorization = (token: string) => {
   if (typeof token !== 'string' || token.length === 0) {
-    throw TypeError('Token must be a string of length > 0', { cause: { token } });
+    throw TypeError('Token must be a string of length > 0');
   }
 
   return { Authorization: `Bearer ${token}` };

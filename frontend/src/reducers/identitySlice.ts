@@ -21,20 +21,16 @@ const identitySlice = createSlice({
     selectIdentity: (state) => state
   },
   reducers: {
-    updateIdentity: (state, action: PayloadAction<CompleteIdentity>) => {
-      return {
-        expiresAt: action.payload.expiresAt,
-        token: action.payload.token,
-        userId: action.payload.userId
-      };
-    },
-    updateIdentityWithAPIRes: (state, action: PayloadAction<IdentityResponse>) => {
-      return {
-        expiresAt: action.payload.exp,
-        token: action.payload.session_token,
-        userId: action.payload.uid
-      };
-    },
+    updateIdentity: (state, action: PayloadAction<CompleteIdentity>) => ({
+      expiresAt: action.payload.expiresAt,
+      token: action.payload.token,
+      userId: action.payload.userId
+    }),
+    updateIdentityWithAPIRes: (state, action: PayloadAction<IdentityResponse>) => ({
+      expiresAt: action.payload.exp,
+      token: action.payload.session_token,
+      userId: action.payload.uid
+    }),
     unsetIdentity: () => initialIdentityState
   }
 });

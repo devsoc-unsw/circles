@@ -19,7 +19,6 @@ const LoginSuccess = () => {
         const identity = await CSELogin(Object.fromEntries(query.entries()));
 
         dispatch(updateIdentityWithAPIRes(identity));
-        // TODO-OLLI(pm): could use a conditional useQuery too
         const userIsSetup = await queryClient.fetchQuery({
           queryKey: ['degree', 'isSetup'], // TODO-OLLI(pm): fix this key
           queryFn: () => getUserIsSetup(identity.session_token)
