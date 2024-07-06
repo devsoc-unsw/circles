@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
+import type { DatePickerProps } from 'antd';
 import { Typography } from 'antd';
+import dayjs from 'dayjs';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
@@ -17,6 +19,11 @@ type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
   setDegreeInfo: SetState<DegreeWizardPayload>;
+};
+
+// Disable 10 years from the selected date
+const disable10YearsOnwards: DatePickerProps['disabledDate'] = (current, { from }) => {
+  return from ? Math.abs(current.year() - from.year()) >= 10 : false;
 };
 
 const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
@@ -48,6 +55,10 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
               width: '100%'
             }}
             onChange={handleOnChange}
+            minDate={dayjs('2019')}
+            maxDate={dayjs().add(7, 'year')}
+            disabledDate={disable10YearsOnwards}
+            // placement="bottomRight" ??
           />
         </Suspense>
       </animated.div>
