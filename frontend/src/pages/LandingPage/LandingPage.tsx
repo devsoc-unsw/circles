@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { inDev } from 'config/constants';
 import Footer from './FooterSection/Footer';
 import GetInvolved from './GetInvolved';
@@ -8,8 +9,14 @@ import InteractiveViewSection from './InteractiveViewSection';
 import KeyFeaturesSection from './KeyFeaturesSection';
 import SponsorSection from './SponsorSection';
 
+const LandingPageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+`;
+
 const LandingPage = () => (
-  <>
+  <LandingPageWrapper>
     <Hero />
     <SponsorSection />
     <KeyFeaturesSection />
@@ -17,7 +24,7 @@ const LandingPage = () => (
     <HowToUse />
     <GetInvolved />
     <Footer />
-  </>
+  </LandingPageWrapper>
 );
 
 export default LandingPage;

@@ -7,9 +7,9 @@ import S from './styles';
 
 const Footer = () => {
   return (
-    <>
+    <div>
       <S.FooterBlob src={footerBlobSrc} />
-      <S.FooterWrapper>
+      <S.FooterContentBody>
         <PageContainer>
           <S.FooterContentContainer>
             <S.FooterLogoWrapper>
@@ -38,8 +38,8 @@ const Footer = () => {
             </S.FooterDisclaimer>
           </S.FooterContentContainer>
         </PageContainer>
-      </S.FooterWrapper>
-    </>
+      </S.FooterContentBody>
+    </div>
   );
 };
 

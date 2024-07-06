@@ -4,10 +4,8 @@ const FooterBlob = styled.img`
   width: 100%;
 `;
 
-const FooterWrapper = styled.div`
+const FooterContentBody = styled.div`
   background-color: #9154de;
-  /* TODO: Hack coz of pixel diff between blob and footer content */
-  margin-top: -1px;
 `;
 
 const FooterContentContainer = styled.div`
@@ -44,6 +42,6 @@ export default {
   FooterContentContainer,
   FooterLogoWrapper,
   FooterDisclaimer,
-  FooterWrapper,
+  FooterContentBody,
   DevSocLogo
 };
