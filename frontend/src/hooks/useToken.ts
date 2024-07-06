@@ -22,7 +22,7 @@ function useToken(options?: Options): string | undefined {
   const token = useAppSelector(selectToken);
 
   if (token === undefined && options?.allowUnset !== true) {
-    // This shouldn't occur of useToken is used inside a RequireToken
+    // This shouldn't occur if useToken is used inside a RequireToken
     throw TypeError('useToken: allowUnset was false when token was undefined.', {
       cause: { token, allowUnset: !!options?.allowUnset }
     });
