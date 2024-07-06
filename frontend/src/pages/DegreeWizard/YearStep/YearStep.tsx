@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import type { DatePickerProps } from 'antd';
-import { Typography } from 'antd';
+import { DatePicker, Typography } from 'antd';
 import dayjs from 'dayjs';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import Spinner from 'components/Spinner';
@@ -10,9 +10,6 @@ import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
-const YearPicker = React.lazy(() =>
-  import('antd').then((d) => ({ default: d.DatePicker.RangePicker }))
-);
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
@@ -47,7 +44,7 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
           What years do you start and finish?
         </Title>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
-          <YearPicker
+          <DatePicker.RangePicker
             picker="year"
             data-testid="antd-rangepicker"
             size="large"
