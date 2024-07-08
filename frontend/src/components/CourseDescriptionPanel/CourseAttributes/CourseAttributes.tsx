@@ -48,7 +48,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
 
   const updatedTerm = recentTermNumber > currentTerm ? recentTermNumber : currentTerm;
 
-  const teachingPeriod = updatedTerm > 0 ? 'T' + updatedTerm : 'U0f';
+  const teachingPeriod = updatedTerm > 0 ? 'T' + updatedTerm : 'U0';
 
   const termMod = termMapping[updatedTerm];
 
