@@ -11,7 +11,6 @@ import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { CURR_YEAR, TERM } from 'config/constants';
 import S from './styles';
-import { c } from 'vite/dist/node/types.d-aGj9QkWt';
 
 const { Title, Text } = Typography;
 
@@ -48,7 +47,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
 
   const updatedTerm = recentTermNumber > currentTerm ? recentTermNumber : currentTerm;
 
-  const teachingPeriod = updatedTerm > 0 ? 'T' + updatedTerm : 'U0';
+  const teachingPeriod = updatedTerm > 0 ? `T${updatedTerm}` : 'U0';
 
   const termMod = termMapping[updatedTerm];
 
