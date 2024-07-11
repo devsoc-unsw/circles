@@ -73,19 +73,24 @@ const TermPlanner = () => {
   const validYearsAndCurrent = (validYears as (number | 'current')[]).concat(['current']);
   console.log(validYearsAndCurrent)
   const courseInfoFlipped = Object.fromEntries(
-    Object.keys(courses).map((code: string, index: number) => [
-      code,
-      ((data) => {
-        if (data === undefined) return data
+    Object.keys(courses).map((code: string, index: number) => {
+      const myFunc = (data?: Record<number, Course>) => {
+        if (!data) return undefined
+        let newData = { ...data };
         let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
         validYears.forEach((year) => {
-          if (!!data[year]) bestYear = year;
-          else data[year] = {...data[bestYear], terms: []};
+          if (!!newData[year]) bestYear = year;
+          else newData[year] = { ...newData[bestYear], terms: [] };
         });
-        return data;
-      })(courseQueries[index].data) ??
-        validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
-    ])
+        return newData;
+      }
+
+      return [
+          code,
+          myFunc(courseQueries[index].data) ??
+          validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
+      ];
+        })
   ) as Record<string, Record<number | 'current', Course>>;
   console.log(courseInfoFlipped)
   const courseInfos: any = {};
