@@ -74,7 +74,7 @@ const TermPlanner = () => {
   console.log(validYearsAndCurrent)
   const courseInfoFlipped = Object.fromEntries(
     Object.keys(courses).map((code: string, index: number) => {
-      const myFunc = (data?: Record<number, Course>) => {
+      const extrapolateYears = (data?: Record<number, Course>) => {
         if (!data) return undefined
         let newData = { ...data };
         let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
@@ -87,7 +87,7 @@ const TermPlanner = () => {
 
       return [
           code,
-          myFunc(courseQueries[index].data) ??
+          extrapolateYears(courseQueries[index].data) ??
           validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
       ];
         })
