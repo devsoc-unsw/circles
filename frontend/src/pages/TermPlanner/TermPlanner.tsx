@@ -72,11 +72,24 @@ const TermPlanner = () => {
   });
   const validYearsAndCurrent = (validYears as (number | 'current')[]).concat(['current']);
   const courseInfoFlipped = Object.fromEntries(
-    Object.keys(courses).map((code: string, index: number) => [
-      code,
-      courseQueries[index].data ??
-        validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
-    ])
+    Object.keys(courses).map((code: string, index: number) => {
+      const extrapolateYears = (data?: Record<number, Course>) => {
+        if (!data) return undefined;
+        const newData = { ...data };
+        let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
+        validYears.forEach((year) => {
+          if (newData[year]) bestYear = year;
+          else newData[year] = { ...newData[bestYear], terms: [] };
+        });
+        return newData;
+      };
+
+      return [
+        code,
+        extrapolateYears(courseQueries[index].data) ??
+          validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
+      ];
+    })
   ) as Record<string, Record<number | 'current', Course>>;
   const courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
@@ -272,7 +285,7 @@ const TermPlanner = () => {
           // TODO: Fix Suspense by updating to react-query v5
           /* <Suspense fallback={<Spinner text="Loading Table..." />}> */
         }
-        {courseQueries.some((c) => c.isPending) || !courseInfos[LIVE_YEAR] ? (
+        {plannerQuery.isPending || coursesQuery.isPending || courseQueries.some((c) => c.isPending) ? (
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
@@ -314,7 +327,7 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = `${iYear}${term}`;
                         if (!planner.isSummerEnabled && term === 'T0') return null;
-                        if (!courseInfos[yearToFetch(iYear)]) return null; // not yet ready // TODO: write better
+                        // if (!courseInfos[yearToFetch(iYear)]) return null; // not yet ready // TODO: write better
                         // console.log('Making termbox for', iYear, term);
                         const codesForThisTerm = year[term];
                         // probs map this at TOP-LEVEL
