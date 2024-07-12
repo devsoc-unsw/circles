@@ -25,7 +25,7 @@ class UserCourseStorage(BaseModel):
 
 # TODO-OLLI(pm): https://docs.pydantic.dev/latest/concepts/models/#rootmodel-and-custom-root-types
 # we can make this a RootModel or use a TypeAdapter if we want stronger type checks here
-type UserCoursesStorage = Dict[str, UserCourseStorage]
+type UserCoursesStorage = Dict[str, UserCourseStorage]  # type: ignore
 
 class PlannerYear(BaseModel):
     T0: List[str]

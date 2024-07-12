@@ -4,9 +4,8 @@ from fastapi import APIRouter, HTTPException, Security
 from starlette.status import HTTP_403_FORBIDDEN
 
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
-from server.routers.model import CourseMark, DegreeLength, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, StartYear, Storage
 from server.routers.courses import get_course
-from server.routers.model import CourseMark, CourseStorage, DegreeWizardInfo, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
+from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
