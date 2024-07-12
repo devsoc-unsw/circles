@@ -68,7 +68,9 @@ tmp
 tmp.*
 
 # Editor and OS files
-**/.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 **/.DS_Store
 .idea
 **/Session.vim
