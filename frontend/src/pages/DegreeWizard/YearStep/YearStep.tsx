@@ -20,7 +20,7 @@ type Props = {
 
 // Disable 10 years from the selected date
 const disable10YearsOnwards: DatePickerProps['disabledDate'] = (current, { from }) => {
-  return from ? Math.abs(current.year() - from.year()) >= 10 : false;
+  return from && Math.abs(current.year() - from.year()) >= 10;
 };
 
 const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
