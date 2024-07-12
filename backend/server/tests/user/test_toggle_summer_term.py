@@ -2,7 +2,7 @@ import json
 
 import requests
 from server.config import DUMMY_TOKEN
-from server.tests.user.utility import clear
+from server.tests.user.utility import clear, get_token_headers
 
 PATH = "server/example_input/example_local_storage_data.json"
 
@@ -11,13 +11,14 @@ with open(PATH, encoding="utf8") as f:
 
 def test_toggleSummerTerm():
     clear()
+    headers = get_token_headers()
     x = requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["summer_term"])
+        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["summer_term"], headers=headers)
     assert x.status_code == 200
-    data = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}')
+    data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers)
     assert data.json()["planner"]["isSummerEnabled"]
-    requests.post('http://127.0.0.1:8000/user/toggleSummerTerm')
-    data = requests.get(f'http://127.0.0.1:8000/user/data/all/{DUMMY_TOKEN}')
+    requests.post('http://127.0.0.1:8000/user/toggleSummerTerm', headers=headers)
+    data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers)
     assert not data.json()["planner"]["isSummerEnabled"]
     assert data.json()["planner"]["years"][0]["T0"] == []
     assert data.json()["planner"]["years"][1]["T0"] == []

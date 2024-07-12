@@ -1,5 +1,6 @@
 import os
 
+import requests
 from dotenv import load_dotenv
 
 from server.db.mongo.setup import setup_user_related_collections
@@ -15,3 +16,9 @@ def clear():
     """drop users in database. Used before every test is run."""
     setup_user_related_collections(drop=True)
     setup_redis_sessionsdb()
+
+def get_token():
+    return requests.post('http://127.0.0.1:8000/auth/guest_login').json()["session_token"]
+
+def get_token_headers():
+    return {"Authorization": f"Bearer {get_token()}"}

@@ -1,6 +1,6 @@
 import json
 import requests
-from server.tests.user.utility import clear
+from server.tests.user.utility import clear, get_token_headers
 
 PATH = "server/example_input/example_local_storage_data.json"
 
@@ -10,19 +10,21 @@ with open(PATH, encoding="utf8") as f:
 
 def test_validateTermPlanner_empty_planner():
     clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"])
+    headers = get_token_headers()
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers)
 
     x = requests.get(
-        'http://127.0.0.1:8000/planner/validateTermPlanner')
+        'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
     assert x.status_code == 200
     assert x.json()['courses_state'] == {}
 
 
 def test_validateTermPlanner_valid_progress():
     clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"])
+    headers = get_token_headers()
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     x = requests.get(
-        'http://127.0.0.1:8000/planner/validateTermPlanner')
+        'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
     assert x.status_code == 200
     assert x.json()['courses_state'] == {
         "COMP1511": {
@@ -72,10 +74,11 @@ def test_validateTermPlanner_valid_progress():
 
 def test_validateTermPlanner_invalid_progress():
     clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["no_uoc"])
+    headers = get_token_headers()
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["no_uoc"], headers=headers)
 
     x = requests.get(
-        'http://127.0.0.1:8000/planner/validateTermPlanner')
+        'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
     assert x.status_code == 200
     assert x.json()['courses_state'] == {
         "COMP1511": {
@@ -122,9 +125,10 @@ def test_validateTermPlanner_invalid_progress():
 def test_validateTermPlanner_out_of_order_progress():
     # if the courses here were shuffled, it would be correct. Show error still
     clear()
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["out_of_order"])
+    headers = get_token_headers()
+    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["out_of_order"], headers=headers)
     x = requests.get(
-        'http://127.0.0.1:8000/planner/validateTermPlanner')
+        'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
     assert x.status_code == 200
     assert x.json()['courses_state'] == {
         "MATH1241": {
