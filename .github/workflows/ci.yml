@@ -70,13 +70,13 @@ jobs:
         run: cd frontend && npm ci
       - name: Run frontend types
         if: always()
-        run: npm run lint
+        run: cd frontend && npm run lint
       - name: Run frontend lint
         if: always()
-        run: npm run types
+        run: cd frontend && npm run types
       - name: Run frontend tests
         if: false # disable these tests for now
-        run: npm run test
+        run: cd frontend && npm run test
       - uses: actions/upload-artifact@v3
         if: false # always()
         with:
