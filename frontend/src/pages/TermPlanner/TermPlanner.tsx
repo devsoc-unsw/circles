@@ -71,28 +71,26 @@ const TermPlanner = () => {
     }))
   });
   const validYearsAndCurrent = (validYears as (number | 'current')[]).concat(['current']);
-  console.log(validYearsAndCurrent)
   const courseInfoFlipped = Object.fromEntries(
     Object.keys(courses).map((code: string, index: number) => {
       const extrapolateYears = (data?: Record<number, Course>) => {
-        if (!data) return undefined
-        let newData = { ...data };
+        if (!data) return undefined;
+        const newData = { ...data };
         let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
         validYears.forEach((year) => {
-          if (!!newData[year]) bestYear = year;
+          if (newData[year]) bestYear = year;
           else newData[year] = { ...newData[bestYear], terms: [] };
         });
         return newData;
-      }
+      };
 
       return [
-          code,
-          extrapolateYears(courseQueries[index].data) ??
+        code,
+        extrapolateYears(courseQueries[index].data) ??
           validYearsAndCurrent.reduce((prev, curr) => ({ ...prev, [curr]: badCourseInfo }), {})
       ];
-        })
+    })
   ) as Record<string, Record<number | 'current', Course>>;
-  console.log(courseInfoFlipped)
   const courseInfos: any = {};
   Object.entries(courseInfoFlipped).forEach(([course, yearData]) => {
     Object.entries(yearData).forEach(([year, courseData]) => {
