@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
@@ -7,25 +6,28 @@ import axios from 'axios';
 import { Course } from 'types/api';
 import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
+import { withAuthorization } from 'utils/api/auth';
 import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
-import type { RootState } from 'config/store';
+import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
 
 const ImportPlannerMenu = () => {
+  const token = useToken();
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner = plannerQuery.data || badPlanner;
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const { token } = useSelector((state: RootState) => state.settings);
 
   const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
     try {
-      await axios.post('planner/unPlannedToTerm', data, { params: { token } });
+      await axios.post('planner/unPlannedToTerm', data, {
+        headers: withAuthorization(token)
+      });
     } catch (err) {
       // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
       console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
@@ -38,7 +40,11 @@ const ImportPlannerMenu = () => {
 
   const handleAddToUnplanned = async (code: string) => {
     try {
-      await axios.post('planner/addToUnplanned', { courseCode: code }, { params: { token } });
+      await axios.post(
+        'planner/addToUnplanned',
+        { courseCode: code },
+        { headers: withAuthorization(token) }
+      );
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Error at handleAddToUnplanned: ', err);
@@ -97,12 +103,12 @@ const ImportPlannerMenu = () => {
             await axios.put(
               '/user/updateDegreeLength',
               { numYears: fileInJson.numYears },
-              { params: { token } }
+              { headers: withAuthorization(token) }
             );
             await axios.put(
               '/user/updateStartYear',
               { startYear: fileInJson.startYear },
-              { params: { token } }
+              { headers: withAuthorization(token) }
             );
           } catch {
             openNotification({
@@ -114,7 +120,7 @@ const ImportPlannerMenu = () => {
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             try {
-              await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+              await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
             } catch {
               openNotification({
                 type: 'error',

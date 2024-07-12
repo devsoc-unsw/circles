@@ -10,6 +10,7 @@ import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import { inDev } from 'config/constants';
+import useToken from 'hooks/useToken';
 import S from './styles';
 
 const { Text } = Typography;
@@ -27,10 +28,12 @@ const CourseInfoDrawers = ({
   pathFrom = [],
   unlocked
 }: CourseInfoDrawersProps) => {
+  const token = useToken();
+
   const courses =
     useQuery({
       queryKey: ['courses'],
-      queryFn: getUserCourses
+      queryFn: () => getUserCourses(token)
     }).data || badCourses;
 
   const pathFromInPlanner = pathFrom.filter((courseCode) =>
@@ -42,7 +45,7 @@ const CourseInfoDrawers = ({
   const inPlanner = courses[course.code];
   const validateQuery = useQuery({
     queryKey: ['validate'],
-    queryFn: validateTermPlanner
+    queryFn: () => validateTermPlanner(token)
   });
   const validations = validateQuery.data ?? badValidations;
   const isUnlocked = validations.courses_state[course.code];

@@ -7,6 +7,7 @@ import { useDebounce } from 'use-debounce';
 import { searchCourse } from 'utils/api/courseApi';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import QuickAddCartButton from 'components/QuickAddCartButton';
+import useToken from 'hooks/useToken';
 
 type SearchResultLabelProps = {
   courseCode: string;
@@ -44,17 +45,15 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
   const [searchResults, setSearchResults] = useState<SearchCourse>({});
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm] = useDebounce(value, 200);
+  const token = useToken();
 
-  const isInPlanner = (courseCode: string) =>
-    userCourses !== undefined &&
-    userCourses[courseCode] !== undefined &&
-    userCourses[courseCode].plannedFor !== null;
+  const isInPlanner = (courseCode: string) => userCourses?.[courseCode] !== undefined;
 
   const queryClient = useQueryClient();
   const courseMutation = useMutation({
     mutationFn: async (courseId: string) => {
       const handleMutation = isInPlanner(courseId) ? removeCourse : addToUnplanned;
-      await handleMutation(courseId);
+      await handleMutation(token, courseId);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -77,7 +76,7 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
   useEffect(() => {
     const handleSearchCourse = async (query: string) => {
       try {
-        setSearchResults(await searchCourse(query));
+        setSearchResults(await searchCourse(token, query));
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error('Error at handleSearchCourse: ', err);
@@ -89,7 +88,7 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
       // if debounced term changes, call API
       handleSearchCourse(debouncedSearchTerm);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, token]);
 
   const handleSelect = (courseCode: string) => {
     setValue(null);

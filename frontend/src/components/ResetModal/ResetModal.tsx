@@ -1,10 +1,10 @@
 import React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from 'antd';
-import { resetDegree } from 'utils/api/degreeApi';
+import { resetUserDegree } from 'utils/api/userApi';
 import { useAppDispatch } from 'hooks';
+import useToken from 'hooks/useToken';
 import { resetTabs } from 'reducers/courseTabsSlice';
-import { setToken } from 'reducers/settingsSlice';
 
 type Props = {
   open?: boolean;
@@ -16,9 +16,10 @@ type Props = {
 const ResetModal = ({ open, onOk, onCancel }: Props) => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+  const token = useToken({ allowUnset: true }); // NOTE: must allow unset since this is used in ErrorBoundary itself
 
   const resetDegreeMutation = useMutation({
-    mutationFn: resetDegree,
+    mutationFn: (definedToken: string) => resetUserDegree(definedToken),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['degree']
@@ -31,13 +32,14 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
   });
 
   const handleResetDegree = () => {
-    resetDegreeMutation.mutate();
+    if (token !== undefined) {
+      resetDegreeMutation.mutate(token);
+    }
   };
 
   const handleOk = async () => {
     handleResetDegree();
     dispatch(resetTabs());
-    dispatch(setToken(''));
     onOk?.();
   };
 
@@ -50,7 +52,7 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
       okText="Reset Data"
       okButtonProps={{ type: 'primary', danger: true }}
       onCancel={onCancel}
-      cancelText="Go to Degree Planner"
+      cancelText="Go to Course Selector"
     >
       <div>
         You can navigate to the Degree Wizard to reset your data. By clicking Ok, Your existing data

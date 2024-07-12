@@ -32,31 +32,33 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
+import useToken from 'hooks/useToken';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
 );
 
 const TermPlanner = () => {
+  const token = useToken();
   const queryClient = useQueryClient();
 
   // Planer obj
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
 
   // The user's actual courses obj???????
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const courses: CoursesResponse = coursesQuery.data ?? badCourses;
 
   const validateQuery = useQuery({
     queryKey: ['validate'],
-    queryFn: validateTermPlanner
+    queryFn: () => validateTermPlanner(token)
   });
   const validations: ValidatesResponse = validateQuery.data ?? badValidations;
   const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);
@@ -101,7 +103,7 @@ const TermPlanner = () => {
 
   // Mutations
   const setPlannedCourseToTermMutation = useMutation({
-    mutationFn: setPlannedCourseToTerm,
+    mutationFn: (data: PlannedToTerm) => setPlannedCourseToTerm(token, data),
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -133,7 +135,7 @@ const TermPlanner = () => {
   };
 
   const setUnplannedCourseToTermMutation = useMutation({
-    mutationFn: setUnplannedCourseToTerm,
+    mutationFn: (data: UnPlannedToTerm) => setUnplannedCourseToTerm(token, data),
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;
@@ -162,7 +164,7 @@ const TermPlanner = () => {
   };
 
   const unscheduleCourseMutation = useMutation({
-    mutationFn: unscheduleCourse,
+    mutationFn: (data: UnscheduleCourse) => unscheduleCourse(token, data),
     onMutate: (data) => {
       queryClient.setQueryData(['planner'], (prev: PlannerResponse | undefined) => {
         if (!prev) return badPlanner;

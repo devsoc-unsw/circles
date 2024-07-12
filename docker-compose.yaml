@@ -11,6 +11,20 @@ services:
       - circles-net
     ports:
       - '27017:27017'
+
+  sessionsdb:
+    image: redis/redis-stack:7.2.0-v9
+    container_name: sessionsdb
+    ports:
+      - '8001:8001'
+      - '6379:6379'
+    env_file:
+      - ./env/sessionsdb.env
+    volumes:
+      - ./backend/redis.conf:/redis-stack.conf
+    networks:
+      - circles-net
+
   backend:
     build:
       context: ./backend
@@ -20,13 +34,16 @@ services:
       - '8000:8000'
     env_file:
       - ./env/backend.env
+    # tty: true
     depends_on:
-      - init-mongo
+      - mongodb
+      - sessionsdb
     networks:
       - circles-net
     volumes:
       # Bind mount volume for live backend updates while developing
       - ./backend:/backend
+
   backend-prod:
     build:
       context: ./backend
@@ -38,8 +55,10 @@ services:
       - ./env/backend.env
     depends_on:
       - mongodb
+      - sessionsdb
     networks:
       - circles-net
+
   frontend:
     build:
       context: ./frontend
@@ -58,6 +77,7 @@ services:
       - backend
     networks:
       - circles-net
+
   frontend-prod:
     build:
       context: ./frontend
@@ -73,32 +93,25 @@ services:
       - backend-prod
     networks:
       - circles-net
-  init-mongo:
-    # Utility container to populate / overwrite database
-    # Run after build or when you need to overwrite data
+
+  ci-backend:
+    # Utility to run the backend with a entirely clean database for testing
+    # Should be identical to the backend production, except for the different entrypoint
     build:
       context: ./backend
-      dockerfile: init-mongo.dockerfile
-    container_name: init-mongo
+      dockerfile: production.dockerfile
+    container_name: ci-backend
+    ports:
+      - '8000:8000'
     env_file:
       - ./env/backend.env
     depends_on:
       - mongodb
+      - sessionsdb
     networks:
       - circles-net
-  ci-backend:
-    # Utility container to populate / overwrite database
-    # Run after build or when you need to overwrite data
-    build:
-      context: ./backend
-      dockerfile: init-mongo.dockerfile
-    container_name: init-mongo-ci
-    env_file:
-      - ./env/backend.env
-    depends_on:
-      - backend
-    networks:
-      - circles-net
+    # THIS IS IMPORTANT
+    entrypoint: ["python3", "-u", "runserver.py", "--overwrite-all-data"]
 
 # Note only named volumes need to be listed here for persistance.
 volumes:

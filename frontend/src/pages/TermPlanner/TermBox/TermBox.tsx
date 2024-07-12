@@ -8,10 +8,12 @@ import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
-import { getToken, getUserCourses, getUserPlanner } from 'utils/api/userApi';
+import { withAuthorization } from 'utils/api/auth';
+import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
+import useToken from 'hooks/useToken';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
 
@@ -36,22 +38,22 @@ const TermBox = ({
   termCourseCodes,
   draggingCourseCode
 }: Props) => {
+  const token = useToken();
   const year = name.slice(0, 4);
   const term = name.match(/T[0-3]/)?.[0] as Term;
   const theme = useTheme();
   const queryClient = useQueryClient();
 
   const toggleLockTerm = async () => {
-    const token = await getToken();
     await axios.post(
       '/planner/toggleTermLocked',
       {},
-      { params: { token, termyear: `${year}${term}` } }
+      { params: { termyear: `${year}${term}` }, headers: withAuthorization(token) }
     );
   };
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const toggleLockTermMutation = useMutation({
     mutationFn: toggleLockTerm,
@@ -67,7 +69,7 @@ const TermBox = ({
   });
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const isSmall = useMediaQuery('(max-width: 1400px)');
 

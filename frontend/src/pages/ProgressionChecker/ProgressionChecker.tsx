@@ -24,6 +24,7 @@ import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
+import useToken from 'hooks/useToken';
 import Dashboard from './Dashboard';
 import GenericCoursesSection from './GenericCoursesSection';
 import GridView from './GridView';
@@ -36,17 +37,18 @@ const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(0);
+  const token = useToken();
 
   const degreeQuery = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   });
   const degree = degreeQuery.data || badDegree;
   const { programCode, specs } = degree;
 
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
   const planner = plannerQuery.data || badPlanner;
   const { unplanned } = planner;
@@ -81,7 +83,7 @@ const ProgressionChecker = () => {
   const [view, setView] = useState(Views.GRID_CONCISE);
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
   const courses = coursesQuery.data || badCourses;
 
@@ -141,7 +143,7 @@ const ProgressionChecker = () => {
               courseCode,
               title: subgroupStructure.courses[courseCode],
               UOC: courses[courseCode]?.uoc || 0,
-              plannedFor: courses[courseCode]?.plannedFor || '',
+              plannedFor: courses[courseCode]?.plannedFor ?? '',
               isUnplanned: unplanned.includes(courseCode),
               isMultiterm: !!courses[courseCode]?.isMultiterm,
               isDoubleCounted,
@@ -196,7 +198,7 @@ const ProgressionChecker = () => {
         courseCode,
         title: courses[courseCode]?.title,
         UOC: courses[courseCode]?.uoc,
-        plannedFor: courses[courseCode]?.plannedFor as string,
+        plannedFor: courses[courseCode]?.plannedFor ?? '',
         isUnplanned: unplanned.includes(courseCode),
         isMultiterm: courses[courseCode]?.isMultiterm,
         isDoubleCounted: false,

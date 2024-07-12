@@ -28,9 +28,9 @@ export const renderWithProviders = async (
         theme: 'dark',
         showMarks: false,
         showLockedCourses: false,
-        showPastWarnings: false,
-        token: ''
-      }
+        showPastWarnings: false
+      },
+      identity: null
     },
     ...renderOptions
   }: ExtendedRenderOptions = {}

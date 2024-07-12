@@ -42,17 +42,20 @@ Scenario:
     last challenges, Ollie on his quest to complete his degree while also
     seeking the approval of the enigmatic number cult
 """
-from typing import Callable, Optional
+from typing import Annotated, Callable, Optional
 
-from fastapi import APIRouter
-from server.config import DUMMY_TOKEN
-from server.routers.model import ValidPlannerData
+from fastapi import APIRouter, Security
+from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.user import get_setup_user
 from server.routers.planner import convert_to_planner_data
-from server.routers.user import get_user
+from server.routers.model import ValidPlannerData
 
 router = APIRouter(
     prefix="/ctf", tags=["ctf"], responses={404: {"description": "Not found"}}
 )
+
+require_uid = HTTPBearerToUserID()
+
 
 def all_courses(data: ValidPlannerData) -> set[str]:
     """
@@ -248,11 +251,11 @@ requirements: list[tuple[ValidatorFn, ObjectiveMessage, Optional[Flag]]] = [
 ]
 
 @router.post("/validateCtf/")
-def validate_ctf(token: str = DUMMY_TOKEN):
+def validate_ctf(uid: Annotated[str, Security(require_uid)]):
     """
     Validates the CTF
     """
-    data = convert_to_planner_data(get_user(token))
+    data = convert_to_planner_data(get_setup_user(uid))
     passed: list[str] = []
     flags: list[str] = []
     for req_num, (fn, msg, flag) in enumerate(requirements):

@@ -8,7 +8,7 @@ from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
 from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
 from fastapi import APIRouter, HTTPException
-from server.database import programsCOL, specialisationsCOL
+from server.db.mongo.conn import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import get_path_from, regex_search
 from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,

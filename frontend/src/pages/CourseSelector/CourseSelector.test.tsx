@@ -35,9 +35,10 @@ describe('CourseSelector', () => {
     await renderWithProviders(<CourseSelector />);
     expect(await screen.findByText('COMP1511: Programming Fundamentals')).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('quick-add-cart-button'));
-    let planner = await getUserPlanner();
+    // TODO: idk how to get token into here...
+    let planner = await getUserPlanner('');
     expect(planner.unplanned).toEqual(['COMP1511']);
-    planner = await getUserPlanner();
+    planner = await getUserPlanner('');
     await userEvent.click(screen.getByTestId('quick-remove-cart-button'));
     expect(planner.unplanned).toEqual([]);
   });

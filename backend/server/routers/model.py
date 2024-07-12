@@ -201,12 +201,11 @@ class PlannerData(BaseModel):
                 user.add_courses(cleaned_term)
         return user
 
-
+# TODO-OLLI(pm): get rid of these user models in favour of the database models
 @with_config(ConfigDict(extra='forbid'))
 class DegreeLocalStorage(TypedDict):
     programCode: str
     specs: list[str]
-    isComplete: bool
 
 @with_config(ConfigDict(extra='forbid'))
 class PlannerLocalStorage(TypedDict):
@@ -230,6 +229,13 @@ markMap = {
 
 @with_config(ConfigDict(extra='forbid'))
 class CourseStorage(TypedDict):
+    code: str
+    mark: Mark
+    uoc: int
+    ignoreFromProgression: bool
+
+@with_config(ConfigDict(extra='forbid'))
+class CourseStorageWithExtra(TypedDict):
     code: str
     mark: Mark
     uoc: int

@@ -22,4 +22,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the server
-ENTRYPOINT ["python3", "-u", "runserver.py", "--overwrite"]
+ENTRYPOINT ["python3", "-u", "runserver.py", "--overwrite-course-data"]

@@ -1,7 +1,7 @@
 import json
 
 from fastapi import APIRouter, HTTPException
-from server.database import coursesCOL
+from server.db.mongo.conn import coursesCOL
 
 router = APIRouter(
     prefix="/followups",

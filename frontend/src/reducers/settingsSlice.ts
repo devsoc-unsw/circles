@@ -8,15 +8,13 @@ type SettingsSliceState = {
   showMarks: boolean;
   showLockedCourses: boolean;
   showPastWarnings: boolean;
-  token: string;
 };
 
 export const initialSettingsState: SettingsSliceState = {
   theme: 'light',
   showMarks: false,
   showLockedCourses: false,
-  showPastWarnings: true,
-  token: ''
+  showPastWarnings: true
 };
 
 const settingsSlice = createSlice({
@@ -34,19 +32,11 @@ const settingsSlice = createSlice({
     },
     toggleShowPastWarnings: (state) => {
       state.showPastWarnings = !state.showPastWarnings;
-    },
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
     }
   }
 });
 
-export const {
-  toggleTheme,
-  toggleShowMarks,
-  toggleLockedCourses,
-  toggleShowPastWarnings,
-  setToken
-} = settingsSlice.actions;
+export const { toggleTheme, toggleShowMarks, toggleLockedCourses, toggleShowPastWarnings } =
+  settingsSlice.actions;
 
 export default settingsSlice.reducer;

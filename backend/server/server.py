@@ -2,12 +2,20 @@
 Configure the FastAPI server
 """
 
+from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from server.routers import auth, courses, followups, planner, programs, specialisations, user
 
-app = FastAPI()
+@asynccontextmanager
+async def on_setup_and_shutdown(_app: FastAPI):
+    # TODO-OLLI(pm): actually use these
+    print("\n\nstartup\n\n")
+    yield
+    print("\n\nshutdown\n\n")
+
+app = FastAPI(lifespan=on_setup_and_shutdown)
 
 origins = [
     "http://host.docker.internal",
@@ -38,11 +46,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
 app.include_router(planner.router)
 app.include_router(courses.router)
 app.include_router(programs.router)
 app.include_router(specialisations.router)
-app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(followups.router)
 # TODO: hide this behind a feature flag?

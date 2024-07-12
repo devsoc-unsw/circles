@@ -4,17 +4,17 @@ APIs for the /courses/ route.
 import pickle
 import re
 from contextlib import suppress
-from typing import Dict, List, Mapping, Optional, Set, Tuple
+from typing import Annotated, Dict, List, Mapping, Optional, Set, Tuple
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
-from server.config import DUMMY_TOKEN
-from server.database import archivesDB, coursesCOL
+from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
@@ -24,6 +24,8 @@ router = APIRouter(
     prefix="/courses",
     tags=["courses"],
 )
+
+require_uid = HTTPBearerToUserID()
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
 ALL_COURSES: Optional[Dict[str, str]] = None
@@ -216,7 +218,7 @@ def get_course(courseCode: str):
         }
     },
 )
-def search(search_string: str, token: str = DUMMY_TOKEN) -> Dict[str, str]:
+def search(search_string: str, uid: Annotated[str, Security(require_uid)]) -> Dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
@@ -225,12 +227,12 @@ def search(search_string: str, token: str = DUMMY_TOKEN) -> Dict[str, str]:
           "COMP1531": "SoftEng Fundamentals",
             ……. }
     """
+    # TODO: remove these because circular imports
+    from server.routers.user import get_setup_user
     from server.routers.programs import get_structure
-    from server.routers.user import get_user
-
     all_courses = fetch_all_courses()
 
-    user = get_user(token)
+    user = get_setup_user(uid)
     specialisations = list(user['degree']['specs'])
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
@@ -663,6 +665,7 @@ def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRest
     # TODO: This loading should not be here; very slow
     # making it global causes some errors
     # There needs to be a startup event for routers to load data
+    # TODO-OLLI(pm): ^ we now have a global startup event, we can setup and cache pickle data there
     if not program_code:
         return None
     with open(PROGRAM_RESTRICTIONS_PICKLE_FILE, "rb") as file:

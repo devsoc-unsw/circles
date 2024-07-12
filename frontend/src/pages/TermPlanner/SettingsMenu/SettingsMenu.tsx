@@ -6,9 +6,11 @@ import { DatePicker, Modal, Select, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
+import { withAuthorization } from 'utils/api/auth';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
+import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 
 type Props = {
@@ -19,7 +21,8 @@ const SettingsMenu = ({ planner }: Props) => {
   const queryClient = useQueryClient();
 
   const { Option } = Select;
-  const { token, theme } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const token = useToken();
 
   function willUnplanCourses(numYears: number) {
     if (!planner) return false;
@@ -37,7 +40,7 @@ const SettingsMenu = ({ planner }: Props) => {
     await axios.put(
       '/user/updateStartYear',
       { startYear: parseInt(year, 10) },
-      { params: { token } }
+      { headers: withAuthorization(token) }
     );
   }
 
@@ -67,7 +70,11 @@ const SettingsMenu = ({ planner }: Props) => {
   };
 
   async function updateDegreeLength(numYears: number) {
-    await axios.put('/user/updateDegreeLength', { numYears }, { params: { token } });
+    await axios.put(
+      '/user/updateDegreeLength',
+      { numYears },
+      { headers: withAuthorization(token) }
+    );
   }
 
   const updateDegreeLengthMutation = useMutation({
@@ -101,7 +108,7 @@ const SettingsMenu = ({ planner }: Props) => {
 
   async function summerToggle() {
     try {
-      await axios.post('/user/toggleSummerTerm', {}, { params: { token } });
+      await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
     } catch {
       openNotification({
         type: 'error',

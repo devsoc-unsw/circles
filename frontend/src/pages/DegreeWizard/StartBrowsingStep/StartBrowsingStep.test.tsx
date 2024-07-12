@@ -10,7 +10,6 @@ import StartBrowsingStep from './StartBrowsingStep';
 
 const mockDegreeInfo = {
   programCode: '3778',
-  isComplete: false,
   startYear: 2020,
   endYear: 2024,
   specs: ['COMPA1']

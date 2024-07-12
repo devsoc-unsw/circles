@@ -11,7 +11,6 @@ export type UserResponse = {
 export type DegreeResponse = {
   programCode: string;
   specs: string[];
-  isComplete: boolean;
 };
 
 export type CourseResponse = {
@@ -53,8 +52,7 @@ export type Term = {
 
 export const badDegree: DegreeResponse = {
   programCode: '3778',
-  specs: [],
-  isComplete: false
+  specs: []
 };
 
 // null coalesced to remove `undefined`. This SHOULD NOT see production

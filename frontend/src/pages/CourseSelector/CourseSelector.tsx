@@ -7,6 +7,7 @@ import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
+import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
@@ -14,19 +15,21 @@ import CourseTabs from './CourseTabs';
 import S from './styles';
 
 const CourseSelector = () => {
+  const token = useToken();
+
   const plannerQuery = useQuery({
     queryKey: ['planner'],
-    queryFn: getUserPlanner
+    queryFn: () => getUserPlanner(token)
   });
 
   const coursesQuery = useQuery({
     queryKey: ['courses'],
-    queryFn: getUserCourses
+    queryFn: () => getUserCourses(token)
   });
 
   const degreeQuery = useQuery({
     queryKey: ['degree'],
-    queryFn: getUserDegree
+    queryFn: () => getUserDegree(token)
   });
 
   const [showedNotif, setShowedNotif] = useState(false);

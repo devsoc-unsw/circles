@@ -5,6 +5,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, Popconfirm, Tooltip, Typography } from 'antd';
 import { removeCourse } from 'utils/api/plannerApi';
+import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
@@ -16,6 +17,8 @@ type Props = {
 };
 
 const CourseCartCard = ({ code, title }: Props) => {
+  const token = useToken();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -26,7 +29,7 @@ const CourseCartCard = ({ code, title }: Props) => {
   };
 
   const remove = useMutation({
-    mutationFn: removeCourse,
+    mutationFn: (courseCode: string) => removeCourse(token, courseCode),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['courses']

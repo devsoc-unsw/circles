@@ -21,7 +21,6 @@ const setDegreeInfoMock = vi.fn();
 
 const degreeInfo = {
   programCode: '',
-  isComplete: false,
   startYear: undefined,
   endYear: undefined,
   specs: []
