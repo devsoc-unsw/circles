@@ -82,6 +82,10 @@ jobs:
         with:
           name: fe-test-results
           path: frontend/junit/fe-test-results.xml
+      - name: Install dotenv for env setup
+        run: |
+          python -m pip install --upgrade pip
+          pip install dotenv
       - name: Set up env
         run: >
           python3
