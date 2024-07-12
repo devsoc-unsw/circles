@@ -55,7 +55,6 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
             minDate={dayjs('2019')}
             maxDate={dayjs().add(7, 'year')}
             disabledDate={disable10YearsOnwards}
-            // placement="bottomRight" ??
           />
         </Suspense>
       </animated.div>
