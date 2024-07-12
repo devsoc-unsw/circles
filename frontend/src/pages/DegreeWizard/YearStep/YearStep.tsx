@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { animated, useSpring } from '@react-spring/web';
-import { Typography } from 'antd';
+import type { DatePickerProps } from 'antd';
+import { DatePicker, Typography } from 'antd';
+import dayjs from 'dayjs';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
@@ -8,15 +10,17 @@ import Steps from '../common/steps';
 import CS from '../common/styles';
 
 const { Title } = Typography;
-const YearPicker = React.lazy(() =>
-  import('antd').then((d) => ({ default: d.DatePicker.RangePicker }))
-);
 
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
   setDegreeInfo: SetState<DegreeWizardPayload>;
+};
+
+// Disable 10 years from the selected date
+const disable10YearsOnwards: DatePickerProps['disabledDate'] = (current, { from }) => {
+  return from && Math.abs(current.year() - from.year()) >= 10;
 };
 
 const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
@@ -40,7 +44,7 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
           What years do you start and finish?
         </Title>
         <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
-          <YearPicker
+          <DatePicker.RangePicker
             picker="year"
             data-testid="antd-rangepicker"
             size="large"
@@ -48,6 +52,9 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
               width: '100%'
             }}
             onChange={handleOnChange}
+            minDate={dayjs('2019')}
+            maxDate={dayjs().add(7, 'year')}
+            disabledDate={disable10YearsOnwards}
           />
         </Suspense>
       </animated.div>

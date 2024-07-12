@@ -6,12 +6,20 @@ import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
 import { getCourseRating } from 'utils/api/unilectivesApi';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
-import { TERM } from 'config/constants';
+import { CURR_YEAR, TERM } from 'config/constants';
 import S from './styles';
 
 const { Title, Text } = Typography;
+
+const termMapping: Record<number, string> = {
+  0: 'Summer',
+  1: 'Term%201',
+  2: 'Term%202',
+  3: 'Term%203'
+};
 
 type CourseAttributesProps = {
   course: Course;
@@ -30,6 +38,18 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
   const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
+
+  const currentTerm = getMostRecentPastTerm(CURR_YEAR).T;
+
+  const recentTermNumber = terms?.length ? parseInt(terms[0].slice(1), 10) : currentTerm;
+
+  const yearCourseAvaliable = recentTermNumber > currentTerm ? CURR_YEAR - 1 : CURR_YEAR;
+
+  const updatedTerm = recentTermNumber > currentTerm ? recentTermNumber : currentTerm;
+
+  const teachingPeriod = updatedTerm > 0 ? `T${updatedTerm}` : 'U0';
+
+  const termMod = termMapping[updatedTerm];
 
   const termTags = terms?.length
     ? terms.map((term) => {
@@ -78,11 +98,23 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
           title: 'UNSW Handbook',
           content: studyLevel ? (
             <S.Link
-              href={`https://www.handbook.unsw.edu.au/${studyLevel.toLowerCase()}/courses/2023/${code}/`}
+              href={`https://www.handbook.unsw.edu.au/${studyLevel.toLowerCase()}/courses/${CURR_YEAR}/${code}/`}
               target="_blank"
               rel="noreferrer"
             >
               View {code} in handbook
+            </S.Link>
+          ) : null
+        },
+        {
+          title: 'UNSW Course Outline',
+          content: studyLevel ? (
+            <S.Link
+              href={`https://www.unsw.edu.au/course-outlines/course-outline#year=${yearCourseAvaliable}&term=${termMod}&deliveryMode=Multimodal&deliveryFormat=Standard&teachingPeriod=${teachingPeriod}&deliveryLocation=Kensington&courseCode=${code}&activityGroupId=1`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View {code} in Course Outline
             </S.Link>
           ) : null
         },
