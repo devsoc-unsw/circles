@@ -165,6 +165,8 @@ const SettingsMenu = ({ planner }: Props) => {
             picker="year"
             style={{ width: 105 }}
             value={dayjs().year(planner.startYear)}
+            minDate={dayjs('2019')}
+            maxDate={dayjs().add(7, 'year')}
           />
         </Suspense>
       </CS.PopupEntry>
