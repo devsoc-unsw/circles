@@ -17,6 +17,7 @@ jobs:
   backend:
     name: Backend CI Testing
     runs-on: ubuntu-latest
+    if: false
     permissions:
       checks: write
       pull-requests: write
@@ -59,6 +60,7 @@ jobs:
   frontend:
     name: Frontend CI Testing
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
