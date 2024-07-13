@@ -12,6 +12,7 @@ runs:
         python-version: "3.12"
     - name: Install dotenv
       run: pip install dotenv
+      shell: bash
     - name: Create env files
       run: >
         python3
@@ -23,6 +24,8 @@ runs:
         --mongodb_username="github_ci"
         --mongodb_password="github_ci"
         --mongodb_service_hostname="mongodb"
+      shell: bash
     - name: lol
       run: ls
+      shell: bash
     
