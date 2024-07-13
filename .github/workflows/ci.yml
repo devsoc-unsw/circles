@@ -99,3 +99,13 @@ jobs:
           --mongodb_service_hostname="mongodb"
       - name: Test the frontend successfully builds
         run: docker compose up -d frontend-prod
+  lol:
+    name: lolol
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Setup Env
+        uses: ./.github/actions/setup-ci-env
+      - name: hahaha
+        run: ls

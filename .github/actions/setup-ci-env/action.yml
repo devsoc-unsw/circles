@@ -1,0 +1,28 @@
+name: "Setup Environment Variables"
+description: "Sets up the environment variables required for the testing containers."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checking out repository
+      uses: actions/checkout@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.12"
+    - name: Install dotenv
+      run: pip install dotenv
+    - name: Create env files
+      run: >
+        python3
+        setup_env.py
+        --default
+        --sessionsdb_username="github_ci"
+        --sessionsdb_password="github_ci"
+        --sessionsdb_service_hostname="sessionsdb"
+        --mongodb_username="github_ci"
+        --mongodb_password="github_ci"
+        --mongodb_service_hostname="mongodb"
+    - name: lol
+      run: ls
+    
