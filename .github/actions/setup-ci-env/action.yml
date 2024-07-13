@@ -25,7 +25,4 @@ runs:
         --mongodb_password="github_ci"
         --mongodb_service_hostname="mongodb"
       shell: bash
-    - name: lol
-      run: ls
-      shell: bash
     

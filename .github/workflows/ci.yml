@@ -107,7 +107,9 @@ jobs:
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
       - name: Setup Env
         uses: ./.github/actions/setup-ci-env
-      - name: hahaha
-        run: ls
