@@ -1,4 +1,4 @@
-name: Unit Tests
+name: CI tests
 
 on:
   pull_request:
@@ -101,15 +101,14 @@ jobs:
           --mongodb_service_hostname="mongodb"
       - name: Test the frontend successfully builds
         run: docker compose up -d frontend-prod
-  lol:
-    name: lolol
+  frontend_lint:
+    name: Frontend Eslint
     runs-on: ubuntu-latest
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Setup Env
-        uses: ./.github/actions/setup-ci-env
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-frontend
+      - name: Frontend linting
+        run: npm run lint
+        working-directory: ./frontend
