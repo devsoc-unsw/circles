@@ -55,7 +55,6 @@ jobs:
         run: docker compose up -d ci-backend
       - name: Wait for backend to initialise  # cringe as hell, remove when we get health checks to wait on
         run: sleep 90s
-        shell: bash
       - name: Test algorithm with pytest
         run: |
           pip install pytest-cov
