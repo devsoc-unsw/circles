@@ -20,6 +20,7 @@ jobs:
     name: Pylint
     # Works on most linux
     runs-on: ubuntu-latest
+    if: false
 
     steps:
     - uses: actions/checkout@v3

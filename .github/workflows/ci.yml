@@ -14,49 +14,56 @@ jobs:
         with:
           name: Event File
           path: ${{ github.event_path }}
-  backend:
-    name: Backend CI Testing
+
+  backend_lint:
+    name: Backend Pylint
     runs-on: ubuntu-latest
-    if: false
-    permissions:
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-backend
+      - name: Install pylint
+        run: pip install pylint
+      - name: Analysing the code with pylint
+        run: pylint $(git ls-files '*.py')
+  backend_typecheck:
+    name: Backend Mypy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-backend
+      - name: Run mypy checks
+        run: python -m mypy .
+        working-directory: ./backend
+  backend_tests:
+    name: Backend Unit Tests
+    runs-on: ubuntu-latest
+    permissions:  # required for artifacts
       checks: write
       pull-requests: write
     steps:
       - name: Checking out repository
-        uses: actions/checkout@v3
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
-      - name: Set up env
-        run: >
-          python3
-          setup_env.py
-          --default
-          --sessionsdb_username="github_ci"
-          --sessionsdb_password="github_ci"
-          --sessionsdb_service_hostname="sessionsdb"
-          --mongodb_username="github_ci"
-          --mongodb_password="github_ci"
-          --mongodb_service_hostname="mongodb"
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-backend
+      - name: Setup environment
+        uses: ./.github/actions/setup-ci-env
       - name: Run the backend container
         run: docker compose up -d ci-backend
-      - name: Run mypy checks
-        run: cd backend && python -m mypy . && cd ..
       - name: Test algorithm with pytest
         run: |
-          cd backend
           pip install pytest-cov
           python -m pytest --junitxml=junit/be-test-results.xml --cov=. --cov-report=xml --cov-report=html
+        working-directory: ./backend
       - uses: actions/upload-artifact@v3 # upload test results
         if: always()
         with:
           name: be-test-results
           path: backend/junit/be-test-results.xml # Path to test results
+
   frontend_lint:
     name: Frontend Eslint
     runs-on: ubuntu-latest
@@ -95,6 +102,7 @@ jobs:
         with:
           name: fe-test-results
           path: frontend/junit/fe-test-results.xml
+
   docker_build:
     name: Build docker containers
     runs-on: ubuntu-latest
