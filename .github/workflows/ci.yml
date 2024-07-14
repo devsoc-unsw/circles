@@ -57,50 +57,6 @@ jobs:
         with:
           name: be-test-results
           path: backend/junit/be-test-results.xml # Path to test results
-  frontend:
-    name: Frontend CI Testing
-    runs-on: ubuntu-latest
-    if: false
-    steps:
-      - name: Checking out repository
-        uses: actions/checkout@v3
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Install frontend
-        run: cd frontend && npm ci
-      - name: Run frontend types
-        if: always()
-        run: cd frontend && npm run lint
-      - name: Run frontend lint
-        if: always()
-        run: cd frontend && npm run types
-      - name: Run frontend tests
-        if: false # disable these tests for now
-        run: cd frontend && npm run test
-      - uses: actions/upload-artifact@v3
-        if: false # always()
-        with:
-          name: fe-test-results
-          path: frontend/junit/fe-test-results.xml
-      - name: Install dotenv for env setup
-        run: |
-          python -m pip install --upgrade pip
-          pip install dotenv
-      - name: Set up env
-        run: >
-          python3
-          setup_env.py
-          --default
-          --sessionsdb_username="github_ci"
-          --sessionsdb_password="github_ci"
-          --sessionsdb_service_hostname="sessionsdb"
-          --mongodb_username="github_ci"
-          --mongodb_password="github_ci"
-          --mongodb_service_hostname="mongodb"
-      - name: Test the frontend successfully builds
-        run: docker compose up -d frontend-prod
   frontend_lint:
     name: Frontend Eslint
     runs-on: ubuntu-latest
@@ -109,6 +65,49 @@ jobs:
         uses: actions/checkout@v4
       - name: Install deps
         uses: ./.github/actions/setup-ci-frontend
-      - name: Frontend linting
-        run: npm run lint
+      - name: Run eslint on frontend
+        run: ls && npm run lint
         working-directory: ./frontend
+  frontend_typecheck:
+    name: Frontend Typechecks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-frontend
+      - name: Typecheck the frontend
+        run: npm run types
+        working-directory: ./frontend
+  frontend_tests:
+    name: Frontend Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-frontend
+      - name: Run the unit tests on frontend
+        run: npm run test
+        working-directory: ./frontend
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: fe-test-results
+          path: frontend/junit/fe-test-results.xml
+  docker_build:
+    name: Build docker containers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Setup environment
+        uses: ./.github/actions/setup-ci-env
+      - name: Check the backend successfully builds
+        run: docker compose build backend-prod
+      - name: Check the frontend successfully builds
+        run: docker compose build frontend-prod
+      # TODO: this doesn't really make sense until we get healthchecks setup (could also upload these artifacts)
+      # - name: Check that we can successfully start the containers
+      #   run: docker compose up --wait backend-prod frontend-prod
+  
