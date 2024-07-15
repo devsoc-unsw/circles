@@ -86,7 +86,7 @@ def main() -> None:
     # frontend
     vite_backend_base_url = env.get_variable("VITE_BACKEND_API_BASE_URL", "http://localhost:8000/")
     vite_env = env.get_variable("VITE_ENV", "dev")
-    
+
     frontend_env["VITE_BACKEND_API_BASE_URL"] = vite_backend_base_url
     frontend_env["VITE_ENV"] = vite_env
 
@@ -148,7 +148,7 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--auth_cse_client_secret", type=str)
     parser.add_argument("--auth_redirect_base_uri", type=str)
 
-    
+
     parser.add_argument("--additional_redis_args", type=str)
     parser.add_argument("--python_version", type=str)
     parser.add_argument("--prod", "--production", action="store_true")

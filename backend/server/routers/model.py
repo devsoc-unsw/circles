@@ -260,7 +260,7 @@ class StartYear(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
     startYear: int
-    
+
 class DegreeLength(BaseModel):
     model_config = ConfigDict(extra='forbid')
 

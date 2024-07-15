@@ -80,10 +80,10 @@ class User:
     def has_taken_course(self, course: str):
         """ Determines if the user has taken this course """
         return any(
-            c in self.courses and (self.courses[c][1] or 50) >= 50 
+            c in self.courses and (self.courses[c][1] or 50) >= 50
             for c in chain([course], (CACHED_EQUIVALENTS.get(course) or []))
         )
-        
+
     def is_taking_specific_course(self, course):
         """ taking a course directly, no equivalents """
         return course in self.cur_courses

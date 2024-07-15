@@ -15,9 +15,9 @@ Scenario:
     scholar, chart his academic path using Circles.
 
     Ollie is planning his 3 year Computer Science (3778) degree starting in 2024
-    and wants to take a Computer Science major and Mathematics minor. Help him set 
+    and wants to take a Computer Science major and Mathematics minor. Help him set
     up his degree in the degree wizard!
-    
+
     When you are done, press the `Validate CTF` button on the term planner page
     to recieve your flags.
 
@@ -155,7 +155,7 @@ def term_sums_odd(data: ValidPlannerData) -> bool:
         for year in data.plan
         for term in year[1::2]
     )
- 
+
 def comp1511_marks(data: ValidPlannerData) -> bool:
     """
     Ollie must achieve a mark of 100 in COMP1511 to keep his scholarship
@@ -277,5 +277,5 @@ def validate_ctf(uid: Annotated[str, Security(require_uid)]):
         "failed": -1,
         "passed": passed,
         "flags": flags,
-        "message": "Congratulations! You have passed all the requirements for the CTF." 
+        "message": "Congratulations! You have passed all the requirements for the CTF."
     }

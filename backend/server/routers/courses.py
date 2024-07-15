@@ -92,7 +92,7 @@ def get_courses() -> list[Dict]:
     Gets all courses in the database.
     (For CSElectives)
     """
-    
+
     def generate_course(course, is_legacy):
         course["is_legacy"] = is_legacy
         course.setdefault("school", None)

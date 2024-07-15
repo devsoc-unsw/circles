@@ -80,7 +80,7 @@ def add_to_unplanned(data: CourseCode, uid: Annotated[str, Security(require_uid)
     user = get_setup_user(uid)
     if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
-    
+
     course = get_course(data.courseCode) # raises exception anyway when unfound
     user['planner']['unplanned'].append(data.courseCode)
     user['courses'][data.courseCode] = {
@@ -254,7 +254,7 @@ def remove_course(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
     # remove course from unplanned (if it's there)
     if data.courseCode in planner['unplanned']:
         planner['unplanned'].remove(data.courseCode)
-        
+
     if data.courseCode in user['courses']:
         del user['courses'][data.courseCode]
     set_user(uid, user, True)
@@ -281,7 +281,7 @@ def remove_all(uid: Annotated[str, Security(require_uid)]):
 
     # Clear unplanned column
     user['planner']['unplanned'] = []
-    
+
     user['courses'] = {}
     set_user(uid, user, True)
 

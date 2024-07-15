@@ -136,7 +136,7 @@ def setup_new_csesoc_session(uid: str, oidc_info: SessionOIDCInfoModel) -> Tuple
 def setup_new_guest_session(uid: str) -> Tuple[SessionToken, int, RefreshToken, int]:
     # creates a new login session for this guest user
     # to keep this as seemless as normal csesoc sessions, it will be handled mostly the same except no OIDC steps.
-    # In reality, there should never be multiple guest sessions for the same guest uid, but that is ok. 
+    # In reality, there should never be multiple guest sessions for the same guest uid, but that is ok.
 
     sid = _setup_new_session(uid, 120)  # only make it last very briefly
     refresh_token, refresh_expiry = _insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)

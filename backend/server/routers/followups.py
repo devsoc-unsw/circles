@@ -105,4 +105,3 @@ def get_set_enrolled_in_term(
     term: str
 ) -> set[str]:
     return set(enrolment_data.get(course, {}).get(term, []))
-

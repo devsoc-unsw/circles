@@ -372,7 +372,7 @@ def setup_user_related_collections(drop: bool):
             # dont want any refresh tokens that point to non existent sessions
             print("Dropping refresh tokens because it was present without sessions...")
             usersDB.drop_collection(REFRESH_TOKENS_COL_NAME)
-    
+
     # build up
     # TODO: setup data versioning so we migrate shapes if needed
     existing = usersDB.list_collection_names()
