@@ -162,6 +162,7 @@ def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security
         HTTPException: Moving a multiterm course somewhere that would result in a
             course being placed before or after the planner
     """
+    # pylint: disable=too-many-locals
     course = get_course(data.courseCode)
     user = get_setup_user(uid)
 

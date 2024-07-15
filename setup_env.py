@@ -1,6 +1,7 @@
 """
 Script built on dotenv to set up the required environment variables
 """
+# pylint: disable=too-many-locals
 
 import argparse
 import os

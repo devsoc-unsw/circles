@@ -10,6 +10,7 @@ Step in the data's journey:
     [   ] Format scraped data (program_formatting.py)
     [ X ] Customise formatted data (program_processing.py)
 """
+# pylint: disable=too-many-function-args
 
 import re
 from collections import OrderedDict
@@ -350,6 +351,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
     Adds specialisation data to the correct spot in program_data given a field and name of program
     """
     for spec_type in ("major", "minor", "honours"):
+        # pylint: disable=cell-var-from-loop
         # Filter out all items that aren't spec_type
         spec_type_items = list(filter(
             lambda r: r["academic_item_type"] is not None and r["academic_item_type"]["value"] == spec_type,

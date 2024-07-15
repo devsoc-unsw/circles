@@ -15,6 +15,7 @@ UOC = int | None
 CoursesByYear = Dict[YearInt, Dict[Term, Dict[CourseCode, Tuple[UOC, Mark, Grade]]]]
 
 def parse_transcript(file: BinaryIO) -> CoursesByYear:
+    # pylint: disable=too-many-locals
     reader = PdfReader(file)
 
     page_texts = list(map(lambda p: p.extract_text(), reader.pages))
