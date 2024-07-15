@@ -1,6 +1,6 @@
-from pypdf import PdfReader
 import re
 from typing import Any, BinaryIO, Dict, Tuple
+from pypdf import PdfReader
 
 
 
