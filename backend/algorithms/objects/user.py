@@ -154,7 +154,7 @@ class User:
                     counted_uoc += uoc
                     total_mark += uoc * grade
 
-        return (None if counted_uoc == 0 else total_mark / counted_uoc, total_uoc == counted_uoc)
+        return (None if counted_uoc == 0 else total_mark / counted_uoc, total_uoc == counted_uoc and counted_uoc != 0)
 
     def uoc(self, category: Category = AnyCategory()):
         """ Given a user, returns the number of units they have taken for this uoc category """
@@ -174,6 +174,7 @@ class User:
             course: False for course in self.core_courses
             if category.match_definition(course)
         }
+        print(has_done)
         relevant_courses = []
         old_courses = dict(self.courses)
         self.add_courses({course: (6, None) for course in courses if course not in self.courses.keys()})
