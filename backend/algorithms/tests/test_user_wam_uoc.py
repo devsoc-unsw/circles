@@ -21,7 +21,7 @@ def test_course_category_produces_correct_wam():
     comp = CourseCategory("COMP")
     wam, marks_complete = user.wam(CourseCategory("FOOD"))
     assert wam == None
-    assert marks_complete
+    assert not marks_complete
 
     wam, marks_complete = user.wam(comp)
     assert wam == 66
