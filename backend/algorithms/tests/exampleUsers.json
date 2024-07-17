@@ -141,5 +141,11 @@
         "courses": {
             "COMP1511": [6, 50]
         }
+    },
+    "user_degree_wizard": {
+        "programCode": "3778",
+        "startYear": 2020,
+        "endYear": 2023,
+        "specs": ["COMPA1", "ACCTA2"]
     }
 }
