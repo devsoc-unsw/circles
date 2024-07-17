@@ -174,7 +174,6 @@ class User:
             course: False for course in self.core_courses
             if category.match_definition(course)
         }
-        print(has_done)
         relevant_courses = []
         old_courses = dict(self.courses)
         self.add_courses({course: (6, None) for course in courses if course not in self.courses.keys()})

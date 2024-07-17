@@ -164,7 +164,6 @@ def test_wam_condition_simple():
 
     cond2 = create_condition((["(", "90WAM", ")"]))
     cond2_user1_unlocked = cond2.validate(user1)
-    print(cond2_user1_unlocked)
     assert cond2_user1_unlocked[0]
     assert len(cond2_user1_unlocked[1]) == 0
 
