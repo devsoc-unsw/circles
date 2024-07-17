@@ -153,8 +153,8 @@ def initialise_program(program: dict) -> dict:
     Initialises basic attributes of the specialisation.
     """
     duration = re.search(r"(\d)", program["duration"])
-    if duration:
-        duration_var = duration.group(1)
+    assert duration is not None
+    duration_var = duration.group(1)
 
     return {
         "title": program["title"],

@@ -1,6 +1,5 @@
 """ Routes to deal with user Authentication. """
 from typing import Annotated, Dict, Optional, Tuple, Union, cast
-from datetime import datetime
 from secrets import token_hex, token_urlsafe
 from time import time
 from fastapi import APIRouter, Cookie, HTTPException, Response, Security

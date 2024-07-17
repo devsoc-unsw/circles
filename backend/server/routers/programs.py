@@ -253,6 +253,7 @@ def get_structure(
     ignored = ignore.split("+") if ignore else []
 
     structure: dict[str, StructureContainer] = {}
+    uoc = 0 # ensure always atleast set regardless of ignore  # TODO-OLLI: None?
     if "spec" not in ignored:
         structure = add_specialisations(structure, spec)
     if "code_details" not in ignored:

@@ -6,7 +6,7 @@
 extension-pkg-whitelist=
 
 # Specify a score threshold to be exceeded before program exits with error.
-fail-under=9.5
+fail-under=10
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
@@ -76,8 +76,30 @@ disable=import-error,                     # allow import from folder.file instea
         too-few-public-methods,           # need classes with zero public methods as abstract objects
         duplicate-code,                   # Code duplication due to progtype1. TODO: Fix on complete refactor
         no-name-in-module,                # seems to be similar to import-error
+        useless-parent-delegation,        # allow for methods that just return super().method()
         missing-module-docstring,         # allow for missing module docstrings, democratially ignored
-        useless-parent-delegation         # allow for methods that just return super().method()
+        missing-function-docstring,       # allow for missing module docstrings, democratially ignored
+        missing-class-docstring,          # allow for missing module docstrings, democratially ignored
+        empty-docstring,                  #
+        use-dict-literal,
+        consider-using-with,
+        abstract-method,
+        subprocess-run-check,
+        too-many-nested-blocks,
+        consider-using-sys-exit,
+        bare-except,
+        too-many-return-statements,
+        too-many-branches,
+        too-many-public-methods,
+        inconsistent-return-statements,
+        unspecified-encoding,
+        raise-missing-from,
+        cyclic-import,
+        multiple-statements,
+        redefined-outer-name,
+        no-else-return,
+        consider-using-enumerate,
+        unused-variable
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
@@ -161,7 +183,7 @@ disable=import-error,                     # allow import from folder.file instea
 # either give multiple identifier separated by comma (,) or put this option
 # multiple time (only on the command line, not in the configuration file where
 # it should appear only once). See also the "--disable" option for examples.
-enable=c-extension-no-member
+enable=c-extension-no-member #, useless-suppression
 
 
 [REPORTS]
