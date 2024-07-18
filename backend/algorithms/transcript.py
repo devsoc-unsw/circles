@@ -20,10 +20,11 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
 
     page_texts = list(map(lambda p: p.extract_text(), reader.pages))
 
-    for i in range(len(page_texts)):
-        search = re.search("Student ID: [0-9]*\n", page_texts[i])
-        if not search: continue
-        page_texts[i] = page_texts[i][search.end(0):] # chop off page beginning text
+    for i, page_text in enumerate(page_texts):
+        search = re.search("Student ID: [0-9]*\n", page_text)
+        if not search:
+            continue
+        page_texts[i] = page_text[search.end(0):] # chop off page beginning text
 
     text = "".join(page_texts)
     lines = text.split('\n')

@@ -132,12 +132,13 @@ class EnvReader():
                 return None
 
         if (default_value := self.preexisting_env.get(name, default)) is not None:
+            # have a default value to offer instead
             print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
             entered_value = read_input()
             return entered_value or default_value
-        else:
-            print(f"Enter value for {name} (press [enter] to skip)")
-            return read_input()
+
+        print(f"Enter value for {name} (press [enter] to skip)")
+        return read_input()
 
 def parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Set up env/ folder and required env files")

@@ -95,10 +95,10 @@ disable=import-error,                     # allow import from folder.file instea
         unspecified-encoding,
         raise-missing-from,
         cyclic-import,
-        multiple-statements,
-        redefined-outer-name,
-        no-else-return,
-        consider-using-enumerate
+      ;   multiple-statements,
+      ;   redefined-outer-name,
+      ;   no-else-return,
+      ;   consider-using-enumerate
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,

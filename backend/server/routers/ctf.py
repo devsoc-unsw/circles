@@ -112,14 +112,14 @@ def extended_courses(data: ValidPlannerData) -> bool:
     """
     Must take atleast 3 courses with extended in the name
     """
-    extended_courses = {
+    extended_course_codes = {
         "COMP3821",
         "COMP3891",
         "COMP6841",
         "COMP6843"
         "COMP6845"
     }
-    return len(extended_courses & all_courses(data)) >= 3
+    return len(extended_course_codes & all_courses(data)) >= 3
 
 
 def summer_course(data: ValidPlannerData) -> bool:
