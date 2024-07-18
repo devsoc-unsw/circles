@@ -81,14 +81,10 @@ disable=import-error,                     # allow import from folder.file instea
         missing-function-docstring,       # allow for missing module docstrings, democratially ignored
         missing-class-docstring,          # allow for missing module docstrings, democratially ignored
         empty-docstring,                  #
-        consider-using-with,
-        abstract-method,
         too-many-nested-blocks,
         too-many-return-statements,
         too-many-branches,
         too-many-public-methods,
-        inconsistent-return-statements,
-        unspecified-encoding,
         cyclic-import,
       #   parameter-unpacking,      
       #   unpacking-in-except,

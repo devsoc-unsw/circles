@@ -28,6 +28,8 @@ if not os.path.exists("frontend/node_modules"):
 
 class LogPipe(threading.Thread, TextIO):
     """ boilerplate abstraction for redirecting the logs of a process """
+    # TODO: implement the abstract methods it is complaining about
+    # pylint: disable=abstract-method
     def __init__(self, level):
         """Setup the object with a logger and a loglevel
         and start the thread
@@ -103,6 +105,7 @@ def main():
     os.system("docker compose up -d sessionsdb mongodb")
 
     try:
+        # pylint: disable=consider-using-with
         Popen(
             f"{python_ver} -u runserver.py --dev",
             stdout=sys.stdout,

@@ -187,7 +187,7 @@ def write_env_file(env: dict[str, Optional[str]], file: Path):
         for key, value in env.items()
         if value is not None
     )
-    with open(file, mode='w') as f:
+    with open(file, mode='w', encoding='utf-8') as f:
         f.write(content)
 
     print(f"Successfully wrote {len(env)} items to {file}")

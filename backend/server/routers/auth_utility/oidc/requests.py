@@ -111,6 +111,7 @@ def generate_oidc_auth_url(state: str) -> str:
 
     return f"{config['authorization_endpoint']}?{params}"
 
+# pylint: disable-next=inconsistent-return-statements  # false positive
 def get_user_info(access_token: str) -> UserInfoResponse:
     # make a request to get user info, if this fails, the token is invalid
     res = requests.get(
@@ -133,6 +134,7 @@ def get_user_info(access_token: str) -> UserInfoResponse:
             status_code=res.status_code
         ) from e
 
+# pylint: disable-next=inconsistent-return-statements  # false positive
 def exchange_tokens(code: str) -> TokenResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
@@ -163,6 +165,7 @@ def exchange_tokens(code: str) -> TokenResponse:
             status_code=res.status_code
         ) from e
 
+# pylint: disable-next=inconsistent-return-statements  # false positive
 def refresh_access_token(refresh_token: str) -> RefreshResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#RefreshingAccessToken
     credentials = client_secret_basic_credentials()
