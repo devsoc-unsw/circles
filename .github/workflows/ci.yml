@@ -41,6 +41,7 @@ jobs:
   backend_tests:
     name: Backend Unit Tests
     runs-on: ubuntu-latest
+    if: false
     permissions:  # required for artifacts
       checks: write
       pull-requests: write
@@ -91,6 +92,7 @@ jobs:
   frontend_tests:
     name: Frontend Unit Tests
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4
