@@ -334,7 +334,7 @@ def unschedule_all(uid: Annotated[str, Security(require_uid)]):
 
 @router.post("/toggleTermLocked")
 def toggleLocked(termyear: str, uid: Annotated[str, Security(require_uid)]):
-    (term_str, year_str) = termyear.split('T')
+    (year_str, term_str) = termyear.split('T')
     if not (term_str.isnumeric() and year_str.isnumeric() and 0 <= int(term_str) <= 3):
         raise HTTPException(status_code=400, detail="Invalid term/year")
 
