@@ -103,7 +103,7 @@ def get_courses() -> list[Dict]:
 
     all_courses = fetch_all_courses()
 
-    courses = dict()
+    courses = {}
     for course in coursesCOL.find():
         courses[course["code"]] = generate_course(course, False)
 
