@@ -11,19 +11,19 @@ from dotenv import dotenv_values
 
 # also crazy - autoconfigure the environment if it is borked
 if not os.path.exists(".venv"):
-    if run("./create_venv.sh", shell=True).returncode != 0:
+    if run("./create_venv.sh", shell=True, check=False).returncode != 0:
         print("please follow the above instructions to set up venv correctly")
-        exit(1)
+        sys.exit(1)
 
 os.system(". .venv/bin/activate")
 
 
-if run("npm --version", shell=True).returncode != 0:
+if run("npm --version", shell=True, check=False).returncode != 0:
     print("You must install npm. Please follow the onboarding instructions to install npm")
-    exit(1)
+    sys.exit(1)
 
 if not os.path.exists("frontend/node_modules"):
-    run("cd frontend; npm install", shell=True)
+    run("cd frontend; npm install", shell=True, check=False)
 
 
 class LogPipe(threading.Thread, TextIO):

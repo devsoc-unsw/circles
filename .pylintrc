@@ -83,9 +83,7 @@ disable=import-error,                     # allow import from folder.file instea
         empty-docstring,                  #
         consider-using-with,
         abstract-method,
-        subprocess-run-check,
         too-many-nested-blocks,
-        consider-using-sys-exit,
         too-many-return-statements,
         too-many-branches,
         too-many-public-methods,
