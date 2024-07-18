@@ -335,11 +335,9 @@ def unschedule_all(uid: Annotated[str, Security(require_uid)]):
 @router.post("/toggleTermLocked")
 def toggleLocked(termyear: str, uid: Annotated[str, Security(require_uid)]):
     (term_str, year_str) = termyear.split('T')
-    try:
-        year = int(year_str)
-        term = int(term_str)
-    except ValueError:
+    if not (term_str.isnumeric() and year_str.isnumeric() and 0 <= int(term_str) <= 3):
         raise HTTPException(status_code=400, detail="Invalid term/year")
+
     user = get_setup_user(uid)
     locked_map = user['planner']['lockedTerms']
     locked_map[termyear] = not locked_map.get(termyear, False)

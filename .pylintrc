@@ -98,8 +98,7 @@ disable=import-error,                     # allow import from folder.file instea
         multiple-statements,
         redefined-outer-name,
         no-else-return,
-        consider-using-enumerate,
-        unused-variable
+        consider-using-enumerate
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,

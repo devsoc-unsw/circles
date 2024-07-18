@@ -32,7 +32,7 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
     def parse_course_line(line):
         match = re.fullmatch(complete_exp, line)
         if match:
-            course_letters, course_number, uattempted, upassed, mark, grade = match.groups()
+            course_letters, course_number, uattempted, _upassed, mark, grade = match.groups()
             course_code = course_letters + course_number
             mark = int(mark)
             try:
