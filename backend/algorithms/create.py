@@ -2,6 +2,7 @@
 This module allows for the conversion from strings / tokens of strings
 to actual condition objects.
 """
+# pylint: disable=too-many-nested-blocks, too-many-branches
 
 import json
 import re

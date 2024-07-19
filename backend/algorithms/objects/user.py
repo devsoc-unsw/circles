@@ -22,6 +22,7 @@ with open(CACHED_EXCLUSIONS_FILE, "r", encoding="utf8") as f:
 
 class User:
     """ A user and their data which will be used to determine if they can take a course """
+    # pylint: disable=too-many-public-methods
 
     def __init__(self, data = None):
         # Will load the data if any was given

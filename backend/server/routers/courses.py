@@ -595,13 +595,14 @@ def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(
-        course: tuple[str, str], search_term: str, structure: dict,
-                  majors: list, minors: list) -> float:
+def weight_course(course: tuple[str, str], search_term: str, structure: dict, majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
     code, _ = course
 
+    # TODO: could this function be refactored to generate a mapping of all codes to their weight deltas for a given structure,
+    #       and then we wouldn't need to run this on every course code?
+    # pylint: disable-next=too-many-nested-blocks  # TODO: refactor
     for structKey in structure.keys():
         if "Major" not in structKey:
             continue
@@ -620,6 +621,7 @@ def weight_course(
             weight += 14
             break
 
+    # pylint: disable-next=too-many-nested-blocks  # TODO: refactor
     for structKey in structure.keys():
         if "Minor" not in structKey:
             continue
