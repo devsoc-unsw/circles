@@ -68,7 +68,6 @@ disable=import-error,                     # allow import from folder.file instea
         expression-not-assigned,          # allow for expressions to be evaluated without assignment. - used in create.py for fastforwarding indexes with list comprehension
         invalid-name,                     # dont enforce variables to be snake_case
         redefined-builtin,                # allow builtins to be redefined. particularly `exit()`
-        import-outside-toplevel,          # allow non-top level imports. used to prevent circular dependencies
         line-too-long,                    # disable enforcing max line width
         unnecessary-pass,                 # allows def func(): pass. useful for abstract functions and superclasses
         anomalous-backslash-in-string,    # allow backslashes in strings to allow regex expressions to be used in docstrings
@@ -78,10 +77,10 @@ disable=import-error,                     # allow import from folder.file instea
         no-name-in-module,                # seems to be similar to import-error
         useless-parent-delegation,        # allow for methods that just return super().method()
         missing-module-docstring,         # allow for missing module docstrings, democratially ignored
-        missing-function-docstring,       # allow for missing module docstrings, democratially ignored
-        missing-class-docstring,          # allow for missing module docstrings, democratially ignored
-        empty-docstring,                  #
-        cyclic-import,
+        missing-function-docstring,       # TODO: be much more selective with these, and docstring most functions 
+        missing-class-docstring,          # 
+        import-outside-toplevel,          # allow non-top level imports. used to prevent circular dependencies
+        cyclic-import,                    # TODO: remove these when utility refactor + old user storage dicts removal
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,

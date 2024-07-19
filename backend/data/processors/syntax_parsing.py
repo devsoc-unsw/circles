@@ -1,7 +1,3 @@
-"""
-
-"""
-
 import re
 import sys
 
