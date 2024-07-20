@@ -86,7 +86,6 @@ const CourseGraph = ({
 
   const programGraphQuery = useQuery({
     queryKey: ['graph', { code: degreeQuery.data?.programCode, specs: degreeQuery.data?.specs }],
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     queryFn: () => getProgramGraph(degreeQuery.data!.programCode, degreeQuery.data!.specs),
     enabled: !degreeQuery.isPending && degreeQuery.data && degreeQuery.isSuccess
   });

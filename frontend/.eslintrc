@@ -73,7 +73,7 @@
     },
     "overrides": [
         {
-            "files": "src/utils/api/*",
+            "files": "src/utils/api/**/*",
             "rules": {
                 "import/prefer-default-export": "off",
                 "no-console": "off"  // TODO-OLLI(pm): remove this when we unify api error handling

@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export, no-console
+// eslint-disable-next-line no-console
 export const errLogger = (loc: string) => (err: unknown) => console.log(`error at ${loc}: `, err);
 
 export const unwrapQuery = <T>(data: T | undefined): T => {
