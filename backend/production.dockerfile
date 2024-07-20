@@ -3,9 +3,9 @@
 # Python image
 FROM python:3.12.3-slim
 
-# gcc required for python-Levenshtein
+# gcc required for python-Levenshtein, curl required for healthcheck
 RUN apt-get update \
-    && apt-get install gcc -y \
+    && apt-get install gcc curl -y \
     && apt-get clean
 
 # Set current working directory inside container to /backend
