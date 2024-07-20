@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { GraphPayload } from 'types/api';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getProgramGraph = async (
   programCode: string,
   specs: string[]

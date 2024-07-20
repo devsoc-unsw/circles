@@ -9,7 +9,6 @@ export const setupDegreeWizard = async (token: string, wizard: DegreeWizardPaylo
       headers: withAuthorization(token)
     });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error resetting degree at setupDegreeWizard: ', err);
     throw err;
   }
