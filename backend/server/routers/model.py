@@ -1,5 +1,4 @@
 """ model for interacting with the FE """
-# pylint: disable=missing-class-docstring
 import json
 import pickle
 from typing import Literal, Optional, TypedDict, Union

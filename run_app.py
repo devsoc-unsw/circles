@@ -123,7 +123,6 @@ def main():
             cwd="frontend/",
             env=frontend_env,
         )
-    # pylint: disable=broad-except
     except Exception as e:
         sys.stdout.write(f"exception - {e}")
     finally:

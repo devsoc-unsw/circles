@@ -1,5 +1,3 @@
-# pylint: disable=missing-function-docstring
-# pylint: disable=missing-module-docstring
 # assumes that getPrograms, getMajors, and getMinors isnt borked.
 import requests
 from hypothesis import given, settings
