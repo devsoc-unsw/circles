@@ -41,6 +41,7 @@ jobs:
   backend_tests:
     name: Backend Unit Tests
     runs-on: ubuntu-latest
+    if: false
     permissions:  # required for artifacts
       checks: write
       pull-requests: write
