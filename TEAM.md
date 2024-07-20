@@ -54,7 +54,7 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 - Sona Reddy (@sonar3d)
 - Elliot Rotenstein (@sixohtoo)
 - Nyah Inglis (@distrib134)
-- Luke Banicevic (@???)
+- Luke Banicevic (@banaboi)
 
 ## 2021
 ### Leads
