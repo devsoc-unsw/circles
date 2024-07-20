@@ -110,6 +110,7 @@ jobs:
   docker_build:
     name: Build docker containers
     runs-on: ubuntu-latest
+    needs: [backend_lint, backend_typecheck, backend_tests, frontend_lint, frontend_typecheck, frontend_tests]
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4
