@@ -372,6 +372,7 @@ def get_legacy_course(year: str, courseCode: str):
     return result
 
 
+# TODO-OLLI(pm): this is not used anymore... (was a step in removing a course from planner)
 @router.post("/unselectCourse/{unselectedCourse}", response_model=CourseCodes,
             responses={
                 400: {"description": "Uh oh you broke me"},

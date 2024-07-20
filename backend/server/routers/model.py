@@ -74,7 +74,7 @@ class Structure(BaseModel):
     uoc: int
 
 
-# TODO: This should just take a token now
+# TODO: routes that use this should just take a token now
 class UserData(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
