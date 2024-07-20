@@ -33,7 +33,7 @@ def do_requests(content_type, items_per_req=ITEMS_LIMIT, max_items = 10000):
             timeout=60 * 5
         )
         # r.json() looks like { "data": { "data": [{}, ..., {}], "count": 123 } }
-        print(json.dumps(r.json())[:100], flush=True)
+        print("brief output:", json.dumps(r.json())[:100], flush=True)
         cur_data = r.json()["data"]
         items_list.extend(cur_data["data"])
         offset += cur_data["count"]
@@ -61,12 +61,7 @@ def _create_payload(offset, limit, content_type, year = LIVE_YEAR):
             "queryParams": [{
                 "queryField": "implementationYear",
                 "queryValue": str(year)
-            },
-            # {
-            #     "queryField": "parentAcademicOrg",
-            #     "queryValue": "57a56ceb4f0093004aa6eb4f0310c7ae"
-            # }
-                            ],
+            }],
             "offset": offset,
             "limit": limit
     }

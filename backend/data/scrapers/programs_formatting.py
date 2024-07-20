@@ -33,8 +33,6 @@ def format_prg_data() -> None:
     # Initialise formatted data
     programs_formatted: dict[str, dict] = {}
     for program in raw_content:
-        # if program['studyLevelValue'] != 'ugrd':
-        #     continue
         # Load summary infomation about program
         data = json.loads(program["data"])
         # Load infomation about program structure
