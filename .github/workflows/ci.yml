@@ -41,7 +41,6 @@ jobs:
   backend_tests:
     name: Backend Unit Tests
     runs-on: ubuntu-latest
-    if: false
     permissions:  # required for artifacts
       checks: write
       pull-requests: write
@@ -53,9 +52,10 @@ jobs:
       - name: Setup environment
         uses: ./.github/actions/setup-ci-env
       - name: Run the backend container
-        run: docker compose up -d ci-backend
-      - name: Wait for backend to initialise  # cringe as hell, remove when we get health checks to wait on
-        run: sleep 90s
+        run: docker compose up --wait --wait-timeout 90 ci-backend
+      - name: Log the backend container output
+        run: docker compose logs ci-backend
+        if: always()
       - name: Test algorithm with pytest
         run: |
           pip install pytest-cov
@@ -119,7 +119,8 @@ jobs:
         run: docker compose build backend-prod
       - name: Check the frontend successfully builds
         run: docker compose build frontend-prod
-      # TODO: this doesn't really make sense until we get healthchecks setup (could also upload these artifacts)
-      # - name: Check that we can successfully start the containers
-      #   run: docker compose up --wait backend-prod frontend-prod
-  
+      - name: Check that we can successfully start the containers
+        run: docker compose up --wait --wait-timeout 90 backend-prod frontend-prod
+      - name: Log the output of the containers
+        run: docker compose logs backend-prod frontend-prod
+        if: always()
