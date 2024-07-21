@@ -295,7 +295,7 @@ const TermPlanner = () => {
         }
         {plannerQuery.isPending ||
         coursesQuery.isPending ||
-        courseQueries.some((c) => c.isPending) ? (
+        courseQueries.some((c) => c.isPlaceholderData) ? (
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
