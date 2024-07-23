@@ -17,7 +17,6 @@ export type CourseResponse = {
   code: string;
   mark: Mark;
   plannedFor: string | null;
-  unlocked: boolean;
   title: string;
   isMultiterm: boolean;
   uoc: number;
