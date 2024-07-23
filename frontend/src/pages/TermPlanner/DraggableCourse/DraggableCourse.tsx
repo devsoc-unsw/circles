@@ -197,7 +197,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
           ) : warningMessage.length !== 0 ? (
             stripExtraParenthesis(warningMessage.join('\n'))
           ) : (
-            // eslint-disable-next-line react/no-danger
+            // eslint-disable-next-line react/no-danger -- TODO: we really should remove this when we figure out better formatting strings
             <div dangerouslySetInnerHTML={{ __html: handbookNote }} />
           )}
           {/* TODO: Fix fullstops. example: "48 UoC required in all courses you have 36 This course will not be included ..."

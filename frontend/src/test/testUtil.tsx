@@ -53,8 +53,8 @@ export const renderWithProviders = async (
       })
     };
   });
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const Wrapper = ({ children }: PropsWithChildren<{}>) => (
+
+  const Wrapper = ({ children }: PropsWithChildren) => (
     <QueryClientProvider client={queryClient}>
       <MemoryRouter>
         <ThemeProvider theme={lightTheme}>
