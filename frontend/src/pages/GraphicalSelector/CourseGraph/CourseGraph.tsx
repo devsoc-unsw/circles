@@ -9,12 +9,11 @@ import {
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { useQuery } from '@tanstack/react-query';
 import { Switch } from 'antd';
-import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked } from 'types/api';
+import { CourseEdge } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
+import { getAllUnlockedCourses } from 'utils/api/coursesApi';
 import { getProgramGraph } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
@@ -349,11 +348,10 @@ const CourseGraph = ({
     const courses = unwrapQuery(coursesQuery.data);
     try {
       setLoading(true);
-      const {
-        data: { courses_state: coursesStates }
-      } = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner, courses))
+      const { courses_state: coursesStates } = await getAllUnlockedCourses(
+        degree,
+        planner,
+        courses
       );
       graphRef.current.getNodes().forEach((n) => {
         const id = n.getID();

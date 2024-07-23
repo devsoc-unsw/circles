@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { Course } from 'types/api';
+import { Course, CoursesAllUnlocked } from 'types/api';
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import prepareUserPayload from 'utils/prepareUserPayload';
 import { getUserPlanner } from './userApi';
 
 export const getCoursesInfo = async (token: string): Promise<Record<string, Course>> => {
@@ -16,4 +18,17 @@ export const getCoursesInfo = async (token: string): Promise<Record<string, Cour
     });
 
   return courses;
+};
+
+export const getAllUnlockedCourses = async (
+  degree: DegreeResponse,
+  planner: PlannerResponse,
+  courses: CoursesResponse
+): Promise<CoursesAllUnlocked> => {
+  const res = await axios.post<CoursesAllUnlocked>(
+    '/courses/getAllUnlocked/',
+    JSON.stringify(prepareUserPayload(degree, planner, courses))
+  );
+
+  return res.data;
 };

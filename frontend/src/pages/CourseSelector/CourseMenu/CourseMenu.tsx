@@ -2,14 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { MenuProps } from 'antd';
-import axios from 'axios';
-import { CoursesAllUnlocked, Structure } from 'types/api';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { getAllUnlockedCourses } from 'utils/api/coursesApi';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import { getProgramStructure } from 'utils/api/programsApi';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
@@ -44,36 +43,15 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
 
   const inPlanner = (courseId: string) => courses && !!courses[courseId];
 
-  const getStructure = React.useCallback(async () => {
-    // eslint-disable-next-line prefer-promise-reject-errors
-    if (!degree) return Promise.reject('degree undefined');
-    const { programCode, specs } = degree;
-    const res = await axios.get<Structure>(
-      `/programs/getStructure/${programCode}/${specs.join('+')}`
-    );
-    return res.data.structure;
-  }, [degree]);
-
-  const getAllUnlocked = React.useCallback(async () => {
-    if (!degree || !planner || !courses)
-      // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject('degree, planner or courses undefined');
-    const res = await axios.post<CoursesAllUnlocked>(
-      '/courses/getAllUnlocked/',
-      JSON.stringify(prepareUserPayload(degree, planner, courses))
-    );
-    return res.data.courses_state;
-  }, [degree, planner, courses]);
-
   const structureQuery = useQuery({
     queryKey: ['structure', degree],
-    queryFn: getStructure,
+    queryFn: () => getProgramStructure(degree!.programCode, degree!.specs),
     enabled: !!degree
   });
 
   const coursesStateQuery = useQuery({
     queryKey: ['coursesState', degree, planner, courses],
-    queryFn: getAllUnlocked,
+    queryFn: () => getAllUnlockedCourses(degree!, planner!, courses!),
     enabled: !!degree && !!planner && !!courses
   });
 
@@ -142,7 +120,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
 
   useEffect(() => {
     if (!courses || !structureQuery.isSuccess || !coursesStateQuery.isSuccess) return;
-    generateMenuData(structureQuery.data, coursesStateQuery.data);
+    generateMenuData(structureQuery.data.structure, coursesStateQuery.data.courses_state);
   }, [
     courses,
     coursesStateQuery.data,
@@ -173,7 +151,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   const defaultOpenKeys = useMemo(() => [Object.keys(menuData)[0]], [menuData]);
   const menuItems: MenuProps['items'] = useMemo((): MenuProps['items'] => {
     if (pageLoaded && structureQuery.isSuccess && courses) {
-      const structure = structureQuery.data;
+      const { structure } = structureQuery.data;
       return Object.entries(menuData).map(([groupKey, groupEntry]) => ({
         label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
         key: groupKey,

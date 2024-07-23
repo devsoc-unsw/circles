@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GraphPayload } from 'types/api';
+import { GraphPayload, Structure } from 'types/api';
 
 export const getProgramGraph = async (
   programCode: string,
@@ -7,4 +7,15 @@ export const getProgramGraph = async (
 ): Promise<GraphPayload> => {
   const res = await axios.get(`/programs/graph/${programCode}/${specs.join('+')}`);
   return res.data as GraphPayload;
+};
+
+export const getProgramStructure = async (
+  programCode: string,
+  specs: string[]
+): Promise<Structure> => {
+  const res = await axios.get<Structure>(
+    `/programs/getStructure/${programCode}/${specs.join('+')}`
+  );
+
+  return res.data;
 };
