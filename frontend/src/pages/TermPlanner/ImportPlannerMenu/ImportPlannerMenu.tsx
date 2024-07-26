@@ -2,11 +2,10 @@ import React, { useRef, useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
-import axios from 'axios';
-import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
+import { JSONPlanner, Term } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
-import { withAuthorization } from 'utils/api/auth';
 import { getCourseInfo } from 'utils/api/courseApi';
+import { addToUnplanned, setUnplannedCourseToTerm } from 'utils/api/plannerApi';
 import {
   getUserPlanner,
   toggleSummerTerm,
@@ -28,32 +27,8 @@ const ImportPlannerMenu = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSetUnplannedCourseToTerm = async (data: UnPlannedToTerm) => {
-    try {
-      await axios.post('planner/unPlannedToTerm', data, {
-        headers: withAuthorization(token)
-      });
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(`Error at handleSetUnplannedCourseToTerm:`, err);
-    }
-  };
-
   const upload = () => {
     inputRef.current?.click();
-  };
-
-  const handleAddToUnplanned = async (code: string) => {
-    try {
-      await axios.post(
-        'planner/addToUnplanned',
-        { courseCode: code },
-        { headers: withAuthorization(token) }
-      );
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at handleAddToUnplanned: ', err);
-    }
   };
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,7 +108,7 @@ const ImportPlannerMenu = () => {
                 const course = await getCourseInfo(code);
                 if (plannedCourses.indexOf(course.code) === -1) {
                   plannedCourses.push(course.code);
-                  handleAddToUnplanned(course.code);
+                  addToUnplanned(token, course.code);
                   const destYear = Number(yearIndex) + Number(planner.startYear);
                   const destTerm = term as Term;
                   const destRow = destYear - planner.startYear;
@@ -144,7 +119,7 @@ const ImportPlannerMenu = () => {
                     destIndex,
                     courseCode: code
                   };
-                  handleSetUnplannedCourseToTerm(data);
+                  setUnplannedCourseToTerm(token, data);
                 }
               });
             });

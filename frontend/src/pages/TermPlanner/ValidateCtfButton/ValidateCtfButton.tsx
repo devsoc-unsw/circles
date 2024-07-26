@@ -1,19 +1,10 @@
 import React from 'react';
 import { Typography } from 'antd';
-import axios from 'axios';
 import styled from 'styled-components';
-import { withAuthorization } from 'utils/api/auth';
+import { CtfResult, validateCtf as validateCtfRequest } from 'utils/api/ctfApi';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
-
-type CtfResult = {
-  valid: boolean;
-  failed: number;
-  passed: Array<string>;
-  message: string;
-  flags: Array<string>;
-};
 
 const { Text, Title } = Typography;
 
@@ -44,12 +35,8 @@ const ValidateCtfButton = () => {
 
   const validateCtf = async () => {
     setOpen(true);
-    const res = await axios.post<CtfResult>(
-      '/ctf/validateCtf/',
-      {},
-      { headers: withAuthorization(token) }
-    );
-    setResult(res.data);
+    const res = await validateCtfRequest(token);
+    setResult(res);
   };
 
   return (
