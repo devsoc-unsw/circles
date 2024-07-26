@@ -3,9 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import { CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable } from 'types/courseCapacity';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { getCourseInfo, getCoursePrereqs } from 'utils/api/courseApi';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import {
@@ -47,10 +48,10 @@ const CourseDescriptionPanel = ({
     return res.data;
   }, [courseCode, degree, planner, courses]);
 
-  const getCourseInfo = React.useCallback(async () => {
+  const getCourseExtendedInfo = React.useCallback(async () => {
     return Promise.allSettled([
-      axios.get<Course>(`/courses/getCourse/${courseCode}`),
-      axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
+      getCourseInfo(courseCode),
+      getCoursePrereqs(courseCode),
       axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
     ]);
   }, [courseCode]);
@@ -75,7 +76,7 @@ const CourseDescriptionPanel = ({
 
   const courseInfoQuery = useQuery({
     queryKey: ['courseInfo', courseCode],
-    queryFn: getCourseInfo
+    queryFn: getCourseExtendedInfo
   });
 
   const loadingWrapper = (
@@ -87,8 +88,8 @@ const CourseDescriptionPanel = ({
   if (courseInfoQuery.isPending || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
-  const course = unwrap(courseRes)?.data;
-  const coursesPathFrom = unwrap(pathFromRes)?.data.courses;
+  const course = unwrap(courseRes);
+  const coursesPathFrom = unwrap(pathFromRes)?.courses;
   const courseCapacity = getEnrolmentCapacity(unwrap(courseCapRes)?.data);
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Course, SearchCourse } from 'types/api';
+import { Course, CourseChildren, CoursePathFrom, SearchCourse } from 'types/api';
 import { LIVE_YEAR } from 'config/constants';
 import { withAuthorization } from './auth';
 
@@ -13,17 +13,27 @@ export const searchCourse = async (token: string, query: string): Promise<Search
   return res.data as SearchCourse;
 };
 
-export const getCourseInfo = async (courseId: string) => {
-  const res = await axios.get<Course>(`courses/getCourse/${courseId}`);
+export const getCourseInfo = async (courseCode: string) => {
+  const res = await axios.get<Course>(`courses/getCourse/${courseCode}`);
+  return res.data;
+};
+
+export const getCoursePrereqs = async (courseCode: string) => {
+  const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`);
+  return res.data;
+};
+
+export const getCourseChildren = async (courseCode: string) => {
+  const res = await axios.get<CourseChildren>(`/courses/courseChildren/${courseCode}`);
   return res.data;
 };
 
 export const getCourseForYearsInfo = async (
-  courseId: string,
+  courseCode: string,
   years: number[]
 ): Promise<Record<number, Course>> => {
   const promises = await Promise.allSettled(
-    years.map((year) => axios.get<Course>(`courses/getLegacyCourse/${year}/${courseId}`))
+    years.map((year) => axios.get<Course>(`courses/getLegacyCourse/${year}/${courseCode}`))
   );
   const legacy: Record<number, Course> = {};
   promises.forEach((promise, index) => {
@@ -31,7 +41,7 @@ export const getCourseForYearsInfo = async (
       legacy[years[index]] = promise.value.data;
     }
   });
-  const current = (await axios.get<Course>(`courses/getCourse/${courseId}`)).data;
+  const current = await getCourseInfo(courseCode);
   legacy[LIVE_YEAR] = current;
   return legacy;
 };

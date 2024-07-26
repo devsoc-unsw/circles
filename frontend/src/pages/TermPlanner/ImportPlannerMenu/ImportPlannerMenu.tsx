@@ -3,10 +3,10 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
 import axios from 'axios';
-import { Course } from 'types/api';
 import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
 import { withAuthorization } from 'utils/api/auth';
+import { getCourseInfo } from 'utils/api/courseApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import useToken from 'hooks/useToken';
@@ -133,7 +133,7 @@ const ImportPlannerMenu = () => {
           fileInJson.years.forEach((year, yearIndex) => {
             Object.entries(year).forEach(([term, termCourses]) => {
               termCourses.forEach(async (code, index) => {
-                const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
+                const course = await getCourseInfo(code);
                 if (plannedCourses.indexOf(course.code) === -1) {
                   plannedCourses.push(course.code);
                   handleAddToUnplanned(course.code);

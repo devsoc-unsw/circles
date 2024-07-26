@@ -1,13 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
-import axios from 'axios';
-import { CourseChildren, CoursePathFrom } from 'types/api';
 import { CourseList } from 'types/courses';
+import {
+  getCourseChildren,
+  getCoursePrereqs as getCoursePrereqsRequest
+} from 'utils/api/courseApi';
 import Spinner from 'components/Spinner';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';
 import S from './styles';
 import { bringEdgeLabelsToFront, calcHeight, handleNodeData, updateEdges } from './utils';
+
+const getCoursePrereqs = async (code: string) => {
+  try {
+    const res = await getCoursePrereqsRequest(code);
+    return res.courses;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Error at getCoursePrereqs', e);
+    return [];
+  }
+};
+
+const getCourseUnlocks = async (code: string) => {
+  try {
+    const res = await getCourseChildren(code);
+    return res.courses;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Error at getCourseUnlocks', e);
+    return [];
+  }
+};
 
 type Props = {
   courseCode: string;
@@ -63,29 +87,6 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
       if (!graphRef.current) return;
       graphRef.current.changeData(graphData);
       bringEdgeLabelsToFront(graphRef.current);
-    };
-
-    /* REQUESTS */
-    const getCourseUnlocks = async (code: string) => {
-      try {
-        const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
-        return res.data.courses;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at getCourseUnlocks', e);
-        return [];
-      }
-    };
-
-    const getCoursePrereqs = async (code: string) => {
-      try {
-        const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
-        return res.data.courses;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at getCoursePrereqs', e);
-        return [];
-      }
     };
 
     /* MAIN */
