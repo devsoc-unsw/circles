@@ -7,7 +7,12 @@ import { JSONPlanner, Term, UnPlannedToTerm } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
 import { withAuthorization } from 'utils/api/auth';
 import { getCourseInfo } from 'utils/api/courseApi';
-import { getUserPlanner } from 'utils/api/userApi';
+import {
+  getUserPlanner,
+  toggleSummerTerm,
+  updateDegreeLength,
+  updateStartYear
+} from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
@@ -100,16 +105,8 @@ const ImportPlannerMenu = () => {
             return;
           }
           try {
-            await axios.put(
-              '/user/updateDegreeLength',
-              { numYears: fileInJson.numYears },
-              { headers: withAuthorization(token) }
-            );
-            await axios.put(
-              '/user/updateStartYear',
-              { startYear: fileInJson.startYear },
-              { headers: withAuthorization(token) }
-            );
+            await updateDegreeLength(token, fileInJson.numYears);
+            await updateStartYear(token, fileInJson.startYear.toString());
           } catch {
             openNotification({
               type: 'error',
@@ -120,7 +117,7 @@ const ImportPlannerMenu = () => {
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             try {
-              await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
+              await toggleSummerTerm(token);
             } catch {
               openNotification({
                 type: 'error',

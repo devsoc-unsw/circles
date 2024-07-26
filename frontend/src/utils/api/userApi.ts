@@ -44,3 +44,19 @@ export const getUserCourses = async (token: string): Promise<CoursesResponse> =>
 export const resetUserDegree = async (token: string): Promise<void> => {
   await axios.post(`user/reset`, {}, { headers: withAuthorization(token) });
 };
+
+export const updateDegreeLength = async (token: string, numYears: number): Promise<void> => {
+  await axios.put('/user/updateDegreeLength', { numYears }, { headers: withAuthorization(token) });
+};
+
+export const toggleSummerTerm = async (token: string): Promise<void> => {
+  await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
+};
+
+export const updateStartYear = async (token: string, year: string): Promise<void> => {
+  await axios.put(
+    '/user/updateStartYear',
+    { startYear: parseInt(year, 10) },
+    { headers: withAuthorization(token) }
+  );
+};

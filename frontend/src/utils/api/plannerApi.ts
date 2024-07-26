@@ -100,3 +100,11 @@ export const updateCourseMark = async (token: string, courseMark: CourseMark) =>
     console.error(e);
   }
 };
+
+export const toggleLockTerm = async (token: string, year: string, term: string) => {
+  await axios.post(
+    '/planner/toggleTermLocked',
+    {},
+    { params: { termyear: `${year}${term}` }, headers: withAuthorization(token) }
+  );
+};
