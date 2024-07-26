@@ -35,6 +35,7 @@ class OIDCInvalidRequest(OIDCRequestError):
 class OIDCTokenError(OIDCRequestError):
     @staticmethod
     def from_dict(error: Dict[str, Any]) -> OIDCRequestError | OIDCUnknownError:
+        # pylint: disable=too-many-return-statements  # this is good
         # matches all possible token related error responses
         code = error.get("error")
         description = error.get("error_description")

@@ -1,5 +1,3 @@
-# pylint: disable=missing-function-docstring
-# pylint: disable=missing-module-docstring
 import json
 import requests
 from server.tests.user.utility import clear

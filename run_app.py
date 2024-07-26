@@ -1,43 +1,35 @@
-# pylint: disable=cyclic-import
 """ run all of circles in one terminal, assuming a unix environment """
 
 import os
-from subprocess import Popen, check_call, run
+import logging
+import sys
+import threading
+from subprocess import run, Popen, check_call
+from typing import TextIO
+from dotenv import dotenv_values
 
 
 # also crazy - autoconfigure the environment if it is borked
 if not os.path.exists(".venv"):
-    if run("./create_venv.sh", shell=True).returncode != 0:
+    if run("./create_venv.sh", shell=True, check=False).returncode != 0:
         print("please follow the above instructions to set up venv correctly")
-        exit(1)
-
+        sys.exit(1)
 
 os.system(". .venv/bin/activate")
 
-if run("nodemon --help > /dev/null", shell=True).returncode != 0:
-    print("You must install npm and nodemon. Please follow the onboarding instructions to install npm, then run 'npm install -g nodemon'")
-    exit(1)
+
+if run("npm --version", shell=True, check=False).returncode != 0:
+    print("You must install npm. Please follow the onboarding instructions to install npm")
+    sys.exit(1)
 
 if not os.path.exists("frontend/node_modules"):
-    run("cd frontend; npm install", shell=True)
-
-
-import logging
-import sys
-import threading
-from subprocess import Popen, check_call
-from typing import TextIO
-try:
-    from dotenv import dotenv_values
-except:
-    print("failed to load from venv correctly. Please run '. .venv/bin/activate' and try again")
-    exit(1)
-
-from dotenv import dotenv_values
+    run("cd frontend; npm install", shell=True, check=False)
 
 
 class LogPipe(threading.Thread, TextIO):
     """ boilerplate abstraction for redirecting the logs of a process """
+    # TODO: implement the abstract methods it is complaining about
+    # pylint: disable=abstract-method
     def __init__(self, level):
         """Setup the object with a logger and a loglevel
         and start the thread
@@ -113,6 +105,7 @@ def main():
     os.system("docker compose up -d sessionsdb mongodb")
 
     try:
+        # pylint: disable=consider-using-with
         Popen(
             f"{python_ver} -u runserver.py --dev",
             stdout=sys.stdout,
@@ -130,7 +123,6 @@ def main():
             cwd="frontend/",
             env=frontend_env,
         )
-    # pylint: disable=broad-except
     except Exception as e:
         sys.stdout.write(f"exception - {e}")
     finally:

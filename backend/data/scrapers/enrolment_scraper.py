@@ -15,6 +15,7 @@ import re
 import sys
 
 import paramiko
+import paramiko.ssh_exception
 import waiting  # type: ignore
 from data.utility.data_helpers import read_data, write_data
 
@@ -33,7 +34,7 @@ def scrape_enrolment_data(username:str, password:str):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect('login.cse.unsw.edu.au', username=username, password=password)
-        stdin, stdout, stderr = ssh.exec_command('ls', timeout=1)
+        stdin, stdout, _stderr = ssh.exec_command('ls', timeout=1)
     except paramiko.ssh_exception.AuthenticationException:
         print('Authentication failed')
         sys.exit(1)
@@ -41,7 +42,7 @@ def scrape_enrolment_data(username:str, password:str):
         print('SSH failed')
         sys.exit(1)
 
-    stdin, stdout, stderr = ssh.exec_command('ls\n', timeout=1)
+    stdin, stdout, _stderr = ssh.exec_command('ls\n', timeout=1)
     # stdout.channel.set_combine_stderr(True)
     for course_code in data:
         if not course_code.startswith("COMP"):

@@ -12,7 +12,6 @@ export const addToUnplanned = async (token: string, courseId: string) => {
       { headers: withAuthorization(token) }
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at addToUnplanned: ', err);
   }
 };
@@ -21,7 +20,6 @@ export const setPlannedCourseToTerm = async (token: string, data: PlannedToTerm)
   try {
     await axios.post('planner/plannedToTerm', data, { headers: withAuthorization(token) });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at setPlannedCourseToTerm: ', err);
   }
 };
@@ -30,7 +28,6 @@ export const setUnplannedCourseToTerm = async (token: string, data: UnPlannedToT
   try {
     await axios.post('planner/unPlannedToTerm', data, { headers: withAuthorization(token) });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at handleSetUnplannedCourseToTerm: ', err);
   }
 };
@@ -43,7 +40,6 @@ export const unscheduleCourse = async (token: string, data: UnscheduleCourse) =>
       { headers: withAuthorization(token) }
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at handleUnscheduleCourse: ', err);
   }
 };
@@ -52,7 +48,6 @@ export const unscheduleAll = async (token: string) => {
   try {
     await axios.post('planner/unscheduleAll', {}, { headers: withAuthorization(token) });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at handleUnscheduleAll: ', err);
   }
 };
@@ -65,7 +60,6 @@ export const removeCourse = async (token: string, courseId: string) => {
       { headers: withAuthorization(token) }
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at removeCourse: ', err);
   }
 };
@@ -78,7 +72,6 @@ export const toggleIgnoreFromProgression = async (token: string, courseId: strin
       { headers: withAuthorization(token) }
     );
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at toggleIgnoreFromProgression: ', err);
   }
 };
@@ -87,7 +80,6 @@ export const removeAll = async (token: string) => {
   try {
     await axios.post('planner/removeAll', {}, { headers: withAuthorization(token) });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error('Error at removeAll: ', err);
   }
 };
@@ -105,7 +97,6 @@ export const updateCourseMark = async (token: string, courseMark: CourseMark) =>
       headers: withAuthorization(token)
     });
   } catch (e) {
-    /* eslint-disable no-console */
-    console.log(e);
+    console.error(e);
   }
 };

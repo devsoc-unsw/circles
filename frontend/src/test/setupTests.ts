@@ -4,9 +4,8 @@ import { vi } from 'vitest';
 // use to mock useMediaQuery
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation((query) => ({
+  value: vi.fn().mockImplementation((query: string) => ({
     matches: false,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     media: query,
     onchange: null,
     addListener: vi.fn(), // deprecated

@@ -1,6 +1,7 @@
 """
 Script built on dotenv to set up the required environment variables
 """
+# pylint: disable=too-many-locals
 
 import argparse
 import os
@@ -86,7 +87,7 @@ def main() -> None:
     # frontend
     vite_backend_base_url = env.get_variable("VITE_BACKEND_API_BASE_URL", "http://localhost:8000/")
     vite_env = env.get_variable("VITE_ENV", "dev")
-    
+
     frontend_env["VITE_BACKEND_API_BASE_URL"] = vite_backend_base_url
     frontend_env["VITE_ENV"] = vite_env
 
@@ -131,12 +132,13 @@ class EnvReader():
                 return None
 
         if (default_value := self.preexisting_env.get(name, default)) is not None:
+            # have a default value to offer instead
             print(f"Enter value for {name} (press [enter] to accept default '{default_value}')")
             entered_value = read_input()
             return entered_value or default_value
-        else:
-            print(f"Enter value for {name} (press [enter] to skip)")
-            return read_input()
+
+        print(f"Enter value for {name} (press [enter] to skip)")
+        return read_input()
 
 def parse_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Set up env/ folder and required env files")
@@ -148,7 +150,7 @@ def parse_cli_args() -> argparse.Namespace:
     parser.add_argument("--auth_cse_client_secret", type=str)
     parser.add_argument("--auth_redirect_base_uri", type=str)
 
-    
+
     parser.add_argument("--additional_redis_args", type=str)
     parser.add_argument("--python_version", type=str)
     parser.add_argument("--prod", "--production", action="store_true")
@@ -185,7 +187,7 @@ def write_env_file(env: dict[str, Optional[str]], file: Path):
         for key, value in env.items()
         if value is not None
     )
-    with open(file, mode='w') as f:
+    with open(file, mode='w', encoding='utf-8') as f:
         f.write(content)
 
     print(f"Successfully wrote {len(env)} items to {file}")

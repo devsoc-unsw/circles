@@ -29,8 +29,8 @@ const ImportPlannerMenu = () => {
         headers: withAuthorization(token)
       });
     } catch (err) {
-      // eslint-disable-next-line no-console, @typescript-eslint/restrict-template-expressions
-      console.error(`Error at handleSetUnplannedCourseToTerm: ${err}`);
+      // eslint-disable-next-line no-console
+      console.error(`Error at handleSetUnplannedCourseToTerm:`, err);
     }
   };
 

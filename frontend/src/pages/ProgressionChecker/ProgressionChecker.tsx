@@ -7,8 +7,6 @@ import {
 } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Divider, Typography } from 'antd';
-import axios from 'axios';
-import { Structure } from 'types/api';
 import {
   ProgressionAdditionalCourses,
   ProgressionViewStructure,
@@ -18,6 +16,7 @@ import {
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
 import { badCourses, badDegree, badPlanner } from 'types/userResponse';
+import { getProgramStructure } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
@@ -57,11 +56,9 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get<Structure>(
-          `/programs/getStructure/${programCode}/${specs.join('+')}`
-        );
-        setStructure(res.data.structure);
-        setUoc(res.data.uoc);
+        const res = await getProgramStructure(programCode, specs);
+        setStructure(res.structure);
+        setUoc(res.uoc);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error('Error at fetchStructure', err);

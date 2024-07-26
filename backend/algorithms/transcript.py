@@ -1,6 +1,6 @@
-from pypdf import PdfReader
 import re
 from typing import Any, BinaryIO, Dict, Tuple
+from pypdf import PdfReader
 
 
 
@@ -15,14 +15,16 @@ UOC = int | None
 CoursesByYear = Dict[YearInt, Dict[Term, Dict[CourseCode, Tuple[UOC, Mark, Grade]]]]
 
 def parse_transcript(file: BinaryIO) -> CoursesByYear:
+    # pylint: disable=too-many-locals
     reader = PdfReader(file)
 
     page_texts = list(map(lambda p: p.extract_text(), reader.pages))
 
-    for i in range(len(page_texts)):
-        search = re.search("Student ID: [0-9]*\n", page_texts[i])
-        if not search: continue
-        page_texts[i] = page_texts[i][search.end(0):] # chop off page beginning text
+    for i, page_text in enumerate(page_texts):
+        search = re.search("Student ID: [0-9]*\n", page_text)
+        if not search:
+            continue
+        page_texts[i] = page_text[search.end(0):] # chop off page beginning text
 
     text = "".join(page_texts)
     lines = text.split('\n')
@@ -31,12 +33,12 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
     def parse_course_line(line):
         match = re.fullmatch(complete_exp, line)
         if match:
-            course_letters, course_number, uattempted, upassed, mark, grade = match.groups()
+            course_letters, course_number, uattempted, _upassed, mark, grade = match.groups()
             course_code = course_letters + course_number
             mark = int(mark)
             try:
                 uattempted = int(uattempted)
-            except:
+            except ValueError:
                 uattempted = None
             return course_code, mark, uattempted, grade
         match = re.fullmatch(r"([A-Z]{4}) ([0-9]{4}) .* ([0-9]+\.[0-9]+) ", line)
@@ -45,13 +47,13 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
             course_code = course_letters + course_number
             try:
                 uattempted = int(uattempted)
-            except:
+            except ValueError:
                 uattempted = None
             return course_code, None, uattempted, None
         return None
 
 
-    years: CoursesByYear = dict()
+    years: CoursesByYear = {}
 
     i = 0
     while i < len(lines):
@@ -65,8 +67,8 @@ def parse_transcript(file: BinaryIO) -> CoursesByYear:
             year = int(year_raw)
             term = 'T' + term_raw
 
-            years[year] = years.get(year, dict())
-            years[year][term] = dict()
+            years[year] = years.get(year, {})
+            years[year][term] = {}
 
             while lines[i] != "Course Title Attempted Passed Mark Grade":
                 i += 1

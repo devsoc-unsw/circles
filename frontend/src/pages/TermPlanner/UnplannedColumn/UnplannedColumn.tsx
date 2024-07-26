@@ -25,8 +25,6 @@ const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
 );
 
-/* eslint-disable */
-
 const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
   const token = useToken();
   const plannerQuery = useQuery({

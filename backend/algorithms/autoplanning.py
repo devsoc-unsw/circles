@@ -31,6 +31,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         - the UOC max for each term is adhered to (no overloading, and the user should be allowed to manipulate this)
         - the prerequisites are respected.
     """
+    # pylint: disable=too-many-locals
     # TODO: add a way to lock in courses
     model = cp_model.CpModel()
     # 1. enforces terms

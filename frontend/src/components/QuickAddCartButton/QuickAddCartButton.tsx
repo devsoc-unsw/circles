@@ -29,8 +29,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
   const mutation = useMutation({
     mutationFn: handleMutation,
     onMutate: () => planned,
-    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-    onSuccess: async (data: void, variables: string, context: unknown) => {
+    onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: ['planner']
       });

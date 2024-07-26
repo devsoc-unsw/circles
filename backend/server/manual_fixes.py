@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring,missing-function-docstring
 from contextlib import suppress
 
 from server.routers.model import StructureContainer

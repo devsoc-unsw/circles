@@ -58,6 +58,13 @@ services:
       - sessionsdb
     networks:
       - circles-net
+    healthcheck:  # mainly just for ci
+      test: "curl -sf http://localhost:8000/ping || exit 1"
+      timeout: 10s
+      interval: 30s
+      start_period: 60s
+      start_interval: 10s
+      retries: 3
 
   frontend:
     build:
@@ -97,19 +104,8 @@ services:
   ci-backend:
     # Utility to run the backend with a entirely clean database for testing
     # Should be identical to the backend production, except for the different entrypoint
-    build:
-      context: ./backend
-      dockerfile: production.dockerfile
+    extends: backend-prod
     container_name: ci-backend
-    ports:
-      - '8000:8000'
-    env_file:
-      - ./env/backend.env
-    depends_on:
-      - mongodb
-      - sessionsdb
-    networks:
-      - circles-net
     # THIS IS IMPORTANT
     entrypoint: ["python3", "-u", "runserver.py", "--overwrite-all-data"]
 

@@ -67,3 +67,8 @@ async def index() -> str:
 def live_year() -> int:
     """sanity check for the live year"""
     return LIVE_YEAR
+
+@app.get("/ping")
+def ping() -> str:
+    """ping command useful for healthchecks"""
+    return "pong"

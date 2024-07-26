@@ -1,8 +1,8 @@
 """ Specialisations Route """
-from typing import Dict, Literal, Optional, cast
+from typing import Dict, Optional, cast
+from fastapi import APIRouter, HTTPException
 
 from data.processors.models import Program
-from fastapi import APIRouter, HTTPException
 from server.db.mongo.conn import programsCOL, specialisationsCOL
 from server.routers.model import SpecType, Specialisations, SpecialisationTypes
 

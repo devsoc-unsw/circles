@@ -65,7 +65,7 @@ const SettingsMenu = ({ planner }: Props) => {
       updateStartYearMutation.mutate(dateString);
     } else {
       // eslint-disable-next-line no-console
-      console.log('Error updating start year. Invalid date string:', dateString);
+      console.error('Error updating start year. Invalid date string:', dateString);
     }
   };
 

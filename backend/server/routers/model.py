@@ -1,5 +1,4 @@
 """ model for interacting with the FE """
-# pylint: disable=missing-class-docstring
 import json
 import pickle
 from typing import Literal, Optional, TypedDict, Union
@@ -75,7 +74,7 @@ class Structure(BaseModel):
     uoc: int
 
 
-# TODO: This should just take a token now
+# TODO: routes that use this should just take a token now
 class UserData(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
@@ -136,7 +135,8 @@ class CoursesTypeState(BaseModel):
 
     courses_state: dict[str, CourseTypeState] = {}
 
-
+# TODO: this is only used in ctf.py and the validatePlanner route...
+#       Shuffle those to use the user objects directly, then we can delete this and the `convert_to_planner_data` function
 class ValidPlannerData(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
@@ -144,6 +144,7 @@ class ValidPlannerData(BaseModel):
     specialisations: list[str]
     plan: list[list[dict[str, tuple[int, Optional[int]]]]]
 
+# TODO: the last surviving route that uses this is the autoplanning, convert it and delete this...
 class PlannerData(BaseModel):
     programCode: str
     specialisations: list[str]
@@ -260,7 +261,7 @@ class StartYear(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
     startYear: int
-    
+
 class DegreeLength(BaseModel):
     model_config = ConfigDict(extra='forbid')
 

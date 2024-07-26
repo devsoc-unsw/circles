@@ -7,7 +7,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistConfig, rootReducer } from 'config/store';
 import App from './App';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({

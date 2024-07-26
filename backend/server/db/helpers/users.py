@@ -128,7 +128,7 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         k: v
         for k, v
         in data.model_dump(
-            include={ "courses", "degree", "planner" }, 
+            include={ "courses", "degree", "planner" },
             exclude_unset=True,
         ).items()
         if v is not None  # cannot exclude_none since subclasses use None

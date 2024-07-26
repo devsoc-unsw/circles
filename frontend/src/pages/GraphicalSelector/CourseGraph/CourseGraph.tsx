@@ -9,12 +9,11 @@ import {
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { useQuery } from '@tanstack/react-query';
 import { Switch } from 'antd';
-import axios from 'axios';
-import { CourseEdge, CoursesAllUnlocked } from 'types/api';
+import { CourseEdge } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
+import { getAllUnlockedCourses } from 'utils/api/coursesApi';
 import { getProgramGraph } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { RootState } from 'config/store';
@@ -86,9 +85,14 @@ const CourseGraph = ({
 
   const programGraphQuery = useQuery({
     queryKey: ['graph', { code: degreeQuery.data?.programCode, specs: degreeQuery.data?.specs }],
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     queryFn: () => getProgramGraph(degreeQuery.data!.programCode, degreeQuery.data!.specs),
     enabled: !degreeQuery.isPending && degreeQuery.data && degreeQuery.isSuccess
+  });
+
+  const coursesStateQuery = useQuery({
+    queryKey: ['coursesState', degreeQuery.data, plannerQuery.data, coursesQuery.data],
+    queryFn: () => getAllUnlockedCourses(degreeQuery.data!, plannerQuery.data!, coursesQuery.data!),
+    enabled: degreeQuery.isSuccess && plannerQuery.isSuccess && coursesQuery.isSuccess
   });
 
   const queriesSuccess =
@@ -141,6 +145,8 @@ const CourseGraph = ({
       const edges = node.getEdges();
       const { Arrow } = await import('@antv/g6');
       const courses = unwrapQuery(coursesQuery.data);
+      const coursesStates = unwrapQuery(coursesStateQuery.data?.courses_state);
+
       edges.forEach((e) => {
         graphRef.current?.updateItem(e, edgeUnhoverStyle(Arrow, theme, e.getID()));
       });
@@ -148,12 +154,7 @@ const CourseGraph = ({
         const courseId = n.getID();
         graphRef.current?.updateItem(
           n as Item,
-          mapNodeStyle(
-            courseId,
-            !!courses[courseId]?.plannedFor,
-            courses[courseId]?.unlocked,
-            theme
-          )
+          mapNodeStyle(courseId, courseId in courses, !!coursesStates[courseId]?.unlocked, theme)
         );
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
         n.toFront();
@@ -179,7 +180,7 @@ const CourseGraph = ({
       graphRef.current?.clearItemStates(node, 'hover');
       graphRef.current?.updateItem(
         node,
-        nodeLabelUnhoverStyle(node.getID(), !!courses[node.getID()]?.plannedFor, theme)
+        nodeLabelUnhoverStyle(node.getID(), node.getID() in courses, theme)
       );
       removeNeighbourStyles(node);
       graphRef.current?.paint();
@@ -203,6 +204,8 @@ const CourseGraph = ({
       if (!container) return;
       const courses = unwrapQuery(coursesQuery.data);
       const programs = unwrapQuery(programGraphQuery.data);
+      const coursesStates = unwrapQuery(coursesStateQuery.data?.courses_state);
+
       makePrerequisitesMap(programs?.edges);
       const { Graph, Arrow } = await import('@antv/g6');
 
@@ -237,7 +240,7 @@ const CourseGraph = ({
       graphRef.current = new Graph(graphArgs);
       const data = {
         nodes: programs.courses?.map((c) =>
-          mapNodeStyle(c, !!courses[c]?.plannedFor, courses[c]?.unlocked, theme)
+          mapNodeStyle(c, c in courses, !!coursesStates[c]?.unlocked, theme)
         ),
         edges: programs.edges
       };
@@ -267,15 +270,12 @@ const CourseGraph = ({
     const repaintCanvas = async () => {
       const nodes = graphRef.current?.getNodes();
       const courses = unwrapQuery(coursesQuery.data);
+      const coursesStates = coursesStateQuery.data?.courses_state ?? {};
+
       nodes?.map((n) =>
         graphRef.current?.updateItem(
           n,
-          mapNodeStyle(
-            n.getID(),
-            !!courses[n.getID()]?.plannedFor,
-            courses[n.getID()]?.unlocked,
-            theme
-          )
+          mapNodeStyle(n.getID(), n.getID() in courses, !!coursesStates[n.getID()]?.unlocked, theme)
         )
       );
 
@@ -300,7 +300,8 @@ const CourseGraph = ({
           !degreeQuery.data ||
           !coursesQuery.data ||
           !plannerQuery.data ||
-          !programGraphQuery.data
+          !programGraphQuery.data ||
+          !coursesStateQuery.data
         )
           return;
         initialisingStart.current = true;
@@ -325,7 +326,8 @@ const CourseGraph = ({
     setLoading,
     coursesQuery.data,
     plannerQuery.data,
-    programGraphQuery.data
+    programGraphQuery.data,
+    coursesStateQuery.data
   ]);
 
   // Show all nodes and edges once graph is initially loaded
@@ -345,35 +347,22 @@ const CourseGraph = ({
 
   const showUnlockedCourses = useCallback(async () => {
     if (!graphRef.current) return;
-    const degree = unwrapQuery(degreeQuery.data);
-    const planner = unwrapQuery(plannerQuery.data);
-    const courses = unwrapQuery(coursesQuery.data);
-    try {
-      setLoading(true);
-      const {
-        data: { courses_state: coursesStates }
-      } = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner, courses))
-      );
-      graphRef.current.getNodes().forEach((n) => {
-        const id = n.getID();
-        if (coursesStates[id]?.unlocked) {
-          n.show();
-          n.getOutEdges().forEach((e) => {
-            if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
-          });
-        } else {
-          n.hide();
-          n.getEdges().forEach((e) => e.hide());
-        }
-      });
-      setLoading(false);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at showUnlockedCourses', e);
-    }
-  }, [degreeQuery.data, plannerQuery.data, coursesQuery.data, setLoading]);
+    const coursesStates = coursesStateQuery.data?.courses_state ?? {};
+
+    graphRef.current.getNodes().forEach((n) => {
+      const id = n.getID();
+
+      if (coursesStates[id]?.unlocked) {
+        n.show();
+        n.getOutEdges().forEach((e) => {
+          if (coursesStates[e.getTarget().getID()]?.unlocked) e.show();
+        });
+      } else {
+        n.hide();
+        n.getEdges().forEach((e) => e.hide());
+      }
+    });
+  }, [coursesStateQuery.data]);
 
   const handleZoomIn = () => {
     const viewportCenter = graphRef.current?.getViewPortCenterPoint();
@@ -426,7 +415,7 @@ const CourseGraph = ({
 
   return (
     <S.Wrapper ref={containerRef}>
-      {loading && queriesSuccess && queriesSuccess ? (
+      {loading || !queriesSuccess ? (
         <S.SpinnerWrapper className="spinner-wrapper">
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>

@@ -80,7 +80,7 @@ def add_to_unplanned(data: CourseCode, uid: Annotated[str, Security(require_uid)
     user = get_setup_user(uid)
     if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
-    
+
     course = get_course(data.courseCode) # raises exception anyway when unfound
     user['planner']['unplanned'].append(data.courseCode)
     user['courses'][data.courseCode] = {
@@ -162,6 +162,7 @@ def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security
         HTTPException: Moving a multiterm course somewhere that would result in a
             course being placed before or after the planner
     """
+    # pylint: disable=too-many-locals
     course = get_course(data.courseCode)
     user = get_setup_user(uid)
 
@@ -254,7 +255,7 @@ def remove_course(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
     # remove course from unplanned (if it's there)
     if data.courseCode in planner['unplanned']:
         planner['unplanned'].remove(data.courseCode)
-        
+
     if data.courseCode in user['courses']:
         del user['courses'][data.courseCode]
     set_user(uid, user, True)
@@ -281,7 +282,7 @@ def remove_all(uid: Annotated[str, Security(require_uid)]):
 
     # Clear unplanned column
     user['planner']['unplanned'] = []
-    
+
     user['courses'] = {}
     set_user(uid, user, True)
 
@@ -333,12 +334,10 @@ def unschedule_all(uid: Annotated[str, Security(require_uid)]):
 
 @router.post("/toggleTermLocked")
 def toggleLocked(termyear: str, uid: Annotated[str, Security(require_uid)]):
-    (term_str, year_str) = termyear.split('T')
-    try:
-        year = int(year_str)
-        term = int(term_str)
-    except ValueError:
+    (year_str, term_str) = termyear.split('T')
+    if not (term_str.isnumeric() and year_str.isnumeric() and 0 <= int(term_str) <= 3):
         raise HTTPException(status_code=400, detail="Invalid term/year")
+
     user = get_setup_user(uid)
     locked_map = user['planner']['lockedTerms']
     locked_map[termyear] = not locked_map.get(termyear, False)

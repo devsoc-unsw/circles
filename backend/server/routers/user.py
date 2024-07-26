@@ -32,7 +32,7 @@ def _otn_courses(s: dict[str, CourseStorage]) -> NEWUserCoursesStorage:
     return { code: NEWUserCourseStorage.model_validate(info) for code, info in s.items() }
 
 def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
-    return { 
+    return {
         code: {
             'code': info.code,
             'ignoreFromProgression': info.ignoreFromProgression,

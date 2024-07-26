@@ -2,6 +2,7 @@
 This module allows for the conversion from strings / tokens of strings
 to actual condition objects.
 """
+# pylint: disable=too-many-nested-blocks, too-many-branches
 
 import json
 import re
@@ -22,7 +23,7 @@ CACHED_EXCLUSIONS_PATH = "algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
-def create_category(tokens) -> Tuple[Optional[Category], int]:  # pylint: disable=too-many-return-statements
+def create_category(tokens) -> Tuple[Optional[Category], int]:
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
