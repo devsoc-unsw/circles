@@ -1,8 +1,7 @@
 import json
 
 import requests
-from server.config import DUMMY_TOKEN
-from server.tests.user.utility import clear, get_token_headers
+from server.tests.user.utility import clear, get_token, get_token_headers
 
 PATH = "server/example_input/example_local_storage_data.json"
 
@@ -12,7 +11,8 @@ with open(PATH, encoding="utf8") as f:
 
 def test_add_to_unplanned():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers)  # set to empty planner
 
     data = {
@@ -28,7 +28,8 @@ def test_add_to_unplanned():
 
 def test_invalid_add_to_unplanned():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers) # set to empty planner
 
     data = {
@@ -45,7 +46,8 @@ def test_invalid_add_to_unplanned():
 
 def test_unplanned_to_term():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
 
     data = {
@@ -63,7 +65,8 @@ def test_unplanned_to_term():
 
 def test_unplanned_to_term_multiterm():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers)
     data = {'courseCode': 'ENGG2600'}
     requests.post('http://127.0.0.1:8000/planner/addToUnplanned', json=data, headers=headers)
@@ -85,7 +88,8 @@ def test_unplanned_to_term_multiterm():
 
 def test_invalid_unplanned_to_term_multiterm():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers)
     data = {'courseCode': 'ENGG2600'}
     requests.post('http://127.0.0.1:8000/planner/addToUnplanned', json=data, headers=headers)
@@ -101,7 +105,8 @@ def test_invalid_unplanned_to_term_multiterm():
 
 def test_planned_to_term():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "COMP2521" in data['planner']['years'][0]['T2']
@@ -123,7 +128,8 @@ def test_planned_to_term():
 
 def test_planned_to_term_multiterm():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "ENGG2600" in data['planner']['years'][1]['T3']
@@ -149,7 +155,8 @@ def test_planned_to_term_multiterm():
 
 def test_invalid_planned_to_term():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
 
     data = {
@@ -165,7 +172,8 @@ def test_invalid_planned_to_term():
 
 def test_remove_unplanned_course():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "COMP6447" in data['planner']['unplanned']
@@ -179,7 +187,8 @@ def test_remove_unplanned_course():
 
 def test_remove_planned_course():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "MATH1081" in data['planner']['years'][0]['T1']
@@ -194,7 +203,8 @@ def test_remove_planned_course():
 
 def test_remove_all_courses():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "COMP6447" in data['planner']['unplanned']
@@ -211,7 +221,8 @@ def test_remove_all_courses():
 
 def test_unschedule_course():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "COMP1531" in data['planner']['years'][0]['T2']
@@ -228,7 +239,8 @@ def test_unschedule_course():
 
 def test_unschedule_unplanned_course():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "COMP6447" in data['planner']['unplanned']
@@ -244,7 +256,8 @@ def test_unschedule_unplanned_course():
 
 def test_unschedule_all():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     assert "COMP1531" in data['planner']['years'][0]['T2']

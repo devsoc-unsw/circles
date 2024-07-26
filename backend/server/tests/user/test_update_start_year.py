@@ -1,8 +1,7 @@
 import json
 
 import requests
-from server.config import DUMMY_TOKEN
-from server.tests.user.utility import clear, get_token_headers
+from server.tests.user.utility import clear, get_token, get_token_headers
 
 PATH = "server/example_input/example_local_storage_data.json"
 
@@ -11,7 +10,8 @@ with open(PATH, encoding="utf8") as f:
 
 def test_updateCourseMark_back_time_2019():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post(
         'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     user_before = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
@@ -25,7 +25,8 @@ def test_updateCourseMark_back_time_2019():
 
 def test_updateCourseMark_back_time_2018():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post(
         'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     user_before = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
@@ -38,7 +39,8 @@ def test_updateCourseMark_back_time_2018():
 
 def test_updateCourseMark_forward_time_2021():
     clear()
-    headers = get_token_headers()
+    token = get_token()
+    headers = get_token_headers(token)
     requests.post(
         'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
     user_before = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()

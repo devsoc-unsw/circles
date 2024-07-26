@@ -20,5 +20,5 @@ def clear():
 def get_token():
     return requests.post('http://127.0.0.1:8000/auth/guest_login').json()["session_token"]
 
-def get_token_headers():
-    return {"Authorization": f"Bearer {get_token()}"}
+def get_token_headers(token: str):
+    return {"Authorization": f"Bearer {token}"}

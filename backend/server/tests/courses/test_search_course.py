@@ -10,47 +10,35 @@ f.close()
 
 
 def test_search_course():
-    user_token = get_token()
-    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers={
-        "Authorization": f"Bearer {user_token}"
-    }, json=USER)
-    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/COMP1', headers={
-        "Authorization": f"Bearer {user_token}"
-    })
+    token = get_token()
+    headers = get_token_headers(token)
+    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers=headers, json=USER)
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/COMP1', headers=headers)
     assert x.status_code == 200
     assert x.json().get("COMP1521") is not None
 
 
 def test_search_archives():
-    user_token = get_token()
-    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers={
-        "Authorization": f"Bearer {user_token}"
-    }, json=USER)
-    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/DESN1000', headers={
-        "Authorization": f"Bearer {user_token}"
-    })
+    token = get_token()
+    headers = get_token_headers(token)
+    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers=headers, json=USER)
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/DESN1000', headers=headers)
     assert x.status_code == 200
     assert x.json().get("DESN1000") is not None
 
 
 def test_search_title():
-    user_token = get_token()
-    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers={
-        "Authorization": f"Bearer {user_token}"
-    }, json=USER)
-    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/Programming Fundamentals', headers={
-        "Authorization": f"Bearer {user_token}"
-    })
+    token = get_token()
+    headers = get_token_headers(token)
+    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers=headers, json=USER)
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/Programming Fundamentals', headers=headers)
     assert x.json().get("COMP1511") is not None
 
 
 def test_search_minor():
-    user_token = get_token()
-    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers={
-        "Authorization": f"Bearer {user_token}"
-    }, json=USER)
-    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/Financial Fundamentals', headers={
-        "Authorization": f"Bearer {user_token}"
-    })
+    token = get_token()
+    headers = get_token_headers(token)
+    requests.post('http://127.0.0.1:8000/user/setupDegreeWizard', headers=headers, json=USER)
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/Financial Fundamentals', headers=headers)
     assert x.status_code == 200
     assert x.json().get("ACCT2511") is not None
