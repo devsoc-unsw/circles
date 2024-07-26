@@ -303,11 +303,7 @@ def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     coursesState = {}
     user = User(fix_user_data(userData.model_dump()))
     for course, condition in CONDITIONS.items():
-        if course == "MATH1231":
-            print("MATH1231")
-            print("AAAAAAAAAAAAAAA")
         result, warnings = condition.validate(user) if condition is not None else (True, [])
-        print("ooop", result, warnings)
         if result:
             coursesState[course] = {
                 "is_accurate": condition is not None,
