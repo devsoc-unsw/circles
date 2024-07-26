@@ -2,8 +2,7 @@
     "empty_year": {
         "degree": {
             "programCode": "3707",
-            "specs": [ "COMPA1" ],
-            "isComplete": true
+            "specs": [ "COMPA1" ]
         },
         "planner": {
             "years": [ {
@@ -34,8 +33,7 @@
     "summer_term": {
         "degree": {
             "programCode": "3707",
-            "specs": [ "COMPA1" ],
-            "isComplete": true
+            "specs": [ "COMPA1" ]
         },
         "planner": {
             "years": [ {
@@ -65,8 +63,7 @@
     "no_uoc": {
         "degree": {
             "programCode": "3707",
-            "specs": [ "COMPA1" ],
-            "isComplete": true
+            "specs": [ "COMPA1" ]
         },
         "planner": {
             "years": [{
@@ -92,8 +89,7 @@
     "suppress_warning": {
         "degree": {
             "programCode": "3707",
-            "specs": [ "COMPA1" ],
-            "isComplete": true
+            "specs": [ "COMPA1" ]
         },
         "planner": {
             "years": [{
@@ -119,8 +115,7 @@
     "simple_year": {
         "degree": {
             "programCode": "3707",
-            "specs": [ "COMPA1" ],
-            "isComplete": true
+            "specs": [ "COMPA1" ]
         },
         "planner": {
             "years": [ {
@@ -159,8 +154,7 @@
     "out_of_order": {
         "degree": {
             "programCode": "3707",
-            "specs": [ "COMPA1" ],
-            "isComplete": true
+            "specs": [ "COMPA1" ]
         },
         "planner": {
             "years": [ {

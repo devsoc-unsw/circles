@@ -9,7 +9,7 @@ with open(PATH, encoding="utf8") as f:
 
 def test_no_courses_completed():
     x = requests.post(
-        'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMP1511', json=USERS["user3"])
+        'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMP1511', json=USERS["user_no_courses"])
     assert x.json() == {
         "direct_unlock": [
             'COMP1521',
@@ -27,10 +27,10 @@ def test_no_courses_completed():
 
 def test_malformed_request():
     x = requests.post(
-        'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/&&&&&', json=USERS["user3"])
+        'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/&&&&&', json=USERS["user_no_courses"])
     assert x.status_code == 400
     x = requests.post(
-        'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMPXXXX', json=USERS["user3"])
+        'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMPXXXX', json=USERS["user_no_courses"])
     assert x.status_code == 400
 
 
@@ -60,5 +60,5 @@ def test_two_courses_completed():
             "COMP9517",
             "COMP9727",
         ],
-        "indirect_unlock": ["TABL2710"]
+        "indirect_unlock": ['BABS3301', 'SOMS3001', "TABL2710"]
     }

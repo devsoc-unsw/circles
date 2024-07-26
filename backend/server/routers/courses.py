@@ -301,7 +301,7 @@ def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """
 
     coursesState = {}
-    user = User(fix_user_data(userData.dict()))
+    user = User(fix_user_data(userData.model_dump()))
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:

@@ -190,6 +190,7 @@ class PlannerData(BaseModel):
 
         # prevent circular import; TODO: There has to be a better way
         from server.routers.courses import get_course
+        from server.routers.utility import get_core_courses
 
         for year in self.plan:
             for term in year:
@@ -200,6 +201,8 @@ class PlannerData(BaseModel):
                         else (get_course(course_name)["UOC"], None) # type: ignore
                     )
                 user.add_courses(cleaned_term)
+        # get the cores of the user
+        user.core_courses = get_core_courses(user.program, user.specialisations)
         return user
 
 # TODO-OLLI(pm): get rid of these user models in favour of the database models

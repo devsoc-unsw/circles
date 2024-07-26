@@ -48,7 +48,7 @@ def test_user3():
     assert user.in_specialisation("COMPA1")
     wam, marks_complete = user.wam()
     assert wam == None
-    assert marks_complete
+    assert not marks_complete
     assert user.uoc() == 0
 
 def test_user_no_data():
