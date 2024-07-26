@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { animated, useSpring } from '@react-spring/web';
+import { useQuery } from '@tanstack/react-query';
 import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
-import axios from 'axios';
-import { Specialisations } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
+import { getSpecialisationsForProgram } from 'utils/api/specsApi';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
@@ -24,14 +24,6 @@ type Props = {
   setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
-type Specialisation = {
-  [spec: string]: {
-    is_optional?: boolean;
-    specs: Record<string, string>;
-    notes: string;
-  };
-};
-
 const SpecialisationStep = ({
   incrementStep,
   currStep,
@@ -40,7 +32,6 @@ const SpecialisationStep = ({
   setDegreeInfo
 }: Props) => {
   const props = useSpring(springProps);
-  const [options, setOptions] = useState<Specialisation | null>(null);
 
   const handleAddSpecialisation = (specialisation: string) => {
     setDegreeInfo((prev) => ({
@@ -56,21 +47,13 @@ const SpecialisationStep = ({
     }));
   };
 
-  const fetchAllSpecialisations = useCallback(async () => {
-    try {
-      const res = await axios.get<Specialisations>(
-        `/specialisations/getSpecialisations/${degreeInfo.programCode}/${type}`
-      );
-      setOptions(res.data.spec);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at getSteps', e);
-    }
-  }, [degreeInfo.programCode, type]);
-
-  useEffect(() => {
-    if (degreeInfo.programCode) fetchAllSpecialisations();
-  }, [fetchAllSpecialisations, degreeInfo.programCode, type]);
+  const specsQuery = useQuery({
+    queryKey: ['specialisations', degreeInfo.programCode, type],
+    queryFn: () => getSpecialisationsForProgram(degreeInfo.programCode, type),
+    select: (data) => data.spec,
+    enabled: degreeInfo.programCode !== ''
+  });
+  const options = specsQuery.data;
 
   const menuItems: MenuProps['items'] = options
     ? Object.keys(options).map((program, index) => ({

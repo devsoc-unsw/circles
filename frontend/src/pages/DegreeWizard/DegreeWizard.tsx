@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Typography } from 'antd';
-import axios from 'axios';
-import { SpecialisationTypes } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
+import { getSpecialisationTypes } from 'utils/api/specsApi';
 import { getUserIsSetup, resetUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
@@ -20,10 +19,11 @@ import YearStep from './YearStep';
 
 const { Title } = Typography;
 
+const DEFAULT_SPEC_TYPES = ['majors', 'honours', 'minors'];
+
 const DegreeWizard = () => {
-  const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
-  const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
   const token = useToken();
+  const [currStep, setCurrStep] = useState(Steps.YEAR);
 
   const [degreeInfo, setDegreeInfo] = useState<DegreeWizardPayload>({
     programCode: '',
@@ -38,6 +38,15 @@ const DegreeWizard = () => {
     queryFn: () => getUserIsSetup(token)
   }).data;
   const navigate = useNavigate();
+
+  const specTypesQuery = useQuery({
+    queryKey: ['specialisations', 'types', programCode],
+    queryFn: () => getSpecialisationTypes(programCode),
+    select: (data) => data.types,
+    enabled: programCode !== ''
+  });
+  const specs = specTypesQuery.data ?? DEFAULT_SPEC_TYPES;
+  const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
 
   const queryClient = useQueryClient();
 
@@ -65,24 +74,6 @@ const DegreeWizard = () => {
         'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
     });
   }, []);
-
-  useEffect(() => {
-    const getSteps = async () => {
-      try {
-        const res = await axios.get<SpecialisationTypes>(
-          `/specialisations/getSpecialisationTypes/${programCode}`
-        );
-        setSpecs(res.data.types);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error at getSteps', e);
-      }
-    };
-    if (programCode !== '') getSteps();
-    // run when we actually add d programCode
-  }, [programCode]);
-
-  const [currStep, setCurrStep] = useState(Steps.YEAR);
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
