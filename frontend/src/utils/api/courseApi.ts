@@ -1,5 +1,14 @@
 import axios from 'axios';
-import { Course, CourseChildren, CoursePathFrom, SearchCourse } from 'types/api';
+import {
+  Course,
+  CourseChildren,
+  CoursePathFrom,
+  CoursesAllUnlocked,
+  CoursesUnlockedWhenTaken,
+  SearchCourse
+} from 'types/api';
+import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import prepareUserPayload from 'utils/prepareUserPayload';
 import { LIVE_YEAR } from 'config/constants';
 import { withAuthorization } from './auth';
 
@@ -25,6 +34,32 @@ export const getCoursePrereqs = async (courseCode: string) => {
 
 export const getCourseChildren = async (courseCode: string) => {
   const res = await axios.get<CourseChildren>(`/courses/courseChildren/${courseCode}`);
+  return res.data;
+};
+
+export const getCoursesUnlockedWhenTaken = async (
+  degree: DegreeResponse,
+  planner: PlannerResponse,
+  courses: CoursesResponse,
+  courseCode: string
+) => {
+  const res = await axios.post<CoursesUnlockedWhenTaken>(
+    `/courses/coursesUnlockedWhenTaken/${courseCode}`,
+    JSON.stringify(prepareUserPayload(degree, planner, courses))
+  );
+  return res.data;
+};
+
+export const getAllUnlockedCourses = async (
+  degree: DegreeResponse,
+  planner: PlannerResponse,
+  courses: CoursesResponse
+) => {
+  const res = await axios.post<CoursesAllUnlocked>(
+    '/courses/getAllUnlocked/',
+    JSON.stringify(prepareUserPayload(degree, planner, courses))
+  );
+
   return res.data;
 };
 

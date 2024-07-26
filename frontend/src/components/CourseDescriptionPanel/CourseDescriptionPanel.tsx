@@ -2,13 +2,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
-import axios from 'axios';
-import { CoursesUnlockedWhenTaken } from 'types/api';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
-import { getCourseInfo, getCoursePrereqs } from 'utils/api/courseApi';
+import { getCourseInfo, getCoursePrereqs, getCoursesUnlockedWhenTaken } from 'utils/api/courseApi';
 import { getCourseTimetable } from 'utils/api/timetable';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
@@ -37,16 +34,6 @@ const CourseDescriptionPanel = ({
   courses,
   degree
 }: CourseDescriptionPanelProps) => {
-  const getCoursesUnlocked = React.useCallback(async () => {
-    if (!degree || !planner || !courses)
-      return Promise.reject(new Error('degree, planner or courses undefined'));
-    const res = await axios.post<CoursesUnlockedWhenTaken>(
-      `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-      JSON.stringify(prepareUserPayload(degree, planner, courses))
-    );
-    return res.data;
-  }, [courseCode, degree, planner, courses]);
-
   const getCourseExtendedInfo = React.useCallback(async () => {
     return Promise.allSettled([
       getCourseInfo(courseCode),
@@ -57,7 +44,7 @@ const CourseDescriptionPanel = ({
 
   const coursesUnlockedQuery = useQuery({
     queryKey: ['coursesUnlocked', courseCode, degree, planner, courses],
-    queryFn: getCoursesUnlocked,
+    queryFn: () => getCoursesUnlockedWhenTaken(degree!, planner!, courses!, courseCode),
     enabled: !!degree && !!planner && !!courses
   });
 
