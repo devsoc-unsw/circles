@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { CoursesUnlockedWhenTaken } from 'types/api';
-import { CourseTimetable } from 'types/courseCapacity';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import { getCourseInfo, getCoursePrereqs } from 'utils/api/courseApi';
+import { getCourseTimetable } from 'utils/api/timetable';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import {
@@ -14,7 +14,6 @@ import {
   LoadingCourseDescriptionPanelSidebar
 } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
-import { TIMETABLE_API_URL } from 'config/constants';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
 import S from './styles';
@@ -52,7 +51,7 @@ const CourseDescriptionPanel = ({
     return Promise.allSettled([
       getCourseInfo(courseCode),
       getCoursePrereqs(courseCode),
-      axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
+      getCourseTimetable(courseCode)
     ]);
   }, [courseCode]);
 
@@ -90,7 +89,7 @@ const CourseDescriptionPanel = ({
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
   const course = unwrap(courseRes);
   const coursesPathFrom = unwrap(pathFromRes)?.courses;
-  const courseCapacity = getEnrolmentCapacity(unwrap(courseCapRes)?.data);
+  const courseCapacity = getEnrolmentCapacity(unwrap(courseCapRes));
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
