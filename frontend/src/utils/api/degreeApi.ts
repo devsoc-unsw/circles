@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { DegreeWizardPayload } from 'types/degreeWizard';
-import { withAuthorization } from './auth';
+import { withAuthorization } from './authApi';
 
 export const setupDegreeWizard = async (token: string, wizard: DegreeWizardPayload) => {
   try {

@@ -4,7 +4,7 @@ import { CourseList } from 'types/courses';
 import {
   getCourseChildren,
   getCoursePrereqs as getCoursePrereqsRequest
-} from 'utils/api/courseApi';
+} from 'utils/api/coursesApi';
 import Spinner from 'components/Spinner';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';

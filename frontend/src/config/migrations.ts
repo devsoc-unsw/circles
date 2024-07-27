@@ -5,7 +5,7 @@
 // @ts-nocheck
 import type { MigrationManifest } from 'redux-persist';
 import { createMigrate } from 'redux-persist';
-import { getCourseInfo } from 'utils/api/courseApi';
+import { getCourseInfo } from 'utils/api/coursesApi';
 
 /**
  * IMPORTANT NOTE:

@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Switch } from 'antd';
 import { CourseEdge } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
-import { getAllUnlockedCourses } from 'utils/api/courseApi';
+import { getAllUnlockedCourses } from 'utils/api/coursesApi';
 import { getProgramGraph } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import { unwrapQuery } from 'utils/queryUtils';

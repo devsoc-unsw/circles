@@ -10,7 +10,7 @@ import {
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { LIVE_YEAR } from 'config/constants';
-import { withAuthorization } from './auth';
+import { withAuthorization } from './authApi';
 
 // TODO: Should error handling be done here?
 export const searchCourse = async (token: string, query: string): Promise<SearchCourse> => {

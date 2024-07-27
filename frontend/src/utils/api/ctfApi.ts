@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { withAuthorization } from './auth';
+import { withAuthorization } from './authApi';
 
 export type CtfResult = {
   valid: boolean;

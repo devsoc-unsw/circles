@@ -1,13 +1,6 @@
 import axios from 'axios';
 import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
-import { withAuthorization } from './auth';
-
-export const initiateCSEAuth = async (): Promise<void> => {
-  // Login to redirect link
-  await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => {
-    window.location.href = res.data;
-  });
-};
+import { withAuthorization } from './authApi';
 
 export const getUser = async (token: string): Promise<UserResponse> => {
   const user = await axios.get(`user/data/all`, { headers: withAuthorization(token) });

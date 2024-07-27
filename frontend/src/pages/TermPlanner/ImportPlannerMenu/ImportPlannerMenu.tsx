@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Spin } from 'antd';
 import { JSONPlanner, Term } from 'types/planner';
 import { badPlanner } from 'types/userResponse';
-import { getCourseInfo } from 'utils/api/courseApi';
+import { getCourseInfo } from 'utils/api/coursesApi';
 import { addToUnplanned, setUnplannedCourseToTerm } from 'utils/api/plannerApi';
 import {
   getUserPlanner,

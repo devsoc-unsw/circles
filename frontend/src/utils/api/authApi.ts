@@ -14,6 +14,13 @@ export const withAuthorization = (token: string) => {
   return { Authorization: `Bearer ${token}` };
 };
 
+export const initiateCSEAuth = async (): Promise<void> => {
+  // Login to redirect link
+  await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => {
+    window.location.href = res.data;
+  });
+};
+
 export const guestLogin = async (): Promise<IdentityResponse> => {
   const res = await axios.post<IdentityResponse>(
     '/auth/guest_login',

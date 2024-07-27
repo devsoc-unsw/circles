@@ -4,7 +4,7 @@ import { Flex, Select, Spin, Typography } from 'antd';
 import { SearchCourse } from 'types/api';
 import { CoursesResponse } from 'types/userResponse';
 import { useDebounce } from 'use-debounce';
-import { searchCourse } from 'utils/api/courseApi';
+import { searchCourse } from 'utils/api/coursesApi';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import QuickAddCartButton from 'components/QuickAddCartButton';
 import useToken from 'hooks/useToken';

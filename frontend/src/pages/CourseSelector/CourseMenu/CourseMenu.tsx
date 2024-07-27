@@ -6,7 +6,7 @@ import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
-import { getAllUnlockedCourses } from 'utils/api/courseApi';
+import { getAllUnlockedCourses } from 'utils/api/coursesApi';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import { getProgramStructure } from 'utils/api/programsApi';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';

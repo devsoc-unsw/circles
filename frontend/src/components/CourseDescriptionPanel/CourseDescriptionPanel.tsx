@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
-import { getCourseInfo, getCoursePrereqs, getCoursesUnlockedWhenTaken } from 'utils/api/courseApi';
-import { getCourseTimetable } from 'utils/api/timetable';
+import { getCourseInfo, getCoursePrereqs, getCoursesUnlockedWhenTaken } from 'utils/api/coursesApi';
+import { getCourseTimetable } from 'utils/api/timetableApi';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import {
   LoadingCourseDescriptionPanel,

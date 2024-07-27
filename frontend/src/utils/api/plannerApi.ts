@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CourseMark } from 'types/api';
 import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import { ValidatesResponse } from 'types/userResponse';
-import { withAuthorization } from './auth';
+import { withAuthorization } from './authApi';
 
 export const addToUnplanned = async (token: string, courseId: string) => {
   try {
