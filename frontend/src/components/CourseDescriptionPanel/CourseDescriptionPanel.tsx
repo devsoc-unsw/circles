@@ -6,6 +6,7 @@ import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResp
 import { getCourseInfo, getCoursePrereqs, getCoursesUnlockedWhenTaken } from 'utils/api/coursesApi';
 import { getCourseTimetable } from 'utils/api/timetableApi';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
+import { unwrapSettledPromise } from 'utils/queryUtils';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
@@ -16,6 +17,14 @@ import CourseInfoDrawers from './CourseInfoDrawers';
 import S from './styles';
 
 const { Title, Text } = Typography;
+
+const getCourseExtendedInfo = async (courseCode: string) => {
+  return Promise.allSettled([
+    getCourseInfo(courseCode),
+    getCoursePrereqs(courseCode),
+    getCourseTimetable(courseCode)
+  ]);
+};
 
 type CourseDescriptionPanelProps = {
   className?: string;
@@ -34,14 +43,6 @@ const CourseDescriptionPanel = ({
   courses,
   degree
 }: CourseDescriptionPanelProps) => {
-  const getCourseExtendedInfo = React.useCallback(async () => {
-    return Promise.allSettled([
-      getCourseInfo(courseCode),
-      getCoursePrereqs(courseCode),
-      getCourseTimetable(courseCode)
-    ]);
-  }, [courseCode]);
-
   const coursesUnlockedQuery = useQuery({
     queryKey: ['coursesUnlocked', courseCode, degree, planner, courses],
     queryFn: () => getCoursesUnlockedWhenTaken(degree!, planner!, courses!, courseCode),
@@ -51,18 +52,9 @@ const CourseDescriptionPanel = ({
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
 
-  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
-    if (res.status === 'rejected') {
-      // eslint-disable-next-line no-console
-      console.error('Rejected request at unwrap', res.reason);
-      return undefined;
-    }
-    return res.value;
-  }
-
   const courseInfoQuery = useQuery({
     queryKey: ['courseInfo', courseCode],
-    queryFn: getCourseExtendedInfo
+    queryFn: () => getCourseExtendedInfo(courseCode)
   });
 
   const loadingWrapper = (
@@ -74,9 +66,9 @@ const CourseDescriptionPanel = ({
   if (courseInfoQuery.isPending || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
-  const course = unwrap(courseRes);
-  const coursesPathFrom = unwrap(pathFromRes)?.courses;
-  const courseCapacity = getEnrolmentCapacity(unwrap(courseCapRes));
+  const course = unwrapSettledPromise(courseRes);
+  const coursesPathFrom = unwrapSettledPromise(pathFromRes)?.courses;
+  const courseCapacity = getEnrolmentCapacity(unwrapSettledPromise(courseCapRes));
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
