@@ -15,7 +15,7 @@ import {
   ViewSubgroupCourse
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
-import { badCourses, badDegree, badPlanner } from 'types/userResponse';
+import { badCourses, badPlanner } from 'types/userResponse';
 import { getProgramStructure } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
@@ -33,40 +33,28 @@ import TableView from './TableView';
 const { Title } = Typography;
 
 const ProgressionChecker = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [structure, setStructure] = useState<ProgramStructure>({});
-  const [uoc, setUoc] = useState(0);
   const token = useToken();
-
-  const degreeQuery = useQuery({
-    queryKey: ['degree'],
-    queryFn: () => getUserDegree(token)
-  });
-  const degree = degreeQuery.data || badDegree;
-  const { programCode, specs } = degree;
 
   const plannerQuery = useQuery({
     queryKey: ['planner'],
     queryFn: () => getUserPlanner(token)
   });
-  const planner = plannerQuery.data || badPlanner;
+  const planner = plannerQuery.data ?? badPlanner;
   const { unplanned } = planner;
 
-  useEffect(() => {
-    // get structure of degree
-    const fetchStructure = async () => {
-      try {
-        const res = await getProgramStructure(programCode, specs);
-        setStructure(res.structure);
-        setUoc(res.uoc);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Error at fetchStructure', err);
-      }
-      setIsLoading(false);
-    };
-    if (programCode && specs.length > 0) fetchStructure();
-  }, [programCode, specs]);
+  const degreeQuery = useQuery({
+    queryKey: ['degree'],
+    queryFn: () => getUserDegree(token)
+  });
+  const degree = degreeQuery.data;
+
+  const structureQuery = useQuery({
+    queryKey: ['structure', degree?.programCode, degree?.specs],
+    queryFn: () => getProgramStructure(degree!.programCode, degree!.specs),
+    enabled: degree !== undefined
+  });
+  const structure: ProgramStructure = structureQuery.data?.structure ?? {};
+  const uoc = structureQuery.data?.uoc ?? 0;
 
   useEffect(() => {
     openNotification({
@@ -82,7 +70,7 @@ const ProgressionChecker = () => {
     queryKey: ['courses'],
     queryFn: () => getUserCourses(token)
   });
-  const courses = coursesQuery.data || badCourses;
+  const courses = coursesQuery.data ?? badCourses;
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};
@@ -139,7 +127,7 @@ const ProgressionChecker = () => {
             const course: ViewSubgroupCourse = {
               courseCode,
               title: subgroupStructure.courses[courseCode],
-              UOC: courses[courseCode]?.uoc || 0,
+              UOC: courses[courseCode]?.uoc ?? 0,
               plannedFor: courses[courseCode]?.plannedFor ?? '',
               isUnplanned: unplanned.includes(courseCode),
               isMultiterm: !!courses[courseCode]?.isMultiterm,
@@ -232,7 +220,7 @@ const ProgressionChecker = () => {
     <PageTemplate>
       <S.Wrapper>
         <Dashboard
-          isLoading={isLoading}
+          isLoading={structureQuery.isPending}
           structure={structure}
           totalUOC={uoc}
           freeElectivesUOC={Object.values(overflowCourses).reduce((acc, curr) => acc + curr.UOC, 0)}
