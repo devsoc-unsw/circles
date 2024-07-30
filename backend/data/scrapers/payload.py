@@ -5,11 +5,12 @@ for the size of the payload. This module centralises creation of the payload
 The module also defines the url and headers for the scrapers
 """
 
+
+from data.config import LIVE_YEAR
+
 import requests
 import json
 import time
-
-from data.config import LIVE_YEAR
 
 URL = "https://api-ap-southeast-2.prod.courseloop.com/publisher/browsepage-academic-items?"
 HEADERS = {
