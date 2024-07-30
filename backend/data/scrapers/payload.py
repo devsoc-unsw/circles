@@ -6,11 +6,12 @@ The module also defines the url and headers for the scrapers
 """
 
 
-from data.config import LIVE_YEAR
 
-import requests
 import json
 import time
+
+import requests
+from data.config import LIVE_YEAR
 
 URL = "https://api-ap-southeast-2.prod.courseloop.com/publisher/browsepage-academic-items?"
 HEADERS = {
