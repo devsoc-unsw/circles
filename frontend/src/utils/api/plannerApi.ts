@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CourseMark } from 'types/api';
 import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import { ValidatesResponse } from 'types/userResponse';
-import { withAuthorization } from './auth';
+import { withAuthorization } from './authApi';
 
 export const addToUnplanned = async (token: string, courseId: string) => {
   try {
@@ -99,4 +99,12 @@ export const updateCourseMark = async (token: string, courseMark: CourseMark) =>
   } catch (e) {
     console.error(e);
   }
+};
+
+export const toggleLockTerm = async (token: string, year: string, term: string) => {
+  await axios.post(
+    '/planner/toggleTermLocked',
+    {},
+    { params: { termyear: `${year}${term}` }, headers: withAuthorization(token) }
+  );
 };

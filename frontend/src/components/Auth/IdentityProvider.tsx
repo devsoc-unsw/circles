@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
-import { refreshTokens } from 'utils/api/auth';
+import { refreshTokens } from 'utils/api/authApi';
 import PageLoading from 'components/PageLoading';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { selectIdentity, unsetIdentity, updateIdentityWithAPIRes } from 'reducers/identitySlice';

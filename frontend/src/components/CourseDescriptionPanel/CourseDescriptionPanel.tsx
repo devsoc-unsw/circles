@@ -2,23 +2,29 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
-import axios from 'axios';
-import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
-import { CourseTimetable } from 'types/courseCapacity';
 import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { getCourseInfo, getCoursePrereqs, getCoursesUnlockedWhenTaken } from 'utils/api/coursesApi';
+import { getCourseTimetable } from 'utils/api/timetableApi';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
-import prepareUserPayload from 'utils/prepareUserPayload';
+import { unwrapSettledPromise } from 'utils/queryUtils';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
 } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
-import { TIMETABLE_API_URL } from 'config/constants';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
 import S from './styles';
 
 const { Title, Text } = Typography;
+
+const getCourseExtendedInfo = async (courseCode: string) => {
+  return Promise.allSettled([
+    getCourseInfo(courseCode),
+    getCoursePrereqs(courseCode),
+    getCourseTimetable(courseCode)
+  ]);
+};
 
 type CourseDescriptionPanelProps = {
   className?: string;
@@ -37,45 +43,18 @@ const CourseDescriptionPanel = ({
   courses,
   degree
 }: CourseDescriptionPanelProps) => {
-  const getCoursesUnlocked = React.useCallback(async () => {
-    if (!degree || !planner || !courses)
-      return Promise.reject(new Error('degree, planner or courses undefined'));
-    const res = await axios.post<CoursesUnlockedWhenTaken>(
-      `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-      JSON.stringify(prepareUserPayload(degree, planner, courses))
-    );
-    return res.data;
-  }, [courseCode, degree, planner, courses]);
-
-  const getCourseInfo = React.useCallback(async () => {
-    return Promise.allSettled([
-      axios.get<Course>(`/courses/getCourse/${courseCode}`),
-      axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`),
-      axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${courseCode}`)
-    ]);
-  }, [courseCode]);
-
   const coursesUnlockedQuery = useQuery({
     queryKey: ['coursesUnlocked', courseCode, degree, planner, courses],
-    queryFn: getCoursesUnlocked,
+    queryFn: () => getCoursesUnlockedWhenTaken(degree!, planner!, courses!, courseCode),
     enabled: !!degree && !!planner && !!courses
   });
 
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
 
-  function unwrap<T>(res: PromiseSettledResult<T>): T | undefined {
-    if (res.status === 'rejected') {
-      // eslint-disable-next-line no-console
-      console.error('Rejected request at unwrap', res.reason);
-      return undefined;
-    }
-    return res.value;
-  }
-
   const courseInfoQuery = useQuery({
     queryKey: ['courseInfo', courseCode],
-    queryFn: getCourseInfo
+    queryFn: () => getCourseExtendedInfo(courseCode)
   });
 
   const loadingWrapper = (
@@ -87,9 +66,9 @@ const CourseDescriptionPanel = ({
   if (courseInfoQuery.isPending || !courseInfoQuery.isSuccess) return loadingWrapper;
 
   const [courseRes, pathFromRes, courseCapRes] = courseInfoQuery.data;
-  const course = unwrap(courseRes)?.data;
-  const coursesPathFrom = unwrap(pathFromRes)?.data.courses;
-  const courseCapacity = getEnrolmentCapacity(unwrap(courseCapRes)?.data);
+  const course = unwrapSettledPromise(courseRes);
+  const coursesPathFrom = unwrapSettledPromise(pathFromRes)?.courses;
+  const courseCapacity = getEnrolmentCapacity(unwrapSettledPromise(courseCapRes));
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;

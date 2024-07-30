@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { IdentityResponse } from 'utils/api/auth';
+import { IdentityResponse } from 'utils/api/authApi';
 
 type CompleteIdentity = {
   token: string;

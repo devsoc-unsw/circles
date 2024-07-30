@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { DatePicker, Modal, Select, Switch } from 'antd';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
-import { withAuthorization } from 'utils/api/auth';
+import { toggleSummerTerm, updateDegreeLength, updateStartYear } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -36,16 +35,8 @@ const SettingsMenu = ({ planner }: Props) => {
     return false;
   }
 
-  async function updateStartYear(year: string) {
-    await axios.put(
-      '/user/updateStartYear',
-      { startYear: parseInt(year, 10) },
-      { headers: withAuthorization(token) }
-    );
-  }
-
   const updateStartYearMutation = useMutation({
-    mutationFn: updateStartYear,
+    mutationFn: (year: string) => updateStartYear(token, year),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
@@ -69,16 +60,8 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   };
 
-  async function updateDegreeLength(numYears: number) {
-    await axios.put(
-      '/user/updateDegreeLength',
-      { numYears },
-      { headers: withAuthorization(token) }
-    );
-  }
-
   const updateDegreeLengthMutation = useMutation({
-    mutationFn: updateDegreeLength,
+    mutationFn: (numYears: number) => updateDegreeLength(token, numYears),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
@@ -106,37 +89,30 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   };
 
-  async function summerToggle() {
-    try {
-      await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
-    } catch {
+  const summerToggleMutation = useMutation({
+    mutationFn: () => toggleSummerTerm(token),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+
+      if (planner && planner.isSummerEnabled) {
+        openNotification({
+          type: 'info',
+          message: 'Your summer term courses have been unplanned',
+          description:
+            'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
+        });
+      }
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at summerToggleMutationMutation: ', err);
       openNotification({
         type: 'error',
         message: 'Error setting summer term',
         description: 'An error occurred when toggling the summer term.'
       });
-      return;
-    }
-    if (planner && planner.isSummerEnabled) {
-      openNotification({
-        type: 'info',
-        message: 'Your summer term courses have been unplanned',
-        description:
-          'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
-      });
-    }
-  }
-
-  const summerToggleMutation = useMutation({
-    mutationFn: summerToggle,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['planner']
-      });
-    },
-    onError: (err) => {
-      // eslint-disable-next-line no-console
-      console.error('Error at summerToggleMutationMutation: ', err);
     }
   });
 

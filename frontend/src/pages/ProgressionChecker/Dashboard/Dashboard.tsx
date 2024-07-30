@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import { badCourses, badDegree } from 'types/userResponse';
-import { fetchAllDegrees } from 'utils/api/programApi';
+import { fetchAllDegrees } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
 import LiquidProgressChart from 'components/LiquidProgressChart';

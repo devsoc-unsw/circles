@@ -1,14 +1,16 @@
+# pylint: disable=wrong-import-position
 import os
 
 import requests
 from dotenv import load_dotenv
 
+load_dotenv("../env/backend.env")  # must be before the connection imports as they require the env
+os.environ["SESSIONSDB_SERVICE_HOSTNAME"] = "localhost"
+os.environ["MONGODB_SERVICE_HOSTNAME"] = "localhost"
+
 from server.db.mongo.setup import setup_user_related_collections
 from server.db.redis.setup import setup_redis_sessionsdb
 
-load_dotenv("../env/backend.env")
-os.environ["MONGODB_SERVICE_HOSTNAME"] = "localhost"
-os.environ["SESSIONSDB_SERVICE_HOSTNAME"] = "localhost"
 
 
 

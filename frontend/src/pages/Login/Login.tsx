@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { guestLogin as guestLoginRequest } from 'utils/api/auth';
-import { initiateCSEAuth } from 'utils/api/userApi';
+import { guestLogin as guestLoginRequest, initiateCSEAuth } from 'utils/api/authApi';
 import BackButton from 'assets/back.svg';
 import SplashArt from 'assets/splashart.svg';
 import PageTemplate from 'components/PageTemplate';

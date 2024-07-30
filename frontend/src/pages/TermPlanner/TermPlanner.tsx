@@ -13,7 +13,7 @@ import {
   PlannerResponse,
   ValidatesResponse
 } from 'types/userResponse';
-import { getCourseForYearsInfo } from 'utils/api/courseApi';
+import { getCourseForYearsInfo } from 'utils/api/coursesApi';
 import {
   setPlannedCourseToTerm,
   setUnplannedCourseToTerm,

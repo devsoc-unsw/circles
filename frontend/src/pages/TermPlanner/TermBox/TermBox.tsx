@@ -2,13 +2,12 @@ import React, { Suspense } from 'react';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Badge } from 'antd';
-import axios from 'axios';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
-import { withAuthorization } from 'utils/api/auth';
+import { toggleLockTerm } from 'utils/api/plannerApi';
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import Spinner from 'components/Spinner';
@@ -44,19 +43,13 @@ const TermBox = ({
   const theme = useTheme();
   const queryClient = useQueryClient();
 
-  const toggleLockTerm = async () => {
-    await axios.post(
-      '/planner/toggleTermLocked',
-      {},
-      { params: { termyear: `${year}${term}` }, headers: withAuthorization(token) }
-    );
-  };
   const plannerQuery = useQuery({
     queryKey: ['planner'],
     queryFn: () => getUserPlanner(token)
   });
+
   const toggleLockTermMutation = useMutation({
-    mutationFn: toggleLockTerm,
+    mutationFn: () => toggleLockTerm(token, year, term),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
@@ -67,6 +60,7 @@ const TermBox = ({
       console.error('Error at toggleLockTermMutation: ', err);
     }
   });
+
   const coursesQuery = useQuery({
     queryKey: ['courses'],
     queryFn: () => getUserCourses(token)

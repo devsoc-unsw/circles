@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { CSELogin } from 'utils/api/auth';
+import { CSELogin } from 'utils/api/authApi';
 import { getUserIsSetup } from 'utils/api/userApi';
 import PageLoading from 'components/PageLoading';
 import { unsetIdentity, updateIdentityWithAPIRes } from 'reducers/identitySlice';

@@ -1,13 +1,6 @@
 import axios from 'axios';
 import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
-import { withAuthorization } from './auth';
-
-export const initiateCSEAuth = async (): Promise<void> => {
-  // Login to redirect link
-  await axios.get<string>('/auth/authorization_url', { withCredentials: true }).then((res) => {
-    window.location.href = res.data;
-  });
-};
+import { withAuthorization } from './authApi';
 
 export const getUser = async (token: string): Promise<UserResponse> => {
   const user = await axios.get(`user/data/all`, { headers: withAuthorization(token) });
@@ -43,4 +36,20 @@ export const getUserCourses = async (token: string): Promise<CoursesResponse> =>
 
 export const resetUserDegree = async (token: string): Promise<void> => {
   await axios.post(`user/reset`, {}, { headers: withAuthorization(token) });
+};
+
+export const updateDegreeLength = async (token: string, numYears: number): Promise<void> => {
+  await axios.put('/user/updateDegreeLength', { numYears }, { headers: withAuthorization(token) });
+};
+
+export const toggleSummerTerm = async (token: string): Promise<void> => {
+  await axios.post('/user/toggleSummerTerm', {}, { headers: withAuthorization(token) });
+};
+
+export const updateStartYear = async (token: string, year: string): Promise<void> => {
+  await axios.put(
+    '/user/updateStartYear',
+    { startYear: parseInt(year, 10) },
+    { headers: withAuthorization(token) }
+  );
 };

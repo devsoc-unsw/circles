@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
+import { useQuery } from '@tanstack/react-query';
 import { Input, Menu, Typography } from 'antd';
-import axios from 'axios';
 import { fuzzy } from 'fast-fuzzy';
-import { Programs } from 'types/api';
 import { DegreeWizardPayload } from 'types/degreeWizard';
+import { fetchAllDegrees } from 'utils/api/programsApi';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -22,21 +22,13 @@ type Props = {
 const DegreeStep = ({ incrementStep, degreeInfo, setDegreeInfo }: Props) => {
   const [input, setInput] = useState('');
   const [options, setOptions] = useState<string[]>([]);
-  const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
-  const fetchAllDegrees = async () => {
-    try {
-      const res = await axios.get<Programs>('/programs/getPrograms');
-      setAllDegrees(res.data.programs);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Error at fetchAllDegrees', e);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllDegrees();
-  }, []);
+  const allDegreesQuery = useQuery({
+    queryKey: ['programs'],
+    queryFn: fetchAllDegrees,
+    select: (data) => data.programs
+  });
+  const allDegrees = allDegreesQuery.data ?? {};
 
   const onDegreeChange = async ({ key }: { key: string }) => {
     setInput(key);
