@@ -5,11 +5,11 @@ for the size of the payload. This module centralises creation of the payload
 The module also defines the url and headers for the scrapers
 """
 
-from data.config import LIVE_YEAR
-
 import requests
 import json
 import time
+
+from data.config import LIVE_YEAR
 
 URL = "https://api-ap-southeast-2.prod.courseloop.com/publisher/browsepage-academic-items?"
 HEADERS = {
@@ -25,7 +25,7 @@ def do_requests(content_type, items_per_req=ITEMS_LIMIT, max_items = 10000):
     offset = 0
     items_list = []
     while offset < max_items:
-        data_payload = _create_payload(offset, ITEMS_LIMIT, content_type)
+        data_payload = _create_payload(offset, items_per_req, content_type)
         r = requests.post(
             URL,
             data=json.dumps(data_payload),
@@ -64,43 +64,6 @@ def _create_payload(offset, limit, content_type, year = LIVE_YEAR):
             }],
             "offset": offset,
             "limit": limit
-    }
-
-
-def create_payload(size, content_type, year = LIVE_YEAR):
-    """
-    Create a payload of the given size
-    content_type will be used as a prefix for the query fields
-    Note: If changing any of the keys and passing them in as an argument,
-    ensure that you add a default value for the argument so as to not
-    break the payload for the other files
-    """
-
-    # Might get passed None as default value by the calling function
-    if year is None:
-        year = LIVE_YEAR
-
-    return {
-            "siteId": "unsw-prod-pres",
-            "contentType": content_type,
-            "queryParams": [{
-                "queryField": "implementationYear",
-                "queryValue": str(year)
-            },
-            # {
-            #     "queryField": "parentAcademicOrg",
-            #     "queryValue": "57a56ceb4f0093004aa6eb4f0310c7ae"
-            # },
-            # {
-            #     "queryField": "studyLevel",
-            #     "queryValue": "undergraduate"
-            # },{
-            #     "queryField": "studyLevelValue",
-            #     "queryValue": "ugrd"
-            # }
-                            ],
-            "offset": 10000,
-            "limit": 100
     }
 
 def create_payload_gened(size, content_type, cl_id, academic_org, year : int | None =LIVE_YEAR):

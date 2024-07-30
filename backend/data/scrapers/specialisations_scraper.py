@@ -8,10 +8,8 @@ Step in the data's journey:
     [   ] Customise formatted data (specialisationProcessing.py)
 """
 
-import json
 
-import requests
-from data.scrapers.payload import HEADERS, URL, do_requests
+from data.scrapers.payload import do_requests
 from data.utility import data_helpers
 
 # Note as at May 2021, there are 365 specialisations
