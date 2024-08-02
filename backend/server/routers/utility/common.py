@@ -159,7 +159,9 @@ def get_all_specialisations(program_code: str) -> Optional[SpecsData]:
         return None
 
     # TODO: this can be done in a single aggregate
-    raw_specs = program["components"]["spec_data"]
+    raw_specs = program["components"].get("spec_data")
+    if raw_specs is None:
+        return {}
     for spec_type_container in raw_specs.values():
         spec_type_container = cast(dict[str, SpecData], spec_type_container)
         for program_specs in spec_type_container.values():
