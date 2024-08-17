@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
-import { useSelector } from 'react-redux';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { InfoCircleOutlined, PieChartOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
@@ -11,8 +10,8 @@ import { CoursesResponse, PlannerResponse, ValidateResponse } from 'types/userRe
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
 import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
+import useSettings from 'hooks/useSettings';
 import ContextMenu from '../ContextMenu';
 import S from './styles';
 
@@ -31,7 +30,7 @@ const Draggable = React.lazy(() =>
 
 const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }: Props) => {
   const { isSummerEnabled } = planner;
-  const { showMarks, showPastWarnings } = useSelector((state: RootState) => state.settings);
+  const { showMarks, showPastWarnings } = useSettings();
   const theme = useTheme();
   const { Text } = Typography;
 

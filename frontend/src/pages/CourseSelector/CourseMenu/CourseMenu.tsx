@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { MenuProps } from 'antd';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
@@ -11,7 +11,7 @@ import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import { getProgramStructure } from 'utils/api/programsApi';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
-import type { RootState } from 'config/store';
+import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseMenuTitle from '../CourseMenuTitle';
@@ -69,7 +69,7 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
 
-  const { showLockedCourses } = useSelector((state: RootState) => state.settings);
+  const { showLockedCourses } = useSettings();
 
   const [pageLoaded, setPageLoaded] = useState(false);
 

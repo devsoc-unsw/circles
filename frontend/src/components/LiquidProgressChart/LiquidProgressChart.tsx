@@ -1,10 +1,9 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Tooltip as ReactTooltip } from 'react-tooltip'; // TODO: investigate using antd tooltip?
 import type { LiquidConfig } from '@ant-design/plots';
 import Spinner from 'components/Spinner';
 import { darkGrey, lightGrey, lightYellow, purple, yellow } from 'config/constants';
-import type { RootState } from 'config/store';
+import useSettings from 'hooks/useSettings';
 
 type Props = {
   completedUOC: number;
@@ -32,7 +31,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   }
 
   // dark mode always has white text
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSettings();
   if (theme === 'dark') {
     textColor = 'white';
   }
