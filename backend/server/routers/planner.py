@@ -306,7 +306,8 @@ def unschedule(data: CourseCode, uid: Annotated[str, Security(require_uid)]):
             if data.courseCode in course_list:
                 removed = True
                 course_list.remove(data.courseCode)
-                user['planner']['unplanned'].append(data.courseCode)
+                if data.courseCode not in user['planner']['unplanned']:
+                    user['planner']['unplanned'].append(data.courseCode)
 
     if not removed:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} not found in planner')

@@ -151,8 +151,13 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
     for index, year in enumerate(planner['years']):
         for termIndex, term in year.items():
             for course in term:
-                assert course not in flattened  # makes sure its not double storred
-                flattened[course] = f"{index + planner['startYear']} {termIndex}"
+                # clunky - needed to convince mypy that this is a safe operation
+                course_value = flattened.get(course)
+                if course in flattened and course_value is not None:
+                    # multiterm
+                    flattened[course] = course_value + f", {index + planner['startYear']} {termIndex}"
+                else:
+                    flattened[course] = f"{index + planner['startYear']} {termIndex}"
 
     res: Dict[str, CourseStorageWithExtra] = {}
 
