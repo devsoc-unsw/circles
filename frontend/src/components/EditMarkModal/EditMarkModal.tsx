@@ -58,7 +58,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     } else if (letterGrades.includes(markValue as Grade)) {
       // mark is a letter grade
       updateMarkMutation.mutate({ course: code, mark: markValue as Grade });
-    } else if (markValue === '') {
+    } else if (markValue === '' || markValue === undefined) {
       updateMarkMutation.mutate({ course: code, mark: undefined });
     } else {
       message.error('Could not update mark. Please enter a valid mark or letter grade');
