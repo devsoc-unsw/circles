@@ -39,6 +39,9 @@ class UserPlannerStorage(BaseModel):
     isSummerEnabled: bool
     years: List[PlannerYear]
     lockedTerms: Dict[str, bool]
+    
+class UserSettingsStorage(BaseModel):
+    showMarks: bool
 
 class _BaseUserStorage(BaseModel):
     # NOTE: could also put uid here if we want
@@ -49,6 +52,7 @@ class UserStorage(_BaseUserStorage):
     degree: UserDegreeStorage
     courses: UserCoursesStorage
     planner: UserPlannerStorage
+    settings: UserSettingsStorage
 
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
@@ -60,6 +64,7 @@ class PartialUserStorage(BaseModel):
     degree: Optional[UserDegreeStorage] = None
     courses: Optional[UserCoursesStorage] = None
     planner: Optional[UserPlannerStorage] = None
+    settings: Optional[UserSettingsStorage] = None
 
 #
 # Session Token Models (redis)

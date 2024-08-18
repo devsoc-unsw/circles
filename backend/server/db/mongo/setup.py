@@ -42,7 +42,7 @@ def _create_users_collection():
                 },
                 {
                     'bsonType': 'object',
-                    'required': ['uid', 'setup', 'guest', 'degree', 'planner', 'courses'],
+                    'required': ['uid', 'setup', 'guest', 'degree', 'planner', 'courses', 'settings'],
                     'additionalProperties': False,
                     'properties': {
                         '_id': { 'bsonType': 'objectId' },
@@ -157,6 +157,17 @@ def _create_users_collection():
                                             }
                                         }
                                     },
+                                }
+                            }
+                        },
+                        'settings': {
+                            'bsonType': 'object',
+                            'required': ['showMarks'],
+                            'additionalProperties': False,
+                            'properties': {
+                                'showMarks': {
+                                    'bsonType': 'bool',
+                                    'description': 'Whether to show marks in the Term Planner'
                                 }
                             }
                         }

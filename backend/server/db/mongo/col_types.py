@@ -62,6 +62,9 @@ class UserPlannerInfoDict(TypedDict):
     years: List[PlannerYearDict]
     lockedTerms: Dict[str, bool]
 
+class UserSettingsInfoDict(TypedDict):
+    showMarks: bool
+
 class UserInfoDict(TypedDict):
     uid: str
     setup: Literal[True]
@@ -69,3 +72,4 @@ class UserInfoDict(TypedDict):
     degree: UserDegreeInfoDict
     courses: Dict[str, UserCourseInfoDict]
     planner: UserPlannerInfoDict
+    settings: UserSettingsInfoDict

@@ -5,12 +5,12 @@ from starlette.status import HTTP_403_FORBIDDEN
 
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
 from server.routers.courses import get_course
-from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
+from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 import server.db.helpers.users as udb
-from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage
+from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
 
 
 router = APIRouter(
@@ -30,6 +30,9 @@ def _otn_degree(s: DegreeLocalStorage) -> NEWUserDegreeStorage:
 
 def _otn_courses(s: dict[str, CourseStorage]) -> NEWUserCoursesStorage:
     return { code: NEWUserCourseStorage.model_validate(info) for code, info in s.items() }
+
+def _otn_settings(s: SettingsStorage) -> NEWUserSettingsStorage:
+    return NEWUserSettingsStorage.model_validate(s.model_dump())
 
 def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
     return {
@@ -60,12 +63,16 @@ def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
         'programCode': s.programCode,
         'specs': s.specs,
     }
+    
+def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
+    return SettingsStorage(showMarks=s.showMarks)
 
 def _nto_storage(s: NEWUserStorage) -> Storage:
     return {
         'courses': _nto_courses(s.courses),
         'degree': _nto_degree(s.degree),
         'planner': _nto_planner(s.planner),
+        'settings': _nto_settings(s.settings),
     }
 
 
@@ -92,6 +99,7 @@ def set_user(uid: str, item: Storage, overwrite: bool = False):
         courses=_otn_courses(item['courses']),
         degree=_otn_degree(item['degree']),
         planner=_otn_planner(item['planner']),
+        settings=_otn_settings(item['settings']),
     ))
 
     assert res
@@ -117,7 +125,8 @@ def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(
     item: Storage = {
         'degree': localStorage.degree,
         'planner': real_planner,
-        'courses': courses
+        'courses': courses,
+        'settings': SettingsStorage(showMarks=False)
     }
     set_user(uid, item)
 
@@ -173,6 +182,16 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
         res[raw_course['code']] = with_extra_info
 
     return res
+
+@router.get("/data/settings")
+def get_user_settings(uid: Annotated[str, Security(require_uid)]) -> SettingsStorage:
+    return get_setup_user(uid)['settings']
+
+@router.post("/settings/toggleShowMarks")
+def toggle_show_marks(uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
+    user['settings'].showMarks = not user['settings'].showMarks
+    set_user(uid, user, True)
 
 @router.post("/toggleSummerTerm")
 def toggle_summer_term(uid: Annotated[str, Security(require_uid)]):
@@ -339,7 +358,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
             'specs': wizard.specs,
         },
         'planner': planner,
-        'courses': {}
+        'courses': {},
+        'settings': SettingsStorage(showMarks=False),
     }
     set_user(uid, user, True)
     return user

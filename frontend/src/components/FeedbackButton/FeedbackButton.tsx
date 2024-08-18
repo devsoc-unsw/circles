@@ -12,6 +12,7 @@ const FeedbackButton = () => {
   const openFeedbackLink = () => {
     window.open(FEEDBACK_LINK, '_blank');
   };
+
   const { theme } = useSettings();
 
   // Move this to the drawer if the screen is too small

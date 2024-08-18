@@ -248,11 +248,17 @@ class CourseStorageWithExtra(TypedDict):
     isMultiterm: bool
     ignoreFromProgression: bool
 
+class SettingsStorage(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    showMarks: bool
+
 @with_config(ConfigDict(extra='forbid'))
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CourseStorage]
+    settings: SettingsStorage
 
 class LocalStorage(BaseModel):
     model_config = ConfigDict(extra='forbid')

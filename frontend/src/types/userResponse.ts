@@ -24,6 +24,10 @@ export type CourseResponse = {
 };
 export type CoursesResponse = Record<string, CourseResponse>;
 
+export type SettingsResponse = {
+  showMarks: boolean;
+};
+
 export type ValidateResponse = {
   is_accurate: boolean;
   handbook_note: string;

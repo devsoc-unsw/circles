@@ -30,11 +30,11 @@ const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker')
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 
 const App = () => {
-  const { theme } = useSettings();
-
   const [queryClient] = React.useState(
     () => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
   );
+
+  const { theme } = useSettings(queryClient);
 
   useEffect(() => {
     // using local storage since I don't want to risk invalidating the redux state right now

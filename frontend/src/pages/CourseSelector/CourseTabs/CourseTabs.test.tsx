@@ -13,7 +13,6 @@ const preloadedState: RootState = {
   },
   settings: {
     theme: 'dark',
-    showMarks: false,
     showLockedCourses: false,
     showPastWarnings: false
   },
