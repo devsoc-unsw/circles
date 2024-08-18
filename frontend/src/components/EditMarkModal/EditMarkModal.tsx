@@ -43,7 +43,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
-      console.error('Error at unscheduleCourseMutation: ', err);
+      console.error('Error at updateMarkMutation:', err);
     }
   });
 
