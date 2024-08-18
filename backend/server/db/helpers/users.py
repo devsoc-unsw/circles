@@ -41,6 +41,7 @@ def reset_user(uid: str) -> bool:
                 "degree": "",
                 "courses": "",
                 "planner": "",
+                "settings": "",
             },
             "$set": {
                 "setup": False,
