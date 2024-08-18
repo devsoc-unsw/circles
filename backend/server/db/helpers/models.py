@@ -1,6 +1,6 @@
-from typing import Dict, List, Literal, NewType, Optional, Union
+from typing import Dict, List, Literal, NewType, Optional, Set, Union
 from uuid import UUID
-from pydantic import BaseModel
+from pydantic import BaseModel, field_serializer
 
 #
 # NewTypes
@@ -40,6 +40,14 @@ class UserPlannerStorage(BaseModel):
     years: List[PlannerYear]
     lockedTerms: Dict[str, bool]
 
+class UserSettingsStorage(BaseModel):
+    showMarks: bool
+    hiddenYears: Set[int]
+
+    @field_serializer('hiddenYears', when_used='always')
+    def serialize_hidden_years(self, hiddenYears: Set[int]):
+        return sorted(hiddenYears)
+
 class _BaseUserStorage(BaseModel):
     # NOTE: could also put uid here if we want
     guest: bool
@@ -49,6 +57,7 @@ class UserStorage(_BaseUserStorage):
     degree: UserDegreeStorage
     courses: UserCoursesStorage
     planner: UserPlannerStorage
+    settings: UserSettingsStorage
 
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
@@ -60,6 +69,7 @@ class PartialUserStorage(BaseModel):
     degree: Optional[UserDegreeStorage] = None
     courses: Optional[UserCoursesStorage] = None
     planner: Optional[UserPlannerStorage] = None
+    settings: Optional[UserSettingsStorage] = None
 
 #
 # Session Token Models (redis)

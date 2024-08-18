@@ -25,8 +25,10 @@ import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import { LIVE_YEAR } from 'config/constants';
+import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import { GridItem } from './common/styles';
+import HideYearTooltip from './HideYearTooltip';
 import OptionsHeader from './OptionsHeader';
 import S from './styles';
 import TermBox from './TermBox';
@@ -62,6 +64,8 @@ type YearToCoursesMap = { [year: number]: { [code: string]: Course } };
 const TermPlanner = () => {
   const token = useToken();
   const [draggingCourse, setDraggingCourse] = useState('');
+  const { hiddenYears } = useSettings();
+
   const queryClient = useQueryClient();
   const plannerPicRef = useRef<HTMLDivElement>(null);
 
@@ -318,11 +322,13 @@ const TermPlanner = () => {
                     });
                   });
 
+                  if (hiddenYears.includes(index)) return null;
                   return (
                     <React.Fragment key={iYear}>
                       <S.YearGridBox>
                         <S.YearWrapper>
                           <S.YearText $currYear={LIVE_YEAR === iYear}>{iYear}</S.YearText>
+                          <HideYearTooltip year={index} />
                         </S.YearWrapper>
                         <Badge
                           style={{

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   ExpandAltOutlined,
   ShrinkOutlined,
@@ -16,8 +15,8 @@ import { getProgramGraph } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
-import { RootState } from 'config/store';
 import { useAppWindowSize } from 'hooks';
+import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
@@ -72,7 +71,7 @@ const CourseGraph = ({
     queryFn: () => getUserCourses(token)
   });
   const windowSize = useAppWindowSize();
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSettings();
   const previousTheme = useRef<typeof theme>(theme);
 
   const graphRef = useRef<Graph | null>(null);

@@ -6,7 +6,7 @@ import pymongo.errors
 from server.db.mongo.constants import UID_INDEX_NAME
 from server.db.mongo.conn import usersCOL
 
-from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserStorage
+from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserSettingsStorage, UserStorage
 
 # TODO-OLLI(pm): decide if we want to remove type ignores by constructing dictionaries manually
 
@@ -41,6 +41,7 @@ def reset_user(uid: str) -> bool:
                 "degree": "",
                 "courses": "",
                 "planner": "",
+                "settings": "",
             },
             "$set": {
                 "setup": False,
@@ -58,7 +59,7 @@ def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
         res = usersCOL.update_one(
             { "uid": uid },
             {
-                "$set": data.model_dump(include={ "degree", "courses", "planner", "setup" }),
+                "$set": data.model_dump(include={ "degree", "courses", "planner", "settings", "setup" }),
                 "$setOnInsert": {
                     # The fields that are usually immutable
                     "uid": uid,
@@ -121,14 +122,29 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
 
     return res.matched_count == 1
 
+def update_user_settings(uid: str, data: UserSettingsStorage) -> bool:
+    res = usersCOL.update_one(
+        { "uid": uid, "setup": True },
+        {
+            "$set": {
+                "settings": data.model_dump(),
+            },
+        },
+        upsert=False,
+        hint=UID_INDEX_NAME,
+    )
+
+    return res.matched_count == 1
+
 def update_user(uid: str, data: PartialUserStorage) -> bool:
     # updates certain properties of the user
     # if enough are given, declares it as setup
+    fields = { "courses", "degree", "planner", "settings" }
     payload = {
         k: v
         for k, v
         in data.model_dump(
-            include={ "courses", "degree", "planner" },
+            include=fields,
             exclude_unset=True,
         ).items()
         if v is not None  # cannot exclude_none since subclasses use None
@@ -138,7 +154,7 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
         # most semantically correct
         return user_is_setup(uid)
 
-    if "courses" in payload and "degree" in payload and "planner" in payload:
+    if fields.issubset(payload.keys()):
         # enough to declare user as setup
         payload["setup"] = True
 

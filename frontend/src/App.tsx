@@ -1,5 +1,4 @@
 import React, { Suspense, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NotificationOutlined } from '@ant-design/icons';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -12,8 +11,8 @@ import RequireToken from 'components/Auth/RequireToken';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
-import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import useSettings from 'hooks/useSettings';
 import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
 import Logout from 'pages/Logout';
@@ -31,11 +30,11 @@ const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker')
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 
 const App = () => {
-  const { theme } = useSelector((state: RootState) => state.settings);
-
   const [queryClient] = React.useState(
     () => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
   );
+
+  const { theme } = useSettings(queryClient);
 
   useEffect(() => {
     // using local storage since I don't want to risk invalidating the redux state right now

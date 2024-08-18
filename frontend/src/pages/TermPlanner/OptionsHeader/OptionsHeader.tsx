@@ -1,16 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
+import { EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
-import type { RootState } from 'config/store';
+import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
-import { toggleShowMarks, toggleShowPastWarnings } from 'reducers/settingsSlice';
 import HelpMenu from '../HelpMenu/HelpMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
@@ -29,9 +27,15 @@ const OptionsHeader = () => {
   });
   const planner = plannerQuery.data;
 
-  const { theme } = useSelector((state: RootState) => state.settings);
-  const { showMarks, showPastWarnings } = useSelector((state: RootState) => state.settings);
-  const dispatch = useDispatch();
+  const {
+    theme,
+    showMarks,
+    showPastWarnings,
+    hiddenYears,
+    toggleShowMarks,
+    toggleShowPastWarnings,
+    showYears
+  } = useSettings();
   const iconStyles = {
     fontSize: '20px',
     color: theme === 'light' ? '#323739' : '#f1f1f1'
@@ -127,8 +131,15 @@ const OptionsHeader = () => {
             </Popconfirm>
           </Tooltip>
         )}
+        {hiddenYears.length > 0 && (
+          <Tooltip title="Show all hidden years">
+            <S.OptionButton onClick={() => showYears()}>
+              <EyeFilled style={iconStyles} />
+            </S.OptionButton>
+          </Tooltip>
+        )}
         <Tooltip title="Toggle warnings for previous terms">
-          <S.OptionButton onClick={() => dispatch(toggleShowPastWarnings())}>
+          <S.OptionButton onClick={() => toggleShowPastWarnings()}>
             <WarningFilled
               style={{
                 ...iconStyles,
@@ -142,7 +153,7 @@ const OptionsHeader = () => {
       <S.OptionSection>
         <S.ShowMarks>
           <S.TextShowMarks>Show Marks</S.TextShowMarks>
-          <Switch defaultChecked={showMarks} onChange={() => dispatch(toggleShowMarks())} />
+          <Switch defaultChecked={showMarks} onChange={() => toggleShowMarks()} />
         </S.ShowMarks>
         <Tippy
           content={<HelpMenu />}

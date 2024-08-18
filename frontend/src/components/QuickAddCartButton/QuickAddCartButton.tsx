@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
-import { RootState } from 'config/store';
+import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import S from './styles';
 
@@ -21,7 +20,7 @@ const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
     ? (code: string) => removeCourse(token, code)
     : (code: string) => addToUnplanned(token, code);
 
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSettings();
   const iconStyles = {
     color: theme === 'light' ? '#000' : '#fff'
   };

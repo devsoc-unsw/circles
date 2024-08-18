@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import { useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { DatePicker, Modal, Select, Switch } from 'antd';
@@ -8,7 +7,7 @@ import { PlannerResponse } from 'types/userResponse';
 import { toggleSummerTerm, updateDegreeLength, updateStartYear } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
-import type { RootState } from 'config/store';
+import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 
@@ -20,7 +19,7 @@ const SettingsMenu = ({ planner }: Props) => {
   const queryClient = useQueryClient();
 
   const { Option } = Select;
-  const { theme } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSettings();
   const token = useToken();
 
   function willUnplanCourses(numYears: number) {
@@ -65,6 +64,9 @@ const SettingsMenu = ({ planner }: Props) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['settings']
       });
     },
     onError: () => {

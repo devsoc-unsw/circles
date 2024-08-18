@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { CoursesResponse, DegreeResponse, PlannerResponse, UserResponse } from 'types/userResponse';
+import {
+  CoursesResponse,
+  DegreeResponse,
+  PlannerResponse,
+  SettingsResponse,
+  UserResponse
+} from 'types/userResponse';
 import { withAuthorization } from './authApi';
 
 export const getUser = async (token: string): Promise<UserResponse> => {
@@ -32,6 +38,25 @@ export const getUserCourses = async (token: string): Promise<CoursesResponse> =>
     headers: withAuthorization(token)
   });
   return courses.data as CoursesResponse;
+};
+
+export const getUserSettings = async (token: string): Promise<SettingsResponse> => {
+  const settings = await axios.get(`user/data/settings`, {
+    headers: withAuthorization(token)
+  });
+  return settings.data as SettingsResponse;
+};
+
+export const toggleShowMarks = async (token: string): Promise<void> => {
+  await axios.post(`user/settings/toggleShowMarks`, {}, { headers: withAuthorization(token) });
+};
+
+export const hideYear = async (token: string, yearIndex: number): Promise<void> => {
+  await axios.post(`user/settings/hideYear`, { yearIndex }, { headers: withAuthorization(token) });
+};
+
+export const showYears = async (token: string): Promise<void> => {
+  await axios.post(`user/settings/showYears`, {}, { headers: withAuthorization(token) });
 };
 
 export const resetUserDegree = async (token: string): Promise<void> => {
