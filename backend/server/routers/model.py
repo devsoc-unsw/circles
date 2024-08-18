@@ -1,7 +1,7 @@
 """ model for interacting with the FE """
 import json
 import pickle
-from typing import Literal, Optional, TypedDict, Union
+from typing import Literal, Optional, Set, TypedDict, Union
 
 from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.user import User
@@ -252,6 +252,12 @@ class SettingsStorage(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
     showMarks: bool
+    hiddenYears: Set[int]
+
+class HiddenYear(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    yearIndex: int
 
 @with_config(ConfigDict(extra='forbid'))
 class Storage(TypedDict):

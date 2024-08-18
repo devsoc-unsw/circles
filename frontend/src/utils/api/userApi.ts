@@ -51,6 +51,14 @@ export const toggleShowMarks = async (token: string): Promise<void> => {
   await axios.post(`user/settings/toggleShowMarks`, {}, { headers: withAuthorization(token) });
 };
 
+export const hideYear = async (token: string, yearIndex: number): Promise<void> => {
+  await axios.post(`user/settings/hideYear`, { yearIndex }, { headers: withAuthorization(token) });
+};
+
+export const showYears = async (token: string): Promise<void> => {
+  await axios.post(`user/settings/showYears`, {}, { headers: withAuthorization(token) });
+};
+
 export const resetUserDegree = async (token: string): Promise<void> => {
   await axios.post(`user/reset`, {}, { headers: withAuthorization(token) });
 };

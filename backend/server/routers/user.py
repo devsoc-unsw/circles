@@ -5,7 +5,7 @@ from starlette.status import HTTP_403_FORBIDDEN
 
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
 from server.routers.courses import get_course
-from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
+from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
 
@@ -65,7 +65,7 @@ def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
     }
 
 def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
-    return SettingsStorage(showMarks=s.showMarks)
+    return SettingsStorage(showMarks=s.showMarks, hiddenYears=s.hiddenYears)
 
 def _nto_storage(s: NEWUserStorage) -> Storage:
     return {
@@ -126,7 +126,7 @@ def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(
         'degree': localStorage.degree,
         'planner': real_planner,
         'courses': courses,
-        'settings': SettingsStorage(showMarks=False)
+        'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
     }
     set_user(uid, item)
 
@@ -193,6 +193,22 @@ def toggle_show_marks(uid: Annotated[str, Security(require_uid)]):
     user['settings'].showMarks = not user['settings'].showMarks
     set_user(uid, user, True)
 
+@router.post("/settings/hideYear")
+def hide_year(hidden: HiddenYear, uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
+    if hidden.yearIndex < 0 or hidden.yearIndex >= len(user['planner']['years']):
+        raise HTTPException(
+            status_code=400, detail=f"Invalid year index '{hidden.yearIndex}'"
+        )
+    user['settings'].hiddenYears.add(hidden.yearIndex)
+    set_user(uid, user, True)
+
+@router.post("/settings/showYears")
+def show_years(uid: Annotated[str, Security(require_uid)]):
+    user = get_setup_user(uid)
+    user['settings'].hiddenYears = set()
+    set_user(uid, user, True)
+
 @router.post("/toggleSummerTerm")
 def toggle_summer_term(uid: Annotated[str, Security(require_uid)]):
     user = get_setup_user(uid)
@@ -253,6 +269,12 @@ def update_degree_length(degreeLength: DegreeLength, uid: Annotated[str, Securit
             for term in year.values():
                 user['planner']['unplanned'].extend(term)
         user['planner']['years'] = user['planner']['years'][:diff]
+
+        user['settings'].hiddenYears = set(
+            yearIndex
+            for yearIndex in user['settings'].hiddenYears
+            if yearIndex < degreeLength.numYears
+        )
     set_user(uid, user, True)
 
 @router.put("/setProgram")
@@ -359,7 +381,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         },
         'planner': planner,
         'courses': {},
-        'settings': SettingsStorage(showMarks=False),
+        'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
     }
     set_user(uid, user, True)
     return user

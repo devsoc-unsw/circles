@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
+import { EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
@@ -27,8 +27,15 @@ const OptionsHeader = () => {
   });
   const planner = plannerQuery.data;
 
-  const { theme, showMarks, showPastWarnings, toggleShowMarks, toggleShowPastWarnings } =
-    useSettings();
+  const {
+    theme,
+    showMarks,
+    showPastWarnings,
+    hiddenYears,
+    toggleShowMarks,
+    toggleShowPastWarnings,
+    showYears
+  } = useSettings();
   const iconStyles = {
     fontSize: '20px',
     color: theme === 'light' ? '#323739' : '#f1f1f1'
@@ -122,6 +129,13 @@ const OptionsHeader = () => {
                 <FaRegCalendarTimes style={iconStyles} />
               </S.OptionButton>
             </Popconfirm>
+          </Tooltip>
+        )}
+        {hiddenYears.length > 0 && (
+          <Tooltip title="Show all hidden years">
+            <S.OptionButton onClick={() => showYears()}>
+              <EyeFilled style={iconStyles} />
+            </S.OptionButton>
           </Tooltip>
         )}
         <Tooltip title="Toggle warnings for previous terms">

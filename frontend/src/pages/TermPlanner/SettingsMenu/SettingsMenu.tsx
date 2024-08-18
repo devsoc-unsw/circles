@@ -65,6 +65,9 @@ const SettingsMenu = ({ planner }: Props) => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
       });
+      queryClient.invalidateQueries({
+        queryKey: ['settings']
+      });
     },
     onError: () => {
       openNotification({

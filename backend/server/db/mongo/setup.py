@@ -162,12 +162,20 @@ def _create_users_collection():
                         },
                         'settings': {
                             'bsonType': 'object',
-                            'required': ['showMarks'],
+                            'required': ['showMarks', 'hiddenYears'],
                             'additionalProperties': False,
                             'properties': {
                                 'showMarks': {
                                     'bsonType': 'bool',
                                     'description': 'Whether to show marks in the Term Planner'
+                                },
+                                'hiddenYears': {
+                                    'bsonType': 'array',
+                                    'items': {
+                                        'bsonType': 'int'
+                                    },
+                                    'description': 'Indexes of years hidden in the Term Planner, 0 is startYear',
+                                    'uniqueItems': True
                                 }
                             }
                         }

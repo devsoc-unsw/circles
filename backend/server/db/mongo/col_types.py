@@ -64,6 +64,7 @@ class UserPlannerInfoDict(TypedDict):
 
 class UserSettingsInfoDict(TypedDict):
     showMarks: bool
+    hiddenYears: List[int]
 
 class UserInfoDict(TypedDict):
     uid: str
