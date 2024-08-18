@@ -39,7 +39,7 @@ class UserPlannerStorage(BaseModel):
     isSummerEnabled: bool
     years: List[PlannerYear]
     lockedTerms: Dict[str, bool]
-    
+
 class UserSettingsStorage(BaseModel):
     showMarks: bool
 

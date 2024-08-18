@@ -63,7 +63,7 @@ def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
         'programCode': s.programCode,
         'specs': s.specs,
     }
-    
+
 def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
     return SettingsStorage(showMarks=s.showMarks)
 
