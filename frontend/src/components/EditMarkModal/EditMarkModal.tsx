@@ -30,9 +30,6 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     mutationFn: (courseMark: CourseMark) => updateCourseMark(token, courseMark),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['planner']
-      });
-      queryClient.invalidateQueries({
         queryKey: ['courses']
       });
       queryClient.invalidateQueries({
@@ -43,7 +40,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
-      console.error('Error at unscheduleCourseMutation: ', err);
+      console.error('Error at updateMarkMutation:', err);
     }
   });
 
@@ -58,7 +55,7 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     } else if (letterGrades.includes(markValue as Grade)) {
       // mark is a letter grade
       updateMarkMutation.mutate({ course: code, mark: markValue as Grade });
-    } else if (markValue === '') {
+    } else if (markValue === '' || markValue === undefined) {
       updateMarkMutation.mutate({ course: code, mark: undefined });
     } else {
       message.error('Could not update mark. Please enter a valid mark or letter grade');

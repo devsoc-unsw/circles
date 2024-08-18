@@ -286,7 +286,7 @@ class CourseMark(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
     course: str
-    mark: Mark
+    mark: Mark = None
 
 class CourseCodes(BaseModel):
     model_config = ConfigDict(extra='forbid')

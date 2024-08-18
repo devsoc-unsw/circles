@@ -36,17 +36,31 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
   const showEditMark = () => setOpenModal(true);
   const handleUnschedule = useMutation({
     mutationFn: (data: UnscheduleCourse) => unscheduleCourse(token, data),
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
-      })
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
+    }
   });
   const handleDelete = useMutation({
     mutationFn: (courseCode: string) => removeCourse(token, courseCode),
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
-      })
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
+    }
   });
   const handleInfo = () => {
     navigate('/course-selector');

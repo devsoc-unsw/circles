@@ -139,6 +139,9 @@ const TermPlanner = () => {
         queryKey: ['planner']
       });
       queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
         queryKey: ['validate']
       });
     },
@@ -166,6 +169,9 @@ const TermPlanner = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
       });
       queryClient.invalidateQueries({
         queryKey: ['validate']
@@ -198,6 +204,9 @@ const TermPlanner = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
       });
       queryClient.invalidateQueries({
         queryKey: ['validate']
