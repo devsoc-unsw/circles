@@ -28,6 +28,9 @@ const PlannerButton = ({ course, isAddedInPlanner }: PlannerButtonProps) => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
       });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     }
   });
 

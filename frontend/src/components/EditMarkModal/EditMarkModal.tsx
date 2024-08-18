@@ -30,9 +30,6 @@ const EditMarkModal = ({ code, open, onCancel }: Props) => {
     mutationFn: (courseMark: CourseMark) => updateCourseMark(token, courseMark),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['planner']
-      });
-      queryClient.invalidateQueries({
         queryKey: ['courses']
       });
       queryClient.invalidateQueries({

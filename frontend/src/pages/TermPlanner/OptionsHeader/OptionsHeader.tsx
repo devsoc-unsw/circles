@@ -43,6 +43,9 @@ const OptionsHeader = () => {
       queryClient.invalidateQueries({
         queryKey: ['planner']
       });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
