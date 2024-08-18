@@ -59,7 +59,7 @@ def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
         res = usersCOL.update_one(
             { "uid": uid },
             {
-                "$set": data.model_dump(include={ "degree", "courses", "planner", "setup" }),
+                "$set": data.model_dump(include={ "degree", "courses", "planner", "settings", "setup" }),
                 "$setOnInsert": {
                     # The fields that are usually immutable
                     "uid": uid,
