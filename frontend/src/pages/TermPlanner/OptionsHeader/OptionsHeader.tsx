@@ -44,6 +44,9 @@ const OptionsHeader = () => {
         queryKey: ['planner']
       });
       queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
         queryKey: ['validate']
       });
     },

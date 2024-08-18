@@ -41,6 +41,9 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
         queryKey: ['planner']
       });
       queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
         queryKey: ['validate']
       });
     }
