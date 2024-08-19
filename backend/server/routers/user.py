@@ -3,8 +3,8 @@ from typing import Annotated, Any, Dict, Optional, cast
 from fastapi import APIRouter, HTTPException, Security
 from starlette.status import HTTP_403_FORBIDDEN
 
+from server.routers.utility import get_course_details
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
-from server.routers.courses import get_course
 from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 from server.routers.programs import get_programs
 from server.routers.specialisations import get_specialisation_types, get_specialisations
@@ -115,7 +115,7 @@ def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(
         course: {
             'code': course,
             'mark': None, # wtf we nuking marks?
-            'uoc': get_course(course)['UOC'],
+            'uoc': get_course_details(course)['UOC'],
             'ignoreFromProgression': False
         }
         for course in chain(planned, unplanned)
@@ -166,7 +166,7 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
     res: Dict[str, CourseStorageWithExtra] = {}
 
     for raw_course in raw_courses.values():
-        course_info = get_course(raw_course['code'])
+        course_info = get_course_details(raw_course['code'])
 
         with_extra_info: CourseStorageWithExtra = {
             'code': raw_course['code'],

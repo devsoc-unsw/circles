@@ -189,8 +189,7 @@ class PlannerData(BaseModel):
         user.specialisations = self.specialisations[:]
 
         # prevent circular import; TODO: There has to be a better way
-        from server.routers.courses import get_course
-        from server.routers.utility import get_core_courses
+        from server.routers.utility import get_core_courses, get_course_details
 
         for year in self.plan:
             for term in year:
@@ -198,7 +197,7 @@ class PlannerData(BaseModel):
                 for course_name, course_value in term.items():
                     cleaned_term[course_name] = (
                         (course_value[0], course_value[1]) if course_value
-                        else (get_course(course_name)["UOC"], None) # type: ignore
+                        else (get_course_details(course_name)['UOC'], None) # type: ignore
                     )
                 user.add_courses(cleaned_term)
         # get the cores of the user

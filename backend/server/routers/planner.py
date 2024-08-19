@@ -11,11 +11,10 @@ from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
-from server.routers.courses import get_course
 from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
                                   ValidCoursesState, ValidPlannerData, markMap)
 from server.routers.user import get_setup_user, set_user
-from server.routers.utility import get_course_object
+from server.routers.utility import get_course_details, get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
 
@@ -81,12 +80,12 @@ def add_to_unplanned(data: CourseCode, uid: Annotated[str, Security(require_uid)
     if data.courseCode in user['courses'].keys() or data.courseCode in user['planner']['unplanned']:
         raise HTTPException(status_code=400, detail=f'{data.courseCode} is already planned.')
 
-    course = get_course(data.courseCode) # raises exception anyway when unfound
+    uoc = get_course_details(data.courseCode)['UOC'] # raises exception anyway when unfound
     user['planner']['unplanned'].append(data.courseCode)
     user['courses'][data.courseCode] = {
         'code': data.courseCode,
         'mark': None,
-        'uoc': course['UOC'],
+        'uoc': uoc,
         'ignoreFromProgression': False
     }
     set_user(uid, user, True)
@@ -110,7 +109,7 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, uid: Annotated[str, Secu
         HTTPException: Moving a multiterm course somewhere that would result in a
             course being placed before or after the planner
     """
-    course = get_course(data.courseCode)
+    course = get_course_details(data.courseCode)
     uoc, terms = itemgetter('UOC', 'terms')(course)
     user = get_setup_user(uid)
     planner = user['planner']
@@ -163,7 +162,7 @@ def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security
             course being placed before or after the planner
     """
     # pylint: disable=too-many-locals
-    course = get_course(data.courseCode)
+    course = get_course_details(data.courseCode)
     user = get_setup_user(uid)
 
     uoc, terms_offered, is_multiterm = itemgetter(

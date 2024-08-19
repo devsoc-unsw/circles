@@ -18,7 +18,7 @@ from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
-from server.routers.utility import get_core_courses, map_suppressed_errors
+from server.routers.utility import get_core_courses, get_course_details, map_suppressed_errors
 
 router = APIRouter(
     prefix="/courses",
@@ -68,7 +68,7 @@ def fix_user_data(userData: dict):
         if not isinstance(userData["courses"][course], list)
     ]
     filledInCourses = {
-        course: [get_course(course)['UOC'], userData["courses"][course]]
+        course: [get_course_details(course)['UOC'], userData["courses"][course]]
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
@@ -167,27 +167,11 @@ def get_course(courseCode: str):
     - start with the current database
     - if not found, check the archives
     """
-    result = coursesCOL.find_one({"code": courseCode})
-    if not result:
-        for year in sorted(ARCHIVED_YEARS, reverse=True):
-            result = archivesDB[str(year)].find_one({"code": courseCode})
-            if result is not None:
-                result.setdefault("raw_requirements", "")
-                result["is_legacy"] = True
-                break
-    else:
-        result["is_legacy"] = False
+    result = get_course_details(courseCode)
 
-    if not result:
-        raise HTTPException(
-            status_code=400, detail=f"Course code {courseCode} was not found"
-        )
-    result.setdefault("school", None)
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
-    del result["_id"]
-    with suppress(KeyError):
-        del result["exclusions"]["leftover_plaintext"]
+
     return result
 
 
@@ -480,7 +464,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
     ## initial state
     courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
-    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken)['UOC'], None]
+    userData.courses[courseToBeTaken] = [get_course_details(courseToBeTaken)['UOC'], None]
     ## final state
     courses_now_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked
@@ -643,21 +627,13 @@ def weight_course(course: tuple[str, str], search_term: str, structure: dict, ma
 
     return weight
 
-def get_course_info(course: str, year: str | int = LIVE_YEAR):
-    """
-    Returns the course info for the given course and year.
-    If no year is given, the current year is used.
-    If the year is not the LIVE_YEAR, then uses legacy information
-    """
-    return get_course(course) if int(year) >= int(LIVE_YEAR) else get_legacy_course(str(year), course)
-
 def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
     """
     Returns the terms in which the given course is offered, for the given year.
     If the year is from the future then, backfill the LIVE_YEAR's results
     """
-    year_to_fetch: int | str = LIVE_YEAR if int(year) > LIVE_YEAR else year
-    return get_course_info(course, year_to_fetch)['terms'] or []
+    course_info = get_course_details(course) if int(year) >= int(LIVE_YEAR) else get_legacy_course(str(year), course)
+    return course_info['terms'] or []
 
 def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """
