@@ -9,7 +9,7 @@ from typing import Annotated, Dict, List, Mapping, Optional, Set, Tuple
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
 from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
@@ -18,7 +18,7 @@ from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
-from server.routers.utility import get_core_courses, get_course_details, map_suppressed_errors
+from server.routers.utility import get_core_courses, get_course_details, get_legacy_course_details, get_terms_offered_multiple_years
 
 router = APIRouter(
     prefix="/courses",
@@ -348,11 +348,7 @@ def get_legacy_course(year: str, courseCode: str):
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = archivesDB.get_collection(year).find_one({"code": courseCode})
-    if not result:
-        raise HTTPException(status_code=400, detail="invalid course code or year")
-    del result["_id"]
-    result["is_legacy"] = False # not a legacy, assuming you know what you are doing
+    result = get_legacy_course_details(courseCode, year)
     return result
 
 
@@ -526,14 +522,10 @@ def terms_offered(course: str, years:str) -> TermsOffered:
             fails: [(year, exception)]
         }
     """
-    fails: list[tuple] = []
-    terms = {
-        year: map_suppressed_errors(get_term_offered, fails, course, year) or []
-        for year in years.split("+")
-    }
+    offerings, fails = get_terms_offered_multiple_years(course, years.split("+"))
 
     return {
-        "terms": terms,
+        "terms": offerings,
         "fails": fails,
     }
 
@@ -626,14 +618,6 @@ def weight_course(course: tuple[str, str], search_term: str, structure: dict, ma
             break
 
     return weight
-
-def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> list[str]:
-    """
-    Returns the terms in which the given course is offered, for the given year.
-    If the year is from the future then, backfill the LIVE_YEAR's results
-    """
-    course_info = get_course_details(course) if int(year) >= int(LIVE_YEAR) else get_legacy_course(str(year), course)
-    return course_info['terms'] or []
 
 def get_program_restriction(program_code: Optional[str]) -> Optional[ProgramRestriction]:
     """

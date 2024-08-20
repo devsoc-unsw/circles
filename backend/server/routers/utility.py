@@ -4,12 +4,12 @@ specifically in any one function
 """
 
 from contextlib import suppress
-from typing import Callable, Optional, TypeVar
+from typing import Callable, Optional, Tuple, TypeVar
 
 from fastapi import HTTPException
 
 from algorithms.objects.course import Course
-from data.config import ARCHIVED_YEARS
+from data.config import ARCHIVED_YEARS, LIVE_YEAR
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
 from server.db.mongo.conn import archivesDB, coursesCOL
@@ -23,6 +23,7 @@ from server.db.mongo.conn import archivesDB, coursesCOL
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
+# P = ParamSpec('P')  # TODO: type the args and kwargs here using ParamSpec, pylint cries rn
 R = TypeVar('R')  # TODO: might be able to inline this https://typing.readthedocs.io/en/latest/spec/generics.html#variance-inference
 def map_suppressed_errors(func: Callable[..., R], errors_log: list[tuple], *args, **kwargs) -> Optional[R]:
     """
@@ -52,18 +53,19 @@ def get_core_courses(program: str, specialisations: list[str]):
 
 
 def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Optional[tuple[int, int]] = None, mark: Optional[int] = 100) -> Course:
-    ''' 
+    '''
     This return the Course object for the given course code.
     Note the difference between this and the get_course_details function
     '''
     if mark is None:
         mark = 100
-    from server.routers.courses import terms_offered
-    years = "+".join(str(year) for year in range(prog_time.startTime[0], prog_time.endTime[0] + 1))
-    terms_result = terms_offered(code, years)["terms"]
-    terms_possible = {}
-    for year, terms in terms_result.items():
-        terms_possible[int(year)] = [int(term[1]) for term in terms]
+
+    years = [str(year) for year in range(prog_time.startTime[0], prog_time.endTime[0] + 1)]
+    terms_result = get_terms_offered_multiple_years(code, years)[0]
+    terms_possible = {
+        int(year): [int(term[1]) for term in terms]
+        for year, terms in terms_result.items()
+    }
 
     try:
         return Course(
@@ -112,3 +114,40 @@ def get_course_details(code: str) -> dict:  # TODO: type this output
     del result["_id"]
 
     return result
+
+# TODO: make all of these year params ints
+def get_legacy_course_details(code: str, year: str) -> dict:  # TODO: type output
+    '''
+    Returns the course details for a legacy year, similarly to get_course_details.
+
+    Will raise a 400 if the course code could not be found in that year.
+    '''
+    result = archivesDB.get_collection(year).find_one({"code": code})
+    if not result:
+        raise HTTPException(status_code=400, detail="invalid course code or year")
+
+    del result["_id"]
+    result["is_legacy"] = False # not a legacy, assuming you know what you are doing
+
+    return result
+
+def get_terms_offered(code: str, year: str) -> list[str]:
+    '''
+    Returns the terms in which the given course is offered, for the given year.
+    If the year is from the future then, backfill the LIVE_YEAR's results
+    '''
+    course_info = get_course_details(code) if int(year) >= LIVE_YEAR else get_legacy_course_details(code, year)
+    return course_info['terms'] or []
+
+def get_terms_offered_multiple_years(code: str, years: list[str]) -> Tuple[dict[str, list[str]], list[tuple]]:
+    '''
+    Returns the term offerings for a course code over multiple years, or an empty list if it could not be found.
+    Also returns the years that were not found, and their specific errors.
+    '''
+    fails: list[tuple] = []
+    offerings: dict[str, list[str]] = {
+        year: map_suppressed_errors(get_terms_offered, fails, code, year) or []
+        for year in years
+    }
+
+    return offerings, fails
