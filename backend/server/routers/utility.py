@@ -4,15 +4,16 @@ specifically in any one function
 """
 
 from contextlib import suppress
-from typing import Callable, Optional, Tuple, TypeVar
+from typing import Callable, Optional, Tuple, TypeVar, cast
 
 from fastapi import HTTPException
 
 from algorithms.objects.course import Course
+from data.processors.models import Program, SpecData, SpecsData
 from data.config import ARCHIVED_YEARS, LIVE_YEAR
 from data.utility import data_helpers
 from server.routers.model import CONDITIONS, ProgramTime
-from server.db.mongo.conn import archivesDB, coursesCOL
+from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisationsCOL
 
 ## TODO-OLLI
 # - move all utility functions into here
@@ -151,3 +152,22 @@ def get_terms_offered_multiple_years(code: str, years: list[str]) -> Tuple[dict[
     }
 
     return offerings, fails
+
+def get_all_specialisations(programCode: str) -> Optional[SpecsData]:
+    '''
+    Returns the specs for the given programCode, removing any specs that are not supported.
+    '''
+    program = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
+    if program is None:
+        return None
+
+    # TODO: this can be done in a single aggregate
+    raw_specs = program["components"]["spec_data"]
+    for spec_type_container in raw_specs.values():
+        spec_type_container = cast(dict[str, SpecData], spec_type_container)
+        for program_specs in spec_type_container.values():
+            for code in [*program_specs["specs"].keys()]:
+                if not specialisationsCOL.find_one({"code": code}):
+                    del program_specs["specs"][code]
+
+    return raw_specs

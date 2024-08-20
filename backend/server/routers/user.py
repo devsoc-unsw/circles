@@ -1,13 +1,12 @@
 from itertools import chain
-from typing import Annotated, Any, Dict, Optional, cast
+from typing import Annotated, Dict, Optional, cast
 from fastapi import APIRouter, HTTPException, Security
 from starlette.status import HTTP_403_FORBIDDEN
 
-from server.routers.utility import get_course_details
+from data.processors.models import SpecData
+from server.routers.utility import get_all_specialisations, get_course_details
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
 from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
-from server.routers.programs import get_programs
-from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
@@ -315,45 +314,42 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
     if num_years < 1:
         raise HTTPException(status_code=400, detail="Invalid year range")
 
-    # Ensure valid prog code - done by the specialisatoin check so this is
-    # techincally redundant
-    progs = get_programs()["programs"]
-    if progs is None:
-        raise HTTPException(status_code=400, detail="Invalid program code")
-
     # Ensure that all specialisations are valid
     # Need a bidirectoinal validate
     # All specs in wizard (lhs) must be in the RHS
     # All specs in the RHS that are "required" must have an associated LHS selection
-    avail_spec_types: list[SpecType] = get_specialisation_types(wizard.programCode)["types"]
-    # Type of elemn in the following is
-    # Dict[Literal['specs'], Dict[str(programTitle), specInfo]]
+
     # Keys in the specInfo
     # - 'specs': List[str] - name of the specialisations - thing that matters
     # - 'notes': str - dw abt this (Fe's prob tbh)
     # - 'is_optional': bool - if true then u need to validate associated elem in LHS
-    avail_specs = list(chain.from_iterable(
-        cast(list[Any], specs) # for some bs, specs is still List[Any | None] ??????
-        for spec_type in avail_spec_types
-        if (specs := list(get_specialisations(wizard.programCode, spec_type).values())) is not None
-    ))
-    # LHS subset All specs
+
+    avail_specs = get_all_specialisations(wizard.programCode)
+    if avail_specs is None:
+        raise HTTPException(status_code=400, detail="Invalid program code")
+
+    flattened_containers = [
+        {
+            "is_optional": program_sub_container["is_optional"],
+            "spec_codes": list(program_sub_container["specs"].keys())
+        }
+        for spec_type_container in cast(dict[SpecType, dict[str, SpecData]], avail_specs).values()
+        for program_sub_container in spec_type_container.values()
+    ]
+
     invalid_lhs_specs = set(wizard.specs).difference(
         spec_code
-        for specs in avail_specs
-        for actl_spec in specs.values()
-        for spec_code in actl_spec.get('specs', []).keys()
+        for container in flattened_containers
+        for spec_code in container["spec_codes"]
     )
-    # All compulsory in RHS has an entry in LHS
-    spec_reqs_not_met = [
-        actl_spec
-        for specs in avail_specs
-        for actl_spec in specs.values()
-        if (
-            actl_spec.get('is_optional') is False
-            and not set(actl_spec.get('specs', []).keys()).intersection(wizard.specs)
-        )
 
+    spec_reqs_not_met = [
+        container
+        for container in flattened_containers
+        if (
+            not container["is_optional"]
+            and not set(container["spec_codes"]).intersection(wizard.specs)
+        )
     ]
 
     # ceebs returning the bad data because FE should be valid anyways
