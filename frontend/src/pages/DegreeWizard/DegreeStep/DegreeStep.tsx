@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { useQuery } from '@tanstack/react-query';
-import { Input, Menu, Typography } from 'antd';
+import { Select, Typography } from 'antd';
 import { fuzzy } from 'fast-fuzzy';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { fetchAllDegrees } from 'utils/api/programsApi';
@@ -15,23 +15,22 @@ type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type Props = {
   incrementStep: (stepTo?: Steps) => void;
-  degreeInfo: DegreeWizardPayload;
   setDegreeInfo: SetState<DegreeWizardPayload>;
 };
 
-const DegreeStep = ({ incrementStep, degreeInfo, setDegreeInfo }: Props) => {
-  const [input, setInput] = useState('');
-  const [options, setOptions] = useState<string[]>([]);
-
+const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const allDegreesQuery = useQuery({
     queryKey: ['programs'],
     queryFn: fetchAllDegrees,
     select: (data) => data.programs
   });
   const allDegrees = allDegreesQuery.data ?? {};
+  const allDegreesOptions = Object.keys(allDegrees).map((code) => ({
+    label: `${code} ${allDegrees[code]}`,
+    value: `${code} ${allDegrees[code]}`
+  }));
 
-  const onDegreeChange = async ({ key }: { key: string }) => {
-    setInput(key);
+  const onDegreeChange = async (key: string) => {
     setDegreeInfo((prev) => ({
       ...prev,
       // key is of format `${programCode} - ${title}`; Need to extract code
@@ -40,30 +39,30 @@ const DegreeStep = ({ incrementStep, degreeInfo, setDegreeInfo }: Props) => {
     if (key) incrementStep(Steps.SPECS);
   };
 
-  const searchDegree = (newInput: string) => {
-    setInput(newInput);
-
-    const fuzzedDegrees = Object.keys(allDegrees)
-      .map((code) => `${code} ${allDegrees[code]}`)
-      .map((title) => {
-        return {
-          distance: fuzzy(newInput, title),
-          name: title
-        };
-      });
-
-    fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
-    fuzzedDegrees.sort((a, b) => b.distance - a.distance);
-
-    setOptions(fuzzedDegrees.splice(0, 8).map((pair) => pair.name));
-  };
-
   const props = useSpring(springProps);
 
-  const items = options.map((degreeName) => ({
-    label: degreeName,
-    key: degreeName
-  }));
+  // const [options, setOptions] = useState<string[]>([]);
+
+  // const searchDegree = (newInput: string) => {
+  //   const fuzzedDegrees = Object.keys(allDegrees)
+  //     .map((code) => `${code} ${allDegrees[code]}`)
+  //     .map((title) => {
+  //       return {
+  //         distance: fuzzy(newInput, title),
+  //         name: title
+  //       };
+  //     });
+
+  //   fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
+  //   fuzzedDegrees.sort((a, b) => b.distance - a.distance);
+
+  //   setOptions(fuzzedDegrees.splice(0, 8).map((pair) => pair.name));
+  // };
+
+  // const items = options.map((degreeName) => ({
+  //   label: degreeName,
+  //   key: degreeName
+  // }));
 
   return (
     <CS.StepContentWrapper id="degree">
@@ -71,26 +70,20 @@ const DegreeStep = ({ incrementStep, degreeInfo, setDegreeInfo }: Props) => {
         <Title level={4} className="text">
           What are you studying?
         </Title>
-        <Input
+        <Select
           size="large"
-          type="text"
-          value={input}
+          showSearch
+          optionFilterProp="label"
           placeholder="Search Degree"
-          onChange={(e) => searchDegree(e.target.value)}
+          style={{ width: '100%' }}
+          onSelect={onDegreeChange}
+          options={allDegreesOptions}
+          filterOption={false}
+          filterSort={(optionA, optionB, info) =>
+            fuzzy(info.searchValue, optionB.label) - fuzzy(info.searchValue, optionA.label)
+          }
+          maxCount={8}
         />
-        {input && options && (
-          <Menu
-            onSelect={onDegreeChange}
-            selectedKeys={
-              degreeInfo.programCode
-                ? [`${degreeInfo.programCode} ${allDegrees[degreeInfo.programCode]}`]
-                : []
-            }
-            items={degreeInfo.programCode ? [] : items}
-            mode="inline"
-            data-testid="antd-degree-menu"
-          />
-        )}
       </animated.div>
     </CS.StepContentWrapper>
   );
