@@ -4,7 +4,7 @@ APIs for the /courses/ route.
 import pickle
 import re
 from contextlib import suppress
-from typing import Annotated, Dict, List, Mapping, Optional, Set, Tuple
+from typing import Annotated, Dict, List, Optional, Set, Tuple
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
@@ -233,23 +233,6 @@ def search(search_string: str, uid: Annotated[str, Security(require_uid)]) -> Di
                               )[:30]
 
     return dict(weighted_results)
-
-def regex_search(search_string: str) -> Mapping[str, str]:
-    """
-    Uses the search string as a regex to match all courses with an exact pattern.
-    """
-
-    pat = re.compile(search_string, re.I)
-    courses = list(coursesCOL.find({"code": {"$regex": pat}}))
-
-    # TODO: do we want to always include matching legacy courses (excluding duplicates)?
-    if not courses:
-        for year in sorted(ARCHIVED_YEARS, reverse=True):
-            courses = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
-            if courses:
-                break
-
-    return {course["code"]: course["title"] for course in courses}
 
 
 @router.post(

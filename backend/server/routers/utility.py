@@ -23,6 +23,7 @@ from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisa
 # - maybe split into a folder if it gets too large
 # - move all cached constants into a new folder or remove them all together
 # - fix pylint for circular imports
+# - get_path_from
 
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
@@ -330,7 +331,6 @@ def add_geneds_to_structure(structure: dict[str, StructureContainer], programCod
 
 def convert_subgroup_object_to_courses_dict(object: str, description: str | list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    from server.routers.courses import regex_search
 
     if " or " in object and isinstance(description, list):
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
@@ -338,3 +338,20 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str | list
         return regex_search(rf"^{object}")
 
     return { object: description }
+
+def regex_search(search_string: str) -> Mapping[str, str]:
+    """
+    Uses the search string as a regex to match all courses with an exact pattern.
+    """
+
+    pat = re.compile(search_string, re.I)
+    courses = list(coursesCOL.find({"code": {"$regex": pat}}))
+
+    # TODO: do we want to always include matching legacy courses (excluding duplicates)?
+    if not courses:
+        for year in sorted(ARCHIVED_YEARS, reverse=True):
+            courses = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
+            if courses:
+                break
+
+    return {course["code"]: course["title"] for course in courses}
