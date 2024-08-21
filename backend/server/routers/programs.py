@@ -1,19 +1,16 @@
 """
 API for fetching data about programs and specialisations """
 import functools
-import re
 from contextlib import suppress
-from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple, cast
+from typing import Any, Callable, Dict, List, Optional
 
-from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
-from data.utility import data_helpers
-from fastapi import APIRouter, HTTPException
-from server.db.mongo.conn import programsCOL, specialisationsCOL
+from fastapi import APIRouter
+from server.db.mongo.conn import programsCOL
 from server.manual_fixes import apply_manual_fixes
-from server.routers.courses import get_path_from, regex_search
+from server.routers.courses import get_path_from
 from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
                                   StructureDict)
-from server.routers.utility import get_core_courses, map_suppressed_errors
+from server.routers.utility import add_program_code_details_to_structure, add_specialisations_to_structure, get_core_courses, get_gen_eds, get_program_structure, map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -79,89 +76,6 @@ def get_programs() -> dict[str, dict[str, str]]:
             "3673": "Economics / Computer Science"
         }
     }
-
-def convert_subgroup_object_to_courses_dict(object: str, description: str | list[str]) -> Mapping[str, str | list[str]]:
-    """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    if " or " in object and isinstance(description, list):
-        return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
-        return regex_search(rf"^{object}")
-
-    return { object: description }
-
-def add_subgroup_container(structure: dict[str, StructureContainer], type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
-    """ Returns the added courses """
-    # TODO: further standardise non_spec_data to remove these lines:
-    title = container.get("title", "")
-    if container.get("type") == "gened":
-        title = "General Education"
-    conditional_type = container.get("type")
-    if conditional_type is not None and "rule" in conditional_type:
-        type = "Rules"
-    structure[type]["content"][title] = {
-        "UOC": container.get("credits_to_complete") or 0,
-        "courses": functools.reduce(
-            lambda rest, current: rest | {
-                course: description for course, description
-                in convert_subgroup_object_to_courses_dict(current[0], current[1]).items()
-                if course not in exceptions
-            }, container.get("courses", {}).items(), {}
-        ),
-        "type": container.get("type", ""),
-        "notes": container.get("notes", "") if type == "Rules" else ""
-    }
-    return list(structure[type]["content"][title]["courses"].keys())
-
-def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer], container: ProgramContainer) -> list[str]:
-    """ Returns the added courses """
-    if container.get("type") != "gened":
-        return []
-
-    item = structure["General"]["content"]["General Education"]
-    item["courses"] = {}
-    if container.get("courses") is None:
-        gen_ed_courses = list(set(get_gen_eds(programCode)["courses"].keys()) - set(sum(
-            (
-                sum((
-                    list(value["courses"].keys())
-                    for sub_group, value in spec["content"].items()
-                    if 'core' in sub_group.lower()
-                ), [])
-            for spec_name, spec in structure.items()
-            if "Major" in spec_name or "Honours" in spec_name)
-        , [])))
-        geneds = get_gen_eds(programCode)
-        item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
-
-
-    return list(item["courses"].keys())
-
-
-def add_specialisation(structure: dict[str, StructureContainer], code: str) -> None:
-    """ Add a specialisation to the structure of a getStructure call """
-    # in a specialisation, the first container takes priority - no duplicates may exist
-    if code.endswith("1"):
-        type = "Major"
-    elif code.endswith("2"):
-        type = "Minor"
-    else:
-        type = "Honours"
-
-    spnResult = cast(Optional[Specialisation], specialisationsCOL.find_one({"code": code}))
-    type = f"{type} - {code}"
-    if not spnResult:
-        raise HTTPException(
-            status_code=400, detail=f"{code} of type {type} not found")
-    structure[type] = {"name": spnResult["name"], "content": {}}
-    # NOTE: takes Core Courses are first
-    exceptions: list[str] = []
-    for cores in filter(lambda a: "Core" in a["title"], spnResult["curriculum"]):
-        new = add_subgroup_container(structure, type, cores, exceptions)
-        exceptions.extend(new)
-
-    for container in spnResult["curriculum"]:
-        if "Core" not in container["title"]:
-            add_subgroup_container(structure, type, container, exceptions)
 
 @router.get(
     "/getStructure/{programCode}/{spec}",
@@ -248,19 +162,11 @@ def get_structure(
     programCode: str, spec: Optional[str] = None, ignore: Optional[str] = None
 ) -> StructureDict:
     """ get the structure of a course given specs and program code """
-    # TODO: This ugly, use compose instead
 
     ignored = ignore.split("+") if ignore else []
+    specs = spec.split("+") if spec else []
 
-    structure: dict[str, StructureContainer] = {}
-    uoc = 0 # ensure always atleast set regardless of ignore  # TODO-OLLI: None?
-    if "spec" not in ignored:
-        structure = add_specialisations(structure, spec)
-    if "code_details" not in ignored:
-        structure, uoc = add_program_code_details(structure, programCode)
-    if "gened" not in ignored:
-        structure = add_geneds_to_structure(structure, programCode)
-    apply_manual_fixes(structure, programCode)
+    structure, uoc = get_program_structure(programCode, specs=specs, ignored=ignored)
 
     return {
         "structure": structure,
@@ -278,9 +184,10 @@ def get_structure_course_list(
         TODO: Add a test for this.
     """
     structure: dict[str, StructureContainer] = {}
+    specs = spec.split("+") if spec is not None else []
 
-    structure = add_specialisations(structure, spec)
-    structure, _ = add_program_code_details(structure, programCode)
+    structure = add_specialisations_to_structure(structure, specs)
+    structure, _ = add_program_code_details_to_structure(structure, programCode)
     apply_manual_fixes(structure, programCode)
 
     return {
@@ -314,31 +221,8 @@ def get_structure_course_list(
 )
 def get_gen_eds_route(programCode: str) -> Dict[str, Dict[str, str]]:
     """ Fetches the geneds for a given program code """
-    course_list: List[str] = course_list_from_structure(get_structure(programCode, ignore="gened")["structure"])
+    course_list: List[str] = course_list_from_structure(get_program_structure(programCode, ignored=["gened"])[0])
     return get_gen_eds(programCode, course_list)
-
-def get_gen_eds(
-        programCode: str, excluded_courses: Optional[List[str]] = None
-    ) -> Dict[str, Dict[str, str]]:
-    """
-    fetches gen eds from file and removes excluded courses.
-        - `programCode` is the program code to fetch geneds for
-        - `excluded_courses` is a list of courses to exclude from the gened list.
-        Typically the result of a `courseList` from `getStructure` to prevent
-        duplicate courses between cores, electives and geneds.
-    """
-    excluded_courses = excluded_courses if excluded_courses is not None else []
-    try:
-        geneds: Dict[str, str] = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
-    except KeyError as err:
-        raise HTTPException(status_code=400, detail=f"No geneds for progrm code {programCode}") from err
-
-    for course in excluded_courses:
-        if course in geneds:
-            del geneds[course]
-
-    return {"courses": geneds}
-
 
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
@@ -415,52 +299,6 @@ def course_list_from_structure(structure: Dict[str, StructureContainer]) -> list
         return
     __recursive_course_search(dict(structure))
     return courses
-
-def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
-    """
-        Take a string of `+` joined specialisations and add
-        them to the structure
-    """
-    if spec:
-        specs = spec.split("+") if "+" in spec else [spec]
-        for m in specs:
-            add_specialisation(structure, m)
-    return structure
-
-def add_program_code_details(structure: dict[str, StructureContainer], programCode: str) -> Tuple[dict[str, StructureContainer], int]:
-    """
-    Add the details for given program code to the structure.
-    Returns:
-        - structure
-        - uoc (int) associated with the program code.
-    """
-    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
-    if not programsResult:
-        raise HTTPException(
-            status_code=400, detail="Program code was not found")
-
-    structure['General'] = {"name": "General Program Requirements", "content": {}}
-    structure['Rules'] = {"name": "General Program Rules", "content": {}}
-    return (structure, programsResult["UOC"])
-
-# TODO: This should be computed at scrape-time
-def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
-    """
-        Insert geneds of the given programCode into the structure
-        provided
-    """
-    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
-    if programsResult is None:
-        raise HTTPException(
-            status_code=400, detail="Program code was not found")
-
-    with suppress(KeyError):
-        for container in programsResult['components']['non_spec_data']:
-            add_subgroup_container(structure, "General", container, [])
-            if container.get("type") == "gened":
-                add_geneds_courses(programCode, structure, container)
-    return structure
-
 
 def compose(*functions: Callable) -> Callable:
     """

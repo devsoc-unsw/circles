@@ -18,7 +18,7 @@ from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
-from server.routers.utility import get_core_courses, get_course_details, get_legacy_course_details, get_terms_offered_multiple_years
+from server.routers.utility import get_core_courses, get_course_details, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
 
 router = APIRouter(
     prefix="/courses",
@@ -213,14 +213,13 @@ def search(search_string: str, uid: Annotated[str, Security(require_uid)]) -> Di
     """
     # TODO: remove these because circular imports
     from server.routers.user import get_setup_user
-    from server.routers.programs import get_structure
     all_courses = fetch_all_courses()
 
     user = get_setup_user(uid)
     specialisations = list(user['degree']['specs'])
     majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = get_structure(user['degree']['programCode'], "+".join(specialisations))['structure']
+    structure = get_program_structure(user['degree']['programCode'], specs=specialisations)[0]
 
     top_results = sorted(all_courses.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
