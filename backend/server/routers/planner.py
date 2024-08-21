@@ -11,9 +11,9 @@ from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.auth_utility.user import get_setup_user, set_user
 from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
                                   ValidCoursesState, ValidPlannerData, markMap)
-from server.routers.user import get_setup_user, set_user
 from server.routers.utility import get_course_details, get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6

@@ -7,7 +7,6 @@ from typing import Any, Callable, Dict, List, Optional
 from fastapi import APIRouter
 from server.db.mongo.conn import programsCOL
 from server.manual_fixes import apply_manual_fixes
-from server.routers.courses import get_path_from
 from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
                                   StructureDict)
 from server.routers.utility import add_program_code_details_to_structure, add_specialisations_to_structure, get_core_courses, get_gen_eds, get_program_structure, map_suppressed_errors
@@ -246,6 +245,8 @@ def graph(
     No longer returns 'err_edges: failed_courses' as those are suppressed and
     caught by the processor
     """
+    from server.routers.courses import get_path_from  # TODO: remove when this is moved
+
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
 

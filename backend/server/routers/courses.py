@@ -14,6 +14,7 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
 from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.auth_utility.user import get_setup_user
 from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
@@ -212,7 +213,6 @@ def search(search_string: str, uid: Annotated[str, Security(require_uid)]) -> Di
             ……. }
     """
     # TODO: remove these because circular imports
-    from server.routers.user import get_setup_user
     all_courses = fetch_all_courses()
 
     user = get_setup_user(uid)
