@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { useQuery } from '@tanstack/react-query';
 import { Select, Typography } from 'antd';
@@ -25,10 +25,6 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
     select: (data) => data.programs
   });
   const allDegrees = allDegreesQuery.data ?? {};
-  const allDegreesOptions = Object.keys(allDegrees).map((code) => ({
-    label: `${code} ${allDegrees[code]}`,
-    value: `${code} ${allDegrees[code]}`
-  }));
 
   const onDegreeChange = async (key: string) => {
     setDegreeInfo((prev) => ({
@@ -41,28 +37,28 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
 
   const props = useSpring(springProps);
 
-  // const [options, setOptions] = useState<string[]>([]);
+  const [options, setOptions] = useState<string[]>([]);
 
-  // const searchDegree = (newInput: string) => {
-  //   const fuzzedDegrees = Object.keys(allDegrees)
-  //     .map((code) => `${code} ${allDegrees[code]}`)
-  //     .map((title) => {
-  //       return {
-  //         distance: fuzzy(newInput, title),
-  //         name: title
-  //       };
-  //     });
+  const searchDegree = (newInput: string) => {
+    const fuzzedDegrees = Object.keys(allDegrees)
+      .map((code) => `${code} ${allDegrees[code]}`)
+      .map((title) => {
+        return {
+          distance: fuzzy(newInput, title),
+          name: title
+        };
+      });
 
-  //   fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
-  //   fuzzedDegrees.sort((a, b) => b.distance - a.distance);
+    fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
+    fuzzedDegrees.sort((a, b) => b.distance - a.distance);
 
-  //   setOptions(fuzzedDegrees.splice(0, 8).map((pair) => pair.name));
-  // };
+    setOptions(fuzzedDegrees.splice(0, 8).map((pair) => pair.name));
+  };
 
-  // const items = options.map((degreeName) => ({
-  //   label: degreeName,
-  //   key: degreeName
-  // }));
+  const items = options.map((degreeName) => ({
+    label: degreeName,
+    value: degreeName
+  }));
 
   return (
     <CS.StepContentWrapper id="degree">
@@ -77,12 +73,9 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
           placeholder="Search Degree"
           style={{ width: '100%' }}
           onSelect={onDegreeChange}
-          options={allDegreesOptions}
+          options={items}
           filterOption={false}
-          filterSort={(optionA, optionB, info) =>
-            fuzzy(info.searchValue, optionB.label) - fuzzy(info.searchValue, optionA.label)
-          }
-          maxCount={8}
+          onSearch={searchDegree}
         />
       </animated.div>
     </CS.StepContentWrapper>
