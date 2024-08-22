@@ -241,29 +241,29 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
     if avail_specs is None:
         raise HTTPException(status_code=400, detail="Invalid program code")
 
-    flattened_containers = [
-        {
-            "is_optional": program_sub_container["is_optional"],
-            "spec_codes": list(program_sub_container["specs"].keys())
-        }
+    # list[(is_optional, spec_codes)]
+    flattened_containers: list[tuple[bool, list[str]]] = [
+        (
+            program_sub_container["is_optional"],
+            list(program_sub_container["specs"].keys())
+        )
         for spec_type_container in cast(dict[SpecType, dict[str, SpecData]], avail_specs).values()
         for program_sub_container in spec_type_container.values()
     ]
 
     invalid_lhs_specs = set(wizard.specs).difference(
         spec_code
-        for container in flattened_containers
-        for spec_code in container["spec_codes"]
+        for (_, spec_codes) in flattened_containers
+        for spec_code in spec_codes
     )
 
-    spec_reqs_not_met = [
-        container
-        for container in flattened_containers
-        if (
-            not container["is_optional"]
-            and not set(container["spec_codes"]).intersection(wizard.specs)
+    spec_reqs_not_met = any(
+        (
+            not is_optional
+            and not set(spec_codes).intersection(wizard.specs)
         )
-    ]
+        for (is_optional, spec_codes) in flattened_containers
+    )
 
     # ceebs returning the bad data because FE should be valid anyways
     if invalid_lhs_specs or spec_reqs_not_met:
