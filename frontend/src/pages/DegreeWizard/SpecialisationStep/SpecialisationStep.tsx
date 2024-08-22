@@ -1,8 +1,7 @@
 import React from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { useQuery } from '@tanstack/react-query';
-import type { MenuProps } from 'antd';
-import { Button, Typography } from 'antd';
+import { Button, Select, Typography } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getSpecialisationsForProgram } from 'utils/api/specsApi';
 import openNotification from 'utils/openNotification';
@@ -10,7 +9,6 @@ import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
-import S from './styles';
 
 const { Title } = Typography;
 
@@ -55,30 +53,26 @@ const SpecialisationStep = ({
   });
   const options = specsQuery.data;
 
-  const menuItems: MenuProps['items'] = options
-    ? Object.keys(options).map((program, index) => ({
-        label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
-        key: index,
-        children: options[program].notes
-          ? [
-              {
-                label: `Note: ${options[program].notes}`,
-                type: 'group',
-                children: Object.keys(options[program].specs)
-                  .sort()
-                  .map((spec) => ({
-                    label: `${spec} ${options[program].specs[spec]}`,
-                    key: spec
-                  }))
-              }
-            ]
-          : Object.keys(options[program].specs)
-              .sort()
-              .map((spec) => ({
-                label: `${spec} ${options[program].specs[spec]}`,
-                key: spec
-              }))
-      }))
+  const selectGroups:
+    | {
+        label: string;
+        note: string | undefined;
+        children: { label: string; value: string }[];
+      }[]
+    | undefined = options
+    ? Object.keys(options).map((program) => {
+        const group = {
+          label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
+          note: options[program].notes,
+          children: Object.keys(options[program].specs)
+            .sort()
+            .map((spec) => ({
+              label: `${spec} ${options[program].specs[spec]}`,
+              value: spec
+            }))
+        };
+        return group;
+      })
     : undefined;
 
   // check if step is optional and can be skipped
@@ -126,21 +120,29 @@ const SpecialisationStep = ({
             </Button>
           )}
         </CS.StepHeadingWrapper>
-        {menuItems ? (
-          <S.Menu
-            data-testid="menu"
-            onSelect={(e) => handleAddSpecialisation(e.key)}
-            onDeselect={(e) => handleRemoveSpecialisation(e.key)}
-            selectedKeys={degreeInfo.specs}
-            defaultOpenKeys={['0']}
-            mode="inline"
-            style={{
-              gap: '10px',
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-            items={menuItems}
-          />
+        {selectGroups ? (
+          selectGroups.map((group) => (
+            <div key={group.label} style={{ marginBottom: '1rem' }}>
+              <Title level={5}>{group.label}</Title>
+              {group.note && <p>{group.note}</p>}
+              <Select
+                mode="multiple"
+                style={{ width: '100%' }}
+                allowClear
+                placeholder={`Select ${type.substring(0, type.length - 1)}s`}
+                defaultValue={[]}
+                value={degreeInfo.specs.filter((spec) =>
+                  group.children.some((child) => child.value === spec)
+                )}
+                options={group.children}
+                onSelect={(value) => handleAddSpecialisation(value)}
+                onDeselect={(value) => handleRemoveSpecialisation(value)}
+                onClear={() => {
+                  group.children.forEach((child) => handleRemoveSpecialisation(child.value));
+                }}
+              />
+            </div>
+          ))
         ) : (
           <Spinner text={`Loading ${type}...`} />
         )}
