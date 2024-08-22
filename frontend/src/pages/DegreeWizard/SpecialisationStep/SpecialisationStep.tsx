@@ -122,7 +122,7 @@ const SpecialisationStep = ({
         </CS.StepHeadingWrapper>
         {selectGroups ? (
           selectGroups.map((group) => (
-            <div key={group.label} style={{ marginBottom: '1rem' }}>
+            <animated.div style={{ ...props, marginBottom: '1rem' }} key={group.label}>
               <Title level={5}>{group.label}</Title>
               {group.note && <p>{group.note}</p>}
               <Select
@@ -141,7 +141,7 @@ const SpecialisationStep = ({
                   group.children.forEach((child) => handleRemoveSpecialisation(child.value));
                 }}
               />
-            </div>
+            </animated.div>
           ))
         ) : (
           <Spinner text={`Loading ${type}...`} />
