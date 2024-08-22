@@ -12,10 +12,10 @@ from fastapi import HTTPException
 
 from algorithms.objects.course import Course
 from data.processors.models import CourseContainer, Program, ProgramContainer, SpecData, Specialisation, SpecsData
-from data.config import ARCHIVED_YEARS, LIVE_YEAR
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility import data_helpers
 from server.manual_fixes import apply_manual_fixes
-from server.routers.model import CONDITIONS, ProgramTime, StructureContainer
+from server.routers.model import CONDITIONS, CoursesPathDict, ProgramTime, StructureContainer
 from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisationsCOL
 
 ## TODO-OLLI
@@ -23,10 +23,11 @@ from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisa
 # - maybe split into a folder if it gets too large
 # - move all cached constants into a new folder or remove them all together
 # - fix pylint for circular imports
-# - get_path_from
 
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+GRAPH: dict[str, dict[str, list[str]]] = data_helpers.read_data(GRAPH_CACHE_FILE)
+INCOMING_ADJACENCY: dict[str, list[str]] = GRAPH.get("incoming_adjacency_list", {})
 
 # P = ParamSpec('P')  # TODO: type the args and kwargs here using ParamSpec, pylint cries rn
 R = TypeVar('R')  # TODO: might be able to inline this https://typing.readthedocs.io/en/latest/spec/generics.html#variance-inference
@@ -355,3 +356,45 @@ def regex_search(search_string: str) -> Mapping[str, str]:
                 break
 
     return {course["code"]: course["title"] for course in courses}
+
+def get_incoming_edges(course_code: str) -> list[str]:
+    """
+    returns the course codes that can be used to satisfy 'course', eg 2521 -> 1511.
+
+    (previously from `get_path_from`)
+    """
+    return INCOMING_ADJACENCY.get(course_code, [])
+
+def convert_adj_list_to_edge_list(proto_edges: list[CoursesPathDict]) -> list[dict[str, str]]:
+    """
+    Take the proto-edges created by calls to `path_from` and convert them into
+    a full list of edges of form.
+    [
+        {
+            "source": (str) - course_code,  # This is the 'original' value
+            "target": (str) - course_code,  # This is the value of 'courses'
+        }
+    ]
+    Effectively, turning an adjacency list into a flat list of edges.
+
+    (previously `proto_edges_to_edges`)
+    """
+    edges = []
+    for proto_edge in proto_edges:
+        # Incoming: { original: str,  courses: list[str]}
+        # Outcome:  { "src": str, "target": str }
+        if not proto_edge["courses"]:
+            continue
+        for course in proto_edge["courses"]:
+            edges.append({
+                    "source": course,
+                    "target": proto_edge["original"],
+                }
+            )
+    return edges
+
+def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[str, str]]:
+    """
+    Remove edges between vertices that are not in the list of courses provided.
+    """
+    return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]

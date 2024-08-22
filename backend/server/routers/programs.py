@@ -9,7 +9,7 @@ from server.db.mongo.conn import programsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
                                   StructureDict)
-from server.routers.utility import add_program_code_details_to_structure, add_specialisations_to_structure, get_core_courses, get_gen_eds, get_program_structure, map_suppressed_errors
+from server.routers.utility import add_program_code_details_to_structure, add_specialisations_to_structure, convert_adj_list_to_edge_list, get_core_courses, get_gen_eds, get_incoming_edges, get_program_structure, prune_edges
 
 router = APIRouter(
     prefix="/programs",
@@ -245,21 +245,20 @@ def graph(
     No longer returns 'err_edges: failed_courses' as those are suppressed and
     caught by the processor
     """
-    from server.routers.courses import get_path_from  # TODO: remove when this is moved
-
     courses = get_structure_course_list(programCode, spec)["courses"]
-    edges = []
 
-    failed_courses: list[tuple] = []
-
-    proto_edges: list[Optional[CoursesPathDict]] = [map_suppressed_errors(
-        get_path_from, failed_courses, course
-    ) for course in courses]
+    proto_edges: list[CoursesPathDict] = [
+        {
+            "original": course,
+            "courses": get_incoming_edges(course)
+        }
+        for course in courses
+    ]
 
     edges = prune_edges(
-            proto_edges_to_edges(proto_edges),
-            courses
-        )
+        convert_adj_list_to_edge_list(proto_edges),
+        courses
+    )
 
     return {
         "edges": edges,
@@ -307,35 +306,3 @@ def compose(*functions: Callable) -> Callable:
         The functions are applied in the order they are given.
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
-
-def proto_edges_to_edges(proto_edges: list[Optional[CoursesPathDict]]) -> List[Dict[str, str]]:
-    """
-    Take the proto-edges created by calls to `path_from` and convert them into
-    a full list of edges of form.
-    [
-        {
-            "source": (str) - course_code,  # This is the 'original' value
-            "target": (str) - course_code,  # This is the value of 'courses'
-        }
-    ]
-    Effectively, turning an adjacency list into a flat list of edges
-    """
-    edges = []
-    for proto_edge in proto_edges:
-        # Incoming: { original: str,  courses: list[str]}
-        # Outcome:  { "src": str, "target": str }
-        if not proto_edge or not proto_edge["courses"]:
-            continue
-        for course in proto_edge["courses"]:
-            edges.append({
-                    "source": course,
-                    "target": proto_edge["original"],
-                }
-            )
-    return edges
-
-def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[str, str]]:
-    """
-    Remove edges between vertices that are not in the list of courses provided.
-    """
-    return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]

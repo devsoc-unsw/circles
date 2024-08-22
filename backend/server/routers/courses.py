@@ -9,7 +9,7 @@ from typing import Annotated, Dict, List, Optional, Set, Tuple
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
 from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
+from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
@@ -19,7 +19,7 @@ from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
-from server.routers.utility import get_core_courses, get_course_details, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
+from server.routers.utility import get_core_courses, get_course_details, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
 
 router = APIRouter(
     prefix="/courses",
@@ -31,8 +31,6 @@ require_uid = HTTPBearerToUserID()
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
 ALL_COURSES: Optional[Dict[str, str]] = None
 CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
-GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
-INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
 
 def fetch_all_courses() -> Dict[str, str]:
     """
@@ -415,10 +413,9 @@ def get_path_from(course: str) -> CoursesPathDict:
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
-    out: List[str] = list(INCOMING_ADJACENCY.get(course, []))
     return {
         "original" : course,
-        "courses" : out,
+        "courses" : get_incoming_edges(course),
     }
 
 
