@@ -14,7 +14,7 @@ from algorithms.objects.course import Course
 from data.processors.models import CourseContainer, Program, ProgramContainer, SpecData, Specialisation, SpecsData
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility import data_helpers
-from server.manual_fixes import apply_manual_fixes
+from server.routers.utility.manual_fixes import apply_manual_fixes
 from server.routers.model import CONDITIONS, CoursesPathDict, ProgramTime, StructureContainer
 from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisationsCOL
 

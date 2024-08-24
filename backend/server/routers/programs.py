@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 from fastapi import APIRouter
 from server.db.mongo.conn import programsCOL
-from server.manual_fixes import apply_manual_fixes
+from server.routers.utility.manual_fixes import apply_manual_fixes
 from server.routers.model import (CourseCodes, Courses, CoursesPathDict, Graph, Programs, Structure, StructureContainer,
                                   StructureDict)
 from server.routers.utility.common import add_program_code_details_to_structure, add_specialisations_to_structure, convert_adj_list_to_edge_list, get_core_courses, get_gen_eds, get_incoming_edges, get_program_structure, prune_edges
