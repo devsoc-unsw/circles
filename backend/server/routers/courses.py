@@ -12,13 +12,13 @@ from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
-from server.routers.auth_utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.auth_utility.user import get_setup_user
+from server.routers.utility.sessions.middleware import HTTPBearerToUserID
+from server.routers.utility.user import get_setup_user
 from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   TermsOffered, UserData)
-from server.routers.utility import get_core_courses, get_course_details, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
+from server.routers.utility.common import get_core_courses, get_course_details, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
 
 router = APIRouter(
     prefix="/courses",

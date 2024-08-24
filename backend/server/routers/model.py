@@ -189,7 +189,7 @@ class PlannerData(BaseModel):
         user.specialisations = self.specialisations[:]
 
         # prevent circular import; TODO: There has to be a better way
-        from server.routers.utility import get_core_courses, get_course_details
+        from server.routers.utility.common import get_core_courses, get_course_details
 
         for year in self.plan:
             for term in year:

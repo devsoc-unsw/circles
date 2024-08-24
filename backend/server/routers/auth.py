@@ -10,12 +10,12 @@ from server.config import SECURE_COOKIES
 from server.db.helpers.models import NotSetupUserStorage, GuestSessionInfoModel, RefreshToken, SessionID, SessionInfoModel, SessionOIDCInfoModel, SessionToken
 from server.db.helpers.users import delete_user, insert_new_user
 
-from .auth_utility.sessions.errors import ExpiredRefreshTokenError, ExpiredSessionTokenError, OldRefreshTokenError
-from .auth_utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
+from .utility.sessions.errors import ExpiredRefreshTokenError, ExpiredSessionTokenError, OldRefreshTokenError
+from .utility.sessions.interface import create_new_guest_token_pair, get_session_info_from_refresh_token, get_session_info_from_session_token, logout_session, setup_new_csesoc_session, create_new_csesoc_token_pair, setup_new_guest_session
 
-from .auth_utility.sessions.middleware import HTTPBearer401, set_secure_cookie
-from .auth_utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_userinfo_and_validate, refresh_and_validate, revoke_token, validate_authorization_response
-from .auth_utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
+from .utility.sessions.middleware import HTTPBearer401, set_secure_cookie
+from .utility.oidc.requests import DecodedIDToken, exchange_and_validate, generate_oidc_auth_url, get_userinfo_and_validate, refresh_and_validate, revoke_token, validate_authorization_response
+from .utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
 
 
 REFRESH_TOKEN_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}refresh-token"
