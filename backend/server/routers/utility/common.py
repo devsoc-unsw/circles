@@ -18,13 +18,7 @@ from server.routers.utility.manual_fixes import apply_manual_fixes
 from server.routers.model import CONDITIONS, CoursesPathDict, ProgramTime, StructureContainer
 from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisationsCOL
 
-## TODO-OLLI
-# - move all utility functions into here
-# - maybe split into a folder if it gets too large
-# - move all cached constants into a new folder or remove them all together
-# - fix pylint for circular imports
-
-
+# TODO: move these constants out into new file, or move model.py ones into here (once we dont have top-level connection initialisation)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 GRAPH: dict[str, dict[str, list[str]]] = data_helpers.read_data(GRAPH_CACHE_FILE)
 INCOMING_ADJACENCY: dict[str, list[str]] = GRAPH.get("incoming_adjacency_list", {})
