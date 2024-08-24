@@ -45,7 +45,7 @@ Scenario:
 from typing import Annotated, Callable, Optional
 
 from fastapi import APIRouter, Security
-from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.auth_utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.auth_utility.user import get_setup_user
 from server.routers.model import ValidPlannerData
 

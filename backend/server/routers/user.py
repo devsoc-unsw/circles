@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, Security
 
 from data.processors.models import SpecData
 from server.routers.utility import get_all_specialisations, get_course_details
-from server.routers.auth_utility.middleware import HTTPBearerToUserID
+from server.routers.auth_utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.auth_utility.user import get_setup_user, set_user
 from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
 
