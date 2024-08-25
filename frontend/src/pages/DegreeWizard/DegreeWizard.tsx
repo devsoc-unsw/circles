@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getSpecialisationTypes } from 'utils/api/specsApi';
 import { getUserIsSetup, resetUserDegree } from 'utils/api/userApi';
@@ -97,6 +97,10 @@ const DegreeWizard = () => {
     }, 100);
   };
 
+  const handleLogout = () => {
+    navigate('/logout');
+  };
+
   return (
     <PageTemplate showHeader={false} showBugButton={false}>
       <S.ContainerWrapper>
@@ -105,7 +109,12 @@ const DegreeWizard = () => {
           onCancel={() => navigate('/course-selector')}
           onOk={() => resetDegree.mutate()}
         />
-        <Title className="text">Welcome to Circles!</Title>
+        <S.HeaderWrapper>
+          <Title className="text">Welcome to Circles!</Title>
+          <Button type="primary" onClick={handleLogout}>
+            Logout
+          </Button>
+        </S.HeaderWrapper>
         <S.Subtitle>
           Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
         </S.Subtitle>

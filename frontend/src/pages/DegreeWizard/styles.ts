@@ -23,9 +23,17 @@ const StepsWrapper = styled.div`
   gap: 1.5rem;
 `;
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 export default {
   ContainerWrapper,
   HorizontalLine,
   Subtitle,
-  StepsWrapper
+  StepsWrapper,
+  HeaderWrapper
 };
