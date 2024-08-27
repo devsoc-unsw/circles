@@ -111,7 +111,7 @@ const DegreeWizard = () => {
         />
         <S.HeaderWrapper>
           <Title className="text">Welcome to Circles!</Title>
-          <Button type="primary" onClick={handleLogout}>
+          <Button danger onClick={handleLogout}>
             Logout
           </Button>
         </S.HeaderWrapper>

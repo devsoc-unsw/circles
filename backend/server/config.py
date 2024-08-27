@@ -8,4 +8,4 @@ ARCHIVED_DATA_PATH = "./data/final_data/archive/processed/"
 
 DUMMY_TOKEN = "token"  # TODO: get rid of this
 
-SECURE_COOKIES = False
+SECURE_COOKIES = True
