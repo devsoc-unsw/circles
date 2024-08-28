@@ -126,14 +126,15 @@ const SpecialisationStep = ({
               <Title level={5}>{group.label}</Title>
               {group.note && <p>{group.note}</p>}
               <Select
+                disabled={specsQuery.isLoading}
                 mode="multiple"
                 style={{ width: '100%' }}
                 allowClear
                 placeholder={`Select ${type.substring(0, type.length - 1)}s`}
                 defaultValue={[]}
-                value={degreeInfo.specs.filter((spec) =>
-                  group.children.some((child) => child.value === spec)
-                )}
+                // value={degreeInfo.specs.filter((spec) =>
+                //   group.children.some((child) => child.value === spec)
+                // )}
                 options={group.children}
                 onSelect={(value) => handleAddSpecialisation(value)}
                 onDeselect={(value) => handleRemoveSpecialisation(value)}

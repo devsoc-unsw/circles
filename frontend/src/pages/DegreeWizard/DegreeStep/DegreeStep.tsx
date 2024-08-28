@@ -22,43 +22,55 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
   const allDegreesQuery = useQuery({
     queryKey: ['programs'],
     queryFn: fetchAllDegrees,
-    select: (data) => data.programs
+    select: (data) =>
+      Object.keys(data.programs).map((code) => {
+        return { label: `${code} ${data.programs[code]}`, value: `${code} ${data.programs[code]}` };
+      })
   });
-  const allDegrees = allDegreesQuery.data ?? {};
+  const allDegrees = allDegreesQuery.data ?? [];
 
   const onDegreeChange = async (key: string) => {
     setDegreeInfo((prev) => ({
       ...prev,
       // key is of format `${programCode} - ${title}`; Need to extract code
-      programCode: key.slice(0, 4)
+      programCode: key.slice(0, 4),
+      specs: []
     }));
     if (key) incrementStep(Steps.SPECS);
   };
 
   const props = useSpring(springProps);
 
-  const [options, setOptions] = useState<string[]>([]);
+  const [items, setItems] = useState<{ label: string; value: string }[]>([]);
 
   const searchDegree = (newInput: string) => {
-    const fuzzedDegrees = Object.keys(allDegrees)
-      .map((code) => `${code} ${allDegrees[code]}`)
-      .map((title) => {
-        return {
-          distance: fuzzy(newInput, title),
-          name: title
-        };
-      });
+    // List all degrees if input is empty
+    if (newInput === '') {
+      setItems(allDegrees);
+      return;
+    }
 
-    fuzzedDegrees.sort((a, b) => a.name.length - b.name.length);
-    fuzzedDegrees.sort((a, b) => b.distance - a.distance);
+    let fuzzedDegrees = allDegrees.map((item) => {
+      return {
+        score: fuzzy(newInput, item.label),
+        ...item
+      };
+    });
 
-    setOptions(fuzzedDegrees.splice(0, 8).map((pair) => pair.name));
+    // score is a number between 0 and 1 where 1 is a perfect match
+    fuzzedDegrees = fuzzedDegrees.filter((pair) => pair.score > 0.5);
+
+    // Shorter name with greater or equal score means better match
+    fuzzedDegrees.sort((a, b) => {
+      if (a.score > b.score) return -1;
+      if (a.score < b.score) return 1;
+      if (a.label.length < b.label.length) return -1;
+      if (a.label.length > b.label.length) return 1;
+      return 0;
+    });
+
+    setItems(fuzzedDegrees);
   };
-
-  const items = options.map((degreeName) => ({
-    label: degreeName,
-    value: degreeName
-  }));
 
   return (
     <CS.StepContentWrapper id="degree">
@@ -67,6 +79,7 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
           What are you studying?
         </Title>
         <Select
+          disabled={allDegreesQuery.isPending}
           size="large"
           showSearch
           optionFilterProp="label"
@@ -76,6 +89,8 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
           options={items}
           filterOption={false}
           onSearch={searchDegree}
+          // items should be initialised with all degrees
+          onClick={() => searchDegree('')}
         />
       </animated.div>
     </CS.StepContentWrapper>
