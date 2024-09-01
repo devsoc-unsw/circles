@@ -19,7 +19,7 @@ import { badCourses, badPlanner } from 'types/userResponse';
 import { getProgramStructure } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
-import openNotification from 'utils/useNotification';
+import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
