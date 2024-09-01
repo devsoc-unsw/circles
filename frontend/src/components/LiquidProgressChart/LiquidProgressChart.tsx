@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Tooltip as ReactTooltip } from 'react-tooltip'; // TODO: investigate using antd tooltip?
 import type { LiquidConfig } from '@ant-design/plots';
@@ -16,16 +16,16 @@ const Liquid = React.lazy(() =>
 );
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
-  const [percent, setPercent] = useState(0);
-  const fillValue = Math.min(completedUOC / totalUOC, 1);
+  // const [percent, setPercent] = useState(0);
+  const fillValue = parseFloat(Math.min(completedUOC / totalUOC, 1).toFixed(2));
 
   // light mode text color varies
   let textColor = '';
-  if (percent < 0.31) {
+  if (fillValue < 0.31) {
     textColor = lightYellow;
-  } else if (percent < 0.45) {
+  } else if (fillValue < 0.45) {
     textColor = lightGrey;
-  } else if (percent < 0.56) {
+  } else if (fillValue < 0.56) {
     textColor = darkGrey;
   } else {
     textColor = 'white';
@@ -45,7 +45,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   // title works, cant figure out how to change text size, (look mayb more textContent)
   // also the filling up is too laggy now
   const config: LiquidConfig = {
-    percent,
+    percent: fillValue,
     width: 320,
     height: 320,
     autoFit: false,
@@ -55,24 +55,26 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
     label: false,
     style: {
       textFill: textColor,
-      fill: percent > 0.45 ? purple : yellow,
-      stroke: percent > 0.45 ? purple : yellow
+      fill: fillValue > 0.45 ? purple : yellow,
+      stroke: fillValue > 0.45 ? purple : yellow
     }
   };
+  // config fields
 
   // increment percentage from 0 to fillValue
-  useEffect(() => {
-    let data = 0.0;
-    const time = 30;
-    const interval = setInterval(() => {
-      data += 0.01;
-      if (fillValue && data <= fillValue + 0.01) {
-        setPercent(data);
-      } else {
-        clearInterval(interval);
-      }
-    }, time);
-  }, [fillValue]);
+  // useEffect(() => {
+  //   let data = 0.0;
+  //   const time = 10;
+  //   const interval = setInterval(() => {
+  //     data += 0.001;
+  //     if (fillValue && data <= fillValue + 0.01) {
+  //       setPercent(data);
+  //     } else {
+  //       clearInterval(interval);
+  //     }
+  //   }, time);
+  //   return () => clearInterval(interval);
+  // }, [fillValue]);
 
   return (
     <>
