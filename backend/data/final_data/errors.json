@@ -1220,8 +1220,8 @@
     },
     "ARTS3242": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Environmental Humanities, Geographical Studies, or International Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Environmental Humanities, Geographical Studies || (3447)"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Environmental Humanities, Geographical Studies, History, or International Studies<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Environmental Humanities, Geographical Studies, History || (3447)"
         },
         "tokens": [
             "(",
@@ -1243,7 +1243,8 @@
             "Environmental",
             "Humanities,",
             "Geographical",
-            "Studies",
+            "Studies,",
+            "History",
             "||",
             "(",
             "3447",
@@ -2029,24 +2030,28 @@
     },
     "ARTS3751": {
         "condition": {
-            "original": "Prerequisite: 60 units of credit overall, and enrolment in a Global Development major or Development Studies major<br/><br/>",
-            "processed": "60UOC && a Global Development major || Development Studies major"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in the Global Development specialisation.<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the Global Development specialisation"
         },
         "tokens": [
             "(",
-            "60UOC",
+            "48UOC",
             "&&",
-            "a",
+            "6UOC",
+            "in",
+            "L1",
+            "&&",
+            "6UOC",
+            "in",
+            "L2",
+            "in",
+            "the",
             "Global",
             "Development",
-            "major",
-            "||",
-            "Development",
-            "Studies",
-            "major",
+            "specialisation",
             ")"
         ],
-        "broke at": "Index 4, Global"
+        "broke at": "Index 11, the"
     },
     "ARTS3755": {
         "condition": {
@@ -2925,8 +2930,8 @@
     },
     "AVIA2125": {
         "condition": {
-            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) AND AVIA2025) OR (3835 Commerce/Aviation (Management) AND AVIA2025). <br/><br/>",
-            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) && AVIA2025) || (3835 Commerce/Aviation (Management) && AVIA2025)"
+            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management). <br/><br/>",
+            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
         },
         "tokens": [
             "(",
@@ -2954,18 +2959,12 @@
             "(",
             "Management",
             ")",
-            "&&",
-            "AVIA2025",
-            ")",
             "||",
             "(",
             "3835",
             "Commerce/Aviation",
             "(",
             "Management",
-            ")",
-            "&&",
-            "AVIA2025",
             ")",
             ")"
         ],
@@ -2973,8 +2972,8 @@
     },
     "AVIA2225": {
         "condition": {
-            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) AND AVIA2025) OR (3835 Commerce/Aviation (Management) AND AVIA2025). <br/><br/>",
-            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) && AVIA2025) || (3835 Commerce/Aviation (Management) && AVIA2025)"
+            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management). <br/><br/>",
+            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
         },
         "tokens": [
             "(",
@@ -3002,18 +3001,12 @@
             "(",
             "Management",
             ")",
-            "&&",
-            "AVIA2025",
-            ")",
             "||",
             "(",
             "3835",
             "Commerce/Aviation",
             "(",
             "Management",
-            ")",
-            "&&",
-            "AVIA2025",
             ")",
             ")"
         ],
@@ -3021,8 +3014,8 @@
     },
     "AVIA3025": {
         "condition": {
-            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) AND AVIA2025) OR (3835 Commerce/Aviation (Management) AND AVIA2025).<br/><br/>",
-            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) && AVIA2025) || (3835 Commerce/Aviation (Management) && AVIA2025)"
+            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management).<br/><br/>",
+            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
         },
         "tokens": [
             "(",
@@ -3050,18 +3043,12 @@
             "(",
             "Management",
             ")",
-            "&&",
-            "AVIA2025",
-            ")",
             "||",
             "(",
             "3835",
             "Commerce/Aviation",
             "(",
             "Management",
-            ")",
-            "&&",
-            "AVIA2025",
             ")",
             ")"
         ],
@@ -3522,35 +3509,23 @@
         ],
         "broke at": "Index 1, 96UOC"
     },
-    "BEIL6003": {
-        "condition": {
-            "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
-            "processed": "96UOC in Built Environment"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "in",
-            "Built",
-            "Environment",
-            ")"
-        ],
-        "broke at": "Index 1, 96UOC"
-    },
     "BEIL6010": {
         "condition": {
-            "original": "96 UOC and enrolment in FBE  Design program<br/><br/>",
-            "processed": "96UOC && FBE DDES#"
+            "original": "96 UOC and enrolment in School of Built Environment program<br/><br/>",
+            "processed": "96UOC && School of Built Environment program"
         },
         "tokens": [
             "(",
             "96UOC",
             "&&",
-            "FBE",
-            "DDES#",
+            "School",
+            "of",
+            "Built",
+            "Environment",
+            "program",
             ")"
         ],
-        "broke at": "Index 4, DDES#"
+        "broke at": "Index 4, of"
     },
     "BEIL6013": {
         "condition": {
@@ -3872,23 +3847,6 @@
             ")"
         ],
         "broke at": "Index 4, ||"
-    },
-    "CEIC3006": {
-        "condition": {
-            "original": "Prerequisites: CEIC2000, MATH2018 or MATH2019, MATH2089<br/><br/>",
-            "processed": "CEIC2000 || MATH2018 || MATH2019, MATH2089"
-        },
-        "tokens": [
-            "(",
-            "CEIC2000",
-            "||",
-            "MATH2018",
-            "||",
-            "MATH2019,",
-            "MATH2089",
-            ")"
-        ],
-        "broke at": "Index 6, MATH2089"
     },
     "CHEM3199": {
         "condition": {
@@ -6018,6 +5976,33 @@
         ],
         "broke at": "Index 6, 4061,"
     },
+    "EDST6779": {
+        "condition": {
+            "original": "Prerequisite: EDST1120, EDST1311 and Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
+            "processed": "EDST1120 && EDST1311 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
+        },
+        "tokens": [
+            "(",
+            "EDST1120",
+            "&&",
+            "EDST1311",
+            "&&",
+            "Bachelor",
+            "of",
+            "Education",
+            "Primary",
+            "(",
+            "Honours",
+            ")",
+            "||",
+            "Bachelor",
+            "of",
+            "Education",
+            "Primary",
+            ")"
+        ],
+        "broke at": "Index 6, of"
+    },
     "EDST6780": {
         "condition": {
             "original": "Prerequisite: EDST2112, EDST1311, EDST6779 and enrolled in Bachelor of Education Primary (Honours) or Bachelor of Education Primary<br/><br/>",
@@ -6099,12 +6084,12 @@
     },
     "EDST6784": {
         "condition": {
-            "original": "Prerequisite: EDST2100 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
-            "processed": "EDST2100 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
+            "original": "Prerequisite: EDST1200 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
+            "processed": "EDST1200 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
         },
         "tokens": [
             "(",
-            "EDST2100",
+            "EDST1200",
             "&&",
             "Bachelor",
             "of",
@@ -6778,27 +6763,23 @@
     },
     "LAWS2351": {
         "condition": {
-            "original": "Prerequisite: Crime and Criminal Process (LAWS1021) and Criminal Laws (LAWS1022).<br/><br/>",
-            "processed": "Crime && Criminal Process (LAWS1021) && Criminal Laws (LAWS1022)"
+            "original": "Prerequisite: LAWS1021 Crime and Criminal Process and LAWS1022 Criminal Laws.<br/><br/>",
+            "processed": "LAWS1021 Crime && Criminal Process && LAWS1022 Criminal Laws"
         },
         "tokens": [
             "(",
+            "LAWS1021",
             "Crime",
             "&&",
             "Criminal",
             "Process",
-            "(",
-            "LAWS1021",
-            ")",
             "&&",
+            "LAWS1022",
             "Criminal",
             "Laws",
-            "(",
-            "LAWS1022",
-            ")",
             ")"
         ],
-        "broke at": "Index 2, &&"
+        "broke at": "Index 3, &&"
     },
     "LAWS2371": {
         "condition": {
@@ -9074,13 +9055,11 @@
     },
     "MFAC3515": {
         "condition": {
-            "original": "Prerequisite: MFAC3523 and Enrolment in Programs 3805 Medicine or 3856 Medicine/Arts<br/><br/>",
-            "processed": "MFAC3523 && s 3805 Medicine || 3856 Medicine/Arts"
+            "original": "Prerequisite: Enrolment in Programs 3805 Medicine or 3856 Medicine/Arts<br/><br/>",
+            "processed": "s 3805 Medicine || 3856 Medicine/Arts"
         },
         "tokens": [
             "(",
-            "MFAC3523",
-            "&&",
             "s",
             "3805",
             "Medicine",
@@ -9089,7 +9068,7 @@
             "Medicine/Arts",
             ")"
         ],
-        "broke at": "Index 4, 3805"
+        "broke at": "Index 2, 3805"
     },
     "MFAC3522": {
         "condition": {
@@ -11021,26 +11000,6 @@
         ],
         "broke at": "Index 5, 4873"
     },
-    "SOSS3002": {
-        "condition": {
-            "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001,  SOSS/SRAP2001, and either ARTS2871 or SRAP2002.<br/>Equivalent SRAP3002<br/><br/>",
-            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001 && ARTS2871 || SRAP2002. Equivalent SRAP3002"
-        },
-        "tokens": [
-            "(",
-            "SOSS/SRAP1000,",
-            "SOSS/SRAP1001,",
-            "SOSS/SRAP2001",
-            "&&",
-            "ARTS2871",
-            "||",
-            "SRAP2002.",
-            "Equivalent",
-            "SRAP3002",
-            ")"
-        ],
-        "broke at": "Index 2, SOSS/SRAP1001,"
-    },
     "SOSS3003": {
         "condition": {
             "original": "Prerequisite: 36 UOC overall, including SOSS/SRAP1000. Excluded: Students in the Bachelor of Social Work (Honours) / Criminology & Criminal Justice double degree program.<br/><br/>",
@@ -11230,22 +11189,6 @@
             ")"
         ],
         "broke at": "Index 4, parallel"
-    },
-    "ZEIT4230": {
-        "condition": {
-            "original": "Prerequisites: ZEIT2209 and ZEIT3223 Embedded Systems<br/><br/>",
-            "processed": "ZEIT2209 && ZEIT3223 Embedded Systems"
-        },
-        "tokens": [
-            "(",
-            "ZEIT2209",
-            "&&",
-            "ZEIT3223",
-            "Embedded",
-            "Systems",
-            ")"
-        ],
-        "broke at": "Index 5, Systems"
     },
     "ZEIT4507": {
         "condition": {
