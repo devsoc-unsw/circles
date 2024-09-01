@@ -109,15 +109,15 @@ const DegreeWizard = () => {
           onCancel={() => navigate('/course-selector')}
           onOk={() => resetDegree.mutate()}
         />
+        <Title className="text">Welcome to Circles!</Title>
         <S.HeaderWrapper>
-          <Title className="text">Welcome to Circles!</Title>
+          <S.Subtitle>
+            Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
+          </S.Subtitle>
           <Button danger onClick={handleLogout}>
             Logout
           </Button>
         </S.HeaderWrapper>
-        <S.Subtitle>
-          Let’s start by setting up your UNSW degree, so you can make a plan that suits you.
-        </S.Subtitle>
         <S.HorizontalLine />
         <S.StepsWrapper>
           <YearStep incrementStep={incrementStep} setDegreeInfo={setDegreeInfo} />
