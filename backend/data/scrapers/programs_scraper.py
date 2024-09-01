@@ -19,6 +19,10 @@ def scrape_prg_data():
     Retrieves data for all undergraduate programs
     """
     data = do_requests("course", items_per_req=20, max_items=TOTAL_PGRMS)
+
+    # we are only keeping undergrad ones for now
+    data = [obj for obj in data if obj["studyLevelValue"] == "ugrd"]
+
     data_helpers.write_data(
         data, "data/scrapers/programsPureRaw.json"
     )

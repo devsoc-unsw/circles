@@ -21,6 +21,9 @@ def scrape_spn_data():
 
     data = do_requests("aos", items_per_req=20, max_items=TOTAL_SPNS )
 
+    # we are only keeping undergrad ones for now
+    data = [obj for obj in data if obj["studyLevelValue"] == "ugrd"]
+
     data_helpers.write_data(
         data, "data/scrapers/specialisationsPureRaw.json"
     )
