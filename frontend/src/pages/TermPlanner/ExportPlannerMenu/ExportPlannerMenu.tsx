@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Radio } from 'antd';
+import { getUser } from 'utils/api/userApi';
+import { exportUser } from 'utils/export';
+import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
 
-type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>;
-};
+// type Props = {
+//   plannerRef: React.RefObject<HTMLDivElement>;
+// };
 
-const ExportPlannerMenu = ({ plannerRef }: Props) => {
+// const ExportPlannerMenu = ({ plannerRef }: Props) => {
+const ExportPlannerMenu = () => {
+  const token = useToken();
+
+  const plannerRef = React.createRef<HTMLDivElement>();
   const exportFormats = ['png', 'jpg', 'json'];
   const exportFields = { fileName: 'Term Planner' };
 
@@ -21,6 +28,21 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
       exportComponentAsPNG(plannerRef, exportFields);
     } else if (format === 'jpg') {
       exportComponentAsJPEG(plannerRef, exportFields);
+    } else if (format === 'json') {
+      getUser(token)
+        .then((user) => {
+          const exported = exportUser(user);
+          const blob = new Blob([JSON.stringify(exported)], { type: 'application/json' });
+          const jsonObjectUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = jsonObjectUrl;
+          const date = new Date();
+          a.download = `circles-planner-export-${date.toISOString()}.json`;
+          a.click();
+        })
+        .catch((err) => {
+          console.error('Error at exportPlannerMenu: ', err);
+        });
     }
   };
 

@@ -1,7 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
-import { EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled } from '@ant-design/icons';
+import {
+  DownloadOutlined,
+  EyeFilled,
+  QuestionCircleOutlined,
+  SettingFilled,
+  UploadOutlined,
+  WarningFilled
+} from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
@@ -9,7 +16,9 @@ import { unscheduleAll } from 'utils/api/plannerApi';
 import { getUserPlanner } from 'utils/api/userApi';
 import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
+import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
+import ImportPlannerMenu from '../ImportPlannerMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
 import S from './styles';
@@ -85,8 +94,8 @@ const OptionsHeader = () => {
             </Tooltip>
           </div>
         </Tippy>
-        {/* <Tippy
-          content={<ExportPlannerMenu plannerRef={plannerRef} />}
+        <Tippy
+          content={<ExportPlannerMenu />}
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
@@ -118,7 +127,7 @@ const OptionsHeader = () => {
               </S.OptionButton>
             </Tooltip>
           </div>
-        </Tippy> */}
+        </Tippy>
 
         {planner && !isPlannerEmpty(planner) && (
           <Tooltip title="Unplan all courses">

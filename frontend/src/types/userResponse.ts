@@ -3,9 +3,9 @@ import { Mark } from './planner';
 
 export type UserResponse = {
   degree: DegreeResponse;
-  // TODO: NOT STRINGS
   planner: PlannerResponse;
   courses: Record<string, CourseResponse>;
+  settings: SettingsResponse;
 };
 
 export type DegreeResponse = {

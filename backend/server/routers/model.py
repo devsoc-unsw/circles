@@ -162,12 +162,6 @@ class Storage(TypedDict):
     courses: dict[str, CourseStorage]
     settings: SettingsStorage
 
-class LocalStorage(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
-    degree: DegreeLocalStorage
-    planner: PlannerLocalStorage
-
 class StartYear(BaseModel):
     model_config = ConfigDict(extra='forbid')
 

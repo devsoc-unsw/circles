@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { SettingsResponse } from 'types/userResponse';
 import {
   getUserSettings,
   hideYear as hideYearApi,
@@ -16,12 +17,13 @@ import useToken from './useToken';
 
 type Theme = 'light' | 'dark';
 
-interface Settings {
+export interface LocalSettings {
   theme: Theme;
-  showMarks: boolean;
   showLockedCourses: boolean;
   showPastWarnings: boolean;
-  hiddenYears: number[];
+}
+
+export interface Settings extends LocalSettings, SettingsResponse {
   mutateTheme: (theme: Theme) => void;
   toggleShowMarks: () => void;
   hideYear: (yearIndex: number) => void;
@@ -103,8 +105,12 @@ function useSettings(queryClient?: QueryClient): Settings {
   const showYears = showYearsMutation.mutate;
 
   return {
-    ...userSettings,
-    ...localSettings,
+    // Do not use the spread operator here, as it doesn't update after the mutation
+    theme: localSettings.theme,
+    showLockedCourses: localSettings.showLockedCourses,
+    showPastWarnings: localSettings.showPastWarnings,
+    showMarks: userSettings.showMarks,
+    hiddenYears: userSettings.hiddenYears,
     mutateTheme,
     toggleShowMarks,
     hideYear,
