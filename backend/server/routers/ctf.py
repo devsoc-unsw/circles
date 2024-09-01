@@ -45,9 +45,8 @@ Scenario:
 from typing import Annotated, Callable, Optional
 
 from fastapi import APIRouter, Security
-from server.routers.auth_utility.middleware import HTTPBearerToUserID
-from server.routers.user import get_setup_user
-from server.routers.planner import convert_to_planner_data
+from server.routers.utility.sessions.middleware import HTTPBearerToUserID
+from server.routers.utility.user import get_setup_user
 from server.routers.model import ValidPlannerData
 
 router = APIRouter(
@@ -255,6 +254,8 @@ def validate_ctf(uid: Annotated[str, Security(require_uid)]):
     """
     Validates the CTF
     """
+    from server.routers.planner import convert_to_planner_data  # TODO: remove when converted
+
     data = convert_to_planner_data(get_setup_user(uid))
     passed: list[str] = []
     flags: list[str] = []

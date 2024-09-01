@@ -1,17 +1,14 @@
 from itertools import chain
-from typing import Annotated, Any, Dict, Optional, cast
+from typing import Annotated, Dict, Optional, cast
 from fastapi import APIRouter, HTTPException, Security
-from starlette.status import HTTP_403_FORBIDDEN
 
-from server.routers.auth_utility.middleware import HTTPBearerToUserID
-from server.routers.courses import get_course
+from data.processors.models import SpecData
+from server.routers.utility.common import get_all_specialisations, get_course_details
+from server.routers.utility.sessions.middleware import HTTPBearerToUserID
+from server.routers.utility.user import get_setup_user, set_user
 from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
-from server.routers.programs import get_programs
-from server.routers.specialisations import get_specialisation_types, get_specialisations
 
 import server.db.helpers.users as udb
-from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
-
 
 router = APIRouter(
     prefix="/user",
@@ -19,91 +16,6 @@ router = APIRouter(
 )
 
 require_uid = HTTPBearerToUserID()
-
-# TODO-OLLI(pm): remove these underwrite helpers once we get rid of the old TypedDicts
-# nto and otn means new-to-old and old-to-new
-def _otn_planner(s: PlannerLocalStorage) -> NEWUserPlannerStorage:
-    return NEWUserPlannerStorage.model_validate(s)
-
-def _otn_degree(s: DegreeLocalStorage) -> NEWUserDegreeStorage:
-    return NEWUserDegreeStorage.model_validate(s)
-
-def _otn_courses(s: dict[str, CourseStorage]) -> NEWUserCoursesStorage:
-    return { code: NEWUserCourseStorage.model_validate(info) for code, info in s.items() }
-
-def _otn_settings(s: SettingsStorage) -> NEWUserSettingsStorage:
-    return NEWUserSettingsStorage.model_validate(s.model_dump())
-
-def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
-    return {
-        code: {
-            'code': info.code,
-            'ignoreFromProgression': info.ignoreFromProgression,
-            'mark': info.mark,
-            'uoc': info.uoc,
-        } for code, info in s.items()
-    }
-
-def _nto_planner(s: NEWUserPlannerStorage) -> PlannerLocalStorage:
-    return {
-        'isSummerEnabled': s.isSummerEnabled,
-        'lockedTerms': s.lockedTerms,
-        'startYear': s.startYear,
-        'unplanned': s.unplanned,
-        'years': [{ 
-            'T0': y.T0,
-            'T1': y.T1,
-            'T2': y.T2,
-            'T3': y.T3,
-        } for y in s.years],
-    }
-
-def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
-    return {
-        'programCode': s.programCode,
-        'specs': s.specs,
-    }
-
-def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
-    return SettingsStorage(showMarks=s.showMarks, hiddenYears=s.hiddenYears)
-
-def _nto_storage(s: NEWUserStorage) -> Storage:
-    return {
-        'courses': _nto_courses(s.courses),
-        'degree': _nto_degree(s.degree),
-        'planner': _nto_planner(s.planner),
-        'settings': _nto_settings(s.settings),
-    }
-
-
-def get_setup_user(uid: str) -> Storage:
-    data = udb.get_user(uid)
-    assert data is not None  # this uid should only come from a token exchange, and we only delete users after logout
-    if data.setup is False:
-        raise HTTPException(
-            status_code=HTTP_403_FORBIDDEN,
-            detail="User must be setup to access this resource.",
-        )
-
-    return _nto_storage(data)
-
-# keep this private
-def set_user(uid: str, item: Storage, overwrite: bool = False):
-    if not overwrite and udb.user_is_setup(uid):
-        # TODO-OLLI(pm): get rid of the overwrite field when we get rid of this function all together
-        print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
-        print("++ ABOUT TO ASSERT FALSE:", uid)
-        assert False  # want to remove these cases too
-
-    res = udb.update_user(uid, PartialUserStorage(
-        courses=_otn_courses(item['courses']),
-        degree=_otn_degree(item['degree']),
-        planner=_otn_planner(item['planner']),
-        settings=_otn_settings(item['settings']),
-    ))
-
-    assert res
-
 
 # Ideally not used often.
 @router.post("/saveLocalStorage")
@@ -115,7 +27,7 @@ def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(
         course: {
             'code': course,
             'mark': None, # wtf we nuking marks?
-            'uoc': get_course(course)['UOC'],
+            'uoc': get_course_details(course)['UOC'],
             'ignoreFromProgression': False
         }
         for course in chain(planned, unplanned)
@@ -166,7 +78,7 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
     res: Dict[str, CourseStorageWithExtra] = {}
 
     for raw_course in raw_courses.values():
-        course_info = get_course(raw_course['code'])
+        course_info = get_course_details(raw_course['code'])
 
         with_extra_info: CourseStorageWithExtra = {
             'code': raw_course['code'],
@@ -315,46 +227,43 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
     if num_years < 1:
         raise HTTPException(status_code=400, detail="Invalid year range")
 
-    # Ensure valid prog code - done by the specialisatoin check so this is
-    # techincally redundant
-    progs = get_programs()["programs"]
-    if progs is None:
-        raise HTTPException(status_code=400, detail="Invalid program code")
-
     # Ensure that all specialisations are valid
     # Need a bidirectoinal validate
     # All specs in wizard (lhs) must be in the RHS
     # All specs in the RHS that are "required" must have an associated LHS selection
-    avail_spec_types: list[SpecType] = get_specialisation_types(wizard.programCode)["types"]
-    # Type of elemn in the following is
-    # Dict[Literal['specs'], Dict[str(programTitle), specInfo]]
+
     # Keys in the specInfo
     # - 'specs': List[str] - name of the specialisations - thing that matters
     # - 'notes': str - dw abt this (Fe's prob tbh)
     # - 'is_optional': bool - if true then u need to validate associated elem in LHS
-    avail_specs = list(chain.from_iterable(
-        cast(list[Any], specs) # for some bs, specs is still List[Any | None] ??????
-        for spec_type in avail_spec_types
-        if (specs := list(get_specialisations(wizard.programCode, spec_type).values())) is not None
-    ))
-    # LHS subset All specs
+
+    avail_specs = get_all_specialisations(wizard.programCode)
+    if avail_specs is None:
+        raise HTTPException(status_code=400, detail="Invalid program code")
+
+    # list[(is_optional, spec_codes)]
+    flattened_containers: list[tuple[bool, list[str]]] = [
+        (
+            program_sub_container["is_optional"],
+            list(program_sub_container["specs"].keys())
+        )
+        for spec_type_container in cast(dict[SpecType, dict[str, SpecData]], avail_specs).values()
+        for program_sub_container in spec_type_container.values()
+    ]
+
     invalid_lhs_specs = set(wizard.specs).difference(
         spec_code
-        for specs in avail_specs
-        for actl_spec in specs.values()
-        for spec_code in actl_spec.get('specs', []).keys()
+        for (_, spec_codes) in flattened_containers
+        for spec_code in spec_codes
     )
-    # All compulsory in RHS has an entry in LHS
-    spec_reqs_not_met = [
-        actl_spec
-        for specs in avail_specs
-        for actl_spec in specs.values()
-        if (
-            actl_spec.get('is_optional') is False
-            and not set(actl_spec.get('specs', []).keys()).intersection(wizard.specs)
-        )
 
-    ]
+    spec_reqs_not_met = any(
+        (
+            not is_optional
+            and not set(spec_codes).intersection(wizard.specs)
+        )
+        for (is_optional, spec_codes) in flattened_containers
+    )
 
     # ceebs returning the bad data because FE should be valid anyways
     if invalid_lhs_specs or spec_reqs_not_met:

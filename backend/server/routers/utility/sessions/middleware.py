@@ -9,8 +9,8 @@ from starlette.status import HTTP_401_UNAUTHORIZED
 from server.config import SECURE_COOKIES
 from server.db.helpers.models import SessionToken
 
-from .sessions.errors import ExpiredSessionTokenError
-from .sessions.interface import get_token_info
+from .errors import ExpiredSessionTokenError
+from .interface import get_token_info
 
 def extract_bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("Authorization")
