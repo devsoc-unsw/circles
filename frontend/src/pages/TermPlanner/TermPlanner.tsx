@@ -222,20 +222,20 @@ const TermPlanner = () => {
     unscheduleCourseMutation.mutate(data);
   };
 
-  const emptyTermsNotification = useNotification({
-    name: 'empty-terms-notification',
-    type: 'info',
-    message: 'Your terms are looking a little empty',
-    description:
-      'Add courses from the course selector to the term planner and drag courses from the unplanned column'
-  });
+  const notificationHandler = useNotification();
 
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
     if (plannerEmpty) {
-      emptyTermsNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'empty-terms-notification',
+        type: 'info',
+        message: 'Your terms are looking a little empty',
+        description:
+          'Add courses from the course selector to the term planner and drag courses from the unplanned column'
+      });
     }
-  }, [plannerEmpty, emptyTermsNotification]);
+  }, [plannerEmpty, notificationHandler]);
 
   const handleOnDragStart: OnDragStartResponder = async (result) => {
     const courseCode = result.draggableId.slice(0, 8);

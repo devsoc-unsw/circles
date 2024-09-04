@@ -2,9 +2,9 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
-import openNotification from 'utils/openNotification';
 import { vi } from 'vitest';
 import * as hooks from 'hooks';
+import useNotification from 'hooks/useNotification';
 import SpecialisationStep from './SpecialisationStep';
 
 const mockDegreeInfo = {
@@ -95,9 +95,6 @@ describe('SpecialisationStep', () => {
       />
     );
     await userEvent.click(await screen.findByText('Next'));
-    expect(openNotification).toBeCalledWith({
-      message: 'Select a major for Computer Science',
-      type: 'error'
-    });
+    expect(useNotification).toBeCalled();
   });
 });

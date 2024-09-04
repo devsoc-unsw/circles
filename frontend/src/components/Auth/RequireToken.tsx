@@ -27,28 +27,26 @@ const RequireToken = ({ needSetup }: Props) => {
   });
   // TODO-OLLI(pm): multitab support is hard
 
-  const errorNotification = useNotification({
-    name: 'token-error-notification',
-    type: 'error',
-    message: 'Error',
-    description: 'You must be logged in before visiting this page 🙂'
-  });
-
-  const warningNotification = useNotification({
-    name: 'token-warning-notification',
-    type: 'warning',
-    message: 'Warning',
-    description: 'You must setup your degree before visiting this page 🙂'
-  });
+  const notificationHandler = useNotification();
 
   useEffect(() => {
     // TODO-OLLI(pm): wont need this when we get new notification hook
     if (token === undefined || !!error) {
-      errorNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'token-error-notification',
+        type: 'error',
+        message: 'Error',
+        description: 'You must be logged in before visiting this page 🙂'
+      });
     } else if (isSetup === false && !!needSetup) {
-      warningNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'token-warning-notification',
+        type: 'warning',
+        message: 'Warning',
+        description: 'You must setup your degree before visiting this page 🙂'
+      });
     }
-  }, [token, isSetup, error, needSetup, errorNotification, warningNotification]);
+  }, [token, isSetup, error, needSetup, notificationHandler]);
 
   if (token === undefined) {
     return <Navigate to="/login" />;

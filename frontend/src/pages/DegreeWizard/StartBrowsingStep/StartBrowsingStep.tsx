@@ -44,24 +44,22 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
     setupDegreeMutation.mutate(degreeInfo);
   };
 
-  const selectDegreeNotification = useNotification({
-    name: 'select-degree-error-notification',
-    type: 'error',
-    message: 'Please select a degree'
-  });
-
-  const selectSpecNotification = useNotification({
-    name: 'select-specialisation-error-notification',
-    type: 'error',
-    message: 'Please select a specialisation'
-  });
+  const notificationHandler = useNotification();
 
   const handleSaveUserSettings = async () => {
     // TODO: Are these checks necessary?
     if (!degreeInfo.programCode) {
-      selectDegreeNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'select-degree-error-notification',
+        type: 'error',
+        message: 'Please select a degree'
+      });
     } else if (!degreeInfo.specs.length) {
-      selectSpecNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'select-specialisation-error-notification',
+        type: 'error',
+        message: 'Please select a specialisation'
+      });
     } else {
       handleSetupDegree();
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -66,15 +66,17 @@ const DegreeWizard = () => {
     }
   });
 
-  const degreeNotification = useNotification({
-    name: 'degree-disclaimer-notification',
-    type: 'info',
-    message: 'Disclaimer',
-    description:
-      'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
-  });
+  const notificationHandler = useNotification();
 
-  degreeNotification.tryOpenNotification();
+  useEffect(() => {
+    notificationHandler.tryOpenNotification({
+      name: 'degree-disclaimer-notification',
+      type: 'info',
+      message: 'Disclaimer',
+      description:
+        'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
+    });
+  }, [notificationHandler]);
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];

@@ -34,12 +34,7 @@ const SettingsMenu = ({ planner }: Props) => {
     return false;
   }
 
-  const degreeStartErrorNotification = useNotification({
-    name: 'degree-start-error-notification',
-    type: 'error',
-    message: 'Error setting degree start year',
-    description: 'There was an error updating the degree start year.'
-  });
+  const notificationHandler = useNotification();
 
   const updateStartYearMutation = useMutation({
     mutationFn: (year: string) => updateStartYear(token, year),
@@ -49,7 +44,12 @@ const SettingsMenu = ({ planner }: Props) => {
       });
     },
     onError: () => {
-      degreeStartErrorNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'degree-start-error-notification',
+        type: 'error',
+        message: 'Error setting degree start year',
+        description: 'There was an error updating the degree start year.'
+      });
     }
   });
 
@@ -62,13 +62,6 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   };
 
-  const degreeLengthErrorNotification = useNotification({
-    name: 'degree-length-error-notification',
-    type: 'error',
-    message: 'Error setting degree length',
-    description: 'There was an error updating the degree length.'
-  });
-
   const updateDegreeLengthMutation = useMutation({
     mutationFn: (numYears: number) => updateDegreeLength(token, numYears),
     onSuccess: () => {
@@ -80,7 +73,12 @@ const SettingsMenu = ({ planner }: Props) => {
       });
     },
     onError: () => {
-      degreeLengthErrorNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'degree-length-error-notification',
+        type: 'error',
+        message: 'Error setting degree length',
+        description: 'There was an error updating the degree length.'
+      });
     }
   });
 
@@ -97,21 +95,6 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   };
 
-  const unplannedSummerNotification = useNotification({
-    name: 'unplanned-summer-courses-notification',
-    type: 'info',
-    message: 'Your summer term courses have been unplanned',
-    description:
-      'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
-  });
-
-  const toggleSummerErrorNotification = useNotification({
-    name: 'toggle-summer-error-notification',
-    type: 'error',
-    message: 'Error setting summer term',
-    description: 'An error occurred when toggling the summer term.'
-  });
-
   const summerToggleMutation = useMutation({
     mutationFn: () => toggleSummerTerm(token),
     onSuccess: () => {
@@ -120,13 +103,24 @@ const SettingsMenu = ({ planner }: Props) => {
       });
 
       if (planner && planner.isSummerEnabled) {
-        unplannedSummerNotification.tryOpenNotification();
+        notificationHandler.tryOpenNotification({
+          name: 'unplanned-summer-courses-notification',
+          type: 'info',
+          message: 'Your summer term courses have been unplanned',
+          description:
+            'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
+        });
       }
     },
     onError: (err) => {
       // eslint-disable-next-line no-console
       console.error('Error at summerToggleMutationMutation: ', err);
-      toggleSummerErrorNotification.tryOpenNotification();
+      notificationHandler.tryOpenNotification({
+        name: 'toggle-summer-error-notification',
+        type: 'error',
+        message: 'Error setting summer term',
+        description: 'An error occurred when toggling the summer term.'
+      });
     }
   });
 

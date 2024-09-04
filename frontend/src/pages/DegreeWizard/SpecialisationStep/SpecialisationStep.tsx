@@ -5,8 +5,8 @@ import type { MenuProps } from 'antd';
 import { Button, Typography } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getSpecialisationsForProgram } from 'utils/api/specsApi';
-import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
+import useNotification from 'hooks/useNotification';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
@@ -92,9 +92,12 @@ const SpecialisationStep = ({
     });
   }
 
+  const notificationHandler = useNotification();
+
   const handleOnNextClick = () => {
     if (!options) return;
     let missingSpec = '';
+
     Object.keys(options).forEach((specKey) => {
       const { is_optional: isOptional, specs: optionSpecs } = options[specKey];
       if (
@@ -106,9 +109,10 @@ const SpecialisationStep = ({
       }
     });
     if (missingSpec) {
-      openNotification({
+      notificationHandler.tryOpenNotification({
+        name: 'missing-spec-error-notification',
         type: 'error',
-        message: `Select a ${type.substring(0, type.length - 1)} for ${missingSpec}`
+        message: `Select a ${type.substring(0, type.length - 1)} for nothing`
       });
     } else incrementStep();
   };

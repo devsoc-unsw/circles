@@ -56,15 +56,15 @@ const ProgressionChecker = () => {
   const structure: ProgramStructure = structureQuery.data?.structure ?? {};
   const uoc = structureQuery.data?.uoc ?? 0;
 
-  const progressionDisclaimerNotification = useNotification({
+  const notificationHandler = useNotification();
+
+  notificationHandler.tryOpenNotification({
     name: 'progression-disclaimer-notification',
     type: 'info',
     message: 'Disclaimer',
     description:
       "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy."
   });
-
-  progressionDisclaimerNotification.tryOpenNotification();
 
   const [view, setView] = useState(Views.GRID_CONCISE);
   const coursesQuery = useQuery({
