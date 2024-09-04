@@ -64,13 +64,6 @@ const SettingsMenu = ({ planner }: Props) => {
     }
   };
 
-  const degreeLengthErrorNotification = useNotification({
-    name: 'degree-length-error-notification',
-    type: 'error',
-    message: 'Error setting degree length',
-    description: 'There was an error updating the degree length.'
-  });
-
   const updateDegreeLengthMutation = useMutation({
     mutationFn: (numYears: number) => updateDegreeLength(token, numYears),
     onSuccess: () => {
@@ -102,21 +95,6 @@ const SettingsMenu = ({ planner }: Props) => {
       updateDegreeLengthMutation.mutate(value);
     }
   };
-
-  const unplannedSummerNotification = useNotification({
-    name: 'unplanned-summer-courses-notification',
-    type: 'info',
-    message: 'Your summer term courses have been unplanned',
-    description:
-      'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.'
-  });
-
-  const toggleSummerErrorNotification = useNotification({
-    name: 'toggle-summer-error-notification',
-    type: 'error',
-    message: 'Error setting summer term',
-    description: 'An error occurred when toggling the summer term.'
-  });
 
   const summerToggleMutation = useMutation({
     mutationFn: () => toggleSummerTerm(token),

@@ -76,8 +76,6 @@ const App = () => {
     icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
   });
 
-  contributeNotication.tryOpenNotification();
-
   return (
     <ConfigProvider
       theme={{
