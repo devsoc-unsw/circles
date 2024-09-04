@@ -12,7 +12,7 @@ import {
   updateDegreeLength,
   updateStartYear
 } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
+import useNotification from 'hooks/useNotification';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
@@ -31,17 +31,55 @@ const ImportPlannerMenu = () => {
     inputRef.current?.click();
   };
 
+  const importJsonErrorNotification = useNotification({
+    name: 'import-json-error-notification',
+    type: 'error',
+    message: 'Import file needs to be JSON.',
+    description: 'The uploaded file is not of type JSON.'
+  });
+
+  const invalidJsonStructureNotification = useNotification({
+    name: 'invalid-json-structure-error-notification',
+    type: 'error',
+    message: 'Invalid structure of the JSON file',
+    description: 'The structure of the JSON file is not valid.'
+  });
+
+  const degreeStartUpdateErrorNotification = useNotification({
+    name: 'degree-start-update-error-notification',
+    type: 'error',
+    message: 'Error setting degree start year or length',
+    description: 'There was an error updating the degree start year or length.'
+  });
+
+  const summerTermErrorNotification = useNotification({
+    name: 'summer-term-error-notification',
+    type: 'error',
+    message: 'Error setting summer term',
+    description: 'An error occurred when trying to import summer term visibility'
+  });
+
+  const invalidJsonFormatErrorNotification = useNotification({
+    name: 'invalid-json-format-error-notification',
+    type: 'error',
+    message: 'Invalid JSON format',
+    description: 'An error occured when parsing the JSON file'
+  });
+
+  const successJsonNotification = useNotification({
+    name: 'import-success-notification',
+    type: 'success',
+    message: 'JSON Imported',
+    description: 'Planner has been successfully imported.'
+  });
+
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) {
       return;
     }
 
     if (e.target.files[0].type !== 'application/json') {
-      openNotification({
-        type: 'error',
-        message: 'Import file needs to be JSON.',
-        description: 'The uploaded file is not of type JSON.'
-      });
+      importJsonErrorNotification.tryOpenNotification();
       e.target.value = '';
       return;
     }
@@ -72,33 +110,21 @@ const ImportPlannerMenu = () => {
             !Object.prototype.hasOwnProperty.call(fileInJson, 'years') ||
             !Object.prototype.hasOwnProperty.call(fileInJson, 'version')
           ) {
-            openNotification({
-              type: 'error',
-              message: 'Invalid structure of the JSON file',
-              description: 'The structure of the JSON file is not valid.'
-            });
+            invalidJsonStructureNotification.tryOpenNotification();
             return;
           }
           try {
             await updateDegreeLength(token, fileInJson.numYears);
             await updateStartYear(token, fileInJson.startYear.toString());
           } catch {
-            openNotification({
-              type: 'error',
-              message: 'Error setting degree start year or length',
-              description: 'There was an error updating the degree start year or length.'
-            });
+            degreeStartUpdateErrorNotification.tryOpenNotification();
             return;
           }
           if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
             try {
               await toggleSummerTerm(token);
             } catch {
-              openNotification({
-                type: 'error',
-                message: 'Error setting summer term',
-                description: 'An error occurred when trying to import summer term visibility'
-              });
+              summerTermErrorNotification.tryOpenNotification();
               return;
             }
           }
@@ -129,19 +155,11 @@ const ImportPlannerMenu = () => {
           setLoading(false);
           // eslint-disable-next-line no-console
           console.error('Error at uploadedJSONFile', err);
-          openNotification({
-            type: 'error',
-            message: 'Invalid JSON format',
-            description: 'An error occured when parsing the JSON file'
-          });
+          invalidJsonFormatErrorNotification.tryOpenNotification();
           return;
         }
 
-        openNotification({
-          type: 'success',
-          message: 'JSON Imported',
-          description: 'Planner has been successfully imported.'
-        });
+        successJsonNotification.tryOpenNotification();
       }
     };
   };

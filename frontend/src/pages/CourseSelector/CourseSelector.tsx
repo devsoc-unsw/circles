@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
+import useNotification from 'hooks/useNotification';
 import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseBanner from './CourseBanner';
@@ -33,17 +33,21 @@ const CourseSelector = () => {
   });
 
   const [showedNotif, setShowedNotif] = useState(false);
+
+  const sidebarNotification = useNotification({
+    name: 'sidebar-courses-notification',
+    type: 'info',
+    message: 'How do I see more sidebar courses?',
+    description:
+      'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
+  });
+
   useEffect(() => {
     if (coursesQuery.isSuccess && !showedNotif && !Object.keys(coursesQuery.data).length) {
-      openNotification({
-        type: 'info',
-        message: 'How do I see more sidebar courses?',
-        description:
-          'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
-      });
+      sidebarNotification.tryOpenNotification();
       setShowedNotif(true);
     }
-  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data]);
+  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data, sidebarNotification]);
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 

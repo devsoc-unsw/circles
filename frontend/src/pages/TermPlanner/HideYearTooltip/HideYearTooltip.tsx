@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
 import { getUserPlanner } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
+import useNotification from 'hooks/useNotification';
 import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 
@@ -24,13 +24,16 @@ const HideYearTooltip = ({ year }: Props) => {
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const numYears = planner.years.length;
 
+  const hideYearNotification = useNotification({
+    name: 'hide-years-notification',
+    type: 'error',
+    message: "Something's not right",
+    description: 'You cannot hide all years in your term planner'
+  });
+
   const handleHideYear = () => {
     if (hiddenYears.length === numYears - 1) {
-      openNotification({
-        type: 'error',
-        message: "Something's not right",
-        description: 'You cannot hide all years in your term planner'
-      });
+      hideYearNotification.tryOpenNotification();
     } else {
       hideYear(year);
     }

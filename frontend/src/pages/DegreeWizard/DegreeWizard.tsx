@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -6,9 +6,9 @@ import { Typography } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getSpecialisationTypes } from 'utils/api/specsApi';
 import { getUserIsSetup, resetUserDegree } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
+import useNotification from 'hooks/useNotification';
 import useToken from 'hooks/useToken';
 import Steps from './common/steps';
 import DegreeStep from './DegreeStep';
@@ -66,14 +66,15 @@ const DegreeWizard = () => {
     }
   });
 
-  useEffect(() => {
-    openNotification({
-      type: 'info',
-      message: 'Disclaimer',
-      description:
-        'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
-    });
-  }, []);
+  const degreeNotification = useNotification({
+    name: 'degree-disclaimer-notification',
+    type: 'info',
+    message: 'Disclaimer',
+    description:
+      'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
+  });
+
+  degreeNotification.tryOpenNotification();
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];

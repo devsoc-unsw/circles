@@ -3,9 +3,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { getUserIsSetup } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
 import { useAppSelector } from 'hooks';
+import useNotification from 'hooks/useNotification';
 import { selectIdentity } from 'reducers/identitySlice';
 
 type Props = {
@@ -27,22 +27,28 @@ const RequireToken = ({ needSetup }: Props) => {
   });
   // TODO-OLLI(pm): multitab support is hard
 
+  const errorNotification = useNotification({
+    name: 'token-error-notification',
+    type: 'error',
+    message: 'Error',
+    description: 'You must be logged in before visiting this page 🙂'
+  });
+
+  const warningNotification = useNotification({
+    name: 'token-warning-notification',
+    type: 'warning',
+    message: 'Warning',
+    description: 'You must setup your degree before visiting this page 🙂'
+  });
+
   useEffect(() => {
     // TODO-OLLI(pm): wont need this when we get new notification hook
     if (token === undefined || !!error) {
-      openNotification({
-        type: 'error',
-        message: 'Error',
-        description: 'You must be logged in before visiting this page 🙂'
-      });
+      errorNotification.tryOpenNotification();
     } else if (isSetup === false && !!needSetup) {
-      openNotification({
-        type: 'warning',
-        message: 'Warning',
-        description: 'You must setup your degree before visiting this page 🙂'
-      });
+      warningNotification.tryOpenNotification();
     }
-  }, [token, isSetup, error, needSetup]);
+  }, [token, isSetup, error, needSetup, errorNotification, warningNotification]);
 
   if (token === undefined) {
     return <Navigate to="/login" />;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   BorderlessTableOutlined,
   EyeFilled,
@@ -19,10 +19,10 @@ import { badCourses, badPlanner } from 'types/userResponse';
 import { getProgramStructure } from 'utils/api/programsApi';
 import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
 import getNumTerms from 'utils/getNumTerms';
-import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
+import useNotification from 'hooks/useNotification';
 import useToken from 'hooks/useToken';
 import Dashboard from './Dashboard';
 import GenericCoursesSection from './GenericCoursesSection';
@@ -56,14 +56,15 @@ const ProgressionChecker = () => {
   const structure: ProgramStructure = structureQuery.data?.structure ?? {};
   const uoc = structureQuery.data?.uoc ?? 0;
 
-  useEffect(() => {
-    openNotification({
-      type: 'info',
-      message: 'Disclaimer',
-      description:
-        "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy."
-    });
-  }, []);
+  const progressionDisclaimerNotification = useNotification({
+    name: 'progression-disclaimer-notification',
+    type: 'info',
+    message: 'Disclaimer',
+    description:
+      "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy."
+  });
+
+  progressionDisclaimerNotification.tryOpenNotification();
 
   const [view, setView] = useState(Views.GRID_CONCISE);
   const coursesQuery = useQuery({

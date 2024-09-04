@@ -39,7 +39,9 @@ const notificationsSlice = createSlice({
       if (foundNotifIndex !== -1 && state.notifications[foundNotifIndex].clicksTillExpire > 0) {
         state.notifications[foundNotifIndex].nextNotificationTime =
           Date.now() + state.notifications[foundNotifIndex].cooldown * 1000;
-        state.notifications[foundNotifIndex].clicksTillExpire -= 1;
+        if (state.notifications[foundNotifIndex].clicksTillExpire > 0) {
+          state.notifications[foundNotifIndex].clicksTillExpire -= 1;
+        }
       }
     }
   }

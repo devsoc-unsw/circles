@@ -21,10 +21,10 @@ import {
   validateTermPlanner
 } from 'utils/api/plannerApi';
 import { getUserCourses, getUserPlanner } from 'utils/api/userApi';
-import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import { LIVE_YEAR } from 'config/constants';
+import useNotification from 'hooks/useNotification';
 import useSettings from 'hooks/useSettings';
 import useToken from 'hooks/useToken';
 import { GridItem } from './common/styles';
@@ -222,17 +222,20 @@ const TermPlanner = () => {
     unscheduleCourseMutation.mutate(data);
   };
 
+  const emptyTermsNotification = useNotification({
+    name: 'empty-terms-notification',
+    type: 'info',
+    message: 'Your terms are looking a little empty',
+    description:
+      'Add courses from the course selector to the term planner and drag courses from the unplanned column'
+  });
+
   const plannerEmpty = isPlannerEmpty(planner);
   useEffect(() => {
     if (plannerEmpty) {
-      openNotification({
-        type: 'info',
-        message: 'Your terms are looking a little empty',
-        description:
-          'Add courses from the course selector to the term planner and drag courses from the unplanned column'
-      });
+      emptyTermsNotification.tryOpenNotification();
     }
-  }, [plannerEmpty]);
+  }, [plannerEmpty, emptyTermsNotification]);
 
   const handleOnDragStart: OnDragStartResponder = async (result) => {
     const courseCode = result.draggableId.slice(0, 8);

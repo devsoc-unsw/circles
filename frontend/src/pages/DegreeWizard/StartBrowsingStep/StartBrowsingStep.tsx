@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { setupDegreeWizard } from 'utils/api/degreeApi';
-import openNotification from 'utils/openNotification';
+import useNotification from 'hooks/useNotification';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
 import S from './styles';
@@ -44,18 +44,24 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
     setupDegreeMutation.mutate(degreeInfo);
   };
 
+  const selectDegreeNotification = useNotification({
+    name: 'select-degree-error-notification',
+    type: 'error',
+    message: 'Please select a degree'
+  });
+
+  const selectSpecNotification = useNotification({
+    name: 'select-specialisation-error-notification',
+    type: 'error',
+    message: 'Please select a specialisation'
+  });
+
   const handleSaveUserSettings = async () => {
     // TODO: Are these checks necessary?
     if (!degreeInfo.programCode) {
-      openNotification({
-        type: 'error',
-        message: 'Please select a degree'
-      });
+      selectDegreeNotification.tryOpenNotification();
     } else if (!degreeInfo.specs.length) {
-      openNotification({
-        type: 'error',
-        message: 'Please select a specialisation'
-      });
+      selectSpecNotification.tryOpenNotification();
     } else {
       handleSetupDegree();
     }

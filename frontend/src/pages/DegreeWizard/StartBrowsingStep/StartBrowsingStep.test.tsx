@@ -3,9 +3,9 @@ import * as reactRouterDom from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from 'test/testUtil';
-import openNotification from 'utils/openNotification';
 import { vi } from 'vitest';
 import * as hooks from 'hooks';
+import useNotification from 'hooks/useNotification';
 import StartBrowsingStep from './StartBrowsingStep';
 
 const mockDegreeInfo = {
@@ -35,7 +35,7 @@ describe('StartBrowsingStep', () => {
     degreeInfo.programCode = '';
     await renderWithProviders(<StartBrowsingStep degreeInfo={degreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
-    expect(openNotification).toBeCalledWith({
+    expect(useNotification).toBeCalledWith({
       message: 'Please select a degree',
       type: 'error'
     });
@@ -46,7 +46,7 @@ describe('StartBrowsingStep', () => {
     degreeInfo.specs = [];
     await renderWithProviders(<StartBrowsingStep degreeInfo={degreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
-    expect(openNotification).toBeCalledWith({
+    expect(useNotification).toBeCalledWith({
       message: 'Please select a specialisation',
       type: 'error'
     });
