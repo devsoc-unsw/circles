@@ -60,5 +60,5 @@ def test_two_courses_completed():
             "COMP9517",
             "COMP9727",
         ],
-        "indirect_unlock": ['BABS3301', 'SOMS3001', "TABL2710"]
+        "indirect_unlock": ['BABS3301', "TABL2710"]
     }

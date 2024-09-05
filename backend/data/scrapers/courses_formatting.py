@@ -35,7 +35,8 @@ def format_course_data(year = None):
         get_exclusions(formatted_course, course_data)
         get_enrolment_rules(formatted_course, course_data)
 
-        ALL_COURSES[course["code"]] = formatted_course
+        if formatted_course["study_level"] == "Undergraduate" or course["code"] not in ALL_COURSES:
+            ALL_COURSES[course["code"]] = formatted_course
 
     data_helpers.write_data(
         ALL_COURSES,
