@@ -65,6 +65,8 @@ def customise_spn_data():
                     get_credits(container))
                 curriculum_item["core"] = is_core(
                     curriculum_item["title"].lower())
+
+                # print(spn, curriculum_item["title"], curriculum_item["courses"])
                 curriculum_item["levels"] = get_levels(
                     curriculum_item["title"].lower())
                 curriculum_item["notes"] = get_notes(container["description"])

@@ -190,10 +190,6 @@
         "original": "Prerequisite: One of the following courses, DART3203, DDES2102, DART3100, DART3310, or FADA2020.<br/><br/>",
         "processed": "One of the following courses, DART3203, DDES2102, DART3100, DART3310 || FADA2020"
     },
-    "ADAD4001": {
-        "original": "Must have completed either SART3800, SDES2116, SOMA3616.<br/><br/>",
-        "processed": "SART3800 || SDES2116 || SOMA3616"
-    },
     "ADAD4100": {
         "original": "Students must be enrolled in an Art & Design Honours Year. Programs 4526, 4527, 4528<br/><br/>",
         "processed": "must be an Art && Design Honours Year. Programs 4526, 4527, 4528"
@@ -215,12 +211,8 @@
         "processed": "(MMAN1300 || ENGG1300 || DPST1072 || CVEN1300 ) && (MMAN2600 || ENGG2500) && MMAN2700"
     },
     "AERO4110": {
-        "original": "Prerequisite: At least 144 Units completed in AEROAH stream<br/><br/>Prerequisite: AERO3110 AND AERO3410 AND AERO3630 AND AERO3660 AND MMAN3200<br/><br/>",
+        "original": "Prerequisite: AERO3110 AND AERO3410 AND AERO3630 AND AERO3660 AND MMAN3200<br/><br/>Prerequisite: At least 144 Units completed in AEROAH stream<br/><br/>",
         "processed": "144UOC && AEROAH && AERO3110"
-    },
-    "AERO4500": {
-        "original": "",
-        "processed": ""
     },
     "AERO4620": {
         "original": "Prerequisite: AERO3660 and (MMAN3200 or ELEC3114)<br/><br/>",
@@ -267,7 +259,7 @@
         "processed": "ANAT1551 || ANAT2111 || (SOMS1912 && SOMS1913)"
     },
     "ANAT2452": {
-        "original": "Prerequisite: Enrolment in program 3896 Exercise Science/Physiotherapy and Exercise Physiology OR <br/>3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
+        "original": "Prerequisite: Enrolment in program 3896 Exercise Science/Physiotherapy and Exercise Physiology<br/><br/>",
         "processed": "3896 || 3897"
     },
     "ANAT2511": {
@@ -670,10 +662,6 @@
         "original": "Prerequisite: 24 units of credit overall<br/><br/>",
         "processed": "24UOC"
     },
-    "ARTS2123": {
-        "original": "Prerequisite: 24 units of credit overall<br/><br/>",
-        "processed": "24UOC"
-    },
     "ARTS2125": {
         "original": "Prerequisite: 24 units of credit overall<br/><br/>",
         "processed": "24UOC"
@@ -803,6 +791,10 @@
         "processed": "24UOC"
     },
     "ARTS2389": {
+        "original": "Prerequisite: 24 units of credit overall<br/><br/>",
+        "processed": "24UOC"
+    },
+    "ARTS2390": {
         "original": "Prerequisite: 24 units of credit overall<br/><br/>",
         "processed": "24UOC"
     },
@@ -1213,8 +1205,8 @@
         "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Environmental Humanities, Geographical Studies, Indigenous Studies || (3447)"
     },
     "ARTS3242": {
-        "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Environmental Humanities, Geographical Studies, or International Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Environmental Humanities, Geographical Studies || (3447)"
+        "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Environmental Humanities, Geographical Studies, History, or International Studies<br/><br/>",
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Environmental Humanities, Geographical Studies, History || (3447)"
     },
     "ARTS3243": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Environmental Humanities or Geographical Studies<br/><br/>",
@@ -1495,8 +1487,8 @@
         "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Geographical Studies, Global Development || (3447)"
     },
     "ARTS3751": {
-        "original": "Prerequisite: 60 units of credit overall, and enrolment in a Global Development major or Development Studies major<br/><br/>",
-        "processed": "60UOC && a Global Development major || Development Studies major"
+        "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in the Global Development specialisation.<br/><br/>",
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the Global Development specialisation"
     },
     "ARTS3755": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Global Development or International Studies<br/><br/>",
@@ -1966,6 +1958,10 @@
         "original": "",
         "processed": ""
     },
+    "ATSI4103": {
+        "original": "",
+        "processed": ""
+    },
     "ATSI7001": {
         "original": "Prereq: Enrolled in 7019<br/><br/>",
         "processed": "7019"
@@ -2000,10 +1996,6 @@
     },
     "AVIA1301": {
         "original": "",
-        "processed": ""
-    },
-    "AVIA1321": {
-        "original": "None<br/><br/>",
         "processed": ""
     },
     "AVIA1401": {
@@ -2051,12 +2043,12 @@
         "processed": "3980 && AVIA2111-2116"
     },
     "AVIA2125": {
-        "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) AND AVIA2025) OR (3835 Commerce/Aviation (Management) AND AVIA2025). <br/><br/>",
-        "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) && AVIA2025) || (3835 Commerce/Aviation (Management) && AVIA2025)"
+        "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management). <br/><br/>",
+        "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
     },
     "AVIA2225": {
-        "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) AND AVIA2025) OR (3835 Commerce/Aviation (Management) AND AVIA2025). <br/><br/>",
-        "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) && AVIA2025) || (3835 Commerce/Aviation (Management) && AVIA2025)"
+        "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management). <br/><br/>",
+        "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
     },
     "AVIA2401": {
         "original": "",
@@ -2079,10 +2071,6 @@
         "processed": ""
     },
     "AVIA2702": {
-        "original": "",
-        "processed": ""
-    },
-    "AVIA2801": {
         "original": "",
         "processed": ""
     },
@@ -2111,8 +2099,8 @@
         "processed": ""
     },
     "AVIA3025": {
-        "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) AND AVIA2025) OR (3835 Commerce/Aviation (Management) AND AVIA2025).<br/><br/>",
-        "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) && AVIA2025) || (3835 Commerce/Aviation (Management) && AVIA2025)"
+        "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management).<br/><br/>",
+        "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
     },
     "AVIA3101": {
         "original": "Prerequisite: AVIA1900,  AVIA2004,  AVIA2014 or 1901 ; Excluded: AVIA3002.<br/><br/>",
@@ -2415,8 +2403,8 @@
         "processed": "96UOC"
     },
     "BEIL6003": {
-        "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
-        "processed": "96UOC in Built Environment"
+        "original": "Prerequisite: 96 units of credit<br/><br/>",
+        "processed": "96UOC"
     },
     "BEIL6005": {
         "original": "Prerequisite: 96 unit of credits completed<br/><br/>",
@@ -2439,8 +2427,8 @@
         "processed": "48UOC"
     },
     "BEIL6010": {
-        "original": "96 UOC and enrolment in FBE  Design program<br/><br/>",
-        "processed": "96UOC && FBE DDES#"
+        "original": "96 UOC and enrolment in School of Built Environment program<br/><br/>",
+        "processed": "96UOC && School of Built Environment program"
     },
     "BEIL6011": {
         "original": "Prerequisite: 96 unit of credits completed<br/><br/>",
@@ -2603,10 +2591,6 @@
         "processed": ""
     },
     "BIOM9027": {
-        "original": "",
-        "processed": ""
-    },
-    "BIOM9311": {
         "original": "",
         "processed": ""
     },
@@ -2968,20 +2952,20 @@
         "processed": "CEIC2000 && CEIC2001 && CEIC2002 && CEIC2005"
     },
     "CEIC3004": {
-        "original": "Prerequisites: CEIC2000 and CEIC2001 and CEIC2002 and (CEIC3001 or ENGG4901)<br/><br/>",
-        "processed": "CEIC2000 && CEIC2001 && CEIC2002 && (CEIC3001 || ENGG4901)"
+        "original": "Pre-requisites: CEIC2000 and CEIC2001 and CEIC2002 and (CEIC3001 or ENGG4902)<br/><br/>",
+        "processed": "CEIC2000 && CEIC2001 && CEIC2002 && (CEIC3001 || ENGG4902)"
     },
     "CEIC3005": {
         "original": "Pre-requisites: CEIC2000, CEIC2001, CEIC2002<br/><br/>",
         "processed": "CEIC2000 && CEIC2001 && CEIC2002"
     },
     "CEIC3006": {
-        "original": "Prerequisites: CEIC2000, MATH2018 or MATH2019, MATH2089<br/><br/>",
-        "processed": "CEIC2000 || MATH2018 || MATH2019, MATH2089"
+        "original": "Prerequisites: CEIC2000, (MATH2018 or MATH2019 OR MATH2121 OR MATH2221), (MATH2089 OR MATH2301 OR CVEN2002)<br/><br/>",
+        "processed": "CEIC2000 || (MATH2018 || MATH2019 || MATH2121 || MATH2221) || (MATH2089 || MATH2301 || CVEN2002)"
     },
     "CEIC3007": {
-        "original": "Co-requisite: CEIC3006<br/><br/>Pre-requisite: CEIC2007 and CEIC3001 and CEIC3005 and MATH2089<br/><br/>",
-        "processed": "[CEIC3006 CEIC2007 && CEIC3001 && CEIC3005 && MATH2089]"
+        "original": "Prerequisite: CEIC2007 and CEIC3001 and CEIC3005 and MATH2089<br/><br/>Corequisite: CEIC3006<br/><br/>",
+        "processed": "CEIC2007 && CEIC3001 && CEIC3005 && MATH2089 && [CEIC3006]"
     },
     "CEIC4000": {
         "original": "",
@@ -2992,23 +2976,23 @@
         "processed": "(CEIC3004 && CEIC3005) || (CEIC3005 && CEIC3006) || (CEIC3006 && CEIC3004)"
     },
     "CEIC4007": {
-        "original": "",
-        "processed": ""
+        "original": "Prerequisite: CEIC8104 OR CHEM2031 OR CEIC3005 OR DESN2000 OR FOOD3010<br/><br/>Prerequisite: Completion of 120 UOC<br/><br/>",
+        "processed": "CEIC8104 || CHEM2031 || CEIC3005 || DESN2000 || FOOD3010 120UOC"
     },
     "CEIC4008": {
-        "original": "",
-        "processed": ""
+        "original": "Prerequisite: CEIC4007 <br/><br/>",
+        "processed": "CEIC4007"
     },
     "CEIC4951": {
-        "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && CORES in L3"
+        "original": "Prerequisite: CEIC3007 or FOOD3020 or CEIC8104<br/><br/>Prerequisite: Completion of 120 UOC<br/><br/>",
+        "processed": "CEIC3007 || FOOD3020 || CEIC8104 120UOC"
     },
     "CEIC4952": {
-        "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
+        "original": "Prerequisite: CEIC4951<br/><br/>",
         "processed": "CEIC4951"
     },
     "CEIC4953": {
-        "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
+        "original": "Prerequisite: CEIC4952<br/><br/>",
         "processed": "CEIC4952"
     },
     "CEIC4954": {
@@ -3055,6 +3039,10 @@
         "original": "Prerequisites: CEIC2001, CEIC2002<br/><br/>",
         "processed": "CEIC2001 && CEIC2002"
     },
+    "CEIC9005": {
+        "original": "Prerequisite: Completion of 120 UOC<br/><br/>",
+        "processed": "120UOC"
+    },
     "CHEM1001": {
         "original": "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831<br/><br/>Exclusion: CHEM1811<br/><br/>",
         "processed": ""
@@ -3072,7 +3060,7 @@
         "processed": ""
     },
     "CHEM1041": {
-        "original": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>",
+        "original": "Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>",
         "processed": "(CHEM1031 || 65GRADE in CHEM1011)",
         "handbook_note": "Must be a program && the option of a CHEM major"
     },
@@ -3112,10 +3100,6 @@
         "original": "Prerequisite: CHEM1011, and enrolment in 3181, 3182, 3952 or a Vision Science major.<br/><br/>",
         "processed": "CHEM1011 && (3181 || 3182 || 3952 || VISN?1)"
     },
-    "CHEM1831": {
-        "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-        "processed": "3871"
-    },
     "CHEM1832": {
         "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation or 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
         "processed": "3894 || 3895"
@@ -3145,14 +3129,6 @@
         "processed": "(CHEM1011 && CHEM1021) || (CHEM1031 && CHEM1041) || (CHEM1051 && CHEM1061) && CHEM2041",
         "handbook_note": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/> It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs"
     },
-    "CHEM2531": {
-        "original": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839<br/><br/>",
-        "processed": "CHEM2041"
-    },
-    "CHEM2541": {
-        "original": "Prerequisite: CHEM1011 or CHEM1031 or CHEM1051 or CHEM1811 or DPST1031 and CHEM1021 or CHEM1041 or CHEM1061 or CHEM1821 or DPST1032 and MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151 or MATH1231 or MATH1241 or MATH1251 or DPST1013 or DPST1014<br/><br/>",
-        "processed": "CHEM1011 || CHEM1031 || CHEM1051 || CHEM1811 || DPST1031 && CHEM1021 || CHEM1041 || CHEM1061 || CHEM1821 || DPST1032 && MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151 || MATH1231 || MATH1241 || MATH1251 || DPST1013 || DPST1014"
-    },
     "CHEM2701": {
         "original": "First year chemistry is a prerequisite. One of the following courses must have been completed prior to enrolment: <br/> - CHEM1021 -- Chemistry 1B <br/> - CHEM1041/1061 -- Higher Chemistry 1B<br/> - CHEM1821 -- Engineering Chemistry 1B<br/> - CHEM1829 -- Biological Chemistry for Optometry Students<br/><br/>",
         "processed": "CHEM1021 || CHEM1041 || CHEM1061 || CHEM1821 || CHEM1829"
@@ -3162,8 +3138,8 @@
         "processed": "PHRM1021"
     },
     "CHEM2901": {
-        "original": "CHEM1011 or DPST1031 or CHEM1031 or CHEM1051 or (CHEM1811 AND CHEM1021) or DPST1032 or CHEM1041 or CHEM1061 or CHEM1821<br/><br/>",
-        "processed": "CHEM1011 || DPST1031 || CHEM1031 || CHEM1051 || (CHEM1811 && CHEM1021) || DPST1032 || CHEM1041 || CHEM1061 || CHEM1821"
+        "original": "Prerequisite: CHEM1021 or DPST1032 or CHEM1041 or CHEM1061 or CHEM1821<br/><br/>",
+        "processed": "CHEM1021 || DPST1032 || CHEM1041 || CHEM1061 || CHEM1821"
     },
     "CHEM2921": {
         "original": "Prerequisite: CHEM1011 or DPST1031 or CHEM1031 or CHEM1051 or CHEM1811 and CHEM1021 or DPST1032 or CHEM1041 or CHEM1061 or CHEM1821<br/><br/>",
@@ -3536,8 +3512,8 @@
         "processed": "COMP1511 || DPST1091 || COMP1917 || COMP1921"
     },
     "COMP3121": {
-        "original": "Prerequisite: COMP1927 or COMP2521<br/><br/>Prerequisite: MATH1081<br/><br/>",
-        "processed": "COMP1927 || COMP2521 MATH1081"
+        "original": "Prerequisite: MATH1081 or Enrolment in 3785<br/><br/>Prerequisite: COMP1927 or COMP2521<br/><br/>",
+        "processed": "MATH1081 || 3785 COMP1927 || COMP2521"
     },
     "COMP3131": {
         "original": "Prerequisite: COMP2511 or COMP2911<br/><br/>",
@@ -3546,6 +3522,10 @@
     "COMP3141": {
         "original": "Prerequisite: COMP1927 or COMP2521<br/><br/>",
         "processed": "COMP1927 || COMP2521"
+    },
+    "COMP3142": {
+        "original": "Prerequisite: COMP1531, COMP2511 and COMP2521<br/><br/>",
+        "processed": "COMP1531 && COMP2511 && COMP2521"
     },
     "COMP3151": {
         "original": "Prerequisite: COMP1927 OR (COMP1521/DPST1092 AND COMP2521)<br/><br/>",
@@ -3596,11 +3576,11 @@
         "processed": "48UOC"
     },
     "COMP3601": {
-        "original": "Prerequisite: COMP2121 OR DESN2000<br/><br/>",
-        "processed": "COMP2121 || DESN2000"
+        "original": "Prerequisite: (DESN2000 OR COMP2121) AND COMP3222<br/><br/>",
+        "processed": "(DESN2000 || COMP2121) && COMP3222"
     },
     "COMP3821": {
-        "original": "Prerequisite: A mark of at least 70 in MATH1081<br/><br/>Prerequisite: A mark of at least 70 in COMP1927 or COMP2521<br/><br/>",
+        "original": "Prerequisite: A mark of at least 70 in COMP1927 or COMP2521<br/><br/>Prerequisite: A mark of at least 70 in MATH1081<br/><br/>",
         "processed": "65GRADE in COMP1927 || 65GRADE in COMP2521"
     },
     "COMP3891": {
@@ -3662,7 +3642,7 @@
         "processed": "COMP3211 && COMP3601"
     },
     "COMP4920": {
-        "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
+        "original": "Completion of 18 UOC in Computer Science.<br/><br/>",
         "processed": "(COMP2511 || COMP2911) && 96UOC && COMP?1"
     },
     "COMP4951": {
@@ -3679,15 +3659,15 @@
         "processed": "COMP4952"
     },
     "COMP4961": {
-        "original": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
+        "original": "Prerequisite: Enrolment in 4515 Computer Science (Hons) or 3779 Advanced Computer Science (Hons)<br/><br/>",
         "processed": "4515 || 3648"
     },
     "COMP4962": {
-        "original": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",
-        "processed": "COMP4951"
+        "original": "Prerequisite: COMP4961<br/><br/>",
+        "processed": "COMP4961"
     },
     "COMP4963": {
-        "original": "COMP4963 Prerequisite: Student must successfully complete COMP4962<br/><br/>",
+        "original": "Prerequisite: COMP4962<br/><br/>",
         "processed": "COMP4962"
     },
     "COMP6080": {
@@ -3815,6 +3795,10 @@
     "COMP9332": {
         "original": "Prerequisite: COMP3331.<br/><br/>",
         "processed": "COMP3331"
+    },
+    "COMP9333": {
+        "original": "Pre-requisite: COMP3331 or COMP9331<br/><br/>",
+        "processed": "COMP3331 || COMP9331"
     },
     "COMP9334": {
         "original": "Prerequisite: COMP1511 OR DPST1091 OR COMP1917 OR COMP1921<br/><br/>",
@@ -4067,10 +4051,6 @@
         "original": "Prerequisite: CVEN3101.<br/><br/>",
         "processed": "CVEN3101"
     },
-    "CVEN4103": {
-        "original": "Prerequisite: CVEN3101.<br/><br/>",
-        "processed": "CVEN3101"
-    },
     "CVEN4104": {
         "original": "Prerequisite: CVEN3101.<br/><br/>",
         "processed": "CVEN3101"
@@ -4126,10 +4106,6 @@
     "CVEN4504": {
         "original": "Prerequisite: CVEN3502<br/><br/>",
         "processed": "CVEN3502"
-    },
-    "CVEN4505": {
-        "original": "",
-        "processed": ""
     },
     "CVEN4507": {
         "original": "Prerequisites: CVEN2501, CVEN3501, CVEN3502<br/><br/>",
@@ -5178,12 +5154,12 @@
         "processed": "ECON1101 || COMM1100"
     },
     "ECON2206": {
-        "original": "Pre-requisite: ECON1203 or COMM1110 or ECON2403 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
+        "original": "Prerequisite: ECON1203 or COMM1110 or ECON2403 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
         "processed": "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
         "handbook_note": "It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course."
     },
     "ECON2209": {
-        "original": "Pre-requisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
+        "original": "Prerequisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
         "processed": "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
         "handbook_note": "It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course."
     },
@@ -5236,7 +5212,7 @@
         "processed": "ECON2101"
     },
     "ECON3202": {
-        "original": "Pre-requisite: ECON2101<br/><br/>",
+        "original": "Prerequisite: ECON2101<br/><br/>",
         "processed": "ECON2101"
     },
     "ECON3203": {
@@ -5248,7 +5224,7 @@
         "processed": "ECON2209"
     },
     "ECON3208": {
-        "original": "Pre-requisite: ECON2206 OR (In Data Sciences and Decisions AND (MATH2831 or MATH2931))<br/><br/>",
+        "original": "Prerequisite: ECON2206 OR (In Data Sciences and Decisions AND (MATH2831 or MATH2931))<br/><br/>",
         "processed": "ECON2206 || (DATA# && (MATH2831 || MATH2931))"
     },
     "ECON3209": {
@@ -5696,6 +5672,10 @@
         "original": "Prerequisite: EDST6777. Corerequisite: EDST6760<br/><br/>",
         "processed": "EDST6777 && [EDST6760]"
     },
+    "EDST6779": {
+        "original": "Prerequisite: EDST1120, EDST1311 and Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
+        "processed": "EDST1120 && EDST1311 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
+    },
     "EDST6780": {
         "original": "Prerequisite: EDST2112, EDST1311, EDST6779 and enrolled in Bachelor of Education Primary (Honours) or Bachelor of Education Primary<br/><br/>",
         "processed": "EDST2112 && EDST1311 && EDST6779 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
@@ -5709,8 +5689,8 @@
         "processed": "EDST1143 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
     },
     "EDST6784": {
-        "original": "Prerequisite: EDST2100 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
-        "processed": "EDST2100 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
+        "original": "Prerequisite: EDST1200 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
+        "processed": "EDST1200 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
     },
     "EDST6785": {
         "original": "Prerequisite: Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Primary. Corequisite: EDST4002.<br/><br/>",
@@ -5759,10 +5739,6 @@
     "EDST6951": {
         "original": "Prerequisite: EDST6708 or EDST6921. Corerequisite: EDST6760<br/><br/>",
         "processed": "EDST6708 || EDST6921 && [EDST6760]"
-    },
-    "EDST6952": {
-        "original": "Prerequisite: EDST6922. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6922 && [EDST6760]"
     },
     "EDST6953": {
         "original": "Prerequisite: EDST6923. Corerequisite: EDST6760<br/><br/>",
@@ -5909,7 +5885,7 @@
         "processed": "ELEC3104"
     },
     "ELEC4622": {
-        "original": "Prereq: ELEC3104<br/><br/>",
+        "original": "Prerequisite: ELEC3104<br/><br/>",
         "processed": "ELEC3104"
     },
     "ELEC4623": {
@@ -5979,7 +5955,7 @@
         "handbook_note": "Please refer to the course overview section for further information on requirements"
     },
     "ENGG2997": {
-        "original": "Successful completion of 72 UOC and enrolled in program 3778 or 3061<br/><br/>",
+        "original": "Enrolled in a Faculty of Engineering program that does not require Industrial Training - 3061, 3778, 3781, 3782, 3783, 3784, 3786, 3788, 3789, 3791, 3673, 3674, 3738, 3787, 3792, 3779.<br/><br/>Successful completion of at least 72 UOC in program<br/><br/>",
         "processed": "72UOC && (3778 || 3061)"
     },
     "ENGG3001": {
@@ -6056,9 +6032,13 @@
         "original": "",
         "processed": ""
     },
-    "ENGG9741": {
-        "original": "",
-        "processed": ""
+    "ENGG9743": {
+        "original": "Prerequisite: ENGG3741<br/><br/>",
+        "processed": "ENGG3741"
+    },
+    "ENGG9744": {
+        "original": "Prerequisite: ENGG3741<br/><br/>",
+        "processed": "ENGG3741"
     },
     "EXCH8033": {
         "original": "",
@@ -6089,12 +6069,12 @@
         "processed": "ANAT1452"
     },
     "EXPT2151": {
-        "original": "Pre-requisites: SOMS1912, SOMS1913, EXPT2137<br/><br/>",
-        "processed": "SOMS1912 && SOMS1913 && EXPT2137"
+        "original": "Pre-requisites: SOMS1912, SOMS1913 and (EXPT2137 OR ANAT2451).<br/><br/>",
+        "processed": "SOMS1912 && SOMS1913 && (EXPT2137 || ANAT2451)"
     },
     "EXPT2154": {
-        "original": "",
-        "processed": ""
+        "original": "Prerequisite: ANAT1452<br/><br/>",
+        "processed": "ANAT1452"
     },
     "EXPT2168": {
         "original": "Prerequisites - EXPT1155 Exercise Physiology and Metabolism <br/><br/>",
@@ -6194,7 +6174,7 @@
         "processed": "COMM1180 || (COMM1140 && ECON1102) || (ACCT1501 && FINS1613)"
     },
     "FINS2622": {
-        "original": "Prerequisite or co-requisite:FINS1612/FINS2618 and FINS2624<br/><br/>",
+        "original": "Prerequisite or corequisite: FINS1612/FINS2618 and FINS2624<br/><br/>",
         "processed": "[FINS1612 || FINS2618] && FINS2624"
     },
     "FINS2624": {
@@ -6212,6 +6192,10 @@
     "FINS3303": {
         "original": "Prerequisite: FINS3202 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
         "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
+    },
+    "FINS3610": {
+        "original": "Prerequisite: FINS2618<br/><br/>",
+        "processed": "FINS2618"
     },
     "FINS3614": {
         "original": "Prerequisite: FINS2618<br/><br/>",
@@ -7341,8 +7325,8 @@
         "processed": "108UOC CORES courses (=years 1+2+3)"
     },
     "LAND2412": {
-        "original": "Pre-requisite: LAND2411<br/><br/>",
-        "processed": "LAND2411"
+        "original": "Pre-requisite: LAND2411 and LAND2421<br/><br/>",
+        "processed": "LAND2411 && LAND2421"
     },
     "LAND2413": {
         "original": "Prerequisite: LAND2412 and LAND2421<br/><br/>",
@@ -7441,8 +7425,8 @@
         "processed": "24UOC in LAWS"
     },
     "LAWS2351": {
-        "original": "Prerequisite: Crime and Criminal Process (LAWS1021) and Criminal Laws (LAWS1022).<br/><br/>",
-        "processed": "Crime && Criminal Process (LAWS1021) && Criminal Laws (LAWS1022)"
+        "original": "Prerequisite: LAWS1021 Crime and Criminal Process and LAWS1022 Criminal Laws.<br/><br/>",
+        "processed": "LAWS1021 Crime && Criminal Process && LAWS1022 Criminal Laws"
     },
     "LAWS2371": {
         "original": "Prerequisite: Principles of Private Law (LAWS1150) and Contracts (LAWS1075)<br/><br/>",
@@ -7461,7 +7445,7 @@
         "processed": "Principles of Private Law (LAWS1150) && Contracts (LAWS1075)"
     },
     "LAWS2820": {
-        "original": "Pre-requisite: Completion of 24 UOC of LAWS courses.<br/><br/>",
+        "original": "Prerequisite: Completion of 24 UOC of LAWS courses.<br/><br/>",
         "processed": "24UOC in LAWS"
     },
     "LAWS3014": {
@@ -7976,6 +7960,14 @@
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
         "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230)"
     },
+    "LAWS3670": {
+        "original": "Prerequisite: 78UOC in LAWS courses<br/><br/>",
+        "processed": "78UOC in LAWS"
+    },
+    "LAWS3671": {
+        "original": "Prerequisite: 78UOC in LAWS courses<br/><br/>",
+        "processed": "78UOC in LAWS"
+    },
     "LAWS3713": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Law in the Global Context (LAWS2270) or Public International Law (LAWS3381).<br/><br/>",
         "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270) || Public International Law (LAWS3381)"
@@ -8003,10 +7995,6 @@
     "LAWS9801": {
         "original": "Prerequisite: Academic Program must be Environmental Science program (3988, 3932, 3965 or 3943)<br/><br/>",
         "processed": "Academic Program must be Environmental SCIF#"
-    },
-    "MANF3100": {
-        "original": "",
-        "processed": ""
     },
     "MANF3510": {
         "original": "Prerequisite: MMAN1130 or MMAN2130<br/><br/>",
@@ -8096,12 +8084,12 @@
         "handbook_note": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     },
     "MARK3088": {
-        "original": "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
+        "original": "Prerequisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
         "processed": "ECON1203 || COMM1190 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM3050 || COMM2501 || INFS2605 || INFS2609",
         "handbook_note": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     },
     "MARK3089": {
-        "original": "Prerequisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
+        "original": "Prerequisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609<br/>Students with equivalent Statistics knowledge can seek prerequisite waiver via webforms<br/><br/>",
         "processed": "ECON1203 || COMM1190 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM3050 || COMM2501 || INFS2605 || INFS2609",
         "handbook_note": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     },
@@ -8359,10 +8347,6 @@
     },
     "MATH3511": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses<br/><br/>",
-        "processed": "12UOC in L2 MATH"
-    },
-    "MATH3521": {
-        "original": "Prerequisite: 12 units of credit in Level 2 Math courses.<br/><br/>",
         "processed": "12UOC in L2 MATH"
     },
     "MATH3531": {
@@ -9037,8 +9021,8 @@
         "processed": "MFAC3501 && MFAC3502 && s 3805 Medicine || 3856 Medicine/Arts"
     },
     "MFAC3515": {
-        "original": "Prerequisite: MFAC3523 and Enrolment in Programs 3805 Medicine or 3856 Medicine/Arts<br/><br/>",
-        "processed": "MFAC3523 && s 3805 Medicine || 3856 Medicine/Arts"
+        "original": "Prerequisite: Enrolment in Programs 3805 Medicine or 3856 Medicine/Arts<br/><br/>",
+        "processed": "s 3805 Medicine || 3856 Medicine/Arts"
     },
     "MFAC3522": {
         "original": "Course Prerequisite MFAC3501, MFAC3502, MFAC3503, MFAC3504, MFAC3505, MFAC3506, MFAC3508, MFAC3514 and Enrolment in Programs 3805 Medicine or 3856 Medicine/Arts<br/><br/>",
@@ -9077,7 +9061,7 @@
         "processed": ""
     },
     "MGMT2101": {
-        "original": "Prerequisite or corequisite:MGMT1101 or COMM1150 or COMM1900 or ECON1102. Excluded: IBUS2107<br/><br/>",
+        "original": "Prerequisite or corequisite: MGMT1101 or COMM1150 or COMM1900 or ECON1102. <br/><br/>",
         "processed": "[MGMT1101 || COMM1150 || COMM1900 || ECON1102]"
     },
     "MGMT2102": {
@@ -9276,21 +9260,9 @@
         "original": "",
         "processed": ""
     },
-    "MMAN1300": {
-        "original": "",
-        "processed": ""
-    },
-    "MMAN2130": {
-        "original": "",
-        "processed": ""
-    },
     "MMAN2300": {
         "original": "Exclusion: MECH2300, MECH3300 AND<br/>Prerequisite: (CVEN1300 or MINE1300 or MMAN1300 or ENGG1300 or DPST1072) AND <br/>(MATH2019 or MATH2018 or (MATH2111 and MATH2221) or (MATH2011 and MATH2121) or (MATH2069 and MATH2121))<br/><br/>",
         "processed": "(CVEN1300 || MINE1300 || MMAN1300 || ENGG1300 || DPST1072) && (MATH2019 || MATH2018 || (MATH2111 && MATH2221) || (MATH2011 && MATH2121) || (MATH2069 && MATH2121))"
-    },
-    "MMAN2400": {
-        "original": "",
-        "processed": ""
     },
     "MMAN2600": {
         "original": "Prerequisite: (MATH1131 or DPST1013 or MATH1141) and (PHYS1121 or PHYS1131 or DPST1023 or PHYS1141)<br/><br/>",
@@ -9375,6 +9347,10 @@
     "MTRN3100": {
         "original": "Prerequisite: MTRN2500 and ELEC1111 and (MMAN3200 or ELEC3114)<br/><br/>",
         "processed": "MTRN2500 && ELEC1111 && (MMAN3200 || ELEC3114)"
+    },
+    "MTRN3210": {
+        "original": "MMAN2300 AND ELEC1111<br/><br/>",
+        "processed": "MMAN2300 && ELEC1111"
     },
     "MTRN3500": {
         "original": "pre-requisite MTRN2500<br/><br/>",
@@ -9624,26 +9600,6 @@
         "original": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
         "processed": "MUSC3704 || MUSC3706 (12UOC) && a Music Creative Practice stream in (MUSC?? || 4508)"
     },
-    "NANO2002": {
-        "original": "",
-        "processed": ""
-    },
-    "NANO3001": {
-        "original": "",
-        "processed": ""
-    },
-    "NANO4004": {
-        "original": "Prerequisite: Enrolled in Nanoscience Honours<br/><br/>",
-        "processed": "(NANO?H)"
-    },
-    "NANO4012": {
-        "original": "",
-        "processed": ""
-    },
-    "NAVL4410": {
-        "original": "",
-        "processed": ""
-    },
     "NEUR2201": {
         "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
         "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC in PSYC"
@@ -9741,7 +9697,7 @@
         "processed": "OPTM3133 && OPTM3201 && OPTM3233 && OPTM3205 && OPTM3105 && VISN3111 && PHAR3306"
     },
     "OPTM6411": {
-        "original": "Prerequisite: OPTM6400 and OPTM6413<br/>Corequisite: OPTM6412<br/><br/>",
+        "original": "Prerequisite: OPTM6400 and OPTM6413, and completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412<br/><br/>",
         "processed": "ANAT2241 && (ANAT2111 || ANAT1521 || PHSL2101 || BIOC2101 || BIOC2181)"
     },
     "OPTM6412": {
@@ -10144,10 +10100,6 @@
         "original": "Prerequisite: PHYS2111 OR ELEC3705 if enrolment in ELECCH Quantum Engineering<br/><br/>",
         "processed": "PHYS2111 || ELEC3705 if ELECCH Quantum Engineering"
     },
-    "PHYS3119": {
-        "original": "Prerequisite: PHYS2111<br/><br/>",
-        "processed": "PHYS2111"
-    },
     "PHYS3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Physics major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Physics prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
         "processed": "SCIF# && a Physics major. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Physics . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
@@ -10508,10 +10460,6 @@
         "original": "Prerequisite:PTRL2019<br/><br/>",
         "processed": "PTRL2019"
     },
-    "PTRL3003": {
-        "original": "Prerequisite:GEOS3321<br/><br/>",
-        "processed": "GEOS3321"
-    },
     "PTRL3015": {
         "original": "",
         "processed": ""
@@ -10561,8 +10509,8 @@
         "processed": "PTRL3001"
     },
     "PTRL4024": {
-        "original": "Prerequisite:PTRL3003,PTRL3015<br/><br/>",
-        "processed": "PTRL3003 && PTRL3015"
+        "original": "Prerequisite: MERE2001, PTRL3015<br/><br/>",
+        "processed": "MERE2001 && PTRL3015"
     },
     "PTRL5100": {
         "original": "Prerequisites: PTRL2019 OR PTRL5019<br/><br/>",
@@ -10811,8 +10759,8 @@
         "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
     },
     "SOCW4017": {
-        "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013]"
+        "original": "Prerequisite: SOCW4003, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4011. Equivalent: SOCW4014, SOCW4001<br/><br/>",
+        "processed": "SOCW4003 && SOCW4012 && SOCW4013 && (4033) && [SOCW4011]"
     },
     "SOCW4018": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
@@ -10831,8 +10779,8 @@
         "processed": ""
     },
     "SOLA2060": {
-        "original": "",
-        "processed": ""
+        "original": "Prerequisite: ELEC1111 <br/><br/>",
+        "processed": "ELEC1111"
     },
     "SOLA2540": {
         "original": "Prerequisite 48 UOC<br/><br/>",
@@ -10843,8 +10791,8 @@
         "processed": ""
     },
     "SOLA3020": {
-        "original": "Prerequisite: SOLA2540<br/><br/>",
-        "processed": "SOLA2540"
+        "original": "Prerequisite: SOLA2060 or SOLA3507<br/><br/>",
+        "processed": "SOLA2060 || SOLA3507"
     },
     "SOLA3507": {
         "original": "Prerequisite SOLA2060 or SOLA2540<br/><br/>",
@@ -10919,8 +10867,8 @@
         "processed": "SOMS1912 Human Systems 1 && (3894) || (3895) || (3896) || (3897) || 3880 International Public Health"
     },
     "SOMS3001": {
-        "original": "WAM above 75<br/><br/>",
-        "processed": "75WAM"
+        "original": "WAM above 65<br/><br/>",
+        "processed": "65WAM"
     },
     "SOMS3050": {
         "original": "Prerequisite: Completion of 72 UOC of courses<br/><br/>",
@@ -10973,10 +10921,6 @@
     "SOSS2822": {
         "original": "Prerequisite: 24 units of credit overall or 18 units of credit if enrolled in 4873 Social Sciences/Law<br/><br/>",
         "processed": "24UOC || 18UOC if 4873 Social Sciences/Law"
-    },
-    "SOSS3002": {
-        "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001,  SOSS/SRAP2001, and either ARTS2871 or SRAP2002.<br/>Equivalent SRAP3002<br/><br/>",
-        "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001 && ARTS2871 || SRAP2002. Equivalent SRAP3002"
     },
     "SOSS3003": {
         "original": "Prerequisite: 36 UOC overall, including SOSS/SRAP1000. Excluded: Students in the Bachelor of Social Work (Honours) / Criminology & Criminal Justice double degree program.<br/><br/>",
@@ -11144,7 +11088,7 @@
         "processed": "TELE3113"
     },
     "TELE4652": {
-        "original": "Prereq: TELE3113<br/><br/>",
+        "original": "Prerequisite: TELE3113<br/><br/>",
         "processed": "TELE3113"
     },
     "TELE4653": {
@@ -11828,8 +11772,8 @@
         "processed": "ZEIT3215 || in parallel && ZEIT3215"
     },
     "ZEIT4230": {
-        "original": "Prerequisites: ZEIT2209 and ZEIT3223 Embedded Systems<br/><br/>",
-        "processed": "ZEIT2209 && ZEIT3223 Embedded Systems"
+        "original": "Prerequisites: ZEIT2209 and ZEIT3221<br/><br/>",
+        "processed": "ZEIT2209 && ZEIT3221"
     },
     "ZEIT4231": {
         "original": "",
@@ -12255,6 +12199,14 @@
     "ZHSS3750": {
         "original": "",
         "processed": ""
+    },
+    "ZHSS3901": {
+        "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
+        "processed": "CCDF#"
+    },
+    "ZHSS3902": {
+        "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
+        "processed": "CCDF#"
     },
     "ZHSS4001": {
         "original": "",
