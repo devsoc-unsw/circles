@@ -80,7 +80,7 @@ class UserData(BaseModel):
 
     program: str
     specialisations: list[str]
-    courses: dict
+    courses: dict  # TODO-OLLI: type this correctly
 
 
 class CourseState(BaseModel):

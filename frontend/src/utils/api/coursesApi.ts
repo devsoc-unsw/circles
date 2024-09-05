@@ -37,15 +37,13 @@ export const getCourseChildren = async (courseCode: string) => {
   return res.data;
 };
 
-export const getCoursesUnlockedWhenTaken = async (
-  degree: DegreeResponse,
-  planner: PlannerResponse,
-  courses: CoursesResponse,
-  courseCode: string
-) => {
+export const getCoursesUnlockedWhenTaken = async (token: string, courseCode: string) => {
   const res = await axios.post<CoursesUnlockedWhenTaken>(
     `/courses/coursesUnlockedWhenTaken/${courseCode}`,
-    JSON.stringify(prepareUserPayload(degree, planner, courses))
+    {},
+    {
+      headers: withAuthorization(token)
+    }
   );
   return res.data;
 };

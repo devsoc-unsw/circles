@@ -12,6 +12,7 @@ import {
   LoadingCourseDescriptionPanelSidebar
 } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
+import useToken from 'hooks/useToken';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
 import S from './styles';
@@ -43,10 +44,11 @@ const CourseDescriptionPanel = ({
   courses,
   degree
 }: CourseDescriptionPanelProps) => {
+  const token = useToken();
+
   const coursesUnlockedQuery = useQuery({
-    queryKey: ['coursesUnlocked', courseCode, degree, planner, courses],
-    queryFn: () => getCoursesUnlockedWhenTaken(degree!, planner!, courses!, courseCode),
-    enabled: !!degree && !!planner && !!courses
+    queryKey: ['courses', 'coursesUnlockedWhenTaken', courseCode],
+    queryFn: () => getCoursesUnlockedWhenTaken(token, courseCode)
   });
 
   const { pathname } = useLocation();

@@ -1,7 +1,8 @@
+from typing import Optional
 from fastapi import HTTPException
 from starlette.status import HTTP_403_FORBIDDEN
 
-from server.routers.model import CourseStorage, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage, UserData
 
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
@@ -90,3 +91,47 @@ def set_user(uid: str, item: Storage, overwrite: bool = False):
     ))
 
     assert res
+
+
+def parse_mark_to_int(mark: Mark) -> Optional[int]:
+    '''Converts the stored mark into a number grade for validation'''
+    # 'SY': null, 'FL': 25, 'PS': 60, 'CR': 70, 'DN': 80, 'HD': 90
+    # TODO-OLLI: unify this with convert_to_planner_data
+    match mark:
+        case int() as n if 0 <= n <= 100:
+            return n
+        case 'SY':
+            return None
+        case 'FL':
+            return 25
+        case 'PS':
+            return 60
+        case 'CR':
+            return 70
+        case 'DN':
+            return 80
+        case 'HD':
+            return 90
+        case _:
+            return None
+
+def prepare_user_payload(user: Storage) -> UserData:
+    '''
+    Temporary helper, lifted directly from the frontend prepareUserPayload...
+    '''
+
+    courseMarks = {
+        code: parse_mark_to_int(courseData['mark'])
+        for code, courseData
+        in user['courses'].items()
+    }
+
+    # TODO: was in the original prepareUserPayload, this should be an invariant though, thus unecessary
+    for code in user['planner']['unplanned']:
+        courseMarks[code] = None
+
+    return UserData(
+        program=user['degree']['programCode'],
+        specialisations=user['degree']['specs'],
+        courses=courseMarks,
+    )

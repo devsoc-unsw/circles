@@ -13,7 +13,7 @@ from data.config import ARCHIVED_YEARS
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import get_setup_user
+from server.routers.utility.user import get_setup_user, prepare_user_payload
 from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
@@ -415,7 +415,6 @@ def get_path_from(course: str) -> CoursesPathDict:
         "courses" : get_incoming_edges(course),
     }
 
-
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
                 400: { "description": "Uh oh you broke me" },
@@ -431,8 +430,10 @@ def get_path_from(course: str) -> CoursesPathDict:
                     }
                 }
             })
-def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dict[str, List[str]]:
+def courses_unlocked_when_taken(uid: Annotated[str, Security(require_uid)], courseToBeTaken: str) -> Dict[str, List[str]]:
     """ Returns all courses which are unlocked when given course is taken """
+    user = get_setup_user(uid)
+    userData = prepare_user_payload(user)
     ## initial state
     courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
