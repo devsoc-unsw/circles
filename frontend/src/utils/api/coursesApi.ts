@@ -7,8 +7,6 @@ import {
   CoursesUnlockedWhenTaken,
   SearchCourse
 } from 'types/api';
-import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
-import prepareUserPayload from 'utils/prepareUserPayload';
 import { LIVE_YEAR } from 'config/constants';
 import { withAuthorization } from './authApi';
 
@@ -48,14 +46,13 @@ export const getCoursesUnlockedWhenTaken = async (token: string, courseCode: str
   return res.data;
 };
 
-export const getAllUnlockedCourses = async (
-  degree: DegreeResponse,
-  planner: PlannerResponse,
-  courses: CoursesResponse
-) => {
+export const getAllUnlockedCourses = async (token: string) => {
   const res = await axios.post<CoursesAllUnlocked>(
     '/courses/getAllUnlocked/',
-    JSON.stringify(prepareUserPayload(degree, planner, courses))
+    {},
+    {
+      headers: withAuthorization(token)
+    }
   );
 
   return res.data;

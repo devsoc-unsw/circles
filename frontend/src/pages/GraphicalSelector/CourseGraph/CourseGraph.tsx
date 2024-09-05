@@ -89,9 +89,8 @@ const CourseGraph = ({
   });
 
   const coursesStateQuery = useQuery({
-    queryKey: ['coursesState', degreeQuery.data, plannerQuery.data, coursesQuery.data],
-    queryFn: () => getAllUnlockedCourses(degreeQuery.data!, plannerQuery.data!, coursesQuery.data!),
-    enabled: degreeQuery.isSuccess && plannerQuery.isSuccess && coursesQuery.isSuccess
+    queryKey: ['courses', 'coursesState'],
+    queryFn: () => getAllUnlockedCourses(token)
   });
 
   const queriesSuccess =

@@ -50,9 +50,8 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   });
 
   const coursesStateQuery = useQuery({
-    queryKey: ['coursesState', degree, planner, courses],
-    queryFn: () => getAllUnlockedCourses(degree!, planner!, courses!),
-    enabled: !!degree && !!planner && !!courses
+    queryKey: ['courses', 'coursesState'],
+    queryFn: () => getAllUnlockedCourses(token)
   });
 
   const queryClient = useQueryClient();
