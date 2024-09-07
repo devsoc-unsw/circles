@@ -4,7 +4,7 @@ from starlette.status import HTTP_403_FORBIDDEN
 
 from algorithms.objects.user import UserJSON, User
 from server.routers.utility.common import get_core_courses, get_course_details
-from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage, ValidPlannerData, markMap
 
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
@@ -138,3 +138,23 @@ def user_storage_to_algo_user(user: Storage) -> User:
     algo_user = User()
     algo_user.load_json(user_data)
     return algo_user
+
+def convert_to_planner_data(user: Storage) -> ValidPlannerData:
+    """ fixes the planner data to add missing UOC info """
+    plan: list[list[dict[str, tuple[int, Optional[int]]]]] = []
+    for year_index, year in enumerate(user['planner']['years']):
+        plan.append([])
+        for term_index, term in enumerate(year.values()):
+            plan[year_index].append({})
+            for courseName in term:
+                c = user['courses'][courseName]
+                mark = c['mark']
+                if not isinstance(mark, int) and mark is not None:
+                    mark = markMap.get(mark, None)
+                plan[year_index][term_index][courseName] = (
+                    int(c["uoc"]), mark)
+    return ValidPlannerData(
+        programCode=user['degree']['programCode'],
+        specialisations=user['degree']['specs'],
+        plan=plan,
+    )

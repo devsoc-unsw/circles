@@ -127,6 +127,7 @@ class CoursesTypeState(BaseModel):
 
 # TODO: this is only used in ctf.py and the validatePlanner route...
 #       Shuffle those to use the user objects directly, then we can delete this and the `convert_to_planner_data` function
+# TODO-OLLI: remove
 class ValidPlannerData(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
@@ -135,6 +136,7 @@ class ValidPlannerData(BaseModel):
     plan: list[list[dict[str, tuple[int, Optional[int]]]]]
 
 # TODO: the last surviving route that uses this is the autoplanning, convert it and delete this...
+# TODO-OLLI: remove
 class PlannerData(BaseModel):
     programCode: str
     specialisations: list[str]

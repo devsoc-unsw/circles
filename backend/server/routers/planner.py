@@ -4,40 +4,19 @@ route for planner algorithms
 
 from math import lcm
 from operator import itemgetter
-from typing import Annotated, Dict, List, Optional, Tuple
+from typing import Annotated, Dict, List
 
 from algorithms.autoplanning import autoplan
 from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import get_setup_user, set_user
-from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, Storage, UnPlannedToTerm,
-                                  ValidCoursesState, ValidPlannerData, markMap)
+from server.routers.utility.user import convert_to_planner_data, get_setup_user, set_user
+from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
+                                  ValidCoursesState)
 from server.routers.utility.common import get_course_details, get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
-
-
-def convert_to_planner_data(user: Storage) -> ValidPlannerData:
-    """ fixes the planner data to add missing UOC info """
-    plan: list[list[dict[str, Tuple[int, Optional[int]]]]] = []
-    for year_index, year in enumerate(user['planner']['years']):
-        plan.append([])
-        for term_index, term in enumerate(year.values()):
-            plan[year_index].append({})
-            for courseName in term:
-                c = user['courses'][courseName]
-                mark = c['mark']
-                if not isinstance(mark, int) and mark is not None:
-                    mark = markMap.get(mark, None)
-                plan[year_index][term_index][courseName] = (
-                    int(c["uoc"]), mark)
-    return ValidPlannerData(
-        programCode=user['degree']['programCode'],
-        specialisations=user['degree']['specs'],
-        plan=plan,
-    )
 
 
 router = APIRouter(
