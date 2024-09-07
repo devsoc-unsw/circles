@@ -319,7 +319,6 @@ def get_legacy_course(year: str, courseCode: str):
     return result
 
 
-# TODO-OLLI(pm): this is not used anymore... (was a step in removing a course from planner)
 @router.post("/unselectCourse/{unselectedCourse}", response_model=CourseCodes,
             responses={
                 400: {"description": "Uh oh you broke me"},
@@ -342,6 +341,8 @@ def unselect_course(uid: Annotated[str, Security(require_uid)], unselectedCourse
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in alphabetically sorted order
+
+    NOTE: No longer in use...
     """
     user_data = get_setup_user(uid)
     user = user_storage_to_algo_user(user_data)
