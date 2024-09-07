@@ -11,9 +11,8 @@ from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import convert_to_planner_data, get_setup_user, set_user
-from server.routers.model import (CourseCode, PlannedToTerm, PlannerData, ProgramTime, UnPlannedToTerm,
-                                  ValidCoursesState)
+from server.routers.utility.user import convert_to_planner_data, get_setup_user, set_user, user_storage_to_algo_user
+from server.routers.model import CourseCode, PlannedToTerm, ProgramTime, UnPlannedToTerm, ValidCoursesState
 from server.routers.utility.common import get_course_details, get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
@@ -491,24 +490,25 @@ def out_of_bounds(num_years, dest_row, terms):
 #                  }
 #              }
 #              )
-def autoplanning(courseCodes: list[str], plannerData: PlannerData, programTime: ProgramTime) -> dict:
+def autoplanning(uid: Annotated[str, Security(require_uid)], courseCodes: list[str], programTime: ProgramTime) -> dict:
     print("started to_user")
-    user = plannerData.to_user()
+    user_data = get_setup_user(uid)
+    user = user_storage_to_algo_user(user_data)
     print('finished the to_user')
 
     try:
         courses = [get_course_object(courseCode, programTime)
                    for courseCode in courseCodes]
         print('in the try')
-        for year_index, year in enumerate(list(plannerData.plan)):
-            for term_index, term in enumerate(year):
-                for course in term:
+        for year_index, year in enumerate(user_data['planner']['years']):
+            for term_index in range(4):
+                for course_code in year[f'T{term_index}']:
                     courses.append(
                         get_course_object(
-                            course,
+                            course_code,
                             programTime,
                             (year_index, term_index),
-                            user.get_grade(course)
+                            user.get_grade(course_code)
                         )
                     )
         print("got to end")
