@@ -13,12 +13,12 @@ from data.config import ARCHIVED_YEARS
 from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import get_setup_user, prepare_user_payload
+from server.routers.utility.user import get_setup_user, user_storage_to_algo_user
 from server.db.mongo.conn import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CourseState, CoursesPath,
                                   CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
-                                  TermsOffered, UserData)
-from server.routers.utility.common import get_core_courses, get_course_details, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
+                                  TermsOffered)
+from server.routers.utility.common import get_course_details, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
 
 router = APIRouter(
     prefix="/courses",
@@ -57,25 +57,9 @@ def fetch_all_courses() -> Dict[str, str]:
     return ALL_COURSES
 
 
-def fix_user_data(userData: dict):
-    """ Updates and returns the userData with the UOC of a course """
-    coursesWithoutUoc = [
-        course
-        for course in userData["courses"]
-        if not isinstance(userData["courses"][course], list)
-    ]
-    filledInCourses = {
-        course: [get_course_details(course)['UOC'], userData["courses"][course]]
-        for course in coursesWithoutUoc
-    }
-    userData["courses"].update(filledInCourses)
-    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"]))
-    return userData
-
 # TODO-OLLI: move this out
-def get_all_course_states_for_user(userData: UserData) -> dict[str, CourseState]:
+def get_all_course_states_for_user(user: User) -> dict[str, CourseState]:
     coursesState: dict[str, CourseState] = {}
-    user = User(fix_user_data(userData.model_dump()))
 
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
@@ -277,9 +261,9 @@ def get_all_unlocked(uid: Annotated[str, Security(require_uid)]) -> CoursesState
     that they have already completed
     """
     user = get_setup_user(uid)
-    userData = prepare_user_payload(user)
-    coursesState = get_all_course_states_for_user(userData)
-    return CoursesState(courses_state=coursesState)
+    algo_user = user_storage_to_algo_user(user)
+    courses_states = get_all_course_states_for_user(algo_user)
+    return CoursesState(courses_state=courses_states)
 
 
 @router.get(
@@ -354,12 +338,13 @@ def get_legacy_course(year: str, courseCode: str):
                      }
                  }
             })
-def unselect_course(userData: UserData, unselectedCourse: str) -> dict[str, list[str]]:
+def unselect_course(uid: Annotated[str, Security(require_uid)], unselectedCourse: str) -> dict[str, list[str]]:
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in alphabetically sorted order
     """
-    user = User(fix_user_data(userData.dict()))
+    user_data = get_setup_user(uid)
+    user = user_storage_to_algo_user(user_data)
     if not user.has_taken_course(unselectedCourse):
         return { 'courses' : [] }
 
@@ -439,13 +424,14 @@ def get_path_from(course: str) -> CoursesPathDict:
 def courses_unlocked_when_taken(uid: Annotated[str, Security(require_uid)], courseToBeTaken: str) -> Dict[str, List[str]]:
     """ Returns all courses which are unlocked when given course is taken """
     user = get_setup_user(uid)
-    userData = prepare_user_payload(user)
+    algo_user = user_storage_to_algo_user(user)
+
     ## initial state
-    courses_initially_unlocked = unlocked_set(get_all_course_states_for_user(userData))
+    courses_initially_unlocked = unlocked_set(get_all_course_states_for_user(algo_user))
     ## add course to the user
-    userData.courses[courseToBeTaken] = [get_course_details(courseToBeTaken)['UOC'], None]
+    algo_user.add_courses({ courseToBeTaken: (get_course_details(courseToBeTaken)['UOC'], None) })
     ## final state
-    courses_now_unlocked = unlocked_set(get_all_course_states_for_user(userData))
+    courses_now_unlocked = unlocked_set(get_all_course_states_for_user(algo_user))
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks

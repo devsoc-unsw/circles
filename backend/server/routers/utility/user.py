@@ -2,7 +2,9 @@ from typing import Optional
 from fastapi import HTTPException
 from starlette.status import HTTP_403_FORBIDDEN
 
-from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage, UserData
+from algorithms.objects.user import UserJSON, User
+from server.routers.utility.common import get_core_courses, get_course_details
+from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage
 
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
@@ -115,23 +117,24 @@ def parse_mark_to_int(mark: Mark) -> Optional[int]:
         case _:
             return None
 
-def prepare_user_payload(user: Storage) -> UserData:
-    '''
-    Temporary helper, lifted directly from the frontend prepareUserPayload...
-    '''
-
-    courseMarks = {
-        code: parse_mark_to_int(courseData['mark'])
+def user_storage_to_algo_user(user: Storage) -> User:
+    '''Convert the database user into the algorithm object user.'''
+    courses_with_uoc: dict[str, tuple[int, Optional[int]]] = {
+        code: (
+            get_course_details(code)['UOC'],
+            parse_mark_to_int(courseData['mark']) if code not in user['planner']['unplanned'] else None
+        )
         for code, courseData
         in user['courses'].items()
     }
 
-    # TODO: was in the original prepareUserPayload, this should be an invariant though, thus unecessary
-    for code in user['planner']['unplanned']:
-        courseMarks[code] = None
+    user_data: UserJSON = {
+        'specialisations': user['degree']['specs'],
+        'program': user['degree']['programCode'],
+        'core_courses': get_core_courses(user['degree']['programCode'], list(user['degree']['specs'])),
+        'courses': courses_with_uoc
+    }
 
-    return UserData(
-        program=user['degree']['programCode'],
-        specialisations=user['degree']['specs'],
-        courses=courseMarks,
-    )
+    algo_user = User()
+    algo_user.load_json(user_data)
+    return algo_user

@@ -73,16 +73,6 @@ class Structure(BaseModel):
     structure: dict[str, StructureContainer]
     uoc: int
 
-
-# TODO: routes that use this should just take a token now
-class UserData(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
-    program: str
-    specialisations: list[str]
-    courses: dict  # TODO-OLLI: type this correctly
-
-
 class CourseState(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
