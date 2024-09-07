@@ -185,5 +185,141 @@
             "isSummerEnabled": false,
             "lockedTerms": {}
         }
+    },
+    "sample_user_1": {
+        "degree": {
+            "programCode": "3778",
+            "specs": [
+                "COMPA1",
+                "ACCTA2"
+            ]
+        },
+        "planner": {
+            "years": [ {
+                    "T0": [],
+                    "T1": ["COMP1511"],
+                    "T2": ["COMP1521"],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "unplanned": [],
+            "startYear": 2020,
+            "isSummerEnabled": false,
+            "lockedTerms": {}
+        }
+    },
+    "sample_user_2": {
+        "degree": {
+            "programCode": "3789",
+            "specs": [
+                "COMPJ1",
+                "FOODH1"
+            ]
+        },
+        "planner": {
+            "years": [ {
+                    "T0": [],
+                    "T1": ["COMP1511"],
+                    "T2": ["COMP1521", "COMP1531"],
+                    "T3": ["COMP2521"]
+                },
+                {
+                    "T0": [],
+                    "T1": ["COMP3231"],
+                    "T2": ["COMP9242"],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "unplanned": [],
+            "startYear": 2020,
+            "isSummerEnabled": false,
+            "lockedTerms": {}
+        }
+    },
+    "sample_user_one_math": {
+        "degree": {
+            "programCode": "3707",
+            "specs": [
+                "COMPA1",
+                "ACCTA2"
+            ]
+        },
+        "planner": {
+            "years": [ {
+                    "T0": [],
+                    "T1": ["MATH1131"],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "unplanned": [],
+            "startYear": 2020,
+            "isSummerEnabled": false,
+            "lockedTerms": {}
+        }
+    },
+    "sample_user_no_courses": {
+        "degree": {
+            "programCode": "3707",
+            "specs": [
+                "COMPA1",
+                "ACCTA2"
+            ]
+        },
+        "planner": {
+            "years": [ {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                },
+                {
+                    "T0": [],
+                    "T1": [],
+                    "T2": [],
+                    "T3": []
+                }
+            ],
+            "unplanned": [],
+            "startYear": 2020,
+            "isSummerEnabled": false,
+            "lockedTerms": {}
+        }
     }
 }
