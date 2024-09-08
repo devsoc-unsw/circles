@@ -3,7 +3,7 @@ from algorithms.objects.user import User
 from server.routers.model import CACHED_HANDBOOK_NOTE, CONDITIONS, CourseState
 
 
-type RawUserPlan = list[list[dict[str, tuple[int, Optional[int]]]]]
+RawUserPlan = list[list[dict[str, tuple[int, Optional[int]]]]]
 
 def validate_terms(programCode: str, specs: list[str], plan: RawUserPlan) -> dict[str, CourseState]:
     """Validates the term planner, returning all warnings."""

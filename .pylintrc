@@ -79,8 +79,6 @@ disable=import-error,                     # allow import from folder.file instea
         missing-module-docstring,         # allow for missing module docstrings, democratially ignored
         missing-function-docstring,       # TODO: be much more selective with these, and docstring most functions 
         missing-class-docstring,          # 
-        import-outside-toplevel,          # allow non-top level imports. used to prevent circular dependencies
-        cyclic-import,                    # TODO: remove these when utility refactor + old user storage dicts removal
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
