@@ -57,7 +57,6 @@ def fetch_all_courses() -> Dict[str, str]:
     return ALL_COURSES
 
 
-# TODO-OLLI: move this out
 def get_all_course_states_for_user(user: User) -> dict[str, CourseState]:
     coursesState: dict[str, CourseState] = {}
 

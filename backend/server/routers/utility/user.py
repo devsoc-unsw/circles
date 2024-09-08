@@ -98,7 +98,6 @@ def set_user(uid: str, item: Storage, overwrite: bool = False):
 def parse_mark_to_int(mark: Mark) -> Optional[int]:
     '''Converts the stored mark into a number grade for validation'''
     # https://www.student.unsw.edu.au/wam
-    # TODO-OLLI: unify this with convert_to_planner_data
     match mark:
         case int() as n if 0 <= n <= 100:
             return n

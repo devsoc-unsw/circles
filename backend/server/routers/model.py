@@ -81,25 +81,10 @@ class CourseState(BaseModel):
     warnings: list
 
 
-class ValidCourseState(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
-    is_accurate: bool
-    unlocked: bool
-    handbook_note: str
-    warnings: list
-
-
 class CoursesState(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
     courses_state: dict[str, CourseState] = {}
-
-
-class ValidCoursesState(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
-    courses_state: dict[str, ValidCourseState] = {}
 
 
 class CoursesUnlockedWhenTaken (BaseModel):
@@ -124,15 +109,6 @@ class CoursesTypeState(BaseModel):
 
     courses_state: dict[str, CourseTypeState] = {}
 
-# TODO: this is only used in ctf.py and the validatePlanner route...
-#       Shuffle those to use the user objects directly, then we can delete this and the `convert_to_planner_data` function
-# TODO-OLLI: remove
-class ValidPlannerData(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-
-    programCode: str
-    specialisations: list[str]
-    plan: list[list[dict[str, tuple[int, Optional[int]]]]]
 
 # TODO-OLLI(pm): get rid of these user models in favour of the database models
 @with_config(ConfigDict(extra='forbid'))
@@ -150,15 +126,6 @@ class PlannerLocalStorage(TypedDict):
 
 LetterGrade = Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD']
 Mark = Optional[int | LetterGrade]
-
-markMap = {
-    "SY": 50,
-    "FL": 25,
-    "PS": 50,
-    "CR": 65,
-    "DN": 75,
-    "HD": 85,
-}
 
 @with_config(ConfigDict(extra='forbid'))
 class CourseStorage(TypedDict):

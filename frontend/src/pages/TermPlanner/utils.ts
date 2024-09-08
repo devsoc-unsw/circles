@@ -8,7 +8,7 @@ const parseMarkToInt = (mark: Mark): number | null => {
     const letterGradeToIntMap: Record<Grade, number | null> = {
       SY: null,
       FL: 25,
-      PS: 60,
+      PS: 55,
       CR: 70,
       DN: 80,
       HD: 90
