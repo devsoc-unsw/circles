@@ -11,8 +11,8 @@ from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import convert_to_planner_data, get_setup_user, set_user, user_storage_to_algo_user
-from server.routers.model import CourseCode, PlannedToTerm, ProgramTime, UnPlannedToTerm, ValidCoursesState
+from server.routers.utility.user import get_setup_user, set_user, user_storage_to_algo_user, user_storage_to_raw_plan
+from server.routers.model import CourseCode, CoursesState, PlannedToTerm, ProgramTime, UnPlannedToTerm
 from server.routers.utility.common import get_course_details, get_course_object
 
 MIN_COMPLETED_COURSE_UOC = 6
@@ -30,8 +30,8 @@ def planner_index() -> str:
     return "Index of planner"
 
 
-@router.get("/validateTermPlanner", response_model=ValidCoursesState)
-def validate_term_planner(uid: Annotated[str, Security(require_uid)]):
+@router.get("/validateTermPlanner", response_model=CoursesState)
+def validate_term_planner(uid: Annotated[str, Security(require_uid)]) -> CoursesState:
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
@@ -39,9 +39,12 @@ def validate_term_planner(uid: Annotated[str, Security(require_uid)]):
     Returns the state of all the courses on the term planner
     """
     user = get_setup_user(uid)
-    data = convert_to_planner_data(user)
-    coursesState = validate_terms(data)
-    return {"courses_state": coursesState}
+    courses_state = validate_terms(
+        programCode=user['degree']['programCode'],
+        specs=user['degree']['specs'],
+        plan=user_storage_to_raw_plan(user)
+    )
+    return CoursesState(courses_state=courses_state)
 
 
 @router.post("/addToUnplanned")
