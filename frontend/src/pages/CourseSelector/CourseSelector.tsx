@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
-import { getUserCourses, getUserDegree, getUserPlanner } from 'utils/api/userApi';
+import { getUserCourses, getUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
@@ -16,11 +16,6 @@ import S from './styles';
 
 const CourseSelector = () => {
   const token = useToken();
-
-  const plannerQuery = useQuery({
-    queryKey: ['planner'],
-    queryFn: () => getUserPlanner(token)
-  });
 
   const coursesQuery = useQuery({
     queryKey: ['courses'],
@@ -88,19 +83,13 @@ const CourseSelector = () => {
         <CourseBanner courses={coursesQuery.data} />
         <CourseTabs />
         <S.ContentWrapper $offset={menuOffset}>
-          <CourseMenu
-            planner={plannerQuery.data}
-            courses={coursesQuery.data}
-            degree={degreeQuery.data}
-          />
+          <CourseMenu courses={coursesQuery.data} degree={degreeQuery.data} />
           <S.ContentResizer ref={divRef} $offset={menuOffset} />
           {courseCode ? (
             <div style={{ overflow: 'auto' }}>
               <CourseDescriptionPanel
                 courseCode={courseCode}
-                planner={plannerQuery.data}
                 courses={coursesQuery.data}
-                degree={degreeQuery.data}
                 onCourseClick={onCourseClick}
               />
             </div>
