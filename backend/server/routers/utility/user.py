@@ -1,7 +1,10 @@
+from typing import Optional
 from fastapi import HTTPException
 from starlette.status import HTTP_403_FORBIDDEN
 
-from server.routers.model import CourseStorage, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage
+from algorithms.objects.user import UserJSON, User
+from server.routers.utility.common import get_core_courses, get_course_details
+from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage
 
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
@@ -90,3 +93,63 @@ def set_user(uid: str, item: Storage, overwrite: bool = False):
     ))
 
     assert res
+
+
+def parse_mark_to_int(mark: Mark) -> Optional[int]:
+    '''Converts the stored mark into a number grade for validation'''
+    # https://www.student.unsw.edu.au/wam
+    match mark:
+        case int() as n if 0 <= n <= 100:
+            return n
+        case 'SY':
+            return None
+        case 'FL':
+            return 25
+        case 'PS':
+            return 55
+        case 'CR':
+            return 70
+        case 'DN':
+            return 80
+        case 'HD':
+            return 90
+        case _:
+            return None
+
+def user_storage_to_algo_user(user: Storage) -> User:
+    '''Convert the database user into the algorithm object user.'''
+    courses_with_uoc: dict[str, tuple[int, Optional[int]]] = {
+        code: (
+            get_course_details(code)['UOC'],
+            parse_mark_to_int(courseData['mark']) if code not in user['planner']['unplanned'] else None
+        )
+        for code, courseData
+        in user['courses'].items()
+    }
+
+    user_data: UserJSON = {
+        'specialisations': user['degree']['specs'],
+        'program': user['degree']['programCode'],
+        'core_courses': get_core_courses(user['degree']['programCode'], list(user['degree']['specs'])),
+        'courses': courses_with_uoc
+    }
+
+    algo_user = User()
+    algo_user.load_json(user_data)
+    return algo_user
+
+def user_storage_to_raw_plan(user: Storage) -> list[list[dict[str, tuple[int, Optional[int]]]]]:
+    '''Attaches UOC and marks to the user's planner'''
+    return [
+        [
+            {
+                courseCode: (
+                    user['courses'][courseCode]['uoc'],
+                    parse_mark_to_int(user['courses'][courseCode]['mark'])
+                )
+                for courseCode in year[term]
+            }
+            for term in ['T0', 'T1', 'T2', 'T3']
+        ]
+        for year in user['planner']['years']
+    ]

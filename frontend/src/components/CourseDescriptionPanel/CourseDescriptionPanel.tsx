@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Typography } from 'antd';
-import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse } from 'types/userResponse';
 import { getCourseInfo, getCoursePrereqs, getCoursesUnlockedWhenTaken } from 'utils/api/coursesApi';
 import { getCourseTimetable } from 'utils/api/timetableApi';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
@@ -12,6 +12,7 @@ import {
   LoadingCourseDescriptionPanelSidebar
 } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
+import useToken from 'hooks/useToken';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
 import S from './styles';
@@ -30,23 +31,20 @@ type CourseDescriptionPanelProps = {
   className?: string;
   courseCode: string;
   onCourseClick?: (code: string) => void;
-  planner?: PlannerResponse;
   courses?: CoursesResponse;
-  degree?: DegreeResponse;
 };
 
 const CourseDescriptionPanel = ({
   className,
   courseCode,
   onCourseClick,
-  planner,
-  courses,
-  degree
+  courses
 }: CourseDescriptionPanelProps) => {
+  const token = useToken();
+
   const coursesUnlockedQuery = useQuery({
-    queryKey: ['coursesUnlocked', courseCode, degree, planner, courses],
-    queryFn: () => getCoursesUnlockedWhenTaken(degree!, planner!, courses!, courseCode),
-    enabled: !!degree && !!planner && !!courses
+    queryKey: ['courses', 'coursesUnlockedWhenTaken', courseCode],
+    queryFn: () => getCoursesUnlockedWhenTaken(token, courseCode)
   });
 
   const { pathname } = useLocation();

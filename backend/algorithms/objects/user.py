@@ -9,7 +9,7 @@ import copy
 import json
 import re
 from itertools import chain
-from typing import List, Literal, Optional, Tuple
+from typing import List, Literal, Optional, Tuple, TypedDict
 
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category
@@ -19,6 +19,13 @@ with open(CACHED_EQUIVALENTS_FILE, "r", encoding="utf8") as f:
 
 with open(CACHED_EXCLUSIONS_FILE, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS: dict[str, dict[str, Literal[1]]] = json.load(f)
+
+class UserJSON(TypedDict, total=False):
+    courses: dict[str, tuple[int, Optional[int]]]
+    program: Optional[str]
+    specialisations: list[str]
+    year: int
+    core_courses: list[str]
 
 class User:
     """ A user and their data which will be used to determine if they can take a course """
@@ -119,18 +126,18 @@ class User:
             for spec in self.specialisations
         )
 
-    def load_json(self, data):
+    def load_json(self, data: UserJSON):
         """ Given the user data, correctly loads it into this user class """
 
-        if "program" in data.keys():
+        if "program" in data:
             self.program = copy.deepcopy(data["program"])
-        if "specialisations" in data.keys():
+        if "specialisations" in data:
             self.specialisations = copy.deepcopy(data["specialisations"])
-        if "courses" in data.keys():
+        if "courses" in data:
             self.courses = copy.deepcopy(data["courses"])
-        if "year" in data.keys():
+        if "year" in data:
             self.year = copy.deepcopy(data["year"])
-        if "core_courses" in data.keys():
+        if "core_courses" in data:
             self.core_courses = copy.deepcopy(data["core_courses"])
 
     def get_grade(self, course: str):
