@@ -5,7 +5,7 @@ import type { MenuProps } from 'antd';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
-import { CoursesResponse, DegreeResponse, PlannerResponse } from 'types/userResponse';
+import { CoursesResponse, DegreeResponse } from 'types/userResponse';
 import { getAllUnlockedCourses } from 'utils/api/coursesApi';
 import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
 import { getProgramStructure } from 'utils/api/programsApi';
@@ -24,7 +24,6 @@ type SubgroupTitleProps = {
 };
 
 type CourseMenuProps = {
-  planner?: PlannerResponse;
   courses?: CoursesResponse;
   degree?: DegreeResponse;
 };
@@ -38,7 +37,7 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
+const CourseMenu = ({ courses, degree }: CourseMenuProps) => {
   const token = useToken();
 
   const inPlanner = (courseId: string) => courses && !!courses[courseId];
@@ -50,9 +49,8 @@ const CourseMenu = ({ planner, courses, degree }: CourseMenuProps) => {
   });
 
   const coursesStateQuery = useQuery({
-    queryKey: ['coursesState', degree, planner, courses],
-    queryFn: () => getAllUnlockedCourses(degree!, planner!, courses!),
-    enabled: !!degree && !!planner && !!courses
+    queryKey: ['courses', 'coursesState'],
+    queryFn: () => getAllUnlockedCourses(token)
   });
 
   const queryClient = useQueryClient();

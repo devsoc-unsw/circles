@@ -47,7 +47,7 @@
     "preview:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.devsoc.app vite preview --port 3000 --host",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint": "eslint src/**/*.{ts,tsx} --max-warnings 0",
     "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "types": "tsc --project tsconfig.json"
