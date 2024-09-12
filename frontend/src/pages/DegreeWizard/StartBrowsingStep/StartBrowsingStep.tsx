@@ -34,7 +34,10 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       navigate('/course-selector');
     },
     onError: (err) => {
-      // TODO: Give the user a notification for stuff like this
+      openNotification({
+        type: 'error',
+        message: 'Error setting up degree, ensure your specialisations are valid.'
+      });
       // eslint-disable-next-line no-console
       console.error('Error at resetDegreeMutation: ', err);
     }
