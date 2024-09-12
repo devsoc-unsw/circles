@@ -1,8 +1,7 @@
 import React from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { useQuery } from '@tanstack/react-query';
-import type { MenuProps } from 'antd';
-import { Button, Typography } from 'antd';
+import { Button, Select, Typography } from 'antd';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getSpecialisationsForProgram } from 'utils/api/specsApi';
 import openNotification from 'utils/openNotification';
@@ -10,7 +9,6 @@ import Spinner from 'components/Spinner';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
 import CS from '../common/styles';
-import S from './styles';
 
 const { Title } = Typography;
 
@@ -55,29 +53,25 @@ const SpecialisationStep = ({
   });
   const options = specsQuery.data;
 
-  const menuItems: MenuProps['items'] = options
-    ? Object.keys(options).map((program, index) => ({
+  type SelectGroup = {
+    label: string;
+    note: string | undefined;
+    children: {
+      label: string;
+      value: string;
+    }[];
+  };
+
+  const selectGroups: SelectGroup[] | undefined = options
+    ? Object.keys(options).map((program) => ({
         label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
-        key: index,
-        children: options[program].notes
-          ? [
-              {
-                label: `Note: ${options[program].notes}`,
-                type: 'group',
-                children: Object.keys(options[program].specs)
-                  .sort()
-                  .map((spec) => ({
-                    label: `${spec} ${options[program].specs[spec]}`,
-                    key: spec
-                  }))
-              }
-            ]
-          : Object.keys(options[program].specs)
-              .sort()
-              .map((spec) => ({
-                label: `${spec} ${options[program].specs[spec]}`,
-                key: spec
-              }))
+        note: options[program].notes,
+        children: Object.keys(options[program].specs)
+          .sort()
+          .map((spec) => ({
+            label: `${spec} ${options[program].specs[spec]}`,
+            value: spec
+          }))
       }))
     : undefined;
 
@@ -126,21 +120,27 @@ const SpecialisationStep = ({
             </Button>
           )}
         </CS.StepHeadingWrapper>
-        {menuItems ? (
-          <S.Menu
-            data-testid="menu"
-            onSelect={(e) => handleAddSpecialisation(e.key)}
-            onDeselect={(e) => handleRemoveSpecialisation(e.key)}
-            selectedKeys={degreeInfo.specs}
-            defaultOpenKeys={['0']}
-            mode="inline"
-            style={{
-              gap: '10px',
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-            items={menuItems}
-          />
+        {selectGroups ? (
+          selectGroups.map((group) => (
+            <animated.div style={{ ...props, marginBottom: '1rem' }} key={group.label}>
+              <Title level={5}>{group.label}</Title>
+              {group.note && <p>{group.note}</p>}
+              <Select
+                disabled={specsQuery.isLoading}
+                mode="multiple"
+                style={{ width: '100%' }}
+                allowClear
+                placeholder={`Select ${type.substring(0, type.length - 1)}s`}
+                defaultValue={[]}
+                options={group.children}
+                onSelect={(value) => handleAddSpecialisation(value)}
+                onDeselect={(value) => handleRemoveSpecialisation(value)}
+                onClear={() => {
+                  group.children.forEach((child) => handleRemoveSpecialisation(child.value));
+                }}
+              />
+            </animated.div>
+          ))
         ) : (
           <Spinner text={`Loading ${type}...`} />
         )}
