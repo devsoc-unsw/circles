@@ -53,26 +53,26 @@ const SpecialisationStep = ({
   });
   const options = specsQuery.data;
 
-  const selectGroups:
-    | {
-        label: string;
-        note: string | undefined;
-        children: { label: string; value: string }[];
-      }[]
-    | undefined = options
-    ? Object.keys(options).map((program) => {
-        const group = {
-          label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
-          note: options[program].notes,
-          children: Object.keys(options[program].specs)
-            .sort()
-            .map((spec) => ({
-              label: `${spec} ${options[program].specs[spec]}`,
-              value: spec
-            }))
-        };
-        return group;
-      })
+  type SelectGroup = {
+    label: string;
+    note: string | undefined;
+    children: {
+      label: string;
+      value: string;
+    }[];
+  };
+
+  const selectGroups: SelectGroup[] | undefined = options
+    ? Object.keys(options).map((program) => ({
+        label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
+        note: options[program].notes,
+        children: Object.keys(options[program].specs)
+          .sort()
+          .map((spec) => ({
+            label: `${spec} ${options[program].specs[spec]}`,
+            value: spec
+          }))
+      }))
     : undefined;
 
   // check if step is optional and can be skipped
@@ -132,9 +132,6 @@ const SpecialisationStep = ({
                 allowClear
                 placeholder={`Select ${type.substring(0, type.length - 1)}s`}
                 defaultValue={[]}
-                // value={degreeInfo.specs.filter((spec) =>
-                //   group.children.some((child) => child.value === spec)
-                // )}
                 options={group.children}
                 onSelect={(value) => handleAddSpecialisation(value)}
                 onDeselect={(value) => handleRemoveSpecialisation(value)}

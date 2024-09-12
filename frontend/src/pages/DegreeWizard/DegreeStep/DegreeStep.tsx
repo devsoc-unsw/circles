@@ -23,9 +23,10 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
     queryKey: ['programs'],
     queryFn: fetchAllDegrees,
     select: (data) =>
-      Object.keys(data.programs).map((code) => {
-        return { label: `${code} ${data.programs[code]}`, value: `${code} ${data.programs[code]}` };
-      })
+      Object.keys(data.programs).map((code) => ({
+        label: `${code} ${data.programs[code]}`,
+        value: `${code} ${data.programs[code]}`
+      }))
   });
   const allDegrees = allDegreesQuery.data ?? [];
 
@@ -50,15 +51,15 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
       return;
     }
 
-    let fuzzedDegrees = allDegrees.map((item) => {
-      return {
-        score: fuzzy(newInput, item.label),
-        ...item
-      };
-    });
-
     // score is a number between 0 and 1 where 1 is a perfect match
-    fuzzedDegrees = fuzzedDegrees.filter((pair) => pair.score > 0.5);
+    const fuzzedDegrees = allDegrees
+      .map((item) => {
+        return {
+          score: fuzzy(newInput, item.label),
+          ...item
+        };
+      })
+      .filter((pair) => pair.score > 0.5);
 
     // Shorter name with greater or equal score means better match
     fuzzedDegrees.sort((a, b) => {
