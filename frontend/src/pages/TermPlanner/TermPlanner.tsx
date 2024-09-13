@@ -380,7 +380,9 @@ const TermPlanner = () => {
                   courseInfos={Object.fromEntries(
                     planner.unplanned.map((code) => [
                       code,
-                      courseInfos[Math.min(validYears.at(-1)!, LIVE_YEAR)][code]
+                      courseInfos[validYears.includes(LIVE_YEAR) ? LIVE_YEAR : validYears.at(-1)!][
+                        code
+                      ]
                     ])
                   )}
                   validateInfos={validations.courses_state}
