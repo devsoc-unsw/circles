@@ -48,7 +48,11 @@ const extrapolateCourseYears = (
 
   validYears.forEach((year) => {
     if (newData[year]) bestYear = year;
-    else newData[year] = { ...newData[bestYear], terms: [] };
+    else
+      newData[year] = {
+        ...newData[bestYear],
+        terms: year > LIVE_YEAR ? newData[LIVE_YEAR].terms : []
+      };
   });
 
   return newData;
@@ -376,7 +380,12 @@ const TermPlanner = () => {
                 <UnplannedColumn
                   dragging={!!draggingCourse}
                   courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [code, courseInfos[LIVE_YEAR][code]])
+                    planner.unplanned.map((code) => [
+                      code,
+                      courseInfos[validYears.includes(LIVE_YEAR) ? LIVE_YEAR : validYears.at(-1)!][
+                        code
+                      ]
+                    ])
                   )}
                   validateInfos={validations.courses_state}
                 />
