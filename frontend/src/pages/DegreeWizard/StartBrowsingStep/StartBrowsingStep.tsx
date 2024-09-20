@@ -18,6 +18,8 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const queryClient = useQueryClient();
   const token = useToken();
 
+  const degreeSetupErrorNotif = useNotification('degree-setup-error-notification');
+
   const setupDegreeMutation = useMutation({
     mutationFn: (wizard: DegreeWizardPayload) => setupDegreeWizard(token, wizard),
     onSuccess: () => {
@@ -34,7 +36,7 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
       navigate('/course-selector');
     },
     onError: (err) => {
-      openNotification({
+      degreeSetupErrorNotif({
         type: 'error',
         message: 'Error setting up degree, ensure your specialisations are valid.'
       });
