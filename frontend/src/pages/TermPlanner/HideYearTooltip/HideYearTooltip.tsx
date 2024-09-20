@@ -24,12 +24,11 @@ const HideYearTooltip = ({ year }: Props) => {
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const numYears = planner.years.length;
 
-  const notificationHandler = useNotification();
+  const hideYearsNotif = useNotification('hide-years-notification');
 
   const handleHideYear = () => {
     if (hiddenYears.length === numYears - 1) {
-      notificationHandler.tryOpenNotification({
-        name: 'hide-years-notification',
+      hideYearsNotif({
         type: 'error',
         message: "Something's not right",
         description: 'You cannot hide all years in your term planner'

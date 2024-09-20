@@ -36,10 +36,9 @@ const App = () => {
 
   const { theme } = useSettings(queryClient);
 
-  const notificationHandler = useNotification();
+  const contributeNotif = useNotification('contribute-notification', 5, 3);
 
-  notificationHandler.tryOpenNotification({
-    name: 'contribute-notification',
+  contributeNotif({
     type: 'info',
     message: 'Want to contribute?',
     description: (
@@ -74,8 +73,6 @@ const App = () => {
       </>
     ),
     duration: 20,
-    cooldown: 5,
-    clicksTillExpire: 3,
     icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
   });
 

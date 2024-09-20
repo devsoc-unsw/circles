@@ -34,12 +34,11 @@ const CourseSelector = () => {
 
   const [showedNotif, setShowedNotif] = useState(false);
 
-  const notificationHandler = useNotification();
+  const sidebarCoursesNotif = useNotification('sidebar-courses-notification');
 
   useEffect(() => {
     if (coursesQuery.isSuccess && !showedNotif && !Object.keys(coursesQuery.data).length) {
-      notificationHandler.tryOpenNotification({
-        name: 'sidebar-courses-notification',
+      sidebarCoursesNotif({
         type: 'info',
         message: 'How do I see more sidebar courses?',
         description:
@@ -47,7 +46,7 @@ const CourseSelector = () => {
       });
       setShowedNotif(true);
     }
-  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data, notificationHandler]);
+  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data, sidebarCoursesNotif]);
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 

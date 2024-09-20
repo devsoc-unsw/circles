@@ -31,7 +31,12 @@ const ImportPlannerMenu = () => {
     inputRef.current?.click();
   };
 
-  const notificationHandler = useNotification();
+  const importJsonErrorNotif = useNotification('import-json-error-notification');
+  const invalidJsonStructErrorNotif = useNotification('invalid-json-structure-error-notification');
+  const degreeStartUpdateErrorNotif = useNotification('degree-start-update-error-notification');
+  const summerTermErrorNotif = useNotification('summer-term-error-notification');
+  const invalidJsonFormatErrorNotif = useNotification('invalid-json-format-error-notification');
+  const importSuccessNotif = useNotification('import-success-notification');
 
   const uploadedJSONFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) {
@@ -39,8 +44,7 @@ const ImportPlannerMenu = () => {
     }
 
     if (e.target.files[0].type !== 'application/json') {
-      notificationHandler.tryOpenNotification({
-        name: 'import-json-error-notification',
+      importJsonErrorNotif({
         type: 'error',
         message: 'Import file needs to be JSON.',
         description: 'The uploaded file is not of type JSON.'
@@ -75,8 +79,7 @@ const ImportPlannerMenu = () => {
             !Object.prototype.hasOwnProperty.call(fileInJson, 'years') ||
             !Object.prototype.hasOwnProperty.call(fileInJson, 'version')
           ) {
-            notificationHandler.tryOpenNotification({
-              name: 'invalid-json-structure-error-notification',
+            invalidJsonStructErrorNotif({
               type: 'error',
               message: 'Invalid structure of the JSON file',
               description: 'The structure of the JSON file is not valid.'
@@ -87,8 +90,7 @@ const ImportPlannerMenu = () => {
             await updateDegreeLength(token, fileInJson.numYears);
             await updateStartYear(token, fileInJson.startYear.toString());
           } catch {
-            notificationHandler.tryOpenNotification({
-              name: 'degree-start-update-error-notification',
+            degreeStartUpdateErrorNotif({
               type: 'error',
               message: 'Error setting degree start year or length',
               description: 'There was an error updating the degree start year or length.'
@@ -99,8 +101,7 @@ const ImportPlannerMenu = () => {
             try {
               await toggleSummerTerm(token);
             } catch {
-              notificationHandler.tryOpenNotification({
-                name: 'summer-term-error-notification',
+              summerTermErrorNotif({
                 type: 'error',
                 message: 'Error setting summer term',
                 description: 'An error occurred when trying to import summer term visibility'
@@ -135,8 +136,7 @@ const ImportPlannerMenu = () => {
           setLoading(false);
           // eslint-disable-next-line no-console
           console.error('Error at uploadedJSONFile', err);
-          notificationHandler.tryOpenNotification({
-            name: 'invalid-json-format-error-notification',
+          invalidJsonFormatErrorNotif({
             type: 'error',
             message: 'Invalid JSON format',
             description: 'An error occured when parsing the JSON file'
@@ -144,8 +144,7 @@ const ImportPlannerMenu = () => {
           return;
         }
 
-        notificationHandler.tryOpenNotification({
-          name: 'import-success-notification',
+        importSuccessNotif({
           type: 'success',
           message: 'JSON Imported',
           description: 'Planner has been successfully imported.'

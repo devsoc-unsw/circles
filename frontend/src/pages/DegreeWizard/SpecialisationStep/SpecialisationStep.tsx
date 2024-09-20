@@ -92,7 +92,7 @@ const SpecialisationStep = ({
     });
   }
 
-  const notificationHandler = useNotification();
+  const missingSpecErrorNotif = useNotification('missing-spec-error-notification');
 
   const handleOnNextClick = () => {
     if (!options) return;
@@ -109,8 +109,7 @@ const SpecialisationStep = ({
       }
     });
     if (missingSpec) {
-      notificationHandler.tryOpenNotification({
-        name: 'missing-spec-error-notification',
+      missingSpecErrorNotif({
         type: 'error',
         message: `Select a ${type.substring(0, type.length - 1)} for nothing`
       });

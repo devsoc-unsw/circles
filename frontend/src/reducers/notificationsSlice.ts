@@ -1,9 +1,15 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
+export type NotificationDefinition = {
+  id: string;
+  maxAppearances: number;
+  cooldown: number;
+};
+
 export type NotificationType = {
-  name: string;
-  clicksTillExpire: number;
+  id: string;
+  maxAppearances: number;
   cooldown: number;
   nextNotificationTime: number;
 };
@@ -20,27 +26,32 @@ const notificationsSlice = createSlice({
   name: 'notifications',
   initialState: initialNotificationsState,
   reducers: {
-    addNotification: (state, action: PayloadAction<NotificationType>) => {
-      const actionNotif: NotificationType = action.payload;
+    addNotification: (state, action: PayloadAction<NotificationDefinition>) => {
+      const actionNotif: NotificationDefinition = action.payload;
       const foundNotifIndex: number = state.notifications.findIndex(
-        (notif) => notif.name === actionNotif.name
+        (notif) => notif.id === actionNotif.id
       );
 
+      const newNotif: NotificationType = {
+        ...actionNotif,
+        nextNotificationTime: Date.now() + actionNotif.cooldown * 1000
+      };
+
       if (foundNotifIndex === -1) {
-        state.notifications.push(action.payload);
+        state.notifications.push(newNotif);
       }
     },
     closeNotification: (state, action: PayloadAction<string>) => {
-      const notificationName: string = action.payload;
+      const notificationId: string = action.payload;
       const foundNotifIndex: number = state.notifications.findIndex(
-        (notif) => notif.name === notificationName
+        (notif) => notif.id === notificationId
       );
 
-      if (foundNotifIndex !== -1 && state.notifications[foundNotifIndex].clicksTillExpire > 0) {
+      if (foundNotifIndex !== -1 && state.notifications[foundNotifIndex].maxAppearances > 0) {
         state.notifications[foundNotifIndex].nextNotificationTime =
           Date.now() + state.notifications[foundNotifIndex].cooldown * 1000;
-        if (state.notifications[foundNotifIndex].clicksTillExpire > 0) {
-          state.notifications[foundNotifIndex].clicksTillExpire -= 1;
+        if (state.notifications[foundNotifIndex].maxAppearances > 0) {
+          state.notifications[foundNotifIndex].maxAppearances -= 1;
         }
       }
     }

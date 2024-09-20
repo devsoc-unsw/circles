@@ -66,17 +66,16 @@ const DegreeWizard = () => {
     }
   });
 
-  const notificationHandler = useNotification();
+  const degreeDisclaimerNotif = useNotification('degree-disclaimer-notification');
 
   useEffect(() => {
-    notificationHandler.tryOpenNotification({
-      name: 'degree-disclaimer-notification',
+    degreeDisclaimerNotif({
       type: 'info',
       message: 'Disclaimer',
       description:
         'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
     });
-  }, [notificationHandler]);
+  }, [degreeDisclaimerNotif]);
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];

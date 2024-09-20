@@ -7,31 +7,39 @@ import { addNotification, closeNotification } from 'reducers/notificationsSlice'
 
 type IconType = ArgsProps['type'];
 
-type Notification = {
-  tryOpenNotification: (notif: Props) => void;
-};
+type Notification = (notif: Props) => void;
 
 type Props = {
-  name: string;
   type: IconType;
   message: string;
   description?: React.ReactNode;
-  cooldown?: number;
-  clicksTillExpire?: number;
   duration?: number;
   icon?: React.ReactNode;
 };
 
-function useNotification(): Notification {
+function useNotification(id: string, cooldown?: number, maxAppearances?: number): Notification {
   const dispatch = useDispatch();
 
   const { notifications } = useSelector((state: RootState) => state.notifications);
 
+  const foundNotif = notifications.find((n) => n.id === id);
+
+  const notifMaxAppearances = maxAppearances ?? -1;
+  const notifCooldown = cooldown ?? 0;
+
+  if (!foundNotif) {
+    dispatch(
+      addNotification({
+        id,
+        maxAppearances: notifMaxAppearances,
+        cooldown: notifCooldown
+      })
+    );
+  }
+
   const tryOpenNotification = useCallback(
     (notif: Props) => {
-      const foundNotif = notifications.find((n) => n.name === notif.name);
-
-      if (foundNotif && foundNotif.clicksTillExpire === 0) {
+      if (foundNotif && foundNotif.maxAppearances === 0) {
         return;
       }
 
@@ -39,9 +47,7 @@ function useNotification(): Notification {
         return;
       }
 
-      notif.clicksTillExpire = notif.clicksTillExpire || -1;
-      notif.cooldown = notif.cooldown || 5;
-      notif.duration = notif.duration || 5;
+      notif.duration = notif.duration ?? 5;
 
       notification.open({
         type: notif.type,
@@ -51,25 +57,14 @@ function useNotification(): Notification {
         placement: 'bottomRight',
         icon: notif.icon,
         onClose: () => {
-          dispatch(closeNotification(notif.name));
+          dispatch(closeNotification(id));
         }
       });
-
-      dispatch(
-        addNotification({
-          name: notif.name,
-          clicksTillExpire: notif.clicksTillExpire,
-          cooldown: notif.cooldown,
-          nextNotificationTime: Date.now() + notif.cooldown * 1000
-        })
-      );
     },
-    [dispatch, notifications]
+    [dispatch, foundNotif, id]
   );
 
-  return {
-    tryOpenNotification
-  };
+  return tryOpenNotification;
 }
 
 export default useNotification;

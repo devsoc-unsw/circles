@@ -34,7 +34,10 @@ const SettingsMenu = ({ planner }: Props) => {
     return false;
   }
 
-  const notificationHandler = useNotification();
+  const degreeStartErrorNotif = useNotification('degree-start-error-notification');
+  const degreeLengthErrorNotif = useNotification('degree-length-error-notification');
+  const unplannedSummerCoursesNotif = useNotification('unplanned-summer-courses-notification');
+  const toggleSummerErrorNotif = useNotification('toggle-summer-error-notification');
 
   const updateStartYearMutation = useMutation({
     mutationFn: (year: string) => updateStartYear(token, year),
@@ -44,8 +47,7 @@ const SettingsMenu = ({ planner }: Props) => {
       });
     },
     onError: () => {
-      notificationHandler.tryOpenNotification({
-        name: 'degree-start-error-notification',
+      degreeStartErrorNotif({
         type: 'error',
         message: 'Error setting degree start year',
         description: 'There was an error updating the degree start year.'
@@ -73,8 +75,7 @@ const SettingsMenu = ({ planner }: Props) => {
       });
     },
     onError: () => {
-      notificationHandler.tryOpenNotification({
-        name: 'degree-length-error-notification',
+      degreeLengthErrorNotif({
         type: 'error',
         message: 'Error setting degree length',
         description: 'There was an error updating the degree length.'
@@ -103,8 +104,7 @@ const SettingsMenu = ({ planner }: Props) => {
       });
 
       if (planner && planner.isSummerEnabled) {
-        notificationHandler.tryOpenNotification({
-          name: 'unplanned-summer-courses-notification',
+        unplannedSummerCoursesNotif({
           type: 'info',
           message: 'Your summer term courses have been unplanned',
           description:
@@ -115,8 +115,7 @@ const SettingsMenu = ({ planner }: Props) => {
     onError: (err) => {
       // eslint-disable-next-line no-console
       console.error('Error at summerToggleMutationMutation: ', err);
-      notificationHandler.tryOpenNotification({
-        name: 'toggle-summer-error-notification',
+      toggleSummerErrorNotif({
         type: 'error',
         message: 'Error setting summer term',
         description: 'An error occurred when toggling the summer term.'

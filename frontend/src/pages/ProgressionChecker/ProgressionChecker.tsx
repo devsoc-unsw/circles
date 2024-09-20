@@ -56,10 +56,9 @@ const ProgressionChecker = () => {
   const structure: ProgramStructure = structureQuery.data?.structure ?? {};
   const uoc = structureQuery.data?.uoc ?? 0;
 
-  const notificationHandler = useNotification();
+  const progressionDisclaimerNotif = useNotification('progression-disclaimer-notification');
 
-  notificationHandler.tryOpenNotification({
-    name: 'progression-disclaimer-notification',
+  progressionDisclaimerNotif({
     type: 'info',
     message: 'Disclaimer',
     description:
