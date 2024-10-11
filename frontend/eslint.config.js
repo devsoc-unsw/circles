@@ -1,4 +1,4 @@
-{
+export default {
     "root": true,
     "env": {
         "browser": true,
@@ -9,8 +9,6 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:react/recommended",
-        "airbnb",
-        "airbnb-typescript",
         "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
