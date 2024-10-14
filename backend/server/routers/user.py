@@ -64,8 +64,8 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
             raise HTTPException(status_code=400, detail="Invalid locked term")
         if termIndex not in ["0", "1", "2", "3"]:
             raise HTTPException(status_code=400, detail="Invalid locked term")
-    for year in data.settings.hiddenYears:
-        if year < 0 or year >= len(data.planner.years):
+    for hiddenYear in data.settings.hiddenYears:
+        if hiddenYear < 0 or hiddenYear >= len(data.planner.years):
             raise HTTPException(status_code=400, detail="Invalid hidden year")
 
     courses = []
@@ -73,9 +73,9 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         if course not in data.courses.keys():
             raise HTTPException(status_code=400, detail="Unplanned course not in courses")
         courses.append(course)
-    for year in data.planner.years:
-        for term in [year.T0, year.T1, year.T2, year.T3]:
-            for course in term:
+    for plannerYear in data.planner.years:
+        for plannerTerm in [plannerYear.T0, plannerYear.T1, plannerYear.T2, plannerYear.T3]:
+            for course in plannerTerm:
                 if course not in data.courses.keys():
                     raise HTTPException(status_code=400, detail="Planned course not in courses")
                 courses.append(course)

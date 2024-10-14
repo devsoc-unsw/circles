@@ -56,6 +56,7 @@ class _BaseUserStorage(BaseModel):
     guest: bool
 
 class UserImport(BaseModel):
+    version: int
     degree: UserDegreeStorage
     courses: dict[str, UserCourseMinimal]
     planner: UserPlannerStorage
