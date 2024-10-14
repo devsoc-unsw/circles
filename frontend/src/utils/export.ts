@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   CourseResponse,
   DegreeResponse,
@@ -73,6 +72,7 @@ export const importUser = (data: JSON) => {
   const parsed = exportOutputSchema.safeParse(data);
   if (!parsed.success || parsed.data === undefined) {
     parsed.error.errors.forEach((err) => {
+      // eslint-disable-next-line no-console
       console.error(err.message);
     });
     throw new Error('Invalid data');

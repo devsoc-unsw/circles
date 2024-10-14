@@ -1,10 +1,9 @@
 from typing import cast
 
 from fastapi import HTTPException
+from data.processors.models import SpecData
 from server.routers.model import SpecType
-
-from backend.data.processors.models import SpecData
-from backend.server.routers.utility.common import get_all_specialisations
+from server.routers.utility.common import get_all_specialisations
 
 
 def validate_degree(programCode: str, specs: list[str]):

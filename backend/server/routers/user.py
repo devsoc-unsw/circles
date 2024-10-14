@@ -5,10 +5,9 @@ from server.db.helpers.models import PartialUserStorage, UserCourseStorage, User
 from server.routers.utility.common import get_course_details
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
+from server.routers.utility.wizard import validate_degree
 from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
 import server.db.helpers.users as udb
-
-from backend.server.routers.utility.wizard import validate_degree
 
 router = APIRouter(
     prefix="/user",
