@@ -1,14 +1,14 @@
-from typing import Annotated, Dict, Optional, cast
+from typing import Annotated, Dict, Optional
 from fastapi import APIRouter, HTTPException, Security
 
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
-from data.processors.models import SpecData
-from server.routers.utility.common import get_all_specialisations, get_course_details
+from server.routers.utility.common import get_course_details
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
-from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage, SpecType
-
+from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
 import server.db.helpers.users as udb
+
+from backend.server.routers.utility.wizard import validate_degree
 
 router = APIRouter(
     prefix="/user",
@@ -19,8 +19,6 @@ require_uid = HTTPBearerToUserID()
 
 @router.put("/import")
 def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
-    assert udb.reset_user(uid)
-
     if data.planner.startYear < 2019:
         raise HTTPException(status_code=400, detail="Invalid start year")
     if len(data.planner.years) > 10:
@@ -28,35 +26,8 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     if len(data.planner.years) < 1:
         raise HTTPException(status_code=400, detail="Not enough years")
 
-    possible_specs = get_all_specialisations(data.degree.programCode)
-    if possible_specs is None:
-        raise HTTPException(status_code=400, detail="Invalid program code")
-
-    flattened_containers: list[tuple[bool, list[str]]] = [
-        (
-            program_sub_container["is_optional"],
-            list(program_sub_container["specs"].keys())
-        )
-        for spec_type_container in cast(dict[SpecType, dict[str, SpecData]], possible_specs).values()
-        for program_sub_container in spec_type_container.values()
-    ]
-
-    invalid_lhs_specs = set(data.degree.specs).difference(
-        spec_code
-        for (_, spec_codes) in flattened_containers
-        for spec_code in spec_codes
-    )
-
-    spec_reqs_not_met = any(
-        (
-            not is_optional
-            and not set(spec_codes).intersection(data.degree.specs)
-        )
-        for (is_optional, spec_codes) in flattened_containers
-    )
-
-    if invalid_lhs_specs or spec_reqs_not_met:
-        raise HTTPException(status_code=400, detail="Invalid specialisations")
+    # Raises an HTTPException if invalid
+    validate_degree(data.degree.programCode, data.degree.specs)
 
     for term in data.planner.lockedTerms.keys():
         year, termIndex = term.split("T")
@@ -92,9 +63,8 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         userCourses[course] = UserCourseStorage(code=course, mark=data.courses[course].mark, uoc=uoc, ignoreFromProgression=data.courses[course].ignoreFromProgression)
 
     user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=data.settings)
-    udb.reset_user(uid)
-    udb.update_user(uid, user)
-
+    if (not udb.reset_user(uid) or not udb.update_user(uid, user)):
+        raise HTTPException(status_code=500, detail="Failed to import user")
 
 @router.get("/data/all")
 def get_user(uid: Annotated[str, Security(require_uid)]) -> Storage:
@@ -280,48 +250,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
     if num_years < 1:
         raise HTTPException(status_code=400, detail="Invalid year range")
 
-    # Ensure that all specialisations are valid
-    # Need a bidirectoinal validate
-    # All specs in wizard (lhs) must be in the RHS
-    # All specs in the RHS that are "required" must have an associated LHS selection
-
-    # Keys in the specInfo
-    # - 'specs': List[str] - name of the specialisations - thing that matters
-    # - 'notes': str - dw abt this (Fe's prob tbh)
-    # - 'is_optional': bool - if true then u need to validate associated elem in LHS
-
-    avail_specs = get_all_specialisations(wizard.programCode)
-    if avail_specs is None:
-        raise HTTPException(status_code=400, detail="Invalid program code")
-
-    # list[(is_optional, spec_codes)]
-    flattened_containers: list[tuple[bool, list[str]]] = [
-        (
-            program_sub_container["is_optional"],
-            list(program_sub_container["specs"].keys())
-        )
-        for spec_type_container in cast(dict[SpecType, dict[str, SpecData]], avail_specs).values()
-        for program_sub_container in spec_type_container.values()
-    ]
-
-    invalid_lhs_specs = set(wizard.specs).difference(
-        spec_code
-        for (_, spec_codes) in flattened_containers
-        for spec_code in spec_codes
-    )
-
-    spec_reqs_not_met = any(
-        (
-            not is_optional
-            and not set(spec_codes).intersection(wizard.specs)
-        )
-        for (is_optional, spec_codes) in flattened_containers
-    )
-
-    # ceebs returning the bad data because FE should be valid anyways
-    if invalid_lhs_specs or spec_reqs_not_met:
-        raise HTTPException(status_code=400, detail="Invalid specialisations")
-    print("Valid specs")
+    # Raises an HTTPException if invalid
+    validate_degree(wizard.programCode, wizard.specs)
 
     planner: PlannerLocalStorage = {
         'unplanned': [],
