@@ -12,8 +12,8 @@ def test_updateDegreeLength_extend():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     requests.put(
         f'http://127.0.0.1:8000/user/updateDegreeLength', headers=headers, json={"numYears": 4})
     user_after = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
@@ -27,8 +27,8 @@ def test_updateDegreeLength_shorten():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     requests.put(
         f'http://127.0.0.1:8000/user/updateDegreeLength', headers=headers, json={"numYears": 1})
     user_after = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()

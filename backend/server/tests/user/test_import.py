@@ -9,21 +9,21 @@ with open(PATH, encoding="utf8") as f:
     DATA = json.load(f)
 
 
-def test_saveLocalStorage_empty():
+def test_import_empty():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    x = requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers)
+    x = requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["empty_year"], headers=headers)
     assert x.status_code == 200
 
 
-def test_saveLocalStorage_simple():
+def test_import_simple():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    x = requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    x = requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     assert x.status_code == 200
 
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers)

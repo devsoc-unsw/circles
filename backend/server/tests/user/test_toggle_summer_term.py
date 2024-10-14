@@ -12,8 +12,8 @@ def test_toggleSummerTerm():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    x = requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["summer_term"], headers=headers)
+    x = requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["summer_term"], headers=headers)
     assert x.status_code == 200
     data = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers)
     assert data.json()["planner"]["isSummerEnabled"]

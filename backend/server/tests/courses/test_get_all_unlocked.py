@@ -14,7 +14,7 @@ def test_fix_wam_only_unlock_given_course():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_2"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_2"], headers=headers)
 
     x = requests.post(
         "http://127.0.0.1:8000/courses/getAllUnlocked", json={}, headers=headers
@@ -28,7 +28,7 @@ def test_unlock_dependent_course():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_one_math"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_one_math"], headers=headers)
 
     requests.put(
         'http://127.0.0.1:8000/user/updateCourseMark',

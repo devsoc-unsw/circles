@@ -29,7 +29,12 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     validate_degree(data.degree.programCode, data.degree.specs)
 
     for term in data.planner.lockedTerms.keys():
-        year, termIndex = term.split("T")
+        try:
+            year, termIndex = term.split("T")
+            int(year)
+            int(termIndex)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail="Invalid locked term") from e
         if int(year) < data.planner.startYear or int(year) >= data.planner.startYear + len(data.planner.years):
             raise HTTPException(status_code=400, detail="Invalid locked term")
         if termIndex not in ["0", "1", "2", "3"]:
@@ -62,7 +67,7 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         userCourses[course] = UserCourseStorage(code=course, mark=data.courses[course].mark, uoc=uoc, ignoreFromProgression=data.courses[course].ignoreFromProgression)
 
     user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=data.settings)
-    if (not udb.reset_user(uid) or not udb.update_user(uid, user)):
+    if not udb.reset_user(uid) or not udb.update_user(uid, user):
         raise HTTPException(status_code=500, detail="Failed to import user")
 
 @router.get("/data/all")

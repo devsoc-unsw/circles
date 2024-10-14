@@ -12,8 +12,8 @@ def test_updateCourseMark_back_time_2019():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     user_before = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     requests.put(
         f'http://127.0.0.1:8000/user/updateStartYear', headers=headers, json={"startYear": 2019})
@@ -27,8 +27,8 @@ def test_updateCourseMark_back_time_2018():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     user_before = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     requests.put(
         f'http://127.0.0.1:8000/user/updateStartYear', headers=headers, json={"startYear": 2018})
@@ -41,8 +41,8 @@ def test_updateCourseMark_forward_time_2021():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     user_before = requests.get(f'http://127.0.0.1:8000/user/data/all', headers=headers).json()
     requests.put(
         f'http://127.0.0.1:8000/user/updateStartYear', headers=headers, json={"startYear": 2021})

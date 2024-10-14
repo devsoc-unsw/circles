@@ -21,7 +21,7 @@ def test_no_dependencies():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_2"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_2"], headers=headers)
 
     for code, mark in MARKS.items():
         requests.put('http://127.0.0.1:8000/user/updateCourseMark',
@@ -40,7 +40,7 @@ def test_multiple_dependencies():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_2"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_2"], headers=headers)
 
     for code, mark in MARKS.items():
         requests.put('http://127.0.0.1:8000/user/updateCourseMark',
@@ -59,7 +59,7 @@ def test_invalid_course():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_2"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_2"], headers=headers)
 
     for code, mark in MARKS.items():
         requests.put('http://127.0.0.1:8000/user/updateCourseMark',

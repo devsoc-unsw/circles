@@ -12,8 +12,8 @@ def test_updateCourseMark():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post(
-        'http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put(
+        'http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     requests.put(
         'http://127.0.0.1:8000/user/updateCourseMark', json={
             'course': 'COMP1511',
