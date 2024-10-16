@@ -15,7 +15,7 @@ fake_specs = ["NAVLAH", "GMATEH", "ARCYB2"]
 @composite
 def major_minor_for_program(draw):
     possible_programs = copy.deepcopy(programs)
-    possible_programs.remove("3362") # City Planning (Honours) does not have majors/minors
+    # possible_programs.remove("3362") # City Planning (Honours) does not have majors/minors
 
     program = draw(sampled_from(possible_programs))
     possible_specs: list[str] = []
