@@ -49,18 +49,18 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
 
   const handleSaveUserSettings = async () => {
     // TODO: Rewrite these checks in the backend
-    // The check below was commented out as it is not always required, i.e. 3362
+    // The check below is not always required, i.e. 3362
     // If we do this at the backend, we can check everything, and only when needed
     if (!degreeInfo.programCode) {
       openNotification({
         type: 'error',
         message: 'Please select a degree'
       });
-      // } else if (!degreeInfo.specs.length) {
-      //   openNotification({
-      //     type: 'error',
-      //     message: 'Please select a specialisation'
-      //   });
+    } else if (!degreeInfo.specs.length) {
+      openNotification({
+        type: 'error',
+        message: 'Please select a specialisation'
+      });
     } else {
       handleSetupDegree();
     }

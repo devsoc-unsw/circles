@@ -136,8 +136,7 @@ const DegreeWizard = () => {
                 />
               )
           )}
-          {currStep >= Steps.DONE ||
-            (currStep === Steps.SPECS && <StartBrowsingStep degreeInfo={degreeInfo} />)}
+          {currStep >= Steps.DONE && <StartBrowsingStep degreeInfo={degreeInfo} />}
         </S.StepsWrapper>
       </S.ContainerWrapper>
     </PageTemplate>
