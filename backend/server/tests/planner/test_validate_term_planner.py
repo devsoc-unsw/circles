@@ -69,7 +69,7 @@ def test_validateTermPlanner_valid_progress():
             'handbook_note': 'Please refer to the course overview section for further information on requirements',
             'is_accurate': True,
             'unlocked': False,
-            'warnings': ['((((DESN1000) OR you need to do a program of type COMP OR you need to do a program of type FOOD OR you need to do a program of type MEDC) AND 42 UOC required in all courses you have 38 UOC))']
+            'warnings': ['((42 UOC required in all courses you have 38 UOC))']
         }
     }
 
