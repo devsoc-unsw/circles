@@ -81,3 +81,6 @@ secret.json
 secret.env
 # "sensitive" data (i.e. raw zID)
 backend/data/scrapers/enrolmentDataRaw.json
+
+# People keep making these by accident
+package-lock.json

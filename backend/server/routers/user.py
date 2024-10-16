@@ -1,13 +1,12 @@
-from itertools import chain
-from typing import Annotated, Dict, Optional, cast
+from typing import Annotated, Dict, Optional
 from fastapi import APIRouter, HTTPException, Security
 
-from data.processors.models import SpecData
-from server.routers.utility.common import get_all_specialisations, get_course_details
+from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
+from server.routers.utility.common import get_course_details
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
-from server.routers.model import CourseMark, CourseStorage, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, LocalStorage, PlannerLocalStorage, Storage, SpecType
-
+from server.routers.utility.wizard import validate_degree
+from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
 import server.db.helpers.users as udb
 
 router = APIRouter(
@@ -17,31 +16,59 @@ router = APIRouter(
 
 require_uid = HTTPBearerToUserID()
 
-# Ideally not used often.
-@router.post("/saveLocalStorage")
-def save_local_storage(localStorage: LocalStorage, uid: Annotated[str, Security(require_uid)]):
-    planned: list[str] = sum((sum(year.values(), [])
-                             for year in localStorage.planner['years']), [])
-    unplanned: list[str] = localStorage.planner['unplanned']
-    courses: dict[str, CourseStorage] = {
-        course: {
-            'code': course,
-            'mark': None, # wtf we nuking marks?
-            'uoc': get_course_details(course)['UOC'],
-            'ignoreFromProgression': False
-        }
-        for course in chain(planned, unplanned)
-    }
-    # cancer, but the FE inspired this cancer
-    real_planner = localStorage.planner.copy()
-    item: Storage = {
-        'degree': localStorage.degree,
-        'planner': real_planner,
-        'courses': courses,
-        'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
-    }
-    set_user(uid, item)
+@router.put("/import")
+def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
+    if data.planner.startYear < 2019:
+        raise HTTPException(status_code=400, detail="Invalid start year")
+    if len(data.planner.years) > 10:
+        raise HTTPException(status_code=400, detail="Too many years")
+    if len(data.planner.years) < 1:
+        raise HTTPException(status_code=400, detail="Not enough years")
 
+    # Raises an HTTPException if invalid
+    validate_degree(data.degree.programCode, data.degree.specs)
+
+    for term in data.planner.lockedTerms.keys():
+        try:
+            year, termIndex = term.split("T")
+            int(year)
+            int(termIndex)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail="Invalid locked term") from e
+        if int(year) < data.planner.startYear or int(year) >= data.planner.startYear + len(data.planner.years):
+            raise HTTPException(status_code=400, detail="Invalid locked term")
+        if termIndex not in ["0", "1", "2", "3"]:
+            raise HTTPException(status_code=400, detail="Invalid locked term")
+    for hiddenYear in data.settings.hiddenYears:
+        if hiddenYear < 0 or hiddenYear >= len(data.planner.years):
+            raise HTTPException(status_code=400, detail="Invalid hidden year")
+
+    courses = []
+    for course in data.planner.unplanned:
+        if course not in data.courses.keys():
+            raise HTTPException(status_code=400, detail="Unplanned course not in courses")
+        courses.append(course)
+    for plannerYear in data.planner.years:
+        for plannerTerm in [plannerYear.T0, plannerYear.T1, plannerYear.T2, plannerYear.T3]:
+            for course in plannerTerm:
+                if course not in data.courses.keys():
+                    raise HTTPException(status_code=400, detail="Planned course not in courses")
+                courses.append(course)
+    for course in data.courses.keys():
+        if course not in courses:
+            raise HTTPException(status_code=400, detail="Course in courses not in planner")
+        mark = data.courses[course].mark
+        if  isinstance(mark, int) and (mark < 0 or mark > 100):
+            raise HTTPException(status_code=400, detail="Invalid mark")
+    userCourses: UserCoursesStorage = {}
+    for course in courses:
+        # This raises an exception
+        uoc = get_course_details(course)["UOC"]
+        userCourses[course] = UserCourseStorage(code=course, mark=data.courses[course].mark, uoc=uoc, ignoreFromProgression=data.courses[course].ignoreFromProgression)
+
+    user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=data.settings)
+    if not udb.reset_user(uid) or not udb.update_user(uid, user):
+        raise HTTPException(status_code=500, detail="Failed to import user")
 
 @router.get("/data/all")
 def get_user(uid: Annotated[str, Security(require_uid)]) -> Storage:
@@ -227,48 +254,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
     if num_years < 1:
         raise HTTPException(status_code=400, detail="Invalid year range")
 
-    # Ensure that all specialisations are valid
-    # Need a bidirectoinal validate
-    # All specs in wizard (lhs) must be in the RHS
-    # All specs in the RHS that are "required" must have an associated LHS selection
-
-    # Keys in the specInfo
-    # - 'specs': List[str] - name of the specialisations - thing that matters
-    # - 'notes': str - dw abt this (Fe's prob tbh)
-    # - 'is_optional': bool - if true then u need to validate associated elem in LHS
-
-    avail_specs = get_all_specialisations(wizard.programCode)
-    if avail_specs is None:
-        raise HTTPException(status_code=400, detail="Invalid program code")
-
-    # list[(is_optional, spec_codes)]
-    flattened_containers: list[tuple[bool, list[str]]] = [
-        (
-            program_sub_container["is_optional"],
-            list(program_sub_container["specs"].keys())
-        )
-        for spec_type_container in cast(dict[SpecType, dict[str, SpecData]], avail_specs).values()
-        for program_sub_container in spec_type_container.values()
-    ]
-
-    invalid_lhs_specs = set(wizard.specs).difference(
-        spec_code
-        for (_, spec_codes) in flattened_containers
-        for spec_code in spec_codes
-    )
-
-    spec_reqs_not_met = any(
-        (
-            not is_optional
-            and not set(spec_codes).intersection(wizard.specs)
-        )
-        for (is_optional, spec_codes) in flattened_containers
-    )
-
-    # ceebs returning the bad data because FE should be valid anyways
-    if invalid_lhs_specs or spec_reqs_not_met:
-        raise HTTPException(status_code=400, detail="Invalid specialisations")
-    print("Valid specs")
+    # Raises an HTTPException if invalid
+    validate_degree(wizard.programCode, wizard.specs)
 
     planner: PlannerLocalStorage = {
         'unplanned': [],

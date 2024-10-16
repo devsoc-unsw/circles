@@ -9,7 +9,7 @@ def test_autoplanning_generic():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json={
+    requests.put('http://127.0.0.1:8000/user/import', json={
         "degree": {
             "programCode": "3778",
             "specs": [

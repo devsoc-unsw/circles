@@ -16,6 +16,9 @@ class UserDegreeStorage(BaseModel):
     programCode: str
     specs: List[str]
 
+class UserCourseMinimal(BaseModel):
+    mark: Union[Literal['SY', 'FL', 'PS', 'CR', 'DN', 'HD'], int, None]
+    ignoreFromProgression: bool
 
 class UserCourseStorage(BaseModel):
     code: str
@@ -51,6 +54,12 @@ class UserSettingsStorage(BaseModel):
 class _BaseUserStorage(BaseModel):
     # NOTE: could also put uid here if we want
     guest: bool
+
+class UserImport(BaseModel):
+    degree: UserDegreeStorage
+    courses: dict[str, UserCourseMinimal]
+    planner: UserPlannerStorage
+    settings: UserSettingsStorage
 
 class UserStorage(_BaseUserStorage):
     setup: Literal[True] = True

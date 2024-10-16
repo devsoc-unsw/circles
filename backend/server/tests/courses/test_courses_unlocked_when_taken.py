@@ -12,7 +12,7 @@ def test_no_courses_completed():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_no_courses"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_no_courses"], headers=headers)
 
     x = requests.post(
         'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMP1511', json={}, headers=headers)
@@ -35,7 +35,7 @@ def test_malformed_request():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_no_courses"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_no_courses"], headers=headers)
 
     x = requests.post(
         'http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/&&&&&', {}, headers=headers)
@@ -49,7 +49,7 @@ def test_two_courses_completed():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["sample_user_1"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["sample_user_1"], headers=headers)
 
     requests.put(
         'http://127.0.0.1:8000/user/updateCourseMark',

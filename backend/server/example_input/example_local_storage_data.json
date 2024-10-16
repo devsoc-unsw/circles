@@ -1,7 +1,7 @@
 {
     "empty_year": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [ "COMPA1" ]
         },
         "planner": {
@@ -28,11 +28,16 @@
             "startYear": 2020,
             "isSummerEnabled": true,
             "lockedTerms": {}
+        },
+        "courses": {},
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "summer_term": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [ "COMPA1" ]
         },
         "planner": {
@@ -58,11 +63,29 @@
             "startYear": 2020,
             "isSummerEnabled": true,
             "lockedTerms": {}
+        },
+        "courses": {
+            "COMP1511": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1141": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1081": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "no_uoc": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [ "COMPA1" ]
         },
         "planner": {
@@ -84,11 +107,41 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "COMP1511": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1141": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1081": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP1521": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP2511": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP4128": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "suppress_warning": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [ "COMPA1" ]
         },
         "planner": {
@@ -110,11 +163,41 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "COMP1511": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1141": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1081": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP1521": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP2511": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP4128": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "simple_year": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [ "COMPA1" ]
         },
         "planner": {
@@ -149,11 +232,49 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "COMP1511": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1141": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1081": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP1521": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP1531": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP2521": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "ENGG2600": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "COMP6447": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "out_of_order": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [ "COMPA1" ]
         },
         "planner": {
@@ -184,6 +305,20 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "MATH1241": {
+                "mark": null,
+                "ignoreFromProgression": false
+            },
+            "MATH1141": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "sample_user_1": {
@@ -218,6 +353,20 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "COMP1511": {
+                "mark": 90,
+                "ignoreFromProgression": false
+            },
+            "COMP1521": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "sample_user_2": {
@@ -252,11 +401,41 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "COMP1511": {
+                "mark": 90,
+                "ignoreFromProgression": false
+            },
+            "COMP1521": {
+                "mark": 90,
+                "ignoreFromProgression": false
+            },
+            "COMP1531": {
+                "mark": 90,
+                "ignoreFromProgression": false
+            },
+            "COMP2521": {
+                "mark": 85,
+                "ignoreFromProgression": false
+            },
+            "COMP3231": {
+                "mark": 80,
+                "ignoreFromProgression": false
+            },
+            "COMP9242": {
+                "mark": 75,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "sample_user_one_math": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [
                 "COMPA1",
                 "ACCTA2"
@@ -286,11 +465,21 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {
+            "MATH1131": {
+                "mark": null,
+                "ignoreFromProgression": false
+            }
+        },
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     },
     "sample_user_no_courses": {
         "degree": {
-            "programCode": "3707",
+            "programCode": "3778",
             "specs": [
                 "COMPA1",
                 "ACCTA2"
@@ -320,6 +509,11 @@
             "startYear": 2020,
             "isSummerEnabled": false,
             "lockedTerms": {}
+        },
+        "courses": {},
+        "settings": {
+            "showMarks": false,
+            "hiddenYears": []
         }
     }
 }

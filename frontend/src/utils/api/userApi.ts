@@ -6,11 +6,16 @@ import {
   SettingsResponse,
   UserResponse
 } from 'types/userResponse';
+import { UserJson } from 'utils/export';
 import { withAuthorization } from './authApi';
 
 export const getUser = async (token: string): Promise<UserResponse> => {
   const user = await axios.get(`user/data/all`, { headers: withAuthorization(token) });
   return user.data as UserResponse;
+};
+
+export const importUser = async (token: string, user: UserJson): Promise<void> => {
+  await axios.put(`user/import`, user, { headers: withAuthorization(token) });
 };
 
 export const getUserDegree = async (token: string): Promise<DegreeResponse> => {

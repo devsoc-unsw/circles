@@ -1,17 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Spin } from 'antd';
-import { JSONPlanner, Term } from 'types/planner';
-import { badPlanner } from 'types/userResponse';
-import { getCourseInfo } from 'utils/api/coursesApi';
-import { addToUnplanned, setUnplannedCourseToTerm } from 'utils/api/plannerApi';
-import {
-  getUserPlanner,
-  toggleSummerTerm,
-  updateDegreeLength,
-  updateStartYear
-} from 'utils/api/userApi';
+import { importUser as importUserApi } from 'utils/api/userApi';
+import { importUser, UserJson } from 'utils/export';
 import openNotification from 'utils/openNotification';
 import useToken from 'hooks/useToken';
 import CS from '../common/styles';
@@ -19,11 +11,26 @@ import S from './styles';
 
 const ImportPlannerMenu = () => {
   const token = useToken();
-  const plannerQuery = useQuery({
-    queryKey: ['planner'],
-    queryFn: () => getUserPlanner(token)
+  const queryClient = useQueryClient();
+
+  const importUserMutation = useMutation({
+    mutationFn: (user: UserJson) => importUserApi(token, user),
+    onSuccess: () => {
+      queryClient.resetQueries();
+    },
+    onError: () => {
+      openNotification({
+        type: 'error',
+        message: 'Import failed',
+        description: 'An error occurred when importing the planner'
+      });
+    }
   });
-  const planner = plannerQuery.data || badPlanner;
+
+  const handleImport = (user: UserJson) => {
+    importUserMutation.mutate(user);
+  };
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
@@ -46,103 +53,39 @@ const ImportPlannerMenu = () => {
       return;
     }
 
-    const plannedCourses: string[] = [];
-    planner.years.forEach((year) => {
-      Object.values(year).forEach((termKey) => {
-        termKey.forEach((code) => {
-          plannedCourses.push(code);
-        });
-      });
-    });
-
     setLoading(true);
     const reader = new FileReader();
     reader.readAsText(e.target.files[0], 'UTF-8');
     reader.onload = async (ev) => {
-      if (ev.target !== null) {
-        const content = ev.target.result;
-        e.target.value = '';
-
-        try {
-          const fileInJson = JSON.parse(content as string) as JSONPlanner;
-          if (
-            !Object.prototype.hasOwnProperty.call(fileInJson, 'startYear') ||
-            !Object.prototype.hasOwnProperty.call(fileInJson, 'numYears') ||
-            !Object.prototype.hasOwnProperty.call(fileInJson, 'isSummerEnabled') ||
-            !Object.prototype.hasOwnProperty.call(fileInJson, 'years') ||
-            !Object.prototype.hasOwnProperty.call(fileInJson, 'version')
-          ) {
-            openNotification({
-              type: 'error',
-              message: 'Invalid structure of the JSON file',
-              description: 'The structure of the JSON file is not valid.'
-            });
-            return;
-          }
-          try {
-            await updateDegreeLength(token, fileInJson.numYears);
-            await updateStartYear(token, fileInJson.startYear.toString());
-          } catch {
-            openNotification({
-              type: 'error',
-              message: 'Error setting degree start year or length',
-              description: 'There was an error updating the degree start year or length.'
-            });
-            return;
-          }
-          if (planner.isSummerEnabled !== fileInJson.isSummerEnabled) {
-            try {
-              await toggleSummerTerm(token);
-            } catch {
-              openNotification({
-                type: 'error',
-                message: 'Error setting summer term',
-                description: 'An error occurred when trying to import summer term visibility'
-              });
-              return;
-            }
-          }
-          fileInJson.years.forEach((year, yearIndex) => {
-            Object.entries(year).forEach(([term, termCourses]) => {
-              termCourses.forEach(async (code, index) => {
-                const course = await getCourseInfo(code);
-                if (plannedCourses.indexOf(course.code) === -1) {
-                  plannedCourses.push(course.code);
-                  addToUnplanned(token, course.code);
-                  const destYear = Number(yearIndex) + Number(planner.startYear);
-                  const destTerm = term as Term;
-                  const destRow = destYear - planner.startYear;
-                  const destIndex = index;
-                  const data = {
-                    destRow,
-                    destTerm,
-                    destIndex,
-                    courseCode: code
-                  };
-                  setUnplannedCourseToTerm(token, data);
-                }
-              });
-            });
-          });
-          setLoading(false);
-        } catch (err) {
-          setLoading(false);
-          // eslint-disable-next-line no-console
-          console.error('Error at uploadedJSONFile', err);
-          openNotification({
-            type: 'error',
-            message: 'Invalid JSON format',
-            description: 'An error occured when parsing the JSON file'
-          });
-          return;
-        }
-
-        openNotification({
-          type: 'success',
-          message: 'JSON Imported',
-          description: 'Planner has been successfully imported.'
-        });
+      if (ev.target === null) {
+        return;
       }
+
+      const content = ev.target.result;
+      e.target.value = '';
+
+      try {
+        const fileInJson = JSON.parse(content as string) as JSON;
+        const user = importUser(fileInJson);
+        handleImport(user);
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+        // eslint-disable-next-line no-console
+        console.error('Error at uploadedJSONFile', err);
+        openNotification({
+          type: 'error',
+          message: 'Invalid JSON format',
+          description: 'An error occured when parsing the JSON file'
+        });
+        return;
+      }
+
+      openNotification({
+        type: 'success',
+        message: 'JSON Imported',
+        description: 'Planner has been successfully imported.'
+      });
     };
   };
 

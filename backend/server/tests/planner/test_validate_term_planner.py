@@ -12,7 +12,7 @@ def test_validateTermPlanner_empty_planner():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["empty_year"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["empty_year"], headers=headers)
 
     x = requests.get(
         'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
@@ -24,7 +24,7 @@ def test_validateTermPlanner_valid_progress():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["simple_year"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["simple_year"], headers=headers)
     x = requests.get(
         'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
     assert x.status_code == 200
@@ -69,7 +69,7 @@ def test_validateTermPlanner_valid_progress():
             'handbook_note': 'Please refer to the course overview section for further information on requirements',
             'is_accurate': True,
             'unlocked': False,
-            'warnings': ['((((DESN1000) OR you need to do a program of type COMP OR you need to do a program of type FOOD OR you need to do a program of type MEDC) AND 42 UOC required in all courses you have 38 UOC))']
+            'warnings': ['((42 UOC required in all courses you have 38 UOC))']
         }
     }
 
@@ -78,7 +78,7 @@ def test_validateTermPlanner_invalid_progress():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["no_uoc"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["no_uoc"], headers=headers)
 
     x = requests.get(
         'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
@@ -130,7 +130,7 @@ def test_validateTermPlanner_out_of_order_progress():
     clear()
     token = get_token()
     headers = get_token_headers(token)
-    requests.post('http://127.0.0.1:8000/user/saveLocalStorage', json=DATA["out_of_order"], headers=headers)
+    requests.put('http://127.0.0.1:8000/user/import', json=DATA["out_of_order"], headers=headers)
     x = requests.get(
         'http://127.0.0.1:8000/planner/validateTermPlanner', headers=headers)
     assert x.status_code == 200

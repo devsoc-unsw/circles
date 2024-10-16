@@ -23,7 +23,7 @@ const HeroContent = ({ startLocation }: Props) => {
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
           whileHover={{ scale: 1.1 }}
         >
-          START WITH CSESOC <Space size="large" />
+          GET STARTED <Space size="large" />
           <ArrowRightOutlined style={{ strokeWidth: '5rem', stroke: '#9453e6' }} />
         </S.HeroCTA>
       </Link>
