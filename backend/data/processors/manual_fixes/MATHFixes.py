@@ -33,7 +33,8 @@ def fix_conditions():
     codes = ["MATH3000", "MATH3001", "MATH3002", "MATH3041",
              "MATH3511", "MATH3521", "MATH3560", "MATH3570"]
     for code in codes:
-        CONDITIONS[code][PROCESSED] = MATH_3000_8()
+        if code in CONDITIONS:
+            CONDITIONS[code][PROCESSED] = MATH_3000_8()
 
     CONDITIONS["MATH2111"][PROCESSED] = MATH_2111()
     CONDITIONS["MATH2221"][PROCESSED] = MATH_2221()

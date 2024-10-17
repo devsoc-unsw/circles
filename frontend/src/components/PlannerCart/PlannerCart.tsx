@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Tooltip, Typography } from 'antd';
+import { badCourses } from 'types/userResponse';
+import { removeAll } from 'utils/api/plannerApi';
+import { getUserCourses } from 'utils/api/userApi';
 import CourseCartCard from 'components/CourseCartCard';
-import type { RootState } from 'config/store';
-import { removeAllCourses } from 'reducers/plannerSlice';
+import useToken from 'hooks/useToken';
 import S from './styles';
 
 const { Text, Title } = Typography;
 
 const PlannerCart = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const courses = useSelector((store: RootState) => store.planner.courses);
   const [showMenu, setShowMenu] = useState(false);
+  const token = useToken();
+
+  const courses =
+    useQuery({
+      queryKey: ['courses'],
+      queryFn: () => getUserCourses(token),
+      enabled: showMenu,
+      staleTime: 100000
+    }).data ?? badCourses;
+
+  const removeAllCourses = useMutation({
+    mutationKey: ['removeCourses'],
+    mutationFn: () => removeAll(token)
+  });
 
   const pathname = useLocation();
 
@@ -52,7 +66,7 @@ const PlannerCart = () => {
                   block
                   danger
                   icon={<DeleteOutlined />}
-                  onClick={() => dispatch(removeAllCourses())}
+                  onClick={() => removeAllCourses.mutate()}
                 >
                   Delete all courses
                 </Button>

@@ -132,7 +132,7 @@ def COMP_4920():
         "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
         "processed": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
     """
-    return "(COMP2511 || COMP2911) && 96UOC && COMP?1"
+    return "(COMP2511 || COMP2911) && 96UOC && (COMP?1 || COMP?H)"
 
 def COMP_4951(conditions):
     """
@@ -170,11 +170,11 @@ def COMP_4953():
 
 def COMP_4961():
     """
-    "original": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
+    "original": "Prerequisite: Enrolment in 4515 Computer Science (Hons) or 3779 Advanced Computer Science (Hons)<br/><br/>",
 
-    "processed": "4515 || 3648"
+    "processed": "4515 || 3779"
     """
-    return "4515 || 3648"
+    return "4515 || 3779"
 
 
 def COMP_6445():

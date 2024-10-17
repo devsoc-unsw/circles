@@ -7,9 +7,9 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 """
 
-from functools import reduce
 import json
 import re
+from functools import reduce
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -630,7 +630,6 @@ def remove_extraneous_handbook_data(processed):
     find = r"Its recommended to seek a progression check prior to application."
     processed, note = add_note_if_found(processed, find, note, r"", find)
     processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
-    
     processed, note = add_note_if_found(processed, r"or language placement approval", note, r"", "language placement approval can also be used.")
     processed, note = add_note_if_found(processed, r"or with Head of School approval", note, r"", "Head of school approval can also be used.")
     # Commerce degree notes

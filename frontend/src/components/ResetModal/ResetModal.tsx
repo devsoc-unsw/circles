@@ -1,10 +1,10 @@
 import React from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from 'antd';
+import { resetUserDegree } from 'utils/api/userApi';
 import { useAppDispatch } from 'hooks';
-import { resetCourses } from 'reducers/coursesSlice';
+import useToken from 'hooks/useToken';
 import { resetTabs } from 'reducers/courseTabsSlice';
-import { resetDegree } from 'reducers/degreeSlice';
-import { resetPlanner } from 'reducers/plannerSlice';
 
 type Props = {
   open?: boolean;
@@ -14,14 +14,32 @@ type Props = {
 
 // has no internal "open" state since it becomes difficult to juggle with external buttons
 const ResetModal = ({ open, onOk, onCancel }: Props) => {
+  const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+  const token = useToken({ allowUnset: true }); // NOTE: must allow unset since this is used in ErrorBoundary itself
 
-  const handleOk = () => {
-    dispatch(resetPlanner());
-    dispatch(resetDegree());
+  const resetDegreeMutation = useMutation({
+    mutationFn: (definedToken: string) => resetUserDegree(definedToken),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['degree']
+      });
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-console
+      console.error('Error at resetDegreeMutation: ', err);
+    }
+  });
+
+  const handleResetDegree = () => {
+    if (token !== undefined) {
+      resetDegreeMutation.mutate(token);
+    }
+  };
+
+  const handleOk = async () => {
+    handleResetDegree();
     dispatch(resetTabs());
-    dispatch(resetCourses());
-
     onOk?.();
   };
 
@@ -31,13 +49,14 @@ const ResetModal = ({ open, onOk, onCancel }: Props) => {
       open={open ?? false}
       closable={false}
       onOk={handleOk}
-      okText="Reset"
+      okText="Reset Data"
       okButtonProps={{ type: 'primary', danger: true }}
       onCancel={onCancel}
-      cancelText="Go back"
+      cancelText="Go to Course Selector"
     >
       <div>
-        Are you sure want to reset your planner? Your existing data will be permanently removed.
+        You can navigate to the Degree Wizard to reset your data. By clicking Ok, Your existing data
+        will be permanently removed.
       </div>
     </Modal>
   );

@@ -8,11 +8,15 @@ import {
   EditFilled,
   InfoCircleFilled,
   PieChartFilled,
-  PieChartOutlined
+  PieChartOutlined,
+  StarOutlined
 } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UnscheduleCourse } from 'types/planner';
+import { removeCourse, toggleIgnoreFromProgression, unscheduleCourse } from 'utils/api/plannerApi';
 import EditMarkModal from 'components/EditMarkModal';
+import useToken from 'hooks/useToken';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse, toggleIgnoreFromProgression, unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
 
 type Props = {
@@ -22,27 +26,59 @@ type Props = {
 };
 
 const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
-  const [openModal, setOpenModal] = useState(false);
+  const token = useToken();
 
+  const queryClient = useQueryClient();
+  const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => dispatch(removeCourse(code));
-  const handleUnschedule = () => {
-    dispatch(
-      unschedule({
-        code,
-        destIndex: null
-      })
-    );
-  };
+  const handleUnschedule = useMutation({
+    mutationFn: (data: UnscheduleCourse) => unscheduleCourse(token, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
+    }
+  });
+  const handleDelete = useMutation({
+    mutationFn: (courseCode: string) => removeCourse(token, courseCode),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['validate']
+      });
+    }
+  });
   const handleInfo = () => {
     navigate('/course-selector');
     dispatch(addTab(code));
   };
+  const ignoreFromProgressionMutation = useMutation({
+    mutationFn: (courseId: string) => toggleIgnoreFromProgression(token, courseId),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['courses']
+      })
+  });
   const handleToggleProgression = () => {
-    dispatch(toggleIgnoreFromProgression(code));
+    ignoreFromProgressionMutation.mutate(code);
+  };
+
+  const handleUnilective = () => {
+    window.open(`https://unilectives.devsoc.app/course/${code}`, '_blank');
   };
 
   const iconStyle = {
@@ -54,11 +90,17 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
     <>
       <Menu id={`${code}-context`} theme="dark">
         {plannedFor && (
-          <Item onClick={handleUnschedule}>
+          <Item
+            onClick={() =>
+              handleUnschedule.mutate({
+                courseCode: code
+              })
+            }
+          >
             <FaRegCalendarTimes style={iconStyle} /> Unschedule
           </Item>
         )}
-        <Item onClick={handleDelete}>
+        <Item onClick={() => handleDelete.mutate(code)}>
           <DeleteFilled style={iconStyle} /> Delete from Planner
         </Item>
         <Item onClick={showEditMark}>
@@ -75,6 +117,9 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
         )}
         <Item onClick={handleInfo}>
           <InfoCircleFilled style={iconStyle} /> View Info
+        </Item>
+        <Item onClick={handleUnilective}>
+          <StarOutlined style={iconStyle} /> View on unilectives
         </Item>
       </Menu>
       <EditMarkModal code={code} open={openModal} onCancel={() => setOpenModal(false)} />
