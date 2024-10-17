@@ -63,8 +63,9 @@ def get_programs() -> dict[str, dict[str, str]]:
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     return {
         "programs": {
+            # "3362": "City Planning (Honours)",
             "3778": "Computer Science",
-            # "3779": "Advanced Computer Science (Honours)",  # TODO: Fix the electives
+            "3779": "Advanced Computer Science (Honours)",
             "3502": "Commerce",
             "3970": "Science",
             "3543": "Economics",

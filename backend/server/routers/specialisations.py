@@ -31,7 +31,7 @@ def get_specialisation_types(programCode: str) -> Dict[str, list[SpecType]]:
     if not result:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
-    return {"types": [*result["components"]["spec_data"].keys()]}
+    return {"types": [*result["components"].get("spec_data", {}).keys()]}
 
 
 @router.get(
@@ -75,7 +75,11 @@ def get_specialisations(programCode: str, typeSpec: SpecType):
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    specRes = result["components"]["spec_data"].get(typeSpec)
+    specData = result["components"].get("spec_data")
+    if not specData:
+        # This is for programs without specialisations, e.g. 3362
+        return {"spec": {}}
+    specRes = specData.get(typeSpec)
     if not specRes:
         raise HTTPException(
             status_code=404, detail=f"this program has no {typeSpec}")

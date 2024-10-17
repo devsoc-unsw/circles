@@ -1,4 +1,5 @@
 # assumes that getPrograms, getMajors, and getMinors isnt borked.
+import copy
 import requests
 from hypothesis import given, settings
 from hypothesis.strategies import composite, sampled_from
@@ -13,7 +14,10 @@ fake_specs = ["NAVLAH", "GMATEH", "ARCYB2"]
 
 @composite
 def major_minor_for_program(draw):
-    program = draw(sampled_from(programs))
+    possible_programs = copy.deepcopy(programs)
+    # possible_programs.remove("3362") # City Planning (Honours) does not have majors/minors
+
+    program = draw(sampled_from(possible_programs))
     possible_specs: list[str] = []
     for t in requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisationTypes/{program}").json()["types"]:
         majorsRequest = requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/{t}")
@@ -35,8 +39,6 @@ def major_minor_for_program(draw):
 @given(sampled_from(programs))
 @settings(deadline=5000)
 def test_all_programs_fetched(program):
-    if program == "3779":  # adv cs broken
-        return
     structure = requests.get(f"http://127.0.0.1:8000/programs/getStructure/{program}")
     assert structure != 500
     assert structure.json()["structure"]["General"] != {}

@@ -233,9 +233,9 @@ def get_courses(
     for course, title in container_courses.items():
         description = description + ""  # prevent unused variable error
 
-        if "any course" in course:
+        if "any course" in course.lower():
             course_processed = {"any course": "1"}
-        elif "any level" in course:
+        elif "any level" in course.lower():
             # e.g. modify "any level 4 COMP course" to "COMP4"
             course_processed = process_any_level(course)
         else:
@@ -249,7 +249,7 @@ def process_any_level(unprocessed_course: str) -> dict[str, str]:
     # group 1 contains level number and group 2 contains program title
     # Note '?:' means inner parentheses is non-capturing group
     # COMP4XXx
-    res = re.search(r"level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
+    res = re.search(r"[lL]evel (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
     if not res:
         print("ERRR BY: ", unprocessed_course)
         # TODO: THIS IS BROKEN by `any level 1/2 ...`

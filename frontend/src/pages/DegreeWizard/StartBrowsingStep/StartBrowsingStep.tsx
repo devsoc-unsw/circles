@@ -48,7 +48,9 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   };
 
   const handleSaveUserSettings = async () => {
-    // TODO: Are these checks necessary?
+    // TODO: Rewrite these checks in the backend
+    // The check below is not always required, i.e. 3362
+    // If we do this at the backend, we can check everything, and only when needed
     if (!degreeInfo.programCode) {
       openNotification({
         type: 'error',
