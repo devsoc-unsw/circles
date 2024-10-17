@@ -1730,6 +1730,27 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "You must complete 12 UOC of General Education courses from the below list. General Education courses for this program are any that do not contain the subject area: ARCH, BEIL, BENV, BLDG, CODE, FADA, IDES, INTA, LAND, PLAN."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "ARCH1302": "Architectural Design Studio 6",
+                        "ARCH1311": "Architectural Design Studio 5",
+                        "ARCH1322": "Architectural History and Theory 3",
+                        "ARCH1331": "Architectural Fabrication",
+                        "ARCH1361": "Architectural Science and Building Environment 2"
+                    },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 36,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 36 UOC of the following courses."
+                },
+                {
                     "type": "core_courses",
                     "courses": {
                         "ARCH1080": "Introduction to Architecture and Enabling Skills",
@@ -1765,22 +1786,6 @@
                 {
                     "type": "core_courses",
                     "courses": {
-                        "ARCH1302": "Architectural Design Studio 6",
-                        "ARCH1311": "Architectural Design Studio 5",
-                        "ARCH1322": "Architectural History and Theory 3",
-                        "ARCH1331": "Architectural Fabrication",
-                        "ARCH1361": "Architectural Science and Building Environment 2"
-                    },
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must take 36 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
                         "ARCH1201": "Architectural Design Studio 3",
                         "ARCH1203": "Architectural Design Studio 4",
                         "ARCH1222": "Architectural History and Theory 2",
@@ -1794,11 +1799,6 @@
                         2
                     ],
                     "notes": "Students must take 36 UOC of the following courses."
-                },
-                {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "You must complete 12 UOC of General Education courses from the below list. General Education courses for this program are any that do not contain the subject area: ARCH, BEIL, BENV, BLDG, CODE, FADA, IDES, INTA, LAND, PLAN."
                 }
             ]
         },
@@ -2953,18 +2953,18 @@
                 {
                     "type": "core_courses",
                     "courses": {
-                        "BENV1010": "Communication in the Built Environment",
-                        "PLAN1001": "Introduction to Planning",
-                        "PLAN1002": "Sustainability and Environment",
-                        "PLAN1003": "Urban Society, History, Theory",
-                        "PLAN1004": "City and Regional Economics",
-                        "PLAN1007": "Development Processes: Feasibility and Finance",
-                        "PLAN1008": "Planning Research: Techniques and Analysis"
+                        "PLAN2001": "Strategic Planning",
+                        "PLAN2002": "Geographical Information Systems and Urban Informatics",
+                        "PLAN2003": "Urban Design",
+                        "PLAN2004": "Equitable Cities",
+                        "PLAN2005": "Planning Law & Administration",
+                        "PLAN2006": "Urban Management and Development Assessment",
+                        "PLAN2007": "City Building: Transport and Infrastructure"
                     },
-                    "title": "Level 1 Core Courses",
+                    "title": "Level 2 Core Courses",
                     "credits_to_complete": 42,
                     "levels": [
-                        1
+                        2
                     ],
                     "notes": "Students must take 42 UOC of the following courses."
                 },
@@ -2981,24 +2981,6 @@
                         4
                     ],
                     "notes": "Students must take 36 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "PLAN2001": "Strategic Planning",
-                        "PLAN2002": "Geographical Information Systems and Urban Informatics",
-                        "PLAN2003": "Urban Design",
-                        "PLAN2004": "Equitable Cities",
-                        "PLAN2005": "Planning Law & Administration",
-                        "PLAN2006": "Urban Management and Development Assessment",
-                        "PLAN2007": "City Building: Transport and Infrastructure"
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "Students must take 42 UOC of the following courses."
                 },
                 {
                     "type": "prescribed_electives",
@@ -3036,6 +3018,24 @@
                     "notes": "Students must take 30 UOC of the following courses."
                 },
                 {
+                    "type": "core_courses",
+                    "courses": {
+                        "BENV1010": "Communication in the Built Environment",
+                        "PLAN1001": "Introduction to Planning",
+                        "PLAN1002": "Sustainability and Environment",
+                        "PLAN1003": "Urban Society, History, Theory",
+                        "PLAN1004": "City and Regional Economics",
+                        "PLAN1007": "Development Processes: Feasibility and Finance",
+                        "PLAN1008": "Planning Research: Techniques and Analysis"
+                    },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 42 UOC of the following courses."
+                },
+                {
                     "type": "gened",
                     "credits_to_complete": 12,
                     "notes": "You must complete 12 UOC of General Education courses from the below list. General Education courses for this program are any that do not contain the subject area: ARCH, BEIL, BENV, BLDG, CODE, FADA, IDES, INTA, LAND, PLAN."
@@ -3055,21 +3055,9 @@
         "components": {
             "non_spec_data": [
                 {
-                    "type": "core_courses",
-                    "courses": {
-                        "LAND1322": "Urban Landscape Design Seminar",
-                        "LAND1351": "Landscape Performance and Management",
-                        "LAND2311": "Landscape Studio 5: Site Planning - Landscape Systems and Performance",
-                        "LAND2312": "Landscape Studio 6: Site Planning \u2013 Landscape Performance and Site Design",
-                        "LAND2333": "Landscape Studio 7: Design with a Complex Program"
-                    },
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 30,
-                    "levels": [
-                        1,
-                        2
-                    ],
-                    "notes": "You must take 30 UOC of the following courses."
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "You must complete 12 UOC of General Education courses from the below list. General Education courses for this program are any that do not contain the subject area: ARCH, BEIL, BENV, BLDG, CODE, FADA, IDES, INTA, LAND, PLAN."
                 },
                 {
                     "type": "prescribed_electives",
@@ -3091,14 +3079,6 @@
                     "notes": "You must take 6 UOC of History and Theory courses and 6 UOC of Digital Technologies courses, for a total of 12 UOC."
                 },
                 {
-                    "type": "prescribed_electives",
-                    "courses": {},
-                    "title": "Built Environment Electives",
-                    "credits_to_complete": 12,
-                    "levels": [],
-                    "notes": "You must take 12 UOC of Built Environment Elective courses. Elective courses offered by the School are generally denoted by a BENV or BEIL prefix.\nThe following courses are excluded and cannot count towards this requirement: - any BENV course listed under Prescribed Electives below - any BENV course completed as a Core Course\nBEIL0009 Exhibition Design is a recommended Built Environment Elective."
-                },
-                {
                     "type": "core_courses",
                     "courses": {
                         "LAND1482": "Professional Practice for Landscape Architects",
@@ -3114,6 +3094,47 @@
                         2
                     ],
                     "notes": "You must take 36 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "LAND2201": "Landscape Studio 3 Landform and Planting",
+                        "LAND2202": "Landscape Studio 4 Design Detail: Resolution and Representation",
+                        "LAND2251": "Planting Design at the Landscape Scale",
+                        "LAND2271": "Landscape Design and Documentation 1",
+                        "LAND2272": "Landscape Design and Documentation 2"
+                    },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 30,
+                    "levels": [
+                        2
+                    ],
+                    "notes": "You must take 30 UOC of the following courses."
+                },
+                {
+                    "type": "prescribed_electives",
+                    "courses": {},
+                    "title": "Built Environment Electives",
+                    "credits_to_complete": 12,
+                    "levels": [],
+                    "notes": "You must take 12 UOC of Built Environment Elective courses. Elective courses offered by the School are generally denoted by a BENV or BEIL prefix.\nThe following courses are excluded and cannot count towards this requirement: - any BENV course listed under Prescribed Electives below - any BENV course completed as a Core Course\nBEIL0009 Exhibition Design is a recommended Built Environment Elective."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "LAND1322": "Urban Landscape Design Seminar",
+                        "LAND1351": "Landscape Performance and Management",
+                        "LAND2311": "Landscape Studio 5: Site Planning - Landscape Systems and Performance",
+                        "LAND2312": "Landscape Studio 6: Site Planning \u2013 Landscape Performance and Site Design",
+                        "LAND2333": "Landscape Studio 7: Design with a Complex Program"
+                    },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 30,
+                    "levels": [
+                        1,
+                        2
+                    ],
+                    "notes": "You must take 30 UOC of the following courses."
                 },
                 {
                     "type": "core_courses",
@@ -3136,27 +3157,6 @@
                     "notes": "You must take 48 UOC of the following courses."
                 },
                 {
-                    "type": "core_courses",
-                    "courses": {
-                        "LAND2201": "Landscape Studio 3 Landform and Planting",
-                        "LAND2202": "Landscape Studio 4 Design Detail: Resolution and Representation",
-                        "LAND2251": "Planting Design at the Landscape Scale",
-                        "LAND2271": "Landscape Design and Documentation 1",
-                        "LAND2272": "Landscape Design and Documentation 2"
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 30,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "You must take 30 UOC of the following courses."
-                },
-                {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "You must complete 12 UOC of General Education courses from the below list. General Education courses for this program are any that do not contain the subject area: ARCH, BEIL, BENV, BLDG, CODE, FADA, IDES, INTA, LAND, PLAN."
-                },
-                {
                     "type": "other",
                     "courses": {
                         "BENV4000": "Research Methods in the Built Environment",
@@ -3173,8 +3173,8 @@
             ]
         },
         "processing_warnings": [
-            "Can't figure out what abbreviated code(s) are for BEIL in program Landscape Architecture (Hons) (3381) in section titled 'Built Environment Electives'",
-            "Can't figure out what abbreviated code(s) are for BENV in program Landscape Architecture (Hons) (3381) in section titled 'Built Environment Electives'"
+            "Can't figure out what abbreviated code(s) are for BENV in program Landscape Architecture (Hons) (3381) in section titled 'Built Environment Electives'",
+            "Can't figure out what abbreviated code(s) are for BEIL in program Landscape Architecture (Hons) (3381) in section titled 'Built Environment Electives'"
         ]
     },
     "3409": {
@@ -9677,23 +9677,66 @@
         "components": {
             "non_spec_data": [
                 {
-                    "type": "info_rule",
-                    "title": "Industrial Training Requirement",
-                    "notes": "Students must complete a minimum of 60 days of Industrial Training to graduate. Industrial Training must be undertaken concurrently with enrolment in the program.\nFor more information on Industrial Training, please visit https://www.engineering.unsw.edu.au/study-with-us/engineering-students-industrial-training"
+                    "type": "core_courses",
+                    "courses": {
+                        "ARCH1102": "Architectural Design Studio 2",
+                        "CVEN3101": "Engineering Operations and Control",
+                        "CVEN3202": "Soil Mechanics",
+                        "CVEN3203": "Applied Geotechnics and Engineering Geology",
+                        "CVEN3303": "Steel Structures",
+                        "CVEN3304": "Concrete Structures",
+                        "CVEN3501": "Water Resources Engineering",
+                        "CVEN3502": "Water and Wastewater Engineering"
+                    },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        1,
+                        3
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
                     "type": "core_courses",
                     "courses": {
-                        "ARCH1201": "Architectural Design Studio 3",
-                        "CVEN4701": "Planning Sustainable Infrastructure"
+                        "CVEN4050": "Thesis A",
+                        "CVEN4051": "Thesis B",
+                        "CVEN4951": "Research Thesis A",
+                        "CVEN4952": "Research Thesis B",
+                        "CVEN4953": "Research Thesis C",
+                        "CVEN4961": "Higher Honours Research Thesis A",
+                        "CVEN4962": "Higher Honours Research Thesis B",
+                        "CVEN4963": "Higher Honours Research Thesis C"
                     },
-                    "title": "Level 4 Core Courses",
-                    "credits_to_complete": 12,
+                    "title": "Thesis Courses",
+                    "credits_to_complete": 0,
                     "levels": [
-                        1,
                         4
                     ],
-                    "notes": "Students must take 12 UOC of the following courses"
+                    "notes": "Students must take at least 12 UOC, up to a maximum of 24 UOC of the following courses. NOTE: - School approval is required to undertake the alternate thesis options (CVEN4951/4952/4953) or (CVEN4961/4962/4963)."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "ARCH1101": "Architectural Design Studio 1",
+                        "BENV1010": "Communication in the Built Environment",
+                        "CVEN2002": "Civil and Environmental Engineering Computations",
+                        "CVEN2101": "Engineering Construction",
+                        "CVEN2303": "Structural Analysis and Modelling",
+                        "ENGG2400": "Mechanics of Solids 1",
+                        "ENGG2500": "Fluid Mechanics for Engineers",
+                        "MATH2019 or MATH2018": [
+                            "Engineering Mathematics 2E",
+                            "Engineering Mathematics 2D"
+                        ]
+                    },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        1,
+                        2
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
                     "type": "prescribed_electives",
@@ -9726,49 +9769,6 @@
                         1
                     ],
                     "notes": "Students must take at least 6 UOC of the following courses.\nCHEM1031 and CHEM1041 will only be available to students enrolled in a program which has a Chemistry major."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "ARCH1102": "Architectural Design Studio 2",
-                        "CVEN3101": "Engineering Operations and Control",
-                        "CVEN3202": "Soil Mechanics",
-                        "CVEN3203": "Applied Geotechnics and Engineering Geology",
-                        "CVEN3303": "Steel Structures",
-                        "CVEN3304": "Concrete Structures",
-                        "CVEN3501": "Water Resources Engineering",
-                        "CVEN3502": "Water and Wastewater Engineering"
-                    },
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        1,
-                        3
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "ARCH1101": "Architectural Design Studio 1",
-                        "BENV1010": "Communication in the Built Environment",
-                        "CVEN2002": "Civil and Environmental Engineering Computations",
-                        "CVEN2101": "Engineering Construction",
-                        "CVEN2303": "Structural Analysis and Modelling",
-                        "ENGG2400": "Mechanics of Solids 1",
-                        "ENGG2500": "Fluid Mechanics for Engineers",
-                        "MATH2018 or MATH2019": [
-                            "Engineering Mathematics 2D",
-                            "Engineering Mathematics 2E"
-                        ]
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        1,
-                        2
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
                     "type": "prescribed_electives",
@@ -9851,13 +9851,27 @@
                 {
                     "type": "core_courses",
                     "courses": {
+                        "ARCH1201": "Architectural Design Studio 3",
+                        "CVEN4701": "Planning Sustainable Infrastructure"
+                    },
+                    "title": "Level 4 Core Courses",
+                    "credits_to_complete": 12,
+                    "levels": [
+                        1,
+                        4
+                    ],
+                    "notes": "Students must take 12 UOC of the following courses"
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
                         "ARCH1080": "Introduction to Architecture and Enabling Skills",
                         "BENV1015": "History of Design Thinking",
                         "DESN1000": "Introduction to Engineering Design and Innovation",
                         "ENGG1300": "Engineering Mechanics",
-                        "MATH1141 or MATH1131": [
-                            "Higher Mathematics 1A",
-                            "Mathematics 1A"
+                        "MATH1131 or MATH1141": [
+                            "Mathematics 1A",
+                            "Higher Mathematics 1A"
                         ],
                         "MATH1231 or MATH1241": [
                             "Mathematics 1B",
@@ -9876,23 +9890,9 @@
                     "notes": "Students must take 42 UOC of the following courses."
                 },
                 {
-                    "type": "core_courses",
-                    "courses": {
-                        "CVEN4050": "Thesis A",
-                        "CVEN4051": "Thesis B",
-                        "CVEN4951": "Research Thesis A",
-                        "CVEN4952": "Research Thesis B",
-                        "CVEN4953": "Research Thesis C",
-                        "CVEN4961": "Higher Honours Research Thesis A",
-                        "CVEN4962": "Higher Honours Research Thesis B",
-                        "CVEN4963": "Higher Honours Research Thesis C"
-                    },
-                    "title": "Thesis Courses",
-                    "credits_to_complete": 0,
-                    "levels": [
-                        4
-                    ],
-                    "notes": "Students must take at least 12 UOC, up to a maximum of 24 UOC of the following courses. NOTE: - School approval is required to undertake the alternate thesis options (CVEN4951/4952/4953) or (CVEN4961/4962/4963)."
+                    "type": "info_rule",
+                    "title": "Industrial Training Requirement",
+                    "notes": "Students must complete a minimum of 60 days of Industrial Training to graduate. Industrial Training must be undertaken concurrently with enrolment in the program.\nFor more information on Industrial Training, please visit https://www.engineering.unsw.edu.au/study-with-us/engineering-students-industrial-training"
                 }
             ]
         },
@@ -12946,18 +12946,18 @@
                         "CVEN3501": "Water Resources Engineering",
                         "DESN1000": "Introduction to Engineering Design and Innovation",
                         "ENGG1811": "Computing for Engineers",
-                        "MATH1141 or MATH1131": [
-                            "Higher Mathematics 1A",
-                            "Mathematics 1A"
+                        "MATH1131 or MATH1141": [
+                            "Mathematics 1A",
+                            "Higher Mathematics 1A"
                         ],
-                        "MATH1241 or MATH1231": [
-                            "Higher Mathematics 1B",
-                            "Mathematics 1B"
+                        "MATH1231 or MATH1241": [
+                            "Mathematics 1B",
+                            "Higher Mathematics 1B"
                         ],
                         "MATH2019": "Engineering Mathematics 2E",
-                        "PHYS1121 or PHYS1131": [
-                            "Physics 1A",
-                            "Higher Physics 1A"
+                        "PHYS1131 or PHYS1121": [
+                            "Higher Physics 1A",
+                            "Physics 1A"
                         ]
                     },
                     "title": "Engineering Foundation Core Courses",
@@ -15650,6 +15650,26 @@
                 {
                     "type": "core_courses",
                     "courses": {
+                        "BABS1201": "Molecules, Cells and Genes",
+                        "BIOC2181": "Fundamentals of Biochemistry",
+                        "CHEM1832": "Chemistry for Health Sciences",
+                        "DIET1001": "Introduction to Dietetics and Food Innovation ",
+                        "FOOD1120": "Food Science, Society and Sustainability",
+                        "HLTH1000": "Interprofessional Practice and Collaborative Care ",
+                        "SOMS1912": "Human Systems 1",
+                        "SOMS1913": "Human Systems 2"
+                    },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        1,
+                        2
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
                         "BIOC3261": "Human Biochemistry of Health and Disease",
                         "DIET2001": "Nutrition for Health Professionals 1",
                         "DIET2002": "Nutrition for Health Professionals 2",
@@ -15686,26 +15706,6 @@
                         3
                     ],
                     "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "BABS1201": "Molecules, Cells and Genes",
-                        "BIOC2181": "Fundamentals of Biochemistry",
-                        "CHEM1832": "Chemistry for Health Sciences",
-                        "DIET1001": "Introduction to Dietetics and Food Innovation ",
-                        "FOOD1120": "Food Science, Society and Sustainability",
-                        "HLTH1000": "Interprofessional Practice and Collaborative Care ",
-                        "SOMS1912": "Human Systems 1",
-                        "SOMS1913": "Human Systems 2"
-                    },
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        1,
-                        2
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
                 }
             ]
         },
@@ -15724,25 +15724,6 @@
                 {
                     "type": "core_courses",
                     "courses": {
-                        "CHEM2051": "Analytical Chemistry for the Pharmaceutical Sciences",
-                        "CHEM2832": "Medicines: Small Molecules to Macromolecules",
-                        "DIET2001": "Nutrition for Health Professionals 1",
-                        "HLTH2000": "Driving Behaviour Change 1",
-                        "MICR2012": "Microbiology for the Pharmaceutical Sciences",
-                        "PHAR2911": "Introductory Pharmacology for Pharmacy",
-                        "PHCM2100": "Appraising and Applying Evidence for Allied Health Practice ",
-                        "PHRM2031": "Pharmacy Practice"
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
                         "BABS1201": "Molecules, Cells and Genes",
                         "BIOC2181": "Fundamentals of Biochemistry",
                         "CHEM1832": "Chemistry for Health Sciences",
@@ -15756,6 +15737,25 @@
                     "credits_to_complete": 48,
                     "levels": [
                         1,
+                        2
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "CHEM2051": "Analytical Chemistry for the Pharmaceutical Sciences",
+                        "CHEM2832": "Medicines: Small Molecules to Macromolecules",
+                        "DIET2001": "Nutrition for Health Professionals 1",
+                        "HLTH2000": "Driving Behaviour Change 1",
+                        "MICR2012": "Microbiology for the Pharmaceutical Sciences",
+                        "PHAR2911": "Introductory Pharmacology for Pharmacy",
+                        "PHCM2100": "Appraising and Applying Evidence for Allied Health Practice ",
+                        "PHRM2031": "Pharmacy Practice"
+                    },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
                         2
                     ],
                     "notes": "Students must take 48 UOC of the following courses."
@@ -17560,6 +17560,11 @@
                     "notes": "Students may not undertake any of the following excluded courses."
                 },
                 {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course see Table 1 cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN### courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
                     "type": "core_courses",
                     "courses": {
                         "AVIA2011": "Advanced Human Factors",
@@ -17574,6 +17579,25 @@
                     "title": "Level 2 Core Courses",
                     "credits_to_complete": 48,
                     "levels": [
+                        2
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "AVIA1111": "Aeronautical Knowledge",
+                        "AVIA1301": "Simulation in Aviation and Airworthiness Management",
+                        "AVIA1401": "Introduction to Human Factors: The Safety Science of Human Performance",
+                        "AVIA1901": "Aviation Transport Economics",
+                        "BEES2680": "Introduction to Science Communication",
+                        "MATH1031": "Mathematics for Life Sciences",
+                        "MATH1041": "Statistics for Life and Social Sciences"
+                    },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        1,
                         2
                     ],
                     "notes": "Students must take 48 UOC of the following courses."
@@ -17607,30 +17631,6 @@
                         3
                     ],
                     "notes": "Students must take 6 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "AVIA1111": "Aeronautical Knowledge",
-                        "AVIA1301": "Simulation in Aviation and Airworthiness Management",
-                        "AVIA1401": "Introduction to Human Factors: The Safety Science of Human Performance",
-                        "AVIA1901": "Aviation Transport Economics",
-                        "BEES2680": "Introduction to Science Communication",
-                        "MATH1031": "Mathematics for Life Sciences",
-                        "MATH1041": "Statistics for Life and Social Sciences"
-                    },
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        1,
-                        2
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course see Table 1 cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN### courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
                 }
             ]
         },
@@ -18997,16 +18997,21 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "info_rule",
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
                     "type": "core_courses",
                     "courses": {
                         "ECON2112": "Game Theory and Business Strategy",
-                        "MATH2601 or MATH2501": [
-                            "Higher Linear Algebra",
-                            "Linear Algebra"
+                        "MATH2501 or MATH2601": [
+                            "Linear Algebra",
+                            "Higher Linear Algebra"
                         ],
-                        "MATH2801 or MATH2901": [
-                            "Theory of Statistics",
-                            "Higher Theory of Statistics"
+                        "MATH2901 or MATH2801": [
+                            "Higher Theory of Statistics",
+                            "Theory of Statistics"
                         ]
                     },
                     "title": "Level 2 Core Courses",
@@ -19015,6 +19020,30 @@
                         2
                     ],
                     "notes": "Students must take 18 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "COMP1511": "Programming Fundamentals",
+                        "COMP2521": "Data Structures and Algorithms",
+                        "DATA1001": "Introduction to Data Science and Decisions",
+                        "ECON1101": "Microeconomics 1",
+                        "MATH1141 or MATH1131": [
+                            "Higher Mathematics 1A",
+                            "Mathematics 1A"
+                        ],
+                        "MATH1241 or MATH1231": [
+                            "Higher Mathematics 1B",
+                            "Mathematics 1B"
+                        ]
+                    },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 36,
+                    "levels": [
+                        1,
+                        2
+                    ],
+                    "notes": "Students must take 36 UOC of the following courses."
                 },
                 {
                     "type": "core_courses",
@@ -19029,30 +19058,6 @@
                         3
                     ],
                     "notes": "Students must take 18 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "COMP1511": "Programming Fundamentals",
-                        "COMP2521": "Data Structures and Algorithms",
-                        "DATA1001": "Introduction to Data Science and Decisions",
-                        "ECON1101": "Microeconomics 1",
-                        "MATH1131 or MATH1141": [
-                            "Mathematics 1A",
-                            "Higher Mathematics 1A"
-                        ],
-                        "MATH1231 or MATH1241": [
-                            "Mathematics 1B",
-                            "Higher Mathematics 1B"
-                        ]
-                    },
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1,
-                        2
-                    ],
-                    "notes": "Students must take 36 UOC of the following courses."
                 },
                 {
                     "type": "limit_rule",
@@ -19119,11 +19124,6 @@
                     "notes": "Students may not undertake any Science, Engineering or Business courses towards their General Education requirement."
                 },
                 {
-                    "type": "info_rule",
-                    "title": "Course Information Rule",
-                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
                     "type": "gened",
                     "credits_to_complete": 12,
                     "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course (see Table 1) cannot be taken as General Education (GE).\nAny exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
@@ -19135,8 +19135,8 @@
                         "is_optional": false,
                         "specs": {
                             "COMPZ1": "Computational Data Science",
-                            "MATHE1": "Quantitative Data Science",
-                            "ECONL1": "Business Data Science"
+                            "ECONL1": "Business Data Science",
+                            "MATHE1": "Quantitative Data Science"
                         },
                         "notes": "Students must complete only one of the following majors. Each major is 66-72 UoC. 18-24 UoC of program core courses are double-counted towards your major and the remaining 48 UoC are specific to your major."
                     }
@@ -20203,24 +20203,29 @@
                     "notes": "A maximum of 72 UOC of Level 1 courses can be taken, including any General Education or mainstream Level 1 course taken to fulfil either the General Education or the Free Elective requirement."
                 },
                 {
+                    "type": "info_rule",
+                    "title": "Double Counting",
+                    "notes": "Students cannot complete a minor with the same name as their nominated major. Students must declare their minor(s) before their final term."
+                },
+                {
                     "type": "prescribed_electives",
                     "courses": {
                         "ANAT": "any Anatomy course",
-                        "AVIA": "any Faculty of Science course",
+                        "AVIA": "any Aviation course",
                         "BABS": "any Biotechnology & Biomolecular Sciences course",
-                        "BEES": "any Faculty of Science course",
-                        "BIOC": "any Faculty of Science course",
+                        "BEES": "any Biological, Earth & Environmental Science course",
+                        "BIOC": "any Biochemistry course",
                         "BIOS": "any Biological Science course",
                         "BIOT": "any Biotechnology course",
-                        "CHEM": "any Faculty of Science course",
+                        "CHEM": "any Chemistry course",
                         "CLIM": "any Climate Science course",
                         "COMP": "any Computer Science course",
                         "DATA": "any Data Science course",
                         "FOOD": "any Food Technology course",
                         "GENS": "any Faculty of Science course",
                         "GEOS": "any Geoscience course",
-                        "MATH": "any Faculty of Science course",
-                        "MATS": "any Faculty of Science course",
+                        "MATH": "any Mathematics course",
+                        "MATS": "any Materials Science and Engineering course",
                         "MICR": "any Microbiology course",
                         "MSCI": "any Marine Science course",
                         "NANO": "any Faculty of Science course",
@@ -20230,7 +20235,7 @@
                         "PHAR": "any Pharmacology course",
                         "PHSL": "any Physiology course",
                         "PHYS": "any Physics course",
-                        "PSYC": "any Faculty of Science course",
+                        "PSYC": "any Psychology course",
                         "SCIF": "any Faculty of Science course",
                         "SOMS": "any Medical Science course",
                         "VISN": "any Vision Science course"
@@ -20251,9 +20256,33 @@
                     "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If the core courses plus your choice of specialisation(s) requires less than 96 UOC, you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
                 },
                 {
-                    "type": "info_rule",
-                    "title": "Double Counting",
-                    "notes": "Students cannot complete a minor with the same name as their nominated major. Students must declare their minor(s) before their final term."
+                    "type": "limit_rule",
+                    "courses": {
+                        "AVIA1": "any level 1 Faculty of Science course",
+                        "BABS1": "any level 1 Faculty of Science course",
+                        "BEES1": "any level 1 Faculty of Science course",
+                        "BIOC1": "any level 1 Faculty of Science course",
+                        "BIOS1": "any level 1 Faculty of Science course",
+                        "CHEM1": "any level 1 Faculty of Science course",
+                        "CLIM1": "any level 1 Faculty of Science course",
+                        "DATA1": "any level 1 Faculty of Science course",
+                        "GENS1": "any level 1 Faculty of Science course",
+                        "GEOS1": "any level 1 Faculty of Science course",
+                        "MATH1": "any level 1 Faculty of Science course",
+                        "MATS1": "any level 1 Faculty of Science course",
+                        "MICR1": "any level 1 Faculty of Science course",
+                        "MSCI1": "any level 1 Faculty of Science course",
+                        "NANO1": "any level 1 Faculty of Science course",
+                        "PHYS1": "any level 1 Faculty of Science course",
+                        "PSYC1": "any level 1 Faculty of Science course",
+                        "SCIF1": "any level 1 Faculty of Science course"
+                    },
+                    "title": "Level 1 Science UOC",
+                    "credits_to_complete": 24,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must complete a minimum of 24 UOC of the following courses."
                 },
                 {
                     "type": "prescribed_electives",
@@ -20291,33 +20320,9 @@
                     "notes": "Students must take 12 UOC of the following courses.\nPlease refer to the current year s handbook for an updated list of options for Employability Experience courses."
                 },
                 {
-                    "type": "limit_rule",
-                    "courses": {
-                        "AVIA1": "any level 1 Faculty of Science course",
-                        "BABS1": "any level 1 Faculty of Science course",
-                        "BEES1": "any level 1 Faculty of Science course",
-                        "BIOC1": "any level 1 Faculty of Science course",
-                        "BIOS1": "any level 1 Faculty of Science course",
-                        "CHEM1": "any level 1 Faculty of Science course",
-                        "CLIM1": "any level 1 Faculty of Science course",
-                        "DATA1": "any level 1 Faculty of Science course",
-                        "GENS1": "any level 1 Faculty of Science course",
-                        "GEOS1": "any level 1 Faculty of Science course",
-                        "MATH1": "any level 1 Faculty of Science course",
-                        "MATS1": "any level 1 Faculty of Science course",
-                        "MICR1": "any level 1 Faculty of Science course",
-                        "MSCI1": "any level 1 Faculty of Science course",
-                        "NANO1": "any level 1 Faculty of Science course",
-                        "PHYS1": "any level 1 Faculty of Science course",
-                        "PSYC1": "any level 1 Faculty of Science course",
-                        "SCIF1": "any level 1 Faculty of Science course"
-                    },
-                    "title": "Level 1 Science UOC",
-                    "credits_to_complete": 24,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must complete a minimum of 24 UOC of the following courses."
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course cannot be taken as General Education (GE).\nAll other courses can be used to fulfil the GE requirement of this program, including GEN#-coded courses.\nAny exceptions to these rules must be approved by the Director of Academic Programs or nominee."
                 },
                 {
                     "type": "limit_rule",
@@ -20358,11 +20363,6 @@
                         9
                     ],
                     "notes": "Students may not undertake any of the following excluded courses."
-                },
-                {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course cannot be taken as General Education (GE).\nAll other courses can be used to fulfil the GE requirement of this program, including GEN#-coded courses.\nAny exceptions to these rules must be approved by the Director of Academic Programs or nominee."
                 }
             ],
             "spec_data": {
@@ -20370,33 +20370,33 @@
                     "Science": {
                         "is_optional": false,
                         "specs": {
-                            "GEOLS1": "Earth Science",
-                            "BIOSM1": "Ecology and Conservation",
-                            "ANATA1": "Anatomy",
-                            "BIOTA1": "Biotechnology",
                             "BINFE1": "Bioinformatics",
-                            "NEURS1": "Neuroscience",
                             "MATSB1": "Materials Science",
-                            "MATHM1": "Mathematics",
+                            "CLIME1": "Climate Systems Science",
+                            "BIOSM1": "Ecology and Conservation",
+                            "PHARA1": "Pharmacology",
+                            "BIOCM1": "Molecular and Cell Biology",
+                            "MSCIM1": "Marine and Coastal Science",
+                            "NEURS1": "Neuroscience",
+                            "MICRB1": "Microbiology",
+                            "BIOSO1": "Biology and Biodiversity ",
+                            "PHSLA1": "Physiology",
+                            "VISNA1": "Vision Science",
+                            "ANATA1": "Anatomy",
+                            "MATHT1": "Statistics",
                             "PHYSL1": "Physics",
                             "MATHN1": "Physical Oceanography",
+                            "MICRJ1": "Immunology",
+                            "GEOLS1": "Earth Science",
+                            "MATHV1": "Mathematics for Education",
+                            "PSYCA1": "Psychology",
                             "BIOCC1": "Genetics",
-                            "MICRB1": "Microbiology",
-                            "CLIME1": "Climate Systems Science",
-                            "VISNA1": "Vision Science",
-                            "BIOSO1": "Biology and Biodiversity ",
+                            "CHEMA1": "Chemistry",
+                            "MATHM1": "Mathematics",
                             "PATHA1": "Pathology",
                             "FOODH1": "Food Science",
-                            "MATHV1": "Mathematics for Education",
-                            "MICRJ1": "Immunology",
-                            "CHEMA1": "Chemistry",
-                            "PSYCA1": "Psychology",
-                            "BIOCM1": "Molecular and Cell Biology",
-                            "PHSLA1": "Physiology",
-                            "MATHT1": "Statistics",
                             "GEOGG1": "Geography",
-                            "MSCIM1": "Marine and Coastal Science",
-                            "PHARA1": "Pharmacology"
+                            "BIOTA1": "Biotechnology"
                         },
                         "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses.\nNotes: 1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program."
                     }
@@ -20405,46 +20405,46 @@
                     "Science": {
                         "is_optional": true,
                         "specs": {
-                            "BIOSI2": "Biology and Biodiversity",
-                            "CLIMB2": "Climate Systems Science",
-                            "PATHB2": "Pathology",
-                            "COMMJ2": "Business Analytics",
-                            "PHYSC2": "Physics",
-                            "MICRJ2": "Immunology",
-                            "MATHD2": "Statistics",
-                            "KOREG2": "Advanced Korean Studies",
-                            "PHARB2": "Pharmacology",
-                            "JAPNF2": "Japanese Studies",
-                            "FRENG2": "Advanced French Studies",
-                            "JAPNG2": "Advanced Japanese Studies",
-                            "MSCIK2": "Marine and Coastal Science",
-                            "PHYSI2": "Astronomy",
-                            "BIOSM2": "Ecology and Conservation",
-                            "GEOLF2": "Geology",
-                            "ANATB2": "Anatomy",
-                            "VISNB2": "Vision Science",
-                            "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
-                            "GEOGH2": "Physical Geography",
-                            "POLSG2": "Politics and International Relations",
-                            "CHEMD2": "Chemistry",
                             "PHSLB2": "Physiology",
-                            "GERSF2": "German Studies",
-                            "SPANI2": "Spanish Studies",
-                            "ENVPE2": "Environmental Humanities",
-                            "KOREF2": "Korean Studies",
                             "COMDF2": "Global Development",
-                            "FRENF2": "French Studies",
-                            "CHINE2": "Chinese Studies",
                             "SOSSC2": "Policy, Power and Government",
-                            "BIOCD2": "Molecular Biology",
-                            "PSYCM2": "Psychology",
-                            "MATHC2": "Mathematics",
-                            "INFSA2": "Information Systems",
                             "SCIFC2": "Professional Workplace Practice",
-                            "CHINF2": "Advanced Chinese Studies",
                             "MDIAO2": "Communication and Journalism",
+                            "CLIMB2": "Climate Systems Science",
+                            "GEOGH2": "Physical Geography",
+                            "PSYCM2": "Psychology",
+                            "MSCIK2": "Marine and Coastal Science",
+                            "VISNB2": "Vision Science",
+                            "POLSG2": "Politics and International Relations",
+                            "ENVPE2": "Environmental Humanities",
+                            "MATHC2": "Mathematics",
+                            "PHARB2": "Pharmacology",
+                            "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
+                            "INFSA2": "Information Systems",
+                            "PHYSC2": "Physics",
                             "MATHG2": "Data Analysis",
-                            "ECONO2": "Behavioural Economics"
+                            "GEOLF2": "Geology",
+                            "SPANI2": "Spanish Studies",
+                            "COMMJ2": "Business Analytics",
+                            "KOREG2": "Advanced Korean Studies",
+                            "PHYSI2": "Astronomy",
+                            "FRENF2": "French Studies",
+                            "BIOSM2": "Ecology and Conservation",
+                            "BIOCD2": "Molecular Biology",
+                            "MATHD2": "Statistics",
+                            "ANATB2": "Anatomy",
+                            "JAPNF2": "Japanese Studies",
+                            "CHEMD2": "Chemistry",
+                            "GERSF2": "German Studies",
+                            "CHINE2": "Chinese Studies",
+                            "BIOSI2": "Biology and Biodiversity",
+                            "MICRJ2": "Immunology",
+                            "FRENG2": "Advanced French Studies",
+                            "ECONO2": "Behavioural Economics",
+                            "PATHB2": "Pathology",
+                            "JAPNG2": "Advanced Japanese Studies",
+                            "CHINF2": "Advanced Chinese Studies",
+                            "KOREF2": "Korean Studies"
                         },
                         "notes": "Students may choose to complete an optional minor in one of the following areas."
                     }
@@ -20720,6 +20720,16 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "info_rule",
+                    "title": "Recommended Electives",
+                    "notes": "The following are some recommended courses that can be taken as free electives to complement your disciplinary study.\nIf you are looking for first year business courses to broaden your commercial understanding, consider: COMM1140 Financial Management, COMM1100 Business Decision Making, COMM1110 Evidence-Based Problem Solving, COMM1120 Collaboration and Innovation in Business, ECON1101 Microeconomics, ECON1102 Macroeconomics (has ECON1101 as prerequisite).\nIf you are interested in enhanced aviation data analytics and optimisation modelling, consider AVIA2601 Aviation Operations Research.\nFor knowledge in design and operations of baggage handling systems, consider AVIA2101 Baggage Handling System Design, Technology & Operations.\nFor theories and practice in drone management, air traffic management, safety management and airport management, consider AVIA2025 Introduction to Airborne Drone Management, AVIA1301 Simulation Application and Air Traffic Management, AVIA3013 Workplace Safety, or AVIA2851 Airport Management 2.\nIf you are interested gaining more knowledge in aviation and sustainable development, consider AVIA2910 Air Transport: Economics and the Environment, AVIA3900 Sustainable Aviation and Tourism or AVIA3910 Environmental Performance Evaluation of Aviation: Theories and Techniques.\nIf you are interested in gaining more depth in aviation law, consider AVIA3410 Advanced Law and Regulation in Aviation."
+                },
+                {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course (see Table 1) cannot be taken as General Education (GE).\nAll other courses can be used to fulfil the GE requirement of this program, including GEN### courses.\nAny exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
                     "type": "limit_rule",
                     "courses": {
                         "AVIA": "any Faculty of Science course",
@@ -20759,60 +20769,25 @@
                     "notes": "Students may not undertake any of the following excluded courses."
                 },
                 {
-                    "type": "info_rule",
-                    "title": "Course Information Rule",
-                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
-                    "type": "gened",
+                    "type": "prescribed_electives",
+                    "courses": {
+                        "AVIA3011": "Human Factors Tools and Methods ",
+                        "AVIA3012": "Aviation Safety Management Systems",
+                        "AVIA3013": "Workplace Safety",
+                        "AVIA3199": "Aviation Work Placement 1",
+                        "AVIA3299": "Aviation Work Placement 2",
+                        "AVIA3410": "Advanced Law and Regulation in Aviation",
+                        "AVIA3601": "Flight Data Analytics",
+                        "AVIA3610": "Aviation Data Modelling",
+                        "AVIA3900": "Sustainable aviation and tourism",
+                        "SCIF3000": "Science Industry Project"
+                    },
+                    "title": "Level 3 Prescribed Electives",
                     "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course (see Table 1) cannot be taken as General Education (GE).\nAll other courses can be used to fulfil the GE requirement of this program, including GEN### courses.\nAny exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
-                    "type": "limit_rule",
-                    "courses": {
-                        "....1": "any level 1 course"
-                    },
-                    "title": "Maximum Level 1 UOC",
-                    "credits_to_complete": 60,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students may only undertake a maximum of 60 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "AVIA3101": "Airline Management",
-                        "AVIA3201": "Airline Resource Management",
-                        "AVIA3401": "Aviation Safety and Resource Management",
-                        "AVIA3710": "Aviation Research Methods"
-                    },
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 24,
                     "levels": [
                         3
                     ],
-                    "notes": "Students must take 24 UOC of the following courses."
-                },
-                {
-                    "type": "prescribed_electives",
-                    "courses": {
-                        "AVIA2011": "Advanced Human Factors",
-                        "AVIA2025": "Introduction to Airborne Drone Management",
-                        "AVIA2501": "Airline Marketing Strategies",
-                        "AVIA2601": "Aviation Operations Research",
-                        "AVIA2610": "Quantitative and Qualitative Research Methods in Aviation",
-                        "AVIA2702": "Aviation Security and Air Freight Logistics",
-                        "AVIA2910": "Air Transport: Economics and the Environment",
-                        "MGMT2721": "Managing People"
-                    },
-                    "title": "Level 2 Prescribed Electives",
-                    "credits_to_complete": 6,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "Students must take 6 UOC of the following courses."
+                    "notes": "Students must take 12 UOC of the following courses.\nStudents are encouraged to extend their Work Integrated Learning (WIL) experience further as part of any free elective load they may have."
                 },
                 {
                     "type": "core_courses",
@@ -20847,30 +20822,55 @@
                     "notes": "Students must take 36 UOC of the following courses.\nBEES2680 is an introductory course, taken as a Level 1 course within this program."
                 },
                 {
+                    "type": "limit_rule",
+                    "courses": {
+                        "....1": "any level 1 course"
+                    },
+                    "title": "Maximum Level 1 UOC",
+                    "credits_to_complete": 60,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students may only undertake a maximum of 60 UOC of the following courses."
+                },
+                {
                     "type": "prescribed_electives",
                     "courses": {
-                        "AVIA3011": "Human Factors Tools and Methods ",
-                        "AVIA3012": "Aviation Safety Management Systems",
-                        "AVIA3013": "Workplace Safety",
-                        "AVIA3199": "Aviation Work Placement 1",
-                        "AVIA3299": "Aviation Work Placement 2",
-                        "AVIA3410": "Advanced Law and Regulation in Aviation",
-                        "AVIA3601": "Flight Data Analytics",
-                        "AVIA3610": "Aviation Data Modelling",
-                        "AVIA3900": "Sustainable aviation and tourism",
-                        "SCIF3000": "Science Industry Project"
+                        "AVIA2011": "Advanced Human Factors",
+                        "AVIA2025": "Introduction to Airborne Drone Management",
+                        "AVIA2501": "Airline Marketing Strategies",
+                        "AVIA2601": "Aviation Operations Research",
+                        "AVIA2610": "Quantitative and Qualitative Research Methods in Aviation",
+                        "AVIA2702": "Aviation Security and Air Freight Logistics",
+                        "AVIA2910": "Air Transport: Economics and the Environment",
+                        "MGMT2721": "Managing People"
                     },
-                    "title": "Level 3 Prescribed Electives",
-                    "credits_to_complete": 12,
+                    "title": "Level 2 Prescribed Electives",
+                    "credits_to_complete": 6,
+                    "levels": [
+                        2
+                    ],
+                    "notes": "Students must take 6 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "AVIA3101": "Airline Management",
+                        "AVIA3201": "Airline Resource Management",
+                        "AVIA3401": "Aviation Safety and Resource Management",
+                        "AVIA3710": "Aviation Research Methods"
+                    },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 24,
                     "levels": [
                         3
                     ],
-                    "notes": "Students must take 12 UOC of the following courses.\nStudents are encouraged to extend their Work Integrated Learning (WIL) experience further as part of any free elective load they may have."
+                    "notes": "Students must take 24 UOC of the following courses."
                 },
                 {
                     "type": "info_rule",
-                    "title": "Recommended Electives",
-                    "notes": "The following are some recommended courses that can be taken as free electives to complement your disciplinary study.\nIf you are looking for first year business courses to broaden your commercial understanding, consider: COMM1140 Financial Management, COMM1100 Business Decision Making, COMM1110 Evidence-Based Problem Solving, COMM1120 Collaboration and Innovation in Business, ECON1101 Microeconomics, ECON1102 Macroeconomics (has ECON1101 as prerequisite).\nIf you are interested in enhanced aviation data analytics and optimisation modelling, consider AVIA2601 Aviation Operations Research.\nFor knowledge in design and operations of baggage handling systems, consider AVIA2101 Baggage Handling System Design, Technology & Operations.\nFor theories and practice in drone management, air traffic management, safety management and airport management, consider AVIA2025 Introduction to Airborne Drone Management, AVIA1301 Simulation Application and Air Traffic Management, AVIA3013 Workplace Safety, or AVIA2851 Airport Management 2.\nIf you are interested gaining more knowledge in aviation and sustainable development, consider AVIA2910 Air Transport: Economics and the Environment, AVIA3900 Sustainable Aviation and Tourism or AVIA3910 Environmental Performance Evaluation of Aviation: Theories and Techniques.\nIf you are interested in gaining more depth in aviation law, consider AVIA3410 Advanced Law and Regulation in Aviation."
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
                 }
             ],
             "spec_data": {
@@ -20879,8 +20879,8 @@
                         "is_optional": true,
                         "specs": {
                             "AVIAE2": "Human Factors and Aviation Safety",
-                            "AVIAC2": "Aviation Data Analytics",
-                            "AVIAD2": "Aviation Law and Sustainability"
+                            "AVIAD2": "Aviation Law and Sustainability",
+                            "AVIAC2": "Aviation Data Analytics"
                         },
                         "notes": "Students may choose to take one of the below 24 UOC minors."
                     }
@@ -21095,56 +21095,6 @@
         "components": {
             "non_spec_data": [
                 {
-                    "type": "limit_rule",
-                    "courses": {
-                        "AVIA": "any Faculty of Science course",
-                        "BABS": "any Faculty of Science course",
-                        "BEES": "any Faculty of Science course",
-                        "BIOC": "any Faculty of Science course",
-                        "BIOS": "any Faculty of Science course",
-                        "CHEM": "any Faculty of Science course",
-                        "CLIM": "any Faculty of Science course",
-                        "COMP": "any Computer Science course",
-                        "DATA": "any Faculty of Science course",
-                        "FOOD": "any Food Technology course",
-                        "GENM": "any General Education - Faculty of Medicine course",
-                        "GENS": "any General Education - Faculty of Science course",
-                        "GEOS": "any Faculty of Science course",
-                        "MATH": "any Faculty of Science course",
-                        "MATS": "any Faculty of Science course",
-                        "MICR": "any Faculty of Science course",
-                        "MSCI": "any Faculty of Science course",
-                        "NANO": "any Faculty of Science course",
-                        "PHYS": "any Faculty of Science course",
-                        "PSYC": "any Faculty of Science course",
-                        "SCIF": "any Faculty of Science course"
-                    },
-                    "title": "Excluded General Education Courses",
-                    "credits_to_complete": 0,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students may not undertake any of the following excluded courses."
-                },
-                {
-                    "type": "info_rule",
-                    "title": "Course Information Rule",
-                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science or Medicine course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
                     "type": "prescribed_electives",
                     "courses": {
                         "AVIA": "any course offered by Faculty of Science",
@@ -21180,25 +21130,6 @@
                         9
                     ],
                     "notes": "Students must take 6 UOC of the following courses (Psychology, Physics or other Mathematics courses are recommended)"
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "ANAT2241": "Histology: Basic and Systematic",
-                        "BIOC2101": "Principles of Biochemistry (Advanced)",
-                        "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                        "MICR2011": "Microbiology 1",
-                        "PATH2201": "Processes in Disease",
-                        "PHAR2011": "Introductory Pharmacology and Toxicology",
-                        "PHSL2101": "Physiology 1A",
-                        "PHSL2201": "Physiology 1B"
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
                     "type": "prescribed_electives",
@@ -21250,9 +21181,9 @@
                     "courses": {
                         "ANAT1521": "Anatomy for Medical Science",
                         "BABS1201": "Molecules, Cells and Genes",
-                        "BABS2202 or BABS2204 or BIOS1101": [
-                            "Molecular Cell Biology 1",
+                        "BABS2204 or BABS2202 or BIOS1101": [
                             "Genetics",
+                            "Molecular Cell Biology 1",
                             "Evolutionary and Functional Biology"
                         ],
                         "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
@@ -21270,6 +21201,75 @@
                         2
                     ],
                     "notes": "Students must take 42 UOC of the following courses.\nNote: Students in 3991 can only enrol in SCIF1131 in T3 if they cannot take SCIF1111 in T1"
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "ANAT2241": "Histology: Basic and Systematic",
+                        "BIOC2101": "Principles of Biochemistry (Advanced)",
+                        "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                        "MICR2011": "Microbiology 1",
+                        "PATH2201": "Processes in Disease",
+                        "PHAR2011": "Introductory Pharmacology and Toxicology",
+                        "PHSL2101": "Physiology 1A",
+                        "PHSL2201": "Physiology 1B"
+                    },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        2
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "type": "limit_rule",
+                    "courses": {
+                        "AVIA": "any Faculty of Science course",
+                        "BABS": "any Faculty of Science course",
+                        "BEES": "any Faculty of Science course",
+                        "BIOC": "any Faculty of Science course",
+                        "BIOS": "any Faculty of Science course",
+                        "CHEM": "any Faculty of Science course",
+                        "CLIM": "any Faculty of Science course",
+                        "COMP": "any Computer Science course",
+                        "DATA": "any Faculty of Science course",
+                        "FOOD": "any Food Technology course",
+                        "GENM": "any General Education - Faculty of Medicine course",
+                        "GENS": "any General Education - Faculty of Science course",
+                        "GEOS": "any Faculty of Science course",
+                        "MATH": "any Faculty of Science course",
+                        "MATS": "any Faculty of Science course",
+                        "MICR": "any Faculty of Science course",
+                        "MSCI": "any Faculty of Science course",
+                        "NANO": "any Faculty of Science course",
+                        "PHYS": "any Faculty of Science course",
+                        "PSYC": "any Faculty of Science course",
+                        "SCIF": "any Faculty of Science course"
+                    },
+                    "title": "Excluded General Education Courses",
+                    "credits_to_complete": 0,
+                    "levels": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "notes": "Students may not undertake any of the following excluded courses."
+                },
+                {
+                    "type": "info_rule",
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science or Medicine course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
                 }
             ],
             "spec_data": {
@@ -21277,15 +21277,15 @@
                     "Medical Science": {
                         "is_optional": false,
                         "specs": {
-                            "BIOCI1": "Molecular Genetics",
-                            "PHSLC1": "Medical Physiology",
-                            "MICRH1": "Medical Microbiology",
-                            "PATHC1": "Human Pathology",
-                            "MICRK1": "Medical Immunology",
-                            "PHARC1": "Medical Pharmacology",
-                            "NEURB1": "Neurobiology",
                             "BIOCH1": "Molecular Biology",
-                            "ANATE1": "Human Anatomy"
+                            "NEURB1": "Neurobiology",
+                            "MICRH1": "Medical Microbiology",
+                            "MICRK1": "Medical Immunology",
+                            "ANATE1": "Human Anatomy",
+                            "PHSLC1": "Medical Physiology",
+                            "PHARC1": "Medical Pharmacology",
+                            "BIOCI1": "Molecular Genetics",
+                            "PATHC1": "Human Pathology"
                         },
                         "notes": "Students may elect to complete a major, or a double major, from the following areas. Where a student would like to graduate with a major (this is not a compulsory part of the program) this must be declared by the commencement of a student's final year of study.\nPlease Note: Students may complete a maximum of two majors but no double-counting of courses between majors is allowed at Level 3."
                     }
@@ -22068,6 +22068,94 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "info_rule",
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
+                    "type": "limit_rule",
+                    "courses": {
+                        "AVIA": "any Faculty of Science course",
+                        "BABS": "any Faculty of Science course",
+                        "BEES": "any Faculty of Science course",
+                        "BIOC": "any Faculty of Science course",
+                        "BIOS": "any Faculty of Science course",
+                        "CHEM": "any Faculty of Science course",
+                        "CLIM": "any Faculty of Science course",
+                        "COMP": "any Computer Science course",
+                        "DATA": "any Faculty of Science course",
+                        "FOOD": "any Food Technology course",
+                        "GENS": "any General Education - Faculty of Science course",
+                        "GEOS": "any Faculty of Science course",
+                        "MATH": "any Faculty of Science course",
+                        "MATS": "any Faculty of Science course",
+                        "MICR": "any Faculty of Science course",
+                        "MSCI": "any Faculty of Science course",
+                        "NANO": "any Faculty of Science course",
+                        "PHYS": "any Faculty of Science course",
+                        "PSYC": "any Faculty of Science course",
+                        "SCIF": "any Faculty of Science course"
+                    },
+                    "title": "Excluded General Education Courses",
+                    "credits_to_complete": 0,
+                    "levels": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "notes": "Students may not undertake any of the following excluded courses."
+                },
+                {
+                    "type": "prescribed_electives",
+                    "courses": {
+                        "BABS2204": "Genetics",
+                        "BABS3021": "Microbial Genetics",
+                        "BABS3041": "Immunology",
+                        "BABS3071": "Commercial Biotechnology",
+                        "BABS3081": "Bacteria and Disease",
+                        "BABS3121": "Molecular Biology of Nucleic Acids",
+                        "BABS3281": "Molecular Frontiers",
+                        "BINF2010": "Introduction to Bioinformatics",
+                        "BIOC3111": "Molecular Biology of Proteins",
+                        "BIOC3261": "Human Biochemistry of Health and Disease",
+                        "BIOC3271": "Molecular Cell Biology 2",
+                        "CHEM2031": "Inorganic Chemistry: The Elements",
+                        "CHEM3031": "Inorganic Chemistry: Transition Metals and Complexes",
+                        "CHEM3998": "Advanced Special Project in Chemistry",
+                        "CHEM6701": "Topics in Contemporary Chemistry A",
+                        "CHEM6702": "Topics in Contemporary Chemistry B",
+                        "MICR2011": "Microbiology 1",
+                        "PHAR3202": "Neuropharmacology",
+                        "PHAR3251": "Clinical and Experimental Pharmacology",
+                        "PHSL2101": "Physiology 1A",
+                        "PHSL2201": "Physiology 1B",
+                        "PHYS1111": "Fundamentals of Physics",
+                        "PHYS1121": "Physics 1A",
+                        "PHYS1131": "Higher Physics 1A",
+                        "SCIF3199": "Science Work Placement"
+                    },
+                    "title": "Medicinal Chemistry Electives",
+                    "credits_to_complete": 12,
+                    "levels": [
+                        1,
+                        2,
+                        3,
+                        6
+                    ],
+                    "notes": "Students must take at least 12 UOC of the following courses."
+                },
+                {
                     "type": "core_courses",
                     "courses": {
                         "BABS1201": "Molecules, Cells and Genes",
@@ -22084,6 +22172,18 @@
                         1
                     ],
                     "notes": "Students must take 42 UOC of the following courses."
+                },
+                {
+                    "type": "limit_rule",
+                    "courses": {
+                        "....1": "any level 1 course"
+                    },
+                    "title": "Maximum Level 1 UOC",
+                    "credits_to_complete": 60,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students may only undertake a maximum of 60 UOC of the following courses."
                 },
                 {
                     "type": "core_courses",
@@ -22130,106 +22230,6 @@
                         3
                     ],
                     "notes": "Students must take 30 UOC of the following courses."
-                },
-                {
-                    "type": "prescribed_electives",
-                    "courses": {
-                        "BABS2204": "Genetics",
-                        "BABS3021": "Microbial Genetics",
-                        "BABS3041": "Immunology",
-                        "BABS3071": "Commercial Biotechnology",
-                        "BABS3081": "Bacteria and Disease",
-                        "BABS3121": "Molecular Biology of Nucleic Acids",
-                        "BABS3281": "Molecular Frontiers",
-                        "BINF2010": "Introduction to Bioinformatics",
-                        "BIOC3111": "Molecular Biology of Proteins",
-                        "BIOC3261": "Human Biochemistry of Health and Disease",
-                        "BIOC3271": "Molecular Cell Biology 2",
-                        "CHEM2031": "Inorganic Chemistry: The Elements",
-                        "CHEM3031": "Inorganic Chemistry: Transition Metals and Complexes",
-                        "CHEM3998": "Advanced Special Project in Chemistry",
-                        "CHEM6701": "Topics in Contemporary Chemistry A",
-                        "CHEM6702": "Topics in Contemporary Chemistry B",
-                        "MICR2011": "Microbiology 1",
-                        "PHAR3202": "Neuropharmacology",
-                        "PHAR3251": "Clinical and Experimental Pharmacology",
-                        "PHSL2101": "Physiology 1A",
-                        "PHSL2201": "Physiology 1B",
-                        "PHYS1111": "Fundamentals of Physics",
-                        "PHYS1121": "Physics 1A",
-                        "PHYS1131": "Higher Physics 1A",
-                        "SCIF3199": "Science Work Placement"
-                    },
-                    "title": "Medicinal Chemistry Electives",
-                    "credits_to_complete": 12,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        6
-                    ],
-                    "notes": "Students must take at least 12 UOC of the following courses."
-                },
-                {
-                    "type": "limit_rule",
-                    "courses": {
-                        "....1": "any level 1 course"
-                    },
-                    "title": "Maximum Level 1 UOC",
-                    "credits_to_complete": 60,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students may only undertake a maximum of 60 UOC of the following courses."
-                },
-                {
-                    "type": "limit_rule",
-                    "courses": {
-                        "AVIA": "any Faculty of Science course",
-                        "BABS": "any Faculty of Science course",
-                        "BEES": "any Faculty of Science course",
-                        "BIOC": "any Faculty of Science course",
-                        "BIOS": "any Faculty of Science course",
-                        "CHEM": "any Faculty of Science course",
-                        "CLIM": "any Faculty of Science course",
-                        "COMP": "any Computer Science course",
-                        "DATA": "any Faculty of Science course",
-                        "FOOD": "any Food Technology course",
-                        "GENS": "any General Education - Faculty of Science course",
-                        "GEOS": "any Faculty of Science course",
-                        "MATH": "any Faculty of Science course",
-                        "MATS": "any Faculty of Science course",
-                        "MICR": "any Faculty of Science course",
-                        "MSCI": "any Faculty of Science course",
-                        "NANO": "any Faculty of Science course",
-                        "PHYS": "any Faculty of Science course",
-                        "PSYC": "any Faculty of Science course",
-                        "SCIF": "any Faculty of Science course"
-                    },
-                    "title": "Excluded General Education Courses",
-                    "credits_to_complete": 0,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students may not undertake any of the following excluded courses."
-                },
-                {
-                    "type": "info_rule",
-                    "title": "Course Information Rule",
-                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
                 }
             ]
         },
@@ -32284,8 +32284,8 @@
                         "is_optional": false,
                         "specs": {
                             "DDESB1": "Integrated Design",
-                            "IDESF1": "Industrial Design",
-                            "CODEB1": "Computational Design"
+                            "CODEB1": "Computational Design",
+                            "IDESF1": "Industrial Design"
                         },
                         "notes": "You must complete one of the specialisations below."
                     }
@@ -32294,53 +32294,54 @@
                     "Design": {
                         "is_optional": true,
                         "specs": {
-                            "IDESA2": "Industrial Design ",
-                            "CODEA2": "Computational Design",
+                            "BENVC2": "Robotic Fabrication",
                             "DDESC2": "Graphic Design",
+                            "CODEA2": "Computational Design",
+                            "IDESA2": "Industrial Design ",
                             "BENVD2": "Social Robotics",
                             "DDESB2": "Integrated Design",
-                            "BENVC2": "Robotic Fabrication",
-                            "AUSTB2": "Australian Studies",
-                            "ARTHB2": "Art History and Theory",
-                            "PHILE2": "Philosophy",
-                            "SOSSB2": "International Political Economy",
-                            "POLSG2": "Politics and International Relations",
-                            "ITALB2": "Italian Studies",
-                            "ASIAB2": "Asian Studies",
                             "COMDF2": "Global Development",
-                            "PSYCM2": "Psychology",
-                            "SOSSD2": "Security Studies",
-                            "MDIAO2": "Communication and Journalism",
-                            "HISTD2": "History",
-                            "CHINF2": "Advanced Chinese Studies",
-                            "THSTC2": "Theatre and Performance Studies",
-                            "SOSSC2": "Policy, Power and Government",
-                            "MDIAR2": "Public Relations and Advertising",
-                            "KOREG2": "Advanced Korean Studies",
-                            "ENGLC2": "English",
-                            "CRWTA2": "Creative Writing",
-                            "SOCAD2": "Sociology and Anthropology",
-                            "SPANI2": "Spanish Studies",
-                            "EUROC2": "European Studies",
-                            "MUSCJ2": "Music Studies",
-                            "DARTC2": "Animation and Moving Image",
-                            "GERSF2": "German Studies",
-                            "FILMB2": "Film Studies",
-                            "WOMSC2": "Gender Studies",
                             "FRENF2": "French Studies",
-                            "ATSIC2": "Indigenous Studies",
-                            "ENVPE2": "Environmental Humanities",
-                            "FRENG2": "Advanced French Studies",
-                            "GEOGK2": "Geographical Studies",
-                            "DARTE2": "Visual Arts",
-                            "KOREF2": "Korean Studies",
-                            "MDIAQ2": "Media Studies",
-                            "GREKC2": "Modern Greek Studies",
                             "JAPNF2": "Japanese Studies",
-                            "LINGC2": "Linguistics",
                             "MDIAT2": "Screen Production",
+                            "SOSSD2": "Security Studies",
+                            "ARTHB2": "Art History and Theory",
+                            "DARTC2": "Animation and Moving Image",
+                            "GEOGK2": "Geographical Studies",
+                            "KOREF2": "Korean Studies",
+                            "PHILE2": "Philosophy",
+                            "THSTC2": "Theatre and Performance Studies",
+                            "ATSIC2": "Indigenous Studies",
+                            "ENGLC2": "English",
+                            "GREKC2": "Modern Greek Studies",
+                            "LINGC2": "Linguistics",
+                            "PSYCM2": "Psychology",
+                            "CHINE2": "Chinese Studies",
+                            "EUROC2": "European Studies",
+                            "INDOC2": "Indonesian Studies",
+                            "MDIAQ2": "Media Studies",
+                            "SOSSB2": "International Political Economy",
+                            "CRWTA2": "Creative Writing",
+                            "FRENG2": "Advanced French Studies",
                             "JAPNG2": "Advanced Japanese Studies",
-                            "INDOC2": "Indonesian Studies"
+                            "MUSCJ2": "Music Studies",
+                            "SPANI2": "Spanish Studies",
+                            "ASIAB2": "Asian Studies",
+                            "DARTE2": "Visual Arts",
+                            "GERSF2": "German Studies",
+                            "KOREG2": "Advanced Korean Studies",
+                            "POLSG2": "Politics and International Relations",
+                            "WOMSC2": "Gender Studies",
+                            "AUSTB2": "Australian Studies",
+                            "ENVPE2": "Environmental Humanities",
+                            "HISTD2": "History",
+                            "MDIAO2": "Communication and Journalism",
+                            "SOCAD2": "Sociology and Anthropology",
+                            "CHINF2": "Advanced Chinese Studies",
+                            "FILMB2": "Film Studies",
+                            "ITALB2": "Italian Studies",
+                            "MDIAR2": "Public Relations and Advertising",
+                            "SOSSC2": "Policy, Power and Government"
                         },
                         "notes": "\n\nThe below optional minors are also available."
                     }
@@ -33462,13 +33463,13 @@
                 {
                     "type": "prescribed_electives",
                     "courses": {
-                        "DPST1021 or DPST1023": [
-                            "Physics 1A",
-                            "Higher Physics 1A"
-                        ],
                         "DPST1022 or DPST1024": [
                             "Physics 1B",
                             "Higher Physics 1B"
+                        ],
+                        "DPST1023 or DPST1021": [
+                            "Higher Physics 1A",
+                            "Physics 1A"
                         ],
                         "DPST1061": "Design in Application of Materials in Science and Engineering"
                     },
@@ -33512,15 +33513,15 @@
                 {
                     "type": "prescribed_electives",
                     "courses": {
-                        "DPST1022 or DPST1041 or DPST1024 or DPST1052": [
-                            "Physics 1B",
-                            "Evolutionary and Functional Biology",
-                            "Higher Physics 1B",
-                            "Applied Biomolecular Sciences"
-                        ],
                         "DPST1023 or DPST1021": [
                             "Higher Physics 1A",
                             "Physics 1A"
+                        ],
+                        "DPST1024 or DPST1041 or DPST1052 or DPST1022": [
+                            "Higher Physics 1B",
+                            "Evolutionary and Functional Biology",
+                            "Applied Biomolecular Sciences",
+                            "Physics 1B"
                         ],
                         "DPST1051": "Molecules, Cells and Genes"
                     },
@@ -33550,10 +33551,10 @@
                     "courses": {
                         "DPST1013": "Mathematics 1A",
                         "DPST1014": "Mathematics 1B",
-                        "DPST1021 or DPST1093 or DPST1023": [
+                        "DPST1023 or DPST1021 or DPST1093": [
+                            "Higher Physics 1A",
                             "Physics 1A",
-                            "Software Engineering Fundamentals",
-                            "Higher Physics 1A"
+                            "Software Engineering Fundamentals"
                         ],
                         "DPST1071": "Introduction to Engineering Design and Innovation",
                         "DPST1091": "Introduction to Programming"
@@ -33631,6 +33632,28 @@
                     "notes": "Students must take 6 UOC of the following courses. Students take either DPGE1004 (over one term) or DPGE1001/1002/1003 (over three terms) depending on English language capabilities."
                 },
                 {
+                    "type": "prescribed_electives",
+                    "courses": {
+                        "DPST1023 or DPST1021": [
+                            "Higher Physics 1A",
+                            "Physics 1A"
+                        ],
+                        "DPST1024 or DPST1022": [
+                            "Higher Physics 1B",
+                            "Physics 1B"
+                        ],
+                        "DPST1051": "Molecules, Cells and Genes",
+                        "DPST1052": "Applied Biomolecular Sciences",
+                        "DPST1071": "Introduction to Engineering Design and Innovation"
+                    },
+                    "title": "Prescribed Electives",
+                    "credits_to_complete": 12,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 12 UOC (2 courses) from the following course list.\nNote: Students can only take Higher Physics 1B if they have passed Higher Physics 1A or achieved a minimum of 65% in the Physics 1A course."
+                },
+                {
                     "type": "core_courses",
                     "courses": {
                         "DPST1013": "Mathematics 1A",
@@ -33645,28 +33668,6 @@
                         1
                     ],
                     "notes": "Students must take 30 UOC of the following courses."
-                },
-                {
-                    "type": "prescribed_electives",
-                    "courses": {
-                        "DPST1021 or DPST1023": [
-                            "Physics 1A",
-                            "Higher Physics 1A"
-                        ],
-                        "DPST1022 or DPST1024": [
-                            "Physics 1B",
-                            "Higher Physics 1B"
-                        ],
-                        "DPST1051": "Molecules, Cells and Genes",
-                        "DPST1052": "Applied Biomolecular Sciences",
-                        "DPST1071": "Introduction to Engineering Design and Innovation"
-                    },
-                    "title": "Prescribed Electives",
-                    "credits_to_complete": 12,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must take 12 UOC (2 courses) from the following course list.\nNote: Students can only take Higher Physics 1B if they have passed Higher Physics 1A or achieved a minimum of 65% in the Physics 1A course."
                 }
             ]
         },
@@ -33696,6 +33697,28 @@
                         1
                     ],
                     "notes": "All students must take 6 UOC of the following courses. Students take either DPGE1004 (over one term) or DPGE1001/1002/1003 (over three terms) depending on English language capabilities. These courses are requirements of the Diploma in Business but no credit is granted for these courses towards the Bachelor of Commerce, Bachelor of Economics and Bachelor of Information Systems."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "COMM0999": "myBCom Blueprint",
+                        "COMM1999": "myBCom First Year Portfolio",
+                        "DPBS1100": "Business Decision Making",
+                        "DPBS1110": "Evidence Based Problem Solving",
+                        "DPBS1120": "Collaboration and Innovation in Business",
+                        "DPBS1140": "Financial Management",
+                        "DPBS1150": "Global Business Environments",
+                        "DPBS1170": "Organisational Resources",
+                        "DPBS1180": "Value Creation",
+                        "DPBS1190": "Data, Insights and Decisions"
+                    },
+                    "title": "Commerce",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        0,
+                        1
+                    ],
+                    "notes": "Students in the Commerce stream must complete 48 UOC of the following."
                 },
                 {
                     "type": "core_courses",
@@ -33738,28 +33761,6 @@
                         1
                     ],
                     "notes": "Students in the Economics stream must take 48 UOC of the following."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "COMM0999": "myBCom Blueprint",
-                        "COMM1999": "myBCom First Year Portfolio",
-                        "DPBS1100": "Business Decision Making",
-                        "DPBS1110": "Evidence Based Problem Solving",
-                        "DPBS1120": "Collaboration and Innovation in Business",
-                        "DPBS1140": "Financial Management",
-                        "DPBS1150": "Global Business Environments",
-                        "DPBS1170": "Organisational Resources",
-                        "DPBS1180": "Value Creation",
-                        "DPBS1190": "Data, Insights and Decisions"
-                    },
-                    "title": "Commerce",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        0,
-                        1
-                    ],
-                    "notes": "Students in the Commerce stream must complete 48 UOC of the following."
                 }
             ]
         },
@@ -33787,12 +33788,65 @@
                         "DPHU1007": "Media, Society and Politics",
                         "DPHU1008": "Working with Data"
                     },
-                    "title": "Communication and Journalism",
+                    "title": "PR and Advertising",
                     "credits_to_complete": 42,
                     "levels": [
                         1
                     ],
-                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: Communication and Journalism, must complete 42 UOC of\nthe following:"
+                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: PR and Advertising, must complete 42 UOC of the following:"
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "DPHU1001": "Media and Communication Contexts",
+                        "DPHU1002": "Public Relations and Advertising Foundations ",
+                        "DPHU1003": "News Fundamentals",
+                        "DPHU1004": "Media Entrepreneurship",
+                        "DPHU1005": "Introduction to Film Studies",
+                        "DPHU1006": "Screen Production 1",
+                        "DPHU1007": "Media, Society and Politics",
+                        "DPHU1008": "Working with Data"
+                    },
+                    "title": "Media Studies",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: Media Studies, must complete 42 UOC of the following:"
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "DPGE1001": "Communication and Academic Literacy 1",
+                        "DPGE1002": "Communication and Academic Literacy 2",
+                        "DPGE1003": "Communication and Academic Literacy 3",
+                        "DPGE1004": "Communication and Academic Literacy - Standard"
+                    },
+                    "title": "Communication and Academic Literacy Core Courses",
+                    "credits_to_complete": 6,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 6 UOC of the following courses. Students take either DPGE1004 (over one term) or DPGE1001/1002/1003 (over three terms) depending on English language capabilities."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "DPHU1001": "Media and Communication Contexts",
+                        "DPHU1002": "Public Relations and Advertising Foundations ",
+                        "DPHU1003": "News Fundamentals",
+                        "DPHU1004": "Media Entrepreneurship",
+                        "DPHU1005": "Introduction to Film Studies",
+                        "DPHU1006": "Screen Production 1",
+                        "DPHU1007": "Media, Society and Politics",
+                        "DPHU1008": "Working with Data"
+                    },
+                    "title": "Cinema Studies",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: Cinema Studies, must complete 42 UOC of\nthe following:"
                 },
                 {
                     "type": "core_courses",
@@ -33825,65 +33879,12 @@
                         "DPHU1007": "Media, Society and Politics",
                         "DPHU1008": "Working with Data"
                     },
-                    "title": "PR and Advertising",
+                    "title": "Communication and Journalism",
                     "credits_to_complete": 42,
                     "levels": [
                         1
                     ],
-                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: PR and Advertising, must complete 42 UOC of the following:"
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "DPHU1001": "Media and Communication Contexts",
-                        "DPHU1002": "Public Relations and Advertising Foundations ",
-                        "DPHU1003": "News Fundamentals",
-                        "DPHU1004": "Media Entrepreneurship",
-                        "DPHU1005": "Introduction to Film Studies",
-                        "DPHU1006": "Screen Production 1",
-                        "DPHU1007": "Media, Society and Politics",
-                        "DPHU1008": "Working with Data"
-                    },
-                    "title": "Cinema Studies",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: Cinema Studies, must complete 42 UOC of\nthe following:"
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "DPGE1001": "Communication and Academic Literacy 1",
-                        "DPGE1002": "Communication and Academic Literacy 2",
-                        "DPGE1003": "Communication and Academic Literacy 3",
-                        "DPGE1004": "Communication and Academic Literacy - Standard"
-                    },
-                    "title": "Communication and Academic Literacy Core Courses",
-                    "credits_to_complete": 6,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must take 6 UOC of the following courses. Students take either DPGE1004 (over one term) or DPGE1001/1002/1003 (over three terms) depending on English language capabilities."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "DPHU1001": "Media and Communication Contexts",
-                        "DPHU1002": "Public Relations and Advertising Foundations ",
-                        "DPHU1003": "News Fundamentals",
-                        "DPHU1004": "Media Entrepreneurship",
-                        "DPHU1005": "Introduction to Film Studies",
-                        "DPHU1006": "Screen Production 1",
-                        "DPHU1007": "Media, Society and Politics",
-                        "DPHU1008": "Working with Data"
-                    },
-                    "title": "Media Studies",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: Media Studies, must complete 42 UOC of the following:"
+                    "notes": "Students intending to pursue a UNSW Degree is Bachelor of Media, Specialisation: Communication and Journalism, must complete 42 UOC of\nthe following:"
                 }
             ]
         },
@@ -33899,6 +33900,23 @@
         "structure_summary": "Students must complete 48 UOC when taken as a standalone program.\n\nCommunication and Academic Literacy (6 UOC)\nDiploma courses (36 UOC)\nA stream-specific course (6 UOC) - Students must select course in the relevant areas of study/stream based on the intended articulated UNSW undergraduate program.",
         "components": {
             "non_spec_data": [
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "DPDE1001": "Practical Design Studio 1 ",
+                        "DPDE1002": "Communication in the Built Environment",
+                        "DPDE1003": "Design History and Theory",
+                        "DPDE1004": "Practical Design Studio 2",
+                        "DPDE1005": "Architectural Composition and Modelling",
+                        "DPDE1006": "Building Environments and Technics 1 "
+                    },
+                    "title": "Core Courses",
+                    "credits_to_complete": 36,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must complete 36 UOC of the following courses."
+                },
                 {
                     "type": "core_courses",
                     "courses": {
@@ -33927,23 +33945,6 @@
                         1
                     ],
                     "notes": "Students must complete one of the following 6 UOC stream-specific courses"
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "DPDE1001": "Practical Design Studio 1 ",
-                        "DPDE1002": "Communication in the Built Environment",
-                        "DPDE1003": "Design History and Theory",
-                        "DPDE1004": "Practical Design Studio 2",
-                        "DPDE1005": "Architectural Composition and Modelling",
-                        "DPDE1006": "Building Environments and Technics 1 "
-                    },
-                    "title": "Core Courses",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must complete 36 UOC of the following courses."
                 }
             ]
         },
@@ -34015,6 +34016,18 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "core_courses",
+                    "courses": {
+                        "DESN1000": "Introduction to Engineering Design and Innovation"
+                    },
+                    "title": "Core Courses",
+                    "credits_to_complete": 18,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 24 UOC of the following\ncourses."
+                },
+                {
                     "type": "prescribed_electives",
                     "courses": {
                         "BIOM1010": "Engineering in Medicine and Biology",
@@ -34036,18 +34049,6 @@
                         1
                     ],
                     "notes": "Students must take 6 UOC of the following\ncourses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "DESN1000": "Introduction to Engineering Design and Innovation"
-                    },
-                    "title": "Core Courses",
-                    "credits_to_complete": 18,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must take 24 UOC of the following\ncourses."
                 }
             ]
         },
