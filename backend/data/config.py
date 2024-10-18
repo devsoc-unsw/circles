@@ -15,7 +15,7 @@ Assumes that `/backend` is the current working directory.
 from typing import List
 
 # Don't forget to update live year in the frontend too
-LIVE_YEAR: int = 2024
+LIVE_YEAR: int = 2025
 
 # The years for which we have archived
 ARCHIVED_YEARS: List[int] = list(range(2019, LIVE_YEAR + 1))

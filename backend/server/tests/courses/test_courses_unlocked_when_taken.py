@@ -23,7 +23,8 @@ def test_no_courses_completed():
             'COMP2041',
             'COMP2121',
             'COMP2521',
-            'COMP9334'
+            'COMP9334',
+            'MMAN9350',
         ],
         # COMP1511 is equivalent to 'DPST1091' so it unlocks DPST1093
         # Maybe "equivalent" courses should be under `direct_unlock`?
@@ -93,6 +94,7 @@ def test_two_courses_completed():
             "COMP9444",
             "COMP9517",
             "COMP9727",
+            "MTRN2500",
         ],
-        "indirect_unlock": ['BABS3301', "TABL2710"]
+        "indirect_unlock": ["BABS3301", "BEIL0011", "MUSC2117", "TABL2710"]
     }
