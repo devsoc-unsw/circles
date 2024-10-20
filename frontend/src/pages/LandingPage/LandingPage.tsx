@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getUserIsSetup } from 'utils/api/userApi';
+import { importUser } from 'utils/export';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import useToken from 'hooks/useToken';
@@ -13,6 +15,23 @@ import KeyFeaturesSection from './KeyFeaturesSection';
 import SponsorSection from './SponsorSection';
 
 const LandingPage = () => {
+  // THIS IS FOR MIGRATION. DELETE WHEN MIGRATION IS DONE
+  const [searchParams, setSearchParams] = useSearchParams();
+  const migration = searchParams.get('migration');
+  if (migration) {
+    try {
+      const json = JSON.parse(migration) as JSON;
+      // Throws error if migration is bad
+      importUser(json);
+      localStorage.setItem('oldUser', migration);
+    } catch {
+      // eslint-disable-next-line no-console
+      console.error('Bad migration query param');
+    }
+    setSearchParams({});
+  }
+  // END OF MIGRATION CODE
+
   // determine our next location
   const token = useToken({ allowUnset: true });
 
