@@ -19,17 +19,17 @@ export type UserJson = {
 
 const settingsSchema = z.strictObject({
   showMarks: z.boolean(),
-  hiddenYears: z.array(z.number())
+  hiddenYears: z.array(z.number().int().positive())
 });
 
 const degreeSchema = z.strictObject({
-  programCode: z.string(),
+  programCode: z.string().length(4),
   specs: z.array(z.string())
 });
 
 const plannerSchema = z.strictObject({
   unplanned: z.array(z.string()),
-  startYear: z.number(),
+  startYear: z.number().int().gte(2019),
   isSummerEnabled: z.boolean(),
   lockedTerms: z.record(z.string(), z.boolean()),
   years: z.array(z.record(z.string(), z.array(z.string())))
@@ -68,7 +68,7 @@ export const exportUser = (user: UserResponse): UserJson => {
   };
 };
 
-export const importUser = (data: JSON) => {
+export const importUser = (data: JSON): UserJson => {
   const parsed = exportOutputSchema.safeParse(data);
   if (!parsed.success || parsed.data === undefined) {
     parsed.error.errors.forEach((err) => {
