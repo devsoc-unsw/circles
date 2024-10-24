@@ -3760,7 +3760,7 @@
     },
     "COMP4920": {
         "original": "Prerequisite: Completion of 18 UOC of COMP**** courses<br/><br/>",
-        "processed": "(COMP2511 || COMP2911) && 96UOC && (COMP?1 || COMP?H)"
+        "processed": "18UOC in COMP"
     },
     "COMP4951": {
         "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
