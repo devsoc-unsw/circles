@@ -556,7 +556,7 @@ def uoc_in_business_school(processed: str) -> str:
     return processed
 
 def uoc_in_school(processed: str) -> str:
-    return re.sub(r"(\d+UOC) (in|of|at) ([A-Z]{4}) courses", r"\1 in \3", processed)
+    return re.sub(r"(\d+ *UOC) (in|of|at) ([A-Z]{4})(\*{4})? courses", r"\1 in \3", processed)
 
 def l2_math_courses(processed: str) -> str:
     """Converts L2 Maths courses to L@ MATH"""
