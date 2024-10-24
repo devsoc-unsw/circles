@@ -23,12 +23,18 @@ const LandingPage = () => {
       const json = JSON.parse(migration) as JSON;
       // Throws error if migration is bad
       importUser(json);
-      localStorage.setItem('oldUser', migration);
+      if (localStorage.getItem('oldUser') === null) {
+        localStorage.setItem('oldUser', migration);
+      } else {
+        // eslint-disable-next-line no-console
+        console.error('oldUser already exists');
+      }
     } catch {
       // eslint-disable-next-line no-console
       console.error('Bad migration query param');
     }
     setSearchParams({});
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
   // END OF MIGRATION CODE
 
