@@ -19,6 +19,7 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState: initialSettingsState,
   reducers: {
+    resetSettings: () => initialSettingsState,
     toggleTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
     },
@@ -31,6 +32,7 @@ const settingsSlice = createSlice({
   }
 });
 
-export const { toggleTheme, toggleLockedCourses, toggleShowPastWarnings } = settingsSlice.actions;
+export const { resetSettings, toggleTheme, toggleLockedCourses, toggleShowPastWarnings } =
+  settingsSlice.actions;
 
 export default settingsSlice.reducer;

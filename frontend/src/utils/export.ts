@@ -19,25 +19,25 @@ export type UserJson = {
 
 const settingsSchema = z.strictObject({
   showMarks: z.boolean(),
-  hiddenYears: z.array(z.number())
+  hiddenYears: z.array(z.number().int().nonnegative())
 });
 
 const degreeSchema = z.strictObject({
-  programCode: z.string(),
+  programCode: z.string().length(4),
   specs: z.array(z.string())
 });
 
 const plannerSchema = z.strictObject({
-  unplanned: z.array(z.string()),
-  startYear: z.number(),
+  unplanned: z.array(z.string().length(8)),
+  startYear: z.number().int().gte(2019),
   isSummerEnabled: z.boolean(),
   lockedTerms: z.record(z.string(), z.boolean()),
-  years: z.array(z.record(z.string(), z.array(z.string())))
+  years: z.array(z.record(z.string(), z.array(z.string().length(8))))
 });
 
 const courseSchema = z.strictObject({
   mark: z
-    .union([z.number().positive().int(), z.enum(['SY', 'FL', 'PS', 'CR', 'DN', 'HD'])])
+    .union([z.number().nonnegative().int(), z.enum(['SY', 'FL', 'PS', 'CR', 'DN', 'HD'])])
     .nullable(),
   ignoreFromProgression: z.boolean()
 });
@@ -46,7 +46,7 @@ const exportOutputSchema = z.strictObject({
   settings: settingsSchema,
   degree: degreeSchema,
   planner: plannerSchema,
-  courses: z.record(z.string(), courseSchema)
+  courses: z.record(z.string().length(8), courseSchema)
 });
 
 export const exportUser = (user: UserResponse): UserJson => {
@@ -68,7 +68,7 @@ export const exportUser = (user: UserResponse): UserJson => {
   };
 };
 
-export const importUser = (data: JSON) => {
+export const importUser = (data: JSON): UserJson => {
   const parsed = exportOutputSchema.safeParse(data);
   if (!parsed.success || parsed.data === undefined) {
     parsed.error.errors.forEach((err) => {

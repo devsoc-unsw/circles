@@ -22,7 +22,7 @@ export const persistConfig = {
   key: 'root',
   version: persistVersion,
   storage,
-  whitelist: ['degree', 'courses', 'planner', 'settings'],
+  whitelist: ['settings'],
   migrate: persistMigrate
 };
 

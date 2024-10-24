@@ -7,6 +7,7 @@ import { DegreeWizardPayload } from 'types/degreeWizard';
 import { getSpecialisationTypes } from 'utils/api/specsApi';
 import { getUserIsSetup, resetUserDegree } from 'utils/api/userApi';
 import openNotification from 'utils/openNotification';
+import MigrationModal from 'components/MigrationModal';
 import PageTemplate from 'components/PageTemplate';
 import ResetModal from 'components/ResetModal';
 import useToken from 'hooks/useToken';
@@ -101,11 +102,18 @@ const DegreeWizard = () => {
     navigate('/logout');
   };
 
+  const [migrationNeeded, setMigrationNeeded] = useState(localStorage.getItem('oldUser') !== null);
+
   return (
     <PageTemplate showHeader={false} showBugButton={false}>
       <S.ContainerWrapper>
+        <MigrationModal
+          open={migrationNeeded}
+          onOk={() => setMigrationNeeded(false)}
+          onCancel={() => setMigrationNeeded(false)}
+        />
         <ResetModal
-          open={isSetup}
+          open={isSetup && !migrationNeeded}
           onCancel={() => navigate('/course-selector')}
           onOk={() => resetDegree.mutate()}
         />
