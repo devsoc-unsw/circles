@@ -1,77 +1,53 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Tooltip } from 'antd';
-import axios from 'axios';
-import { Course, UnselectCourses } from 'types/api';
-import { PlannerCourse } from 'types/planner';
-import prepareUserPayload from 'utils/prepareUserPayload';
-import type { RootState } from 'config/store';
-import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import { addToUnplanned, removeCourse } from 'utils/api/plannerApi';
+import useSettings from 'hooks/useSettings';
+import useToken from 'hooks/useToken';
 import S from './styles';
 
 type Props = {
   courseCode: string;
+  runMutate?: (courseId: string) => void;
   planned?: boolean;
 };
 
-const QuickAddCartButton = ({ courseCode, planned }: Props) => {
-  const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.settings);
+const QuickAddCartButton = ({ courseCode, runMutate, planned }: Props) => {
+  const token = useToken();
+
+  const handleMutation = planned
+    ? (code: string) => removeCourse(token, code)
+    : (code: string) => addToUnplanned(token, code);
+
+  const { theme } = useSettings();
   const iconStyles = {
     color: theme === 'light' ? '#000' : '#fff'
   };
-
-  const { degree, planner } = useSelector((state: RootState) => state);
-
-  const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
-    e.stopPropagation();
-    try {
-      const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
-
-      const courseData: PlannerCourse = {
-        title: course.title,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-        isMultiterm: course.is_multiterm,
-        supressed: false,
-        ignoreFromProgression: false,
-        mark: undefined
-      };
-      dispatch(addToUnplanned({ courseCode: course.code, courseData }));
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at addToPlanner', err);
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: handleMutation,
+    onMutate: () => planned,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['planner']
+      });
     }
-  };
+  });
 
-  const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    try {
-      const res = await axios.post<UnselectCourses>(
-        `/courses/unselectCourse/${code}`,
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
-      dispatch(removeCourses(res.data.courses));
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Error at removeFromPlanner', err);
-    }
+    if (runMutate) runMutate(courseCode);
+    else mutation.mutate(courseCode);
   };
 
   return !planned ? (
     <Tooltip title="Add to Planner" placement="top">
       <S.SelectButton
         data-testid="quick-add-cart-button"
-        onClick={(e) => addToPlanner(e, courseCode)}
+        onClick={handleClick}
         size="small"
+        loading={mutation.isPending}
         shape="circle"
         icon={<PlusOutlined style={iconStyles} />}
       />
@@ -80,8 +56,9 @@ const QuickAddCartButton = ({ courseCode, planned }: Props) => {
     <Tooltip title="Remove from Planner" placement="top">
       <S.DeselectButton
         data-testid="quick-remove-cart-button"
-        onClick={(e) => removeFromPlanner(e, courseCode)}
+        onClick={handleClick}
         size="small"
+        loading={mutation.isPending}
         shape="circle"
         icon={<MinusOutlined style={iconStyles} />}
       />
