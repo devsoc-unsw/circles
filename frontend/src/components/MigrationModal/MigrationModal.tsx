@@ -74,7 +74,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
 
   return (
     <Modal
-      title="Local Circles Data Detected"
+      title="Local Circles Data Detected (Pre Nov 2024)"
       open={open ?? false}
       closable={false}
       onOk={handleMigration}
@@ -89,8 +89,8 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
     >
       <div>
         <p>
-          As you may have noticed, Circles moved to a login system. We&apos;ve detected an old
-          planner saved locally, and can attempt to migrate it for you. You can also{' '}
+          As you may have noticed, Circles moved to a login system in 2024 Term 3. We&apos;ve
+          detected an old planner saved locally, and can attempt to migrate it for you. You can also{' '}
           <a onClick={download}>download</a> it for importing later.
         </p>
         <p>
