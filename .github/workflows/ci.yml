@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Event File
           path: ${{ github.event_path }}
@@ -48,7 +48,7 @@ jobs:
           cd backend
           pip install pytest-cov
           python -m pytest --junitxml=junit/be-test-results.xml --cov=. --cov-report=xml --cov-report=html
-      - uses: actions/upload-artifact@v3 # upload test results
+      - uses: actions/upload-artifact@v4 # upload test results
         if: always()
         with:
           name: be-test-results
@@ -68,7 +68,7 @@ jobs:
           cd frontend
           npm ci
           npm run test
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: fe-test-results
