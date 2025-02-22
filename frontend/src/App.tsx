@@ -62,7 +62,7 @@ const App = () => {
             Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
           </>
         ),
-        duration: 0,  // Doesn't automatically expire
+        duration: 0, // Doesn't automatically expire
         icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
       });
     } else {
@@ -101,7 +101,7 @@ const App = () => {
             Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
           </>
         ),
-        duration: 20,  // Automatically expires after 20s
+        duration: 20, // Automatically expires after 20s
         icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
       });
     }
