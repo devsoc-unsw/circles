@@ -37,7 +37,6 @@ const App = () => {
     if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) return;
 
     localStorage.setItem('last-seen-contribution-recruitment', Date.now().toString());
-    localStorage.setItem('last-seen-contribution-recruitment', Date.now().toString());
 
     if (activeRecruitment) {
       // Actively recruiting for subcommittee
