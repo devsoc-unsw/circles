@@ -106,7 +106,8 @@ const SponsorSection = () => {
 
   const renderLogos = (logoUrls: string[], tier: LogoProps['size']) =>
     logoUrls.map((url) => {
-      const fileName = url.split('/').pop()?.split('.')[0] || '';
+      // Necessary to split on '-' as in production some tags are added to the image
+      const fileName = url.split('/').pop()?.split('.')[0].split('-')[0] || '';
       return (
         <Logo
           key={`${tier}-${url}`}
