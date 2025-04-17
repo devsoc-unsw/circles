@@ -23,7 +23,7 @@ const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker')
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 
 // Subcommittee Recruitment flag
-const activeRecruitment = true;
+const activeRecruitment = false;
 
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
