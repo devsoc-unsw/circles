@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Event File
           path: ${{ github.event_path }}
@@ -61,7 +61,7 @@ jobs:
           pip install pytest-cov
           python -m pytest --junitxml=junit/be-test-results.xml --cov=. --cov-report=xml --cov-report=html
         working-directory: ./backend
-      - uses: actions/upload-artifact@v3 # upload test results
+      - uses: actions/upload-artifact@v4 # upload test results
         if: always()
         with:
           name: be-test-results
@@ -101,7 +101,7 @@ jobs:
       - name: Run the unit tests on frontend
         run: npm run test
         working-directory: ./frontend
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: fe-test-results
