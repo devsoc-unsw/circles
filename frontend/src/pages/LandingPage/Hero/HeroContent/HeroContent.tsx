@@ -4,6 +4,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
 import devsocLogo from 'assets/devsocLogo.svg';
 import easySubTitle from 'assets/LandingPage/easySubtitle.svg';
+import useSettings from 'hooks/useSettings';
 import S from './styles';
 
 type Props = {
@@ -11,9 +12,14 @@ type Props = {
 };
 
 const HeroContent = ({ startLocation }: Props) => {
+  const { theme } = useSettings();
   return (
     <S.HeroContent>
-      <S.HeroTitle animate={{ x: [-60, 10, 0] }} transition={{ duration: 1, ease: 'easeInOut' }}>
+      <S.HeroTitle
+        themeMode={theme}
+        animate={{ x: [-60, 10, 0] }}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+      >
         Degree planning made <S.HeroSubTitle src={easySubTitle} alt="Hero Subtitle" />
       </S.HeroTitle>
       <Link to={startLocation}>
