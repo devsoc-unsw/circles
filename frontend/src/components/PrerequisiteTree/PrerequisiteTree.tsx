@@ -1,3 +1,6 @@
+// No longer used prerequisite tree, as it was bad UI design and redundant with the
+// course listings
+
 import React, { useEffect, useRef, useState } from 'react';
 import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import axios from 'axios';

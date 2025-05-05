@@ -86,7 +86,7 @@ const CourseInfoDrawers = ({
             </S.TextBlock>
             <S.TextBlock>
               {unlocked.direct_unlock.map((code) => (
-                <CourseTag key={code} name={code} onCourseClick={onCourseClick} />
+                <CourseTag key={`index-${code}`} name={code} onCourseClick={onCourseClick} />
               ))}
             </S.TextBlock>
           </>
