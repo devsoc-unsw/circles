@@ -6,6 +6,7 @@ import json
 import re
 from abc import ABC, abstractmethod
 from typing import Optional, Tuple, TypedDict
+from typing_extensions import TypedDict
 
 from algorithms.objects.categories import AnyCategory, Category
 from algorithms.objects.course import Course

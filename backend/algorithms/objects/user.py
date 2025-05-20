@@ -9,7 +9,8 @@ import copy
 import json
 import re
 from itertools import chain
-from typing import List, Literal, Optional, Tuple, TypedDict
+from typing import List, Literal, Optional, Tuple
+from typing_extensions import TypedDict
 
 from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE, CACHED_EXCLUSIONS_FILE
 from algorithms.objects.categories import AnyCategory, Category

@@ -1,5 +1,6 @@
 from datetime import datetime
-from typing import Dict, List, Literal, TypedDict, Union
+from typing_extensions import TypedDict
+from typing import Dict, List, Literal, Union
 from uuid import UUID
 
 class RefreshTokenInfoDict(TypedDict):

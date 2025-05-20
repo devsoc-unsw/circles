@@ -1,8 +1,9 @@
 import base64
-from typing import Dict, List, Literal, Tuple, TypedDict, cast
+from typing import Dict, List, Literal, Tuple, cast
 from urllib.parse import urlencode
 import jwt
 import requests
+from typing_extensions import TypedDict
 
 from .constants import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, OPENID_CONFIG_URL
 from .errors import OIDCTokenError, OIDCValidationError, OIDCUnknownError, OIDCUserInfoError
