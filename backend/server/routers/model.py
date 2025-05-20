@@ -1,8 +1,7 @@
 """ model for interacting with the FE """
 import json
 import pickle
-from typing import Literal, Optional, Set, Union
-from typing_extensions import TypedDict
+from typing import Literal, Optional, Set, TypedDict, Union
 
 from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel, ConfigDict, with_config

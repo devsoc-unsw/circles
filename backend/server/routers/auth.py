@@ -18,8 +18,8 @@ from .utility.oidc.requests import DecodedIDToken, exchange_and_validate, genera
 from .utility.oidc.errors import OIDCInvalidGrant, OIDCInvalidToken, OIDCTokenError, OIDCValidationError
 
 
-REFRESH_TOKEN_COOKIE = f"{'__Host-' if SECURE_COOKIES else ''}refresh-token"
-AUTH_STATE_COOKIE = f"{'__Host-' if SECURE_COOKIES else ''}auth-state"
+REFRESH_TOKEN_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}refresh-token"
+AUTH_STATE_COOKIE = f"{"__Host-" if SECURE_COOKIES else ""}auth-state"
 AUTH_STATE_COOKIE_TTL = 10 * 60 # seconds
 
 
