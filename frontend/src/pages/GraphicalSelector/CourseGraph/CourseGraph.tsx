@@ -5,7 +5,8 @@ import {
   ZoomInOutlined,
   ZoomOutOutlined
 } from '@ant-design/icons';
-import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
+import type { GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
+import { Arrow, Graph } from '@antv/g6';
 import { Switch } from 'antd';
 import { CourseEdge } from 'types/api';
 import { useDebouncedCallback } from 'use-debounce';
@@ -102,8 +103,6 @@ const CourseGraph = ({
       const node = nodeItem as INode;
       const neighbours = node.getNeighbors();
       const opacity = theme === 'light' ? 0.3 : 0.4;
-      const { Arrow } = await import('@antv/g6');
-
       // Every other node and edge becomes less visible
       graphRef.current?.getNodes().forEach((n) => {
         graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
@@ -140,7 +139,6 @@ const CourseGraph = ({
     async (nodeItem: Item) => {
       const node = nodeItem as INode;
       const edges = node.getEdges();
-      const { Arrow } = await import('@antv/g6');
       const courses = unwrapQuery(coursesQuery.data);
       const coursesStates = unwrapQuery(coursesStateQuery.data?.courses_state);
 
@@ -213,7 +211,6 @@ const CourseGraph = ({
       addUnhoverStyles(ev);
     });
 
-    const { Arrow } = await import('@antv/g6');
     const edges = graphRef.current?.getEdges();
     edges?.map((e) => graphRef.current?.updateItem(e, defaultEdge(Arrow, theme)));
     graphRef.current?.paint();
@@ -247,7 +244,6 @@ const CourseGraph = ({
       const coursesStates = unwrapQuery(coursesStateQuery.data?.courses_state);
 
       makePrerequisitesMap(programs?.edges);
-      const { Graph, Arrow } = await import('@antv/g6');
 
       const graphArgs: GraphOptions = {
         container,

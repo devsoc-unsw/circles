@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useQueries, useQueryClient } from '@tanstack/react-query';
 import { Badge } from 'antd';
 import { Course } from 'types/api';
@@ -36,10 +37,6 @@ import S from './styles';
 import TermBox from './TermBox';
 import UnplannedColumn from './UnplannedColumn';
 import { isPlannerEmpty } from './utils';
-
-const DragDropContext = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
-);
 
 const extrapolateCourseYears = (
   data: Record<number, Course>,
