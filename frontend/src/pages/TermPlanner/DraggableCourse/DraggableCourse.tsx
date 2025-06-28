@@ -70,7 +70,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
 
   const BEwarnings = handbookNote || warningMessage.length !== 0;
 
-  const isTermLocked = time ? planner.lockedTerms[`${time.year}${time.term}`] ?? false : false;
+  const isTermLocked = time ? (planner.lockedTerms[`${time.year}${time.term}`] ?? false) : false;
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
   // TODO: Fix these boolean checks for warnings
