@@ -118,7 +118,7 @@ def get_session_info_from_session_token(session_token: SessionToken) -> Tuple[Se
 
     return (info.sid, session_info)
 
-def setup_new_csesoc_session(uid: str, oidc_info: SessionOIDCInfoModel) -> Tuple[SessionToken, int, RefreshToken, int]:
+def setup_new_devsoc_session(uid: str, oidc_info: SessionOIDCInfoModel) -> Tuple[SessionToken, int, RefreshToken, int]:
     # creates a new login session for this user and oidc pair, returning the tokens and expiry
     # this oidc info should only be used for ONE circles session,
     # and is used to keep track of whether the oidc session is still intact
@@ -130,12 +130,12 @@ def setup_new_csesoc_session(uid: str, oidc_info: SessionOIDCInfoModel) -> Tuple
     session_token, session_token_expiry = _insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
 
     # bind the tokens to the session and return, with a session ttl of abit over refresh token for autocleanup
-    assert sessions.update_csesoc_session(sid, refresh_expiry + DAY, refresh_token, oidc_info)
+    assert sessions.update_devsoc_session(sid, refresh_expiry + DAY, refresh_token, oidc_info)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
 def setup_new_guest_session(uid: str) -> Tuple[SessionToken, int, RefreshToken, int]:
     # creates a new login session for this guest user
-    # to keep this as seemless as normal csesoc sessions, it will be handled mostly the same except no OIDC steps.
+    # to keep this as seemless as normal devsoc sessions, it will be handled mostly the same except no OIDC steps.
     # In reality, there should never be multiple guest sessions for the same guest uid, but that is ok.
 
     sid = _setup_new_session(uid, 120)  # only make it last very briefly
@@ -146,7 +146,7 @@ def setup_new_guest_session(uid: str) -> Tuple[SessionToken, int, RefreshToken, 
     assert sessions.update_guest_session(sid, refresh_expiry + DAY, refresh_token)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
-def create_new_csesoc_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfoModel) -> Tuple[SessionToken, int, RefreshToken, int]:
+def create_new_devsoc_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfoModel) -> Tuple[SessionToken, int, RefreshToken, int]:
     # generates a new token pair given an existing session
     # again, assumes oidc info is valid, otherwise it will collapse
     # TODO-OLLI(pm): do we want to convert this to a single find_one_and_update?
@@ -157,7 +157,7 @@ def create_new_csesoc_token_pair(sid: SessionID, new_oidc_info: SessionOIDCInfoM
     # all is good, generate new pair, bind tokens and return
     refresh_token, refresh_expiry = _insert_new_refresh_info(sid, REFRESH_TOKEN_LIFETIME)
     session_token, session_token_expiry = _insert_new_session_token_info(sid, uid, SESSION_TOKEN_LIFETIME)
-    assert sessions.update_csesoc_session(sid, refresh_expiry + DAY, refresh_token, new_oidc_info)
+    assert sessions.update_devsoc_session(sid, refresh_expiry + DAY, refresh_token, new_oidc_info)
     return (session_token, session_token_expiry, refresh_token, refresh_expiry)
 
 def create_new_guest_token_pair(sid: SessionID) -> Tuple[SessionToken, int, RefreshToken, int]:

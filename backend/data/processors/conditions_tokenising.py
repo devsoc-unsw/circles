@@ -1,5 +1,5 @@
 """
-DOCUMENTATION: https://github.com/csesoc/Circles/wiki/Tokenising-Conditions
+DOCUMENTATION: https://github.com/devsoc-unsw/circles/wiki/Tokenising-Conditions
 
 Turns the processed conditions into a list, separated into logical blocks.
 For example:

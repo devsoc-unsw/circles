@@ -1,5 +1,5 @@
 """
-https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
+https://github.com/devsoc-unsw/circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
 If you make a mistake and need to regenerate condition
 """

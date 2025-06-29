@@ -119,7 +119,7 @@ class SessionInfoModel(BaseModel):
     uid: str                            # for validation and back lookup
     oidc_info: SessionOIDCInfoModel
     curr_ref_token: RefreshToken        # the most recent refresh token, only one that should be accepted
-    type: Literal['csesoc'] = 'csesoc'  # ensure that this can get parsed correctly
+    type: Literal['devsoc'] = 'devsoc'  # ensure that this can get parsed correctly
     expires_at: int                     # time of expiry, will be replaced with a TTL on the cache
 
 class GuestSessionInfoModel(BaseModel):
