@@ -9,4 +9,4 @@ if CLIENT_ID is None or CLIENT_SECRET is None:
 
 OPENID_CONFIG_URL = "https://id.csesoc.unsw.edu.au/.well-known/openid-configuration"
 _REDIRECT_BASE_URI = os.getenv("AUTH_REDIRECT_BASE_URI", "http://localhost:3000")
-REDIRECT_URI = f"{_REDIRECT_BASE_URI}/login/success/csesoc"
+REDIRECT_URI = f"{_REDIRECT_BASE_URI}/login/success/devsoc"

@@ -231,7 +231,7 @@ def _create_sessions_collection():
     #     sid! uuid,       // unique indexed
     #     uid! string,     // index on if we dont have the reverse lookup
     #     expiresAt! Date, // ttl indexed (should be same as the currRefTok expiry time, or +1 day)
-    #     type! notsetup | csesoc | guest,
+    #     type! notsetup | devsoc | guest,
     #     currRefTok? string,
     #     oidcInfo? {
     #         access_token string         # most recent access token
@@ -277,7 +277,7 @@ def _create_sessions_collection():
                             'description': 'Expiry time of this session document',
                             'bsonType': 'date',
                         },
-                        'type': { 'enum': ['csesoc'] },
+                        'type': { 'enum': ['devsoc'] },
                     },
                 },
                 {

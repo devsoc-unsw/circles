@@ -28,7 +28,7 @@ def get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSe
             type="guest",
         )
 
-    assert session["type"] == "csesoc"
+    assert session["type"] == "devsoc"
     return SessionInfoModel(
         uid=session["uid"],
         curr_ref_token=RefreshToken(session["currRefreshToken"]),
@@ -39,7 +39,7 @@ def get_session_info(sid: SessionID) -> Optional[Union[SessionInfoModel, GuestSe
             validated_id_token=session["oidcInfo"]["validatedIdToken"],
         ),
         expires_at=exp,
-        type="csesoc",
+        type="devsoc",
     )
 
 def insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -> bool:
@@ -58,14 +58,14 @@ def insert_not_setup_session(sid: SessionID, info: NotSetupSessionModel) -> bool
         # sid already existed
         return False
 
-def update_csesoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfoModel) -> bool:
+def update_devsoc_session(sid: SessionID, expires_at: PositiveInt, curr_ref_token: RefreshToken, info: SessionOIDCInfoModel) -> bool:
     res = sessionsCOL.update_one(
-        { "sid": sid, "type": { "$in": [ "csesoc", "notsetup" ] } },
+        { "sid": sid, "type": { "$in": [ "devsoc", "notsetup" ] } },
         {
             "$set": {
                 "expiresAt": datetime.datetime.fromtimestamp(expires_at, tz=datetime.timezone.utc), 
                 "currRefreshToken": curr_ref_token,
-                "type": "csesoc",
+                "type": "devsoc",
                 "oidcInfo": {
                     "accessToken": info.access_token,
                     "rawIdToken": info.raw_id_token,

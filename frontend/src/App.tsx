@@ -10,7 +10,6 @@ import PreventToken from 'components/Auth/PreventToken';
 import RequireToken from 'components/Auth/RequireToken';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
-import { inDev } from 'config/constants';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import useSettings from 'hooks/useSettings';
 import Login from 'pages/Login';
@@ -29,6 +28,9 @@ const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 
+// Subcommittee Recruitment flag
+const activeRecruitment = false;
+
 const App = () => {
   const [queryClient] = React.useState(
     () => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
@@ -37,50 +39,80 @@ const App = () => {
   const { theme } = useSettings(queryClient);
 
   useEffect(() => {
-    // using local storage since I don't want to risk invalidating the redux state right now
-    const cooldownMs = 1000 * 60 * 60 * 24 * 7; // every 7 days
-    const lastSeen = localStorage.getItem('last-seen-contribution');
+    // If actively recruiting subcommittee, notify every 11 hours. Otherwise, notify every 7 days.
+    const cooldownMs = activeRecruitment ? 1000 * 60 * 60 * 11 : 1000 * 60 * 60 * 24 * 7;
+    const lastSeen = localStorage.getItem('last-seen-contribution-recruitment');
     if (lastSeen !== null && Date.now() - parseInt(lastSeen, 10) < cooldownMs) return;
 
-    localStorage.setItem('last-seen-contribution', Date.now().toString());
+    localStorage.setItem('last-seen-contribution-recruitment', Date.now().toString());
 
-    openNotification({
-      type: 'info',
-      message: 'Want to contribute?',
-      description: (
-        <>
-          Found a bug or have feedback? Open an issue on{' '}
-          <a
-            href="https://github.com/devsoc-unsw/circles/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>{' '}
-          or share your thoughts on{' '}
-          <a href="https://discord.gg/u9p34WUTcs" target="_blank" rel="noopener noreferrer">
-            Discord
-          </a>
-          !
-          <br />
-          <br />
-          Feeling brave? You can even fix it yourself by submitting a{' '}
-          <a
-            href="https://github.com/devsoc-unsw/circles/pulls"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            pull request
-          </a>
-          !
-          <br />
-          <br />
-          Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
-        </>
-      ),
-      duration: 20,
-      icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
-    });
+    if (activeRecruitment) {
+      // Actively recruiting for subcommittee
+      openNotification({
+        type: 'info',
+        message: 'Subcommittee Recruitment!',
+        description: (
+          <>
+            Interested in working on Circles or one of our other student-led projects? DevSoc is
+            currently recruiting subcommittee members!
+            <br />
+            <br />
+            This is a fantastic opportunity to contribute to a project with a substantial userbase
+            and learn from other programmers.
+            <br />
+            <br />
+            Find out more at{' '}
+            <a href="https://devsoc.app/get-involved" target="_blank" rel="noopener noreferrer">
+              devsoc.app/get-involved
+            </a>
+            <br />
+            <br />
+            Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
+          </>
+        ),
+        duration: 0, // Doesn't automatically expire
+        icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
+      });
+    } else {
+      // Not actively recruiting for subcommittee
+      openNotification({
+        type: 'info',
+        message: 'Want to contribute?',
+        description: (
+          <>
+            Found a bug or have feedback? Open an issue on{' '}
+            <a
+              href="https://github.com/devsoc-unsw/circles/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>{' '}
+            or share your thoughts on{' '}
+            <a href="https://discord.gg/u9p34WUTcs" target="_blank" rel="noopener noreferrer">
+              Discord
+            </a>
+            !
+            <br />
+            <br />
+            Feeling brave? You can even fix it yourself by submitting a{' '}
+            <a
+              href="https://github.com/devsoc-unsw/circles/pulls"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              pull request
+            </a>
+            !
+            <br />
+            <br />
+            Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
+          </>
+        ),
+        duration: 20, // Automatically expires after 20s
+        icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
+      });
+    }
   }, []);
 
   return (
@@ -110,9 +142,7 @@ const App = () => {
                       </Route>
                       <Route element={<RequireToken needSetup />}>
                         <Route path="/course-selector" element={<CourseSelector />} />
-                        {inDev && (
-                          <Route path="/graphical-selector" element={<GraphicalSelector />} />
-                        )}
+                        <Route path="/graphical-selector" element={<GraphicalSelector />} />
                         <Route path="/term-planner" element={<TermPlanner />} />
                         <Route path="/progression-checker" element={<ProgressionChecker />} />
                       </Route>

@@ -19,7 +19,7 @@ class SessionInfoDict(TypedDict):
     expiresAt: datetime
     currRefreshToken: str
     oidcInfo: SessionInfoOIDCInfoDict
-    type: Literal['csesoc']
+    type: Literal['devsoc']
 
 class NotSetupSessionInfoDict(TypedDict):
     sid: UUID

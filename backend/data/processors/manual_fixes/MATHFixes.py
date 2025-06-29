@@ -1,5 +1,5 @@
 """
-https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
+https://github.com/devsoc-unsw/circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
 Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py

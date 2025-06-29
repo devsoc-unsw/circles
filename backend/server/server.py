@@ -54,8 +54,6 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(user.router)
 app.include_router(followups.router)
-# TODO: hide this behind a feature flag?
-# app.include_router(ctf.router)
 if os.getenv("APP_ENV") == "dev":
     from server.routers import dev
     app.include_router(dev.router)
