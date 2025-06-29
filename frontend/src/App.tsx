@@ -13,19 +13,21 @@ import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import useSettings from 'hooks/useSettings';
-import CourseSelector from 'pages/CourseSelector';
-import DegreeWizard from 'pages/DegreeWizard';
-import GraphicalSelector from 'pages/GraphicalSelector';
-import LandingPage from 'pages/LandingPage';
 import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
 import Logout from 'pages/Logout';
-import Page404 from 'pages/Page404';
-import ProgressionChecker from 'pages/ProgressionChecker';
-import TermPlanner from 'pages/TermPlanner';
 import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
+
+// Lazy load in pages
+const LandingPage = React.lazy(() => import('./pages/LandingPage'));
+const CourseSelector = React.lazy(() => import('./pages/CourseSelector'));
+const DegreeWizard = React.lazy(() => import('./pages/DegreeWizard'));
+const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
+const Page404 = React.lazy(() => import('./pages/Page404'));
+const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
+const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 
 const App = () => {
   const [queryClient] = React.useState(

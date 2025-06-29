@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { Item, TreeGraphData } from '@antv/g6';
-import { TreeGraph } from '@antv/g6';
+import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import { useCourseChildrenQuery, useCoursePrereqsQuery } from 'utils/apiHooks/static';
 import Spinner from 'components/Spinner';
 import GRAPH_STYLE from './config';
@@ -38,6 +37,7 @@ const PrerequisiteTree = ({ courseCode, onCourseClick }: Props) => {
     const generateTreeGraph = async (graphData: TreeGraphData) => {
       const container = ref.current;
       if (!container) return;
+      const { TreeGraph } = await import('@antv/g6');
 
       graphRef.current = new TreeGraph({
         container,

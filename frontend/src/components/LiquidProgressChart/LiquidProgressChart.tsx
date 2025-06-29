@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip'; // TODO: investigate using antd tooltip?
 import type { LiquidConfig } from '@ant-design/plots';
-import { Liquid } from '@ant-design/plots';
 import Spinner from 'components/Spinner';
 import { darkGrey, lightGrey, lightYellow, purple, yellow } from 'config/constants';
 import useSettings from 'hooks/useSettings';
@@ -10,6 +9,10 @@ type Props = {
   completedUOC: number;
   totalUOC: number;
 };
+
+const Liquid = React.lazy(() =>
+  import('@ant-design/plots').then((plot) => ({ default: plot.Liquid }))
+);
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   const [percent, setPercent] = useState(0);
