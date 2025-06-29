@@ -10,7 +10,6 @@ import PreventToken from 'components/Auth/PreventToken';
 import RequireToken from 'components/Auth/RequireToken';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLoading from 'components/PageLoading';
-import { inDev } from 'config/constants';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import useSettings from 'hooks/useSettings';
 import Login from 'pages/Login';
