@@ -13,7 +13,8 @@ export default defineConfig({
     'process.env': process.env
   },
   build: {
-    outDir: 'build'
+    outDir: 'build',
+    assetsInlineLimit: 0
   },
   plugins: [
     react(),
