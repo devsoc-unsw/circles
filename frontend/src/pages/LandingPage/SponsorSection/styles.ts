@@ -22,7 +22,9 @@ const LogoImg = styled.img<{ size: string }>`
   max-width: ${(props) => props.size};
   height: auto;
   object-fit: contain;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 
   &:hover {
     transform: scale(1.05);

@@ -1,4 +1,4 @@
-FROM node:lts-alpine as builder
+FROM node:lts-alpine AS builder
 ARG API_URL
 ENV VITE_BACKEND_API_BASE_URL=$API_URL
 # Set the current working directory inside the container
