@@ -14,9 +14,8 @@ const routes: Route[] = [
     link: '/course-selector'
   },
   {
-    label: 'Graphical Selector',
-    link: '/graphical-selector',
-    dev: true
+    label: 'Graphical Selector (Beta)',
+    link: '/graphical-selector'
   },
   {
     label: 'Term Planner',

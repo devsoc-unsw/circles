@@ -143,9 +143,7 @@ const App = () => {
                       </Route>
                       <Route element={<RequireToken needSetup />}>
                         <Route path="/course-selector" element={<CourseSelector />} />
-                        {inDev && (
-                          <Route path="/graphical-selector" element={<GraphicalSelector />} />
-                        )}
+                        <Route path="/graphical-selector" element={<GraphicalSelector />} />
                         <Route path="/term-planner" element={<TermPlanner />} />
                         <Route path="/progression-checker" element={<ProgressionChecker />} />
                       </Route>
