@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /s3cr3t_p4g3.html
+
+# Allow everything else
+Allow: /
