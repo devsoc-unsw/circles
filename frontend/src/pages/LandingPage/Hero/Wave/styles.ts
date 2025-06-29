@@ -3,7 +3,7 @@ import waveBackground from 'assets/LandingPage/waveBackground.svg';
 import waveForeground from 'assets/LandingPage/waveForeground.svg';
 
 const waveAnimation = keyframes`
-  0%, {margin-left: 0;}
+  0% {margin-left: 0;}
   100% {margin-left: -1600px;}
 `;
 
