@@ -27,6 +27,7 @@ const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
 const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
+const ChangeLog = React.lazy(() => import('./pages/ChangeLog'));
 
 // Subcommittee Recruitment flag
 const activeRecruitment = false;
@@ -145,6 +146,7 @@ const App = () => {
                         <Route path="/graphical-selector" element={<GraphicalSelector />} />
                         <Route path="/term-planner" element={<TermPlanner />} />
                         <Route path="/progression-checker" element={<ProgressionChecker />} />
+                        <Route path="/change-log" element={<ChangeLog />} />
                       </Route>
                       <Route path="/logout" element={<Logout />} />
                     </Route>
