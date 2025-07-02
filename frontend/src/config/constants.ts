@@ -2,6 +2,7 @@ import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 
 export const FEEDBACK_LINK =
   'https://docs.google.com/forms/d/e/1FAIpQLSdGoxb-1fRRLySEi5j4Gy_ERWt3XWTBwyKJaDWlTqhy8Xdlxw/viewform?usp=sf_link';
+export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
 
 // Don't forget to update live year in the backend too
 export const LIVE_YEAR = 2025;
