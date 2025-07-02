@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import circlesLogo from 'assets/circlesLogo.svg';
-import useSettings from 'hooks/useSettings';
 import S from './styles';
 
 const HeroHeader = () => {
-  const { theme } = useSettings();
-
   return (
     <S.Header
       animate={{ y: 0 }}
@@ -16,7 +13,7 @@ const HeroHeader = () => {
       <Link to="/">
         <S.LogoWrapper>
           <S.HeaderLogo src={circlesLogo} alt="Circles Logo" />
-          <S.HeaderTitle themeMode={theme}>Circles</S.HeaderTitle>
+          <S.HeaderTitle>Circles</S.HeaderTitle>
         </S.LogoWrapper>
       </Link>
     </S.Header>

@@ -9,8 +9,8 @@ const HeroContent = styled.div`
   }
 `;
 
-export const HeroTitle = motion(styled.h1<{ themeMode: string }>`
-  color: ${({ themeMode }) => (themeMode === 'dark' ? '#fff' : '#000')};
+const HeroTitle = motion(styled.h1`
+  color: #fff;
   line-height: 1.2;
   font-size: 70px;
   font-weight: 650;

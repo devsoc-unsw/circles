@@ -45,7 +45,7 @@ const HeaderLogo = styled.img`
 `;
 
 const HeaderTitle = styled.h1<{ themeMode: string }>`
-  color: ${({ themeMode }) => (themeMode === 'dark' ? '#fff' : '#000')};
+  color: #fff;
   font-size: 26px;
 `;
 
