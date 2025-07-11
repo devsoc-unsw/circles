@@ -1,5 +1,6 @@
 # Prerequisite: have Chrome installed or change the line driver = webdriver.Chrome() to whatever you prefer
-# e.g. driver = webdriver.Firefox().
+# e.g. driver = webdriver.Firefox(). May want to multiprocess this later if impatient, use multiprocessing to
+# get around Python's GIL (global interpreter lock), as threads are just secretly one.
 
 # Don't be alarmed when Selenium opens Chrome, this is needed for fetching data, as the data is
 # loaded dynamically based on the fragments, and cannot be parsed via a standard. By isn't needed
@@ -50,11 +51,7 @@ try:
 except:
     print("Cookie banner not found, possibly already handled")
     
-proof = 1
 for course in courses:
-    proof += 1
-    if proof == 10:
-        break
     # This is the search form's Id and the submit button's id, wait til they both exist and are clickable
     search_form_id = "degree-search-input"
     search_form_submit_button = "degree-search-submit"
