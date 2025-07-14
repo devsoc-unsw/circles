@@ -8,9 +8,12 @@
 # but the old way with just normal Selenium is deprecated anyways, so better to use it. WebDriverWait
 # and EC (expected conditions) are needed, as content is dynamically loaded, and otherwise failures
 # may occur. If parsing using Selenium, remember to use expected conditions to wait for content to load before
-# interacting with it
+# interacting with it. XPath selectors are used, you can search documentation on that.
 # Final parse is done using Beautiful Soup, since it's a little faster, but if you're a future subcomm
 # reading this, feel free to use Selenium again if you only want to learn one.
+
+# A known test course, that can be used to quickly verify whether this is working as intended or not
+KNOWN_TEST_COURSE = "COMP6080"
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -20,24 +23,34 @@ from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 # This is only needed to get the strings for searching from conditions_processed.json, can implement a
 # better way later
-import json
+import time
 
-# Wait a max of 10 second before giving up on a necessary element of a page loading. Most of the time, it won't take
+# Wait a max of 20 second before giving up on a necessary element of a page loading. Most of the time, it won't take
 # that long
-MAX_WAIT_TIME = 10
+MAX_WAIT_TIME = 20
+# Look every 1 seconds to see if it's stopped changing
+POLL_FREQUENCY = 1
+INVALID_COUNT = -1
+standard_XPath = "//dd"
 
-# Function to get all course codes from conditions_processed.json, since we need them as input
-# into beautiful soup. Not good design, but it's temp helper and should be replaced with another
-# source
-course_data = {}
-with open("../data/final_data/conditionsProcessed.json", "r") as file:
-    data = json.load(file)
-    keys = data.keys()
+def wait_for_stabilisation(driver, XPath):
+    end_time = time.time() + MAX_WAIT_TIME
+    last_count = INVALID_COUNT
+    while time.time() < end_time:
+        elements = driver.find_elements(By.XPATH, XPath)
+        count = len(elements)
+        if count == last_count and count > 0:
+            return
+        last_count = count
+        time.sleep(POLL_FREQUENCY)
+    raise TimeoutException("Elements did not stabilize in time")
 
 # Uses your version of Chrome to run the script, please have Chrome installed, or alternatively, rewrite this to
 #use whatever you usually use
 driver = webdriver.Chrome()
-driver.get("https://www.unsw.edu.au/course-outlines/course-outline")
+driver.get("https://www.unsw.edu.au/course-outlines")
+# Sets wait times
+wait = WebDriverWait(driver, MAX_WAIT_TIME) 
 
 # Needs to accept cookies when working via Selenium unfortunately otherwise overlay will block access
 # to form. Can also have information sent via Javascript execution probably, but no clue about UNSW's
@@ -50,57 +63,72 @@ try:
     cookie_button.click()
 except:
     print("Cookie banner not found, possibly already handled")
+    
+    # This is the search form's Id and the submit button's id, wait til they both exist,
+    # fill in the form and send keys
+    search_form_id = "degree-search-input"
+    search_form_submit_button = "degree-search-submit"
+    try:
+        wait.until(
+            EC.element_to_be_clickable((By.ID, search_form_submit_button))
+        )
+        # Fills in the form
+        wait.until(
+            EC.presence_of_element_located((By.ID, search_form_id))
+        ).send_keys(KNOWN_TEST_COURSE)
+        wait.until(
+            EC.element_to_be_clickable((By.ID, search_form_submit_button))
+        ).click()
+    except TimeoutException:
+        # Content not loaded in time
+        print(f"Element not found on webpage when searching from homepage: {KNOWN_TEST_COURSE}")
+        exit(1)
 
-# This is the search form's Id
-search_form_id = "degree-search-input"
-search_form_submit_button = "degree-search-submit"
-search_form = driver.find_element(By.ID, search_form_id)
-search_form_submit = driver.find_element(By.ID, search_form_submit_button)
-search_form.send_keys("COMP6080")
-search_form_submit.click()
+    # As content is dynamically loaded, wait until it is loaded to try getting the link
+    try:
+        wait = WebDriverWait(driver, MAX_WAIT_TIME) 
+        wait.until(
+            EC.element_to_be_clickable((By.XPATH, f"//a/span[normalize-space(text())='{KNOWN_TEST_COURSE}']"))
+        ).click()
+    except TimeoutException:
+        # Content not loaded in time
+        print(f"Element not found on webpage when trying to fetch link {KNOWN_TEST_COURSE}")
+        exit(1)
 
-# As content is dynamically loaded, wait until it is loaded to try getting the link
-try:
-    wait = WebDriverWait(driver, MAX_WAIT_TIME) 
-    span = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//span[normalize-space(text())='COMP6080']"))
-    )
-except TimeoutException:
-    # Content not loaded in time
-    print("Element not found on webpage.")
-    exit(1)
+    # Finds first element that matches the pattern that is standard to the website
+    # course_outline_a = driver.find_element(By.XPATH, f"//a[span[normalize-space(text())='{course}']]")
 
-# Finds first element that matches the pattern that is standard to the website
-course_outline_link = driver.find_element(By.XPATH, "//a[span[normalize-space(text())='COMP6080']]")
+    # Note: We can cache the pages generated by this program to avoid parsing again, and just use the
+    # direct link using the below, however I recommend just reloading every time, since links will change
+    # year to year. If you want to though, you can use this href
+    # course_outline_link = str(course_outline_a.get_attribute("href"))
+    try:
+        wait_for_stabilisation(driver, standard_XPath)
+    except TimeoutException:
+        # Content not loaded in time
+        print(f"Element not found on webpage when trying to fetch link {KNOWN_TEST_COURSE}")
+        exit(1)
+    html = driver.page_source
 
-# Note: We can cache the pages generated by this program to avoid parsing again, and just use the
-# direct link using the below, however I recommend just reloading every time, since links will change
-# year to year. If you want to though:
-# course_outline_link.get_attribute("href") will get you the page.
-course_outline_link.click()
-html = driver.page_source
+    # Puts the HTML in nicer beautiful soup format for the final parse, it's quicker than using Selenium
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Gets whether it's group work or not, all group work specifications is stored under a tag called description details,
+    # and it conveniently enough can be parsed out. There's a bunch of unrelated description details tags, so
+    # we get all the ones that contain the exact text "Group", since that's a standard way of formatting
+    # group projects or tasks worth a percentage of the mark for the course. The below is approximately the
+    # format from the webpage:
+    # <dt>Assessment Format: <dt> <dd>Group<dd>
+    potential_group_tags = soup.find_all('dd')
+    groupwork = False
+    for potential_group_tag in potential_group_tags:
+        if potential_group_tag.get_text() == "Group":
+            groupwork = True
+            break
+    if groupwork:
+        print(f"Groupwork found in {KNOWN_TEST_COURSE}!")
+    else:
+        print(f"Groupwork not found in {KNOWN_TEST_COURSE}!")
+    driver.get("https://www.unsw.edu.au/course-outlines")
+
 driver.quit()
-
-# Puts the HTML in nicer beautiful soup format for the final parse, it's quicker than using Selenium
-soup = BeautifulSoup(html, 'html.parser')
-
-# Gets whether it's group work or not, all group work specifications is stored under a tag called description details,
-# and it conveniently enough can be parsed out. There's a bunch of unrelated description details tags, so
-# we get all the ones that contain the exact text "Group", since that's a standard way of formatting
-# group projects or tasks worth a percentage of the mark for the course. The below is approximately the
-# format from the webpage:
-# <dt>Assessment Format: <dt> <dd>Group<dd>
-potential_group_tags = soup.find_all('dd')
-groupwork = False
-for potential_group_tag in potential_group_tags:
-    if potential_group_tag.get_text() == "Group":
-        groupwork = True
-        break
-if groupwork:
-    print("Success: Groupwork found in COMP6080!")
-else:
-    # If you are getting this error, either change the link at driver.get() to a course you
-    # are certain has groupwork (At present it is COMP6080), and if it works you're good to go.
-    # If it still doesn't work, it's time to see how the website's changed, my notes are above,
-    # good luck
-    print("I swear groupwork was part of this course, either it's been reworked, or the website's changed formats")
