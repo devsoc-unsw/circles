@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
+import { Droppable } from '@hello-pangea/dnd';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
@@ -12,10 +13,6 @@ import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
-
-const Droppable = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
-);
 
 type Props = {
   name: string; // Ideally replace this with a proper term type later

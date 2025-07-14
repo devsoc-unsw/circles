@@ -1,7 +1,8 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
-import type { DraggingStyle } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
+import type { DraggingStyle } from '@hello-pangea/dnd';
+import { Draggable } from '@hello-pangea/dnd';
 import { Button } from 'antd';
 import { useTheme } from 'styled-components';
 import Spinner from 'components/Spinner';
@@ -9,10 +10,6 @@ import type { RootState } from 'config/store';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { removeTab, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';
-
-const Draggable = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
-);
 
 type Props = {
   tabName: string;

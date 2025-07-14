@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
-import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
+import type { OnDragEndResponder, OnDragStartResponder } from '@hello-pangea/dnd';
+import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import DraggableTab from 'components/DraggableTab';
 import Spinner from 'components/Spinner';
@@ -9,13 +10,6 @@ import type { RootState } from 'config/store';
 import useSettings from 'hooks/useSettings';
 import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';
-
-const DragDropContext = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
-);
-const Droppable = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
-);
 
 const CourseTabs = () => {
   const dispatch = useDispatch();

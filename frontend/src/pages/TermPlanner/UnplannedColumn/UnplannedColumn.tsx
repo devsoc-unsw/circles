@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { Droppable } from '@hello-pangea/dnd';
 import { Course } from 'types/api';
 import {
   badCourses,
@@ -18,10 +19,6 @@ type Props = {
   courseInfos: Record<string, Course>;
   validateInfos: Record<string, ValidateResponse>;
 };
-
-const Droppable = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
-);
 
 const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
   const plannerQuery = useUserPlanner();

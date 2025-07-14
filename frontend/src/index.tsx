@@ -22,8 +22,7 @@ const persistor = persistStore(store);
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-  // TODO: disabled strict mode because of react-beautiful-dnd
-  // https://github.com/atlassian/react-beautiful-dnd/issues/2396
+  // TODO: Test enabling StrictMode and fix any issues that arise
   // <React.StrictMode>
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>

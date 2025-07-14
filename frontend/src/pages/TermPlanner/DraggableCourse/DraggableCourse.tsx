@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { InfoCircleOutlined, PieChartOutlined, WarningOutlined } from '@ant-design/icons';
+import { Draggable } from '@hello-pangea/dnd';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
@@ -23,10 +24,6 @@ type Props = {
   index: number;
   time?: CourseTime;
 };
-
-const Draggable = React.lazy(() =>
-  import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable }))
-);
 
 const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }: Props) => {
   const { isSummerEnabled } = planner;
