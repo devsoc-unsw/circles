@@ -31,6 +31,9 @@ INVALID_COUNT = -1
 
 standard_XPath = "//dd"
 
+# Waits until the number of the element is consistent to show that dynamic content is fully loaded,
+# In this case, description details tag is used, since the elements we're fetching have that tag,
+# and it's also one of the most common tags on the page.
 def wait_for_stabilisation(driver, XPath):
     end_time = time.time() + MAX_WAIT_TIME
     last_count = INVALID_COUNT
