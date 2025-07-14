@@ -40,7 +40,7 @@ const Section: React.FC<SectionProps> = ({ title, items }) => {
 };
 
 type VersionData = {
-  version: string;
+  date: string;
   flair?: string;
   major?: ChangeLogItem[];
   minor?: ChangeLogItem[];
@@ -62,7 +62,7 @@ const VersionSection: React.FC<VersionSectionProps> = ({ versionData, isOpenDefa
         ) : (
           <RightOutlined style={{ marginRight: 8 }} />
         )}
-        {versionData.version}
+        {versionData.date}
         {versionData.flair && <S.Flair>- {versionData.flair}</S.Flair>}
       </S.Header>
       {open && (
@@ -81,7 +81,7 @@ const ChangeLog = () => (
     <S.Wrapper>
       <S.Title>Changelog</S.Title>
       {changelogData.map((entry, idx) => (
-        <VersionSection key={entry.version} versionData={entry} isOpenDefault={idx === 0} />
+        <VersionSection key={entry.date} versionData={entry} isOpenDefault={idx === 0} />
       ))}
     </S.Wrapper>
   </PageTemplate>
