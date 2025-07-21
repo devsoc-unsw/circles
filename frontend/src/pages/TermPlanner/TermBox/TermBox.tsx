@@ -56,7 +56,10 @@ const TermBox = ({
     toggleLockTermMutation.mutate({ term, year });
   };
 
-  const termUOC = termCourseCodes.reduce((acc, code) => acc + termCourseInfos[code].UOC, 0);
+  const termUOC = termCourseCodes.reduce((acc, code) => {
+    const course = termCourseInfos[code];
+    return acc + (course ? course.UOC : 0);
+  }, 0);
 
   const isLocked: boolean = planner.lockedTerms[`${year}${term}`] ?? false;
   const offeredInTerm =
@@ -97,9 +100,10 @@ const TermBox = ({
               {...provided.droppableProps}
             >
               {Object.values(termCourseInfos).map((info, index) => {
+                if (!info || !courseInfos[info.code]) return null;
                 return (
                   <DraggableCourse
-                    key={`${info.title || ''}${term}`}
+                    key={`${info.title || info.code || ''}${term}`}
                     planner={planner}
                     courses={courses}
                     validate={validateInfos[info.code]}

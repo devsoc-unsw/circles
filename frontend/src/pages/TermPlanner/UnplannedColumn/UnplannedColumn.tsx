@@ -46,17 +46,21 @@ const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
               $droppable={dragging}
               $isSmall={isSmall}
             >
-              {unplanned.map((courseCode, courseIndex) => (
-                <DraggableCourse
-                  key={courseCode}
-                  planner={planner}
-                  courses={courses}
-                  validate={validateInfos[courseCode]}
-                  courseInfo={courseInfos[courseCode]}
-                  index={courseIndex}
-                  time={undefined}
-                />
-              ))}
+              {unplanned.map((courseCode, courseIndex) => {
+                const info = courseInfos[courseCode];
+                if (!info) return null;
+                return (
+                  <DraggableCourse
+                    key={courseCode}
+                    planner={planner}
+                    courses={courses}
+                    validate={validateInfos[courseCode]}
+                    courseInfo={info}
+                    index={courseIndex}
+                    time={undefined}
+                  />
+                );
+              })}
               {provided.placeholder}
             </S.UnplannedBox>
           )}
