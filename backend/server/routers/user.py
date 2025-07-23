@@ -16,6 +16,7 @@ router = APIRouter(
 
 require_uid = HTTPBearerToUserID()
 
+# pylint: disable=too-many-locals
 @router.put("/import")
 def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     if data.planner.startYear < 2019:
@@ -24,6 +25,39 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         raise HTTPException(status_code=400, detail="Too many years")
     if len(data.planner.years) < 1:
         raise HTTPException(status_code=400, detail="Not enough years")
+
+    # TODO: Handle past specialisations better
+    # Some specialisations have been replaced, such as MTRNAH and MTRNBH
+    # Apply the following list of mappings to the specs
+    spec_mappings = {
+        "MTRNAH": "MTRNBH",
+        "GMATEH": "GMATDH",
+        "PETRAH": "SOLABH",
+        "COMPE1": "COMPA1",
+        "BIOSG1": "BIOSM1",
+        "BIOSJ1": "BIOSO1",
+        "BINFB1": "BINFE1",
+        "GEOGK1": "GEOGG1",
+        "COMMF1": "COMMG1",
+        "ECONI1": "ECONO1",
+        "ECONJ1": "ECONO1",
+        "MGMTA1": "MGMTH1",
+        "TABLA1": "TABLC1",
+        "SPANH2": "SPANI2",
+        "BIOSD2": "BIOSI2",
+        "CLIMA2": "CLIMB2",
+        "MSCIH2": "MSCIK2",
+    }
+
+    # Some minors no longer exist, such as COMMF2
+    to_delete = {"COMMF2", "ARCBY2"}
+
+    # Remove duplicates from provided specs, map old to new, remove any minors that cannot be remapped
+    data.degree.specs = [
+        spec_mappings.get(spec, spec)
+        for spec in dict.fromkeys(data.degree.specs)
+        if spec not in to_delete
+    ]
 
     # Raises an HTTPException if invalid
     validate_degree(data.degree.programCode, data.degree.specs)
