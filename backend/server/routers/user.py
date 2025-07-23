@@ -16,6 +16,7 @@ router = APIRouter(
 
 require_uid = HTTPBearerToUserID()
 
+# pylint: disable=too-many-locals
 @router.put("/import")
 def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     if data.planner.startYear < 2019:
@@ -25,6 +26,7 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     if len(data.planner.years) < 1:
         raise HTTPException(status_code=400, detail="Not enough years")
 
+    # TODO: Handle past specialisations better
     # Some specialisations have been replaced, such as MTRNAH and MTRNBH
     # Apply the following list of mappings to the specs
     spec_mappings = {
