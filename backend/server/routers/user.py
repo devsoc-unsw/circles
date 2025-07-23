@@ -48,12 +48,16 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         "CLIMA2": "CLIMB2",
         "MSCIH2": "MSCIK2",
     }
-    data.degree.specs = [spec_mappings.get(spec, spec) for spec in data.degree.specs]
+
     # Some minors no longer exist, such as COMMF2
-    to_delete = ["COMMF2", "ARCYB2"]
-    for spec in to_delete:
-        while spec in data.degree.specs:
-            data.degree.specs.remove(spec)
+    to_delete = {"COMMF2", "ARCBY2"}
+
+    # Remove duplicates from provided specs, map old to new, remove any minors that cannot be remapped
+    data.degree.specs = [
+        spec_mappings.get(spec, spec)
+        for spec in dict.fromkeys(data.degree.specs)
+        if spec not in to_delete
+    ]
 
     # Raises an HTTPException if invalid
     validate_degree(data.degree.programCode, data.degree.specs)
