@@ -410,7 +410,7 @@ def get_terms_list(
         return []
     row_offset = 0
 
-    num_terms = lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc
+    num_terms = (lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc) if uoc != 0 else 1
 
     for _ in range(instance_num):
         if index < 0:
