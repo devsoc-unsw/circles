@@ -25,6 +25,34 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     if len(data.planner.years) < 1:
         raise HTTPException(status_code=400, detail="Not enough years")
 
+    # Some specialisations have been replaced, such as MTRNAH and MTRNBH
+    # Apply the following list of mappings to the specs
+    spec_mappings = {
+        "MTRNAH": "MTRNBH",
+        "GMATEH": "GMATDH",
+        "PETRAH": "SOLABH",
+        "COMPE1": "COMPA1",
+        "BIOSG1": "BIOSM1",
+        "BIOSJ1": "BIOSO1",
+        "BINFB1": "BINFE1",
+        "GEOGK1": "GEOGG1",
+        "COMMF1": "COMMG1",
+        "ECONI1": "ECONO1",
+        "ECONJ1": "ECONO1",
+        "MGMTA1": "MGMTH1",
+        "TABLA1": "TABLC1",
+        "SPANH2": "SPANI2",
+        "BIOSD2": "BIOSI2",
+        "CLIMA2": "CLIMB2",
+        "MSCIH2": "MSCIK2",
+    }
+    data.degree.specs = [spec_mappings.get(spec, spec) for spec in data.degree.specs]
+    # Some minors no longer exist, such as COMMF2
+    to_delete = ["COMMF2", "ARCYB2"]
+    for spec in to_delete:
+        while spec in data.degree.specs:
+            data.degree.specs.remove(spec)
+
     # Raises an HTTPException if invalid
     validate_degree(data.degree.programCode, data.degree.specs)
 
