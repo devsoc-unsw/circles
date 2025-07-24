@@ -6,22 +6,23 @@ import Header from 'components/Header';
 type Props = {
   children: React.ReactNode;
   showHeader?: boolean;
+  showBugButton?: boolean;
 };
 
-const PageTemplate = ({ children, showHeader = true }: Props) => (
+const PageTemplate = ({ children, showHeader = true, showBugButton = true }: Props) => (
   <>
     <Helmet>
       <title>Circles</title>
-      <meta name="description" content="Circles UNSW Degree Planner" />
+      <meta name="description" content="Circles - UNSW DevSoc's Degree Planner" />
       <meta
         name="keywords"
-        content="circles, unsw, csesoc, devsoc, degree, planner, course, plan"
+        content="circles, unsw, csesoc, devsoc, degree, planner, course, plan, university, term, semester, trimester"
       />
     </Helmet>
     {showHeader && <Header />}
     <div>
       {children}
-      <FeedbackButton />
+      {showBugButton && <FeedbackButton />}
     </div>
   </>
 );

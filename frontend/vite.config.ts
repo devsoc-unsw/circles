@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import eslint from 'vite-plugin-eslint';
 import svgrPlugin from 'vite-plugin-svgr';
@@ -13,7 +13,8 @@ export default defineConfig({
     'process.env': process.env
   },
   build: {
-    outDir: 'build'
+    outDir: 'build',
+    assetsInlineLimit: 0
   },
   plugins: [
     react(),
@@ -24,7 +25,6 @@ export default defineConfig({
       }
     }),
     eslint(),
-    splitVendorChunkPlugin(),
     checker({ typescript: true })
   ],
   resolve: {
