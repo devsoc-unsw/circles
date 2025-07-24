@@ -1,7 +1,13 @@
 name: Docker
 on:
   push:
-    branches: [ "dev", "renovate/*" ]
+    branches:
+      - dev
+      - staging
+
+env:
+  ENVIRONMENT: ${{ github.ref_name == 'dev' && 'prod' || 'staging' }}
+  IMAGE_NAME: ${{ github.ref_name == 'dev' && 'circles' || 'circles-staging' }}
 
 jobs:
   build:
@@ -45,8 +51,8 @@ jobs:
           file: ${{ matrix.component }}/${{ matrix.dockerfile }}
           build-args: ${{ matrix.args }}
           tags: |
-            ghcr.io/csesoc/circles-${{ matrix.component }}:${{ github.sha }}
-            ghcr.io/csesoc/circles-${{ matrix.component }}:latest
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:${{ github.sha }}
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:latest
           labels: ${{ steps.meta.outputs.labels }}
   deploy:
     name: Deploy (CD)
@@ -60,9 +66,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          repository: csesoc/deployment
+          repository: devsoc-unsw/deployment
           token: ${{ secrets.GH_TOKEN }}
-          ref: migration
+          ref: dev
       - name: Install yq - portable yaml processor
         uses: mikefarah/yq@v4.35.2
       - name: Update deployment
@@ -71,11 +77,11 @@ jobs:
         run: |
           git config user.name "CSESoc CD"
           git config user.email "technical@csesoc.org.au"
-          git checkout -b update/circles/${{ github.sha }}
-          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/csesoc/circles-frontend:${{ github.sha }}"' projects/circles/deploy-frontend.yml
-          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/csesoc/circles-backend:${{ github.sha }}"' projects/circles/deploy-backend.yml
+          git checkout -b update/${{ env.IMAGE_NAME }}/${{ github.sha }}
+          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}"' projects/circles/${{ env.ENVIRONMENT }}/deploy-frontend.yml
+          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-backend:${{ github.sha }}"' projects/circles/${{ env.ENVIRONMENT }}/deploy-backend.yml
           git add . 
-          git commit -m "feat(circles): update images" 
-          git push -u origin update/circles/${{ github.sha }}
-          gh pr create -B migration --title "feat(circles): update image" --body "Updates the image for the circles deployment to commit csesoc/circles@${{ github.sha }}." > URL
+          git commit -m "feat(${{ env.IMAGE_NAME }}): update images" 
+          git push -u origin update/${{ env.IMAGE_NAME }}/${{ github.sha }}
+          gh pr create -B dev --title "feat(${{ env.IMAGE_NAME }}): update image" --body "Updates the image for the ${{ env.IMAGE_NAME }} deployment to commit devsoc-unsw/${{ env.IMAGE_NAME }}@${{ github.sha }}." > URL
           gh pr merge $(cat URL) --squash -d
