@@ -53,7 +53,7 @@ const App = () => {
         type: 'info',
         message: 'Subcommittee Recruitment!',
         description: (
-          <>
+          <span style={{ color: theme === 'dark' ? 'white' : 'black' }}>
             Interested in working on Circles or one of our other student-led projects? DevSoc is
             currently recruiting subcommittee members!
             <br />
@@ -69,7 +69,7 @@ const App = () => {
             <br />
             <br />
             Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
-          </>
+          </span>
         ),
         duration: 0, // Doesn't automatically expire
         icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
@@ -80,7 +80,7 @@ const App = () => {
         type: 'info',
         message: 'Want to contribute?',
         description: (
-          <>
+          <span style={{ color: theme === 'dark' ? 'white' : 'black' }}>
             Found a bug or have feedback? Open an issue on{' '}
             <a
               href="https://github.com/devsoc-unsw/circles/issues"
@@ -108,13 +108,13 @@ const App = () => {
             <br />
             <br />
             Let&apos;s make <strong>Circles</strong> even better, together! &#128156;
-          </>
+          </span>
         ),
         duration: 20, // Automatically expires after 20s
         icon: <NotificationOutlined style={{ color: lightTheme.purplePrimary }} />
       });
     }
-  }, []);
+  }, [theme]);
 
   return (
     <ConfigProvider

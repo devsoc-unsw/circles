@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from 'antd';
+import { useTheme } from 'styled-components';
 import { importUser as importUserApi } from 'utils/api/userApi';
 import { importUser, UserJson } from 'utils/export';
 import openNotification from 'utils/openNotification';
@@ -18,12 +19,16 @@ type Props = {
   onCancel?: () => void;
 };
 
-function migrationErrorNotification() {
+function migrationErrorNotification(text: string) {
   openNotification({
     type: 'error',
     message: 'Migration failed',
-    description:
-      'An error occurred whilst migrating your data. Either try again, reset your data, or download your data and attempt to import it again/contact DevSoc for help.'
+    description: (
+      <span style={{ color: text }}>
+        An error occurred whilst migrating your data. Either try again, reset your data, or download
+        your data and attempt to import it again/contact DevSoc for help.
+      </span>
+    )
   });
 }
 
@@ -32,7 +37,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
   const token = useToken();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  const theme = useTheme();
   const importUserMutation = useMutation({
     mutationFn: (user: UserJson) => importUserApi(token, user),
     onSuccess: () => {
@@ -42,7 +47,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
       onOk?.();
     },
     onError: () => {
-      migrationErrorNotification();
+      migrationErrorNotification(theme.text);
     }
   });
 
@@ -58,7 +63,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
       const user = importUser(JSON.parse(localStorage.getItem('oldUser')!) as JSON);
       importUserMutation.mutate(user);
     } catch (error) {
-      migrationErrorNotification();
+      migrationErrorNotification(theme.text);
     }
   };
 

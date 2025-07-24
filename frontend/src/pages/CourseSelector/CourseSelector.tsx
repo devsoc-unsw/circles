@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from 'styled-components';
 import { useUserCourses, useUserDegree } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
@@ -13,6 +14,7 @@ import CourseTabs from './CourseTabs';
 import S from './styles';
 
 const CourseSelector = () => {
+  const theme = useTheme();
   const coursesQuery = useUserCourses();
   const degreeQuery = useUserDegree();
 
@@ -22,12 +24,16 @@ const CourseSelector = () => {
       openNotification({
         type: 'info',
         message: 'How do I see more sidebar courses?',
-        description:
-          'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.'
+        description: (
+          <span style={{ color: theme.text }}>
+            Courses are shown as you meet the requirements to take them. Any course can also be
+            selected via the search bar.
+          </span>
+        )
       });
       setShowedNotif(true);
     }
-  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data]);
+  }, [showedNotif, coursesQuery.isSuccess, coursesQuery.data, theme.text]);
 
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
 

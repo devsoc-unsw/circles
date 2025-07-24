@@ -1,6 +1,7 @@
 import React from 'react';
 import { EyeInvisibleFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import { useTheme } from 'styled-components';
 import { badPlanner, PlannerResponse } from 'types/userResponse';
 import { useUserPlanner } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
@@ -17,12 +18,16 @@ const HideYearTooltip = ({ year }: Props) => {
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const numYears = planner.years.length;
 
+  const theme = useTheme();
+
   const handleHideYear = () => {
     if (hiddenYears.length === numYears - 1) {
       openNotification({
         type: 'error',
         message: "Something's not right",
-        description: 'You cannot hide all years in your term planner'
+        description: (
+          <span style={{ color: theme.text }}>You cannot hide all years in your term planner</span>
+        )
       });
     } else {
       hideYear(year);
