@@ -6,7 +6,7 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import SidebarDrawer from 'components/SidebarDrawer';
 import CS from './common/styles';
-import { COURSE_INFO_TAB, HELP_TAB, PROGRAM_STRUCTURE_TAB } from './constants';
+import { COURSE_INFO_TAB, HELP_TAB } from './constants';
 import CourseGraph from './CourseGraph';
 import HowToUse from './HowToUse';
 import S from './styles';
@@ -18,7 +18,7 @@ const GraphicalSelector = () => {
   const coursesQuery = useUserCourses();
   const [loading, setLoading] = useState(true);
   const courses = coursesQuery.data || badCourses;
-
+  // TODO: add figure out what to do with program structure tab
   const items = [
     {
       label: 'Course Info',
@@ -33,11 +33,6 @@ const GraphicalSelector = () => {
       ) : (
         <CS.TextWrapper>No course selected</CS.TextWrapper>
       )
-    },
-    {
-      label: 'Program Structure',
-      key: PROGRAM_STRUCTURE_TAB,
-      children: <CS.TextWrapper>Program Structure</CS.TextWrapper>
     },
     { label: 'Help', key: HELP_TAB, children: <HowToUse /> }
   ];
