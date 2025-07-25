@@ -23,12 +23,35 @@ const HeroTitle = motion(styled.h1`
     2px 0 0 #9154de,
     0 -2px 0 #9154de,
     0 2px 0 #9154de;
+
+  @media (max-width: 768px) {
+    font-size: 42px;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 32px;
+    line-height: 1.1;
+  }
 `);
 
 const HeroSubTitle = styled.img`
   width: 160px;
   margin-top: -6px;
   margin-left: -8px;
+
+  @media (max-width: 768px) {
+    width: 120px;
+    margin-top: -4px;
+    margin-left: -6px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+    margin-top: -3px;
+    margin-left: -4px;
+  }
 `;
 
 const HeroCTA = motion(styled.button`
@@ -44,12 +67,38 @@ const HeroCTA = motion(styled.button`
   color: #9453e6;
   filter: drop-shadow(-1px -1px 0 #9154de) drop-shadow(1px -1px 0 #9154de)
     drop-shadow(-1px 1px 0 #9154de) drop-shadow(1px 1px 0 #9154de) drop-shadow(0 0 2px #9154de);
+
+  @media (max-width: 768px) {
+    width: 220px;
+    height: 3rem;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 200px;
+    height: 2.8rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
 `);
 
 const DevSocLogo = motion(styled.img`
   width: 160px;
   filter: drop-shadow(-1px -1px 0 #9154de) drop-shadow(1px -1px 0 #9154de)
     drop-shadow(-1px 1px 0 #9154de) drop-shadow(1px 1px 0 #9154de) drop-shadow(0 0 2px #9154de);
+
+  @media (max-width: 1024px) {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 140px;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
+  }
 `);
 
 export default {

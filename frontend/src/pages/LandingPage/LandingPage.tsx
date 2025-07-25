@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useUserSetupState } from 'utils/apiHooks/user';
 import { importUser } from 'utils/export';
+import MobileNotSupportedModal from 'components/MobileNotSupportedModal';
 import PageLoading from 'components/PageLoading';
 import { inDev } from 'config/constants';
 import useToken from 'hooks/useToken';
@@ -70,6 +71,7 @@ const LandingPage = () => {
 
   return (
     <>
+      <MobileNotSupportedModal />
       <Hero startLocation={nextPage} />
       <SponsorSection />
       <KeyFeaturesSection />
