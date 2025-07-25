@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Button, Typography } from 'antd';
+import { useTheme } from 'styled-components';
 import { DegreeWizardPayload } from 'types/degreeWizard';
 import { useSpecTypesQuery } from 'utils/apiHooks/static';
 import { useResetDegreeMutation, useUserSetupState } from 'utils/apiHooks/user';
@@ -22,7 +23,7 @@ const DEFAULT_SPEC_TYPES = ['majors', 'honours', 'minors'];
 
 const DegreeWizard = () => {
   const [currStep, setCurrStep] = useState(Steps.YEAR);
-
+  const theme = useTheme();
   const [degreeInfo, setDegreeInfo] = useState<DegreeWizardPayload>({
     programCode: '',
     startYear: undefined,
@@ -49,10 +50,14 @@ const DegreeWizard = () => {
     openNotification({
       type: 'info',
       message: 'Disclaimer',
-      description:
-        'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!'
+      description: (
+        <span style={{ color: theme.text }}>
+          Currently, Circles can only support some degrees and undergrad courses. If you find any
+          errors, feel free to report a bug!
+        </span>
+      )
     });
-  }, []);
+  }, [theme.text]);
 
   const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];

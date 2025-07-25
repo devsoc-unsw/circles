@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
+import { useTheme } from 'styled-components';
 import { useImportUserMutation } from 'utils/apiHooks/user';
 import { importUser, UserJson } from 'utils/export';
 import openNotification from 'utils/openNotification';
@@ -9,7 +10,7 @@ import S from './styles';
 
 const ImportPlannerMenu = () => {
   const importUserMutation = useImportUserMutation();
-
+  const theme = useTheme();
   const handleImport = (user: UserJson) => {
     importUserMutation.mutate(user);
   };
@@ -30,7 +31,9 @@ const ImportPlannerMenu = () => {
       openNotification({
         type: 'error',
         message: 'Import file needs to be JSON.',
-        description: 'The uploaded file is not of type JSON.'
+        description: (
+          <span style={{ color: theme.text }}>The uploaded file is not of type JSON.</span>
+        )
       });
       e.target.value = '';
       return;
@@ -59,7 +62,9 @@ const ImportPlannerMenu = () => {
         openNotification({
           type: 'error',
           message: 'Invalid JSON format',
-          description: 'An error occured when parsing the JSON file'
+          description: (
+            <span style={{ color: theme.text }}>An error occured when parsing the JSON file</span>
+          )
         });
         return;
       }
@@ -67,7 +72,9 @@ const ImportPlannerMenu = () => {
       openNotification({
         type: 'success',
         message: 'JSON Imported',
-        description: 'Planner has been successfully imported.'
+        description: (
+          <span style={{ color: theme.text }}>Planner has been successfully imported.</span>
+        )
       });
     };
   };

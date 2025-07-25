@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useQueries, useQueryClient } from '@tanstack/react-query';
 import { Badge } from 'antd';
+import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { PlannedToTerm, Term, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
 import {
@@ -75,6 +76,8 @@ const TermPlanner = () => {
 
   const queryClient = useQueryClient();
   const plannerPicRef = useRef<HTMLDivElement>(null);
+
+  const theme = useTheme();
 
   // Planer obj
   const plannerQuery = useUserPlanner();
@@ -198,11 +201,15 @@ const TermPlanner = () => {
       openNotification({
         type: 'info',
         message: 'Your terms are looking a little empty',
-        description:
-          'Add courses from the course selector to the term planner and drag courses from the unplanned column'
+        description: (
+          <span style={{ color: theme.text }}>
+            Add courses from the course selector to the term planner and drag courses from the
+            unplanned column
+          </span>
+        )
       });
     }
-  }, [plannerEmpty]);
+  }, [plannerEmpty, theme.text]);
 
   const handleOnDragStart: OnDragStartResponder = async (result) => {
     const courseCode = result.draggableId.slice(0, 8);

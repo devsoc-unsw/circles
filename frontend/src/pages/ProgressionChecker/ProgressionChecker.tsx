@@ -6,6 +6,7 @@ import {
   TableOutlined
 } from '@ant-design/icons';
 import { Button, Divider, Typography } from 'antd';
+import { useTheme } from 'styled-components';
 import {
   ProgressionAdditionalCourses,
   ProgressionViewStructure,
@@ -38,6 +39,8 @@ const ProgressionChecker = () => {
   const degreeQuery = useUserDegree();
   const degree = degreeQuery.data;
 
+  const theme = useTheme();
+
   const structureQuery = useStructureQuery(
     {
       queryOptions: {
@@ -55,10 +58,15 @@ const ProgressionChecker = () => {
     openNotification({
       type: 'info',
       message: 'Disclaimer',
-      description:
-        "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy."
+      description: (
+        <span style={{ color: theme.text }}>
+          This progression check is intended to outline the courses required by your degree and may
+          not be 100% accurate. Please refer to UNSW&apos;s official progression check and handbook
+          for further accuracy.
+        </span>
+      )
     });
-  }, []);
+  }, [theme.text]);
 
   const [view, setView] = useState(Views.GRID_CONCISE);
   const coursesQuery = useUserCourses();

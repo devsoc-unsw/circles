@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { isAxiosError } from 'axios';
+import { useTheme } from 'styled-components';
 import { useUserSetupState } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
@@ -13,6 +14,8 @@ type Props = {
 
 const RequireToken = ({ needSetup }: Props) => {
   const { token } = useAppSelector(selectIdentity) ?? {};
+
+  const theme = useTheme();
 
   const {
     isPending,
@@ -31,17 +34,25 @@ const RequireToken = ({ needSetup }: Props) => {
         openNotification({
           type: 'error',
           message: 'Error',
-          description: 'You must be logged in before visiting this page 🙂'
+          description: (
+            <span style={{ color: theme.text }}>
+              You must be logged in before visiting this page 🙂
+            </span>
+          )
         });
       } else if (isSetup === false && !!needSetup) {
         openNotification({
           type: 'warning',
           message: 'Warning',
-          description: 'You must setup your degree before visiting this page 🙂'
+          description: (
+            <span style={{ color: theme.text }}>
+              You must setup your degree before visiting this page 🙂
+            </span>
+          )
         });
       }
     }
-  }, [token, isPending, isSetup, error, needSetup]);
+  }, [token, isPending, isSetup, error, needSetup, theme.text]);
 
   if (token === undefined) {
     return <Navigate to="/login" />;
