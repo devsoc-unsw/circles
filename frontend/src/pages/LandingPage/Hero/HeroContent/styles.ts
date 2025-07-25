@@ -14,15 +14,6 @@ const HeroTitle = motion(styled.h1`
   line-height: 1.2;
   font-size: 70px;
   font-weight: 650;
-  text-shadow:
-    -2px -2px 0 #9154de,
-    2px -2px 0 #9154de,
-    -2px 2px 0 #9154de,
-    2px 2px 0 #9154de,
-    -2px 0 0 #9154de,
-    2px 0 0 #9154de,
-    0 -2px 0 #9154de,
-    0 2px 0 #9154de;
 `);
 
 const HeroSubTitle = styled.img`
@@ -42,14 +33,10 @@ const HeroCTA = motion(styled.button`
   font-weight: 700;
   font-size: 1rem;
   color: #9453e6;
-  filter: drop-shadow(-1px -1px 0 #9154de) drop-shadow(1px -1px 0 #9154de)
-    drop-shadow(-1px 1px 0 #9154de) drop-shadow(1px 1px 0 #9154de) drop-shadow(0 0 2px #9154de);
 `);
 
 const DevSocLogo = motion(styled.img`
   width: 160px;
-  filter: drop-shadow(-1px -1px 0 #9154de) drop-shadow(1px -1px 0 #9154de)
-    drop-shadow(-1px 1px 0 #9154de) drop-shadow(1px 1px 0 #9154de) drop-shadow(0 0 2px #9154de);
 `);
 
 export default {
