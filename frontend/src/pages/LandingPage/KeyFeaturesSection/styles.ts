@@ -10,6 +10,18 @@ const FeatureTitle = styled.h1`
   margin-bottom: 75px;
   font-weight: 650;
   margin-top: 90px;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    margin-bottom: 50px;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
 `;
 
 const CardsSection = styled.div`
@@ -20,6 +32,18 @@ const CardsSection = styled.div`
   gap: 30px;
   position: relative;
   margin-bottom: 200px;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+    margin-bottom: 100px;
+    padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 16px;
+    margin-bottom: 60px;
+    padding: 0 12px;
+  }
 `;
 
 const Card = styled.div`
@@ -37,6 +61,18 @@ const Card = styled.div`
     box-shadow:
       0 14px 28px rgba(0, 0, 0, 0.25),
       0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  @media (max-width: 768px) {
+    width: 280px;
+    height: 300px;
+    padding: 35px 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 260px;
+    height: 280px;
+    padding: 30px 18px;
   }
 `;
 
@@ -87,6 +123,16 @@ const BlobBackground = styled.img`
 
   @media (max-width: 902px) {
     top: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 120%;
+    top: 45%;
+  }
+
+  @media (max-width: 480px) {
+    width: 140%;
+    top: 40%;
   }
 `;
 

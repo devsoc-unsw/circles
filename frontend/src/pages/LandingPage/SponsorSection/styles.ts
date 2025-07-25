@@ -9,6 +9,16 @@ const SponsorsText = styled.h1`
   position: relative;
   margin-bottom: 2rem;
   font-weight: 650;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const LogosWrapper = styled.div`
@@ -16,6 +26,16 @@ const LogosWrapper = styled.div`
   flex-direction: column;
   gap: 3rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
 `;
 
 const LogoImg = styled.img<{ size: string }>`
@@ -28,6 +48,36 @@ const LogoImg = styled.img<{ size: string }>`
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    max-width: ${(props) => {
+      switch (props.size) {
+        case '350px':
+          return '250px';
+        case '250px':
+          return '180px';
+        case '150px':
+          return '120px';
+        default:
+          return props.size;
+      }
+    }};
+  }
+
+  @media (max-width: 480px) {
+    max-width: ${(props) => {
+      switch (props.size) {
+        case '350px':
+          return '200px';
+        case '250px':
+          return '150px';
+        case '150px':
+          return '100px';
+        default:
+          return props.size;
+      }
+    }};
   }
 `;
 
@@ -43,6 +93,22 @@ const TierWrapper = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+
+    &:not(:last-child) {
+      padding-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+
+    &:not(:last-child) {
+      padding-bottom: 1.5rem;
+    }
   }
 `;
 
