@@ -34,11 +34,6 @@ const GraphicalSelector = () => {
         <CS.TextWrapper>No course selected</CS.TextWrapper>
       )
     },
-    {
-      label: 'Program Structure',
-      key: PROGRAM_STRUCTURE_TAB,
-      children: <CS.TextWrapper>Program Structure</CS.TextWrapper>
-    },
     { label: 'Help', key: HELP_TAB, children: <HowToUse /> }
   ];
 
