@@ -119,11 +119,6 @@ const CourseInfoDrawers = ({
           </S.TextBlock>
         )}
       </Collapsible>
-      {inDev && (
-        <Collapsible title="Prerequisite Visualisation">
-          <PrerequisiteTree courseCode={course.code} onCourseClick={onCourseClick} />
-        </Collapsible>
-      )}
     </div>
   );
 };
