@@ -86,10 +86,12 @@ const CourseDescriptionPanel = ({
               </Title>
             </div>
           </S.TitleWrapper>
-          <PlannerButton
-            course={course}
-            isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
-          />
+          <div style={{ paddingBottom: '.8rem' }}>
+            <PlannerButton
+              course={course}
+              isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
+            />
+          </div>
         </div>
         {course.is_legacy && (
           <Text strong>
