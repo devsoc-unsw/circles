@@ -46,11 +46,29 @@ const Link = styled.a`
   }
 `;
 
+const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const DialWrapper = styled.div`
+  text-align: center;
+  width: 85px;
+`;
+
+const DialLabel = styled.p`
+  font-size: small;
+`;
+
 export default {
   Wrapper,
   MainWrapper,
   SidebarWrapper,
   TitleWrapper,
   TextBlock,
-  Link
+  Link,
+  RatingWrapper,
+  DialWrapper,
+  DialLabel
 };

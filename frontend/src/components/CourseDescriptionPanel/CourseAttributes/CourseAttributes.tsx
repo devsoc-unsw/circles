@@ -147,47 +147,6 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
         {
           title: 'Units of Credit',
           content: UOC
-        },
-        {
-          title: 'Unilectives Rating',
-          content: rating ? (
-            <S.RatingWrapper>
-              <S.DialWrapper>
-                <Progress
-                  type="dashboard"
-                  percent={rating.enjoyability ? (rating.enjoyability / 5) * 100 : 0}
-                  format={() => `${rating.enjoyability ? rating.enjoyability.toFixed(1) : '?'} / 5`}
-                  strokeColor={theme.purplePrimary}
-                  size={65}
-                />
-                <S.DialLabel>Enjoyability</S.DialLabel>
-              </S.DialWrapper>
-              <S.DialWrapper>
-                <Progress
-                  type="dashboard"
-                  percent={rating.usefulness ? (rating.usefulness / 5) * 100 : 0}
-                  format={() => `${rating.usefulness ? rating.usefulness.toFixed(1) : '?'} / 5`}
-                  strokeColor={theme.purplePrimary}
-                  size={65}
-                />
-                <S.DialLabel>Usefulness</S.DialLabel>
-              </S.DialWrapper>
-              <S.DialWrapper>
-                <Progress
-                  type="dashboard"
-                  percent={rating.manageability ? (rating.manageability / 5) * 100 : 0}
-                  format={() =>
-                    `${rating.manageability ? rating.manageability.toFixed(1) : '?'} / 5`
-                  }
-                  strokeColor={theme.purplePrimary}
-                  size={65}
-                />
-                <S.DialLabel>Manageability</S.DialLabel>
-              </S.DialWrapper>
-            </S.RatingWrapper>
-          ) : (
-            <p>N/A</p>
-          )
         }
       ]
     : [];
