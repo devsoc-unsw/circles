@@ -48,7 +48,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
   }, [generateFood]);
 
   const checkCollision = useCallback((head: Position, snakeBody: Position[]): boolean => {
-    // Wall collision
     if (
       head.x < 0 ||
       head.x >= CANVAS_WIDTH / GRID_SIZE ||
@@ -57,7 +56,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
     ) {
       return true;
     }
-    // Self collision
     return snakeBody.some((segment) => segment.x === head.x && segment.y === head.y);
   }, []);
 
@@ -77,7 +75,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
 
       newSnake.unshift(head);
 
-      // Check if food eaten
       if (head.x === food.x && head.y === food.y) {
         setScore((prev) => prev + 1);
         setFood(generateFood());
@@ -96,11 +93,9 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Clear canvas with theme-aware background
     ctx.fillStyle = theme.body || '#1d1f20';
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    // Draw subtle grid lines for better visibility
     ctx.strokeStyle = theme.graph?.borderColor || '#333';
     ctx.lineWidth = 0.3;
     ctx.globalAlpha = 0.3;
@@ -118,10 +113,8 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
     }
     ctx.globalAlpha = 1;
 
-    // Draw snake with Circles purple theme
     snake.forEach((segment, index) => {
       if (index === 0) {
-        // Head is brighter with gradient
         const gradient = ctx.createRadialGradient(
           segment.x * GRID_SIZE + GRID_SIZE / 2,
           segment.y * GRID_SIZE + GRID_SIZE / 2,
@@ -134,7 +127,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
         gradient.addColorStop(1, '#9254de');
         ctx.fillStyle = gradient;
       } else {
-        // Body segments with decreasing opacity
         const opacity = Math.max(0.6, 1 - index * 0.04);
         ctx.fillStyle = `rgba(146, 84, 222, ${opacity})`;
       }
@@ -146,7 +138,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
         GRID_SIZE - 2
       );
 
-      // Add subtle border
       ctx.strokeStyle = '#51258f';
       ctx.lineWidth = 1;
       ctx.strokeRect(
@@ -157,7 +148,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
       );
     });
 
-    // Draw food with complementary orange theme
     const foodGradient = ctx.createRadialGradient(
       food.x * GRID_SIZE + GRID_SIZE / 2,
       food.y * GRID_SIZE + GRID_SIZE / 2,
@@ -173,7 +163,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
     ctx.fillStyle = foodGradient;
     ctx.fillRect(food.x * GRID_SIZE + 1, food.y * GRID_SIZE + 1, GRID_SIZE - 2, GRID_SIZE - 2);
 
-    // Add food border
     ctx.strokeStyle = '#d4380d';
     ctx.lineWidth = 1;
     ctx.strokeRect(food.x * GRID_SIZE + 1, food.y * GRID_SIZE + 1, GRID_SIZE - 2, GRID_SIZE - 2);
@@ -216,7 +205,6 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
           if (gameOver) resetGame();
           break;
         default:
-          // Do nothing for other keys
           break;
       }
     };
