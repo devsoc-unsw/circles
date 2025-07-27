@@ -278,16 +278,13 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
                   marginBottom: '5px'
                 }}
               >
-                Game Over! 💥
+                Game Over!
               </div>
               <div style={{ color: theme.text }}>Press SPACE to restart</div>
             </div>
           ) : (
             <div>
-              <div>🎯 Use arrow keys to move the snake</div>
-              <div style={{ marginTop: '5px', opacity: 0.8 }}>
-                Eat the golden orbs to grow and score!
-              </div>
+              <div>Use arrow keys to move the snake</div>
             </div>
           )}
         </div>
