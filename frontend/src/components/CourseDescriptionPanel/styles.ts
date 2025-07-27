@@ -30,9 +30,6 @@ const TitleWrapper = styled.div<{ $sidebar?: boolean }>`
   ${({ $sidebar }) =>
     $sidebar &&
     css`
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       align-items: center;
     `}
 `;
@@ -42,10 +39,18 @@ const TextBlock = styled(Text)`
   color: ${({ theme }) => theme.graph.tabTextColor};
 `;
 
+const Link = styled.a`
+  color: ${({ theme }) => theme.courseMenu?.hrefColor};
+  &:hover {
+    color: ${({ theme }) => theme.courseMenu?.hrefHoverColor};
+  }
+`;
+
 export default {
   Wrapper,
   MainWrapper,
   SidebarWrapper,
   TitleWrapper,
-  TextBlock
+  TextBlock,
+  Link
 };

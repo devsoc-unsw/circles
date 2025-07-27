@@ -1,11 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Typography, Rate } from 'antd';
 import { CoursesResponse } from 'types/userResponse';
 import {
   useCourseInfoQuery,
   useCoursePrereqsQuery,
-  useCourseTimetableQuery
+  useCourseTimetableQuery,
+  useCourseRatingQuery
 } from 'utils/apiHooks/static';
 import { useUserCoursesUnlockedWhenTaken } from 'utils/apiHooks/user';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
@@ -44,6 +45,7 @@ const CourseDescriptionPanel = ({
     { queryOptions: { select: getEnrolmentCapacity, retry: 1, enabled: sidebar } }, // retry only once because we have bad error handling
     courseCode
   );
+  const ratingQuery = useCourseRatingQuery({}, courseCode);
 
   const loadingWrapper = (
     <S.Wrapper $sidebar={sidebar}>
@@ -62,35 +64,54 @@ const CourseDescriptionPanel = ({
   const coursesPathFrom = coursePrereqsQuery.data?.courses;
   const courseCapacity = courseCapacityQuery.data;
 
+  const rating = ratingQuery?.data;
+
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
   return (
     <S.Wrapper $sidebar={sidebar} className={className}>
       <S.MainWrapper>
-        <S.TitleWrapper $sidebar={sidebar}>
-          <div>
-            <Title level={2} className="text">
-              {courseCode} - {course.title}
-            </Title>
-          </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap'
+          }}
+        >
+          <S.TitleWrapper $sidebar={sidebar}>
+            <div>
+              <Title level={2} className="text">
+                {courseCode} - {course.title}
+              </Title>
+            </div>
+          </S.TitleWrapper>
           <PlannerButton
             course={course}
             isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
           />
-        </S.TitleWrapper>
-        {/* TODO: Style this better? */}
+        </div>
         {course.is_legacy && (
           <Text strong>
             NOTE: this course is discontinued - if a current course exists, pick that instead
           </Text>
         )}
-
         {!sidebar && (
           <div style={{ flexBasis: '25%' }}>
             <CourseAttributes course={course} />
           </div>
         )}
-
+        <div>
+          <Rate disabled value={rating?.overallRating ? rating.overallRating : 0} allowHalf />
+          <S.Link
+            href={`https://unilectives.devsoc.app/course/${courseCode}/`}
+            target="_blank"
+            rel="noreferrer"
+            style={{ display: 'block' }}
+          >
+            Read reviews on Unilectives
+          </S.Link>
+        </div>
         <CourseInfoDrawers
           course={course}
           pathFrom={coursesPathFrom}
