@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Modal } from 'antd';
 import { useTheme } from 'styled-components';
+import './SnakeGame.css';
 
 interface Position {
   x: number;
