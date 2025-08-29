@@ -17,7 +17,7 @@ const routes: Route[] = [
     inHamburger: false
   },
   {
-    label: 'Graphical Selector (Beta)',
+    label: 'Graphical Selector',
     link: '/graphical-selector',
     inHamburger: false
   },

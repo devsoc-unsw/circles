@@ -9,9 +9,9 @@
 
 Tired of using a poorly laid out spreadsheet to cobble together a plan to follow for the next 3-8 years of your life? Have no fear, Circles is here!
 
-Circles is a UNSW degree planner where you can explore and validate your degree structure.
+Circles is a UNSW degree planner and course discovery tool where you can explore and validate your degree structure.
 
-You can find a live build of Circles at [https://circles.devsoc.app](https://circles.devsoc.app/).
+Visit and bookmark Circles at [https://circles.devsoc.app](https://circles.devsoc.app/).
 
 ## Features
 
@@ -20,28 +20,22 @@ You can find a live build of Circles at [https://circles.devsoc.app](https://cir
 NOTE: we currently only support a selection of degrees - but we will add more!
 
 - Adaptive course selector:
-
   - Allows you to explore your currently unlocked courses
   - Shows all the courses relevant to your degree
   - Automatically checks if you meet the requirement to take a course
 
 - Term planner:
-
   - An intuitive drag and drop interface
   - Validates your progression to make sure you've met the requirements for future courses
   - Allows you to generate a saveable and sharable image of your plan
 
-- Progression checker: (NEW PAGE!)
+- Progression checker:
   - Lets you understand which requirements you have met and which you still need to complete
   - Shows you what courses you can do to complete your degree
 
-## Future Plans
-
-This project is rapidly expanding and our roadmap includes features such as:
-
 - Graphical view:
   - A graphical model of your degree plan, to show you a beautiful dependency tree of courses relevant to your degree
-  - Will adapt to your degree structure
+  - Adapts to your degree structure
 
 # Our team
 

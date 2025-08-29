@@ -6,10 +6,11 @@ import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import SidebarDrawer from 'components/SidebarDrawer';
 import CS from './common/styles';
-import { COURSE_INFO_TAB, HELP_TAB } from './constants';
+import { COURSE_INFO_TAB, HELP_TAB, UNILECTIVES_TAB } from './constants';
 import CourseGraph from './CourseGraph';
 import HowToUse from './HowToUse';
 import S from './styles';
+import UnilectiveReview from './UnilectiveReview/UnilectiveReview';
 
 const GraphicalSelector = () => {
   const [fullscreen, setFullscreen] = useState(false);
@@ -30,6 +31,15 @@ const GraphicalSelector = () => {
           onCourseClick={setCourseCode}
           courses={courses}
         />
+      ) : (
+        <CS.TextWrapper>No course selected</CS.TextWrapper>
+      )
+    },
+    {
+      label: 'Unilectives Reviews',
+      key: UNILECTIVES_TAB,
+      children: courseCode ? (
+        <UnilectiveReview courseCode={courseCode} key={courseCode} />
       ) : (
         <CS.TextWrapper>No course selected</CS.TextWrapper>
       )

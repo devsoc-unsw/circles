@@ -2,6 +2,21 @@
 
 Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team to work on [circles360](https://circles360.github.io/) which inspired the current Circles you see today! :)
 
+## 2025
+### Directors
+- Matthew Lim (@matthew-lim-matthew-lim)  - director
+- Keats Mackay (@Keatsm)     - director
+
+### Members
+- Jason Cong Chen (@jcongc)
+- Dylan Liang (@DylanSHLiang)
+- Kevin Lin (@KevinLin1803)
+- Alex Lee
+- Winnie Chan (@winnieee-chan)
+- Valentina Guedez Mercado (@val-guedez)
+- Elaine Zhang (@imagine-hussain)
+- Jenny Mengzhen Liu
+
 ## 2024
 ### Directors
 - Martin Knezevic (@martanman)  - dire
