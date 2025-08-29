@@ -27,9 +27,9 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-
-    CONDITIONS["DESN1900"][PROCESSED] = DESN_1900()
-    CONDITIONS["DESN2000"] = DESN_2000(CONDITIONS["DESN2000"])
+    if "DESN1900" in CONDITIONS:
+        CONDITIONS["DESN1900"][PROCESSED] = DESN_1900()
+        CONDITIONS["DESN2000"] = DESN_2000(CONDITIONS["DESN2000"])
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(

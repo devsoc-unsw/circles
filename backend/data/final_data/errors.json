@@ -35,6 +35,32 @@
         ],
         "broke at": "Index 10, in"
     },
+    "ACTL4306": {
+        "condition": {
+            "original": "Students should have completed ACTL3142 or equivalent courses and achieved an exemption level for that course (65 and above).<br/><br/>",
+            "processed": "ACTL3142 courses && achieved an exemption level for that course (65 && above)"
+        },
+        "tokens": [
+            "(",
+            "ACTL3142",
+            "courses",
+            "&&",
+            "achieved",
+            "an",
+            "exemption",
+            "level",
+            "for",
+            "that",
+            "course",
+            "(",
+            "65",
+            "&&",
+            "above",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 3, &&"
+    },
     "ADAD3000": {
         "condition": {
             "original": "Prerequisite: One of the following courses, DART3203, DDES2102, DART3100, DART3310, or FADA2020.<br/><br/>",
@@ -141,29 +167,27 @@
     },
     "ARCH1101": {
         "condition": {
-            "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-            "processed": "3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
+            "original": "Prerequisite: enrolment in program 3261 Architectural Studies or 3635 Civil Engineering (Civil Engineering with Architecture). <br/><br/>",
+            "processed": "3261 Architectural Studies || 3635 Civil Engineering (Civil Engineering && Architecture)"
         },
         "tokens": [
             "(",
             "3261",
             "Architectural",
-            "Studies,",
-            "3268",
-            "Computational",
-            "Design",
+            "Studies",
             "||",
             "3635",
             "Civil",
             "Engineering",
+            "(",
+            "Civil",
+            "Engineering",
             "&&",
             "Architecture",
-            "(",
-            "Hons",
             ")",
             ")"
         ],
-        "broke at": "Index 3, Studies,"
+        "broke at": "Index 3, Studies"
     },
     "ARCH1201": {
         "condition": {
@@ -205,12 +229,14 @@
     },
     "ARCH1361": {
         "condition": {
-            "original": "Prerequisite: ARCH1161, or completion of the UNSW College Diploma of Architecture<br/><br/>",
-            "processed": "ARCH1161 || the UNSW College Diploma of Architecture"
+            "original": "Prerequisite: ARCH1161 or BENV1161 or completion of the UNSW College Diploma of Architecture<br/><br/>",
+            "processed": "ARCH1161 || BENV1161 || the UNSW College Diploma of Architecture"
         },
         "tokens": [
             "(",
             "ARCH1161",
+            "||",
+            "BENV1161",
             "||",
             "the",
             "UNSW",
@@ -220,7 +246,7 @@
             "Architecture",
             ")"
         ],
-        "broke at": "Index 4, UNSW"
+        "broke at": "Index 6, UNSW"
     },
     "ARTS2021": {
         "condition": {
@@ -694,33 +720,6 @@
         ],
         "broke at": "Index 11, one"
     },
-    "ARTS3050": {
-        "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, English<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, English"
-        },
-        "tokens": [
-            "(",
-            "48UOC",
-            "&&",
-            "6UOC",
-            "in",
-            "L1",
-            "&&",
-            "6UOC",
-            "in",
-            "L2",
-            "in",
-            "one",
-            "of",
-            "the",
-            "following",
-            "specialisations,",
-            "English",
-            ")"
-        ],
-        "broke at": "Index 11, one"
-    },
     "ARTS3054": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, English<br/><br/>",
@@ -905,16 +904,22 @@
     },
     "ARTS3066": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Cinema Studies or Film Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Cinema Studies || Film Studies"
+            "original": "Prerequisite: 48 UOC overall, including one of the following, ARTS1060 or ARTS1062 or ARTS1064, and 6 UOC at level 2 in one of the following specialisations, Cinema Studies or, Film Studies, or Screen Production<br/><br/>",
+            "processed": "48UOC && one of the following, ARTS1060 || ARTS1062 || ARTS1064 && 6UOC in L2 in one of the following specialisations, Cinema Studies or, Film Studies || Screen Production"
         },
         "tokens": [
             "(",
             "48UOC",
             "&&",
-            "6UOC",
-            "in",
-            "L1",
+            "one",
+            "of",
+            "the",
+            "following,",
+            "ARTS1060",
+            "||",
+            "ARTS1062",
+            "||",
+            "ARTS1064",
             "&&",
             "6UOC",
             "in",
@@ -927,12 +932,15 @@
             "specialisations,",
             "Cinema",
             "Studies",
-            "||",
+            "or,",
             "Film",
             "Studies",
+            "||",
+            "Screen",
+            "Production",
             ")"
         ],
-        "broke at": "Index 11, one"
+        "broke at": "Index 4, of"
     },
     "ARTS3102": {
         "condition": {
@@ -1957,6 +1965,34 @@
         ],
         "broke at": "Index 2, of"
     },
+    "ARTS3461": {
+        "condition": {
+            "original": "Prerequisite: One of the following courses, ARTS3451, ARTS3452, ARTS3453, ARTS3454, ARTS3456, ARTS3458, ARTS2452, ARTS3460, ARTS3462, or ARTS3463. Or language placement approval.<br/><br/>",
+            "handbook_note": "language placement approval can also be used.",
+            "processed": "One of the following courses, ARTS3451, ARTS3452, ARTS3453, ARTS3454, ARTS3456, ARTS3458, ARTS2452, ARTS3460, ARTS3462 || ARTS3463."
+        },
+        "tokens": [
+            "(",
+            "One",
+            "of",
+            "the",
+            "following",
+            "courses,",
+            "ARTS3451,",
+            "ARTS3452,",
+            "ARTS3453,",
+            "ARTS3454,",
+            "ARTS3456,",
+            "ARTS3458,",
+            "ARTS2452,",
+            "ARTS3460,",
+            "ARTS3462",
+            "||",
+            "ARTS3463.",
+            ")"
+        ],
+        "broke at": "Index 2, of"
+    },
     "ARTS3462": {
         "condition": {
             "original": "Prerequisite: One of the following courses, ARTS3451, ARTS3452, ARTS3453, ARTS3454, ARTS3455, ARTS3456, ARTS3458, ARTS2452, ARTS3460, or ARTS3463. Or language placement approval.<br/><br/>",
@@ -2216,8 +2252,8 @@
     },
     "ARTS3750": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Geographical Studies, Global Development or International Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Geographical Studies, Global Development || (3447)"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations: Geographical Studies, Global Development, International Studies or Working with Communities.<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations: Geographical Studies, Global Development, (3447) || Working && Communities"
         },
         "tokens": [
             "(",
@@ -2235,15 +2271,18 @@
             "of",
             "the",
             "following",
-            "specialisations,",
+            "specialisations:",
             "Geographical",
             "Studies,",
             "Global",
-            "Development",
-            "||",
+            "Development,",
             "(",
             "3447",
             ")",
+            "||",
+            "Working",
+            "&&",
+            "Communities",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2275,8 +2314,8 @@
     },
     "ARTS3755": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Global Development or International Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Global Development || (3447)"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations: Global Development, International Studies or Working with Communities<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations: Global Development, (3447) || Working && Communities"
         },
         "tokens": [
             "(",
@@ -2294,13 +2333,16 @@
             "of",
             "the",
             "following",
-            "specialisations,",
+            "specialisations:",
             "Global",
-            "Development",
-            "||",
+            "Development,",
             "(",
             "3447",
             ")",
+            "||",
+            "Working",
+            "&&",
+            "Communities",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2546,28 +2588,39 @@
     },
     "ARTS3810": {
         "condition": {
-            "original": "Prerequisite: 60 units of credit overall, and  enrolment in an International Relations, Politics, or Politics & International Relations major or minor<br/><br/>",
-            "processed": "60UOC && an International Relations, Politics || Politics && International Relations major || minor"
+            "original": "Prerequisite: 60 UOC overall, including ARTS1810, ARTS1811, ARTS2821, and 6 UOC Level 2 Politics and International Relations prescribed elective. Students must also have declared a major in Politics and International Relations.<br/><br/>",
+            "processed": "60UOC && ARTS1810, ARTS1811, ARTS2821 && 6UOC in L2 Politics && International Relations elective. must also have declared a major in Politics && International Relations"
         },
         "tokens": [
             "(",
             "60UOC",
             "&&",
-            "an",
-            "International",
-            "Relations,",
-            "Politics",
-            "||",
+            "ARTS1810,",
+            "ARTS1811,",
+            "ARTS2821",
+            "&&",
+            "6UOC",
+            "in",
+            "L2",
             "Politics",
             "&&",
             "International",
             "Relations",
+            "elective.",
+            "must",
+            "also",
+            "have",
+            "declared",
+            "a",
             "major",
-            "||",
-            "minor",
+            "in",
+            "Politics",
+            "&&",
+            "International",
+            "Relations",
             ")"
         ],
-        "broke at": "Index 4, International"
+        "broke at": "Index 4, ARTS1811,"
     },
     "ARTS3812": {
         "condition": {
@@ -2720,8 +2773,8 @@
     },
     "ARTS3820": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations: Politics and International Relations or Working with Communities.<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations: Politics && International Relations || Working && Communities"
         },
         "tokens": [
             "(",
@@ -2739,11 +2792,15 @@
             "of",
             "the",
             "following",
-            "specialisations,",
+            "specialisations:",
             "Politics",
             "&&",
             "International",
             "Relations",
+            "||",
+            "Working",
+            "&&",
+            "Communities",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2808,6 +2865,34 @@
         ],
         "broke at": "Index 11, one"
     },
+    "ARTS3823": {
+        "condition": {
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in a specialisation in Politics and International Relations<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in a specialisation in Politics && International Relations"
+        },
+        "tokens": [
+            "(",
+            "48UOC",
+            "&&",
+            "6UOC",
+            "in",
+            "L1",
+            "&&",
+            "6UOC",
+            "in",
+            "L2",
+            "in",
+            "a",
+            "specialisation",
+            "in",
+            "Politics",
+            "&&",
+            "International",
+            "Relations",
+            ")"
+        ],
+        "broke at": "Index 11, a"
+    },
     "ARTS3850": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Political Economy, Politics and International Relations, or Security Studies<br/><br/>",
@@ -2846,8 +2931,8 @@
     },
     "ARTS3872": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Studies, or Sociology & Anthropology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, (3447) || Sociology && Anthropology"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations: Digital Social Sciences, International Studies, or Sociology<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations: Digital Social Sciences, (3447) || Sociology"
         },
         "tokens": [
             "(",
@@ -2865,22 +2950,23 @@
             "of",
             "the",
             "following",
-            "specialisations,",
+            "specialisations:",
+            "Digital",
+            "Social",
+            "Sciences,",
             "(",
             "3447",
             ")",
             "||",
             "Sociology",
-            "&&",
-            "Anthropology",
             ")"
         ],
         "broke at": "Index 11, one"
     },
     "ARTS3874": {
         "condition": {
-            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Geographical Studies, Global Development, International Studies, or Sociology & Anthropology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Australian Studies, Geographical Studies, Global Development, (3447) || Sociology && Anthropology"
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Geographical Studies, Global Development, International Studies, Sociology, or Working with Communities.<br/><br/>",
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Australian Studies, Geographical Studies, Global Development, (3447) , Sociology || Working && Communities"
         },
         "tokens": [
             "(",
@@ -2908,10 +2994,12 @@
             "(",
             "3447",
             ")",
-            "||",
+            ",",
             "Sociology",
+            "||",
+            "Working",
             "&&",
-            "Anthropology",
+            "Communities",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3105,29 +3193,68 @@
     },
     "ARTS4266": {
         "condition": {
-            "original": "Prerequisite: Enrolment in a School of Social Sciences, Asian Studies or European Studies honours program or Nura Gili Indigenous program completing honours (ATSIAH specialisation)<br/><br/>",
-            "processed": "(ASIABH || EUROBH) || Nura Gili Indigenous program honours (ATSIAH specialisation)"
+            "original": "Prerequisite: Enrolment in a School of Social Sciences Honours Program or one of the following Honours Programs: Asian Studies, Australian Indigenous Studies, Criminology, or European Studies.<br/><br/>",
+            "processed": "a School of Social Sciences Honours Program || one of the following Honours Programs: Asian Studies, Australian Indigenous Studies, Criminology || European Studies"
         },
         "tokens": [
             "(",
-            "(",
-            "ASIABH",
+            "a",
+            "School",
+            "of",
+            "Social",
+            "Sciences",
+            "Honours",
+            "Program",
             "||",
-            "EUROBH",
-            ")",
-            "||",
-            "Nura",
-            "Gili",
+            "one",
+            "of",
+            "the",
+            "following",
+            "Honours",
+            "Programs:",
+            "Asian",
+            "Studies,",
+            "Australian",
             "Indigenous",
-            "program",
-            "honours",
-            "(",
-            "ATSIAH",
-            "specialisation",
-            ")",
+            "Studies,",
+            "Criminology",
+            "||",
+            "European",
+            "Studies",
             ")"
         ],
-        "broke at": "Index 8, Gili"
+        "broke at": "Index 2, School"
+    },
+    "ARTS4268": {
+        "condition": {
+            "original": "Enrolment in a School of Social Sciences Honours Program or one of the following Honours Programs: Asian Studies, Criminology, or European Studies.<br/><br/>",
+            "processed": "a School of Social Sciences Honours Program || one of the following Honours Programs: Asian Studies, Criminology || European Studies"
+        },
+        "tokens": [
+            "(",
+            "a",
+            "School",
+            "of",
+            "Social",
+            "Sciences",
+            "Honours",
+            "Program",
+            "||",
+            "one",
+            "of",
+            "the",
+            "following",
+            "Honours",
+            "Programs:",
+            "Asian",
+            "Studies,",
+            "Criminology",
+            "||",
+            "European",
+            "Studies",
+            ")"
+        ],
+        "broke at": "Index 2, School"
     },
     "ARTS4920": {
         "condition": {
@@ -3207,63 +3334,23 @@
     },
     "AVIA2117": {
         "condition": {
-            "original": "Prerequisite: Enrolled in 3980 and completion of AVIA2111-2116<br/><br/>",
-            "processed": "3980 && AVIA2111-2116"
+            "original": "Prerequisite: Enrolled in 3980 OR 3928, and completion of AVIA2111-2113<br/><br/>",
+            "processed": "3980 || 3928 && AVIA2111-2113"
         },
         "tokens": [
             "(",
             "3980",
+            "||",
+            "3928",
             "&&",
-            "AVIA2111-2116",
+            "AVIA2111-2113",
             ")"
         ],
-        "broke at": "Index 4, )"
+        "broke at": "Index 6, )"
     },
     "AVIA2125": {
         "condition": {
-            "original": "Must be enrolled in: 3980 Aviation (Flying) OR 3928 Aviation (Remotely Piloted Aircraft Systems) OR (3981 Aviation (Management) OR (3835 Commerce/Aviation (Management). <br/><br/>",
-            "processed": "Must be : 3980 Aviation (Flying) || 3928 Aviation (Remotely Piloted Aircraft Systems) || (3981 Aviation (Management) || (3835 Commerce/Aviation (Management)"
-        },
-        "tokens": [
-            "(",
-            "Must",
-            "be",
-            ":",
-            "3980",
-            "Aviation",
-            "(",
-            "Flying",
-            ")",
-            "||",
-            "3928",
-            "Aviation",
-            "(",
-            "Remotely",
-            "Piloted",
-            "Aircraft",
-            "Systems",
-            ")",
-            "||",
-            "(",
-            "3981",
-            "Aviation",
-            "(",
-            "Management",
-            ")",
-            "||",
-            "(",
-            "3835",
-            "Commerce/Aviation",
-            "(",
-            "Management",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, be"
-    },
-    "AVIA2225": {
-        "condition": {
-            "original": "Prerequisite: MATH1041 OR equivalent (as reviewed and approved by the Course Convenor)<br/><br/>",
+            "original": "Pre-requisite: MATH1041 OR equivalent (as reviewed and approved by the Course Convenor)<br/><br/>",
             "processed": "MATH1041 || equivalent (as reviewed && approved by the Course Convenor)"
         },
         "tokens": [
@@ -3943,40 +4030,26 @@
         ],
         "broke at": "Index 4, Restricted"
     },
-    "BIOM9551": {
+    "BIOS2061": {
         "condition": {
-            "original": "At least 96 UOC completed successfully <br/><br/>",
-            "processed": "96UOC successfully"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "successfully",
-            ")"
-        ],
-        "broke at": "Index 3, )"
-    },
-    "BIOS3011": {
-        "condition": {
-            "original": "Prerequisite: Minimum 48UOC completed<br/><br/>Prerequisite: Students must have completed 12 UOC of Level 2 BEES courses, or permission from the course convenor.<br/><br/>",
-            "processed": "48UOC 12UOC in L2 BEES || permission from the course convenor"
+            "original": "Students must have completed 48 UoC (or equivalent completion of one year of study) in an undergraduate degree. <br/><br/>",
+            "processed": "48UOC (one year of study) in an degree"
         },
         "tokens": [
             "(",
             "48UOC",
-            "12UOC",
+            "(",
+            "one",
+            "year",
+            "of",
+            "study",
+            ")",
             "in",
-            "L2",
-            "BEES",
-            "||",
-            "permission",
-            "from",
-            "the",
-            "course",
-            "convenor",
+            "an",
+            "degree",
             ")"
         ],
-        "broke at": "Index 8, from"
+        "broke at": "Index 3, one"
     },
     "BIOS3012": {
         "condition": {
@@ -4135,6 +4208,24 @@
         ],
         "broke at": "Index 2, Construction"
     },
+    "BLDG3015": {
+        "condition": {
+            "original": "Prerequisite: 84 UOC overall, including BLDG1011, BLDG1012, BLDG1013, and BLDG1016. <br/><br/>",
+            "processed": "84UOC && BLDG1011, BLDG1012, BLDG1013 && BLDG1016"
+        },
+        "tokens": [
+            "(",
+            "84UOC",
+            "&&",
+            "BLDG1011,",
+            "BLDG1012,",
+            "BLDG1013",
+            "&&",
+            "BLDG1016",
+            ")"
+        ],
+        "broke at": "Index 4, BLDG1012,"
+    },
     "BLDG4501": {
         "condition": {
             "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
@@ -4192,19 +4283,19 @@
     },
     "CEIC4954": {
         "condition": {
-            "original": "Corequisite: CEIC4953<br/><br/>WAM of 65<br/><br/>Prerequisite: CEIC4952<br/><br/>",
-            "processed": "[CEIC4953 65WAM CEIC4952]"
+            "original": "Corequisite: CEIC4953<br/><br/>Prerequisite: CEIC4952<br/><br/>WAM of 65<br/><br/>",
+            "processed": "[CEIC4953 CEIC4952 65WAM]"
         },
         "tokens": [
             "(",
             "[",
             "CEIC4953",
-            "65WAM",
             "CEIC4952",
+            "65WAM",
             "]",
             ")"
         ],
-        "broke at": "Index 3, 65WAM"
+        "broke at": "Index 4, 65WAM"
     },
     "CHEM3199": {
         "condition": {
@@ -4404,21 +4495,24 @@
     },
     "CODE3100": {
         "condition": {
-            "original": "Pre: CODE2230 /CODE2250 /CODE 2270<br/><br/>",
-            "processed": "(CODE2230 || CODE2250) /CODE 2270"
+            "original": "Prerequisite: 72 UOC overall, including CODE2120 and enrolment in an undergraduate Computational Design specialisation or program<br/><br/>",
+            "processed": "72UOC && CODE2120 && an Computational Design specialisation || program"
         },
         "tokens": [
             "(",
-            "(",
-            "CODE2230",
+            "72UOC",
+            "&&",
+            "CODE2120",
+            "&&",
+            "an",
+            "Computational",
+            "Design",
+            "specialisation",
             "||",
-            "CODE2250",
-            ")",
-            "/CODE",
-            "2270",
+            "program",
             ")"
         ],
-        "broke at": "Index 7, 2270"
+        "broke at": "Index 6, Computational"
     },
     "COMM1120": {
         "condition": {
@@ -4545,6 +4639,34 @@
         ],
         "broke at": "Index 3, courses"
     },
+    "COMM3624": {
+        "condition": {
+            "original": "Prerequisite: Completion of 108 UOC at UNSW AND LAWS3999 AND [COMP3411 OR DDES2900 OR COMM3614 OR INFS3822 OR MATH3856]<br/><br/>",
+            "processed": "108UOC at UNSW && LAWS3999 && (COMP3411 || DDES2900 || COMM3614 || INFS3822 || MATH3856)"
+        },
+        "tokens": [
+            "(",
+            "108UOC",
+            "at",
+            "UNSW",
+            "&&",
+            "LAWS3999",
+            "&&",
+            "(",
+            "COMP3411",
+            "||",
+            "DDES2900",
+            "||",
+            "COMM3614",
+            "||",
+            "INFS3822",
+            "||",
+            "MATH3856",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 3, UNSW"
+    },
     "COMP1337": {
         "condition": {
             "original": "Prerequisite: Enrolment in 3777 Bachelor of Cyber Security<br/><br/>",
@@ -4563,12 +4685,35 @@
     },
     "COMP1939": {
         "condition": {
-            "original": "Prerequisite: COMP1337 and enrolment in 3777 Bachelor of Cyber Security<br/><br/>Prerequisite or Co-requisite: COMP1521<br/><br/>",
-            "processed": "COMP1337 && 3777 Bachelor of Cyber Security || [COMP1521]"
+            "original": "Prerequisite or Co-requisite: COMP1521<br/><br/>Prerequisite: COMP1337 and enrolment in 3777 Bachelor of Cyber Security<br/><br/>",
+            "processed": "or && [COMP1521 COMP1337 && 3777 Bachelor of Cyber Security]"
         },
         "tokens": [
             "(",
+            "or",
+            "&&",
+            "[",
+            "COMP1521",
             "COMP1337",
+            "&&",
+            "3777",
+            "Bachelor",
+            "of",
+            "Cyber",
+            "Security",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, &&"
+    },
+    "COMP2949": {
+        "condition": {
+            "original": "Prerequisite: COMP1939 and enrolment in 3777 Bachelor of Cyber Security<br/><br/>Prerequisite or Co-requisite: COMP1521<br/><br/>",
+            "processed": "COMP1939 && 3777 Bachelor of Cyber Security || [COMP1521]"
+        },
+        "tokens": [
+            "(",
+            "COMP1939",
             "&&",
             "3777",
             "Bachelor",
@@ -4582,29 +4727,6 @@
             ")"
         ],
         "broke at": "Index 5, of"
-    },
-    "COMP2949": {
-        "condition": {
-            "original": "Prerequisite or Co-requisite: COMP1521<br/><br/>Prerequisite: COMP1939 and enrolment in 3777 Bachelor of Cyber Security<br/><br/>",
-            "processed": "or && [COMP1521 COMP1939 && 3777 Bachelor of Cyber Security]"
-        },
-        "tokens": [
-            "(",
-            "or",
-            "&&",
-            "[",
-            "COMP1521",
-            "COMP1939",
-            "&&",
-            "3777",
-            "Bachelor",
-            "of",
-            "Cyber",
-            "Security",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, &&"
     },
     "COMP3959": {
         "condition": {
@@ -5027,8 +5149,8 @@
     },
     "CRIM3028": {
         "condition": {
-            "original": "72 UOC overall, and enrolment in a Criminology & Criminal Justice single or dual program or a Criminology major/minor.<br/><br/>",
-            "processed": "72UOC && a Criminology && Criminal Justice single || dual program || a Criminology major/minor"
+            "original": "72 UOC overall, and enrolment in a Criminology & Criminal Justice single or double program or a Criminology major/minor.<br/><br/>",
+            "processed": "72UOC && a Criminology && Criminal Justice single || double program || a Criminology major/minor"
         },
         "tokens": [
             "(",
@@ -5041,7 +5163,7 @@
             "Justice",
             "single",
             "||",
-            "dual",
+            "double",
             "program",
             "||",
             "a",
@@ -5275,6 +5397,53 @@
         ],
         "broke at": "Index 2, Theory"
     },
+    "DDES2102": {
+        "condition": {
+            "original": "Prerequisite: 48 UOC overall, and enrolment in the Integrated Design major specialisation in a Bachelor of Design program.<br/><br/>",
+            "processed": "48UOC && the Integrated Design major specialisation in a Bachelor of DDES#"
+        },
+        "tokens": [
+            "(",
+            "48UOC",
+            "&&",
+            "the",
+            "Integrated",
+            "Design",
+            "major",
+            "specialisation",
+            "in",
+            "a",
+            "Bachelor",
+            "of",
+            "DDES#",
+            ")"
+        ],
+        "broke at": "Index 4, Integrated"
+    },
+    "DDES3100": {
+        "condition": {
+            "original": "Prerequisites: Either DDES2100 or DDES2104, and one of the following DDES2101 or FADA2020 or DDES2103<br/><br/>",
+            "processed": "DDES2100 || DDES2104 && one of the following DDES2101 || FADA2020 || DDES2103"
+        },
+        "tokens": [
+            "(",
+            "DDES2100",
+            "||",
+            "DDES2104",
+            "&&",
+            "one",
+            "of",
+            "the",
+            "following",
+            "DDES2101",
+            "||",
+            "FADA2020",
+            "||",
+            "DDES2103",
+            ")"
+        ],
+        "broke at": "Index 6, of"
+    },
     "DDES4101": {
         "condition": {
             "original": "Prerequisite: Enrolment in Design (Honours) program<br/><br/>",
@@ -5306,38 +5475,32 @@
         ],
         "broke at": "Index 2, &&"
     },
-    "DESN3200": {
+    "DESN2000": {
         "condition": {
-            "original": "Completed 72 UOC<br/><br/>Completed at least one first-year design course (for example, ENGG1000, DESN1000, DESN1010, GENE1500, or DPST1071)<br/><br/>",
-            "processed": "72UOC at least one first-year design course (for example, ENGG1000, DESN1000, DESN1010, GENE1500 || DPST1071)"
+            "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
+            "processed": "Please refer to the course overview section for information on requirements"
         },
         "tokens": [
             "(",
-            "72UOC",
-            "at",
-            "least",
-            "one",
-            "first-year",
-            "design",
+            "Please",
+            "refer",
+            "to",
+            "the",
             "course",
-            "(",
+            "overview",
+            "section",
             "for",
-            "example,",
-            "ENGG1000,",
-            "DESN1000,",
-            "DESN1010,",
-            "GENE1500",
-            "||",
-            "DPST1071",
-            ")",
+            "information",
+            "on",
+            "requirements",
             ")"
         ],
-        "broke at": "Index 3, least"
+        "broke at": "Index 2, refer"
     },
     "DPBS1001": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5349,7 +5512,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5358,8 +5521,8 @@
     },
     "DPBS1002": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5371,7 +5534,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5380,8 +5543,8 @@
     },
     "DPBS1012": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5393,17 +5556,57 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
         ],
         "broke at": "Index 3, any"
     },
+    "DPBS1100": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPBS1101": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
     "DPBS1102": {
         "condition": {
-            "original": "Prereq: DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1101 && 6UOC GLDIP && a Global Diploma program"
+            "original": "Prerequisite: DPBS1101 + 6UOC GLDIP + enrolment in a UNSW Diploma program<br/><br/>",
+            "processed": "DPBS1101 && 6UOC GLDIP && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5413,7 +5616,7 @@
             "GLDIP",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5422,8 +5625,8 @@
     },
     "DPBS1110": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5435,7 +5638,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5444,8 +5647,8 @@
     },
     "DPBS1120": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5457,17 +5660,37 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
         ],
         "broke at": "Index 3, any"
     },
+    "DPBS1140": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
     "DPBS1150": {
         "condition": {
-            "original": "Prereq: DPBS1100 or DPBS1101, 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1100 || DPBS1101 && 6UOC GLDIP && a Global Diploma program"
+            "original": "Prerequisite: DPBS1100 or DPBS1101, 6UoC GLDIP + enrolment in a UNSW Diploma program<br/><br/>",
+            "processed": "DPBS1100 || DPBS1101 && 6UOC GLDIP && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5479,7 +5702,7 @@
             "GLDIP",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5488,8 +5711,8 @@
     },
     "DPBS1170": {
         "condition": {
-            "original": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1140 6UOC GLDIP && a Global Diploma program"
+            "original": "Prerequisite: DPBS1140 6UOC GLDIP + enrolment in a UNSW Diploma program<br/><br/>",
+            "processed": "DPBS1140 6UOC GLDIP && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5498,7 +5721,7 @@
             "GLDIP",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5507,8 +5730,8 @@
     },
     "DPBS1180": {
         "condition": {
-            "original": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1140 6UOC GLDIP && a Global Diploma program"
+            "original": "Prerequisite: DPBS1140 6UOC GLDIP + enrolment in a UNSW Diploma program<br/><br/>",
+            "processed": "DPBS1140 6UOC GLDIP && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5517,7 +5740,7 @@
             "GLDIP",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5526,8 +5749,8 @@
     },
     "DPBS1190": {
         "condition": {
-            "original": "Prereq: DPBS1110 or DPBS1203,6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1110 || DPBS1203 && 6UOC GLDIP && a Global Diploma program"
+            "original": "Prerequisite: DPBS1110 or DPBS1203, 6 UOC GLDIP + enrolment in a UNSW Diploma program<br/><br/>",
+            "processed": "DPBS1110 || DPBS1203 && 6UOC GLDIP && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5539,17 +5762,37 @@
             "GLDIP",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
         ],
         "broke at": "Index 7, &&"
     },
+    "DPBS1203": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
     "DPBS1501": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5561,7 +5804,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5570,8 +5813,8 @@
     },
     "DPBS1511": {
         "condition": {
-            "original": "Prereq: DPBS1501 + 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-            "processed": "DPBS1501 && 6UOC GLDIP && a Global Diploma program"
+            "original": "Prerequisite: DPBS1501 + 6UOC GLDIP + enrolment in a UNSW Diploma program<br/><br/>",
+            "processed": "DPBS1501 && 6UOC GLDIP && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5581,7 +5824,7 @@
             "GLDIP",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5590,8 +5833,8 @@
     },
     "DPBS1602": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5603,7 +5846,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5612,8 +5855,8 @@
     },
     "DPBS1603": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5625,7 +5868,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5634,8 +5877,8 @@
     },
     "DPBS1609": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5647,7 +5890,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5656,8 +5899,8 @@
     },
     "DPBS1613": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5669,7 +5912,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5678,8 +5921,8 @@
     },
     "DPBS1710": {
         "condition": {
-            "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
+            "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
+            "processed": "6UOC of any DPGE, DPST, DPBS && a UNSW Diploma program"
         },
         "tokens": [
             "(",
@@ -5691,7 +5934,7 @@
             "DPBS",
             "&&",
             "a",
-            "Global",
+            "UNSW",
             "Diploma",
             "program",
             ")"
@@ -5700,89 +5943,84 @@
     },
     "DPDE1001": {
         "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1002": {
         "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1003": {
         "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1004": {
         "condition": {
-            "original": "Prerequisites: DPDE1001 and DPDE1005 <br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1001 && DPDE1005 7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>Prerequisites: DPDE1001 and DPDE1005 <br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program. DPDE1001 && DPDE1005"
         },
         "tokens": [
             "(",
-            "DPDE1001",
-            "&&",
-            "DPDE1005",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
-            "Program",
+            "Program.",
+            "DPDE1001",
+            "&&",
+            "DPDE1005",
             ")"
         ],
-        "broke at": "Index 6, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1005": {
         "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1002<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program. DPDE1002"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1002<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program. DPDE1002"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
@@ -5790,130 +6028,123 @@
             "DPDE1002",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1006": {
         "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1007": {
         "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
     },
     "DPDE1008": {
         "condition": {
-            "original": "Prerequisite: DPDE1003<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1003 7006 UNSW Global Diploma in Architecture Program"
+            "original": "Prerequisite: DPDE1003<br/><br/>Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "DPDE1003 7006 UNSW Diploma in Architecture Program"
         },
         "tokens": [
             "(",
             "DPDE1003",
             "7006",
             "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program",
             ")"
         ],
-        "broke at": "Index 4, Global"
+        "broke at": "Index 4, Diploma"
     },
     "DPDE1009": {
         "condition": {
-            "original": "Prerequisite: DPDE1001 <br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1001 7006 UNSW Global Diploma in Architecture Program"
-        },
-        "tokens": [
-            "(",
-            "DPDE1001",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, Global"
-    },
-    "DPDE1010": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program"
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1001 <br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program. DPDE1001"
         },
         "tokens": [
             "(",
             "7006",
             "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 3, Global"
-    },
-    "DPDE1011": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>Prerequisite: DPDE1001 and DPDE1005.<br/><br/>",
-            "processed": "7006 UNSW Global Diploma in Architecture Program. DPDE1001 && DPDE1005"
-        },
-        "tokens": [
-            "(",
-            "7006",
-            "UNSW",
-            "Global",
             "Diploma",
             "in",
             "Architecture",
             "Program.",
             "DPDE1001",
-            "&&",
-            "DPDE1005",
             ")"
         ],
-        "broke at": "Index 3, Global"
+        "broke at": "Index 3, Diploma"
+    },
+    "DPDE1010": {
+        "condition": {
+            "original": "Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "7006 UNSW Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "7006",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPDE1011": {
+        "condition": {
+            "original": "Prerequisite: DPDE1001 and DPDE1005.<br/><br/>Enrolment in 7006 UNSW Diploma in Architecture Program.<br/><br/>",
+            "processed": "DPDE1001 && DPDE1005. 7006 UNSW Diploma in Architecture Program"
+        },
+        "tokens": [
+            "(",
+            "DPDE1001",
+            "&&",
+            "DPDE1005.",
+            "7006",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Architecture",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 4, 7006"
     },
     "DPGE1001": {
         "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)"
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)"
         },
         "tokens": [
             "(",
             "UNSW",
-            "Global",
             "Diplomas",
             "only",
             "(",
@@ -5926,17 +6157,16 @@
             ")",
             ")"
         ],
-        "broke at": "Index 2, Global"
+        "broke at": "Index 2, Diplomas"
     },
     "DPGE1004": {
         "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)"
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)"
         },
         "tokens": [
             "(",
             "UNSW",
-            "Global",
             "Diplomas",
             "only",
             "(",
@@ -5949,22 +6179,316 @@
             ")",
             ")"
         ],
-        "broke at": "Index 2, Global"
+        "broke at": "Index 2, Diplomas"
     },
-    "DPST1024": {
+    "DPHU1001": {
         "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-            "processed": "(7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
         },
         "tokens": [
             "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1002": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
             "(",
-            "7001",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1003": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1004": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1005": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1006": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1007": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPHU1008": {
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "7005 UNSW Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "7005",
+            "UNSW",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 3, Diploma"
+    },
+    "DPST1012": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1013": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1014": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004) and prerequisite DPST1013<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004) && DPST1013"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            "&&",
+            "DPST1013",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1021": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013 or DPST1012<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004) && [DPST1013 || DPST1012]"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            "&&",
+            "[",
+            "DPST1013",
             "||",
-            "7002",
+            "DPST1012",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1022": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004), prerequisite DPST1021 OR DPST1023 and corequisite DPST1014<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004), DPST1021 || DPST1023 && [DPST1014]"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ",",
+            "DPST1021",
             "||",
-            "7003",
+            "DPST1023",
+            "&&",
+            "[",
+            "DPST1014",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1023": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013 or DPST1012<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004) && [DPST1013 || DPST1012]"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            "&&",
+            "[",
+            "DPST1013",
             "||",
+            "DPST1012",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1024": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "DPST1023",
@@ -5982,28 +6506,237 @@
             "]",
             ")"
         ],
-        "broke at": "Index 13, credit"
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1032": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004) and DPST1031<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004) && DPST1031"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            "&&",
+            "DPST1031",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1041": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1051": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1052": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1061": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1071": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1072": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004), DPST1013 and DPST1021 OR DPST1023<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004), DPST1013 && DPST1021 || DPST1023"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ",",
+            "DPST1013",
+            "&&",
+            "DPST1021",
+            "||",
+            "DPST1023",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1081": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1091": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004)"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
+    },
+    "DPST1092": {
+        "condition": {
+            "original": "UNSW Diplomas only (7001, 7002, 7003, 7004) and DPST1091<br/><br/>",
+            "processed": "UNSW Diplomas only (7001, 7002, 7003, 7004) && DPST1091"
+        },
+        "tokens": [
+            "(",
+            "UNSW",
+            "Diplomas",
+            "only",
+            "(",
+            "7001,",
+            "7002,",
+            "7003,",
+            "7004",
+            ")",
+            "&&",
+            "DPST1091",
+            ")"
+        ],
+        "broke at": "Index 2, Diplomas"
     },
     "EDST2002": {
         "condition": {
-            "original": "Prerequisite: 72 UOC including EDST1101, EDST1104, and EDST2003. Students must have passed LANTITE.<br/><br/>",
-            "processed": "72UOC && EDST1101, EDST1104 && EDST2003. must have passed LANTITE"
+            "original": "Prerequisite: 72 UOC overall, including EDST1108 or EDST2009. Students must have passed LANTITE.<br/><br/>",
+            "processed": "72UOC && EDST1108 || EDST2009. must have passed LANTITE"
         },
         "tokens": [
             "(",
             "72UOC",
             "&&",
-            "EDST1101,",
-            "EDST1104",
-            "&&",
-            "EDST2003.",
+            "EDST1108",
+            "||",
+            "EDST2009.",
             "must",
             "have",
             "passed",
             "LANTITE",
             ")"
         ],
-        "broke at": "Index 4, EDST1104"
+        "broke at": "Index 6, must"
     },
     "EDST2094": {
         "condition": {
@@ -6034,46 +6767,205 @@
         ],
         "broke at": "Index 11, Please"
     },
-    "EDST2112": {
+    "EDST2248": {
         "condition": {
-            "original": "Prerequisite: EDST1311 (Foundations of Mathematics)<br/><br/>",
-            "processed": "EDST1311 (Foundations of Mathematics)"
+            "original": "Prerequisite: EDST3200 and enrolment in program 4072 Education (Primary)<br/><br/>",
+            "processed": "EDST3200 && 4072 Education (Primary)"
         },
         "tokens": [
             "(",
-            "EDST1311",
+            "EDST3200",
+            "&&",
+            "4072",
+            "Education",
             "(",
-            "Foundations",
-            "of",
-            "Mathematics",
+            "Primary",
             ")",
             ")"
         ],
-        "broke at": "Index 3, Foundations"
+        "broke at": "Index 5, ("
     },
-    "EDST3221": {
+    "EDST2386": {
         "condition": {
-            "original": "Prerequisite: EDST1120, EDST6782, EDST3200, and enrolment in a Primary Education program.<br/><br/>",
-            "processed": "EDST1120 && EDST6782 && EDST3200 && a Primary (4509 || 4056)"
+            "original": "Prerequisite: EDST1244 and enrolment in an undergraduate Education (Primary) program<br/><br/>",
+            "processed": "EDST1244 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST1244",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, Education"
+    },
+    "EDST2990": {
+        "condition": {
+            "original": "Prerequisite: EDST3380 or EDST6780, and enrolment in program 4072 Education (Primary)<br/><br/>",
+            "processed": "EDST3380 || EDST6780 && 4072 Education (Primary)"
+        },
+        "tokens": [
+            "(",
+            "EDST3380",
+            "||",
+            "EDST6780",
+            "&&",
+            "4072",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 7, ("
+    },
+    "EDST3179": {
+        "condition": {
+            "original": "Prerequisite: EDST2112, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "EDST2112 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST2112",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, Education"
+    },
+    "EDST3182": {
+        "condition": {
+            "original": "Prerequisite: EDST1120, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "EDST1120 && an Education (Primary) program"
         },
         "tokens": [
             "(",
             "EDST1120",
             "&&",
-            "EDST6782",
-            "&&",
-            "EDST3200",
-            "&&",
-            "a",
-            "Primary",
+            "an",
+            "Education",
             "(",
-            "4509",
-            "||",
-            "4056",
+            "Primary",
             ")",
+            "program",
             ")"
         ],
-        "broke at": "Index 8, Primary"
+        "broke at": "Index 4, Education"
+    },
+    "EDST3200": {
+        "condition": {
+            "original": "Prerequisite: EDST1120, and either EDST3182 or EDST6782, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "EDST1120 && EDST3182 || EDST6782 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST1120",
+            "&&",
+            "EDST3182",
+            "||",
+            "EDST6782",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 8, Education"
+    },
+    "EDST3221": {
+        "condition": {
+            "original": "Prerequisite: EDST1120, and either EDST3182 or EDST6782, and enrolment in an undergraduate Education (Primary) program <br/><br/>",
+            "processed": "EDST1120 && EDST3182 || EDST6782 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST1120",
+            "&&",
+            "EDST3182",
+            "||",
+            "EDST6782",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 8, Education"
+    },
+    "EDST3283": {
+        "condition": {
+            "original": "Prerequisite: EDST1143, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "EDST1143 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST1143",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, Education"
+    },
+    "EDST3284": {
+        "condition": {
+            "original": "Prerequisite: EDST1200, and enrolment in an undergraduate Education (Primary) program<br/><br/>",
+            "processed": "EDST1200 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST1200",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, Education"
+    },
+    "EDST3380": {
+        "condition": {
+            "original": "Prerequisite: EDST3179 or EDST6779, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "EDST3179 || EDST6779 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST3179",
+            "||",
+            "EDST6779",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 6, Education"
     },
     "EDST4080": {
         "condition": {
@@ -6109,8 +7001,8 @@
     },
     "EDST4084": {
         "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education Secondary program. OR Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary.<br/><br/>",
-            "processed": "78UOC && EDST2002 && an Education Secondary program. || Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
+            "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in an undergraduate Education (Secondary) program. Or 42 UOC overall, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "78UOC && EDST2002 && an Education (Secondary) program. || 42UOC && an Education (Primary) program"
         },
         "tokens": [
             "(",
@@ -6120,38 +7012,143 @@
             "&&",
             "an",
             "Education",
+            "(",
             "Secondary",
+            ")",
             "program.",
             "||",
-            "Bachelor",
-            "of",
+            "42UOC",
+            "&&",
+            "an",
             "Education",
-            "Primary",
             "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
             "Primary",
+            ")",
+            "program",
             ")"
         ],
         "broke at": "Index 6, Education"
     },
+    "EDST4096": {
+        "condition": {
+            "original": "Prerequisite: 78 UOC overall, including EDST6760, and enrolment in an undergraduate Education (Secondary) program or 4072 Education (Primary) program.<br/><br/>",
+            "processed": "78UOC && EDST6760 && an Education (Secondary) program || 4072 Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST6760",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Secondary",
+            ")",
+            "program",
+            "||",
+            "4072",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 6, Education"
+    },
+    "EDST4185": {
+        "condition": {
+            "original": "Prerequisite: EDST4002, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "EDST4002 && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "EDST4002",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, Education"
+    },
+    "EDST4223": {
+        "condition": {
+            "original": "Prerequisite: EDST3200 and enrolment in 4072 Education (Primary)<br/><br/>",
+            "processed": "EDST3200 && 4072 Education (Primary)"
+        },
+        "tokens": [
+            "(",
+            "EDST3200",
+            "&&",
+            "4072",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 5, ("
+    },
+    "EDST4991": {
+        "condition": {
+            "original": "Prerequisite: EDST3380 or EDST6780, and enrolment in 4072 Education (Primary)<br/><br/>",
+            "processed": "EDST3380 || EDST6780 && 4072 Education (Primary)"
+        },
+        "tokens": [
+            "(",
+            "EDST3380",
+            "||",
+            "EDST6780",
+            "&&",
+            "4072",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 7, ("
+    },
+    "EDST5180": {
+        "condition": {
+            "original": "Prerequisite: 78 UOC overall, including enrolment in an undergraduate Education (Primary) program <br/><br/>",
+            "processed": "78UOC && an Education (Primary) program"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            ")"
+        ],
+        "broke at": "Index 4, Education"
+    },
     "EDST5190": {
         "condition": {
-            "original": "Prerequisite: EDST5180 and enrolment in an Education program. WAM of 75+, successful research proposal and availability of a supervisor.<br/><br/>",
-            "processed": "EDST5180 && (4509 || 4056) . 75WAM && successful research proposal && availability of a supervisor"
+            "original": "Prerequisite: EDST5180 and 4071 Education (Primary) (Honours). WAM of 75+, successful research proposal and availability of a supervisor.<br/><br/>",
+            "processed": "EDST5180 && 4071 Education (Primary) (Honours). 75WAM && successful research proposal && availability of a supervisor"
         },
         "tokens": [
             "(",
             "EDST5180",
             "&&",
+            "4071",
+            "Education",
             "(",
-            "4509",
-            "||",
-            "4056",
+            "Primary",
+            ")",
+            "(",
+            "Honours",
             ")",
             ".",
             "75WAM",
@@ -6166,7 +7163,43 @@
             "supervisor",
             ")"
         ],
-        "broke at": "Index 9, 75WAM"
+        "broke at": "Index 5, ("
+    },
+    "EDST5291": {
+        "condition": {
+            "original": "Prerequisite: EDST5180, and enrolment in 4071 Education (Primary) (Honours). <br/>Corequisite: EDST5190 must be completed at the same time or prior to this course.<br/><br/>",
+            "processed": "EDST5180 && 4071 Education (Primary) (Honours) && [EDST5190 must be at the same time || prior to this course]"
+        },
+        "tokens": [
+            "(",
+            "EDST5180",
+            "&&",
+            "4071",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "(",
+            "Honours",
+            ")",
+            "&&",
+            "[",
+            "EDST5190",
+            "must",
+            "be",
+            "at",
+            "the",
+            "same",
+            "time",
+            "||",
+            "prior",
+            "to",
+            "this",
+            "course",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 5, ("
     },
     "EDST6706": {
         "condition": {
@@ -6253,50 +7286,65 @@
     },
     "EDST6760": {
         "condition": {
-            "original": "Prerequisite: Enrolment in an Education Secondary program and EDST2002, EDST4084, 12 UoC Teaching Method 1 courses OR Enrolment in Education Primary program and EDST1120, EDST1311, EDST2112, EDST6783, EDST6786, EDST6782, EDST6779, EDST3200. Students must have passed LANTITE.  Students must have sufficient subject content knowledge in their teaching areas.<br/><br/>",
-            "processed": "an Education Secondary program && EDST2002, EDST4084, 12UOC Teaching Method 1 courses || Education Primary program && EDST1120, EDST1311, EDST2112, EDST6783, EDST6786, EDST6782, EDST6779, EDST3200. must have passed LANTITE. must have sufficient subject content knowledge in their teaching areas"
+            "original": "Prerequisite: Enrolment in an undergraduate Education (Secondary) program and EDST2002, EDST4084, and 12 UOC Method 1 courses. Students must have passed LANTITE. See Additional Enrolment Constraints for the subject content knowledge requirements to be eligible for placement. <br/>Or enrolment in an undergraduate Education (Primary) program and EDST2002, and either EDST3179 or EDST6779, and either EDST3182 or EDST6782. Students must have passed LANTITE.<br/><br/>",
+            "processed": "an Education (Secondary) program && EDST2002, EDST4084 && 12UOC Method 1 courses. must have passed LANTITE. See Additional Enrolment Constraints for the subject content knowledge requirements to be eligible for placement. || an Education (Primary) program && EDST2002 && EDST3179 || EDST6779 && EDST3182 || EDST6782. must have passed LANTITE"
         },
         "tokens": [
             "(",
             "an",
             "Education",
+            "(",
             "Secondary",
+            ")",
             "program",
             "&&",
             "EDST2002,",
-            "EDST4084,",
+            "EDST4084",
+            "&&",
             "12UOC",
-            "Teaching",
             "Method",
             "1",
-            "courses",
-            "||",
-            "Education",
-            "Primary",
-            "program",
-            "&&",
-            "EDST1120,",
-            "EDST1311,",
-            "EDST2112,",
-            "EDST6783,",
-            "EDST6786,",
-            "EDST6782,",
-            "EDST6779,",
-            "EDST3200.",
+            "courses.",
             "must",
             "have",
             "passed",
             "LANTITE.",
-            "must",
-            "have",
-            "sufficient",
+            "See",
+            "Additional",
+            "Enrolment",
+            "Constraints",
+            "for",
+            "the",
             "subject",
             "content",
             "knowledge",
-            "in",
-            "their",
-            "teaching",
-            "areas",
+            "requirements",
+            "to",
+            "be",
+            "eligible",
+            "for",
+            "placement.",
+            "||",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
+            "&&",
+            "EDST2002",
+            "&&",
+            "EDST3179",
+            "||",
+            "EDST6779",
+            "&&",
+            "EDST3182",
+            "||",
+            "EDST6782.",
+            "must",
+            "have",
+            "passed",
+            "LANTITE",
             ")"
         ],
         "broke at": "Index 2, Education"
@@ -6333,28 +7381,12 @@
     },
     "EDST6765": {
         "condition": {
-            "original": "Prerequisite: 180 UoC and enrolment in Bachelor of Education Primary Honours or Bachelor of Education Primary OR Enrolment in an Education Secondary program and EDST4080, EDST4096, EDST6760, 24 UoC Teaching Method courses. Students must have passed LANTITE. Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081.<br/><br/>",
-            "processed": "180UOC && Bachelor of Education Primary Honours || Bachelor of Education Primary || an Education Secondary program && EDST4080, EDST4096, EDST6760, 24UOC Teaching Method courses. must have passed LANTITE. must have sufficient subject content knowledge in their teaching areas"
+            "original": "Prerequisite: 180 UOC overall, including EDST4080, EDST4096, EDST6760, 24 UOC Teaching Method courses, and enrolment in an undergraduate Education (Secondary) program. See Additional Enrolment Constraints for the subject content knowledge requirements to be eligible for placement.<br/> <br/>Or 180 UOC overall, and enrolment in an undergraduate Education (Primary) program.<br/><br/>",
+            "processed": "180UOC && EDST4080, EDST4096, EDST6760, 24UOC Teaching Method courses && an Education (Secondary) program. See Additional Enrolment Constraints for the subject content knowledge requirements to be eligible for placement. || 180UOC && an Education (Primary) program"
         },
         "tokens": [
             "(",
             "180UOC",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "Honours",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "||",
-            "an",
-            "Education",
-            "Secondary",
-            "program",
             "&&",
             "EDST4080,",
             "EDST4096,",
@@ -6362,24 +7394,41 @@
             "24UOC",
             "Teaching",
             "Method",
-            "courses.",
-            "must",
-            "have",
-            "passed",
-            "LANTITE.",
-            "must",
-            "have",
-            "sufficient",
+            "courses",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Secondary",
+            ")",
+            "program.",
+            "See",
+            "Additional",
+            "Enrolment",
+            "Constraints",
+            "for",
+            "the",
             "subject",
             "content",
             "knowledge",
-            "in",
-            "their",
-            "teaching",
-            "areas",
+            "requirements",
+            "to",
+            "be",
+            "eligible",
+            "for",
+            "placement.",
+            "||",
+            "180UOC",
+            "&&",
+            "an",
+            "Education",
+            "(",
+            "Primary",
+            ")",
+            "program",
             ")"
         ],
-        "broke at": "Index 4, of"
+        "broke at": "Index 4, EDST4096,"
     },
     "EDST6771": {
         "condition": {
@@ -6450,188 +7499,6 @@
             ")"
         ],
         "broke at": "Index 6, 4061,"
-    },
-    "EDST6779": {
-        "condition": {
-            "original": "Prerequisite: EDST1120, EDST1311 and Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
-            "processed": "EDST1120 && EDST1311 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
-        },
-        "tokens": [
-            "(",
-            "EDST1120",
-            "&&",
-            "EDST1311",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            ")"
-        ],
-        "broke at": "Index 6, of"
-    },
-    "EDST6780": {
-        "condition": {
-            "original": "Prerequisite: EDST2112, EDST1311, EDST6779 and enrolled in Bachelor of Education Primary (Honours) or Bachelor of Education Primary<br/><br/>",
-            "processed": "EDST2112 && EDST1311 && EDST6779 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
-        },
-        "tokens": [
-            "(",
-            "EDST2112",
-            "&&",
-            "EDST1311",
-            "&&",
-            "EDST6779",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            ")"
-        ],
-        "broke at": "Index 8, of"
-    },
-    "EDST6782": {
-        "condition": {
-            "original": "Prerequisite: EDST1120 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary<br/><br/>",
-            "processed": "EDST1120 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
-        },
-        "tokens": [
-            "(",
-            "EDST1120",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            ")"
-        ],
-        "broke at": "Index 4, of"
-    },
-    "EDST6783": {
-        "condition": {
-            "original": "Prerequisite: EDST1143 and Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary<br/><br/>",
-            "processed": "EDST1143 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
-        },
-        "tokens": [
-            "(",
-            "EDST1143",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            ")"
-        ],
-        "broke at": "Index 4, of"
-    },
-    "EDST6784": {
-        "condition": {
-            "original": "Prerequisite: EDST1200 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary <br/><br/>",
-            "processed": "EDST1200 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
-        },
-        "tokens": [
-            "(",
-            "EDST1200",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            ")"
-        ],
-        "broke at": "Index 4, of"
-    },
-    "EDST6785": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Bachelor of Education Primary (Honours) or Bachelor of Primary. Corequisite: EDST4002.<br/><br/>",
-            "processed": "Bachelor of Education Primary (Honours) || Bachelor of Primary && [EDST4002]"
-        },
-        "tokens": [
-            "(",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Primary",
-            "&&",
-            "[",
-            "EDST4002",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, of"
-    },
-    "EDST6786": {
-        "condition": {
-            "original": "Prerequisite: EDST1244 and enrolment in Bachelor of Education Primary (Honours) or Bachelor of Education Primary<br/><br/>",
-            "processed": "EDST1244 && Bachelor of Education Primary (Honours) || Bachelor of Education Primary"
-        },
-        "tokens": [
-            "(",
-            "EDST1244",
-            "&&",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            "(",
-            "Honours",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Education",
-            "Primary",
-            ")"
-        ],
-        "broke at": "Index 4, of"
     },
     "FADA2020": {
         "condition": {
@@ -6721,42 +7588,136 @@
     },
     "FINS3647": {
         "condition": {
-            "original": "Prerequisite: FINS1612/FINS2618; OR {enrolled in Business Analytics Major (COMMJ1) and completed [COMM1180 or FINS1613 or (COMM1140 and ECON1102)]}<br/><br/>",
-            "processed": "((FINS1612 || FINS2618)) || { Business Analytics Major (COMMJ1) && (COMM1180 || FINS1613 || (COMM1140 && ECON1102))}"
+            "original": "Prerequisite: (FINS1612 or FINS2618) OR (Enrolment in Business Analytics Major COMMJ1 AND ((COMM1180 or FINS1613 or COMM1140 or COMM1240) and ECON1102))<br/><br/>",
+            "processed": "(FINS1612 || FINS2618) || (Business Analytics Major COMMJ1 && ((COMM1180 || FINS1613 || COMM1140 || COMM1240) && ECON1102))"
         },
         "tokens": [
-            "(",
             "(",
             "(",
             "FINS1612",
             "||",
             "FINS2618",
             ")",
-            ")",
             "||",
-            "{",
+            "(",
             "Business",
             "Analytics",
             "Major",
-            "(",
             "COMMJ1",
-            ")",
             "&&",
+            "(",
             "(",
             "COMM1180",
             "||",
             "FINS1613",
             "||",
-            "(",
             "COMM1140",
+            "||",
+            "COMM1240",
+            ")",
             "&&",
             "ECON1102",
             ")",
             ")",
-            "}",
             ")"
         ],
-        "broke at": "Index 10, Business"
+        "broke at": "Index 8, Business"
+    },
+    "FINS4796": {
+        "condition": {
+            "original": "Enrolment in (FINSAH Finance Honours Specialisation of the 4501 Program) or (FINSBH Finance Co-op Honours Specialisation of the 3565 Program)<br/><br/>",
+            "processed": "(FINSAH Finance Honours Specialisation of the 4501 Program) || ((FINSBH) Specialisation of the 3565 Program)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "FINSAH",
+            "Finance",
+            "Honours",
+            "Specialisation",
+            "of",
+            "the",
+            "4501",
+            "Program",
+            ")",
+            "||",
+            "(",
+            "(",
+            "FINSBH",
+            ")",
+            "Specialisation",
+            "of",
+            "the",
+            "3565",
+            "Program",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 3, Finance"
+    },
+    "FINS4797": {
+        "condition": {
+            "original": "Enrolment in (FINSAH Finance Honours Specialisation of the 4501 Program) or (FINSBH Finance Co-op Honours Specialisation of the 3565 Program)<br/><br/>",
+            "processed": "(FINSAH Finance Honours Specialisation of the 4501 Program) || ((FINSBH) Specialisation of the 3565 Program)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "FINSAH",
+            "Finance",
+            "Honours",
+            "Specialisation",
+            "of",
+            "the",
+            "4501",
+            "Program",
+            ")",
+            "||",
+            "(",
+            "(",
+            "FINSBH",
+            ")",
+            "Specialisation",
+            "of",
+            "the",
+            "3565",
+            "Program",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 3, Finance"
+    },
+    "FINS4799": {
+        "condition": {
+            "original": "Enrolment in (FINSAH Finance Honours Specialisation of the 4501 Program) or (FINSBH Finance Co-op Honours Specialisation of the 3565 Program)<br/><br/>",
+            "processed": "(FINSAH Finance Honours Specialisation of the 4501 Program) || ((FINSBH) Specialisation of the 3565 Program)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "FINSAH",
+            "Finance",
+            "Honours",
+            "Specialisation",
+            "of",
+            "the",
+            "4501",
+            "Program",
+            ")",
+            "||",
+            "(",
+            "(",
+            "FINSBH",
+            ")",
+            "Specialisation",
+            "of",
+            "the",
+            "3565",
+            "Program",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 3, Finance"
     },
     "FOOD6804": {
         "condition": {
@@ -6927,17 +7888,11 @@
     },
     "INFS3300": {
         "condition": {
-            "original": "(INFS1602 or INFS2602) and Minimum of 96UOC completed at UNSW prior to this course<br/><br/>",
-            "processed": "(INFS1602 || INFS2602) && 96UOC at UNSW prior to this course"
+            "original": "Minimum of 96UOC completed at UNSW prior to this course<br/><br/>",
+            "processed": "96UOC at UNSW prior to this course"
         },
         "tokens": [
             "(",
-            "(",
-            "INFS1602",
-            "||",
-            "INFS2602",
-            ")",
-            "&&",
             "96UOC",
             "at",
             "UNSW",
@@ -6947,7 +7902,37 @@
             "course",
             ")"
         ],
-        "broke at": "Index 9, UNSW"
+        "broke at": "Index 3, UNSW"
+    },
+    "INFS4929": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in (INFSAH Honours specialisation of 4501 program) OR (INFSCH Honours specialisation of 3964 program and completion of 144 UOC)<br/><br/>",
+            "processed": "(INFSAH Honours specialisation of 4501 program) || (INFSCH Honours specialisation of 3964 program && 144UOC)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "INFSAH",
+            "Honours",
+            "specialisation",
+            "of",
+            "4501",
+            "program",
+            ")",
+            "||",
+            "(",
+            "INFSCH",
+            "Honours",
+            "specialisation",
+            "of",
+            "3964",
+            "program",
+            "&&",
+            "144UOC",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 3, Honours"
     },
     "INST2003": {
         "condition": {
@@ -7096,38 +8081,17 @@
     },
     "INTA3003": {
         "condition": {
-            "original": "Prerequisite: BENV1015 and INTA3002, or completion of the UNSW College Diploma of Architecture<br/><br/>",
-            "processed": "BENV1015 && INTA3002 || the UNSW College Diploma of Architecture"
-        },
-        "tokens": [
-            "(",
-            "BENV1015",
-            "&&",
-            "INTA3002",
-            "||",
-            "the",
-            "UNSW",
-            "College",
-            "Diploma",
-            "of",
-            "Architecture",
-            ")"
-        ],
-        "broke at": "Index 6, UNSW"
-    },
-    "INTA3004": {
-        "condition": {
-            "original": "Prerequisites: BENV1015 or INTA3001, and INTA3002; OR completion of the UNSW College Diploma of Architecture<br/><br/>",
-            "processed": "(BENV1015 || INTA3001 && INTA3002) || the UNSW College Diploma of Architecture"
+            "original": "Prerequisite: INTA3002, and either BENV1161 or BENV1015; Or completion of the UNSW College Diploma of Architecture<br/><br/>",
+            "processed": "(INTA3002 && BENV1161 || BENV1015) || the UNSW College Diploma of Architecture"
         },
         "tokens": [
             "(",
             "(",
-            "BENV1015",
-            "||",
-            "INTA3001",
-            "&&",
             "INTA3002",
+            "&&",
+            "BENV1161",
+            "||",
+            "BENV1015",
             ")",
             "||",
             "the",
@@ -7139,6 +8103,33 @@
             ")"
         ],
         "broke at": "Index 10, UNSW"
+    },
+    "INTA3004": {
+        "condition": {
+            "original": "Prerequisite: INTA3002, and either BENV1161 or BENV1015 or INTA3001; OR completion of the UNSW College Diploma of Architecture. <br/><br/>",
+            "processed": "(INTA3002 && BENV1161 || BENV1015 || INTA3001) || the UNSW College Diploma of Architecture"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "INTA3002",
+            "&&",
+            "BENV1161",
+            "||",
+            "BENV1015",
+            "||",
+            "INTA3001",
+            ")",
+            "||",
+            "the",
+            "UNSW",
+            "College",
+            "Diploma",
+            "of",
+            "Architecture",
+            ")"
+        ],
+        "broke at": "Index 12, UNSW"
     },
     "INTA4000": {
         "condition": {
@@ -7279,6 +8270,26 @@
             ")"
         ],
         "broke at": "Index 4, ("
+    },
+    "LAWJ2000": {
+        "condition": {
+            "original": "Students must have completed ARTS2115 Philosophy of AI and INFS2604 AI Fluency<br/><br/>Students must have completed 72UOC<br/><br/>",
+            "processed": "ARTS2115 Philosophy of AI && INFS2604 AI Fluency 72UOC"
+        },
+        "tokens": [
+            "(",
+            "ARTS2115",
+            "Philosophy",
+            "of",
+            "AI",
+            "&&",
+            "INFS2604",
+            "AI",
+            "Fluency",
+            "72UOC",
+            ")"
+        ],
+        "broke at": "Index 3, of"
     },
     "LAWS1052": {
         "condition": {
@@ -7423,6 +8434,52 @@
         ],
         "broke at": "Index 2, of"
     },
+    "LAWS1213": {
+        "condition": {
+            "original": "Corequisite: Students must be enrolled in LAWS1052 and LAWS1213 in the same term.<br/><br/>",
+            "processed": "[must be LAWS1052 && in the same term]"
+        },
+        "tokens": [
+            "(",
+            "[",
+            "must",
+            "be",
+            "LAWS1052",
+            "&&",
+            "in",
+            "the",
+            "same",
+            "term",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, must"
+    },
+    "LAWS1214": {
+        "condition": {
+            "original": "Corequisite: Students must be enrolled in LAWS1061 Torts and LAWS1214 Foundations Enrichment 2 in the same term. <br/><br/>",
+            "processed": "[must be LAWS1061 Torts && Foundations Enrichment 2 in the same term]"
+        },
+        "tokens": [
+            "(",
+            "[",
+            "must",
+            "be",
+            "LAWS1061",
+            "Torts",
+            "&&",
+            "Foundations",
+            "Enrichment",
+            "2",
+            "in",
+            "the",
+            "same",
+            "term",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, must"
+    },
     "LAWS2150": {
         "condition": {
             "original": "Prerequisite: Principles of Public Law (LAWS1141) and Administrative Law (LAWS1160)<br/><br/>",
@@ -7446,48 +8503,6 @@
             ")"
         ],
         "broke at": "Index 2, of"
-    },
-    "LAWS2270": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity and Trusts (LAWS2385). <br/><br/>",
-            "processed": "78UOC in LAWS && Equity && Trusts (LAWS2385)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "&&",
-            "Equity",
-            "&&",
-            "Trusts",
-            "(",
-            "LAWS2385",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 6, &&"
-    },
-    "LAWS2277": {
-        "condition": {
-            "original": "Corequisite: LAWS1160 completed prior to or concurrently with enrolment in this course<br/><br/>",
-            "processed": "[LAWS1160 prior to || concurrently && this course]"
-        },
-        "tokens": [
-            "(",
-            "[",
-            "LAWS1160",
-            "prior",
-            "to",
-            "||",
-            "concurrently",
-            "&&",
-            "this",
-            "course",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 3, prior"
     },
     "LAWS2351": {
         "condition": {
@@ -7690,38 +8705,6 @@
         ],
         "broke at": "Index 6, Associations"
     },
-    "LAWS3057": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/>Co-requisite: Foundations of Intellectual Property Law (LAWS3021) or Intellectual Property Law (LAWS8017).<br/><br/>",
-            "processed": "78UOC in LAWS && [Foundations of Intellectual Property Law (LAWS3021) || Intellectual Property Law (LAWS8017)]"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "&&",
-            "[",
-            "Foundations",
-            "of",
-            "Intellectual",
-            "Property",
-            "Law",
-            "(",
-            "LAWS3021",
-            ")",
-            "||",
-            "Intellectual",
-            "Property",
-            "Law",
-            "(",
-            "LAWS8017",
-            ")",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 6, Foundations"
-    },
     "LAWS3072": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
@@ -7872,29 +8855,6 @@
         ],
         "broke at": "Index 6, Associations"
     },
-    "LAWS3157": {
-        "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses and Law in the Global Context (LAWS2270).<br/><br/>",
-            "processed": "78UOC in LAWS && Law in the Global Context (LAWS2270)"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "in",
-            "LAWS",
-            "&&",
-            "Law",
-            "in",
-            "the",
-            "Global",
-            "Context",
-            "(",
-            "LAWS2270",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
     "LAWS3170": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)<br/><br/>",
@@ -7980,8 +8940,8 @@
     },
     "LAWS3198": {
         "condition": {
-            "original": "78 UOC of LAWS Courses<br/><br/>",
-            "processed": "78UOC of LAWS Courses"
+            "original": "Completion of 78 UOC of LAWS Courses including LAWS2351Court Process, Evidence and Proof.<br/><br/>",
+            "processed": "78UOC of LAWS Courses && LAWS2351Court Process, Evidence && Proof"
         },
         "tokens": [
             "(",
@@ -7989,31 +8949,37 @@
             "of",
             "LAWS",
             "Courses",
+            "&&",
+            "LAWS2351Court",
+            "Process,",
+            "Evidence",
+            "&&",
+            "Proof",
             ")"
         ],
         "broke at": "Index 3, LAWS"
     },
     "LAWS3240": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230)"
+            "original": "Students must be in good academic standing.<br/><br/>Prerequisite: Completion of 78 UOC in LAWS courses including LAWS1230 Lawyers, Ethics and Justice.<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": ". 78UOC in LAWS && LAWS1230 Lawyers, Ethics && Justice"
         },
         "tokens": [
             "(",
+            ".",
             "78UOC",
             "in",
             "LAWS",
             "&&",
+            "LAWS1230",
             "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
-            "(",
-            "LAWS1230",
-            ")",
             ")"
         ],
-        "broke at": "Index 6, Ethics"
+        "broke at": "Index 2, 78UOC"
     },
     "LAWS3250": {
         "condition": {
@@ -8123,8 +9089,9 @@
     },
     "LAWS3302": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160) and Equity and Trusts (LAWS2385).<br/><br/>",
-            "processed": "78UOC in LAWS && Administrative Law (LAWS1160) && Equity && Trusts (LAWS2385)"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including LAWS1160 and LAWS2385. Students must be in good academic standing.<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": "78UOC in LAWS && LAWS1160 && LAWS2385."
         },
         "tokens": [
             "(",
@@ -8132,26 +9099,18 @@
             "in",
             "LAWS",
             "&&",
-            "Administrative",
-            "Law",
-            "(",
             "LAWS1160",
-            ")",
             "&&",
-            "Equity",
-            "&&",
-            "Trusts",
-            "(",
-            "LAWS2385",
-            ")",
+            "LAWS2385.",
             ")"
         ],
-        "broke at": "Index 6, Law"
+        "broke at": "Index 8, )"
     },
     "LAWS3303": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including LAWS1230 Lawyers, Ethics and Justice and LAWS2371 Resolving Civil Disputes.<br/><br/>Students must be in good academic standing<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": "78UOC in LAWS && LAWS1230 Lawyers, Ethics && Justice && LAWS2371 Resolving Civil Disputes"
         },
         "tokens": [
             "(",
@@ -8159,28 +9118,25 @@
             "in",
             "LAWS",
             "&&",
+            "LAWS1230",
             "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
-            "(",
-            "LAWS1230",
-            ")",
             "&&",
+            "LAWS2371",
             "Resolving",
             "Civil",
             "Disputes",
-            "(",
-            "LAWS2371",
-            ")",
             ")"
         ],
-        "broke at": "Index 6, Ethics"
+        "broke at": "Index 7, Ethics"
     },
     "LAWS3304": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+            "original": "Completion of 78 UOC in LAWS courses including LAWS1230 Lawyers, Ethics and Justice and LAWS2371 Resolving Civil Disputes.<br/><br/>Students must be in good academic standing<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": "78UOC in LAWS && LAWS1230 Lawyers, Ethics && Justice && LAWS2371 Resolving Civil Disputes"
         },
         "tokens": [
             "(",
@@ -8188,28 +9144,25 @@
             "in",
             "LAWS",
             "&&",
+            "LAWS1230",
             "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
-            "(",
-            "LAWS1230",
-            ")",
             "&&",
+            "LAWS2371",
             "Resolving",
             "Civil",
             "Disputes",
-            "(",
-            "LAWS2371",
-            ")",
             ")"
         ],
-        "broke at": "Index 6, Ethics"
+        "broke at": "Index 7, Ethics"
     },
     "LAWS3305": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230) and Resolving Civil Disputes (LAWS2371).<br/><br/>",
-            "processed": "78UOC in LAWS && Lawyers, Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371)"
+            "original": "Students must be in good academic standing<br/><br/>Prerequisite: Completion of 78 UOC in LAWS courses including LAWS1230 Lawyers, Ethics and Justice and LAWS2371 Resolving Civil Disputes.<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": "78UOC in LAWS && LAWS1230 Lawyers, Ethics && Justice && LAWS2371 Resolving Civil Disputes"
         },
         "tokens": [
             "(",
@@ -8217,23 +9170,19 @@
             "in",
             "LAWS",
             "&&",
+            "LAWS1230",
             "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
-            "(",
-            "LAWS1230",
-            ")",
             "&&",
+            "LAWS2371",
             "Resolving",
             "Civil",
             "Disputes",
-            "(",
-            "LAWS2371",
-            ")",
             ")"
         ],
-        "broke at": "Index 6, Ethics"
+        "broke at": "Index 7, Ethics"
     },
     "LAWS3314": {
         "condition": {
@@ -8258,8 +9207,9 @@
     },
     "LAWS3319": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Criminal Laws (LAWS1022)<br/><br/>",
-            "processed": "78UOC in LAWS && Criminal Laws (LAWS1022)"
+            "original": "Students must be in good academic standing<br/><br/>Completion of 78 UOC in LAWS courses including LAWS1022 Criminal Laws<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": "78UOC in LAWS && LAWS1022 Criminal Laws"
         },
         "tokens": [
             "(",
@@ -8267,14 +9217,12 @@
             "in",
             "LAWS",
             "&&",
+            "LAWS1022",
             "Criminal",
             "Laws",
-            "(",
-            "LAWS1022",
-            ")",
             ")"
         ],
-        "broke at": "Index 6, Laws"
+        "broke at": "Index 7, Laws"
     },
     "LAWS3321": {
         "condition": {
@@ -8446,20 +9394,39 @@
         ],
         "broke at": "Index 2, Law"
     },
-    "LAWS3499": {
+    "LAWS3434": {
         "condition": {
-            "original": "Completion of 78UOC in LAWS courses. <br/><br/>Students must have completed LAWS1160<br/><br/>",
-            "processed": "78UOC in LAWS. LAWS1160"
+            "original": "Students must be currently enrolled in LAWS3423 Research Thesis, demonstrate satisfactory progress as confirmed by their supervisor, and have approval to proceed with the extended thesis.<br/><br/>",
+            "processed": "must be currently LAWS3423 Research Thesis, demonstrate satisfactory progress as confirmed by their supervisor && have approval to proceed && the extended thesis"
         },
         "tokens": [
             "(",
-            "78UOC",
-            "in",
-            "LAWS.",
-            "LAWS1160",
+            "must",
+            "be",
+            "currently",
+            "LAWS3423",
+            "Research",
+            "Thesis,",
+            "demonstrate",
+            "satisfactory",
+            "progress",
+            "as",
+            "confirmed",
+            "by",
+            "their",
+            "supervisor",
+            "&&",
+            "have",
+            "approval",
+            "to",
+            "proceed",
+            "&&",
+            "the",
+            "extended",
+            "thesis",
             ")"
         ],
-        "broke at": "Index 1, 78UOC"
+        "broke at": "Index 2, be"
     },
     "LAWS3523": {
         "condition": {
@@ -8481,8 +9448,8 @@
     },
     "LAWS3533": {
         "condition": {
-            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053 or an approved exchange program. Students enrolled in UNSW Law programs are excluded from this course.<br/><br/>",
-            "processed": "Restricted to Legal Studies LEGLB24053 || an approved exchange program. UNSW LAWS# are"
+            "original": "Prerequisite: Restricted to students enrolled in Legal Studies LEGLB24053, LEGLC24053 or an approved exchange program. Students enrolled in UNSW Law programs are excluded from this course.<br/><br/>",
+            "processed": "Restricted to Legal Studies LEGLB24053, LEGLC24053 || an approved exchange program. UNSW LAWS# are"
         },
         "tokens": [
             "(",
@@ -8490,7 +9457,8 @@
             "to",
             "Legal",
             "Studies",
-            "LEGLB24053",
+            "LEGLB24053,",
+            "LEGLC24053",
             "||",
             "an",
             "approved",
@@ -8502,6 +9470,48 @@
             ")"
         ],
         "broke at": "Index 2, to"
+    },
+    "LAWS3535": {
+        "condition": {
+            "original": "Completion of 78 UOC in LAWS courses including LAWS2371 Resolving Civil Disputes and LAWS2351 Court Process, Evidence and Proof<br/><br/>",
+            "processed": "78UOC in LAWS && LAWS2371 Resolving Civil Disputes && LAWS2351 Court Process, Evidence && Proof"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "in",
+            "LAWS",
+            "&&",
+            "LAWS2371",
+            "Resolving",
+            "Civil",
+            "Disputes",
+            "&&",
+            "LAWS2351",
+            "Court",
+            "Process,",
+            "Evidence",
+            "&&",
+            "Proof",
+            ")"
+        ],
+        "broke at": "Index 7, Civil"
+    },
+    "LAWS3555": {
+        "condition": {
+            "original": "Students must be in good academic standing.<br/><br/>Completion of 78 UOC in LAWS courses.<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
+            "processed": ". 78UOC in LAWS"
+        },
+        "tokens": [
+            "(",
+            ".",
+            "78UOC",
+            "in",
+            "LAWS",
+            ")"
+        ],
+        "broke at": "Index 2, 78UOC"
     },
     "LAWS3589": {
         "condition": {
@@ -8578,7 +9588,8 @@
     },
     "LAWS3777": {
         "condition": {
-            "original": "Prerequisite: Completion of 78 UOC of LAWS Courses; and enrolment in LAWS3555 concurrently or consecutively<br/><br/>",
+            "original": "Completion of 78 UOC of LAWS Courses; and enrolment in LAWS3555 concurrently or consecutively<br/><br/>Students must be in good academic standing<br/><br/>",
+            "handbook_note": "Students must be in Good Academic Standing.",
             "processed": "(78UOC of LAWS Courses) && LAWS3555 && [|| consecutively]"
         },
         "tokens": [
@@ -8656,8 +9667,8 @@
     },
     "LAWS9801": {
         "condition": {
-            "original": "Prerequisite: Academic Program must be Environmental Science program (3988, 3932, 3965 or 3943)<br/><br/>",
-            "processed": "Academic Program must be Environmental SCIF#"
+            "original": " Academic Program must be Environmental Science program 3965 or 3955<br/><br/>",
+            "processed": "Academic Program must be Environmental SCIF# 3965 || 3955"
         },
         "tokens": [
             "(",
@@ -8667,6 +9678,9 @@
             "be",
             "Environmental",
             "SCIF#",
+            "3965",
+            "||",
+            "3955",
             ")"
         ],
         "broke at": "Index 2, Program"
@@ -8695,6 +9709,174 @@
             ")"
         ],
         "broke at": "Index 11, Linguistics."
+    },
+    "MARK3086": {
+        "condition": {
+            "original": "Prerequisite: ECON1203 or COMM1190 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or<br/>MARK2052. <br/>Students with equivalent statistics knowledge can seek a prerequisite waiver.<br/><br/>",
+            "processed": "ECON1203 || COMM1190 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052. && equivalent statistics knowledge can seek a waiver"
+        },
+        "tokens": [
+            "(",
+            "ECON1203",
+            "||",
+            "COMM1190",
+            "||",
+            "MATH1041",
+            "||",
+            "MATH1231",
+            "||",
+            "MATH1241",
+            "||",
+            "MATH1251",
+            "||",
+            "MARK2052.",
+            "&&",
+            "equivalent",
+            "statistics",
+            "knowledge",
+            "can",
+            "seek",
+            "a",
+            "waiver",
+            ")"
+        ],
+        "broke at": "Index 14, &&"
+    },
+    "MATH3599": {
+        "condition": {
+            "original": "Prerequisite: Enrolled in a Science program (single or dual) and majoring in a MATH major or specialisation OR Enroled in the 3959 Data Science and Decisions Program. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by MATH prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
+            "processed": "SCIF# && majoring in a MATH major || specialisation || Enroled in the 3959 Data Science && Decisions Program. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by MATH . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        },
+        "tokens": [
+            "(",
+            "SCIF#",
+            "&&",
+            "majoring",
+            "in",
+            "a",
+            "MATH",
+            "major",
+            "||",
+            "specialisation",
+            "||",
+            "Enroled",
+            "in",
+            "the",
+            "3959",
+            "Data",
+            "Science",
+            "&&",
+            "Decisions",
+            "Program.",
+            "Must",
+            "pass",
+            "for",
+            "WIL",
+            "modules",
+            ".",
+            "Placement",
+            "must",
+            "be",
+            "related",
+            "to",
+            "the",
+            "\u2019s",
+            "major",
+            "||",
+            "specialisation",
+            "&&",
+            "approved",
+            "by",
+            "MATH",
+            ".",
+            "48UOC",
+            "&&",
+            "65WAM.",
+            "It",
+            "is",
+            "the",
+            "\u2019s",
+            "responsibility",
+            "to",
+            "check",
+            "if",
+            "they",
+            "have",
+            "space",
+            "in",
+            "their",
+            "program",
+            "for",
+            "this",
+            "elective.",
+            "This",
+            "course",
+            "cannot",
+            "be",
+            "taken",
+            "during",
+            "an",
+            "Honours",
+            "year",
+            ")"
+        ],
+        "broke at": "Index 4, in"
+    },
+    "MATH3699": {
+        "condition": {
+            "original": "Must complete MATH3599 - Mathematics, Statistics and Data Science Work Placement 1 as a co-requisite or pre-requisite.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
+            "processed": "Must complete MATH3599 - Mathematics, Statistics && Data Science Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+        },
+        "tokens": [
+            "(",
+            "Must",
+            "complete",
+            "MATH3599",
+            "-",
+            "Mathematics,",
+            "Statistics",
+            "&&",
+            "Data",
+            "Science",
+            "Work",
+            "Placement",
+            "1",
+            "as",
+            "a",
+            "&&",
+            "[",
+            "||",
+            ".",
+            "It",
+            "is",
+            "the",
+            "\u2019s",
+            "responsibility",
+            "to",
+            "check",
+            "if",
+            "they",
+            "have",
+            "space",
+            "in",
+            "their",
+            "program",
+            "for",
+            "this",
+            "elective.",
+            "This",
+            "course",
+            "cannot",
+            "be",
+            "taken",
+            "during",
+            "an",
+            "Honours",
+            "year",
+            "]",
+            ")"
+        ],
+        "broke at": "Index 2, complete"
     },
     "MATS3199": {
         "condition": {
@@ -9169,6 +10351,27 @@
         ],
         "broke at": "Index 5, in"
     },
+    "MDIA3013": {
+        "condition": {
+            "original": "Prerequisite: 48 UOC overall, including 6 UOC from level 2 Communication and Journalism courses<br/><br/>",
+            "processed": "48UOC && 6UOC from in L2 Communication && Journalism courses"
+        },
+        "tokens": [
+            "(",
+            "48UOC",
+            "&&",
+            "6UOC",
+            "from",
+            "in",
+            "L2",
+            "Communication",
+            "&&",
+            "Journalism",
+            "courses",
+            ")"
+        ],
+        "broke at": "Index 5, in"
+    },
     "MDIA3020": {
         "condition": {
             "original": "48 UOC overall, including 6 UOC form Level 2 Public Relations and Advertising courses<br/><br/>",
@@ -9340,6 +10543,25 @@
             ")"
         ],
         "broke at": "Index 5, in"
+    },
+    "MERE4951": {
+        "condition": {
+            "original": "Prerequisite: Completion of 126 UOC and (MINE3430, MERE5004 or PTRL3030)<br/><br/>",
+            "processed": "126UOC && (MINE3430, MERE5004 || PTRL3030)"
+        },
+        "tokens": [
+            "(",
+            "126UOC",
+            "&&",
+            "(",
+            "MINE3430,",
+            "MERE5004",
+            "||",
+            "PTRL3030",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 4, MINE3430,"
     },
     "MFAC1501": {
         "condition": {
@@ -10520,8 +11742,8 @@
     },
     "PHAR2011": {
         "condition": {
-            "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
-            "processed": "6UOC in L1 Biology (BABS || BIOS ), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) DPST courses"
+            "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: 3999-Medicinal Chemistry, 4755-Medicinal Chemistry (Honours) / Law, and 3053-Biotechnology students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
+            "processed": "6UOC in L1 Biology (BABS || BIOS), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: 3999-Medicinal Chemistry, 4755-Medicinal Chemistry (Honours) / Law && 3053-Biotechnology may substitute BIOC2101 for Physiology 1A) DPST courses"
         },
         "tokens": [
             "(",
@@ -10548,8 +11770,17 @@
             "1A",
             "(",
             "Note:",
-            "Medicinal",
+            "3999-Medicinal",
+            "Chemistry,",
+            "4755-Medicinal",
             "Chemistry",
+            "(",
+            "Honours",
+            ")",
+            "/",
+            "Law",
+            "&&",
+            "3053-Biotechnology",
             "may",
             "substitute",
             "BIOC2101",
@@ -11334,30 +12565,11 @@
     },
     "SENG3993": {
         "condition": {
-            "original": "Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>",
-            "processed": "SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course. Currently 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041"
+            "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>",
+            "processed": "3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
         },
         "tokens": [
             "(",
-            "SENG2991",
-            "&&",
-            "attendance",
-            "at",
-            "IT",
-            "Reflection",
-            "Workshop",
-            "(",
-            "facilitated",
-            "by",
-            "Co-op",
-            "Program",
-            ")",
-            "are",
-            "a",
-            "for",
-            "this",
-            "course.",
-            "Currently",
             "3707",
             "in",
             "the",
@@ -11377,30 +12589,36 @@
             "&&",
             "COMP2511",
             "&&",
-            "COMP2041",
+            "COMP2041.",
+            "SENG2991",
+            "&&",
+            "attendance",
+            "at",
+            "IT",
+            "Reflection",
+            "Workshop",
+            "(",
+            "facilitated",
+            "by",
+            "Co-op",
+            "Program",
+            ")",
+            "are",
+            "a",
+            "for",
+            "this",
+            "course",
             ")"
         ],
-        "broke at": "Index 4, at"
+        "broke at": "Index 3, the"
     },
     "SENG3994": {
         "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG3011.<br/><br/>Successful completion of SENG2991 and (SENG3991or SENG3993) are a prerequisite for this course<br/><br/>",
-            "processed": "3707 in the SENGAH stream && in the Co-op program && SENG3011. SENG2991 && (SENG3991or SENG3993) are a for this course"
+            "original": "Successful completion of SENG2991 and (SENG3991or SENG3993) are a prerequisite for this course<br/><br/>Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG3011.<br/><br/>",
+            "processed": "SENG2991 && (SENG3991or SENG3993) are a for this course Currently 3707 in the SENGAH stream && in the Co-op program && SENG3011"
         },
         "tokens": [
             "(",
-            "3707",
-            "in",
-            "the",
-            "SENGAH",
-            "stream",
-            "&&",
-            "in",
-            "the",
-            "Co-op",
-            "program",
-            "&&",
-            "SENG3011.",
             "SENG2991",
             "&&",
             "(",
@@ -11412,9 +12630,43 @@
             "for",
             "this",
             "course",
+            "Currently",
+            "3707",
+            "in",
+            "the",
+            "SENGAH",
+            "stream",
+            "&&",
+            "in",
+            "the",
+            "Co-op",
+            "program",
+            "&&",
+            "SENG3011",
             ")"
         ],
-        "broke at": "Index 3, the"
+        "broke at": "Index 4, SENG3991or"
+    },
+    "SOCW2006": {
+        "condition": {
+            "original": "Prerequisite: SOCW1001, and enrolment in either a Social Work program or Working with Communities Minor.<br/><br/>",
+            "processed": "SOCW1001 && (4033) || Working && Communities Minor"
+        },
+        "tokens": [
+            "(",
+            "SOCW1001",
+            "&&",
+            "(",
+            "4033",
+            ")",
+            "||",
+            "Working",
+            "&&",
+            "Communities",
+            "Minor",
+            ")"
+        ],
+        "broke at": "Index 8, &&"
     },
     "SOCW3009": {
         "condition": {
@@ -11460,48 +12712,10 @@
         ],
         "broke at": "Index 20, ||"
     },
-    "SOCW3012": {
-        "condition": {
-            "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033)"
-        },
-        "tokens": [
-            "(",
-            "ARTS1753",
-            "||",
-            "ARTS1870",
-            "||",
-            "ARTS1871",
-            "&&",
-            "PSYC1001",
-            "||",
-            "SOCW2006",
-            "||",
-            "SOCW2008",
-            "||",
-            "SOCW2009",
-            "||",
-            "SOCW2100",
-            "||",
-            "SOSS/SRAP1000",
-            "||",
-            "SOSS/SRAP1001",
-            "||",
-            "ARTS2871",
-            "||",
-            "SRAP2002",
-            "&&",
-            "(",
-            "4033",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 18, ||"
-    },
     "SOCW4003": {
         "condition": {
-            "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
+            "original": "Prerequisite: SOCW3006, SOCW3010, SOSS3008 and enrolment in a Social Work program. Or SOCW3010, SOSS3008 and enrolment in a Social Work/Law program<br/><br/>",
+            "processed": "SOCW3006 && SOCW3010 && SOSS3008 && (4033) . || SOCW3010 && SOSS3008 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11509,9 +12723,7 @@
             "&&",
             "SOCW3010",
             "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
+            "SOSS3008",
             "&&",
             "(",
             "4033",
@@ -11520,9 +12732,7 @@
             "||",
             "SOCW3010",
             "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
+            "SOSS3008",
             "&&",
             "(",
             "4033",
@@ -11530,46 +12740,12 @@
             "/LAWS#",
             ")"
         ],
-        "broke at": "Index 6, ||"
-    },
-    "SOCW4011": {
-        "condition": {
-            "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
-        },
-        "tokens": [
-            "(",
-            "SOCW3006",
-            "&&",
-            "SOCW3010",
-            "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
-            "&&",
-            "(",
-            "4033",
-            ")",
-            ".",
-            "||",
-            "SOCW3010",
-            "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
-            "&&",
-            "(",
-            "4033",
-            ")",
-            "/LAWS#",
-            ")"
-        ],
-        "broke at": "Index 6, ||"
+        "broke at": "Index 11, ||"
     },
     "SOCW4012": {
         "condition": {
-            "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
+            "original": "Prerequisite: SOCW3006, SOCW3010, SOSS3008 and enrolment in a Social Work program. Or SOCW3010, SOSS3008 and enrolment in a Social Work/Law program<br/><br/>",
+            "processed": "SOCW3006 && SOCW3010 && SOSS3008 && (4033) . || SOCW3010 && SOSS3008 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11577,9 +12753,7 @@
             "&&",
             "SOCW3010",
             "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
+            "SOSS3008",
             "&&",
             "(",
             "4033",
@@ -11588,9 +12762,7 @@
             "||",
             "SOCW3010",
             "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
+            "SOSS3008",
             "&&",
             "(",
             "4033",
@@ -11598,12 +12770,12 @@
             "/LAWS#",
             ")"
         ],
-        "broke at": "Index 6, ||"
+        "broke at": "Index 11, ||"
     },
     "SOCW4013": {
         "condition": {
-            "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /LAWS#"
+            "original": "Prerequisite: SOCW3006, SOCW3010, SOSS3008 and enrolment in a Social Work program. Or SOCW3010, SOSS3008 and enrolment in a Social Work/Law program<br/><br/>",
+            "processed": "SOCW3006 && SOCW3010 && SOSS3008 && (4033) . || SOCW3010 && SOSS3008 && (4033) /LAWS#"
         },
         "tokens": [
             "(",
@@ -11611,9 +12783,7 @@
             "&&",
             "SOCW3010",
             "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
+            "SOSS3008",
             "&&",
             "(",
             "4033",
@@ -11622,9 +12792,7 @@
             "||",
             "SOCW3010",
             "&&",
-            "SOSS/SRAP3000",
-            "||",
-            "ARTS2871",
+            "SOSS3008",
             "&&",
             "(",
             "4033",
@@ -11632,7 +12800,7 @@
             "/LAWS#",
             ")"
         ],
-        "broke at": "Index 6, ||"
+        "broke at": "Index 11, ||"
     },
     "SOCW4015": {
         "condition": {
@@ -11761,7 +12929,7 @@
     },
     "SOMS3199": {
         "condition": {
-            "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a School of Biomedical Sciences major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by the School of Biomedical Sciences prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
+            "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a School of Biomedical Sciences major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by the School of Biomedical Sciences prior to enrolment.  <br/>Prerequisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
             "processed": "3991 program || SCIF# s . 48UOC && 65WAM"
         },
         "tokens": [
@@ -11794,30 +12962,6 @@
             ")"
         ],
         "broke at": "Index 3, multi-term"
-    },
-    "SOSS2001": {
-        "condition": {
-            "original": "Prerequisite: SOSS/SRAP1001<br/><br/>",
-            "processed": "SOSS/SRAP1001"
-        },
-        "tokens": [
-            "(",
-            "SOSS/SRAP1001",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "SOSS2002": {
-        "condition": {
-            "original": "Prerequisite: SOSS/SRAP1001<br/><br/>",
-            "processed": "SOSS/SRAP1001"
-        },
-        "tokens": [
-            "(",
-            "SOSS/SRAP1001",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "SOSS2005": {
         "condition": {
@@ -11859,29 +13003,17 @@
         ],
         "broke at": "Index 5, 4873"
     },
-    "SOSS3003": {
-        "condition": {
-            "original": "Prerequisite: 36 UOC overall, including SOSS/SRAP1000. Excluded: Students in the Bachelor of Social Work (Honours) / Criminology & Criminal Justice double degree program.<br/><br/>",
-            "processed": "36UOC && SOSS/SRAP1000"
-        },
-        "tokens": [
-            "(",
-            "36UOC",
-            "&&",
-            "SOSS/SRAP1000",
-            ")"
-        ],
-        "broke at": "Index 4, )"
-    },
     "SOSS3006": {
         "condition": {
-            "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP2001, and enrolment in a Social Science/s or Social Research and Policy program. Students must have completed 96 units of credit.<br/><br/>",
-            "processed": "SOSS/SRAP1000, SOSS/SRAP2001 && a Social Science/s || Social Research && Policy program. 96UOC"
+            "original": "Prerequisite: 96 UOC overall, including SOSS1000, SOSS2001, and enrolment in a Social Science/s or Social Research and Policy program.<br/><br/>",
+            "processed": "96UOC && SOSS1000, SOSS2001 && a Social Science/s || Social Research && Policy program"
         },
         "tokens": [
             "(",
-            "SOSS/SRAP1000,",
-            "SOSS/SRAP2001",
+            "96UOC",
+            "&&",
+            "SOSS1000,",
+            "SOSS2001",
             "&&",
             "a",
             "Social",
@@ -11891,39 +13023,10 @@
             "Research",
             "&&",
             "Policy",
-            "program.",
-            "96UOC",
+            "program",
             ")"
         ],
-        "broke at": "Index 2, SOSS/SRAP2001"
-    },
-    "SOSS3007": {
-        "condition": {
-            "original": "Prerequisite: 36 units of credit overall, including SOSS/SRAP1001<br/><br/>",
-            "processed": "36UOC && SOSS/SRAP1001"
-        },
-        "tokens": [
-            "(",
-            "36UOC",
-            "&&",
-            "SOSS/SRAP1001",
-            ")"
-        ],
-        "broke at": "Index 4, )"
-    },
-    "SOSS3008": {
-        "condition": {
-            "original": "Prerequisite: 36 UOC overall, including SOSS/SRAP1000<br/><br/>",
-            "processed": "36UOC && SOSS/SRAP1000"
-        },
-        "tokens": [
-            "(",
-            "36UOC",
-            "&&",
-            "SOSS/SRAP1000",
-            ")"
-        ],
-        "broke at": "Index 4, )"
+        "broke at": "Index 4, SOSS2001"
     },
     "TABL3333": {
         "condition": {
@@ -12073,6 +13176,71 @@
         ],
         "broke at": "Index 2, have"
     },
+    "ZEIT3758": {
+        "condition": {
+            "original": "Pre requisite: ZEIT3750 Naval Architecture Practice, Ship Hydrostatics and Stability<br/><br/>",
+            "processed": "ZEIT3750 Naval Architecture Practice && Ship Hydrostatics && Stability"
+        },
+        "tokens": [
+            "(",
+            "ZEIT3750",
+            "Naval",
+            "Architecture",
+            "Practice",
+            "&&",
+            "Ship",
+            "Hydrostatics",
+            "&&",
+            "Stability",
+            ")"
+        ],
+        "broke at": "Index 3, Architecture"
+    },
+    "ZEIT3759": {
+        "condition": {
+            "original": "1.\tThe course is available to students enrolled in 4400 (BA), 4405 (BBus), 4410 (BSc), 4427 (BCCS) and may be taken as an elective <br/><br/>2.\tStudents must have completed at least 48 UOC to enrol in this course<br/><br/>",
+            "processed": "1.\tThe course is available to 4400 (BA), 4405 (BBus), 4410 (BSc), 4427 (BCCS) && may be taken as an elective 2. 48UOC"
+        },
+        "tokens": [
+            "(",
+            "1.",
+            "The",
+            "course",
+            "is",
+            "available",
+            "to",
+            "4400",
+            "(",
+            "BA",
+            ")",
+            ",",
+            "4405",
+            "(",
+            "BBus",
+            ")",
+            ",",
+            "4410",
+            "(",
+            "BSc",
+            ")",
+            ",",
+            "4427",
+            "(",
+            "BCCS",
+            ")",
+            "&&",
+            "may",
+            "be",
+            "taken",
+            "as",
+            "an",
+            "elective",
+            "2.",
+            "48UOC",
+            ")"
+        ],
+        "broke at": "Index 2, The"
+    },
     "ZEIT4227": {
         "condition": {
             "original": "ZEIT3215 or in parallel with ZEIT3215<br/><br/>",
@@ -12220,5 +13388,105 @@
             ")"
         ],
         "broke at": "Index 6, Chemistry"
+    },
+    "ZSPS1113": {
+        "condition": {
+            "original": "Prerequisite: ZSPS1111 Introduction to Information Technology & Networking<br/><br/>",
+            "processed": "ZSPS1111 Introduction to Information Technology && Networking"
+        },
+        "tokens": [
+            "(",
+            "ZSPS1111",
+            "Introduction",
+            "to",
+            "Information",
+            "Technology",
+            "&&",
+            "Networking",
+            ")"
+        ],
+        "broke at": "Index 3, to"
+    },
+    "ZSPS2121": {
+        "condition": {
+            "original": "Prerequisite: ZSPS2118 Machine Learning for Cyber Security<br/><br/>",
+            "processed": "ZSPS2118 Machine Learning for Cyber Security"
+        },
+        "tokens": [
+            "(",
+            "ZSPS2118",
+            "Machine",
+            "Learning",
+            "for",
+            "Cyber",
+            "Security",
+            ")"
+        ],
+        "broke at": "Index 3, Learning"
+    },
+    "ZSPS2122": {
+        "condition": {
+            "original": "Prerequisite: ZSPS2118 Machine Learning for Cyber Security<br/><br/>",
+            "processed": "ZSPS2118 Machine Learning for Cyber Security"
+        },
+        "tokens": [
+            "(",
+            "ZSPS2118",
+            "Machine",
+            "Learning",
+            "for",
+            "Cyber",
+            "Security",
+            ")"
+        ],
+        "broke at": "Index 3, Learning"
+    },
+    "ZSPS3110": {
+        "condition": {
+            "original": "Prerequisites: ZSPS1111 Introduction to Information Technology and Networking, and<br/>ZSPS1337 Introduction to Cyber Security<br/><br/>",
+            "processed": "ZSPS1111 Introduction to Information Technology && Networking && ZSPS1337 Introduction to Cyber Security"
+        },
+        "tokens": [
+            "(",
+            "ZSPS1111",
+            "Introduction",
+            "to",
+            "Information",
+            "Technology",
+            "&&",
+            "Networking",
+            "&&",
+            "ZSPS1337",
+            "Introduction",
+            "to",
+            "Cyber",
+            "Security",
+            ")"
+        ],
+        "broke at": "Index 3, to"
+    },
+    "ZSPS3111": {
+        "condition": {
+            "original": "Prerequisites: ZSPS1111 Introduction to Information Technology and Networking, and<br/>ZSPS1337 Introduction to Cyber Security<br/><br/>",
+            "processed": "ZSPS1111 Introduction to Information Technology && Networking && ZSPS1337 Introduction to Cyber Security"
+        },
+        "tokens": [
+            "(",
+            "ZSPS1111",
+            "Introduction",
+            "to",
+            "Information",
+            "Technology",
+            "&&",
+            "Networking",
+            "&&",
+            "ZSPS1337",
+            "Introduction",
+            "to",
+            "Cyber",
+            "Security",
+            ")"
+        ],
+        "broke at": "Index 3, to"
     }
 }

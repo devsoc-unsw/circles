@@ -38,7 +38,8 @@ def fix_conditions():
     CONDITIONS["CHEM2521"] = CHEM_2521(CONDITIONS["CHEM2521"])
     CONDITIONS["CHEM2701"][PROCESSED] = CHEM_2701()
     CONDITIONS["CHEM3051"][PROCESSED] = CHEM_3051()
-    CONDITIONS["CHEM6701"][PROCESSED] = CHEM_6701()
+    if "CHEM6701" in CONDITIONS:
+        CONDITIONS["CHEM6701"][PROCESSED] = CHEM_6701()
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
