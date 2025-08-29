@@ -58,6 +58,26 @@ export const SubList = styled.ul`
   margin-left: 1.5rem;
 `;
 
+export const SnakeEmojiTrigger = styled.span`
+  display: inline-block;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+  padding: 2px 4px;
+  border-radius: 4px;
+
+  &:hover {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 8px rgba(146, 84, 222, 0.6));
+    background-color: rgba(146, 84, 222, 0.1);
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+`;
+
 const S = {
   Wrapper,
   Title,
@@ -66,7 +86,8 @@ const S = {
   Flair,
   SectionTitle,
   List,
-  SubList
+  SubList,
+  SnakeEmojiTrigger
 };
 
 export default S;
