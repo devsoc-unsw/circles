@@ -61,6 +61,19 @@ const DialLabel = styled.p`
   font-size: small;
 `;
 
+// Flex wrapper for the header section
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+// Padding for the bottom section of planner
+const PlannerWrapper = styled.div`
+  padding-bottom: 0.8rem;
+`;
+
 export default {
   Wrapper,
   MainWrapper,
@@ -70,5 +83,7 @@ export default {
   Link,
   RatingWrapper,
   DialWrapper,
-  DialLabel
+  DialLabel,
+  HeaderWrapper,
+  PlannerWrapper
 };

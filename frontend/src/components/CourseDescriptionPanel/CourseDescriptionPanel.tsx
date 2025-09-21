@@ -71,14 +71,7 @@ const CourseDescriptionPanel = ({
   return (
     <S.Wrapper $sidebar={sidebar} className={className}>
       <S.MainWrapper>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap'
-          }}
-        >
+        <S.HeaderWrapper>
           <S.TitleWrapper $sidebar={sidebar}>
             <div>
               <Title level={2} className="text">
@@ -86,33 +79,32 @@ const CourseDescriptionPanel = ({
               </Title>
             </div>
           </S.TitleWrapper>
-          <div style={{ paddingBottom: '.8rem' }}>
+          <S.PlannerWrapper>
             <PlannerButton
               course={course}
               isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
             />
-          </div>
-        </div>
+          </S.PlannerWrapper>
+        </S.HeaderWrapper>
         {course.is_legacy && (
           <Text strong>
             NOTE: this course is discontinued - if a current course exists, pick that instead
           </Text>
         )}
         {!sidebar && (
-          <div style={{ flexBasis: '25%' }}>
+          <S.SidebarWrapper>
             <CourseAttributes course={course} />
-          </div>
+          </S.SidebarWrapper>
         )}
         <div>
           <Rate disabled value={rating?.overallRating ? rating.overallRating : 0} allowHalf />
-          <S.Link
+          <a
             href={`https://unilectives.devsoc.app/course/${courseCode}/`}
             target="_blank"
             rel="noreferrer"
-            style={{ display: 'block' }}
           >
             Read reviews on Unilectives
-          </S.Link>
+          </a>
         </div>
         <CourseInfoDrawers
           course={course}
