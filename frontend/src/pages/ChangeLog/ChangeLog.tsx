@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DownOutlined, RightOutlined } from '@ant-design/icons';
 import PageTemplate from 'components/PageTemplate';
+import SnakeGame from 'components/SnakeGame/SnakeGame';
 import changelogDataRaw from './changeLogData.json';
 import S from './styles';
 
@@ -76,15 +77,27 @@ const VersionSection: React.FC<VersionSectionProps> = ({ versionData, isOpenDefa
   );
 };
 
-const ChangeLog = () => (
-  <PageTemplate>
-    <S.Wrapper>
-      <S.Title>Changelog</S.Title>
-      {changelogData.map((entry, idx) => (
-        <VersionSection key={entry.date} versionData={entry} isOpenDefault={idx === 0} />
-      ))}
-    </S.Wrapper>
-  </PageTemplate>
-);
+const ChangeLog = () => {
+  const [snakeGameOpen, setSnakeGameOpen] = useState(false);
+
+  return (
+    <PageTemplate>
+      <S.Wrapper>
+        <S.Title>Changelog</S.Title>
+        {changelogData.map((entry, idx) => (
+          <VersionSection key={entry.date} versionData={entry} isOpenDefault={idx === 0} />
+        ))}
+        <div style={{ textAlign: 'center', marginTop: '2rem', color: '#999', fontSize: '14px' }}>
+          Thanks for using Circles{' '}
+          <S.SnakeEmojiTrigger onClick={() => setSnakeGameOpen(true)} title="Play Snake! 🐍">
+            🐍
+          </S.SnakeEmojiTrigger>{' '}
+          !
+        </div>
+      </S.Wrapper>
+      <SnakeGame isOpen={snakeGameOpen} onClose={() => setSnakeGameOpen(false)} />
+    </PageTemplate>
+  );
+};
 
 export default ChangeLog;
