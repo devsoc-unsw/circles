@@ -12,6 +12,7 @@ import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
+import CourseShowAllButton from './CourseTabs/CourseShowAllButton';
 
 const CourseSelector = () => {
   const theme = useTheme();
@@ -42,7 +43,7 @@ const CourseSelector = () => {
   const courseCode = tabs[active];
 
   const divRef = useRef<null | HTMLDivElement>(null);
-  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
+  const [menuOffset, setMenuOffset] = useState<number>(300);
   useEffect(() => {
     const minMenuWidth = 100;
     const maxMenuWidth = (60 * window.innerWidth) / 100;
@@ -76,8 +77,15 @@ const CourseSelector = () => {
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner courses={coursesQuery.data} />
-        <CourseTabs />
+        <S.CourseHeader>
+          <S.CourseShowAllButton $offset={menuOffset}>
+            <CourseShowAllButton />
+          </S.CourseShowAllButton>
+          <CourseTabs />
+        </S.CourseHeader>
+
         <S.ContentWrapper $offset={menuOffset}>
+          {/* Course menu */}
           <CourseMenu courses={coursesQuery.data} degree={degreeQuery.data} />
           <S.ContentResizer ref={divRef} $offset={menuOffset} />
           {courseCode ? (

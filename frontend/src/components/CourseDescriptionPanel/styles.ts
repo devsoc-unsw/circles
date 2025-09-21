@@ -5,12 +5,12 @@ const { Text } = Typography;
 
 const Wrapper = styled.div<{ $sidebar?: boolean }>`
   width: 100%;
-  padding: 10px;
+  padding: 0.6rem;
 
   ${({ $sidebar }) =>
     $sidebar &&
     css`
-      padding: 30px;
+      padding: 1.9rem;
       display: flex;
       flex-direction: row;
       gap: 4rem;

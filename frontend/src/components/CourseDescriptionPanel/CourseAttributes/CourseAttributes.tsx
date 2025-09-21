@@ -157,9 +157,7 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
         ({ title, content }) =>
           content && (
             <S.AttributeWrapper key={`course-attribute-${title}`}>
-              <Title level={3} className="text">
-                {title}
-              </Title>
+              <h3 className="text">{title}</h3>
               <S.AttributeText>{content}</S.AttributeText>
             </S.AttributeWrapper>
           )

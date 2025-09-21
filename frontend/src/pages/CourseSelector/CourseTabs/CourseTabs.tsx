@@ -2,13 +2,13 @@ import React, { Suspense } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
-import { Popconfirm, Switch, Tooltip } from 'antd';
+import { Popconfirm, Tooltip } from 'antd';
 import DraggableTab from 'components/DraggableTab';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
-import useSettings from 'hooks/useSettings';
 import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';
+import CourseShowAllButton from './CourseShowAllButton';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -20,7 +20,6 @@ const Droppable = React.lazy(() =>
 const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs } = useSelector((state: RootState) => state.courseTabs);
-  const { showLockedCourses, toggleLockedCourses } = useSettings();
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     dispatch(setActiveTab(result.source.index));
@@ -43,15 +42,6 @@ const CourseTabs = () => {
 
   return (
     <S.CourseTabsWrapper>
-      <S.ShowAllCourses>
-        <S.TextShowCourses>Show all courses</S.TextShowCourses>
-        <Switch
-          size="small"
-          data-testid="show-all-courses"
-          defaultChecked={showLockedCourses}
-          onChange={() => toggleLockedCourses()}
-        />
-      </S.ShowAllCourses>
       <Suspense fallback={<Spinner text="loading tabs..." size="small" />}>
         <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
           <Droppable droppableId="droppable" direction="horizontal">
