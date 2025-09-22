@@ -21,6 +21,13 @@ const ShowAllCourses = styled.div`
 const TextShowCourses = styled.div`
   margin: 5px;
   white-space: nowrap;
+
+  // Responsible for rendering "courses" part of show all courses on larger screens
+  @media (min-width: 700px) {
+    &::after {
+      content: ' courses';
+    }
+  }
 `;
 
 const CourseTabsSection = styled.div`

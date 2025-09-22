@@ -7,7 +7,7 @@ const CourseShowAllButton = () => {
   const { showLockedCourses, toggleLockedCourses } = useSettings();
   return (
     <S.ShowAllCourses>
-      <S.TextShowCourses>Show all courses</S.TextShowCourses>
+      <S.TextShowCourses>Show all</S.TextShowCourses>
       <Switch
         size="small"
         data-testid="show-all-courses"

@@ -113,7 +113,6 @@ const CourseDescriptionPanel = ({
           onCourseClick={onCourseClick}
         />
       </S.MainWrapper>
-
       {sidebar && (
         <S.SidebarWrapper>
           <CourseAttributes course={course} courseCapacity={courseCapacity} />

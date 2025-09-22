@@ -67,6 +67,14 @@ const CourseShowAllButton = styled.div<CourseShowAllButtonProps>`
   min-width: 150px;
   flex-shrink: 0;
   flex-grow: 0;
+
+  // Hide button if offset is too small
+  ${({ $offset }) =>
+    $offset &&
+    $offset < 100 &&
+    `
+      display: none;
+  `}
 `;
 
 export default {
