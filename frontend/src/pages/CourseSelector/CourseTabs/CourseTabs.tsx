@@ -8,7 +8,6 @@ import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';
-import CourseShowAllButton from './CourseShowAllButton';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
