@@ -13,11 +13,13 @@ import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
 import CourseShowAllButton from './CourseTabs/CourseShowAllButton';
 import S from './styles';
+import useMobileHook from './UseMobileHook';
 
 const CourseSelector = () => {
   const theme = useTheme();
   const coursesQuery = useUserCourses();
   const degreeQuery = useUserDegree();
+  const isMobile = useMobileHook();
 
   const [showedNotif, setShowedNotif] = useState(false);
   useEffect(() => {
@@ -43,7 +45,7 @@ const CourseSelector = () => {
   const courseCode = tabs[active];
 
   const divRef = useRef<null | HTMLDivElement>(null);
-  const [menuOffset, setMenuOffset] = useState<number>(300);
+  const [menuOffset, setMenuOffset] = useState<number>(isMobile ? 1 : 300); // Set initial width to 1px if mobile
 
   useEffect(() => {
     // Set min width to 1px to prevent it from collapsing fully
