@@ -1,17 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Progress, Typography } from 'antd';
-import { useTheme } from 'styled-components';
+import { Typography } from 'antd';
 import { Course } from 'types/api';
 import { EnrolmentCapacityData } from 'types/courseCapacity';
-import { useCourseRatingQuery } from 'utils/apiHooks/static';
 import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { CURR_YEAR, TERM } from 'config/constants';
 import S from './styles';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 const termMapping: Record<number, string> = {
   0: 'Summer',
@@ -28,10 +26,6 @@ type CourseAttributesProps = {
 const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
-  const theme = useTheme();
-
-  const ratingQuery = useCourseRatingQuery({}, course.code);
-  const rating = ratingQuery.data;
 
   const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
 
