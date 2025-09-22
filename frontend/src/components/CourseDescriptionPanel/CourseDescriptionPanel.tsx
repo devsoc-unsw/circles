@@ -98,13 +98,15 @@ const CourseDescriptionPanel = ({
         )}
         <div>
           <Rate disabled value={rating?.overallRating ? rating.overallRating : 0} allowHalf />
-          <a
-            href={`https://unilectives.devsoc.app/course/${courseCode}/`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read reviews on Unilectives
-          </a>
+          <div>
+            <a
+              href={`https://unilectives.devsoc.app/course/${courseCode}/`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read reviews on Unilectives
+            </a>
+          </div>
         </div>
         <CourseInfoDrawers
           course={course}
