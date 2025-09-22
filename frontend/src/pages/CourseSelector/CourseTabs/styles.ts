@@ -23,7 +23,7 @@ const TextShowCourses = styled.div`
   white-space: nowrap;
 
   // Responsible for rendering "courses" part of show all courses on larger screens
-  @media (min-width: 700px) {
+  @media (min-width: 1000px) {
     &::after {
       content: ' courses';
     }
