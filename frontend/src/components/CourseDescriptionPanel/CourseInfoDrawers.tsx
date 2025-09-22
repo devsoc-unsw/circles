@@ -1,14 +1,14 @@
 import React from 'react';
 import { Progress, Typography } from 'antd';
+import { useTheme } from 'styled-components';
 import { Course, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseList } from 'types/courses';
 import { badCourses, badValidations } from 'types/userResponse';
+import { useCourseRatingQuery } from 'utils/apiHooks/static';
 import { useUserCourses, useUserTermValidations } from 'utils/apiHooks/user';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
 import S from './styles';
-import { useCourseRatingQuery } from 'utils/apiHooks/static';
-import { useTheme } from 'styled-components';
 
 const { Text } = Typography;
 

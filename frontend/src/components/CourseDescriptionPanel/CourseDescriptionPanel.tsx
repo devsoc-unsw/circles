@@ -1,18 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Typography, Rate } from 'antd';
-
+import { Rate, Typography } from 'antd';
 import { CoursesResponse } from 'types/userResponse';
-
 import {
   useCourseInfoQuery,
   useCoursePrereqsQuery,
-  useCourseTimetableQuery,
-  useCourseRatingQuery
+  useCourseRatingQuery,
+  useCourseTimetableQuery
 } from 'utils/apiHooks/static';
 import { useUserCoursesUnlockedWhenTaken } from 'utils/apiHooks/user';
 import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
-
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
@@ -20,7 +17,6 @@ import {
 import PlannerButton from 'components/PlannerButton';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
-
 import S from './styles';
 
 const { Title, Text } = Typography;
