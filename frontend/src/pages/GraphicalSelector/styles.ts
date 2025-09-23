@@ -32,7 +32,9 @@ const SidebarWrapper = styled.div`
   border-radius: 20px;
   border: ${({ theme }) => theme.graph.borderColor} solid 1px;
   padding: 10px;
-  flex: 2;
+  flex-grow: 2;
+  flex-shrink: 0; /* prevent shrinking */
+  flex-basis: 10rem; /* base width equal to min-width */
   overflow-y: auto;
   background-color: ${({ theme }) => theme.graph.backgroundColor};
 `;
