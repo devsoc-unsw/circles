@@ -78,7 +78,7 @@ const LoginButton = styled.button`
   color: #fff;
   font-weight: 700;
   font-size: 1.25rem;
-  margin: 1.25rem;
+  margin: calc(0.5rem + 1vw);
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
@@ -108,7 +108,7 @@ const GuestButton = styled.button`
   color: ${({ theme }) => theme.text};
   font-weight: 700;
   font-size: 1.25rem;
-  margin: 1.25rem;
+  margin: calc(0.5rem + 1vw);
   cursor: pointer;
   transition: all 0.3s;
   &:disabled {
