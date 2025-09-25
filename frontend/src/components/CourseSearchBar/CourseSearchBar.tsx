@@ -109,7 +109,7 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
       onSearch={handleSearch}
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
-      style={{ width: '55ch', ...style }}
+      style={{ minWidth: '30ch', maxWidth: '55ch', ...style }}
       suffixIcon={!value}
       className="course-search-bar"
     />
