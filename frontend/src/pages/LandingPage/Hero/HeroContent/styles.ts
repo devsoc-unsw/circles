@@ -42,7 +42,7 @@ const HeroSubTitle = styled.img`
   margin-left: -8px;
 
   @media (max-width: 768px) {
-    width: 11.25rem;
+    width: 7.5rem';
     margin-top: -4px;
     margin-left: -6px;
   }
@@ -97,7 +97,7 @@ const DevSocLogo = motion(styled.img`
   }
 
   @media (max-width: 480px) {
-    width: 11.25rem;
+    width: 7.5rem';
   }
 `);
 
