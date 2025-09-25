@@ -5,12 +5,12 @@ const { Text } = Typography;
 
 const Wrapper = styled.div<{ $sidebar?: boolean }>`
   width: 100%;
-  padding: 10px;
+  padding: 0.6rem;
 
   ${({ $sidebar }) =>
     $sidebar &&
     css`
-      padding: 30px;
+      padding: 1.9rem;
       display: flex;
       flex-direction: row;
       gap: 4rem;
@@ -44,9 +44,6 @@ const TitleWrapper = styled.div<{ $sidebar?: boolean }>`
   ${({ $sidebar }) =>
     $sidebar &&
     css`
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       align-items: center;
 
       @media (max-width: 768px) {
@@ -62,10 +59,51 @@ const TextBlock = styled(Text)`
   color: ${({ theme }) => theme.graph.tabTextColor};
 `;
 
+const Link = styled.a`
+  color: ${({ theme }) => theme.courseMenu?.hrefColor};
+  &:hover {
+    color: ${({ theme }) => theme.courseMenu?.hrefHoverColor};
+  }
+`;
+
+const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const DialWrapper = styled.div`
+  text-align: center;
+  width: 85px;
+`;
+
+const DialLabel = styled.p`
+  font-size: small;
+`;
+
+// Flex wrapper for the header section
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+// Padding for the bottom section of planner
+const PlannerWrapper = styled.div`
+  padding-bottom: 0.8rem;
+`;
+
 export default {
   Wrapper,
   MainWrapper,
   SidebarWrapper,
   TitleWrapper,
-  TextBlock
+  TextBlock,
+  Link,
+  RatingWrapper,
+  DialWrapper,
+  DialLabel,
+  HeaderWrapper,
+  PlannerWrapper
 };

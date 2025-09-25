@@ -13,6 +13,7 @@ const CourseTabsWrapper = styled.div`
 
 const ShowAllCourses = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 5px;
   flex-shrink: 0;
@@ -27,6 +28,14 @@ const ShowAllCourses = styled.div`
 
 const TextShowCourses = styled.div`
   margin: 5px;
+  white-space: nowrap;
+
+  // Responsible for rendering "courses" part of show all courses on larger screens
+  @media (min-width: 1000px) {
+    &::after {
+      content: ' courses';
+    }
+  }
 `;
 
 const CourseTabsSection = styled.div`

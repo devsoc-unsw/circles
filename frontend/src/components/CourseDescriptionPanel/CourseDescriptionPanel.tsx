@@ -1,10 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Rate, Typography } from 'antd';
 import { CoursesResponse } from 'types/userResponse';
 import {
   useCourseInfoQuery,
   useCoursePrereqsQuery,
+  useCourseRatingQuery,
   useCourseTimetableQuery
 } from 'utils/apiHooks/static';
 import { useUserCoursesUnlockedWhenTaken } from 'utils/apiHooks/user';
@@ -44,6 +45,7 @@ const CourseDescriptionPanel = ({
     { queryOptions: { select: getEnrolmentCapacity, retry: 1, enabled: sidebar } }, // retry only once because we have bad error handling
     courseCode
   );
+  const ratingQuery = useCourseRatingQuery({}, courseCode);
 
   const loadingWrapper = (
     <S.Wrapper $sidebar={sidebar}>
@@ -62,35 +64,50 @@ const CourseDescriptionPanel = ({
   const coursesPathFrom = coursePrereqsQuery.data?.courses;
   const courseCapacity = courseCapacityQuery.data;
 
+  const rating = ratingQuery?.data;
+
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
   if (!course) return loadingWrapper;
   return (
     <S.Wrapper $sidebar={sidebar} className={className}>
       <S.MainWrapper>
-        <S.TitleWrapper $sidebar={sidebar}>
-          <div>
-            <Title level={2} className="text">
-              {courseCode} - {course.title}
-            </Title>
-          </div>
-          <PlannerButton
-            course={course}
-            isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
-          />
-        </S.TitleWrapper>
-        {/* TODO: Style this better? */}
+        <S.HeaderWrapper>
+          <S.TitleWrapper $sidebar={sidebar}>
+            <div>
+              <Title level={2} className="text">
+                {courseCode} - {course.title}
+              </Title>
+            </div>
+          </S.TitleWrapper>
+          <S.PlannerWrapper>
+            <PlannerButton
+              course={course}
+              isAddedInPlanner={courses !== undefined && courses[course.code] !== undefined}
+            />
+          </S.PlannerWrapper>
+        </S.HeaderWrapper>
         {course.is_legacy && (
           <Text strong>
             NOTE: this course is discontinued - if a current course exists, pick that instead
           </Text>
         )}
-
         {!sidebar && (
-          <div style={{ flexBasis: '25%' }}>
+          <S.SidebarWrapper>
             <CourseAttributes course={course} />
-          </div>
+          </S.SidebarWrapper>
         )}
-
+        <div>
+          <Rate disabled value={rating?.overallRating ? rating.overallRating : 0} allowHalf />
+          <div>
+            <a
+              href={`https://unilectives.devsoc.app/course/${courseCode}/`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read reviews on Unilectives
+            </a>
+          </div>
+        </div>
         <CourseInfoDrawers
           course={course}
           pathFrom={coursesPathFrom}
@@ -98,7 +115,6 @@ const CourseDescriptionPanel = ({
           onCourseClick={onCourseClick}
         />
       </S.MainWrapper>
-
       {sidebar && (
         <S.SidebarWrapper>
           <CourseAttributes course={course} courseCapacity={courseCapacity} />

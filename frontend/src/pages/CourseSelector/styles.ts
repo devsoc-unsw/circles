@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface CourseShowAllButtonProps {
+  $offset?: number;
+}
+
 const ContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,4 +75,33 @@ const InfographicContainer = styled.div`
   }
 `;
 
-export default { ContainerWrapper, ContentResizer, ContentWrapper, InfographicContainer };
+const CourseHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: ${({ theme }) => theme.purpleLight};
+`;
+
+const CourseShowAllButton = styled.div<CourseShowAllButtonProps>`
+  width: ${({ $offset }) => ($offset ? `${$offset}px` : '20vw')};
+  min-width: 150px;
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  // Hide button if offset is too small
+  ${({ $offset }) =>
+    $offset &&
+    $offset < 100 &&
+    `
+      display: none;
+  `}
+`;
+
+export default {
+  ContainerWrapper,
+  ContentResizer,
+  ContentWrapper,
+  InfographicContainer,
+  CourseHeader,
+  CourseShowAllButton
+};
