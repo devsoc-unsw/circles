@@ -52,8 +52,8 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
 const TermCheckboxWrapper = styled.div<{ $checked: boolean }>`
   background-color: ${({ $checked }) => ($checked ? '#9685f3' : '#D9D9D9')};
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   display: flex;
   justify-content: center;
   padding-top: 3.5px;

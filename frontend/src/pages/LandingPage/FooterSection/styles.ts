@@ -28,7 +28,7 @@ const FooterContentContainer = styled.div`
 
   @media (max-width: 480px) {
     gap: 30px;
-    padding: 20px 0;
+    padding: 1.25rem 0;
   }
 `;
 
@@ -46,7 +46,7 @@ const FooterLogoWrapper = styled.div`
   }
 
   @media (max-width: 480px) {
-    gap: 20px;
+    gap: 1.25rem;
   }
 `;
 
@@ -66,7 +66,7 @@ const FooterDisclaimer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 20px;
+  gap: 1.25rem;
 
   @media (max-width: 768px) {
     text-align: left;

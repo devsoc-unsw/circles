@@ -52,7 +52,7 @@ const SubContent = styled.div`
   color: #fff;
   margin-top: 2rem;
   line-height: 2;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
 
   @media (max-width: 768px) {

@@ -34,7 +34,7 @@ const CardsSection = styled.div`
   margin-bottom: 200px;
 
   @media (max-width: 768px) {
-    gap: 20px;
+    gap: 1.25rem;
     margin-bottom: 100px;
     padding: 0 16px;
   }
@@ -48,7 +48,7 @@ const CardsSection = styled.div`
 
 const Card = styled.div`
   background: #fff;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   height: 275px;
   position: relative;
   width: 250px;
@@ -66,7 +66,7 @@ const Card = styled.div`
   @media (max-width: 768px) {
     width: 280px;
     height: 300px;
-    padding: 35px 20px;
+    padding: 35px 1.25rem;
   }
 
   @media (max-width: 480px) {
@@ -87,7 +87,7 @@ const IconContainer = styled.div`
 `;
 
 const FeatureSubtitle = styled.h3<{ $startColor: string; $endColor: string }>`
-  font-size: 20px;
+  font-size: 1.25rem;
   background: -webkit-linear-gradient(
     45deg,
     ${({ $startColor }) => $startColor},

@@ -54,7 +54,7 @@ const Wrapper = styled.div<{ $open?: boolean }>`
 const ChildrenWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 12px 20px;
+  padding: 12px 1.25rem;
   background-color: ${({ theme }) => theme.sidebarDrawer.backgroundColor};
 
   overflow-y: auto;
