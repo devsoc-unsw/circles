@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
-import SplashArtImg from 'assets/splashart.svg';
+
+export const Title = styled.h1`
+  font-size: clamp(1.8rem, 2.5vw, 8rem);
+  font-weight: bold;
+`;
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -30,7 +34,7 @@ const Left = styled.div`
     `}
   padding: 50px;
   border-radius: 15px 0px 0px 15px;
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     display: none;
   }
 `;
@@ -154,5 +158,6 @@ export default {
   Wrapper,
   Login,
   Right,
-  Back
+  Back,
+  Title
 };

@@ -45,7 +45,7 @@ const Login = () => {
               <Link to="/">
                 <S.Back src={BackButton} />
               </Link>
-              <Title>Login to Circles</Title>
+              <S.Title>Login to Circles</S.Title>
               <div style={{ textAlign: 'center' }}>For current UNSW Students</div>
               <S.LoginButton onClick={initiateCSEAuth}>Login with zID</S.LoginButton>
               <S.GuestButton onClick={guestLogin}>Continue as guest (coming soon)</S.GuestButton>
