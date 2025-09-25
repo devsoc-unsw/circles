@@ -9,6 +9,11 @@ const BannerWrapper = styled.div`
   height: var(--cs-top-cont-height);
 
   background-color: ${({ theme }) => theme.purpleLight};
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 760px;
+  }
 `;
 
 export default { BannerWrapper };
