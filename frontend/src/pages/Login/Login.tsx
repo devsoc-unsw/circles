@@ -7,10 +7,7 @@ import SplashArt from 'assets/splashart.svg';
 import PageTemplate from 'components/PageTemplate';
 import { useAppDispatch } from 'hooks';
 import { updateIdentityWithAPIRes } from 'reducers/identitySlice';
-import { Typography } from 'antd';
 import S from './styles';
-
-const { Title } = Typography;
 
 const Login = () => {
   const dispatch = useAppDispatch();
