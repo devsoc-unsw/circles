@@ -19,6 +19,7 @@ import {
 import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { useAppWindowSize } from 'hooks';
+import useMediaQuery from 'hooks/useMediaQuery';
 import useSettings from 'hooks/useSettings';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
@@ -65,6 +66,7 @@ const CourseGraph = ({
   const windowSize = useAppWindowSize();
   const { theme } = useSettings();
   const previousTheme = useRef<typeof theme>(theme);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const graphRef = useRef<Graph | null>(null);
   const initialisingStart = useRef(false); // prevents multiple graphs being loaded
@@ -455,12 +457,16 @@ const CourseGraph = ({
             checked={!showingUnlockedCourses}
             onChange={() => setShowingUnlockedCourses((prevState) => !prevState)}
           />
-          <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
-          <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
-          <S.Button
-            onClick={handleToggleFullscreen}
-            icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
-          />
+          <S.ButtonGroup>
+            <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
+            <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
+            {!isMobile && (
+              <S.Button
+                onClick={handleToggleFullscreen}
+                icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
+              />
+            )}
+          </S.ButtonGroup>
         </S.ToolsWrapper>
       )}
     </S.Wrapper>
