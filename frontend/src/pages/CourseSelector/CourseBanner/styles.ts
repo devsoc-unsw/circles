@@ -5,8 +5,8 @@ const BannerWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
-  height: var(--cs-top-cont-height);
-  padding: 3rem 1.7rem 3rem;
+  height: calc(var(--cs-top-cont-height) * 4 / 5);
+  padding: 3.6rem 1.7rem;
   background-color: ${({ theme }) => theme.purpleLight};
 `;
 

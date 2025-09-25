@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import SplashArtImg from 'assets/splashart.svg';
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -29,6 +30,9 @@ const Left = styled.div`
     `}
   padding: 50px;
   border-radius: 15px 0px 0px 15px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const SplashArt = styled.img`
