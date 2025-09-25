@@ -47,7 +47,7 @@ const Login = () => {
               <S.LoginButton onClick={initiateCSEAuth}>Login with zID</S.LoginButton>
               <S.GuestButton onClick={guestLogin} disabled>
                 Continue as guest (coming soon)
-              </S.GuestButton>{' '}
+              </S.GuestButton>
             </S.Login>
           </S.Right>
         </S.Wrapper>
