@@ -7,7 +7,10 @@ import SplashArt from 'assets/splashart.svg';
 import PageTemplate from 'components/PageTemplate';
 import { useAppDispatch } from 'hooks';
 import { updateIdentityWithAPIRes } from 'reducers/identitySlice';
+import { Typography } from 'antd';
 import S from './styles';
+
+const { Title } = Typography;
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -42,8 +45,8 @@ const Login = () => {
               <Link to="/">
                 <S.Back src={BackButton} />
               </Link>
-              <h2>Login to Circles</h2>
-              <p>For current UNSW Students</p>
+              <Title>Login to Circles</Title>
+              <div style={{ textAlign: 'center' }}>For current UNSW Students</div>
               <S.LoginButton onClick={initiateCSEAuth}>Login with zID</S.LoginButton>
               <S.GuestButton onClick={guestLogin}>Continue as guest (coming soon)</S.GuestButton>
             </S.Login>
