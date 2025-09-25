@@ -235,7 +235,7 @@ export const GlobalStyles = createGlobalStyle`
     /* color of the scroll thumb */
     background-color:  ${({ theme }) => theme.scrollbar.scrollbarColor};
     /* roundness of the scroll thumb */
-    border-radius: 20px;
+    border-radius: 1.25rem;
     /* creates padding around scroll thumb */
     border: 3px solid ${({ theme }) => theme.scrollbar.scollbarBorderColor}; 
   }
@@ -499,7 +499,7 @@ export const darkTheme: DefaultTheme = {
   searchBar: {
     spinBackgroundColor: '#b384ea',
     backgroundColor: '#262626',
-    boxShadow: '0 3px 20px -10px #ffffe0, 0 5px 0px -10px #ffffeb, 0 10px 20px -25px #fffff2',
+    boxShadow: '0 3px 1.25rem -10px #ffffe0, 0 5px 0px -10px #ffffeb, 0 10px 1.25rem -25px #fffff2',
     borderColor: '#5f5a64',
     hoverBackgroundColor: '#6d6772'
   },

@@ -20,19 +20,19 @@ const CourseGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 1.25rem;
   margin: 15px 0;
 `;
 
 const ViewAllCoursesWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 1.25rem 0;
 `;
 
 const NotesText = styled.div`
   font-size: 1rem;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 `;
 
 export default {

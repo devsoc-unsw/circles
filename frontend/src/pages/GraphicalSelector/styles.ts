@@ -5,7 +5,7 @@ import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 const Wrapper = styled.div<{ $fullscreen: boolean; $isMobile?: boolean }>`
   height: calc(100vh - var(--navbar-height));
   display: flex;
-  gap: 20px;
+  gap: 1.25rem;
 
   ${({ $fullscreen, $isMobile }) =>
     !$fullscreen &&
@@ -44,10 +44,12 @@ const GraphWrapper = styled.div<{ $fullscreen: boolean; $isMobile?: boolean }>`
 `;
 
 const SidebarWrapper = styled.div`
-  border-radius: 20px;
+  border-radius: 1.25rem;
   border: ${({ theme }) => theme.graph.borderColor} solid 1px;
   padding: 10px;
-  flex: 2;
+  flex-grow: 2;
+  flex-shrink: 0; /* prevent shrinking */
+  flex-basis: 10rem; /* base width equal to min-width */
   overflow-y: auto;
   background-color: ${({ theme }) => theme.graph.backgroundColor};
 `;
@@ -75,7 +77,7 @@ const SearchBarWrapper = styled.div<{ $isMobile?: boolean }>`
 
 const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
   & h3.ant-typography {
-    font-size: 20px !important;
+    font-size: 1.25rem !important;
   }
 
   & h2.ant-typography {

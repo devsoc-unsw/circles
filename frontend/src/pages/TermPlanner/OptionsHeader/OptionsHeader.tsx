@@ -37,7 +37,7 @@ const OptionsHeader = () => {
     showYears
   } = useSettings();
   const iconStyles = {
-    fontSize: '20px',
+    fontSize: '1.25rem',
     color: theme === 'light' ? '#323739' : '#f1f1f1'
   };
 

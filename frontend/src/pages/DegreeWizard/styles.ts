@@ -13,7 +13,7 @@ const Subtitle = styled.div`
 
 const HorizontalLine = styled.hr`
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   border-color: rgb(251, 251, 251);
 `;
 
