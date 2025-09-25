@@ -42,7 +42,7 @@ const HeroSubTitle = styled.img`
   margin-left: -8px;
 
   @media (max-width: 768px) {
-    width: 120px;
+    width: 11.25rem;
     margin-top: -4px;
     margin-left: -6px;
   }
@@ -69,7 +69,7 @@ const HeroCTA = motion(styled.button`
     drop-shadow(-1px 1px 0 #9154de) drop-shadow(1px 1px 0 #9154de) drop-shadow(0 0 2px #9154de);
 
   @media (max-width: 768px) {
-    width: 220px;
+    width: 21.25rem;
     height: 3rem;
     font-size: 0.9rem;
     margin-bottom: 2rem;
@@ -97,7 +97,7 @@ const DevSocLogo = motion(styled.img`
   }
 
   @media (max-width: 480px) {
-    width: 120px;
+    width: 11.25rem;
   }
 `);
 

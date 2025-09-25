@@ -6,7 +6,7 @@ const SkeletonWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
-  gap: 20px;
+  gap: 1.25rem;
 `;
 
 export default {

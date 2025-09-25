@@ -238,11 +238,11 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
         }
       }}
     >
-      <div style={{ textAlign: 'center', padding: '20px 10px' }}>
+      <div style={{ textAlign: 'center', padding: '1.25rem 10px' }}>
         <div
           style={{
             marginBottom: '15px',
-            fontSize: '20px',
+            fontSize: '1.25rem',
             fontWeight: 'bold',
             color: '#9254de',
             textShadow: '0 0 10px rgba(146, 84, 222, 0.3)'
@@ -258,7 +258,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
             border: `3px solid #9254de`,
             borderRadius: '8px',
             backgroundColor: theme.body,
-            boxShadow: '0 0 20px rgba(146, 84, 222, 0.2)'
+            boxShadow: '0 0 1.25rem rgba(146, 84, 222, 0.2)'
           }}
         />
         <div

@@ -35,7 +35,7 @@ const InteractiveViewText = styled.p`
 const GradientBox = styled.img`
   width: 500px;
   height: 500px;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   background: -webkit-linear-gradient(#eeddff, #faeef5, #ffffff);
   padding: 30px;
 `;

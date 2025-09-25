@@ -52,8 +52,8 @@ const LinksWrapper = styled.div`
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
     margin-bottom: 40px;
   }
 `;

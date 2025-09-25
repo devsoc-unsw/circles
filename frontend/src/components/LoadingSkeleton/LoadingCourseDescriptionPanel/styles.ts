@@ -12,7 +12,7 @@ const SkeletonDescription = styled.div`
   justify-content: flex-start;
   width: 50vw;
   overflow: hidden;
-  gap: 20px;
+  gap: 1.25rem;
 `;
 
 const SkeletonAttributes = styled.div`
@@ -20,7 +20,7 @@ const SkeletonAttributes = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 20vw;
-  gap: 20px;
+  gap: 1.25rem;
 `;
 
 export default { SkeletonWrapper, SkeletonDescription, SkeletonAttributes };

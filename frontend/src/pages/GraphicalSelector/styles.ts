@@ -4,7 +4,7 @@ import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 const Wrapper = styled.div<{ $fullscreen: boolean }>`
   height: calc(100vh - var(--navbar-height));
   display: flex;
-  gap: 20px;
+  gap: 1.25rem;
 
   ${({ $fullscreen }) =>
     !$fullscreen &&
@@ -23,13 +23,13 @@ const GraphWrapper = styled.div<{ $fullscreen: boolean }>`
   ${({ $fullscreen }) =>
     !$fullscreen &&
     css`
-      border-radius: 20px;
+      border-radius: 1.25rem;
       border: ${({ theme }) => theme.graph.borderColor} solid 1px;
     `}
 `;
 
 const SidebarWrapper = styled.div`
-  border-radius: 20px;
+  border-radius: 1.25rem;
   border: ${({ theme }) => theme.graph.borderColor} solid 1px;
   padding: 10px;
   flex-grow: 2;
@@ -41,13 +41,13 @@ const SidebarWrapper = styled.div`
 
 const SearchBarWrapper = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 1.25rem;
+  right: 1.25rem;
 `;
 
 const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
   & h3.ant-typography {
-    font-size: 20px !important;
+    font-size: 1.25rem !important;
   }
 
   & h2.ant-typography {

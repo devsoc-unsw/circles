@@ -58,7 +58,7 @@ const LogoImg = styled.img<{ size: string }>`
         case '250px':
           return '180px';
         case '150px':
-          return '120px';
+          return '11.25rem';
         default:
           return props.size;
       }

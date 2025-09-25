@@ -8,11 +8,11 @@ const CourseBadgeIcon = styled.div`
   color: #fff;
   font-weight: normal;
   font-size: 12px;
-  line-height: 20px;
+  line-height: 1.25rem;
   text-align: center;
   border-radius: 50%;
-  min-width: 20px;
-  height: 20px;
+  min-width: 1.25rem;
+  height: 1.25rem;
   box-shadow: 0 0 0 1px #fff;
   cursor: pointer;
 `;
