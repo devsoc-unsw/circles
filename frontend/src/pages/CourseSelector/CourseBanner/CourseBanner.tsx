@@ -29,7 +29,7 @@ const CourseBanner = ({ courses }: CourseBannerProps) => {
 
   return (
     <S.BannerWrapper>
-      <Title level={2} className="text">
+      <Title level={2} className="text" style={{ marginTop: 20 }}>
         {degreeQuery.data?.programCode} - {getUserProgramTitle()}
       </Title>
       <CourseSearchBar

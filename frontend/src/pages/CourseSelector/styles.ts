@@ -14,6 +14,13 @@ const ContentWrapper = styled.div<{ $offset?: number }>`
   display: grid;
   grid-template-columns: ${({ $offset }) => ($offset ? `${$offset}px` : '20vw')} auto;
   height: var(--cs-bottom-cont-height);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    height: auto;
+    min-height: var(--cs-bottom-cont-height);
+  }
 `;
 
 const ContentResizer = styled.div<{ $offset?: number }>`
@@ -25,6 +32,10 @@ const ContentResizer = styled.div<{ $offset?: number }>`
   left: ${({ $offset }) => ($offset ? `${$offset}px` : '20vw')};
   margin-left: -3px;
   z-index: 100;
+
+  @media (max-width: 768px) {
+    display: none; /* Hide resizer on mobile */
+  }
 `;
 
 const InfographicContainer = styled.div`
@@ -52,6 +63,15 @@ const InfographicContainer = styled.div`
     width: 70%;
     height: 70%;
     max-height: 500px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    & img {
+      width: 90%;
+      height: auto;
+      max-height: 300px;
+    }
   }
 `;
 

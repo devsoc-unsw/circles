@@ -10,6 +10,18 @@ const UnplannedContainer = styled.div<{ $summerEnabled: boolean }>`
   place-self: stretch;
   min-width: 18em;
   align-items: center;
+
+  @media (max-width: 768px) {
+    position: relative;
+    top: unset;
+    right: unset;
+    width: 100%;
+    height: auto;
+    min-height: 35vh;
+    max-height: 35vh;
+    margin: 0;
+    flex-shrink: 0;
+  }
 `;
 
 const UnplannedTitle = styled(GridItem)`
@@ -96,6 +108,11 @@ const UnplannedBox = styled.ul<UnplannedBoxProps>`
       border-radius: 1em;
       min-width: 13em;
     `}
+  
+  @media (max-width: 768px) {
+    max-height: 30vh;
+    width: 30px;
+  }
 `;
 
 export default { UnplannedContainer, UnplannedBox, UnplannedTitle };
