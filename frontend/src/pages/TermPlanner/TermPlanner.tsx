@@ -289,7 +289,7 @@ const TermPlanner = () => {
           <Spinner text="Loading Table..." />
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
-            <S.PlannerContainer>
+            <S.PlannerContainer style={{ display: 'flex', flex: 1 }}>
               <S.PlannerGridWrapper $summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
                 <GridItem /> {/* Empty grid item for the year */}
                 {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
