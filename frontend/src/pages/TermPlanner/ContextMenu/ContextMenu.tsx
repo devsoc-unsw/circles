@@ -8,7 +8,8 @@ import {
   EditFilled,
   InfoCircleFilled,
   PieChartFilled,
-  PieChartOutlined
+  PieChartOutlined,
+  UsergroupAddOutlined
 } from '@ant-design/icons';
 import EditMarkModal from 'components/EditMarkModal';
 import { addTab } from 'reducers/courseTabsSlice';
@@ -19,9 +20,10 @@ type Props = {
   code: string;
   plannedFor: string | null;
   ignoreFromProgression: boolean;
+  groupwork: boolean;
 };
 
-const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
+const ContextMenu = ({ code, plannedFor, ignoreFromProgression, groupwork }: Props) => {
   const [openModal, setOpenModal] = useState(false);
 
   const dispatch = useDispatch();
@@ -71,6 +73,11 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
         ) : (
           <Item onClick={handleToggleProgression}>
             <PieChartOutlined style={iconStyle} /> Ignore Progression
+          </Item>
+        )}
+        {groupwork && (
+          <Item onClick={() => {}}>
+            <UsergroupAddOutlined style={iconStyle} /> Course has Groupwork
           </Item>
         )}
         <Item onClick={handleInfo}>

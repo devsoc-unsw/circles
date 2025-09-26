@@ -47,6 +47,7 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
     mark
   } = courses[code];
   const warningMessage = courses[code].warnings;
+  const groupwork = true;
 
   const isOffered = plannedFor
     ? courseHasOffering(courses[code], plannedFor.slice(0, 4), term as Term)
@@ -173,6 +174,7 @@ const DraggableCourse = ({ code, index, term, showMultiCourseBadge }: Props) => 
         code={code}
         plannedFor={plannedFor}
         ignoreFromProgression={ignoreFromProgression}
+        groupwork={groupwork}
       />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
