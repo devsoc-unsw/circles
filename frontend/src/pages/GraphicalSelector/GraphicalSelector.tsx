@@ -24,12 +24,6 @@ const GraphicalSelector = () => {
   const [loading, setLoading] = useState(true);
   const courses = coursesQuery.data || badCourses;
 
-  useEffect(() => {
-    if (isMobile) {
-      setFullscreen(true);
-    }
-  }, [isMobile]);
-
   const items = [
     {
       label: 'Course Info',
@@ -59,8 +53,8 @@ const GraphicalSelector = () => {
 
   return (
     <PageTemplate>
-      <S.Wrapper $fullscreen={fullscreen} ={isMobile}>
-        <S.GraphWrapper $fullscreen={fullscreen} ={isMobile}>
+      <S.Wrapper $fullscreen={fullscreen}>
+        <S.GraphWrapper $fullscreen={fullscreen}>
           <CourseGraph
             onNodeClick={(node) => {
               setCourseCode(node.getID());

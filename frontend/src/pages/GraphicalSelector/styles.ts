@@ -62,11 +62,11 @@ const SearchBarWrapper = styled.div`
 
 const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
   & h3.ant-typography {
-    font-size: 1.25rem !important;
+    font-size: 1.25rem;
   }
 
   & h2.ant-typography {
-    font-size: 26px !important;
+    font-size: 26px;
   }
 `;
 
@@ -78,37 +78,31 @@ const SpinnerWraper = styled.div`
 `;
 
 const MobileMenuButton = styled(Button)`
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  z-index: 10;
-  height: 56px;
-  width: 56px;
-  min-width: 56px;
-  border-radius: 50%;
-  font-size: 22px;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background: linear-gradient(135deg, #9254de 0%, #b37feb 100%);
+  display: none;
 
-  &.ant-btn {
+  @media (max-width: 800px) {
+    /* show on mobile */
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
     height: 56px;
     width: 56px;
+    min-width: 56px;
     border-radius: 50%;
-    padding: 0;
-    line-height: 1;
-  }
-
-  .anticon {
-    color: white;
-    display: flex;
+    font-size: 22px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: none;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    background: linear-gradient(135deg, #9254de 0%, #b37feb 100%);
+
+    .anticon {
+      color: white;
+    }
   }
 `;
 
