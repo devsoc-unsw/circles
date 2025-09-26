@@ -76,7 +76,7 @@ const GraphicalSelector = () => {
             setLoading={setLoading}
           />
           {!loading && (
-            <S.SearchBarWrapper $isMobile={isMobile}>
+            <S.SearchBarWrapper>
               <CourseSearchBar
                 userCourses={coursesQuery.data}
                 onSelectCallback={(code) => {

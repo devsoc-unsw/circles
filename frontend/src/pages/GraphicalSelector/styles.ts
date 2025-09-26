@@ -21,26 +21,24 @@ const Wrapper = styled.div<{ $fullscreen: boolean; $isMobile?: boolean }>`
     `}
 `;
 
-const GraphWrapper = styled.div<{ $fullscreen: boolean; $isMobile?: boolean }>`
+const GraphWrapper = styled.div<{ $fullscreen: boolean }>`
   height: 100%;
   width: 100%;
   overflow: hidden;
   flex: 5;
   position: relative;
 
-  ${({ $fullscreen, $isMobile }) =>
+  ${({ $fullscreen, theme }) =>
     !$fullscreen &&
     css`
       border-radius: 1.25rem;
-      border: ${({ theme }) => theme.graph.borderColor} solid 1px;
+      border: ${theme.graph.borderColor} solid 1px;
     `}
 
-  ${({ $isMobile }) =>
-    $isMobile &&
-    css`
-      height: calc(100vh - var(--navbar-height) - 20px);
-      min-height: 500px;
-    `}
+  @media (max-width: 800px) {
+    height: calc(100vh - var(--navbar-height) - 20px);
+    min-height: 500px;
+  }
 `;
 
 const SidebarWrapper = styled.div`
@@ -54,7 +52,7 @@ const SidebarWrapper = styled.div`
   background-color: ${({ theme }) => theme.graph.backgroundColor};
 `;
 
-const SearchBarWrapper = styled.div<{ $isMobile?: boolean }>`
+const SearchBarWrapper = styled.div`
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
