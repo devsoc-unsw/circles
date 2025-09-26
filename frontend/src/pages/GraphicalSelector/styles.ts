@@ -2,23 +2,25 @@ import { Button } from 'antd';
 import styled, { css } from 'styled-components';
 import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
-const Wrapper = styled.div<{ $fullscreen: boolean; $isMobile?: boolean }>`
+const Wrapper = styled.div<{ $fullscreen: boolean }>`
   height: calc(100vh - var(--navbar-height));
   display: flex;
   gap: 1.25rem;
 
-  ${({ $fullscreen, $isMobile }) =>
+  ${({ $fullscreen }) =>
     !$fullscreen &&
     css`
-      padding: ${$isMobile ? '10px' : '25px'};
+      padding: 25px;
+
+      @media (max-width: 800px) {
+        padding: 10px;
+      }
     `}
 
-  ${({ $isMobile }) =>
-    $isMobile &&
-    css`
-      flex-direction: column;
-      gap: 0;
-    `}
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 0;
+  }
 `;
 
 const GraphWrapper = styled.div<{ $fullscreen: boolean }>`

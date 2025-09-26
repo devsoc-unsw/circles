@@ -59,8 +59,8 @@ const GraphicalSelector = () => {
 
   return (
     <PageTemplate>
-      <S.Wrapper $fullscreen={fullscreen} $isMobile={isMobile}>
-        <S.GraphWrapper $fullscreen={fullscreen} $isMobile={isMobile}>
+      <S.Wrapper $fullscreen={fullscreen} ={isMobile}>
+        <S.GraphWrapper $fullscreen={fullscreen} ={isMobile}>
           <CourseGraph
             onNodeClick={(node) => {
               setCourseCode(node.getID());
