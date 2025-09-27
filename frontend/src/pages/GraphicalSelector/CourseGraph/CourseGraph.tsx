@@ -1,5 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ExpandAltOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import {
+  ExpandAltOutlined,
+  ShrinkOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined
+} from '@ant-design/icons';
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Switch } from 'antd';
 import { CourseEdge } from 'types/api';
@@ -14,6 +19,7 @@ import {
 import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { useAppWindowSize } from 'hooks';
+import useMediaQuery from 'hooks/useMediaQuery';
 import useSettings from 'hooks/useSettings';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
@@ -34,6 +40,8 @@ import S from './styles';
 
 type Props = {
   onNodeClick: (node: INode) => void;
+  handleToggleFullscreen: () => void;
+  fullscreen: boolean;
   focused?: string;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,7 +51,14 @@ interface CoursePrerequisite {
   [key: string]: string[];
 }
 
-const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
+const CourseGraph = ({
+  onNodeClick,
+  handleToggleFullscreen,
+  fullscreen,
+  focused,
+  loading,
+  setLoading
+}: Props) => {
   const degreeQuery = useUserDegree();
   const plannerQuery = useUserPlanner();
   const coursesQuery = useUserCourses();
@@ -51,6 +66,7 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
   const windowSize = useAppWindowSize();
   const { theme } = useSettings();
   const previousTheme = useRef<typeof theme>(theme);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const graphRef = useRef<Graph | null>(null);
   const initialisingStart = useRef(false); // prevents multiple graphs being loaded
@@ -64,6 +80,7 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
     {
       queryOptions: { enabled: !degreeQuery.isPending && degreeQuery.data && degreeQuery.isSuccess }
     },
+    // TODO-olli: this is ugly, but we will need some interesting type rules to allow this otherwise
     degreeQuery.data?.programCode ?? '',
     degreeQuery.data?.specs ?? []
   );
@@ -394,12 +411,14 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
     });
   };
 
+  // focus the focussed course
   useEffect(() => {
     if (focused) {
       graphRef.current?.focusItem(focused);
     }
   }, [focused]);
 
+  // handle resizing
   const resizeGraph = useCallback(() => {
     const graph = graphRef.current;
     const container = containerRef.current;
@@ -410,8 +429,14 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
   const resizeGraphDebounce = useDebouncedCallback(resizeGraph, 20, { maxWait: 20 });
 
   useEffect(() => {
+    // resize on window size change
     resizeGraphDebounce();
   }, [windowSize, resizeGraphDebounce]);
+
+  useEffect(() => {
+    // resize instantly for fullscreening
+    resizeGraph();
+  }, [fullscreen, resizeGraph]);
 
   useEffect(() => {
     if (!queriesSuccess) return;
@@ -420,9 +445,9 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
   }, [showUnlockedCourses, showingUnlockedCourses, queriesSuccess]);
 
   return (
-    <div ref={containerRef}>
+    <S.Wrapper ref={containerRef}>
       {loading || !queriesSuccess ? (
-        <S.SpinnerWrapper>
+        <S.SpinnerWrapper className="spinner-wrapper">
           <Spinner text="Loading graph..." />
         </S.SpinnerWrapper>
       ) : (
@@ -433,19 +458,18 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
             onChange={() => setShowingUnlockedCourses((prevState) => !prevState)}
           />
           <S.ButtonGroup>
-            <S.Button onClick={handleZoomIn}>
-              <ZoomInOutlined />
-            </S.Button>
-            <S.Button onClick={handleZoomOut}>
-              <ZoomOutOutlined />
-            </S.Button>
-            <S.Button className="fullscreen-toggle">
-              <ExpandAltOutlined />
-            </S.Button>
+            <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
+            <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
+            {!isMobile && (
+              <S.Button
+                onClick={handleToggleFullscreen}
+                icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
+              />
+            )}
           </S.ButtonGroup>
         </S.ToolsWrapper>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 

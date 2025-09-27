@@ -92,6 +92,15 @@ const ButtonGroup = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
-export default { SpinnerWrapper, ToolsWrapper, Wrapper, Button, ButtonGroup };
+export default {
+  SpinnerWrapper,
+  ToolsWrapper,
+  Wrapper,
+  Button,
+  ButtonGroup
+};
