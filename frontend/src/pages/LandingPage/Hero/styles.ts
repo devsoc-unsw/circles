@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const HeroSection = styled.section`
   margin-bottom: 22rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     margin-bottom: 8rem;
   }
 
@@ -25,7 +25,7 @@ const ContentWrapper = styled.div`
     text-align: center;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     padding: 16px 0;
     gap: 24px;
   }

@@ -19,7 +19,7 @@ const FooterContentContainer = styled.div`
   gap: 75px;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     gap: 40px;
     padding: 30px 0;
@@ -39,7 +39,7 @@ const FooterLogoWrapper = styled.div`
   justify-content: space-between;
   gap: 50px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 100%;
     align-items: center;
     gap: 30px;
@@ -53,7 +53,7 @@ const FooterLogoWrapper = styled.div`
 const DevSocLogo = styled.img`
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 200px;
   }
 
@@ -68,7 +68,7 @@ const FooterDisclaimer = styled.div`
   flex: 1;
   gap: 1.25rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     text-align: left;
     gap: 16px;
   }

@@ -1,74 +1,65 @@
 import { Button } from 'antd';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
-const Wrapper = styled.div<{ $fullscreen: boolean }>`
+const Wrapper = styled.div`
   height: calc(100vh - var(--navbar-height));
   display: flex;
   gap: 1.25rem;
-
-  ${({ $fullscreen }) =>
-    !$fullscreen &&
-    css`
-      padding: 25px;
-
-      @media (max-width: 800px) {
-        padding: 10px;
-      }
-    `}
-
+  padding: 25px;
   @media (max-width: 800px) {
     flex-direction: column;
     gap: 0;
+    padding: 10px;
   }
 `;
 
-const GraphWrapper = styled.div<{ $fullscreen: boolean }>`
+const GraphWrapper = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
   flex: 5;
   position: relative;
-
-  ${({ $fullscreen, theme }) =>
-    !$fullscreen &&
-    css`
-      border-radius: 1.25rem;
-      border: ${theme.graph.borderColor} solid 1px;
-    `}
+  border-radius: 1.25rem;
+  border: ${({ theme }) => theme.graph.borderColor} solid 1px;
 
   @media (max-width: 800px) {
     height: calc(100vh - var(--navbar-height) - 20px);
     min-height: 500px;
+    border: none;
+    border-radius: 0;
   }
 `;
 
 const SidebarWrapper = styled.div`
   border-radius: 1.25rem;
   border: ${({ theme }) => theme.graph.borderColor} solid 1px;
-  padding: 10px;
+  padding: 1rem;
   flex-grow: 2;
-  flex-shrink: 0; /* prevent shrinking */
-  flex-basis: 10rem; /* base width equal to min-width */
+  flex-shrink: 0;
+  flex-basis: 10rem;
   overflow-y: auto;
   background-color: ${({ theme }) => theme.graph.backgroundColor};
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const SearchBarWrapper = styled.div`
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
-`;
 
-const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)`
-  & h3.ant-typography {
-    font-size: 1.25rem;
-  }
-
-  & h2.ant-typography {
-    font-size: 26px;
+  @media (max-width: 800px) {
+    width: 100%;
+    right: 0;
+    top: 0.75rem;
+    padding: 0 1rem;
   }
 `;
+
+const CourseDescriptionPanel = styled(CourseDescriptionPanelComp)``;
 
 const SpinnerWraper = styled.div`
   position: absolute;
@@ -81,7 +72,6 @@ const MobileMenuButton = styled(Button)`
   display: none;
 
   @media (max-width: 800px) {
-    /* show on mobile */
     display: flex;
     position: absolute;
     bottom: 20px;
@@ -99,10 +89,6 @@ const MobileMenuButton = styled(Button)`
     justify-content: center;
     padding: 0;
     background: linear-gradient(135deg, #9254de 0%, #b37feb 100%);
-
-    .anticon {
-      color: white;
-    }
   }
 `;
 

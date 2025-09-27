@@ -11,7 +11,7 @@ const FeatureTitle = styled.h1`
   font-weight: 650;
   margin-top: 90px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 36px;
     margin-bottom: 50px;
     margin-top: 60px;
@@ -33,7 +33,7 @@ const CardsSection = styled.div`
   position: relative;
   margin-bottom: 200px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     gap: 1.25rem;
     margin-bottom: 100px;
     padding: 0 16px;
@@ -63,7 +63,7 @@ const Card = styled.div`
       0 10px 10px rgba(0, 0, 0, 0.22);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 280px;
     height: 300px;
     padding: 35px 1.25rem;
@@ -125,7 +125,7 @@ const BlobBackground = styled.img`
     top: 50%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 120%;
     top: 45%;
   }
