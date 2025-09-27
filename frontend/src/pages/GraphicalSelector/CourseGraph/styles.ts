@@ -24,7 +24,6 @@ const ToolsWrapper = styled.div`
     right: 20px;
     left: auto;
     transform: none;
-    background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(8px);
     padding: 12px 16px;
     border-radius: 16px;
