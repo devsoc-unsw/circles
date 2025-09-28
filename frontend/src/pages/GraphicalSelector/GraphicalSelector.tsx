@@ -87,6 +87,8 @@ const GraphicalSelector = () => {
                   setCourseCode(code);
                   if (isMobile) {
                     setDrawerOpen(true);
+                  } else {
+                    setFullscreen(false);
                   }
                 }}
               />
