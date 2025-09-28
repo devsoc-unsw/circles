@@ -5,7 +5,6 @@ import { badCourses } from 'types/userResponse';
 import { useUserCourses } from 'utils/apiHooks/user';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
-import SidebarDrawer from 'components/SidebarDrawer';
 import useMediaQuery from 'hooks/useMediaQuery';
 import CS from './common/styles';
 import { COURSE_INFO_TAB, HELP_TAB, UNILECTIVES_TAB } from './constants';
@@ -15,20 +14,20 @@ import S from './styles';
 import UnilectiveReview from './UnilectiveReview/UnilectiveReview';
 
 const GraphicalSelector = () => {
+  // Note that mobile view uses fullscreen only for convenience and ease of use, as
+  // non-full screen does not provide enough space
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [fullscreen, setFullscreen] = useState(isMobile);
+  useEffect(() => {
+    setFullscreen(isMobile);
+  }, [isMobile]);
+
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const coursesQuery = useUserCourses();
   const [loading, setLoading] = useState(true);
   const courses = coursesQuery.data || badCourses;
-
-  useEffect(() => {
-    if (isMobile) {
-      setFullscreen(true);
-    }
-  }, [isMobile]);
 
   const items = [
     {
@@ -64,9 +63,14 @@ const GraphicalSelector = () => {
           <CourseGraph
             onNodeClick={(node) => {
               setCourseCode(node.getID());
-              setActiveTab('course-info');
-              if (isMobile) {
-                setMobileDrawerOpen(true);
+              setActiveTab(COURSE_INFO_TAB);
+              // Always open drawer on node click, saves state so will be open
+              // if width changes to mobile, only mobile will load the drawer, otherwise
+              // display: none
+              setDrawerOpen(true);
+              // toggles fullscreen off if in normal fullscreen mode
+              if (fullscreen && !isMobile) {
+                setFullscreen(true);
               }
             }}
             fullscreen={fullscreen}
@@ -82,33 +86,26 @@ const GraphicalSelector = () => {
                 onSelectCallback={(code) => {
                   setCourseCode(code);
                   if (isMobile) {
-                    setMobileDrawerOpen(true);
+                    setDrawerOpen(true);
                   }
                 }}
-                style={{ width: isMobile ? '100%' : '25rem' }}
               />
             </S.SearchBarWrapper>
           )}
-          {isMobile && !loading && (
+
+          {/* Mobile-only floating button */}
+          {!loading && (
             <S.MobileMenuButton
               type="primary"
               icon={<InfoCircleOutlined />}
-              onClick={() => setMobileDrawerOpen(true)}
+              onClick={() => setDrawerOpen(true)}
               title="Course Information"
             />
           )}
-          {fullscreen && !isMobile && (
-            <SidebarDrawer>
-              <Tabs
-                items={items}
-                activeKey={activeTab}
-                onChange={setActiveTab}
-                className="graph-sidebar-fullscreen"
-              />
-            </SidebarDrawer>
-          )}
         </S.GraphWrapper>
-        {!fullscreen && !isMobile && (
+
+        {/* Desktop sidebar */}
+        {!fullscreen && (
           <S.SidebarWrapper>
             <Tabs
               items={items}
@@ -118,13 +115,15 @@ const GraphicalSelector = () => {
             />
           </S.SidebarWrapper>
         )}
+
+        {/* Mobile drawer that opens when course is searched on mobile */}
         {isMobile && (
           <Drawer
             title="Course Information"
             placement="bottom"
-            onClose={() => setMobileDrawerOpen(false)}
-            open={mobileDrawerOpen}
-            height="70vh"
+            onClose={() => setDrawerOpen(false)}
+            open={drawerOpen}
+            height="80vh"
             className="mobile-course-drawer"
           >
             <Tabs

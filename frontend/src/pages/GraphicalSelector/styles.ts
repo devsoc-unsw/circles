@@ -57,7 +57,7 @@ const SidebarWrapper = styled.div`
   overflow-y: auto;
   background-color: ${({ theme }) => theme.graph.backgroundColor};
 
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -106,7 +106,7 @@ const MobileMenuButton = styled(Button)`
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border: none;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -126,6 +126,15 @@ const MobileMenuButton = styled(Button)`
     align-items: center;
     justify-content: center;
   }
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+const FullscreenSidebar = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;
 
 export default {
@@ -135,5 +144,6 @@ export default {
   SidebarWrapper,
   SearchBarWrapper,
   SpinnerWraper,
-  MobileMenuButton
+  MobileMenuButton,
+  FullscreenSidebar
 };
