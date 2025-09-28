@@ -14,30 +14,16 @@ const Wrapper = styled.div<{ $sidebar?: boolean }>`
       display: flex;
       flex-direction: row;
       gap: 4rem;
-
-      @media (max-width: 768px) {
-        flex-direction: column;
-        gap: 2rem;
-        padding: 16px;
-      }
     `}
 `;
 
 const MainWrapper = styled.div`
   flex-basis: 75%;
   flex-grow: 1;
-
-  @media (max-width: 768px) {
-    flex-basis: 100%;
-  }
 `;
 
 const SidebarWrapper = styled.div`
   flex-basis: 25%;
-
-  @media (max-width: 768px) {
-    flex-basis: 100%;
-  }
 `;
 
 const TitleWrapper = styled.div<{ $sidebar?: boolean }>`
@@ -45,12 +31,6 @@ const TitleWrapper = styled.div<{ $sidebar?: boolean }>`
     $sidebar &&
     css`
       align-items: center;
-
-      @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
     `}
 `;
 

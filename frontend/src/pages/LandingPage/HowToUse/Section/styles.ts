@@ -7,7 +7,7 @@ const LeftSubTitle = styled.div`
   margin-top: 3rem;
   font-weight: 800;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 5rem;
     margin-top: 2rem;
   }
@@ -23,7 +23,7 @@ const ContentContainer = styled.div`
   margin: 3rem 0 15rem 0;
   padding: 2rem 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     margin: 2rem 0 8rem 0;
     padding: 1.5rem 0;
   }
@@ -39,7 +39,7 @@ const ContentHeading = styled.h1`
   font-weight: 700;
   font-size: 3rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 2.2rem;
   }
 
@@ -55,7 +55,7 @@ const SubContent = styled.div`
   font-size: 1.25rem;
   font-weight: 500;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 18px;
     line-height: 1.8;
     margin-top: 1.5rem;

@@ -19,7 +19,7 @@ const ToolsWrapper = styled.div`
   gap: 10px;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     bottom: 20px;
     right: 20px;
     left: auto;
@@ -61,7 +61,7 @@ const Button = styled(antdButton)`
     background-color: ${({ theme }) => theme.genericButton.hoverBackgroundColor};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     height: 40px;
     width: 40px;
     border-radius: 20px;
@@ -92,6 +92,15 @@ const ButtonGroup = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
-export default { SpinnerWrapper, ToolsWrapper, Wrapper, Button, ButtonGroup };
+export default {
+  SpinnerWrapper,
+  ToolsWrapper,
+  Wrapper,
+  Button,
+  ButtonGroup
+};
