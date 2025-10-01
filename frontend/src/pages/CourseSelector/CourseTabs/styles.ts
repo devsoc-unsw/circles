@@ -2,24 +2,32 @@ import styled from 'styled-components';
 
 const CourseTabsWrapper = styled.div`
   background-color: ${({ theme }) => theme.purpleLight};
-  padding-left: calc(20vw - 2px); // 20vw - width of menu sidebar, 2px is tab margin-left
-  padding-right: 25px;
-  width: 100vw;
+  width: 100%;
   height: var(--cs-tabs-cont-height);
   display: flex;
   align-items: center;
+  flex-wrap: nowrap; // Prevent the items from wrapping
+  justify-content: flex-start;
 `;
 
 const ShowAllCourses = styled.div`
-  position: absolute;
-  left: 20px;
+  background-color: ${({ theme }) => theme.purpleLight};
   display: flex;
+  flex-direction: row;
   align-items: center;
   width: calc(14vw - 2px);
 `;
 
 const TextShowCourses = styled.div`
   margin: 5px;
+  white-space: nowrap;
+
+  // Responsible for rendering "courses" part of show all courses on larger screens
+  @media (min-width: 1000px) {
+    &::after {
+      content: ' courses';
+    }
+  }
 `;
 
 const CourseTabsSection = styled.div`
@@ -32,7 +40,7 @@ const CourseTabsSection = styled.div`
 `;
 
 const TabsCloseAll = styled.div`
-  margin: 0 15px;
+  margin: 0 1rem;
 `;
 
 export default {

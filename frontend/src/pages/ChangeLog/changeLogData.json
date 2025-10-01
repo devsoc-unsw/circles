@@ -1,0 +1,20 @@
+[
+  {
+    "date": "13/07/2025",
+    "flair": "Added Accounts and Changelog Page",
+    "major": [
+      {
+        "main": "Added support for user accounts",
+        "details": ["Users can now login with their zIDs"]
+      }
+    ],
+    "minor": [
+      {
+        "main": "Introduced changelog page"
+      },
+      {
+        "main": "Added hamburger menu for navigation bar on larger screens"
+      }
+    ]
+  }
+]

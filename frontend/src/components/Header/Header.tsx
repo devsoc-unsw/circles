@@ -34,7 +34,7 @@ const Header = () => {
   );
 
   const items = routes
-    .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
+    .filter((route) => (!route.dev || inDev) && route.inHamburger === false) // filter out in dev features if not in dev mode
     .map((route) => ({
       label: route.label,
       key: route.link
@@ -56,12 +56,18 @@ const Header = () => {
       />
       <ThemeToggle />
       <PlannerCart />
+      <Button
+        type="primary"
+        size="large"
+        onClick={() => setShowDrawer(true)}
+        icon={<BarsOutlined style={{ color: '#fff', fontSize: '1.7rem' }} />}
+      />
     </S.HeaderContent>
   );
 
   return (
     <S.HeaderWrapper>
-      <Link to="/degree-wizard">
+      <Link to="/">
         <S.LogoWrapper>
           <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
           <Title
@@ -76,9 +82,7 @@ const Header = () => {
           </Title>
         </S.LogoWrapper>
       </Link>
-
       {isSmall ? smallHeader : largeHeader}
-
       <Drawer onClose={() => setShowDrawer(false)} open={showDrawer}>
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>

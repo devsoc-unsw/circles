@@ -2,6 +2,35 @@
 
 Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team to work on [circles360](https://circles360.github.io/) which inspired the current Circles you see today! :)
 
+## 2025
+### Directors
+- Matthew Lim (@matthew-lim-matthew-lim)  - director
+- Keats Mackay (@Keatsm)     - director
+
+### Members
+- Jason Cong Chen (@jcongc)
+- Dylan Liang (@DylanSHLiang)
+- Kevin Lin (@KevinLin1803)
+- Alex Lee
+- Winnie Chan (@winnieee-chan)
+- Valentina Guedez Mercado (@val-guedez)
+- Elaine Zhang (@imagine-hussain)
+- Jenny Mengzhen Liu
+
+## 2024
+### Directors
+- Martin Knezevic (@martanman)  - dire
+- Olli Bowers (@ollibowers)     - ctor
+
+### Our Members
+- Fai Chan (@chanfaileui)
+- Lucas Harvey (@lhvy)
+- Salina Huang (@Salina-H)
+- Joel Jose (@justjo3l)
+- Deki Lhamu (@pikapiku)
+- Hussain Nawaz (@imagine-hussain)
+- Jackson Wang (@Arnold45202)
+
 ## 2023
 ### Directors
 - Leonardo Fan (@leonardo-fan) - Frontend Director
@@ -10,12 +39,13 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 ### Full Stack Members
 - Christian Lam (@ui-Auxilary)
 - Martin Knezevic (@martanman)
-- Oliver Bowers (@ollibowers)
+- Olli Bowers (@ollibowers)
 - Vinayak Fialok (@VinayakFia)
 - Luke Prior (@LukePrior)
 - Lucas Harvey (@lhvy)
 - Kobi Beckett (@Bahnschrift)
 - Sandeep Das (@Dasyure)
+- Nyah Inglis (@distrib134)
 
 ## 2022
 ### Leads
@@ -28,7 +58,7 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 - Uzaif Sheikh (@Uzaif-Sheikh)
 - Kellie Yau (@kellieyau)
 - Xing He (@xincczn)
-- Oliver Bowers (@ollibowers)
+- Olli Bowers (@ollibowers)
 - Christian Lam (@ui-Auxilary)
 
 ### Backend
@@ -39,6 +69,7 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 - Sona Reddy (@sonar3d)
 - Elliot Rotenstein (@sixohtoo)
 - Nyah Inglis (@distrib134)
+- Luke Banicevic (@banaboi)
 
 ## 2021
 ### Leads

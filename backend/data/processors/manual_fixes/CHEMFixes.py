@@ -1,5 +1,5 @@
 """
-https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
+https://github.com/devsoc-unsw/circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
 Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
@@ -30,7 +30,8 @@ def fix_conditions():
     CONDITIONS["CHEM1521"][PROCESSED] = CHEM_1521()
     CONDITIONS["CHEM1151"][PROCESSED] = CHEM_1151()
     CONDITIONS["CHEM1829"][PROCESSED] = CHEM_1829()
-    CONDITIONS["CHEM1831"][PROCESSED] = CHEM_1831()
+    if "CHEM1831" in CONDITIONS:
+        CONDITIONS["CHEM1831"][PROCESSED] = CHEM_1831()
     CONDITIONS["CHEM1832"][PROCESSED] = CHEM_1832()
     CONDITIONS["CHEM1777"][PROCESSED] = CHEM_1777()
     CONDITIONS["CHEM2051"][PROCESSED] = CHEM_2051()

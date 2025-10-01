@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const AttributeWrapper = styled.div`
   border-bottom: ${({ theme }) => theme.courseDescription.paddingColor} solid 1px; // grey-5
-  padding: 10px 0;
+  padding: 0.6rem 0;
 `;
 
 const AttributeText = styled.div`
@@ -10,7 +10,7 @@ const AttributeText = styled.div`
 `;
 
 const TermWrapper = styled.div`
-  margin-top: 10px;
+  margin-top: 0.6rem;
 `;
 
 const AttributesWrapperConcise = styled.div`
@@ -19,7 +19,7 @@ const AttributesWrapperConcise = styled.div`
 `;
 
 const AttributeConcise = styled.div`
-  padding: 16px 4px;
+  padding: 1rem 0.25rem;
   flex: 1 1 0;
   text-align: center;
 
@@ -36,11 +36,30 @@ const Link = styled.a`
   }
 `;
 
+const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const DialWrapper = styled.div`
+  text-align: center;
+  width: 85px;
+`;
+
+const DialLabel = styled.p`
+  font-size: small;
+`;
+
 export default {
   AttributeWrapper,
   AttributeText,
   TermWrapper,
   AttributesWrapperConcise,
   AttributeConcise,
-  Link
+  Link,
+  RatingWrapper,
+  DialWrapper,
+  DialLabel
 };

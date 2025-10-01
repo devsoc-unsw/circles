@@ -13,7 +13,7 @@ const Subtitle = styled.div`
 
 const HorizontalLine = styled.hr`
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   border-color: rgb(251, 251, 251);
 `;
 
@@ -23,9 +23,16 @@ const StepsWrapper = styled.div`
   gap: 1.5rem;
 `;
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export default {
   ContainerWrapper,
   HorizontalLine,
   Subtitle,
-  StepsWrapper
+  StepsWrapper,
+  HeaderWrapper
 };

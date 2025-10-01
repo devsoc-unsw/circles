@@ -7,11 +7,11 @@ const PlannerCartRoot = styled.div`
 `;
 
 const PlannerCartContainer = styled.div`
-  padding: 20px;
+  padding: 1.25rem;
   position: absolute;
   min-height: 200px;
   height: 380px;
-  width: 320px;
+  width: 31.25rem;
   top: 35px;
   right: 0px;
   border-radius: 5px;

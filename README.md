@@ -1,7 +1,7 @@
 [![DevSoc](https://img.shields.io/badge/Devsoc-dark?color=3c424b)](https://devsoc.app/)
 [![Status](https://img.shields.io/website?url=https%3A%2F%2Fcircles.devsoc.app%2F&up_message=online&label=status)](https://circles.devsoc.app/)
-[![Unit Tests](https://github.com/devsoc-unsw/Circles/actions/workflows/ci.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/ci.yml)
-[![Pylint](https://github.com/devsoc-unsw/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/devsoc-unsw/Circles/actions/workflows/pylinter.yml)
+[![Unit Tests](https://github.com/devsoc-unsw/circles/actions/workflows/ci.yml/badge.svg)](https://github.com/devsoc-unsw/circles/actions/workflows/ci.yml)
+[![Pylint](https://github.com/devsoc-unsw/circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/devsoc-unsw/circles/actions/workflows/pylinter.yml)
 ![Lines of code](https://img.shields.io/tokei/lines/github/devsoc-unsw/Circles)
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/devsoc-unsw/Circles)
 
@@ -9,9 +9,9 @@
 
 Tired of using a poorly laid out spreadsheet to cobble together a plan to follow for the next 3-8 years of your life? Have no fear, Circles is here!
 
-Circles is a UNSW degree planner where you can explore and validate your degree structure.
+Circles is a UNSW degree planner and course discovery tool where you can explore and validate your degree structure.
 
-You can find a live build of Circles at [https://circles.devsoc.app](https://circles.devsoc.app/).
+Visit and bookmark Circles at [https://circles.devsoc.app](https://circles.devsoc.app/).
 
 ## Features
 
@@ -29,17 +29,13 @@ NOTE: we currently only support a selection of degrees - but we will add more!
   - Validates your progression to make sure you've met the requirements for future courses
   - Allows you to generate a saveable and sharable image of your plan
 
-- Progression checker: (NEW PAGE!)
+- Progression checker:
   - Lets you understand which requirements you have met and which you still need to complete
   - Shows you what courses you can do to complete your degree
 
-## Future Plans
-
-This project is rapidly expanding and our roadmap includes features such as:
-
 - Graphical view:
   - A graphical model of your degree plan, to show you a beautiful dependency tree of courses relevant to your degree
-  - Will adapt to your degree structure
+  - Adapts to your degree structure
 
 # Our team
 
@@ -47,4 +43,6 @@ We are a team that is part of DevSoc! See [TEAM.md](./TEAM.md) for more informat
 
 Also, special thanks to James Ji, Vincent Xiao, Hayes Choy for being the first team to work on and inspire Circles :)
 
-[For further development documentation, visit our confluence page!](https://devsoc.atlassian.net/wiki/spaces/C/pages/756966/About+Circles)
+Information to run Circles on your local machine are available in the [frontend](./frontend/README.md) and [backend](./backend/README.md) `README.md` files.
+
+For further development documentation, visit our [confluence page](https://devsoc.atlassian.net/wiki/spaces/C/pages/756966/About+Circles)! 

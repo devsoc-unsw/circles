@@ -10,6 +10,18 @@ const FeatureTitle = styled.h1`
   margin-bottom: 75px;
   font-weight: 650;
   margin-top: 90px;
+
+  @media (max-width: 800px) {
+    font-size: 36px;
+    margin-bottom: 50px;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 28px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
 `;
 
 const CardsSection = styled.div`
@@ -20,19 +32,47 @@ const CardsSection = styled.div`
   gap: 30px;
   position: relative;
   margin-bottom: 200px;
+
+  @media (max-width: 800px) {
+    gap: 1.25rem;
+    margin-bottom: 100px;
+    padding: 0 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 16px;
+    margin-bottom: 60px;
+    padding: 0 12px;
+  }
 `;
 
 const Card = styled.div`
   background: #fff;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   height: 275px;
   position: relative;
   width: 250px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 45px 25px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  @media (max-width: 800px) {
+    width: 280px;
+    height: 300px;
+    padding: 35px 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 260px;
+    height: 280px;
+    padding: 30px 18px;
   }
 `;
 
@@ -46,12 +86,12 @@ const IconContainer = styled.div`
   background: ${({ color }) => color};
 `;
 
-const FeatureSubtitle = styled.h3<{ startColor: string; endColor: string }>`
-  font-size: 20px;
+const FeatureSubtitle = styled.h3<{ $startColor: string; $endColor: string }>`
+  font-size: 1.25rem;
   background: -webkit-linear-gradient(
     45deg,
-    ${({ startColor }) => startColor},
-    ${({ endColor }) => endColor}
+    ${({ $startColor }) => $startColor},
+    ${({ $endColor }) => $endColor}
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -83,6 +123,16 @@ const BlobBackground = styled.img`
 
   @media (max-width: 902px) {
     top: 50%;
+  }
+
+  @media (max-width: 800px) {
+    width: 120%;
+    top: 45%;
+  }
+
+  @media (max-width: 480px) {
+    width: 140%;
+    top: 40%;
   }
 `;
 

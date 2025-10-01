@@ -1,73 +1,71 @@
-import React, { Suspense, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
-import type { LiquidConfig } from '@ant-design/plots';
-import Spinner from 'components/Spinner';
-import { darkGrey, lightGrey, lightYellow, purple, yellow } from 'config/constants';
-import type { RootState } from 'config/store';
+import React, { useEffect, useMemo, useState } from 'react';
+import LiquidFillGauge from 'react-liquid-gauge';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import { darkGrey, lightGrey, lightYellow } from 'config/constants';
+import useSettings from 'hooks/useSettings';
 
 type Props = {
   completedUOC: number;
   totalUOC: number;
 };
 
-const Liquid = React.lazy(() =>
-  import('@ant-design/plots').then((plot) => ({ default: plot.Liquid }))
-);
+type TextRendererProps = {
+  value: number;
+  width: number;
+  height: number;
+  textSize: number;
+  percentSign: string;
+};
 
-const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
-  const [percent, setPercent] = useState(0);
+const liquidTextRenderer = ({ value, width, height, textSize, percentSign }: TextRendererProps) => {
+  const radius = Math.min(height / 2, width / 2);
+  const textPixels = (textSize * radius) / 2;
+
+  return (
+    <tspan>
+      <tspan className="value" style={{ fontSize: textPixels }}>
+        {Math.round(value)}
+      </tspan>
+      <tspan style={{ fontSize: textPixels * 0.6 }}>{percentSign}</tspan>
+    </tspan>
+  );
+};
+
+const LiquidProgressChart: React.FC<Props> = ({ completedUOC, totalUOC }) => {
+  const [percent, setPercent] = useState<number>(0);
   const fillValue = Math.min(completedUOC / totalUOC, 1);
 
-  // light mode text color varies
-  let textColor = '';
-  if (percent < 0.31) {
-    textColor = lightYellow;
-  } else if (percent < 0.45) {
-    textColor = lightGrey;
-  } else if (percent < 0.56) {
-    textColor = darkGrey;
-  } else {
-    textColor = 'white';
-  }
+  const { theme } = useSettings();
 
-  // dark mode always has white text
-  const { theme } = useSelector((state: RootState) => state.settings);
-  if (theme === 'dark') {
-    textColor = 'white';
-  }
+  const fillColor = useMemo(() => {
+    if (fillValue > 0.45) {
+      return theme === 'dark' ? '#663399' : '#8855cc';
+    }
+    return theme === 'dark' ? '#ffff66' : '#ffcc00';
+  }, [fillValue, theme]);
 
-  const config: LiquidConfig = {
-    percent,
-    radius: 1,
-    width: 320,
-    height: 320,
-    autoFit: false,
-    statistic: {
-      title: {
-        formatter: () => 'Progress',
-        style: () => ({
-          fill: textColor
-        })
-      },
-      content: {
-        style: {
-          fontSize: '60px',
-          lineHeight: 1,
-          fill: textColor
-        },
-        formatter: () => `${(percent * 100).toFixed(0)}%`
-      }
-    },
-    liquidStyle: () => ({
-      fill: percent > 0.45 ? purple : yellow,
-      stroke: percent > 0.45 ? purple : yellow
-    })
+  const textColor = useMemo(() => {
+    if (theme === 'dark') return '#fff';
+    if (percent < 0.31) return lightYellow;
+    if (percent < 0.45) return lightGrey;
+    if (percent < 0.56) return darkGrey;
+    return 'white';
+  }, [percent, theme]);
+
+  const circleStyle = {
+    fill: fillColor
   };
-  // increment percentage from 0 to fillValue
+
+  const waveStyle = {
+    fill: fillColor
+  };
+
+  const commonTextStyle = {
+    fill: textColor
+  };
+
   useEffect(() => {
     let data = 0.0;
-    const time = 30;
     const interval = setInterval(() => {
       data += 0.01;
       if (fillValue && data <= fillValue + 0.01) {
@@ -75,20 +73,58 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
       } else {
         clearInterval(interval);
       }
-    }, time);
+    }, 30);
+    return () => clearInterval(interval);
   }, [fillValue]);
 
   return (
-    <div>
-      <ReactTooltip place="bottom" type={theme === 'dark' ? 'light' : 'dark'}>
+    <>
+      <div id="liquidChart">
+        <div data-tip>
+          <LiquidFillGauge
+            width={320}
+            height={320}
+            value={percent * 100}
+            percent="%"
+            margin={0}
+            textSize={0.5}
+            textOffsetX={0}
+            textOffsetY={15}
+            outerRadius={0.91}
+            textRenderer={({
+              value,
+              width,
+              height,
+              textSize,
+              percent: percentSign
+            }: {
+              value: number;
+              width: number;
+              height: number;
+              textSize: number;
+              percent: string;
+            }) => liquidTextRenderer({ value, width, height, textSize, percentSign })}
+            riseAnimation
+            waveAnimation
+            waveFrequency={2}
+            waveAmplitude={1}
+            gradient={false}
+            circleStyle={circleStyle}
+            waveStyle={waveStyle}
+            textStyle={commonTextStyle}
+            waveTextStyle={commonTextStyle}
+          />
+        </div>
+      </div>
+      <ReactTooltip
+        noArrow
+        anchorSelect="#liquidChart"
+        place="bottom"
+        variant={theme === 'dark' ? 'light' : 'dark'}
+      >
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
-      <div data-tip>
-        <Suspense fallback={<Spinner text="Loading Progress..." />}>
-          <Liquid {...config} />
-        </Suspense>
-      </div>
-    </div>
+    </>
   );
 };
 

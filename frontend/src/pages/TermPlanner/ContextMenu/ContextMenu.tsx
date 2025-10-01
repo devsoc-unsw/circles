@@ -9,11 +9,16 @@ import {
   InfoCircleFilled,
   PieChartFilled,
   PieChartOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
+  StarOutlined
 } from '@ant-design/icons';
+import {
+  useRemoveCourseMutation,
+  useToggleIgnoreFromProgressionMutation,
+  useUnscheduleCourseMutation
+} from 'utils/apiHooks/user';
 import EditMarkModal from 'components/EditMarkModal';
 import { addTab } from 'reducers/courseTabsSlice';
-import { removeCourse, toggleIgnoreFromProgression, unschedule } from 'reducers/plannerSlice';
 import 'react-contexify/ReactContexify.css';
 
 type Props = {
@@ -25,26 +30,26 @@ type Props = {
 
 const ContextMenu = ({ code, plannedFor, ignoreFromProgression, groupwork }: Props) => {
   const [openModal, setOpenModal] = useState(false);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const showEditMark = () => setOpenModal(true);
-  const handleDelete = () => dispatch(removeCourse(code));
-  const handleUnschedule = () => {
-    dispatch(
-      unschedule({
-        code,
-        destIndex: null
-      })
-    );
-  };
+  const handleUnschedule = useUnscheduleCourseMutation();
+
+  const handleDelete = useRemoveCourseMutation();
+
   const handleInfo = () => {
     navigate('/course-selector');
     dispatch(addTab(code));
   };
+
+  const ignoreFromProgressionMutation = useToggleIgnoreFromProgressionMutation();
   const handleToggleProgression = () => {
-    dispatch(toggleIgnoreFromProgression(code));
+    ignoreFromProgressionMutation.mutate(code);
+  };
+
+  const handleUnilective = () => {
+    window.open(`https://unilectives.devsoc.app/course/${code}`, '_blank');
   };
 
   const iconStyle = {
@@ -56,11 +61,17 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression, groupwork }: Pro
     <>
       <Menu id={`${code}-context`} theme="dark">
         {plannedFor && (
-          <Item onClick={handleUnschedule}>
+          <Item
+            onClick={() =>
+              handleUnschedule.mutate({
+                courseCode: code
+              })
+            }
+          >
             <FaRegCalendarTimes style={iconStyle} /> Unschedule
           </Item>
         )}
-        <Item onClick={handleDelete}>
+        <Item onClick={() => handleDelete.mutate(code)}>
           <DeleteFilled style={iconStyle} /> Delete from Planner
         </Item>
         <Item onClick={showEditMark}>
@@ -82,6 +93,9 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression, groupwork }: Pro
         )}
         <Item onClick={handleInfo}>
           <InfoCircleFilled style={iconStyle} /> View Info
+        </Item>
+        <Item onClick={handleUnilective}>
+          <StarOutlined style={iconStyle} /> View on unilectives
         </Item>
       </Menu>
       <EditMarkModal code={code} open={openModal} onCancel={() => setOpenModal(false)} />

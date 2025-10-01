@@ -7,7 +7,7 @@ const FooterBlob = styled.img`
 const FooterWrapper = styled.div`
   background-color: #9154de;
   /* TODO: Hack coz of pixel diff between blob and footer content */
-  margin-top: -0.5px;
+  margin-top: -1px;
 `;
 
 const FooterContentContainer = styled.div`
@@ -18,6 +18,18 @@ const FooterContentContainer = styled.div`
   padding: 40px 0;
   gap: 75px;
   flex-wrap: wrap;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 40px;
+    padding: 30px 0;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    gap: 30px;
+    padding: 1.25rem 0;
+  }
 `;
 
 const FooterLogoWrapper = styled.div`
@@ -26,17 +38,45 @@ const FooterLogoWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 50px;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    align-items: center;
+    gap: 30px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.25rem;
+  }
 `;
 
 const DevSocLogo = styled.img`
   width: 100%;
+
+  @media (max-width: 800px) {
+    width: 200px;
+  }
+
+  @media (max-width: 480px) {
+    width: 160px;
+  }
 `;
 
 const FooterDisclaimer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 20px;
+  gap: 1.25rem;
+
+  @media (max-width: 800px) {
+    text-align: left;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 14px;
+    font-size: 0.9rem;
+  }
 `;
 
 export default {
