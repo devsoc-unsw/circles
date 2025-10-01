@@ -12,8 +12,11 @@ import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
+// import useAverageDifficulty from 'hooks/useAverageDifficulty';
+
 import { useQueries } from '@tanstack/react-query';
 import { getCourseRating } from 'utils/api/unilectivesApi';
+import getDifficultyRating from 'utils/getDifficultyRating';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
@@ -47,6 +50,9 @@ const TermBox = ({
   const coursesQuery = useUserCourses();
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
+  // const difficulty = useAverageDifficulty(termCourseCodes);
+  // console.log(`${name}: ${difficulty}`);
+
   const courseRatings = useQueries({
     queries: termCourseCodes.map((courseCode) => ({
       queryKey: [`${courseCode}`],
@@ -55,13 +61,14 @@ const TermBox = ({
   });
   const manageabilities = courseRatings
     .map((courseRating) => courseRating.data?.manageability)
-    .filter((rating) => typeof rating === 'number' && Number.isNaN(rating) === false);
+    .filter((rating) => typeof rating === 'number');
   let avgManageability = 0;
   if (manageabilities.length !== 0) {
     avgManageability =
       manageabilities.reduce((sum, currRating) => sum + currRating, 0) / manageabilities.length;
   }
-  const roundedAvgManageability = avgManageability.toFixed(1);
+  const difficulty = getDifficultyRating(avgManageability);
+  console.log(`${name}: ${difficulty}`);
 
   if (!coursesQuery.data || !plannerQuery.data) {
     return <div>loading page...</div>;
