@@ -13,7 +13,7 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
   min-width: 21em;
   color: white;
   list-style: none;
-  padding: 1.2em;
+  padding: 1.5em;
   border-radius: 2em;
   transition: 200ms ease-out;
   border: 0.5px solid ${({ theme }) => theme.termBoxWrapper.borderColor};
