@@ -12,6 +12,8 @@ import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
+import { useQueries } from '@tanstack/react-query';
+import { getCourseRating } from 'utils/api/unilectivesApi';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
@@ -45,6 +47,22 @@ const TermBox = ({
   const coursesQuery = useUserCourses();
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
+  const courseRatings = useQueries({
+    queries: termCourseCodes.map((courseCode) => ({
+      queryKey: [`${courseCode}`],
+      queryFn: () => getCourseRating(courseCode)
+    }))
+  });
+  const manageabilities = courseRatings
+    .map((courseRating) => courseRating.data?.manageability)
+    .filter((rating) => typeof rating === 'number' && Number.isNaN(rating) === false);
+  let avgManageability = 0;
+  if (manageabilities.length !== 0) {
+    avgManageability =
+      manageabilities.reduce((sum, currRating) => sum + currRating, 0) / manageabilities.length;
+  }
+  const roundedAvgManageability = avgManageability.toFixed(1);
+
   if (!coursesQuery.data || !plannerQuery.data) {
     return <div>loading page...</div>;
   }
@@ -75,6 +93,7 @@ const TermBox = ({
     backgroundColor: theme.uocBadge.backgroundColor,
     boxShadow: 'none'
   };
+
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isLocked}>
@@ -122,6 +141,7 @@ const TermBox = ({
                   offset={[0, 0]}
                 />
               </S.UOCBadgeWrapper>
+              {/* place difficulty div here */}
             </S.TermBoxWrapper>
           </Badge>
         )}
