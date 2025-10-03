@@ -66,6 +66,11 @@ class UserSettingsInfoDict(TypedDict):
     showMarks: bool
     hiddenYears: List[int]
 
+class UserLoadoutInfoDict(TypedDict):
+    loadoutName: str
+    planner: UserPlannerInfoDict
+    courses: Dict[str, UserCourseInfoDict]
+
 class UserInfoDict(TypedDict):
     uid: str
     setup: Literal[True]
@@ -74,3 +79,6 @@ class UserInfoDict(TypedDict):
     courses: Dict[str, UserCourseInfoDict]
     planner: UserPlannerInfoDict
     settings: UserSettingsInfoDict
+    loadouts: List[UserLoadoutInfoDict]
+    activeLoadout: str
+

@@ -1,3 +1,4 @@
+import copy
 from typing import Optional, Union
 
 import pymongo
@@ -5,8 +6,9 @@ import pymongo.errors
 
 from server.db.mongo.constants import UID_INDEX_NAME
 from server.db.mongo.conn import usersCOL
+from server.routers.loadouts import get_target_loadout
 
-from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserSettingsStorage, UserStorage
+from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserSettingsStorage, UserStorage, UserLoadoutStorage
 
 # TODO-OLLI(pm): decide if we want to remove type ignores by constructing dictionaries manually
 
@@ -42,6 +44,8 @@ def reset_user(uid: str) -> bool:
                 "courses": "",
                 "planner": "",
                 "settings": "",
+                "loadouts": "",
+                "activeLoadout": "",
             },
             "$set": {
                 "setup": False,
@@ -54,12 +58,20 @@ def reset_user(uid: str) -> bool:
     return res.matched_count == 1
 
 def set_user(uid: str, data: UserStorage, overwrite: bool = False) -> bool:
+    # sync the active loadout with the current planner/course data
+    if hasattr(data, 'loadouts') and hasattr(data, 'activeLoadout'):
+        for loadout in data.loadouts:
+            if loadout.loadoutName == data.activeLoadout:
+                loadout.planner = copy.deepcopy(data.planner)
+                loadout.courses = copy.deepcopy(data.courses)
+                break
+
     if overwrite:
         # update/upsert
         res = usersCOL.update_one(
             { "uid": uid },
             {
-                "$set": data.model_dump(include={ "degree", "courses", "planner", "settings", "setup" }),
+                "$set": data.model_dump(include={ "degree", "courses", "planner", "settings", "setup", "loadouts", "activeLoadout" }),
                 "$setOnInsert": {
                     # The fields that are usually immutable
                     "uid": uid,
@@ -94,6 +106,7 @@ def update_user_degree(uid: str, data: UserDegreeStorage) -> bool:
 
     return res.matched_count == 1
 
+# unused function
 def update_user_courses(uid: str, data: UserCoursesStorage) -> bool:
     res = usersCOL.update_one(
         { "uid": uid, "setup": True },
@@ -108,6 +121,7 @@ def update_user_courses(uid: str, data: UserCoursesStorage) -> bool:
 
     return res.matched_count == 1
 
+# unused function 
 def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
     res = usersCOL.update_one(
         { "uid": uid, "setup": True },
@@ -122,6 +136,7 @@ def update_user_planner(uid: str, data: UserPlannerStorage) -> bool:
 
     return res.matched_count == 1
 
+# unused function
 def update_user_settings(uid: str, data: UserSettingsStorage) -> bool:
     res = usersCOL.update_one(
         { "uid": uid, "setup": True },
@@ -136,10 +151,25 @@ def update_user_settings(uid: str, data: UserSettingsStorage) -> bool:
 
     return res.matched_count == 1
 
+# unused function
+def update_user_loadouts(uid: str, data: list[UserLoadoutStorage]) -> bool:
+    res = usersCOL.update_one(
+        { "uid": uid, "setup": True },
+        {
+            "$set": {
+                "loadouts": [loadout.model_dump() for loadout in data],
+            },
+        },
+        upsert=False,
+        hint=UID_INDEX_NAME,
+    )
+
+    return res.matched_count == 1
+
 def update_user(uid: str, data: PartialUserStorage) -> bool:
     # updates certain properties of the user
     # if enough are given, declares it as setup
-    fields = { "courses", "degree", "planner", "settings" }
+    fields = { "courses", "degree", "planner", "settings", "loadouts", "activeLoadout" }
     payload = {
         k: v
         for k, v
@@ -153,6 +183,17 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
     if len(payload) == 0:
         # most semantically correct
         return user_is_setup(uid)
+
+    # handling case of update_user being used by import -> have to initialise default loadout if both courses and planner imported
+    if 'courses' in payload and 'planner' in payload and 'loadouts' not in payload:
+        # import always resets user first, so we can assume no existing loadouts
+        default_loadout = UserLoadoutStorage(
+            loadoutName="Default Plan",
+            planner=payload['planner'],
+            courses=payload['course'],
+        )
+        payload['loadouts'] = [default_loadout.model_dump()]
+        payload['activeLoadout'] = "Default Plan"
 
     if fields.issubset(payload.keys()):
         # enough to declare user as setup

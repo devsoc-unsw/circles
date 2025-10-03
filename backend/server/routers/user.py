@@ -1,12 +1,13 @@
 from typing import Annotated, Dict, Optional
 from fastapi import APIRouter, HTTPException, Security
+import copy
 
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
 from server.routers.utility.common import get_course_details
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
 from server.routers.utility.wizard import validate_degree
-from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage, LoadoutStorage
 import server.db.helpers.users as udb
 
 router = APIRouter(
@@ -307,6 +308,13 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         for _ in range(num_years)
     ]
 
+    # create default loadout
+    default_loadout: LoadoutStorage = {
+        'loadoutName': 'Default Plan',
+        'planner': planner,
+        'courses': {},
+    }
+
     user: Storage = {
         'degree': {
             'programCode': wizard.programCode,
@@ -315,6 +323,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         'planner': planner,
         'courses': {},
         'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
+        'loadouts': [default_loadout],
+        'activeLoadout': 'Default Plan'
     }
     set_user(uid, user, True)
     return user

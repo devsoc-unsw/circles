@@ -1,13 +1,14 @@
+import copy
 from typing import Optional
 from fastapi import HTTPException
 from starlette.status import HTTP_403_FORBIDDEN
 
 from algorithms.objects.user import UserJSON, User
 from server.routers.utility.common import get_core_courses, get_course_details
-from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage, LoadoutStorage
 
 import server.db.helpers.users as udb
-from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage
+from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage, UserLoadoutStorage as NEWUserLoadoutStorage
 
 
 # TODO-OLLI(pm): remove these underwrite helpers once we get rid of the old TypedDicts
@@ -23,6 +24,9 @@ def _otn_courses(s: dict[str, CourseStorage]) -> NEWUserCoursesStorage:
 
 def _otn_settings(s: SettingsStorage) -> NEWUserSettingsStorage:
     return NEWUserSettingsStorage.model_validate(s.model_dump())
+
+def _otn_loadouts(s: list[LoadoutStorage]) -> list[NEWUserLoadoutStorage]:
+    return [NEWUserLoadoutStorage.model_validate(l) for l in s]
 
 def _nto_courses(s: NEWUserCoursesStorage) -> dict[str, CourseStorage]:
     return {
@@ -57,12 +61,17 @@ def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
 def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
     return SettingsStorage(showMarks=s.showMarks, hiddenYears=s.hiddenYears)
 
+def _nto_loadouts(s: list[NEWUserLoadoutStorage]) -> list[LoadoutStorage]:
+    return [LoadoutStorage(loadoutName=l.loadoutName, planner=l.planner, courses=l.courses) for l in s]
+
 def _nto_storage(s: NEWUserStorage) -> Storage:
     return {
         'courses': _nto_courses(s.courses),
         'degree': _nto_degree(s.degree),
         'planner': _nto_planner(s.planner),
         'settings': _nto_settings(s.settings),
+        'loadouts': _nto_loadouts(s.loadouts),
+        'activeLoadout': s.activeLoadout
     }
 
 
@@ -84,12 +93,21 @@ def set_user(uid: str, item: Storage, overwrite: bool = False):
         print("Tried to overwrite existing user. Use overwrite=True to overwrite.")
         print("++ ABOUT TO ASSERT FALSE:", uid)
         assert False  # want to remove these cases too
+    
+    # sync any potential changes to courses or planners to active loadout
+    if 'loadouts' in item and 'activeLoadout' in item:
+        for loadout in item['loadouts']:
+            if loadout['loadoutName'] == item['activeLoadout']:
+                loadout['courses'] = copy.deepcopy(item['courses'])
+                loadout['planner'] = copy.deepcopy(item['planner'])
 
     res = udb.update_user(uid, PartialUserStorage(
         courses=_otn_courses(item['courses']),
         degree=_otn_degree(item['degree']),
         planner=_otn_planner(item['planner']),
         settings=_otn_settings(item['settings']),
+        loadouts=_otn_loadouts(item['loadouts']),
+        activeLoadout=item['activeLoadout']
     ))
 
     assert res

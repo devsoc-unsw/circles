@@ -61,12 +61,19 @@ class UserImport(BaseModel):
     planner: UserPlannerStorage
     settings: UserSettingsStorage
 
+class UserLoadoutStorage(BaseModel):
+    loadoutName: str
+    planner: UserPlannerStorage
+    courses: UserCoursesStorage
+
 class UserStorage(_BaseUserStorage):
     setup: Literal[True] = True
     degree: UserDegreeStorage
     courses: UserCoursesStorage
     planner: UserPlannerStorage
     settings: UserSettingsStorage
+    loadouts: list[UserLoadoutStorage]
+    activeLoadout: str
 
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
@@ -79,6 +86,8 @@ class PartialUserStorage(BaseModel):
     courses: Optional[UserCoursesStorage] = None
     planner: Optional[UserPlannerStorage] = None
     settings: Optional[UserSettingsStorage] = None
+    loadouts: Optional[list[UserLoadoutStorage]] = None
+    activeLoadout: Optional[str] = None
 
 #
 # Session Token Models (redis)

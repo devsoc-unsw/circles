@@ -156,11 +156,20 @@ class HiddenYear(BaseModel):
     yearIndex: int
 
 @with_config(ConfigDict(extra='forbid'))
+class LoadoutStorage(TypedDict):
+    loadoutName: str
+    planner: PlannerLocalStorage
+    courses: dict[str, CourseStorage]
+
+@with_config(ConfigDict(extra='forbid'))
 class Storage(TypedDict):
     degree: DegreeLocalStorage
     planner: PlannerLocalStorage
     courses: dict[str, CourseStorage]
     settings: SettingsStorage
+    loadouts: list[LoadoutStorage]
+    activeLoadout: str # trick which loadout is currently active
+
 
 class StartYear(BaseModel):
     model_config = ConfigDict(extra='forbid')

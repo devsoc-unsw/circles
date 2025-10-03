@@ -42,7 +42,7 @@ def _create_users_collection():
                 },
                 {
                     'bsonType': 'object',
-                    'required': ['uid', 'setup', 'guest', 'degree', 'planner', 'courses', 'settings'],
+                    'required': ['uid', 'setup', 'guest', 'degree', 'planner', 'courses', 'settings', 'loadouts', 'activeLoadout'],
                     'additionalProperties': False,
                     'properties': {
                         '_id': { 'bsonType': 'objectId' },
@@ -178,6 +178,116 @@ def _create_users_collection():
                                     'uniqueItems': True
                                 }
                             }
+                        },
+                        'loadouts': {
+                            'bsonType': 'array',
+                            'description': 'list of all user loadouts',
+                            'items': {
+                                'bsonType': 'object',
+                                'required': ['loadoutName', 'planner', 'courses'],
+                                'additionalProperties': False,
+                                'properties': {
+                                    'loadoutName': {
+                                        'bsonType': 'string',
+                                        'description': 'Unique name for this loadout',
+                                    },
+                                    'courses': {
+                                        'bsonType': 'object',
+                                        'description': 'an object of CourseCode -> CourseInformation mapping',
+                                        'properties': {},
+                                        'additionalProperties': {
+                                            'bsonType': 'object',
+                                            'required': ['code', 'mark', 'uoc', 'ignoreFromProgression'],
+                                            'additionalProperties': False,
+                                            'properties': {
+                                                'code': {
+                                                    'bsonType': 'string',
+                                                    'description': 'Course code repeated',
+                                                },
+                                                'mark': {
+                                                    'oneOf': [
+                                                        { 'enum': ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'] },
+                                                        { 'bsonType': ['int', 'null'] },
+                                                    ],
+                                                    'description': 'Mark entered for this course'
+                                                },
+                                                'uoc': {
+                                                    'bsonType': 'int',
+                                                    'description': 'UOC of this course',
+                                                },
+                                                'ignoreFromProgression': {
+                                                    'bsonType': 'bool',
+                                                    'description': 'Whether the course is ignored from progression checking',
+                                                }
+                                            }
+                                        }
+                                    },
+                                    'planner': {
+                                        'bsonType': 'object',
+                                        'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years', 'lockedTerms'],
+                                        'additionalProperties': False,
+                                        'properties': {
+                                            'lockedTerms': {
+                                                'bsonType': 'object',
+                                                'properties': {},
+                                                'additionalProperties': { 'bsonType': 'bool' },
+                                                'description': 'A map of <YEAR><TERM> -> boolean of which terms are locked. Example: 2024T1 -> True',
+                                            },
+                                            'unplanned': {
+                                                'bsonType': 'array',
+                                                'items': {
+                                                    'bsonType': 'string'
+                                                }
+                                            },
+                                            'startYear': {
+                                                'bsonType': 'int'
+                                            },
+                                            'isSummerEnabled': {
+                                                'bsonType': 'bool'
+                                            },
+                                            'years': {
+                                                'bsonType': 'array',
+                                                'items': {
+                                                    'bsonType': 'object',
+                                                    'required': ['T0', 'T1', 'T2', 'T3'],
+                                                    'additionalProperties': False,
+                                                    'properties': {
+                                                        'T0': {
+                                                            'bsonType': 'array',
+                                                            'items': {
+                                                                'bsonType': 'string'
+                                                            }
+                                                        },
+                                                        'T1': {
+                                                            'bsonType': 'array',
+                                                            'items': {
+                                                                'bsonType': 'string'
+                                                            }
+                                                        },
+                                                        'T2': {
+                                                            'bsonType': 'array',
+                                                            'items': {
+                                                                'bsonType': 'string'
+                                                            }
+                                                        },
+                                                        'T3': {
+                                                            'bsonType': 'array',
+                                                            'items': {
+                                                                'bsonType': 'string'
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        },
+                        'activeLoadout': {
+                            'bsonType': 'string',
+                            'description': 'name of the currently active/selected loadout'
                         }
                     }
                 }

@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BarsOutlined } from '@ant-design/icons';
 import { Button, Drawer, Menu, Typography } from 'antd';
 import circlesLogo from 'assets/circlesLogo.svg';
+import LoadoutsDropdown from 'components/LoadoutsDropdown';
 import PlannerCart from 'components/PlannerCart';
 import ThemeToggle from 'components/ThemeToggle';
 import { inDev } from 'config/constants';
@@ -54,6 +55,7 @@ const Header = () => {
         onClick={(e) => navigate(e.key)}
         items={items}
       />
+      <LoadoutsDropdown />
       <ThemeToggle />
       <PlannerCart />
       <Button

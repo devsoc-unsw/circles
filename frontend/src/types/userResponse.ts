@@ -6,6 +6,8 @@ export type UserResponse = {
   planner: PlannerResponse;
   courses: Record<string, CourseResponse>;
   settings: SettingsResponse;
+  loadouts: LoadoutsResponse;
+  activeLoadout: string;
 };
 
 export type DegreeResponse = {
@@ -48,6 +50,13 @@ export type PlannerResponse = {
   // TODO: Type this better somehow
   years: Record<string, string[]>[];
 };
+
+export type LoadoutResponse = {
+  loadoutName: string;
+  planner: PlannerResponse;
+  courses: CoursesResponse;
+};
+export type LoadoutsResponse = LoadoutResponse[];
 
 export type Term = {
   Y: string;

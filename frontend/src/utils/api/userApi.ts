@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
   CoursesResponse,
   DegreeResponse,
+  LoadoutResponse,
+  LoadoutsResponse,
   PlannerResponse,
   SettingsResponse,
   UserResponse
@@ -82,4 +84,30 @@ export const updateStartYear = async (token: string, year: string): Promise<void
     { startYear: parseInt(year, 10) },
     { headers: withAuthorization(token) }
   );
+};
+
+export const getUserLoadouts = async (token: string): Promise<LoadoutsResponse> => {
+  const loadouts = await axios.get(`loadouts/data`, { headers: withAuthorization(token) });
+  return loadouts.data as LoadoutsResponse;
+};
+
+export const getUserActiveLoadout = async (token: string): Promise<LoadoutResponse> => {
+  const loadout = await axios.get(`loadouts/getActiveLoadout`, {
+    headers: withAuthorization(token)
+  });
+
+  return loadout.data as LoadoutResponse;
+};
+
+// currently can't choose name for loadout upon creation -> name is auto generated
+export const createUserLoadout = async (token: string): Promise<void> => {
+  await axios.post(`loadouts/create`, {}, { headers: withAuthorization(token) });
+};
+
+export const deleteUserLoadout = async (token: string, loadoutName: string): Promise<void> => {
+  await axios.delete(`loadouts/delete/${loadoutName}`, { headers: withAuthorization(token) });
+};
+
+export const switchUserLoadout = async (token: string, loadoutName: string): Promise<void> => {
+  await axios.post(`loadouts/switch/${loadoutName}`, {}, { headers: withAuthorization(token) });
 };
