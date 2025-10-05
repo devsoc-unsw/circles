@@ -1,0 +1,29 @@
+import { useQueries } from '@tanstack/react-query';
+import { getCourseRating } from 'utils/api/unilectivesApi';
+
+export function useCourseManageabilities(courseCodes: string[]): string[] {
+  const courseRatings = useQueries({
+    queries: courseCodes.map((courseCode) => ({
+      queryKey: [`${courseCode}`],
+      queryFn: () => getCourseRating(courseCode)
+    }))
+  });
+
+  const manageabilities = courseRatings
+    .map((rating) => rating.data?.manageability)
+    .filter((rating) => typeof rating === 'number')
+    .map((rating) => rating.toFixed(1));
+
+  // let difficulty = 'Unknown';
+  // if (manageabilities.length !== 0) {
+  //   const totalManageability = manageabilities.reduce((sum, currRating) => sum + currRating, 0);
+  //   difficulty = getDifficultyRating(totalManageability);
+  // }
+
+  return manageabilities;
+}
+
+// TODO: option to have hooks for other ratings?
+export function useCourseUsefullnesses(courseCodes: string[]) {
+  return null;
+}

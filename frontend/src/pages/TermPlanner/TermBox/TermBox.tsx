@@ -12,9 +12,8 @@ import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
-import { useQueries } from '@tanstack/react-query';
-import { getCourseRating } from 'utils/api/unilectivesApi';
-import getDifficultyRating from 'utils/getDifficultyRating';
+import { useCourseManageabilities } from 'hooks/useCourseRatings';
+import getTermDifficulty from 'utils/getTermDifficulty';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
@@ -48,24 +47,10 @@ const TermBox = ({
   const coursesQuery = useUserCourses();
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
-  const courseRatings = useQueries({
-    queries: termCourseCodes.map((courseCode) => ({
-      queryKey: [`${courseCode}`],
-      queryFn: () => getCourseRating(courseCode)
-    }))
-  });
+  const manageabilities = useCourseManageabilities(termCourseCodes);
+  const difficulty = getTermDifficulty(manageabilities);
 
-  const manageabilities = courseRatings
-    .map((courseRating) => courseRating.data?.manageability)
-    .filter((rating) => typeof rating === 'number');
-
-  let difficulty = 'Unknown';
-  if (manageabilities.length !== 0) {
-    const totalManageability = manageabilities.reduce((sum, currRating) => sum + currRating, 0);
-    difficulty = getDifficultyRating(totalManageability);
-  }
-
-  console.log(`${name}: ${manageabilities.length}`);
+  manageabilities.forEach((m, idx) => console.log(`${termCourseCodes[idx]}: ${m}`));
 
   if (!coursesQuery.data || !plannerQuery.data) {
     return <div>loading page...</div>;
