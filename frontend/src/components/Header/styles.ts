@@ -4,7 +4,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   background-color: ${({ theme }) => theme.purplePrimary};
   height: var(--navbar-height);
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;

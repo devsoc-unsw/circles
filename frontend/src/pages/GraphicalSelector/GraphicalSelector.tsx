@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Tabs } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Drawer, Tabs } from 'antd';
 import { badCourses } from 'types/userResponse';
 import { useUserCourses } from 'utils/apiHooks/user';
 import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
-import SidebarDrawer from 'components/SidebarDrawer';
+import useMediaQuery from 'hooks/useMediaQuery';
 import CS from './common/styles';
 import { COURSE_INFO_TAB, HELP_TAB, UNILECTIVES_TAB } from './constants';
 import CourseGraph from './CourseGraph';
@@ -13,9 +14,17 @@ import S from './styles';
 import UnilectiveReview from './UnilectiveReview/UnilectiveReview';
 
 const GraphicalSelector = () => {
-  const [fullscreen, setFullscreen] = useState(false);
+  // Note that mobile view uses fullscreen only for convenience and ease of use, as
+  // non-full screen does not provide enough space
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const [fullscreen, setFullscreen] = useState(isMobile);
+  useEffect(() => {
+    setFullscreen(isMobile);
+  }, [isMobile]);
+
   const [courseCode, setCourseCode] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(HELP_TAB);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const coursesQuery = useUserCourses();
   const [loading, setLoading] = useState(true);
   const courses = coursesQuery.data || badCourses;
@@ -54,7 +63,15 @@ const GraphicalSelector = () => {
           <CourseGraph
             onNodeClick={(node) => {
               setCourseCode(node.getID());
-              setActiveTab('course-info');
+              setActiveTab(COURSE_INFO_TAB);
+              // Always open drawer on node click, saves state so will be open
+              // if width changes to mobile, only mobile will load the drawer, otherwise
+              // display: none
+              setDrawerOpen(true);
+              // toggles fullscreen off if in normal fullscreen mode
+              if (fullscreen && !isMobile) {
+                setFullscreen(true);
+              }
             }}
             fullscreen={fullscreen}
             handleToggleFullscreen={() => setFullscreen((prevState) => !prevState)}
@@ -66,22 +83,30 @@ const GraphicalSelector = () => {
             <S.SearchBarWrapper>
               <CourseSearchBar
                 userCourses={coursesQuery.data}
-                onSelectCallback={setCourseCode}
-                style={{ width: '25rem' }}
+                onSelectCallback={(code) => {
+                  setCourseCode(code);
+                  if (isMobile) {
+                    setDrawerOpen(true);
+                  } else {
+                    setFullscreen(false);
+                  }
+                }}
               />
             </S.SearchBarWrapper>
           )}
-          {fullscreen && (
-            <SidebarDrawer>
-              <Tabs
-                items={items}
-                activeKey={activeTab}
-                onChange={setActiveTab}
-                className="graph-sidebar-fullscreen"
-              />
-            </SidebarDrawer>
+
+          {/* Mobile-only floating button */}
+          {!loading && (
+            <S.MobileMenuButton
+              type="primary"
+              icon={<InfoCircleOutlined />}
+              onClick={() => setDrawerOpen(true)}
+              title="Course Information"
+            />
           )}
         </S.GraphWrapper>
+
+        {/* Desktop sidebar */}
         {!fullscreen && (
           <S.SidebarWrapper>
             <Tabs
@@ -91,6 +116,25 @@ const GraphicalSelector = () => {
               className="graph-sidebar"
             />
           </S.SidebarWrapper>
+        )}
+
+        {/* Mobile drawer that opens when course is searched on mobile */}
+        {isMobile && (
+          <Drawer
+            title="Course Information"
+            placement="bottom"
+            onClose={() => setDrawerOpen(false)}
+            open={drawerOpen}
+            height="80vh"
+            className="mobile-course-drawer"
+          >
+            <Tabs
+              items={items}
+              activeKey={activeTab}
+              onChange={setActiveTab}
+              className="mobile-course-tabs"
+            />
+          </Drawer>
         )}
       </S.Wrapper>
     </PageTemplate>

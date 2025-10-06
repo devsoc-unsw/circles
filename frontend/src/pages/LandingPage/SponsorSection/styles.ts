@@ -10,7 +10,7 @@ const SponsorsText = styled.h1`
   margin-bottom: 2rem;
   font-weight: 650;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
   }
@@ -27,7 +27,7 @@ const LogosWrapper = styled.div`
   gap: 3rem;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     gap: 2rem;
     padding: 0 1rem;
   }
@@ -50,7 +50,7 @@ const LogoImg = styled.img<{ size: string }>`
     transform: scale(1.05);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     max-width: ${(props) => {
       switch (props.size) {
         case '350px':
@@ -58,7 +58,7 @@ const LogoImg = styled.img<{ size: string }>`
         case '250px':
           return '180px';
         case '150px':
-          return '120px';
+          return '7.5rem';
         default:
           return props.size;
       }
@@ -95,7 +95,7 @@ const TierWrapper = styled.div`
     padding-bottom: 3rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     gap: 1.5rem;
 
     &:not(:last-child) {

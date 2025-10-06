@@ -10,7 +10,7 @@ const Title = styled.h1`
   position: relative;
   font-weight: 700;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 36px;
     margin-bottom: 2rem;
   }
@@ -25,7 +25,7 @@ const ContentWrapper = styled.div`
   text-align: center;
   font-size: 1rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     padding: 0 1rem;
     font-size: 0.95rem;
   }
@@ -43,7 +43,7 @@ const LinksWrapper = styled.div`
   margin-top: 40px;
   margin-bottom: 100px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     gap: 50px;
     margin-top: 30px;
     margin-bottom: 60px;
@@ -52,8 +52,8 @@ const LinksWrapper = styled.div`
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
     margin-bottom: 40px;
   }
 `;

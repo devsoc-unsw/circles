@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
 
+export const Title = styled.h1`
+  font-size: clamp(1.8rem, 2.5vw, 8rem);
+  font-weight: bold;
+`;
+
 const LoginContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -7,6 +12,7 @@ const LoginContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const Wrapper = styled.div`
@@ -29,6 +35,9 @@ const Left = styled.div`
     `}
   padding: 50px;
   border-radius: 15px 0px 0px 15px;
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const SplashArt = styled.img`
@@ -73,8 +82,8 @@ const LoginButton = styled.button`
   height: 70px;
   color: #fff;
   font-weight: 700;
-  font-size: 20px;
-  margin: 20px;
+  font-size: 1.25rem;
+  margin: calc(0.5rem + 1vw);
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
@@ -103,8 +112,8 @@ const GuestButton = styled.button`
   height: 70px;
   color: ${({ theme }) => theme.text};
   font-weight: 700;
-  font-size: 20px;
-  margin: 20px;
+  font-size: 1.25rem;
+  margin: calc(0.5rem + 1vw);
   cursor: pointer;
   transition: all 0.3s;
   &:disabled {
@@ -150,5 +159,6 @@ export default {
   Wrapper,
   Login,
   Right,
-  Back
+  Back,
+  Title
 };

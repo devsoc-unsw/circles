@@ -32,7 +32,7 @@ const CourseList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 1.25rem;
   padding-top: 10px;
   padding-bottom: 10px;
   max-height: 60vh;

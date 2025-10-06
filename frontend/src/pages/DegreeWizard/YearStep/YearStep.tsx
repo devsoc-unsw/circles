@@ -51,6 +51,10 @@ const YearStep = ({ incrementStep, setDegreeInfo }: Props) => {
             style={{
               width: '100%'
             }}
+            popupStyle={{
+              width: '200px',
+              fontSize: '12px'
+            }}
             onChange={handleOnChange}
             minDate={dayjs('2019')}
             maxDate={dayjs().add(7, 'year')}

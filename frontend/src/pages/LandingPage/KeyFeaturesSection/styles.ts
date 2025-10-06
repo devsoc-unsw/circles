@@ -11,7 +11,7 @@ const FeatureTitle = styled.h1`
   font-weight: 650;
   margin-top: 90px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 36px;
     margin-bottom: 50px;
     margin-top: 60px;
@@ -33,8 +33,8 @@ const CardsSection = styled.div`
   position: relative;
   margin-bottom: 200px;
 
-  @media (max-width: 768px) {
-    gap: 20px;
+  @media (max-width: 800px) {
+    gap: 1.25rem;
     margin-bottom: 100px;
     padding: 0 16px;
   }
@@ -48,7 +48,7 @@ const CardsSection = styled.div`
 
 const Card = styled.div`
   background: #fff;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   height: 275px;
   position: relative;
   width: 250px;
@@ -63,10 +63,10 @@ const Card = styled.div`
       0 10px 10px rgba(0, 0, 0, 0.22);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 280px;
     height: 300px;
-    padding: 35px 20px;
+    padding: 35px 1.25rem;
   }
 
   @media (max-width: 480px) {
@@ -87,7 +87,7 @@ const IconContainer = styled.div`
 `;
 
 const FeatureSubtitle = styled.h3<{ $startColor: string; $endColor: string }>`
-  font-size: 20px;
+  font-size: 1.25rem;
   background: -webkit-linear-gradient(
     45deg,
     ${({ $startColor }) => $startColor},
@@ -125,7 +125,7 @@ const BlobBackground = styled.img`
     top: 50%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 120%;
     top: 45%;
   }

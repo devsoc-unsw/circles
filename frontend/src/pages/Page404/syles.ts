@@ -46,7 +46,7 @@ const Title404 = styled.div`
   font-size: 6rem;
   color: #808080;
   font-weight: 600;
-  height: 120px;
+  height: 7.5rem;
 `;
 
 const Text404 = styled.div`

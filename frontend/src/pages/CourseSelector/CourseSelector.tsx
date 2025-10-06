@@ -6,17 +6,20 @@ import openNotification from 'utils/openNotification';
 import infographic from 'assets/infographicFontIndependent.svg';
 import CourseDescriptionPanel from 'components/CourseDescriptionPanel';
 import PageTemplate from 'components/PageTemplate';
-import type { RootState } from 'config/store';
+import { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseBanner from './CourseBanner';
 import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
+import CourseShowAllButton from './CourseTabs/CourseShowAllButton';
 import S from './styles';
+import useMobileHook from './UseMobileHook';
 
 const CourseSelector = () => {
   const theme = useTheme();
   const coursesQuery = useUserCourses();
   const degreeQuery = useUserDegree();
+  const isMobile = useMobileHook();
 
   const [showedNotif, setShowedNotif] = useState(false);
   useEffect(() => {
@@ -42,15 +45,22 @@ const CourseSelector = () => {
   const courseCode = tabs[active];
 
   const divRef = useRef<null | HTMLDivElement>(null);
-  const [menuOffset, setMenuOffset] = useState<number | undefined>(undefined);
+  const [menuOffset, setMenuOffset] = useState<number>(isMobile ? 1 : 300); // Set initial width to 1px if mobile
+
   useEffect(() => {
-    const minMenuWidth = 100;
+    // Set min width to 1px to prevent it from collapsing fully
+    const minMenuWidth = 1;
     const maxMenuWidth = (60 * window.innerWidth) / 100;
     const resizerDiv = divRef.current as HTMLDivElement;
+
     const setNewWidth = (clientX: number) => {
-      if (clientX > minMenuWidth && clientX < maxMenuWidth) {
-        resizerDiv.style.left = `${clientX}px`;
+      // Ensure the new width doesn't go below the min width or above the max width
+      if (clientX < 100) {
+        setMenuOffset(minMenuWidth);
+      } else if (clientX < maxMenuWidth) {
         setMenuOffset(clientX);
+      } else {
+        setMenuOffset(maxMenuWidth);
       }
     };
     const handleResize = (ev: globalThis.MouseEvent) => {
@@ -67,6 +77,7 @@ const CourseSelector = () => {
       window.addEventListener('mouseup', endResize);
     };
     resizerDiv?.addEventListener('mousedown', startResize);
+
     return () => resizerDiv?.removeEventListener('mousedown', startResize);
   }, []);
 
@@ -76,7 +87,12 @@ const CourseSelector = () => {
     <PageTemplate>
       <S.ContainerWrapper>
         <CourseBanner courses={coursesQuery.data} />
-        <CourseTabs />
+        <S.CourseHeader>
+          <S.CourseShowAllButton $offset={menuOffset}>
+            <CourseShowAllButton />
+          </S.CourseShowAllButton>
+          <CourseTabs />
+        </S.CourseHeader>
         <S.ContentWrapper $offset={menuOffset}>
           <CourseMenu courses={coursesQuery.data} degree={degreeQuery.data} />
           <S.ContentResizer ref={divRef} $offset={menuOffset} />

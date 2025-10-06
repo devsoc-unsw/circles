@@ -6,7 +6,7 @@ const DashboardWrapper = styled(animated.div)`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `;
 
 const CardsWrapper = styled.div`
