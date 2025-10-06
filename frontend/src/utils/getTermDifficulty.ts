@@ -6,6 +6,11 @@ export default function getTermDifficulty(manageabilities: string[]): string {
 
   const diffSum = manageabilities.reduce((sum, curr) => sum + (5 - +curr), 0).toFixed(1);
 
-  return diffSum;
-  // return 'Easy';
+  if (+diffSum >= 4) {
+    return 'Hard';
+  }
+  if (+diffSum >= 2) {
+    return 'Medium';
+  }
+  return 'Easy';
 }
