@@ -50,8 +50,6 @@ const TermBox = ({
   const manageabilities = useCourseManageabilities(termCourseCodes);
   const difficulty = getTermDifficulty(manageabilities);
 
-  manageabilities.forEach((m, idx) => console.log(`${termCourseCodes[idx]}: ${m}`));
-
   if (!coursesQuery.data || !plannerQuery.data) {
     return <div>loading page...</div>;
   }
