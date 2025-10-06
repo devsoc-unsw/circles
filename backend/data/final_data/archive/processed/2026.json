@@ -1814,7 +1814,7 @@
             "T3"
         ],
         "gen_ed": false,
-        "raw_requirements": "Prerequisite: 90 UOC",
+        "raw_requirements": "Prerequisite: 96 UOC",
         "is_multiterm": false
     },
     "ARCH1331": {
@@ -9878,7 +9878,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [],
+        "terms": [
+            "T3"
+        ],
         "gen_ed": true,
         "raw_requirements": "",
         "is_multiterm": false
@@ -14027,7 +14029,7 @@
         "code": "BIOS2091",
         "UOC": 6,
         "level": 2,
-        "description": "This course focuses on the ecology and conservation of shallow aquatic habitats, with a major emphasis on the ecology of marine coastal systems such as kelp forests, coral reefs or seagrass meadows but also including freshwater ecosystems. There is a very strong emphasis on experimental ecological analysis of benthic communities.\nThe course includes three one-hour lectures and one four-hour practical session per week (in the field or in the lab). Fieldwork is a very important component of the course; this can include snorkeling or intertidal work. Much of the fieldwork is done independently, sometimes outside of class time. There is a whale-watching practical session that incurs additional costs. Assumed Knowledge: MSCI1001 and BIOS1101.",
+        "description": "This course focuses on the ecology and conservation of shallow aquatic habitats, with a major emphasis on the ecology of marine coastal systems such as kelp forests, coral reefs or seagrass meadows but also including freshwater ecosystems. There is a very strong emphasis on experimental ecological analysis of benthic communities.\nThe course includes three one-hour lectures and one four-hour practical session per week (in the field or in the lab). Fieldwork is a very important component of the course; this can include snorkeling or intertidal work. Much of the fieldwork is done independently, sometimes outside of class time.\u00a0 Assumed Knowledge: MSCI1001 and BIOS1101.",
         "study_level": "Undergraduate",
         "school": "School of Biological, Earth and Environmental Sciences",
         "faculty": "Faculty of Science",
@@ -14725,8 +14727,7 @@
         },
         "exclusions": {},
         "terms": [
-            "T1",
-            "T2"
+            "T1"
         ],
         "gen_ed": false,
         "raw_requirements": "Pre: BLDG2013 and BLDG2023",
@@ -15470,7 +15471,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [],
+        "terms": [
+            "T3"
+        ],
         "gen_ed": false,
         "raw_requirements": "Prerequisites: (CHEM1821 OR CHEM1021 OR DPST1032) AND DESN2000 AND MATH2089",
         "is_multiterm": false
@@ -23703,7 +23706,7 @@
         "equivalents": {},
         "exclusions": {},
         "terms": [
-            "T3"
+            "T2"
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: 48 units of credit overall and enrolment in a Fine Arts or Art Theory program",
@@ -26743,7 +26746,7 @@
         "code": "ECON1101",
         "UOC": 6,
         "level": 1,
-        "description": "Economics is about shaping a better world for everybody in it \u2014 so no, it&#39;s not just about numbers. It is the study of how people, businesses, and governments make decisions in a world of limited resources, and how those choices affect society as a whole.\nThis course will equip you with the tools to &#34;think like an economist,&#34; enabling you to analyze real-world challenges such as climate change, economic development and poverty, wealth and income inequality, and fair access to quality healthcare and education. You\u2019ll learn how economic principles help us understand global issues, how to evaluate the effects of policies (and understand who stands to gain or lose from various interventions), and ultimately, how to design solutions that drive positive change.\n\u00a0\nWe will explore questions like:\n\u00a0\nHow can we balance economic growth with environmental sustainability?\n\u00a0\nWhat policies can reduce inequality and improve social welfare?\n\u00a0\nHow do markets allocate resources, and when do they fail?\n\u00a0\nWhat are the trade-offs of government interventions, and how can we measure their impact?\n\u00a0\nBy the end of the course, you\u2019ll not only understand fundamental economic concepts but also be able to apply them to some of the most pressing issues facing our world today. Whether you\u2019re interested in business, policymaking, or global development, economics provides powerful insights into building a more sustainable and equitable future for our society \u2014 and everybody in it.",
+        "description": "Economics is about shaping a better world. It examines how people, businesses, and governments make decisions with limited resources, and how those choices affect society.\nIn this course, you\u2019ll learn to \u201cthink like an economist\u201d and apply economic reasoning to real-world challenges like climate change, inequality, poverty, and access to healthcare and education. You\u2019ll gain tools to evaluate policies, understand who benefits (and who doesn\u2019t), and design solutions that create positive impact.\nWe\u2019ll explore questions such as:\nHow can growth and sustainability be balanced?What policies reduce inequality and improve welfare?When do markets fail, and what can governments do?\nBy the end, you\u2019ll not only master core concepts but also know how to use them to tackle pressing issues. Whether your path is business, policy, or global development, economics offers powerful insights for building a fairer future.",
         "study_level": "Undergraduate",
         "school": "School of Economics",
         "faculty": "UNSW Business School",
@@ -27598,6 +27601,7 @@
         "equivalents": {},
         "exclusions": {},
         "terms": [
+            "T1",
             "T3"
         ],
         "gen_ed": false,
@@ -35795,7 +35799,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [],
+        "terms": [
+            "T3"
+        ],
         "gen_ed": false,
         "raw_requirements": "",
         "is_multiterm": false
@@ -35964,7 +35970,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [],
+        "terms": [
+            "T2"
+        ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: IDES3331 and IDES3333",
         "is_multiterm": false
@@ -37916,9 +37924,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
+            "LAWS1001": 1,
             "JURD7101": 1,
-            "JURD7121": 1,
-            "LAWS1001": 1
+            "JURD7121": 1
         },
         "terms": [
             "T1",
@@ -37940,9 +37948,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "JURD7122": 1,
             "LAWS1011": 1,
-            "JURD7111": 1
+            "JURD7111": 1,
+            "JURD7122": 1
         },
         "terms": [
             "T2",
@@ -38029,9 +38037,9 @@
         "equivalents": {},
         "exclusions": {
             "JURD7172": 1,
-            "LAWS1072": 1,
+            "LAWS8175": 1,
             "JURD7175": 1,
-            "LAWS8175": 1
+            "LAWS1072": 1
         },
         "terms": [
             "T1",
@@ -38146,8 +38154,8 @@
         "equivalents": {},
         "exclusions": {
             "LAWS1140": 1,
-            "JURD7141": 1,
-            "JURD7140": 1
+            "JURD7140": 1,
+            "JURD7141": 1
         },
         "terms": [
             "T2",
@@ -38162,7 +38170,7 @@
         "code": "LAWS1150",
         "UOC": 6,
         "level": 1,
-        "description": "LAWS1150\u00a0is only available in T1 by School Consent. Contact\u00a0UNSW Law\u00a0Student Services for more information.\u00a0\nThis course introduces students to the basic elements and principles of private law.\u00a0It begins by looking at what the term private law means, the sources of private law and how the different areas of private law - especially property, contract, tort and unjust enrichment \u2013 relate to each other.\nThe bulk of the course is spent on the topics of contract and property law. In both cases, the course provides an introduction to materials that are expanded upon in later subjects. With respect to contract law, this course covers the formation of contracts and the doctrine of privity. Several other elements of contract law are dealt with later in the curriculum in Contracts. With respect to property law, this course considers the boundaries of the concept of property, as well as several of the rules with respect to the creation, transfer and protection of property rights. Again several other elements of property law are dealt with later in Land Law, and to some extent also in Equity and Trusts.\nThe course also introduces students to two smaller topics: agency and equitable estoppel. As well as being closely related to contracts and property, these are two important areas of law for practicing lawyers.\n\u00a0\nMain Topics\nThe Domain of Private Law\nPrivate law, values and justicePrivate law and public law distinguishedOrigins and sources of private lawThe categories of private law\n\u00a0\nContract\nFormation of contractsOffer and acceptanceIntention to create legal relationsConsiderationCertainty of termsPrivityPromissory estoppel\u00a0\n\u00a0\nProperty\nDefinition of propertyLicences, contractual and otherwiseNew forms of propertyDefinition of landDoctrine of fixturesPersonal propertyCreation of property rights: original acquisition, voluntary/involuntary transfersThe concept of possession of land and goodsBailmentTorts of trespass, detinue and conversionAdverse possession/possessory titleFormal requirements for the transfer of interests in landProprietary estoppel\n\u00a0Agency\nFundamental principlesDistinction from other relationships, eg employment, sub-contractThe formation and consequences of agency",
+        "description": "LAWS1150\u00a0is only available in T1 by School Consent. Contact\u00a0UNSW Law\u00a0Student Services for more information.\u00a0\nThis course introduces students to the basic elements and principles of private law.\u00a0It begins by looking at what the term private law means, the sources of private law and how the different areas of private law - especially property, contract, tort and unjust enrichment \u2013 relate to each other.\nThe bulk of the course is spent on the topics of contract and property law. In both cases, the course provides an introduction to materials that are expanded upon in later subjects. With respect to contract law, this course covers the formation of contracts and the doctrine of privity. Several other elements of contract law are dealt with later in the curriculum in Contracts. With respect to property law, this course considers the boundaries of the concept of property, as well as several of the rules with respect to the creation, transfer and protection of property rights. Again several other elements of property law are dealt with later in Land Law, and to some extent also in Equity and Trusts.\nThe course also introduces students to two smaller topics: agency and equitable estoppel. As well as being closely related to contracts and property, these are two important areas of law for practicing lawyers.\n\u00a0\nMain Topics\nThe Domain of Private Law\nPrivate law, values and justicePrivate law and public law distinguishedOrigins and sources of private lawThe categories of private law\nContract\nFormation of contractsOffer and acceptanceIntention to create legal relationsConsiderationCertainty of termsPrivityPromissory estoppel\u00a0\nProperty\nDefinition of propertyLicences, contractual and otherwiseNew forms of propertyDefinition of landDoctrine of fixturesPersonal propertyCreation of property rights: original acquisition, voluntary/involuntary transfersThe concept of possession of land and goodsBailmentTorts of trespass, detinue and conversionAdverse possession/possessory titleFormal requirements for the transfer of interests in landProprietary estoppel\n\u00a0Agency\nFundamental principlesDistinction from other relationships, eg employment, sub-contractThe formation and consequences of agency",
         "study_level": "Undergraduate",
         "school": "School of Private and Commercial Law",
         "faculty": "Faculty of Law and Justice",
@@ -38170,9 +38178,9 @@
         "equivalents": {},
         "exclusions": {
             "LAWS8150": 1,
-            "LAWS1071": 1,
+            "JURD7150": 1,
             "JURD7171": 1,
-            "JURD7150": 1
+            "LAWS1071": 1
         },
         "terms": [
             "T1",
@@ -38258,9 +38266,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "JURD7110": 1,
             "LAWS1210": 1,
-            "JURD7130": 1
+            "JURD7130": 1,
+            "JURD7110": 1
         },
         "terms": [
             "T1",
@@ -38386,9 +38394,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
+            "JURD7221": 1,
             "LAWS2321": 1,
-            "JURD7251": 1,
-            "JURD7221": 1
+            "JURD7251": 1
         },
         "terms": [
             "T1",
@@ -38410,9 +38418,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
+            "LAWS2311": 1,
             "JURD7211": 1,
-            "JURD7271": 1,
-            "LAWS2311": 1
+            "JURD7271": 1
         },
         "terms": [
             "T1",
@@ -38486,8 +38494,8 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "LAWS2381": 1,
             "JURD7281": 1,
+            "LAWS2381": 1,
             "JURD7285": 1
         },
         "terms": [
@@ -38810,10 +38818,10 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
+            "JURD7345": 1,
             "LAWS3441": 1,
-            "JURD7564": 1,
             "JURD7441": 1,
-            "JURD7345": 1
+            "JURD7564": 1
         },
         "terms": [
             "T0",
@@ -39001,9 +39009,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "JURD7486": 1,
             "LAWS3510": 1,
-            "JURD7610": 1
+            "JURD7610": 1,
+            "JURD7486": 1
         },
         "terms": [
             "T0",
@@ -39434,7 +39442,9 @@
         "exclusions": {
             "JURD7370": 1
         },
-        "terms": [],
+        "terms": [
+            "T3"
+        ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)",
         "is_multiterm": false
@@ -39486,7 +39496,7 @@
         "code": "LAWS3183",
         "UOC": 6,
         "level": 3,
-        "description": "The Australian Human Rights Institute breaks silos between academic research and real-world problems to progress human rights. We deliver interdisciplinary, applied research, empowering communities and educating the next generation of human rights leaders.\nThe\u00a0Australian Journal of Human Rights\u00a0(AJHR) is a publication of the Australian Human Rights Institute.\nThe AJHR is Australia&#39;s first peer reviewed journal devoted exclusively to human rights development in Australia, the Asia-Pacific region and internationally. \u00a0The law journal aims to raise awareness of human rights issues in Australia and the Asia-Pacific region by providing a forum for scholarship and discussion.\nThe AJHR examines legal aspects of human rights, along with associated philosophical, historical, economic and political considerations, across a range of issues, including aboriginal ownership of land, racial discrimination and vilification, human rights in the criminal justice system, children&#39;s rights, homelessness, immigration, asylum and detention, corporate accountability, disability standards and free speech.\n\u00a0\nProgram and Supervision\nInterns will be Associate Editors of the journal, playing an active role in the production of one of the Institute\u2019s key publications. You will have the opportunity to develop your analytical, copyediting, proofing and writing skills, and form contacts with leading academics in the human rights field.\nAs an Associate Editor you will help facilitate the intake, review and publication of contributions to the journal. Amongst your tasks you will:\nScreen contributions to the journalIdentify and liaise with potential reviewersEdit and proof articles, interviews, Current Perspectives pieces and book reviewsLiaise with academics and members of the legal professionUndertake a range of other tasks connected with the production of the journal, as directed by the Editors.\nAll interns are also expected to produce a blog post (600-800 words) on a contemporary human rights issue of their choice, to be published on the Institute\u2019s website.\nYou will work under the supervision of the journal\u2019s Editor in Chief and Managing Editor.\nThe AJHR\u2019s Editorial Board is comprised of leading human rights academics at UNSW and other Australian universities: https://www.humanrights.unsw.edu.au/research/australian-journal-human-rights\n\u00a0\nCourse Objectives\nAt the end of this course, students should have:\ndeveloped an appreciation for the professional and personal responsibilities associated with the production of a human rights journal;improved their self-management skills by completing activities associated with the position \u2013 such as reviewing and editing articles and liaising with contributors and reviewers \u2013 to a high standard and within deadlines;demonstrated effective oral and written communication skills by successfully liaising with contributors in a persuasive and appropriate manner to meet publication deadlines; and\nimproved their written communication skills by completing a blog on a contemporary human rights issue that will be published on the Institute\u2019s website.",
+        "description": "The Australian Human Rights Institute breaks silos between academic research and real-world problems to progress human rights. We deliver interdisciplinary, applied research, empowering communities and educating the next generation of human rights leaders.\nThe\u00a0Australian Journal of Human Rights\u00a0(AJHR) is a publication of the Australian Human Rights Institute.\nThe AJHR is Australia&#39;s first peer reviewed journal devoted exclusively to human rights development in Australia, the Asia-Pacific region and internationally. \u00a0The law journal aims to raise awareness of human rights issues in Australia and the Asia-Pacific region by providing a forum for scholarship and discussion.\nThe AJHR examines legal aspects of human rights, along with associated philosophical, historical, economic and political considerations, across a range of issues, including aboriginal ownership of land, racial discrimination and vilification, human rights in the criminal justice system, children&#39;s rights, homelessness, immigration, asylum and detention, corporate accountability, disability standards and free speech.\n\u00a0\nProgram and Supervision\nInterns will be Associate Editors of the journal, playing an active role in the production of one of the Institute\u2019s key publications. You will have the opportunity to develop your analytical, copyediting, proofing and writing skills, and form contacts with leading academics in the human rights field.\nAs an Associate Editor you will help facilitate the intake, review and publication of contributions to the journal. Amongst your tasks you will:\nScreen contributions to the journalIdentify and liaise with potential reviewersEdit and proof articles, interviews, Current Perspectives pieces and book reviewsLiaise with academics and members of the legal professionUndertake a range of other tasks connected with the production of the journal, as directed by the Editors.\nAll interns are also expected to produce a blog post (600-800 words) on a contemporary human rights issue of their choice, to be published on the Institute\u2019s website.\nYou will work under the supervision of the journal\u2019s Editor in Chief and Managing Editor.\nThe AJHR\u2019s Editorial Board is comprised of leading human rights academics at UNSW and other Australian universities: https://www.humanrights.unsw.edu.au/research/australian-journal-human-rights",
         "study_level": "Undergraduate",
         "school": "School of Global and Public Law",
         "faculty": "Faculty of Law and Justice",
@@ -39584,9 +39594,7 @@
             "LAWS8091": 1,
             "JURD7392": 1
         },
-        "terms": [
-            "T2"
-        ],
+        "terms": [],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).",
         "is_multiterm": false
@@ -40125,7 +40133,9 @@
         "exclusions": {
             "JURD7316": 1
         },
-        "terms": [],
+        "terms": [
+            "T2"
+        ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses.",
         "is_multiterm": false
@@ -40916,14 +40926,15 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "JURD7486": 1,
             "JURD7610": 1,
+            "JURD7486": 1,
             "LAWS3086": 1
         },
         "terms": [
             "T0",
             "T1",
-            "T2"
+            "T2",
+            "T3"
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses.",
@@ -41113,8 +41124,8 @@
         "exclusions": {
             "LAWS8052": 1,
             "LAWS8173": 1,
-            "JURD7308": 1,
-            "LAWS3308": 1
+            "LAWS3308": 1,
+            "JURD7308": 1
         },
         "terms": [
             "T0",
@@ -41123,7 +41134,7 @@
             "T3"
         ],
         "gen_ed": false,
-        "raw_requirements": "Completion of 78 UOC in LAWS courses.Students must be in good academic standing.",
+        "raw_requirements": "Students must be in good academic standing.Completion of 78 UOC in LAWS courses.",
         "is_multiterm": false
     },
     "LAWS3560": {
@@ -41327,10 +41338,10 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "LAWS8052": 1,
-            "JURD7308": 1,
-            "LAWS3308": 1,
             "JURD7777": 1,
+            "JURD7308": 1,
+            "LAWS8052": 1,
+            "LAWS3308": 1,
             "LAWS8173": 1
         },
         "terms": [
@@ -41419,7 +41430,7 @@
             "JURD7851": 1
         },
         "terms": [
-            "T3"
+            "T2"
         ],
         "gen_ed": false,
         "raw_requirements": "Completion of 78 UOC of LAWS courses ",
@@ -42025,6 +42036,7 @@
         "exclusions": {},
         "terms": [
             "T1",
+            "T2",
             "T3"
         ],
         "gen_ed": true,
@@ -42102,6 +42114,7 @@
         "exclusions": {},
         "terms": [
             "T1",
+            "T2",
             "T3"
         ],
         "gen_ed": false,
@@ -43915,8 +43928,8 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "MATH3811": 1,
-            "MATH5905": 1
+            "MATH5905": 1,
+            "MATH3811": 1
         },
         "terms": [
             "T1"
@@ -44790,23 +44803,6 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: Enrolled in MATSCH Materials Science Honours specialisation in the Science (Honours) or Advanced Science (Honours) program including double-degrees",
-        "is_multiterm": false
-    },
-    "MATS5001": {
-        "title": "Thesis A",
-        "code": "MATS5001",
-        "UOC": 6,
-        "level": 5,
-        "description": "An experimental or technical investigation or design related to some aspects of materials engineering in the specific discipline (ceramic engineering, metallurgical engineering or materials engineering).",
-        "study_level": "Undergraduate",
-        "school": "School of Materials Science & Engineering",
-        "faculty": "Faculty of Science",
-        "campus": "Sydney",
-        "equivalents": {},
-        "exclusions": {},
-        "terms": [],
-        "gen_ed": false,
-        "raw_requirements": "",
         "is_multiterm": false
     },
     "MATS6006": {
@@ -46317,9 +46313,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "MERE5002": 1,
             "MERE2810": 1,
-            "MERE6002": 1
+            "MERE6002": 1,
+            "MERE5002": 1
         },
         "terms": [
             "T2"
@@ -48183,9 +48179,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            "T2"
-        ],
+        "terms": [],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: MINE4440",
         "is_multiterm": false
@@ -49184,8 +49178,8 @@
         "equivalents": {},
         "exclusions": {
             "MUSC1708": 1,
-            "MUSC1802": 1,
-            "MUSC1707": 1
+            "MUSC1707": 1,
+            "MUSC1802": 1
         },
         "terms": [
             "T2"
@@ -49206,9 +49200,9 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "MUSC1803": 1,
             "MUSC1708": 1,
-            "MUSC1707": 1
+            "MUSC1707": 1,
+            "MUSC1803": 1
         },
         "terms": [
             "T3"
@@ -60898,8 +60892,7 @@
             "ZGEN2240": 1
         },
         "terms": [
-            "S2",
-            "SC"
+            "S2"
         ],
         "gen_ed": true,
         "raw_requirements": "Prerequisite: 36 Units of Credit in Level 1 courses",
@@ -61562,8 +61555,8 @@
         "equivalents": {},
         "exclusions": {},
         "terms": [
-            "S2",
-            "SC"
+            "S1",
+            "S2"
         ],
         "gen_ed": false,
         "raw_requirements": "",
