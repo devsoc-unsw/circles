@@ -168,7 +168,7 @@ class Storage(TypedDict):
     courses: dict[str, CourseStorage]
     settings: SettingsStorage
     loadouts: list[LoadoutStorage]
-    activeLoadout: str # trick which loadout is currently active
+    activeLoadout: str
 
 
 class StartYear(BaseModel):

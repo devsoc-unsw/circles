@@ -3,18 +3,15 @@ APIs for the /loadouts/ route.
 """
 
 import copy
-from math import lcm
-from operator import itemgetter
-from typing import Annotated, Dict, List, Optional
+from typing import Annotated, Optional
 
-from algorithms.autoplanning import autoplan
-from algorithms.transcript import parse_transcript
-from algorithms.validate_term_planner import validate_terms
-from fastapi import APIRouter, HTTPException, Security, UploadFile
+from fastapi import APIRouter, HTTPException, Security
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import get_setup_user, set_user, user_storage_to_algo_user, user_storage_to_raw_plan
-from server.routers.model import CourseCode, CoursesState, LoadoutStorage, PlannedToTerm, ProgramTime, Storage, UnPlannedToTerm
-from server.routers.utility.common import get_course_details, get_course_object
+from server.routers.utility.user import get_setup_user, set_user
+from server.routers.model import LoadoutStorage,PlannerLocalStorage, Storage
+
+DEFAULT_LOADOUT_NAME = 'Default Plan'
+MAX_LOADOUTS = 3
 
 router = APIRouter(
     prefix="/loadouts", 
@@ -25,16 +22,48 @@ require_uid = HTTPBearerToUserID()
 
 @router.get("/data")
 def get_user_loadouts(uid: Annotated[str, Security(require_uid)]):
+    """
+    Gets user loadouts, a list of loadouts
+    Args:
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Returns:
+        List[Loadout]: a list of the users loadouts
+            - loadoutName(str): The name of the loadout
+            - planner(PlannerLocalStorage): The loadout's planner
+            - courses (dict[str, CourseStorage]): The loadout's courses
+    """
     user = get_setup_user(uid)
     return user['loadouts']
 
 @router.get("/getActiveLoadoutName")
 def get_active_loadout_name(uid: Annotated[str, Security(require_uid)]):
+    """
+    Gets the name of the active loadout for the user
+
+    Args:
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Returns:
+        str: the name of the currently active loadout
+    """
     user = get_setup_user(uid)
     return user['activeLoadout']
 
 @router.get("/getActiveLoadout")
 def get_active_loadout(uid: Annotated[str, Security(require_uid)]):
+    """
+    Gets the user's active loadout
+
+    Args:
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+    
+    Returns:
+        Loadout: the users current active loadout
+            - loadoutName(str): The name of the active loadout
+            - planner(PlannerLocalStorage): The active loadout's planner
+            - courses(dict[str, CourseStorage]): The active loadout's courses
+    """
     user = get_setup_user(uid)
     
 
@@ -51,27 +80,67 @@ def get_active_loadout(uid: Annotated[str, Security(require_uid)]):
 
 @router.post("/create")
 def create_user_loadout(uid: Annotated[str, Security(require_uid)]):
+    """
+    Create's a new loadout for the user (Maximum of MAX_LOADOUTS = 3 loadouts)
+
+    Args:
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Raises:
+        HTTPException: The user has already created the maximum number of loadouts
+    """
     user = get_setup_user(uid)
 
-    # user can have maximum 3 loadouts
-    if len(user['loadouts']) >= 3:
+    # user can have maximum MAX_LOADOUTS loadouts
+    if len(user['loadouts']) >= MAX_LOADOUTS:
         raise HTTPException(status_code=400, detail="Maximum number of loadouts reached")
     
     num_curr_loadouts = len(user['loadouts'])
 
     new_loadout_name = f'Loadout {num_curr_loadouts + 1}'
 
+    new_planner: PlannerLocalStorage = {
+        'unplanned': [],
+        'isSummerEnabled': False,
+        'startYear': user['planner']['startYear'],
+        'lockedTerms': {},
+        'years': [],
+    }
+
+    num_years = len(user['planner']['years'])
+
+    new_planner['years'] = [
+        {"T0": [], "T1": [], "T2": [], "T3": []}
+        for _ in range(num_years)
+    ]
+
     new_loadout: LoadoutStorage = {
         'loadoutName': new_loadout_name,
-        'planner': copy.deepcopy(user['planner']),
-        'courses': copy.deepcopy(user['courses']),
+        'planner': new_planner,
+        'courses': {},
     }
 
     user['loadouts'].append(new_loadout)
+
+    # switch to the new loadout
+    user['courses'] = new_loadout['courses']
+    user['planner'] = new_loadout['planner']
+    user['activeLoadout'] = new_loadout_name
+
     set_user(uid, user, True)
+
+    
 
 @router.post("/switch/{loadout_name}")
 def switch_loadout(loadout_name: str, uid: Annotated[str, Security(require_uid)]):
+    """
+    Args:
+        loadout_name: The name of the loadout to switch to
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Raises:
+        HTTPException: The loadout the user requested to switch to does not exist
+    """
     user = get_setup_user(uid)
 
     target_loadout = get_target_loadout(loadout_name, user)
@@ -88,6 +157,14 @@ def switch_loadout(loadout_name: str, uid: Annotated[str, Security(require_uid)]
 
 @router.delete("/delete/{loadout_name}")
 def delete_loadout(loadout_name: str, uid: Annotated[str, Security(require_uid)]):
+    """
+    Args:
+        loadout_name: The name of the loadout to delete
+        token (str, optional): The user's authentication token. Defaults to DUMMY_TOKEN.
+
+    Raises:
+        HTTPException: The loadout the user requested to delete does not exist
+    """
     user = get_setup_user(uid)
 
     target_loadout = get_target_loadout(loadout_name, user)

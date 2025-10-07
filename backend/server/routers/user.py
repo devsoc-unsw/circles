@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, Security
 import copy
 
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
+from server.routers.loadouts import DEFAULT_LOADOUT_NAME
 from server.routers.utility.common import get_course_details
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
@@ -310,7 +311,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
 
     # create default loadout
     default_loadout: LoadoutStorage = {
-        'loadoutName': 'Default Plan',
+        'loadoutName': DEFAULT_LOADOUT_NAME,
         'planner': planner,
         'courses': {},
     }
@@ -324,7 +325,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         'courses': {},
         'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
         'loadouts': [default_loadout],
-        'activeLoadout': 'Default Plan'
+        'activeLoadout': DEFAULT_LOADOUT_NAME
     }
     set_user(uid, user, True)
     return user

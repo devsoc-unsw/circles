@@ -3,6 +3,7 @@ import React from 'react';
 import { Dropdown, Button } from 'antd';
 import type { MenuProps } from 'antd';
 import { DownOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useTheme } from 'styled-components';
 
 import { useUserLoadouts, useUserActiveLoadout } from 'utils/apiHooks/loadouts/queries';
 import {
@@ -10,14 +11,49 @@ import {
   useDeleteLoadoutMutation,
   useSwitchLoadoutMutation
 } from 'utils/apiHooks/loadouts/mutations';
+import openNotification from 'utils/openNotification';
 
 const LoadoutsDropdown = () => {
+  const theme = useTheme();
   const { data: loadouts } = useUserLoadouts();
   const { data: activeLoadout } = useUserActiveLoadout();
 
-  const createLoadoutMutation = useCreateLoadoutMutation();
-  const deleteLoadoutMutation = useDeleteLoadoutMutation();
-  const switchLoadoutMutation = useSwitchLoadoutMutation();
+  const createLoadoutMutation = useCreateLoadoutMutation({
+    mutationOptions: {
+      onError: (error) => {
+        openNotification({
+          type: 'error',
+          message: 'Failed to create loadout',
+          description: <span style={{ color: theme.text }}>Maximum number of loadouts reached</span>
+        });
+        console.log(error);
+      }
+    }
+  });
+
+  const deleteLoadoutMutation = useDeleteLoadoutMutation({
+    mutationOptions: {
+      onError: (error) => {
+        openNotification({
+          type: 'error',
+          message: 'Failed to delete loadout',
+          description: <span style={{ color: theme.text }}>Cannot delete all loadouts</span>
+        });
+      }
+    }
+  });
+
+  const switchLoadoutMutation = useSwitchLoadoutMutation({
+    mutationOptions: {
+      onError: (error) => {
+        openNotification({
+          type: 'error',
+          message: 'Failed to switch loadout',
+          description: <span style={{ color: theme.text }}>{error.message}</span>
+        });
+      }
+    }
+  });
 
   const handleSwitchLoadout = (loadoutName: string) => {
     if (loadoutName !== activeLoadout?.loadoutName) {

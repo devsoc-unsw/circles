@@ -6,7 +6,7 @@ import pymongo.errors
 
 from server.db.mongo.constants import UID_INDEX_NAME
 from server.db.mongo.conn import usersCOL
-from server.routers.loadouts import get_target_loadout
+from server.routers.loadouts import DEFAULT_LOADOUT_NAME, get_target_loadout
 
 from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserSettingsStorage, UserStorage, UserLoadoutStorage
 
@@ -188,12 +188,12 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
     if 'courses' in payload and 'planner' in payload and 'loadouts' not in payload:
         # import always resets user first, so we can assume no existing loadouts
         default_loadout = UserLoadoutStorage(
-            loadoutName="Default Plan",
+            loadoutName=DEFAULT_LOADOUT_NAME,
             planner=payload['planner'],
             courses=payload['course'],
         )
         payload['loadouts'] = [default_loadout.model_dump()]
-        payload['activeLoadout'] = "Default Plan"
+        payload['activeLoadout'] = DEFAULT_LOADOUT_NAME
 
     if fields.issubset(payload.keys()):
         # enough to declare user as setup
