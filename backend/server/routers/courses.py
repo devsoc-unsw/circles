@@ -165,6 +165,7 @@ def get_course(courseCode: str):
     - if not found, check the archives
     """
     result = get_course_details(courseCode)
+    print(result)
 
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")

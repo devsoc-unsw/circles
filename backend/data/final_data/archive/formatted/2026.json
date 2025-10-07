@@ -38399,25 +38399,6 @@
         },
         "enrolment_rules": ""
     },
-    "GMAT9606": {
-        "title": "Microwave Remote Sensing",
-        "code": "GMAT9606",
-        "UOC": "6",
-        "gen_ed": "false",
-        "level": null,
-        "description": "<p>Use of passive and active (radar) microwave techniques in remote sensing of earth resources. Topics include: real and synthetic aperture radar systems; passive microwave radiometry; energy-surface interactions; interpretation of microwave image data: applications in agriculture, geology, oceanography and hydrology; issues in signal and image processing; characteristics of airborne and spaceborne microwave sensors.</p>",
-        "study_level": "Undergraduate",
-        "school": "School of Civil and Environmental Engineering",
-        "faculty": "Faculty of Engineering",
-        "campus": "Sydney",
-        "terms": "",
-        "calendar": "3+",
-        "field_of_education": "031199 Geomatic Engineering not elsewhere classified",
-        "attributes": [],
-        "equivalents": {},
-        "exclusions": {},
-        "enrolment_rules": ""
-    },
     "GSOE9712": {
         "title": "Engineering Statistics and Experiment Design",
         "code": "GSOE9712",

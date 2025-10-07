@@ -5475,28 +5475,6 @@
         ],
         "broke at": "Index 2, &&"
     },
-    "DESN2000": {
-        "condition": {
-            "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-            "processed": "Please refer to the course overview section for information on requirements"
-        },
-        "tokens": [
-            "(",
-            "Please",
-            "refer",
-            "to",
-            "the",
-            "course",
-            "overview",
-            "section",
-            "for",
-            "information",
-            "on",
-            "requirements",
-            ")"
-        ],
-        "broke at": "Index 2, refer"
-    },
     "DPBS1001": {
         "condition": {
             "original": "Prerequisite: 6 UOC of any DPGE, DPST, DPBS and enrolled in a UNSW Diploma program<br/><br/>",
