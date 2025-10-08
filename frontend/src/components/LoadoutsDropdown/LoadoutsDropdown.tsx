@@ -1,16 +1,15 @@
 import React from 'react';
-
-import { Dropdown, Button } from 'antd';
+import { DeleteOutlined, DownOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
-import { DownOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTheme } from 'styled-components';
 
-import { useUserLoadouts, useUserActiveLoadout } from 'utils/apiHooks/loadouts/queries';
 import {
   useCreateLoadoutMutation,
   useDeleteLoadoutMutation,
   useSwitchLoadoutMutation
 } from 'utils/apiHooks/loadouts/mutations';
+import { useUserActiveLoadout, useUserLoadouts } from 'utils/apiHooks/loadouts/queries';
 import openNotification from 'utils/openNotification';
 
 const LoadoutsDropdown = () => {
@@ -20,20 +19,19 @@ const LoadoutsDropdown = () => {
 
   const createLoadoutMutation = useCreateLoadoutMutation({
     mutationOptions: {
-      onError: (error) => {
+      onError: (_) => {
         openNotification({
           type: 'error',
           message: 'Failed to create loadout',
           description: <span style={{ color: theme.text }}>Maximum number of loadouts reached</span>
         });
-        console.log(error);
       }
     }
   });
 
   const deleteLoadoutMutation = useDeleteLoadoutMutation({
     mutationOptions: {
-      onError: (error) => {
+      onError: (_) => {
         openNotification({
           type: 'error',
           message: 'Failed to delete loadout',

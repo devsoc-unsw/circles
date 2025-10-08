@@ -94,7 +94,11 @@ def create_user_loadout(uid: Annotated[str, Security(require_uid)]):
     
     num_curr_loadouts = len(user['loadouts'])
 
-    new_loadout_name = f'Loadout {num_curr_loadouts + 1}'
+    new_loadout_number = 2
+    while f'Loadout {new_loadout_number}' in [l['loadoutName'] for l in user['loadouts']]:
+        new_loadout_number += 1
+
+    new_loadout_name = f'Loadout {new_loadout_number}'
 
     new_planner: PlannerLocalStorage = {
         'unplanned': [],
