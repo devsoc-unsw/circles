@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, with_config
 
 # Constants
 DEFAULT_LOADOUT_NAME = 'Default Plan'
+MAX_LOADOUTS = 3
 
 
 class Programs(BaseModel):

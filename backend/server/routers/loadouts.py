@@ -8,8 +8,7 @@ from typing import Annotated, Optional
 from fastapi import APIRouter, HTTPException, Security
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
-from server.routers.model import LoadoutStorage,PlannerLocalStorage, Storage
-MAX_LOADOUTS = 3
+from server.routers.model import DEFAULT_LOADOUT_NAME, LoadoutStorage,PlannerLocalStorage, Storage, MAX_LOADOUTS
 
 router = APIRouter(
     prefix="/loadouts", 
@@ -164,6 +163,9 @@ def delete_loadout(loadout_name: str, uid: Annotated[str, Security(require_uid)]
         HTTPException: The loadout the user requested to delete does not exist
     """
     user = get_setup_user(uid)
+
+    if loadout_name == DEFAULT_LOADOUT_NAME:
+        raise HTTPException(status_code=400, detail=f"Cannot delete default loadout")
 
     target_loadout = get_target_loadout(loadout_name, user)
 

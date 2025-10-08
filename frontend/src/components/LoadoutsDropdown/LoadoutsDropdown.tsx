@@ -37,7 +37,9 @@ const LoadoutsDropdown = () => {
         openNotification({
           type: 'error',
           message: 'Failed to delete loadout',
-          description: <span style={{ color: theme.text }}>Cannot delete all loadouts</span>
+          description: (
+            <span style={{ color: theme.text }}>Cannot delete all loadouts or default loadout</span>
+          )
         });
       }
     }
