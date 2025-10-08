@@ -11,7 +11,7 @@ const UnplannedContainer = styled.div<{ $summerEnabled: boolean }>`
   min-width: 18em;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     position: relative;
     top: unset;
     right: unset;
@@ -109,7 +109,7 @@ const UnplannedBox = styled.ul<UnplannedBoxProps>`
       min-width: 13em;
     `}
   
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     max-height: 30vh;
     width: 30px;
   }

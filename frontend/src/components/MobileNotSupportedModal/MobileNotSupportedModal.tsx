@@ -7,7 +7,7 @@ const { Title, Paragraph } = Typography;
 
 const MobileNotSupportedModal = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 800px)');
 
   useEffect(() => {
     // Check if user has already seen the modal in this session
