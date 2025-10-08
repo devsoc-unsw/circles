@@ -3,12 +3,11 @@ from fastapi import APIRouter, HTTPException, Security
 import copy
 
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
-from server.routers.loadouts import DEFAULT_LOADOUT_NAME
 from server.routers.utility.common import get_course_details
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
 from server.routers.utility.wizard import validate_degree
-from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage, LoadoutStorage
+from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage, LoadoutStorage, DEFAULT_LOADOUT_NAME
 import server.db.helpers.users as udb
 
 router = APIRouter(
@@ -103,8 +102,9 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         userCourses[course] = UserCourseStorage(code=course, mark=data.courses[course].mark, uoc=uoc, ignoreFromProgression=data.courses[course].ignoreFromProgression)
 
     user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=data.settings)
-    if not udb.reset_user(uid) or not udb.update_user(uid, user):
+    if not udb.reset_user(uid) or not udb.update_user(uid, user, True):
         raise HTTPException(status_code=500, detail="Failed to import user")
+
 
 @router.get("/data/all")
 def get_user(uid: Annotated[str, Security(require_uid)]) -> Storage:

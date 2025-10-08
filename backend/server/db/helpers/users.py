@@ -6,7 +6,7 @@ import pymongo.errors
 
 from server.db.mongo.constants import UID_INDEX_NAME
 from server.db.mongo.conn import usersCOL
-from server.routers.loadouts import DEFAULT_LOADOUT_NAME, get_target_loadout
+from server.routers.model import DEFAULT_LOADOUT_NAME
 
 from .models import NotSetupUserStorage, PartialUserStorage, UserCoursesStorage, UserDegreeStorage, UserPlannerStorage, UserSettingsStorage, UserStorage, UserLoadoutStorage
 
@@ -166,7 +166,7 @@ def update_user_loadouts(uid: str, data: list[UserLoadoutStorage]) -> bool:
 
     return res.matched_count == 1
 
-def update_user(uid: str, data: PartialUserStorage) -> bool:
+def update_user(uid: str, data: PartialUserStorage, force_setup: bool = False) -> bool:
     # updates certain properties of the user
     # if enough are given, declares it as setup
     fields = { "courses", "degree", "planner", "settings", "loadouts", "activeLoadout" }
@@ -187,15 +187,19 @@ def update_user(uid: str, data: PartialUserStorage) -> bool:
     # handling case of update_user being used by import -> have to initialise default loadout if both courses and planner imported
     if 'courses' in payload and 'planner' in payload and 'loadouts' not in payload:
         # import always resets user first, so we can assume no existing loadouts
+        # Convert the data to the correct format for UserLoadoutStorage
+        planner_data = data.planner.model_dump() if hasattr(data.planner, 'model_dump') else data.planner
+        courses_data = {code: info.model_dump() if hasattr(info, 'model_dump') else info for code, info in data.courses.items()}
+        
         default_loadout = UserLoadoutStorage(
             loadoutName=DEFAULT_LOADOUT_NAME,
-            planner=payload['planner'],
-            courses=payload['course'],
+            planner=planner_data,
+            courses=courses_data,
         )
         payload['loadouts'] = [default_loadout.model_dump()]
         payload['activeLoadout'] = DEFAULT_LOADOUT_NAME
 
-    if fields.issubset(payload.keys()):
+    if force_setup or fields.issubset(payload.keys()):
         # enough to declare user as setup
         payload["setup"] = True
 

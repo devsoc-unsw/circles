@@ -9,8 +9,6 @@ from fastapi import APIRouter, HTTPException, Security
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
 from server.routers.model import LoadoutStorage,PlannerLocalStorage, Storage
-
-DEFAULT_LOADOUT_NAME = 'Default Plan'
 MAX_LOADOUTS = 3
 
 router = APIRouter(

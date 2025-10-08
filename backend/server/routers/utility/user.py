@@ -5,7 +5,7 @@ from starlette.status import HTTP_403_FORBIDDEN
 
 from algorithms.objects.user import UserJSON, User
 from server.routers.utility.common import get_core_courses, get_course_details
-from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage, LoadoutStorage
+from server.routers.model import CourseStorage, Mark, SettingsStorage, DegreeLocalStorage, PlannerLocalStorage, Storage, LoadoutStorage, DEFAULT_LOADOUT_NAME
 
 import server.db.helpers.users as udb
 from server.db.helpers.models import PartialUserStorage, UserStorage as NEWUserStorage, UserDegreeStorage as NEWUserDegreeStorage, UserPlannerStorage as NEWUserPlannerStorage, UserCoursesStorage as NEWUserCoursesStorage, UserCourseStorage as NEWUserCourseStorage, UserSettingsStorage as NEWUserSettingsStorage, UserLoadoutStorage as NEWUserLoadoutStorage
@@ -62,17 +62,52 @@ def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
     return SettingsStorage(showMarks=s.showMarks, hiddenYears=s.hiddenYears)
 
 def _nto_loadouts(s: list[NEWUserLoadoutStorage]) -> list[LoadoutStorage]:
-    return [LoadoutStorage(loadoutName=l.loadoutName, planner=l.planner, courses=l.courses) for l in s]
+    result = []
+    for l in s:
+        # handle both old (TypedDict) and new (Pydantic model) formats
+        if hasattr(l.planner, 'model_dump'):
+            # Old format - Pydantic model
+            planner_dict = l.planner.model_dump()
+            courses_dict = {code: info.model_dump() for code, info in l.courses.items()}
+        else:
+            # new format - already converted to Pydantic model
+            planner_dict = _nto_planner(l.planner)
+            courses_dict = _nto_courses(l.courses)
+        
+        result.append(LoadoutStorage(
+            loadoutName=l.loadoutName,
+            planner=planner_dict,
+            courses=courses_dict
+        ))
+    return result
 
 def _nto_storage(s: NEWUserStorage) -> Storage:
-    return {
+    # handle migration for users without loadouts to new setup with loadouts
+    needs_migration = s.loadouts is None or s.activeLoadout is None
+    
+    if needs_migration:
+        # create default loadout for existing users that don't have loadouts
+        default_loadout = LoadoutStorage(
+            loadoutName=DEFAULT_LOADOUT_NAME,
+            planner=_nto_planner(s.planner),
+            courses=_nto_courses(s.courses)
+        )
+        loadouts = [default_loadout]
+        active_loadout = DEFAULT_LOADOUT_NAME
+    else:
+        loadouts = _nto_loadouts(s.loadouts)
+        active_loadout = s.activeLoadout
+    
+    result = {
         'courses': _nto_courses(s.courses),
         'degree': _nto_degree(s.degree),
         'planner': _nto_planner(s.planner),
         'settings': _nto_settings(s.settings),
-        'loadouts': _nto_loadouts(s.loadouts),
-        'activeLoadout': s.activeLoadout
+        'loadouts': loadouts,
+        'activeLoadout': active_loadout
     }
+    
+    return result
 
 
 def get_setup_user(uid: str) -> Storage:
@@ -84,7 +119,20 @@ def get_setup_user(uid: str) -> Storage:
             detail="User must be setup to access this resource.",
         )
 
-    return _nto_storage(data)
+    # check if user needs migration (i.e. they don't have loadouts)
+    needs_migration = data.loadouts is None or data.activeLoadout is None
+    
+    result = _nto_storage(data)
+    
+    # persist the migration to database
+    if needs_migration:
+        # save the migrated loadouts back to the database
+        udb.update_user(uid, PartialUserStorage(
+            loadouts=_otn_loadouts(result['loadouts']),
+            activeLoadout=result['activeLoadout']
+        ))
+    
+    return result
 
 # keep this private
 def set_user(uid: str, item: Storage, overwrite: bool = False):

@@ -6,6 +6,9 @@ from typing import Literal, Optional, Set, TypedDict, Union
 from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel, ConfigDict, with_config
 
+# Constants
+DEFAULT_LOADOUT_NAME = 'Default Plan'
+
 
 class Programs(BaseModel):
     model_config = ConfigDict(extra='forbid')

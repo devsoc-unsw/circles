@@ -55,16 +55,18 @@ class _BaseUserStorage(BaseModel):
     # NOTE: could also put uid here if we want
     guest: bool
 
+class UserLoadoutStorage(BaseModel):
+    loadoutName: str
+    planner: UserPlannerStorage
+    courses: UserCoursesStorage
+
 class UserImport(BaseModel):
     degree: UserDegreeStorage
     courses: dict[str, UserCourseMinimal]
     planner: UserPlannerStorage
     settings: UserSettingsStorage
-
-class UserLoadoutStorage(BaseModel):
-    loadoutName: str
-    planner: UserPlannerStorage
-    courses: UserCoursesStorage
+    loadouts: Optional[list[UserLoadoutStorage]] = None
+    activeLoadout: Optional[str] = None
 
 class UserStorage(_BaseUserStorage):
     setup: Literal[True] = True
@@ -72,8 +74,8 @@ class UserStorage(_BaseUserStorage):
     courses: UserCoursesStorage
     planner: UserPlannerStorage
     settings: UserSettingsStorage
-    loadouts: list[UserLoadoutStorage]
-    activeLoadout: str
+    loadouts: Optional[list[UserLoadoutStorage]] = None
+    activeLoadout: Optional[str] = None
 
 class NotSetupUserStorage(_BaseUserStorage):
     setup: Literal[False] = False
