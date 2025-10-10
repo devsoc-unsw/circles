@@ -105,6 +105,9 @@ const TermBox = ({
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
+              <S.DifficultyWrapper>
+                <S.DifficultySign $difficulty={difficulty}> {difficulty} </S.DifficultySign>
+              </S.DifficultyWrapper>
               {Object.values(termCourseInfos).map((info, index) => {
                 if (!info || !courseInfos[info.code]) return null;
                 return (
@@ -128,8 +131,6 @@ const TermBox = ({
                   offset={[0, 0]}
                 />
               </S.UOCBadgeWrapper>
-              {/* place difficulty div here */}
-              {difficulty}
             </S.TermBoxWrapper>
           </Badge>
         )}
