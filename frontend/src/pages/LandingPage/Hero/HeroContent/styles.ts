@@ -24,7 +24,7 @@ const HeroTitle = motion(styled.h1`
     0 -2px 0 #9154de,
     0 2px 0 #9154de;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 42px;
     line-height: 1.1;
     margin-bottom: 1rem;
@@ -41,7 +41,7 @@ const HeroSubTitle = styled.img`
   margin-top: -6px;
   margin-left: -8px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 7.5rem;
     margin-top: -4px;
     margin-left: -6px;
@@ -68,7 +68,7 @@ const HeroCTA = motion(styled.button`
   filter: drop-shadow(-1px -1px 0 #9154de) drop-shadow(1px -1px 0 #9154de)
     drop-shadow(-1px 1px 0 #9154de) drop-shadow(1px 1px 0 #9154de) drop-shadow(0 0 2px #9154de);
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 21.25rem;
     height: 3rem;
     font-size: 0.9rem;
@@ -92,7 +92,7 @@ const DevSocLogo = motion(styled.img`
     margin-top: 1rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 140px;
   }
 

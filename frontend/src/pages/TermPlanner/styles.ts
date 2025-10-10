@@ -12,7 +12,7 @@ const PlannerContainer = styled.div`
   justify-content: center;
   margin: var(--tp-planner-container-margin);
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
@@ -29,7 +29,7 @@ const PlannerGridWrapper = styled.div<{ $summerEnabled?: boolean }>`
     $summerEnabled ? '7em 1fr 1fr 1fr 1fr 1fr' : '7em 1fr 1fr 1fr 1fr'};
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     display: flex;
     flex-direction: column;
     grid-template-columns: repeat(2, 1fr);
@@ -41,7 +41,7 @@ const YearGridBox = styled(GridItem)`
   flex-direction: column;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     margin-bottom: 0.5rem;
   }
 `;

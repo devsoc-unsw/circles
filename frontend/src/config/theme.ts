@@ -203,23 +203,6 @@ export const GlobalStyles = createGlobalStyle`
       -0.07em 0 ${({ theme }) => theme.graph.loadingText},
       0 -0.07em ${({ theme }) => theme.graph.loadingText};
   }
-  .mobile-course-drawer .ant-drawer-content-wrapper {
-    height: 70vh;
-  }
-  .mobile-course-drawer .ant-drawer-title {
-    color: ${({ theme }) => theme.text};
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .mobile-course-drawer .ant-drawer-body {
-    background-color: ${({ theme }) => theme.body};
-    padding: 16px;
-  }
-  .mobile-course-tabs .ant-tabs-tab {
-    color: ${({ theme }) => theme.graph.tabColor};
-    font-size: 16px;
-    padding: 12px 16px;
-  }
 
   // Scrollbar settings
   /* width */

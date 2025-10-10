@@ -97,7 +97,7 @@ const CourseDescriptionPanel = ({
           </S.SidebarWrapper>
         )}
         <div>
-          <Rate disabled value={rating?.overallRating ? rating.overallRating : 0} allowHalf />
+          <Rate value={rating?.overallRating ? rating.overallRating : 0} allowHalf />
           <div>
             <a
               href={`https://unilectives.devsoc.app/course/${courseCode}/`}

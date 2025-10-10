@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledWrapper = styled.div`
   margin-bottom: 80px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     margin-bottom: 40px;
   }
 `;
@@ -19,7 +19,7 @@ const Title = styled.h1`
   position: relative;
   font-weight: 700;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     font-size: 36px;
     margin-bottom: 2rem;
   }
@@ -37,7 +37,7 @@ const SectionContainer = styled.div`
   position: sticky;
   top: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     height: auto;
     position: static;
@@ -52,7 +52,7 @@ const Left = styled.div`
   padding: 5rem;
   flex-direction: column;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     padding: 2rem;
     min-height: 60vh;
   }
@@ -67,7 +67,7 @@ const Right = styled.div`
   flex: 1;
   background-color: #fbf5ff;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     min-height: 50vh;
     display: flex;
     align-items: center;
@@ -83,7 +83,7 @@ const RightSection = styled.div`
   position: sticky;
   top: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     position: static;
     padding: 2rem;
   }
@@ -100,7 +100,7 @@ const SVGContainer = motion(styled.div`
   height: 600px;
   transition: all 0.2s ease-in-out;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 80%;
     height: 400px;
     margin-top: 2rem;
