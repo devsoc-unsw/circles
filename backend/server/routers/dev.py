@@ -6,8 +6,8 @@ from server.routers.utility.sessions.middleware import set_secure_cookie
 
 
 router = APIRouter(
-    prefix="/auth",
-    tags=["auth"],
+    prefix="/dev",
+    tags=["dev"],
 )
 
 @router.post('/guest_login')

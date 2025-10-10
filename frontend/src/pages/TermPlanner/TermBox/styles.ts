@@ -7,19 +7,44 @@ type TermBoxWrapperProps = {
   $isSmall: boolean;
 };
 
+const DifficultyWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+
+  transform: translateY(-10px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+
+  z-index: 9999;
+`;
+
 const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
   margin: 1em;
   min-height: 18em;
   min-width: 21em;
   color: white;
   list-style: none;
-  padding: 1.5em;
+  padding: 1.2em;
   border-radius: 2em;
   transition: 200ms ease-out;
   border: 0.5px solid ${({ theme }) => theme.termBoxWrapper.borderColor};
   position: relative;
 
   ${({ $droppable }) => $droppable && Droppable}
+
+  &:hover ${DifficultyWrapper} {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 
   ${({ $summerEnabled }) =>
     $summerEnabled &&
@@ -70,14 +95,6 @@ const UOCBadgeWrapper = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-`;
-
-const DifficultyWrapper = styled.div`
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const DifficultySign = styled.div<{ $difficulty: string }>`
