@@ -72,8 +72,40 @@ const UOCBadgeWrapper = styled.div`
   right: 0;
 `;
 
+const DifficultyWrapper = styled.div`
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DifficultySign = styled.div<{ $difficulty: string }>`
+  border-radius: 1em;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+
+  background-color: ${({ $difficulty }) => {
+    if ($difficulty === 'Easy') {
+      return '#4BAD44';
+    }
+    if ($difficulty === 'Medium') {
+      return '#E39700';
+    }
+    if ($difficulty === 'Hard') {
+      return '#C90000';
+    }
+    return '#A3A3A3';
+  }};
+`;
+
 export default {
   TermBoxWrapper,
   TermCheckboxWrapper,
-  UOCBadgeWrapper
+  UOCBadgeWrapper,
+  DifficultyWrapper,
+  DifficultySign
 };
