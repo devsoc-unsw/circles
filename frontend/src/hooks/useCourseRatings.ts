@@ -14,12 +14,6 @@ export function useCourseManageabilities(courseCodes: string[]): string[] {
     .filter((rating) => typeof rating === 'number')
     .map((rating) => rating.toFixed(1));
 
-  // let difficulty = 'Unknown';
-  // if (manageabilities.length !== 0) {
-  //   const totalManageability = manageabilities.reduce((sum, currRating) => sum + currRating, 0);
-  //   difficulty = getDifficultyRating(totalManageability);
-  // }
-
   return manageabilities;
 }
 
