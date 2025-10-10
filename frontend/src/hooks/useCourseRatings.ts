@@ -1,7 +1,7 @@
 import { useQueries } from '@tanstack/react-query';
 import { getCourseRating } from 'utils/api/unilectivesApi';
 
-export function useCourseManageabilities(courseCodes: string[]): string[] {
+export default function useCourseManageabilities(courseCodes: string[]): string[] {
   const courseRatings = useQueries({
     queries: courseCodes.map((courseCode) => ({
       queryKey: [`${courseCode}`],
