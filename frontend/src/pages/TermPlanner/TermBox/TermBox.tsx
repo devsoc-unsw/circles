@@ -12,7 +12,7 @@ import Spinner from 'components/Spinner';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
-import { useCourseManageabilities } from 'hooks/useCourseRatings';
+import useCourseManageabilities from 'hooks/useCourseRatings';
 import getTermDifficulty from 'utils/getTermDifficulty';
 
 const Droppable = React.lazy(() =>
