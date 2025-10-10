@@ -16,8 +16,3 @@ export function useCourseManageabilities(courseCodes: string[]): string[] {
 
   return manageabilities;
 }
-
-// TODO: option to have hooks for other ratings?
-export function useCourseUsefullnesses(courseCodes: string[]) {
-  return null;
-}
