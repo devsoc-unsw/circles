@@ -8,12 +8,12 @@ import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
 import { useToggleLockTermMutation, useUserCourses, useUserPlanner } from 'utils/apiHooks/user';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
+import getTermDifficulty from 'utils/getTermDifficulty';
 import Spinner from 'components/Spinner';
+import useCourseManageabilities from 'hooks/useCourseRatings';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
-import useCourseManageabilities from 'hooks/useCourseRatings';
-import getTermDifficulty from 'utils/getTermDifficulty';
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
