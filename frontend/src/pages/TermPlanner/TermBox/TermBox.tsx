@@ -8,7 +8,9 @@ import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
 import { useToggleLockTermMutation, useUserCourses, useUserPlanner } from 'utils/apiHooks/user';
 import { courseHasOffering } from 'utils/getAllCourseOfferings';
+import getTermDifficulty from 'utils/getTermDifficulty';
 import Spinner from 'components/Spinner';
+import useCourseManageabilities from 'hooks/useCourseRatings';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
@@ -45,6 +47,9 @@ const TermBox = ({
   const coursesQuery = useUserCourses();
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
+  const manageabilities = useCourseManageabilities(termCourseCodes);
+  const difficulty = getTermDifficulty(manageabilities);
+
   if (!coursesQuery.data || !plannerQuery.data) {
     return <div>loading page...</div>;
   }
@@ -75,6 +80,7 @@ const TermBox = ({
     backgroundColor: theme.uocBadge.backgroundColor,
     boxShadow: 'none'
   };
+
   return (
     <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isLocked}>
@@ -99,6 +105,11 @@ const TermBox = ({
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
+              {difficulty !== 'Unknown' && (
+                <S.DifficultyWrapper>
+                  <S.DifficultySign $difficulty={difficulty}> {difficulty} </S.DifficultySign>
+                </S.DifficultyWrapper>
+              )}
               {Object.values(termCourseInfos).map((info, index) => {
                 if (!info || !courseInfos[info.code]) return null;
                 return (
