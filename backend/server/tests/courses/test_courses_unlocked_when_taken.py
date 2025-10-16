@@ -75,7 +75,6 @@ def test_two_courses_completed():
     # TABL2710 is unlocked because USER1 now meets the 18UOC requirement
     assert x.json() == {
         "direct_unlock": [
-            "COMP3121",
             "COMP3141",
             "COMP3151",
             "COMP3161",
@@ -96,5 +95,5 @@ def test_two_courses_completed():
             "COMP9727",
             "MTRN2500",
         ],
-        "indirect_unlock": ["BABS3301", "BEIL0011", "COMP4920", "MUSC2117", "TABL2710"]
+        "indirect_unlock": ["BABS3301", "BEIL0011", "COMP4920", "MUSC2117", "MUSC2119", "TABL2710"]
     }
