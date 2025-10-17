@@ -31,8 +31,8 @@ def fix_conditions():
     for course in ("MATS4503", "MATS4504", "MATS4505"):
         CONDITIONS[course][PROCESSED] = MATS_4503_4504_4505()
 
-
-    CONDITIONS["MATS5003"][PROCESSED] = MATS_5003()
+    if "MATS5003" in CONDITIONS:
+        CONDITIONS["MATS5003"][PROCESSED] = MATS_5003()
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(

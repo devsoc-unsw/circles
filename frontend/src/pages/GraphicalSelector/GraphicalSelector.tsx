@@ -28,7 +28,7 @@ const GraphicalSelector = () => {
   const coursesQuery = useUserCourses();
   const [loading, setLoading] = useState(true);
   const courses = coursesQuery.data || badCourses;
-
+  // TODO: add figure out what to do with program structure tab
   const items = [
     {
       label: 'Course Info',

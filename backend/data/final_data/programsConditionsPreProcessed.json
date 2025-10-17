@@ -1,51 +1,51 @@
 {
     "3134": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3462": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3502": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3523": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3529": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
@@ -71,11 +71,11 @@
     ],
     "3558": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any level 3 courses"
         }
     ],
@@ -99,11 +99,11 @@
     ],
     "3573": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
@@ -115,11 +115,11 @@
     ],
     "3584": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
@@ -135,41 +135,41 @@
     ],
     "3593": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3597": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3598": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3599": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
@@ -181,41 +181,41 @@
     ],
     "3734": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3764": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3784": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
     "3835": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],
@@ -239,11 +239,11 @@
     ],
     "4733": [
         {
-            "dependency": "Student must have completed 24 UOC",
+            "dependency": "Students must have completed 24 UOC",
             "dependent": "taking any Level 2 courses"
         },
         {
-            "dependency": "Student must have completed 48 UOC",
+            "dependency": "Students must have completed 48 UOC",
             "dependent": "taking any Level 3 courses"
         }
     ],

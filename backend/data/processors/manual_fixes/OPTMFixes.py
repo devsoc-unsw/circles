@@ -24,8 +24,8 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-
-    CONDITIONS["OPTM6411"][PROCESSED] = OPTM_6411()
+    if "OPTMM6411" in CONDITIONS:
+        CONDITIONS["OPTM6411"][PROCESSED] = OPTM_6411()
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
