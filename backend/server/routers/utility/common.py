@@ -394,3 +394,11 @@ def prune_edges(edges: list[dict[str, str]], courses: list[str]) -> list[dict[st
     Remove edges between vertices that are not in the list of courses provided.
     """
     return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
+
+def sort_courses_by_code(course_codes: list[str]) -> list[str]:
+    """
+    Sorts by ascending order of the course codes (ie CODEXXXX ascending XXXX)
+    """
+    sorted_codes = sorted(course_codes, key=lambda c: int(''.join(filter(str.isdigit, c))))
+    return sorted_codes
+
