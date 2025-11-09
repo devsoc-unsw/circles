@@ -307,7 +307,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         {"T0": [], "T1": [], "T2": [], "T3": []}
         for _ in range(num_years)
     ]
-    
+
     user: Storage = {
         'degree': {
             'programCode': wizard.programCode,
