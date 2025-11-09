@@ -401,4 +401,3 @@ def sort_courses_by_code(course_codes: list[str]) -> list[str]:
     """
     sorted_codes = sorted(course_codes, key=lambda c: int(''.join(filter(str.isdigit, c))))
     return sorted_codes
-
