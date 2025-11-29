@@ -46,3 +46,5 @@ Also, special thanks to James Ji, Vincent Xiao, Hayes Choy for being the first t
 Information to run Circles on your local machine are available in the [frontend](./frontend/README.md) and [backend](./backend/README.md) `README.md` files.
 
 For further development documentation, visit our [confluence page](https://devsoc.atlassian.net/wiki/spaces/C/pages/756966/About+Circles)! 
+
+This branch is to test CI
