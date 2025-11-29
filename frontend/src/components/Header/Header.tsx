@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BarsOutlined } from '@ant-design/icons';
 import { Button, Drawer, Menu, Typography } from 'antd';
 import circlesLogo from 'assets/circlesLogo.svg';
+import ChatbotCayman from 'components/CirclesChatbotCayman/ChatbotCayman';
 import PlannerCart from 'components/PlannerCart';
 import ThemeToggle from 'components/ThemeToggle';
 import { inDev } from 'config/constants';
@@ -22,6 +23,7 @@ const Header = () => {
   const smallHeader = (
     <S.HeaderContent>
       <ThemeToggle />
+      <ChatbotCayman />
       <div style={{ margin: '10px' }}>
         <Button
           type="primary"
@@ -55,6 +57,7 @@ const Header = () => {
         items={items}
       />
       <ThemeToggle />
+      <ChatbotCayman />
       <PlannerCart />
       <Button
         type="primary"

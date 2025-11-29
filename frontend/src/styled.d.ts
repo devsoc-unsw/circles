@@ -18,6 +18,17 @@ declare module 'styled-components' {
     droppable: {
       backgroundColor: string;
     };
+    caymanChatbotCard: {
+      backgroundColorHover: string;
+    };
+    caymanChatbotMenu: {
+      backgroundColor: string;
+      borderColor?: string;
+      userMessageBackgroundColor?: string;
+      assistantMessageBackgroundColor?: string;
+      userMessageTextColor?: string;
+      assistantMessageTextColor?: string;
+    };
     plannerCartCard: {
       backgroundColorHover: string;
     };
