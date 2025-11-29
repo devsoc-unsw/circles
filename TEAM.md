@@ -15,7 +15,8 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 - Winnie Chan (@winnieee-chan)
 - Valentina Guedez Mercado (@val-guedez)
 - Elaine Zhang (@imagine-hussain)
-- Jenny Mengzhen Liu
+- Jenny Mengzhen Liu (@ChronoComplexity)
+- Eugene Briones (@le-eug)
 
 ## 2024
 ### Directors
