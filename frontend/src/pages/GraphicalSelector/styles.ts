@@ -1,49 +1,33 @@
 import { Button } from 'antd';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import CourseDescriptionPanelComp from 'components/CourseDescriptionPanel';
 
-const Wrapper = styled.div<{ $fullscreen: boolean }>`
+const Wrapper = styled.div`
   height: calc(100vh - var(--navbar-height));
   display: flex;
   gap: 1.25rem;
-
-  ${({ $fullscreen }) =>
-    !$fullscreen &&
-    css`
-      padding: 25px;
-
-      @media (max-width: 768px) {
-        padding: 10px;
-      }
-    `}
-
-  @media (max-width: 768px) {
+  padding: 25px;
+  @media (max-width: 800px) {
     flex-direction: column;
     gap: 0;
+    padding: 10px;
   }
 `;
 
-const GraphWrapper = styled.div<{ $fullscreen: boolean }>`
+const GraphWrapper = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
   flex: 5;
   position: relative;
+  border-radius: 1.25rem;
+  border: ${({ theme }) => theme.graph.borderColor} solid 1px;
 
-  ${({ $fullscreen }) =>
-    !$fullscreen &&
-    css`
-      border-radius: 20px;
-      border: ${({ theme }) => theme.graph.borderColor} solid 1px;
-
-      @media (max-width: 768px) {
-        border-radius: 15px;
-      }
-    `}
-
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     height: calc(100vh - var(--navbar-height) - 20px);
     min-height: 500px;
+    border: none;
+    border-radius: 0;
   }
 `;
 
@@ -57,30 +41,21 @@ const SidebarWrapper = styled.div`
   overflow-y: auto;
   background-color: ${({ theme }) => theme.graph.backgroundColor};
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     display: none;
   }
 `;
 
 const SearchBarWrapper = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
+  top: 1.25rem;
+  right: 1.25rem;
 
-  @media (max-width: 768px) {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-
-    .ant-select {
-      .ant-select-selector {
-        border-radius: 8px;
-        padding: 8px 12px;
-        height: 44px;
-        font-size: 16px;
-      }
-    }
+  @media (max-width: 800px) {
+    width: 100%;
+    right: 0;
+    top: 0.75rem;
+    padding: 0 1rem;
   }
 `;
 
@@ -94,37 +69,26 @@ const SpinnerWraper = styled.div`
 `;
 
 const MobileMenuButton = styled(Button)`
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  z-index: 10;
-  height: 56px;
-  width: 56px;
-  min-width: 56px;
-  border-radius: 50%;
-  font-size: 22px;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: none;
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background: linear-gradient(135deg, #9254de 0%, #b37feb 100%);
 
-  &.ant-btn {
+  @media (max-width: 800px) {
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
     height: 56px;
     width: 56px;
+    min-width: 56px;
     border-radius: 50%;
-    padding: 0;
-    line-height: 1;
-  }
-
-  .anticon {
-    color: white;
-    display: flex;
+    font-size: 22px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: none;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    background: linear-gradient(135deg, #9254de 0%, #b37feb 100%);
   }
   @media (max-width: 768px) {
     display: flex;
