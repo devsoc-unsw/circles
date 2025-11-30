@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {
-  ExpandAltOutlined,
-  ShrinkOutlined,
-  ZoomInOutlined,
-  ZoomOutOutlined
-} from '@ant-design/icons';
+import { ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import type { Graph, GraphOptions, IG6GraphEvent, INode, Item } from '@antv/g6';
 import { Switch } from 'antd';
 import { CourseEdge } from 'types/api';
@@ -19,7 +14,6 @@ import {
 import { unwrapQuery } from 'utils/queryUtils';
 import Spinner from 'components/Spinner';
 import { useAppWindowSize } from 'hooks';
-import useMediaQuery from 'hooks/useMediaQuery';
 import useSettings from 'hooks/useSettings';
 import { ZOOM_IN_RATIO, ZOOM_OUT_RATIO } from '../constants';
 import {
@@ -40,8 +34,6 @@ import S from './styles';
 
 type Props = {
   onNodeClick: (node: INode) => void;
-  handleToggleFullscreen: () => void;
-  fullscreen: boolean;
   focused?: string;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,14 +43,7 @@ interface CoursePrerequisite {
   [key: string]: string[];
 }
 
-const CourseGraph = ({
-  onNodeClick,
-  handleToggleFullscreen,
-  fullscreen,
-  focused,
-  loading,
-  setLoading
-}: Props) => {
+const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
   const degreeQuery = useUserDegree();
   const plannerQuery = useUserPlanner();
   const coursesQuery = useUserCourses();
@@ -66,7 +51,6 @@ const CourseGraph = ({
   const windowSize = useAppWindowSize();
   const { theme } = useSettings();
   const previousTheme = useRef<typeof theme>(theme);
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const graphRef = useRef<Graph | null>(null);
   const initialisingStart = useRef(false); // prevents multiple graphs being loaded
@@ -434,11 +418,6 @@ const CourseGraph = ({
   }, [windowSize, resizeGraphDebounce]);
 
   useEffect(() => {
-    // resize instantly for fullscreening
-    resizeGraph();
-  }, [fullscreen, resizeGraph]);
-
-  useEffect(() => {
     if (!queriesSuccess) return;
     if (showingUnlockedCourses) showUnlockedCourses();
     else showAllCourses();
@@ -460,12 +439,6 @@ const CourseGraph = ({
           <S.ButtonGroup>
             <S.Button onClick={handleZoomIn} icon={<ZoomInOutlined />} />
             <S.Button onClick={handleZoomOut} icon={<ZoomOutOutlined />} />
-            {!isMobile && (
-              <S.Button
-                onClick={handleToggleFullscreen}
-                icon={fullscreen ? <ShrinkOutlined /> : <ExpandAltOutlined />}
-              />
-            )}
           </S.ButtonGroup>
         </S.ToolsWrapper>
       )}
