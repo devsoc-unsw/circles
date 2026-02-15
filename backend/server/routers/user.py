@@ -2,7 +2,7 @@ from typing import Annotated, Dict, Optional
 from fastapi import APIRouter, HTTPException, Security
 
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
-from server.routers.utility.common import get_course_details
+from server.routers.utility.common import get_core_courses, get_course_details, sort_courses_by_code
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user
 from server.routers.utility.wizard import validate_degree
@@ -316,5 +316,24 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         'courses': {},
         'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
     }
+
+    # Automatically add core courses to unplanned
+    core_course_codes = get_core_courses(wizard.programCode, wizard.specs)
+
+    # Remove duplicates and sort
+    core_course_codes = list(set(core_course_codes))
+    core_course_codes = sort_courses_by_code(core_course_codes)
+
+    # TODO:Refactor so we use a helper here and add_to_unplanned
+    for code in core_course_codes:
+        uoc = get_course_details(code)['UOC'] # raises exception anyway when unfound
+        user['planner']['unplanned'].append(code)
+        user['courses'][code] = {
+            'code': code,
+            'mark': None,
+            'uoc': uoc,
+            'ignoreFromProgression': False
+        }
+
     set_user(uid, user, True)
     return user

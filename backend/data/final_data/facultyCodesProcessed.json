@@ -20,7 +20,6 @@
         "MATS",
         "MICR",
         "MSCI",
-        "NANO",
         "PHYS",
         "PSYC",
         "SCIF"
@@ -493,6 +492,7 @@
         "INST",
         "INTA",
         "LAND",
+        "LING",
         "MDIA",
         "MUSC",
         "PLAN",
@@ -504,6 +504,7 @@
     ],
     "F Engineering": [
         "AERO",
+        "ATOM",
         "BINF",
         "BIOM",
         "CEIC",
@@ -523,7 +524,6 @@
         "MINE",
         "MMAN",
         "MTRN",
-        "NAVL",
         "PHTN",
         "PTRL",
         "SENG",
@@ -532,6 +532,7 @@
     ],
     "F Medicine": [
         "ANAT",
+        "BIOP",
         "DIET",
         "EXPT",
         "GENM",
@@ -550,8 +551,7 @@
         "PSCY",
         "SOMS",
         "SWCH",
-        "VISN",
-        "YMED"
+        "VISN"
     ],
     "F DVC": [
         "ATSI",
@@ -564,6 +564,7 @@
         "CRIM",
         "GENL",
         "HUMS",
+        "LAWJ",
         "LAWS"
     ],
     "F College": [
@@ -601,17 +602,18 @@
     ],
     "S Mechanical": [
         "AERO",
+        "ATOM",
         "ENGG",
         "GSOE",
         "MANF",
         "MECH",
         "MMAN",
-        "MTRN",
-        "NAVL"
+        "MTRN"
     ],
     "S Biomedical": [
         "ANAT",
         "BIOM",
+        "BIOP",
         "HDAT",
         "NEUR",
         "PATH",
@@ -641,6 +643,7 @@
         "ARTS",
         "HUMS",
         "INST",
+        "LING",
         "ZGEN",
         "ZHSS"
     ],
@@ -661,7 +664,8 @@
         "BABS",
         "BIOC",
         "GENS",
-        "MICR"
+        "MICR",
+        "SCIF"
     ],
     "S Biological": [
         "BEES",
@@ -686,7 +690,6 @@
     ],
     "S Chemistry": [
         "CHEM",
-        "NANO",
         "SCIF"
     ],
     "S Information": [
@@ -706,6 +709,7 @@
         "CRIM",
         "GENL",
         "HUMS",
+        "LAWJ",
         "LAWS"
     ],
     "S Civil": [
@@ -758,8 +762,7 @@
     ],
     "S Population": [
         "GENM",
-        "PHCM",
-        "YMED"
+        "PHCM"
     ],
     "S Physics": [
         "GENS",
@@ -773,8 +776,7 @@
         "MARK"
     ],
     "S Materials": [
-        "MATS",
-        "NANO"
+        "MATS"
     ],
     "S Minerals": [
         "MERE",
@@ -810,6 +812,9 @@
     "S UC-Science": [
         "ZEIT",
         "ZPEM"
+    ],
+    "S UC-Engineering": [
+        "ZEIT"
     ],
     "S Professional": [
         "ZSPS"

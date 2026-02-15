@@ -1,7 +1,7 @@
 services:
   mongodb:
     image: mongo:6.0.14
-    container_name: mongodb
+    container_name: circles-mongodb
     volumes:
       # Named volume to persist database
       - circles_data:/data/db
@@ -14,7 +14,7 @@ services:
 
   sessionsdb:
     image: redis/redis-stack:7.2.0-v9
-    container_name: sessionsdb
+    container_name: circles-sessionsdb
     ports:
       - '8001:8001'
       - '6379:6379'
@@ -29,7 +29,7 @@ services:
     build:
       context: ./backend
       dockerfile: dev.dockerfile
-    container_name: backend
+    container_name: circles-backend
     ports:
       - '8000:8000'
     env_file:
@@ -48,7 +48,7 @@ services:
     build:
       context: ./backend
       dockerfile: production.dockerfile
-    container_name: backend-prod
+    container_name: circles-backend-prod
     ports:
       - '8000:8000'
     env_file:
@@ -70,7 +70,7 @@ services:
     build:
       context: ./frontend
       dockerfile: dev.dockerfile
-    container_name: frontend
+    container_name: circles-frontend
     ports:
       - '3000:3000'
     env_file:
@@ -89,7 +89,7 @@ services:
     build:
       context: ./frontend
       dockerfile: production.dockerfile
-    container_name: frontend-prod
+    container_name: circles-frontend-prod
     ports:
       - '3000:80'
     env_file:
@@ -105,7 +105,7 @@ services:
     # Utility to run the backend with a entirely clean database for testing
     # Should be identical to the backend production, except for the different entrypoint
     extends: backend-prod
-    container_name: ci-backend
+    container_name: circles-ci-backend
     # THIS IS IMPORTANT
     entrypoint: ["python3", "-u", "runserver.py", "--overwrite-all-data"]
 

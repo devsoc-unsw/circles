@@ -14,7 +14,7 @@ You can now run the `setup_env.py` script to setup your env files automatically 
 
 #### Long way
 
-MongoDB, redis and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add three files: `backend.env`, `sessionsdb.env`, `mongodb.env` and `frontend.env`. 
+MongoDB, redis and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add four files: `backend.env`, `sessionsdb.env`, `mongodb.env` and `frontend.env`. 
 
 In `backend.env`, add the environment variables:
 

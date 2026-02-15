@@ -5,7 +5,7 @@ export const FEEDBACK_LINK =
 export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
 
 // Don't forget to update live year in the backend too
-export const LIVE_YEAR = 2025;
+export const LIVE_YEAR = 2026;
 export const CURR_YEAR = new Date().getFullYear();
 export const TERM = `${CURR_YEAR + (getMostRecentPastTerm(CURR_YEAR).T === 3 ? 1 : 0)}-T${
   (getMostRecentPastTerm(CURR_YEAR).T + 0) % 3

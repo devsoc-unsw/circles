@@ -35,7 +35,9 @@ import HideYearTooltip from './HideYearTooltip';
 import OptionsHeader from './OptionsHeader';
 import S from './styles';
 import TermBox from './TermBox';
+import TermBoxMobile from './TermBoxMobile';
 import UnplannedColumn from './UnplannedColumn';
+import useMobileHook from './UseMobileHook';
 import { isPlannerEmpty } from './utils';
 
 const DragDropContext = React.lazy(() =>
@@ -275,6 +277,7 @@ const TermPlanner = () => {
     }
   };
 
+  const isMobile = useMobileHook();
   return (
     <PageTemplate>
       <OptionsHeader />
@@ -290,77 +293,88 @@ const TermPlanner = () => {
         ) : (
           <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
             <S.PlannerContainer style={{ display: 'flex', flex: 1 }}>
-              <S.PlannerGridWrapper $summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
-                <GridItem /> {/* Empty grid item for the year */}
-                {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
-                <GridItem>Term 1</GridItem>
-                <GridItem>Term 2</GridItem>
-                <GridItem>Term 3</GridItem>
-                {planner.years.map((year, index) => {
-                  // TODO: move this out
-                  const iYear = planner.startYear + index;
-                  let yearUOC = 0;
-                  Object.keys(year).forEach((termKey) => {
-                    Object.entries(courseInfoFlipped).forEach(([courseCode, courseInfo]) => {
-                      if (year[termKey as Term].includes(courseCode)) {
-                        yearUOC += courseInfo[iYear].UOC;
-                      }
-                    });
-                  });
-
-                  if (hiddenYears.includes(index)) return null;
-                  return (
-                    <React.Fragment key={iYear}>
-                      <S.YearGridBox>
-                        <S.YearWrapper>
-                          <S.YearText $currYear={LIVE_YEAR === iYear}>{iYear}</S.YearText>
-                          <HideYearTooltip year={index} />
-                        </S.YearWrapper>
-                        <Badge
-                          style={{
-                            backgroundColor: '#efdbff',
-                            color: '#000000'
-                          }}
-                          size="small"
-                          count={`${yearUOC} UOC`}
-                        />
-                      </S.YearGridBox>
-                      {Object.keys(year).map((term) => {
-                        const key = `${iYear}${term}`;
-                        if (!planner.isSummerEnabled && term === 'T0') return null;
-                        const codesForThisTerm = year[term];
-                        // TODO: probs map this at TOP-LEVEL
-                        const courseInfoForThisTerm = Object.fromEntries(
-                          codesForThisTerm.map((code) => [code, courseInfos[iYear][code]])
-                        );
-                        return (
-                          <TermBox
-                            key={key}
-                            name={key}
-                            courseInfos={courseInfos[iYear]}
-                            validateInfos={validations.courses_state}
-                            termCourseInfos={courseInfoForThisTerm}
-                            termCourseCodes={codesForThisTerm}
-                            draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
-                          />
-                        );
-                      })}
-                    </React.Fragment>
-                  );
-                })}
-                <UnplannedColumn
-                  dragging={!!draggingCourse}
-                  courseInfos={Object.fromEntries(
-                    planner.unplanned.map((code) => [
-                      code,
-                      courseInfos[validYears.includes(LIVE_YEAR) ? LIVE_YEAR : validYears.at(-1)!][
-                        code
-                      ]
-                    ])
-                  )}
-                  validateInfos={validations.courses_state}
+              {isMobile ? (
+                // Mobile view - single term box with navigation
+                <TermBoxMobile
+                  planner={planner}
+                  courseInfos={courseInfos}
+                  validations={validations}
+                  draggingCourseCode={draggingCourse}
+                  validYears={validYears}
                 />
-              </S.PlannerGridWrapper>
+              ) : (
+                <S.PlannerGridWrapper $summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
+                  <GridItem /> {/* Empty grid item for the year */}
+                  {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
+                  <GridItem>Term 1</GridItem>
+                  <GridItem>Term 2</GridItem>
+                  <GridItem>Term 3</GridItem>
+                  {planner.years.map((year, index) => {
+                    // TODO: move this out
+                    const iYear = planner.startYear + index;
+                    let yearUOC = 0;
+                    Object.keys(year).forEach((termKey) => {
+                      Object.entries(courseInfoFlipped).forEach(([courseCode, courseInfo]) => {
+                        if (year[termKey as Term].includes(courseCode)) {
+                          yearUOC += courseInfo[iYear].UOC;
+                        }
+                      });
+                    });
+
+                    if (hiddenYears.includes(index)) return null;
+                    return (
+                      <React.Fragment key={iYear}>
+                        <S.YearGridBox>
+                          <S.YearWrapper>
+                            <S.YearText $currYear={LIVE_YEAR === iYear}>{iYear}</S.YearText>
+                            <HideYearTooltip year={index} />
+                          </S.YearWrapper>
+                          <Badge
+                            style={{
+                              backgroundColor: '#efdbff',
+                              color: '#000000'
+                            }}
+                            size="small"
+                            count={`${yearUOC} UOC`}
+                          />
+                        </S.YearGridBox>
+                        {Object.keys(year).map((term) => {
+                          const key = `${iYear}${term}`;
+                          if (!planner.isSummerEnabled && term === 'T0') return null;
+                          const codesForThisTerm = year[term];
+                          // TODO: probs map this at TOP-LEVEL
+                          const courseInfoForThisTerm = Object.fromEntries(
+                            codesForThisTerm.map((code) => [code, courseInfos[iYear][code]])
+                          );
+                          return (
+                            <TermBox
+                              key={key}
+                              name={key}
+                              courseInfos={courseInfos[iYear]}
+                              validateInfos={validations.courses_state}
+                              termCourseInfos={courseInfoForThisTerm}
+                              termCourseCodes={codesForThisTerm}
+                              draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
+                            />
+                          );
+                        })}
+                      </React.Fragment>
+                    );
+                  })}
+                  <UnplannedColumn
+                    dragging={!!draggingCourse}
+                    courseInfos={Object.fromEntries(
+                      planner.unplanned.map((code) => [
+                        code,
+                        courseInfos[
+                          validYears.includes(LIVE_YEAR) ? LIVE_YEAR : validYears.at(-1)!
+                        ][code]
+                      ])
+                    )}
+                    validateInfos={validations.courses_state}
+                  />
+                </S.PlannerGridWrapper>
+              )}
             </S.PlannerContainer>
           </DragDropContext>
         )}

@@ -19,7 +19,9 @@ const URLS = {
   citadel: 'https://www.citadel.com',
   thetradedesk: 'https://www.thetradedesk.com/',
   safetyculture: 'https://www.safetyculture.com',
-  arista: 'https://www.arista.com'
+  arista: 'https://www.arista.com',
+  lyra: 'https://www.lyratechnologies.com.au/',
+  airwallex: 'https://www.airwallex.com/au'
 } as const;
 
 const LOGO_SIZES = {
@@ -45,24 +47,24 @@ const Logo = ({ src, href, size }: LogoProps) => {
 const sponsorAssets = {
   dark: {
     platinum: import.meta.glob(
-      '/src/assets/LandingPage/Sponsors/Dark/Platinum/*.(png|jpg|jpeg|svg)'
+      '/src/assets/LandingPage/Sponsors/Dark/Platinum/*.(png|jpg|jpeg|svg|avif)'
     ) as Files,
     gold: import.meta.glob(
-      '/src/assets/LandingPage/Sponsors/Dark/Gold/*.(png|jpg|jpeg|svg)'
+      '/src/assets/LandingPage/Sponsors/Dark/Gold/*.(png|jpg|jpeg|svg|avif)'
     ) as Files,
     silver: import.meta.glob(
-      '/src/assets/LandingPage/Sponsors/Dark/Silver/*.(png|jpg|jpeg|svg)'
+      '/src/assets/LandingPage/Sponsors/Dark/Silver/*.(png|jpg|jpeg|svg|avif)'
     ) as Files
   },
   light: {
     platinum: import.meta.glob(
-      '/src/assets/LandingPage/Sponsors/Light/Platinum/*.(png|jpg|jpeg|svg)'
+      '/src/assets/LandingPage/Sponsors/Light/Platinum/*.(png|jpg|jpeg|svg|avif)'
     ) as Files,
     gold: import.meta.glob(
-      '/src/assets/LandingPage/Sponsors/Light/Gold/*.(png|jpg|jpeg|svg)'
+      '/src/assets/LandingPage/Sponsors/Light/Gold/*.(png|jpg|jpeg|svg|avif)'
     ) as Files,
     silver: import.meta.glob(
-      '/src/assets/LandingPage/Sponsors/Light/Silver/*.(png|jpg|jpeg|svg)'
+      '/src/assets/LandingPage/Sponsors/Light/Silver/*.(png|jpg|jpeg|svg|avif)'
     ) as Files
   }
 };
