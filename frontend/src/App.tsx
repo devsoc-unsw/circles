@@ -30,7 +30,7 @@ const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
 const ChangeLog = React.lazy(() => import('./pages/ChangeLog'));
 
 // Subcommittee Recruitment flag
-const activeRecruitment = false;
+const activeRecruitment = true;
 
 const App = () => {
   const [queryClient] = React.useState(
