@@ -16,12 +16,17 @@ type Files = Record<string, () => Promise<LogoModule>>;
 const URLS = {
   janestreet: 'https://www.janestreet.com',
   imc: 'https://www.imc.com/ap/',
-  citadel: 'https://www.citadel.com',
+  citadel: 'https://www.citadelsecurities.com/',
   thetradedesk: 'https://www.thetradedesk.com/',
   safetyculture: 'https://www.safetyculture.com',
   arista: 'https://www.arista.com',
   lyra: 'https://www.lyratechnologies.com.au/',
-  airwallex: 'https://www.airwallex.com/au'
+  airwallex: 'https://www.airwallex.com/au',
+  atlassian: 'https://atlassian.com',
+  qrt: 'https://www.qube-rt.com/',
+  januarycapital: 'https://www.january.capital/',
+  optiver: 'https://optiver.com/',
+  recordpoint: 'https://www.recordpoint.com/'
 } as const;
 
 const LOGO_SIZES = {
@@ -126,6 +131,7 @@ const SponsorSection = () => {
       <S.LogosWrapper>
         <S.TierWrapper>{renderLogos(logos.platinum, 'platinum')}</S.TierWrapper>
         <S.TierWrapper>{renderLogos(logos.gold, 'gold')}</S.TierWrapper>
+        <S.TierWrapper>{renderLogos(logos.silver, 'silver')}</S.TierWrapper>
       </S.LogosWrapper>
     </PageContainer>
   );
