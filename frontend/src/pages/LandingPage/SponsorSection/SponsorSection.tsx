@@ -131,7 +131,6 @@ const SponsorSection = () => {
       <S.LogosWrapper>
         <S.TierWrapper>{renderLogos(logos.platinum, 'platinum')}</S.TierWrapper>
         <S.TierWrapper>{renderLogos(logos.gold, 'gold')}</S.TierWrapper>
-        <S.TierWrapper>{renderLogos(logos.silver, 'silver')}</S.TierWrapper>
       </S.LogosWrapper>
     </PageContainer>
   );
