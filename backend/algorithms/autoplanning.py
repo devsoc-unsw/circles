@@ -5,7 +5,6 @@ from typing import Tuple
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
 from ortools.sat.python import cp_model  # type: ignore
-from server.routers.model import CONDITIONS
 
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
@@ -14,10 +13,10 @@ def terms_between(start: Tuple[int, int], end: Tuple[int, int]):
     return (end[0] - start[0]) * 4 + end[1] - start[1]
 
 def map_var_to_course(courses: list[Course], var: cp_model.IntVar):
-    return [course for course in courses if course.name == var.Name()][0]
+    return [course for course in courses if course.name == var.name][0]
 
 def map_course_to_var(course: Course, variables: list[cp_model.IntVar]):
-    return [variable for variable in variables if course.name == variable.Name()][0]
+    return [variable for variable in variables if course.name == variable.name][0]
 
 def convert_to_term_year(number: int, start: Tuple[int, int]):
     return (number // 4 + start[0], number % 4 + start[1])
@@ -35,14 +34,14 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     # TODO: add a way to lock in courses
     model = cp_model.CpModel()
     # 1. enforces terms
-    variables = [model.NewIntVarFromDomain(cp_model.Domain.FromIntervals(course.term_domain(start, end)), course.name) for course in courses]
+    variables = [model.new_int_var_from_domain(cp_model.Domain.from_intervals(course.term_domain(start, end)), course.name) for course in courses]
     # 2. if any courses are named the same, then they must be taken consecutively
     possible_course_dupes = [course.name for course in courses if not course.locked]
     duplicate_courses = set(c for c in possible_course_dupes if possible_course_dupes.count(c) > 1)
     for dupe in duplicate_courses:
-        matched_courses = [variable for variable in variables if variable.Name() == dupe]
+        matched_courses = [variable for variable in variables if variable.name == dupe]
         for match, next_match in zip(matched_courses, matched_courses[1:]):
-            model.Add(match + 1 == next_match)
+            model.add(match + 1 == next_match)
 
     # 3. set max UOC for a term
     for index, m in enumerate(uoc_max):
@@ -50,12 +49,12 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         for v in variables:
             # b is a 'channeling constraint'. This is done to fill the resovoir only *if* the course is in that given term
             # https://developers.google.com/optimization/cp/channeling
-            b = model.NewBoolVar('hi')
-            model.Add(v == index).OnlyEnforceIf(b)
-            model.Add(v != index).OnlyEnforceIf(b.Not())
+            b = model.new_bool_var('hi')
+            model.add(v == index).only_enforce_if(b)
+            model.add(v != index).only_enforce_if(b.Not())
             boolean_indexes.append(b)
         # if the course is in term 'index', only allow 0 to m UOC to exist in that term.
-        model.AddReservoirConstraintWithActive(
+        model.add_reservoir_constraint_with_active(
             variables,
             list(map_var_to_course(courses, var).uoc for var in variables),  # this fills the resovoir by UoC units if active
             boolean_indexes,  # a course is only active if in term 'index'
@@ -76,13 +75,15 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
             map_course_to_var(course, variables)
         )
     solver = cp_model.CpSolver()
-    status = solver.Solve(model)
+    status = solver.solve(model)
     if status in [cp_model.MODEL_INVALID, cp_model.INFEASIBLE]:
         raise ValueError(f'your courses are impossible to put in these terms! Error code: {status}')
-    return [(v.Name(), convert_to_term_year(solver.Value(v), start)) for v in variables]
+    return [(v.name, convert_to_term_year(solver.value(v), start)) for v in variables]
 
 
 if __name__ == '__main__':
+    from server.routers.model import CONDITIONS
+
     pprint(autoplan(
         [
             Course("MATH1141", CONDITIONS["MATH1141"], 65, 6, {2020: [1, 3], 2021: [1, 3], 2022: [1, 3]}),
