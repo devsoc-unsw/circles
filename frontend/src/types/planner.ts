@@ -61,3 +61,13 @@ export type JSONPlanner = {
   years: PlannerYear[];
   version: number;
 };
+
+export type AutoplanRequest = {
+  courseCodes: string[];
+  endTime: [number, number];
+  lockExistingPlannedCourses: boolean;
+};
+
+export type AutoplanResponse = {
+  plan: PlannerYear[];
+};

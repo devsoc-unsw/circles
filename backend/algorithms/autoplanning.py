@@ -31,7 +31,6 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
         - the prerequisites are respected.
     """
     # pylint: disable=too-many-locals
-    # TODO: add a way to lock in courses
     model = cp_model.CpModel()
     # 1. enforces terms
     variables = [model.new_int_var_from_domain(cp_model.Domain.from_intervals(course.term_domain(start, end)), course.name) for course in courses]
@@ -99,7 +98,7 @@ if __name__ == '__main__':
             Course("COMP2511", CONDITIONS["COMP2511"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
             Course("MATH1241", CONDITIONS["MATH1141"], 65, 6, {2020: [2, 3], 2021: [2, 3], 2022: [2, 3]}),
             Course("MATH3411", CONDITIONS["MATH3411"], 65, 6, {2020: [3], 2021: [3], 2022: [3]}),
-            Course("COMP3411", CONDITIONS["COMP3411"], 65, 6, {2020: [3], 2021: [0], 2022: [0]}),
+            Course("COMP3411", CONDITIONS["COMP3411"], 65, 6, {2020: [3], 2021: [3], 2022: [0]}),
             Course("COMP6841", CONDITIONS["COMP6841"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
             Course("COMP3231", CONDITIONS["COMP3231"], 65, 6, {2020: [1], 2021: [1], 2022: [1]}),
             Course("COMP3141", CONDITIONS["COMP3141"], 65, 6, {2020: [2], 2021: [2], 2022: [2]}),
