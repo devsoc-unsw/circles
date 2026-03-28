@@ -86,6 +86,12 @@ def get_oidc_config() -> OIDCConfig:
 config = None if os.getenv('CI') or os.getenv('ENVIRONMENT') == 'test' else get_oidc_config()
 
 
+def require_oidc_config() -> OIDCConfig:
+    if config is None:
+        raise ValueError("OIDC config has not been loaded.")
+    return config
+
+
 #
 # raw requests
 #
@@ -100,6 +106,7 @@ def client_secret_basic_credentials() -> str:
 def generate_oidc_auth_url(state: str) -> str:
     if CLIENT_ID is None:
         raise ValueError("OIDC client ID has not been specified.")
+    oidc_config = require_oidc_config()
 
     # TODO-OLLI(pm): include nonce here one day
     params = urlencode({
@@ -110,13 +117,14 @@ def generate_oidc_auth_url(state: str) -> str:
         "state": state,
     })
 
-    return f"{config['authorization_endpoint']}?{params}"
+    return f"{oidc_config['authorization_endpoint']}?{params}"
 
 # pylint: disable-next=inconsistent-return-statements  # false positive
 def get_user_info(access_token: str) -> UserInfoResponse:
+    oidc_config = require_oidc_config()
     # make a request to get user info, if this fails, the token is invalid
     res = requests.get(
-        config["userinfo_endpoint"],
+        oidc_config["userinfo_endpoint"],
         headers={ "Authorization": f"Bearer {access_token}" },
         timeout=REQUEST_TIMEOUT
     )
@@ -139,8 +147,9 @@ def get_user_info(access_token: str) -> UserInfoResponse:
 def exchange_tokens(code: str) -> TokenResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint
     credentials = client_secret_basic_credentials()
+    oidc_config = require_oidc_config()
     res = requests.post(
-        config["token_endpoint"],
+        oidc_config["token_endpoint"],
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
@@ -170,8 +179,9 @@ def exchange_tokens(code: str) -> TokenResponse:
 def refresh_access_token(refresh_token: str) -> RefreshResponse:
     # https://openid.net/specs/openid-connect-core-1_0.html#RefreshingAccessToken
     credentials = client_secret_basic_credentials()
+    oidc_config = require_oidc_config()
     res = requests.post(
-        config["token_endpoint"],
+        oidc_config["token_endpoint"],
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
@@ -202,8 +212,9 @@ def revoke_token(token: str, token_type: Literal["access_token", "refresh_token"
     # TODO: use oidc logout endpoints if we want.
     #       Currently at time of writing, fedauth does not fully support.
     credentials = client_secret_basic_credentials()
+    oidc_config = require_oidc_config()
     res = requests.post(
-        config["revocation_endpoint"],
+        oidc_config["revocation_endpoint"],
         headers={
             "Content-Type": "application/x-www-form-urlencoded",
             "Authorization": f"Basic {credentials}",
@@ -257,9 +268,10 @@ def compute_at_hash(access_token: str) -> str:
 def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
     if CLIENT_ID is None:
         raise ValueError("OIDC client ID has not been specified.")
+    oidc_config = require_oidc_config()
 
     # NOTE: we might not want to fetch these jwks on every login?
-    jwkclient = jwt.PyJWKClient(config["jwks_uri"])
+    jwkclient = jwt.PyJWKClient(oidc_config["jwks_uri"])
     signing_key = jwkclient.get_signing_key_from_jwt(token)
 
     try:
@@ -268,7 +280,7 @@ def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
             key=signing_key.key,
             algorithms=["RS256"],
             audience=CLIENT_ID,
-            issuer=config["issuer"],
+            issuer=oidc_config["issuer"],
             options={ "verify_signature": True },
             leeway=5,
         )
@@ -326,10 +338,11 @@ def refresh_and_validate(old_id_token: DecodedIDToken, refresh_token: str) -> Tu
     return refreshed, validated
 
 def get_userinfo_and_validate(id_token: DecodedIDToken, access_token: str) -> UserInfoResponse:
+    oidc_config = require_oidc_config()
     info_res = get_user_info(access_token)
 
     # TODO-OLLI(pm): make sure aud is correct 5.3.2
-    if info_res["sub"] != id_token["sub"] or info_res["iss"] != config["issuer"]:
+    if info_res["sub"] != id_token["sub"] or info_res["iss"] != oidc_config["issuer"]:
         raise OIDCValidationError(
             error_description="UserInfo response sub or issuer were wrong"
         )
