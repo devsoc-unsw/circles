@@ -1,4 +1,5 @@
 import base64
+import os
 from typing import Dict, List, Literal, Tuple, TypedDict, cast
 from urllib.parse import urlencode
 import jwt
@@ -81,8 +82,9 @@ def get_oidc_config() -> OIDCConfig:
 
     return config_dict
 
-# TODO-OLLI(pm): we need to do something to deal with if these actually change?? Whappens to our refreshing??
-config = get_oidc_config()
+if os.getenv('CI') or os.getenv('ENVIRONMENT') == 'test':
+    # TODO-OLLI(pm): we need to do something to deal with if these actually change?? Whappens to our refreshing??
+    config = get_oidc_config()
 
 
 #
