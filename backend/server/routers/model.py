@@ -260,6 +260,20 @@ class ProgramTime(BaseModel):
     endTime: tuple[int, int]
     uocMax: list[int]  # list of maximum uocs per term e.g. [12, 20, 20, 20] as in 12 in first term, 20 in each of the next 3 terms
 
+
+class AutoplanRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    courseCodes: list[str]
+    endTime: tuple[int, int]  # (Year, Term) inclusive end bound
+    lockExistingPlannedCourses: bool = True
+
+
+class AutoplanResponse(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    plan: list[dict[str, list[str]]]
+
 @with_config(ConfigDict(extra='forbid'))
 class TermsOffered(TypedDict):
     terms: dict[str, list[str]]
