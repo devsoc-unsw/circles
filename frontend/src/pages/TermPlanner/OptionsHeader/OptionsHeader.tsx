@@ -11,7 +11,7 @@ import {
   WarningFilled
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
-import { Popconfirm, Switch, Tooltip } from 'antd';
+import { Popconfirm, Switch, Tooltip, Button } from 'antd';
 import { useUnscheduleAllMutation, useUserPlanner } from 'utils/apiHooks/user';
 import useSettings from 'hooks/useSettings';
 import AutoplanModal from '../AutoplanModal/AutoplanModal';
