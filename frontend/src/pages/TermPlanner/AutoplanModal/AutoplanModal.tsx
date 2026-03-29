@@ -4,6 +4,7 @@ import { isAxiosError } from 'axios';
 import { useTheme } from 'styled-components';
 import { useAutoplanCoursesMutation, useUserCourses, useUserPlanner } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
+import S from './styles';
 
 const { Text } = Typography;
 
@@ -84,8 +85,7 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
       return;
     }
 
-    const endYear = Number(split[0]);
-    const endTerm = Number(split[1]);
+    const [endYear, endTerm] = split.map(Number);
 
     if (Number.isNaN(endYear) || Number.isNaN(endTerm)) {
       message.error('Invalid end term selected.');
@@ -104,11 +104,11 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
             type: 'success',
             message: 'Autoplan complete',
             description: (
-              <span style={{ color: theme.text }}>
+              <S.NotificationSpan>
                 Your planner has been updated. This generated a possible plan you can create using
                 your selected end date, but you can continue dragging courses to fit your needs, or
                 redo your plan with an earlier end date.
-              </span>
+              </S.NotificationSpan>
             )
           });
           onCancel();
@@ -122,7 +122,7 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
           openNotification({
             type: 'error',
             message: 'Could not generate a plan',
-            description: <span style={{ color: theme.text }}>{detail}</span>
+            description: <S.NotificationSpan>{detail}</S.NotificationSpan>
           });
         }
       }
@@ -140,32 +140,33 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
       destroyOnClose
     >
       <Text>Select unplanned courses to automatically place into your planner.</Text>
-      <Select
-        mode="multiple"
-        style={{ width: '100%', marginTop: 12 }}
-        placeholder="Select courses"
-        value={selectedCourses}
-        onChange={(values) => setSelectedCourses(values)}
-        options={courseOptions}
-        optionFilterProp="label"
-      />
+      <S.CoursesSelectWrapper>
+        <Select
+          mode="multiple"
+          placeholder="Select courses"
+          value={selectedCourses}
+          onChange={(values) => setSelectedCourses(values)}
+          options={courseOptions}
+          optionFilterProp="label"
+        />
+      </S.CoursesSelectWrapper>
 
-      <Text style={{ display: 'block', marginTop: 16 }}>Plan up to term</Text>
-      <Select
-        style={{ width: '100%', marginTop: 8 }}
-        placeholder="Select end term"
-        value={selectedEndTerm}
-        onChange={(value) => setSelectedEndTerm(value)}
-        options={endTermOptions}
-      />
+      <S.EndTermLabel>Plan up to term</S.EndTermLabel>
+      <S.EndTermSelectWrapper>
+        <Select
+          placeholder="Select end term"
+          value={selectedEndTerm}
+          onChange={(value) => setSelectedEndTerm(value)}
+          options={endTermOptions}
+        />
+      </S.EndTermSelectWrapper>
 
-      <Checkbox
-        style={{ marginTop: 16 }}
+      <S.LockCheckbox
         checked={lockExistingPlanned}
         onChange={(event) => setLockExistingPlanned(event.target.checked)}
       >
         Lock currently planned courses
-      </Checkbox>
+      </S.LockCheckbox>
     </Modal>
   );
 };

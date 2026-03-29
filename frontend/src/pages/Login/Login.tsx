@@ -15,10 +15,11 @@ type APIErrorPayload = {
   detail?: string;
 };
 
+const IS_DEV_GUEST_ENABLED = !import.meta.env.PROD;
+
 const Login = () => {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
-  const isDevGuestEnabled = !import.meta.env.PROD;
 
   // TODO-OLLI(pm): what if a user has two tabs open, logs in with one and then logs in with other??
   // similarly with logout and other authentication events
@@ -63,7 +64,7 @@ const Login = () => {
               <S.Title>Login to Circles</S.Title>
               <div>For current UNSW Students</div>
               <S.LoginButton onClick={initiateCSEAuth}>Login with zID</S.LoginButton>
-              {isDevGuestEnabled ? (
+              {IS_DEV_GUEST_ENABLED ? (
                 <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
               ) : (
                 <S.GuestButton disabled>Continue as guest (coming soon)</S.GuestButton>

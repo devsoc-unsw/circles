@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import {
   DownloadOutlined,
@@ -26,7 +26,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 const OptionsHeader = () => {
-  const [autoplanOpen, setAutoplanOpen] = React.useState(false);
+  const [autoplanOpen, setAutoplanOpen] = useState(false);
   const plannerQuery = useUserPlanner();
   const planner = plannerQuery.data;
 
