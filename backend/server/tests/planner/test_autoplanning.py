@@ -64,12 +64,7 @@ def test_autoplanning_generic():
 
     x = requests.post(
         'http://127.0.0.1:8000/planner/autoplan', json={
-            'courseCodes': [
-                'COMP1511',
-                'COMP1521'
-            ],
             'endTime': [2023, 3],
-            'lockExistingPlannedCourses': True,
         },
         headers=headers
     )

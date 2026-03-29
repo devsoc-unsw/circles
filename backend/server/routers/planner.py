@@ -2,7 +2,6 @@
 route for planner algorithms
 """
 
-from math import lcm
 from operator import itemgetter
 from typing import Annotated, Dict, List
 
@@ -13,9 +12,7 @@ from server.routers.utility.autoplan import solve_and_apply_autoplan
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user, user_storage_to_raw_plan
 from server.routers.model import AutoplanRequest, AutoplanResponse, CourseCode, CoursesState, PlannedToTerm, UnPlannedToTerm
-from server.routers.utility.common import get_course_details
-
-MIN_COMPLETED_COURSE_UOC = 6
+from server.routers.utility.common import get_course_details, get_multiterm_instance_count
 
 
 router = APIRouter(
@@ -49,20 +46,18 @@ def validate_term_planner(uid: Annotated[str, Security(require_uid)]) -> Courses
 
 @router.post('/autoplan', response_model=AutoplanResponse)
 def autoplan_courses(data: AutoplanRequest, uid: Annotated[str, Security(require_uid)]) -> AutoplanResponse:
-    """Autoplans selected unplanned courses and persists results to the user's planner."""
+    """Autoplans all unplanned courses and persists results to the user's planner."""
     user = get_setup_user(uid)
+    unplanned_courses = list(user['planner']['unplanned'])
 
-    try:
-        result = solve_and_apply_autoplan(
-            user,
-            data.courseCodes,
-            data.endTime,
-            data.lockExistingPlannedCourses,
-        )
-    except HTTPException:
-        raise
-    except Exception as err:  # pragma: no cover - defensive catch for unexpected runtime errors
-        raise HTTPException(status_code=500, detail='Unexpected server error while running autoplan') from err
+    if len(unplanned_courses) == 0:
+        raise HTTPException(status_code=400, detail='No unplanned courses to autoplan')
+
+    result = solve_and_apply_autoplan(
+        user,
+        unplanned_courses,
+        data.endTime,
+    )
 
     set_user(uid, user, True)
     return AutoplanResponse(plan=result.plan)
@@ -431,7 +426,14 @@ def get_terms_list(
         return []
     row_offset = 0
 
-    num_terms = (lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc) if uoc != 0 else 1
+    num_terms = get_multiterm_instance_count(
+        {
+            'is_multiterm': True,
+            'terms': terms_offered,
+            'UOC': uoc,
+        },
+        is_summer_enabled,
+    )
 
     for _ in range(instance_num):
         if index < 0:

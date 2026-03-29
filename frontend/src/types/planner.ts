@@ -63,9 +63,7 @@ export type JSONPlanner = {
 };
 
 export type AutoplanRequest = {
-  courseCodes: string[];
   endTime: [number, number];
-  lockExistingPlannedCourses: boolean;
 };
 
 export type AutoplanResponse = {

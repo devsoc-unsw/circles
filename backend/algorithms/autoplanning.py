@@ -24,6 +24,7 @@ def convert_to_term_year(number: int, start: Tuple[int, int]):
 def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tuple[int, int], uoc_max: list[int]) -> list[Tuple[str, Tuple[int, int]]]:
     """
     given a list of courses, we will fill our terms in a valid ordering.
+    locked courses are included as fixed constraints.
     we will enforce that:
         - the course must be offered in that term
         - duplicate courses (usually only multiterm courses) must be taken consecutively
@@ -35,7 +36,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     # 1. enforces terms
     variables = [model.new_int_var_from_domain(cp_model.Domain.from_intervals(course.term_domain(start, end)), course.name) for course in courses]
     # 2. if any courses are named the same, then they must be taken consecutively
-    possible_course_dupes = [course.name for course in courses if not course.locked]
+    possible_course_dupes = [course.name for course in courses if course.locked is None]
     duplicate_courses = set(c for c in possible_course_dupes if possible_course_dupes.count(c) > 1)
     for dupe in duplicate_courses:
         matched_courses = [variable for variable in variables if variable.name == dupe]
@@ -63,7 +64,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
 
     # 4. enforce prereqs, only if not locked by user
     for course in courses:
-        if course.locked:
+        if course.locked is not None:
             continue
 
         # this is the responsibility of the condition class to generate prereq model.
@@ -77,7 +78,7 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     status = solver.solve(model)
     if status in [cp_model.MODEL_INVALID, cp_model.INFEASIBLE]:
         raise ValueError(f'your courses are impossible to put in these terms! Error code: {status}')
-    return [(v.name, convert_to_term_year(solver.value(v), start)) for v in variables]
+    return [(variable.name, convert_to_term_year(solver.value(variable), start)) for variable in variables]
 
 
 if __name__ == '__main__':

@@ -1,6 +1,5 @@
 """Helper utilities for planner autoplan routing."""
 
-from collections import Counter
 from dataclasses import dataclass
 from typing import Optional
 
@@ -9,15 +8,9 @@ from fastapi import HTTPException
 from algorithms.autoplanning import autoplan, terms_between
 from algorithms.objects.user import User
 from server.routers.model import ProgramTime, Storage
-from server.routers.utility.common import get_course_object
-from server.routers.utility.user import user_storage_to_algo_user
+from server.routers.utility.common import get_course_details, get_course_object, get_multiterm_instance_count
+from server.routers.utility.user import iter_storage_planned_course_placements, user_storage_to_algo_user
 
-DEFAULT_TERM_UOC_LIMITS = {
-    0: 12,
-    1: 20,
-    2: 20,
-    3: 20,
-}
 
 @dataclass
 class AutoplanSolveResult:
@@ -33,20 +26,20 @@ def build_program_time(
 ) -> ProgramTime:
     start_year = user['planner']['startYear']
     start_time = (start_year, 0)
+    default_term_uoc_limits = {
+        0: 0 if not user['planner']['isSummerEnabled'] else 12,
+        1: 20,
+        2: 20,
+        3: 20,
+    }
 
     # Validate end_time
     term_count = terms_between(start_time, end_time) + 1
 
     uoc_max = uoc_max_override if uoc_max_override is not None else [
-        DEFAULT_TERM_UOC_LIMITS[(start_time[1] + index) % 4]
+        default_term_uoc_limits[(start_time[1] + index) % 4]
         for index in range(term_count)
     ]
-
-    if not user['planner']['isSummerEnabled']:
-        for index in range(term_count):
-            term_index = (start_time[1] + index) % 4
-            if term_index == 0:
-                uoc_max[index] = 0
 
     return ProgramTime(startTime=start_time, endTime=end_time, uocMax=uoc_max)
 
@@ -55,86 +48,64 @@ def _build_solver_courses(
     user: Storage,
     algo_user: User,
     program_time: ProgramTime,
-    course_codes: list[str],
-    lock_existing_planned: bool,
+    unplanned_courses: list[str],
 ):
-    """Build list of Course objects for solver, respecting lock_existing_planned flag."""
+    """Build solver courses from unplanned targets plus locked planned placements."""
+
+    def expanded_target_codes() -> list[str]:
+        # Unplanned codes are unique. Expand multiterm courses into required instances.
+        expanded: list[str] = []
+        for code in unplanned_courses:
+            expanded.extend([code] * get_multiterm_instance_count(
+                get_course_details(code),
+                user['planner']['isSummerEnabled'],
+            ))
+
+        return expanded
+
     solver_courses = [
         get_course_object(code, program_time, mark=algo_user.get_grade(code))
-        for code in course_codes
+        for code in expanded_target_codes()
     ]
 
-    if not lock_existing_planned:
-        return solver_courses
-
     # Include existing planned courses as locked constraints.
-    # Counter preserves duplicate-sensitive behavior when selected course codes repeat.
-    selected_codes = Counter(course_codes)
-    for row_index, year in enumerate(user['planner']['years']):
-        absolute_year = user['planner']['startYear'] + row_index
-        for term_index in range(4):
-            term_name = f'T{term_index}'
-            for code in year[term_name]:
-                if selected_codes[code] > 0:
-                    selected_codes[code] -= 1
-                    continue
-                # Lock courses not being autoplanned to their current placement
-                locked_course = get_course_object(code, program_time, (absolute_year, term_index), algo_user.get_grade(code))
-                solver_courses.append(locked_course)
+    solver_courses.extend(
+        get_course_object(code, program_time, placement, algo_user.get_grade(code))
+        for code, placement in iter_storage_planned_course_placements(user)
+    )
 
     return solver_courses
-
-
-def _remove_selected_courses(user: Storage, selected_codes: list[str]) -> None:
-    """Remove selected codes from unplanned list."""
-    to_remove = Counter(selected_codes)
-    filtered_unplanned: list[str] = []
-    for code in user['planner']['unplanned']:
-        if to_remove[code] > 0:
-            to_remove[code] -= 1
-            continue
-        filtered_unplanned.append(code)
-    user['planner']['unplanned'] = filtered_unplanned
-
-
-def _remove_existing_placements(user: Storage, solved_courses: list[tuple[str, tuple[int, int]]]) -> None:
-    """Remove existing placements of solved courses from planner."""
-    to_remove = Counter(course for course, _ in solved_courses)
-    for year in user['planner']['years']:
-        for term_name in (f'T{term}' for term in range(4)):
-            filtered_term_courses: list[str] = []
-            for course in year[term_name]:
-                if to_remove[course] > 0:
-                    to_remove[course] -= 1
-                    continue
-                filtered_term_courses.append(course)
-            year[term_name] = filtered_term_courses
-
-
-def _add_solved_courses(user: Storage, solved_courses: list[tuple[str, tuple[int, int]]]) -> None:
-    """Add solved courses to their assigned placements in planner."""
-    for course, (year, term) in solved_courses:
-        year_index = year - user['planner']['startYear']
-        term_name = f'T{term}'
-        user['planner']['years'][year_index][term_name].append(course)
 
 
 def apply_autoplan_to_storage(
     user: Storage,
     solved_courses: list[tuple[str, tuple[int, int]]],
-    selected_codes: list[str],
 ) -> None:
-    """Apply autoplan solution to user storage by removing and adding courses."""
-    _remove_selected_courses(user, selected_codes)
-    _remove_existing_placements(user, solved_courses)
-    _add_solved_courses(user, solved_courses)
+    """Overwrite planner terms from solver output and clear unplanned courses."""
+    term_count = len(user['planner']['years'])
+    rebuilt_years: list[dict[str, list[str]]] = [
+        {
+            'T0': [],
+            'T1': [],
+            'T2': [],
+            'T3': [],
+        }
+        for _ in range(term_count)
+    ]
+
+    for course, (year, term) in solved_courses:
+        year_index = year - user['planner']['startYear']
+        term_name = f'T{term}'
+        rebuilt_years[year_index][term_name].append(course)
+
+    user['planner']['years'] = rebuilt_years
+    user['planner']['unplanned'] = []
 
 
 def solve_and_apply_autoplan(
     user: Storage,
-    course_codes: list[str],
+    unplanned_courses: list[str],
     end_time: tuple[int, int],
-    lock_existing_planned: bool,
 ) -> AutoplanSolveResult:
     """Solve autoplan request and apply to user storage."""
 
@@ -145,8 +116,7 @@ def solve_and_apply_autoplan(
         user,
         algo_user,
         program_time,
-        course_codes,
-        lock_existing_planned,
+        unplanned_courses,
     )
     try:
         solved = autoplan(
@@ -159,7 +129,7 @@ def solve_and_apply_autoplan(
     except ValueError as err:
         raise HTTPException(status_code=400, detail=str(err)) from err
 
-    apply_autoplan_to_storage(user, solved, course_codes)
+    apply_autoplan_to_storage(user, solved)
 
     plan_years = program_time.endTime[0] - program_time.startTime[0] + 1
     plan: list[dict[str, list[str]]] = [{} for _ in range(plan_years)]

@@ -116,6 +116,26 @@ def parse_mark_to_int(mark: Mark) -> Optional[int]:
         case _:
             return None
 
+
+def iter_storage_planned_course_placements(user: Storage) -> list[tuple[str, tuple[int, int]]]:
+    """Return all planned course placements as (courseCode, (absoluteYear, termIndex))."""
+    placements: list[tuple[str, tuple[int, int]]] = []
+    for row_index, year in enumerate(user['planner']['years']):
+        absolute_year = user['planner']['startYear'] + row_index
+        for term_index in range(4):
+            term_name = f'T{term_index}'
+            placements.extend((code, (absolute_year, term_index)) for code in year[term_name])
+    return placements
+
+
+def user_storage_to_planned_for_map(user: Storage) -> dict[str, Optional[str]]:
+    """Build map from course code to first planned location string '<year> T<term>' or None if unplanned."""
+    flattened: dict[str, Optional[str]] = {code: None for code in user['planner']['unplanned']}
+    for code, (year, term) in iter_storage_planned_course_placements(user):
+        if code not in flattened:
+            flattened[code] = f"{year} T{term}"
+    return flattened
+
 def user_storage_to_algo_user(user: Storage) -> User:
     '''Convert the database user into the algorithm object user.'''
     courses_with_uoc: dict[str, tuple[int, Optional[int]]] = {

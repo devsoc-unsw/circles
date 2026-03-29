@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { message, Modal, Select, Typography } from 'antd';
 import { isAxiosError } from 'axios';
-import { useAutoplanCoursesMutation, useUserCourses, useUserPlanner } from 'utils/apiHooks/user';
+import { useAutoplanCoursesMutation, useUserPlanner } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
 import S from './styles';
 
@@ -20,25 +20,12 @@ type APIErrorPayload = {
 
 const AutoplanModal = ({ open, onCancel }: Props) => {
   const plannerQuery = useUserPlanner();
-  const coursesQuery = useUserCourses();
 
   const planner = plannerQuery.data;
-  const courses = coursesQuery.data;
 
   const autoplanMutation = useAutoplanCoursesMutation();
 
-  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
   const [selectedEndTerm, setSelectedEndTerm] = useState<string>('');
-  const [lockExistingPlanned, setLockExistingPlanned] = useState(true);
-
-  const courseOptions = useMemo(
-    () =>
-      (planner?.unplanned ?? []).map((courseCode) => ({
-        value: courseCode,
-        label: `${courseCode} - ${courses?.[courseCode]?.title ?? 'Unknown course'}`
-      })),
-    [courses, planner?.unplanned]
-  );
 
   const endTermOptions = useMemo(() => {
     if (!planner) {
@@ -59,16 +46,15 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
       return;
     }
 
-    setSelectedCourses([...planner.unplanned]);
-
     const lastYear = planner.startYear + planner.years.length - 1;
     setSelectedEndTerm(`${lastYear}-3`);
-    setLockExistingPlanned(true);
   }, [open, planner]);
 
   const handleSubmit = () => {
-    if (selectedCourses.length === 0) {
-      message.error('Select at least one unplanned course to autoplan.');
+    if (!planner || planner.unplanned.length === 0) {
+      message.error(
+        'All courses are currently planned. Unplan one or more courses first to use Autoplan.'
+      );
       return;
     }
 
@@ -92,9 +78,7 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
 
     autoplanMutation.mutate(
       {
-        courseCodes: selectedCourses,
-        endTime: [endYear, endTerm],
-        lockExistingPlannedCourses: lockExistingPlanned
+        endTime: [endYear, endTerm]
       },
       {
         onSuccess: () => {
@@ -137,17 +121,10 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
       confirmLoading={autoplanMutation.isPending}
       destroyOnClose
     >
-      <Text>Select unplanned courses to automatically place into your planner.</Text>
-      <S.CoursesSelectWrapper>
-        <Select
-          mode="multiple"
-          placeholder="Select courses"
-          value={selectedCourses}
-          onChange={(values) => setSelectedCourses(values)}
-          options={courseOptions}
-          optionFilterProp="label"
-        />
-      </S.CoursesSelectWrapper>
+      <Text>
+        Autoplan will place all currently unplanned courses into your planner up to the term you
+        select.
+      </Text>
 
       <S.EndTermLabel>Plan up to term</S.EndTermLabel>
       <S.EndTermSelectWrapper>
@@ -158,13 +135,6 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
           options={endTermOptions}
         />
       </S.EndTermSelectWrapper>
-
-      <S.LockCheckbox
-        checked={lockExistingPlanned}
-        onChange={(event) => setLockExistingPlanned(event.target.checked)}
-      >
-        Lock currently planned courses
-      </S.LockCheckbox>
     </Modal>
   );
 };

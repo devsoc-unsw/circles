@@ -45,6 +45,10 @@ const OptionsHeader = () => {
   };
 
   const unscheduleAllMutation = useUnscheduleAllMutation();
+  const canAutoplan = planner ? planner.unplanned.length > 0 : false;
+  const autoplanTooltipTitle = canAutoplan
+    ? 'Autoplan all unplanned courses'
+    : 'All courses are currently planned. Unplan one or more courses first to use Autoplan.';
 
   const handleUnscheduleAll = async () => {
     unscheduleAllMutation.mutate();
@@ -123,15 +127,17 @@ const OptionsHeader = () => {
             </Popconfirm>
           </Tooltip>
         )}
-        <Tooltip title="Autoplan all unplanned courses">
-          <S.AutoplanButton
-            type="primary"
-            onClick={() => setAutoplanOpen(true)}
-            disabled={!planner || planner.unplanned.length === 0}
-            icon={<ThunderboltOutlined />}
-          >
-            Autoplan
-          </S.AutoplanButton>
+        <Tooltip title={autoplanTooltipTitle}>
+          <span>
+            <S.AutoplanButton
+              type="primary"
+              onClick={() => setAutoplanOpen(true)}
+              disabled={!canAutoplan}
+              icon={<ThunderboltOutlined />}
+            >
+              Autoplan
+            </S.AutoplanButton>
+          </span>
         </Tooltip>
 
         {hiddenYears.length > 0 && (

@@ -264,9 +264,7 @@ class ProgramTime(BaseModel):
 class AutoplanRequest(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
-    courseCodes: list[str]
     endTime: tuple[int, int]  # (Year, Term) inclusive end bound
-    lockExistingPlannedCourses: bool = True
 
 
 class AutoplanResponse(BaseModel):
