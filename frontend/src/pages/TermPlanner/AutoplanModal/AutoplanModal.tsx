@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Checkbox, message, Modal, Select, Typography } from 'antd';
+import { message, Modal, Select, Typography } from 'antd';
 import { isAxiosError } from 'axios';
-import { useTheme } from 'styled-components';
 import { useAutoplanCoursesMutation, useUserCourses, useUserPlanner } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
 import S from './styles';
@@ -22,7 +21,6 @@ type APIErrorPayload = {
 const AutoplanModal = ({ open, onCancel }: Props) => {
   const plannerQuery = useUserPlanner();
   const coursesQuery = useUserCourses();
-  const theme = useTheme();
 
   const planner = plannerQuery.data;
   const courses = coursesQuery.data;

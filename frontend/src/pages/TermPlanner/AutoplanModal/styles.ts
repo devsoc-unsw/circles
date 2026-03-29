@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Checkbox, Typography } from 'antd';
+import styled from 'styled-components';
 
 const NotificationSpan = styled.span`
   color: ${(props) => props.theme.text};
