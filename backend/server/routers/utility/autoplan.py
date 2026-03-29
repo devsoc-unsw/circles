@@ -1,6 +1,7 @@
 """Helper utilities for planner autoplan routing."""
 
 from collections import Counter
+from dataclasses import dataclass
 from typing import Optional
 
 from fastapi import HTTPException
@@ -18,13 +19,11 @@ DEFAULT_TERM_UOC_LIMITS = {
     3: 20,
 }
 
-
+@dataclass
 class AutoplanSolveResult:
     """Container for solver output and normalized plan shape."""
-
-    def __init__(self, solved_courses: list[tuple[str, tuple[int, int]]], plan: list[dict[str, list[str]]]):
-        self.solved_courses = solved_courses
-        self.plan = plan
+    solved_courses: list[tuple[str, tuple[int, int]]]
+    plan: list[dict[str, list[str]]]
 
 
 def build_program_time(
@@ -38,13 +37,10 @@ def build_program_time(
     # Validate end_time
     term_count = terms_between(start_time, end_time) + 1
 
-    if uoc_max_override is not None:
-        uoc_max = uoc_max_override
-    else:
-        uoc_max = [
-            DEFAULT_TERM_UOC_LIMITS[(start_time[1] + index) % 4]
-            for index in range(term_count)
-        ]
+    uoc_max = uoc_max_override if uoc_max_override is not None else [
+        DEFAULT_TERM_UOC_LIMITS[(start_time[1] + index) % 4]
+        for index in range(term_count)
+    ]
 
     if not user['planner']['isSummerEnabled']:
         for index in range(term_count):
@@ -71,7 +67,8 @@ def _build_solver_courses(
     if not lock_existing_planned:
         return solver_courses
 
-    # Include existing planned courses as locked constraints
+    # Include existing planned courses as locked constraints.
+    # Counter preserves duplicate-sensitive behavior when selected course codes repeat.
     selected_codes = Counter(course_codes)
     for row_index, year in enumerate(user['planner']['years']):
         absolute_year = user['planner']['startYear'] + row_index
@@ -81,7 +78,7 @@ def _build_solver_courses(
                 if selected_codes[code] > 0:
                     selected_codes[code] -= 1
                     continue
-                # Lock this course to its current placement
+                # Lock courses not being autoplanned to their current placement
                 locked_course = get_course_object(code, program_time, (absolute_year, term_index), algo_user.get_grade(code))
                 solver_courses.append(locked_course)
 
@@ -90,37 +87,28 @@ def _build_solver_courses(
 
 def _remove_selected_courses(user: Storage, selected_codes: list[str]) -> None:
     """Remove selected codes from unplanned list."""
-    selected_counter = Counter(selected_codes)
-    for code, count in selected_counter.items():
-        if code in user['planner']['unplanned']:
-            removed = 0
-            next_unplanned: list[str] = []
-            for unplanned_code in user['planner']['unplanned']:
-                if unplanned_code == code and removed < count:
-                    removed += 1
-                    continue
-                next_unplanned.append(unplanned_code)
-            user['planner']['unplanned'] = next_unplanned
+    to_remove = Counter(selected_codes)
+    filtered_unplanned: list[str] = []
+    for code in user['planner']['unplanned']:
+        if to_remove[code] > 0:
+            to_remove[code] -= 1
+            continue
+        filtered_unplanned.append(code)
+    user['planner']['unplanned'] = filtered_unplanned
 
 
 def _remove_existing_placements(user: Storage, solved_courses: list[tuple[str, tuple[int, int]]]) -> None:
     """Remove existing placements of solved courses from planner."""
-    placements = Counter(course for course, _ in solved_courses)
-    for code, placement_count in placements.items():
-        remaining = placement_count
-        for planned_year in user['planner']['years']:
-            if remaining == 0:
-                break
-            for term_name in ('T0', 'T1', 'T2', 'T3'):
-                if remaining == 0:
-                    break
-                new_term_courses: list[str] = []
-                for planned_code in planned_year[term_name]:
-                    if planned_code == code and remaining > 0:
-                        remaining -= 1
-                        continue
-                    new_term_courses.append(planned_code)
-                planned_year[term_name] = new_term_courses
+    to_remove = Counter(course for course, _ in solved_courses)
+    for year in user['planner']['years']:
+        for term_name in (f'T{term}' for term in range(4)):
+            filtered_term_courses: list[str] = []
+            for course in year[term_name]:
+                if to_remove[course] > 0:
+                    to_remove[course] -= 1
+                    continue
+                filtered_term_courses.append(course)
+            year[term_name] = filtered_term_courses
 
 
 def _add_solved_courses(user: Storage, solved_courses: list[tuple[str, tuple[int, int]]]) -> None:
