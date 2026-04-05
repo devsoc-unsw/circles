@@ -2,7 +2,7 @@ name: CI tests
 
 on:
   pull_request:
-    branches: [dev, main, 331-staging]
+    branches: [dev, main, staging]
 
 jobs:
   event_file:
@@ -26,7 +26,7 @@ jobs:
       - name: Install pylint
         run: pip install pylint
       - name: Analysing the code with pylint
-        run: pylint $(git ls-files '*.py')
+        run: git ls-files '*.py' | xargs -r pylint
   backend_typecheck:
     name: Backend Mypy
     runs-on: ubuntu-latest
@@ -89,24 +89,6 @@ jobs:
       - name: Typecheck the frontend
         run: npm run types
         working-directory: ./frontend
-  frontend_tests:
-    name: Frontend Unit Tests
-    runs-on: ubuntu-latest
-    if: false
-    steps:
-      - name: Checking out repository
-        uses: actions/checkout@v4
-      - name: Install deps
-        uses: ./.github/actions/setup-ci-frontend
-      - name: Run the unit tests on frontend
-        run: npm run test
-        working-directory: ./frontend
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: fe-test-results
-          path: frontend/junit/fe-test-results.xml
-
   docker_build:
     name: Build docker containers
     runs-on: ubuntu-latest
