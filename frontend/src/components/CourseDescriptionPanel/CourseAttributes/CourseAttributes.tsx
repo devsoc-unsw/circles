@@ -2,11 +2,9 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Typography } from 'antd';
 import { Course } from 'types/api';
-import { EnrolmentCapacityData } from 'types/courseCapacity';
 import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
-import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
-import { CURR_YEAR, TERM } from 'config/constants';
+import { CURR_YEAR } from 'config/constants';
 import S from './styles';
 
 const { Text } = Typography;
@@ -20,10 +18,9 @@ const termMapping: Record<number, string> = {
 
 type CourseAttributesProps = {
   course: Course;
-  courseCapacity?: EnrolmentCapacityData;
 };
 
-const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => {
+const CourseAttributes = ({ course }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
 
@@ -119,24 +116,6 @@ const CourseAttributes = ({ course, courseCapacity }: CourseAttributesProps) => 
         {
           title: 'Campus',
           content: campus
-        },
-        {
-          title: 'Course Capacity',
-          content:
-            courseCapacity && Object.keys(courseCapacity).length ? (
-              <>
-                <div>
-                  {courseCapacity.capacity} Students for {TERM}
-                </div>
-                <ProgressBar
-                  progress={
-                    Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
-                  }
-                />
-              </>
-            ) : (
-              <p>No data available</p>
-            )
         },
         {
           title: 'Units of Credit',

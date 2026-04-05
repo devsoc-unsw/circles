@@ -5,11 +5,9 @@ import { CoursesResponse } from 'types/userResponse';
 import {
   useCourseInfoQuery,
   useCoursePrereqsQuery,
-  useCourseRatingQuery,
-  useCourseTimetableQuery
+  useCourseRatingQuery
 } from 'utils/apiHooks/static';
 import { useUserCoursesUnlockedWhenTaken } from 'utils/apiHooks/user';
-import getEnrolmentCapacity from 'utils/getEnrolmentCapacity';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
@@ -41,10 +39,6 @@ const CourseDescriptionPanel = ({
 
   const courseQuery = useCourseInfoQuery({}, courseCode);
   const coursePrereqsQuery = useCoursePrereqsQuery({}, courseCode);
-  const courseCapacityQuery = useCourseTimetableQuery(
-    { queryOptions: { select: getEnrolmentCapacity, retry: 1, enabled: sidebar } }, // retry only once because we have bad error handling
-    courseCode
-  );
   const ratingQuery = useCourseRatingQuery({}, courseCode);
 
   const loadingWrapper = (
@@ -53,17 +47,10 @@ const CourseDescriptionPanel = ({
     </S.Wrapper>
   );
 
-  if (
-    courseQuery.isPending ||
-    coursePrereqsQuery.isPending ||
-    (sidebar && courseCapacityQuery.isPending)
-  )
-    return loadingWrapper;
+  if (courseQuery.isPending || coursePrereqsQuery.isPending) return loadingWrapper;
 
   const course = courseQuery.data;
   const coursesPathFrom = coursePrereqsQuery.data?.courses;
-  const courseCapacity = courseCapacityQuery.data;
-
   const rating = ratingQuery?.data;
 
   // course wasn't fetchable (fatal; should do proper error handling instead of indefinitely loading)
@@ -117,7 +104,7 @@ const CourseDescriptionPanel = ({
       </S.MainWrapper>
       {sidebar && (
         <S.SidebarWrapper>
-          <CourseAttributes course={course} courseCapacity={courseCapacity} />
+          <CourseAttributes course={course} />
         </S.SidebarWrapper>
       )}
     </S.Wrapper>
