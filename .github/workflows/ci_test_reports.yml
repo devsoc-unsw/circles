@@ -1,7 +1,7 @@
 name: "Test Report"
 on:
   workflow_run:
-    workflows: ["CI tests"]
+    workflows: ["Unit Tests"]
     types:
       - completed
 jobs:
@@ -28,10 +28,10 @@ jobs:
 
           artifacts_url=${{ github.event.workflow_run.artifacts_url }}
 
-          gh api "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read -r artifact
+          gh api "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read artifact
           do
-            IFS=$'\t' read -r name url <<< "$artifact"
-            gh api "$url" > "$name.zip"
+            IFS=$'\t' read name url <<< "$artifact"
+            gh api $url > "$name.zip"
             unzip -d "$name" "$name.zip"
           done
 
@@ -41,4 +41,4 @@ jobs:
           commit: ${{ github.event.workflow_run.head_sha }}
           event_file: artifacts/Event File/event.json
           event_name: ${{ github.event.workflow_run.event }}
-          files: "artifacts/**/*.xml"
+          junit_files: "artifacts/**/*.xml"
