@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - dev
+      - staging
+
+env:
+  ENVIRONMENT: ${{ github.ref_name == 'dev' && 'prod' || 'staging' }}
+  IMAGE_NAME: ${{ github.ref_name == 'dev' && 'circles' || 'circles-staging' }}
 
 jobs:
   build:
@@ -46,8 +51,8 @@ jobs:
           file: ${{ matrix.component }}/${{ matrix.dockerfile }}
           build-args: ${{ matrix.args }}
           tags: |
-            ghcr.io/devsoc-unsw/circles-${{ matrix.component }}:${{ github.sha }}
-            ghcr.io/devsoc-unsw/circles-${{ matrix.component }}:latest
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:${{ github.sha }}
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:latest
           labels: ${{ steps.meta.outputs.labels }}
   deploy:
     name: Deploy (CD)
@@ -64,5 +69,5 @@ jobs:
           deployment-dispatcher-app-id: ${{ vars.DEPLOYMENT_DISPATCHER_APP_ID }}
           deployment-dispatcher-app-private-key: ${{ secrets.DEPLOYMENT_DISPATCHER_APP_PRIVATE_KEY }}
           updates: |
-            ghcr.io/devsoc-unsw/circles-frontend=${{ github.sha }}
-            ghcr.io/devsoc-unsw/circles-backend=${{ github.sha }}
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-frontend=${{ github.sha }}
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-backend=${{ github.sha }}
