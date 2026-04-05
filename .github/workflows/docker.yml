@@ -46,7 +46,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ${{ matrix.component }}
-          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/dev' }}
+          push: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging') }}
           platforms: linux/amd64
           file: ${{ matrix.component }}/${{ matrix.dockerfile }}
           build-args: ${{ matrix.args }}
@@ -60,7 +60,7 @@ jobs:
     needs: [build]
     concurrency: production
     environment: production
-    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/dev' }}
+    if: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging') }}
 
     steps:
       - name: Dispatch deployment
