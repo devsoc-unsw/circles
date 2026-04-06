@@ -35,6 +35,8 @@ origins = [
     "http://frontend:3000",
     "http://frontend:3001",
     "https://circles.devsoc.app",
+    "https://circles.staging.devsoc.app",
+    "https://circlesstaging.devsoc.app",
     "https://unilectives.devsoc.app",
     "https://unilectives.staging.devsoc.app",
 ]
