@@ -193,12 +193,16 @@ class UOCCondition(Condition):
             return [model.add_bool_and(False)]
         boolean_indexes = []
         for variable, _ in filtered_courses:
-            # b is a 'channeling constraint'. This is done to fill the resovoir only *if* the course is after or at the same term as the course
+            # Create a boolean variable that is true iff this course is after (or at) the target course.
+            # This channeling constraint links the boolean to the ordering constraint:
+            # - If is_after_target=true, then restrict this course to term >= target_term
+            # - If is_after_target=false, then restrict this course to term < target_term
+            # The reservoir then only counts UOC for courses where is_after_target=true.
             # https://developers.google.com/optimization/cp/channeling
-            b = model.new_bool_var('hi')
-            model.add(variable >= course_variable).only_enforce_if(b)
-            model.add(variable < course_variable).only_enforce_if(b.Not())
-            boolean_indexes.append(b)
+            is_after_target = model.new_bool_var('is_after_target_course')
+            model.add(variable >= course_variable).only_enforce_if(is_after_target)
+            model.add(variable < course_variable).only_enforce_if(is_after_target.Not())
+            boolean_indexes.append(is_after_target)
         return [
             model.add_reservoir_constraint_with_active(
                 [course[0] for course in filtered_courses],  # the variables of the filtered courses
@@ -218,12 +222,16 @@ class UOCCondition(Condition):
 
         boolean_indexes = []
         for variable, _ in filtered_courses:
-            # b is a 'channeling constraint'. This is done to fill the resovoir only *if* the course is before the course's term
+            # Create a boolean variable that is true iff this course is before the target course.
+            # This channeling constraint links the boolean to the ordering constraint:
+            # - If is_before_target=true, then restrict this course to term < target_term
+            # - If is_before_target=false, then restrict this course to term >= target_term
+            # The reservoir then only counts UOC for courses where is_before_target=true.
             # https://developers.google.com/optimization/cp/channeling
-            b = model.new_bool_var('hi')
-            model.add(variable < course_variable).only_enforce_if(b)
-            model.add(variable >= course_variable).only_enforce_if(b.Not())
-            boolean_indexes.append(b)
+            is_before_target = model.new_bool_var('is_before_target_course')
+            model.add(variable < course_variable).only_enforce_if(is_before_target)
+            model.add(variable >= course_variable).only_enforce_if(is_before_target.Not())
+            boolean_indexes.append(is_before_target)
         return [
             model.add_reservoir_constraint_with_active(
                 [course[0] for course in filtered_courses],  # the variables of the filtered courses
@@ -389,9 +397,12 @@ class CoresCondition(Condition):
             for course in relevant_courses
             if (var := get_variable(courses, course)) is not None
         ]
-        boolean_vars = [model.new_bool_var("hi") for _ in or_constraints]
+        boolean_vars = [model.new_bool_var(f"core_satisfies_{course}") for course in relevant_courses]
         for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
-            # b is a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
+            # Create a boolean for each core course constraint. This channeling constraint ensures:
+            # - If constraint_satisfied=true, the ordering constraint (>= target) is enforced
+            # - If constraint_satisfied=false, the negated constraint (< target) is enforced
+            # Then add_bool_or ensures at least one of these booleans is true (at least one core must be satisfied).
             # https://developers.google.com/optimization/cp/channeling
             constraint.only_enforce_if(boolean)
             negation.only_enforce_if(boolean.Not())
@@ -565,7 +576,7 @@ class CompositeCondition(Condition):
 
         match self.logic:
             case Logic.AND:
-                # just aggregate the conditions together, they are already all simutaneously asserted
+                # just aggregate the conditions together, they are already all simultaneously asserted
                 return sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
             case Logic.OR:
                 or_constraints: list[cp_model.Constraint] = sum((
@@ -573,8 +584,11 @@ class CompositeCondition(Condition):
                     for condition in self.conditions
                 ), [])
                 or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
-                boolean_vars = [model.new_bool_var("hi") for _ in or_constraints]
-                # boolean_vars are a 'channeling constraint'. This is done to allow us to check that at least 1 of these is true
+                boolean_vars = [model.new_bool_var(f"condition_{i}") for i in range(len(or_constraints))]
+                # Create a boolean for each condition in the OR group. This channeling constraint ensures:
+                # - If condition_satisfied=true, the condition's constraint is enforced
+                # - If condition_satisfied=false, the condition's negation is enforced
+                # Then add_bool_or ensures at least one of these booleans is true (OR logic).
                 # https://developers.google.com/optimization/cp/channeling
                 for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
                     constraint.only_enforce_if(boolean)
