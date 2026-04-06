@@ -1,7 +1,6 @@
 import { getCourseChildren, getCourseInfo, getCoursePrereqs } from 'utils/api/coursesApi';
 import { fetchAllDegrees, getProgramGraph, getProgramStructure } from 'utils/api/programsApi';
 import { getSpecialisationsForProgram, getSpecialisationTypes } from 'utils/api/specsApi';
-import { getCourseTimetable } from 'utils/api/timetableApi';
 import { getCourseRating } from 'utils/api/unilectivesApi';
 import { createStaticQueryHook } from './hookHelpers';
 
@@ -13,11 +12,6 @@ export const useCourseRatingQuery = createStaticQueryHook(
 export const useCourseInfoQuery = createStaticQueryHook(
   (code) => ['courses', code, 'info'],
   getCourseInfo
-);
-
-export const useCourseTimetableQuery = createStaticQueryHook(
-  (code) => ['courses', code, 'timetable'],
-  getCourseTimetable
 );
 
 export const useCourseChildrenQuery = createStaticQueryHook(
