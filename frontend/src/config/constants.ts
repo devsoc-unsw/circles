@@ -1,5 +1,3 @@
-import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
-
 export const FEEDBACK_LINK =
   'https://docs.google.com/forms/d/e/1FAIpQLSdGoxb-1fRRLySEi5j4Gy_ERWt3XWTBwyKJaDWlTqhy8Xdlxw/viewform?usp=sf_link';
 export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
@@ -7,10 +5,6 @@ export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
 // Don't forget to update live year in the backend too
 export const LIVE_YEAR = 2026;
 export const CURR_YEAR = new Date().getFullYear();
-export const TERM = `${CURR_YEAR + (getMostRecentPastTerm(CURR_YEAR).T === 3 ? 1 : 0)}-T${
-  (getMostRecentPastTerm(CURR_YEAR).T + 0) % 3
-}`;
-export const TIMETABLE_API_URL = `https://timetable.devsoc.app/api/terms/${TERM}/courses`;
 
 // Global colors - currently only being used in LiquidProgressChart
 export const lightYellow = '#f9b01e';
