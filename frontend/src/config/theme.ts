@@ -254,6 +254,12 @@ export const lightTheme: DefaultTheme = {
   plannerCartMenu: {
     backgroundColor: '#ffffff'
   },
+  caymanChatbotCard: {
+    backgroundColorHover: '#f4f4f4'
+  },
+  caymanChatbotMenu: {
+    backgroundColor: '#ffffff'
+  },
   draggableTab: {
     backgroundColor: '#fafafa',
     borderColor: '#f0f0f0'
@@ -393,6 +399,12 @@ export const darkTheme: DefaultTheme = {
     backgroundColorHover: '#292a2b'
   },
   plannerCartMenu: {
+    backgroundColor: '#1D1F20'
+  },
+  caymanChatbotCard: {
+    backgroundColorHover: '#292a2b'
+  },
+  caymanChatbotMenu: {
     backgroundColor: '#1D1F20'
   },
   courseTag: {

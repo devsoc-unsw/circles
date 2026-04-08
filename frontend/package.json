@@ -28,6 +28,7 @@
     "react-helmet": "6.1.0",
     "react-icons": "5.5.0",
     "react-liquid-gauge": "1.2.4",
+    "react-markdown": "^10.1.0",
     "react-redux": "9.2.0",
     "react-router-dom": "6.22.3",
     "react-scroll": "1.9.3",
@@ -35,6 +36,7 @@
     "redux": "5.0.1",
     "redux-persist": "6.0.0",
     "redux-thunk": "3.1.0",
+    "remark-gfm": "^4.0.1",
     "styled-components": "6.1.19",
     "use-debounce": "10.0.5",
     "zod": "3.25.67"

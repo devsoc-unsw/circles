@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from server.routers import auth, courses, followups, planner, programs, specialisations, user
+from server.routers import auth, chatbot, courses, followups, planner, programs, specialisations, user
 
 @asynccontextmanager
 async def on_setup_and_shutdown(_app: FastAPI):
@@ -55,6 +55,7 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(user.router)
 app.include_router(followups.router)
+app.include_router(chatbot.router)
 if os.getenv("APP_ENV") == "dev":
     from server.routers import dev
     app.include_router(dev.router)
