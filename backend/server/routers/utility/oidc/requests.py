@@ -83,7 +83,7 @@ def get_oidc_config() -> OIDCConfig:
     return config_dict
 
 # TODO-OLLI(pm): we need to do something to deal with if these actually change?? Whappens to our refreshing??
-config = None if os.getenv('CI') or os.getenv('ENVIRONMENT') == 'test' or os.getenv('APP_ENV') == 'dev' else get_oidc_config()
+config = None if os.getenv('CI') or os.getenv('ENVIRONMENT') == 'test' else get_oidc_config()
 
 
 def require_oidc_config() -> OIDCConfig:
