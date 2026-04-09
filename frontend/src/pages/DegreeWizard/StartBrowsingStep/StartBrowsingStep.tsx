@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
-import { DegreeWizardPayload } from 'types/degreeWizard';
+import { Button, Radio } from 'antd';
+import { CoreCoursesPreference, DegreeWizardPayload } from 'types/degreeWizard';
 import { useSetupDegreeWizardMutation } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
 import CS from '../common/styles';
@@ -11,15 +11,22 @@ type Props = {
   degreeInfo: DegreeWizardPayload;
 };
 
+const CORE_COURSES_OPTIONS: { label: string; value: CoreCoursesPreference }[] = [
+  { label: "Don't add core courses", value: 'none' },
+  { label: 'Add lower-level courses', value: 'lower' },
+  { label: 'Add higher-level courses', value: 'higher' }
+];
+
 const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
+  const [addCoreCourses, setAddCoreCourses] = useState<CoreCoursesPreference>('lower');
 
   const setupDegreeMutation = useSetupDegreeWizardMutation({
     mutationOptions: { onSuccess: () => navigate('/course-selector') }
   });
 
   const handleSetupDegree = () => {
-    setupDegreeMutation.mutate(degreeInfo);
+    setupDegreeMutation.mutate({ ...degreeInfo, addCoreCourses });
   };
 
   const handleSaveUserSettings = async () => {
@@ -44,6 +51,11 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
   return (
     <CS.StepContentWrapper id="start browsing">
       <S.StartBrowsingWrapper>
+        <Radio.Group
+          options={CORE_COURSES_OPTIONS}
+          onChange={(e) => setAddCoreCourses(e.target.value as CoreCoursesPreference)}
+          value={addCoreCourses}
+        />
         <Button type="primary" onClick={handleSaveUserSettings}>
           Start browsing courses!
         </Button>

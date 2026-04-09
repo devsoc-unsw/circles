@@ -9,6 +9,7 @@ from ortools.sat.python import cp_model  # type: ignore
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
 
+# TODO (semester): remove hard coded 4 terms
 def terms_between(start: Tuple[int, int], end: Tuple[int, int]):
     return (end[0] - start[0]) * 4 + end[1] - start[1]
 
