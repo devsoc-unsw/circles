@@ -19,6 +19,7 @@ class DegreeWizardInfo(BaseModel):
     startYear: int
     endYear: int
     specs: list[str]
+    addCoreCourses: Literal['none', 'lower', 'higher'] = 'lower'
 
 class Specialisations(BaseModel):
     model_config = ConfigDict(extra='forbid')

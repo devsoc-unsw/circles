@@ -28,7 +28,8 @@ const DegreeWizard = () => {
     programCode: '',
     startYear: undefined,
     endYear: undefined,
-    specs: []
+    specs: [],
+    addCoreCourses: 'lower'
   });
 
   const { programCode } = degreeInfo;

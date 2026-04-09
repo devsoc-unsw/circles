@@ -11,7 +11,8 @@ const mockDegreeInfo = {
   programCode: '3778',
   startYear: undefined,
   endYear: undefined,
-  specs: []
+  specs: [],
+  addCoreCourses: 'lower' as const
 };
 
 const incrementStepMock = vi.fn();

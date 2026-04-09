@@ -5,6 +5,7 @@ specifically in any one function
 
 from contextlib import suppress
 import functools
+import json
 from math import lcm
 import re
 from typing import Callable, Mapping, Optional, Tuple, TypeVar, cast
@@ -18,9 +19,12 @@ from data.utility import data_helpers
 from server.routers.utility.manual_fixes import apply_manual_fixes
 from server.routers.model import CONDITIONS, CoursesPathDict, ProgramTime, StructureContainer
 from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisationsCOL
+from algorithms.cache.cache_config import CACHED_EXCLUSIONS_FILE
 
 # TODO: move these constants out into new file, or move model.py ones into here (once we dont have top-level connection initialisation)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+with open(CACHED_EXCLUSIONS_FILE, "r", encoding="utf8") as _f:
+    _CACHED_EXCLUSIONS: dict[str, dict[str, int]] = json.load(_f)
 GRAPH: dict[str, dict[str, list[str]]] = data_helpers.read_data(GRAPH_CACHE_FILE)
 INCOMING_ADJACENCY: dict[str, list[str]] = GRAPH.get("incoming_adjacency_list", {})
 
@@ -38,9 +42,9 @@ def map_suppressed_errors(func: Callable[..., R], errors_log: list[tuple], *args
     return None
 
 
-def get_core_courses(program: str, specialisations: list[str]):
+def get_core_courses(program: str, specialisations: list[str], prefer_higher: bool = False):
     structure = get_program_structure(program, specs=specialisations)[0]
-    return sum((
+    courses = sum((
                 sum((
                     list(value["courses"].keys())
                     for sub_group, value in spec["content"].items()
@@ -49,6 +53,30 @@ def get_core_courses(program: str, specialisations: list[str]):
                 for spec_name, spec in structure.items()
                 if "Major" in spec_name or "Honours" in spec_name)
          , [])
+    return _filter_exclusive_courses(courses, prefer_higher)
+
+
+def _filter_exclusive_courses(course_codes: list[str], prefer_higher: bool = False) -> list[str]:
+    """Remove courses that are mutually exclusive with others in the list.
+
+    When two courses exclude each other, prefer_higher controls which is kept:
+    - prefer_higher=False (default): keep the lower-numbered course (e.g. MATH1131)
+    - prefer_higher=True: keep the higher-numbered course (e.g. MATH1141)
+    """
+    code_set = set(course_codes)
+    to_remove: set[str] = set()
+
+    for code in course_codes:
+        for excluded in _CACHED_EXCLUSIONS.get(code, {}):
+            if excluded not in code_set:
+                continue
+            code_num = int(''.join(filter(str.isdigit, code)))
+            excl_num = int(''.join(filter(str.isdigit, excluded)))
+            keep_current = (code_num >= excl_num) if prefer_higher else (code_num <= excl_num)
+            if keep_current:
+                to_remove.add(excluded)
+
+    return [c for c in course_codes if c not in to_remove]
 
 
 def get_multiterm_instance_count(course_details: dict, is_summer_enabled: bool) -> int:

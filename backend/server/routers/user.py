@@ -306,23 +306,24 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
     }
 
-    # Automatically add core courses to unplanned
-    core_course_codes = get_core_courses(wizard.programCode, wizard.specs)
+    if wizard.addCoreCourses != 'none':
+        # Automatically add core courses to unplanned
+        core_course_codes = get_core_courses(wizard.programCode, wizard.specs, prefer_higher=wizard.addCoreCourses == 'higher')
 
-    # Remove duplicates and sort
-    core_course_codes = list(set(core_course_codes))
-    core_course_codes = sort_courses_by_code(core_course_codes)
+        # Remove duplicates and sort
+        core_course_codes = list(set(core_course_codes))
+        core_course_codes = sort_courses_by_code(core_course_codes)
 
-    # TODO:Refactor so we use a helper here and add_to_unplanned
-    for code in core_course_codes:
-        uoc = get_course_details(code)['UOC'] # raises exception anyway when unfound
-        user['planner']['unplanned'].append(code)
-        user['courses'][code] = {
-            'code': code,
-            'mark': None,
-            'uoc': uoc,
-            'ignoreFromProgression': False
-        }
+        # TODO:Refactor so we use a helper here and add_to_unplanned
+        for code in core_course_codes:
+            uoc = get_course_details(code)['UOC'] # raises exception anyway when unfound
+            user['planner']['unplanned'].append(code)
+            user['courses'][code] = {
+                'code': code,
+                'mark': None,
+                'uoc': uoc,
+                'ignoreFromProgression': False
+            }
 
     set_user(uid, user, True)
     return user
