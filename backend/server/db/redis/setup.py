@@ -1,6 +1,6 @@
 from redis.exceptions import ResponseError
 from redis.commands.search.field import TagField
-from redis.commands.search.indexDefinition import IndexDefinition, IndexType
+from redis.commands.search.index_definition import IndexDefinition, IndexType
 
 from .conn import sdb
 
@@ -19,7 +19,7 @@ def _create_uid_index(drop: bool):
     # FT.CREATE idx:uid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA uid TAG CASESENSITIVE
     print("creating uid index")
     print(sdb.ft("idx:uid").create_index(
-        fields=(TagField("uid", case_sensitive=True), ),
+        fields=[TagField("uid", case_sensitive=True)],
         definition=IndexDefinition(
             prefix=["token:"],
             index_type=IndexType.HASH,
@@ -42,7 +42,7 @@ def _create_sid_index(drop: bool):
     # FT.CREATE idx:sid ON HASH PREFIX 1 "stoken:" NOOFFSETS NOHL NOFIELDS NOFREQS STOPWORDS 0 SCHEMA sid TAG CASESENSITIVE
     print("creating sid index")
     print(sdb.ft("idx:sid").create_index(
-        fields=TagField("sid", case_sensitive=True),
+        fields=[TagField("sid", case_sensitive=True)],
         definition=IndexDefinition(
             prefix=["token:"],
             index_type=IndexType.HASH,

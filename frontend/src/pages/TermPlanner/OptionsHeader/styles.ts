@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import styled from 'styled-components';
 
 const OptionsHeaderWrapper = styled.div`
@@ -45,10 +46,46 @@ const TextShowMarks = styled.div`
   font-size: 14px;
 `;
 
+const HeaderTextButton = styled(Button)`
+  height: 36px;
+`;
+
+const AutoplanButton = styled(Button)`
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+  border: none;
+  color: black;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  height: 36px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(135deg, #ffed4e 0%, #ffb81a 100%);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+    transform: scale(1.05);
+    color: black;
+  }
+
+  &:active {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+  }
+
+  &:disabled {
+    background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+    box-shadow: none;
+    color: #666666;
+    opacity: 0.6;
+  }
+`;
+
 export default {
   OptionsHeaderWrapper,
   OptionButton,
   OptionSection,
   ShowMarks,
-  TextShowMarks
+  TextShowMarks,
+  HeaderTextButton,
+  AutoplanButton
 };

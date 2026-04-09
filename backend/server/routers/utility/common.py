@@ -5,6 +5,7 @@ specifically in any one function
 
 from contextlib import suppress
 import functools
+from math import lcm
 import re
 from typing import Callable, Mapping, Optional, Tuple, TypeVar, cast
 
@@ -48,6 +49,21 @@ def get_core_courses(program: str, specialisations: list[str]):
                 for spec_name, spec in structure.items()
                 if "Major" in spec_name or "Honours" in spec_name)
          , [])
+
+
+def get_multiterm_instance_count(course_details: dict, is_summer_enabled: bool) -> int:
+    """Return required multiterm instances from a get_course_details-style object."""
+    if not course_details['is_multiterm']:
+        return 1
+
+    terms_offered = course_details['terms']
+    allowed_terms = ['T0', 'T1', 'T2', 'T3'] if is_summer_enabled else ['T1', 'T2', 'T3']
+    if not any(term in terms_offered for term in allowed_terms):
+        return 1
+
+    uoc = course_details['UOC']
+    min_completed_course_uoc = 6
+    return (lcm(uoc, min_completed_course_uoc) // uoc) if uoc != 0 else 1
 
 
 def get_course_object(code: str, prog_time: ProgramTime, locked_offering: Optional[tuple[int, int]] = None, mark: Optional[int] = 100) -> Course:

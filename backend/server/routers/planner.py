@@ -2,20 +2,17 @@
 route for planner algorithms
 """
 
-from math import lcm
 from operator import itemgetter
 from typing import Annotated, Dict, List
 
-from algorithms.autoplanning import autoplan
 from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
 from fastapi import APIRouter, HTTPException, Security, UploadFile
+from server.routers.utility.autoplan import solve_and_apply_autoplan
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import get_setup_user, set_user, user_storage_to_algo_user, user_storage_to_raw_plan
-from server.routers.model import CourseCode, CoursesState, PlannedToTerm, ProgramTime, UnPlannedToTerm
-from server.routers.utility.common import get_course_details, get_course_object
-
-MIN_COMPLETED_COURSE_UOC = 6
+from server.routers.utility.user import get_setup_user, set_user, user_storage_to_raw_plan
+from server.routers.model import AutoplanRequest, AutoplanResponse, CourseCode, CoursesState, PlannedToTerm, UnPlannedToTerm
+from server.routers.utility.common import get_course_details, get_multiterm_instance_count
 
 
 router = APIRouter(
@@ -45,6 +42,25 @@ def validate_term_planner(uid: Annotated[str, Security(require_uid)]) -> Courses
         plan=user_storage_to_raw_plan(user)
     )
     return CoursesState(courses_state=courses_state)
+
+
+@router.post('/autoplan', response_model=AutoplanResponse)
+def autoplan_courses(data: AutoplanRequest, uid: Annotated[str, Security(require_uid)]) -> AutoplanResponse:
+    """Autoplans all unplanned courses and persists results to the user's planner."""
+    user = get_setup_user(uid)
+    unplanned_courses = list(user['planner']['unplanned'])
+
+    if len(unplanned_courses) == 0:
+        raise HTTPException(status_code=400, detail='No unplanned courses to autoplan')
+
+    result = solve_and_apply_autoplan(
+        user,
+        unplanned_courses,
+        data.endTime,
+    )
+
+    set_user(uid, user, True)
+    return AutoplanResponse(plan=result.plan)
 
 
 @router.post("/addToUnplanned")
@@ -410,7 +426,14 @@ def get_terms_list(
         return []
     row_offset = 0
 
-    num_terms = (lcm(uoc, MIN_COMPLETED_COURSE_UOC) // uoc) if uoc != 0 else 1
+    num_terms = get_multiterm_instance_count(
+        {
+            'is_multiterm': True,
+            'terms': terms_offered,
+            'UOC': uoc,
+        },
+        is_summer_enabled,
+    )
 
     for _ in range(instance_num):
         if index < 0:
@@ -458,74 +481,3 @@ def out_of_bounds(num_years, dest_row, terms):
     min_row_offset = min(terms, key=lambda x: x['row_offset'])['row_offset']
 
     return dest_row + min_row_offset < 0 or dest_row + max_row_offset > num_years - 1
-
-
-# TODO: Broken till migration is fixed; Previous planner methods are deprecated
-# @router.post("/autoplanning/",
-#              response_model=dict,
-#              responses={
-#                  400: {"description": "Bad Request e.g. can't create a plan with the given constraints`"},
-#                  200: {
-#                      "description": "Successful Response",
-#                      "content": {
-#                          "plan": [
-#                              {
-#                                  "T1": [
-#                                      "COMP1511",
-#                                      "MATH1131"
-#                                  ],
-#                                  "T3": [
-#                                      "COMP1521"
-#                                  ]
-#                              },
-#                              {
-#                                  "T0": [
-#                                      "COMP2521"
-#                                  ],
-#                                  "T2": [
-#                                      "COMP1531"
-#                                  ],
-#                                  "T1": [
-#                                      "COMP3821",
-#                                      "COMP3891",
-#                                  ]
-#                              }
-#                          ]
-#                      }
-#                  }
-#              }
-#              )
-def autoplanning(uid: Annotated[str, Security(require_uid)], courseCodes: list[str], programTime: ProgramTime) -> dict:
-    print("started to_user")
-    user_data = get_setup_user(uid)
-    user = user_storage_to_algo_user(user_data)
-    print('finished the to_user')
-
-    try:
-        courses = [get_course_object(courseCode, programTime)
-                   for courseCode in courseCodes]
-        print('in the try')
-        for year_index, year in enumerate(user_data['planner']['years']):
-            for term_index in range(4):
-                for course_code in year[f'T{term_index}']:
-                    courses.append(
-                        get_course_object(
-                            course_code,
-                            programTime,
-                            (year_index, term_index),
-                            user.get_grade(course_code)
-                        )
-                    )
-        print("got to end")
-        autoplanned = autoplan(
-            courses, user, programTime.startTime, programTime.endTime, programTime.uocMax)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error: {e}") from e
-
-    result: dict[str, list[dict]] = {"plan": [{} for _ in range(
-        programTime.endTime[0] - programTime.startTime[0] + 1)]}
-
-    for course, (year_autoplanned, term_autoplanned) in autoplanned:
-        result["plan"][year_autoplanned - programTime.startTime[0]
-                       ].setdefault(f'T{term_autoplanned}', []).append(course)
-    return result
