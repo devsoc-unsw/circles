@@ -12,6 +12,7 @@ from typing import Callable, Mapping, Optional, Tuple, TypeVar, cast
 
 from fastapi import HTTPException
 
+from algorithms.cache.cache_config import CACHED_EXCLUSIONS_FILE
 from algorithms.objects.course import Course
 from data.processors.models import CourseContainer, Program, ProgramContainer, SpecData, Specialisation, SpecsData
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
@@ -19,7 +20,6 @@ from data.utility import data_helpers
 from server.routers.utility.manual_fixes import apply_manual_fixes
 from server.routers.model import CONDITIONS, CoursesPathDict, ProgramTime, StructureContainer
 from server.db.mongo.conn import archivesDB, coursesCOL, programsCOL, specialisationsCOL
-from algorithms.cache.cache_config import CACHED_EXCLUSIONS_FILE
 
 # TODO: move these constants out into new file, or move model.py ones into here (once we dont have top-level connection initialisation)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
@@ -37,7 +37,7 @@ def map_suppressed_errors(func: Callable[..., R], errors_log: list[tuple], *args
     """
     try:
         return func(*args, **kwargs)
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         errors_log.append((*args, str(e)))
     return None
 
