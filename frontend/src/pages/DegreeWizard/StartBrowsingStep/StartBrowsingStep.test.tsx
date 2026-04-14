@@ -12,7 +12,8 @@ const mockDegreeInfo = {
   programCode: '3778',
   startYear: 2020,
   endYear: 2024,
-  specs: ['COMPA1']
+  specs: ['COMPA1'],
+  addCoreCourses: 'lower' as const
 };
 
 describe('StartBrowsingStep', () => {

@@ -61,3 +61,11 @@ export type JSONPlanner = {
   years: PlannerYear[];
   version: number;
 };
+
+export type AutoplanRequest = {
+  endTime: [number, number];
+};
+
+export type AutoplanResponse = {
+  plan: PlannerYear[];
+};

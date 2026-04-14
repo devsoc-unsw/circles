@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { CourseMark } from 'types/api';
 import { CourseTime } from 'types/courses';
-import { PlannedToTerm, UnPlannedToTerm, UnscheduleCourse } from 'types/planner';
+import {
+  AutoplanRequest,
+  AutoplanResponse,
+  PlannedToTerm,
+  UnPlannedToTerm,
+  UnscheduleCourse
+} from 'types/planner';
 import { ValidatesResponse } from 'types/userResponse';
 import { withAuthorization } from './authApi';
 
@@ -109,4 +115,15 @@ export const toggleLockTerm = async (token: string, termyear: CourseTime) => {
     {},
     { params: { termyear: `${termyear.year}${termyear.term}` }, headers: withAuthorization(token) }
   );
+};
+
+export const autoplanCourses = async (
+  token: string,
+  payload: AutoplanRequest
+): Promise<AutoplanResponse> => {
+  const res = await axios.post('/planner/autoplan', payload, {
+    headers: withAuthorization(token)
+  });
+
+  return res.data as AutoplanResponse;
 };

@@ -1,10 +1,10 @@
-from typing import Annotated, Dict, Optional
+from typing import Annotated, Dict
 from fastapi import APIRouter, HTTPException, Security
 
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
 from server.routers.utility.common import get_core_courses, get_course_details, sort_courses_by_code
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
-from server.routers.utility.user import get_setup_user, set_user
+from server.routers.utility.user import get_setup_user, set_user, user_storage_to_planned_for_map
 from server.routers.utility.wizard import validate_degree
 from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
 import server.db.helpers.users as udb
@@ -126,18 +126,7 @@ def get_user_p(uid: Annotated[str, Security(require_uid)]) -> Dict[str, CourseSt
     # TODO-OLLI(pm): remove the additional data here and get frontend to request it itself
     user = get_setup_user(uid)
     raw_courses = user['courses']
-    planner = user['planner']
-
-    # flatten the planner
-    flattened: Dict[str, Optional[str]] = { code: None for code in planner['unplanned'] }
-    for index, year in enumerate(planner['years']):
-        for termIndex, term in year.items():
-            for course in term:
-                # TODO: Investigate if we need this. Needs to be switched off for multiterm courses
-                # assert course not in flattened  # makes sure its not double storred
-                if course not in flattened:
-                    # This if statement was added when the above assert was commented out
-                    flattened[course] = f"{index + planner['startYear']} {termIndex}"
+    flattened = user_storage_to_planned_for_map(user)
 
     res: Dict[str, CourseStorageWithExtra] = {}
 
@@ -317,23 +306,24 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
     }
 
-    # Automatically add core courses to unplanned
-    core_course_codes = get_core_courses(wizard.programCode, wizard.specs)
+    if wizard.addCoreCourses != 'none':
+        # Automatically add core courses to unplanned
+        core_course_codes = get_core_courses(wizard.programCode, wizard.specs, prefer_higher=wizard.addCoreCourses == 'higher')
 
-    # Remove duplicates and sort
-    core_course_codes = list(set(core_course_codes))
-    core_course_codes = sort_courses_by_code(core_course_codes)
+        # Remove duplicates and sort
+        core_course_codes = list(set(core_course_codes))
+        core_course_codes = sort_courses_by_code(core_course_codes)
 
-    # TODO:Refactor so we use a helper here and add_to_unplanned
-    for code in core_course_codes:
-        uoc = get_course_details(code)['UOC'] # raises exception anyway when unfound
-        user['planner']['unplanned'].append(code)
-        user['courses'][code] = {
-            'code': code,
-            'mark': None,
-            'uoc': uoc,
-            'ignoreFromProgression': False
-        }
+        # TODO:Refactor so we use a helper here and add_to_unplanned
+        for code in core_course_codes:
+            uoc = get_course_details(code)['UOC'] # raises exception anyway when unfound
+            user['planner']['unplanned'].append(code)
+            user['courses'][code] = {
+                'code': code,
+                'mark': None,
+                'uoc': uoc,
+                'ignoreFromProgression': False
+            }
 
     set_user(uid, user, True)
     return user
