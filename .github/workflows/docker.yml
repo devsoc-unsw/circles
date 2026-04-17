@@ -24,7 +24,7 @@ jobs:
           - component: frontend
             dockerfile: production.dockerfile
             args: |
-              "API_URL=${{ github.ref_name == 'dev' && 'https://circlesapi.devsoc.app' || 'https://circlesstagingapi.devsoc.app' }}"
+              "API_URL=${{ github.ref_name == 'dev' && 'https://circlesapi.devsoc.app' || 'https://circles-staging.devsoc.app' }}"
           - component: backend
             dockerfile: production.dockerfile
     steps:
