@@ -1,6 +1,7 @@
 from typing import Optional
 from pytest import raises
 from algorithms.autoplanning import autoplan, terms_between
+from algorithms.create import create_condition
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
 from algorithms.validate_term_planner import RawUserPlan, validate_terms
@@ -79,6 +80,41 @@ def test_more_complex_prereqs():
         "3707",
         ["COMPBH"]
     )
+
+
+def test_comp4128_requires_comp3121_ordering_when_no_comp3821():
+    """Regression: OR branches with nested AND must be enforced as whole branches."""
+    prereq_code = "COMP9998"
+    target_code = "COMP9999"
+    target_condition = create_condition([
+        "(",
+        "COMP8888",
+        "||",
+        "(",
+        prereq_code,
+        "&&",
+        "75WAM",
+        ")",
+        ")",
+    ])
+
+    results = autoplan(
+        [
+            Course(prereq_code, create_condition(["(", ")"]), 80, 6, {2026: [1, 2, 3]}),
+            Course(target_code, target_condition, 80, 6, {2026: [1, 2, 3]}),
+        ],
+        User({
+            "program": "3778",
+            "specialisations": ["COMPA1"],
+            "courses": {},
+        }),
+        (2026, 0),
+        (2026, 3),
+        [12, 12, 12, 12],
+    )
+
+    placements = {course_name: term for course_name, term in results}
+    assert terms_between((2026, 0), placements[prereq_code]) < terms_between((2026, 0), placements[target_code])
 
 def test_infeasable():
     with raises(Exception):

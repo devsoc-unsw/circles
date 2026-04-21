@@ -5,6 +5,7 @@ Contains the Conditions classes
 import json
 import re
 from abc import ABC, abstractmethod
+from itertools import chain
 from typing import Optional, Tuple, TypedDict
 
 from algorithms.objects.categories import AnyCategory, Category
@@ -579,22 +580,21 @@ class CompositeCondition(Condition):
                 # just aggregate the conditions together, they are already all simultaneously asserted
                 return sum((condition.condition_to_model(model, user, courses, course_variable) for condition in self.conditions), [])
             case Logic.OR:
-                or_constraints: list[cp_model.Constraint] = sum((
+                condition_truths = [model.new_bool_var(f"condition_{index}") for index, _ in enumerate(self.conditions)]
+
+                # Build each child branch independently, then flatten the result.
+                branch_constraints = [
                     condition.condition_to_model(model, user, courses, course_variable)
                     for condition in self.conditions
-                ), [])
-                or_opposite_constraints: list[cp_model.Constraint] = sum((condition.condition_negation(model, user, courses, course_variable) for condition in self.conditions), [])
-                boolean_vars = [model.new_bool_var(f"condition_{i}") for i in range(len(or_constraints))]
-                # Create a boolean for each condition in the OR group. This channeling constraint ensures:
-                # - If condition_satisfied=true, the condition's constraint is enforced
-                # - If condition_satisfied=false, the condition's negation is enforced
-                # Then add_bool_or ensures at least one of these booleans is true (OR logic).
-                # https://developers.google.com/optimization/cp/channeling
-                for constraint, negation, boolean in zip(or_constraints, or_opposite_constraints, boolean_vars):
-                    constraint.only_enforce_if(boolean)
-                    negation.only_enforce_if(boolean.Not())
-                model.add_bool_or(boolean_vars)
-                return or_constraints
+                ]
+
+                for condition_truth, constraints in zip(condition_truths, branch_constraints):
+                    for constraint in constraints:
+                        constraint.only_enforce_if(condition_truth)
+
+                # one of our constraints must be met
+                model.add_bool_or(condition_truths)
+                return list(chain.from_iterable(branch_constraints))
 
     def condition_negation(self, model: cp_model.CpModel, user: User, courses: list[Tuple[cp_model.IntVar, Course]], course_variable: cp_model.IntVar) -> list[cp_model.Constraint]:
         if len(self.conditions) == 0:
