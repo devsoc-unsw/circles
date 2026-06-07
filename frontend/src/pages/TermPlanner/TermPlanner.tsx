@@ -60,6 +60,15 @@ const extrapolateCourseYears = (
       };
   });
 
+  // groupwork is a current-offering property; archive years won't have it, so
+  // copy it from LIVE_YEAR into every year so the indicator is always correct.
+  const liveGroupwork = newData[LIVE_YEAR]?.groupwork;
+  if (liveGroupwork !== undefined) {
+    validYears.forEach((year) => {
+      if (newData[year]) newData[year] = { ...newData[year], groupwork: liveGroupwork };
+    });
+  }
+
   return newData;
 };
 

@@ -61,7 +61,8 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
     unlocked: true,
     handbook_note: ''
   };
-  const groupwork = true;
+  const groupwork = courseInfo.groupwork ?? false;
+  console.log(`course ${courseInfo.code} groupwork ${groupwork}`);
 
   const hasOffering = time ? courseHasOffering(courseInfo, time.term) : true;
 
