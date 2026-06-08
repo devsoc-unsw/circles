@@ -11,17 +11,15 @@
 # Final parse is done using Beautiful Soup, since it's a little faster, but if you're a future subcomm
 # reading this, feel free to use Selenium again if you only want to learn one.
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from bs4 import BeautifulSoup
-from selenium.webdriver.chrome.options import Options
-# This is only needed to get the strings for searching from coursesProcessed.json, can implement a
-# better way later
 import json
 import time
+
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 
 # Wait a max of 20 second before giving up on a necessary element of a page loading. Most of the time, it won't take
 # that long
@@ -35,11 +33,11 @@ standard_XPath = "//dd"
 # Waits until the number of the element is consistent to show that dynamic content is fully loaded,
 # In this case, description details tag is used, since the elements we're fetching have that tag,
 # and it's also one of the most common tags on the page.
-def wait_for_stabilisation(driver, XPath):
+def wait_for_stabilisation(web_driver, XPath):
     end_time = time.time() + MAX_WAIT_TIME
     last_count = INVALID_COUNT
     while time.time() < end_time:
-        elements = driver.find_elements(By.XPATH, XPath)
+        elements = web_driver.find_elements(By.XPATH, XPath)
         count = len(elements)
         if count == last_count and count > 0:
             return
@@ -51,29 +49,24 @@ def wait_for_stabilisation(driver, XPath):
 # into beautiful soup. Not good design, but it's temp helper and should be replaced with another
 # source
 course_data = {}
-with open("../data/final_data/coursesProcessed.json", "r") as file:
+with open("../data/final_data/coursesProcessed.json", "r", encoding="utf-8") as file:
     course_data = json.load(file)
     courses = list(course_data.keys())
 
 # Uses your version of Chrome to run the script, please have Chrome installed, or alternatively, rewrite this to
 #use whatever you usually use
 # chrome_options = Options()
-# chrome_options.add_argument("--headless=new") 
+# chrome_options.add_argument("--headless=new")
 # driver = webdriver.Chrome(options=chrome_options)
 driver = webdriver.Chrome()
 driver.get("https://www.unsw.edu.au/course-outlines")
 # Sets wait times
-wait = WebDriverWait(driver, MAX_WAIT_TIME) 
+wait = WebDriverWait(driver, MAX_WAIT_TIME)
 
 # Needs to accept cookies when working via Selenium unfortunately otherwise overlay will block access
 # to form. Can also have information sent via Javascript execution probably, but no clue about UNSW's
 # level of protection against external scripting.
-#cookies_button = "onetrust-accept-btn-handler"
-#cookies_button_submit = driver.find_element(By.ID, cookies_button)
-#cookies_button_submit.click()
 try:
-    # cookie_button = driver.find_element(By.ID, "onetrust-accept-btn-handler")
-    # cookie_button.click()
     cookie_wait = WebDriverWait(driver, 10)
     cookie_button = cookie_wait.until(
         EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler"))
@@ -85,10 +78,10 @@ try:
         EC.invisibility_of_element_located((By.ID, "onetrust-banner-sdk"))
     )
     print("Accepted cookies")
-except:
+except TimeoutException:
     print("Cookie banner not found, possibly already handled")
 
-# NOTE: have currently processed up until 1150th course 
+# NOTE: have currently processed up until 1150th course
 for course in courses:
     # This is the search form's Id and the submit button's id, wait til they both exist,
     # fill in the form and send keys
@@ -113,17 +106,17 @@ for course in courses:
 
     # As content is dynamically loaded, wait until it is loaded to try getting the link
     try:
-        wait = WebDriverWait(driver, MAX_WAIT_TIME) 
+        wait = WebDriverWait(driver, MAX_WAIT_TIME)
         wait.until(
             EC.element_to_be_clickable((By.XPATH, f"//a/span[normalize-space(text())='{course}']"))
         ).click()
     except TimeoutException:
         # If content not loaded in time or returns no results
-        # it may be some courses have not updated yet for 2026 
+        # it may be some courses have not updated yet for 2026
         # so try again by changing the filter by year to 2025
         try:
             # open the Year dropdown (the combobox button)
-            year_dropdown = wait.until(
+            wait.until(
                 EC.element_to_be_clickable((
                     By.XPATH,
                     "//button[@role='combobox' and contains(@aria-labelledby,'dropdown-year')]"
@@ -131,7 +124,7 @@ for course in courses:
             ).click()
 
             # click year option
-            year_option = wait.until(
+            wait.until(
                 EC.element_to_be_clickable((By.ID, "dropdown-year-1"))
             ).click()
 
@@ -184,9 +177,9 @@ for course in courses:
 
 # Save updated courses data
 try:
-    with open("../data/final_data/coursesProcessed.json", "w") as file:
+    with open("../data/final_data/coursesProcessed.json", "w", encoding="utf-8") as file:
         json.dump(course_data, file, indent=4)
-except Exception as e:
+except OSError as e:
     print(f"Error saving file: {e}")
 
 driver.quit()

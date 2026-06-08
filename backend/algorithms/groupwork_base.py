@@ -12,18 +12,18 @@
 # Final parse is done using Beautiful Soup, since it's a little faster, but if you're a future subcomm
 # reading this, feel free to use Selenium again if you only want to learn one.
 
-# A known test course, that can be used to quickly verify whether this is working as intended or not
-KNOWN_TEST_COURSE = "COMP6080"
+import sys
+import time
 
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from bs4 import BeautifulSoup
-# This is only needed to get the strings for searching from conditions_processed.json, can implement a
-# better way later
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+# A known test course, that can be used to quickly verify whether this is working as intended or not
+KNOWN_TEST_COURSE = "COMP6080"
 
 # Wait a max of 20 second before giving up on a necessary element of a page loading. Most of the time, it won't take
 # that long
@@ -36,11 +36,11 @@ standard_XPath = "//dd"
 # Waits until the number of the element is consistent to show that dynamic content is fully loaded,
 # In this case, description details tag is used, since the elements we're fetching have that tag,
 # and it's also one of the most common tags on the page.
-def wait_for_stabilisation(driver, XPath):
+def wait_for_stabilisation(web_driver, XPath):
     end_time = time.time() + MAX_WAIT_TIME
     last_count = INVALID_COUNT
     while time.time() < end_time:
-        elements = driver.find_elements(By.XPATH, XPath)
+        elements = web_driver.find_elements(By.XPATH, XPath)
         count = len(elements)
         if count == last_count and count > 0:
             return
@@ -53,20 +53,17 @@ def wait_for_stabilisation(driver, XPath):
 driver = webdriver.Chrome()
 driver.get("https://www.unsw.edu.au/course-outlines")
 # Sets wait times
-wait = WebDriverWait(driver, MAX_WAIT_TIME) 
+wait = WebDriverWait(driver, MAX_WAIT_TIME)
 
 # Needs to accept cookies when working via Selenium unfortunately otherwise overlay will block access
 # to form. Can also have information sent via Javascript execution probably, but no clue about UNSW's
 # level of protection against external scripting.
-#cookies_button = "onetrust-accept-btn-handler"
-#cookies_button_submit = driver.find_element(By.ID, cookies_button)
-#cookies_button_submit.click()
 try:
     cookie_button = driver.find_element(By.ID, "onetrust-accept-btn-handler")
     cookie_button.click()
-except:
+except NoSuchElementException:
     print("Cookie banner not found, possibly already handled")
-    
+
     # This is the search form's Id and the submit button's id, wait til they both exist,
     # fill in the form and send keys
     search_form_id = "degree-search-input"
@@ -85,18 +82,18 @@ except:
     except TimeoutException:
         # Content not loaded in time
         print(f"Element not found on webpage when searching from homepage: {KNOWN_TEST_COURSE}")
-        exit(1)
+        sys.exit(1)
 
     # As content is dynamically loaded, wait until it is loaded to try getting the link
     try:
-        wait = WebDriverWait(driver, MAX_WAIT_TIME) 
+        wait = WebDriverWait(driver, MAX_WAIT_TIME)
         wait.until(
             EC.element_to_be_clickable((By.XPATH, f"//a/span[normalize-space(text())='{KNOWN_TEST_COURSE}']"))
         ).click()
     except TimeoutException:
         # Content not loaded in time
         print(f"Element not found on webpage when trying to fetch link {KNOWN_TEST_COURSE}")
-        exit(1)
+        sys.exit(1)
 
     # Finds first element that matches the pattern that is standard to the website
     # course_outline_a = driver.find_element(By.XPATH, f"//a[span[normalize-space(text())='{course}']]")
@@ -110,7 +107,7 @@ except:
     except TimeoutException:
         # Content not loaded in time
         print(f"Element not found on webpage when trying to fetch link {KNOWN_TEST_COURSE}")
-        exit(1)
+        sys.exit(1)
     html = driver.page_source
 
     # Puts the HTML in nicer beautiful soup format for the final parse, it's quicker than using Selenium
