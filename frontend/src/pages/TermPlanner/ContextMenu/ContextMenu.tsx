@@ -86,11 +86,6 @@ const ContextMenu = ({ code, plannedFor, ignoreFromProgression, groupwork }: Pro
             <PieChartOutlined style={iconStyle} /> Ignore Progression
           </Item>
         )}
-        {groupwork && (
-          <Item onClick={() => {}}>
-            <UsergroupAddOutlined style={iconStyle} /> Course has Groupwork
-          </Item>
-        )}
         <Item onClick={handleInfo}>
           <InfoCircleFilled style={iconStyle} /> View Info
         </Item>
