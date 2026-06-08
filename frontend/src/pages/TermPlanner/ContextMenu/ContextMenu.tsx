@@ -9,7 +9,6 @@ import {
   InfoCircleFilled,
   PieChartFilled,
   PieChartOutlined,
-  UsergroupAddOutlined,
   StarOutlined
 } from '@ant-design/icons';
 import {
@@ -25,10 +24,9 @@ type Props = {
   code: string;
   plannedFor: string | null;
   ignoreFromProgression: boolean;
-  groupwork: boolean;
 };
 
-const ContextMenu = ({ code, plannedFor, ignoreFromProgression, groupwork }: Props) => {
+const ContextMenu = ({ code, plannedFor, ignoreFromProgression }: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();

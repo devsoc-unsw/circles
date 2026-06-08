@@ -233,7 +233,6 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
         code={code}
         ignoreFromProgression={courses[code].ignoreFromProgression}
         plannedFor={courses[code].plannedFor}
-        groupwork={groupwork}
       />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
