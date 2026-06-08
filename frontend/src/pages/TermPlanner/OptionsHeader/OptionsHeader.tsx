@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import {
   DownloadOutlined,
   EyeFilled,
   QuestionCircleOutlined,
   SettingFilled,
+  ThunderboltOutlined,
   UploadOutlined,
   WarningFilled
 } from '@ant-design/icons';
@@ -13,6 +14,7 @@ import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import { useUnscheduleAllMutation, useUserPlanner } from 'utils/apiHooks/user';
 import useSettings from 'hooks/useSettings';
+import AutoplanModal from '../AutoplanModal/AutoplanModal';
 import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
 import ImportPlannerMenu from '../ImportPlannerMenu';
@@ -24,6 +26,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 const OptionsHeader = () => {
+  const [autoplanOpen, setAutoplanOpen] = useState(false);
   const plannerQuery = useUserPlanner();
   const planner = plannerQuery.data;
 
@@ -42,6 +45,10 @@ const OptionsHeader = () => {
   };
 
   const unscheduleAllMutation = useUnscheduleAllMutation();
+  const canAutoplan = planner ? planner.unplanned.length > 0 : false;
+  const autoplanTooltipTitle = canAutoplan
+    ? 'Autoplan all unplanned courses'
+    : 'All courses are currently planned. Unplan one or more courses first to use Autoplan.';
 
   const handleUnscheduleAll = async () => {
     unscheduleAllMutation.mutate();
@@ -120,6 +127,19 @@ const OptionsHeader = () => {
             </Popconfirm>
           </Tooltip>
         )}
+        <Tooltip title={autoplanTooltipTitle}>
+          <span>
+            <S.AutoplanButton
+              type="primary"
+              onClick={() => setAutoplanOpen(true)}
+              disabled={!canAutoplan}
+              icon={<ThunderboltOutlined />}
+            >
+              Autoplan
+            </S.AutoplanButton>
+          </span>
+        </Tooltip>
+
         {hiddenYears.length > 0 && (
           <Tooltip title="Show all hidden years">
             <S.OptionButton onClick={() => showYears()}>
@@ -162,6 +182,7 @@ const OptionsHeader = () => {
           </div>
         </Tippy>
       </S.OptionSection>
+      <AutoplanModal open={autoplanOpen} onCancel={() => setAutoplanOpen(false)} />
     </S.OptionsHeaderWrapper>
   );
 };

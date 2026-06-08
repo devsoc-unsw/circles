@@ -1,6 +1,7 @@
 import { setupDegreeWizard } from 'utils/api/degreeApi';
 import {
   addToUnplanned,
+  autoplanCourses,
   removeAll,
   removeCourse,
   setPlannedCourseToTerm,
@@ -79,3 +80,8 @@ export const useSetUnplannedCourseToTermMutation = createUserMutationHook(
 );
 
 export const useImportUserMutation = createUserMutationHook(true, importUser);
+
+export const useAutoplanCoursesMutation = createUserMutationHook(
+  [['planner'], ['planner', 'validation']],
+  autoplanCourses
+);

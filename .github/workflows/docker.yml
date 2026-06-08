@@ -6,7 +6,7 @@ on:
       - staging
 
 env:
-  ENVIRONMENT: ${{ github.ref_name == 'dev' && 'prod' || 'staging' }}
+  ENVIRONMENT: ${{ github.ref_name == 'dev' && 'production' || 'staging' }}
   IMAGE_NAME: ${{ github.ref_name == 'dev' && 'circles' || 'circles-staging' }}
 
 jobs:
@@ -24,64 +24,49 @@ jobs:
           - component: frontend
             dockerfile: production.dockerfile
             args: |
-              "API_URL=https://circlesapi.devsoc.app"
+              "API_URL=${{ github.ref_name == 'dev' && 'https://circlesapi.devsoc.app' || 'https://circlesstagingapi.devsoc.app' }}"
           - component: backend
             dockerfile: production.dockerfile
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: arm64
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ github.token }}
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: ${{ matrix.component }}
-          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/dev' }}
+          push: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging') }}
           platforms: linux/amd64
           file: ${{ matrix.component }}/${{ matrix.dockerfile }}
           build-args: ${{ matrix.args }}
           tags: |
             ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:${{ github.sha }}
             ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:latest
-          labels: ${{ steps.meta.outputs.labels }}
   deploy:
     name: Deploy (CD)
     runs-on: ubuntu-latest
     needs: [build]
-    concurrency: production
-    environment: production
-    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/dev' }}
+    concurrency: ${{ github.ref_name == 'dev' && 'production' || 'staging' }}
+    environment: ${{ github.ref_name == 'dev' && 'production' || 'staging' }}
+    if: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging') }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Dispatch deployment
+        uses: devsoc-unsw/deployment-dispatch-action@main
         with:
-          repository: devsoc-unsw/deployment
-          token: ${{ secrets.GH_TOKEN }}
-          ref: dev
-      - name: Install yq - portable yaml processor
-        uses: mikefarah/yq@v4.35.2
-      - name: Update deployment
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git config user.name "CSESoc CD"
-          git config user.email "technical@csesoc.org.au"
-          git checkout -b update/${{ env.IMAGE_NAME }}/${{ github.sha }}
-          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}"' projects/circles/${{ env.ENVIRONMENT }}/deploy-frontend.yml
-          yq -i '.items[0].spec.template.spec.containers[0].image = "ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-backend:${{ github.sha }}"' projects/circles/${{ env.ENVIRONMENT }}/deploy-backend.yml
-          git add . 
-          git commit -m "feat(${{ env.IMAGE_NAME }}): update images" 
-          git push -u origin update/${{ env.IMAGE_NAME }}/${{ github.sha }}
-          gh pr create -B dev --title "feat(${{ env.IMAGE_NAME }}): update image" --body "Updates the image for the ${{ env.IMAGE_NAME }} deployment to commit devsoc-unsw/${{ env.IMAGE_NAME }}@${{ github.sha }}." > URL
-          gh pr merge $(cat URL) --squash -d
+          deployment-dispatcher-app-id: ${{ vars.DEPLOYMENT_DISPATCHER_APP_ID }}
+          deployment-dispatcher-app-private-key: ${{ secrets.DEPLOYMENT_DISPATCHER_APP_PRIVATE_KEY }}
+          updates: |
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-frontend=${{ github.sha }}
+            ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME }}-backend=${{ github.sha }}

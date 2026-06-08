@@ -23,4 +23,7 @@ runs:
         --mongodb_password="github_ci"
         --mongodb_service_hostname="mongodb"
       shell: bash
+    - name: Set backend test environment
+      run: echo "ENVIRONMENT=test" >> env/backend.env
+      shell: bash
     
