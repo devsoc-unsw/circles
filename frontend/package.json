@@ -108,6 +108,6 @@
     "vite-plugin-checker": "0.9.3",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-svgr": "4.3.0",
-    "vitest": "3.2.4"
+    "vitest": "3.2.6"
   }
 }
