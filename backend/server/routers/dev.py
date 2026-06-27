@@ -11,7 +11,7 @@ router = APIRouter(
     tags=["dev"],
 )
 
-@router.post('/guest_login', 
+@router.post('/guest_login',
              dependencies=[Depends(RateLimiter(times=3, seconds=60))],
             )
 def create_guest_session(res: Response) -> IdentityPayload:

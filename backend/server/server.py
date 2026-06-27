@@ -6,8 +6,8 @@ import os
 from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
-from fastapi_limiter import FastAPILimiter
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_limiter import FastAPILimiter
 from server.db.redis.limiter_conn import make_limiter_redis
 from server.routers import auth, courses, followups, planner, programs, specialisations, user
 
