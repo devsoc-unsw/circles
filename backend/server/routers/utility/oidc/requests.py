@@ -275,7 +275,7 @@ def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
     signing_key = jwkclient.get_signing_key_from_jwt(token)
 
     try:
-        decoded: DecodedIDToken = jwt.decode(
+        decoded: DecodedIDToken = cast(DecodedIDToken, jwt.decode(
             token,
             key=signing_key.key,
             algorithms=["RS256"],
@@ -283,7 +283,7 @@ def validate_id_token(token: str, access_token: str) -> DecodedIDToken:
             issuer=oidc_config["issuer"],
             options={ "verify_signature": True },
             leeway=5,
-        )
+        ))
     except jwt.exceptions.InvalidTokenError as e:
         raise OIDCValidationError(
             error_description="Could not validate id_token",
