@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, Depends
+from fastapi_limiter.depends import RateLimiter
 
 from server.routers.auth import REFRESH_TOKEN_COOKIE, IdentityPayload, insert_new_guest_user
 from server.routers.utility.sessions.interface import setup_new_guest_session
@@ -10,7 +11,9 @@ router = APIRouter(
     tags=["dev"],
 )
 
-@router.post('/guest_login')
+@router.post('/guest_login', 
+             dependencies=[Depends(RateLimiter(times=3, seconds=60))],
+            )
 def create_guest_session(res: Response) -> IdentityPayload:
     # create new login session for user in db, generating new tokens
     uid = insert_new_guest_user()
