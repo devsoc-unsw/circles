@@ -6,14 +6,20 @@ import os
 from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
+from fastapi_limiter import FastAPILimiter
 from fastapi.middleware.cors import CORSMiddleware
+from server.db.redis.limiter_conn import make_limiter_redis
 from server.routers import auth, courses, followups, planner, programs, specialisations, user
 
 @asynccontextmanager
 async def on_setup_and_shutdown(_app: FastAPI):
     # TODO-OLLI(pm): actually use these
     print("\n\nstartup\n\n")
+    limiter_redis = make_limiter_redis()
+    await FastAPILimiter.init(limiter_redis) # connect limiter to redis
     yield
+    await FastAPILimiter.close() # clean shutdown
+    await limiter_redis.aclose()
     print("\n\nshutdown\n\n")
 
 app = FastAPI(lifespan=on_setup_and_shutdown)
