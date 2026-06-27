@@ -15,7 +15,7 @@
     "@tanstack/react-query": "5.81.5",
     "@tippyjs/react": "4.2.6",
     "antd": "5.26.2",
-    "axios": "1.10.0",
+    "axios": "1.16.0",
     "dayjs": "1.11.13",
     "fast-fuzzy": "1.12.0",
     "framer-motion": "11.0.20",
