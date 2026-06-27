@@ -71,7 +71,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "7.27.7",
+    "@babel/core": "7.29.6",
     "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "14.2.2",
@@ -108,6 +108,6 @@
     "vite-plugin-checker": "0.9.3",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-svgr": "4.3.0",
-    "vitest": "3.2.4"
+    "vitest": "3.2.6"
   }
 }
