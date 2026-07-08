@@ -12,8 +12,8 @@ import {
 import { importUser, UserJson } from 'utils/export';
 import openNotification from 'utils/openNotification';
 import CS from '../common/styles';
-import S from './styles';
 import parseAcademicStatement from './inputParsers';
+import S from './styles';
 
 const ImportPlannerMenu = () => {
   const importUserMutation = useImportUserMutation();
