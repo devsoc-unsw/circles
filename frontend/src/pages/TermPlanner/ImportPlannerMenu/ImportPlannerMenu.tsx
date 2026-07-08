@@ -2,7 +2,13 @@ import React, { useRef, useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { useTheme } from 'styled-components';
-import { useImportUserMutation } from 'utils/apiHooks/user';
+import {
+  useImportUserMutation,
+  useUserCourses,
+  useUserDegree,
+  useUserPlanner,
+  useUserSettings
+} from 'utils/apiHooks/user';
 import { importUser, UserJson } from 'utils/export';
 import openNotification from 'utils/openNotification';
 import CS from '../common/styles';
@@ -12,6 +18,12 @@ import parseAcademicStatement from './inputParsers';
 const ImportPlannerMenu = () => {
   const importUserMutation = useImportUserMutation();
   const theme = useTheme();
+
+  const { data: currentDegree } = useUserDegree();
+  const { data: currentCourses } = useUserCourses();
+  const { data: currentSettings } = useUserSettings();
+  const { data: currentPlanner } = useUserPlanner();
+
   const handleImport = (user: UserJson) => {
     importUserMutation.mutate(user);
   };
@@ -107,23 +119,72 @@ const ImportPlannerMenu = () => {
     }
 
     setLoadingPdf(true);
+
+    // Write extracted data to db.
     try {
       const parsedPlanner = await parseAcademicStatement(file);
-      e.target.value = '';
 
-      console.log('Successfully Parsed Planner Structure:', parsedPlanner);
+      if (!currentDegree || !currentCourses || !currentSettings || !currentPlanner) {
+        throw new Error('Current user state not fully loaded from server hooks.');
+      }
+
+      const updatedCourses: Record<string, unknown> = { ...currentCourses };
+
+      const seenInPlanner = new Set<string>();
+
+      parsedPlanner.years.forEach((year) => {
+        const terms: (keyof typeof year)[] = ['T0', 'T1', 'T2', 'T3'];
+        terms.forEach((term) => {
+          year[term].forEach((code: string) => {
+            seenInPlanner.add(code);
+            if (!updatedCourses[code]) {
+              updatedCourses[code] = { mark: null, ignoreFromProgression: false };
+            }
+          });
+        });
+      });
+
+      const currentPlannerYears = currentPlanner.years;
+      const targetLength = Math.max(currentPlannerYears.length, 4);
+
+      while (parsedPlanner.years.length < targetLength) {
+        parsedPlanner.years.push({ T0: [], T1: [], T2: [], T3: [] });
+      }
+
+      const userPayload = {
+        degree: currentDegree,
+        settings: currentSettings,
+        planner: {
+          ...parsedPlanner,
+          unplanned: Object.keys(updatedCourses).filter((code) => !seenInPlanner.has(code)),
+          lockedTerms: {},
+          years: parsedPlanner.years.map((y) => ({
+            T0: y.T0,
+            T1: y.T1,
+            T2: y.T2,
+            T3: y.T3
+          }))
+        },
+        courses: updatedCourses
+      };
+
+      await importUserMutation.mutateAsync(userPayload as unknown as UserJson);
+      e.target.value = '';
 
       setLoadingPdf(false);
       openNotification({
         type: 'success',
-        message: 'PDF Statement Parsed',
+        message: 'Transcript Imported',
         description: (
-          <span style={{ color: theme.text }}>Your course history has been extracted cleanly.</span>
+          <span style={{ color: theme.text }}>
+            Your planner has been updated with your academic history.
+          </span>
         )
       });
     } catch (err) {
       setLoadingPdf(false);
       e.target.value = '';
+      // eslint-disable-next-line no-console
       console.error('Error parsing academic statement:', err);
       openNotification({
         type: 'error',
