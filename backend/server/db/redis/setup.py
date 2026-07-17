@@ -1,3 +1,6 @@
+import os
+
+import redis
 from redis.exceptions import ResponseError
 from redis.commands.search.field import TagField
 from redis.commands.search.index_definition import IndexDefinition, IndexType
@@ -60,3 +63,21 @@ def setup_redis_sessionsdb():
     _drop_all_keys()
     _create_sid_index(True)
     # create_uid_index(True)  # don't really have a use for this yet...
+
+def reset_redis_limiterdb():
+    # Flush the fastapi-limiter logical db (db=1) -> for test setup only
+    # Separate logical db from the sessionsdb (db=0)
+    # To store rate limiting counters for fastapi-limiter package
+    limiter_db = redis.Redis(
+        host=os.environ["SESSIONSDB_SERVICE_HOSTNAME"],
+        port=6379,
+        db=1,  # keep in sync with make_limiter_redis() in limiter_conn.py
+        protocol=3,
+        decode_responses=True,
+        username=os.environ["SESSIONSDB_USERNAME"],
+        password=os.environ["SESSIONSDB_PASSWORD"],
+    )
+    try:
+        limiter_db.flushdb()
+    finally:
+        limiter_db.close()

@@ -9,7 +9,7 @@ os.environ["SESSIONSDB_SERVICE_HOSTNAME"] = "localhost"
 os.environ["MONGODB_SERVICE_HOSTNAME"] = "localhost"
 
 from server.db.mongo.setup import setup_user_related_collections
-from server.db.redis.setup import setup_redis_sessionsdb
+from server.db.redis.setup import reset_redis_limiterdb, setup_redis_sessionsdb
 
 
 
@@ -20,6 +20,8 @@ def clear():
     setup_redis_sessionsdb()
 
 def get_token():
+    """Reset the limiter's counters first so test suite doesn't trip the limit and get a 429 with no session_token in the body."""
+    reset_redis_limiterdb()
     return requests.post('http://127.0.0.1:8000/dev/guest_login', timeout=5000).json()["session_token"]
 
 def get_token_headers(token: str):
