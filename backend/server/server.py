@@ -18,8 +18,7 @@ async def on_setup_and_shutdown(_app: FastAPI):
     limiter_redis = make_limiter_redis()
     await FastAPILimiter.init(limiter_redis) # connect limiter to redis
     yield
-    await FastAPILimiter.close() # clean shutdown
-    await limiter_redis.aclose()
+    await FastAPILimiter.close() # clean shutdown (also closes limiter_redis)
     print("\n\nshutdown\n\n")
 
 app = FastAPI(lifespan=on_setup_and_shutdown)
