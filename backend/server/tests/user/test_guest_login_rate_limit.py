@@ -1,5 +1,6 @@
 import os
 import time
+from typing import cast
 
 import redis
 import requests
@@ -27,10 +28,10 @@ def fast_forward_limiter_window():
     """
     limiter_db = redis.Redis(**limiter_redis_kwargs())
     try:
-        keys = limiter_db.keys("*")
+        keys = cast(list, limiter_db.keys("*"))
         assert keys, "expected limiter counters to exist before the window expires"
         for key in keys:
-            assert limiter_db.pttl(key) > 0, "limiter counter should carry a TTL"
+            assert cast(int, limiter_db.pttl(key)) > 0, "limiter counter should carry a TTL"
             limiter_db.pexpire(key, 1)  # expire ~immediately
     finally:
         limiter_db.close()
