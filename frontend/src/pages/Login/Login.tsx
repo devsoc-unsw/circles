@@ -15,8 +15,6 @@ type APIErrorPayload = {
   detail?: string;
 };
 
-const IS_DEV_GUEST_ENABLED = !import.meta.env.PROD;
-
 const Login = () => {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
@@ -64,11 +62,7 @@ const Login = () => {
               <S.Title>Login to Circles</S.Title>
               <div>For current UNSW Students</div>
               <S.LoginButton onClick={initiateCSEAuth}>Login with zID</S.LoginButton>
-              {IS_DEV_GUEST_ENABLED ? (
-                <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
-              ) : (
-                <S.GuestButton disabled>Continue as guest (coming soon)</S.GuestButton>
-              )}
+              <S.GuestButton onClick={guestLogin}>Continue as guest</S.GuestButton>
             </S.Login>
           </S.Right>
         </S.Wrapper>

@@ -22,7 +22,7 @@ def clear():
 def get_token():
     """Reset the limiter's counters first so test suite doesn't trip the limit and get a 429 with no session_token in the body."""
     reset_redis_limiterdb()
-    return requests.post('http://127.0.0.1:8000/dev/guest_login', timeout=5000).json()["session_token"]
+    return requests.post('http://127.0.0.1:8000/auth/guest_login', timeout=5000).json()["session_token"]
 
 def get_token_headers(token: str):
     return {"Authorization": f"Bearer {token}"}

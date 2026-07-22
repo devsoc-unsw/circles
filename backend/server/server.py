@@ -2,7 +2,6 @@
 Configure the FastAPI server
 """
 
-import os
 from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
@@ -60,9 +59,6 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(user.router)
 app.include_router(followups.router)
-if os.getenv("APP_ENV") == "dev":
-    from server.routers import dev
-    app.include_router(dev.router)
 
 
 @app.get("/")
