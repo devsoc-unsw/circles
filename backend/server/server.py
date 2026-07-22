@@ -2,18 +2,22 @@
 Configure the FastAPI server
 """
 
-import os
 from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_limiter import FastAPILimiter
+from server.db.redis.limiter_conn import make_limiter_redis
 from server.routers import auth, courses, followups, planner, programs, specialisations, user
 
 @asynccontextmanager
 async def on_setup_and_shutdown(_app: FastAPI):
     # TODO-OLLI(pm): actually use these
     print("\n\nstartup\n\n")
+    limiter_redis = make_limiter_redis()
+    await FastAPILimiter.init(limiter_redis) # connect limiter to redis
     yield
+    await FastAPILimiter.close() # clean shutdown (also closes limiter_redis)
     print("\n\nshutdown\n\n")
 
 app = FastAPI(lifespan=on_setup_and_shutdown)
@@ -55,9 +59,6 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(user.router)
 app.include_router(followups.router)
-if os.getenv("APP_ENV") == "dev":
-    from server.routers import dev
-    app.include_router(dev.router)
 
 
 @app.get("/")
