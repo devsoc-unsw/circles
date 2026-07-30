@@ -48,17 +48,30 @@ def wait_for_stabilisation(web_driver, XPath):
 # Function to get all course codes from coursesProcessed.json, since we need them as input
 # into beautiful soup. Not good design, but it's temp helper and should be replaced with another
 # source
+OUTPUT_PATH = "../data/final_data/coursesProcessed.json"
+# Flush progress to disk every this many courses so a crash part-way through a
+# long run doesn't throw away everything scraped so far.
+SAVE_INTERVAL = 50
+
 course_data = {}
-with open("../data/final_data/coursesProcessed.json", "r", encoding="utf-8") as file:
+with open(OUTPUT_PATH, "r", encoding="utf-8") as file:
     course_data = json.load(file)
     courses = list(course_data.keys())
+
+
+def save_progress():
+    try:
+        with open(OUTPUT_PATH, "w", encoding="utf-8") as out_file:
+            json.dump(course_data, out_file, indent=4)
+    except OSError as e:
+        print(f"Error saving file: {e}")
 
 # Uses your version of Chrome to run the script, please have Chrome installed, or alternatively, rewrite this to
 #use whatever you usually use
 # chrome_options = Options()
 # chrome_options.add_argument("--headless=new")
 # driver = webdriver.Chrome(options=chrome_options)
-driver = webdriver.Chrome()
+driver = webdriver.Chrome()  # pylint: disable=not-callable  # selenium false positive
 driver.get("https://www.unsw.edu.au/course-outlines")
 # Sets wait times
 wait = WebDriverWait(driver, MAX_WAIT_TIME)
@@ -81,8 +94,16 @@ try:
 except TimeoutException:
     print("Cookie banner not found, possibly already handled")
 
-# NOTE: have currently processed up until 1150th course
-for course in courses:
+for idx, course in enumerate(courses):
+    # Periodically persist progress so the run can be resumed after a crash.
+    if idx and idx % SAVE_INTERVAL == 0:
+        save_progress()
+
+    # Resume support: skip courses that already have a groupwork value from a
+    # previous run so re-running only scrapes what's left.
+    if "groupwork" in course_data[course]:
+        continue
+
     # This is the search form's Id and the submit button's id, wait til they both exist,
     # fill in the form and send keys
     search_form_id = "degree-search-input"
@@ -178,10 +199,6 @@ for course in courses:
     driver.get("https://www.unsw.edu.au/course-outlines")
 
 # Save updated courses data
-try:
-    with open("../data/final_data/coursesProcessed.json", "w", encoding="utf-8") as file:
-        json.dump(course_data, file, indent=4)
-except OSError as e:
-    print(f"Error saving file: {e}")
+save_progress()
 
 driver.quit()

@@ -50,7 +50,7 @@ def wait_for_stabilisation(web_driver, XPath):
 
 # Uses your version of Chrome to run the script, please have Chrome installed, or alternatively, rewrite this to
 #use whatever you usually use
-driver = webdriver.Chrome()
+driver = webdriver.Chrome()  # pylint: disable=not-callable  # selenium false positive
 driver.get("https://www.unsw.edu.au/course-outlines")
 # Sets wait times
 wait = WebDriverWait(driver, MAX_WAIT_TIME)

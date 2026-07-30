@@ -38,39 +38,11 @@ import TermBox from './TermBox';
 import TermBoxMobile from './TermBoxMobile';
 import UnplannedColumn from './UnplannedColumn';
 import useMobileHook from './UseMobileHook';
-import { isPlannerEmpty } from './utils';
+import { extrapolateCourseYears, isPlannerEmpty } from './utils';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
 );
-
-const extrapolateCourseYears = (
-  data: Record<number, Course>,
-  validYears: number[]
-): Record<number, Course> => {
-  const newData = { ...data };
-  let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
-
-  validYears.forEach((year) => {
-    if (newData[year]) bestYear = year;
-    else
-      newData[year] = {
-        ...newData[bestYear],
-        terms: year > LIVE_YEAR ? newData[LIVE_YEAR].terms : []
-      };
-  });
-
-  // groupwork is a current-offering property; archive years won't have it, so
-  // copy it from LIVE_YEAR into every year so the indicator is always correct.
-  const liveGroupwork = newData[LIVE_YEAR]?.groupwork;
-  if (liveGroupwork !== undefined) {
-    validYears.forEach((year) => {
-      if (newData[year]) newData[year] = { ...newData[year], groupwork: liveGroupwork };
-    });
-  }
-
-  return newData;
-};
 
 const badCourseYears = (code: string, validYears: number[]): Record<number, Course> =>
   Object.fromEntries(validYears.map((year) => [year, { ...badCourseInfo, code }]));
