@@ -1,4 +1,4 @@
-import { Grade, Mark, PlannerCourse, Term } from 'types/planner';
+import { Grade, Mark, Term } from 'types/planner';
 import { PlannerResponse } from 'types/userResponse';
 import getNumTerms from 'utils/getNumTerms';
 import { getTermsList as getYearTermsList } from 'utils/termsPerYear';
@@ -85,24 +85,39 @@ const getTermsList = (
   return termsList;
 };
 
+// Which instance of a multiterm course is being dragged, mirroring the backend's
+// plannedToTerm derivation: collect the terms containing the course in row-major
+// T0-T3 order, then index the source term name.
+const getMultitermInstanceNum = (
+  years: PlannerResponse['years'],
+  courseCode: string,
+  srcTerm: Term
+): number => {
+  const srcTermList: Term[] = [];
+  years.forEach((year) => {
+    (['T0', 'T1', 'T2', 'T3'] as Term[]).forEach((term) => {
+      if (year[term]?.includes(courseCode)) srcTermList.push(term);
+    });
+  });
+  return Math.max(srcTermList.indexOf(srcTerm), 0);
+};
+
 // Checks whether multiterm course will extend below bottom row of term planner
 type MultitermInBoundsPayload = {
-  srcTerm: Term | 'unplanned';
   destTerm: Term;
   startYear: number;
   destRow: number;
-  course: PlannerCourse;
+  instanceNum: number;
+  uoc: number;
+  termsOffered: Term[];
   isSummerTerm: boolean;
   numYears: number;
 };
 
 const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
-  const { destTerm, course, isSummerTerm, startYear, destRow, numYears, srcTerm } = payload;
+  const { destTerm, isSummerTerm, startYear, destRow, numYears, instanceNum, uoc, termsOffered } =
+    payload;
 
-  const { UOC: uoc, termsOffered, plannedFor } = course;
-
-  const instanceNum =
-    srcTerm === 'unplanned' || !plannedFor ? 0 : plannedFor.split(' ').indexOf(srcTerm);
   const termsList = getTermsList(
     startYear + destRow,
     destTerm,
@@ -122,4 +137,11 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
   return maxRowOffset < numYears - destRow && minRowOffset + destRow >= 0;
 };
 
-export { checkMultitermInBounds, getNumTerms, getTermsList, isPlannerEmpty, parseMarkToInt };
+export {
+  checkMultitermInBounds,
+  getMultitermInstanceNum,
+  getNumTerms,
+  getTermsList,
+  isPlannerEmpty,
+  parseMarkToInt
+};

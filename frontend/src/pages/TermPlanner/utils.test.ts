@@ -1,5 +1,5 @@
-import { PlannerCourse, Term } from 'types/planner';
-import { checkMultitermInBounds, getTermsList } from './utils';
+import { Term } from 'types/planner';
+import { checkMultitermInBounds, getMultitermInstanceNum, getTermsList } from './utils';
 
 // Placements must walk through the terms that exist in each calendar year
 // (3 standard terms before 2028, 2 from 2028 onwards), skipping terms that
@@ -59,60 +59,65 @@ describe('getTermsList', () => {
   });
 });
 
-describe('checkMultitermInBounds', () => {
-  const multitermCourse = (termsOffered: Term[], uoc: number): PlannerCourse => ({
-    title: 'Multiterm Course',
-    termsOffered,
-    UOC: uoc,
-    plannedFor: null,
-    prereqs: '',
-    isLegacy: false,
-    isUnlocked: true,
-    warnings: [],
-    handbookNote: '',
-    isAccurate: true,
-    ignoreFromProgression: false,
-    isMultiterm: true,
-    mark: null
+// Mirrors the backend's instance derivation in plannedToTerm: collect the terms
+// containing the course in row-major T0-T3 order, then index the source term name.
+describe('getMultitermInstanceNum', () => {
+  const emptyYear = (): Record<string, string[]> => ({ T0: [], T1: [], T2: [], T3: [] });
+
+  it('returns 0 when the source term holds the first instance', () => {
+    const years = [{ ...emptyYear(), T1: ['COMP1511'], T2: ['COMP1511'] }];
+    expect(getMultitermInstanceNum(years, 'COMP1511', 'T1')).toBe(0);
   });
 
+  it('returns the index of a later instance in the same year', () => {
+    const years = [{ ...emptyYear(), T1: ['COMP1511'], T2: ['COMP1511'] }];
+    expect(getMultitermInstanceNum(years, 'COMP1511', 'T2')).toBe(1);
+  });
+
+  it('counts instances across years in row order', () => {
+    const years = [
+      { ...emptyYear(), T3: ['COMP1511'] },
+      { ...emptyYear(), T1: ['COMP1511'] }
+    ];
+    expect(getMultitermInstanceNum(years, 'COMP1511', 'T1')).toBe(1);
+  });
+
+  it('walks terms in T0-T3 order regardless of object key order', () => {
+    const years = [{ T2: ['COMP1511'], T1: ['COMP1511'], T3: [], T0: [] }];
+    expect(getMultitermInstanceNum(years, 'COMP1511', 'T2')).toBe(1);
+  });
+});
+
+describe('checkMultitermInBounds', () => {
+  const basePayload = {
+    startYear: 2027,
+    destRow: 0,
+    destTerm: 'T3' as Term,
+    instanceNum: 0,
+    uoc: 2,
+    termsOffered: ['T1', 'T2', 'T3'] as Term[],
+    isSummerTerm: false,
+    numYears: 2
+  };
+
   it('accepts a spill that fits inside the planner', () => {
-    expect(
-      checkMultitermInBounds({
-        startYear: 2027,
-        destRow: 0,
-        destTerm: 'T3',
-        srcTerm: 'unplanned',
-        course: multitermCourse(['T1', 'T2', 'T3'], 2),
-        isSummerTerm: false,
-        numYears: 2
-      })
-    ).toBe(true);
+    expect(checkMultitermInBounds(basePayload)).toBe(true);
   });
 
   it('rejects a spill that extends past the last planner year', () => {
-    expect(
-      checkMultitermInBounds({
-        startYear: 2027,
-        destRow: 0,
-        destTerm: 'T3',
-        srcTerm: 'unplanned',
-        course: multitermCourse(['T1', 'T2', 'T3'], 2),
-        isSummerTerm: false,
-        numYears: 1
-      })
-    ).toBe(false);
+    expect(checkMultitermInBounds({ ...basePayload, numYears: 1 })).toBe(false);
+  });
+
+  it('rejects a drop into a term that does not exist in its year', () => {
+    expect(checkMultitermInBounds({ ...basePayload, startYear: 2028, numYears: 10 })).toBe(false);
   });
 
   it('rejects a course whose instances can never be placed', () => {
     expect(
       checkMultitermInBounds({
-        startYear: 2027,
-        destRow: 0,
-        destTerm: 'T3',
-        srcTerm: 'unplanned',
-        course: multitermCourse(['T3'], 3),
-        isSummerTerm: false,
+        ...basePayload,
+        uoc: 3,
+        termsOffered: ['T3'],
         numYears: 10
       })
     ).toBe(false);

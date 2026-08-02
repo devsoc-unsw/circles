@@ -39,7 +39,7 @@ import TermBox from './TermBox';
 import TermBoxMobile from './TermBoxMobile';
 import UnplannedColumn from './UnplannedColumn';
 import useMobileHook from './UseMobileHook';
-import { isPlannerEmpty } from './utils';
+import { checkMultitermInBounds, getMultitermInstanceNum, isPlannerEmpty } from './utils';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
@@ -227,6 +227,39 @@ const TermPlanner = () => {
     setDraggingCourse(courseCode);
   };
 
+  // Mirrors the backend's out-of-bounds rejection so invalid multiterm drops are
+  // blocked before mutating, e.g. spills stranded by 2-term years from 2028
+  const multitermDropInBounds = (
+    courseCode: string,
+    destRow: number,
+    destTerm: Term,
+    instanceNum: number
+  ) => {
+    // Backend bounds-checks against the live course offering, which the
+    // LIVE_YEAR info (extrapolated to future years) is the closest match for
+    const infoYear = validYears.includes(LIVE_YEAR) ? LIVE_YEAR : validYears.at(-1)!;
+    const courseInfo = courseInfos[infoYear]?.[courseCode];
+    if (!courseInfo?.is_multiterm) return true;
+    return checkMultitermInBounds({
+      startYear: planner.startYear,
+      destRow,
+      destTerm,
+      instanceNum,
+      uoc: courseInfo.UOC,
+      termsOffered: courseInfo.terms,
+      isSummerTerm: planner.isSummerEnabled,
+      numYears: planner.years.length
+    });
+  };
+
+  const multitermOutOfBoundsNotification = (courseCode: string) => {
+    openNotification({
+      type: 'warning',
+      message: 'Course would extend outside of the term planner',
+      description: `Keep ${courseCode} inside the calendar by moving it to a different term instead`
+    });
+  };
+
   const handleOnDragEnd: OnDragEndResponder = async (result) => {
     setDraggingCourse('');
     const { destination, source, draggableId: draggableIdUnique } = result;
@@ -258,6 +291,10 @@ const TermPlanner = () => {
       const destYear = Number(destination.droppableId.match(/[0-9]{4}/)?.[0]);
       const destTerm = destination.droppableId.match(/T[0-3]/)?.[0] as Term;
       const destRow = destYear - planner.startYear;
+      if (!multitermDropInBounds(draggableId, destRow, destTerm, 0)) {
+        multitermOutOfBoundsNotification(draggableId);
+        return;
+      }
       // === move unplanned course to term ===
       const data = {
         destRow,
@@ -273,6 +310,19 @@ const TermPlanner = () => {
       const destYear = Number(destination.droppableId.match(/[0-9]{4}/)?.[0]);
       const destTerm = destination.droppableId.match(/T[0-3]/)?.[0] as Term;
       const destRow = destYear - planner.startYear;
+      // Same-term reorders skip the bounds check, matching the backend
+      if (
+        source.droppableId !== destination.droppableId &&
+        !multitermDropInBounds(
+          draggableId,
+          destRow,
+          destTerm,
+          getMultitermInstanceNum(planner.years, draggableId, srcTerm)
+        )
+      ) {
+        multitermOutOfBoundsNotification(draggableId);
+        return;
+      }
       // === move between terms ===
       const data = {
         srcRow,
