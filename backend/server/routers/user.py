@@ -5,6 +5,7 @@ from server.db.helpers.models import PartialUserStorage, UserCourseStorage, User
 from server.routers.utility.common import get_core_courses, get_course_details, sort_courses_by_code
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.planner_terms import (
+    unplan_nonexistent_term_courses,
     validate_locked_term_string,
     validate_planner_years_terms,
 )
@@ -220,6 +221,9 @@ def update_start_year(startYear: StartYear, uid: Annotated[str, Security(require
     """
     user = get_setup_user(uid)
     user['planner']['startYear'] = startYear.startYear
+    unplan_nonexistent_term_courses(
+        startYear.startYear, user['planner']['years'], user['planner']['unplanned']
+    )
     set_user(uid, user, True)
 
 @router.put("/updateDegreeLength")

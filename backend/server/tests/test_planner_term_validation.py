@@ -6,6 +6,7 @@ import pytest
 from fastapi import HTTPException
 
 from server.routers.utility.planner_terms import (
+    unplan_nonexistent_term_courses,
     validate_locked_term_string,
     validate_multiterm_terms,
     validate_planner_years_terms,
@@ -121,3 +122,44 @@ def test_planner_years_calendar_year_derived_from_row_index():
         validate_planner_years_terms(2026, years)
     assert exc.value.status_code == 400
     validate_planner_years_terms(2025, years)
+
+
+def test_unplan_trimester_years_untouched():
+    years = [_empty_year(T3=['COMP1511']), _empty_year(T3=['COMP1521'])]
+    unplanned = ['COMP2521']
+    unplan_nonexistent_term_courses(2025, years, unplanned)
+    assert years == [_empty_year(T3=['COMP1511']), _empty_year(T3=['COMP1521'])]
+    assert unplanned == ['COMP2521']
+
+
+def test_unplan_semester_year_t3_courses_moved():
+    years = [_empty_year(T3=['COMP1511', 'COMP1521'])]
+    unplanned: list[str] = []
+    unplan_nonexistent_term_courses(2028, years, unplanned)
+    assert years == [_empty_year()]
+    assert unplanned == ['COMP1511', 'COMP1521']
+
+
+def test_unplan_appends_to_existing_unplanned():
+    years = [_empty_year(T3=['COMP1511'])]
+    unplanned = ['COMP2521']
+    unplan_nonexistent_term_courses(2028, years, unplanned)
+    assert unplanned == ['COMP2521', 'COMP1511']
+
+
+def test_unplan_only_affects_rows_landing_on_semester_years():
+    # startYear 2027: row 0 is 2027 (T3 exists), row 1 is 2028 (T3 does not)
+    years = [_empty_year(T3=['COMP1511']), _empty_year(T3=['COMP1521'])]
+    unplanned: list[str] = []
+    unplan_nonexistent_term_courses(2027, years, unplanned)
+    assert years == [_empty_year(T3=['COMP1511']), _empty_year()]
+    assert unplanned == ['COMP1521']
+
+
+def test_unplan_leaves_existing_terms_and_summer_alone():
+    # T0 exists in every year, so summer courses on a 2028+ row stay planned
+    years = [_empty_year(T0=['COMP1511'], T1=['COMP1521'], T2=['COMP2521'])]
+    unplanned: list[str] = []
+    unplan_nonexistent_term_courses(2028, years, unplanned)
+    assert years == [_empty_year(T0=['COMP1511'], T1=['COMP1521'], T2=['COMP2521'])]
+    assert unplanned == []

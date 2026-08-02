@@ -66,6 +66,26 @@ def validate_planner_years_terms(start_year: int, years: List[Dict[str, List[str
                 )
 
 
+def unplan_nonexistent_term_courses(
+    start_year: int,
+    years: List[Dict[str, List[str]]],
+    unplanned: List[str],
+) -> None:
+    """
+    Move courses out of any term that does not exist for its row's calendar
+    year (row index resolved against start_year), appending them to unplanned.
+    Used when a plan is shifted onto new calendar years, e.g. a start year
+    change landing a row with T3 courses on a 2-term year. The summer term T0
+    exists in every year, so summer courses are never moved.
+    """
+    for row, year_terms in enumerate(years):
+        valid_terms = get_terms_list(start_year + row, include_summer=True)
+        for term, courses in year_terms.items():
+            if courses and term not in valid_terms:
+                unplanned.extend(courses)
+                year_terms[term] = []
+
+
 def build_autoplan_uoc_max(
     start_year: int,
     end_time: Tuple[int, int],
