@@ -3,7 +3,7 @@ route for planner algorithms
 """
 
 from operator import itemgetter
-from typing import Annotated, Dict, List
+from typing import Annotated
 
 from algorithms.transcript import parse_transcript
 from algorithms.validate_term_planner import validate_terms
@@ -13,7 +13,7 @@ from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user, user_storage_to_raw_plan
 from server.routers.model import AutoplanRequest, AutoplanResponse, CourseCode, CoursesState, PlannedToTerm, UnPlannedToTerm
 from server.routers.utility.common import get_course_details, get_multiterm_instance_count
-from server.routers.utility.planner_terms import validate_locked_term_string, validate_multiterm_terms, validate_term_exists
+from server.routers.utility.planner_terms import get_multiterm_placements, validate_locked_term_string, validate_multiterm_terms, validate_term_exists
 
 
 router = APIRouter(
@@ -115,7 +115,8 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, uid: Annotated[str, Secu
         planner['startYear'] + data.destRow, data.destTerm, planner['isSummerEnabled'])
     instance_num = 0
     terms_list = get_terms_list(
-        data.destTerm, uoc, terms, planner['isSummerEnabled'], instance_num)
+        planner['startYear'] + data.destRow, data.destTerm, uoc, terms,
+        planner['isSummerEnabled'], instance_num)
 
     # If moving a multiterm course out of bounds
     if course['is_multiterm'] and out_of_bounds(len(planner['years']), data.destRow, terms_list):
@@ -201,6 +202,7 @@ def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security
 
     instance_num = src_term_list.index(data.srcTerm)
     new_terms = get_terms_list(
+        user['planner']['startYear'] + data.destRow,
         data.destTerm,
         uoc,
         terms_offered,
@@ -398,7 +400,8 @@ def generate_empty_years(num_years: int):
     return [{'T0': [], 'T1': [], 'T2': [], 'T3': []} for _ in range(num_years)]
 
 
-def get_terms_list(
+def get_terms_list(  # pylint: disable=too-many-arguments,too-many-positional-arguments
+    dest_year: int,
     current_term: str,
     uoc: int,
     terms_offered: list[str],
@@ -411,6 +414,7 @@ def get_terms_list(
     done 3 times, so it can't be hard-coded
 
     Args:
+        dest_year (int): The calendar year of the term the course is being moved to
         current_term (str): The term the multi-term course is being moved to
         uoc (int): The UOC each instance of the course counts as
         terms_offered (list[str]): A list of terms the course is offered in
@@ -419,21 +423,9 @@ def get_terms_list(
 
     Returns:
         List[Dict[str, str | int]]: A list of terms and their offsets from the original
-            row that the multiterm course will be moved to
+            row that the multiterm course will be moved to, skipping terms that do
+            not exist in their calendar year (e.g. T3 from 2028 onwards)
     """
-    all_terms = ['T1', 'T2', 'T3']
-    terms_list: List[Dict[str, int | str]] = []
-    if is_summer_enabled:
-        all_terms.insert(0, 'T0')
-
-    # Remove any unavailable terms
-    terms = sorted(list(set(all_terms) & set(terms_offered)))
-    try:
-        index = terms.index(current_term) - 1
-    except ValueError:
-        return []
-    row_offset = 0
-
     num_terms = get_multiterm_instance_count(
         {
             'is_multiterm': True,
@@ -442,34 +434,8 @@ def get_terms_list(
         },
         is_summer_enabled,
     )
-
-    for _ in range(instance_num):
-        if index < 0:
-            index = len(terms) - 1
-            row_offset -= 1
-
-        terms_list.insert(0, {
-            'term': terms[(index + len(terms) % 3)],
-            'row_offset': row_offset
-        })
-
-        index -= 1
-
-    row_offset = 0
-    index = terms.index(current_term)
-
-    for _ in range(instance_num, num_terms):
-        if index == len(terms):
-            index = 0
-            row_offset += 1
-
-        terms_list.append({
-            'term': terms[index],
-            'row_offset': row_offset
-        })
-
-        index += 1
-    return terms_list
+    return get_multiterm_placements(
+        dest_year, current_term, num_terms, terms_offered, is_summer_enabled, instance_num)
 
 
 def out_of_bounds(num_years, dest_row, terms):

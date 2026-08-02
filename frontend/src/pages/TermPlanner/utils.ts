@@ -1,6 +1,7 @@
 import { Grade, Mark, PlannerCourse, Term } from 'types/planner';
 import { PlannerResponse } from 'types/userResponse';
 import getNumTerms from 'utils/getNumTerms';
+import { getTermsList as getYearTermsList } from 'utils/termsPerYear';
 
 const parseMarkToInt = (mark: Mark): number | null => {
   if (typeof mark === 'undefined') return null;
@@ -25,54 +26,59 @@ const isPlannerEmpty = (planner: PlannerResponse) => {
   );
 };
 
-// Returns a list of terms and rowOffsets that multiterm course will be added to
+// How many years a multiterm placement walk may cross before giving up.
+// Guards against endless walks when a course's offered terms never exist
+// again, e.g. a T3-only course spilling forward past 2028.
+const MAX_MULTITERM_YEAR_SPAN = 100;
+
+// Returns a list of terms and rowOffsets that a multiterm course will be added to,
+// walking through the terms that exist in each calendar year so that terms which
+// don't exist in a given year (e.g. T3 from 2028 onwards) are skipped.
+// Returns null if the remaining instances can never be placed.
 const getTermsList = (
+  destYear: number,
   currentTerm: Term,
   uoc: number,
   availableTerms: Term[],
   isSummerTerm: boolean,
   instanceNum: number
-) => {
-  const allTerms = ['T1', 'T2', 'T3'];
-  const termsList = [];
+): { term: Term; rowOffset: number }[] | null => {
+  const offeredTermsIn = (year: number): Term[] =>
+    getYearTermsList(year, isSummerTerm).filter((term) => availableTerms.includes(term));
 
-  if (isSummerTerm) allTerms.unshift('T0');
+  const destTerms = offeredTermsIn(destYear);
+  if (!destTerms.includes(currentTerm)) return [];
 
-  // Remove any unavailable terms
-  const terms = allTerms.filter((term) => availableTerms.includes(term as Term)) as Term[];
-
-  let index = terms.indexOf(currentTerm) - 1;
-  let rowOffset = 0;
+  const termsList: { term: Term; rowOffset: number }[] = [];
   const numTerms = getNumTerms(uoc, true);
 
+  // Walk backwards to place the instances before the dragged one
+  let rowOffset = 0;
+  let terms = destTerms;
+  let index = terms.indexOf(currentTerm) - 1;
   for (let i = 0; i < instanceNum; i++) {
-    if (index < 0) {
-      index = terms.length - 1;
+    while (index < 0) {
       rowOffset -= 1;
+      if (rowOffset < -MAX_MULTITERM_YEAR_SPAN) return null;
+      terms = offeredTermsIn(destYear + rowOffset);
+      index = terms.length - 1;
     }
-
-    termsList.unshift({
-      term: terms[(index + terms.length) % 3],
-      rowOffset
-    });
-
+    termsList.unshift({ term: terms[index], rowOffset });
     index -= 1;
   }
 
+  // Walk forwards from the dragged instance
   rowOffset = 0;
+  terms = destTerms;
   index = terms.indexOf(currentTerm);
-
   for (let i = instanceNum; i < numTerms; i++) {
-    if (index === terms.length) {
-      index = 0;
+    while (index >= terms.length) {
       rowOffset += 1;
+      if (rowOffset > MAX_MULTITERM_YEAR_SPAN) return null;
+      terms = offeredTermsIn(destYear + rowOffset);
+      index = 0;
     }
-
-    termsList.push({
-      term: terms[index],
-      rowOffset
-    });
-
+    termsList.push({ term: terms[index], rowOffset });
     index += 1;
   }
 
@@ -83,6 +89,7 @@ const getTermsList = (
 type MultitermInBoundsPayload = {
   srcTerm: Term | 'unplanned';
   destTerm: Term;
+  startYear: number;
   destRow: number;
   course: PlannerCourse;
   isSummerTerm: boolean;
@@ -90,17 +97,24 @@ type MultitermInBoundsPayload = {
 };
 
 const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
-  const { destTerm, course, isSummerTerm, destRow, numYears, srcTerm } = payload;
+  const { destTerm, course, isSummerTerm, startYear, destRow, numYears, srcTerm } = payload;
 
   const { UOC: uoc, termsOffered, plannedFor } = course;
 
-  if (!termsOffered.includes(destTerm)) {
-    return false;
-  }
-
   const instanceNum =
     srcTerm === 'unplanned' || !plannedFor ? 0 : plannedFor.split(' ').indexOf(srcTerm);
-  const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm, instanceNum);
+  const termsList = getTermsList(
+    startYear + destRow,
+    destTerm,
+    uoc,
+    termsOffered,
+    isSummerTerm,
+    instanceNum
+  );
+
+  if (!termsList || termsList.length === 0) {
+    return false;
+  }
 
   const { rowOffset: maxRowOffset } = termsList[termsList.length - 1];
   const { rowOffset: minRowOffset } = termsList[0];
