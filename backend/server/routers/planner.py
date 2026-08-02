@@ -13,6 +13,7 @@ from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user, user_storage_to_raw_plan
 from server.routers.model import AutoplanRequest, AutoplanResponse, CourseCode, CoursesState, PlannedToTerm, UnPlannedToTerm
 from server.routers.utility.common import get_course_details, get_multiterm_instance_count
+from server.routers.utility.planner_terms import validate_locked_term_string, validate_multiterm_terms, validate_term_exists
 
 
 router = APIRouter(
@@ -110,6 +111,8 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, uid: Annotated[str, Secu
     uoc, terms = itemgetter('UOC', 'terms')(course)
     user = get_setup_user(uid)
     planner = user['planner']
+    validate_term_exists(
+        planner['startYear'] + data.destRow, data.destTerm, planner['isSummerEnabled'])
     instance_num = 0
     terms_list = get_terms_list(
         data.destTerm, uoc, terms, planner['isSummerEnabled'], instance_num)
@@ -119,6 +122,9 @@ def set_unplanned_course_to_term(data: UnPlannedToTerm, uid: Annotated[str, Secu
         raise HTTPException(status_code=400,
                             detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
+    if course['is_multiterm']:
+        validate_multiterm_terms(
+            planner['startYear'], data.destRow, terms_list, planner['isSummerEnabled'])
     planner['unplanned'].remove(data.courseCode)
 
     # If multiterm add multiple instances of course
@@ -161,6 +167,8 @@ def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security
     # pylint: disable=too-many-locals
     course = get_course_details(data.courseCode)
     user = get_setup_user(uid)
+    validate_term_exists(
+        user['planner']['startYear'] + data.destRow, data.destTerm, user['planner']['isSummerEnabled'])
 
     uoc, terms_offered, is_multiterm = itemgetter(
         'UOC', 'terms', 'is_multiterm')(course)
@@ -206,6 +214,8 @@ def set_planned_course_to_term(data: PlannedToTerm, uid: Annotated[str, Security
                             detail=f'{data.courseCode} would extend outside of the term planner. \
                 Either drag it to a different term, or extend the planner first')
     if is_multiterm:
+        validate_multiterm_terms(
+            user['planner']['startYear'], data.destRow, new_terms, user['planner']['isSummerEnabled'])
         new_terms.pop(instance_num)
 
     first_term = user['planner']['years'][data.destRow][data.destTerm]
@@ -332,9 +342,7 @@ def unschedule_all(uid: Annotated[str, Security(require_uid)]):
 
 @router.post("/toggleTermLocked")
 def toggleLocked(termyear: str, uid: Annotated[str, Security(require_uid)]):
-    (year_str, term_str) = termyear.split('T')
-    if not (term_str.isnumeric() and year_str.isnumeric() and 0 <= int(term_str) <= 3):
-        raise HTTPException(status_code=400, detail="Invalid term/year")
+    validate_locked_term_string(termyear)
 
     user = get_setup_user(uid)
     locked_map = user['planner']['lockedTerms']
