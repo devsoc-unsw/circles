@@ -3,6 +3,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import type { Course } from 'types/api';
 import type { Term } from 'types/planner';
 import type { PlannerResponse, ValidatesResponse } from 'types/userResponse';
+import { getTermsList } from 'utils/termsPerYear';
 import { LIVE_YEAR } from 'config/constants';
 import TermBox from '../TermBox';
 import UnplannedColumn from '../UnplannedColumn';
@@ -28,14 +29,15 @@ const TermBoxMobile: React.FC<MobilePlannerViewProps> = ({
   const [yearIndex, setYearIndex] = useState(0);
   const [termIndex, setTermIndex] = useState(0);
 
-  const terms = planner.isSummerEnabled ? ['T0', 'T1', 'T2', 'T3'] : ['T1', 'T2', 'T3'];
-  const termLabels = planner.isSummerEnabled
-    ? ['Summer', 'Term 1', 'Term 2', 'Term 3']
-    : ['Term 1', 'Term 2', 'Term 3'];
+  const termsForYearIndex = (yIdx: number): Term[] =>
+    getTermsList(planner.startYear + yIdx, planner.isSummerEnabled);
+
+  const terms = termsForYearIndex(yearIndex);
+  const clampedTermIndex = Math.min(termIndex, terms.length - 1);
 
   const currentYear = planner.startYear + yearIndex;
-  const currentTerm = terms[termIndex] as Term;
-  const currentTermLabel = termLabels[termIndex];
+  const currentTerm = terms[clampedTermIndex];
+  const currentTermLabel = currentTerm === 'T0' ? 'Summer' : `Term ${currentTerm[1]}`;
   const termKey = `${currentYear}${currentTerm}`;
 
   const handleNext = () => {
@@ -52,7 +54,7 @@ const TermBoxMobile: React.FC<MobilePlannerViewProps> = ({
       setTermIndex(termIndex - 1);
     } else if (yearIndex > 0) {
       setYearIndex(yearIndex - 1);
-      setTermIndex(terms.length - 1);
+      setTermIndex(termsForYearIndex(yearIndex - 1).length - 1);
     }
   };
 
@@ -61,8 +63,9 @@ const TermBoxMobile: React.FC<MobilePlannerViewProps> = ({
     termCourses.map((code) => [code, courseInfos[currentYear]?.[code]])
   );
 
-  const isFirstTerm = yearIndex === 0 && termIndex === 0;
-  const isLastTerm = yearIndex === planner.years.length - 1 && termIndex === terms.length - 1;
+  const isFirstTerm = yearIndex === 0 && clampedTermIndex === 0;
+  const isLastTerm =
+    yearIndex === planner.years.length - 1 && clampedTermIndex === terms.length - 1;
 
   const termUOC = termCourses.reduce((acc, code) => {
     const course = termCourseInfos[code];
@@ -114,7 +117,12 @@ const TermBoxMobile: React.FC<MobilePlannerViewProps> = ({
       </S.QuickJumpWrapper>
 
       <S.ProgressIndicator>
-        Term {yearIndex * terms.length + termIndex + 1} of {planner.years.length * terms.length}
+        Term{' '}
+        {planner.years.reduce(
+          (acc, _, yIdx) => (yIdx < yearIndex ? acc + termsForYearIndex(yIdx).length : acc),
+          clampedTermIndex + 1
+        )}{' '}
+        of {planner.years.reduce((acc, _, yIdx) => acc + termsForYearIndex(yIdx).length, 0)}
       </S.ProgressIndicator>
 
       <S.TermUnplannedWrapper>

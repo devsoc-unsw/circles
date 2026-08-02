@@ -14,7 +14,7 @@ const LoadingTermPlanner = () => {
 
   return (
     <CS.PlannerContainer>
-      <CS.PlannerGridWrapper>
+      <CS.PlannerGridWrapper $numColumns={4}>
         <GridItem />
         <GridItem>Term 1</GridItem>
         <GridItem>Term 2</GridItem>

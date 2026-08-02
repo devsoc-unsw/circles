@@ -23,10 +23,9 @@ const PlannerContainer = styled.div`
   }
 `;
 
-const PlannerGridWrapper = styled.div<{ $summerEnabled?: boolean }>`
+const PlannerGridWrapper = styled.div<{ $numColumns: number }>`
   display: grid;
-  grid-template-columns: ${({ $summerEnabled }) =>
-    $summerEnabled ? '7em 1fr 1fr 1fr 1fr 1fr' : '7em 1fr 1fr 1fr 1fr'};
+  grid-template-columns: ${({ $numColumns }) => `7em repeat(${$numColumns}, 1fr)`};
   align-items: center;
 
   @media (max-width: 800px) {

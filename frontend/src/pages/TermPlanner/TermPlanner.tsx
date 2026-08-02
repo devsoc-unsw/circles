@@ -25,6 +25,7 @@ import {
   useUserTermValidations
 } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
+import { getTermsList, getTermsPerYear } from 'utils/termsPerYear';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import { LIVE_YEAR } from 'config/constants';
@@ -94,6 +95,14 @@ const TermPlanner = () => {
   const validations: ValidatesResponse = validateQuery.data ?? badValidations;
 
   const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);
+
+  // The grid needs a column for every term that appears in at least one year,
+  // e.g. a Term 3 column is kept while any pre-2028 year is shown
+  const maxTermsPerYear = validYears.length ? Math.max(...validYears.map(getTermsPerYear)) : 0;
+  const columnTerms: Term[] = [
+    ...(planner.isSummerEnabled ? (['T0'] as Term[]) : []),
+    ...Array.from({ length: maxTermsPerYear }, (_, i) => `T${i + 1}` as Term)
+  ];
 
   // comes in as an { [year]: course }[], which gets auto extrapolated, also preseeded with bad data
   const courseQueries = useQueries({
@@ -303,12 +312,15 @@ const TermPlanner = () => {
                   validYears={validYears}
                 />
               ) : (
-                <S.PlannerGridWrapper $summerEnabled={planner.isSummerEnabled} ref={plannerPicRef}>
+                <S.PlannerGridWrapper $numColumns={columnTerms.length + 1} ref={plannerPicRef}>
                   <GridItem /> {/* Empty grid item for the year */}
-                  {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
-                  <GridItem>Term 1</GridItem>
-                  <GridItem>Term 2</GridItem>
-                  <GridItem>Term 3</GridItem>
+                  {columnTerms.map((term) =>
+                    term === 'T0' ? (
+                      <GridItem key={term}>Summer</GridItem>
+                    ) : (
+                      <GridItem key={term}>Term {term[1]}</GridItem>
+                    )
+                  )}
                   {planner.years.map((year, index) => {
                     // TODO: move this out
                     const iYear = planner.startYear + index;
@@ -338,9 +350,12 @@ const TermPlanner = () => {
                             count={`${yearUOC} UOC`}
                           />
                         </S.YearGridBox>
-                        {Object.keys(year).map((term) => {
+                        {columnTerms.map((term) => {
                           const key = `${iYear}${term}`;
-                          if (!planner.isSummerEnabled && term === 'T0') return null;
+                          // years with fewer terms leave the trailing columns empty
+                          if (!getTermsList(iYear, planner.isSummerEnabled).includes(term)) {
+                            return <GridItem key={key} />;
+                          }
                           const codesForThisTerm = year[term];
                           // TODO: probs map this at TOP-LEVEL
                           const courseInfoForThisTerm = Object.fromEntries(

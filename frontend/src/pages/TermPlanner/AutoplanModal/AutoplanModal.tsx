@@ -3,6 +3,7 @@ import { message, Modal, Select, Typography } from 'antd';
 import { isAxiosError } from 'axios';
 import { useAutoplanCoursesMutation, useUserPlanner } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
+import { getTermsPerYear } from 'utils/termsPerYear';
 import S from './styles';
 
 const { Text } = Typography;
@@ -11,8 +12,6 @@ type Props = {
   open: boolean;
   onCancel: () => void;
 };
-
-const TERM_LABELS = ['T0', 'T1', 'T2', 'T3'];
 
 type APIErrorPayload = {
   detail?: string;
@@ -34,9 +33,10 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
 
     return planner.years.flatMap((_, rowIndex) => {
       const year = planner.startYear + rowIndex;
-      return [0, 1, 2, 3].map((termIndex) => ({
+      // T0 (summer) up to the last standard term of that year
+      return Array.from({ length: getTermsPerYear(year) + 1 }, (__, termIndex) => ({
         value: `${year}-${termIndex}`,
-        label: `${year} ${TERM_LABELS[termIndex]}`
+        label: `${year} T${termIndex}`
       }));
     });
   }, [planner]);
@@ -47,7 +47,7 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
     }
 
     const lastYear = planner.startYear + planner.years.length - 1;
-    setSelectedEndTerm(`${lastYear}-3`);
+    setSelectedEndTerm(`${lastYear}-${getTermsPerYear(lastYear)}`);
   }, [open, planner]);
 
   const handleSubmit = () => {
