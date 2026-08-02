@@ -4,6 +4,10 @@ from fastapi import APIRouter, HTTPException, Security
 from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
 from server.routers.utility.common import get_core_courses, get_course_details, sort_courses_by_code
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
+from server.routers.utility.planner_terms import (
+    validate_locked_term_string,
+    validate_planner_years_terms,
+)
 from server.routers.utility.user import get_setup_user, set_user, user_storage_to_planned_for_map
 from server.routers.utility.wizard import validate_degree
 from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
@@ -63,16 +67,14 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     validate_degree(data.degree.programCode, data.degree.specs)
 
     for term in data.planner.lockedTerms.keys():
-        try:
-            year, termIndex = term.split("T")
-            int(year)
-            int(termIndex)
-        except ValueError as e:
-            raise HTTPException(status_code=400, detail="Invalid locked term") from e
+        validate_locked_term_string(term)
+        year = term.partition("T")[0]
         if int(year) < data.planner.startYear or int(year) >= data.planner.startYear + len(data.planner.years):
             raise HTTPException(status_code=400, detail="Invalid locked term")
-        if termIndex not in ["0", "1", "2", "3"]:
-            raise HTTPException(status_code=400, detail="Invalid locked term")
+    validate_planner_years_terms(
+        data.planner.startYear,
+        [plannerYear.model_dump() for plannerYear in data.planner.years],
+    )
     for hiddenYear in data.settings.hiddenYears:
         if hiddenYear < 0 or hiddenYear >= len(data.planner.years):
             raise HTTPException(status_code=400, detail="Invalid hidden year")

@@ -8,6 +8,7 @@ from fastapi import HTTPException
 from server.routers.utility.planner_terms import (
     validate_locked_term_string,
     validate_multiterm_terms,
+    validate_planner_years_terms,
     validate_term_exists,
 )
 
@@ -87,3 +88,36 @@ def test_multiterm_terms_row_offset_uses_dest_row():
     terms_list = [{'term': 'T3', 'row_offset': 0}]
     with pytest.raises(HTTPException):
         validate_multiterm_terms(2026, 2, terms_list, is_summer_enabled=False)
+
+
+def _empty_year(**terms: list[str]) -> dict[str, list[str]]:
+    return {'T0': [], 'T1': [], 'T2': [], 'T3': [], **terms}
+
+
+def test_planner_years_trimester_t3_courses_allowed():
+    years = [_empty_year(T3=['COMP1511']), _empty_year(T3=['COMP1521'])]
+    validate_planner_years_terms(2026, years)
+
+
+def test_planner_years_semester_year_t3_courses_rejected():
+    with pytest.raises(HTTPException) as exc:
+        validate_planner_years_terms(2028, [_empty_year(T3=['COMP1511'])])
+    assert exc.value.status_code == 400
+
+
+def test_planner_years_semester_year_empty_t3_allowed():
+    validate_planner_years_terms(2028, [_empty_year(T1=['COMP1511'])])
+
+
+def test_planner_years_semester_year_summer_courses_allowed():
+    # T0 exists in every year; whether summer is enabled is a separate toggle
+    validate_planner_years_terms(2028, [_empty_year(T0=['COMP1511'])])
+
+
+def test_planner_years_calendar_year_derived_from_row_index():
+    # startYear 2026: rows are 2026, 2027, 2028 - only the 2028 row's T3 is invalid
+    years = [_empty_year(T3=['COMP1511']), _empty_year(T3=['COMP1521']), _empty_year(T3=['COMP2521'])]
+    with pytest.raises(HTTPException) as exc:
+        validate_planner_years_terms(2026, years)
+    assert exc.value.status_code == 400
+    validate_planner_years_terms(2025, years)

@@ -47,6 +47,25 @@ def validate_locked_term_string(termyear: str) -> None:
         raise HTTPException(status_code=400, detail="Invalid term/year")
 
 
+def validate_planner_years_terms(start_year: int, years: List[Dict[str, List[str]]]) -> None:
+    """
+    Raise a 400 if any year row of a planner (row index resolved against
+    start_year) holds courses in a term that does not exist in its calendar
+    year, e.g. T3 of a 2-term year. The summer term T0 exists in every year;
+    the summer toggle only affects placement, not stored data.
+    """
+    for row, year_terms in enumerate(years):
+        calendar_year = start_year + row
+        valid_terms = get_terms_list(calendar_year, include_summer=True)
+        for term, courses in year_terms.items():
+            if courses and term not in valid_terms:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f'{term} is not a valid term in {calendar_year}, '
+                           f'so courses cannot be planned there: {", ".join(courses)}'
+                )
+
+
 def build_autoplan_uoc_max(
     start_year: int,
     end_time: Tuple[int, int],
