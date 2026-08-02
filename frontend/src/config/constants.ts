@@ -6,6 +6,16 @@ export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
 export const LIVE_YEAR = 2026;
 export const CURR_YEAR = new Date().getFullYear();
 
+// Number of standard academic terms (T1, T2, ...) per year, excluding the
+// optional summer term (T0). Each key is the first year its value applies
+// from; a year uses the value of the latest key at or before it.
+// UNSW moves from 3 terms to 2 terms per year from 2028 onwards.
+// Don't forget to keep this in sync with TERMS_PER_YEAR in the backend too
+export const TERMS_PER_YEAR: Record<number, number> = {
+  2019: 3,
+  2028: 2
+};
+
 // Global colors - currently only being used in LiquidProgressChart
 export const lightYellow = '#f9b01e';
 export const lightGrey = '#565652';
