@@ -6,7 +6,7 @@ The number of standard terms per year is configured in data.config
 only exists in some calendar years.
 """
 
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from fastapi import HTTPException
 
@@ -45,6 +45,28 @@ def validate_locked_term_string(termyear: str) -> None:
     year, term_num = int(year_str), int(term_str)
     if not 0 <= term_num <= get_terms_per_year(year):
         raise HTTPException(status_code=400, detail="Invalid term/year")
+
+
+def build_autoplan_uoc_max(
+    start_year: int,
+    end_time: Tuple[int, int],
+    is_summer_enabled: bool,
+) -> List[int]:
+    """
+    Default per-slot UOC caps for autoplan over its 4-slot-per-year grid
+    (T0-T3), from (start_year, T0) up to and including end_time. Slots for
+    terms that do not exist in their calendar year (e.g. T3 from 2028
+    onwards) are capped at 0 so nothing can be planned into them.
+    """
+    end_year, end_term = end_time
+    caps: List[int] = []
+    for slot in range((end_year - start_year) * 4 + end_term + 1):
+        year, term = start_year + slot // 4, slot % 4
+        if term == 0:
+            caps.append(12 if is_summer_enabled else 0)
+        else:
+            caps.append(20 if term <= get_terms_per_year(year) else 0)
+    return caps
 
 
 def get_multiterm_placements(  # pylint: disable=too-many-arguments,too-many-positional-arguments

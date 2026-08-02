@@ -4,14 +4,31 @@ from typing import Tuple
 
 from algorithms.objects.course import Course
 from algorithms.objects.user import User
+from data.config import get_terms_per_year
 from ortools.sat.python import cp_model  # type: ignore
 
 # Inspired by AbdallahS's code here: https://github.com/AbdallahS/planner
 # with help from Martin and MJ :)
 
-# TODO (semester): remove hard coded 4 terms
+# The planner grid always reserves 4 slots per year (T0-T3); terms that do
+# not exist in a given calendar year (e.g. T3 from 2028 onwards) keep their
+# slot but are excluded from course domains and consecutive placements.
 def terms_between(start: Tuple[int, int], end: Tuple[int, int]):
     return (end[0] - start[0]) * 4 + end[1] - start[1]
+
+def slot_exists(slot: int, start: Tuple[int, int]) -> bool:
+    """Whether the grid slot maps to a term that exists in its calendar year."""
+    absolute = start[1] + slot
+    year, term = start[0] + absolute // 4, absolute % 4
+    return term == 0 or term <= get_terms_per_year(year)
+
+def consecutive_existing_slot_pairs(start: Tuple[int, int], end: Tuple[int, int]) -> list[Tuple[int, int]]:
+    """
+    Allowed (slot, next_slot) assignments for consecutive multiterm instances,
+    skipping over slots whose term does not exist in its calendar year.
+    """
+    existing = [slot for slot in range(terms_between(start, end) + 1) if slot_exists(slot, start)]
+    return list(zip(existing, existing[1:]))
 
 def map_var_to_course(courses: list[Course], var: cp_model.IntVar):
     return [course for course in courses if course.name == var.name][0]
@@ -36,13 +53,15 @@ def autoplan(courses: list[Course], user: User, start: Tuple[int, int], end: Tup
     model = cp_model.CpModel()
     # 1. enforces terms
     variables = [model.new_int_var_from_domain(cp_model.Domain.from_intervals(course.term_domain(start, end)), course.name) for course in courses]
-    # 2. if any courses are named the same, then they must be taken consecutively
+    # 2. if any courses are named the same, then they must be taken in
+    # consecutive existing terms (skipping terms that don't exist in a year)
     possible_course_dupes = [course.name for course in courses if course.locked is None]
     duplicate_courses = set(c for c in possible_course_dupes if possible_course_dupes.count(c) > 1)
+    allowed_slot_pairs = consecutive_existing_slot_pairs(start, end) if duplicate_courses else []
     for dupe in duplicate_courses:
         matched_courses = [variable for variable in variables if variable.name == dupe]
         for match, next_match in zip(matched_courses, matched_courses[1:]):
-            model.add(match + 1 == next_match)
+            model.add_allowed_assignments([match, next_match], allowed_slot_pairs)
 
     # 3. set max UOC for a term
     for index, m in enumerate(uoc_max):

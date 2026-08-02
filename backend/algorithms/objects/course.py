@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Optional, Tuple
 
+from data.config import get_terms_per_year
+
 if TYPE_CHECKING:
     from algorithms.objects.conditions import Condition
 
@@ -20,6 +22,10 @@ class Course:
         numbers = []
         for key, value in self.terms.items():
             for term in value:
+                # skip terms that do not exist in that calendar year,
+                # e.g. T3 from 2028 onwards (the summer term T0 always exists)
+                if term != 0 and term > get_terms_per_year(key):
+                    continue
                 new_number = (key - start[0]) * 4 + term - start[1]
                 if new_number <= (end[0] - start[0]) * 4 + end[1] - start[1]:
                     numbers.append(new_number)

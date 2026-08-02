@@ -5,10 +5,11 @@ from typing import Optional
 
 from fastapi import HTTPException
 
-from algorithms.autoplanning import autoplan, terms_between
+from algorithms.autoplanning import autoplan
 from algorithms.objects.user import User
 from server.routers.model import ProgramTime, Storage
 from server.routers.utility.common import get_course_details, get_course_object, get_multiterm_instance_count
+from server.routers.utility.planner_terms import build_autoplan_uoc_max, validate_term_exists
 from server.routers.utility.user import iter_storage_planned_course_placements, user_storage_to_algo_user
 
 
@@ -26,20 +27,15 @@ def build_program_time(
 ) -> ProgramTime:
     start_year = user['planner']['startYear']
     start_time = (start_year, 0)
-    default_term_uoc_limits = {
-        0: 0 if not user['planner']['isSummerEnabled'] else 12,
-        1: 20,
-        2: 20,
-        3: 20,
-    }
 
-    # Validate end_time
-    term_count = terms_between(start_time, end_time) + 1
+    # Reject end terms that don't exist in the end year, e.g. T3 from 2028
+    validate_term_exists(end_time[0], f'T{end_time[1]}', is_summer_enabled=True)
 
-    uoc_max = uoc_max_override if uoc_max_override is not None else [
-        default_term_uoc_limits[(start_time[1] + index) % 4]
-        for index in range(term_count)
-    ]
+    uoc_max = uoc_max_override if uoc_max_override is not None else build_autoplan_uoc_max(
+        start_year,
+        end_time,
+        user['planner']['isSummerEnabled'],
+    )
 
     return ProgramTime(startTime=start_time, endTime=end_time, uocMax=uoc_max)
 
