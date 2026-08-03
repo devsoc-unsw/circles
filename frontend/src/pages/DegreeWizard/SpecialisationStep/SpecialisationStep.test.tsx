@@ -68,7 +68,7 @@ describe('SpecialisationStep', () => {
       />
     );
     await userEvent.click(await screen.findByText('COMPA1 Computer Science'));
-    expect(setDegreeInfoMock).toHaveBeenCalled();
+    expect(setDegreeInfoMock).toBeCalled();
   });
 
   it('should display "Next" button when on current step and call incrementStep', async () => {
@@ -96,7 +96,7 @@ describe('SpecialisationStep', () => {
       />
     );
     await userEvent.click(await screen.findByText('Next'));
-    expect(openNotification).toHaveBeenCalledWith({
+    expect(openNotification).toBeCalledWith({
       message: 'Select a major for Computer Science',
       type: 'error'
     });

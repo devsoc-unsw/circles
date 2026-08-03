@@ -70,6 +70,6 @@ describe('DegreeWizard', () => {
       programName: 'Computer Science',
       specs: ['COMPA1']
     });
-    expect(dummyNavigate).toHaveBeenCalledWith('/course-selector');
+    expect(dummyNavigate).toBeCalledWith('/course-selector');
   });
 });
