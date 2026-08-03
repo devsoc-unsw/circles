@@ -23,7 +23,7 @@ mypy-extensions==1.0.0
 ortools==9.15.6755
 packaging==26.0
 pandas==3.0.1
-paramiko==5.0.0
+paramiko==4.0.0
 pluggy==1.5.0
 pycparser==3.0
 pydantic==2.12.5
