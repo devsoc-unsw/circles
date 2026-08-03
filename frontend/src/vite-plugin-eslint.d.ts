@@ -2,6 +2,8 @@
 // "exports" map has no "types" condition, so they are unreachable under
 // moduleResolution: "bundler". Re-export the bundled types via a direct path.
 declare module 'vite-plugin-eslint' {
+  import eslintPlugin from 'vite-plugin-eslint/dist/index';
+
   export * from 'vite-plugin-eslint/dist/index';
-  export { default } from 'vite-plugin-eslint/dist/index';
+  export default eslintPlugin;
 }
