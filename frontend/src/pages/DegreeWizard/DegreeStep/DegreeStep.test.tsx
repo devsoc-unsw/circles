@@ -45,7 +45,7 @@ describe('DegreeStep', () => {
     expect(screen.getByPlaceholderText('Search Degree')).toBeInTheDocument();
     userEvent.type(screen.getByPlaceholderText('Search Degree'), 'comp');
     await userEvent.click(await screen.findByText('3778 Computer Science'));
-    expect(dummyDispatch).toHaveBeenCalledWith({
+    expect(dummyDispatch).toBeCalledWith({
       payload: {
         programCode: '3778',
         programName: 'Computer Science'

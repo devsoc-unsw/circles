@@ -34,7 +34,7 @@ describe('CourseBanner', () => {
     await renderWithProviders(<CourseBanner />);
     userEvent.type(screen.getByText('Search for a course...'), 'COMP1511');
     await userEvent.click(await screen.findByText('COMP1511: Programming Fundamentals'));
-    expect(dummyDispatch).toHaveBeenCalledWith({
+    expect(dummyDispatch).toBeCalledWith({
       payload: 'COMP1511',
       type: 'courseTabs/addTab'
     });
