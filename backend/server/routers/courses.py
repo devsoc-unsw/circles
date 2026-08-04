@@ -501,9 +501,9 @@ def terms_offered(course: str, years:str) -> TermsOffered:
 
 # Below this many program students with saved plans, the counts are too noisy
 # to be meaningful, so we report no popular electives at all.
-MIN_POPULAR_SAMPLE = 5
+MIN_POPULAR_SAMPLE = 20
 # How many electives to surface as "popular".
-POPULAR_LIMIT = 10
+POPULAR_LIMIT = 5
 
 
 def count_program_course_frequencies(program_code: str, specialisations: Optional[List[str]] = None) -> Tuple[Dict[str, int], int]:
