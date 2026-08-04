@@ -499,20 +499,26 @@ def terms_offered(course: str, years:str) -> TermsOffered:
     }
 
 
-# Below this many program students with saved plans, percentages are too noisy
+# Below this many program students with saved plans, the counts are too noisy
 # to be meaningful, so we report no popular electives at all.
 MIN_POPULAR_SAMPLE = 5
 # How many electives to surface as "popular".
 POPULAR_LIMIT = 10
 
 
-def count_program_course_frequencies(program_code: str) -> Tuple[Dict[str, int], int]:
+def count_program_course_frequencies(program_code: str, specialisations: Optional[List[str]] = None) -> Tuple[Dict[str, int], int]:
     """
     Count, among setup users enrolled in the given program, how many have each
     course in their plan (i.e. in their `courses` map). Returns the per-course
     counts and the sample size (number of such users).
+
+    When `specialisations` is given, only users enrolled in all of those
+    specialisations are counted, so a student sees the choices of peers on the
+    same major rather than the whole program.
     """
     query: Dict[str, Any] = {"setup": True, "degree.programCode": program_code}
+    if specialisations:
+        query["degree.specs"] = {"$all": specialisations}
     sample_size = usersCOL.count_documents(query)
     pipeline: List[Dict[str, Any]] = [
         {"$match": query},
@@ -535,12 +541,13 @@ def popular_electives(programCode: str, spec: Optional[str] = None) -> PopularEl
     """
     Returns the most commonly chosen elective courses for a program: the top
     electives ranked by how many of the program's students have placed them in
-    their plan. Core and general-education courses are excluded.
+    their plan. Core and general-education courses are excluded. When a spec is
+    given, only students on that spec are counted.
     """
     specs = spec.split("+") if spec else []
     electives = get_elective_courses(programCode, specs)  # raises 400 for an invalid program
 
-    counts, sample_size = count_program_course_frequencies(programCode)
+    counts, sample_size = count_program_course_frequencies(programCode, specs)
     if sample_size < MIN_POPULAR_SAMPLE:
         return PopularElectives(programCode=programCode, sampleSize=sample_size, popular=[])
 
