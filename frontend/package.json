@@ -15,7 +15,7 @@
     "@tanstack/react-query": "5.81.5",
     "@tippyjs/react": "4.2.6",
     "antd": "5.26.2",
-    "axios": "1.10.0",
+    "axios": "1.16.0",
     "dayjs": "1.11.13",
     "fast-fuzzy": "1.12.0",
     "framer-motion": "11.0.20",
@@ -71,7 +71,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "7.27.7",
+    "@babel/core": "7.29.6",
     "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "14.2.2",
@@ -108,6 +108,6 @@
     "vite-plugin-checker": "0.9.3",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-svgr": "4.3.0",
-    "vitest": "3.2.4"
+    "vitest": "3.2.6"
   }
 }

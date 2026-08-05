@@ -22,7 +22,11 @@ export const initiateCSEAuth = async (): Promise<void> => {
 };
 
 export const guestLogin = async (): Promise<IdentityResponse> => {
-  const res = await axios.post<IdentityResponse>('/dev/guest_login', {}, { withCredentials: true });
+  const res = await axios.post<IdentityResponse>(
+    '/auth/guest_login',
+    {},
+    { withCredentials: true }
+  );
 
   return res.data;
 };
