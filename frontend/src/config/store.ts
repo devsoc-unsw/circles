@@ -1,6 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import storage from 'redux-persist/lib/storage';
+// Must be the `es/` build, not `lib/`: Vite 8's rolldown-based dep optimizer bundles the CJS
+// `lib/storage` as `export default require_storage()`, so the default import lands on the raw
+// `exports` object (`{ __esModule, default }`) and `storage.getItem` is undefined at runtime.
+import storage from 'redux-persist/es/storage';
 import courseTabsReducer from 'reducers/courseTabsSlice';
 import identityReducer from 'reducers/identitySlice';
 import settingsReducer from 'reducers/settingsSlice';
