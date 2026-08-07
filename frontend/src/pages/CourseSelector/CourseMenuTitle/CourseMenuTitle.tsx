@@ -2,6 +2,7 @@ import React from 'react';
 import { LockOutlined, WarningOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useTheme } from 'styled-components';
+import PopularityTag from 'components/PopularityTag';
 import QuickAddCartButton from 'components/QuickAddCartButton';
 import useMediaQuery from 'hooks/useMediaQuery';
 import S from './styles';
@@ -13,9 +14,18 @@ type Props = {
   accurate?: boolean;
   unlocked?: boolean;
   title: string;
+  popularityCount?: number;
 };
 
-const CourseMenuTitle = ({ courseCode, runMutate, selected, accurate, unlocked, title }: Props) => {
+const CourseMenuTitle = ({
+  courseCode,
+  runMutate,
+  selected,
+  accurate,
+  unlocked,
+  title,
+  popularityCount
+}: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
   const theme = useTheme();
   const locked = !unlocked;
@@ -34,6 +44,7 @@ const CourseMenuTitle = ({ courseCode, runMutate, selected, accurate, unlocked, 
         </S.CourseTitleWrapper>
       )}
       <S.IconsWrapper>
+        {popularityCount !== undefined && <PopularityTag count={popularityCount} />}
         {!accurate && (
           <Tooltip
             placement="top"

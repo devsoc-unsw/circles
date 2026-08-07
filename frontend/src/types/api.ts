@@ -60,6 +60,18 @@ export type CoursesUnlockedWhenTaken = {
   indirect_unlock: CourseList;
 };
 
+export type PopularElective = {
+  courseCode: string;
+  count: number; // number of students on this program/spec with the course in their plan
+  percent: number;
+};
+
+export type PopularElectives = {
+  programCode: string;
+  sampleSize: number;
+  popular: PopularElective[]; // electives only, top 10, sorted by count desc
+};
+
 /* Programs api */
 export type Programs = {
   programs: Record<string, string>; // of shape {code: name}
