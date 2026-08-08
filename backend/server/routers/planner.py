@@ -433,6 +433,9 @@ def get_terms_list(  # pylint: disable=too-many-arguments,too-many-positional-ar
             'UOC': uoc,
         },
         is_summer_enabled,
+        # The walk starts in the destination year, so that year decides whether
+        # the course has a real term to occupy at all
+        [dest_year],
     )
     return get_multiterm_placements(
         dest_year, current_term, num_terms, terms_offered, is_summer_enabled, instance_num)

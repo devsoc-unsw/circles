@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 import { Droppable, GridItem } from '../common/styles';
 
-const UnplannedContainer = styled.div<{ $summerEnabled: boolean }>`
+const UnplannedContainer = styled.div<{ $colStart?: number; $colSpan?: number }>`
   grid-row-start: 1;
   grid-row-end: span 10;
-  grid-column-start: ${({ $summerEnabled }) => ($summerEnabled ? 6 : 5)};
+  // Sits after the term columns, whose count varies with how many terms a year has
+  grid-column: ${({ $colStart, $colSpan }) =>
+    $colStart ? `${$colStart} / span ${$colSpan ?? 1}` : 'auto'};
   display: flex;
   flex-direction: column;
   place-self: stretch;

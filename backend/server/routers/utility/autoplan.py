@@ -48,6 +48,10 @@ def _build_solver_courses(
 ):
     """Build solver courses from unplanned targets plus locked planned placements."""
 
+    # Years the solver may place into, so a course offered only in terms that
+    # don't exist in any of them isn't expanded into unplaceable instances
+    plan_years = range(program_time.startTime[0], program_time.endTime[0] + 1)
+
     def expanded_target_codes() -> list[str]:
         # Unplanned codes are unique. Expand multiterm courses into required instances.
         expanded: list[str] = []
@@ -55,6 +59,7 @@ def _build_solver_courses(
             expanded.extend([code] * get_multiterm_instance_count(
                 get_course_details(code),
                 user['planner']['isSummerEnabled'],
+                plan_years,
             ))
 
         return expanded

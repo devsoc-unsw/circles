@@ -24,6 +24,7 @@ type Props = {
   termCourseInfos: Record<string, Course>; // All courses in term
   termCourseCodes: string[]; // Course codes in the current term
   draggingCourseCode?: string;
+  colSpan?: number; // Grid columns to span, so shorter years still fill the row
 };
 
 const TermBox = ({
@@ -32,7 +33,8 @@ const TermBox = ({
   validateInfos,
   termCourseInfos,
   termCourseCodes,
-  draggingCourseCode
+  draggingCourseCode,
+  colSpan = 1 // the mobile view lays these out with flex, where the span is ignored
 }: Props) => {
   const year = name.slice(0, 4);
   const term = name.match(/T[0-3]/)?.[0] as Term;
@@ -90,7 +92,8 @@ const TermBox = ({
               </S.TermCheckboxWrapper>
             }
             offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
-            styles={{ root: { width: 'unset' } }}
+            // Badge's root is the grid item, so the column span has to be set here
+            styles={{ root: { width: 'unset', gridColumn: `span ${colSpan}` } }}
           >
             <S.TermBoxWrapper
               $droppable={isOffered && !!draggingCourseCode}

@@ -17,13 +17,16 @@ type Props = {
   dragging: boolean;
   courseInfos: Record<string, Course>;
   validateInfos: Record<string, ValidateResponse>;
+  // Omitted by the mobile view, which lays this out with flex instead of the grid
+  colStart?: number; // First grid column after the term columns
+  colSpan?: number; // Matches the width of one term of the longest year
 };
 
 const Droppable = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable }))
 );
 
-const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
+const UnplannedColumn = ({ dragging, courseInfos, validateInfos, colStart, colSpan }: Props) => {
   const plannerQuery = useUserPlanner();
   const planner: PlannerResponse = plannerQuery.data ?? badPlanner;
   const { unplanned, isSummerEnabled } = planner;
@@ -34,7 +37,7 @@ const UnplannedColumn = ({ dragging, courseInfos, validateInfos }: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
-    <S.UnplannedContainer $summerEnabled={isSummerEnabled}>
+    <S.UnplannedContainer $colStart={colStart} $colSpan={colSpan}>
       <S.UnplannedTitle>Unplanned</S.UnplannedTitle>
       <Suspense fallback={<Spinner text="Loading unplanned column..." />}>
         <Droppable droppableId="unplanned">

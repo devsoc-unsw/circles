@@ -35,6 +35,12 @@ const PlannerGridWrapper = styled.div<{ $numColumns: number }>`
   }
 `;
 
+// Term column headers span the width of one term of the longest year, so they stay
+// aligned with those rows while shorter years tile the same width with wider boxes
+const TermHeaderItem = styled(GridItem)<{ $colSpan: number }>`
+  grid-column: ${({ $colSpan }) => `span ${$colSpan}`};
+`;
+
 const YearGridBox = styled(GridItem)`
   display: flex;
   flex-direction: column;
@@ -80,6 +86,7 @@ export default {
   ContainerWrapper,
   PlannerContainer,
   PlannerGridWrapper,
+  TermHeaderItem,
   YearGridBox,
   YearText,
   YearWrapper

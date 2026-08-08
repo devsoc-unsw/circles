@@ -8,14 +8,14 @@ import functools
 import json
 from math import lcm
 import re
-from typing import Callable, Mapping, Optional, Tuple, TypeVar, cast
+from typing import Callable, Iterable, Mapping, Optional, Tuple, TypeVar, cast
 
 from fastapi import HTTPException
 
 from algorithms.cache.cache_config import CACHED_EXCLUSIONS_FILE
 from algorithms.objects.course import Course
 from data.processors.models import CourseContainer, Program, ProgramContainer, SpecData, Specialisation, SpecsData
-from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR, get_terms_list
 from data.utility import data_helpers
 from server.routers.utility.manual_fixes import apply_manual_fixes
 from server.routers.model import CONDITIONS, CoursesPathDict, ProgramTime, StructureContainer
@@ -79,13 +79,26 @@ def _filter_exclusive_courses(course_codes: list[str], prefer_higher: bool = Fal
     return [c for c in course_codes if c not in to_remove]
 
 
-def get_multiterm_instance_count(course_details: dict, is_summer_enabled: bool) -> int:
-    """Return required multiterm instances from a get_course_details-style object."""
+def get_multiterm_instance_count(
+    course_details: dict,
+    is_summer_enabled: bool,
+    years: Iterable[int],
+) -> int:
+    """Return required multiterm instances from a get_course_details-style object.
+
+    `years` are the calendar years being planned. A course only needs multiple
+    instances if it is offered in a term that exists in at least one of them,
+    e.g. a T3-only course is a single instance once T3 stops existing in 2028.
+    """
     if not course_details['is_multiterm']:
         return 1
 
     terms_offered = course_details['terms']
-    allowed_terms = ['T0', 'T1', 'T2', 'T3'] if is_summer_enabled else ['T1', 'T2', 'T3']
+    allowed_terms = {
+        term
+        for year in years
+        for term in get_terms_list(year, include_summer=is_summer_enabled)
+    }
     if not any(term in terms_offered for term in allowed_terms):
         return 1
 

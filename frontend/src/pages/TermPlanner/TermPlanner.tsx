@@ -25,7 +25,12 @@ import {
   useUserTermValidations
 } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
-import { getTermsList, getTermsPerYear } from 'utils/termsPerYear';
+import {
+  getTermColumnSpan,
+  getTermColumnUnits,
+  getTermsList,
+  getTermsPerYear
+} from 'utils/termsPerYear';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import { LIVE_YEAR } from 'config/constants';
@@ -96,13 +101,23 @@ const TermPlanner = () => {
 
   const validYears = [...Array(planner.years.length).keys()].map((y) => y + planner.startYear);
 
-  // The grid needs a column for every term that appears in at least one year,
-  // e.g. a Term 3 column is kept while any pre-2028 year is shown
+  // The header needs a column for every term that appears in at least one year,
+  // e.g. a Term 3 header is kept while any pre-2028 year is shown
   const maxTermsPerYear = validYears.length ? Math.max(...validYears.map(getTermsPerYear)) : 0;
   const columnTerms: Term[] = [
     ...(planner.isSummerEnabled ? (['T0'] as Term[]) : []),
     ...Array.from({ length: maxTermsPerYear }, (_, i) => `T${i + 1}` as Term)
   ];
+
+  // Rather than leaving a trailing gap, every year tiles the same total width: the term
+  // area is split into enough units that both 2- and 3-term years divide it evenly, so a
+  // 2-term year just gets wider boxes. `baseSpan` is one term of the longest year, which
+  // the headers, summer column and unplanned column are all sized against.
+  const termUnits = getTermColumnUnits(validYears);
+  const baseSpan = maxTermsPerYear ? termUnits / maxTermsPerYear : 1;
+  const summerUnits = planner.isSummerEnabled ? baseSpan : 0;
+  // 1 for the year label column, then summer and the terms, then unplanned
+  const unplannedColStart = 1 + summerUnits + termUnits + 1;
 
   // comes in as an { [year]: course }[], which gets auto extrapolated, also preseeded with bad data
   const courseQueries = useQueries({
@@ -362,15 +377,16 @@ const TermPlanner = () => {
                   validYears={validYears}
                 />
               ) : (
-                <S.PlannerGridWrapper $numColumns={columnTerms.length + 1} ref={plannerPicRef}>
+                <S.PlannerGridWrapper
+                  $numColumns={summerUnits + termUnits + baseSpan}
+                  ref={plannerPicRef}
+                >
                   <GridItem /> {/* Empty grid item for the year */}
-                  {columnTerms.map((term) =>
-                    term === 'T0' ? (
-                      <GridItem key={term}>Summer</GridItem>
-                    ) : (
-                      <GridItem key={term}>Term {term[1]}</GridItem>
-                    )
-                  )}
+                  {columnTerms.map((term) => (
+                    <S.TermHeaderItem key={term} $colSpan={baseSpan}>
+                      {term === 'T0' ? 'Summer' : `Term ${term[1]}`}
+                    </S.TermHeaderItem>
+                  ))}
                   {planner.years.map((year, index) => {
                     // TODO: move this out
                     const iYear = planner.startYear + index;
@@ -400,12 +416,8 @@ const TermPlanner = () => {
                             count={`${yearUOC} UOC`}
                           />
                         </S.YearGridBox>
-                        {columnTerms.map((term) => {
+                        {getTermsList(iYear, planner.isSummerEnabled).map((term) => {
                           const key = `${iYear}${term}`;
-                          // years with fewer terms leave the trailing columns empty
-                          if (!getTermsList(iYear, planner.isSummerEnabled).includes(term)) {
-                            return <GridItem key={key} />;
-                          }
                           const codesForThisTerm = year[term];
                           // TODO: probs map this at TOP-LEVEL
                           const courseInfoForThisTerm = Object.fromEntries(
@@ -420,6 +432,9 @@ const TermPlanner = () => {
                               termCourseInfos={courseInfoForThisTerm}
                               termCourseCodes={codesForThisTerm}
                               draggingCourseCode={!draggingCourse ? undefined : draggingCourse}
+                              colSpan={
+                                term === 'T0' ? summerUnits : getTermColumnSpan(iYear, termUnits)
+                              }
                             />
                           );
                         })}
@@ -437,6 +452,8 @@ const TermPlanner = () => {
                       ])
                     )}
                     validateInfos={validations.courses_state}
+                    colStart={unplannedColStart}
+                    colSpan={baseSpan}
                   />
                 </S.PlannerGridWrapper>
               )}
