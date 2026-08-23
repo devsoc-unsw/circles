@@ -16,6 +16,7 @@ import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
 import Logout from 'pages/Logout';
 import './config/axios';
+import { SchemaLoader } from 'pages/SchemaLoader';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
 
@@ -133,6 +134,7 @@ const App = () => {
               <Suspense fallback={<PageLoading />}>
                 <Router>
                   <Routes>
+                    <Route path="/debug/schema" element={<SchemaLoader />} />
                     <Route element={<IdentityProvider />}>
                       <Route path="/" element={<LandingPage />} />
                       <Route element={<PreventToken />}>
