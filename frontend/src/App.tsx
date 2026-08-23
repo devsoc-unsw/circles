@@ -15,8 +15,8 @@ import useSettings from 'hooks/useSettings';
 import Login from 'pages/Login';
 import LoginSuccess from 'pages/LoginSuccess';
 import Logout from 'pages/Logout';
-import './config/axios';
 import { SchemaLoader } from 'pages/SchemaLoader';
+import './config/axios';
 // stylesheets for antd library
 import 'antd/dist/reset.css';
 
