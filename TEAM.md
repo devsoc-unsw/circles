@@ -2,6 +2,23 @@
 
 Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team to work on [circles360](https://circles360.github.io/) which inspired the current Circles you see today! :)
 
+## 2026
+### Directors
+- Jason Chen (@jcongc)  - director
+- Kevin Lin (@KevinLin1803)  - director
+
+### Members
+
+- Luyan Chen (@duringtheduration)
+- Vivian Dai (@avvinid)
+- Jeniffer Leong (@sleepyjen4)
+- Jimmy Khanijow (@StupidRefrigerator)
+- Olivianne Kho (@liivvyk)
+- Woojae Lim (@itsJae)
+- Jonathan Yuang Liu (@JonnoYL)
+- Kieran Teh (@kieranteh)
+
+
 ## 2025
 ### Directors
 - Matthew Lim (@matthew-lim-matthew-lim)  - director
@@ -11,10 +28,10 @@ Special thanks to James Ji, Vincent Xiao and Hayes Choy for being the first team
 - Jason Cong Chen (@jcongc)
 - Dylan Liang (@DylanSHLiang)
 - Kevin Lin (@KevinLin1803)
-- Alex Lee
+- Alex Lee (@xela6134)
 - Winnie Chan (@winnieee-chan)
 - Valentina Guedez Mercado (@val-guedez)
-- Elaine Zhang (@imagine-hussain)
+- Elaine Zhang (@y1l1nnnn)
 - Jenny Mengzhen Liu (@ChronoComplexity)
 - Eugene Briones (@le-eug)
 
