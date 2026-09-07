@@ -88,7 +88,7 @@ const CourseAttributes = ({ course }: CourseAttributesProps) => {
           // Term Planner where the indicator only appears for group work courses.
           content: groupwork ? (
             <Tag icon={<TeamOutlined />} color="purple">
-              This course has group work
+              Includes group work
             </Tag>
           ) : null
         },

@@ -1,8 +1,13 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { InfoCircleOutlined, PieChartOutlined, WarningOutlined } from '@ant-design/icons';
-import { Typography } from 'antd';
+import {
+  InfoCircleOutlined,
+  PieChartOutlined,
+  TeamOutlined,
+  WarningOutlined
+} from '@ant-design/icons';
+import { Tooltip, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
@@ -62,22 +67,6 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
     handbook_note: ''
   };
   const groupwork = courseInfo.groupwork ?? false;
-
-  const [showPeek, setShowPeek] = useState(false);
-  const peekTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(
-    () => () => {
-      if (peekTimer.current) clearTimeout(peekTimer.current);
-    },
-    []
-  );
-
-  const handleMouseEnter = () => {
-    if (!groupwork || showPeek) return;
-    setShowPeek(true);
-    peekTimer.current = setTimeout(() => setShowPeek(false), 2000);
-  };
 
   const hasOffering = time ? courseHasOffering(courseInfo, time.term) : true;
 
@@ -147,7 +136,6 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
               data-for={code}
               id={code}
               onContextMenu={handleContextMenu}
-              onMouseEnter={handleMouseEnter}
             >
               {!isTermLocked &&
                 shouldHaveWarning &&
@@ -160,6 +148,14 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                 ))}
               {courses[code].ignoreFromProgression && (
                 <PieChartOutlined style={{ color: theme.infoOutlined.color }} />
+              )}
+              {groupwork && (
+                <Tooltip title="Includes group work">
+                  <TeamOutlined
+                    aria-label="Includes group work"
+                    style={{ color: theme.groupworkOutlined.color }}
+                  />
+                </Tooltip>
               )}
               <S.CourseLabel>
                 {isSmall ? (
@@ -189,42 +185,6 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                   </div>
                 )}
               </S.CourseLabel>
-              {showPeek && (
-                <>
-                  <S.GroupworkPersonWrapper>
-                    <S.GroupworkIcon>
-                      {/* Full-body SVG; card covers lower half via z-index */}
-                      <svg
-                        viewBox="0 0 36 36"
-                        width="1em"
-                        height="1em"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle cx="18" cy="7" r="6.5" />
-                        <path d="M13 13 C11 16 10 21 10 28 C10 34 12 38 15 39 L21 39 C24 38 26 34 26 28 C26 21 25 16 23 13 C21.5 12 20 11.5 18 11.5 C16 11.5 14.5 12 13 13 Z" />
-                        {/* Right arm raised */}
-                        <path
-                          d="M23 16 C26.5 12 29.5 8 32 4"
-                          stroke="currentColor"
-                          strokeWidth="4.5"
-                          strokeLinecap="round"
-                          fill="none"
-                        />
-                        {/* Left arm resting */}
-                        <path
-                          d="M13 16 C11 19 9 21.5 7 24"
-                          stroke="currentColor"
-                          strokeWidth="4.5"
-                          strokeLinecap="round"
-                          fill="none"
-                        />
-                      </svg>
-                    </S.GroupworkIcon>
-                  </S.GroupworkPersonWrapper>
-                  <S.SpeechBubble>Course has Groupwork</S.SpeechBubble>
-                </>
-              )}
             </S.CourseWrapper>
           )}
         </Draggable>
