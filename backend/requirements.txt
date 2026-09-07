@@ -39,7 +39,7 @@ python-Levenshtein==0.27.3
 python-multipart==0.0.31
 pytz==2026.1.post1
 rapidfuzz==3.9.0
-redis==7.4.0
+redis==8.1.0
 requests==2.33.0
 selenium==4.46.0
 six==1.16.0
