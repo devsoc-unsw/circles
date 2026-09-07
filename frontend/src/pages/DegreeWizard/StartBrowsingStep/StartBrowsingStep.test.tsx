@@ -36,7 +36,7 @@ describe('StartBrowsingStep', () => {
     degreeInfo.programCode = '';
     await renderWithProviders(<StartBrowsingStep degreeInfo={degreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
-    expect(openNotification).toBeCalledWith({
+    expect(openNotification).toHaveBeenCalledWith({
       message: 'Please select a degree',
       type: 'error'
     });
@@ -47,7 +47,7 @@ describe('StartBrowsingStep', () => {
     degreeInfo.specs = [];
     await renderWithProviders(<StartBrowsingStep degreeInfo={degreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
-    expect(openNotification).toBeCalledWith({
+    expect(openNotification).toHaveBeenCalledWith({
       message: 'Please select a specialisation',
       type: 'error'
     });
@@ -59,7 +59,7 @@ describe('StartBrowsingStep', () => {
     await renderWithProviders(<StartBrowsingStep degreeInfo={mockDegreeInfo} />);
     await userEvent.click(screen.getByText('Start browsing courses!'));
     await React.act(async () => {
-      await vi.waitFor(() => expect(dummyNavigate).toBeCalledWith('/course-selector'));
+      await vi.waitFor(() => expect(dummyNavigate).toHaveBeenCalledWith('/course-selector'));
     });
   });
 });
