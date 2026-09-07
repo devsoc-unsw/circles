@@ -317,6 +317,9 @@ export const lightTheme: DefaultTheme = {
   infoOutlined: {
     color: '#000'
   },
+  groupworkOutlined: {
+    color: '#9254de'
+  },
   uocBadge: {
     backgroundColor: '#9254de'
   },
@@ -465,6 +468,9 @@ export const darkTheme: DefaultTheme = {
   },
   infoOutlined: {
     color: '#fff'
+  },
+  groupworkOutlined: {
+    color: '#b384ea'
   },
   uocBadge: {
     backgroundColor: '#51258f'

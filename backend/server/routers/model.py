@@ -54,6 +54,7 @@ class CourseDetails(BaseModel):
     is_legacy: bool
     is_accurate: bool
     is_multiterm: Optional[bool] = None
+    groupwork: bool = False
 
 @with_config(ConfigDict(extra='forbid'))
 class ContainerContent(TypedDict):

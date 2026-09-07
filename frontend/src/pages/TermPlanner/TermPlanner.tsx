@@ -38,30 +38,11 @@ import TermBox from './TermBox';
 import TermBoxMobile from './TermBoxMobile';
 import UnplannedColumn from './UnplannedColumn';
 import useMobileHook from './UseMobileHook';
-import { isPlannerEmpty } from './utils';
+import { extrapolateCourseYears, isPlannerEmpty } from './utils';
 
 const DragDropContext = React.lazy(() =>
   import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext }))
 );
-
-const extrapolateCourseYears = (
-  data: Record<number, Course>,
-  validYears: number[]
-): Record<number, Course> => {
-  const newData = { ...data };
-  let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
-
-  validYears.forEach((year) => {
-    if (newData[year]) bestYear = year;
-    else
-      newData[year] = {
-        ...newData[bestYear],
-        terms: year > LIVE_YEAR ? newData[LIVE_YEAR].terms : []
-      };
-  });
-
-  return newData;
-};
 
 const badCourseYears = (code: string, validYears: number[]): Record<number, Course> =>
   Object.fromEntries(validYears.map((year) => [year, { ...badCourseInfo, code }]));
