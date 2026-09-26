@@ -5,6 +5,7 @@ import {
   CoursePathFrom,
   CoursesAllUnlocked,
   CoursesUnlockedWhenTaken,
+  PopularElectives,
   SearchCourse
 } from 'types/api';
 import { LIVE_YEAR } from 'config/constants';
@@ -55,6 +56,14 @@ export const getAllUnlockedCourses = async (token: string) => {
     }
   );
 
+  return res.data;
+};
+
+export const getPopularElectives = async (programCode: string, specs: string[]) => {
+  const suffix = specs.length ? `/${specs.join('+')}` : '';
+  const res = await axios.get<PopularElectives>(
+    `/courses/popularElectives/${programCode}${suffix}`
+  );
   return res.data;
 };
 
