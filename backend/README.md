@@ -69,3 +69,5 @@ If you run into too many issues, you should use a complete docker solution, as b
 
 #### with docker
 assuming that you correctly followed the steps above, you can run all of circles by using `docker compose up frontend` in a dev environment which will reflect your changes. If you change anything related to `database.py`, you will need to rebuild it to refect the changes.
+
+If the `mongodb` container exits after its image version is bumped (e.g. `UPGRADE PROBLEM: Found an invalid featureCompatibilityVersion` in `docker compose logs mongodb`), your local database volume was created by an older MongoDB major version. The course data is reloaded on startup, so the simplest fix is to delete the volume with `docker compose down -v` (this also removes any local user accounts).
