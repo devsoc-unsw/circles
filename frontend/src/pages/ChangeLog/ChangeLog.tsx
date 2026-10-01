@@ -5,7 +5,7 @@ import SnakeGame from 'components/SnakeGame/SnakeGame';
 import changelogDataRaw from './changeLogData.json';
 import S from './styles';
 
-const changelogData: VersionData[] = changelogDataRaw as VersionData[];
+const changelogData: VersionData[] = changelogDataRaw;
 
 type ChangeLogItem = {
   main: string;

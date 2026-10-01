@@ -62,7 +62,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
     try {
       const user = importUser(JSON.parse(localStorage.getItem('oldUser')!) as JSON);
       importUserMutation.mutate(user);
-    } catch (error) {
+    } catch {
       migrationErrorNotification(theme.text);
     }
   };

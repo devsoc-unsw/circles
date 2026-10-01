@@ -9,6 +9,22 @@ import axios from 'config/axios';
 import { RootState, setupStore } from 'config/store';
 import { lightTheme } from 'config/theme';
 import '@testing-library/jest-dom';
+
+vi.mock('redux-persist', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('redux-persist')>();
+  return {
+    ...mod,
+    getStoredState: async () => ({
+      settings: {
+        theme: 'dark',
+        showLockedCourses: true,
+        showPastWarnings: true,
+        token: 'token' // force token to be dummy
+      }
+    })
+  };
+});
+
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
@@ -37,20 +53,6 @@ export const renderWithProviders = async (
   const queryClient = new QueryClient();
   await axios.post('user/reset');
   const store = setupStore(preloadedState);
-  vi.mock('redux-persist', async (importOriginal) => {
-    const mod = await importOriginal<typeof import('redux-persist')>();
-    return {
-      ...mod,
-      getStoredState: async () => ({
-        settings: {
-          theme: 'dark',
-          showLockedCourses: true,
-          showPastWarnings: true,
-          token: 'token' // force token to be dummy
-        }
-      })
-    };
-  });
 
   const Wrapper = ({ children }: PropsWithChildren) => (
     <QueryClientProvider client={queryClient}>
