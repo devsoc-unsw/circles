@@ -17,6 +17,6 @@ const ProgressBar = ({ progress }: Props) => {
     bgColor = '#ffa500';
   }
 
-  return <S.Progress strokeColor={bgColor} percent={progress} trailColor={trailColor} />;
+  return <S.Progress strokeColor={bgColor} percent={progress} railColor={trailColor} />;
 };
 export default ProgressBar;

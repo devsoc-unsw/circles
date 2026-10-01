@@ -22,7 +22,7 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
 
   return (
     <Link to={type} smooth duration={2000}>
-      <S.Card hoverable bordered={false} id={`#${specTitle || type}SpecCard`}>
+      <S.Card hoverable variant="borderless" id={`#${specTitle || type}SpecCard`}>
         <Title className="text" level={5}>
           {specTitle || type}
         </Title>
@@ -30,7 +30,7 @@ const SpecialisationCard = ({ type, totalUOC, currUOC, specTitle }: Props) => {
         <div data-tip data-for={`card-${type}`}>
           <Progress
             percent={progress}
-            trailColor={trailColor}
+            railColor={trailColor}
             showInfo={false}
             strokeColor={{ '0%': purple[3], '100%': purple[4] }}
           />

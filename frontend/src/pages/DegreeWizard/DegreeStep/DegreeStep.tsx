@@ -81,14 +81,11 @@ const DegreeStep = ({ incrementStep, setDegreeInfo }: Props) => {
         <Select
           disabled={allDegreesQuery.isPending}
           size="large"
-          showSearch
-          optionFilterProp="label"
+          showSearch={{ optionFilterProp: 'label', filterOption: false, onSearch: searchDegree }}
           placeholder="Search Degree"
           style={{ width: '100%' }}
           onSelect={onDegreeChange}
           options={items}
-          filterOption={false}
-          onSearch={searchDegree}
           // items should be initialised with all degrees
           onClick={() => searchDegree('')}
         />

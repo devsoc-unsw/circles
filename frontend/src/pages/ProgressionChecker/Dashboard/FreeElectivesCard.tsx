@@ -12,7 +12,7 @@ const FreeElectivesCard = ({ uoc }: Props) => {
 
   return (
     <Link to="Free Electives" smooth duration={2000}>
-      <S.Card hoverable bordered={false}>
+      <S.Card hoverable variant="borderless">
         <Title className="text" level={5}>
           Free Electives
         </Title>

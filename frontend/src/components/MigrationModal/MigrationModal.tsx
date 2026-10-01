@@ -88,8 +88,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
       onCancel={clearOldUser}
       cancelText="Clear Old Data"
       cancelButtonProps={{ type: 'primary', danger: true }}
-      mask
-      maskClosable={false}
+      mask={{ closable: false }}
       keyboard={false}
     >
       <div>
