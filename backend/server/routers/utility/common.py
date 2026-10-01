@@ -56,6 +56,47 @@ def get_core_courses(program: str, specialisations: list[str], prefer_higher: bo
     return _filter_exclusive_courses(courses, prefer_higher)
 
 
+def _is_elective_container(title: str, container_type: str) -> bool:
+    """
+    Decide whether a structure sub-group holds electives.
+
+    Mirrors the frontend's categorisation in ProgressionChecker.tsx, which keys
+    off the container `type` string: gen-ed (`gened`) and rule (`*_rule`)
+    containers are never electives, and program containers typed `*_electives`
+    are. Specialisation curriculum containers carry no `type` (e.g. COMPA1's
+    "Computing Electives"), so we fall back to the title: any non-core
+    "... Electives" group counts, and everything else (e.g. "Thesis Courses",
+    type "other") does not.
+    """
+    type_lower = container_type.lower()
+    title_lower = title.lower()
+    if "gened" in type_lower or "rule" in type_lower or "general education" in title_lower:
+        return False
+    if "core" in title_lower:
+        return False
+    if "electives" in type_lower:
+        return True
+    return "elective" in title_lower
+
+
+def get_elective_courses(program: str, specialisations: list[str]) -> set[str]:
+    """
+    Returns the set of elective course codes for the given program and
+    specialisations. Mirrors `get_core_courses` but selects elective
+    containers instead of core ones (excluding core, general education and
+    rule containers).
+    """
+    structure = get_program_structure(program, specs=specialisations)[0]
+    electives: set[str] = set()
+    for spec_name, spec in structure.items():
+        if spec_name == "Rules":
+            continue
+        for sub_group, value in spec["content"].items():
+            if _is_elective_container(sub_group, value.get("type", "")):
+                electives.update(value["courses"].keys())
+    return electives
+
+
 def _filter_exclusive_courses(course_codes: list[str], prefer_higher: bool = False) -> list[str]:
     """Remove courses that are mutually exclusive with others in the list.
 
