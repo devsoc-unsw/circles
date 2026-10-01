@@ -9,7 +9,7 @@
     "@ant-design/plots": "2.5.0",
     "@antv/algorithm": "0.1.26",
     "@antv/g6": "4.8.24",
-    "@react-spring/web": "9.7.3",
+    "@react-spring/web": "10.1.2",
     "@reduxjs/toolkit": "2.8.2",
     "@rive-app/react-canvas": "4.21.4",
     "@tanstack/react-query": "5.81.5",
