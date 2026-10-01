@@ -28,6 +28,28 @@ def test_get_archived_course():
     assert x.json()['is_legacy'] == True
 
 
+def test_get_course_with_groupwork():
+    # COMP1531 (software engineering fundamentals) is a known group work course
+    x = requests.get('http://127.0.0.1:8000/courses/getCourse/COMP1531')
+    assert x.status_code == 200
+    assert x.json()['groupwork'] is True
+
+
+def test_get_course_without_groupwork():
+    # COMP1521 (computer systems fundamentals) has no group work
+    x = requests.get('http://127.0.0.1:8000/courses/getCourse/COMP1521')
+    assert x.status_code == 200
+    assert x.json()['groupwork'] is False
+
+
+def test_get_course_groupwork_defaults_false():
+    # ENGG1000 hasn't been scraped for group work, so the field is absent from the
+    # data and the model default should surface it as False rather than omitting it.
+    x = requests.get('http://127.0.0.1:8000/courses/getCourse/ENGG1000')
+    assert x.status_code == 200
+    assert x.json()['groupwork'] is False
+
+
 def test_get_course_all_courses():
     failed_courses = {
         course for course in CONDITIONS.keys()
