@@ -5,7 +5,7 @@
   "type": "module",
   "dependencies": {
     "@ant-design/colors": "8.0.1",
-    "@ant-design/icons": "5.3.7",
+    "@ant-design/icons": "6.3.4",
     "@ant-design/plots": "2.5.0",
     "@antv/algorithm": "0.1.26",
     "@antv/g6": "4.8.24",
