@@ -37,7 +37,7 @@
     "redux-thunk": "3.1.0",
     "styled-components": "6.1.19",
     "use-debounce": "10.0.5",
-    "zod": "3.25.67"
+    "zod": "4.6.5"
   },
   "scripts": {
     "start": "vite --port 3000 --host",
