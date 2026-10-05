@@ -1017,7 +1017,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prereqs: ACTL3142",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "ADAD3000": {
         "title": "Work Integrated Learning",
@@ -4575,7 +4576,8 @@
         ],
         "gen_ed": true,
         "raw_requirements": "Prerequisite: 24 units of credit overall",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "ARTS2469": {
         "title": "Islam in Asia and the Pacific",
@@ -6089,7 +6091,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Cinema Studies or Film Studies",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "ARTS3061": {
         "title": "Screen Production III (Video Project)",
@@ -6877,7 +6880,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Philosophy",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "ARTS3450": {
         "title": "Chinese 5",
@@ -7589,7 +7593,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: ARTS3632 or language level assessment approval",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "ARTS3660": {
         "title": "Korean 5",
@@ -7924,7 +7929,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, European Studies, History, or International Studies. Or 48 UOC overall, including 12 UOC in German Studies language courses.",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "ARTS3783": {
         "title": "Great, Emerging and Declining Powers in the Contemporary World",
@@ -9838,7 +9844,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: Completion of 48 UOC",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "ATSI0001": {
         "title": "Enabling Skills 1",
@@ -16293,7 +16300,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisites: CEIC2001, CEIC2002",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "CEIC9005": {
         "title": "Advanced Thesis",
@@ -18922,7 +18930,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: COMP1939 and enrolment in 3777 Bachelor of Cyber SecurityPrerequisite or Co-requisite: COMP1521",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "COMP3110": {
         "title": "Machine Learning Engineering",
@@ -18941,7 +18950,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: COMP1531",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "COMP3121": {
         "title": "Algorithm Design and Analysis",
@@ -19283,7 +19293,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: COMP2521 or COMP1927, and a WAM of at least 70",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "COMP3443": {
         "title": "Web Application Security and Testing",
@@ -25025,7 +25036,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "DDES1043": {
         "title": "Publication Design",
@@ -25434,7 +25446,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: DDES2101 or FADA2020 or DDES2103",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "DDES2110": {
         "title": "3D Visualisation 2: Virtual Worlds",
@@ -30282,7 +30295,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: EDST6706. Corerequisite: EDST6760",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "EDST6737": {
         "title": "German Method 2",
@@ -39125,7 +39139,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Students must have completed 72UOCStudents must have completed ARTS2115 Philosophy of AI and INFS2604 AI Fluency",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "LAWJ2021": {
         "title": "Introduction to the Australian Legal System",
@@ -45727,7 +45742,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "MATH3965": {
         "title": "Discrete Time Financial Modelling",
@@ -46182,7 +46198,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "MATS3199": {
         "title": "Materials Science Work Placement 1",
@@ -47674,7 +47691,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC from level 2 Communication and Journalism courses",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "MDIA3014": {
         "title": "Influencing with Impact",
@@ -51026,7 +51044,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Prerequisite: COMP2521",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "MTRN3020": {
         "title": "Modelling and Control of Mechatronic Systems",
@@ -54686,7 +54705,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "PHYS6143": {
         "title": "Contemporary Physics A",
@@ -55360,7 +55380,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "Enrolled in 3831 Science (Medicine) Honours",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "PSCY9901": {
         "title": "Law and Mental Health",
@@ -60235,7 +60256,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "WCAN1001": {
         "title": "Business Economics (Bengaluru)",
@@ -60254,7 +60276,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "WCAN1002": {
         "title": "Introduction to Accounting (Bengaluru)",
@@ -60292,7 +60315,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": true
     },
     "WCAN1100": {
         "title": "Fundamentals of Data Analysis (Bengaluru)",
@@ -60311,7 +60335,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "WCAN2000": {
         "title": "Business Law (Bengaluru)",
@@ -60655,7 +60680,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "WENG1001": {
         "title": "Computer Systems Fundamentals (Bengaluru)",
@@ -61030,7 +61056,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "WSCI1001": {
         "title": "Mathematics 1A (Bengaluru)",
@@ -61050,7 +61077,8 @@
         "terms": [],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "WSCI1002": {
         "title": "Mathematics 1B (Bengaluru)",
@@ -67154,7 +67182,8 @@
         ],
         "gen_ed": false,
         "raw_requirements": "",
-        "is_multiterm": false
+        "is_multiterm": false,
+        "groupwork": false
     },
     "ZPEM1301": {
         "title": "Mathematics 1A",
