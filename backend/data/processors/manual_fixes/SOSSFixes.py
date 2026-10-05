@@ -25,10 +25,23 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
     # TODO: Fill in
+    CONDITIONS["SOSS3025"] = SOSS_3025(CONDITIONS["SOSS3025"])
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
+
+def SOSS_3025(condition):
+    """
+    "original": "Prerequisite: 96 UOC overall. Students must have declared a major in Politics and International Relations, Global Development, or Sociology. <br/><br/>",
+    "processed": "96UOC . must have declared a major in Politics && International Relations, Global Development || Sociology"
+    """
+    return {
+        "original": condition["original"],
+        "processed": "96UOC",
+        "handbook_note": "Students must have declared a major in Politics and International Relations, Global Development, or Sociology."
+    }
 
 
 if __name__ == "__main__":

@@ -29,7 +29,8 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["CDEV3500"] = CDEV_3500(CONDITIONS["CDEV3500"])
-    CONDITIONS["CDEV3200"][PROCESSED] = CDEV_3200()
+
+    CONDITIONS["CDEV2100"] = CDEV_2100(CONDITIONS["CDEV2100"])
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
@@ -47,12 +48,16 @@ def CDEV_3500(condition):
         "handbook_note": "Enrolment is selective based on academic performance, co-curricular experience, and interview."
     }
 
-def CDEV_3200():
+def CDEV_2100(condition):
     """
-        "original": "Prerequisite: Enrolment in 3959 Data Science program<br/><br/>",
-        "processed": "Enrolment in 3959 Data Science program"
+    "original": "Students must have an approved volunteering opportunity to enrol.<br/><br/>",
+    "processed": "must have an approved volunteering opportunity"
     """
-    return "30UOC"
+    return {
+        "original": condition["original"],
+        "processed": "",
+        "handbook_note": "Students must have an approved volunteering opportunity to enrol."
+    }
 
 
 if __name__ == "__main__":
