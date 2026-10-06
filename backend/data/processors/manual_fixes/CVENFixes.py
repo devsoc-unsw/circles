@@ -37,7 +37,6 @@ def fix_conditions():
     for course in ("CVEN4201", "CVEN4202", "CVEN4204"):
         CONDITIONS[course][PROCESSED] = CVEN_4201_4202_4204()
 
-    CONDITIONS["CVEN4300"][PROCESSED] = CVEN_4300()
     CONDITIONS["CVEN4308"][PROCESSED] = CVEN_4308()
     CONDITIONS["CVEN4309"][PROCESSED] = CVEN_4309()
     CONDITIONS["CVEN4507"][PROCESSED] = CVEN_4507()
@@ -85,14 +84,6 @@ def CVEN_4201_4202_4204():
     """
 
     return "(CVEN2201 || CVEN3202) && (CVEN3201 || CVEN3203)"
-
-def CVEN_4300():
-    """
-    "original": "Pre-requisite: 2303, 3303 & 3304<br/><br/>",
-    "processed": "2303, 3303 & 3304"
-    """
-
-    return "CVEN2303 && CVEN3303 && CVEN3304"
 
 def CVEN_4308():
     """
