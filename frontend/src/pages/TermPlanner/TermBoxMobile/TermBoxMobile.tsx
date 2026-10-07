@@ -88,7 +88,7 @@ const TermBoxMobile: React.FC<MobilePlannerViewProps> = ({
           onClick={handleNext}
           disabled={isLastTerm}
           icon={<RightOutlined />}
-          iconPosition="end"
+          iconPlacement="end"
         >
           Next
         </S.NavButton>

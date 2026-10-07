@@ -97,20 +97,18 @@ const CourseSearchBar = ({ onSelectCallback, style, userCourses }: CourseSearchB
 
   return (
     <Select
-      showSearch
+      showSearch={{ filterOption: false, onSearch: handleSearch }}
       placeholder="Search for a course..."
-      filterOption={false}
       size="large"
       options={courses}
       value={value}
       // open attribute - close search dropdown when there is no input value or
       // when a course has been selected
       open={!!value}
-      onSearch={handleSearch}
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
       style={{ width: 'calc(15rem + 20vw)', ...style }}
-      suffixIcon={!value}
+      suffix={!value}
       className="course-search-bar"
     />
   );

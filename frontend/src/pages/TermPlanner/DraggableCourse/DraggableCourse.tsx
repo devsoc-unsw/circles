@@ -1,8 +1,13 @@
 import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { InfoCircleOutlined, PieChartOutlined, WarningOutlined } from '@ant-design/icons';
-import { Typography } from 'antd';
+import {
+  InfoCircleOutlined,
+  PieChartOutlined,
+  TeamOutlined,
+  WarningOutlined
+} from '@ant-design/icons';
+import { Tooltip, Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
 import { CourseTime } from 'types/courses';
@@ -61,6 +66,7 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
     unlocked: true,
     handbook_note: ''
   };
+  const groupwork = courseInfo.groupwork ?? false;
 
   const hasOffering = time ? courseHasOffering(courseInfo, time.term) : true;
 
@@ -142,6 +148,14 @@ const DraggableCourse = ({ planner, validate, courses, courseInfo, index, time }
                 ))}
               {courses[code].ignoreFromProgression && (
                 <PieChartOutlined style={{ color: theme.infoOutlined.color }} />
+              )}
+              {groupwork && (
+                <Tooltip title="Includes group work">
+                  <TeamOutlined
+                    aria-label="Includes group work"
+                    style={{ color: theme.groupworkOutlined.color }}
+                  />
+                </Tooltip>
               )}
               <S.CourseLabel>
                 {isSmall ? (

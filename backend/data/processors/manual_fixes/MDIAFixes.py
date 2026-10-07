@@ -28,6 +28,8 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["MDIA3003"][PROCESSED] = MDIA_3003()
+    CONDITIONS["MDIA2004"][PROCESSED] = MDIA_2004()
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -41,6 +43,14 @@ def MDIA_3003():
     """
 
     return f"66UOC && (6UOC in L2 MDIA CORES) && (3454 || 3453)"
+
+def MDIA_2004():
+    """
+    "original": "Prerequisite: 24 UOC overall including 6uoc of level 1 courses from the Screen Production (ARTS1064, MDIA1005, MDIA1010)  or Film Studies (ARTS1060, ARTS1062) specialisation.<br/><br/>",
+    "processed": "24UOC && 6UOC in L1 from the Screen Production (ARTS1064, MDIA1005, MDIA1010) || Film Studies (ARTS1060, ARTS1062) specialisation"
+    """
+    return "24UOC && 6UOC in (ARTS1064 || MDIA1005 || MDIA1010 || ARTS1060 || ARTS1062)"
+
 
 if __name__ == "__main__":
     fix_conditions()

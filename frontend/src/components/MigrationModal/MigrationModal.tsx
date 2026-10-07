@@ -62,7 +62,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
     try {
       const user = importUser(JSON.parse(localStorage.getItem('oldUser')!) as JSON);
       importUserMutation.mutate(user);
-    } catch (error) {
+    } catch {
       migrationErrorNotification(theme.text);
     }
   };
@@ -88,8 +88,7 @@ const MigrationModal = ({ open, onOk, onCancel }: Props) => {
       onCancel={clearOldUser}
       cancelText="Clear Old Data"
       cancelButtonProps={{ type: 'primary', danger: true }}
-      mask
-      maskClosable={false}
+      mask={{ closable: false }}
       keyboard={false}
     >
       <div>

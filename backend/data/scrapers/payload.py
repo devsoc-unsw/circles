@@ -13,27 +13,28 @@ import time
 import requests
 from data.config import LIVE_YEAR
 
-URL = "https://api-ap-southeast-2.prod.courseloop.com/publisher/browsepage-academic-items?"
+URL = "https://www.handbook.unsw.edu.au/api/search/browsepage-academic-items?"
 HEADERS = {
     "content-type": "application/json",
 }
 ITEMS_LIMIT = 20
 REQ_DELAY = 0.1
 
-def do_requests(content_type, items_per_req=ITEMS_LIMIT, max_items = 10000):
+def do_requests(content_type, items_per_req=ITEMS_LIMIT, max_items = 10000, year = None):
     """
     retuns a list of items.
     """
     offset = 0
     items_list = []
     while offset < max_items:
-        data_payload = _create_payload(offset, items_per_req, content_type)
+        data_payload = _create_payload(offset, items_per_req, content_type, year)
         r = requests.post(
             URL,
             data=json.dumps(data_payload),
             headers=HEADERS,
             timeout=60 * 5
         )
+        r.raise_for_status()
         # r.json() looks like { "data": { "data": [{}, ..., {}], "count": 123 } }
         print("brief output:", json.dumps(r.json())[:100], flush=True)
         cur_data = r.json()["data"]

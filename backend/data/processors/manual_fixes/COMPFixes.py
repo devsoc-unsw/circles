@@ -50,6 +50,9 @@ def fix_conditions():
 
     CONDITIONS["COMP9491"][PROCESSED] = COMP_9491()
 
+    CONDITIONS["COMP3601"][PROCESSED] = COMP_3601()
+    CONDITIONS["COMP4940"] = COMP_4940(CONDITIONS["COMP4940"])
+
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
@@ -270,6 +273,24 @@ def COMP_9491():
     "processed": "COMP3411 && 70WAM && 12UOC in (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
     """
     return "COMP3411 && 70WAM && 12UOC in (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
+
+def COMP_3601():
+    """
+    "original": "Prerequisite for students in COMPBH Computer Engineering: DESN2000 and COMP3222<br/>Prerequisite for all other students: COMP2121 and COMP3222<br/><br/>",
+    "processed": "for in COMPBH Computer Engineering: DESN2000 && COMP3222 for all other : COMP2121 && COMP3222"
+    """
+    return "COMP3222 && ((COMPBH && DESN2000) || COMP2121)"
+
+def COMP_4940(condition):
+    """
+    "original": "Pre-requisite:<br/>- Enrolment in 4515 Computer Science and Engineering (Hons); or<br/>- Enrolment in 3779 Advanced Computer Science (Hons) with a WAM of 65 and must have completed: 66 units of Core courses specified in the default Stream (COMPCH), 30 units of Computing Electives (Level 3 or higher) and successfully completed at least 120 UoC overall<br/><br/>",
+    "processed": "(- 4515 Computer Science && Engineering (Hons)) || - 3779 Advanced Computer Science (Hons) w 65WAM && : 66 units of CORES courses specified in the default Stream (COMPCH), 30 units of Computing Electives (in L3 ) && successfully 120UOC"
+    """
+    return {
+        "original": condition["original"],
+        "processed": "4515 || (3779 && 65WAM && 120UOC)",
+        "handbook_note": "Students in 3779 must also have completed 66 UOC of core courses in the default stream (COMPCH) and 30 UOC of Level 3+ Computing Electives."
+    }
 
 
 if __name__ == "__main__":

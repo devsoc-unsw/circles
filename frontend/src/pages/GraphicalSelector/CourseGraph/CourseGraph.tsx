@@ -92,7 +92,7 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
 
       // Every other node and edge becomes less visible
       graphRef.current?.getNodes().forEach((n) => {
-        graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), opacity));
+        graphRef.current?.updateItem(n, mapNodeOpacity(n.getID(), opacity));
         n.getEdges().forEach((e) => {
           graphRef.current?.updateItem(e, mapEdgeOpacity(Arrow, theme, e.getID(), opacity));
         });
@@ -109,13 +109,13 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
       });
       // Target node and neighbouring nodes remain visible
       node.toFront();
-      graphRef.current?.updateItem(node as Item, mapNodeOpacity(node.getID(), 1));
+      graphRef.current?.updateItem(node, mapNodeOpacity(node.getID(), 1));
       neighbours.forEach((n) => {
-        graphRef.current?.updateItem(n as Item, mapNodeOpacity(n.getID(), 1));
+        graphRef.current?.updateItem(n, mapNodeOpacity(n.getID(), 1));
         n.toFront();
         const courseId = n.getID();
         if (isCoursePrerequisite(node.getID(), courseId)) {
-          graphRef.current?.updateItem(n as Item, mapNodePrereq(courseId, theme));
+          graphRef.current?.updateItem(n, mapNodePrereq(courseId, theme));
         }
       });
     },
@@ -136,10 +136,10 @@ const CourseGraph = ({ onNodeClick, focused, loading, setLoading }: Props) => {
       graphRef.current?.getNodes().forEach((n) => {
         const courseId = n.getID();
         graphRef.current?.updateItem(
-          n as Item,
+          n,
           mapNodeStyle(courseId, courseId in courses, !!coursesStates[courseId]?.unlocked, theme)
         );
-        graphRef.current?.updateItem(n as Item, mapNodeOpacity(courseId, 1));
+        graphRef.current?.updateItem(n, mapNodeOpacity(courseId, 1));
         n.toFront();
       });
       graphRef.current?.getEdges().forEach((e) => {

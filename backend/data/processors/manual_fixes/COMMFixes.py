@@ -43,6 +43,9 @@ def fix_conditions():
     CONDITIONS["COMM3500"] = COMM_3500(CONDITIONS["COMM3500"])
     CONDITIONS["COMM3900"] = COMM_3900(CONDITIONS["COMM3900"])
     CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
+    CONDITIONS["COMM1240"][PROCESSED] = COMM_1240()
+    CONDITIONS["COMM3614"][PROCESSED] = COMM_3614()
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -305,6 +308,19 @@ def COMM_3999(conditions):
         "handbook_note": "Students must be in their final year"
     }
 
+def COMM_1240():
+    """
+    "original": "Only students taking Actuarial Studies single and double degrees (programs 3586, 3587, 3589, 3155, 3674, 3588, 3671, 4737, 3154) are permitted to enrol.<br/><br/>",
+    "processed": "Only taking Actuarial Studies single && double degrees (programs 3586, 3587, 3589, 3155, 3674, 3588, 3671, 4737, 3154) are permitted"
+    """
+    return "3586 || 3587 || 3589 || 3155 || 3674 || 3588 || 3671 || 4737 || 3154"
+
+def COMM_3614():
+    """
+    "original": "Prerequisite: (Completion of 48 UOC of undergraduate courses) OR INFS2822 OR COMP1010<br/><br/>",
+    "processed": "(48UOC of courses) || INFS2822 || COMP1010"
+    """
+    return "48UOC || INFS2822 || COMP1010"
 
 
 if __name__ == "__main__":

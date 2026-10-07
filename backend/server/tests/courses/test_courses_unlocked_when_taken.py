@@ -20,15 +20,16 @@ def test_no_courses_completed():
         "direct_unlock": [
             'COMP1521',
             'COMP1531',
+            'COMP2020',
             'COMP2041',
             'COMP2121',
             'COMP2521',
             'COMP9334',
             'MMAN9350',
         ],
-        # COMP1511 is equivalent to 'DPST1091' so it unlocks DPST1093
+        # COMP1511 is equivalent to 'DPST1091' and 'WENG1000' so it unlocks DPST1093 and the WENG courses
         # Maybe "equivalent" courses should be under `direct_unlock`?
-        "indirect_unlock": ["DPST1093"]
+        "indirect_unlock": ["DPST1093", "WENG1001", "WENG1002", "WENG2000", "WENG2002"]
     }
 
 
@@ -95,5 +96,8 @@ def test_two_courses_completed():
             "COMP9727",
             "MTRN2500",
         ],
-        "indirect_unlock": ["BABS3301", "BEIL0011", "COMP4920", "MUSC2117", "MUSC2119", "TABL2710"]
+        "indirect_unlock": [
+            "BABS3301", "BEIL0011", "COMP4920", "MUSC2117", "MUSC2119", "TABL2710",
+            "WENG3002", "WENG3004", "WENG3007", "WENG6004",
+        ]
     }

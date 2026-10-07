@@ -15,7 +15,7 @@ Assumes that `/backend` is the current working directory.
 from typing import Dict, List
 
 # Don't forget to update live year in the frontend too
-LIVE_YEAR: int = 2026
+LIVE_YEAR: int = 2027
 
 # Number of standard academic terms (T1, T2, ...) per year, excluding the
 # optional summer term (T0). Each key is the first year its value applies
