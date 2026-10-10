@@ -32,3 +32,5 @@ export type {
 } from './eval/types';
 export type { Bundle, CourseEntry, PatchStatus, ResolvedDoc } from './resolve/bundle';
 export { createBundle, staticCatalogue } from './resolve/bundle';
+export type { SemanticDoc, SemanticResult } from './validate/semantic';
+export { checkDocs, checkFixture } from './validate/semantic';
