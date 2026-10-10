@@ -18,12 +18,14 @@ import { ProgramStructure } from 'types/structure';
 import { badCourses, badPlanner } from 'types/userResponse';
 import { useStructureQuery } from 'utils/apiHooks/static';
 import { useUserCourses, useUserDegree, useUserPlanner } from 'utils/apiHooks/user';
+import useDegreeEvaluation from 'utils/degreeEval/useDegreeEvaluation';
 import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
-import { MAX_COURSES_OVERFLOW } from 'config/constants';
+import { DEGREE_EVAL_ENABLED, MAX_COURSES_OVERFLOW } from 'config/constants';
 import Dashboard from './Dashboard';
+import EvaluatorNotice from './EvaluatorNotice';
 import GenericCoursesSection from './GenericCoursesSection';
 import GridView from './GridView';
 import S from './styles';
@@ -44,15 +46,30 @@ const ProgressionChecker = () => {
   const structureQuery = useStructureQuery(
     {
       queryOptions: {
-        enabled: degree !== undefined
+        enabled: degree !== undefined && !DEGREE_EVAL_ENABLED
       }
     },
     // TODO-olli: this is ugly, but we will need some interesting type rules to allow this otherwise
     degree?.programCode ?? '',
     degree?.specs ?? []
   );
-  const structure: ProgramStructure = structureQuery.data?.structure ?? {};
-  const uoc = structureQuery.data?.uoc ?? 0;
+  const [view, setView] = useState(Views.GRID_CONCISE);
+  const coursesQuery = useUserCourses();
+  const courses = coursesQuery.data ?? badCourses;
+
+  // behind the flag, the structure and the view come from the degree evaluator instead
+  const evaluation = useDegreeEvaluation(
+    DEGREE_EVAL_ENABLED,
+    degree,
+    plannerQuery.data,
+    coursesQuery.data
+  );
+  const evaluated = evaluation.data;
+
+  const structure: ProgramStructure = DEGREE_EVAL_ENABLED
+    ? (evaluated?.structure ?? {})
+    : (structureQuery.data?.structure ?? {});
+  const uoc = DEGREE_EVAL_ENABLED ? (evaluated?.totalUOC ?? 0) : (structureQuery.data?.uoc ?? 0);
 
   useEffect(() => {
     openNotification({
@@ -67,10 +84,6 @@ const ProgressionChecker = () => {
       )
     });
   }, [theme.text]);
-
-  const [view, setView] = useState(Views.GRID_CONCISE);
-  const coursesQuery = useUserCourses();
-  const courses = coursesQuery.data ?? badCourses;
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};
@@ -202,7 +215,8 @@ const ProgressionChecker = () => {
     return newViewLayout;
   };
 
-  const viewStructure = generateViewStructure();
+  const legacyViewStructure = generateViewStructure();
+  const viewStructure = DEGREE_EVAL_ENABLED ? (evaluated?.view ?? {}) : legacyViewStructure;
 
   const sortSubgroups = (item1: [string, ViewSubgroup], item2: [string, ViewSubgroup]) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
@@ -220,11 +234,16 @@ const ProgressionChecker = () => {
     <PageTemplate>
       <S.Wrapper>
         <Dashboard
-          isLoading={structureQuery.isPending}
+          isLoading={DEGREE_EVAL_ENABLED ? evaluation.isPending : structureQuery.isPending}
           structure={structure}
           totalUOC={uoc}
-          freeElectivesUOC={Object.values(overflowCourses).reduce((acc, curr) => acc + curr.UOC, 0)}
+          freeElectivesUOC={
+            DEGREE_EVAL_ENABLED
+              ? (evaluated?.freeElectivesUOC ?? 0)
+              : Object.values(overflowCourses).reduce((acc, curr) => acc + curr.UOC, 0)
+          }
         />
+        {DEGREE_EVAL_ENABLED && <EvaluatorNotice result={evaluated} error={evaluation.error} />}
         <div id="divider">
           <Divider />
         </div>
@@ -275,7 +294,7 @@ const ProgressionChecker = () => {
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
                       notes={structure[group].content[subgroup].notes}
-                      showNotes={group === 'Rules'}
+                      showNotes={DEGREE_EVAL_ENABLED || group === 'Rules'}
                       type={structure[group].content[subgroup].type}
                       courses={subgroupEntry.courses}
                     />
@@ -284,7 +303,7 @@ const ProgressionChecker = () => {
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
                       notes={structure[group].content[subgroup].notes}
-                      showNotes={group === 'Rules'}
+                      showNotes={DEGREE_EVAL_ENABLED || group === 'Rules'}
                       type={structure[group].content[subgroup].type}
                       courses={subgroupEntry.courses}
                       isCoursesOverflow={subgroupEntry.isCoursesOverflow}
@@ -294,13 +313,23 @@ const ProgressionChecker = () => {
                 )}
             </Collapsible>
           ))}
-          <GenericCoursesSection
-            courses={Object.values(overflowCourses)}
-            view={view}
-            title="Free Electives"
-            subheading="additional courses planned"
-            description="These courses may or may not be counted to your program. Please manually verify your progression with this information."
-          />
+          {DEGREE_EVAL_ENABLED ? (
+            <GenericCoursesSection
+              courses={evaluated?.notCounted ?? []}
+              view={view}
+              title="Not Counted"
+              subheading="courses that count towards no requirement"
+              description="Every requirement these courses could count towards is already full, or none accepts them."
+            />
+          ) : (
+            <GenericCoursesSection
+              courses={Object.values(overflowCourses)}
+              view={view}
+              title="Free Electives"
+              subheading="additional courses planned"
+              description="These courses may or may not be counted to your program. Please manually verify your progression with this information."
+            />
+          )}
           <GenericCoursesSection
             courses={Object.values(ignoredCourses)}
             view={view}

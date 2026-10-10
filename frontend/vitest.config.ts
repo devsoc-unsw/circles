@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { searchForWorkspaceRoot } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 const projectRootDir = resolve(__dirname);
@@ -19,6 +20,15 @@ export default defineConfig({
       provider: 'istanbul'
     },
     fileParallelism: false
+  },
+  server: {
+    fs: {
+      // same as vite.config.ts: the degree documents are read from the package
+      allow: [
+        searchForWorkspaceRoot(process.cwd()),
+        resolve(projectRootDir, '../packages/degree-eval')
+      ]
+    }
   },
   resolve: {
     alias: [

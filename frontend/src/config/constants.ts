@@ -17,5 +17,9 @@ export const lightPurple = '#efdbff';
 // export const inDev = false;
 export const inDev = import.meta.env.MODE !== 'production';
 
+// Progression checker evaluated in the browser from the degree YAML documents (@circles/degree-eval)
+// instead of the backend structure. Set VITE_DEGREE_EVAL=true to try it.
+export const DEGREE_EVAL_ENABLED = import.meta.env.VITE_DEGREE_EVAL === 'true';
+
 export const MAX_COURSES_OVERFLOW = 80;
 export const COURSES_INITIALLY_COLLAPSED = 16;
