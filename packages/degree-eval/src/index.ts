@@ -30,7 +30,15 @@ export type {
   Tri,
   UocRange
 } from './eval/types';
-export type { Bundle, CourseEntry, PatchStatus, ResolvedDoc } from './resolve/bundle';
-export { createBundle, staticCatalogue } from './resolve/bundle';
+export type {
+  Bundle,
+  CatalogueData,
+  CourseEntry,
+  PatchStatus,
+  ResolvedDoc
+} from './resolve/bundle';
+export { catalogueFromData, createBundle, staticCatalogue } from './resolve/bundle';
 export type { SemanticDoc, SemanticResult } from './validate/semantic';
 export { checkDocs, checkFixture } from './validate/semantic';
+export type { Client, LoadResult, Method, Port, Request, Response } from './worker';
+export { createClient, createHandler, serve } from './worker';

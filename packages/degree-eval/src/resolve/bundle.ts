@@ -263,3 +263,26 @@ export const staticCatalogue = (
   }
   return { get: () => map };
 };
+
+// Catalogue facts as plain data, so they can be posted to a Web Worker. `years` holds per-year
+// facts; a year with no entry falls back to `courses` (facts that hold for every year), and a course
+// missing from both gets `default` when one is given.
+export interface CatalogueData {
+  years?: Record<string, CourseFacts[]>;
+  courses?: CourseFacts[];
+  default?: Omit<CourseFacts, 'code'>;
+}
+
+export const catalogueFromData = (data: CatalogueData): CatalogueProvider => {
+  const build = (facts: CourseFacts[]) => {
+    const map = new DefaultingMap(data.default);
+    for (const f of data.courses ?? []) map.set(f.code, f);
+    for (const f of facts) map.set(f.code, f);
+    return map;
+  };
+  const base = build([]);
+  const years = new Map(
+    Object.entries(data.years ?? {}).map(([y, facts]) => [Number(y), build(facts)])
+  );
+  return { get: (year) => years.get(year) ?? base };
+};

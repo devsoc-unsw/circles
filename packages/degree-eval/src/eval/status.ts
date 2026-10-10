@@ -588,6 +588,9 @@ export const computeStatuses = (
       id: n.id,
       kind: n.kind,
       ...(typeof n.raw.title === 'string' ? { title: n.raw.title } : {}),
+      ...(typeof n.raw.role === 'string' ? { role: n.raw.role } : {}),
+      ...(n.items ? { items: n.items.map((i) => i.written) } : {}),
+      ...(n.kind === 'info' && typeof n.raw.text === 'string' ? { text: n.raw.text } : {}),
       status: r.status,
       projected,
       counted_uoc:

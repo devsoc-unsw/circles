@@ -90,6 +90,9 @@ export interface NodeResult {
   id: string;
   kind: string; // node kind, or 'root', 'subtree' (a selected spec), 'component'
   title?: string;
+  role?: string; // pool role (§4.2), e.g. free_elective, gen_ed
+  items?: string[]; // core: each item as written, for display
+  text?: string; // info: the text shown to the student
   status: Tri;
   projected: boolean;
   counted_uoc: number;

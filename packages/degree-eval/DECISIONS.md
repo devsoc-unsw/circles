@@ -38,3 +38,17 @@ All 10 fixtures pass as written, on their first execution. No fixture or spec te
     ajv-formats' full URI rule). `tools/validate.mjs` remains the strict authoring check.
 12. **`extends` documents** are parse-checked on their own requirements only. Ancestors are checked
     as documents in their own right.
+
+## Performance (EVALUATOR.md §5.6, measured for M7)
+
+`npm run bench`, 2026-10-11, Node 26 on the development laptop (Apple Silicon), median of 50 runs:
+
+| case | median | p95 | budget |
+|---|---|---|---|
+| 3778 + COMPA1 + MATHC2, 144 UOC: load and validate the documents | 1.5 ms | 1.8 ms | — |
+| 3778 + COMPA1 + MATHC2, 144 UOC: evaluate | 0.5 ms | 2.0 ms | 50 ms |
+| 3409 golden plan, 144 UOC: evaluate with selections | 2.1 ms | 2.6 ms | 50 ms |
+| 3409 golden plan: evaluate with both choice groups auto-chosen | 3.1 ms | 4.1 ms | 300 ms |
+
+Spec slots are never enumerated by auto-choice (§7.5), so an unselected 3778 is not a slow case;
+3409's `choose` groups are the realistic auto-choice load.
