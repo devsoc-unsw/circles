@@ -45,7 +45,9 @@ const targetObject = (data: Obj, target: string): Obj | undefined => {
 
 const sameItem = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
-// Applies one op; returns an error text, or undefined on success.
+// Applies one op; returns an error text, or undefined on success. Edits `data` in place (callers
+// pass a copy).
+/* eslint-disable no-param-reassign */
 export const applyOp = (data: Obj, op: Obj): string | undefined => {
   const name = String(op.op);
   const target = typeof op.target === 'string' ? op.target : undefined;
@@ -53,7 +55,8 @@ export const applyOp = (data: Obj, op: Obj): string | undefined => {
     case 'set': {
       const obj = target === undefined ? undefined : targetObject(data, target);
       if (!obj || !isObj(op.fields)) return `set: target "${String(target)}" not found`;
-      if ('kind' in op.fields || 'id' in op.fields) return `set: ${target ?? ''}: kind and id may not change`;
+      if ('kind' in op.fields || 'id' in op.fields)
+        return `set: ${target ?? ''}: kind and id may not change`;
       Object.assign(obj, clone(op.fields));
       return undefined;
     }
@@ -88,7 +91,12 @@ export const applyOp = (data: Obj, op: Obj): string | undefined => {
         }
       }
       if (!list || !isObj(op.node)) return `add: parent "${parent}" not found or not a group`;
-      const anchor = typeof op.before === 'string' ? op.before : typeof op.after === 'string' ? op.after : undefined;
+      const anchor =
+        typeof op.before === 'string'
+          ? op.before
+          : typeof op.after === 'string'
+            ? op.after
+            : undefined;
       let at = list.length;
       if (anchor !== undefined) {
         const i = list.findIndex((n) => isObj(n) && n.id === anchor);
@@ -103,7 +111,7 @@ export const applyOp = (data: Obj, op: Obj): string | undefined => {
       const obj = target === undefined ? undefined : targetObject(data, target);
       const field = typeof op.field === 'string' ? op.field : '';
       if (!obj) return `${name}: target "${String(target)}" not found`;
-      const items = Array.isArray(op.items) ? op.items : [];
+      const items: unknown[] = Array.isArray(op.items) ? op.items : [];
       const current = obj[field];
       if (current !== undefined && !Array.isArray(current)) {
         return `${name}: ${target ?? ''}.${field} is not a list`;
@@ -124,6 +132,8 @@ export const applyOp = (data: Obj, op: Obj): string | undefined => {
       return `unknown op "${name}"`;
   }
 };
+
+/* eslint-enable no-param-reassign */
 
 // Applies ops to a copy; returns the new data, or the first failure.
 export const applyOps = (

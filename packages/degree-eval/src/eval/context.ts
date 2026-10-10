@@ -1,8 +1,8 @@
 // Plan instances, course equivalence and selector matching (SCHEMA.md §5.1, §6, §7.1, §7.3).
+import type { DocCtx } from '../ir/tree';
 import type { Selector } from '../lang/ast';
 import { normalizeSelector } from '../lang/normalize';
 import type { Bundle } from '../resolve/bundle';
-import type { DocCtx } from '../ir/tree';
 import type { CourseFacts, Outcome, PlanInstance, StudentState } from './types';
 
 type Obj = Record<string, unknown>;
@@ -32,7 +32,9 @@ export const makeInstances = (bundle: Bundle, student: StudentState): Inst[] => 
   const ignored = new Set(student.ignored ?? []);
   const sorted = [...student.plan].sort(
     (a: PlanInstance, b: PlanInstance) =>
-      a.term - b.term || (a.code < b.code ? -1 : a.code > b.code ? 1 : 0) || (a.iid < b.iid ? -1 : a.iid > b.iid ? 1 : 0)
+      a.term - b.term ||
+      (a.code < b.code ? -1 : a.code > b.code ? 1 : 0) ||
+      (a.iid < b.iid ? -1 : a.iid > b.iid ? 1 : 0)
   );
   return sorted.map((p, idx) => {
     const year = p.year ?? student.year;
@@ -97,7 +99,7 @@ export class Selectors {
       const lib = this.bundle.library(doc.year);
       const raw = local ?? (isObj(lib?.sets) ? lib.sets[name] : undefined);
       this.sets.set(key, null); // cycle guard while normalising
-      let sel: Selector | null = null;
+      let sel: Selector | null;
       try {
         sel = raw === undefined ? null : normalizeSelector(raw).ast;
       } catch {
@@ -122,7 +124,8 @@ export class Selectors {
       const s = this.set(sel.set, doc);
       return s === undefined ? false : m(s);
     }
-    if ('in' in sel) return c.inst !== undefined && inMember !== undefined && inMember(c.inst, sel.in, doc);
+    if ('in' in sel)
+      return c.inst !== undefined && inMember !== undefined && inMember(c.inst, sel.in, doc);
     const f = c.facts;
     if (!f) return false;
     if ('faculty' in sel) return f.faculty === sel.faculty;

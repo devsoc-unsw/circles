@@ -10,3 +10,25 @@ export type { DocKind, SchemaIssue } from './validate';
 export { checkDocumentSchema, checkFixtureSchema, displayPath, explainDocument } from './validate';
 
 export const SCHEMA_VERSION = '1.0';
+
+export type { TraceEvent } from './eval/allocate';
+export type { EvaluateOptions, ExplainEvent } from './eval/evaluate';
+export { checkInstance, evaluate, explain, nodeAt, unlockedAt } from './eval/evaluate';
+export type {
+  AllocationKind,
+  CatalogueProvider,
+  ConditionResult,
+  CourseFacts,
+  Evaluation,
+  InstanceAllocation,
+  NodeResult,
+  Outcome,
+  PlanInstance,
+  Reason,
+  ReasonCode,
+  StudentState,
+  Tri,
+  UocRange
+} from './eval/types';
+export type { Bundle, CourseEntry, PatchStatus, ResolvedDoc } from './resolve/bundle';
+export { createBundle, staticCatalogue } from './resolve/bundle';

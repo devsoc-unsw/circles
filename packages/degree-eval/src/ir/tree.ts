@@ -1,4 +1,5 @@
 // The resolved requirement tree for one student (SCHEMA.md §7.2 steps 1–3, §4.1 node paths, §8).
+import type { UocRange } from '../eval/types';
 import type { CoreItem, Selector } from '../lang/ast';
 import { parseCoreItem } from '../lang/core-item';
 import { normalizeSelector } from '../lang/normalize';
@@ -6,7 +7,6 @@ import { RX } from '../lang/patterns';
 import type { Diagnostic } from '../load';
 import type { Bundle, ResolvedDoc } from '../resolve/bundle';
 import { applyOps, findNode } from '../resolve/ops';
-import type { UocRange } from '../eval/types';
 
 type Obj = Record<string, unknown>;
 
@@ -123,7 +123,17 @@ export const toRange = (v: unknown): UocRange => {
   return {};
 };
 
-const NODE_KINDS = new Set(['group', 'core', 'pool', 'spec', 'limit', 'maturity', 'timing', 'check', 'info']);
+const NODE_KINDS = new Set([
+  'group',
+  'core',
+  'pool',
+  'spec',
+  'limit',
+  'maturity',
+  'timing',
+  'check',
+  'info'
+]);
 
 const selectorOf = (v: unknown): Selector => {
   try {
@@ -135,7 +145,7 @@ const selectorOf = (v: unknown): Selector => {
 
 const coreItems = (node: IRNode): CoreItemIR[] =>
   (Array.isArray(node.raw.courses) ? node.raw.courses : []).map((written: unknown, index) => {
-    let item: CoreItem = '';
+    let item: CoreItem;
     try {
       item = parseCoreItem(String(written));
     } catch {
@@ -193,7 +203,14 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
     take(doc.data.exemptions, exemptions);
   };
 
-  const make = (path: string, id: string, kind: IRKind, raw: Obj, doc: DocCtx, parent?: IRNode): IRNode => {
+  const make = (
+    path: string,
+    id: string,
+    kind: IRKind,
+    raw: Obj,
+    doc: DocCtx,
+    parent?: IRNode
+  ): IRNode => {
     const node: IRNode = {
       path,
       id,
@@ -211,12 +228,7 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
     return node;
   };
 
-  const ctxFor = (
-    resolved: ResolvedDoc,
-    base: string,
-    key: string,
-    root?: IRNode
-  ): DocCtx => ({
+  const ctxFor = (resolved: ResolvedDoc, base: string, key: string, root?: IRNode): DocCtx => ({
     key,
     kind: resolved.kind,
     code: resolved.code,
@@ -275,7 +287,9 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
   rulesOf(rootDoc);
 
   // §8: each component becomes a group of the included (patched) nodes of its program
-  for (const c of (Array.isArray(program.data.components) ? program.data.components : []).filter(isObj)) {
+  for (const c of (Array.isArray(program.data.components) ? program.data.components : []).filter(
+    isObj
+  )) {
     const id = String(c.id);
     const year = typeof c.year === 'number' ? c.year : program.year;
     const prog = bundle.program(String(c.program), year);
@@ -311,7 +325,11 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
       comp.doc = ctx;
       buildList(requirements, comp, ctx);
       // §8 does not define importing a component's shares/substitutions/exemptions; v1 does not
-      if (['shares', 'substitutions', 'exemptions'].some((k) => Array.isArray(data[k]) && (data[k] as unknown[]).length)) {
+      if (
+        ['shares', 'substitutions', 'exemptions'].some(
+          (k) => Array.isArray(data[k]) && (data[k] as unknown[]).length
+        )
+      ) {
         diagnostics.push({
           level: 'info',
           code: 'COMPONENT_RULES_NOT_IMPORTED',
@@ -336,7 +354,9 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
       choiceGroups.push(n);
       const explicit = input.selections[n.path] ?? input.choices?.get(n.path);
       const implicit = n.children
-        .filter((child) => selectionNodes.some((s) => s.path.startsWith(`${child.path}/`) || s === child))
+        .filter((child) =>
+          selectionNodes.some((s) => s.path.startsWith(`${child.path}/`) || s === child)
+        )
         .map((child) => child.id);
       const chosen = explicit ?? (implicit.length ? implicit : undefined);
       // eslint-disable-next-line no-param-reassign
@@ -346,7 +366,11 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
       if (!n.chosen) unselectedChoices.push(n);
     }
     for (const child of n.children) {
-      visit(child, inactive || (n.chosen !== undefined && n.choose !== undefined && !n.chosen.includes(child.id)));
+      visit(
+        child,
+        inactive ||
+          (n.chosen !== undefined && n.choose !== undefined && !n.chosen.includes(child.id))
+      );
     }
   };
   visit(root, false);
@@ -361,19 +385,36 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
   };
   order(root);
 
-  return { program, root, nodes, active, shares, substitutions, exemptions, choiceGroups, unselectedChoices, diagnostics };
+  return {
+    program,
+    root,
+    nodes,
+    active,
+    shares,
+    substitutions,
+    exemptions,
+    choiceGroups,
+    unselectedChoices,
+    diagnostics
+  };
 };
 
 // §4.1 node paths, relative to the document `doc` that contains the reference. Returns the nodes the
 // path denotes (a `slot/id` path may match in several selected specs), or `unresolved`.
-export const resolvePath = (tree: Tree, ref: string, doc: DocCtx): { nodes: IRNode[]; unresolved: boolean } => {
+export const resolvePath = (
+  tree: Tree,
+  ref: string,
+  doc: DocCtx
+): { nodes: IRNode[]; unresolved: boolean } => {
   const none = { nodes: [] as IRNode[], unresolved: true };
   if (ref === 'root') return { nodes: [doc.root], unresolved: false };
   const segs = ref.split('/');
   let current: IRNode[];
   if (ref.startsWith('spec:')) {
     const code = (segs.shift() as string).slice('spec:'.length);
-    current = [...tree.nodes.values()].filter((n) => n.kind === 'subtree' && n.id === code && !n.inactive);
+    current = [...tree.nodes.values()].filter(
+      (n) => n.kind === 'subtree' && n.id === code && !n.inactive
+    );
     if (!current.length) return { nodes: [], unresolved: false }; // no slot holds it: empty
   } else {
     const head = tree.nodes.get(`${doc.base}${segs.shift() as string}`);

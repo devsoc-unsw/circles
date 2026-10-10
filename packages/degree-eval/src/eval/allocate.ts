@@ -1,8 +1,8 @@
 // The reference allocation algorithm (SCHEMA.md §7.4), step by step.
-import type { Selector } from '../lang/ast';
-import { normalizeSelector } from '../lang/normalize';
 import type { CoreItemIR, DocCtx, IRNode, Rule, Tree } from '../ir/tree';
 import { resolvePath, within } from '../ir/tree';
+import type { Selector } from '../lang/ast';
+import { normalizeSelector } from '../lang/normalize';
 import type { Bundle } from '../resolve/bundle';
 import type { Course, Inst, Selectors } from './context';
 import { equivalent, patternMatches } from './context';
@@ -80,7 +80,11 @@ export const allocate = (
     trace: []
   };
   const trace = (e: TraceEvent) => a.trace.push(e);
-  const course = (i: Inst): Course => ({ code: i.code, ...(i.facts ? { facts: i.facts } : {}), inst: i });
+  const course = (i: Inst): Course => ({
+    code: i.code,
+    ...(i.facts ? { facts: i.facts } : {}),
+    inst: i
+  });
   const matches = (s: Selector, i: Inst, doc: DocCtx) => selectors.matches(s, course(i), doc);
 
   // ---- eligibility (§7.3) ----
@@ -96,9 +100,14 @@ export const allocate = (
     i.active &&
     i.facts !== undefined &&
     pinOk(i, it.node) &&
-    (alt ? [alt] : it.alternatives).some((x) => !x.and && altMatches(i, x.codes[0] as string, x.pattern));
+    (alt ? [alt] : it.alternatives).some(
+      (x) => !x.and && altMatches(i, x.codes[0] as string, x.pattern)
+    );
   const forPool = (i: Inst, p: IRNode) =>
-    i.active && i.facts !== undefined && pinOk(i, p) && matches((p.pool as NonNullable<IRNode['pool']>).selector, i, p.doc);
+    i.active &&
+    i.facts !== undefined &&
+    pinOk(i, p) &&
+    matches((p.pool as NonNullable<IRNode['pool']>).selector, i, p.doc);
   const free = (i: Inst) => a.primary[i.idx] === undefined;
 
   // ---- share rules (program rules, then hoisted spec rules in pre-order) ----
@@ -137,7 +146,11 @@ export const allocate = (
   const base = [...pools].sort((x, y) => {
     const px = x.pool as NonNullable<IRNode['pool']>;
     const py = y.pool as NonNullable<IRNode['pool']>;
-    return ROLE_RANK[px.role] - ROLE_RANK[py.role] || Number(px.overflow) - Number(py.overflow) || x.pre - y.pre;
+    return (
+      ROLE_RANK[px.role] - ROLE_RANK[py.role] ||
+      Number(px.overflow) - Number(py.overflow) ||
+      x.pre - y.pre
+    );
   });
   // `priority` re-seats one document's pools within the positions they already occupy
   const ordered = [...base];
@@ -145,14 +158,18 @@ export const allocate = (
     const positions = base.map((p, i) => (p.doc.key === key ? i : -1)).filter((i) => i >= 0);
     const mine = positions
       .map((i) => base[i] as IRNode)
-      .sort((x, y) => (x.pool?.priority ?? 0) - (y.pool?.priority ?? 0) || base.indexOf(x) - base.indexOf(y));
+      .sort(
+        (x, y) =>
+          (x.pool?.priority ?? 0) - (y.pool?.priority ?? 0) || base.indexOf(x) - base.indexOf(y)
+      );
     positions.forEach((pos, k) => {
       ordered[pos] = mine[k] as IRNode;
     });
   }
 
   // ---- pool bookkeeping ----
-  const members = (p: IRNode) => insts.filter((i) => a.primary[i.idx] === p || a.shares[i.idx]?.includes(p));
+  const members = (p: IRNode) =>
+    insts.filter((i) => a.primary[i.idx] === p || a.shares[i.idx]?.includes(p));
   interface Held {
     uoc: number;
     count: number;
@@ -175,12 +192,20 @@ export const allocate = (
     return (
       h.uoc < (pool.uoc.min ?? 0) ||
       h.count < (pool.count.min ?? 0) ||
-      pool.quotas.some((q, k) => (h.quotas[k]?.uoc ?? 0) < (q.uoc.min ?? 0) || (h.quotas[k]?.count ?? 0) < (q.count.min ?? 0))
+      pool.quotas.some(
+        (q, k) =>
+          (h.quotas[k]?.uoc ?? 0) < (q.uoc.min ?? 0) ||
+          (h.quotas[k]?.count ?? 0) < (q.count.min ?? 0)
+      )
     );
   };
   const hasMax = (p: IRNode) => {
     const pool = p.pool as NonNullable<IRNode['pool']>;
-    return pool.uoc.max !== undefined || pool.count.max !== undefined || pool.quotas.some((q) => q.uoc.max !== undefined || q.count.max !== undefined);
+    return (
+      pool.uoc.max !== undefined ||
+      pool.count.max !== undefined ||
+      pool.quotas.some((q) => q.uoc.max !== undefined || q.count.max !== undefined)
+    );
   };
   const fitsMax = (p: IRNode, add: Inst[]) => {
     const pool = p.pool as NonNullable<IRNode['pool']>;
@@ -191,7 +216,8 @@ export const allocate = (
     return pool.quotas.every((q, k) => {
       const qs = add.filter((i) => matches(q.selector, i, p.doc));
       return (
-        (q.uoc.max === undefined || (h.quotas[k]?.uoc ?? 0) + qs.reduce((s, i) => s + i.uoc, 0) <= q.uoc.max) &&
+        (q.uoc.max === undefined ||
+          (h.quotas[k]?.uoc ?? 0) + qs.reduce((s, i) => s + i.uoc, 0) <= q.uoc.max) &&
         (q.count.max === undefined || (h.quotas[k]?.count ?? 0) + qs.length <= q.count.max)
       );
     });
@@ -201,8 +227,15 @@ export const allocate = (
   const items = coreItems.filter((it) => !it.node.inactive && !it.exempt);
   const unsatisfied = () => items.filter((it) => !a.itemSat.has(it.key));
   const satisfiedVia = (it: CoreItemIR, i: Inst) => {
-    const alt = it.alternatives.find((x) => !x.and && altMatches(i, x.codes[0] as string, x.pattern));
-    return alt?.provisional === true && !it.alternatives.some((x) => !x.provisional && !x.and && altMatches(i, x.codes[0] as string, x.pattern));
+    const alt = it.alternatives.find(
+      (x) => !x.and && altMatches(i, x.codes[0] as string, x.pattern)
+    );
+    return (
+      alt?.provisional === true &&
+      !it.alternatives.some(
+        (x) => !x.provisional && !x.and && altMatches(i, x.codes[0] as string, x.pattern)
+      )
+    );
   };
 
   // criterion 6: other core items and non-overflow pools x is eligible for that are still below min
@@ -212,7 +245,12 @@ export const allocate = (
 
   // The exact choice for pool P from `cands` (step 2/5 order, or step 4 top-up), with extra max
   // dimensions for share-rule budgets (step 5).
-  const pick = (p: IRNode, cands: Inst[], mode: 'fill' | 'topup', budgets: Dimension[] = []): Inst[] => {
+  const pick = (
+    p: IRNode,
+    cands: Inst[],
+    mode: 'fill' | 'topup',
+    budgets: Dimension[] = []
+  ): Inst[] => {
     const pool = p.pool as NonNullable<IRNode['pool']>;
     const h = heldOf(p);
     const dims: Dimension[] = [
@@ -221,14 +259,26 @@ export const allocate = (
       ...pool.quotas.flatMap((q, k): Dimension[] => {
         const inQ = cands.map((i) => matches(q.selector, i, p.doc));
         return [
-          { kind: 'uoc', contrib: cands.map((i, j) => (inQ[j] ? i.uoc : 0)), held: h.quotas[k]?.uoc ?? 0, ...q.uoc },
-          { kind: 'count', contrib: cands.map((_, j) => (inQ[j] ? 1 : 0)), held: h.quotas[k]?.count ?? 0, ...q.count }
+          {
+            kind: 'uoc',
+            contrib: cands.map((i, j) => (inQ[j] ? i.uoc : 0)),
+            held: h.quotas[k]?.uoc ?? 0,
+            ...q.uoc
+          },
+          {
+            kind: 'count',
+            contrib: cands.map((_, j) => (inQ[j] ? 1 : 0)),
+            held: h.quotas[k]?.count ?? 0,
+            ...q.count
+          }
         ];
       }),
       ...budgets
     ];
     try {
-      return choose({ dims, weights: cands.map((i) => scarcity(i, p)), mode }).map((k) => cands[k] as Inst);
+      return choose({ dims, weights: cands.map((i) => scarcity(i, p)), mode }).map(
+        (k) => cands[k] as Inst
+      );
     } catch (e) {
       if (!(e instanceof BudgetExceeded)) throw e;
       a.poolOverflow.add(p);
@@ -247,7 +297,13 @@ export const allocate = (
     const cands = insts.filter((i) => free(i) && forPool(i, p));
     for (const i of pick(p, cands, 'topup')) {
       a.primary[i.idx] = p;
-      trace({ step, node: p.path, iid: i.iid, action: 'primary', why: step === '4' ? 'exact top-up' : 'overflow' });
+      trace({
+        step,
+        node: p.path,
+        iid: i.iid,
+        action: 'primary',
+        why: step === '4' ? 'exact top-up' : 'overflow'
+      });
     }
   };
 
@@ -279,7 +335,13 @@ export const allocate = (
     const i = insts[idx] as Inst;
     a.primary[idx] = it.node;
     a.itemSat.set(it.key, { kind: 'primary', insts: [i], provisional: satisfiedVia(it, i) });
-    trace({ step: '1a', node: it.node.path, iid: i.iid, action: 'primary', why: `core item ${it.written}` });
+    trace({
+      step: '1a',
+      node: it.node.path,
+      iid: i.iid,
+      action: 'primary',
+      why: `core item ${it.written}`
+    });
   }
 
   // ---- 1b. shares for core items ----
@@ -288,12 +350,20 @@ export const allocate = (
     for (const i of insts) {
       const q = a.primary[i.idx];
       if (!done && q && q !== it.node && forItem(i, it)) {
-        const rule = a.rules.find((r) => r.mode === 'both' && covers(r, it.node, q) && courseOk(r, i) && r.budget >= i.uoc);
+        const rule = a.rules.find(
+          (r) => r.mode === 'both' && covers(r, it.node, q) && courseOk(r, i) && r.budget >= i.uoc
+        );
         if (rule) {
           rule.budget -= i.uoc;
           a.shares[i.idx]?.push(it.node);
           a.itemSat.set(it.key, { kind: 'share', insts: [i], provisional: satisfiedVia(it, i) });
-          trace({ step: '1b', node: it.node.path, iid: i.iid, action: 'share', why: `share rule ${rule.index} covers ${it.node.path} and ${q.path}` });
+          trace({
+            step: '1b',
+            node: it.node.path,
+            iid: i.iid,
+            action: 'share',
+            why: `share rule ${rule.index} covers ${it.node.path} and ${q.path}`
+          });
           done = true;
         }
       }
@@ -306,13 +376,27 @@ export const allocate = (
       if (!a.itemSat.has(it.key)) {
         const chosen: Inst[] = [];
         for (const code of alt.codes) {
-          const i = insts.find((x) => free(x) && !chosen.includes(x) && x.active && x.facts && pinOk(x, it.node) && altMatches(x, code, alt.pattern));
+          const i = insts.find(
+            (x) =>
+              free(x) &&
+              !chosen.includes(x) &&
+              x.active &&
+              x.facts &&
+              pinOk(x, it.node) &&
+              altMatches(x, code, alt.pattern)
+          );
           if (i) chosen.push(i);
         }
         if (chosen.length === alt.codes.length) {
           for (const i of chosen) {
             a.primary[i.idx] = it.node;
-            trace({ step: '1c', node: it.node.path, iid: i.iid, action: 'primary', why: `and-alternative ${alt.codes.join(' and ')}` });
+            trace({
+              step: '1c',
+              node: it.node.path,
+              iid: i.iid,
+              action: 'primary',
+              why: `and-alternative ${alt.codes.join(' and ')}`
+            });
           }
           a.itemSat.set(it.key, { kind: 'and', insts: chosen, provisional: alt.provisional });
         }
@@ -329,31 +413,51 @@ export const allocate = (
     for (const x of insts) {
       const q = a.primary[x.idx];
       if (!found && q && forItem(x, it)) {
-        const rule = a.rules.find((r) => r.mode === 'replace' && covers(r, it.node, q) && courseOk(r, x));
+        const rule = a.rules.find(
+          (r) => r.mode === 'replace' && covers(r, it.node, q) && courseOk(r, x)
+        );
         if (rule) found = { x, rule };
       }
     }
     if (found) {
       const { x, rule } = found;
       const side = inSide(rule, 0, it.node) ? rule.sides[0] : rule.sides[1];
-      const sidePools = rule.replacementFrom ? [] : pools.filter((p) => side.some((s) => within(p, s)));
+      const sidePools = rule.replacementFrom
+        ? []
+        : pools.filter((p) => side.some((s) => within(p, s)));
       const level = (code: string) => Number(code[4]);
       const y = insts.find(
         (c) =>
           free(c) &&
           c.active &&
           c.facts !== undefined &&
-          (rule.replacementFrom ? matches(rule.replacementFrom, c, rule.doc) : sidePools.some((p) => matches((p.pool as NonNullable<IRNode['pool']>).selector, c, p.doc))) &&
+          (rule.replacementFrom
+            ? matches(rule.replacementFrom, c, rule.doc)
+            : sidePools.some((p) =>
+                matches((p.pool as NonNullable<IRNode['pool']>).selector, c, p.doc)
+              )) &&
           (!rule.sameOrHigher || level(c.code) >= level(x.code))
       );
       if (y) {
         a.primary[y.idx] = it.node;
         a.replaces[y.idx] = x;
         a.itemSat.set(it.key, { kind: 'replacement', insts: [y], provisional: false });
-        trace({ step: '3', node: it.node.path, iid: y.iid, action: 'replacement', why: `replaces ${x.code} (share rule ${rule.index}, mode: replace)` });
+        trace({
+          step: '3',
+          node: it.node.path,
+          iid: y.iid,
+          action: 'replacement',
+          why: `replaces ${x.code} (share rule ${rule.index}, mode: replace)`
+        });
       } else {
         a.replacementMissing.add(it.key);
-        trace({ step: '3', node: it.node.path, iid: x.iid, action: 'replacement_missing', why: `${x.code} counts elsewhere and no replacement elective is planned` });
+        trace({
+          step: '3',
+          node: it.node.path,
+          iid: x.iid,
+          action: 'replacement_missing',
+          why: `${x.code} counts elsewhere and no replacement elective is planned`
+        });
       }
     }
   }
@@ -368,19 +472,37 @@ export const allocate = (
       for (const i of insts) {
         const q = a.primary[i.idx];
         if (q && q !== p && !a.shares[i.idx]?.includes(p) && forPool(i, p)) {
-          const rule = a.rules.find((r) => r.mode === 'both' && r.targets === 'any' && covers(r, p, q) && courseOk(r, i));
+          const rule = a.rules.find(
+            (r) => r.mode === 'both' && r.targets === 'any' && covers(r, p, q) && courseOk(r, i)
+          );
           if (rule) bound.push({ i, rule });
         }
       }
       const rulesUsed = [...new Set(bound.map((b) => b.rule))];
       const budgets: Dimension[] = rulesUsed
         .filter((r) => r.budget !== Infinity)
-        .map((r) => ({ kind: 'uoc', contrib: bound.map((b) => (b.rule === r ? b.i.uoc : 0)), held: 0, max: r.budget }));
-      for (const i of pick(p, bound.map((b) => b.i), 'fill', budgets)) {
-        const rule = (bound.find((b) => b.i === i) as { rule: ShareIR }).rule;
+        .map((r) => ({
+          kind: 'uoc',
+          contrib: bound.map((b) => (b.rule === r ? b.i.uoc : 0)),
+          held: 0,
+          max: r.budget
+        }));
+      for (const i of pick(
+        p,
+        bound.map((b) => b.i),
+        'fill',
+        budgets
+      )) {
+        const { rule } = bound.find((b) => b.i === i) as { rule: ShareIR };
         rule.budget -= i.uoc;
         a.shares[i.idx]?.push(p);
-        trace({ step: '5', node: p.path, iid: i.iid, action: 'share', why: `share rule ${rule.index} covers ${p.path} and ${(a.primary[i.idx] as IRNode).path}` });
+        trace({
+          step: '5',
+          node: p.path,
+          iid: i.iid,
+          action: 'share',
+          why: `share rule ${rule.index} covers ${p.path} and ${(a.primary[i.idx] as IRNode).path}`
+        });
       }
     }
   }
@@ -408,7 +530,15 @@ export const allocate = (
   const donor = (eligible: (i: Inst) => boolean, target: IRNode) =>
     insts.find((x) => {
       const q = a.primary[x.idx];
-      return !x.pin && !moved.has(x.idx) && q !== undefined && q !== target && a.replaces[x.idx] === undefined && eligible(x) && staysMet(q, x);
+      return (
+        !x.pin &&
+        !moved.has(x.idx) &&
+        q !== undefined &&
+        q !== target &&
+        a.replaces[x.idx] === undefined &&
+        eligible(x) &&
+        staysMet(q, x)
+      );
     });
   for (const it of unsatisfied()) {
     const x = donor((i) => forItem(i, it), it.node);
@@ -417,7 +547,13 @@ export const allocate = (
       a.primary[x.idx] = it.node;
       moved.add(x.idx);
       a.itemSat.set(it.key, { kind: 'primary', insts: [x], provisional: satisfiedVia(it, x) });
-      trace({ step: '7', node: it.node.path, iid: x.iid, action: 'moved', why: `from ${q.path}, which stays met` });
+      trace({
+        step: '7',
+        node: it.node.path,
+        iid: x.iid,
+        action: 'moved',
+        why: `from ${q.path}, which stays met`
+      });
       if (q.kind === 'pool' && !q.pool?.overflow && belowMin(q)) fill(q, '7');
     }
   }
@@ -428,14 +564,22 @@ export const allocate = (
         const q = a.primary[x.idx] as IRNode;
         a.primary[x.idx] = p;
         moved.add(x.idx);
-        trace({ step: '7', node: p.path, iid: x.iid, action: 'moved', why: `from ${q.path}, which stays met` });
+        trace({
+          step: '7',
+          node: p.path,
+          iid: x.iid,
+          action: 'moved',
+          why: `from ${q.path}, which stays met`
+        });
         if (q.kind === 'pool' && !q.pool?.overflow && belowMin(q)) fill(q, '7');
       }
     }
   }
 
   // ---- 8. credit (counts_toward) ----
-  for (const spec of tree.active.filter((x) => x.kind === 'spec' && Array.isArray(x.raw.counts_toward))) {
+  for (const spec of tree.active.filter(
+    (x) => x.kind === 'spec' && Array.isArray(x.raw.counts_toward)
+  )) {
     const rules = (spec.raw.counts_toward as unknown[]).map((r) => {
       const path = typeof r === 'string' ? r : isObj(r) ? String(r.node) : '';
       let filter: Selector | undefined;
@@ -444,7 +588,9 @@ export const allocate = (
       } catch {
         filter = undefined;
       }
-      const host = resolvePath(tree, path, spec.doc).nodes.find((x) => x.kind === 'pool' && !x.inactive);
+      const host = resolvePath(tree, path, spec.doc).nodes.find(
+        (x) => x.kind === 'pool' && !x.inactive
+      );
       return { host, filter };
     });
     for (const sub of spec.children.filter((c) => c.kind === 'subtree' && !c.inactive)) {
@@ -467,7 +613,13 @@ export const allocate = (
                 (pool.count.max === undefined || count <= pool.count.max);
               if (ok) {
                 a.credits[i.idx] = host;
-                trace({ step: '8', node: host.path, iid: i.iid, action: 'credit', why: `counts_toward from ${spec.path}` });
+                trace({
+                  step: '8',
+                  node: host.path,
+                  iid: i.iid,
+                  action: 'credit',
+                  why: `counts_toward from ${spec.path}`
+                });
               }
             }
           }
@@ -483,32 +635,60 @@ export const allocate = (
     return cur;
   };
   for (const i of insts) {
-    if (!i.ignored && !i.failed && (i.active || !i.completed) && a.primary[i.idx] === undefined && i.active) {
+    if (
+      !i.ignored &&
+      !i.failed &&
+      (i.active || !i.completed) &&
+      a.primary[i.idx] === undefined &&
+      i.active
+    ) {
       a.notCounted.push(i);
-      trace({ step: '9', node: 'root', iid: i.iid, action: 'not_counted', why: i.facts ? 'no node takes it' : 'missing from the catalogue' });
+      trace({
+        step: '9',
+        node: 'root',
+        iid: i.iid,
+        action: 'not_counted',
+        why: i.facts ? 'no node takes it' : 'missing from the catalogue'
+      });
     }
   }
   for (const it of unsatisfied()) {
     if (!a.replacementMissing.has(it.key)) {
       for (const x of insts) {
         const q = a.primary[x.idx];
-        if (!a.overlap.has(it.key) && q && forItem(x, it) && regionOf(q) !== regionOf(it.node) && !a.rules.some((r) => covers(r, it.node, q))) {
+        if (
+          !a.overlap.has(it.key) &&
+          q &&
+          forItem(x, it) &&
+          regionOf(q) !== regionOf(it.node) &&
+          !a.rules.some((r) => covers(r, it.node, q))
+        ) {
           a.overlap.set(it.key, { inst: x, q });
-          trace({ step: '9', node: it.node.path, iid: x.iid, action: 'overlap_undeclared', why: `${x.code} counts toward ${q.path} and no share rule covers the pair` });
+          trace({
+            step: '9',
+            node: it.node.path,
+            iid: x.iid,
+            action: 'overlap_undeclared',
+            why: `${x.code} counts toward ${q.path} and no share rule covers the pair`
+          });
         }
       }
     }
   }
   // instances that could not take part: failed ones and ones missing from the catalogue
-  const note = (map: Map<IRNode, Inst[]>, node: IRNode, i: Inst) => map.set(node, [...(map.get(node) ?? []), i]);
+  const note = (map: Map<IRNode, Inst[]>, node: IRNode, i: Inst) =>
+    map.set(node, [...(map.get(node) ?? []), i]);
   for (const i of insts) {
     if (!i.ignored && (i.failed || !i.facts)) {
       const map = i.failed ? a.failedOn : a.missingOn;
       for (const it of coreItems.filter((x) => !x.node.inactive)) {
-        if (it.alternatives.some((alt) => alt.codes.some((c) => altMatches(i, c, alt.pattern)))) note(map, it.node, i);
+        if (it.alternatives.some((alt) => alt.codes.some((c) => altMatches(i, c, alt.pattern))))
+          note(map, it.node, i);
       }
       for (const p of pools) {
-        const eligible = i.facts ? matches((p.pool as NonNullable<IRNode['pool']>).selector, i, p.doc) : selectors.names((p.pool as NonNullable<IRNode['pool']>).selector, i.code, p.doc);
+        const eligible = i.facts
+          ? matches((p.pool as NonNullable<IRNode['pool']>).selector, i, p.doc)
+          : selectors.names((p.pool as NonNullable<IRNode['pool']>).selector, i.code, p.doc);
         if (eligible) note(map, p, i);
       }
     }

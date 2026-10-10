@@ -1,8 +1,8 @@
 // Tri-state condition evaluation (SCHEMA.md §5.1–5.3).
-import type { Condition, Selector } from '../lang/ast';
-import { printCondition, printSelector } from '../lang/print';
 import type { CoreItemIR, DocCtx, IRNode, Tree } from '../ir/tree';
 import { resolvePath } from '../ir/tree';
+import type { Condition, Selector } from '../lang/ast';
+import { printCondition, printSelector } from '../lang/print';
 import type { Bundle } from '../resolve/bundle';
 import type { InMembership, Inst, Selectors } from './context';
 import { equivalent, patternMatches } from './context';
@@ -31,7 +31,11 @@ export interface Point {
   doc: DocCtx; // where the condition was written (sets, node paths)
 }
 
-export const result = (status: Tri, projected = false, reasons: Reason[] = []): ConditionResult => ({
+export const result = (
+  status: Tri,
+  projected = false,
+  reasons: Reason[] = []
+): ConditionResult => ({
   status,
   projected,
   reasons,
@@ -89,7 +93,12 @@ export class Conditions {
   }
 
   private sel(s: Selector, i: Inst, p: Point): boolean {
-    return this.w.selectors.matches(s, { code: i.code, ...(i.facts ? { facts: i.facts } : {}), inst: i }, p.doc, this.w.inMember);
+    return this.w.selectors.matches(
+      s,
+      { code: i.code, ...(i.facts ? { facts: i.facts } : {}), inst: i },
+      p.doc,
+      this.w.inMember
+    );
   }
 
   evaluate(c: Condition, p: Point): ConditionResult {
@@ -110,17 +119,35 @@ export class Conditions {
     if ('reported_wam' in c) {
       const v = this.w.student.reported?.[c.reported_wam.label];
       const atom = printCondition(c);
-      if (v === undefined) return result('unknown', false, [reason('not_attested', `${c.reported_wam.label} has not been entered`, atom)]);
-      return result(v >= c.reported_wam.min ? 'met' : 'unmet', false, v >= c.reported_wam.min ? [] : [reason('below_min', `${c.reported_wam.label} is ${v}, below ${c.reported_wam.min}`, atom)]);
+      if (v === undefined)
+        return result('unknown', false, [
+          reason('not_attested', `${c.reported_wam.label} has not been entered`, atom)
+        ]);
+      return result(
+        v >= c.reported_wam.min ? 'met' : 'unmet',
+        false,
+        v >= c.reported_wam.min
+          ? []
+          : [
+              reason(
+                'below_min',
+                `${c.reported_wam.label} is ${v}, below ${c.reported_wam.min}`,
+                atom
+              )
+            ]
+      );
     }
-    if ('cores' in c) return this.cores(c.cores === true ? undefined : c.cores, p, printCondition(c));
+    if ('cores' in c)
+      return this.cores(c.cores === true ? undefined : c.cores, p, printCondition(c));
     if ('complete' in c) return this.complete(c.complete, p, printCondition(c));
     if ('program' in c) return this.program(c.program, p, printCondition(c));
     if ('spec' in c) return this.spec(c.spec, p, printCondition(c));
     const key = typeof c.manual === 'string' ? c.manual : c.manual.id;
     const text = typeof c.manual === 'string' ? c.manual : c.manual.text;
     if (this.w.student.attest?.[key]) return result('met');
-    return result('unknown', false, [reason('manual', `needs confirmation: ${text}`, printCondition(c))]);
+    return result('unknown', false, [
+      reason('manual', `needs confirmation: ${text}`, printCondition(c))
+    ]);
   }
 
   // X (done before t) or coreq(X) (done in or before t), counting equivalents (§5.1)
@@ -132,9 +159,19 @@ export class Conditions {
         (coreq ? i.term <= p.term : i.term < p.term) &&
         this.isEquiv(i.code, code, i)
     );
-    if (hits.length) return result('met', hits.every((i) => i.projected));
+    if (hits.length)
+      return result(
+        'met',
+        hits.every((i) => i.projected)
+      );
     const atom = coreq ? `coreq(${code})` : code;
-    return result('unmet', false, [reason('requires_unmet', `${code} is not completed${coreq ? ' by then' : ' before this term'}`, atom)]);
+    return result('unmet', false, [
+      reason(
+        'requires_unmet',
+        `${code} is not completed${coreq ? ' by then' : ' before this term'}`,
+        atom
+      )
+    ]);
   }
 
   // planned(X): an instance of X or an equivalent anywhere in the plan other than i, not failed,
@@ -144,15 +181,26 @@ export class Conditions {
       (i) => i !== p.self && !i.ignored && !i.failed && this.isEquiv(i.code, code, i)
     );
     if (hits.length) {
-      return result('met', hits.every((i) => i.projected), [
-        reason('excluded', `${code} is in the plan`, `planned(${code})`, hits.map((i) => i.iid))
-      ]);
+      return result(
+        'met',
+        hits.every((i) => i.projected),
+        [
+          reason(
+            'excluded',
+            `${code} is in the plan`,
+            `planned(${code})`,
+            hits.map((i) => i.iid)
+          )
+        ]
+      );
     }
     return result('unmet');
   }
 
   private uoc(min: number, s: Selector | undefined, p: Point, atom: string): ConditionResult {
-    const done = this.w.insts.filter((i) => this.done(i, p) && i.term < p.term && (s === undefined || this.sel(s, i, p)));
+    const done = this.w.insts.filter(
+      (i) => this.done(i, p) && i.term < p.term && (s === undefined || this.sel(s, i, p))
+    );
     const known = done.filter((i) => i.facts);
     const sum = known.reduce((a, i) => a + i.uoc, 0);
     if (sum >= min) {
@@ -161,9 +209,24 @@ export class Conditions {
       return result('met', firm < min);
     }
     if (done.some((i) => !i.facts)) {
-      return result('unknown', false, [reason('catalogue_missing', `UOC of ${done.filter((i) => !i.facts).map((i) => i.code).join(', ')} unknown`, atom)]);
+      return result('unknown', false, [
+        reason(
+          'catalogue_missing',
+          `UOC of ${done
+            .filter((i) => !i.facts)
+            .map((i) => i.code)
+            .join(', ')} unknown`,
+          atom
+        )
+      ]);
     }
-    return result('unmet', false, [reason('below_min', `${sum} UOC${s === undefined ? '' : ` in ${printSelector(s)}`} completed, ${min} needed`, atom)]);
+    return result('unmet', false, [
+      reason(
+        'below_min',
+        `${sum} UOC${s === undefined ? '' : ` in ${printSelector(s)}`} completed, ${min} needed`,
+        atom
+      )
+    ]);
   }
 
   // WAM = Σ mark·uoc / Σ uoc over WAM-bearing instances with a mark; exact arithmetic (§5.1)
@@ -175,28 +238,51 @@ export class Conditions {
       (i) => i.completed && (i.outcome === 'pass' || i.outcome === 'fail') && i.mark !== undefined
     );
     const projected = relevant.some((i) => !p.static && (!i.completed || i.outcome === 'pending'));
-    if (relevant.some((i) => i.completed && i.outcome === 'pass' && i.mark === undefined) || !bearing.length) {
-      return result('unknown', projected, [reason('missing_mark', 'no mark to compute the WAM from', atom)]);
+    if (
+      relevant.some((i) => i.completed && i.outcome === 'pass' && i.mark === undefined) ||
+      !bearing.length
+    ) {
+      return result('unknown', projected, [
+        reason('missing_mark', 'no mark to compute the WAM from', atom)
+      ]);
     }
     const scaled = (x: number) => Math.round(x * 100);
     const num = bearing.reduce((a, i) => a + scaled(i.mark ?? 0) * i.uoc, 0);
     const den = bearing.reduce((a, i) => a + i.uoc, 0);
     const ok = num >= scaled(min) * den;
-    return result(ok ? 'met' : 'unmet', projected, ok ? [] : [reason('below_min', `WAM ${(num / den / 100).toFixed(2)} is below ${min}`, atom)]);
+    return result(
+      ok ? 'met' : 'unmet',
+      projected,
+      ok ? [] : [reason('below_min', `WAM ${(num / den / 100).toFixed(2)} is below ${min}`, atom)]
+    );
   }
 
   private grade(c: Extract<Condition, { grade: unknown }>, p: Point): ConditionResult {
     const g = c.grade;
     const atom = printCondition(c);
-    const match = (i: Inst) => ('course' in g ? this.isEquiv(i.code, g.course, i) : this.sel(g.in, i, p));
+    const match = (i: Inst) =>
+      'course' in g ? this.isEquiv(i.code, g.course, i) : this.sel(g.in, i, p);
     const done = this.w.insts.filter((i) => this.done(i, p) && i.term < p.term && match(i));
     const marked = done.filter((i) => i.completed && i.mark !== undefined);
     if (marked.some((i) => (i.mark ?? 0) >= g.min)) return result('met');
     const unmarked = done.filter((i) => !i.completed || i.mark === undefined);
     if (unmarked.length) {
-      return result('unknown', true, [reason('missing_mark', `no mark yet for ${unmarked.map((i) => i.code).join(', ')}`, atom, unmarked.map((i) => i.iid))]);
+      return result('unknown', true, [
+        reason(
+          'missing_mark',
+          `no mark yet for ${unmarked.map((i) => i.code).join(', ')}`,
+          atom,
+          unmarked.map((i) => i.iid)
+        )
+      ]);
     }
-    return result('unmet', false, [reason('below_min', done.length ? `best mark is below ${g.min}` : 'no matching course completed', atom)]);
+    return result('unmet', false, [
+      reason(
+        'below_min',
+        done.length ? `best mark is below ${g.min}` : 'no matching course completed',
+        atom
+      )
+    ]);
   }
 
   // cores(sel): every core item with an alternative matching sel is satisfied by done instances
@@ -206,53 +292,125 @@ export class Conditions {
         it.node.raw.is_core !== false &&
         !it.node.inactive &&
         it.alternatives.some((alt) =>
-          alt.codes.some((code) => s === undefined || this.w.selectors.matches(s, { code, ...(this.w.bundle.facts(code, p.doc.year) ? { facts: this.w.bundle.facts(code, p.doc.year) as NonNullable<ReturnType<Bundle['facts']>> } : {}) }, it.node.doc))
+          alt.codes.some(
+            (code) =>
+              s === undefined ||
+              this.w.selectors.matches(
+                s,
+                {
+                  code,
+                  ...(this.w.bundle.facts(code, p.doc.year)
+                    ? {
+                        facts: this.w.bundle.facts(code, p.doc.year) as NonNullable<
+                          ReturnType<Bundle['facts']>
+                        >
+                      }
+                    : {})
+                },
+                it.node.doc
+              )
+          )
         )
     );
-    if (!items.length) return result('unknown', false, [reason('no_matching_cores', 'no core item matches', atom)]);
+    if (!items.length)
+      return result('unknown', false, [reason('no_matching_cores', 'no core item matches', atom)]);
     const rs = items.map((it) => {
       if (it.exempt) return result('met');
       const sats = it.alternatives.map((alt) => {
         const insts = alt.codes.map((code) =>
-          this.w.insts.find((i) => this.done(i, p) && i.term < p.term && (alt.pattern ? patternMatches(code, i.code) : this.isEquiv(i.code, code, i)))
+          this.w.insts.find(
+            (i) =>
+              this.done(i, p) &&
+              i.term < p.term &&
+              (alt.pattern ? patternMatches(code, i.code) : this.isEquiv(i.code, code, i))
+          )
         );
         return insts.every(Boolean) ? (insts as Inst[]) : undefined;
       });
       const best = sats.find((x) => x && x.every((i) => !i.projected)) ?? sats.find(Boolean);
       return best
-        ? result('met', best.some((i) => i.projected))
-        : result('unmet', false, [reason('not_planned', `core item ${it.written} not completed`, atom)]);
+        ? result(
+            'met',
+            best.some((i) => i.projected)
+          )
+        : result('unmet', false, [
+            reason('not_planned', `core item ${it.written} not completed`, atom)
+          ]);
     });
     return kleeneAnd(rs);
   }
 
   private complete(path: string, p: Point, atom: string): ConditionResult {
-    if (!this.w.complete) return result('unknown', false, [reason('unresolved_path', 'complete() is only evaluated after allocation', atom)]);
+    if (!this.w.complete)
+      return result('unknown', false, [
+        reason('unresolved_path', 'complete() is only evaluated after allocation', atom)
+      ]);
     const { nodes, unresolved } = resolvePath(this.w.tree, path, p.doc);
-    if (unresolved || !nodes.length) return result('unknown', false, [reason('unresolved_path', `${path} does not resolve`, atom)]);
-    return kleeneAnd(nodes.map((n) => {
-      const s = (this.w.complete as (node: IRNode, term: number) => Tri)(n, p.term);
-      return result(s, false, s === 'met' ? [] : [reason(s === 'unmet' ? 'below_min' : 'unresolved_path', `${path} is not complete`, atom)]);
-    }));
+    if (unresolved || !nodes.length)
+      return result('unknown', false, [
+        reason('unresolved_path', `${path} does not resolve`, atom)
+      ]);
+    return kleeneAnd(
+      nodes.map((n) => {
+        const s = (this.w.complete as (node: IRNode, term: number) => Tri)(n, p.term);
+        return result(
+          s,
+          false,
+          s === 'met'
+            ? []
+            : [
+                reason(
+                  s === 'unmet' ? 'below_min' : 'unresolved_path',
+                  `${path} is not complete`,
+                  atom
+                )
+              ]
+        );
+      })
+    );
   }
 
   private groups(kind: 'program_groups' | 'spec_groups', name: string, p: Point): string[] {
     const lib = this.w.bundle.library(p.doc.year);
-    const g = isObj(lib?.[kind]) ? (lib[kind] as Obj)[name] : undefined;
+    const g = isObj(lib?.[kind]) ? lib[kind][name] : undefined;
     return Array.isArray(g) ? g.map(String) : [];
   }
 
   private program(list: string[], p: Point, atom: string): ConditionResult {
-    const mine = [this.w.tree.program.code, ...(Array.isArray(this.w.tree.program.data.components) ? this.w.tree.program.data.components : []).filter(isObj).map((c) => String(c.program))];
-    const codes = list.flatMap((x) => (x.startsWith('@') ? this.groups('program_groups', x.slice(1), p) : [x]));
+    const mine = [
+      this.w.tree.program.code,
+      ...(Array.isArray(this.w.tree.program.data.components)
+        ? this.w.tree.program.data.components
+        : []
+      )
+        .filter(isObj)
+        .map((c) => String(c.program))
+    ];
+    const codes = list.flatMap((x) =>
+      x.startsWith('@') ? this.groups('program_groups', x.slice(1), p) : [x]
+    );
     const ok = mine.some((m) => codes.includes(m));
-    return result(ok ? 'met' : 'unmet', false, ok ? [] : [reason('not_allowed', `program ${mine.join('/')} is not ${list.join(', ')}`, atom)]);
+    return result(
+      ok ? 'met' : 'unmet',
+      false,
+      ok ? [] : [reason('not_allowed', `program ${mine.join('/')} is not ${list.join(', ')}`, atom)]
+    );
   }
 
   private spec(list: string[], p: Point, atom: string): ConditionResult {
-    const selected = [...this.w.tree.nodes.values()].filter((n) => n.kind === 'subtree' && !n.inactive).map((n) => n.id);
-    const patterns = list.flatMap((x) => (x.startsWith('@') ? this.groups('spec_groups', x.slice(1), p) : [x]));
+    const selected = [...this.w.tree.nodes.values()]
+      .filter((n) => n.kind === 'subtree' && !n.inactive)
+      .map((n) => n.id);
+    const patterns = list.flatMap((x) =>
+      x.startsWith('@') ? this.groups('spec_groups', x.slice(1), p) : [x]
+    );
     const ok = selected.some((code) => patterns.some((pat) => patternMatches(pat, code)));
-    return result(ok ? 'met' : 'unmet', false, ok ? [] : [reason('not_allowed', `no selected specialisation matches ${list.join(', ')}`, atom)]);
+    return result(
+      ok ? 'met' : 'unmet',
+      false,
+      ok
+        ? []
+        : [reason('not_allowed', `no selected specialisation matches ${list.join(', ')}`, atom)]
+    );
   }
 }

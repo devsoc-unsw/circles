@@ -43,7 +43,9 @@ export const choose = ({ dims, weights, mode }: Choice): number[] => {
   // dimension with neither bound is dropped (except dims[0]).
   const live = dims
     .map((d, i) => ({ d, i }))
-    .filter(({ d, i }) => i === 0 || d.max !== undefined || (mode === 'fill' && d.min !== undefined));
+    .filter(
+      ({ d, i }) => i === 0 || d.max !== undefined || (mode === 'fill' && d.min !== undefined)
+    );
   const cap = live.map(({ d, i }) => {
     if (i === 0 || d.max !== undefined) return Infinity;
     return Math.max(0, (d.min ?? 0) - d.held);
@@ -72,12 +74,14 @@ export const choose = ({ dims, weights, mode }: Choice): number[] => {
   };
 
   const step = (state: number[], i: number): number[] | undefined => {
-    const next = live.map(({ d }, k) => Math.min(cap[k] ?? Infinity, (state[k] ?? 0) + (d.contrib[i] ?? 0)));
+    const next = live.map(({ d }, k) =>
+      Math.min(cap[k] ?? Infinity, (state[k] ?? 0) + (d.contrib[i] ?? 0))
+    );
     const ok = live.every(({ d }, k) => d.max === undefined || d.held + (next[k] ?? 0) <= d.max);
     return ok ? next : undefined;
   };
 
-  const memo: Map<string, number[]>[] = Array.from({ length: n + 1 }, () => new Map());
+  const memo = Array.from({ length: n + 1 }, () => new Map<string, number[]>());
   let cells = 0;
   const best = (i: number, state: number[]): number[] => {
     if (i === n) return [...finalScore(state), 0, 0];

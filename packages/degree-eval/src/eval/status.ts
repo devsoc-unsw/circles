@@ -1,15 +1,15 @@
 // Node status (SCHEMA.md §7.6): per-kind rules, the uoc check with blocked UOC, Kleene AND for
 // structural nodes.
-import type { Condition, Selector } from '../lang/ast';
-import { normalizeCondition, normalizeSelector } from '../lang/normalize';
 import type { CoreItemIR, IRNode, Tree } from '../ir/tree';
 import { resolvePath, toRange, within } from '../ir/tree';
+import type { Condition, Selector } from '../lang/ast';
+import { normalizeCondition, normalizeSelector } from '../lang/normalize';
 import type { Allocation } from './allocate';
 import type { Conditions, World } from './conditions';
 import { kleeneAnd, result } from './conditions';
 import type { Inst } from './context';
 import { equivalent, patternMatches } from './context';
-import type { ConditionResult, NodeResult, Reason, ReasonCode, Tri, UocRange } from './types';
+import type { ConditionResult, NodeResult, Reason, ReasonCode, UocRange } from './types';
 
 type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -92,64 +92,124 @@ export const computeStatuses = (
       }
     }
   }
-  for (const node of alloc.missingOn.keys()) for (let cur: IRNode | undefined = node; cur; cur = cur.parent) missingIn.add(cur);
+  for (const node of alloc.missingOn.keys())
+    for (let cur: IRNode | undefined = node; cur; cur = cur.parent) missingIn.add(cur);
 
   const allocations = (n: IRNode) =>
     insts.flatMap((i) => {
       const out: NodeResult['allocations'] = [];
-      if (alloc.primary[i.idx] === n) out.push({ iid: i.iid, kind: alloc.replaces[i.idx] ? 'replacement' : 'primary' });
+      if (alloc.primary[i.idx] === n)
+        out.push({ iid: i.iid, kind: alloc.replaces[i.idx] ? 'replacement' : 'primary' });
       if (alloc.shares[i.idx]?.includes(n)) out.push({ iid: i.iid, kind: 'share' });
       if (alloc.credits[i.idx] === n) out.push({ iid: i.iid, kind: 'credit' });
       return out;
     });
 
-  const uocCheck = (n: IRNode, range: UocRange | undefined, label: string): ConditionResult | undefined => {
+  const uocCheck = (
+    n: IRNode,
+    range: UocRange | undefined,
+    label: string
+  ): ConditionResult | undefined => {
     if (!range || (range.min === undefined && range.max === undefined)) return undefined;
     const c = uocOf(countedIn(n));
     if (range.max !== undefined && c > range.max) {
-      return result('unmet', false, [reason('above_max', `${label}: ${c} UOC counted, at most ${range.max}`)]);
+      return result('unmet', false, [
+        reason('above_max', `${label}: ${c} UOC counted, at most ${range.max}`)
+      ]);
     }
     if (c >= (range.min ?? 0)) return result('met');
     const b = [...(blocked.get(n) ?? [])];
     if (missingIn.has(n) || c + uocOf(b) >= (range.min ?? 0)) {
       const codes: Reason[] = [];
-      if (b.length) codes.push(reason('overlap_undeclared', `${label}: ${c} UOC counted + ${uocOf(b)} UOC blocked by an undeclared overlap, ${range.min ?? 0} needed`, b.map((i) => i.iid)));
-      if (missingIn.has(n)) codes.push(reason('catalogue_missing', `${label}: a course's UOC is unknown (missing from the catalogue)`));
+      if (b.length)
+        codes.push(
+          reason(
+            'overlap_undeclared',
+            `${label}: ${c} UOC counted + ${uocOf(b)} UOC blocked by an undeclared overlap, ${range.min ?? 0} needed`,
+            b.map((i) => i.iid)
+          )
+        );
+      if (missingIn.has(n))
+        codes.push(
+          reason(
+            'catalogue_missing',
+            `${label}: a course's UOC is unknown (missing from the catalogue)`
+          )
+        );
       return result('unknown', false, codes);
     }
-    return result('unmet', false, [reason('below_min', `${label}: ${c} UOC counted, ${range.min ?? 0} needed`)]);
+    return result('unmet', false, [
+      reason('below_min', `${label}: ${c} UOC counted, ${range.min ?? 0} needed`)
+    ]);
   };
 
   const itemCovers = (it: CoreItemIR, i: Inst) =>
-    it.alternatives.some((alt) => alt.codes.some((c) => (alt.pattern ? patternMatches(c, i.code) : equivalent(w.bundle, i.code, c, i.year))));
+    it.alternatives.some((alt) =>
+      alt.codes.some((c) =>
+        alt.pattern ? patternMatches(c, i.code) : equivalent(w.bundle, i.code, c, i.year)
+      )
+    );
 
   const coreStatus = (n: IRNode): ConditionResult => {
     const rs = w.coreItems
       .filter((it) => it.node === n)
       .map((it): ConditionResult => {
         if (it.exempt) {
-          return it.exempt.provisional ? result('unknown', false, [reason('provisional', `${it.written} exempt provisionally`)]) : result('met');
+          return it.exempt.provisional
+            ? result('unknown', false, [
+                reason('provisional', `${it.written} exempt provisionally`)
+              ])
+            : result('met');
         }
         const sat = alloc.itemSat.get(it.key);
         if (sat) {
           const projected = sat.insts.some((i) => i.projected);
-          return sat.provisional ? result('unknown', projected, [reason('provisional', `${it.written} met only through a provisional substitution`)]) : result('met', projected);
+          return sat.provisional
+            ? result('unknown', projected, [
+                reason('provisional', `${it.written} met only through a provisional substitution`)
+              ])
+            : result('met', projected);
         }
         if (alloc.replacementMissing.has(it.key)) {
-          return result('unmet', false, [reason('replacement_missing', `${it.written} counts elsewhere; plan a replacement elective`)]);
+          return result('unmet', false, [
+            reason(
+              'replacement_missing',
+              `${it.written} counts elsewhere; plan a replacement elective`
+            )
+          ]);
         }
         const ov = alloc.overlap.get(it.key);
         if (ov) {
-          return result('unknown', ov.inst.projected, [reason('overlap_undeclared', `${it.written}: ${ov.inst.code} counts toward ${ov.q.path}; no share rule says whether it may count here too`, [ov.inst.iid])]);
+          return result('unknown', ov.inst.projected, [
+            reason(
+              'overlap_undeclared',
+              `${it.written}: ${ov.inst.code} counts toward ${ov.q.path}; no share rule says whether it may count here too`,
+              [ov.inst.iid]
+            )
+          ]);
         }
         const missing = (alloc.missingOn.get(n) ?? []).filter((i) => itemCovers(it, i));
         if (missing.length) {
-          return result('unknown', false, [reason('catalogue_missing', `${it.written}: ${missing.map((i) => i.code).join(', ')} missing from the catalogue`, missing.map((i) => i.iid))]);
+          return result('unknown', false, [
+            reason(
+              'catalogue_missing',
+              `${it.written}: ${missing.map((i) => i.code).join(', ')} missing from the catalogue`,
+              missing.map((i) => i.iid)
+            )
+          ]);
         }
         const failed = (alloc.failedOn.get(n) ?? []).filter((i) => itemCovers(it, i));
         return result('unmet', false, [
           reason('not_planned', `${it.written} is not planned`),
-          ...(failed.length ? [reason('failed', `${failed.map((i) => i.code).join(', ')} failed`, failed.map((i) => i.iid))] : [])
+          ...(failed.length
+            ? [
+                reason(
+                  'failed',
+                  `${failed.map((i) => i.code).join(', ')} failed`,
+                  failed.map((i) => i.iid)
+                )
+              ]
+            : [])
         ]);
       });
     return kleeneAnd(rs.length ? rs : [result('met')]);
@@ -165,36 +225,82 @@ export const computeStatuses = (
     if (uoc < (pool.uoc.min ?? 0)) short.push(`${uoc} of ${pool.uoc.min ?? 0} UOC`);
     if (count < (pool.count.min ?? 0)) short.push(`${count} of ${pool.count.min ?? 0} courses`);
     pool.quotas.forEach((q, k) => {
-      const qs = own.filter((i) => w.selectors.matches(q.selector, { code: i.code, ...(i.facts ? { facts: i.facts } : {}), inst: i }, n.doc));
-      if (uocOf(qs) < (q.uoc.min ?? 0)) short.push(`quota ${k + 1}: ${uocOf(qs)} of ${q.uoc.min ?? 0} UOC`);
-      if (qs.length < (q.count.min ?? 0)) short.push(`quota ${k + 1}: ${qs.length} of ${q.count.min ?? 0} courses`);
+      const qs = own.filter((i) =>
+        w.selectors.matches(
+          q.selector,
+          { code: i.code, ...(i.facts ? { facts: i.facts } : {}), inst: i },
+          n.doc
+        )
+      );
+      if (uocOf(qs) < (q.uoc.min ?? 0))
+        short.push(`quota ${k + 1}: ${uocOf(qs)} of ${q.uoc.min ?? 0} UOC`);
+      if (qs.length < (q.count.min ?? 0))
+        short.push(`quota ${k + 1}: ${qs.length} of ${q.count.min ?? 0} courses`);
     });
     const projected = [...own, ...credited].some((i) => i.projected);
     if (!short.length) return result('met', projected);
-    if (alloc.poolOverflow.has(n)) return result('unknown', projected, [reason('below_min', 'too many candidate combinations to search exactly')]);
+    if (alloc.poolOverflow.has(n))
+      return result('unknown', projected, [
+        reason('below_min', 'too many candidate combinations to search exactly')
+      ]);
     const missing = alloc.missingOn.get(n) ?? [];
     if (missing.length) {
-      return result('unknown', projected, [reason('catalogue_missing', `${missing.map((i) => i.code).join(', ')} missing from the catalogue`, missing.map((i) => i.iid))]);
+      return result('unknown', projected, [
+        reason(
+          'catalogue_missing',
+          `${missing.map((i) => i.code).join(', ')} missing from the catalogue`,
+          missing.map((i) => i.iid)
+        )
+      ]);
     }
     const failed = alloc.failedOn.get(n) ?? [];
     return result('unmet', projected, [
       reason('below_min', short.join('; ')),
-      ...(failed.length ? [reason('failed', `${failed.map((i) => i.code).join(', ')} failed`, failed.map((i) => i.iid))] : [])
+      ...(failed.length
+        ? [
+            reason(
+              'failed',
+              `${failed.map((i) => i.code).join(', ')} failed`,
+              failed.map((i) => i.iid)
+            )
+          ]
+        : [])
     ]);
   };
 
-  const inMember = w.inMember;
-  const instCourse = (i: Inst) => ({ code: i.code, ...(i.facts ? { facts: i.facts } : {}), inst: i });
+  const { inMember } = w;
+  const instCourse = (i: Inst) => ({
+    code: i.code,
+    ...(i.facts ? { facts: i.facts } : {}),
+    inst: i
+  });
   const takesPart = (i: Inst) => !i.ignored && !i.failed && (i.completed || horizon === 'planned');
 
   const limitStatus = (n: IRNode): { r: ConditionResult; sum: number; inactive: boolean } => {
     const scopePath = typeof n.raw.scope === 'string' ? n.raw.scope : 'root';
     const { nodes, unresolved } = resolvePath(tree, scopePath, n.doc);
-    if (unresolved) return { r: result('unknown', false, [reason('unresolved_path', `scope ${scopePath} does not resolve`)]), sum: 0, inactive: false };
-    const inactive = !nodes.length || nodes.some((s) => s.inactive || (s.kind === 'spec' && !(s.selected ?? []).length));
-    if (inactive) return { r: result('met', false, [reason('inactive', `scope ${scopePath} has no selected specialisation or branch`)]), sum: 0, inactive: true };
+    if (unresolved)
+      return {
+        r: result('unknown', false, [
+          reason('unresolved_path', `scope ${scopePath} does not resolve`)
+        ]),
+        sum: 0,
+        inactive: false
+      };
+    const inactive =
+      !nodes.length ||
+      nodes.some((s) => s.inactive || (s.kind === 'spec' && !(s.selected ?? []).length));
+    if (inactive)
+      return {
+        r: result('met', false, [
+          reason('inactive', `scope ${scopePath} has no selected specialisation or branch`)
+        ]),
+        sum: 0,
+        inactive: true
+      };
     const from = selectorOf(n.raw.from);
-    const match = (i: Inst) => from !== undefined && w.selectors.matches(from, instCourse(i), n.doc, inMember);
+    const match = (i: Inst) =>
+      from !== undefined && w.selectors.matches(from, instCourse(i), n.doc, inMember);
     const pool =
       n.raw.basis === 'planned'
         ? insts.filter((i) => takesPart(i) && match(i))
@@ -202,8 +308,20 @@ export const computeStatuses = (
     const sum = uocOf(pool);
     const range = toRange(n.raw.uoc);
     const projected = pool.some((i) => i.projected);
-    if (range.max !== undefined && sum > range.max) return { r: result('unmet', projected, [reason('above_max', `${sum} UOC, at most ${range.max}`)]), sum, inactive };
-    if (sum < (range.min ?? 0)) return { r: result('unmet', projected, [reason('below_min', `${sum} UOC, at least ${range.min ?? 0} needed`)]), sum, inactive };
+    if (range.max !== undefined && sum > range.max)
+      return {
+        r: result('unmet', projected, [reason('above_max', `${sum} UOC, at most ${range.max}`)]),
+        sum,
+        inactive
+      };
+    if (sum < (range.min ?? 0))
+      return {
+        r: result('unmet', projected, [
+          reason('below_min', `${sum} UOC, at least ${range.min ?? 0} needed`)
+        ]),
+        sum,
+        inactive
+      };
     return { r: result('met', projected), sum, inactive };
   };
 
@@ -215,7 +333,14 @@ export const computeStatuses = (
       .filter((i) => takesPart(i) && w.selectors.matches(applies, instCourse(i), n.doc, inMember))
       .map((i) => {
         const r = conds.evaluate(cond, { term: i.term, self: i, doc: n.doc });
-        return { ...r, reasons: r.reasons.map((x) => ({ ...x, iids: [i.iid], text: `${i.code} (term ${i.term}): ${x.text}` })) };
+        return {
+          ...r,
+          reasons: r.reasons.map((x) => ({
+            ...x,
+            iids: [i.iid],
+            text: `${i.code} (term ${i.term}): ${x.text}`
+          }))
+        };
       });
     return kleeneAnd(rs.length ? rs : [result('met')]);
   };
@@ -230,31 +355,63 @@ export const computeStatuses = (
   const timingStatus = (n: IRNode): ConditionResult => {
     const sel = selectorOf(n.raw.courses);
     if (!sel) return result('unknown');
-    const matching = insts.filter((i) => takesPart(i) && w.selectors.matches(sel, instCourse(i), n.doc, inMember));
+    const matching = insts.filter(
+      (i) => takesPart(i) && w.selectors.matches(sel, instCourse(i), n.doc, inMember)
+    );
     if (!matching.length) return result('met');
     const terms = insts.filter((i) => !i.ignored).map((i) => i.term);
-    const fail = (text: string) => result('unmet', matching.some((i) => i.projected), [reason('below_min', text, matching.map((i) => i.iid))]);
+    const fail = (text: string) =>
+      result(
+        'unmet',
+        matching.some((i) => i.projected),
+        [
+          reason(
+            'below_min',
+            text,
+            matching.map((i) => i.iid)
+          )
+        ]
+      );
     if (typeof n.raw.within_final_uoc === 'number') {
       const total = enclosingTotal(n);
       for (const i of matching) {
         const before = uocOf(insts.filter((x) => takesPart(x) && x.term < i.term));
         if (before < total - n.raw.within_final_uoc) {
-          return fail(`${i.code} is taken with ${total - before} UOC remaining (must be within the final ${n.raw.within_final_uoc} UOC)`);
+          return fail(
+            `${i.code} is taken with ${total - before} UOC remaining (must be within the final ${n.raw.within_final_uoc} UOC)`
+          );
         }
       }
     }
-    if (n.raw.term === 'first' && matching.some((i) => i.term !== Math.min(...terms))) return fail('must be taken in the first term of the plan');
-    if (n.raw.term === 'last' && matching.some((i) => i.term !== Math.max(...terms))) return fail('must be taken in the last term of the plan');
-    if (n.raw.same_term === true && new Set(matching.map((i) => i.term)).size > 1) return fail('must all be taken in the same term');
+    if (n.raw.term === 'first' && matching.some((i) => i.term !== Math.min(...terms)))
+      return fail('must be taken in the first term of the plan');
+    if (n.raw.term === 'last' && matching.some((i) => i.term !== Math.max(...terms)))
+      return fail('must be taken in the last term of the plan');
+    if (n.raw.same_term === true && new Set(matching.map((i) => i.term)).size > 1)
+      return fail('must all be taken in the same term');
     if (n.raw.consecutive === true) {
       const ts = [...new Set(matching.map((i) => i.term))].sort((x, y) => x - y);
-      if (ts.some((t, k) => k > 0 && t - (ts[k - 1] ?? t) !== 1)) return fail('must be taken in consecutive terms');
+      if (ts.some((t, k) => k > 0 && t - (ts[k - 1] ?? t) !== 1))
+        return fail('must be taken in consecutive terms');
     }
     if (Array.isArray(n.raw.order)) {
-      const firsts = (n.raw.order as unknown[]).map(String).map((code) => matching.filter((i) => i.code === code).map((i) => i.term).sort((x, y) => x - y)[0]).filter((t): t is number => t !== undefined);
-      if (firsts.some((t, k) => k > 0 && t <= (firsts[k - 1] ?? t))) return fail(`must be taken in the order ${(n.raw.order as unknown[]).join(', ')}`);
+      const firsts = (n.raw.order as unknown[])
+        .map(String)
+        .map(
+          (code) =>
+            matching
+              .filter((i) => i.code === code)
+              .map((i) => i.term)
+              .sort((x, y) => x - y)[0]
+        )
+        .filter((t): t is number => t !== undefined);
+      if (firsts.some((t, k) => k > 0 && t <= (firsts[k - 1] ?? t)))
+        return fail(`must be taken in the order ${(n.raw.order as unknown[]).join(', ')}`);
     }
-    return result('met', matching.some((i) => i.projected));
+    return result(
+      'met',
+      matching.some((i) => i.projected)
+    );
   };
 
   const specExtras = (n: IRNode): ConditionResult[] => {
@@ -262,24 +419,60 @@ export const computeStatuses = (
     const selected = n.selected ?? [];
     const count = n.count ?? { min: 1, max: 1 };
     if (selected.length < (count.min ?? 0)) {
-      out.push(result('unmet', false, [reason(selected.length ? 'below_min' : 'select_spec', selected.length ? `select at least ${count.min ?? 0}` : 'select a specialisation')]));
+      out.push(
+        result('unmet', false, [
+          reason(
+            selected.length ? 'below_min' : 'select_spec',
+            selected.length ? `select at least ${count.min ?? 0}` : 'select a specialisation'
+          )
+        ])
+      );
     } else if (count.max !== undefined && selected.length > count.max) {
       out.push(result('unmet', false, [reason('above_max', `select at most ${count.max}`)]));
     }
     const subtrees = n.children.filter((c) => c.kind === 'subtree');
-    const keyOf = (by: unknown, sub: IRNode) => (by === 'title' ? String(sub.raw.title) : by === 'subject' ? sub.id.slice(0, 4) : sub.id);
-    for (const rule of (Array.isArray(n.raw.distinct_from) ? n.raw.distinct_from : []).filter(isObj)) {
-      const other = resolvePath(tree, String(rule.node), n.doc).nodes.find((x) => x.kind === 'spec');
-      const theirs = (other?.children ?? []).filter((c) => c.kind === 'subtree').map((c) => keyOf(rule.by, c));
+    const keyOf = (by: unknown, sub: IRNode) =>
+      by === 'title' ? String(sub.raw.title) : by === 'subject' ? sub.id.slice(0, 4) : sub.id;
+    for (const rule of (Array.isArray(n.raw.distinct_from) ? n.raw.distinct_from : []).filter(
+      isObj
+    )) {
+      const other = resolvePath(tree, String(rule.node), n.doc).nodes.find(
+        (x) => x.kind === 'spec'
+      );
+      const theirs = (other?.children ?? [])
+        .filter((c) => c.kind === 'subtree')
+        .map((c) => keyOf(rule.by, c));
       const clash = subtrees.find((s) => theirs.includes(keyOf(rule.by, s)));
-      if (clash) out.push(result('unmet', false, [reason('distinct_violation', `${clash.id} has the same ${String(rule.by ?? 'code')} as a selection in ${String(rule.node)}`)]));
+      if (clash)
+        out.push(
+          result('unmet', false, [
+            reason(
+              'distinct_violation',
+              `${clash.id} has the same ${typeof rule.by === 'string' ? rule.by : 'code'} as a selection in ${String(rule.node)}`
+            )
+          ])
+        );
     }
     for (const sub of subtrees) {
-      const allowed = sub.raw.allowed_if === undefined ? undefined : conditionOf(sub.raw.allowed_if);
+      const allowed =
+        sub.raw.allowed_if === undefined ? undefined : conditionOf(sub.raw.allowed_if);
       if (allowed !== undefined) {
         const r = conds.evaluate(allowed, { term: Infinity, static: true, doc: sub.doc });
-        if (r.status === 'unmet') out.push(result('unmet', false, [reason('not_allowed', `${sub.id} is not available: ${r.reasons.map((x) => x.text).join('; ') || 'allowed_if is unmet'}`)]));
-        if (r.status === 'unknown') out.push(result('unknown', false, [reason('provisional', `${sub.id} is allowed only provisionally`)]));
+        if (r.status === 'unmet')
+          out.push(
+            result('unmet', false, [
+              reason(
+                'not_allowed',
+                `${sub.id} is not available: ${r.reasons.map((x) => x.text).join('; ') || 'allowed_if is unmet'}`
+              )
+            ])
+          );
+        if (r.status === 'unknown')
+          out.push(
+            result('unknown', false, [
+              reason('provisional', `${sub.id} is allowed only provisionally`)
+            ])
+          );
       }
     }
     return out;
@@ -329,7 +522,11 @@ export const computeStatuses = (
       }
       case 'info':
         if (n.raw.confirm === true) {
-          r = w.student.attest?.[n.id] ? result('met') : result('unknown', false, [reason('not_attested', `needs confirmation: ${String(n.raw.text)}`)]);
+          r = w.student.attest?.[n.id]
+            ? result('met')
+            : result('unknown', false, [
+                reason('not_attested', `needs confirmation: ${String(n.raw.text)}`)
+              ]);
         } else {
           r = result('met');
           inactive = true; // display only: excluded from the parent's status (§4.2)
@@ -343,12 +540,28 @@ export const computeStatuses = (
         const parts = childResults();
         if (n.choose) {
           const chosen = n.chosen ?? [];
-          if (chosen.length < (n.choose.min ?? 0) || (n.choose.max !== undefined && chosen.length > n.choose.max)) {
-            parts.push(result('unmet', false, [reason('not_selected', `choose ${n.choose.min ?? 0}–${n.choose.max ?? '∞'} of these`)]));
+          if (
+            chosen.length < (n.choose.min ?? 0) ||
+            (n.choose.max !== undefined && chosen.length > n.choose.max)
+          ) {
+            parts.push(
+              result('unmet', false, [
+                reason(
+                  'not_selected',
+                  `choose ${n.choose.min ?? 0}–${n.choose.max ?? '∞'} of these`
+                )
+              ])
+            );
           }
         }
-        const label = n.kind === 'root' ? 'program total' : n.kind === 'subtree' ? `${n.id} total` : `${n.id} total`;
-        const range = n.kind === 'root' ? rootUoc : n.kind === 'subtree' ? (n.parent?.uoc ?? n.uoc) : n.uoc;
+        const label =
+          n.kind === 'root'
+            ? 'program total'
+            : n.kind === 'subtree'
+              ? `${n.id} total`
+              : `${n.id} total`;
+        const range =
+          n.kind === 'root' ? rootUoc : n.kind === 'subtree' ? (n.parent?.uoc ?? n.uoc) : n.uoc;
         const check = uocCheck(n, range, label);
         if (check) parts.push(check);
         r = kleeneAnd(parts.length ? parts : [result('met')]);
@@ -356,8 +569,20 @@ export const computeStatuses = (
     }
     const own = countedIn(n);
     const credited = insts.filter((i) => alloc.credits[i.idx] === n);
-    const projected = r.projected || (n.kind !== 'limit' && n.kind !== 'info' && own.some((i) => i.projected)) || kids.some((k) => k.projected && !k.inactive);
-    const required = n.kind === 'root' ? rootUoc : n.kind === 'subtree' ? (n.parent?.uoc ?? n.uoc) : n.kind === 'pool' ? n.pool?.uoc : n.kind === 'limit' ? toRange(n.raw.uoc) : n.uoc;
+    const projected =
+      r.projected ||
+      (n.kind !== 'limit' && n.kind !== 'info' && own.some((i) => i.projected)) ||
+      kids.some((k) => k.projected && !k.inactive);
+    const required =
+      n.kind === 'root'
+        ? rootUoc
+        : n.kind === 'subtree'
+          ? (n.parent?.uoc ?? n.uoc)
+          : n.kind === 'pool'
+            ? n.pool?.uoc
+            : n.kind === 'limit'
+              ? toRange(n.raw.uoc)
+              : n.uoc;
     const res: NodeResult = {
       path: n.path,
       id: n.id,
@@ -365,9 +590,15 @@ export const computeStatuses = (
       ...(typeof n.raw.title === 'string' ? { title: n.raw.title } : {}),
       status: r.status,
       projected,
-      counted_uoc: sum ?? (n.kind === 'info' || n.kind === 'maturity' || n.kind === 'timing' || n.kind === 'check' ? 0 : uocOf(own)),
+      counted_uoc:
+        sum ??
+        (n.kind === 'info' || n.kind === 'maturity' || n.kind === 'timing' || n.kind === 'check'
+          ? 0
+          : uocOf(own)),
       credited_uoc: uocOf(credited),
-      ...(required && (required.min !== undefined || required.max !== undefined) ? { required_uoc: required } : {}),
+      ...(required && (required.min !== undefined || required.max !== undefined)
+        ? { required_uoc: required }
+        : {}),
       allocations: allocations(n),
       reasons: dedupe(r.reasons),
       warnings: dedupe([...r.warnings, ...warnings]),
@@ -382,5 +613,8 @@ export const computeStatuses = (
   };
   const root = visit(tree.root);
   const rootCheck = uocCheck(tree.root, rootUoc, 'program total');
-  return { results: new Map([...results.entries()].map(([k, v]) => [k, k === tree.root.path ? root : v])), rootUocFails: rootCheck !== undefined && rootCheck.status !== 'met' };
+  return {
+    results: new Map([...results.entries()].map(([k, v]) => [k, k === tree.root.path ? root : v])),
+    rootUocFails: rootCheck !== undefined && rootCheck.status !== 'met'
+  };
 };

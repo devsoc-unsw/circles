@@ -132,6 +132,7 @@ export default tseslint.config(
       'import/prefer-default-export': 'off',
       // airbnb also bans for...of; the parser and walkers read better with it
       'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
+      'no-nested-ternary': ['off'], // as in frontend/eslint.config.js
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_$' }],
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_$' }],

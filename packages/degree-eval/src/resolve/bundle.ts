@@ -1,6 +1,6 @@
 // Identity, merge order, year fallback, `extends` and patch documents (SCHEMA.md §2.2–2.4, §9).
-import type { Diagnostic, Doc } from '../load';
 import type { CatalogueProvider, CourseFacts } from '../eval/types';
+import type { Diagnostic, Doc } from '../load';
 import { applyOps, checkExpect, clone } from './ops';
 
 type Obj = Record<string, unknown>;
@@ -150,7 +150,7 @@ export const createBundle = (docs: readonly Doc[], catalogue: CatalogueProvider)
         });
       } else {
         // §2.3: shallow-merge over the resolved base; `requirements` replaces wholesale
-        const { extends: _x, patch, ...own } = data;
+        const { patch, ...own } = data;
         data = { ...clone(parent.data), ...own };
         delete data.extends;
         const patched = applyOps(data, patch);
@@ -165,7 +165,14 @@ export const createBundle = (docs: readonly Doc[], catalogue: CatalogueProvider)
       }
     }
     data = applyPatches(data, kind, code, used);
-    const doc: ResolvedDoc = { kind, code, year: used, yearFallback: used !== year, file: base.file, data };
+    const doc: ResolvedDoc = {
+      kind,
+      code,
+      year: used,
+      yearFallback: used !== year,
+      file: base.file,
+      data
+    };
     resolved.set(memo, doc);
     return doc;
   };
@@ -200,7 +207,12 @@ export const createBundle = (docs: readonly Doc[], catalogue: CatalogueProvider)
           }
         }
       }
-      const data = applyPatches({ kind: 'course_conditions', year, courses }, 'course_conditions', undefined, year);
+      const data = applyPatches(
+        { kind: 'course_conditions', year, courses },
+        'course_conditions',
+        undefined,
+        year
+      );
       m = { data, files };
       yearMaps.set(year, m);
     }
@@ -211,7 +223,9 @@ export const createBundle = (docs: readonly Doc[], catalogue: CatalogueProvider)
     if (used === undefined) return undefined;
     const { data, files } = conditionsFor(used);
     const entry = isObj(data.courses) ? data.courses[code] : undefined;
-    return isObj(entry) ? { code, year: used, file: files.get(code) ?? '', data: entry } : undefined;
+    return isObj(entry)
+      ? { code, year: used, file: files.get(code) ?? '', data: entry }
+      : undefined;
   };
 
   return {
