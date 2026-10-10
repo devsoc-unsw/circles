@@ -128,6 +128,11 @@ jobs:
         run: npm run types
       - name: Run degree-eval unit tests
         run: npm test
+      - name: Build the degree-eval CLI and run the conformance fixtures with it
+        run: |
+          npm run build:cli
+          node dist/degree-eval.mjs validate test-data/examples --fixtures test-data/fixtures --root test-data
+          node dist/degree-eval.mjs fixtures test-data/fixtures test/golden --root test-data
       - uses: actions/upload-artifact@v4
         if: always()
         with:

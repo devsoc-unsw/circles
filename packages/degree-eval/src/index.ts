@@ -11,6 +11,8 @@ export { checkDocumentSchema, checkFixtureSchema, displayPath, explainDocument }
 
 export const SCHEMA_VERSION = '1.0';
 
+export type { Fixture, FixtureRun } from './conformance';
+export { compareFixture, runFixture } from './conformance';
 export type { TraceEvent } from './eval/allocate';
 export type { EvaluateOptions, ExplainEvent } from './eval/evaluate';
 export { checkInstance, evaluate, explain, nodeAt, unlockedAt } from './eval/evaluate';
@@ -38,7 +40,11 @@ export type {
   ResolvedDoc
 } from './resolve/bundle';
 export { catalogueFromData, createBundle, staticCatalogue } from './resolve/bundle';
+export type { TextFile, ValidationReport } from './validate/run';
+export { validateSources } from './validate/run';
 export type { SemanticDoc, SemanticResult } from './validate/semantic';
 export { checkDocs, checkFixture } from './validate/semantic';
+export type { Compact, FileDoc, FileSite, ParseStats } from './validate/stats';
+export { collectSites, compactStrings, parseStats } from './validate/stats';
 export type { Client, LoadResult, Method, Port, Request, Response } from './worker';
 export { createClient, createHandler, serve } from './worker';

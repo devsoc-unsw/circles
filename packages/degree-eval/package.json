@@ -10,16 +10,20 @@
       "default": "./src/index.ts"
     }
   },
+  "bin": {
+    "degree-eval": "dist/degree-eval.mjs"
+  },
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
     "bench": "vitest run --config vitest.bench.config.ts",
-    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts' --max-warnings 0",
-    "lint:fix": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts'",
-    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts' 'cli/**/*.ts' --max-warnings 0",
+    "lint:fix": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts' 'cli/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts' 'cli/**/*.ts'",
     "types": "tsc -p tsconfig.json && tsc -p tsconfig.test.json",
     "sync-test-data": "node scripts/sync-test-data.ts",
-    "build-validators": "node scripts/build-validators.ts"
+    "build-validators": "node scripts/build-validators.ts",
+    "build:cli": "rolldown -c rolldown.config.ts"
   },
   "devDependencies": {
     "@eslint/compat": "2.1.1",
@@ -37,6 +41,7 @@
     "fast-check": "4.10.2",
     "globals": "17.13.0",
     "prettier": "3.6.2",
+    "rolldown": "1.2.13",
     "typescript": "6.0.3",
     "typescript-eslint": "8.71.0",
     "vitest": "5.0.3"

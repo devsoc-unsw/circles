@@ -16,26 +16,8 @@ import {
   printSelector
 } from '../src';
 import type { Doc, Site } from './helpers/sites';
-import { collectSites, conditionStrings, loadDocs, selectorStrings } from './helpers/sites';
+import { collectSites, compactStrings, loadDocs, parseStats } from './helpers/sites';
 import { readSource } from './helpers/test-data';
-
-interface Compact {
-  file: string;
-  where: string;
-  kind: 'condition' | 'selector';
-  src: string;
-}
-
-const compactStrings = (sites: Site[]): Compact[] =>
-  sites.flatMap(({ file, where, kind, value }) => {
-    if (kind === 'selector') {
-      return selectorStrings(value).map((src) => ({ file, where, kind, src }));
-    }
-    if (kind === 'condition' || kind === 'exclude') {
-      return conditionStrings(value).map((s) => ({ file, where, ...s }));
-    }
-    return [];
-  });
 
 const parse = (kind: 'condition' | 'selector', src: string): Condition | Selector =>
   kind === 'condition' ? parseCondition(src) : parseSelector(src);
@@ -97,6 +79,11 @@ describe('example body', () => {
     );
     expect(strings.length + items.length).toBe(source.validate.parsed);
     expect(strings.length).toBe(source.validate.roundTrips);
+    // the CLI's census agrees
+    expect(parseStats(docs)).toEqual({
+      parsed: source.validate.parsed,
+      roundTrips: source.validate.roundTrips
+    });
   });
 
   it('round-trips every string to an equal AST', () => {
