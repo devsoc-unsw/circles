@@ -8,6 +8,7 @@ import type { CourseFacts, Port, StudentState } from '../src';
 import {
   createBundle,
   createClient,
+  createLocalClient,
   evaluate,
   loadDocuments,
   serve,
@@ -54,6 +55,10 @@ describe('worker protocol', () => {
     });
     expect(loaded.diagnostics.filter((d) => d.level === 'error')).toEqual([]);
 
+    expect(
+      await client.assignSpecs({ program: '3778', year: 2026, codes: ['COMPA1', 'MATHC2'] })
+    ).toEqual({ selections: { major: ['COMPA1'], minor: ['MATHC2'] }, unplaced: [] });
+
     const ev = await client.evaluate({ student: fx.student });
     const local = evaluate(
       createBundle(
@@ -82,5 +87,13 @@ describe('worker protocol', () => {
       'not an Evaluation'
     );
     expect((await client.evaluate({ student: fx.student })).root.status).toBeDefined();
+  });
+
+  it('has an in-thread client with the same API', async () => {
+    const local = createLocalClient();
+    await expect(local.evaluate({ student: fx.student })).rejects.toThrow('no documents loaded');
+    await local.load({ files, catalogue: { courses } });
+    const ev = await local.evaluate({ student: fx.student });
+    expect(ev.root.status).toBe((await client.evaluate({ student: fx.student })).root.status);
   });
 });

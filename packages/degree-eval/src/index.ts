@@ -16,6 +16,8 @@ export { compareFixture, runFixture } from './conformance';
 export type { TraceEvent } from './eval/allocate';
 export type { EvaluateOptions, ExplainEvent } from './eval/evaluate';
 export { checkInstance, evaluate, explain, nodeAt, unlockedAt } from './eval/evaluate';
+export type { SpecAssignment } from './eval/specs';
+export { assignSpecs } from './eval/specs';
 export type {
   AllocationKind,
   CatalogueProvider,
@@ -47,4 +49,4 @@ export { checkDocs, checkFixture } from './validate/semantic';
 export type { Compact, FileDoc, FileSite, ParseStats } from './validate/stats';
 export { collectSites, compactStrings, parseStats } from './validate/stats';
 export type { Client, LoadResult, Method, Port, Request, Response } from './worker';
-export { createClient, createHandler, serve } from './worker';
+export { createClient, createHandler, createLocalClient, serve } from './worker';

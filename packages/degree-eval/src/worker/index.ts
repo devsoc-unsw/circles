@@ -4,6 +4,8 @@
 // MessageChannel, or in-thread with `createHandler` where no Worker exists (tests, Node).
 import type { ExplainEvent } from '../eval/evaluate';
 import { checkInstance, evaluate, explain, unlockedAt } from '../eval/evaluate';
+import type { SpecAssignment } from '../eval/specs';
+import { assignSpecs } from '../eval/specs';
 import type { ConditionResult, Evaluation, StudentState } from '../eval/types';
 import type { Diagnostic, SourceFile } from '../load';
 import { loadDocuments } from '../load';
@@ -17,6 +19,10 @@ export interface LoadResult {
 
 interface Calls {
   load: { args: { files: SourceFile[]; catalogue: CatalogueData }; result: LoadResult };
+  assignSpecs: {
+    args: { program: string; year: number; codes: string[] };
+    result: SpecAssignment;
+  };
   evaluate: { args: { student: StudentState; trace?: boolean }; result: Evaluation };
   checkInstance: { args: { iid: string }; result: ConditionResult };
   unlockedAt: { args: { term: number; codes: string[] }; result: Map<string, ConditionResult> };
@@ -55,6 +61,13 @@ export const createHandler = () => {
           patches: bundle.patchReport()
         };
       }
+      case 'assignSpecs':
+        return assignSpecs(
+          needs(bundle, 'documents loaded'),
+          req.args.program,
+          req.args.year,
+          req.args.codes
+        );
       case 'evaluate':
         last = evaluate(needs(bundle, 'documents loaded'), req.args.student, {
           trace: req.args.trace === true
@@ -111,6 +124,29 @@ export const createClient = (port: Port): Client => {
       });
   return {
     load: call('load'),
+    assignSpecs: call('assignSpecs'),
+    evaluate: call('evaluate'),
+    checkInstance: call('checkInstance'),
+    unlockedAt: call('unlockedAt'),
+    explain: call('explain')
+  };
+};
+
+// The same promise API without a worker, for environments that have none (tests, Node scripts).
+export const createLocalClient = (): Client => {
+  const handle = createHandler();
+  let next = 0;
+  const call =
+    <M extends Method>(method: M) =>
+    async (args: Calls[M]['args']): Promise<Calls[M]['result']> => {
+      next += 1;
+      const res = handle({ id: next, method, args } as Request);
+      if (!res.ok) throw new Error(res.error);
+      return res.result;
+    };
+  return {
+    load: call('load'),
+    assignSpecs: call('assignSpecs'),
     evaluate: call('evaluate'),
     checkInstance: call('checkInstance'),
     unlockedAt: call('unlockedAt'),
