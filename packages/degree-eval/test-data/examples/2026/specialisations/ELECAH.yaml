@@ -1,0 +1,88 @@
+# ELECAH Electrical Engineering (honours specialisation in 3707), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ELECAH
+#   (curriculum structure 2026.01.034; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: ELECAH
+year: 2026
+title: Electrical Engineering
+spec_kind: honours
+uoc: 168
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ELECAH
+  structure_version: "2026.01.034"
+  retrieved: 2026-10-09
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 48
+    courses:
+      - COMP1521
+      - DESN1000
+      - ELEC1111
+      - PHYS1231
+      - COMP1511 or COMP1911
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+      - PHYS1121 or PHYS1131
+    original: Students must take 48 UOC of the following courses.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 36
+    courses: [DESN2000, ELEC2133, ELEC2134, ELEC2141, MATH2069, MATH2099]
+    original: Students must take 36 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 42
+    courses: [ELEC3104, ELEC3105, ELEC3106, ELEC3114, ELEC3115, ELEC3117, TELE3113]
+    original: Students must take 42 UOC of the following courses.
+
+  # Handbook container "Level 4 Core Courses" (24 UOC) is split so that the thesis courses can be
+  # referenced as `thesis` (3707 honours classes, §4.1 convention). Declared UOC is left to the catalogue.
+  - id: level-4-core
+    kind: core
+    title: Level 4 Core Courses
+    courses: [ELEC4122, ELEC4123]
+    original: Students must take 24 UOC of the following courses.
+  - id: thesis
+    kind: core
+    title: Level 4 Core Courses (thesis)
+    courses: [ELEC4951, ELEC4952, ELEC4953]
+
+  - id: breadth-electives
+    kind: pool
+    title: Breadth Electives
+    uoc: { max: 6 }
+    from: [COMP2041, COMP3211, COMP3231, ELEC3111, ELEC3145, ELEC3146, ELEC3705, ENGG3001, ENGG3060,
+           ENGG3741, ENGG4060, ENGG4102, "@vip", MATH3101, MATH3121, MATH3161, MATH3201, MATH3261,
+           MATH3411, TELE3118, TELE4641]
+    original: >-
+      Students can take up to a maximum of 6 UOC of the following courses. 2 UOC and 3 UOC courses
+      are run over consecutive terms for a final total of 6 UOC.
+
+  - id: vip-consecutive
+    kind: timing
+    severity: warning
+    courses: "@vip"
+    consecutive: true
+    original: 2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC.
+
+  - id: discipline-electives
+    kind: pool
+    title: Discipline Electives
+    uoc: { min: 12, max: 24 }
+    from: [ELEC4445, ELEC4601, ELEC4602, ELEC4603, ELEC4604, ELEC4605, ELEC4611, ELEC4612, ELEC4613,
+           ELEC4614, ELEC4617, ELEC4621, ELEC4622, ELEC4623, ELEC4631, ELEC4632, ELEC4633, PHTN4661,
+           PHTN4662, TELE4642, TELE4651, TELE4652, TELE4653]
+    original: Students must take at least 12 UOC of the following courses.
+    note: >-
+      Range from the structured data (max 24) and the text (at least 12). With 150 UOC of core and at
+      most 6 UOC of breadth electives, the specialisation's 168 UOC total requires 18-24 UOC here.

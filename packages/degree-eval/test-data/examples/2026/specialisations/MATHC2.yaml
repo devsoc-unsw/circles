@@ -1,0 +1,39 @@
+# MATHC2 Mathematics (minor), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHC2
+#   (curriculum structure 2026.01.026, accessed 2026-10-08)
+# Note: same title as MATHM1, so 3970's distinct_from {by: title} forbids MATHM1 + MATHC2.
+schema_version: "1.0"
+kind: specialisation
+code: MATHC2
+year: 2026
+title: Mathematics
+spec_kind: minor
+uoc: 36
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHC2
+  structure_version: "2026.01.026"
+  retrieved: 2026-10-08
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 12
+    courses: [MATH1131 or MATH1141, MATH1231 or MATH1241]
+
+  - id: electives
+    kind: pool
+    title: Mathematics Electives
+    uoc: { min: 24 }
+    from: [MATH2011, MATH2019, MATH2069, MATH2089, MATH2099, MATH2111, MATH2121, MATH2221, MATH2241,
+           MATH2301, MATH2400, MATH2501, MATH2521, MATH2601, MATH2621, MATH2701, MATH3041, MATH3051,
+           MATH3101, MATH3121, MATH3161, MATH3171, MATH3201, MATH3261, MATH3311, MATH3371, MATH3411,
+           MATH3431, MATH3511, MATH3531, MATH3560, MATH3570, MATH3611, MATH3701, MATH3711, MATH6781]
+    quotas:
+      - from: MATH3*** or MATH6***
+        uoc: { min: 6 }
+        original: >-
+          Students must complete a minimum of 6 UOC of the following courses. any level 3 Mathematics
+          (MATH) course any level 6 Mathematics (MATH) course

@@ -1,0 +1,861 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://circlesapp.csesoc.app/schema/degree/1.0/schema.json",
+  "title": "Circles degree schema documents (schema_version 1.x)",
+  "description": "One YAML/JSON document per file. See SCHEMA.md for semantics; this file checks structure only. Compact condition/selector strings are checked by the reference parser, not by JSON Schema.",
+  "type": "object",
+  "required": ["schema_version", "kind"],
+  "properties": {
+    "kind": { "enum": ["program", "specialisation", "course_conditions", "patch", "library"] }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/programDoc" },
+    { "$ref": "#/$defs/specialisationDoc" },
+    { "$ref": "#/$defs/courseConditionsDoc" },
+    { "$ref": "#/$defs/patchDoc" },
+    { "$ref": "#/$defs/libraryDoc" }
+  ],
+
+  "$defs": {
+    "schemaVersion": { "type": "string", "pattern": "^1\\.[0-9]+$" },
+    "year": { "type": "integer", "minimum": 2000, "maximum": 2100 },
+    "courseCode": { "type": "string", "pattern": "^[A-Z]{4}[0-9]{4}$" },
+    "specCode": { "type": "string", "pattern": "^[A-Z]{5}[0-9A-Z]$" },
+    "specRef": {
+      "description": "Spec code, spec pattern with * wildcards (COMP*1), or @spec-group.",
+      "type": "string",
+      "pattern": "^([A-Z*]{5}[0-9A-Z*]|@[a-z][a-z0-9_]*)$"
+    },
+    "programCode": {
+      "oneOf": [
+        { "type": "string", "pattern": "^[0-9]{4}$" },
+        { "type": "integer", "minimum": 1000, "maximum": 9999 }
+      ]
+    },
+    "programRef": {
+      "oneOf": [
+        { "$ref": "#/$defs/programCode" },
+        { "type": "string", "pattern": "^@[a-z][a-z0-9_]*$" }
+      ]
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "not": { "const": "root" }
+    },
+    "nodeRef": {
+      "description": "Node path (SCHEMA.md §4.1): 'root'; a node id; a path whose segments are node ids or spec codes (major/COMPA1, major/COMPA1/core, major/thesis, eng/major/COMPBH/level-1-core); or spec:CODE[/id...] (whichever slot holds that spec).",
+      "type": "string",
+      "pattern": "^(root|spec:[A-Z]{5}[0-9A-Z](/[a-z0-9][a-z0-9-]*)*|[a-z0-9][a-z0-9-]*(/([a-z0-9][a-z0-9-]*|[A-Z]{5}[0-9A-Z]))*)$"
+    },
+    "label": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "text": { "type": "string", "minLength": 1 },
+    "extensionKeys": {
+      "description": "Keys starting with x- are ignored by evaluators (tooling metadata).",
+      "patternProperties": { "^x-": true }
+    },
+
+    "range": {
+      "description": "Either an exact integer (min = max) or {min?, max?}.",
+      "oneOf": [
+        { "type": "integer", "minimum": 0 },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "min": { "type": "integer", "minimum": 0 },
+            "max": { "type": "integer", "minimum": 0 }
+          }
+        }
+      ]
+    },
+
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source"],
+      "properties": {
+        "source": { "enum": ["scraped", "hand", "patch", "local"] },
+        "url": { "type": "string", "format": "uri" },
+        "urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "structure_version": { "type": "string" },
+        "retrieved": { "type": "string", "format": "date" },
+        "generator": { "type": "string" },
+        "authors": { "type": "array", "items": { "type": "string" } },
+        "reviewed": { "type": "string", "format": "date" },
+        "status": { "enum": ["complete", "partial", "draft"] },
+        "warnings": { "type": "array", "items": { "type": "string" } },
+        "note": { "type": "string" }
+      }
+    },
+
+    "selector": {
+      "description": "Course selector. String = compact form (see SCHEMA.md §6). Array = union. Object = structured form with exactly one key.",
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/selector" } },
+        { "$ref": "#/$defs/selectorObject" }
+      ]
+    },
+    "selectorObject": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "or": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/selector" } },
+        "and": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/selector" } },
+        "not": { "$ref": "#/$defs/selector" },
+        "course": { "$ref": "#/$defs/courseCode" },
+        "pattern": { "type": "string", "pattern": "^[A-Z*]{4}[0-9*]{4}$" },
+        "set": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "level": { "type": "integer", "minimum": 0, "maximum": 9 },
+        "faculty": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "school": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "career": { "enum": ["ugrd", "pgrd", "rsch"] },
+        "attr": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "in": { "$ref": "#/$defs/nodeRef" },
+        "gened": { "const": true },
+        "any": { "const": true }
+      }
+    },
+
+    "condition": {
+      "description": "Condition. String = compact form (see SCHEMA.md §5). Object = structured form with exactly one key.",
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "boolean" },
+        { "$ref": "#/$defs/conditionObject" }
+      ]
+    },
+    "conditionObject": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "and": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/condition" } },
+        "or": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/condition" } },
+        "not": { "$ref": "#/$defs/condition" },
+        "done": { "$ref": "#/$defs/courseCode" },
+        "coreq": { "$ref": "#/$defs/courseCode" },
+        "planned": { "$ref": "#/$defs/courseCode" },
+        "uoc": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            {
+              "type": "object", "additionalProperties": false, "required": ["min"],
+              "properties": { "min": { "type": "integer", "minimum": 0 }, "in": { "$ref": "#/$defs/selector" } }
+            }
+          ]
+        },
+        "wam": {
+          "oneOf": [
+            { "type": "number", "minimum": 0, "maximum": 100 },
+            {
+              "type": "object", "additionalProperties": false, "required": ["min"],
+              "properties": { "min": { "type": "number", "minimum": 0, "maximum": 100 }, "in": { "$ref": "#/$defs/selector" } }
+            }
+          ]
+        },
+        "grade": {
+          "description": "Best mark among done instances of one course (course) or of any course matching a selector (in). SCHEMA.md §5.1.",
+          "oneOf": [
+            {
+              "type": "object", "additionalProperties": false, "required": ["min", "course"],
+              "properties": { "min": { "type": "number", "minimum": 0, "maximum": 100 }, "course": { "$ref": "#/$defs/courseCode" } }
+            },
+            {
+              "type": "object", "additionalProperties": false, "required": ["min", "in"],
+              "properties": { "min": { "type": "number", "minimum": 0, "maximum": 100 }, "in": { "$ref": "#/$defs/selector" } }
+            }
+          ]
+        },
+        "cores": {
+          "description": "Core items whose alternatives match the selector (static match on course codes; in: is not allowed here). Use complete(node) for node-scoped completion.",
+          "oneOf": [ { "const": true }, { "$ref": "#/$defs/selector" } ]
+        },
+        "complete": { "$ref": "#/$defs/nodeRef" },
+        "reported_wam": {
+          "type": "object", "additionalProperties": false, "required": ["min", "label"],
+          "properties": { "min": { "type": "number", "minimum": 0, "maximum": 100 }, "label": { "$ref": "#/$defs/label" } }
+        },
+        "program": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/programRef" } },
+        "spec": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/specRef" } },
+        "manual": {
+          "oneOf": [
+            { "$ref": "#/$defs/text" },
+            {
+              "type": "object", "additionalProperties": false, "required": ["text"],
+              "properties": { "text": { "$ref": "#/$defs/text" }, "id": { "$ref": "#/$defs/nodeId" } }
+            }
+          ]
+        }
+      }
+    },
+
+    "coreItem": {
+      "description": "A course code, or a compact item expression over course codes only: 'MATH1131 or MATH1141', 'MATH2901 and MATH2931'.",
+      "type": "string",
+      "pattern": "^[A-Z]{4}[0-9]{4}(( or [A-Z]{4}[0-9]{4})*|( and [A-Z]{4}[0-9]{4})*)$"
+    },
+
+    "nodeCommon": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nodeId" },
+        "kind": { "type": "string" },
+        "title": { "type": "string" },
+        "note": { "type": "string" },
+        "original": { "type": "string", "description": "Verbatim handbook wording this node was transcribed from." },
+        "severity": { "enum": ["error", "warning"] },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+
+    "node": {
+      "oneOf": [
+        { "$ref": "#/$defs/groupNode" },
+        { "$ref": "#/$defs/coreNode" },
+        { "$ref": "#/$defs/poolNode" },
+        { "$ref": "#/$defs/specNode" },
+        { "$ref": "#/$defs/limitNode" },
+        { "$ref": "#/$defs/maturityNode" },
+        { "$ref": "#/$defs/timingNode" },
+        { "$ref": "#/$defs/checkNode" },
+        { "$ref": "#/$defs/infoNode" }
+      ]
+    },
+    "nodeList": { "type": "array", "items": { "$ref": "#/$defs/node" } },
+
+    "groupNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["children"],
+      "properties": {
+        "id": true, "kind": { "const": "group" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "children": { "$ref": "#/$defs/nodeList" },
+        "choose": { "$ref": "#/$defs/range" },
+        "uoc": { "$ref": "#/$defs/range" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "coreNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["courses"],
+      "properties": {
+        "id": true, "kind": { "const": "core" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "courses": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/coreItem" } },
+        "uoc": { "type": "integer", "minimum": 0, "description": "Declared UOC (lint: should equal the catalogue sum)." },
+        "is_core": { "type": "boolean", "description": "Whether cores() counts these courses. Default true." }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "quota": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from"],
+      "anyOf": [ { "required": ["uoc"] }, { "required": ["count"] } ],
+      "properties": {
+        "from": { "$ref": "#/$defs/selector" },
+        "uoc": { "$ref": "#/$defs/range" },
+        "count": { "$ref": "#/$defs/range" },
+        "note": { "type": "string" },
+        "original": { "type": "string" }
+      }
+    },
+    "poolNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["from"],
+      "anyOf": [ { "required": ["uoc"] }, { "required": ["count"] } ],
+      "properties": {
+        "id": true, "kind": { "const": "pool" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "from": { "$ref": "#/$defs/selector" },
+        "uoc": { "$ref": "#/$defs/range" },
+        "count": { "$ref": "#/$defs/range" },
+        "quotas": { "type": "array", "items": { "$ref": "#/$defs/quota" } },
+        "role": { "enum": ["elective", "gen_ed", "free_elective"] },
+        "overflow": { "type": "boolean" },
+        "priority": { "type": "integer" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "distinctRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node"],
+      "properties": {
+        "node": { "$ref": "#/$defs/nodeRef", "description": "The other spec node (by id/path), not a slot type." },
+        "by": { "enum": ["code", "title", "subject"] }
+      }
+    },
+    "creditRule": {
+      "description": "counts_toward entry: a host pool (node ref) or {node, courses} restricting which courses are credited. SCHEMA.md §7.4 step 8.",
+      "oneOf": [
+        { "$ref": "#/$defs/nodeRef" },
+        {
+          "type": "object", "additionalProperties": false, "required": ["node"],
+          "properties": { "node": { "$ref": "#/$defs/nodeRef" }, "courses": { "$ref": "#/$defs/selector" }, "note": { "type": "string" } }
+        }
+      ]
+    },
+    "specNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["slot", "options"],
+      "properties": {
+        "id": true, "kind": { "const": "spec" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "slot": { "enum": ["major", "minor", "honours", "specialisation", "stream", "any"] },
+        "options": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/specRef" } },
+        "count": { "$ref": "#/$defs/range" },
+        "default": { "$ref": "#/$defs/specCode" },
+        "uoc": { "$ref": "#/$defs/range" },
+        "distinct_from": { "type": "array", "items": { "$ref": "#/$defs/distinctRule" } },
+        "counts_toward": { "type": "array", "items": { "$ref": "#/$defs/creditRule" } }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "limitNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["from", "uoc"],
+      "properties": {
+        "id": true, "kind": { "const": "limit" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "from": { "$ref": "#/$defs/selector" },
+        "uoc": { "$ref": "#/$defs/range" },
+        "scope": { "$ref": "#/$defs/nodeRef" },
+        "basis": { "enum": ["counted", "planned"] }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "maturityNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["applies_to", "require"],
+      "properties": {
+        "id": true, "kind": { "const": "maturity" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "applies_to": { "$ref": "#/$defs/selector" },
+        "require": { "$ref": "#/$defs/condition" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "timingNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["courses"],
+      "anyOf": [
+        { "required": ["within_final_uoc"] }, { "required": ["term"] },
+        { "required": ["same_term"] }, { "required": ["consecutive"] }, { "required": ["order"] }
+      ],
+      "properties": {
+        "id": true, "kind": { "const": "timing" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "courses": { "$ref": "#/$defs/selector" },
+        "within_final_uoc": { "type": "integer", "minimum": 0 },
+        "term": { "enum": ["first", "last"] },
+        "same_term": { "const": true },
+        "consecutive": { "const": true },
+        "order": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/courseCode" } }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "checkNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["require"],
+      "properties": {
+        "id": true, "kind": { "const": "check" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "require": { "$ref": "#/$defs/condition" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "infoNode": {
+      "allOf": [ { "$ref": "#/$defs/nodeCommon" } ],
+      "required": ["text"],
+      "properties": {
+        "id": true, "kind": { "const": "info" }, "title": true, "note": true, "original": true, "severity": true, "provenance": true,
+        "text": { "$ref": "#/$defs/text" },
+        "confirm": { "type": "boolean", "description": "If true the node is unknown until the student attests it; otherwise display-only." }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+
+    "shareRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["between"],
+      "properties": {
+        "between": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/nodeRef" } },
+        "courses": { "$ref": "#/$defs/selector" },
+        "max_uoc": { "type": "integer", "minimum": 0 },
+        "mode": { "enum": ["both", "replace"], "description": "both (default): the course is credited to both sides. replace: it counts on one side only; the other side's core item needs a replacement instance (SCHEMA.md §7.4 step 3)." },
+        "targets": { "enum": ["any", "core"], "description": "core: the share may only satisfy core items, never pools. Default any." },
+        "replacement": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "from": { "$ref": "#/$defs/selector", "description": "Default: the union of the selectors of the pools inside the side being replaced." },
+            "level": { "enum": ["any", "same_or_higher"] }
+          }
+        },
+        "note": { "type": "string" },
+        "original": { "type": "string" }
+      },
+      "if": { "not": { "properties": { "mode": { "const": "replace" } }, "required": ["mode"] } },
+      "then": { "not": { "required": ["replacement"] } }
+    },
+    "substitution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["replace", "with"],
+      "properties": {
+        "replace": { "$ref": "#/$defs/courseCode" },
+        "with": {
+          "description": "Item expression: course codes or course patterns joined by only 'or' (any one) or only 'and' (all required).",
+          "type": "string",
+          "pattern": "^[A-Z*]{4}[0-9*]{4}(( or [A-Z*]{4}[0-9*]{4})*|( and [A-Z*]{4}[0-9*]{4})*)$"
+        },
+        "scope": { "$ref": "#/$defs/nodeRef" },
+        "when": { "$ref": "#/$defs/condition" },
+        "note": { "type": "string" },
+        "original": { "type": "string" }
+      }
+    },
+    "exemption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["courses"],
+      "properties": {
+        "courses": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/courseCode" } },
+        "scope": { "$ref": "#/$defs/nodeRef" },
+        "when": { "$ref": "#/$defs/condition" },
+        "reduce_uoc": { "type": "boolean", "description": "Default true: the enclosing node's UOC target drops by the exempt course's UOC." },
+        "note": { "type": "string" },
+        "original": { "type": "string" }
+      }
+    },
+    "awardClass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "require"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "require": { "$ref": "#/$defs/condition" },
+        "note": { "type": "string" }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "program"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nodeId" },
+        "program": { "$ref": "#/$defs/programCode" },
+        "year": { "$ref": "#/$defs/year" },
+        "title": { "type": "string" },
+        "uoc": { "$ref": "#/$defs/range" },
+        "include": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/nodeId" } },
+        "patch": { "$ref": "#/$defs/opList" },
+        "note": { "type": "string" },
+        "original": { "type": "string" }
+      }
+    },
+    "localSets": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "$ref": "#/$defs/selector" }
+    },
+    "extends": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year"],
+      "properties": { "year": { "$ref": "#/$defs/year" } }
+    },
+
+    "op": {
+      "type": "object",
+      "required": ["op"],
+      "oneOf": [
+        {
+          "properties": { "op": { "const": "set" }, "target": { "$ref": "#/$defs/opTarget" }, "fields": { "type": "object", "minProperties": 1 }, "note": { "type": "string" } },
+          "required": ["target", "fields"], "additionalProperties": false
+        },
+        {
+          "properties": { "op": { "const": "remove" }, "target": { "$ref": "#/$defs/opTarget" }, "note": { "type": "string" } },
+          "required": ["target"], "additionalProperties": false
+        },
+        {
+          "properties": { "op": { "const": "replace" }, "target": { "$ref": "#/$defs/opTarget" }, "node": { "type": "object" }, "note": { "type": "string" } },
+          "required": ["target", "node"], "additionalProperties": false
+        },
+        {
+          "properties": {
+            "op": { "const": "add" }, "parent": { "$ref": "#/$defs/opTarget" },
+            "before": { "$ref": "#/$defs/nodeRef" }, "after": { "$ref": "#/$defs/nodeRef" },
+            "node": { "type": "object" }, "note": { "type": "string" }
+          },
+          "required": ["parent", "node"], "additionalProperties": false
+        },
+        {
+          "properties": {
+            "op": { "enum": ["list_add", "list_remove"] }, "target": { "$ref": "#/$defs/opTarget" },
+            "field": { "type": "string", "pattern": "^[a-z_]+$" }, "items": { "type": "array", "minItems": 1 },
+            "note": { "type": "string" }
+          },
+          "required": ["target", "field", "items"], "additionalProperties": false
+        }
+      ]
+    },
+    "opTarget": {
+      "description": "Node ref inside a program/spec document, a course code inside course_conditions, or 'root' for the document itself.",
+      "oneOf": [ { "$ref": "#/$defs/nodeRef" }, { "$ref": "#/$defs/courseCode" } ]
+    },
+    "opList": { "type": "array", "items": { "$ref": "#/$defs/op" } },
+
+    "docCommon": {
+      "type": "object",
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schemaVersion" },
+        "kind": { "type": "string" },
+        "year": { "$ref": "#/$defs/year" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+
+    "programDoc": {
+      "type": "object",
+      "required": ["schema_version", "kind", "code", "year", "provenance"],
+      "if": { "not": { "required": ["extends"] } },
+      "then": { "required": ["title", "uoc"], "anyOf": [ { "required": ["requirements"] }, { "required": ["components"] } ] },
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schemaVersion" },
+        "kind": { "const": "program" },
+        "code": { "$ref": "#/$defs/programCode" },
+        "year": { "$ref": "#/$defs/year" },
+        "title": { "type": "string" },
+        "career": { "enum": ["ugrd", "pgrd", "rsch"] },
+        "uoc": { "type": "integer", "minimum": 0 },
+        "duration_years": { "type": "number" },
+        "awards": { "type": "array", "items": { "type": "string" } },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "extends": { "$ref": "#/$defs/extends" },
+        "patch": { "$ref": "#/$defs/opList" },
+        "sets": { "$ref": "#/$defs/localSets" },
+        "components": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/component" } },
+        "requirements": { "$ref": "#/$defs/nodeList" },
+        "shares": { "type": "array", "items": { "$ref": "#/$defs/shareRule" } },
+        "substitutions": { "type": "array", "items": { "$ref": "#/$defs/substitution" } },
+        "exemptions": { "type": "array", "items": { "$ref": "#/$defs/exemption" } },
+        "entry": { "$ref": "#/$defs/condition" },
+        "classes": { "type": "array", "items": { "$ref": "#/$defs/awardClass" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+
+    "specialisationDoc": {
+      "type": "object",
+      "required": ["schema_version", "kind", "code", "year", "provenance"],
+      "if": { "not": { "required": ["extends"] } },
+      "then": { "required": ["title", "spec_kind", "uoc", "requirements"] },
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schemaVersion" },
+        "kind": { "const": "specialisation" },
+        "code": { "$ref": "#/$defs/specCode" },
+        "year": { "$ref": "#/$defs/year" },
+        "title": { "type": "string" },
+        "spec_kind": { "enum": ["major", "minor", "honours", "specialisation", "stream"] },
+        "uoc": { "$ref": "#/$defs/range" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "extends": { "$ref": "#/$defs/extends" },
+        "patch": { "$ref": "#/$defs/opList" },
+        "sets": { "$ref": "#/$defs/localSets" },
+        "allowed_if": { "$ref": "#/$defs/condition" },
+        "requirements": { "$ref": "#/$defs/nodeList" },
+        "shares": { "type": "array", "items": { "$ref": "#/$defs/shareRule" } },
+        "substitutions": { "type": "array", "items": { "$ref": "#/$defs/substitution" } },
+        "exemptions": { "type": "array", "items": { "$ref": "#/$defs/exemption" } },
+        "entry": { "$ref": "#/$defs/condition" },
+        "classes": { "type": "array", "items": { "$ref": "#/$defs/awardClass" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+
+    "courseEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "original": { "type": "string" },
+        "requires": { "$ref": "#/$defs/condition" },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "description": "Exact course code (no patterns), 'spec(...)'/'program(...)' compact atom, or structured {spec}/{program} object. Always applied, whatever `status` is.",
+            "oneOf": [
+              { "type": "string", "pattern": "^([A-Z]{4}[0-9]{4}|(spec|program)\\(.*\\))$" },
+              {
+                "type": "object", "additionalProperties": false, "minProperties": 1, "maxProperties": 1,
+                "properties": {
+                  "spec": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/specRef" } },
+                  "program": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/programRef" } }
+                }
+              }
+            ]
+          }
+        },
+        "note": { "type": "string" },
+        "status": { "enum": ["parsed", "partial", "manual", "unparsed", "none"], "description": "Describes `requires` only. none = no prerequisite (requires is true)." },
+        "warnings": { "type": "array", "items": { "type": "string" } },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      },
+      "if": { "properties": { "status": { "const": "none" } }, "required": ["status"] },
+      "then": { "not": { "required": ["requires"] } },
+      "patternProperties": { "^x-": true }
+    },
+    "courseConditionsDoc": {
+      "type": "object",
+      "required": ["schema_version", "kind", "year", "provenance", "courses"],
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schemaVersion" },
+        "kind": { "const": "course_conditions" },
+        "year": { "$ref": "#/$defs/year" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "sets": { "$ref": "#/$defs/localSets" },
+        "courses": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^[A-Z]{4}[0-9]{4}$" },
+          "additionalProperties": { "$ref": "#/$defs/courseEntry" }
+        }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+
+    "patchDoc": {
+      "type": "object",
+      "required": ["schema_version", "kind", "id", "target", "provenance", "ops"],
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schemaVersion" },
+        "kind": { "const": "patch" },
+        "id": { "$ref": "#/$defs/nodeId" },
+        "priority": { "type": "integer" },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "years"],
+          "properties": {
+            "kind": { "enum": ["program", "specialisation", "course_conditions"] },
+            "code": {
+              "description": "Program/spec code. Omit for course_conditions (op targets are course codes).",
+              "oneOf": [ { "$ref": "#/$defs/programCode" }, { "$ref": "#/$defs/specCode" } ]
+            },
+            "years": {
+              "oneOf": [
+                { "$ref": "#/$defs/year" },
+                {
+                  "type": "object", "additionalProperties": false, "required": ["from"],
+                  "properties": { "from": { "$ref": "#/$defs/year" }, "to": { "$ref": "#/$defs/year" } }
+                }
+              ]
+            }
+          }
+        },
+        "expect": {
+          "description": "Guards: the patch is reported stale (not applied) if the target's original text no longer matches.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "reason": { "$ref": "#/$defs/text" },
+        "ops": { "$ref": "#/$defs/opList" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+
+    "orgEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "faculty": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "handbook_id": { "type": "string" }
+      }
+    },
+    "libraryDoc": {
+      "type": "object",
+      "required": ["schema_version", "kind", "year", "provenance"],
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schemaVersion" },
+        "kind": { "const": "library" },
+        "year": { "$ref": "#/$defs/year" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "faculties": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[A-Z][A-Z0-9_]*$" },
+          "additionalProperties": { "$ref": "#/$defs/orgEntry" }
+        },
+        "schools": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[A-Z][A-Z0-9_]*$" },
+          "additionalProperties": { "$ref": "#/$defs/orgEntry" }
+        },
+        "sets": { "$ref": "#/$defs/localSets" },
+        "program_groups": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+          "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/programRef" } }
+        },
+        "spec_groups": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+          "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/specRef" } }
+        }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+
+    "status": { "enum": ["met", "unmet", "unknown"] },
+    "reasonCode": {
+      "description": "Normative reason codes (SCHEMA.md §7.8).",
+      "enum": ["below_min", "above_max", "not_planned", "not_selected", "select_spec", "not_allowed", "distinct_violation",
+               "overlap_undeclared", "replacement_missing", "provisional", "excluded", "requires_unmet",
+               "requires_unknown", "no_condition_data", "missing_mark", "failed", "catalogue_missing",
+               "manual", "not_attested", "inactive", "no_matching_cores", "unresolved_path", "not_counted"]
+    },
+    "fixtureCourse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["uoc"],
+      "properties": {
+        "uoc": { "type": "integer", "minimum": 0 },
+        "faculty": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "school": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "career": { "enum": ["ugrd", "pgrd", "rsch"] },
+        "gened": { "type": "boolean" },
+        "attrs": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" } },
+        "equivalents": { "type": "array", "items": { "$ref": "#/$defs/courseCode" } }
+      }
+    },
+    "planInstance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["iid", "code", "term", "status"],
+      "properties": {
+        "iid": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$" },
+        "code": { "$ref": "#/$defs/courseCode" },
+        "year": { "$ref": "#/$defs/year" },
+        "term": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["completed", "planned"] },
+        "outcome": { "enum": ["pass", "pass_no_mark", "fail", "withdrawn", "pending"], "description": "SCHEMA.md §5.1 'Results'. Required meaning for completed instances; planned instances have none." },
+        "mark": { "type": "number", "minimum": 0, "maximum": 100 },
+        "grade": { "type": "string", "pattern": "^[A-Z]{2,3}$", "description": "Display grade code (HD, SY, FL, ...); outcome is normative." },
+        "note": { "type": "string" }
+      },
+      "if": { "properties": { "status": { "const": "completed" } } },
+      "then": { "required": ["outcome"] },
+      "else": { "not": { "required": ["outcome"] } }
+    },
+    "expectedNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "counted_uoc": { "type": "integer", "minimum": 0, "description": "Distinct UOC of primary, replacement and share allocations (for a limit: the sum it compares). Excludes counts_toward credit." },
+        "credited_uoc": { "type": "integer", "minimum": 0, "description": "counts_toward credit recorded on a pool (SCHEMA.md §7.4 step 8)." },
+        "reasons": { "type": "array", "items": { "$ref": "#/$defs/reasonCode" }, "description": "Each listed code must appear in the node's reasons; others may also appear." },
+        "projected": { "type": "boolean" }
+      }
+    },
+    "fixture": {
+      "description": "Conformance fixture (SCHEMA.md §15). Not a schema document kind; validated separately.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixture_version", "id", "findings", "title", "bundle", "student", "expect"],
+      "properties": {
+        "fixture_version": { "const": "1.0" },
+        "id": { "$ref": "#/$defs/nodeId" },
+        "findings": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^(B[0-9]+|M[0-9]+|m[0-9]+|N[0-9]+)$" } },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "bundle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["documents", "catalogue"],
+          "properties": {
+            "documents": { "type": "array", "items": { "type": "string", "pattern": "^examples/.+\\.ya?ml$" } },
+            "inline": { "type": "array", "items": { "type": "object", "required": ["schema_version", "kind", "provenance"] } },
+            "catalogue": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["courses"],
+              "properties": {
+                "default": { "$ref": "#/$defs/fixtureCourse" },
+                "courses": {
+                  "type": "object",
+                  "propertyNames": { "pattern": "^[A-Z]{4}[0-9]{4}$" },
+                  "additionalProperties": { "$ref": "#/$defs/fixtureCourse" }
+                },
+                "note": { "type": "string" }
+              }
+            }
+          }
+        },
+        "student": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["program", "year", "plan"],
+          "properties": {
+            "program": { "$ref": "#/$defs/programCode" },
+            "year": { "$ref": "#/$defs/year" },
+            "horizon": { "enum": ["planned", "completed"] },
+            "selections": {
+              "type": "object",
+              "propertyNames": { "$ref": "#/$defs/nodeRef" },
+              "additionalProperties": { "type": "array", "items": { "type": "string" } }
+            },
+            "plan": { "type": "array", "items": { "$ref": "#/$defs/planInstance" } },
+            "attest": { "type": "object", "additionalProperties": { "const": true } },
+            "reported": { "type": "object", "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" }, "additionalProperties": { "type": "number", "minimum": 0, "maximum": 100 } },
+            "pins": { "type": "object", "additionalProperties": { "$ref": "#/$defs/nodeRef" } },
+            "ignored": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "expect": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "nodes": { "type": "object", "propertyNames": { "$ref": "#/$defs/nodeRef" }, "additionalProperties": { "$ref": "#/$defs/expectedNode" } },
+            "courses": { "type": "object", "additionalProperties": { "$ref": "#/$defs/expectedNode" }, "description": "Keyed by iid: the §7.7 unlock result for that instance." },
+            "not_counted": { "type": "array", "items": { "type": "string" }, "description": "Exact set of iids reported as not counted." },
+            "allocations": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object", "additionalProperties": false,
+                "description": "Expected allocations of one instance (SCHEMA.md §7.4 'Kinds of allocation'). primary: null means unallocated. Listed arrays must match exactly; omitted ones are not asserted.",
+                "properties": {
+                  "primary": { "anyOf": [ { "$ref": "#/$defs/nodeRef" }, { "type": "null" } ] },
+                  "replacement_for": { "type": "string", "description": "iid of the overlapping instance this one replaces (mode: replace)." },
+                  "shares": { "type": "array", "items": { "$ref": "#/$defs/nodeRef" } },
+                  "credits": { "type": "array", "items": { "$ref": "#/$defs/nodeRef" } }
+                }
+              }
+            }
+          }
+        },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

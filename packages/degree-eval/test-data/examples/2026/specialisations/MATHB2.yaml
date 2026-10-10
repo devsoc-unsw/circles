@@ -1,0 +1,64 @@
+# MATHB2 Mathematics for Engineers (Arts minor), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHB2
+#   (curriculum structure 2026.01.002, accessed 2026-10-10)
+# Lane C transcription. Required by 3409 (listed minor, restricted to Engineering/Arts duals).
+# The structured data is visibly incomplete (see provenance warnings).
+schema_version: "1.0"
+kind: specialisation
+code: MATHB2
+year: 2026
+title: Mathematics for Engineers
+spec_kind: minor
+uoc: 24
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHB2
+  structure_version: "2026.01.002"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - >-
+      The "Prescribed Electives" container ("at least 24 UOC of the following courses") lists only
+      CVEN2002 in a one-of group; the course list is evidently truncated in the 2026 data. The pool below
+      uses the courses the handbook names in this document (CVEN2002, CVEN2702, any Level 2 MATH course).
+    - >-
+      Availability conflict: 3409 says the minor "is only available in 3961 Engineering (Honours)/Arts and
+      3732 Engineering Science/Arts"; this page says "Only students enrolled concurrently in both a
+      Bachelor of Arts and Bachelor of Engineering (Honours) program may take this minor" (3732 is not a
+      BE (Hons)). allowed_if follows 3409's explicit list; confirm with the Faculty.
+
+allowed_if: program(3961, 3732)
+
+requirements:
+  - id: prescribed-electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: { min: 24 }
+    from: CVEN2002 or CVEN2702 or (level:2 and MATH****)
+    quotas:
+      - { from: CVEN2002 or CVEN2702, count: { max: 1 }, original: "One of the following: (CVEN2002 OR CVEN2702)" }
+    original: Students must take at least 24 UOC of the following courses.
+    note: Reconstructed `from` (see provenance); no Level 3 MATH is admitted because none is named.
+
+  - id: maths-level-2
+    kind: limit
+    title: Minimum Maths Level 2 UOC
+    from: (level:2 and MATH****) or CVEN2002 or CVEN2702
+    uoc: { min: 12 }
+    original: >-
+      Students Must Complete A Minimum Of 12 UOC Of The Following Courses. For The Purpose Of This Minor
+      One Of CVEN2002 Or CVEN2702 Will Count As A Level 2 Mathematics Course Where This Course Is Required
+      In The Student's Chosen Engineering Major. Any Level 2 Mathematics (MATH) Course One Of The
+      Following: (CVEN2002 - Civil and Environmental Engineering Computations OR CVEN2702 - Engineering
+      Computations for Environmental Engineers)
+    note: >-
+      SCHEMA GAP: CVEN2002/2702 count as Level 2 Mathematics only "where this course is required in the
+      student's chosen Engineering major" — a counting rule conditional on another component's core
+      (would need cores() or in:<eng>/major inside a selector, which allocation forbids). Counted
+      unconditionally here.
+    severity: warning
+
+  - id: exclusions
+    kind: info
+    title: Exclusions
+    text: Only students enrolled concurrently in both a Bachelor of Arts and Bachelor of Engineering (Honours) program may take this minor.

@@ -1,0 +1,60 @@
+# COMPN1 Computer Science (Computer Networks) (major in 3778), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/COMPN1
+#   (curriculum structure 2026.01.038; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: COMPN1
+year: 2026
+title: Computer Science (Computer Networks)
+spec_kind: major
+uoc: 96
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/COMPN1
+  structure_version: "2026.01.038"
+  retrieved: 2026-10-09
+  status: complete
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 72
+    courses:
+      - COMP1511
+      - COMP1521
+      - COMP1531
+      - COMP2511
+      - COMP2521
+      - COMP3331
+      - COMP3900
+      - COMP4920
+      - MATH1081
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+      - COMP3121 or COMP3821
+    original: "Students must take 72 UOC of the following courses."
+
+  - id: computing-electives
+    kind: pool
+    title: Computing Electives
+    uoc: 6
+    from: "@cse_computing_electives"
+    quotas:
+      - from: "@vip"
+        uoc: { max: 6 }
+        note: Further VIP courses need Program Authority and Deputy Head of School approval (not modelled).
+    original: "Students must complete 6 UOC of the following courses. NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+
+  - id: vip-consecutive
+    kind: timing
+    severity: warning
+    courses: "@vip"
+    consecutive: true
+    original: 2 UOC courses are run over consecutive terms for a final total of 6 UOC.
+
+  - id: prescribed-electives
+    kind: pool
+    title: Discipline Electives
+    uoc: { min: 18 }
+    from: [COMP4336, COMP4337, COMP6733, COMP9332, COMP9334]
+    original: "Students must take at least 18 UOC of the following courses."

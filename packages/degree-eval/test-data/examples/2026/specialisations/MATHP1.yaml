@@ -1,0 +1,56 @@
+# MATHP1 Pure Mathematics (Advanced Mathematics (Honours) major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHP1
+#   (curriculum structure 2026.02.007, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: MATHP1
+year: 2026
+title: Pure Mathematics
+spec_kind: major
+uoc: 90
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHP1
+  structure_version: "2026.02.007"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 18
+    courses: [MATH1081, MATH1141, MATH1241]
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 36
+    courses: [MATH2111, MATH2221, MATH2601, MATH2621, MATH2701, MATH2901]
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 18
+    courses: [MATH3611, MATH3701, MATH3711]
+
+  - id: computing-elective
+    kind: pool
+    title: Level 1 Computer Science Elective
+    uoc: { min: 6 }
+    from: ENGG1811 or COMP1***
+    original: "Students must take at least 6 UOC of the following courses: ENGG1811; any level 1 Computer Science course."
+
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Electives
+    uoc: 12
+    from: MATH3*** and not (MATH3599 or MATH3699)
+    original: >-
+      12 UOC of Level 3 Maths courses (excluding MATH3599 and MATH3699) chosen with the approval of the
+      Head of School of Mathematics and Statistics or nominee.
+    note: Handbook cp=12 with no maximum; the description's "12 UOC" is used as exact.
+  - id: level-3-electives-approval
+    kind: info
+    confirm: true
+    text: Level 3 electives are chosen with the approval of the Head of School of Mathematics and Statistics or nominee.

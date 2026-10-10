@@ -1,0 +1,49 @@
+# ECONV1 Macroeconomics and Financial Markets (Economics major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ECONV1
+#   (curriculum structure 2026.01.029, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: ECONV1
+year: 2026
+title: Macroeconomics and Financial Markets
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ECONV1
+  structure_version: "2026.01.029"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 24
+    courses: [ECON2101, ECON2206, ECON1101, ECON1102]
+    original: Students must complete 24 UOC of the following courses.
+
+  - id: level-2-electives
+    kind: pool
+    title: Prescribed Level 2 Elective Courses
+    uoc: 6
+    from: [ECON2209, ECON2107]
+    original: Student must complete 6 UOC of the following courses.
+
+  - id: level-3-methods
+    kind: pool
+    title: Prescribed Level 3 Elective Courses - Methods
+    uoc: 6
+    from: [ECON3208, ECON3206, ECON3210]
+    original: Student must complete 6 UOC of the following courses.
+
+  - id: level-3-applications
+    kind: pool
+    title: Prescribed level 3 Elective Courses - Applications
+    uoc: 12
+    from: ECON3116 or ECON3107 or COMM3000 or ECON3104 or ACTL3191 or ACTL3192
+    quotas:
+      - from: ACTL3191 or ACTL3192
+        uoc: { max: 6 }
+        original: "Actuarial Studies Options: Students may take a maximum of 6 UOC of the following courses."
+    original: Student must complete 12 UOC of the following courses.

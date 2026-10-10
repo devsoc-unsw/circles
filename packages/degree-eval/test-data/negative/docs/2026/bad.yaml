@@ -1,0 +1,32 @@
+schema_version: "1.0"
+kind: program
+code: "9999"
+year: 2026
+title: Broken
+uoc: 144
+provenance: { source: hand }
+requirements:
+  - id: a
+    kind: pool
+    from: COMP1511 and COMP1521 or COMP1531
+    uoc: 6
+  - id: b
+    kind: pool
+    from: in:a
+    uoc: 6
+  - id: c
+    kind: pool
+    from: "@nope"
+    uoc: 6
+  - id: d
+    kind: core
+    courses: [COMP1511 or COMP1521 and COMP1531]
+  - id: e
+    kind: maturity
+    applies_to: level:3
+    require: uoc(24) and wam(65,
+  - id: f
+    kind: frobnicate
+  - id: a
+    kind: info
+    text: dup

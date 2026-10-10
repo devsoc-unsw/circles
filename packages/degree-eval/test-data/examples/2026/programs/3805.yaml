@@ -1,0 +1,251 @@
+# 3805 Medicine (Bachelor of Medical Studies / Doctor of Medicine), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3805
+#   (curriculum structure 2026.01.001, accessed 2026-10-10)
+# Lane C transcription. Shows: stage-gated maturity, 0 UOC examination "courses" as core items,
+# multi-term courses whose total UOC exceeds the catalogue per-term UOC, a conditional ILP exemption,
+# a distinction rule on a non-University weighted mark, and many attestable enrolment conditions.
+# Task brief named this program "Medical Studies/Doctor of Medicine"; the handbook title is "Medicine"
+# (awards BMed + MD), code verified.
+schema_version: "1.0"
+kind: program
+code: "3805"
+year: 2026
+title: Medicine
+career: ugrd
+uoc: 288
+duration_years: 6
+awards: [Bachelor of Medical Studies, Doctor of Medicine]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3805
+  structure_version: "2026.01.001"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - >-
+      Stage 2 declares 84 UOC, but its courses sum to 64 UOC per catalogue credit points: MFAC4001
+      (2 UOC) and MFAC4999 (8 UOC) are multi-term courses taken in each of 3 terms (6 and 24 UOC in
+      total). SCHEMA GAP (no item multiplicity); worked around with the MATHAH thesis device: the two
+      courses sit in a sibling pool `ilp` (30 UOC, quotas 24/6) so all three enrolments count, and
+      `stage-2-core` holds the other 54 UOC.
+    - >-
+      The ILP exemption targets a pool, but §7.2 step 5 defines exemptions for core items only, so an
+      exempt student still reads `ilp` unmet (and the 24 UOC target reduction is not applied) until the
+      schema allows pool exemptions or conditional nodes. Flagged for review.
+    - >-
+      The General Education rule also excludes two academic orgs identified only by handbook sys_id.
+      523a1d4f4f4d97404aa6eb4f0310c776 is the School of Chemistry (resolved 2026-10-10 from the cached
+      CHEMA1 page; library school CHEM) and is now excluded. 1a3a1d4f4f4d97404aa6eb4f0310c776 is still
+      unresolved, so the gen-ed selector remains broader than the handbook rule.
+
+sets:
+  stage_1_core: >-
+    MFAC1501 or MFAC1511 or MFAC1512 or MFAC1513 or MFAC1521 or MFAC1522 or MFAC1523 or MFAC1524
+    or MFAC1525 or MFAC1526 or MFAC1527
+  stage_2_core: >-
+    MFAC2507 or MFAC2511 or MFAC2512 or MFAC2514 or MFAC2515 or MFAC2516 or MFAC4001 or MFAC4999
+  stage_3_core: >-
+    MFAC3501 or MFAC3502 or MFAC3503 or MFAC3504 or MFAC3505 or MFAC3506 or MFAC3508 or MFAC3509
+    or MFAC3512 or MFAC3514 or MFAC3515 or MFAC3522 or MFAC3523
+
+entry:
+  and:
+    - manual("Selected for entry into Medicine (academic merit, UCAT ANZ and interview), or BMedSc student offered a provisional place")
+    - manual("Comply with NSW Health clinical placement requirements, criminal record check and the UNSW Medicine Immunisation and Blood-borne Viruses Policy")
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 276 }
+    original: Students must complete 276 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: stage-1-core
+        kind: core
+        title: Stage 1 Core Courses
+        uoc: 96
+        courses: [MFAC1501, MFAC1521, MFAC1522, MFAC1523, MFAC1524, MFAC1525, MFAC1526, MFAC1527,
+                  MFAC1511, MFAC1512, MFAC1513]
+        original: Students must take 96 UOC of the following courses.
+        note: >-
+          MFAC1511 (Phase 1 Portfolio Examination), MFAC1512 (End-of-Phase Examination) and MFAC1513
+          (Clinical and Communications Skills Examination) are 0 UOC assessment items, required as core
+          items like ENGG4999.
+
+      - id: stage-2-core
+        kind: core
+        title: Stage 2 Core Courses
+        uoc: 54
+        courses: [MFAC2514, MFAC2515, MFAC2516, MFAC2507, MFAC2511, MFAC2512]
+        original: >-
+          Students must take 84 UOC of the following courses. Note: - MFAC4001 (2 UOC) is a multi-term
+          course run over 3-terms for a total UOC of 6. - MFAC4999 (8 UOC) is a multi-term course run
+          over 3-terms for a total UOC of 24. - MFAC4001 and MFAC4999 must be taken concurrently in
+          Year 4
+        note: >-
+          The handbook's 84 UOC Stage 2 list is split in two: these six courses (54 UOC) here, and
+          MFAC4999/MFAC4001 in the sibling pool `ilp` (30 UOC). SCHEMA GAP: a core item is satisfied by
+          one instance, but MFAC4999/MFAC4001 need three enrolments each to earn 24/6 UOC; a pool counts
+          every instance up to its quotas (same device as MATHAH's thesis).
+      - id: ilp
+        kind: pool
+        title: Independent Learning Project (Stage 2, multi-term)
+        from: MFAC4001 or MFAC4999
+        uoc: 30
+        quotas:
+          - { from: MFAC4999, uoc: 24 }
+          - { from: MFAC4001, uoc: 6 }
+        original: >-
+          MFAC4001 (2 UOC) is a multi-term course run over 3-terms for a total UOC of 6. MFAC4999 (8 UOC)
+          is a multi-term course run over 3-terms for a total UOC of 24.
+        note: >-
+          Part of the handbook's Stage 2 Core (84 UOC = 54 in stage-2-core + 30 here). Exact quotas: three
+          MFAC4999 instances (3 x 8) and three MFAC4001 instances (3 x 2); a fourth or failed enrolment is
+          not counted. Not `is_core`, so `cores()` does not see these two courses.
+      - id: ilp-concurrent
+        kind: timing
+        courses: MFAC4001 or MFAC4999
+        consecutive: true
+        original: MFAC4001 and MFAC4999 must be taken concurrently in Year 4
+        note: >-
+          Partial: `consecutive` checks the multi-term run; "concurrently" (term-by-term pairing) and
+          "in Year 4" (a plan-year position) are not expressible. See info ilp-year-4.
+      - id: ilp-year-4
+        kind: info
+        text: MFAC4001 and MFAC4999 must be taken concurrently in Year 4.
+        note: SCHEMA GAP — timing has no "in year N" / "same terms as" form.
+
+      - id: stage-3-core
+        kind: core
+        title: Stage 3 Core Courses
+        uoc: 96
+        courses: [MFAC3501, MFAC3502, MFAC3503, MFAC3504, MFAC3505, MFAC3506, MFAC3508, MFAC3509,
+                  MFAC3514, MFAC3515, MFAC3512, MFAC3522, MFAC3523]
+        original: >-
+          Students must complete 96 UOC of Stage 3 core courses. Note: Students who are enrolled
+          concurrently in the Bachelor of Medicine and the Bachelor of Arts programs must complete the
+          Bachelor of Arts program requirements prior to commencing Stage 3 of the Medicine program. Upon
+          rejoining the Medicine program, they will undertake a short clinical skills refresher course.
+      - id: concurrent-arts
+        kind: info
+        text: >-
+          Students who are enrolled concurrently in the Bachelor of Medicine and the Bachelor of Arts
+          programs must complete the Bachelor of Arts program requirements prior to commencing Stage 3 of
+          the Medicine program. Upon rejoining the Medicine program, they will undertake a short clinical
+          skills refresher course.
+        note: >-
+          SCHEMA GAP — a constraint across two concurrently enrolled programs (not a double degree);
+          complete() can only reference nodes of this plan.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    uoc: { min: 12 }
+    from: gened and not (faculty:MED or school:CHEM or GENS1112 or PSYC1011 or PSYC1022 or PSYC1023 or PSYC1024)
+    original: >-
+      Students must take at least 12 UOC of the following courses. Please refer to program constraints,
+      information rule below for further details. (Rule: any General Education course.)
+    note: >-
+      Exclusions taken from the structured dynamic rule (not shown in handbook text): parent faculty
+      Medicine & Health, GENS1112, PSYC1011, PSYC1022-1024, the School of Chemistry (org sys_id
+      523a…c776) and one still unresolved org (see provenance).
+      The "information rule below" the text refers to is not present in the 2026 page data.
+  - id: gen-ed-during-ilp
+    kind: info
+    text: >-
+      During the Independent Learning Project students should also complete 12 UOC of General Education
+      courses in a faculty or faculties other than Medicine.
+
+  - id: maturity-stage-2
+    kind: maturity
+    applies_to: "@stage_2_core"
+    require: uoc(96)
+    original: Students must have completed 96 UOC before taking any Stage 2 Core Courses.
+  - id: maturity-stage-3
+    kind: maturity
+    applies_to: "@stage_3_core"
+    require: uoc(180)
+    original: Students must have completed 180 UOC before taking any Stage 3 Core Courses.
+
+  - id: capability-progression
+    kind: info
+    text: >-
+      Assessment in this program is capability based, requiring students to demonstrate their ongoing
+      development with respect to the eight areas of capability. Progression will not be based solely on
+      satisfactory completion of individual courses, nor will it correspond solely to annual stages.
+      Full details are available on the Faculty of Medicine website.
+  - id: both-awards
+    kind: info
+    text: >-
+      All students selected for entry into Medicine will have to complete both the BMed and MD. Students
+      who are unable to complete either the BMed or MD may apply for transfer to the BSc (Med) depending
+      on the stage of withdrawal from Medicine.
+  - id: rural-placement
+    kind: info
+    confirm: true
+    text: A student's clinical experiences during Phase 3 must include a minimum of 4 weeks in a rural location.
+  - id: criminal-record-check
+    kind: info
+    confirm: true
+    text: >-
+      All students undertaking clinical placements must undergo an Australian National Criminal Record
+      Check prior to placement in the NSW Health System. Students who fail to satisfy the requirements of
+      this criminal record check at any point during their enrolment will be excluded from the Program.
+  - id: immunisation
+    kind: info
+    confirm: true
+    text: >-
+      In order to be enrolled in the UNSW Medicine program, you must comply with UNSW Medicine's
+      Immunisation and Blood-borne Viruses Policy, available at https://med.unsw.edu.au/policies
+  - id: medical-board-registration
+    kind: info
+    confirm: true
+    text: >-
+      All Medicine Program students must at all times during enrolment be registered with the Medical
+      Board of Australia, and comply with NSW Health requirements before commencing clinical/hospital
+      placements.
+  - id: clinical-travel
+    kind: info
+    text: >-
+      In all phases of the program, students will be required to travel to various clinical environments
+      associated with UNSW, which will be the predominant locations for learning in Phases 2 and 3.
+
+exemptions:
+  - courses: [MFAC4999]
+    scope: ilp
+    when: manual("Enrolled in BSc (Med) Honours 3831, or previously completed a research Honours program, higher research degree, Master degree with a significant research component, or other acceptable evidence of independent study or research")
+    original: >-
+      Students wishing to undertake a full year of research may be able to enrol in the BSc (Med)
+      Honours program 3831 subject to the approval from the Honours Committee. These students will be
+      exempt from undertaking the Independent Learning Project. Exemption from the Independent Learning
+      Project will also be granted to students who have previously completed a research Honours program
+      or higher research degree, or a Master degree with a significant research component, or who can
+      otherwise demonstrate acceptable evidence of independent study or research at a tertiary level.
+    note: >-
+      Retargeted from stage-2-core to the `ilp` pool, where MFAC4999 now sits. SCHEMA GAP: §7.2 step 5
+      exempts core items only, so against a pool this exemption has no effect yet (see provenance
+      warning). Intended reading: reduce_uoc defaults to true (the 24 UOC drops from the targets). The
+      handbook does not say whether the 288 UOC total is reduced or met by Honours credit; flagged for
+      review.
+
+classes:
+  # "Award with Distinction" is decided per award on a Faculty weighted mark that is not the University
+  # WAM (Phase-based examinations included), so it is student-reported. First match wins.
+  - name: Distinction in both BMed and MD
+    require: reported_wam(75, bmed_distinction_mark) and reported_wam(75, md_distinction_mark)
+  - name: Distinction in BMed
+    require: reported_wam(75, bmed_distinction_mark)
+  - name: Distinction in MD
+    require: reported_wam(75, md_distinction_mark)
+
+notes:
+  - >-
+    Award with Distinction: students who achieve a weighted, average mark of at least 75% in either the
+    BMed and/or MD will be awarded Distinction in one or both degrees. The weighted, average mark used for
+    this purpose is not the University WAM. BMed: Phase 1 Course Results 20%, Phase 1 Written Examination
+    10%, Phase 1 Clinical Skills Examination 10%, Phase 1 Portfolio Examination 20%, Phase 2 Course
+    Assignments/Project Results 10%, Phase 2 Integrated Clinical Examination 20%, General Education/Arts
+    Course Results 10%. MD: ILP/Science Honours 15%, Phase 3 Course Results 20%, Biomedical Sciences Viva
+    Examination 15%, Phase 3 Integrated Clinical Examination 30%, Phase 3 Portfolio 20%.
+  - The program has 26 teaching periods of about 8 weeks (4 per year in Years 1-4, plus a Summer Teaching Period in Years 5-6), not the standard UNSW 3-term calendar.

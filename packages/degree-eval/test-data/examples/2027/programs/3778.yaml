@@ -1,0 +1,16 @@
+# 3778 Bachelor of Computer Science, handbook year 2027 — expressed as a diff from 2026.
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2027/3778
+#   (curriculum structure 2027.01.001, accessed 2026-10-08). The rule structure is identical to
+#   2026; only the structure version changed, so the document inherits everything.
+schema_version: "1.0"
+kind: program
+code: "3778"
+year: 2027
+extends: { year: 2026 }
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2027/3778
+  structure_version: "2027.01.001"
+  retrieved: 2026-10-08
+  status: complete
+patch: []

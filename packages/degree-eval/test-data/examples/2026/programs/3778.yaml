@@ -1,0 +1,75 @@
+# 3778 Bachelor of Computer Science, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3778
+#   (curriculum structure 2026.03.001, accessed 2026-10-08)
+schema_version: "1.0"
+kind: program
+code: "3778"
+year: 2026
+title: Computer Science
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Computer Science]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3778
+  structure_version: "2026.03.001"
+  retrieved: 2026-10-08
+  status: complete
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: major
+        kind: spec
+        slot: major
+        title: Majors
+        options: [COMPA1, COMPD1, COMPI1, COMPJ1, COMPN1, COMPS1, COMPY1]
+        default: COMPA1
+        original: COMPA1 is the default specialisation, and will be used if no other specialisation is selected.
+
+  - id: minor
+    kind: spec
+    slot: minor
+    title: Optional Minor
+    options: [ACCTA2, FINSA2, INFSA2, MARKA2, MATHC2, PSYCM2]
+    count: { min: 0, max: 1 }
+    # Minor courses are credited to the free-elective pool as well (a minor "uses" the electives).
+    counts_toward: [free-electives]
+    note: >-
+      MATHC2 and COMPA1 both require MATH1131|MATH1141 and MATH1231|MATH1241. The handbook publishes no
+      overlap policy for 3778, so no share is declared and the evaluator reports MATHC2's level-1 core
+      as unknown (overlap_undeclared, §7.4 step 9), not unmet. Confirm with CSE (§13).
+    original: >-
+      Optional minors available include the following. If you complete a minor of 30 UOC,
+      you will also need to take 6 UOC of free electives.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any
+    uoc: 36
+    overflow: true
+    original: Students take 36 UOC of free electives. These free electives can be used to complete an optional minor.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: gened and not (MATH**** or DATA****)
+    uoc: 12
+    original: >-
+      Students must take 12 UOC of any General Education course. NOTE: MATH and DATA courses
+      do not meet the requirements of General Education for this program.
+
+  - id: infs-comp3311-clash
+    kind: info
+    text: >-
+      Students taking a major and minor that require INFS1603 and COMP3311 as core courses should
+      take only COMP3311 and replace INFS1603 with an Information Systems Level 2 or 3 course.
+    note: Could be modelled as a substitution scoped to the minor once the replacement set is pinned down.

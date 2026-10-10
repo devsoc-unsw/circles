@@ -1,0 +1,38 @@
+# Expected errors for the negative self-test (tools/negative). Each line is a substring that must match
+# exactly one reported error; "warn: " lines match a lint warning instead. Any other error, and any
+# other lint, fails the run (so the "no lint" probes in bad-2.yaml are checked too).
+# --- bad.yaml: the original 2026-10-08 negative test (formerly /tmp/circles-neg) ---
+bad.yaml: schema: /requirements/3
+bad.yaml: duplicate node id "a"
+bad.yaml: requirements[0].from: selector "COMP1511 and COMP1521 or COMP1531": mixed "and"/"or"
+bad.yaml: requirements[1].from: in: is only allowed in post-allocation contexts
+bad.yaml: requirements[2].from: unknown set @nope
+bad.yaml: requirements[3]: bad core item
+bad.yaml: requirements[4].require: condition "uoc(24) and wam(65,": unexpected end of selector
+# --- bad-2.yaml: node paths (M2), counts_toward/distinct_from targets (B1, minor 2), cores() (M7), marks (minor 11), shares (M1), lint (M6) ---
+bad-2.yaml: requirements[0].counts_toward: "core-x" must be a pool
+bad-2.yaml: requirements[0].distinct_from: "free" must be a spec node
+bad-2.yaml: requirements[3].scope: COMPZZ is not an option of spec node major
+bad-2.yaml: requirements[4].from: "free" is a pool node in this document
+bad-2.yaml: requirements[5].require: condition "cores(in:major)": in: is not allowed inside cores()
+bad-2.yaml: requirements[6].require: condition "wam(999)": wam() mark 999 is above 100
+bad-2.yaml: shares[0]: max_uoc has no meaning with mode: replace
+warn: bad-2.yaml: lint: group big-group needs 96 UOC but its children can count at most 6
+# --- bad-2.yaml: REVIEW-2 N3 (vacuous limit) and N6 (replace share with an empty default replacement set) ---
+warn: bad-2.yaml: lint: limit vacuous can never fail: uoc.max 36 is at least the most its selector can count (36)
+warn: bad-2.yaml: lint: shares[1] (mode: replace) needs replacement.from: side "core-x" has no pools
+# --- bad-conditions.yaml: course entries (M4, minor 10, minor 11) ---
+bad-conditions.yaml: schema: /courses/COMP1511 must NOT be valid
+bad-conditions.yaml: courses.COMP1511: status none means "no prerequisite" but requires is present
+bad-conditions.yaml: courses.COMP1911.excludes "COMP9***": patterns are not allowed in excludes
+bad-conditions.yaml: courses.COMP2521.requires: condition "grade(120, COMP1511)": grade() mark 120 is above 100
+# --- fixtures (M9): shape and references ---
+bad-shape.yaml: fixture schema:  must have required property 'expect'
+bad-fixture.yaml: duplicate iid a
+bad-fixture.yaml: a: outcome pass with mark < 50
+bad-fixture.yaml: plan course COMP1521 (a) has no catalogue entry
+bad-fixture.yaml: unknown iid "zz"
+bad-fixture.yaml: selections.major: COMPZZ is not an option
+bad-fixture.yaml: expect.nodes: COMPA1 is not selected in major
+bad-fixture.yaml: expect.nodes: "nonexistent" is not a node of COMPA1
+bad-fixture.yaml: expect.nodes: "free-electives/x" continues past non-spec node free-electives

@@ -1,0 +1,95 @@
+# COMPOS Internetworking (specialisation in 8543 Master of Information Technology), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/postgraduate/specialisations/2026/COMPOS
+#   (curriculum structure 2026.01.126; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: COMPOS
+year: 2026
+title: Internetworking
+spec_kind: specialisation
+uoc: 96
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/postgraduate/specialisations/2026/COMPOS
+  structure_version: "2026.01.126"
+  retrieved: 2026-10-09
+  status: complete
+
+sets:
+  dke: >-
+    COMP6733 or COMP9332 or COMP9334 or COMP9336 or COMP9337
+
+requirements:
+  - id: foundational-core
+    kind: core
+    title: Foundational Core
+    uoc: 18
+    courses: [COMP9020, COMP9021, COMP9024]
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: advanced-core
+    kind: core
+    title: Advanced Core
+    uoc: 18
+    courses: [COMP9311, COMP9331, COMP9820]
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: electives
+    kind: pool
+    title: Electives
+    uoc: 24
+    from: "@mit_electives"
+    original: "Students must take 24 UOC of the following courses."
+
+  - id: dke
+    kind: pool
+    title: Disciplinary Knowledge Electives
+    uoc: 18
+    from: "@dke"
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: project
+    kind: group
+    title: Project/ Capstone/Research
+    choose: 1
+    original: "Students must take 18 UOC from one of the following groups."
+    children:
+      - id: option-1
+        kind: group
+        title: Option 1
+        original: "Students take 18 UOC including COMP9900, 6 UOC Disciplinary Knowledge Electives, and either GSOE9010 or GSOE9011."
+        children:
+          - id: option-1-information-technology-project
+            kind: core
+            title: Information Technology Project
+            courses: [COMP9900]
+          - id: option-1-dke
+            kind: pool
+            title: Disciplinary Knowledge Electives
+            uoc: 6
+            from: "@dke"
+            original: "See list of courses above."
+          - id: option-1-one-of
+            kind: core
+            title: One of the following
+            courses: [GSOE9010 or GSOE9011]
+      - id: option-2
+        kind: group
+        title: Option 2
+        original: "Students take 18 UOC including COMP9991, COMP9992, and 6 UOC Disciplinary Knowledge Electives."
+        children:
+          - id: option-2-research-project
+            kind: core
+            title: Research Project
+            courses: [COMP9991, COMP9992]
+          - id: option-2-dke
+            kind: pool
+            title: Disciplinary Knowledge Electives
+            uoc: 6
+            from: "@dke"
+            original: "See list of courses above."
+      - id: option-3
+        kind: core
+        title: Option 3
+        courses: [COMP9991, COMP9993]
+        original: "Students take 18 UOC of the following courses."

@@ -1,0 +1,121 @@
+# Conformance fixture (SCHEMA.md §15). Review B1: a BSc with a science minor must not lose its real free
+# electives to secondary credit, and the science total must count the minor's science courses once.
+fixture_version: "1.0"
+id: b1-3970-science-minor
+findings: [B1]
+title: 3970 BSc, 48 UOC science major + MATHC2 minor + 30 UOC non-science free electives
+description: >-
+  The reviewer's B1 counterexample. Under the first draft, MATHC2's 36 UOC was credited to free-electives
+  as well, filling its 36 UOC cap, so the 30 UOC of real free electives became "not counted" and the
+  program showed unmet at 114 UOC. Under §7.4 (primary allocation first; counts_toward credit only into
+  headroom and only for `not @science` courses) every course is counted once and the plan is complete.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3970.yaml
+    - examples/2026/specialisations/MATHC2.yaml
+  inline:
+    - schema_version: "1.0"
+      kind: specialisation
+      code: GEOLS1
+      year: 2026
+      title: Geology (fixture stand-in)
+      spec_kind: major
+      uoc: 48
+      provenance:
+        source: local
+        note: >-
+          Synthetic stand-in so the fixture has a 48 UOC science major that does not use MATH1131/1231.
+          NOT the handbook GEOLS1 structure; the GEOS codes are placeholders.
+      requirements:
+        - id: core
+          kind: core
+          courses: [GEOS1111, GEOS1211, GEOS2141, GEOS2161, GEOS2181, GEOS3141, GEOS3161, GEOS3181]
+  catalogue:
+    note: Fixture inputs. UOC values match the handbook where known; GEOS/GENL codes are placeholders.
+    courses:
+      SCIF0000: { uoc: 0, faculty: SCI }
+      SCIF1000: { uoc: 6, faculty: SCI }
+      SCIF2041: { uoc: 6, faculty: SCI }
+      SCIF3041: { uoc: 6, faculty: SCI }
+      SCIF3010: { uoc: 0, faculty: SCI }
+      GEOS1111: { uoc: 6, faculty: SCI }
+      GEOS1211: { uoc: 6, faculty: SCI }
+      GEOS2141: { uoc: 6, faculty: SCI }
+      GEOS2161: { uoc: 6, faculty: SCI }
+      GEOS2181: { uoc: 6, faculty: SCI }
+      GEOS3141: { uoc: 6, faculty: SCI }
+      GEOS3161: { uoc: 6, faculty: SCI }
+      GEOS3181: { uoc: 6, faculty: SCI }
+      MATH1131: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH1231: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2011: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2501: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2121: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH3411: { uoc: 6, faculty: SCI, school: MATHS }
+      ECON1101: { uoc: 6, faculty: BUS }
+      ECON1102: { uoc: 6, faculty: BUS }
+      ECON2101: { uoc: 6, faculty: BUS }
+      ARTS1090: { uoc: 6, faculty: ADA }
+      ARTS2090: { uoc: 6, faculty: ADA }
+      GENL1062: { uoc: 6, faculty: LAW, gened: true }
+      GENL2020: { uoc: 6, faculty: LAW, gened: true }
+student:
+  program: "3970"
+  year: 2026
+  horizon: planned
+  selections:
+    major: [GEOLS1]
+    additional-specs: [minors]
+    minors: [MATHC2]
+  plan:
+    - { iid: scif0000, code: SCIF0000, term: 1, status: planned }
+    - { iid: scif1000, code: SCIF1000, term: 1, status: planned }
+    - { iid: geos1111, code: GEOS1111, term: 1, status: planned }
+    - { iid: math1131, code: MATH1131, term: 1, status: planned }
+    - { iid: geos1211, code: GEOS1211, term: 2, status: planned }
+    - { iid: math1231, code: MATH1231, term: 2, status: planned }
+    - { iid: econ1101, code: ECON1101, term: 2, status: planned }
+    - { iid: geos2141, code: GEOS2141, term: 3, status: planned }
+    - { iid: math2011, code: MATH2011, term: 3, status: planned }
+    - { iid: econ1102, code: ECON1102, term: 3, status: planned }
+    - { iid: geos2161, code: GEOS2161, term: 4, status: planned }
+    - { iid: math2501, code: MATH2501, term: 4, status: planned }
+    - { iid: arts1090, code: ARTS1090, term: 4, status: planned }
+    - { iid: geos2181, code: GEOS2181, term: 5, status: planned }
+    - { iid: math2121, code: MATH2121, term: 5, status: planned }
+    - { iid: scif2041, code: SCIF2041, term: 5, status: planned }
+    - { iid: geos3141, code: GEOS3141, term: 6, status: planned }
+    - { iid: math3411, code: MATH3411, term: 6, status: planned }
+    - { iid: econ2101, code: ECON2101, term: 6, status: planned }
+    - { iid: geos3161, code: GEOS3161, term: 7, status: planned }
+    - { iid: scif3041, code: SCIF3041, term: 7, status: planned }
+    - { iid: genl1062, code: GENL1062, term: 7, status: planned }
+    - { iid: geos3181, code: GEOS3181, term: 8, status: planned }
+    - { iid: arts2090, code: ARTS2090, term: 8, status: planned }
+    - { iid: genl2020, code: GENL2020, term: 8, status: planned }
+    - { iid: scif3010, code: SCIF3010, term: 8, status: planned }
+expect:
+  nodes:
+    root: { status: met, counted_uoc: 144, projected: true }
+    disciplinary: { status: met, counted_uoc: 102 }
+    science-96: { status: met, counted_uoc: 102 }
+    employability: { status: met, counted_uoc: 12 }
+    major/GEOLS1/core: { status: met }
+    minors: { status: met, counted_uoc: 36 }
+    minors/MATHC2/level-1-core: { status: met }
+    minors/MATHC2/electives: { status: met, counted_uoc: 24 }
+    science-electives: { status: met, counted_uoc: 0 }
+    free-electives: { status: met, counted_uoc: 30, credited_uoc: 0 }
+    gen-ed: { status: met, counted_uoc: 12 }
+    max-level-1: { status: met, counted_uoc: 54 }
+    level-1-science: { status: met, counted_uoc: 30 }
+  allocations:
+    math1131: { primary: minors/MATHC2/level-1-core, shares: [] }
+    math2011: { primary: minors/MATHC2/electives, shares: [], credits: [] }
+    econ1101: { primary: free-electives, shares: [] }
+    genl1062: { primary: gen-ed, shares: [] }
+  not_counted: []
+notes:
+  - MATHC2 courses are all `@science`, so the filtered counts_toward credits nothing to free-electives or gen-ed.
+  - The free-electives pool has no minimum in 3970, so its 30 UOC is met; the 144 total is what requires it.

@@ -1,0 +1,33 @@
+# Conformance fixture (SCHEMA.md §15). Review M3: a failed 0 UOC, no-mark item is not passed.
+fixture_version: "1.0"
+id: m3-engg4999-fail
+findings: [M3]
+title: 3707 with ENGG4999 (0 UOC, Satisfactory/Fail) failed
+description: >-
+  ENGG4999 has no mark. Under the first draft "failed" meant mark < 50, so an unmarked fail counted as
+  done. With `outcome: fail` the instance is not done, is not allocated, and the core item is unmet.
+  A second, passed attempt in a later term would satisfy it. Partial plan: only the listed node is asserted.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2027/programs/3707.yaml
+    - examples/2027/specialisations/COMPBH.yaml
+  catalogue:
+    courses:
+      ENGG4999: { uoc: 0, faculty: ENG }
+student:
+  program: "3707"
+  year: 2027
+  horizon: planned
+  selections:
+    major: [COMPBH]
+  plan:
+    - { iid: engg4999, code: ENGG4999, term: 9, status: completed, outcome: fail }
+expect:
+  nodes:
+    industrial-training: { status: unmet, reasons: [failed] }
+  allocations:
+    engg4999: { primary: null, shares: [] }
+  not_counted: []
+notes:
+  - A failed instance is neither allocated nor reported as not counted; it is listed with reason failed.

@@ -1,0 +1,16 @@
+# Component programs for paths.yaml (synthetic, not handbook data).
+schema_version: "1.0"
+kind: program
+code: "9997"
+year: 2026
+title: Component probe A
+uoc: 192
+provenance: { source: local, note: synthetic validator probe }
+requirements:
+  - id: disciplinary
+    kind: group
+    children:
+      - id: major
+        kind: spec
+        slot: honours
+        options: [COMPBH, MECHAH]

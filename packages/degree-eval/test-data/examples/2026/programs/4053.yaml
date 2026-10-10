@@ -1,0 +1,141 @@
+# 4053 Arts / Education (Secondary) double degree (BA / BEd (Sec)), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4053
+#   (curriculum structure 2026.04.180, accessed 2026-10-10)
+# Lane C transcription. Built by composition (SCHEMA.md §8) from the Disciplinary Components of
+# 3409 Arts and 4056 Education (Secondary) (both 2026, this lane), narrowed to the 4053 option lists.
+# Shows: cross-slot major/minor combination rules, and professional-experience eligibility that reads
+# the Arts specialisations from inside the Education component's courses.
+schema_version: "1.0"
+kind: program
+code: "4053"
+year: 2026
+title: Arts / Education (Secondary)
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Arts, Bachelor of Education (Secondary)]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4053
+  structure_version: "2026.04.180"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - Inherits partial items from 3409 (Prescribed Electives selector) and 4056 (methods by teaching area, EDST6765 alone in term).
+    - Professional-experience eligibility is "typically" and depends on an "appropriate" teaching area; encoded as warning-severity maturity rules.
+
+components:
+  - id: arts
+    program: "3409"
+    title: Disciplinary Component - 3409 Arts
+    uoc: { min: 96 }
+    include: [disciplinary]
+    original: You must complete 96 UOC of the following including two specialisations.
+    patch:
+      - op: list_remove
+        target: major
+        field: options
+        items: &not_4053_majors [ASIAB1, COMDF1, CRIMC1, CRWTA1, ENVPE1, EUROC1, FILMB1, GERSF1, LINGC1,
+                                 MECTC1, MUSCJ1, PHILE1, POLSG1, PSYCD1]
+        note: 4053 offers 16 of the 30 3409 majors.
+      - op: list_remove
+        target: second-major
+        field: options
+        items: *not_4053_majors
+      - op: list_remove
+        target: minor
+        field: options
+        items: [ARTHB2, COMDF2, CRIMC2, GERSF2, GREKC2, INDOC2, ITALB2, MATHB2, MUSCJ2, POLSG2, PSYCM2,
+                SOSSB2, SOSSC2, SOSSD2, SOSSG2, WOMSC2]
+        note: 4053 offers 25 of the 41 3409 minors, including LEGLC2 (only available in 4053).
+  - id: edu
+    program: "4056"
+    title: Disciplinary Component - 4056 Education (Secondary)
+    uoc: { min: 96 }
+    include: [disciplinary]
+    original: You must complete 96 UOC of the following to satisfy the core requirements of this degree.
+    patch:
+      - op: list_remove
+        target: methods
+        field: from
+        items: [EDST6715, EDST6716, EDST6725, EDST6726, EDST6728, EDST6745, EDST6746, EDST6755, EDST6756,
+                EDST6758, EDST6771, EDST6772, EDST6775, EDST6776, EDST6777, EDST6778, EDST6788, EDST6789,
+                EDST6790, EDST6791, EDST6792, EDST6793, EDST6922, EDST6923, EDST6924, EDST6925, EDST6926,
+                EDST6927, EDST6952, EDST6953, EDST6954, EDST6955, EDST6956, EDST6957, EDST6958]
+        note: 4053 lists 32 of the 67 4056 method courses (the Arts teaching specialisations).
+
+requirements:
+  - id: history-minors
+    kind: check
+    title: Minors that require a History major
+    require: not spec(ASIAB2, AUSTB2, ENVPE2, EUROC2) or spec(HISTD1)
+    original: >-
+      Certain major/minor combinations are restricted due to teaching specialisation requirements: Asian
+      Studies, Australian Studies, Environmental Humanities, European Studies minors - must be combined
+      with History major
+    note: >-
+      A program-level check because the rule depends on this double degree; the same specs in 3409 carry
+      no such restriction. spec(...) in a check is evaluated against the student's selections. Could also
+      be a per-slot `allowed_if` if spec nodes accepted a condition per option (SCHEMA GAP: allowed_if
+      lives on the spec document, so it cannot vary by program without a patch).
+  - id: english-minors
+    kind: check
+    title: Minors that require an English major
+    require: not spec(CRWTA2, FILMB2, MECTC2, PHILE2) or spec(ENGLC1)
+    original: >-
+      Creative Writing, Film Studies, Media, Culture & Technology, Philosophy minors - must be combined
+      with English major
+
+  - id: pe1-content-knowledge
+    kind: maturity
+    title: Professional Experience 1 - teaching area content
+    severity: warning
+    applies_to: EDST6760
+    require: >-
+      uoc(12, level:1 and in:arts/major) and uoc(12, not level:1 and in:arts/major)
+      and uoc(12, level:1 and (in:arts/minor or in:arts/second-major))
+      and uoc(12, not level:1 and (in:arts/minor or in:arts/second-major))
+    original: >-
+      Typically, students will need to have completed 24 UOC in an appropriate minor (12 UOC at level 1
+      and 12 UOC at level 2 or above), and a minimum of 24 UOC in an appropriate major (12 UOC at level 1
+      and 12 UOC at level 2 or above).
+    note: >-
+      "Typically" → warning. "Appropriate" (the specialisation matches a teaching method area) is not
+      checked. A second major stands in for the minor. Course prerequisites and NESA participation
+      requirements for EDST6760 belong in course_conditions.
+  - id: pe2-content-knowledge
+    kind: maturity
+    title: Professional Experience 2/Internship - teaching area content
+    severity: warning
+    applies_to: EDST6765
+    require: >-
+      uoc(12, level:1 and (in:arts/minor or in:arts/second-major))
+      and uoc(12, not level:1 and (in:arts/minor or in:arts/second-major))
+      and uoc(36, in:arts/major) and uoc(24, not level:1 and in:arts/major)
+      and uoc(12, not (level:1 or level:2) and in:arts/major)
+    original: >-
+      Typically, students will need to have completed 24 UOC in an appropriate minor (12 UOC at level 1
+      and 12 UOC at level 2 or above), and a minimum of 36 UOC in an appropriate major (maximum 12 UOC at
+      level 1 and at least 12 UOC at level 3 or above).
+    note: >-
+      "Minimum 36 UOC in the major, maximum 12 UOC at level 1" (level 1 UOC beyond 12 do not count toward
+      the 36) means min(L1, 12) + nonL1 >= 36. That is equivalent to uoc(36) in the major together with
+      nonL1 >= 24: if L1 >= 12 then 12 + nonL1 >= 36; otherwise the capped sum equals the total.
+
+  - id: teaching-specialisations
+    kind: info
+    text: >-
+      The Prescribed Education Methods comprise of two of the following teaching specialisations:
+      Aboriginal (Indigenous) Studies, Ancient History, Drama, English, English as an Additional Language
+      or Dialect (EAL/D), Geography, Languages (Chinese, French, Japanese, Korean, Spanish), Legal Studies,
+      Modern History, Music Studies (Intensive), Society and Culture.
+    note: >-
+      SCHEMA GAP: linking a method area to the Arts major/minor that supplies its content knowledge would
+      need a mapping (method set ↔ spec) the schema has no construct for.
+
+notes:
+  - >-
+    You must complete 192 UOC. Bachelor of Arts (96 UOC): a Major (48) + a Minor (36) + Prescribed Electives
+    (12), OR a Major (48) + a second Major (48). Bachelor of Education (96 UOC): Education Core (66),
+    Prescribed Education method electives (24), Prescribed Education electives (6).
+  - No General Education or free electives in this double degree; 3409's GE, FE and optional third specialisation are not imported.

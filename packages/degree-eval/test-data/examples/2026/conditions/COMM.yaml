@@ -1,0 +1,21 @@
+# Course conditions for selected COMM courses, handbook year 2026.
+# Source: https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMM3090 (accessed 2026-10-08)
+schema_version: "1.0"
+kind: course_conditions
+year: 2026
+provenance:
+  source: hand
+  authors: [circles-schema-draft]
+  retrieved: 2026-10-08
+
+courses:
+  COMM3090:
+    original: >-
+      Students are expected to be in their final year of a Bachelor of Commerce single or dual degree
+      with at least 108 UOC completed.
+    status: parsed
+    # Maturity-style UOC prerequisite plus a program-group test (replaces title-keyword "COMM#").
+    requires: program(@bcom) and uoc(108)
+    note: >-
+      0 UOC Final Year Synthesis by application for significant extra-curricular projects (e.g. Peter
+      Farrell Cup); offered in limited circumstances.

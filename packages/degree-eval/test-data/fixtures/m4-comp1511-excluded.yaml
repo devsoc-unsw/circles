@@ -1,0 +1,31 @@
+# Conformance fixture (SCHEMA.md §15). Review M4: `excludes` applies whatever `status` says.
+fixture_version: "1.0"
+id: m4-comp1511-excluded
+findings: [M4]
+title: COMP1511 (status none) after a passed COMP1911
+description: >-
+  COMP1511's entry has `status: none` (no prerequisite) and `excludes: [COMP1911, WENG1000]`. Under the
+  first draft `status: none` returned met and skipped the exclusions. Now status describes `requires`
+  only, so the planned COMP1511 is unmet with reason excluded.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3778.yaml
+    - examples/2026/specialisations/COMPA1.yaml
+    - examples/2026/conditions/COMP.yaml
+  catalogue:
+    courses:
+      COMP1911: { uoc: 6, faculty: ENG, school: CSE }
+      COMP1511: { uoc: 6, faculty: ENG, school: CSE }
+student:
+  program: "3778"
+  year: 2026
+  horizon: planned
+  plan:
+    - { iid: comp1911, code: COMP1911, term: 1, status: completed, outcome: pass, mark: 72, grade: CR }
+    - { iid: comp1511, code: COMP1511, term: 2, status: planned }
+expect:
+  courses:
+    comp1511: { status: unmet, reasons: [excluded] }
+notes:
+  - Only the unlock result of the planned COMP1511 is asserted (§7.7).

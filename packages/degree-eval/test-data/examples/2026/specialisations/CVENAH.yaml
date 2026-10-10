@@ -1,0 +1,152 @@
+# CVENAH Civil Engineering (honours specialisation in 3707), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/CVENAH
+#   (curriculum structure 2026.01.132; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: CVENAH
+year: 2026
+title: Civil Engineering
+spec_kind: honours
+uoc: 168
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/CVENAH
+  structure_version: "2026.01.132"
+  retrieved: 2026-10-09
+  status: partial
+  warnings:
+    - >-
+      "School approval is required to take the alternative thesis options CVEN4951/4952/4953 or
+      CVEN4961/4962/4963" is not modelled as a condition (no allowed_if on group branches); kept in the
+      thesis node's original text.
+    - >-
+      Discipline Electives sub-containers (Engineering Construction and Management, Environmental, ...)
+      are 0 UOC display categories; they are flattened into one list.
+
+sets:
+  cvenah_discipline_electives: >-
+    CVEN4102 or CVEN4103 or CVEN4104 or CVEN4106
+    or CVEN3701 or CVEN4701 or CVEN4705 or CVEN4706 or CVEN9881 or GSOE9740
+    or CVEN4201 or CVEN4202 or CVEN4204
+    or ENGG3001 or ENGG4102 or ENGG4103
+    or CVEN4300 or CVEN4301 or CVEN4308 or CVEN4309 or CVEN9806 or CVEN9809 or CVEN9818 or CVEN9820
+    or CVEN9822 or CVEN9824 or CVEN9826 or CVEN9840
+    or CVEN4800 or GMAT1110 or GMAT3220 or GMAT9600 or GMAT9606
+    or CVEN4402 or CVEN4404 or CVEN4405 or CVEN9405 or CVEN9415 or ENGG1400
+    or CVEN4503 or CVEN4504 or CVEN4507 or CVEN4703 or CVEN9612 or CVEN9620 or CVEN9640
+    or CODE2170 or ENGG3741 or ENGG4060
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 42
+    courses:
+      - DESN1000
+      - ENGG1300
+      - ENGG1811
+      - MATS1101
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+      - PHYS1121 or PHYS1131
+    original: Students must take 42 UOC of the following courses.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 42
+    courses:
+      - CVEN2002
+      - CVEN2101
+      - CVEN2303
+      - DESN2000
+      - ENGG2400
+      - ENGG2500
+      - MATH2018 or MATH2019
+    original: Students must take 42 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 48
+    courses: [CVEN3101, CVEN3202, CVEN3203, CVEN3303, CVEN3304, CVEN3401, CVEN3501, CVEN3502]
+    original: Students must take 48 UOC of the following courses.
+
+  - id: discipline-electives
+    kind: pool
+    title: Discipline Electives
+    uoc: { min: 12 }
+    from: "@cvenah_discipline_electives"
+    original: >-
+      Students must take at least 12 UOC of the following courses. Note: Students studying CVENAH in a
+      single degree may also take courses from this list to satisfy program requirements.
+
+  - id: practice-electives
+    kind: pool
+    title: Practice Electives
+    uoc: { max: 18 }
+    from: "@vip"
+    original: >-
+      Students may take 6 UOC, up to a maximum of 18 UOC of the following courses subject to stream and
+      program requirements. Students studying a single degree in CVENAH may select additional UOC from
+      the Discipline and/or Practice Elective list to satisfy their program requirements. In some
+      situations students in double degrees where there is double counting may also have additional
+      UOC free for practice electives. NOTE: 2 UOC and 3 UOC courses are run over consecutive terms for
+      a final total of 6 UOC.
+    note: >-
+      "may take" is read as optional (no minimum). The specialisation's 168 UOC total (132 core + 12-24
+      thesis) is completed from discipline and/or practice electives.
+
+  - id: vip-consecutive
+    kind: timing
+    severity: warning
+    courses: "@vip"
+    consecutive: true
+    original: 2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC.
+
+  # Named `thesis` for the 3707 honours-class convention (§4.1); grade(65, in:major/thesis) reads the
+  # chosen option's courses.
+  - id: thesis
+    kind: group
+    title: Thesis Courses
+    choose: 1
+    original: >-
+      Students must take either 12 UOC or 24 UOC of the following courses. Note: School approval is
+      required to take the alternative thesis options CVEN4951/4952/4953 or CVEN4961/4962/4963 Students
+      who take CVEN4951 Research Thesis A or CVEN4961 Higher Honours Thesis A must take CVEN4701
+      Planning Sustainable Infrastructure as one of their discipline electives.
+    children:
+      - id: thesis-standard
+        kind: core
+        title: Thesis
+        uoc: 12
+        courses: [CVEN4050, CVEN4051]
+      - id: thesis-research
+        kind: core
+        title: Research Thesis
+        uoc: 12
+        courses: [CVEN4951, CVEN4952, CVEN4953]
+        note: School approval required.
+      - id: thesis-higher-honours
+        kind: core
+        title: Higher Honours Research Thesis
+        uoc: 24
+        courses: [CVEN4961, CVEN4962, CVEN4963]
+        note: School approval required.
+
+  - id: research-thesis-cven4701
+    kind: check
+    title: CVEN4701 with a research thesis
+    require: (not CVEN4951 and not CVEN4961) or CVEN4701
+    original: >-
+      Students who take CVEN4951 Research Thesis A or CVEN4961 Higher Honours Thesis A must take
+      CVEN4701 Planning Sustainable Infrastructure as one of their discipline electives.
+    note: Checks completion of CVEN4701 anywhere in the plan, not specifically as a discipline elective.
+
+  - id: thesis-approval
+    kind: info
+    title: Alternative thesis approval
+    confirm: false
+    text: >-
+      School approval is required to take the alternative thesis options CVEN4951/4952/4953 or
+      CVEN4961/4962/4963.

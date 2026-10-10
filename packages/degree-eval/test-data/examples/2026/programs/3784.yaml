@@ -1,0 +1,199 @@
+# 3784 Commerce / Computer Science double degree, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3784
+#   (curriculum structure 2026.04.017; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+# Built by composition (§8): imports the Disciplinary Component of 3502 Commerce (2026) and of 3778
+# Computer Science (2026), then adds the double-degree rules. The component documents are not edited.
+schema_version: "1.0"
+kind: program
+code: "3784"
+year: 2026
+title: Commerce / Computer Science
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Commerce, Bachelor of Science]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3784
+  structure_version: "2026.04.017"
+  retrieved: 2026-10-09
+  status: partial
+  warnings:
+    - >-
+      The structured IFY container still lists COMM1110 (48 UOC) while the program summary says
+      "Integrated First Year Courses (42 UOC) - 3784 students do not have to take COMM1110 as this
+      requirement is satisfied in the Computer Science program". The summary is followed (exemption).
+    - >-
+      "Prescribed Work Integrated Learning Course (Requirement can be satisfied by taking a Computer
+      Science or Commerce WIL course)": no Computer Science WIL course list is published in the
+      structure. The imported WIL pool is made optional (`uoc: {max: 6}`, as in 3764) and the
+      either-degree rule is the check `wil-cs-option`: met by a Commerce WIL course, otherwise unknown
+      until a Computer Science WIL course is attested.
+    - >-
+      The 3784 page names COMM1822 in the COMP3311 substitution rule; the same sentence on the INFSA1
+      page and the 3764 page names COMM2822 (3764 adds "COMP3311, INFS1603 and COMM2822 have
+      exclusions from each other"). COMM2822 is used here; COMM1822 is read as a typo on the 3784 page
+      (to confirm with the Business School). No 2026 major written so far cores either code.
+    - >-
+      Whether a component program's own `shares` are imported with `include` is not specified in §8;
+      the 3502 shares this program relies on are re-declared below with component paths.
+    - INFSG1/INFSG2 overlap rules with the Computer Science degree are left as info.
+
+components:
+  - id: commerce
+    program: "3502"
+    title: Disciplinary Component - 3502 Commerce
+    uoc: { min: 96 }
+    include: [disciplinary]
+    patch:
+      # WIL "can be satisfied by taking a Computer Science or Commerce WIL course": the Commerce WIL
+      # course becomes optional here (as in 3764); the either-degree rule is the check wil-cs-option.
+      - op: set
+        target: wil
+        fields:
+          title: Prescribed Work Integrated Learning (WIL) Course (optional in 3784; see wil-cs-option)
+          uoc: { max: 6 }
+      - op: add
+        parent: disciplinary
+        node:
+          id: business-electives
+          kind: pool
+          title: Business electives
+          from: faculty:BUS
+          uoc: { min: 0 }
+          overflow: true
+          original: Business electives to make up to 96UOC Business School disciplinary requirement
+        note: >-
+          From the program summary; the double degree has no free-elective pool, so the Commerce
+          component is completed to 96 UOC with Business School courses.
+      - op: add
+        parent: disciplinary
+        node:
+          id: bcom-minor
+          kind: spec
+          slot: minor
+          title: Optional Minor
+          options: [ACCTA2, COMMG2, COMMI2, COMMJ2, ECONF2, ECONO2, FINSA2, FINSR2, IBUSA2, INFSA2,
+                    INFSG2, MARKA2, MARKD2, MGMTA2, MGMTH2, MGMTJ2, TABLC2]
+          count: { min: 0, max: 1 }
+          original: >-
+            Students may choose to use their electives to complete one of the following minors. Minor
+            Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and
+            Level 3.
+        note: >-
+          In 3784 the Optional Minor container sits inside the Commerce disciplinary component (3502
+          places its own minor at the root, which `include` drops). Its courses therefore count
+          toward the 96 UOC Commerce component, in place of business electives.
+      - op: add
+        parent: disciplinary
+        node:
+          id: bcom-minor-level-2-3
+          kind: limit
+          title: Minor Level 2 and 3 minimum
+          from: level:2 or level:3
+          scope: bcom-minor
+          uoc: { min: 18 }
+          note: Read as 18 UOC combined across Levels 2 and 3 (as in 3502). Inactive when no minor is selected.
+  - id: cs
+    program: "3778"
+    title: Disciplinary Component - 3778 Computer Science
+    uoc: { min: 96 }
+    include: [disciplinary]
+
+requirements:
+  - id: commerce-max-level-1
+    kind: limit
+    title: Maximum Level 1 UOC (Commerce component)
+    from: level:1
+    uoc: { max: 60 }
+    scope: commerce
+    original: >-
+      Students may complete up to a maximum of 60 UOC of any level 1 courses for the Commerce
+      component of the double degree.
+
+  - id: wil-cs-option
+    kind: check
+    title: WIL in either degree
+    require: uoc(6, in:commerce/wil) or manual("Completed a Computer Science WIL course in the Computer Science component")
+    original: >-
+      Prescribed Work Integrated Learning Course (Requirement can be satisfied by taking a Computer
+      Science or Commerce WIL course). Where students complete mandatory WIL in the non-Commerce
+      component of the Double Degree, the 150 hours minimum requirement does not apply to the Commerce
+      component of the program.
+    note: >-
+      Was an info node while the imported 6 UOC WIL pool was required, which reported a student with
+      WIL in the CS component as unmet. No CS WIL list is published, so the CS route is attested.
+
+  - id: infsg-overlap
+    kind: info
+    title: Cybersecurity Management major/minor
+    text: >-
+      Students may choose to complete INFSG1 or INGFS2 Cybersecurity Management for the Commerce
+      component, and must follow the rules listed in the handbook for INFSG1 and INFSG2 regarding the
+      overlapping courses with the Computer Science degree.
+    note: '"INGFS2" is the handbook''s typo for INFSG2.'
+
+exemptions:
+  - courses: [COMM1110]
+    scope: commerce
+    original: >-
+      Integrated First Year Courses (42 UOC) - 3784 students do not have to take COMM1110 as this
+      requirement is satisfied in the Computer Science program
+
+substitutions:
+  # "3784 - Major Course Substitution" (information rule).
+  - replace: ECON1202
+    with: MATH1011 or MATH1031 or MATH1131 or MATH1141 or MATH1151
+    scope: commerce
+    original: >-
+      For any majors that require ECON1202, MATH1011/MATH1031/MATH1131/MATH1141/MATH1151 completed
+      under the Computer Science component will act as substitute so student should not do ECON1202
+      but instead complete another Major elective to meet the 48 UOC requirement.
+    note: >-
+      The program summary lists only MATH1131 or MATH1141; the information rule (more specific) lists
+      five MATH courses and is followed. The replace-mode share below makes the major take an extra
+      elective.
+  - replace: COMM2822
+    with: COMP3311
+    scope: commerce
+    when: spec(COMPD1)
+    original: >-
+      Students taking a combination of majors and/or minors that require both COMM1822 or INFS1603 and
+      COMP3311 as core courses, should take only COMP3311, and replace COMM1822/INFS1603 with an
+      additional major or minor elective.
+    note: >-
+      COMM2822, not the page's COMM1822: the INFSA1 and 3764 pages state the same rule with COMM2822
+      (see provenance). `when: spec(COMPD1)`: the rule applies only when COMP3311 is also a core course,
+      and among the 3778 majors only COMPD1 cores it; without the condition an INFSA1 + COMPA1 student
+      taking COMP3311 as a CS elective would be excused INFS1603.
+  - replace: INFS1603
+    with: COMP3311
+    scope: commerce
+    when: spec(COMPD1)
+
+shares:
+  # Re-declared from 3502 (2026) with component paths.
+  - between: [commerce/ify, commerce/major]
+    courses: "@commerce_ify"
+    max_uoc: 6
+    original: >-
+      Please note, this 48 UOC includes 6 UOC from the Integrated First Year (IFY) core. This means
+      that students will complete 42 UOC in specified disciplinary courses outside the IFY core.
+  - between: [commerce/wil, commerce/major]
+    courses: "@business_wil"
+  - between: [commerce/fys, commerce/major]
+    courses: "@business_fys"
+  - between: [commerce/wil, commerce/fys]
+  # Substituted courses count once (in the CS component); the Commerce major/minor takes a replacement
+  # elective from its own pools.
+  - between: [commerce/major, cs]
+    courses: MATH1011 or MATH1031 or MATH1131 or MATH1141 or MATH1151
+    mode: replace
+  - between: [commerce, cs]
+    courses: COMP3311
+    mode: replace
+    note: >-
+      Side is the whole Commerce component because the COMM2822/INFS1603 core may sit in the major or
+      in the patch-added bcom-minor (tools/validate.mjs does not resolve paths to patch-added nodes).
+      The default replacement set is therefore every Commerce pool, broader than the handbook's
+      "additional major or minor elective".

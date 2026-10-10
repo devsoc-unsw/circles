@@ -1,0 +1,52 @@
+# Conformance fixture (SCHEMA.md §15). Review M5: pool filling must be exact (subset-sum), not greedy.
+fixture_version: "1.0"
+id: m5-compbh-subset-sum
+findings: [M5]
+title: COMPBH discipline electives with 6, 6, 2, 2, 6, 6 UOC candidates (exactly 24 UOC required)
+description: >-
+  COMPBH discipline-electives needs exactly 24 UOC (uoc: 24) with at least 12 UOC from @level4_list.
+  In canonical order the candidates are 6 (COMP6441), 6 (COMP6443), 2 (ENGG2600), 2 (ENGG3600),
+  6 (COMP3331), 6 (COMP3311). The first draft's greedy fill took 6+6+2+2+6 = 22 and stopped because the
+  next 6 would exceed 24. The exact fill of §7.4 step 2 chooses {COMP6441, COMP6443, COMP3331, COMP3311}
+  = 24, the only subset that reaches the minimum within the maximum. The two VIP courses then fall to
+  free-electives. This is a partial plan: only the nodes listed under expect are asserted.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2027/programs/3707.yaml
+    - examples/2027/specialisations/COMPBH.yaml
+  catalogue:
+    note: Fixture inputs. ENGG2600/ENGG3600 are the 2 UOC VIP courses.
+    courses:
+      COMP6441: { uoc: 6, faculty: ENG, school: CSE }
+      COMP6443: { uoc: 6, faculty: ENG, school: CSE }
+      ENGG2600: { uoc: 2, faculty: ENG }
+      ENGG3600: { uoc: 2, faculty: ENG }
+      COMP3331: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3311: { uoc: 6, faculty: ENG, school: CSE }
+student:
+  program: "3707"
+  year: 2027
+  horizon: planned
+  selections:
+    major: [COMPBH]
+  plan:
+    - { iid: comp6441, code: COMP6441, term: 1, status: planned }
+    - { iid: comp6443, code: COMP6443, term: 2, status: planned }
+    - { iid: engg2600, code: ENGG2600, term: 3, status: planned }
+    - { iid: engg3600, code: ENGG3600, term: 4, status: planned }
+    - { iid: comp3331, code: COMP3331, term: 5, status: planned }
+    - { iid: comp3311, code: COMP3311, term: 6, status: planned }
+expect:
+  nodes:
+    major/COMPBH/discipline-electives: { status: met, counted_uoc: 24 }
+  allocations:
+    comp6441: { primary: major/COMPBH/discipline-electives, shares: [] }
+    comp6443: { primary: major/COMPBH/discipline-electives, shares: [] }
+    comp3331: { primary: major/COMPBH/discipline-electives, shares: [] }
+    comp3311: { primary: major/COMPBH/discipline-electives, shares: [] }
+    engg2600: { primary: free-electives, shares: [] }
+    engg3600: { primary: free-electives, shares: [] }
+  not_counted: []
+notes:
+  - The library is the 2026 one (nearest year at or before 2027, §2.2); COMPBH uses only its local set.

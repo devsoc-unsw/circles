@@ -1,0 +1,49 @@
+# 4515 Computer Science & Engineering (Honours) — separate honours year, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4515
+#   (curriculum structure 2026.02.003, accessed 2026-10-08)
+schema_version: "1.0"
+kind: program
+code: "4515"
+year: 2026
+title: Computer Science & Engineering (Honours)
+career: ugrd
+uoc: 48
+duration_years: 1
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4515
+  structure_version: "2026.02.003"
+  retrieved: 2026-10-08
+  status: complete
+
+entry:
+  and:
+    # WAM of the student's previous program, which is not part of this plan: student-reported (§5.3).
+    - reported_wam(65, prior_program)
+    - manual("Completed a 3-year BSc in Computer Science or Bioinformatics at UNSW or equivalent, or a Bachelor of Data Science and Decisions with a major in Computational Data Science")
+    - manual("Nominated a suitable thesis topic, subject to supervisor availability")
+
+requirements:
+  - id: specialisation
+    kind: spec
+    slot: honours
+    title: Specialisation Requirements
+    options: [COMPAH, BINFBH]
+    count: { min: 1, max: 1 }
+    original: Students must complete at least one of the specialisations below.
+    note: '"At least one" but the 48 UOC program fits exactly one 48 UOC honours specialisation.'
+
+  - id: no-rpl
+    kind: info
+    text: No advanced standing (RPL) will be allowed in this program.
+
+classes:
+  - name: Honours Class 1
+    require: wam(85, in:root)
+    note: Students with a WAM of 85 or higher will be considered for the University Medal.
+  - name: Honours Class 2 Division 1
+    require: wam(75, in:root)
+  - name: Honours Class 2 Division 2
+    require: wam(65, in:root)
+  - name: Honours Class 3
+    require: wam(50, in:root)

@@ -1,0 +1,61 @@
+# ENGLC1 English (Arts major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ENGLC1
+#   (curriculum structure 2026.01.045, accessed 2026-10-10)
+# Lane C transcription. Chosen as one of four high-enrolment Arts majors (enrolment figures are not in
+# the handbook; selection is a judgement call). Shows: level minimums inside one 36 UOC pool (quotas)
+# and a program-specific requirement (4053 / NESA).
+schema_version: "1.0"
+kind: specialisation
+code: ENGLC1
+year: 2026
+title: English
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ENGLC1
+  structure_version: "2026.01.045"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  english_l2: ARTS1009 or ARTS2031 or ARTS2033 or ARTS2034 or ARTS2035 or ARTS2036 or ARTS2040 or ARTS2042 or ARTS2127
+  english_l3: >-
+    ARTS3015 or ARTS3022 or ARTS3023 or ARTS3025 or ARTS3037 or ARTS3039 or ARTS3040 or ARTS3047
+    or ARTS3048 or ARTS3049 or ARTS3054
+
+requirements:
+  - id: level-1
+    kind: pool
+    title: Level 1 Prescribed Electives
+    uoc: 12
+    from: ARTS1030 or ARTS1031 or ARTS1032
+    original: You must take 12 UOC of the following courses.
+
+  - id: level-2-3
+    kind: pool
+    title: Level 2 and 3 Prescribed Electives
+    uoc: 36
+    from: "@english_l2 or @english_l3"
+    quotas:
+      - { from: "@english_l2", uoc: { min: 12, max: 18 }, original: You must take at least 12 UOC of the following courses. }
+      - { from: "@english_l3", uoc: { min: 18, max: 24 }, original: You must take at least 18 UOC of the following courses. }
+    original: >-
+      You must take 36 UOC of the following courses, including at least 12 UOC at Level 2 and at least
+      18 UOC at Level 3.
+    note: >-
+      Handbook discrepancy: the "Level 2 Prescribed Electives" list contains ARTS1009, a Level 1 course.
+      The quota follows the list (as the structured data does), not the "at Level 2" wording.
+
+  - id: nesa-4053
+    kind: check
+    title: Requirements for 4053 Arts/Education (Secondary) Students
+    require: not program(4053) or uoc(6, in:level-2-3 and ARTS2031)
+    original: >-
+      4053 Arts/Education (Secondary) students undertaking the English major: In order to meet the
+      criteria set by NESA, you must take ARTS2031 Australian Literature (6 UOC).
+    note: >-
+      ARTS2031 must be counted inside this major (`in:level-2-3`), not merely appear in the plan.
+      A conditional requirement written as an implication. Works, but a conditional node form
+      (`active_if: program(4053)` on a core) would show it as a requirement rather than a check
+      (SCHEMA GAP, also 4701 Nura Gili).

@@ -1,0 +1,22 @@
+# Negative self-test (synthetic): a malformed conformance fixture.
+fixture_version: "1.0"
+id: bad-fixture
+findings: [M9]
+title: Broken fixture
+bundle:
+  documents: [examples/2026/library.yaml, examples/2026/programs/3778.yaml, examples/2026/specialisations/COMPA1.yaml]
+  catalogue:
+    courses:
+      COMP1511: { uoc: 6 }
+student:
+  program: "3778"
+  year: 2026
+  selections: { major: [COMPZZ] }
+  plan:
+    - { iid: a, code: COMP1511, term: 1, status: completed, outcome: pass, mark: 40 }
+    - { iid: a, code: COMP1521, term: 2, status: planned }
+expect:
+  nodes:
+    major/COMPA1/nonexistent: { status: met }
+    free-electives/x: { status: met }
+  not_counted: [zz]

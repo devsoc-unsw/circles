@@ -1,0 +1,68 @@
+# PHYSL1 Physics (Science major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/PHYSL1
+#   (curriculum structure 2026.01.018, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: PHYSL1
+year: 2026
+title: Physics
+spec_kind: major
+uoc: 78
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/PHYSL1
+  structure_version: "2026.01.018"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 30
+    courses:
+      - MATH2069
+      - MATH1141 or MATH1131
+      - MATH1241 or MATH1231
+      - PHYS1131 or PHYS1121 or PHYS1141
+      - PHYS1231 or PHYS1221 or PHYS1241
+    original: Students must take 30 UOC of the following courses.
+    note: MATH2069 (a level 2 course) sits in the handbook's "Level 1 Core Courses" container; kept as listed.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 18
+    courses: [PHYS2114, MATH2089, PHYS2111]
+    original: Students must take 18 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 18
+    courses: [PHYS3113, PHYS3112, PHYS3111]
+    original: Students must take 18 UOC of the following courses.
+
+  - id: electives
+    kind: pool
+    title: Electives
+    uoc: { min: 12 }
+    from: [PHYS3114, PHYS2801, PHYS2116, PHYS3117, PHYS2113, PHYS3115, PHYS3118, PHYS3116]
+    original: >-
+      Students must take 12 UOC of the following courses. Note: Students who are considering an Honours
+      degree in Physics are required to complete PHYS2113 Classical Mechanics and Special Relativity and
+      PHYS3114 Electrodynamics.
+    note: Handbook gives cp=12 with no maximum (major total 78 = 66 core + 12); written as at least 12.
+
+  - id: double-major-maths
+    kind: info
+    text: >-
+      Double Major: Mathematics and Physics. Students who are contemplating a double major in Mathematics
+      and Physics should complete the following 36UOC of Stage 2 MATH courses: MATH2301 MATH2011/2111
+      MATH2121/2221 MATH2501/2601 MATH2521/2621 MATH2801/2901 No substitutes are permitted. The
+      requirement for MATH2069 in the Physics major is replaced by the combination of (MATH2011 or
+      MATH2111) and (MATH2521 or MATH2621) in the MATH Major. The requirement for MATH2089 in the Physics
+      major is replaced by MATH2301 and the other level 2 MATH courses in the MATH Major.
+    note: >-
+      Not encoded as substitutions: a substitution `with` item cannot mix "and" and "or", and the
+      replacement courses are counted in the MATH major (an allocation-dependent rule).

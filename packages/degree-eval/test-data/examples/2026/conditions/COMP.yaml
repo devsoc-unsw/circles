@@ -1,0 +1,64 @@
+# Course conditions for selected COMP courses, handbook year 2026.
+# Sources (enrolment rules + exclusion associations), accessed 2026-10-08:
+#   https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP1511
+#   https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP1911
+#   https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP3311
+#   https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP3900
+#   https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP4920
+#   https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP4951
+# Written in the shape the scraper would emit (source: scraped); COMP3900 is then corrected by
+# ../../patches/comp3900-enrolment.yaml.
+schema_version: "1.0"
+kind: course_conditions
+year: 2026
+provenance:
+  source: scraped
+  generator: circles-conditions/2.0 (hypothetical)
+  retrieved: 2026-10-08
+
+courses:
+  COMP1511:
+    status: none
+    excludes: [COMP1911, WENG1000]
+
+  COMP1911:
+    original: "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)"
+    status: parsed
+    # Spec-based exclusion (today dropped by create.py): not enrolled in any CSE major/honours spec.
+    excludes:
+      - COMP1511
+      - WENG1000
+      - spec(COMP*1, COMP*H, BINF*1, BINF*H, SENG*1, SENG*H)
+
+  COMP3311:
+    original: "Prerequisite: COMP2521 or COMP1927"
+    status: parsed
+    requires: COMP2521 or COMP1927
+    excludes: [INFS5992, INFS1603, COMP9311, WENG3002]
+
+  COMP3900:
+    original: >-
+      Prerequisite: COMP1531, and COMP2521 or COMP1927, and enrolled in a BSc Computer Science major
+      or Advanced Computer Science Honours major with completion of 102 UOC.
+    status: partial
+    requires: >-
+      COMP1531 and (COMP2521 or COMP1927) and uoc(102)
+      and manual("Enrolled in a BSc Computer Science major or Advanced Computer Science Honours major")
+    warnings: ["Could not map 'BSc Computer Science major or Advanced Computer Science Honours major' to specialisation codes"]
+
+  COMP4920:
+    original: "Prerequisite: Completion of 18 UOC of COMP**** courses"
+    status: parsed
+    requires: uoc(18, COMP****)
+    excludes: [COMP9920, SENG4921, SENG4920, COMP2920, BINF4920, WENG4000]
+
+  COMP4951:
+    original: "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core."
+    status: parsed
+    # Structured form of the same condition (compact: "spec(@cse_be_hons_specs) and uoc(126) and cores(level:3)").
+    requires:
+      and:
+        - spec: ["@cse_be_hons_specs"]
+        - uoc: 126
+        - cores: level:3
+    note: Multi-term course (COMP4951/4952/4953); a final grade is withheld until the final course is completed.

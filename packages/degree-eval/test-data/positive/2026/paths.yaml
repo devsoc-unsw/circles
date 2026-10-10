@@ -1,0 +1,47 @@
+# Positive self-test (not handbook data): every node-path form of SCHEMA.md §4.1 must validate.
+schema_version: "1.0"
+kind: program
+code: "9998"
+year: 2026
+title: Path probe
+uoc: 240
+provenance: { source: local, note: synthetic validator probe }
+
+components:
+  - id: eng
+    program: "9997"
+    include: [disciplinary]
+  - id: cs
+    program: "9996"
+
+requirements:
+  - id: limits
+    kind: group
+    children:
+      - { id: whole, kind: limit, from: any, uoc: { min: 0 }, scope: root }
+      - { id: by-id, kind: limit, from: in:extra, uoc: { min: 0 } }
+      - { id: component-node, kind: limit, from: in:eng/major, uoc: { min: 0 }, scope: eng/disciplinary }
+      - { id: component-spec, kind: limit, from: level:1, uoc: { max: 60 }, scope: eng/major/COMPBH }
+      - { id: component-spec-node, kind: limit, from: in:eng/major/COMPBH/level-1-core, uoc: { min: 0 } }
+      - { id: whole-component, kind: limit, from: in:cs, uoc: { min: 0 } }
+  - id: extra
+    kind: pool
+    from: any and not GEN*****
+    uoc: { max: 12 }
+    overflow: true
+  - id: minor
+    kind: spec
+    slot: minor
+    options: [MATHC2, FINSA2]
+    count: { min: 0, max: 1 }
+    distinct_from: [{ node: eng/major, by: title }]
+    counts_toward: [extra, { node: extra, courses: not MATH**** }]
+  - { id: spec-slot, kind: limit, from: level:2 or level:3, uoc: { min: 18 }, scope: minor }
+  - { id: spec-code, kind: limit, from: level:3, uoc: { min: 6 }, scope: minor/MATHC2 }
+  - { id: spec-node, kind: limit, from: in:minor/MATHC2/electives, uoc: { min: 0 } }
+  - { id: slot-relative, kind: check, require: "grade(65, in:eng/major/thesis)", severity: warning }
+  - { id: by-spec, kind: check, require: complete(spec:MATHC2/level-1-core), severity: warning }
+  - { id: node-complete, kind: maturity, applies_to: level:4, require: complete(eng) and cores(level:3) }
+
+classes:
+  - { name: Probe, require: "reported_wam(70, honours_wam) and grade(65, COMP4963) and wam(60, in:root)" }

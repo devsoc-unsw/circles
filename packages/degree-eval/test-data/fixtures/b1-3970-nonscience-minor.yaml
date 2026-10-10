@@ -1,0 +1,116 @@
+# Conformance fixture (SCHEMA.md §15). Review B1, reverse case: a non-science minor must not count toward
+# the 96 UOC of Science courses.
+fixture_version: "1.0"
+id: b1-3970-nonscience-minor
+findings: [B1]
+title: 3970 BSc with 72 UOC science + a 24 UOC non-science minor (CHINF2 stand-in)
+description: >-
+  Under the first draft the minor sat inside `disciplinary` (uoc min 96), so 72 UOC of science plus the
+  24 UOC minor made the Disciplinary Component look met. With the science-96 limit (from: @science,
+  scope: disciplinary) the plan is correctly unmet: the program needs 96 UOC of Science courses.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3970.yaml
+  inline:
+    - schema_version: "1.0"
+      kind: specialisation
+      code: GEOLS1
+      year: 2026
+      title: Geology (fixture stand-in)
+      spec_kind: major
+      uoc: 48
+      provenance: { source: local, note: "Synthetic stand-in; NOT the handbook GEOLS1 structure; GEOS codes are placeholders." }
+      requirements:
+        - { id: core, kind: core, courses: [GEOS1111, GEOS1211, GEOS2141, GEOS2161, GEOS2181, GEOS3141, GEOS3161, GEOS3181] }
+    - schema_version: "1.0"
+      kind: specialisation
+      code: CHINF2
+      year: 2026
+      title: Chinese Studies (fixture stand-in)
+      spec_kind: minor
+      uoc: 24
+      provenance: { source: local, note: "Synthetic stand-in; NOT the handbook CHINF2 structure; CHIN codes are placeholders." }
+      requirements:
+        - { id: core, kind: core, courses: [CHIN1000, CHIN1100, CHIN2000, CHIN3000] }
+  catalogue:
+    note: Fixture inputs; GEOS/CHIN/GENL codes are placeholders.
+    courses:
+      SCIF0000: { uoc: 0, faculty: SCI }
+      SCIF1000: { uoc: 6, faculty: SCI }
+      SCIF2041: { uoc: 6, faculty: SCI }
+      SCIF3041: { uoc: 6, faculty: SCI }
+      SCIF3010: { uoc: 0, faculty: SCI }
+      GEOS1111: { uoc: 6, faculty: SCI }
+      GEOS1211: { uoc: 6, faculty: SCI }
+      GEOS2141: { uoc: 6, faculty: SCI }
+      GEOS2161: { uoc: 6, faculty: SCI }
+      GEOS2181: { uoc: 6, faculty: SCI }
+      GEOS3141: { uoc: 6, faculty: SCI }
+      GEOS3161: { uoc: 6, faculty: SCI }
+      GEOS3181: { uoc: 6, faculty: SCI }
+      PHYS1121: { uoc: 6, faculty: SCI }
+      CHIN1000: { uoc: 6, faculty: ADA }
+      CHIN1100: { uoc: 6, faculty: ADA }
+      CHIN2000: { uoc: 6, faculty: ADA }
+      CHIN3000: { uoc: 6, faculty: ADA }
+      ECON1101: { uoc: 6, faculty: BUS }
+      ECON1102: { uoc: 6, faculty: BUS }
+      ECON2101: { uoc: 6, faculty: BUS }
+      ARTS1090: { uoc: 6, faculty: ADA }
+      ARTS1360: { uoc: 6, faculty: ADA }
+      ARTS2090: { uoc: 6, faculty: ADA }
+      GENL1062: { uoc: 6, faculty: LAW, gened: true }
+      GENL2020: { uoc: 6, faculty: LAW, gened: true }
+student:
+  program: "3970"
+  year: 2026
+  horizon: planned
+  selections:
+    major: [GEOLS1]
+    minors: [CHINF2]
+  plan:
+    - { iid: scif0000, code: SCIF0000, term: 1, status: planned }
+    - { iid: scif1000, code: SCIF1000, term: 1, status: planned }
+    - { iid: geos1111, code: GEOS1111, term: 1, status: planned }
+    - { iid: chin1000, code: CHIN1000, term: 1, status: planned }
+    - { iid: geos1211, code: GEOS1211, term: 2, status: planned }
+    - { iid: chin1100, code: CHIN1100, term: 2, status: planned }
+    - { iid: econ1101, code: ECON1101, term: 2, status: planned }
+    - { iid: geos2141, code: GEOS2141, term: 3, status: planned }
+    - { iid: phys1121, code: PHYS1121, term: 3, status: planned }
+    - { iid: econ1102, code: ECON1102, term: 3, status: planned }
+    - { iid: geos2161, code: GEOS2161, term: 4, status: planned }
+    - { iid: chin2000, code: CHIN2000, term: 4, status: planned }
+    - { iid: arts1090, code: ARTS1090, term: 4, status: planned }
+    - { iid: geos2181, code: GEOS2181, term: 5, status: planned }
+    - { iid: scif2041, code: SCIF2041, term: 5, status: planned }
+    - { iid: arts1360, code: ARTS1360, term: 5, status: planned }
+    - { iid: geos3141, code: GEOS3141, term: 6, status: planned }
+    - { iid: chin3000, code: CHIN3000, term: 6, status: planned }
+    - { iid: econ2101, code: ECON2101, term: 6, status: planned }
+    - { iid: geos3161, code: GEOS3161, term: 7, status: planned }
+    - { iid: scif3041, code: SCIF3041, term: 7, status: planned }
+    - { iid: genl1062, code: GENL1062, term: 7, status: planned }
+    - { iid: geos3181, code: GEOS3181, term: 8, status: planned }
+    - { iid: arts2090, code: ARTS2090, term: 8, status: planned }
+    - { iid: genl2020, code: GENL2020, term: 8, status: planned }
+    - { iid: scif3010, code: SCIF3010, term: 8, status: planned }
+expect:
+  nodes:
+    root: { status: unmet, counted_uoc: 144 }
+    disciplinary: { status: unmet }
+    science-96: { status: unmet, counted_uoc: 72, reasons: [below_min] }
+    science-electives: { status: met, counted_uoc: 6 }
+    minors: { status: met, counted_uoc: 24 }
+    free-electives: { status: met, counted_uoc: 36, credited_uoc: 0 }
+    gen-ed: { status: met, counted_uoc: 12 }
+  allocations:
+    phys1121: { primary: science-electives, shares: [] }
+    chin1000: { primary: minors/CHINF2/core, shares: [], credits: [] }
+  not_counted: []
+notes:
+  - >-
+    CHINF2 courses match `not @science`, so they are eligible for credit to free-electives and gen-ed, but
+    both pools are already full of primary allocations (no headroom), so no credit is recorded. Credit
+    never changes any total (§7.4 step 8).

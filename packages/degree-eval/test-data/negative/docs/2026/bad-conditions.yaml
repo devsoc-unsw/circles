@@ -1,0 +1,15 @@
+# Negative self-test (synthetic): course-entry rules (review M4, minor 10, minor 11).
+schema_version: "1.0"
+kind: course_conditions
+year: 2026
+provenance: { source: local, note: synthetic validator probe }
+courses:
+  COMP1511:
+    status: none
+    requires: COMP1911                 # status none means no prerequisite
+  COMP1911:
+    status: parsed
+    excludes: [COMP9***]               # patterns are not allowed in excludes
+  COMP2521:
+    status: parsed
+    requires: grade(120, COMP1511)     # mark > 100

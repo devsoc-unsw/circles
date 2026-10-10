@@ -1,0 +1,113 @@
+# Conformance fixture (SCHEMA.md §15). REVIEW-2 N1, other direction: an unknown child must not hide a
+# real UOC shortfall in the same spec. Variant of m1-3778-mathc2.
+fixture_version: "1.0"
+id: n1-3778-mathc2-shortfall
+findings: [N1]
+title: 3778 BCompSc + MATHC2 stand-in whose electives cover only 18 of the minor's 36 UOC
+description: >-
+  As m1-3778-mathc2, COMPA1 takes MATH1131/MATH1231 and MATHC2's level-1 core is unknown
+  (overlap_undeclared). The MATHC2 here is a synthetic stand-in whose electives pool needs only 18 UOC
+  while the spec still needs 36, and the plan has 18 UOC of MATH electives (MATH2121 is replaced by a
+  real free elective, ECON1102). Every child of the minor is met or unknown, but its uoc check is
+  unmet: 18 counted + 12 blocked = 30 < 36 (SCHEMA.md §7.6). A table that ignored the uoc condition
+  would report unknown; the Kleene AND reports unmet, and so the root is unmet even though its total
+  is 144.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3778.yaml
+    - examples/2026/specialisations/COMPA1.yaml
+  inline:
+    - schema_version: "1.0"
+      kind: specialisation
+      code: MATHC2
+      year: 2026
+      title: Mathematics (fixture stand-in)
+      spec_kind: minor
+      uoc: 36
+      provenance: { source: local, note: "Synthetic stand-in; NOT the handbook MATHC2 structure (the real electives pool needs 24 UOC)." }
+      requirements:
+        - { id: level-1-core, kind: core, uoc: 12, courses: [MATH1131 or MATH1141, MATH1231 or MATH1241] }
+        - id: electives
+          kind: pool
+          uoc: { min: 18 }
+          from: [MATH2011, MATH2121, MATH2501, MATH3411]
+          quotas:
+            - { from: MATH3*** or MATH6***, uoc: { min: 6 } }
+  catalogue:
+    note: Fixture inputs; GENL codes are placeholders.
+    courses:
+      COMP1511: { uoc: 6, faculty: ENG, school: CSE }
+      COMP1521: { uoc: 6, faculty: ENG, school: CSE }
+      COMP1531: { uoc: 6, faculty: ENG, school: CSE }
+      COMP2511: { uoc: 6, faculty: ENG, school: CSE }
+      COMP2521: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3121: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3311: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3331: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3900: { uoc: 6, faculty: ENG, school: CSE }
+      COMP4920: { uoc: 6, faculty: ENG, school: CSE }
+      COMP6080: { uoc: 6, faculty: ENG, school: CSE }
+      COMP6441: { uoc: 6, faculty: ENG, school: CSE }
+      COMP9417: { uoc: 6, faculty: ENG, school: CSE }
+      MATH1081: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH1131: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH1231: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2011: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2501: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH3411: { uoc: 6, faculty: SCI, school: MATHS }
+      ECON1101: { uoc: 6, faculty: BUS }
+      ECON1102: { uoc: 6, faculty: BUS }
+      ARTS1090: { uoc: 6, faculty: ADA }
+      GENL1062: { uoc: 6, faculty: LAW, gened: true }
+      GENL2020: { uoc: 6, faculty: LAW, gened: true }
+student:
+  program: "3778"
+  year: 2026
+  horizon: planned
+  selections:
+    major: [COMPA1]
+    minor: [MATHC2]
+  plan:
+    - { iid: comp1511, code: COMP1511, term: 1, status: completed, outcome: pass, mark: 78, grade: DN }
+    - { iid: math1131, code: MATH1131, term: 1, status: completed, outcome: pass, mark: 71, grade: CR }
+    - { iid: math1081, code: MATH1081, term: 1, status: completed, outcome: pass, mark: 66, grade: CR }
+    - { iid: comp1521, code: COMP1521, term: 2, status: planned }
+    - { iid: math1231, code: MATH1231, term: 2, status: planned }
+    - { iid: econ1101, code: ECON1101, term: 2, status: planned }
+    - { iid: comp1531, code: COMP1531, term: 3, status: planned }
+    - { iid: comp2521, code: COMP2521, term: 3, status: planned }
+    - { iid: math2011, code: MATH2011, term: 3, status: planned }
+    - { iid: comp2511, code: COMP2511, term: 4, status: planned }
+    - { iid: math2501, code: MATH2501, term: 4, status: planned }
+    - { iid: arts1090, code: ARTS1090, term: 4, status: planned }
+    - { iid: comp3121, code: COMP3121, term: 5, status: planned }
+    - { iid: comp3311, code: COMP3311, term: 5, status: planned }
+    - { iid: econ1102, code: ECON1102, term: 5, status: planned }
+    - { iid: comp3331, code: COMP3331, term: 6, status: planned }
+    - { iid: math3411, code: MATH3411, term: 6, status: planned }
+    - { iid: genl1062, code: GENL1062, term: 6, status: planned }
+    - { iid: comp3900, code: COMP3900, term: 7, status: planned }
+    - { iid: comp6080, code: COMP6080, term: 7, status: planned }
+    - { iid: genl2020, code: GENL2020, term: 7, status: planned }
+    - { iid: comp4920, code: COMP4920, term: 8, status: planned }
+    - { iid: comp6441, code: COMP6441, term: 8, status: planned }
+    - { iid: comp9417, code: COMP9417, term: 8, status: planned }
+expect:
+  nodes:
+    root: { status: unmet, counted_uoc: 144 }
+    disciplinary: { status: met, counted_uoc: 96 }
+    minor: { status: unmet, counted_uoc: 18, reasons: [below_min] }
+    minor/MATHC2/level-1-core: { status: unknown, reasons: [overlap_undeclared] }
+    minor/MATHC2/electives: { status: met, counted_uoc: 18 }
+    free-electives: { status: met, counted_uoc: 18, credited_uoc: 18 }
+    gen-ed: { status: met, counted_uoc: 12 }
+  allocations:
+    math1131: { primary: major/COMPA1/core, shares: [] }
+    math2011: { primary: minor/MATHC2/electives, shares: [], credits: [free-electives] }
+    econ1102: { primary: free-electives, shares: [] }
+  not_counted: []
+notes:
+  - >-
+    The root's own uoc check is met (144 counted); the root is unmet only because the minor is. The
+    minor's 12 blocked UOC is counted under COMPA1, so it adds nothing at the root (§7.6).
