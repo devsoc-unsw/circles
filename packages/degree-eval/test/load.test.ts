@@ -4,7 +4,9 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Diagnostic, SourceFile } from '../src';
 import {
+  checkDocumentSchema,
   checkFixtureSchema,
+  displayPath,
   formatDiagnostic,
   loadDocuments,
   MAX_CHARS,
@@ -60,34 +62,64 @@ describe('loadDocuments over the vendored data', () => {
     expect(docs.length).toBeGreaterThan(0);
   });
 
-  it('reproduces the schema and parse errors of tools/negative/expected.txt', () => {
+  it('reports the schema and parse errors of tools/negative/expected.txt at the same places', () => {
     // §11 layers 1–2 only: structure (schema) and compact-string parse errors. The remaining
-    // expected lines are cross-reference checks and lints (M8).
-    const layer12 = /: (fixture )?schema: |: (selector|condition) "|bad core item/;
-    const expected = readFileSync(join(TEST_DATA, 'negative', 'expected.txt'), 'utf8')
+    // expected lines are cross-reference checks and lints (M8). Wording differs on purpose (the
+    // loader explains errors for authors), so lines are matched by file and location; the raw
+    // validate.mjs schema text is still checked through checkDocumentSchema.
+    const lines = readFileSync(join(TEST_DATA, 'negative', 'expected.txt'), 'utf8')
       .split('\n')
       .map((s) => s.trim())
-      .filter((s) => s && !s.startsWith('#') && !s.startsWith('warn: ') && layer12.test(s));
-
-    const { diagnostics } = loadDocuments(listYaml('negative/docs').map((f) => source(f)));
-    const reported = errors(diagnostics).map(formatDiagnostic);
-    for (const f of listYaml('negative/fixtures')) {
-      const m = checkFixtureSchema(parseYaml(readFileSync(join(TEST_DATA, f), 'utf8')));
-      if (m !== null) reported.push(`${f}: fixture schema: ${m}`);
-    }
-
-    // every expected line matches exactly one reported error, and nothing else is reported
-    const unmatched = new Set(reported);
-    const missing = expected.filter((x) => {
-      const hit = [...unmatched].find(
-        (e) => e.includes(x.replace(/^[^:]+: /, '')) && e.includes(x.split(':')[0] as string)
-      );
-      if (hit) unmatched.delete(hit);
-      return !hit;
+      .filter((s) => s && !s.startsWith('#') && !s.startsWith('warn: '));
+    const docLines = lines.filter((s) =>
+      /^[\w-]+\.yaml: (schema: |\S+: (selector|condition) "|\S+: bad core item)/.test(s)
+    );
+    const files = listYaml('negative/docs');
+    const fileOf = (base: string) => files.find((f) => f.endsWith(`/${base}`)) as string;
+    const expected = docLines.map((line) => {
+      const [base, rest] = [line.slice(0, line.indexOf(': ')), line.slice(line.indexOf(': ') + 2)];
+      const schema = rest.startsWith('schema: ');
+      const pointer = rest.slice('schema: '.length).split(' ')[0] as string;
+      const loc = schema
+        ? displayPath(
+            pointer
+              .split('/')
+              .slice(1)
+              .map((x) => (/^\d+$/.test(x) ? Number(x) : x))
+          )
+        : rest.slice(0, rest.indexOf(': '));
+      return { line, file: fileOf(base), schema, loc, raw: rest.slice('schema: '.length) };
     });
-    expect(expected.length).toBeGreaterThanOrEqual(9);
-    expect(missing).toEqual([]);
-    expect([...unmatched]).toEqual([]);
+    expect(expected.length).toBe(8);
+
+    const { diagnostics } = loadDocuments(files.map((f) => source(f)));
+    const errs = errors(diagnostics);
+    const near = (a: string, b: string) => a.startsWith(b) || b.startsWith(a);
+    for (const x of expected) {
+      const hits = errs.filter((d) => d.file === x.file && near(d.path ?? '', x.loc));
+      expect(hits.length, x.line).toBeGreaterThan(0);
+      if (x.schema) {
+        expect(
+          checkDocumentSchema(parseYaml(readFileSync(join(TEST_DATA, x.file), 'utf8')))
+        ).toContain(x.raw);
+      }
+    }
+    // nothing else: schema errors only in files with an expected schema line, parse errors only
+    // at expected parse locations
+    for (const d of errs) {
+      const ok =
+        d.code === 'SCHEMA'
+          ? expected.some((x) => x.schema && x.file === d.file)
+          : expected.some((x) => !x.schema && x.file === d.file && near(d.path ?? '', x.loc));
+      expect(ok, formatDiagnostic(d)).toBe(true);
+    }
+    // the fixture-shape line, in validate.mjs wording
+    const shape = lines.find((s) => s.includes('fixture schema:')) as string;
+    const fx = listYaml('negative/fixtures').find((f) =>
+      f.endsWith(shape.split(':')[0] as string)
+    ) as string;
+    const m = checkFixtureSchema(parseYaml(readFileSync(join(TEST_DATA, fx), 'utf8')));
+    expect(`${fx}: fixture schema: ${m ?? ''}`).toContain(shape.slice(shape.indexOf(': ') + 2));
   });
 
   it('leaves documents with errors out of `docs`', () => {
@@ -148,9 +180,9 @@ describe('schema_version (SCHEMA.md §10) and origin', () => {
   it('rejects unknown fields in a known minor version', () => {
     const { docs, diagnostics } = load(`${PROGRAM}future_field: 1\n`);
     expect(docs).toEqual([]);
-    expect(errors(diagnostics)[0]?.message).toContain(
-      'must NOT have additional properties (future_field)'
-    );
+    expect(errors(diagnostics).map(formatDiagnostic)).toEqual([
+      'p.yaml:12:1: future_field: unknown field "future_field"'
+    ]);
   });
 
   it('loads a newer minor version leniently', () => {
@@ -196,7 +228,8 @@ future_field: 1
     const { docs, diagnostics } = load(text);
     expect(docs).toEqual([]);
     expect(errors(diagnostics).map(formatDiagnostic)).toEqual([
-      'p.yaml: requirements[1].from.and[1]: selector "level:3 and": unexpected end of selector'
+      // line 15, column 55: just after `level:3 and` inside the second string
+      'p.yaml:15:55: requirements[1].from.and[1]: selector "level:3 and": unexpected end of selector'
     ]);
   });
 });
