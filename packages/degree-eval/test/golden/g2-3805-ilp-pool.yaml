@@ -1,0 +1,115 @@
+# Golden trace (EVALUATOR.md §6): catalogue-reports/FIXES.md fix 2, "after" expectations.
+fixture_version: "1.0"
+id: g2-3805-ilp-pool
+title: 3805 multi-term ILP courses fill the ilp pool
+description: >-
+  Stage 1: 11 courses, 96 UOC. Stage 2: six courses (54) plus MFAC4999 x3 (8 each) and MFAC4001 x3
+  (2 each). Stage 3: 13 courses, 96 UOC. Gen-ed 12. Plan total 288. Step 1 matches the six Stage 2
+  courses; step 2 fills ilp exactly, since the only admissible set meeting 30 UOC and both quota
+  minimums is all six ILP instances. disciplinary 96 + 54 + 30 + 96 = 276 and the root 288, both met.
+  g2b-3805-ilp-fourth-enrolment adds a fourth MFAC4999 enrolment.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3805.yaml
+  catalogue:
+    note: >-
+      UOC per course is a fixture input chosen to give the handbook stage totals (96, 54, 96); the
+      zero-UOC items are the program's assessment items.
+    courses:
+      MFAC1501: { uoc: 12, faculty: MED }
+      MFAC1521: { uoc: 12, faculty: MED }
+      MFAC1522: { uoc: 12, faculty: MED }
+      MFAC1523: { uoc: 12, faculty: MED }
+      MFAC1524: { uoc: 12, faculty: MED }
+      MFAC1525: { uoc: 12, faculty: MED }
+      MFAC1526: { uoc: 12, faculty: MED }
+      MFAC1527: { uoc: 12, faculty: MED }
+      MFAC1511: { uoc: 0, faculty: MED }
+      MFAC1512: { uoc: 0, faculty: MED }
+      MFAC1513: { uoc: 0, faculty: MED }
+      MFAC2514: { uoc: 9, faculty: MED }
+      MFAC2515: { uoc: 9, faculty: MED }
+      MFAC2516: { uoc: 9, faculty: MED }
+      MFAC2507: { uoc: 9, faculty: MED }
+      MFAC2511: { uoc: 9, faculty: MED }
+      MFAC2512: { uoc: 9, faculty: MED }
+      MFAC3501: { uoc: 8, faculty: MED }
+      MFAC3502: { uoc: 8, faculty: MED }
+      MFAC3503: { uoc: 8, faculty: MED }
+      MFAC3504: { uoc: 8, faculty: MED }
+      MFAC3505: { uoc: 8, faculty: MED }
+      MFAC3506: { uoc: 8, faculty: MED }
+      MFAC3508: { uoc: 8, faculty: MED }
+      MFAC3509: { uoc: 8, faculty: MED }
+      MFAC3514: { uoc: 8, faculty: MED }
+      MFAC3515: { uoc: 8, faculty: MED }
+      MFAC3512: { uoc: 8, faculty: MED }
+      MFAC3522: { uoc: 8, faculty: MED }
+      MFAC3523: { uoc: 0, faculty: MED }
+      MFAC4999: { uoc: 8, faculty: MED }
+      MFAC4001: { uoc: 2, faculty: MED }
+      PHYS1160: { uoc: 6, faculty: SCI, gened: true }
+      GEOS1111: { uoc: 6, faculty: SCI, gened: true }
+student:
+  program: "3805"
+  year: 2026
+  horizon: planned
+  attest: { rural-placement: true, criminal-record-check: true, immunisation: true, medical-board-registration: true }
+  plan:
+    - { iid: mfac1501, code: MFAC1501, term: 1, status: planned }
+    - { iid: mfac1521, code: MFAC1521, term: 1, status: planned }
+    - { iid: mfac1522, code: MFAC1522, term: 1, status: planned }
+    - { iid: mfac1523, code: MFAC1523, term: 2, status: planned }
+    - { iid: mfac1524, code: MFAC1524, term: 2, status: planned }
+    - { iid: mfac1525, code: MFAC1525, term: 2, status: planned }
+    - { iid: mfac1526, code: MFAC1526, term: 3, status: planned }
+    - { iid: mfac1527, code: MFAC1527, term: 3, status: planned }
+    - { iid: mfac1511, code: MFAC1511, term: 3, status: planned }
+    - { iid: mfac1512, code: MFAC1512, term: 4, status: planned }
+    - { iid: mfac1513, code: MFAC1513, term: 4, status: planned }
+    - { iid: mfac2514, code: MFAC2514, term: 5, status: planned }
+    - { iid: mfac2515, code: MFAC2515, term: 5, status: planned }
+    - { iid: mfac2516, code: MFAC2516, term: 6, status: planned }
+    - { iid: mfac2507, code: MFAC2507, term: 6, status: planned }
+    - { iid: mfac2511, code: MFAC2511, term: 7, status: planned }
+    - { iid: mfac2512, code: MFAC2512, term: 7, status: planned }
+    - { iid: mfac4999-1, code: MFAC4999, term: 8, status: planned }
+    - { iid: mfac4001-1, code: MFAC4001, term: 8, status: planned }
+    - { iid: mfac4999-2, code: MFAC4999, term: 9, status: planned }
+    - { iid: mfac4001-2, code: MFAC4001, term: 9, status: planned }
+    - { iid: mfac4999-3, code: MFAC4999, term: 10, status: planned }
+    - { iid: mfac4001-3, code: MFAC4001, term: 10, status: planned }
+    - { iid: phys1160, code: PHYS1160, term: 8, status: planned }
+    - { iid: geos1111, code: GEOS1111, term: 9, status: planned }
+    - { iid: mfac3501, code: MFAC3501, term: 11, status: planned }
+    - { iid: mfac3502, code: MFAC3502, term: 11, status: planned }
+    - { iid: mfac3503, code: MFAC3503, term: 11, status: planned }
+    - { iid: mfac3504, code: MFAC3504, term: 12, status: planned }
+    - { iid: mfac3505, code: MFAC3505, term: 12, status: planned }
+    - { iid: mfac3506, code: MFAC3506, term: 12, status: planned }
+    - { iid: mfac3508, code: MFAC3508, term: 13, status: planned }
+    - { iid: mfac3509, code: MFAC3509, term: 13, status: planned }
+    - { iid: mfac3514, code: MFAC3514, term: 13, status: planned }
+    - { iid: mfac3515, code: MFAC3515, term: 14, status: planned }
+    - { iid: mfac3512, code: MFAC3512, term: 14, status: planned }
+    - { iid: mfac3522, code: MFAC3522, term: 14, status: planned }
+    - { iid: mfac3523, code: MFAC3523, term: 15, status: planned }
+expect:
+  nodes:
+    root: { status: met, counted_uoc: 288 }
+    disciplinary: { status: met, counted_uoc: 276 }
+    stage-1-core: { status: met, counted_uoc: 96 }
+    stage-2-core: { status: met, counted_uoc: 54 }
+    ilp: { status: met, counted_uoc: 30 }
+    stage-3-core: { status: met, counted_uoc: 96 }
+    gen-ed: { status: met, counted_uoc: 12 }
+  allocations:
+    mfac4999-1: { primary: ilp }
+    mfac4001-1: { primary: ilp }
+    mfac4999-2: { primary: ilp }
+    mfac4001-2: { primary: ilp }
+    mfac4999-3: { primary: ilp }
+    mfac4001-3: { primary: ilp }
+    mfac2514: { primary: stage-2-core }
+  not_counted: []

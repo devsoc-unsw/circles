@@ -1,0 +1,75 @@
+# Golden trace (EVALUATOR.md §6): catalogue-reports/FIXES.md fix 3, "after" expectations.
+fixture_version: "1.0"
+id: g3-3586-actuarial-substitutions
+title: 3586 MATH1151/MATH1251 meet the MATHE1 level 1 core through substitution and share
+description: >-
+  A 3586 student with the optional major MATHE1. The plan has the 3586 level 1 core including
+  MATH1151 and MATH1251, the level 2 and 3 core and electives, the MATHE1 level 2 and 3 core and
+  24 UOC of MATHE1 prescribed electives, and no MATH1131 or MATH1231. Resolution adds MATH1151 as an
+  alternative to MATHE1's MATH1131 item and MATH1251 to MATH1231 (scope actuarial-major). Step 1a:
+  3586 level-1-core comes first in pre-order and matches both instances, so MATHE1's items stay
+  unmatched. Step 1b: the share [level-1-core, actuarial-major] covers them, so both items are met by
+  share allocations, and the 12 shared UOC count toward MATHE1's 66 UOC check.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3586.yaml
+    - examples/2026/specialisations/MATHE1.yaml
+  catalogue:
+    default: { uoc: 6, faculty: BUS }
+    courses:
+      MATH1151: { uoc: 6, faculty: SCI }
+      MATH1251: { uoc: 6, faculty: SCI }
+      MATH2831: { uoc: 6, faculty: SCI }
+      MATH2871: { uoc: 6, faculty: SCI }
+      MATH2901: { uoc: 6, faculty: SCI }
+      MATH3801: { uoc: 6, faculty: SCI }
+      MATH3811: { uoc: 6, faculty: SCI }
+      MATH3821: { uoc: 6, faculty: SCI }
+      MATH3831: { uoc: 6, faculty: SCI }
+      MATH3841: { uoc: 6, faculty: SCI }
+      MATH3871: { uoc: 6, faculty: SCI }
+student:
+  program: "3586"
+  year: 2026
+  horizon: planned
+  selections:
+    actuarial-major: [MATHE1]
+  plan:
+    - { iid: econ1101, code: ECON1101, term: 1, status: planned }
+    - { iid: actl1101, code: ACTL1101, term: 1, status: planned }
+    - { iid: comm1170, code: COMM1170, term: 1, status: planned }
+    - { iid: math1151, code: MATH1151, term: 1, status: planned }
+    - { iid: comm1180, code: COMM1180, term: 2, status: planned }
+    - { iid: comm1240, code: COMM1240, term: 2, status: planned }
+    - { iid: econ1102, code: ECON1102, term: 2, status: planned }
+    - { iid: math1251, code: MATH1251, term: 2, status: planned }
+    - { iid: actl2102, code: ACTL2102, term: 3, status: planned }
+    - { iid: actl2111, code: ACTL2111, term: 3, status: planned }
+    - { iid: math2831, code: MATH2831, term: 3, status: planned }
+    - { iid: actl2131, code: ACTL2131, term: 4, status: planned }
+    - { iid: comm2501, code: COMM2501, term: 4, status: planned }
+    - { iid: math2871, code: MATH2871, term: 4, status: planned }
+    - { iid: math2901, code: MATH2901, term: 5, status: planned }
+    - { iid: actl3142, code: ACTL3142, term: 5, status: planned }
+    - { iid: actl3141, code: ACTL3141, term: 5, status: planned }
+    - { iid: actl3143, code: ACTL3143, term: 6, status: planned }
+    - { iid: actl3151, code: ACTL3151, term: 6, status: planned }
+    - { iid: math3821, code: MATH3821, term: 6, status: planned }
+    - { iid: math3871, code: MATH3871, term: 7, status: planned }
+    - { iid: math3801, code: MATH3801, term: 7, status: planned }
+    - { iid: math3811, code: MATH3811, term: 7, status: planned }
+    - { iid: math3831, code: MATH3831, term: 8, status: planned }
+    - { iid: math3841, code: MATH3841, term: 8, status: planned }
+expect:
+  nodes:
+    level-1-core: { status: met, counted_uoc: 48 }
+    spec:MATHE1/level-1-core: { status: met, counted_uoc: 12 }
+    spec:MATHE1/level-2-core: { status: met, counted_uoc: 18 }
+    spec:MATHE1/level-3-core: { status: met, counted_uoc: 12 }
+    spec:MATHE1/prescribed-electives: { status: met, counted_uoc: 24 }
+    spec:MATHE1: { status: met, counted_uoc: 66 }
+  allocations:
+    math1151: { primary: level-1-core, shares: [spec:MATHE1/level-1-core] }
+    math1251: { primary: level-1-core, shares: [spec:MATHE1/level-1-core] }
+  not_counted: []
