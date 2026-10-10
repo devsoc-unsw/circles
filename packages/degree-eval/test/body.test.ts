@@ -31,7 +31,7 @@ const compactStrings = (sites: Site[]): Compact[] =>
     if (kind === 'selector') {
       return selectorStrings(value).map((src) => ({ file, where, kind, src }));
     }
-    if (kind === 'condition') {
+    if (kind === 'condition' || kind === 'exclude') {
       return conditionStrings(value).map((s) => ({ file, where, ...s }));
     }
     return [];
@@ -48,7 +48,7 @@ const label = (x: { file: string; where: string }) => `${x.file}: ${x.where}`;
 // every site value normalises, and its canonical compact form parses back to the same AST
 const checkStructured = (sites: Site[]) => {
   for (const s of sites) {
-    if (s.kind === 'condition') {
+    if (s.kind === 'condition' || s.kind === 'exclude') {
       const { ast } = normalizeCondition(s.value);
       expect(astEqual(parseCondition(printCondition(ast)), ast), label(s)).toBe(true);
     }
@@ -121,7 +121,7 @@ describe('positive self-test documents', () => {
     checkStructured(sites);
     // node paths at path sites, plus those inside in: selectors and complete()
     const refPaths = sites.flatMap((s) => {
-      if (s.kind === 'condition') return normalizeCondition(s.value).refs;
+      if (s.kind === 'condition' || s.kind === 'exclude') return normalizeCondition(s.value).refs;
       if (s.kind === 'selector') return normalizeSelector(s.value).refs;
       return [];
     });

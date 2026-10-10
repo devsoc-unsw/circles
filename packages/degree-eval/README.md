@@ -1,9 +1,16 @@
 # @circles/degree-eval
 
 Loads, resolves and evaluates Circles degree YAML (programs, specialisations, course conditions,
-libraries, patches) in the browser or in Node, with no server. M0–M1 contain the compact
-condition/selector language (`src/lang/`); loading, resolution and evaluation come in later
-milestones. The design lives in `circles-schema/EVALUATOR.md` and `SPEC-M0-M1.md`.
+libraries, patches) in the browser or in Node. The backend stores and serves the documents as YAML
+text; this package loads, checks and (in later milestones) evaluates them client-side.
+
+- `src/lang/` (M1): the compact condition/selector language: parse, print, normalise.
+- `src/load/` (M2): `loadDocuments(files)`: YAML under the size/alias/merge-key limits,
+  `schema_version` handling, schema validation and a parse check of every compact string.
+- `src/validate/` (M2): schema validators **generated** from `schema.json` by Ajv's standalone mode
+  (`src/validate/generated/`, committed; never edit by hand). Ajv is a build-time dependency only.
+
+Resolution and evaluation come in later milestones. The design lives in `circles-schema/EVALUATOR.md` and `SPEC-M0-M1.md`.
 
 The package is **source-only** (`exports` points at `src/index.ts`; there is no build step). The
 frontend depends on it as `"@circles/degree-eval": "file:../packages/degree-eval"` and Vite/Vitest
@@ -17,6 +24,7 @@ alias it to `src/` for hot reload. `src/` must not use Node or DOM APIs.
 | `npm run lint` / `lint:fix` / `format` | ESLint + Prettier (same rules as the frontend, minus React) |
 | `npm run types` | `tsc` for `src/` (no ambient types) and for tests/scripts (Node types) |
 | `npm run sync-test-data -- --from <dir>` | re-vendor `test-data/` from a circles-schema checkout |
+| `npm run build-validators` | regenerate `src/validate/generated/` from `test-data/schema.json` |
 
 ## Install
 
@@ -31,6 +39,7 @@ lockfile entry for the link stays accurate (`npm ci` does not check this).
 
 ```bash
 npm run sync-test-data -- --from /path/to/circles-schema
+npm run build-validators   # only needed when schema.json changed; a test fails until it is run
 npm test
 ```
 
