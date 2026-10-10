@@ -23,6 +23,7 @@ jobs:
         include:
           - component: frontend
             dockerfile: production.dockerfile
+            contexts: degree-eval=packages/degree-eval
             args: |
               "API_URL=${{ github.ref_name == 'dev' && 'https://circlesapi.devsoc.app' || 'https://circlesstagingapi.devsoc.app' }}"
           - component: backend
@@ -50,6 +51,7 @@ jobs:
           platforms: linux/amd64
           file: ${{ matrix.component }}/${{ matrix.dockerfile }}
           build-args: ${{ matrix.args }}
+          build-contexts: ${{ matrix.contexts }}
           tags: |
             ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:${{ github.sha }}
             ghcr.io/devsoc-unsw/${{ env.IMAGE_NAME}}-${{ matrix.component }}:latest
