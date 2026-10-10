@@ -89,7 +89,16 @@ const airbnbTypescript = [
 ];
 
 export default tseslint.config(
-  { ignores: ['node_modules/', 'junit/', 'coverage/', 'test-data/', 'eslint.config.js'] },
+  {
+    ignores: [
+      'node_modules/',
+      'junit/',
+      'coverage/',
+      'test-data/',
+      'src/validate/generated/',
+      'eslint.config.js'
+    ]
+  },
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   // airbnb-base has no eslint 10 release; fixupConfigRules shims the removed context APIs

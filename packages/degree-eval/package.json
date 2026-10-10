@@ -17,14 +17,16 @@
     "lint:fix": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts'",
     "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts'",
     "types": "tsc -p tsconfig.json && tsc -p tsconfig.test.json",
-    "sync-test-data": "node scripts/sync-test-data.ts"
+    "sync-test-data": "node scripts/sync-test-data.ts",
+    "build-validators": "node scripts/build-validators.ts"
   },
-  "dependencies": {},
   "devDependencies": {
     "@eslint/compat": "2.1.1",
     "@eslint/eslintrc": "3.3.7",
     "@eslint/js": "10.0.1",
     "@types/node": "24.13.3",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
     "eslint": "^10.0.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "10.1.5",
@@ -36,8 +38,7 @@
     "prettier": "3.6.2",
     "typescript": "6.0.3",
     "typescript-eslint": "8.71.0",
-    "vitest": "5.0.3",
-    "yaml": "2.9.1"
+    "vitest": "5.0.3"
   },
   "overrides": {
     "eslint-config-airbnb-base": {
@@ -46,5 +47,8 @@
     "eslint-plugin-import": {
       "eslint": "$eslint"
     }
+  },
+  "dependencies": {
+    "yaml": "2.9.1"
   }
 }
