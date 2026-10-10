@@ -23,6 +23,11 @@ export default defineConfig({
   resolve: {
     alias: [
       // TODO: alias should be sync with vite.config.ts
+      // @circles/degree-eval is source-only: alias to src/ so edits hot-reload without reinstalling
+      {
+        find: /^@circles\/degree-eval$/,
+        replacement: resolve(projectRootDir, '../packages/degree-eval/src/index.ts')
+      },
       { find: 'assets', replacement: resolve(projectRootDir, 'src/assets') },
       { find: 'components', replacement: resolve(projectRootDir, './src/components') },
       { find: 'config', replacement: resolve(projectRootDir, './src/config') },
