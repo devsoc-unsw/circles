@@ -1,0 +1,50 @@
+{
+  "name": "@circles/degree-eval",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts' --max-warnings 0",
+    "lint:fix": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts' 'scripts/**/*.ts'",
+    "types": "tsc -p tsconfig.json && tsc -p tsconfig.test.json",
+    "sync-test-data": "node scripts/sync-test-data.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/compat": "2.1.1",
+    "@eslint/eslintrc": "3.3.7",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.3",
+    "eslint": "^10.0.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "5.5.1",
+    "eslint-plugin-simple-import-sort": "14.0.0",
+    "fast-check": "4.10.2",
+    "globals": "17.13.0",
+    "prettier": "3.6.2",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vitest": "5.0.3",
+    "yaml": "2.9.1"
+  },
+  "overrides": {
+    "eslint-config-airbnb-base": {
+      "eslint": "$eslint"
+    },
+    "eslint-plugin-import": {
+      "eslint": "$eslint"
+    }
+  }
+}

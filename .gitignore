@@ -84,3 +84,4 @@ backend/data/scrapers/enrolmentDataRaw.json
 
 # People keep making these by accident
 package-lock.json
+!packages/degree-eval/package-lock.json
