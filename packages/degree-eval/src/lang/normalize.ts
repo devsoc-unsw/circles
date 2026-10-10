@@ -272,9 +272,10 @@ class Normalizer {
         return k === 'program' ? { program: xs } : { spec: xs };
       }
       case 'manual': {
-        if (typeof val === 'string' && val) return { manual: val };
+        // minLength is a schema rule (M2); the compact form accepts manual("") too
+        if (typeof val === 'string') return { manual: val };
         const o = fields(val, here, ['text'], ['id']);
-        const text = str(o.text, [...here, 'text'], /./su, 'a non-empty string');
+        const text = str(o.text, [...here, 'text'], /^/, 'a string');
         if (o.id === undefined) return { manual: text };
         return { manual: { text, id: str(o.id, [...here, 'id'], SEG_ID_RX, 'a node id') } };
       }
