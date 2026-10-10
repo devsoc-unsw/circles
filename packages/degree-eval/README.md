@@ -9,8 +9,14 @@ text; this package loads, checks and (in later milestones) evaluates them client
   `schema_version` handling, schema validation and a parse check of every compact string.
 - `src/validate/` (M2): schema validators **generated** from `schema.json` by Ajv's standalone mode
   (`src/validate/generated/`, committed; never edit by hand). Ajv is a build-time dependency only.
+- `src/resolve/`, `src/ir/` (M3): which document wins, year fallback, `extends`, patches (with
+  stale reporting), components, spec expansion and node paths.
+- `src/eval/` (M4–M7): `evaluate(bundle, student)` runs the §7.4 allocation and §7.6 statuses;
+  `checkInstance`/`unlockedAt` give course unlock results (§7.7); `explain` returns the trace.
+- `src/validate/semantic.ts` (M8): cross-reference checks and lints (`checkDocs`, `checkFixture`).
 
-Resolution and evaluation come in later milestones. The design lives in `circles-schema/EVALUATOR.md` and `SPEC-M0-M1.md`.
+The 10 conformance fixtures run in `test/conformance.test.ts`. Rulings where the spec is silent are
+in `DECISIONS.md`. The design lives in `circles-schema/EVALUATOR.md` and `SPEC-M0-M1.md`.
 
 The package is **source-only** (`exports` points at `src/index.ts`; there is no build step). The
 frontend depends on it as `"@circles/degree-eval": "file:../packages/degree-eval"` and Vite/Vitest
