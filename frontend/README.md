@@ -68,6 +68,25 @@ To remove all containers and the docker network, run `docker-compose down`. Add 
 
 To stop a docker containers that is running, run `docker-compose stop <containerName>`. This will not remove the container.
 
+#### Degree evaluator (preview)
+
+The progression checker can be built on the in-browser degree evaluator (`packages/degree-eval`) instead of the backend's structure. It is off by default:
+
+- dev server or dev container: add `VITE_DEGREE_EVAL=true` to `env/frontend.env` (or the environment) and restart it.
+- production image: `DEGREE_EVAL=true docker compose build frontend-prod`.
+
+Until the backend serves the degree documents, the evaluator reads the examples in `packages/degree-eval/test-data/examples`, which both images copy in.
+
+## End-to-end tests
+
+`npm run e2e` runs the Playwright tests in `e2e/` (`*.e2e.ts`). It builds the frontend with the degree evaluator on and serves it with `vite preview`, then drives it in Chromium. A backend must already be running on `localhost:8000` (`docker compose up backend`, or `E2E_API_URL` to point elsewhere). The tests seed their own guest user through the API.
+
+- First time: `npx playwright install chromium`.
+- The backend only allows `localhost:3000` and `:3001` (CORS), so while the dev container holds :3000, run `E2E_PORT=3001 npm run e2e`.
+- On a failure, `npx playwright show-trace test-results/<test>/trace.zip` replays it.
+
+CI runs them in the `frontend_e2e` job against the `ci-backend` service.
+
 ## Project Structure 
 (Accurate as of January 2023)
 ```bash

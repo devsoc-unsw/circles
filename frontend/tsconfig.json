@@ -104,6 +104,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/", "vite.config.ts", "vitest.config.ts", ".eslintrc"],
+  "include": ["src/", "e2e/", "vite.config.ts", "vitest.config.ts", "playwright.config.ts", ".eslintrc"],
   "exclude": ["node_modules", "build"]
 }

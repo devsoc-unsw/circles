@@ -139,10 +139,39 @@ jobs:
           name: degree-eval-test-results
           path: packages/degree-eval/junit/degree-eval-test-results.xml
 
+  frontend_e2e:
+    name: Frontend E2E (degree evaluator)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-frontend
+      - name: Setup environment
+        uses: ./.github/actions/setup-ci-env
+      - name: Run the backend container
+        run: docker compose up --wait --wait-timeout 90 ci-backend
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: ./frontend
+      - name: Run the e2e tests (builds the frontend with VITE_DEGREE_EVAL=true and serves it on :3000)
+        run: npm run e2e
+        working-directory: ./frontend
+      - name: Log the backend container output
+        run: docker compose logs ci-backend
+        if: failure()
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fe-e2e-results
+          path: |
+            frontend/junit/e2e-test-results.xml
+            frontend/test-results/
+
   docker_build:
     name: Build docker containers
     runs-on: ubuntu-latest
-    needs: [backend_lint, backend_typecheck, backend_tests, frontend_lint, frontend_typecheck, degree_eval] # TODO: add test jobs when they get unskipped
+    needs: [backend_lint, backend_typecheck, backend_tests, frontend_lint, frontend_typecheck, frontend_e2e, degree_eval] # TODO: add test jobs when they get unskipped
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4

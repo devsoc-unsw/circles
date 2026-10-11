@@ -48,10 +48,11 @@
     "preview:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.devsoc.app vite preview --port 3000 --host",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "lint": "eslint 'src/**/*.{ts,tsx}' --max-warnings 0",
-    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "types": "tsc --project tsconfig.json"
+    "lint": "eslint 'src/**/*.{ts,tsx}' 'e2e/**/*.ts' playwright.config.ts --max-warnings 0",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}' 'e2e/**/*.ts' playwright.config.ts",
+    "format": "prettier --write 'src/**/*.{ts,tsx}' 'e2e/**/*.ts' playwright.config.ts",
+    "types": "tsc --project tsconfig.json",
+    "e2e": "playwright test"
   },
   "browserslist": {
     "production": [
@@ -70,6 +71,7 @@
     "@eslint/compat": "2.1.1",
     "@eslint/eslintrc": "3.3.7",
     "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
     "@testing-library/dom": "10.4.2",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.3",
