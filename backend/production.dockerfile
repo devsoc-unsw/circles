@@ -1,7 +1,7 @@
 # Sets up the backend, without writing data into the database.
 
 # Python image
-FROM python:3.12.11-slim
+FROM python:3.14.8-slim
 
 # gcc required for python-Levenshtein, curl required for healthcheck
 RUN apt-get update \
