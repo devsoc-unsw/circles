@@ -1,5 +1,6 @@
 node_modules
 junit
 coverage
-test-data
+test-data/fixtures
+test-data/SOURCE.json
 dist

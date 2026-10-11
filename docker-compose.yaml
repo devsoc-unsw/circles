@@ -81,6 +81,7 @@ services:
       # Bind mount volume for live frontend updates while developing
       - ./frontend/src:/client/src
       - ./packages/degree-eval/src:/packages/degree-eval/src
+      - ./packages/degree-eval/test-data/examples:/packages/degree-eval/test-data/examples
     stdin_open: true
     tty: true
     depends_on:
@@ -94,6 +95,9 @@ services:
       dockerfile: production.dockerfile
       additional_contexts:
         degree-eval: ./packages/degree-eval
+      args:
+        # build the progression checker on the degree evaluator: DEGREE_EVAL=true docker compose build
+        DEGREE_EVAL: ${DEGREE_EVAL:-false}
     container_name: circles-frontend-prod
     ports:
       - '3000:80'
