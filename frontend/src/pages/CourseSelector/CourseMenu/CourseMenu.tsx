@@ -5,7 +5,7 @@ import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import { CoursesResponse, DegreeResponse } from 'types/userResponse';
-import { useStructureQuery } from 'utils/apiHooks/static';
+import { usePopularElectivesQuery, useStructureQuery } from 'utils/apiHooks/static';
 import {
   useAddToUnplannedMutation,
   useRemoveCourseMutation,
@@ -47,6 +47,23 @@ const CourseMenu = ({ courses, degree }: CourseMenuProps) => {
     degree?.programCode ?? '',
     degree?.specs ?? []
   );
+
+  const popularElectivesQuery = usePopularElectivesQuery(
+    {
+      queryOptions: { enabled: degree !== undefined }
+    },
+    degree?.programCode ?? '',
+    degree?.specs ?? []
+  );
+
+  // courseCode -> how many students on this program/spec have it planned
+  const popularityCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    popularElectivesQuery.data?.popular.forEach((elective) => {
+      counts[elective.courseCode] = elective.count;
+    });
+    return counts;
+  }, [popularElectivesQuery.data]);
 
   const coursesStateQuery = useUserAllUnlocked();
 
@@ -180,6 +197,7 @@ const CourseMenu = ({ courses, degree }: CourseMenuProps) => {
                           runMutate={courseMutation}
                           accurate={course.accuracy}
                           unlocked={course.unlocked}
+                          popularityCount={popularityCounts[course.courseCode]}
                         />
                       ),
                       // key is course code + groupKey + subgroupKey to differentiate as unique
@@ -199,6 +217,7 @@ const CourseMenu = ({ courses, degree }: CourseMenuProps) => {
     menuData,
     pageLoaded,
     courseMutation,
+    popularityCounts,
     showLockedCourses,
     structureQuery.data,
     structureQuery.isSuccess

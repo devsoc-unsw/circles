@@ -4,7 +4,7 @@ APIs for the /courses/ route.
 import pickle
 import re
 from contextlib import suppress
-from typing import Annotated, Dict, List, Optional, Set, Tuple
+from typing import Annotated, Any, Dict, List, Optional, Set, Tuple, cast
 
 from algorithms.create_program import PROGRAM_RESTRICTIONS_PICKLE_FILE
 from algorithms.objects.program_restrictions import NoRestriction, ProgramRestriction
@@ -14,11 +14,11 @@ from fastapi import APIRouter, HTTPException, Security
 from fuzzywuzzy import fuzz  # type: ignore
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, user_storage_to_algo_user
-from server.db.mongo.conn import archivesDB, coursesCOL
+from server.db.mongo.conn import archivesDB, coursesCOL, usersCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes, CourseDetails, CourseState, CoursesPath,
-                                  CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
-                                  TermsOffered)
-from server.routers.utility.common import get_course_details, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
+                                  CoursesPathDict, CoursesState, CoursesUnlockedWhenTaken, PopularElective, PopularElectives,
+                                  ProgramCourses, TermsList, TermsOffered)
+from server.routers.utility.common import get_course_details, get_elective_courses, get_incoming_edges, get_legacy_course_details, get_program_structure, get_terms_offered_multiple_years
 
 router = APIRouter(
     prefix="/courses",
@@ -497,6 +497,71 @@ def terms_offered(course: str, years:str) -> TermsOffered:
         "terms": offerings,
         "fails": fails,
     }
+
+
+# Below this many program students with saved plans, the counts are too noisy
+# to be meaningful, so we report no popular electives at all.
+MIN_POPULAR_SAMPLE = 20
+# How many electives to surface as "popular".
+POPULAR_LIMIT = 5
+
+
+def count_program_course_frequencies(program_code: str, specialisations: Optional[List[str]] = None) -> Tuple[Dict[str, int], int]:
+    """
+    Count, among setup users enrolled in the given program, how many have each
+    course in their plan (i.e. in their `courses` map). Returns the per-course
+    counts and the sample size (number of such users).
+
+    When `specialisations` is given, only users enrolled in all of those
+    specialisations are counted, so a student sees the choices of peers on the
+    same major rather than the whole program.
+    """
+    query: Dict[str, Any] = {"setup": True, "degree.programCode": program_code}
+    if specialisations:
+        query["degree.specs"] = {"$all": specialisations}
+    sample_size = usersCOL.count_documents(query)
+    pipeline: List[Dict[str, Any]] = [
+        {"$match": query},
+        # `courses` is keyed by course code; turn it into an array so we can
+        # tally each code across users.
+        {"$project": {"codes": {"$objectToArray": "$courses"}}},
+        {"$unwind": "$codes"},
+        {"$group": {"_id": "$codes.k", "count": {"$sum": 1}}},
+    ]
+    counts: Dict[str, int] = {}
+    for row in usersCOL.aggregate(pipeline):
+        row_dict = cast(Dict[str, Any], row)
+        counts[row_dict["_id"]] = row_dict["count"]
+    return counts, sample_size
+
+
+@router.get("/popularElectives/{programCode}/{spec}", response_model=PopularElectives)
+@router.get("/popularElectives/{programCode}", response_model=PopularElectives)
+def popular_electives(programCode: str, spec: Optional[str] = None) -> PopularElectives:
+    """
+    Returns the most commonly chosen elective courses for a program: the top
+    electives ranked by how many of the program's students have placed them in
+    their plan. Core and general-education courses are excluded. When a spec is
+    given, only students on that spec are counted.
+    """
+    specs = spec.split("+") if spec else []
+    electives = get_elective_courses(programCode, specs)  # raises 400 for an invalid program
+
+    counts, sample_size = count_program_course_frequencies(programCode, specs)
+    if sample_size < MIN_POPULAR_SAMPLE:
+        return PopularElectives(programCode=programCode, sampleSize=sample_size, popular=[])
+
+    ranked = sorted(
+        ((code, n) for code, n in counts.items() if code in electives),
+        key=lambda item: item[1],
+        reverse=True,
+    )[:POPULAR_LIMIT]
+
+    popular = [
+        PopularElective(courseCode=code, count=n, percent=n / sample_size)
+        for code, n in ranked
+    ]
+    return PopularElectives(programCode=programCode, sampleSize=sample_size, popular=popular)
 
 
 ###############################################################################
