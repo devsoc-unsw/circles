@@ -24,8 +24,10 @@ jobs:
           - component: frontend
             dockerfile: production.dockerfile
             contexts: degree-eval=packages/degree-eval
+            # the progression checker runs on the degree evaluator on staging only
             args: |
               "API_URL=${{ github.ref_name == 'dev' && 'https://circlesapi.devsoc.app' || 'https://circlesstagingapi.devsoc.app' }}"
+              "DEGREE_EVAL=${{ github.ref_name == 'staging' && 'true' || 'false' }}"
           - component: backend
             dockerfile: production.dockerfile
     steps:
