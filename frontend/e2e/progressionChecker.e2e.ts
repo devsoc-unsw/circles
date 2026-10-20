@@ -1,5 +1,5 @@
 // The progression checker, rendered by the degree evaluator (VITE_DEGREE_EVAL=true), for a guest
-// on 3778 + COMPA1 with a full 144 UOC plan. The user is seeded through the existing API: a guest
+// on 3778 + COMPA1 with a full 144 UOC plan and one course left in Unplanned. The user is seeded through the existing API: a guest
 // login, then PUT /user/import with the whole degree, planner and courses.
 import { expect, test } from '@playwright/test';
 
@@ -20,7 +20,7 @@ const TERMS = [
 const user = {
   degree: { programCode: '3778', specs: ['COMPA1'] },
   planner: {
-    unplanned: [],
+    unplanned: ['COMP6841'],
     startYear: 2026,
     isSummerEnabled: false,
     lockedTerms: {},
@@ -33,7 +33,10 @@ const user = {
   },
   // the first term is completed
   courses: Object.fromEntries(
-    TERMS.flat().map((code, i) => [code, { mark: i < 3 ? 75 : null, ignoreFromProgression: false }])
+    [...TERMS.flat(), 'COMP6841'].map((code, i) => [
+      code,
+      { mark: i < 3 ? 75 : null, ignoreFromProgression: false }
+    ])
   ),
   settings: { showMarks: false, hiddenYears: [] }
 };
@@ -52,23 +55,28 @@ test('progression checker renders 3778 + COMPA1 from the degree evaluator', asyn
 
   await page.goto('/progression-checker');
 
-  // the banner summarises the evaluator's verdict
-  await expect(page.getByText('132 of 144 UOC counted', { exact: false })).toBeVisible({
-    timeout: 30_000
-  });
+  // the banner summarises the evaluator's verdict; with the backend's course details (gen-ed,
+  // faculty, school, equivalents) the whole plan counts
+  await expect(
+    page.getByText('Met (if the plan goes ahead). 144 of 144 UOC counted', { exact: false })
+  ).toBeVisible({ timeout: 30_000 });
+  await expect(
+    page.getByText("1 course in Unplanned isn't counted until you place it in a term.")
+  ).toBeVisible();
 
   // the major is its own group, and its core lists a planned course
   await expect(page.getByRole('heading', { name: /^COMPA1/ })).toBeVisible();
   await expect(page.getByText('COMP1511').first()).toBeVisible();
 
-  // the 36 UOC free-elective pool is full, so two more non-major courses count towards nothing
-  await expect(page.getByRole('heading', { name: 'Not Counted' })).toBeVisible();
-  await expect(
-    page.getByRole('heading', { name: /12 UOC worth of courses that count towards no requirement/ })
-  ).toBeVisible();
-  await expect(page.getByRole('button', { name: /^MATH3411:/ }).last()).toBeVisible();
+  // General Education is met by the two GENL courses, which the backend marks as gen-ed
+  await expect(page.getByRole('heading', { name: 'General Education' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /^GENL1062:/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /^GENL1063:/ })).toBeVisible();
-  // the legacy "Free Electives" overflow section is replaced
+
+  // every course counts somewhere, and the legacy "Free Electives" overflow section is replaced
+  await expect(
+    page.getByRole('heading', { name: /0 UOC worth of courses that count towards no requirement/ })
+  ).toBeVisible();
   await expect(
     page.getByText('These courses may or may not be counted', { exact: false })
   ).toHaveCount(0);

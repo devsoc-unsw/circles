@@ -1,5 +1,5 @@
-// Planner state → the evaluator's StudentState and catalogue (SCHEMA.md §7.1).
-import type { CatalogueData, PlanInstance, StudentState } from '@circles/degree-eval';
+// Planner state → the evaluator's StudentState (SCHEMA.md §7.1).
+import type { PlanInstance, StudentState } from '@circles/degree-eval';
 import { Mark } from 'types/planner';
 import { CoursesResponse, PlannerResponse } from 'types/userResponse';
 
@@ -53,10 +53,3 @@ export const toStudent = (
     ignored: plan.filter((i) => courses[i.code]?.ignoreFromProgression).map((i) => i.iid)
   };
 };
-
-// The facts Circles already has for the student's courses. Faculty, school, gen-ed, attributes
-// and equivalents need the per-year catalogue export (EVALUATOR.md §9 Q1); until then, selectors
-// on them match nothing.
-export const toCatalogue = (courses: CoursesResponse): CatalogueData => ({
-  courses: Object.values(courses).map((c) => ({ code: c.code, uoc: c.uoc }))
-});

@@ -32,7 +32,24 @@ const EvaluatorNotice = ({ result, error }: Props) => {
     ...(errors.length
       ? [`${errors.length} problems were found loading the degree documents.`]
       : []),
-    'Faculty, General Education and equivalence data are not loaded yet, so requirements that depend on them may show as not met.'
+    ...(result.unplannedCount
+      ? [
+          `${result.unplannedCount} ${result.unplannedCount === 1 ? 'course' : 'courses'} in Unplanned ${
+            result.unplannedCount === 1 ? "isn't" : "aren't"
+          } counted until you place ${result.unplannedCount === 1 ? 'it' : 'them'} in a term.`
+        ]
+      : []),
+    ...result.equivalents.map(
+      ({ code, item }) =>
+        `${code} counts towards ${item} as an equivalent of a listed course. Equivalent courses also exclude each other, so you can only count one of them.`
+    ),
+    ...(result.undecided.length
+      ? [
+          `Can't be decided automatically, because a course could count towards two requirements and the degree rules don't say whether it may: ${result.undecided.join(
+            ', '
+          )}. Check these against the handbook.`
+        ]
+      : [])
   ];
 
   return (
@@ -41,11 +58,13 @@ const EvaluatorNotice = ({ result, error }: Props) => {
       showIcon
       message={`Degree evaluator (preview): ${result.summary}`}
       description={
-        <ul>
-          {caveats.map((c) => (
-            <li key={c}>{c}</li>
-          ))}
-        </ul>
+        caveats.length ? (
+          <ul>
+            {caveats.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        ) : undefined
       }
     />
   );

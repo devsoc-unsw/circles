@@ -3,6 +3,7 @@
 import { createLocalClient } from '@circles/degree-eval';
 import { CoursesResponse, PlannerResponse } from 'types/userResponse';
 import { describe, expect, it } from 'vitest';
+import { CourseDetails } from './catalogue';
 import { evaluateProgression } from './evaluateProgression';
 import loadExampleDocuments from './exampleDocuments';
 import { toPlan } from './student';
@@ -97,5 +98,50 @@ describe('evaluateProgression', () => {
     expect(r.summary).toBe(
       'Not met (if the plan goes ahead). 132 of 144 UOC counted. 1 requirement not met'
     );
+  });
+
+  it("uses the courses' details: gen-ed counts, equivalents meet core items", async () => {
+    // DPST1091 in place of COMP1511 (its equivalent), and a course left in Unplanned
+    const swap = (c: string) => (c === 'COMP1511' ? 'DPST1091' : c);
+    const withEquivalent: PlannerResponse = {
+      ...planner,
+      unplanned: ['COMP6841'],
+      years: planner.years.map((y) => ({
+        T0: [],
+        T1: y.T1.map(swap),
+        T2: y.T2.map(swap),
+        T3: y.T3.map(swap)
+      }))
+    };
+    const codes = [...TERMS.flat().map(swap), 'COMP6841'];
+    const ownCourses: CoursesResponse = Object.fromEntries(
+      codes.map((code) => [code, { ...(courses[code] ?? courses.COMP1511), code, title: code }])
+    );
+    const details: Record<string, CourseDetails> = Object.fromEntries(
+      codes.map((code) => [
+        code,
+        {
+          code,
+          study_level: 'Undergraduate',
+          school: '',
+          gen_ed: code.startsWith('GENL'),
+          equivalents: Object.fromEntries(code === 'DPST1091' ? [['COMP1511', 1]] : [])
+        }
+      ])
+    );
+
+    const r = await evaluateProgression(
+      createLocalClient(),
+      await loadExampleDocuments(),
+      { programCode: '3778', specs: ['COMPA1'] },
+      withEquivalent,
+      ownCourses,
+      details
+    );
+    expect(r.summary).toBe('Met (if the plan goes ahead). 144 of 144 UOC counted');
+    expect(r.notCounted).toEqual([]);
+    expect(r.equivalents).toEqual([{ code: 'DPST1091', item: 'Core Courses' }]);
+    expect(r.unplannedCount).toBe(1);
+    expect(r.undecided).toEqual([]);
   });
 });
