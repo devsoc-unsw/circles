@@ -67,6 +67,21 @@ describe('evaluateProgression', () => {
     });
   });
 
+  it('makes a multi-term course one instance, in its last term', () => {
+    const multi: PlannerResponse = {
+      ...planner,
+      years: [{ T0: [], T1: ['CHEM4508', 'COMP1511'], T2: ['CHEM4508'], T3: [] }]
+    };
+    const plan = toPlan(multi, {
+      COMP1511: courses.COMP1511,
+      CHEM4508: { ...courses.COMP1511, code: 'CHEM4508', uoc: 8, mark: null, isMultiterm: true }
+    });
+    expect(plan.map((i) => [i.iid, i.term])).toEqual([
+      ['COMP1511', 2],
+      ['CHEM4508', 3]
+    ]);
+  });
+
   it('renders 3778 + COMPA1 from the evaluator, with not-counted courses', async () => {
     const files = await loadExampleDocuments();
     expect(files.length).toBe(84);
