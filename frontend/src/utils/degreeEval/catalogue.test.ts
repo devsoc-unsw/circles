@@ -1,6 +1,6 @@
+import loadExampleDocuments from 'test/exampleDegreeDocuments';
 import { describe, expect, it } from 'vitest';
 import { orgCodes, toCatalogue } from './catalogue';
-import loadExampleDocuments from './exampleDocuments';
 
 const course = (code: string) => ({
   code,

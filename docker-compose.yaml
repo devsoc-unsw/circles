@@ -81,7 +81,6 @@ services:
       # Bind mount volume for live frontend updates while developing
       - ./frontend/src:/client/src
       - ./packages/degree-eval/src:/packages/degree-eval/src
-      - ./packages/degree-eval/test-data/examples:/packages/degree-eval/test-data/examples
     stdin_open: true
     tty: true
     depends_on:

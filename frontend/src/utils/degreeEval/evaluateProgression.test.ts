@@ -1,11 +1,11 @@
 // M9 done criterion (EVALUATOR.md §8): the progression view comes from the evaluator for
 // 3778 + COMPA1, with courses that count nowhere shown as not counted.
 import { createLocalClient } from '@circles/degree-eval';
+import loadExampleDocuments from 'test/exampleDegreeDocuments';
 import { CoursesResponse, PlannerResponse } from 'types/userResponse';
 import { describe, expect, it } from 'vitest';
 import { CourseDetails } from './catalogue';
 import { evaluateProgression } from './evaluateProgression';
-import loadExampleDocuments from './exampleDocuments';
 import { toPlan } from './student';
 
 // the m1-3778-mathc2 fixture's 144 UOC plan, by term

@@ -1,10 +1,10 @@
-// Stand-in document source: the circles-schema examples vendored in the package. The agreed design
-// is that the backend stores the documents and serves them as YAML text; swap this for that call
-// when the endpoint exists. Loaded lazily, so the YAML is only fetched when the flag is on.
+// Test fixtures: the circles-schema examples vendored in the package, as the backend would serve
+// them (GET /degrees/documents). Tests use these fixed copies so that edits to the backend's
+// documents do not change test expectations.
 import type { SourceFile } from '@circles/degree-eval';
 
 const files = import.meta.glob<string>(
-  '../../../../packages/degree-eval/test-data/examples/**/*.yaml',
+  '../../../packages/degree-eval/test-data/examples/**/*.yaml',
   { query: '?raw', import: 'default' }
 );
 

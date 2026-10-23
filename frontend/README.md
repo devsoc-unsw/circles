@@ -75,7 +75,7 @@ The progression checker can be built on the in-browser degree evaluator (`packag
 - dev server or dev container: add `VITE_DEGREE_EVAL=true` to `env/frontend.env` (or the environment) and restart it.
 - production image: `DEGREE_EVAL=true docker compose build frontend-prod`.
 
-Until the backend serves the degree documents, the evaluator reads the examples in `packages/degree-eval/test-data/examples`, which both images copy in.
+The degree documents come from the backend (`GET /degrees/documents`), which loads them from `backend/data/degree_documents` at startup; see `AUTHORING.md` there to add or change one.
 
 ## End-to-end tests
 
