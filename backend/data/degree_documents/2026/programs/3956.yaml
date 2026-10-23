@@ -1,0 +1,182 @@
+# 3956 Bachelor of Science (Advanced Mathematics) (Honours), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3956
+#   (curriculum structure 2026.01.006, accessed 2026-10-09; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: program
+code: "3956"
+year: 2026
+title: Advanced Mathematics (Honours)
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Science (Advanced Mathematics) (Honours)]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3956
+  structure_version: "2026.01.006"
+  retrieved: 2026-10-09
+  status: complete
+  warnings:
+    - >-
+      Science Electives: structured data gives max 6 UOC, but the description ("major plus Honours year
+      plus 'science' courses total 144") needs up to 12 UOC with the 84 UOC MATHU1 major. The description
+      is followed (max 12).
+    - >-
+      General Education: the description excludes "any course defined as a Science course" (Table 1, not in
+      the structured data); the "Excluded General Education Courses" rule lists only Faculty of Science,
+      GENS, FOOD, SOMS and COMP. The description is followed by excluding the whole science-elective list.
+    - Honours classes are not published on the program page and are not encoded.
+
+sets:
+  # The 27 "any <subject> course" rules under 3956 "Science Electives" (2026). Same as the library
+  # science_electives minus Biophysics (BIOP), which this list does not name.
+  adv_maths_science: >-
+    faculty:SCI or CLIM**** or FOOD**** or PATH**** or CHEM**** or AVIA**** or ANAT**** or BABS****
+    or PHAR**** or COMP**** or MATH**** or BIOT**** or BIOS**** or SOMS**** or PHSL**** or MATS****
+    or DATA**** or GEOS**** or NEUR**** or VISN**** or MSCI**** or MICR**** or BEES**** or BIOC****
+    or PSYC**** or OPTM**** or PHYS****
+  science_l1_or_l3_subjects: >-
+    faculty:SCI or ANAT**** or NEUR**** or PATH**** or PHAR**** or PHSL**** or FOOD**** or COMP****
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 144 }
+    original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: major
+        kind: spec
+        slot: major
+        title: Major Specialisation Requirements
+        options: [MATHA1, MATHU1, MATHP1]
+        count: 1
+        original: >-
+          Students must complete exactly one approved Bachelor of Science (Advanced Mathematics) (Honours)
+          major, and this must be declared before enrolling in Level III courses. Students cannot undertake
+          a double major in this program.
+      - id: declare-major
+        kind: info
+        text: The major must be declared before enrolling in Level III courses.
+
+      - id: honours
+        kind: spec
+        slot: honours
+        title: Honours Specialisation Requirements
+        options: [MATHTH, MATHAH, MATHPH]
+        count: 1
+        original: Students must complete at least one of the specialisations below.
+        note: '"At least one", but the 48 UOC Honours year fits exactly one 48 UOC honours specialisation (as 4515).'
+
+      - id: science-electives
+        kind: pool
+        title: Science Electives
+        from: "@adv_maths_science and not GEN*****"
+        uoc: { max: 12 }
+        original: >-
+          Students must take 'science' courses so that the major plus Honours year plus 'science' courses
+          total 144 units of credit.
+        note: >-
+          No minimum of its own: the Disciplinary Component's 144 UOC is what fails. Max 12 = 144 - 48
+          (honours) - 84 (smallest major, MATHU1); the structured data says 6 (see provenance warning).
+
+      - id: recommended-electives
+        kind: info
+        text: >-
+          The Faculty strongly recommends one of the following courses be taken as either part of a Science
+          Elective or Free Elective. SCIF1001, DESN1000, COMM1190, MATH3041, MATH3121, MATH3171, MATH3191,
+          MATH3201, MATH3821, MATH3831.
+
+      - id: max-level-1
+        kind: limit
+        title: Maximum Level 1 UOC
+        from: level:1
+        uoc: { max: 72 }
+        scope: root
+        original: >-
+          A maximum of 72 UOC of Level 1 courses can be taken, including any General Education or
+          mainstream Level 1 course taken to fulfil either the General Education or the Free Elective
+          requirement.
+
+      - id: level-1-science
+        kind: limit
+        title: Minimum Level 1 Science Courses
+        from: level:1 and @science_l1_or_l3_subjects
+        uoc: { min: 24 }
+        scope: root
+        original: >-
+          Students must complete a minimum of 24 UOC of the following courses. any level 1 course offered by
+          Faculty of Science any level 1 Computer Science (COMP) course any level 1 Food Technology (FOOD)
+          course any level 1 Anatomy (ANAT) course any level 1 Neuroscience (NEUR) course any level 1
+          Pathology (PATH) course any level 1 Pharmacology (PHAR) course any level 1 Physiology (PHSL) course
+
+      - id: level-3-science
+        kind: limit
+        title: Minimum Level 3 Science Courses
+        from: level:3 and (@science_l1_or_l3_subjects or SOMS****)
+        uoc: { min: 30 }
+        scope: root
+        original: >-
+          Students must complete a minimum of 30 UOC of the following courses. any level 3 course offered by
+          Faculty of Science any level 3 Anatomy (ANAT) course any level 3 Neuroscience (NEUR) course any
+          level 3 Pathology (PATH) course any level 3 Pharmacology (PHAR) course any level 3 Physiology
+          (PHSL) course any level 3 Food Technology (FOOD) course any level 3 Computer Science (COMP) course
+          any level 3 Medical Science (SOMS) course
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: 36
+    overflow: true
+    original: >-
+      Students must take 36 UOC of the following courses. GEN# courses cannot count towards the free
+      elective component, or towards science core courses or science electives in the program.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    uoc: 12
+    from: gened and not (@adv_maths_science or GENS****)
+    original: >-
+      Students must take 12 UOC of the following courses. Any course defined as a Science course cannot be
+      taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this
+      program, including GEN# coded courses. Excluded General Education Courses: any course offered by
+      Faculty of Science; any General Education - Faculty of Science (GENS) course; any Food Technology
+      (FOOD) course; any Medical Science (SOMS) course; any Computer Science (COMP) course.
+
+  - id: maturity-level-2
+    kind: maturity
+    applies_to: level:2
+    require: uoc(30, level:1)
+    original: Students may commence Level 2 courses upon successful completion of 30 UOC of Level 1 courses.
+  - id: maturity-level-3
+    kind: maturity
+    applies_to: level:3
+    require: uoc(72)
+    original: Students may commence Level 3 courses upon successful completion of 72 UOC.
+
+  - id: honours-progression
+    kind: maturity
+    applies_to: in:honours
+    require: >-
+      uoc(144) and wam(70, level:3 and MATH****) and manual("WAM of 70 or higher in the level III
+      courses for the chosen major and honours discipline; all requirements of the first three years
+      completed")
+    original: >-
+      Progression to Stage 4 is subject to academic performance and requires the completion of a total of
+      144 UoC and all the requirements of the first three years of the program, including Level I, major,
+      and General Education requirements. To progress to Honours, students are required to have achieved a
+      WAM of 70 or higher in their level III mathematics courses, and a WAM of 70 or higher in the level
+      III courses for their chosen major and honours discipline.
+
+  - id: exit-to-3970
+    kind: info
+    text: >-
+      Students who are ineligible to progress to Honours, will be required to transfer to the Bachelor of
+      Science program (3970) and graduate with the Bachelor of Science award at pass level. Students that
+      for any reason transfer from the Advanced Mathematics (Honours) program to the BSc program are not
+      required to take SCIF1000 if at the time of transfer they have already taken one of the following:
+      SCIF1001, DESN1000, COMM1190, MATH3041, MATH3121, MATH3171, MATH3191, MATH3201, MATH3821, MATH3831.

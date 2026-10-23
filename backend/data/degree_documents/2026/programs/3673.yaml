@@ -1,0 +1,152 @@
+# 3673 Economics / Computer Science double degree, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3673
+#   (curriculum structure 2026.02.012; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10;
+#   recomposed 2026-10-10 after SPOT-CHECK.md)
+# Built by composition (§8): imports the Disciplinary Component of 3543 Economics (2026) and of 3778
+# Computer Science (2026), then adds the double-degree rules. The component documents are not edited.
+# Re-checked against the cached 3673 page: its "Disciplinary Component - 3543 Economics" container
+# matches 3543's (same introductory business list, 8-course core, Economics Electives with the same four
+# sub-containers, Business School electives, optional Economics major, Level 3 maturity), except that
+# the Accounting Options are "only available to students in the standalone program" (patched out below)
+# and the 60 UOC Level 1 cap, which is double-degree specific (program-level limit below).
+schema_version: "1.0"
+kind: program
+code: "3673"
+year: 2026
+title: Economics / Computer Science
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Economics, Bachelor of Science]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3673
+  structure_version: "2026.02.012"
+  retrieved: 2026-10-09
+  status: partial
+  warnings:
+    - >-
+      Economics Electives: the structured "Level 3 Economics course" sub-container has max 6 UOC,
+      which contradicts the container text "at least 18 UOC of Level 3 Economics courses". The text is
+      followed (quota min 18, as in 3543); the max 6 is not encoded.
+    - >-
+      Economics Electives "Accounting Options" (ACCT3563, ACCT3583) are "only available to students in
+      the standalone program who declare a non-Economics major in Accounting", so the component patch
+      removes them from the imported pool, and removes 3543's Accounting-option check with them.
+    - >-
+      Whether a component program's own `shares` are imported with `include` is not specified in §8;
+      the 3543 shares this program relies on are re-declared below with component paths (as 3784 and
+      3764 do for 3502).
+    - >-
+      The patch writes the Economics Electives selectors out in full instead of 3543's local sets
+      (@econ_l3, @actl_options), because §8 does not say which document's sets a patch field resolves
+      against.
+
+components:
+  - id: economics
+    program: "3543"
+    title: Disciplinary Component - 3543 Economics
+    uoc: { min: 96 }
+    include: [disciplinary]
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    patch:
+      # Accounting Options are standalone-only: drop them from the pool and its quotas.
+      - op: set
+        target: economics-electives
+        fields:
+          from: ECON2*** or ECON3*** or COMM3000 or ACTL3191 or ACTL3192
+          quotas:
+            - from: ECON2***
+              uoc: { max: 12 }
+              original: "Level 2 Economics course: any Level 2 Economics course (max 12 UOC)."
+            - from: ECON3*** or COMM3000 or ACTL3191 or ACTL3192
+              uoc: { min: 18 }
+              original: >-
+                Students must take 30 UOC of the following courses with at least 18 UOC of Level 3
+                Economics courses.
+              note: >-
+                COMM3000 is listed under Level 3 Economics course and the ACTL options are "substitutes
+                for Level 3 ECON courses".
+            - from: ACTL3191 or ACTL3192
+              uoc: { max: 6 }
+              original: >-
+                Actuarial Studies Options: Students can take a maximum of 6 UOC of the following courses
+                as substitutes for Level 3 ECON courses.
+      - op: remove
+        target: accounting-options-eligibility
+      - op: set
+        target: business-electives
+        fields:
+          original: >-
+            Students must complete 12 UOC of UNSW Business School electives. Students are encouraged to
+            select a Work-Integrated Learning course as one of their UNSW Business School Electives -
+            e.g., COMM2222, COMM2233, COMM2244, COMM3020, COMM3030, COMM3101, or COMM3202
+  - id: cs
+    program: "3778"
+    title: Disciplinary Component - 3778 Computer Science
+    uoc: { min: 96 }
+    include: [disciplinary]
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+
+requirements:
+  - id: economics-max-level-1
+    kind: limit
+    title: Maximum Level 1 UOC (Economics component)
+    from: level:1
+    uoc: { max: 60 }
+    scope: economics
+    original: >-
+      No more than 60 UOC in Level 1 courses will be counted towards the Economics component of the
+      double degree
+
+  - id: business-minimum
+    kind: limit
+    title: Minimum Business School UOC
+    from: faculty:BUS
+    uoc: { min: 96 }
+    scope: root
+    original: Students must complete a minimum of 96 UOC of courses from the UNSW Business School.
+    note: >-
+      Taken from the program's Limit Rule as written. With the MATH substitutions counted in the
+      Economics component, the Economics component alone may hold fewer than 96 UOC of Business School
+      courses; this rule is not relaxed for that case in the handbook.
+
+substitutions:
+  - replace: ECON1202
+    with: MATH1131 or MATH1141
+    scope: economics
+    original: >-
+      Students should do the MATH courses which are required in the Computer Science specialisation,
+      ie MATH1131/MATH1141 & MATH1231/MATH1241. These courses will substitute for Economics courses in
+      your major as follows:- MATH1131/MATH1141 will substitute for ECON1202. MATH1231/MATH1241 will
+      substitute for ECON1203.
+  - replace: ECON1203
+    with: MATH1231 or MATH1241
+    scope: economics
+
+shares:
+  - between: [economics, cs]
+    courses: MATH1131 or MATH1141 or MATH1231 or MATH1241
+    mode: replace
+    original: >-
+      Students have the option of counting the MATH pair of courses towards the Computer Science
+      component and must complete 2 additional Economics electives (4 in total); OR towards the
+      Economics component and must complete 2 additional Computer Science electives.
+    note: >-
+      The MATH courses count once; the side that does not hold them takes a replacement elective from
+      its own pools. Which side holds them follows allocation order (Economics first) unless the student
+      pins the courses (§7.4 "pins").
+  # Re-declared from 3543 (2026) with component paths.
+  - between: [economics/economics-core, economics/econ-major]
+    original: >-
+      Students may choose to use their Economics core and elective courses to complete an optional
+      Economics major. Courses for the major are taken once but also meet core and elective course rules
+      where listed.
+  - between: [economics/economics-electives, economics/econ-major]
+  - between: [economics/economics-core, economics/econ-second-major]
+  - between: [economics/economics-electives, economics/econ-second-major]
+  - between: [economics/econ-major, economics/econ-second-major]
+    max_uoc: 12
+    original: >-
+      If you choose to study two optional Economics majors, you must choose another 6 courses (36 UOC)
+      from the second major that do not overlap with the first optional major.

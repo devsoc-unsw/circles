@@ -1,0 +1,237 @@
+# 3962 Bachelor of Advanced Science (Honours), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3962
+#   (curriculum structure 2026.02.110, accessed 2026-10-09; transcribed 2026-10-10 by Lane B)
+# Spec selection follows 3970: one major, then EITHER a second major OR up to two minors; plus Honours.
+schema_version: "1.0"
+kind: program
+code: "3962"
+year: 2026
+title: Advanced Science (Honours)
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Advanced Science (Honours)]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3962
+  structure_version: "2026.02.110"
+  retrieved: 2026-10-09
+  status: complete
+  warnings:
+    - >-
+      Free Electives: structured data gives max 24 UOC, but the description and the program summary say
+      36 UOC. The text is followed (max 36).
+    - >-
+      "Science courses are defined in Table 1 in the Additional Information section", which is not in the
+      page data; the Science Electives list is used as the definition (as 3970).
+    - Honours classes are not published on the program page and are not encoded.
+
+sets:
+  # The 26 "any <subject> course" rules under 3962 "Science Electives" (2026). Same as the library
+  # science_electives minus Vision Science (VISN) and Optometry (OPTM), which this list does not name.
+  adv_science_electives: >-
+    faculty:SCI or MICR**** or FOOD**** or BIOS**** or AVIA**** or COMP**** or PSYC**** or GEOS****
+    or BEES**** or BABS**** or PHAR**** or BIOT**** or PHSL**** or CHEM**** or ANAT**** or SOMS****
+    or MATH**** or MSCI**** or CLIM**** or DATA**** or MATS**** or NEUR**** or PATH**** or PHYS****
+    or BIOP**** or BIOC****
+  adv_science: "@adv_science_electives or SCIF****"
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree
+    note: >-
+      No group `uoc`: the 144 UOC is a Science-only total (limit science-144), so non-science courses of
+      a minor must not count toward it (as 3970's science-96).
+    children:
+      - id: core
+        kind: core
+        title: Core Courses
+        uoc: 12
+        courses: [SCIF0000, SCIF1001, SCIF2001, SCIF3010]
+        original: >-
+          Students must take 12 UOC of the following courses, including two 0 UOC professional development
+          elements SCIF0000 and SCIF3010. SCIF0000 should be enrolled in during the first term of study and
+          SCIF3010 should be enrolled in the final term of study.
+      - id: scif0000-first
+        kind: timing
+        severity: warning
+        courses: SCIF0000
+        term: first
+      - id: scif3010-last
+        kind: timing
+        severity: warning
+        courses: SCIF3010
+        term: last
+
+      - id: major
+        kind: spec
+        slot: major
+        title: Majors
+        options: &adv_science_majors [ANATF1, BINFD1, BIOCG1, BIOCL1, BIOPB1, BIOSN1, BIOSP1, BIOTB1, CHEMB1,
+                                      CLIMB1, GEOGV1, GEOLN1, MATHG1, MATHJ1, MATHK1, MATSP1, MICRE1, MICRL1,
+                                      MSCIK1, NEURA1, PATHB1, PHARB1, PHSLB1, PHYSC1, PSYCA1]
+        original: >-
+          Students must complete at least one of the following majors. Students should declare their major
+          prior to commencing Stage 2 courses. Students may also opt to complete either a second major OR up
+          to 2 minors. When offered in a particular major, students must take higher versions of any Level
+          2 or 3 courses. Any variation to this must be approved by the Associate Dean (Academic Programs) or
+          nominee.
+      - id: higher-versions
+        kind: info
+        text: >-
+          When offered in a particular major, students must take higher versions of any Level 2 or 3
+          courses. Any variation to this must be approved by the Associate Dean (Academic Programs) or
+          nominee.
+
+      - id: additional-specs
+        kind: group
+        title: Optional second major or minors
+        choose: { min: 0, max: 1 }
+        children:
+          - id: second-major
+            kind: spec
+            slot: major
+            options: *adv_science_majors
+            count: 1
+            distinct_from: [{ node: major }]
+          - id: minors
+            kind: spec
+            slot: minor
+            title: Minors
+            options: [ANATB2, AVIAF2, BIOCD2, BIOPA2, BIOSI2, BIOSM2, CHEMD2, CHINE2, CHINF2, CLIMB2,
+                      COMDF2, COMMJ2, ECONO2, ENVPE2, FRENF2, FRENG2, GEOGH2, GEOLF2, GERSF2, INFSA2,
+                      JAPNF2, JAPNG2, KOREF2, KOREG2, MATHC2, MATHD2, MATHG2, MDIAO2, MGMTJ2, MICRJ2,
+                      MSCIK2, PATHB2, PHARB2, PHSLB2, PHYSC2, PHYSI2, POLSG2, PSYCM2, SCIFC2, SOSSC2,
+                      SPANI2, VISNB2]
+            count: { min: 1, max: 2 }
+            distinct_from: [{ node: major, by: title }]
+            counts_toward:
+              - { node: free-electives, courses: not @adv_science }
+              - { node: gen-ed, courses: not @adv_science }
+            original: >-
+              Students may complete up to two of the following optional minors where there is capacity in
+              their program to do so. Free electives and General Education courses may be used to satisfy
+              any non-science courses required by the minor.
+            note: >-
+              "Students cannot complete a minor with the same name as their nominated major" (Double
+              Counting rule) → distinct_from by title.
+
+      - id: honours
+        kind: spec
+        slot: honours
+        title: Honours Specialisations
+        options: [ARCYBH, BABSBH, BIOCFH, BIOCGH, BIOPAH, BIOSKH, BIOSLH, BIOTBH, CHEMFH, CLIMDH, GEOGTH,
+                  GEOLMH, MATHAH, MATHNH, MATHPH, MATHTH, MATSCH, MICRFH, MSCIJH, NEURBH, PHYSGH, PSYCAH,
+                  SOMSAH, SOMSBH, SOMSCH, SOMSDH, SOMSEH, VISNBH]
+        count: 1
+        original: Students must complete at least one Science Honours Specialisation selected from the list below.
+        note: '"At least one", but the 48 UOC Honours year fits exactly one 48 UOC honours specialisation (as 4515).'
+
+      - id: science-electives
+        kind: pool
+        title: Science Electives
+        from: "@adv_science_electives and not GEN*****"
+        uoc: { max: 84 }
+        original: >-
+          Students need to complete 144 UOC to meet the core requirements for the Advanced Science (Honours)
+          program. If the core courses, your choice of specialisation(s), plus Honours requires less than 144
+          UOC, you are required to complete additional Science elective courses from the following list to
+          meet the 144 UOC requirement.
+        note: >-
+          No minimum of its own (science-144 fails instead). The handbook gives no cap; max 84 = 144 - 12
+          (core) - 48 (honours) is only an upper bound so exact top-up (§7.4 step 4) can fill it.
+
+      - id: science-144
+        kind: limit
+        title: 144 UOC of Science courses
+        from: "@adv_science"
+        uoc: { min: 144 }
+        scope: disciplinary
+        original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree
+
+      - id: max-level-1
+        kind: limit
+        title: Maximum Level 1 UOC
+        from: level:1
+        uoc: { max: 72 }
+        scope: root
+        original: >-
+          Students may take up to a maximum of 72 UOC of Level 1 courses, including any General Education or
+          mainstream Level 1 course taken to fulfil either the General Education or the Free Elective
+          requirement.
+
+      - id: level-1-science
+        kind: limit
+        title: Minimum Level 1 Science UOC
+        from: level:1 and @science_l1_subjects
+        uoc: { min: 24 }
+        scope: root
+        original: >-
+          Students must complete a minimum of 24 UOC of the following courses. any level 1 course offered by
+          Faculty of Science any level 1 Biophysics (BIOP) course any level 1 Computer Science (COMP) course
+          any level 1 Food Technology (FOOD) course any level 1 Anatomy (ANAT) course any level 1
+          Neuroscience (NEUR) course any level 1 Pathology (PATH) course any level 1 Pharmacology (PHAR)
+          course any level 1 Physiology (PHSL) course any level 1 Medical Science (SOMS) course
+
+      - id: declare-minors
+        kind: info
+        text: Students must declare their minor(s) before their final term.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    uoc: 12
+    from: gened and not (faculty:SCI or GENS**** or BIOP**** or COMP**** or FOOD**** or SOMS****)
+    original: >-
+      Students must take 12 UOC of the following courses. Any course defined as a Science course cannot be
+      taken as General Education (GE). Therefore, the following courses cannot count towards this
+      requirement: any course offered by the Faculty of Science, including GENS courses; any Biophysics
+      (BIOP) course; any Computer Science (COMP) course; any Food Technology (FOOD) course; any Medical
+      Science (SOMS) course. All other courses can be taken as GE, including other GEN# courses. Any
+      exceptions to these rules must be approved by the Director of Academic Programs or nominee.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: { max: 36 }
+    overflow: true
+    original: >-
+      Students may take up to a maximum of 36 UOC of the following courses. GEN# courses cannot count as
+      Free Electives, Science Core Courses, or Science Electives in this program.
+
+  - id: maturity-level-2
+    kind: maturity
+    applies_to: level:2
+    require: uoc(24)
+    original: Students must have completed 24 UOC before taking any of the following courses. any level 2 course
+  - id: maturity-level-3
+    kind: maturity
+    applies_to: level:3
+    require: uoc(72)
+    original: Students must have completed 72 UOC before taking any of the following courses. any level 3 course
+
+  - id: honours-progression
+    kind: maturity
+    applies_to: in:honours
+    require: >-
+      uoc(144) and manual("All requirements of the first three stages completed and the School's Honours
+      entry criteria met")
+    original: >-
+      Progression to Stage 4 (the honours year) of this program is subject to academic performance. Where
+      students successfully complete a total of 144 UoC and all the requirements of the first three stages
+      of the program, including Level I/II/III, major, and general education requirements, they can apply
+      for entry into the Stage 4 honours component. Entry criteria for honours in each School can be found
+      here https://www.science.unsw.edu.au/study-us/undergraduate/honours-degrees/honours-how-apply
+
+  - id: exit-to-3970
+    kind: info
+    text: >-
+      If a student is not permitted to progress in the Advanced Science (Honours) they will be required to
+      transfer to, and graduate from, program 3970 Bachelor of Science. Not all Advanced Science (Honours)
+      majors are available in 3970. Entry to Honours may still be possible by application to enter program
+      4500 Bachelor of Science (Honours).

@@ -10,7 +10,7 @@ from pymongo import MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
 
-from .constants import COURSES_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SPECS_COL_NAME, USERS_COL_NAME
+from .constants import COURSES_COL_NAME, DEGREE_DOCS_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SPECS_COL_NAME, USERS_COL_NAME
 from .col_types import GuestSessionInfoDict, NotSetupSessionInfoDict, NotSetupUserInfoDict, RefreshTokenInfoDict, SessionInfoDict, UserInfoDict
 
 client: MongoClient
@@ -22,6 +22,7 @@ usersDB: Database
 programsCOL: Collection
 specialisationsCOL: Collection
 coursesCOL: Collection
+degreeDocumentsCOL: Collection
 
 sessionsCOL: Collection[Union[NotSetupSessionInfoDict, SessionInfoDict, GuestSessionInfoDict]]
 refreshTokensCOL: Collection[RefreshTokenInfoDict]
@@ -29,7 +30,7 @@ usersCOL: Collection[Union[NotSetupUserInfoDict, UserInfoDict]]
 
 def connect():
     # TODO-OLLI(pm): this global list is horrible...
-    global client, db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, sessionsCOL, refreshTokensCOL, usersCOL
+    global client, db, archivesDB, usersDB, programsCOL, specialisationsCOL, coursesCOL, degreeDocumentsCOL, sessionsCOL, refreshTokensCOL, usersCOL
     print("Trying to connect to mongo database.")
 
     # this should raise error if this fails, this is better than exit(1)
@@ -44,6 +45,7 @@ def connect():
     programsCOL = db[PROGRAMS_COL_NAME]
     specialisationsCOL = db[SPECS_COL_NAME]
     coursesCOL = db[COURSES_COL_NAME]
+    degreeDocumentsCOL = db[DEGREE_DOCS_COL_NAME]
 
     sessionsCOL = usersDB[SESSIONS_COL_NAME].with_options(
         codec_options=CodecOptions(

@@ -1,0 +1,116 @@
+# MTRNBH Robotics and Mechatronics Engineering (honours specialisation in 3707), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MTRNBH
+#   (curriculum structure 2026.01.129; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+# Chosen in place of the brief's "MTRNAH": 3707 (2026) lists MTRNBH, not MTRNAH, as its Mechatronics
+# honours specialisation.
+schema_version: "1.0"
+kind: specialisation
+code: MTRNBH
+year: 2026
+title: Robotics and Mechatronics Engineering
+spec_kind: honours
+uoc: 168
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MTRNBH
+  structure_version: "2026.01.129"
+  retrieved: 2026-10-09
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 48
+    courses:
+      - COMP1511
+      - DESN1000
+      - ELEC1111
+      - ENGG1300
+      - MMAN1130
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+      - PHYS1121 or PHYS1131
+    original: Students must take 48 UOC of the following courses.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 48
+    courses:
+      - COMP2521
+      - DESN2000
+      - ELEC2141
+      - MATH2089
+      - MMAN2300
+      - MTRN2500
+      - MATH2018 or MATH2019
+      - ENGG2400 or ENGG2500 or MMAN2700
+    original: Students must take 48 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 30
+    courses: [DESN3000, MTRN3020, MTRN3100, MTRN3210, MTRN3500]
+    original: Students must take 30 UOC of the following courses.
+
+  - id: level-4-core
+    kind: core
+    title: Level 4 Core Courses
+    uoc: 12
+    courses: [MTRN4010, MTRN4230]
+    original: Students must take 12 UOC of the following courses.
+
+  - id: thesis
+    kind: core
+    title: Thesis Courses
+    uoc: 12
+    courses: [MMAN4951, MMAN4952, MMAN4953]
+    original: Students must take 12 UOC of the following courses.
+
+  - id: thesis-sequence
+    kind: timing
+    title: Thesis sequence
+    severity: warning
+    courses: MMAN4951 or MMAN4952 or MMAN4953
+    order: [MMAN4951, MMAN4952, MMAN4953]
+    note: Course order assumed from the A/B/C numbering; not stated on the page.
+
+  - id: recommended-discipline-electives
+    kind: pool
+    title: Recommended Discipline Electives
+    uoc: 6
+    from: [COMP3141, COMP3331, COMP3431, COMP9417, COMP9444, COMP9517, ELEC4633, ENGG3060, ENGG3741,
+           MANF4611, MMAN4400, MMAN9350, MTRN4231, MTRN9400]
+    original: Students must take 6 UOC of the following courses.
+
+  - id: discipline-electives
+    kind: pool
+    title: Discipline Electives
+    uoc: 12
+    from: [AERO9500, AERO9610, AERO9660, ENGG2400, ENGG2500, "@vip", ENGG3001, ENGG3060, ENGG4841,
+           MANF3510, MANF4100, MANF4430, MANF6860, MANF9400, MANF9420, MANF9472,
+           MECH4100, MECH4305, MECH4320, MECH4620, MECH4770, MECH4880, MECH4900, MECH9325, MECH9420,
+           MECH9650, MECH9720, MECH9761, MMAN2700, MMAN4200, MMAN4250,
+           SOLA5052, SOLA5053, SOLA5056, SOLA5057]
+    quotas:
+      - from: not (AERO**** or MECH**** or MANF**** or MMAN****)
+        count: { max: 2 }
+        uoc: { max: 12 }
+        note: At most 2 disciplinary electives (12 UOC) without an AERO, MECH, MANF or MMAN prefix can be taken.
+    original: >-
+      Students must take 12 UOC of the following courses. NOTE: - At most 2 disciplinary electives (12
+      UOC) without an AERO, MECH, MANF or MMAN prefix can be taken. - Postgraduate courses and/or
+      courses offered outside of the School may require manual enrolment. - 2 UOC and 3 UOC courses
+      are run over consecutive terms for a final total of 6 UOC.
+    note: >-
+      The quota cannot bind inside a 12 UOC pool of 6 UOC courses but is kept as published. "Manual
+      enrolment" is advisory and not modelled.
+
+  - id: vip-consecutive
+    kind: timing
+    severity: warning
+    courses: "@vip"
+    consecutive: true
+    original: 2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC.

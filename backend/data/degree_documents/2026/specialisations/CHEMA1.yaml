@@ -1,0 +1,43 @@
+# CHEMA1 Chemistry (Science major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/CHEMA1
+#   (curriculum structure 2026.01.014, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: CHEMA1
+year: 2026
+title: Chemistry
+spec_kind: major
+uoc: 78
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/CHEMA1
+  structure_version: "2026.01.014"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 30
+    courses:
+      - MATH1141 or MATH1031 or MATH1131
+      - MATH1041 or MATH1231 or MATH1241
+      - PHYS1111 or PHYS1131 or PHYS1121
+      - CHEM1011 or CHEM1031
+      - CHEM1021 or CHEM1041
+    original: Students must take 30 UOC of the following courses.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 24
+    courses: [CHEM2031, CHEM2011, CHEM2041, CHEM2021]
+    original: Students must take 24 UOC of the following courses.
+
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Prescribed Electives
+    uoc: { min: 24 }
+    from: [CHEM3011, CHEM3041, CHEM3031, CHEM3061, CHEM3021, CHEM3071]
+    original: Students must take at least 24 UOC of the following courses.

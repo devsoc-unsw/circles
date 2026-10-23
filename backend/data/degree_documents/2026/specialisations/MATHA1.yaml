@@ -1,0 +1,79 @@
+# MATHA1 Applied Mathematics (Advanced Mathematics (Honours) major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHA1
+#   (curriculum structure 2026.02.006, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: MATHA1
+year: 2026
+title: Applied Mathematics
+spec_kind: major
+uoc: 90
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHA1
+  structure_version: "2026.02.006"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  matha1_l3_core_a: MATH3041 or MATH3051
+  matha1_l3_core_b: >-
+    MATH3101 or MATH3121 or MATH3161 or MATH3171 or MATH3191 or MATH3201 or MATH3261 or MATH3311
+    or MATH3361 or MATH3371 or MATH6781
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 18
+    courses: [MATH1081, MATH1141, MATH1241]
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 36
+    courses: [MATH2111, MATH2221, MATH2301, MATH2601, MATH2621, MATH2901]
+
+  - id: computing-elective
+    kind: pool
+    title: Level 1 Computer Science Elective
+    uoc: { min: 6 }
+    from: ENGG1811 or COMP1***
+    original: "Students must take at least 6 UOC of the following courses: ENGG1811; any level 1 Computer Science course."
+
+  - id: level-3-core
+    kind: pool
+    title: Level 3 Core
+    uoc: 18
+    from: "@matha1_l3_core_a or @matha1_l3_core_b"
+    quotas:
+      - from: "@matha1_l3_core_a"
+        uoc: { min: 6, max: 12 }
+        original: "Level 3 Core A: Students take 6 -12 UOC of the following courses."
+      - from: "@matha1_l3_core_b"
+        uoc: { min: 6, max: 12 }
+        original: "Level 3 Core B: Students take 6 -12 UOC of the following courses."
+    priority: 10
+    original: Students must take 18 UOC of the following courses.
+
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Prescribed Electives
+    uoc: 12
+    from: MATH3*** and not (MATH3599 or MATH3699)
+    priority: 20
+    original: >-
+      Students must complete 12 UOC of Level 3 Maths courses (excluding MATH3599 and MATH3699), chosen
+      with the approval of the Head of School of Mathematics and Statistics or nominee.
+  - id: level-3-electives-approval
+    kind: info
+    confirm: true
+    text: Level 3 prescribed electives are chosen with the approval of the Head of School of Mathematics and Statistics or nominee.
+
+notes:
+  - >-
+    Recommended Level 1 electives (not required): PHYS1121 and PHYS1221 (physical sciences, oceanography,
+    meteorology, fluid dynamics); at least 12 UOC from one of Biology (BABS1201, BIOS1101), Psychology
+    (PSYC1001, PSYC1011) or Chemistry (CHEM1011, CHEM1021) (social or biological sciences); COMP1511
+    (computational methods).
+  - "Recommended Level 2 elective (not required): at least 6 UOC from MATH2241 Intro to Atmos & Oceans."

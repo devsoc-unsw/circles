@@ -6,6 +6,7 @@ REFRESH_TOKENS_COL_NAME = "refreshTokens"
 PROGRAMS_COL_NAME = "Programs"
 SPECS_COL_NAME = "Specialisations"
 COURSES_COL_NAME = "Courses"
+DEGREE_DOCS_COL_NAME = "DegreeDocuments"  # YAML degree documents, from data/degree_documents
 
 UID_INDEX_NAME = "uidIndex"
 SID_INDEX_NAME = "sidIndex"

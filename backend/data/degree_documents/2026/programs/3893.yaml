@@ -1,0 +1,70 @@
+# 3893 Bachelor of Exercise Science, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3893
+#   (curriculum structure 2026.01.029, accessed 2026-10-10)
+# Lane C transcription. The brief called this "Exercise Physiology"; the 2026 handbook title is
+# "Exercise Science", and it is only an exit award from the 3896 Bachelor of Exercise Science / Master
+# of Physiotherapy and Exercise Physiology double degree. Shows: an all-core program, an exit-award-only
+# program, placement hours and a maximum-attempts rule.
+schema_version: "1.0"
+kind: program
+code: "3893"
+year: 2026
+title: Exercise Science
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Exercise Science]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3893
+  structure_version: "2026.01.029"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 144 }
+    original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: level-1-core
+        kind: core
+        title: Level 1 Core Courses
+        uoc: 48
+        courses: [ANAT1451, ANAT1452, BABS1201, EXPT1155, EXPT1182, HLTH1000, SOMS1912, SOMS1913]
+      - id: level-2-core
+        kind: core
+        title: Level 2 Core Courses
+        uoc: 48
+        courses: [ANAT2452, EXPT2137, EXPT2151, EXPT2154, EXPT2168, EXPT2170, HLTH2000, HLTH2001]
+      - id: level-3-core
+        kind: core
+        title: Level 3 Core Courses
+        uoc: 48
+        courses: [EXPT3148, EXPT3170, EXPT3174, EXPT3175, EXPT3178, EXPT3179, HLTH3000, HLTH3001]
+
+  - id: exit-award-only
+    kind: info
+    text: >-
+      This program is currently only available as an exit award from the combined Bachelor of Exercise
+      Science/Master of Physiotherapy and Exercise Physiology double-degree and is not available for entry
+      as a standalone program. To qualify for the exit award students must complete 144 UOC and satisfy
+      all program rules.
+    note: >-
+      SCHEMA GAP (minor): no program-level flag for "exit award only / not open for entry"; `entry` could
+      carry program(3896) but entry is advisory and evaluated against the student's own program.
+  - id: placement-hours
+    kind: info
+    confirm: true
+    text: >-
+      To complete this degree, you must complete 3 years equivalent of full-time study, including 140 hours
+      of professional placement.
+  - id: max-attempts
+    kind: info
+    text: >-
+      Students are permitted to attempt the same course a maximum of three times. A student who fails the
+      same course for the third time will not be permitted to re-enrol.
+    note: >-
+      Checkable from plan history (count of failed attempts per course) but the condition language has no
+      attempt-count atom (SCHEMA GAP).

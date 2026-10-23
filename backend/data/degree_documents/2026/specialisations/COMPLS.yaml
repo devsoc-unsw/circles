@@ -1,0 +1,106 @@
+# COMPLS Artificial Intelligence (specialisation in 8543 Master of Information Technology), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/postgraduate/specialisations/2026/COMPLS
+#   (curriculum structure 2026.01.126; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: COMPLS
+year: 2026
+title: Artificial Intelligence
+spec_kind: specialisation
+uoc: 96
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/postgraduate/specialisations/2026/COMPLS
+  structure_version: "2026.01.126"
+  retrieved: 2026-10-09
+  status: complete
+
+sets:
+  dke: >-
+    COMP4418 or COMP6713 or COMP9417 or COMP9418 or COMP9434 or COMP9444 or COMP9491 or COMP9517 or
+    COMP9727
+
+requirements:
+  - id: foundational-core
+    kind: core
+    title: Foundational Core Courses
+    uoc: 18
+    courses: [COMP9020, COMP9021, COMP9024]
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: advanced-core
+    kind: core
+    title: Advanced Core Courses
+    uoc: 18
+    courses: [COMP9311, COMP9331, COMP9820]
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: electives
+    kind: pool
+    title: Electives
+    uoc: 18
+    from: "@mit_electives"
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: ai-core
+    kind: core
+    title: Artificial Intelligence Core Course
+    uoc: 6
+    courses: [COMP9414 or COMP9814]
+    original: "Students must take 6 UOC of the following courses."
+    note: >-
+      The structured data lists both courses without an OR connector, but the container is 6 UOC
+      ("Students must take 6 UOC of the following courses"), so one of the two is required.
+
+  - id: dke
+    kind: pool
+    title: Disciplinary Knowledge Elective Courses
+    uoc: 18
+    from: "@dke"
+    original: "Students must take 18 UOC of the following courses."
+
+  - id: project
+    kind: group
+    title: Research/Capstone/Project
+    choose: 1
+    original: "Students must take 18 UOC from one of the following groups."
+    children:
+      - id: option-1
+        kind: group
+        title: Option 1
+        original: "Students take 18 UOC including COMP9900, 6 UOC Disciplinary Knowledge Electives, and either GSOE9010 or GSOE9011."
+        children:
+          - id: option-1-information-technology-project
+            kind: core
+            title: Information Technology Project
+            courses: [COMP9900]
+          - id: option-1-dke
+            kind: pool
+            title: Disciplinary Knowledge Electives
+            uoc: 6
+            from: "@dke"
+            original: "See list of courses above."
+          - id: option-1-one-of
+            kind: core
+            title: One of the following
+            courses: [GSOE9010 or GSOE9011]
+      - id: option-2
+        kind: group
+        title: Option 2
+        original: "Students take COMP9991 and COMP9992, and 6 UOC Disciplinary Knowledge Electives."
+        children:
+          - id: option-2-research-project
+            kind: core
+            title: Research Project
+            courses: [COMP9991, COMP9992]
+          - id: option-2-dke
+            kind: pool
+            title: Disciplinary Knowledge Electives
+            uoc: 6
+            from: "@dke"
+            original: "See list of courses above."
+      - id: option-3
+        kind: core
+        title: Option 3
+        courses: [COMP9991, COMP9993]
+        original: "Students take 18 UOC of the following courses."

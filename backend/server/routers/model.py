@@ -279,6 +279,20 @@ class TermsOffered(TypedDict):
     terms: dict[str, list[str]]
     fails: list[tuple]
 
+class DegreeDocument(BaseModel):
+    """One degree document as written (SourceFile in @circles/degree-eval)"""
+    model_config = ConfigDict(extra='forbid')
+
+    path: str  # relative to data/degree_documents, e.g. 2026/programs/3778.yaml
+    text: str  # the YAML text, unparsed
+    origin: Literal['repo']
+
+class DegreeDocuments(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+
+    version: str  # changes whenever any document does; also the response's ETag
+    documents: list[DegreeDocument]
+
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = pickle.load(file)

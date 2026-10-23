@@ -1,0 +1,115 @@
+# 4830 Bachelor of Fine Arts, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4830
+#   (curriculum structure 2026.01.048, accessed 2026-10-10)
+# Lane C transcription; code 4830 verified (title "Fine Arts"). Same shape as 4825: one 96 UOC
+# specialisation, FE, "GE or an external major/minor" (SCHEMA.md §4.2 cites 4830 for this choice).
+schema_version: "1.0"
+kind: program
+code: "4830"
+year: 2026
+title: Fine Arts
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Fine Arts]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4830
+  structure_version: "2026.01.048"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  # "General Education courses for this program are any that do not contain the subject area:
+  # ADAD, DART, DDES, MUSC."
+  fine_arts_ge_excluded_subjects: ADAD**** or DART**** or DDES**** or MUSC****
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    children:
+      - id: specialisation
+        kind: spec
+        slot: specialisation
+        title: Specialisation Requirement
+        options: [DARTC1, DARTD1, DARTE1, MUSCP1, MUSCQ1, MUSCR1, MUSCS1]
+        uoc: 96
+        original: You must complete one of the specialisations below.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any
+    uoc: { max: 48 }
+    overflow: true
+    original: >-
+      You must take 36 UOC of the following courses. A Free Elective is any course offered either within
+      or outside UNSW Arts, Design and Architecture into which you can enrol.
+    note: Cap 36 + 12, as in 4825, for when GE is met by an external minor (interpretation).
+
+  - id: gen-ed-or-minor
+    kind: group
+    title: General Education
+    choose: 1
+    original: >-
+      You must complete 12 UOC of General Education courses. General Education courses for this program
+      are any that do not contain the subject area: ADAD, DART, DDES, MUSC. This requirement is met if
+      you complete an external major or minor.
+    children:
+      - id: gen-ed
+        kind: pool
+        role: gen_ed
+        title: General Education courses
+        uoc: 12
+        from: gened and not @fine_arts_ge_excluded_subjects
+      - id: external-minor-complete
+        kind: check
+        title: External minor completed instead of General Education
+        require: complete(external-minor)
+        note: >-
+          "External" read as a minor outside the GE-excluded subject areas (ADAD, DART, DDES, MUSC).
+          This makes DDES design minors internal but ARTHB2 and THSTC2 ("Fine Arts Minors") external;
+          the handbook does not define the term. Confirm with the Faculty.
+
+  - id: optional-minor
+    kind: group
+    title: Optional Minors
+    choose: { min: 0, max: 1 }
+    original: >-
+      If you are enrolled in the standalone program you may use your Free Elective courses to complete
+      one of the optional minors listed below. If you intend to take an optional minor you are encouraged
+      to declare the minor as soon as possible. Please note: courses completed as part of your
+      disciplinary component cannot be double counted towards your minor.
+    children:
+      - id: internal-minor
+        kind: spec
+        slot: minor
+        title: Minors in GE-excluded subject areas
+        options: [DARTC2, DARTE2, DARTG2, DARTH2, DDESB2, DDESC2, DDESD2, MUSCJ2]
+        counts_toward: [free-electives]
+        note: >-
+          Regrouped from the handbook's "Fine Arts Minors" (DARTE2, MUSCJ2, DARTG2, DARTH2, DARTC2) and
+          "Other Minors" (DDESB2, DDESC2, DDESD2). The handbook places no same-area restriction on the minor
+          beyond the no-double-counting note.
+      - id: external-minor
+        kind: spec
+        slot: minor
+        title: External minors
+        options: [ARTHB2, ASIAB2, ATSIC2, AUSTB2, CHINE2, CHINF2, CODEA2, COMDF2, COMMI2, CRWTA2, ENGLC2,
+                  ENVPE2, EUROC2, FILMB2, FRENF2, FRENG2, GEOGK2, GERSF2, GREKC2, HISTD2, IDESA2, INDOC2,
+                  ITALB2, JAPNF2, JAPNG2, KOREF2, KOREG2, LINGC2, MDIAO2, MDIAQ2, MDIAR2, MDIAT2, PHILE2,
+                  POLSG2, PSYCM2, SOCAE2, SOSSB2, SOSSC2, SOSSD2, SOSSH2, SPANI2, THSTC2, WOMSC2]
+        counts_toward: [free-electives]
+
+  - id: no-double-count-minor
+    kind: info
+    text: >-
+      Please note: courses completed as part of your disciplinary component cannot be double counted
+      towards your minor.
+    note: SCHEMA GAP (see 4825) — no way to declare an overlap forbidden; it evaluates `unknown`.
+  - id: progression
+    kind: info
+    text: Progression rules are in accordance with university policy.

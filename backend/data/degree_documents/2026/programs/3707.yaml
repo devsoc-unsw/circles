@@ -1,0 +1,141 @@
+# 3707 Bachelor of Engineering (Honours), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3707
+#   (curriculum structure 2026.07.028, page version 2026.09; fetched 2026-10-08 into .handbook-cache,
+#   transcribed 2026-10-10)
+# Differences from the 2027 example: the 0 UOC container is titled "Industrial Training" (2027:
+# "Engineering Professional Practice"), and the optional minor lists only ENGGA2 and ENGGF2 (2027 adds
+# AVIAF2).
+schema_version: "1.0"
+kind: program
+code: "3707"
+year: 2026
+title: Engineering (Honours)
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Engineering (Honours)]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3707
+  structure_version: "2026.07.028"
+  retrieved: 2026-10-08
+  status: complete
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 168 }
+    original: Students must complete 168 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: major
+        kind: spec
+        slot: honours
+        title: Majors
+        options: [AEROAH, BINFAH, BIOMMH, CEICAH, CEICDH, COMPBH, CVENAH, CVENBH, ELECAH, ELECCH,
+                  ENGGFH, GMATDH, MANFBH, MECHAH, MEREAH, MINEAH, MTRNBH, SENGAH, SOLAAH, SOLABH, TELEAH]
+        original: Students must complete one of the specialisations below.
+
+      - id: industrial-training
+        kind: core
+        title: Industrial Training
+        uoc: 0
+        courses: [ENGG4999]
+        original: Students must complete the following course.
+        note: >-
+          ENGG4999 is 0 UOC; it is satisfied by completing the course (60 days of approved Industrial
+          Training), not by UOC.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any
+    uoc: 12
+    overflow: true
+    original: Students must take 12 UOC of Free Electives
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    uoc: 12
+    from: >-
+      gened and not (
+        (faculty:ENG and not (ENGG0360 or GENE1500))
+        or ((CHEM**** or MATH**** or PHYS****) and not PHYS1160)
+      )
+    original: >-
+      Students must take 12 UOC of General Education courses. The following courses cannot count
+      towards this requirement: - Courses offered by the Faculty of Engineering (except ENGG0360 or
+      GENE1500) - Courses that start with CHEM, MATH, or PHYS (except PHYS1160)
+
+  - id: minor
+    kind: spec
+    slot: minor
+    title: Optional Minor
+    options: [ENGGA2, ENGGF2]
+    count: { min: 0, max: 1 }
+    uoc: 24
+    counts_toward: [free-electives, gen-ed]
+    original: >-
+      Students who choose to complete a minor must declare the minor before their final term of
+      study. Students should check requirements for the minor and in which Engineering (Honours)
+      specialisations it is available.
+    note: >-
+      counts_toward follows the 2027 example (a minor uses the FE/GE allowance); the 2026 handbook does
+      not state this in data. Per-specialisation availability is not published as data, so no
+      allowed_if is set.
+
+  - id: minor-declaration
+    kind: info
+    title: Minor declaration deadline
+    text: Students who choose to complete a minor must declare the minor before their final term of study.
+
+  - id: maturity-level-3
+    kind: maturity
+    title: Level 3 maturity
+    applies_to: level:3
+    require: uoc(42)
+    original: Students must have completed 42 UOC before taking any of the following courses. any level 3 course
+
+  - id: maturity-level-4
+    kind: maturity
+    title: Level 4 maturity
+    applies_to: level:4
+    require: uoc(102)
+    original: Students must have completed 102 UOC before taking any of the following courses. any level 4 course
+
+  - id: progression
+    kind: info
+    title: Progression requirements
+    text: >-
+      Students must make satisfactory progress while studying in the BE (Hons) program. Students must
+      show cause not to be excluded from the program if any of the following occur: Fail a core course
+      2 or more times; Fail more than half of the courses attempted, after completing 84 UOC or more of
+      the BE(Hons) major; Have an overall WAM less than 50.000 with 48 UOC or more of your BE(Hons)
+      remaining. Students must also satisfy UNSW progression requirements.
+
+  - id: surveying-recognition
+    kind: info
+    title: Surveying professional recognition
+    text: >-
+      The Surveying specialisation within the Bachelor of Engineering (Honours) program and related
+      double degree programs is recognised by the Board of Surveying and Spatial Information of New
+      South Wales. Students must complete GMAT4400 Land Management Project as part of the Surveying
+      specialisation requirements for recognition.
+
+classes:
+  # "The class is based on the candidate's Honours WAM and on the mark awarded for thesis." Honours WAM
+  # is defined on the BE(Hons) Program Rules webpage (not transcribed), so it is reported_wam. Thesis
+  # courses are read from the selected honours spec's `thesis` node (§4.1 convention); a spec without
+  # one makes grade() unknown (unresolved_path).
+  - name: Honours Class 1
+    require: reported_wam(80, honours_wam) and grade(65, in:major/thesis)
+  - name: Honours Class 2 Division 1
+    require: reported_wam(75, honours_wam) and grade(65, in:major/thesis)
+  - name: Honours Class 2 Division 2
+    require: reported_wam(65, honours_wam) and grade(65, in:major/thesis)
+
+notes:
+  - All students are required to complete ENGG4999 - 60 days of Industrial Training.

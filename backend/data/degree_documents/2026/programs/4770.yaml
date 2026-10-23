@@ -1,0 +1,79 @@
+# 4770 Science / Law double degree (BSc / LLB), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4770
+#   (curriculum structure 2026.03.189, accessed 2026-10-10)
+# Lane C transcription; code verified (the 4770 series has only 4770 published for 2026 among
+# 4770-4779; 4771-4779 return no program page). Built by composition (SCHEMA.md §8) from the
+# Disciplinary Components of 3970 Science (2026, existing example) and 4701 Law (2026, this lane).
+schema_version: "1.0"
+kind: program
+code: "4770"
+year: 2026
+title: Science / Law
+career: ugrd
+uoc: 240
+duration_years: 5
+awards: [Bachelor of Science, Bachelor of Laws]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4770
+  structure_version: "2026.03.189"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - >-
+      Inherits 4701's partial status (postgraduate-elective ratio rule, Nura Gili cohort rule).
+    - >-
+      The 3970 minors slot is kept but its counts_toward credit is removed, because 4770 has no Free
+      Elective or General Education pools for a minor to use (see component patch).
+
+components:
+  - id: sci
+    program: "3970"
+    title: Disciplinary Component - 3970 Science
+    uoc: { min: 96 }
+    include: [disciplinary]
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    patch:
+      - op: list_remove
+        target: major
+        field: options
+        items: [MATHV1]
+        note: The 4770 major list has 27 majors; MATHV1 (in the 3970 list) is not offered here.
+      - op: list_remove
+        target: second-major
+        field: options
+        items: [MATHV1]
+      - op: set
+        target: minors
+        fields:
+          counts_toward: []
+          note: >-
+            4770 lists no minors container, but the Majors description repeats "Students may also opt to
+            complete either a second major OR up to 2 minors" and the Double Counting rule refers to
+            minors, so the 3970 minor list is kept. No FE/GE exists in 4770, so there is no credit.
+      - op: set
+        target: max-level-1
+        fields:
+          scope: sci
+          note: >-
+            Re-scoped from `root` to the Science component: the 72 UOC Level 1 cap appears inside the
+            Science component and refers to GE/FE, which only exist in the BSc. Scoped at the 240 UOC
+            root it would count ~60 UOC of LAWS1xxx core.
+      - op: set
+        target: level-1-science
+        fields:
+          scope: sci
+  - id: law
+    program: "4701"
+    title: Disciplinary Component - 4701 Law
+    uoc: { min: 144 }
+    include: [disciplinary]
+    original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree.
+
+notes:
+  - >-
+    Students must complete 240 UOC. Bachelor of Science (96 UOC): Core Courses, an approved Bachelor of
+    Science Major, Science Elective Courses, Employability Experience Courses. Bachelor of Laws (144 UOC):
+    Law compulsory courses 96 UOC, Law Prescribed Elective 6 UOC, Law elective courses 42 UOC.
+  - Undergraduate double degree LLB students are not required to do General Education courses (4701).
+  - No overlap between the components is declared by the handbook (96 + 144 = 240), so no shares.

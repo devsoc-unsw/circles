@@ -1,0 +1,115 @@
+# Shared library for handbook year 2026: org codes, named course sets, program/spec groups.
+# Sources: org names from the handbook course/program pages (e.g.
+#   https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3970 "Science Electives" list),
+#   accessed 2026-10-08. Short org codes (ENG, SCI, BUS, CSE) are Circles-assigned identifiers;
+#   handbook_id would hold the handbook's opaque org sys_id once resolved (not done here).
+schema_version: "1.0"
+kind: library
+year: 2026
+provenance:
+  source: hand
+  authors: [circles-schema-draft]
+  status: partial
+  note: Illustrative subset. A generated library would list every faculty and school.
+
+faculties:
+  ENG: { name: Faculty of Engineering }
+  SCI: { name: Faculty of Science }
+  BUS: { name: UNSW Business School }
+  ADA: { name: "Faculty of Arts, Design & Architecture" }
+  LAW: { name: Faculty of Law & Justice }
+  MED: { name: Faculty of Medicine & Health }
+
+schools:
+  CSE: { name: School of Computer Science and Engineering, faculty: ENG }
+  MATHS: { name: School of Mathematics and Statistics, faculty: SCI }
+  # Handbook org sys_id from the 2026 CHEMA1 page (academic_org/school_detail); also one of the two
+  # orgs excluded by 3805's General Education rule.
+  CHEM: { name: School of Chemistry, faculty: SCI, handbook_id: 523a1d4f4f4d97404aa6eb4f0310c776 }
+  # Not yet used: 3632 and 3959 approximate "School of Medical Sciences" by subject patterns; switching
+  # them to school:SOMS changes the evaluated set and needs the catalogue's school data (SPOT-CHECK).
+  SOMS: { name: School of Medical Sciences, faculty: MED }
+
+sets:
+  # The 28 "any <subject> course" rules under 3970 "Science Electives" (2026), as subject patterns.
+  # "any Faculty of Science course" is the faculty atom.
+  science_electives: >-
+    faculty:SCI or FOOD**** or VISN**** or MATS**** or MSCI**** or DATA**** or GEOS**** or
+    BIOT**** or BIOP**** or MICR**** or CLIM**** or CHEM**** or PHAR**** or BIOS**** or
+    BIOC**** or ANAT**** or OPTM**** or BEES**** or SOMS**** or COMP**** or PHSL**** or
+    NEUR**** or AVIA**** or BABS**** or MATH**** or PHYS**** or PATH**** or PSYC****
+  # General Education courses (handbook cs_tags GE tag), excluding nothing; programs narrow it.
+  gen_ed_any: gened
+  # 2 UOC Vertically Integrated Project courses.
+  vip: ENGG2600 or ENGG3600 or ENGG4600
+
+  # --- Promoted from program/spec documents (SPOT-CHECK.md merge list, 2026-10-10). Each was diffed as a
+  # course set against every local copy it replaces; the local copies are removed (no shadowing, §6.4).
+  # Bachelor of Commerce (3502, 2026) and the BCom doubles 3764/3784.
+  commerce_ify: COMM1100 or COMM1110 or COMM1120 or COMM1140 or COMM1150 or COMM1170 or COMM1180 or COMM1190
+  business_wil: COMM2222 or COMM2233 or COMM2244 or COMM3020 or COMM3030 or COMM3060 or COMM3101 or COMM3202 or TABL3033
+  non_business_wil: CDEV3000 or CDEV3001 or CDEV3012 or CDEV3100 or CDEV3200 or CDEV3300
+  business_fys: >-
+    COMM3900 or MGMT3004 or TABL3033 or COMM2233 or COMM2244 or COMM3000 or COMM3030 or COMM3060
+    or COMM3090 or COMM3501 or COMM3020 or ACCT3583 or ACTL3192
+  non_business_fys: CDEV3000 or CDEV3300 or CDEV3500
+  # Business School programs' General Education (3502, 3543, 3586, 3979): any GE course not offered by the
+  # Business School, except GENL2021 and GENL2032.
+  business_gen_ed: gened and not (faculty:BUS or GENL2021 or GENL2032)
+  # CSE majors' "Computing Elective(s)" (COMPA1, COMPD1, COMPI1, COMPN1, COMPS1, COMPY1; not COMPJ1).
+  cse_computing_electives: COMP2041 or COMP2111 or @vip or COMP3*** or COMP4*** or COMP6*** or COMP9***
+  # 8543 Master of IT "Electives" list shared by COMPLS/COMPNS/COMPOS (and COMPXS plus COMP6420; COMPMS DKE).
+  mit_electives: >-
+    COMP4121 or COMP4128 or COMP4141 or COMP4161 or COMP4418 or COMP4511 or COMP6080 or COMP6131 or
+    COMP6441 or COMP6443 or COMP6445 or COMP6447 or COMP6448 or COMP6451 or COMP6452 or COMP6453 or
+    COMP6713 or COMP6714 or COMP6721 or COMP6733 or COMP6741 or COMP6752 or COMP6771 or COMP6841 or
+    COMP6843 or COMP6845 or COMP6991 or COMP9032 or COMP9044 or COMP9101 or COMP9102 or COMP9153 or
+    COMP9154 or COMP9164 or COMP9201 or COMP9211 or COMP9222 or COMP9242 or COMP9243 or COMP9283 or
+    COMP9312 or COMP9313 or COMP9315 or COMP9319 or COMP9321 or COMP9332 or COMP9333 or COMP9334 or
+    COMP9336 or COMP9337 or COMP9414 or COMP9415 or COMP9417 or COMP9418 or COMP9434 or COMP9444 or
+    COMP9447 or COMP9491 or COMP9511 or COMP9517 or COMP9727 or COMP9814 or COMP9920 or GSOE9210 or
+    GSOE9220 or MATH5836 or MATH5845 or MATH5855 or MATH5905 or MATH5960
+  # 3962 "at least 24 UOC of Level 1 Science" subject list (use with level:1). 3956's list omits BIOP/SOMS
+  # and stays local.
+  science_l1_subjects: >-
+    faculty:SCI or BIOP**** or COMP**** or FOOD**** or ANAT**** or NEUR**** or PATH**** or PHAR****
+    or PHSL**** or SOMS****
+  # 3409 Arts "Prescribed Electives" named courses.
+  arts_prescribed_electives: HUMS1005 or HUMS1006 or HUMS2006 or HUMS2007 or ARTS2050 or FADA3900 or FADA6700
+  # 4701 Juris Doctor/LLB (2026) lists, for Law duals.
+  law_core: >-
+    LAWS1021 or LAWS1022 or LAWS1052 or LAWS1055 or LAWS1061 or LAWS1075 or LAWS1091 or LAWS1141 or
+    LAWS1150 or LAWS1160 or LAWS1230 or LAWS2150 or LAWS2270 or LAWS2351 or LAWS2371 or LAWS2383 or
+    LAWS2385
+  law_prescribed_theory: LAWS2320 or LAWS2326 or LAWS2384 or LAWS2820
+  law_electives_ug: >-
+    LAWS1213 or LAWS1214 or LAWS3014 or LAWS3017 or LAWS3018 or LAWS3021 or LAWS3022 or LAWS3023 or
+    LAWS3025 or LAWS3028 or LAWS3040 or LAWS3046 or LAWS3047 or LAWS3057 or LAWS3060 or LAWS3064 or
+    LAWS3065 or LAWS3067 or LAWS3070 or LAWS3072 or LAWS3073 or LAWS3079 or LAWS3080 or LAWS3084 or
+    LAWS3086 or LAWS3087 or LAWS3102 or LAWS3105 or LAWS3110 or LAWS3115 or LAWS3123 or LAWS3125 or
+    LAWS3131 or LAWS3133 or LAWS3135 or LAWS3137 or LAWS3139 or LAWS3144 or LAWS3146 or LAWS3149 or
+    LAWS3150 or LAWS3155 or LAWS3157 or LAWS3159 or LAWS3167 or LAWS3170 or LAWS3181 or LAWS3182 or
+    LAWS3183 or LAWS3185 or LAWS3187 or LAWS3188 or LAWS3192 or LAWS3195 or LAWS3196 or LAWS3208 or
+    LAWS3211 or LAWS3212 or LAWS3216 or LAWS3221 or LAWS3222 or LAWS3231 or LAWS3240 or LAWS3248 or
+    LAWS3250 or LAWS3251 or LAWS3268 or LAWS3272 or LAWS3276 or LAWS3281 or LAWS3282 or LAWS3292 or
+    LAWS3301 or LAWS3302 or LAWS3303 or LAWS3304 or LAWS3305 or LAWS3309 or LAWS3314 or LAWS3316 or
+    LAWS3319 or LAWS3326 or LAWS3327 or LAWS3331 or LAWS3332 or LAWS3335 or LAWS3341 or LAWS3345 or
+    LAWS3346 or LAWS3348 or LAWS3354 or LAWS3361 or LAWS3381 or LAWS3382 or LAWS3383 or LAWS3384 or
+    LAWS3391 or LAWS3392 or LAWS3393 or LAWS3395 or LAWS3396 or LAWS3401 or LAWS3402 or LAWS3412 or
+    LAWS3413 or LAWS3423 or LAWS3427 or LAWS3434 or LAWS3441 or LAWS3442 or LAWS3445 or LAWS3478 or
+    LAWS3480 or LAWS3499 or LAWS3501 or LAWS3510 or LAWS3512 or LAWS3513 or LAWS3524 or LAWS3535 or
+    LAWS3541 or LAWS3549 or LAWS3555 or LAWS3560 or LAWS3589 or LAWS3623 or LAWS3670 or LAWS3671 or
+    LAWS3713 or LAWS3737 or LAWS3751 or LAWS3758 or LAWS3777 or LAWS3812 or LAWS3838 or LAWS3850 or
+    LAWS3851 or LAWS3852 or LAWS3853 or LAWS3854 or LAWS3855
+
+program_groups:
+  # Replaces title-keyword matching for "Bachelor of Commerce single or dual degree" (R6).
+  # Membership is hand-curated; the list here is illustrative, not exhaustive.
+  # 3764 removed (2026-10-10): it composes 3502, and program() already matches component programs (§5.1).
+  bcom: ["3502", "3155"]
+  # "CSE BE (Hons) programs" in COMP4951's prerequisite.
+  cse_be_hons: ["3707", "3785"]
+
+spec_groups:
+  # Specialisations administered by CSE inside BE (Hons). Used with spec(@cse_be_hons_specs).
+  cse_be_hons_specs: [COMPBH, SENGAH, BINFAH]

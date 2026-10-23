@@ -1,0 +1,58 @@
+# MUSCP1 Music (Bachelor of Fine Arts specialisation), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MUSCP1
+#   (curriculum structure 2026.01.050, accessed 2026-10-10)
+# Lane C transcription. Required by 4830. Shows nested sub-list minimums inside one 42 UOC pool.
+schema_version: "1.0"
+kind: specialisation
+code: MUSCP1
+year: 2026
+title: Music
+spec_kind: specialisation
+uoc: 96
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MUSCP1
+  structure_version: "2026.01.050"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  music_craft: MUSC2706 or MUSC2901 or MUSC2902 or MUSC2903
+  musicology: >-
+    MUSC2001 or MUSC2002 or MUSC2113 or MUSC2115 or MUSC2117 or MUSC2119 or MUSC2803 or MUSC2804
+    or MUSC2905 or MUSC3104 or MUSC3105 or MUSC3162 or MUSC3302 or MUSC3802 or MUSC3808 or MUSC4101
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 36
+    courses: [MUSC1604, MUSC1801, MUSC1802, MUSC1803, MUSC1807, MUSC1901]
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 12
+    courses: [MUSC1808, MUSC2116]
+    note: Handbook discrepancy — MUSC1808 (Level 1 code) is in "Level 2 Core Courses".
+  - id: capstone
+    kind: core
+    title: Level 3 Music Capstone
+    uoc: 6
+    courses: [MUSC4102]
+    note: Handbook discrepancy — the "Level 3" capstone is MUSC4102 (Level 4 code).
+
+  - id: prescribed-electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: 42
+    from: "@music_craft or @musicology"
+    quotas:
+      - from: "@music_craft"
+        uoc: { min: 18, max: 18 }
+        original: You must take 18 UOC of credit of the following courses, including at least 6 UOC from MUSC2901, MUSC2902, or MUSC2903.
+      - { from: MUSC2901 or MUSC2902 or MUSC2903, uoc: { min: 6 } }
+      - from: "@musicology"
+        uoc: { min: 24 }
+        original: "You must take at least 24 UOC of the following courses. Note: Some Musicology courses may not be offered every year."
+    original: You must take 42 UOC of the following Craft and Musicology courses.
+    note: Craft is read as exactly 18 UOC (18 + at least 24 = 42).

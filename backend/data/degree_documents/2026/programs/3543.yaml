@@ -1,0 +1,219 @@
+# 3543 Bachelor of Economics, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3543
+#   (curriculum structure 2026.04.122, accessed 2026-10-09; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: program
+code: "3543"
+year: 2026
+title: Economics
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Economics]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3543
+  structure_version: "2026.04.122"
+  retrieved: 2026-10-09
+  status: complete
+  warnings:
+    - >-
+      Economics Electives: the structured sub-container "Level 3 Economics course" has max 6 UOC, which
+      contradicts the description "at least 18 UOC of Level 3 Economics courses". The description is
+      followed (Level 3 quota min 18, ACTL/ACCT options counting as Level 3 substitutes).
+    - >-
+      "Optional Non-Economics Majors or Minors" gives no maximum number; written as count {min: 0}.
+
+sets:
+  econ_l3: (ECON3*** or COMM3000)
+  actl_options: ACTL3191 or ACTL3192
+  acct_options: ACCT3583 or ACCT3563
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: introductory-business
+        kind: pool
+        title: Introductory Business Course
+        uoc: 6
+        from: [COMM1190, COMM1900, COMM1140, COMM1120]
+        original: Students must take 6 UOC of the following courses.
+
+      - id: economics-core
+        kind: core
+        title: Economics Core
+        uoc: 48
+        courses: [ECON2101, ECON2102, ECON1401, ECON1202, ECON1102, ECON2206, ECON1101, ECON1203]
+        original: Students must take 48 UOC of the following courses.
+
+      - id: economics-electives
+        kind: pool
+        title: Economics Electives
+        uoc: 30
+        from: "ECON2*** or @econ_l3 or @actl_options or @acct_options"
+        quotas:
+          - from: ECON2***
+            uoc: { max: 12 }
+            original: "Level 2 Economics course: any Level 2 Economics course (max 12 UOC)."
+          - from: "@econ_l3 or @actl_options or @acct_options"
+            uoc: { min: 18 }
+            original: >-
+              Students must take 30 UOC of the following courses with at least 18 UOC of Level 3 Economics
+              courses.
+            note: ACTL and ACCT options are "substitutes for Level 3 ECON courses", so they count here.
+          - from: "@actl_options"
+            uoc: { max: 6 }
+            original: >-
+              Actuarial Studies Options: Students can take a maximum of 6 UOC of the following courses as
+              substitutes for Level 3 ECON courses.
+          - from: "@acct_options"
+            uoc: { max: 12 }
+            original: >-
+              Accounting Options: Students can take up to 12 UOC of the following courses as substitutes for
+              Level 3 ECON courses.
+        original: >-
+          Students must take 30 UOC of the following courses with at least 18 UOC of Level 3 Economics
+          courses.
+      - id: accounting-options-eligibility
+        kind: check
+        title: Accounting Options only with an Accounting major
+        require: not uoc(1, in:economics-electives and @acct_options) or spec(ACCTA1)
+        original: >-
+          The below courses are only available to students in the standalone program who declare a
+          non-Economics major in Accounting.
+
+      - id: business-electives
+        kind: pool
+        title: UNSW Business School Electives
+        uoc: 12
+        from: faculty:BUS
+        original: Students must complete 12 UOC of UNSW Business School electives.
+        note: >-
+          Recommended (not required): a Work-Integrated Learning course, e.g. COMM2222, COMM2233, COMM2244,
+          COMM3020, COMM3030, COMM3101, or COMM3202.
+
+      - id: econ-major
+        kind: spec
+        slot: major
+        title: Optional Economics Major
+        options: [ECONT1, ECONU1, ECONV1]
+        count: { min: 0, max: 1 }
+        original: >-
+          Students may choose to complete one or two optional Economics majors. Students may use their
+          Economics Core and Economics Elective courses to complete these economics majors. Please note: If
+          you choose to study two optional Economics majors, you must choose another 6 courses (36 UOC) from
+          the second major that do not overlap with the first optional major.
+      - id: econ-second-major
+        kind: spec
+        slot: major
+        title: Optional second Economics Major
+        options: [ECONT1, ECONU1, ECONV1]
+        count: { min: 0, max: 1 }
+        distinct_from: [{ node: econ-major }]
+        note: >-
+          "One or two" majors split into two optional slots so the overlap allowance can be written as a
+          share (at most 12 UOC = 48 - 36 between the two majors).
+
+      - id: level-3-econ-maturity
+        kind: maturity
+        applies_to: ECON3***
+        require: cores(ECON1***)
+        original: >-
+          Students must have completed all Level 1 ECON courses prescribed in the degree before taking any
+          Level 3 ECON courses.
+
+  # Placed at the root (as 3502's minor) so a non-Economics spec uses elective space, not the 96 UOC
+  # Disciplinary Component.
+  - id: other-specs
+    kind: spec
+    slot: any
+    title: Optional Non-Economics Majors or Minors
+    options: [ACCTA1, ACCTA2, ASIAB2, ATSIC2, AUSTB2, CHINE2, CHINF2, COMDE2, COMMG1, COMMG2, COMMI1, COMMI2,
+              COMMJ1, COMMJ2, ECONO1, ECONO2, ENVPE2, EUROC2, FINSA1, FINSA2, FINSR1, FINSR2, FRENF2, FRENG2,
+              GERSF2, HISTD2, IBUSA1, IBUSA2, INFSA1, INFSA2, INFSG1, INFSG2, JAPNF2, JAPNG2, KOREF2, KOREG2,
+              MARKA1, MARKA2, MARKD1, MARKD2, MATHC2, MATHD2, MGMTA2, MGMTH1, MGMTH2, MGMTJ1, MGMTJ2, POLSG2,
+              PSYCM2, SOCAE2, SPANI2, TABLA2, TABLC1]
+    count: { min: 0 }
+    counts_toward: [business-electives, free-electives, gen-ed]
+    original: >-
+      Students may use their electives to complete optional majors or minors either from the list of
+      approved Business majors/minors or from the following list of approved minors in other Faculties.
+      Students completing the degree as a standalone program may also choose to complete optional majors and
+      minors from outside Economics by using their business electives, free electives and / or general
+      education electives as appropriate.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: { max: 36 }
+    overflow: true
+    original: >-
+      Students may complete up to a maximum of 36 UOC of Free Electives. Students may instead use their
+      Free Electives to complete an optional second major/minor. Note: GEN# courses cannot towards this
+      requirement.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: "@business_gen_ed"
+    uoc: 12
+    original: >-
+      Students must complete 12 UOC of General Education. The following courses cannot count towards this
+      requirement: - Courses offered by the UNSW Business School - GENL2021 An Introduction to the
+      Australian Legal System - GENL2032 Cyberspace Law
+  - id: gen-ed-maturity
+    kind: maturity
+    applies_to: in:gen-ed
+    require: uoc(48)
+    original: Students must complete 48 UOC before taking any General Education course
+
+  - id: business-minimum
+    kind: limit
+    title: Minimum Business School UOC
+    from: faculty:BUS
+    uoc: { min: 96 }
+    scope: root
+    original: Students must complete a minimum of 96 UOC of courses from the UNSW Business School.
+
+  - id: max-level-1
+    kind: limit
+    title: Maximum Level 1 UOC
+    from: level:1 or GEN*****
+    uoc: { max: 72 }
+    scope: root
+    original: >-
+      Students may take a maximum of 72 UOC of Level 1 courses, including any GEN# courses (irrespective of
+      their level).
+
+  - id: economics-honours
+    kind: info
+    text: >-
+      High performing students can complete an additional Honours year. For students considering Honours,
+      it is recommended to take 3202 Mathematical Economics. Please, refer to Economics (Honours) Program
+      for more information.
+
+shares:
+  # "Courses for the major are taken once but also meet core and elective course rules where listed."
+  - between: [economics-core, econ-major]
+    original: >-
+      Students may choose to use their Economics core and elective courses to complete an optional Economics
+      major. Courses for the major are taken once but also meet core and elective course rules where listed.
+  - between: [economics-electives, econ-major]
+  - between: [economics-core, econ-second-major]
+  - between: [economics-electives, econ-second-major]
+  - between: [econ-major, econ-second-major]
+    max_uoc: 12
+    original: >-
+      If you choose to study two optional Economics majors, you must choose another 6 courses (36 UOC) from
+      the second major that do not overlap with the first optional major.
+
+notes:
+  - "For single and related double degrees please see Progression Plan."
+  - Progression rules are in accordance with university policy.

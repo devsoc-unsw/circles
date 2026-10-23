@@ -1,0 +1,69 @@
+# FINSA1 Finance (Commerce major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/FINSA1
+#   (curriculum structure 2026.06.023, accessed 2026-10-08)
+schema_version: "1.0"
+kind: specialisation
+code: FINSA1
+year: 2026
+title: Finance
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/FINSA1
+  structure_version: "2026.06.023"
+  retrieved: 2026-10-08
+  status: complete
+
+sets:
+  fintech: FINS3645 or FINS3646 or FINS3647 or FINS3648 or FINS3657
+  wil_fys: >-
+    ACCT3583 or ACTL3192 or COMM2222 or COMM2233 or COMM2244 or COMM3000 or COMM3020 or COMM3030
+    or COMM3060 or COMM3101 or COMM3202 or COMM3900 or MGMT3004
+  finance_electives: >-
+    FINS3626 or FINS3630 or FINS3631 or FINS3633 or FINS3635 or FINS3636 or FINS3637 or FINS3640
+    or FINS3641 or FINS3644 or FINS3650 or FINS3655 or FINS3666 or ACCT3563 or FINS2622 or FINS2643
+    or FINS3610 or FINS3611 or FINS3612 or FINS3614 or FINS3623 or FINS3625
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 30
+    courses: [COMM1180, FINS2615, FINS2618, FINS2624, FINS3616]
+    original: >-
+      Students must take 30 UOC of the following courses. Students in 3543 Bachelor of Economics
+      should take COMM1140 and ECON1102 instead of COMM1180.
+
+  - id: electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: 18
+    from: "@finance_electives or @fintech or @wil_fys"
+    quotas:
+      - from: "@fintech"
+        count: { max: 1 }
+        original: Students may only count ONE Financial Technology course (FINS3645, FINS3646, FINS3647 or FINS3648) towards their major in Finance.
+      - from: ACCT3563 or @wil_fys
+        count: { max: 1 }
+        original: Students may count ONE (6 UOC) of ACCT3563 or any Work Integrated Learning or any Final Year Synthesis course towards their major in Finance.
+      - from: FINS3***
+        count: { min: 2 }
+        original: At least two (2) of the elective courses must be at level 3 (i.e. FINS3XXX).
+
+substitutions:
+  - replace: COMM1180
+    with: COMM1140 and ECON1102
+    when: program(3543)
+    scope: core
+    original: Students in 3543 Bachelor of Economics should take COMM1140 and ECON1102 instead of COMM1180.
+
+shares:
+  - between: [electives, spec:ACCTA1]
+    courses: ACCT3563
+    original: Students with majors in Accounting and Finance may count this course towards the Finance major AND the Accounting major.
+
+notes:
+  - >-
+    Students interested in pursuing the CFA examinations will find FINS2643, FINS3635, FINS3640 and
+    FINS3641 very helpful.

@@ -1,0 +1,69 @@
+# MGMTH1 Human Resource Management (Commerce major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MGMTH1
+#   (curriculum structure 2026.03.026, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+# Substitute for the requested "MGMTA1", which does not exist in 2026 (handbook returns no page; MGMTA2 is a
+# minor). MGMTH1 is the Management-school major in 3502's option list.
+schema_version: "1.0"
+kind: specialisation
+code: MGMTH1
+year: 2026
+title: Human Resource Management
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MGMTH1
+  structure_version: "2026.03.026"
+  retrieved: 2026-10-10
+  status: complete
+  warnings:
+    - >-
+      Prescribed Electives: structured data gives exactly 18 UOC, the description "12-18 UOC of electives
+      depending on whether both MGMT3724 and MGMT3730 are taken". The description is followed.
+
+sets:
+  mgmth_wil_fys: >-
+    COMM3030 or COMM3060 or MGMT3004 or ACTL3192 or COMM2222 or COMM2233 or COMM3900 or COMM2244 or
+    COMM3020 or COMM3101 or COMM3202
+
+requirements:
+  - id: core-comm
+    kind: core
+    title: Core Course (COMM)
+    uoc: 6
+    courses: [COMM1170 or COMM1900 or COMM1100]
+    original: Students must take 6 UOC from the following courses.
+
+  - id: core-mgmt
+    kind: core
+    title: Core Courses (MGMT)
+    uoc: 18
+    courses: [MGMT3701, MGMT2004, MGMT2718]
+    original: Students must take 18 UOC of the following courses.
+
+  - id: elective-core
+    kind: pool
+    title: Elective Core Course (MGMT)
+    uoc: { min: 6, max: 12 }
+    from: [MGMT3724, MGMT3730]
+    priority: 10
+    original: Students must take a minimum of 6 UOC from the following courses.
+
+  - id: electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: { min: 12, max: 18 }
+    from: >-
+      MGMT2705 or MGMT2725 or MGMT3729 or MGMT2005 or MGMT3720 or MGMT3728 or MGMT3702 or MGMT2002 or
+      MGMT3721 or @mgmth_wil_fys
+    quotas:
+      - from: "@mgmth_wil_fys"
+        count: { max: 1 }
+        original: >-
+          any one of the following: For students in the Bachelor of Commerce degree these courses may
+          satisfy the Work Integrated Learning and/or Final Year Synthesis requirements of your degree.
+    priority: 20
+    original: >-
+      Students must take 12-18 UOC of electives depending on whether both MGMT3724 and MGMT3730 are taken
+      as elective core courses.
+    note: The spec's 48 UOC total makes elective-core + electives = 24 UOC.

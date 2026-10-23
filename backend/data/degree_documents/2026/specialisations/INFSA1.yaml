@@ -1,0 +1,90 @@
+# INFSA1 Information Systems (Commerce major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/INFSA1
+#   (curriculum structure 2026.03.002, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: INFSA1
+year: 2026
+title: Information Systems
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/INFSA1
+  structure_version: "2026.03.002"
+  retrieved: 2026-10-10
+  status: complete
+  warnings:
+    - >-
+      "Students taking Actuarial degrees" is conditioned on program(3586) or manual(...), because the
+      Actuarial double-degree codes were not verified.
+
+sets:
+  infs_electives: >-
+    ACCT3563 or COMM3614 or INFS1701 or INFS2604 or INFS2608 or INFS2631 or INFS2701 or INFS2702 or
+    INFS2822 or INFS3020 or INFS3300 or INFS3603 or INFS3700 or INFS3701 or INFS3703 or INFS3822 or
+    INFS3830 or INFS3873
+  infs_wil_fys: >-
+    COMM2222 or COMM2233 or COMM2244 or COMM3020 or COMM3030 or COMM3060 or COMM3101 or COMM3202 or
+    COMM3900
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 30
+    courses: [COMM1190, INFS1602, INFS1603, INFS2603, INFS3604]
+    original: >-
+      Students must take 30 UOC of the following courses. Students taking Actuarial degrees should complete
+      MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190.
+
+  - id: electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: 18
+    from: "@infs_electives or @infs_wil_fys"
+    quotas:
+      - from: INFS3***
+        count: { min: 2 }
+        original: >-
+          At least two (2) of these elective courses must be at level 3 (i.e. INFS3XXX). This is regardless
+          of whether you are doing a single major or taking Information Systems as a second major.
+      - from: ACCT3563 or @infs_wil_fys
+        count: { max: 1 }
+        original: >-
+          Students may count ONE (6 UOC) of ACCT3563, or any Work Integrated Learning or any Final Year
+          Synthesis course towards their major in Information Systems.
+    original: Students must take 18 UOC of the following courses.
+    note: Handbook cp=18 with no maximum; the description's "18 UOC" is used as exact.
+
+  - id: course-combination-notes
+    kind: info
+    text: >-
+      Students taking a combination of majors and/or minors that require both COMM2822 or INFS1603 and
+      COMP3311 as core courses, should take only COMP3311, and replace COMM2822/INFS1603 with an additional
+      major or minor elective. Students taking a combination of majors and/or minors that require COMP2511
+      as a core course should not take INFS2822. Students pursuing a double major in Business Analytics and
+      Information Systems can complete either INFS1603 or COMM2822 as the core course and fulfill the major
+      UOC requirement by completing an additional prescribed elective for the major. Students who take both
+      COMP9313 and COMP9315 as part of their Computer Science degree should not take INFS2608.
+
+substitutions:
+  - replace: COMM1190
+    with: MATH1151 or MATH1251
+    scope: core
+    when: program(3586) or manual("Enrolled in an Actuarial Studies double degree")
+    original: >-
+      Students taking Actuarial degrees should complete MATH1151 or MATH1251 instead of COMM1190. All other
+      students should complete COMM1190.
+
+shares:
+  - between: [electives, spec:ACCTA1]
+    courses: ACCT3563
+    original: >-
+      Students with majors in Accounting and Information Systems may count this course towards the
+      Information Systems major AND the Accounting major.
+
+notes:
+  - >-
+    SAS Certificate in Business Analytics and SAS Academic Digital Badge (not a major requirement): any four
+    of INFS2608, INFS3603, INFS3822, INFS3830, INFS3873 completed at UNSW (RPL does not count).

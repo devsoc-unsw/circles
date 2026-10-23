@@ -1,0 +1,161 @@
+# 3959 Bachelor of Data Science and Decisions, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3959
+#   (curriculum structure 2026.02.028; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: program
+code: "3959"
+year: 2026
+title: Data Science and Decisions
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Data Science and Decisions]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3959
+  structure_version: "2026.02.028"
+  retrieved: 2026-10-09
+  status: partial
+  warnings:
+    - >-
+      General Education exclusion "Any course defined as a Science course (see Table 1)" refers to a
+      table that is not in the structured data; only the explicit "Excluded General Education Courses"
+      list is encoded.
+    - >-
+      "any course offered by School of Medical Sciences" is approximated by subject patterns (ANAT,
+      PATH, PHAR, PHSL, NEUR, SOMS) because the 2026 library has no school code for it.
+
+sets:
+  # "Excluded General Education Courses" (limit rule in the handbook structure).
+  dsd_ge_excluded: >-
+    faculty:SCI or faculty:ENG or faculty:BUS or GENC**** or GENS**** or GENE**** or FOOD****
+    or COMP**** or ANAT**** or PATH**** or PHAR**** or PHSL**** or NEUR**** or SOMS****
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 120 }
+    original: Students must complete 120 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: major
+        kind: spec
+        slot: major
+        title: Majors
+        options: [COMPZ1, ECONL1, MATHE1]
+        original: >-
+          Students must complete only one of the following majors. Each major is 66-72 UoC. 18-24 UoC
+          of program core courses are double-counted towards your major and the remaining 48 UoC are
+          specific to your major.
+
+      - id: level-1-core
+        kind: core
+        title: Level 1 Core Courses
+        uoc: 36
+        courses:
+          - COMP1511
+          - COMP2521
+          - DATA1001
+          - ECON1101
+          - MATH1131 or MATH1141
+          - MATH1231 or MATH1241
+        original: Students must take 36 UOC of the following courses.
+
+      - id: level-2-core
+        kind: core
+        title: Level 2 Core Courses
+        uoc: 18
+        courses:
+          - ECON2112
+          - MATH2501 or MATH2601
+          - MATH2801 or MATH2901
+        original: Students must take 18 UOC of the following courses.
+
+      - id: level-3-core
+        kind: core
+        title: Level 3 Core Courses
+        uoc: 18
+        courses: [COMP3311, DATA3001, ECON3203]
+        original: Students must take 18 UOC of the following courses.
+
+      - id: max-level-1
+        kind: limit
+        title: Maximum Level 1 UOC
+        from: level:1
+        uoc: { max: 72 }
+        scope: root
+        original: >-
+          Students may complete up to a maximum of 72 UOC of Level 1 courses (including General
+          Education courses). any level 1 course
+        note: >-
+          The handbook places this rule inside the Disciplinary Component but its wording (including
+          General Education) makes it program-wide, so scope is root.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: 12
+    overflow: true
+    original: Students must take 12 UOC of the following courses. any course
+    note: >-
+      "GEN# courses cannot count towards the free elective component" (Course Information Rule) is
+      folded into the selector.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: gened and not @dsd_ge_excluded
+    uoc: 12
+    original: >-
+      Students must take 12 UOC of the following courses. Any course defined as a Science course (see
+      Table 1) cannot be taken as General Education (GE). Any exceptions to these rules must be
+      approved by the Associate Dean (Academic Programs) or nominee.
+
+  - id: excluded-gen-ed
+    kind: info
+    title: Excluded General Education Courses
+    text: >-
+      Students may not undertake any Science, Engineering or Business courses towards their General
+      Education requirement. any course offered by Faculty of Science; any course offered by Faculty
+      of Engineering; any course offered by UNSW Business School; any General Education - Faculty of
+      Business (GENC) course; any General Education - Faculty of Science (GENS) course; any General
+      Education - Faculty of Engineering (GENE) course; any Food Technology (FOOD) course; any Computer
+      Science (COMP) course; any course offered by School of Medical Sciences.
+    note: Encoded in the gen-ed selector via @dsd_ge_excluded; kept for display. "Table 1" is not encoded.
+
+  - id: course-information-rule
+    kind: info
+    title: Course Information Rule
+    text: >-
+      GEN# courses cannot count towards the free elective component, or towards science core courses
+      or science electives in the program. Any exceptions to these rules must be approved by the
+      Associate Dean (Academic Programs) or nominee.
+
+  - id: maturity-level-2
+    kind: maturity
+    title: Level 2 maturity
+    applies_to: level:2
+    require: uoc(30)
+    original: Students must have completed 30 UOC before taking any level 2 course
+
+  - id: maturity-level-3
+    kind: maturity
+    title: Level 3 maturity
+    applies_to: level:3
+    require: uoc(72)
+    original: Students must have completed 72 UOC before taking any level 3 course
+
+shares:
+  # "18-24 UoC of program core courses are double-counted towards your major". No per-rule budget is
+  # set: the 18-24 UOC range is a description of the majors, not a cap the handbook asks to enforce.
+  - between: [level-1-core, major]
+    original: 18-24 UoC of program core courses are double-counted towards your major
+  - between: [level-2-core, major]
+  - between: [level-3-core, major]
+
+notes:
+  - Progression rules are in accordance with university policy.
+  - Award of Pass with Distinction requires a WAM of at least 75 (university-wide rule; not modelled as a class).

@@ -1,0 +1,83 @@
+# 3778 Bachelor of Computer Science, handbook year 2023
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2023/3778
+#   (curriculum structure 2023.02.001, accessed 2026-10-08)
+# Compare with ../../2026/programs/3778.yaml. Differences from 2023 to 2026: COMPE1 dropped from majors;
+# "Maximum Level 1 Electives UOC" limit removed; GE "encouraged to complete 48 UOC first" note removed.
+schema_version: "1.0"
+kind: program
+code: "3778"
+year: 2023
+title: Computer Science
+career: ugrd
+uoc: 144
+duration_years: 3
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2023/3778
+  structure_version: "2023.02.001"
+  retrieved: 2026-10-08
+  status: complete
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    children:
+      - id: major
+        kind: spec
+        slot: major
+        title: Majors
+        options: [COMPA1, COMPD1, COMPE1, COMPI1, COMPJ1, COMPN1, COMPS1, COMPY1]
+        default: COMPA1
+        original: COMPA1 is the default stream, and will be used if no other stream is selected.
+
+      - id: max-level-1
+        kind: limit
+        title: Maximum Level 1 Electives UOC
+        from: level:1
+        uoc: { max: 60 }
+        scope: root
+        severity: warning
+        original: Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course
+        note: >-
+          Transcribed literally ("any level 1 course", 60 UOC program-wide) and reported as a warning
+          until CSE confirms the scope (§13 Q8). The container title says "Electives", which suggests
+          excluding level 1 courses counted in the major, but `level:1 and not in:major` can never
+          exceed 60 in a 144 UOC plan (outside the major there are only 36 FE and 12 GE, and a minor
+          uses the FE), so that reading would make the rule vacuous (REVIEW-2 N3).
+
+  - id: minor
+    kind: spec
+    slot: minor
+    title: Optional Minor
+    options: [ACCTA2, FINSA2, INFSA2, MARKA2, MATHC2, PSYCM2]
+    count: { min: 0, max: 1 }
+    counts_toward: [free-electives]
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any
+    uoc: 36
+    overflow: true
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: gened and not (MATH**** or DATA****)
+    uoc: 12
+    original: >-
+      Students must take 12 UOC of any General Education course. NOTE: Students are encouraged to
+      complete 48 UOC before taking any General Education course. MATH and DATA courses do not meet
+      the requirements of General Education for this program.
+
+  - id: gen-ed-maturity
+    kind: maturity
+    severity: warning
+    title: Recommended GE maturity
+    applies_to: in:gen-ed
+    require: uoc(48)
+    note: '"Encouraged", so a warning rather than an error.'
