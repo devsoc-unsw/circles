@@ -36,6 +36,11 @@ All 10 fixtures pass as written, on their first execution. No fixture or spec te
     groups), not to these document totals. An explicit `{min, max}` keeps its maximum (3959's
     `{min: 66, max: 72}`). Reading them as exact failed every plan that counted more than the total
     (e.g. a 3778 plan with 48 UOC of computing electives). SCHEMA.md §4.1 should say so.
+11. **Top-up pools (§7.4 steps 4 and 6).** "A pool with a `uoc.max` or `count.max`" means the
+    pool's own maximum. A quota maximum still limits what the pool takes but does not make it a
+    top-up pool. Reading quota maxima as pool maxima made COMPA1's computing electives (`{min: 30}`
+    with a 6 UOC VIP quota) take every COMP course, so a 3778 plan with 48 UOC of COMP electives
+    and 18 of other courses read free electives as 18 of 36 instead of 36.
 
 ## Loading and validation
 

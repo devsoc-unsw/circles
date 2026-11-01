@@ -199,13 +199,13 @@ export const allocate = (
       )
     );
   };
+  // Steps 4 and 6 top up "a pool with a uoc.max or count.max": the pool's own maximum. A quota's
+  // maximum (COMPA1's "at most 6 UOC of VIP") still limits what the pool takes, but does not make
+  // it a top-up pool, or a {min: 30} elective pool would take every eligible course and starve the
+  // free electives.
   const hasMax = (p: IRNode) => {
     const pool = p.pool as NonNullable<IRNode['pool']>;
-    return (
-      pool.uoc.max !== undefined ||
-      pool.count.max !== undefined ||
-      pool.quotas.some((q) => q.uoc.max !== undefined || q.count.max !== undefined)
-    );
+    return pool.uoc.max !== undefined || pool.count.max !== undefined;
   };
   const fitsMax = (p: IRNode, add: Inst[]) => {
     const pool = p.pool as NonNullable<IRNode['pool']>;

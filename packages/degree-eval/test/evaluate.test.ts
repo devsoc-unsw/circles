@@ -228,3 +228,39 @@ describe('program and specialisation totals', () => {
     expect(ev.nodes.get('major/TESTA1')?.reasons.map((r) => r.code)).toContain('above_max');
   });
 });
+
+describe('top-up (§7.4 step 4)', () => {
+  it('a quota maximum does not make a {min} pool take every course; the rest overflow', () => {
+    const bundle = bundleOf(
+      doc({
+        kind: 'program',
+        code: '9000',
+        title: 'Electives',
+        uoc: 24,
+        requirements: [
+          {
+            id: 'electives',
+            kind: 'pool',
+            from: 'COMP****',
+            uoc: { min: 12 },
+            quotas: [{ from: 'COMP4***', uoc: { max: 6 } }]
+          },
+          { id: 'free', kind: 'pool', role: 'free_elective', from: 'any', overflow: true, uoc: 12 }
+        ]
+      })
+    );
+    // 24 UOC of COMP: 12 meet the electives' minimum, the other 12 are free electives
+    const ev = evaluate(
+      bundle,
+      plan([
+        ['COMP1511', 1],
+        ['COMP1521', 1],
+        ['COMP2521', 2],
+        ['COMP2511', 2]
+      ])
+    );
+    expect(ev.nodes.get('electives')).toMatchObject({ status: 'met', counted_uoc: 12 });
+    expect(ev.nodes.get('free')).toMatchObject({ status: 'met', counted_uoc: 12 });
+    expect(ev.root.status).toBe('met');
+  });
+});
