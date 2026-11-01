@@ -41,6 +41,10 @@ All 10 fixtures pass as written, on their first execution. No fixture or spec te
     top-up pool. Reading quota maxima as pool maxima made COMPA1's computing electives (`{min: 30}`
     with a 6 UOC VIP quota) take every COMP course, so a 3778 plan with 48 UOC of COMP electives
     and 18 of other courses read free electives as 18 of 36 instead of 36.
+12. **Summer terms (`timing consecutive`, §4.2).** "Summer terms may be skipped", but §7.1 numbers
+    terms without saying which are summer. `StudentState.summerTerms` (an extension) lists the
+    summer ordinals; `consecutive` allows only those between two matching terms. Without it every
+    term is standard, so VIP over T3 and the next T1 read as not consecutive.
 
 ## Loading and validation
 

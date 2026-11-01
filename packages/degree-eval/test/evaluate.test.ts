@@ -264,3 +264,48 @@ describe('top-up (§7.4 step 4)', () => {
     expect(ev.root.status).toBe('met');
   });
 });
+
+describe('timing consecutive (§4.2)', () => {
+  const bundle = () =>
+    bundleOf(
+      doc({
+        kind: 'program',
+        code: '9000',
+        title: 'Timing',
+        uoc: 6,
+        requirements: [
+          {
+            id: 'free',
+            kind: 'pool',
+            role: 'free_elective',
+            from: 'any',
+            overflow: true,
+            uoc: { min: 0 }
+          },
+          { id: 'vip', kind: 'timing', courses: 'ENGG2600', consecutive: true }
+        ]
+      })
+    );
+  const vip = (terms: number[], extra: Partial<StudentState> = {}): StudentState => ({
+    program: '9000',
+    year: 2026,
+    plan: terms.map((term, k) => ({
+      iid: `engg2600-${k}`,
+      code: 'ENGG2600',
+      term,
+      status: 'planned' as const
+    })),
+    ...extra
+  });
+  const status = (s: StudentState) => evaluate(bundle(), s).nodes.get('vip')?.status;
+  // terms 1, 5, 9 are summer: T3 (4) then T1 of the next year (6) skips only summer
+  it('skips summer terms between standard ones', () => {
+    expect(status(vip([3, 4, 6], { summerTerms: [1, 5, 9] }))).toBe('met');
+  });
+  it('a standard term in between breaks the run', () => {
+    expect(status(vip([2, 4], { summerTerms: [1, 5, 9] }))).toBe('unmet');
+  });
+  it('without summer terms, every term is standard', () => {
+    expect(status(vip([3, 4, 6]))).toBe('unmet');
+  });
+});

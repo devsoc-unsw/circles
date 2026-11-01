@@ -76,6 +76,9 @@ export interface StudentState {
   pins?: Record<string, string>; // iid → node path
   ignored?: string[];
   reported?: Record<string, number>;
+  // the plan's summer term ordinals: `timing consecutive` may skip them (§4.2). Not in SCHEMA.md
+  // §7.1, which numbers terms without saying which are summer; without it, every term is standard.
+  summerTerms?: number[];
 }
 
 export interface UocRange {

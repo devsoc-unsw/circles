@@ -390,8 +390,14 @@ export const computeStatuses = (
     if (n.raw.same_term === true && new Set(matching.map((i) => i.term)).size > 1)
       return fail('must all be taken in the same term');
     if (n.raw.consecutive === true) {
+      // consecutive standard terms: only summer terms may lie between two of them (§4.2)
+      const summer = new Set(w.student.summerTerms ?? []);
       const ts = [...new Set(matching.map((i) => i.term))].sort((x, y) => x - y);
-      if (ts.some((t, k) => k > 0 && t - (ts[k - 1] ?? t) !== 1))
+      const gap = (from: number, to: number) => {
+        for (let t = from + 1; t < to; t++) if (!summer.has(t)) return true;
+        return false;
+      };
+      if (ts.some((t, k) => k > 0 && gap(ts[k - 1] ?? t, t)))
         return fail('must be taken in consecutive terms');
     }
     if (Array.isArray(n.raw.order)) {

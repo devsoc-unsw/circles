@@ -6,7 +6,7 @@ import { CoursesResponse, PlannerResponse } from 'types/userResponse';
 import { describe, expect, it } from 'vitest';
 import { CourseDetails } from './catalogue';
 import { evaluateProgression } from './evaluateProgression';
-import { toPlan } from './student';
+import { toPlan, toStudent } from './student';
 
 // the m1-3778-mathc2 fixture's 144 UOC plan, by term
 const TERMS = [
@@ -65,6 +65,10 @@ describe('evaluateProgression', () => {
       year: 2028,
       status: 'planned'
     });
+  });
+
+  it('marks T0 of each year as a summer term', () => {
+    expect(toStudent('3778', planner, courses, {}).summerTerms).toEqual([1, 5, 9]);
   });
 
   it('counts each term of a multi-term course', () => {

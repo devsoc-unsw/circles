@@ -52,6 +52,8 @@ export const toStudent = (
     horizon: 'planned',
     selections,
     plan,
-    ignored: plan.filter((i) => courses[i.code]?.ignoreFromProgression).map((i) => i.iid)
+    ignored: plan.filter((i) => courses[i.code]?.ignoreFromProgression).map((i) => i.iid),
+    // T0 of each year, which `consecutive` timing rules may skip (VIP over T3 and the next T1)
+    summerTerms: planner.years.map((_, y) => y * TERMS.length + 1)
   };
 };
