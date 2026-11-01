@@ -187,3 +187,44 @@ describe('evaluate', () => {
     expect(ev.notCounted).toEqual([]);
   });
 });
+
+describe('program and specialisation totals', () => {
+  const program = (specUoc: unknown) => [
+    doc({
+      kind: 'program',
+      code: '9000',
+      title: 'Totals',
+      uoc: 12,
+      requirements: [
+        { id: 'major', kind: 'spec', slot: 'major', options: ['TESTA1'], default: 'TESTA1' },
+        { id: 'free', kind: 'pool', role: 'free_elective', from: 'any', overflow: true, uoc: 6 }
+      ]
+    }),
+    doc({
+      kind: 'specialisation',
+      code: 'TESTA1',
+      title: 'Test major',
+      spec_kind: 'major',
+      uoc: specUoc,
+      requirements: [{ id: 'core', kind: 'core', courses: ['COMP1511', 'COMP1521'] }]
+    })
+  ];
+  // 12 UOC in the major (6 more than its 6), 18 UOC in all (6 more than the program's 12)
+  const extra = plan([
+    ['COMP1511', 1],
+    ['COMP1521', 1],
+    ['ARTS1000', 2]
+  ]);
+
+  it('an integer total is a minimum: courses beyond it do not fail the degree', () => {
+    const ev = evaluate(bundleOf(...program(6)), extra);
+    expect(ev.nodes.get('major/TESTA1')).toMatchObject({ status: 'met', counted_uoc: 12 });
+    expect(ev.root).toMatchObject({ status: 'met', counted_uoc: 18, required_uoc: { min: 12 } });
+  });
+
+  it('a {min, max} total keeps its maximum', () => {
+    const ev = evaluate(bundleOf(...program({ min: 6, max: 6 })), extra);
+    expect(ev.nodes.get('major/TESTA1')?.status).toBe('unmet');
+    expect(ev.nodes.get('major/TESTA1')?.reasons.map((r) => r.code)).toContain('above_max');
+  });
+});

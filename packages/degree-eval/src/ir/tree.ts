@@ -123,6 +123,11 @@ export const toRange = (v: unknown): UocRange => {
   return {};
 };
 
+// A program's or specialisation's own `uoc` is its total: an integer is a minimum, not an exact
+// amount (SCHEMA.md §4.2 "counted UOC ≥ the spec's uoc", §7.6 "a UOC minimum m"), so courses beyond
+// it do not fail the degree. A {min, max} range keeps its maximum (3959's {min: 66, max: 72}).
+const toTotal = (v: unknown): UocRange => (typeof v === 'number' ? { min: v } : toRange(v));
+
 const NODE_KINDS = new Set([
   'group',
   'core',
@@ -267,7 +272,7 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
               });
             } else {
               const sub = make(`${node.path}/${code}`, code, 'subtree', spec.data, doc, node);
-              if (spec.data.uoc !== undefined) sub.uoc = toRange(spec.data.uoc);
+              if (spec.data.uoc !== undefined) sub.uoc = toTotal(spec.data.uoc);
               const ctx = ctxFor(spec, `${node.path}/${code}/`, `spec:${node.path}/${code}`, sub);
               sub.doc = ctx;
               node.children.push(sub);
@@ -283,7 +288,7 @@ export const buildTree = (bundle: Bundle, input: BuildInput): Tree | { error: st
   const rootDoc = ctxFor(program, '', `program:${program.code}`);
   const root = make('root', 'root', 'root', program.data, rootDoc);
   rootDoc.root = root;
-  if (program.data.uoc !== undefined) root.uoc = toRange(program.data.uoc);
+  if (program.data.uoc !== undefined) root.uoc = toTotal(program.data.uoc);
   rulesOf(rootDoc);
 
   // §8: each component becomes a group of the included (patched) nodes of its program

@@ -29,6 +29,13 @@ All 10 fixtures pass as written, on their first execution. No fixture or spec te
 9. **Structural reasons.** A group, spec or root carries the reasons of the children that decided
    its status (unmet ones, else unknown ones), so a reason like `overlap_undeclared` is visible at
    the spec node, as the fixtures expect.
+10. **Program and specialisation totals are minimums.** An integer `uoc` on a program or
+    specialisation document means "at least", so courses beyond it do not fail the degree: §4.2
+    checks a spec as "counted UOC ≥ the spec's uoc" and §7.6 describes the root's check as "a UOC
+    minimum m". §4.1's "an integer means exactly" is read as applying to node fields (pools, cores,
+    groups), not to these document totals. An explicit `{min, max}` keeps its maximum (3959's
+    `{min: 66, max: 72}`). Reading them as exact failed every plan that counted more than the total
+    (e.g. a 3778 plan with 48 UOC of computing electives). SCHEMA.md §4.1 should say so.
 
 ## Loading and validation
 
