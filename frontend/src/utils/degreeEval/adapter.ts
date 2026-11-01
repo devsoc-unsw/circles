@@ -46,10 +46,28 @@ export const describeStatus = (n: NodeResult): string => {
 const plural = (n: number, noun: string, rest: string) =>
   `${n} ${noun}${n === 1 ? '' : 's'} ${rest}`;
 
+// A program, spec or group total that is out of range: named "program total (138 of 144 UOC)", since
+// no single requirement under it explains the failure.
+const TOTAL_KINDS = new Set(['root', 'subtree', 'group', 'component']);
+const totalFails = (n: NodeResult) =>
+  TOTAL_KINDS.has(n.kind) &&
+  n.required_uoc !== undefined &&
+  (n.counted_uoc < (n.required_uoc.min ?? 0) || n.counted_uoc > (n.required_uoc.max ?? Infinity));
+const totalName = (n: NodeResult) => {
+  const name = n.kind === 'root' ? 'program' : n.kind === 'subtree' ? n.id : (n.title ?? n.id);
+  const { min, max } = n.required_uoc ?? {};
+  const amount =
+    n.counted_uoc > (max ?? Infinity)
+      ? `${n.counted_uoc} UOC, at most ${max}`
+      : `${n.counted_uoc} of ${min} UOC`;
+  return `${name} total (${amount})`;
+};
+
 // A requirement's name for the banner: its title, after the spec it belongs to (from its path, e.g.
 // major/COMPA1/core → "COMPA1 Core Courses"), so two specs' "Core Courses" read differently.
 const SPEC_CODE = /^[A-Z]{5}[0-9A-Z]$/;
 const nameOf = (n: NodeResult) => {
+  if (TOTAL_KINDS.has(n.kind)) return totalName(n);
   const spec = n.path
     .split('/')
     .filter((segment) => SPEC_CODE.test(segment))
@@ -66,9 +84,17 @@ const names = (ns: NodeResult[]) =>
     : ns.map(nameOf).join(', ');
 
 // One line for the banner: the verdict, the program total and the requirements still open, by name.
+// A failing total is named only when no open requirement inside it already explains it.
 const summarise = (ev: Evaluation): string => {
-  const leaves = [...ev.nodes.values()].filter((n) => LEAF_KINDS.has(n.kind) && !n.inactive);
-  const withStatus = (status: NodeResult['status']) => leaves.filter((n) => n.status === status);
+  const active = [...ev.nodes.values()].filter((n) => !n.inactive);
+  const leaves = active.filter((n) => LEAF_KINDS.has(n.kind) && n.status !== 'met');
+  const openInside = (path: string): boolean =>
+    (ev.nodes.get(path)?.children ?? []).some(
+      (child) => leaves.some((leaf) => leaf.path === child) || openInside(child)
+    );
+  const totals = active.filter((n) => totalFails(n) && !openInside(n.path));
+  const withStatus = (status: NodeResult['status']) =>
+    [...leaves, ...totals].filter((n) => n.status === status);
   const verdict = describeStatus({ ...ev.root, reasons: [] });
   const needed = ev.root.required_uoc?.min;
   const total = `${ev.root.counted_uoc}${needed === undefined ? '' : ` of ${needed}`} UOC counted`;

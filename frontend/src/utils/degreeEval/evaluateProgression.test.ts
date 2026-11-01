@@ -132,6 +132,70 @@ describe('evaluateProgression', () => {
     );
   });
 
+  it('names a failing total when no requirement inside it explains it', async () => {
+    const doc = (o: object) => ({
+      path: 'x.yaml',
+      origin: 'repo' as const,
+      text: JSON.stringify({
+        schema_version: '1.0',
+        year: 2026,
+        provenance: { source: 'hand' },
+        ...o
+      })
+    });
+    const files = [
+      {
+        ...doc({
+          kind: 'program',
+          code: '9000',
+          title: 'Totals',
+          uoc: 24,
+          requirements: [
+            { id: 'major', kind: 'spec', slot: 'major', options: ['TESTA1'], default: 'TESTA1' },
+            {
+              id: 'free',
+              kind: 'pool',
+              role: 'free_elective',
+              title: 'Free Electives',
+              from: 'any',
+              overflow: true,
+              uoc: { min: 0 }
+            }
+          ]
+        }),
+        path: 'programs/9000.yaml'
+      },
+      {
+        ...doc({
+          kind: 'specialisation',
+          code: 'TESTA1',
+          title: 'Test',
+          spec_kind: 'major',
+          uoc: { min: 6, max: 6 },
+          requirements: [
+            { id: 'core', kind: 'core', title: 'Core', courses: ['COMP1511', 'COMP1521'] }
+          ]
+        }),
+        path: 'specialisations/TESTA1.yaml'
+      }
+    ];
+    const two: PlannerResponse = {
+      ...planner,
+      years: [{ T0: [], T1: ['COMP1511', 'COMP1521'], T2: [], T3: [] }]
+    };
+    const r = await evaluateProgression(
+      createLocalClient(),
+      files,
+      { programCode: '9000', specs: [] },
+      two,
+      { COMP1511: courses.COMP1511, COMP1521: courses.COMP1521 }
+    );
+    // every requirement is met; the spec exceeds its maximum and the program is short
+    expect(r.summary).toBe(
+      'Not met (if the plan goes ahead). 12 of 24 UOC counted. 2 requirements not met: TESTA1 total (12 UOC, at most 6), program total (12 of 24 UOC)'
+    );
+  });
+
   it("uses the courses' details: gen-ed counts, equivalents meet core items", async () => {
     // DPST1091 in place of COMP1511 (its equivalent), and a course left in Unplanned
     const swap = (c: string) => (c === 'COMP1511' ? 'DPST1091' : c);
