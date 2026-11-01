@@ -14,37 +14,29 @@ const resultOf = (mark: Mark | undefined): Partial<PlanInstance> => {
   return { status: 'completed', outcome: mark === 'FL' ? 'fail' : 'pass', grade: mark };
 };
 
-// One instance per course per planned term, except a multi-term course: the planner repeats its
-// code in every term it spans, but it is one enrolment (one UOC total), so its terms collapse into
-// one instance in the last of them, when it completes. Terms are numbered across the whole plan
-// (four per year, summer first); `year` is the calendar year of that term, which picks the
-// catalogue and handbook year (§7.1).
+// One instance per course per planned term. A multi-term course (VIP ENGG2600: 2 UOC a term, 6 over
+// three terms) appears in every term it spans, and each occurrence counts its `uoc`: the backend
+// places it in that many terms and stores the UOC of one occurrence. Repeats get iids CODE#2, CODE#3.
+// Terms are numbered across the whole plan (four per year, summer first); `year` is the calendar
+// year of that term, which picks the catalogue and handbook year (§7.1).
 export const toPlan = (planner: PlannerResponse, courses: CoursesResponse): PlanInstance[] => {
-  const placed = planner.years.flatMap((year, y) =>
+  const seen = new Map<string, number>();
+  return planner.years.flatMap((year, y) =>
     TERMS.flatMap((term, t) =>
-      (year[term] ?? []).map((code) => ({
-        code,
-        term: y * TERMS.length + t + 1,
-        year: planner.startYear + y
-      }))
+      (year[term] ?? []).map((code): PlanInstance => {
+        const n = (seen.get(code) ?? 0) + 1;
+        seen.set(code, n);
+        return {
+          iid: n === 1 ? code : `${code}#${n}`,
+          code,
+          term: y * TERMS.length + t + 1,
+          year: planner.startYear + y,
+          status: 'planned',
+          ...resultOf(courses[code]?.mark)
+        };
+      })
     )
   );
-  const lastTerm = new Map(placed.map((p) => [p.code, p.term])); // later terms overwrite
-  const seen = new Map<string, number>();
-  return placed
-    .filter((p) => !courses[p.code]?.isMultiterm || lastTerm.get(p.code) === p.term)
-    .map(({ code, term, year }): PlanInstance => {
-      const n = (seen.get(code) ?? 0) + 1;
-      seen.set(code, n);
-      return {
-        iid: n === 1 ? code : `${code}#${n}`,
-        code,
-        term,
-        year,
-        status: 'planned',
-        ...resultOf(courses[code]?.mark)
-      };
-    });
 };
 
 export const toStudent = (

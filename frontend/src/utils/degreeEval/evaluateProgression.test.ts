@@ -67,18 +67,21 @@ describe('evaluateProgression', () => {
     });
   });
 
-  it('makes a multi-term course one instance, in its last term', () => {
+  it('counts each term of a multi-term course', () => {
+    // VIP: 2 UOC in each of three consecutive terms, 6 UOC in all
     const multi: PlannerResponse = {
       ...planner,
-      years: [{ T0: [], T1: ['CHEM4508', 'COMP1511'], T2: ['CHEM4508'], T3: [] }]
+      years: [{ T0: [], T1: ['ENGG2600', 'COMP1511'], T2: ['ENGG2600'], T3: ['ENGG2600'] }]
     };
     const plan = toPlan(multi, {
       COMP1511: courses.COMP1511,
-      CHEM4508: { ...courses.COMP1511, code: 'CHEM4508', uoc: 8, mark: null, isMultiterm: true }
+      ENGG2600: { ...courses.COMP1511, code: 'ENGG2600', uoc: 2, mark: null, isMultiterm: true }
     });
     expect(plan.map((i) => [i.iid, i.term])).toEqual([
+      ['ENGG2600', 2],
       ['COMP1511', 2],
-      ['CHEM4508', 3]
+      ['ENGG2600#2', 3],
+      ['ENGG2600#3', 4]
     ]);
   });
 
