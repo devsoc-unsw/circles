@@ -111,7 +111,24 @@ describe('evaluateProgression', () => {
     expect(r.notCounted.map((c) => c.courseCode)).toHaveLength(2);
     expect(r.status).not.toBe('met');
     expect(r.summary).toBe(
-      'Not met (if the plan goes ahead). 132 of 144 UOC counted. 1 requirement not met'
+      'Not met (if the plan goes ahead). 132 of 144 UOC counted. 1 requirement not met: General Education'
+    );
+  });
+
+  it('names the open requirements, with their spec, up to three', async () => {
+    const empty: PlannerResponse = {
+      ...planner,
+      years: planner.years.map(() => ({ T0: [], T1: [], T2: [], T3: [] }))
+    };
+    const r = await evaluateProgression(
+      createLocalClient(),
+      await loadExampleDocuments(),
+      { programCode: '3778', specs: ['COMPA1'] },
+      empty,
+      {}
+    );
+    expect(r.summary).toBe(
+      'Not met. 0 of 144 UOC counted. 4 requirements not met: COMPA1 Core Courses, COMPA1 Computing Electives, Free Electives and 1 more'
     );
   });
 

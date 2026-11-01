@@ -46,16 +46,37 @@ export const describeStatus = (n: NodeResult): string => {
 const plural = (n: number, noun: string, rest: string) =>
   `${n} ${noun}${n === 1 ? '' : 's'} ${rest}`;
 
-// One line for the banner: the verdict, the program total and how many requirements are open.
+// A requirement's name for the banner: its title, after the spec it belongs to (from its path, e.g.
+// major/COMPA1/core → "COMPA1 Core Courses"), so two specs' "Core Courses" read differently.
+const SPEC_CODE = /^[A-Z]{5}[0-9A-Z]$/;
+const nameOf = (n: NodeResult) => {
+  const spec = n.path
+    .split('/')
+    .filter((segment) => SPEC_CODE.test(segment))
+    .pop();
+  const name = n.title ?? n.id;
+  return spec && spec !== name ? `${spec} ${name}` : name;
+};
+
+// at most three names, then "and N more"
+const MAX_NAMED = 3;
+const names = (ns: NodeResult[]) =>
+  ns.length > MAX_NAMED
+    ? `${ns.slice(0, MAX_NAMED).map(nameOf).join(', ')} and ${ns.length - MAX_NAMED} more`
+    : ns.map(nameOf).join(', ');
+
+// One line for the banner: the verdict, the program total and the requirements still open, by name.
 const summarise = (ev: Evaluation): string => {
   const leaves = [...ev.nodes.values()].filter((n) => LEAF_KINDS.has(n.kind) && !n.inactive);
-  const count = (status: NodeResult['status']) => leaves.filter((n) => n.status === status).length;
+  const withStatus = (status: NodeResult['status']) => leaves.filter((n) => n.status === status);
   const verdict = describeStatus({ ...ev.root, reasons: [] });
   const needed = ev.root.required_uoc?.min;
   const total = `${ev.root.counted_uoc}${needed === undefined ? '' : ` of ${needed}`} UOC counted`;
+  const unmet = withStatus('unmet');
+  const unknown = withStatus('unknown');
   const open = [
-    count('unmet') ? plural(count('unmet'), 'requirement', 'not met') : '',
-    count('unknown') ? plural(count('unknown'), 'requirement', 'to check') : ''
+    unmet.length ? `${plural(unmet.length, 'requirement', 'not met')}: ${names(unmet)}` : '',
+    unknown.length ? `${plural(unknown.length, 'requirement', 'to check')}: ${names(unknown)}` : ''
   ].filter(Boolean);
   return [verdict, total, ...open].join('. ');
 };
