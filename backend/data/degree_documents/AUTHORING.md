@@ -3,7 +3,9 @@
 This folder holds the degree documents that Circles evaluates: one YAML file per program,
 specialisation, course-condition set, library and patch. The backend loads every file here into
 Mongo at startup and serves them unchanged from `GET /degrees/documents`. The browser evaluates them
-with `@circles/degree-eval`.
+with `@circles/degree-eval`. The app asks only for what one student needs
+(`?programCode=3778&specs=COMPA1&start_year=2026`). The backend follows each program's `extends`,
+`components` and spec-slot `default`s to decide what that is, so keep those accurate.
 
 This guide covers everything needed to write or generate a document. The full specification, with
 the evaluation algorithm, is `SCHEMA.md` in the circles-schema repository. Where the two differ,

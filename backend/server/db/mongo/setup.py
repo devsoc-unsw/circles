@@ -9,7 +9,9 @@ import hashlib
 import json
 import os
 import re
-from typing import Optional
+from typing import Any, Optional
+
+import yaml
 
 from server.config import ARCHIVED_DATA_PATH, DEGREE_DOCUMENTS_PATH, FINAL_DATA_PATH
 from data.config import ARCHIVED_YEARS
@@ -386,6 +388,44 @@ _DEGREE_DOCUMENT_PATHS = [
 ]
 
 
+def _spec_defaults(node: Any) -> list[str]:
+    """The `default` of every spec slot in a requirement tree"""
+    if isinstance(node, list):
+        return [code for child in node for code in _spec_defaults(child)]
+    if not isinstance(node, dict):
+        return []
+    own = [node["default"]] if node.get("kind") == "spec" and isinstance(node.get("default"), str) else []
+    return own + _spec_defaults(node.get("children", []))
+
+
+def _references(kind: str, text: str) -> dict:
+    """What a document points at, for GET /degrees/documents?programCode=...: the year it extends,
+    a program's component programs and spec defaults, and a patch's target. Not validation: a
+    document that does not parse here has no references (CI's validator reports it)."""
+    try:
+        data = yaml.safe_load(text)
+    except yaml.YAMLError:
+        return {}
+    if not isinstance(data, dict):
+        return {}
+
+    refs: dict[str, Any] = {}
+    extends = data.get("extends")
+    if isinstance(extends, dict) and isinstance(extends.get("year"), int):
+        refs["extends_year"] = extends["year"]
+    if kind == "program":
+        refs["components"] = [
+            {"program": str(c["program"]), "year": c.get("year") if isinstance(c.get("year"), int) else None}
+            for c in data.get("components") or []
+            if isinstance(c, dict) and "program" in c
+        ]
+        refs["spec_defaults"] = _spec_defaults(data.get("requirements") or [])
+    if kind == "patch" and isinstance(data.get("target"), dict):
+        refs["target_kind"] = data["target"].get("kind")
+        refs["target_code"] = str(data["target"]["code"]) if "code" in data["target"] else None
+    return refs
+
+
 def _degree_document(path: str, text: str) -> Optional[dict]:
     """The stored form of one degree document: its text as written, plus what its path says.
     None for a file at no known path."""
@@ -400,6 +440,7 @@ def _degree_document(path: str, text: str) -> Optional[dict]:
                 "year": int(year) if year else None,
                 "code": code,
                 "sha256": hashlib.sha256(text.encode("utf8")).hexdigest(),
+                "refs": _references(kind, text),
             }
     return None
 

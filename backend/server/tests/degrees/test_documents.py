@@ -51,3 +51,61 @@ def test_etag_is_the_version_and_revalidates():
 def test_gzipped_when_asked():
     x = requests.get(URL, headers={"Accept-Encoding": "gzip"})
     assert x.headers.get("Content-Encoding") == "gzip"
+
+
+def _paths(query):
+    x = requests.get(URL, params=query)
+    assert x.status_code == 200
+    return [doc["path"] for doc in x.json()["documents"]]
+
+
+def test_filter_by_program_specs_and_start_year():
+    assert _paths({"programCode": "3778", "specs": "COMPA1", "start_year": 2026}) == [
+        "2026/library.yaml",
+        "2026/programs/3778.yaml",
+        "2026/specialisations/COMPA1.yaml",
+    ]
+
+
+def test_filter_follows_extends_and_takes_specs_comma_separated():
+    # 3778 2027 extends 2026; MATHC2 has no 2027 document, so the nearest earlier year
+    assert _paths({"programCode": "3778", "specs": "COMPA1,MATHC2", "start_year": 2027}) == [
+        "2026/library.yaml",
+        "2026/programs/3778.yaml",
+        "2026/specialisations/COMPA1.yaml",
+        "2026/specialisations/MATHC2.yaml",
+        "2027/programs/3778.yaml",
+    ]
+
+
+def test_filter_includes_spec_defaults_and_falls_back_a_year():
+    # no 2025 document: the nearest earlier year (2023), and its default major COMPA1 at 2026
+    assert _paths({"programCode": "3778", "start_year": 2025}) == [
+        "2023/programs/3778.yaml",
+        "2026/library.yaml",
+        "2026/specialisations/COMPA1.yaml",
+    ]
+
+
+def test_filter_includes_component_programs():
+    paths = _paths([("programCode", "3785"), ("specs", "COMPBH"), ("specs", "COMPA1"), ("start_year", 2027)])
+    assert "2027/programs/3785.yaml" in paths
+    assert "2027/programs/3707.yaml" in paths
+    assert "2027/programs/3778.yaml" in paths
+    assert "2027/specialisations/COMPBH.yaml" in paths
+    # course conditions only serve course checks
+    assert not [p for p in paths if "/conditions/" in p]
+
+
+def test_filter_unknown_program_is_empty():
+    assert not _paths({"programCode": "9999", "start_year": 2026})
+
+
+def test_filter_needs_a_program():
+    assert requests.get(URL, params={"specs": "COMPA1"}).status_code == 400
+
+
+def test_filtered_etag_revalidates():
+    query = {"programCode": "3778", "specs": "COMPA1", "start_year": 2026}
+    version = requests.get(URL, params=query).json()["version"]
+    assert requests.get(URL, params=query, headers={"If-None-Match": f'"{version}"'}).status_code == 304

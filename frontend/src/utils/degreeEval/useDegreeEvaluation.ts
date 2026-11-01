@@ -8,7 +8,8 @@ import { evaluateProgression } from './evaluateProgression';
 
 // The progression evaluated in the browser from the degree documents (behind DEGREE_EVAL_ENABLED).
 // The query key is the student's state, so any planner change re-evaluates. The documents come
-// from the backend once per page load (GET /degrees/documents, revalidated by its ETag). Each course's details
+// from the backend once per program, specs and start year (GET /degrees/documents?programCode=…,
+// revalidated by its ETag). Each course's details
 // (gen-ed, faculty, school, equivalents) come from /courses/getCourse, shared with the rest of the
 // app's ['courses', code, 'info'] cache; a course whose details fail to load keeps only its UOC.
 const useDegreeEvaluation = (
@@ -21,9 +22,14 @@ const useDegreeEvaluation = (
   return useQuery({
     queryKey: ['degreeEval', degree, planner, courses],
     queryFn: async () => {
+      const filter = {
+        programCode: (degree as DegreeResponse).programCode,
+        specs: (degree as DegreeResponse).specs,
+        startYear: (planner as PlannerResponse).startYear
+      };
       const documents = queryClient.fetchQuery({
-        queryKey: ['degreeDocuments'],
-        queryFn: getDegreeDocuments,
+        queryKey: ['degreeDocuments', filter],
+        queryFn: () => getDegreeDocuments(filter),
         staleTime: Infinity
       });
       const codes = Object.keys(courses ?? {});
