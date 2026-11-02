@@ -75,7 +75,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/google.accounts": "0.0.14",
     "@types/jest": "30.0.0",
-    "@types/node": "24.13.3",
+    "@types/node": "26.6.6",
     "@types/react-beautiful-dnd": "13.1.8",
     "@types/react-dom": "18.3.7",
     "@types/react-helmet": "6.1.11",
