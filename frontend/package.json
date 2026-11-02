@@ -29,7 +29,7 @@
     "react-icons": "5.5.0",
     "react-liquid-gauge": "1.2.4",
     "react-redux": "9.2.0",
-    "react-router-dom": "6.22.3",
+    "react-router-dom": "7.18.5",
     "react-scroll": "1.9.3",
     "react-tooltip": "6.0.8",
     "redux": "5.0.1",
@@ -37,7 +37,7 @@
     "redux-thunk": "3.1.0",
     "styled-components": "6.1.19",
     "use-debounce": "10.0.5",
-    "zod": "3.25.67"
+    "zod": "4.6.7"
   },
   "scripts": {
     "start": "vite --port 3000 --host",
@@ -102,7 +102,7 @@
     "react-is": "18.3.1",
     "typescript": "6.0.3",
     "typescript-eslint": "8.71.0",
-    "vite": "^8.0.0",
+    "vite": "^8.3.5",
     "vite-plugin-checker": "0.9.3",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-svgr": "5.2.0",
@@ -124,6 +124,8 @@
     },
     "eslint-plugin-react": {
       "eslint": "$eslint"
-    }
+    },
+    "postcss": "^8.5.23",
+    "d3-color": "^3.1.0"
   }
 }

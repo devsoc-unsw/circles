@@ -1,6 +1,6 @@
 services:
   mongodb:
-    image: mongo:9.0.2
+    image: mongo:9.0.4
     container_name: circles-mongodb
     volumes:
       # Named volume to persist database
