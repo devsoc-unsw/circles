@@ -8,6 +8,6 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM caddy:2.10.0-alpine
+FROM caddy:2.11.9-alpine
 COPY ./Caddyfile /etc/caddy/Caddyfile
 COPY --from=builder /app/build /srv 
