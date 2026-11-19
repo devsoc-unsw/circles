@@ -1,0 +1,62 @@
+# POLSG1 Politics and International Relations (Arts major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/POLSG1
+#   (curriculum structure 2026.01.033, accessed 2026-10-10)
+# Lane C transcription. Chosen as one of four high-enrolment Arts majors (judgement call). Shows:
+# a program exclusion as allowed_if, and a "recommended" course.
+schema_version: "1.0"
+kind: specialisation
+code: POLSG1
+year: 2026
+title: Politics and International Relations
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/POLSG1
+  structure_version: "2026.01.033"
+  retrieved: 2026-10-10
+  status: complete
+
+allowed_if: not program(4053)
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 12
+    courses: [ARTS1810, ARTS1811]
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 6
+    courses: [ARTS2821]
+  - id: level-2-electives
+    kind: pool
+    title: Level 2 Prescribed Electives
+    uoc: 12
+    from: >-
+      ARTS2813 or ARTS2815 or ARTS2816 or ARTS2817 or ARTS2818 or ARTS2819 or ARTS2820 or ARTS2845
+      or ARTS2849 or ARTS2852 or SOSS2005
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 6
+    courses: [ARTS3810]
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Prescribed Electives
+    uoc: 12
+    from: >-
+      ARTS3783 or ARTS3812 or ARTS3814 or ARTS3818 or ARTS3819 or ARTS3820 or ARTS3821 or ARTS3822
+      or ARTS3823 or ARTS3850
+
+  - id: not-4053
+    kind: info
+    title: Arts/Education (Secondary) Students
+    text: The major in Politics and International Relations must not be taken as it is not an approved teaching specialisation.
+    note: Enforced by allowed_if (4053 also omits POLSG1 from its major list).
+
+notes:
+  - >-
+    Level 1 Recommended Elective: Students taking the Politics and International Relations major are
+    encouraged to take ARTS1846 as a Prescribed Elective or free elective.

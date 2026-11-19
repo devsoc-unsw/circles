@@ -1,0 +1,113 @@
+# SENGAH Software Engineering (honours specialisation in 3707), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/SENGAH
+#   (curriculum structure 2026.01.044; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: SENGAH
+year: 2026
+title: Software Engineering
+spec_kind: honours
+uoc: 168
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/SENGAH
+  structure_version: "2026.01.044"
+  retrieved: 2026-10-09
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 42
+    courses:
+      - COMP1511
+      - COMP1521
+      - COMP1531
+      - DESN1000
+      - MATH1081
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+    original: Students must take 42 UOC of the following courses.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 42
+    courses: [COMP2041, COMP2511, COMP2521, DESN2000, MATH2400, MATH2859, SENG2011, SENG2021]
+    original: Students must take 42 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 24
+    courses: [COMP3142, COMP3311, COMP3331, SENG3011]
+    original: Students must take 24 UOC of the following courses.
+
+  # Handbook container "Level 4 Core Courses" (18 UOC) is split so that the thesis courses can be
+  # referenced as `thesis` (3707 honours classes, §4.1 convention). Declared UOC is left to the catalogue.
+  - id: level-4-core
+    kind: core
+    title: Level 4 Core Courses
+    courses: [COMP4920]
+    original: Students must take 18 UOC of the following courses.
+  - id: thesis
+    kind: core
+    title: Level 4 Core Courses (thesis)
+    courses: [COMP4951, COMP4952, COMP4953]
+
+  - id: thesis-sequence
+    kind: timing
+    title: Research thesis sequence
+    severity: warning
+    courses: COMP4951 or COMP4952 or COMP4953
+    order: [COMP4951, COMP4952, COMP4953]
+    consecutive: true
+    note: Multi-term course group (as in COMPBH); not stated on the SENGAH page.
+
+  - id: discipline-electives
+    kind: pool
+    title: Discipline Electives
+    uoc: 36
+    from: [COMP6131, ENGG3060, "@vip",
+           COMP3***, COMP4***, COMP6***, COMP9***,
+           INFS3***, INFS4***,
+           MATH3***, MATH4***, MATH6***,
+           ELEC3***, ELEC4***,
+           TELE3***, TELE4***]
+    original: >-
+      2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC. (Rule:
+      COMP6131, ENGG4600, ENGG3060, ENGG2600, ENGG3600, any level 3/4/6/9 Computer Science course, any
+      level 3/4 Information Systems course, any level 3/4/6 Mathematics course, any level 3/4 Electrical
+      Engineering course, any level 3/4 Telecommunications course.)
+    note: >-
+      Subject areas are read as subject-code prefixes (Computer Science = COMP, Information Systems =
+      INFS, Mathematics = MATH, Electrical Engineering = ELEC, Telecommunications = TELE). The
+      container states no VIP cap, so none is set.
+
+  - id: vip-consecutive
+    kind: timing
+    severity: warning
+    courses: "@vip"
+    consecutive: true
+    original: 2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC.
+
+  - id: free-elective
+    kind: pool
+    role: free_elective
+    title: Free Elective
+    uoc: { min: 6 }
+    from: any
+    original: Students must take at least 6 UOC of the following courses. any course
+
+  - id: level-4-comp-minimum
+    kind: limit
+    title: Level 4 (or higher) COMP UOC Minimum
+    from: COMP4*** or COMP6*** or COMP9***
+    uoc: { min: 30 }
+    original: >-
+      Students must complete a minimum of 30 UOC of the following courses. COMP4920 - Professional
+      Issues and Ethics in Information Technology any level 4 Computer Science (COMP) course any level
+      6 Computer Science (COMP) course any level 9 Computer Science (COMP) course COMP4951 - Research
+      Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C
+    note: COMP4920 and COMP4951-COMP4953 are covered by COMP4***. Scope defaults to this specialisation's subtree.

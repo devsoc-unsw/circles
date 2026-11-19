@@ -228,7 +228,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ isOpen, onClose }) => {
       centered
       width={500}
       styles={{
-        content: {
+        container: {
           backgroundColor: theme.body,
           borderRadius: '12px'
         },

@@ -1,0 +1,57 @@
+# BIOSO1 Biology and Biodiversity (Science major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/BIOSO1
+#   (curriculum structure 2026.01.032, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: BIOSO1
+year: 2026
+title: Biology and Biodiversity
+spec_kind: major
+uoc: 78
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/BIOSO1
+  structure_version: "2026.01.032"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 30
+    courses: [MATH1041, BIOS1101, BEES1041, BIOS1301, BABS1201]
+    original: Students must take 30 UOC of the following courses.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 6
+    courses: [BEES2041]
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 6
+    courses: [BIOS3171]
+
+  - id: level-2-electives
+    kind: pool
+    title: Level 2 Prescribed Electives
+    uoc: 18
+    from: [BIOS2011, BIOS2031, BIOS2051, BIOS2500, BIOS2061]
+    original: Students must take 18 UOC of the following courses.
+
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Prescribed Electives
+    uoc: 18
+    from: [BEES3041, BEES3199, BIOS3061, BIOS3161, BIOS3012, BIOS3601, BIOS3011, BIOS3221]
+    quotas:
+      - from: BIOS3011 or BIOS3012
+        count: { max: 1 }
+        original: Students may take either BIOS3011 OR BIOS3012 from the list below, but not both.
+    original: Students must take 18 UOC of the following courses.
+
+notes:
+  - "BIOSM1 Ecology and Conservation states: A double major with BIOSO1 Biology and Biodiversity is not permitted."

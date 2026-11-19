@@ -1,0 +1,13 @@
+# Negative self-test (synthetic): fixture failing the fixture schema (missing expect, planned with outcome).
+fixture_version: "1.0"
+id: bad-shape
+findings: [M9]
+title: Broken fixture shape
+bundle:
+  documents: [examples/2026/programs/3778.yaml]
+  catalogue: { courses: {} }
+student:
+  program: "3778"
+  year: 2026
+  plan:
+    - { iid: a, code: COMP1511, term: 1, status: planned, outcome: pass }

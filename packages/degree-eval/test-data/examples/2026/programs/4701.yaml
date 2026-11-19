@@ -1,0 +1,133 @@
+# 4701 Bachelor of Laws (LLB), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4701
+#   (curriculum structure 2026.03.130, accessed 2026-10-10)
+# Lane C transcription. "This Program is not available for enrolment": the LLB is only taken inside a
+# double degree. It is written so that Law dual degrees (e.g. 4770 Science/Law) can import its
+# `disciplinary` component (SCHEMA.md §8). Shows: a ratio cap on postgraduate electives, a cohort-only
+# requirement (Nura Gili) and a 0 UOC co-enrolled course.
+schema_version: "1.0"
+kind: program
+code: "4701"
+year: 2026
+title: Law
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Laws]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4701
+  structure_version: "2026.03.130"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - >-
+      The approved Postgraduate Electives list is not in the handbook page; postgraduate LAWS courses are
+      admitted as `career:pgrd and LAWS****` under a 21 UOC quota (see law-electives note).
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 144 }
+    original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree.
+    children:
+      - id: core
+        kind: core
+        title: Core Courses
+        uoc: 96
+        courses: [LAWS1052, LAWS1055, LAWS1021, LAWS1022, LAWS1061, LAWS1075, LAWS1091, LAWS1141, LAWS1150,
+                  LAWS1160, LAWS1230, LAWS2150, LAWS2270, LAWS2351, LAWS2371, LAWS2383, LAWS2385]
+        original: >-
+          Students must take 96 UOC of the following courses. In the first term of enrolment, students
+          must enrol in both LAWS1052 Introducing Law & Justice and LAWS1055 Legal Research & Writing.
+        note: LAWS1055 Legal Research and Writing is 0 UOC and is a required core item.
+      - id: first-term
+        kind: timing
+        courses: LAWS1052 or LAWS1055
+        term: first
+        original: >-
+          In the first term of enrolment, students must enrol in both LAWS1052 Introducing Law & Justice
+          and LAWS1055 Legal Research & Writing.
+        note: >-
+          `term: first` is the plan's first term. In a double degree the student's first term of the
+          program is the same, so this holds when imported as a component.
+
+      - id: prescribed-theory
+        kind: pool
+        title: Prescribed Theory Electives
+        uoc: 6
+        from: "@law_prescribed_theory"
+        original: Students must take 6 UOC of the following courses
+
+      - id: law-electives
+        kind: pool
+        title: Law Elective Courses
+        uoc: { min: 42 }
+        from: "@law_electives_ug or (career:pgrd and LAWS****)"
+        quotas:
+          - { from: career:pgrd, uoc: { max: 21 } }
+        original: >-
+          Students must complete 42 UOC of Law Electives. Note: With the permission of the Director of
+          Undergraduate Studies and the course teacher, undergraduate students may enrol in one or more
+          Postgraduate courses, in a select list of approved Postgraduate Electives. Not more than half
+          the students' total elective courses may be taken from the postgraduate offerings.
+        note: >-
+          RATIO RULE / SCHEMA GAP: "not more than half the total elective courses" is a cap relative to
+          another quantity (counted in courses, over however many electives the student takes). The
+          schema has only absolute caps, so the quota is fixed at half the 42 UOC minimum (21 UOC). The
+          postgraduate selector `career:pgrd and LAWS****` over-approximates the unpublished approved
+          list; permission is the info node pg-elective-permission.
+      - id: pg-elective-permission
+        kind: info
+        confirm: true
+        text: >-
+          Postgraduate electives require the permission of the Director of Undergraduate Studies and the
+          course teacher, and must be on the select list of approved Postgraduate Electives.
+
+      - id: nura-gili
+        kind: info
+        title: Nura-Gili Pre-Law Program
+        text: >-
+          Indigenous students who have entered the Bachelor of Law program through the Nura Gili Pre-Law
+          program must complete the following two courses (6 UOC) in place of 6 UOC of Law Elective
+          Courses: LAWS1213 Foundations Enrichment 1 (3 UOC), LAWS1214 Foundations Enrichment 2 (3 UOC).
+          These courses are not available to other students.
+        note: >-
+          SCHEMA GAP: a requirement that applies only to a cohort needs a conditional node (e.g. a core
+          with `active_if: manual("Nura Gili Pre-Law entry")`). Both courses already count as Law
+          electives; "not available to other students" belongs in their course_conditions.
+
+  - id: completion-time-limit
+    kind: info
+    text: Students must complete the LLB within 10 years of first enrolment in the program.
+  - id: double-degree-only
+    kind: info
+    text: >-
+      The Bachelor of Laws (LLB) cannot be studied as a single stand alone degree. The LLB must be
+      studied with another degree. Undergraduate double degree LLB students are not required to do
+      General Education courses.
+  - id: honours-transfer
+    kind: info
+    text: >-
+      UNSW LLB students are eligible to transfer to the LLB (Honours) program if, at the time of making
+      their application, they: a) have successfully completed a minimum of 96 UOC of LLB courses; b) have
+      successfully completed at least 84 UOC of core LLB courses (which can include the prescribed theory
+      elective); c) have a minimum of 6 UOC of LLB courses still to complete at UNSW; and d) have a WAM in
+      their core LLB courses (including the prescribed theory elective, if applicable) of 75 or above.
+    note: >-
+      Expressible as the entry condition of 4702 Law (Honours) (uoc(96, @law_core or @law_electives_ug ...)
+      and wam(75, @law_core or @law_prescribed_theory)), except c), which looks forward. Not written here.
+
+classes:
+  - name: LLB with Distinction
+    require: wam(75, LAWS****)
+    note: >-
+      Handbook: "An LLB student whose WAM in all their graded Law courses is 75 or above at the
+      completion of their 144 uoc of LLB courses will be eligible to graduate with 'LLB with
+      Distinction'." Only for students who commenced the LLB in or after 2015 (true of every 2026 commencer). In a
+      double degree these classes are not imported with the component (SCHEMA GAP: component `classes`).
+
+notes:
+  - Not every elective available within the program is offered each year. For course offerings refer to the timetable.
+  - From 2018 the University Medal is only awarded to LLB (Honours) students (see 4702 Law (Honours)).

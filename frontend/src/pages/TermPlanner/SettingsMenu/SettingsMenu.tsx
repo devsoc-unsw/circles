@@ -17,7 +17,6 @@ type Props = {
 };
 
 const SettingsMenu = ({ planner }: Props) => {
-  const { Option } = Select;
   const { theme } = useSettings();
 
   function willUnplanCourses(numYears: number) {
@@ -34,8 +33,8 @@ const SettingsMenu = ({ planner }: Props) => {
 
   const updateStartYearMutation = useUpdateStartYearMutation();
 
-  const handleUpdateStartYear = async (_: unknown, dateString: string | string[]) => {
-    if (dateString && typeof dateString === 'string') {
+  const handleUpdateStartYear = async (_: unknown, dateString: string | null) => {
+    if (dateString) {
       updateStartYearMutation.mutate(dateString);
     } else {
       // eslint-disable-next-line no-console
@@ -102,19 +101,22 @@ const SettingsMenu = ({ planner }: Props) => {
         <Select
           value={planner.years.length}
           style={{ width: 70 }}
-          dropdownStyle={{
-            backgroundColor: theme === 'light' ? '#fff' : '#444249',
-            color: theme === 'light' ? '#444249' : '#fff'
+          styles={{
+            popup: {
+              root: {
+                backgroundColor: theme === 'light' ? '#fff' : '#444249',
+                color: theme === 'light' ? '#444249' : '#fff'
+              }
+            }
           }}
           onChange={handleUpdateDegreeLength}
           className="settings-degree-length-popup"
-        >
-          {years.map((num) => (
-            <Option key={num} value={num} className="settings-degree-length-popup">
-              {num}
-            </Option>
-          ))}
-        </Select>
+          options={years.map((num) => ({
+            value: num,
+            label: num,
+            className: 'settings-degree-length-popup'
+          }))}
+        />
       </CS.PopupEntry>
     </CS.MenuPopup>
   );

@@ -1,0 +1,55 @@
+# DDESB1 Integrated Design (Bachelor of Design specialisation), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/DDESB1
+#   (curriculum structure 2026.03.033, accessed 2026-10-10)
+# Lane C transcription. Required by 4825 (one of its three 96 UOC specialisations). Shows: "two
+# complete studio sequences in two of seven areas" as a choose-2 group of cores.
+schema_version: "1.0"
+kind: specialisation
+code: DDESB1
+year: 2026
+title: Integrated Design
+spec_kind: specialisation
+uoc: 96
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/DDESB1
+  structure_version: "2026.03.033"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 18
+    courses: [DDES1101, DDES1200, FADA1010]
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 24
+    courses: [DDES2102, DDES2103, DDES2104, DDES2201]
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 18
+    courses: [DDES3100, DDES3101, DDES3201]
+
+  - id: disciplinary-studio
+    kind: group
+    title: Disciplinary Studio
+    choose: 2
+    uoc: { min: 36 }
+    original: >-
+      You must complete two studio sequences of Introductory, Intermediate and Advanced level courses (18
+      UOC each) in two of the following 7 studio areas for a total of 36 UOC.
+    children:
+      - { id: studio-object, kind: core, title: Object, uoc: 18, courses: [DDES1120, DDES2120, DDES2121] }
+      - { id: studio-experience, kind: core, title: Experience, uoc: 18, courses: [DDES1130, DDES2130, DDES2131] }
+      - { id: studio-graphics, kind: core, title: Graphics, uoc: 18, courses: [DDES1140, DDES2140, DDES2141] }
+      - { id: studio-interaction, kind: core, title: Interaction, uoc: 18, courses: [DDES1150, DDES2150, DDES2151] }
+      - { id: studio-textiles, kind: core, title: Textiles, uoc: 18, courses: [DDES1160, DDES2160, DDES2161] }
+      - { id: studio-fashion, kind: core, title: Fashion, uoc: 18, courses: [DDES1170, DDES2170, DDES2171] }
+      - { id: studio-3d-visualisation, kind: core, title: 3D Visualisation, uoc: 18, courses: [DDES1110, DDES2110, DDES2111] }
+    note: >-
+      "Introductory, Intermediate and Advanced" order within a sequence is presumably enforced by course
+      prerequisites; not restated here.

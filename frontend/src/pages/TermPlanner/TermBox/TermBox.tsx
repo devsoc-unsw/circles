@@ -3,7 +3,6 @@ import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
 import { Course } from 'types/api';
-import { CourseTime } from 'types/courses';
 import { Term } from 'types/planner';
 import { ValidateResponse } from 'types/userResponse';
 import { useToggleLockTermMutation, useUserCourses, useUserPlanner } from 'utils/apiHooks/user';
@@ -109,7 +108,7 @@ const TermBox = ({
                     validate={validateInfos[info.code]}
                     courseInfo={info}
                     index={index}
-                    time={{ year, term } as CourseTime}
+                    time={{ year, term }}
                   />
                 );
               })}

@@ -1,0 +1,82 @@
+# 3785 Engineering (Honours) / Computer Science double degree, handbook year 2027
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2027/3785
+#   (curriculum structure 2027.03.001, accessed 2026-10-08); substitution wording from the
+#   identical 2026 summary: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3785
+# Built by composition: imports the Disciplinary Component of 3707 (2027) and of 3778 (2027, which
+# itself extends 2026), then narrows and links them.
+schema_version: "1.0"
+kind: program
+code: "3785"
+year: 2027
+title: Engineering (Honours) / Computer Science
+career: ugrd
+uoc: 240
+awards: [Bachelor of Engineering (Honours), Bachelor of Computer Science]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2027/3785
+  structure_version: "2027.03.001"
+  retrieved: 2026-10-08
+  status: complete
+
+components:
+  - id: eng
+    program: "3707"
+    title: Disciplinary Component - 3707 Engineering (Honours)
+    uoc: { min: 168 }
+    include: [disciplinary]
+    patch:
+      - op: list_remove
+        target: major
+        field: options
+        items: [BINFAH, COMPBH, SENGAH]
+        note: BINFAH and COMPBH and SENGAH majors are not available in this double degree.
+  - id: cs
+    program: "3778"
+    title: Disciplinary Component - 3778 Computer Science
+    uoc: { min: 96 }
+    include: [disciplinary]
+
+requirements:
+  - id: additional-electives
+    kind: pool
+    role: free_elective
+    title: Additional electives to reach 240 UOC
+    from: faculty:ENG or school:CSE
+    uoc: { min: 0 }
+    overflow: true
+    original: >-
+      When a student meets all the requirements for both degrees in less than 240 UOC, students must
+      complete additional Elective course/s to bring the total to 240 UOC. Students must take these
+      additional Electives from Faculty of Engineering and/or the School of Computer Science.
+
+shares:
+  - between: [eng, cs]
+    targets: core
+    original: >-
+      As there are courses required for both degrees, there is an overlap of at least 24 UOC to
+      reduce the total minimum volume to 240 UOC.
+
+substitutions:
+  - replace: ENGG1811
+    with: COMP1511
+    scope: eng
+    original: COMP1511 replaces ENGG1811 or COMP1911 in the Bachelor of Engineering (Honours) Major.
+  - replace: COMP1911
+    with: COMP1511
+    scope: eng
+  - replace: MATH1081
+    with: MATH2***
+    scope: cs
+    original: >-
+      The Level 2 MATH course taken in the Bachelor of Engineering (Honours) Major is counted towards
+      the MATH1081 requirement in the Bachelor of Computer Science Major.
+    note: >-
+      Broader than the handbook: accepts any level 2 MATH course, not only the one taken in the BE(Hons)
+      major. Narrowing it needs an allocation-dependent `with` (in:eng/major), which would make
+      allocation cyclic, so it stays broad and flagged (§13). The core-only eng<->cs share lets the same
+      course stay counted in the engineering major.
+
+notes:
+  - Without following the substitutions above, students may need to take more than 240 UOC to complete the double degree.
+  - Students must also complete at least 60 days of approved Industrial Training (ENGG4999, imported from 3707).

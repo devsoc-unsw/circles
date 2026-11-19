@@ -1,3 +1,5 @@
 node_modules
 Dockerfile
 .git
+test-results
+playwright-report

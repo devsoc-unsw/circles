@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import checker from 'vite-plugin-checker';
 import eslint from 'vite-plugin-eslint';
 import svgrPlugin from 'vite-plugin-svgr';
@@ -24,12 +24,26 @@ export default defineConfig({
         // ...svgr options (https://react-svgr.com/docs/options/)
       }
     }),
-    eslint(),
+    // the frontend eslint config must not lint packages/degree-eval (it has its own)
+    eslint({ exclude: ['**/node_modules/**', '**/packages/degree-eval/**'] }),
     checker({ typescript: true })
   ],
+  server: {
+    fs: {
+      allow: [
+        searchForWorkspaceRoot(process.cwd()),
+        resolve(projectRootDir, '../packages/degree-eval')
+      ]
+    }
+  },
   resolve: {
     alias: [
       // TODO: alias should be sync with vitest.config.ts
+      // @circles/degree-eval is source-only: alias to src/ so edits hot-reload without reinstalling
+      {
+        find: /^@circles\/degree-eval$/,
+        replacement: resolve(projectRootDir, '../packages/degree-eval/src/index.ts')
+      },
       { find: 'assets', replacement: resolve(projectRootDir, 'src/assets') },
       { find: 'components', replacement: resolve(projectRootDir, './src/components') },
       { find: 'config', replacement: resolve(projectRootDir, './src/config') },

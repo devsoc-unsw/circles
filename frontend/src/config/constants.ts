@@ -3,7 +3,7 @@ export const FEEDBACK_LINK =
 export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
 
 // Don't forget to update live year in the backend too
-export const LIVE_YEAR = 2026;
+export const LIVE_YEAR = 2027;
 export const CURR_YEAR = new Date().getFullYear();
 
 // Global colors - currently only being used in LiquidProgressChart
@@ -16,6 +16,10 @@ export const lightPurple = '#efdbff';
 
 // export const inDev = false;
 export const inDev = import.meta.env.MODE !== 'production';
+
+// Progression checker evaluated in the browser from the degree YAML documents (@circles/degree-eval)
+// instead of the backend structure. Set VITE_DEGREE_EVAL=true to try it.
+export const DEGREE_EVAL_ENABLED = import.meta.env.VITE_DEGREE_EVAL === 'true';
 
 export const MAX_COURSES_OVERFLOW = 80;
 export const COURSES_INITIALLY_COLLAPSED = 16;

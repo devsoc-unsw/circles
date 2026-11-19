@@ -1,0 +1,5 @@
+node_modules
+junit
+coverage
+test-data
+dist

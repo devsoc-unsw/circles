@@ -1,0 +1,130 @@
+# 3979 Bachelor of Information Systems, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3979
+#   (curriculum structure 2026.01.085, accessed 2026-10-09; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: program
+code: "3979"
+year: 2026
+title: Information Systems
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Information Systems]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3979
+  structure_version: "2026.01.085"
+  retrieved: 2026-10-09
+  status: complete
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 120 }
+    original: Students must complete 120 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: business-core
+        kind: core
+        title: Business Core Courses
+        uoc: 30
+        courses: [COMM1100, COMM1190, COMM1110, COMM1150 or COMM1140, COMM1180 or COMM1120]
+        original: >-
+          Students must take 30 UOC of the following courses. Integrated First Year Courses: COMM1100,
+          COMM1190, COMM1110. One of the following: COMM1150, COMM1140. One of the following: COMM1180,
+          COMM1120.
+
+      - id: is-core
+        kind: core
+        title: Information Systems Core Courses
+        uoc: 72
+        courses: [INFS1602, INFS1603, INFS1701, INFS2603, INFS2608, INFS2701, INFS2822, INFS3604, INFS3605,
+                  INFS3700, INFS3701, INFS3703]
+        original: Students must take 72 UOC of the following courses.
+
+      - id: is-electives
+        kind: pool
+        title: Prescribed Information Systems Electives
+        uoc: 12
+        from: >-
+          INFS3822 or INFS3300 or INFS3873 or INFS3603 or INFS3830 or INFS2702 or INFS2631 or INFS3020 or
+          INFS3922 or INFS3929 or INFS3959
+        original: >-
+          Students must take 12 UOC of the following courses. IS Data Analytics Electives: INFS3822, INFS3300,
+          INFS3873, INFS3603, INFS3830. IS Organisational Electives: INFS2702, INFS2631, INFS3300, INFS3020.
+          IS Cybersecurity Management Electives: INFS3922, INFS3929, INFS3959.
+
+      - id: wil
+        kind: pool
+        title: Work Integrated Learning (WIL)
+        uoc: 6
+        from: [COMM2233, COMM3030, COMM2244, COMM3202, COMM3020, COMM3101, COMM2222]
+        original: >-
+          Students must take 6 UOC of the following courses to satisfy the minimum 150 hours of professional
+          work that is required for this degree. This also applies to students in the Bachelor of
+          Commerce/Information Systems double degree. Students can satisfy the requirement in either the
+          Commerce or Information Systems component of the double degree. Students are NOT required to
+          satisfy the requirement in both components of the double degree.
+
+      - id: maturity-level-2
+        kind: maturity
+        applies_to: level:2
+        require: uoc(24)
+        original: Students must have completed 24 UOC before taking any Level 2 courses.
+      - id: maturity-level-3
+        kind: maturity
+        applies_to: level:3
+        require: uoc(48)
+        original: Students must have completed 48 UOC before taking any Level 3 courses.
+
+  - id: minor
+    kind: spec
+    slot: minor
+    title: Optional Minor
+    options: [COMMI2]
+    count: { min: 0, max: 1 }
+    counts_toward: [free-electives, gen-ed]
+    original: >-
+      Students may complete an optional minor using Free Elective and General Education UOC. Please refer to
+      the Free Elective and General Education requirements below.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: 12
+    overflow: true
+    original: >-
+      Students must complete 12 UOC of Free Electives. These can be any courses offered by any Faculty.
+      Students may instead use their Free Electives to complete an optional minor. Note: GEN# courses
+      cannot towards this requirement.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: "@business_gen_ed"
+    uoc: 12
+    original: >-
+      Students must complete 12 UOC of General Education. The following courses cannot count towards this
+      requirement: - Courses offered by the UNSW Business School - GENL2021 An Introduction to the
+      Australian Legal System - GENL2032 Cyberspace Law
+
+  - id: max-level-1
+    kind: limit
+    title: Maximum Level 1 UOC
+    from: level:1 or GEN*****
+    uoc: { max: 72 }
+    scope: root
+    original: >-
+      Students may take a maximum of 72 UOC of Level 1 courses, including any GEN# courses (irrespective of
+      their level).
+
+notes:
+  - >-
+    SAS Certification and SAS Academic Digital Badge (not a degree requirement): students who complete any
+    four of INFS2608, INFS3603, INFS3822, INFS3830, INFS3873 at UNSW are eligible (RPL does not count).
+    Students in the COMPD1 major who replace INFS2608 with COMP9313 AND COMP9315 should complete INFS3603,
+    INFS3822, INFS3830 and INFS3873.
+  - Please see Progression Plan. Progression rules are in accordance with university policy.

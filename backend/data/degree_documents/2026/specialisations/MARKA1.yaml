@@ -1,0 +1,87 @@
+# MARKA1 Marketing (Commerce major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MARKA1
+#   (curriculum structure 2026.02.019, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: MARKA1
+year: 2026
+title: Marketing
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MARKA1
+  structure_version: "2026.02.019"
+  retrieved: 2026-10-10
+  status: complete
+  warnings:
+    - >-
+      The Commerce/Economics and Commerce/Actuarial Studies double-degree codes were not verified, so the
+      COMM1900 substitution is conditioned on manual(...).
+
+sets:
+  mark_electives: >-
+    MARK3085 or MARK2071 or MARK2085 or MARK3081 or MARK2055 or MARK3054 or MARK3091 or MARK2053 or
+    MARK2060 or MARK3096
+  mark_other: COMM3000 or ACCT3563 or ACTL3192 or MGMT3004
+  mark_wil_fys: >-
+    COMM3060 or COMM2244 or COMM2222 or COMM3202 or COMM2233 or COMM3020 or COMM3900 or COMM3101 or
+    COMM3030
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 36
+    courses: [COMM1100, MARK2051, MARK3092, MARK2052, MARK2012, MARK3082]
+    original: >-
+      Students must take 36 UOC of the following courses. Students in Comm/Econ and Comm/Actl should take
+      COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students
+      should complete COMM1100. It is highly recommended that Marketing Major students study MARK2012
+      before other marketing courses.
+
+  - id: electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: 12
+    from: "@mark_electives or @mark_other or @mark_wil_fys"
+    quotas:
+      - from: level:3
+        uoc: { min: 6 }
+        original: At least 6 UOC must be taken from level 3 courses.
+      - from: "@mark_other or @mark_wil_fys"
+        uoc: { max: 6 }
+        original: >-
+          Students may count at most 6 UOC of 'Other Electives' or 'Work Integrated/Final Year Synthesis
+          Options' as a major elective.
+    original: >-
+      Students must take 12 UOC of the following courses. At least 6 UOC must be taken from level 3
+      courses. Students may count at most 6 UOC of 'Other Electives' or 'Work Integrated/Final Year
+      Synthesis Options' as a major elective.
+
+substitutions:
+  - replace: COMM1100
+    with: COMM1900
+    scope: core
+    when: manual("Enrolled in a Commerce/Economics or Commerce/Actuarial Studies double degree")
+    original: Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100.
+  - replace: COMM1100
+    with: ECON1101
+    scope: core
+    when: program(3543, 3586)
+    original: Students in Econ and Actl should take ECON1101.
+
+shares:
+  - between: [electives, spec:ACCTA1]
+    courses: ACCT3563
+    original: >-
+      ACCT3563 Issues in Financial Reporting is included for the benefit of students undertaking majors in
+      both Accounting and Marketing to allow compliance with the requirements of the professional
+      Accounting bodies. Students with majors in Accounting and Marketing may count this course towards the
+      Accounting major AND the Marketing major.
+
+notes:
+  - >-
+    Honours level study is available for Marketing students. Students interested in studying at Honours
+    Level should refer to the relevant Honours plan within 4501 Bachelor of Commerce (Honours) for entry
+    requirements.

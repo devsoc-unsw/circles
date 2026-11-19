@@ -1,0 +1,90 @@
+# DARTC1 Animation and Moving Image (Bachelor of Fine Arts specialisation), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/DARTC1
+#   (curriculum structure 2026.02.031, accessed 2026-10-10)
+# Lane C transcription. Required by 4830. Shows: studio sequences that must "follow on from" chosen
+# introductory studios (a dependency between two choices), pattern-based theory pools, and a
+# Fine Arts/Education NESA stream rule via complete().
+schema_version: "1.0"
+kind: specialisation
+code: DARTC1
+year: 2026
+title: Animation and Moving Image
+spec_kind: specialisation
+uoc: 96
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/DARTC1
+  structure_version: "2026.02.031"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - '"The two sequences must follow on from two of the introductory studios completed" is info only: the handbook does not map introductory studios to areas, and the schema cannot tie two choices together.'
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 36
+    courses: [ADAD3000, DART1350, DART1351, DART3200, DART3201, DART3203]
+
+  - id: introductory-studios
+    kind: pool
+    title: Introductory Disciplinary Studios
+    uoc: 24
+    from: DART1210 or DART1220 or DART1230 or DART1240 or DART1260 or DART1270 or DDES1110
+    original: You must complete 24 UOC of the following courses.
+
+  - id: disciplinary-studios
+    kind: group
+    title: Disciplinary Studios
+    choose: 2
+    uoc: { min: 24 }
+    original: >-
+      You must complete two studio sequences (12 UOC each) from the following areas: Animation, Visual
+      Effects, Moving Image, Sound, Game Art, Game Design, 3D Visualisation. The two sequences must follow
+      on from two of the introductory studios completed for the above requirement.
+    children:
+      - { id: studio-animation, kind: core, title: Animation, uoc: 12, courses: [DART2210, DART2211] }
+      - { id: studio-visual-effects, kind: core, title: Visual Effects, uoc: 12, courses: [DART2220, DART2221] }
+      - { id: studio-moving-image, kind: core, title: Moving Image, uoc: 12, courses: [DART2230, DART2231] }
+      - { id: studio-sound, kind: core, title: Sound, uoc: 12, courses: [DART2240, DART2241] }
+      - { id: studio-game-art, kind: core, title: Game Art, uoc: 12, courses: [DART2260, DART2261] }
+      - { id: studio-game-design, kind: core, title: Game Design, uoc: 12, courses: [DART2270, DART2271] }
+      - { id: studio-3d-visualisation, kind: core, title: 3D Visualisation, uoc: 12, courses: [DDES2110, DDES2111] }
+  - id: follow-on
+    kind: info
+    text: The two sequences must follow on from two of the introductory studios completed for the above requirement.
+    note: >-
+      SCHEMA GAP: a dependency between choices in two different nodes ("branch X of this group requires
+      course I_X in that pool"). Expressible per branch only if the intro↔area mapping were published
+      (then each branch could be a core of intro + two sequence courses, with the intro pool reduced).
+      Course prerequisites probably enforce it in practice.
+
+  - id: art-theory-l1-l2
+    kind: pool
+    title: Level 1 or 2 Art Theory Courses
+    uoc: 6
+    from: DART13** or DART23**
+    original: "You must complete 6 UOC in Level 1 or Level 2 Art Theory courses. (any course matching the pattern DART23xx / DART13xx)"
+  - id: art-theory-l3
+    kind: pool
+    title: Level 3 Art Theory Courses
+    uoc: 6
+    from: DART33**
+    original: "You must complete 6 UOC in Level 3 Art Theory courses. (any course matching the pattern DART33xx)"
+
+  - id: nesa-fine-arts-education
+    kind: check
+    title: NESA Accreditation Requirements for Fine Arts/Education (Secondary) Students
+    require: not program(4068) or complete(studio-visual-effects)
+    original: >-
+      The double degree Bachelor of Fine Arts in Animation and Moving Image/Education (Secondary) enables
+      students to pursue a teaching specialisation in Graphics and Multimedia Technology, as well as a
+      second teaching specialisation in Visual Arts. To meet NESA accreditation requirements for Visual
+      Arts, students in the Bachelor of Fine Arts in Animation and Moving Image MUST choose one 2D (Visual
+      Effects) AND one 4D disciplinary studio stream (Animation, Sound, Moving Image, Game Art, Game Design,
+      or 3D Visualisation) for their Disciplinary Studios.
+    note: >-
+      The double degree is assumed to be 4068 Fine Arts/Education (Secondary) (named in 4056). With exactly
+      two streams chosen, requiring Visual Effects makes the other one 4D. A `selections`-based form
+      (require a particular branch of a choose group) would read more directly.

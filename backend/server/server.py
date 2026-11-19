@@ -6,9 +6,10 @@ from contextlib import asynccontextmanager
 from data.config import LIVE_YEAR
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi_limiter import FastAPILimiter
 from server.db.redis.limiter_conn import make_limiter_redis
-from server.routers import auth, courses, followups, planner, programs, specialisations, user
+from server.routers import auth, courses, degrees, followups, planner, programs, specialisations, user
 
 @asynccontextmanager
 async def on_setup_and_shutdown(_app: FastAPI):
@@ -44,6 +45,9 @@ origins = [
     "https://unilectives.staging.devsoc.app",
 ]
 
+# the degree documents are ~0.5 MB of YAML; gzip makes them ~0.1 MB
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -59,6 +63,7 @@ app.include_router(programs.router)
 app.include_router(specialisations.router)
 app.include_router(user.router)
 app.include_router(followups.router)
+app.include_router(degrees.router)
 
 
 @app.get("/")

@@ -1,0 +1,65 @@
+# MATHM1 Mathematics (Science major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHM1
+#   (curriculum structure 2026.02.025, accessed 2026-10-08)
+schema_version: "1.0"
+kind: specialisation
+code: MATHM1
+year: 2026
+title: Mathematics
+spec_kind: major
+uoc: 60
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHM1
+  structure_version: "2026.02.025"
+  retrieved: 2026-10-08
+  status: complete
+
+sets:
+  # "Courses numbered from MATH3000 to MATH3799 or MATH6700 to MATH6899 (inclusive)" — as listed.
+  non_statistics_l3: >-
+    MATH3000 or MATH3001 or MATH3002 or MATH3041 or MATH3051 or MATH3101 or MATH3121 or MATH3161
+    or MATH3171 or MATH3191 or MATH3201 or MATH3261 or MATH3311 or MATH3361 or MATH3371 or MATH3411
+    or MATH3431 or MATH3511 or MATH3531 or MATH3560 or MATH3570 or MATH3611 or MATH3701 or MATH3711
+    or MATH6781
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 12
+    courses: [MATH1131 or MATH1141, MATH1231 or MATH1241]
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 30
+    courses:
+      - MATH2501 or MATH2601
+      - MATH2801 or MATH2901
+      - MATH2011 or MATH2111
+      - MATH2521 or MATH2621
+      - MATH2121 or MATH2221
+
+  - id: non-statistics
+    kind: pool
+    title: Level 3 Non-Statistics Prescribed Electives
+    uoc: 12
+    from: "@non_statistics_l3"
+    priority: 10
+
+  - id: level-3-elective
+    kind: pool
+    title: Level 3 Mathematics Prescribed Electives
+    uoc: 6
+    from: (MATH3*** or MATH6***) and not (MATH3599 or MATH3699)
+    priority: 20
+    original: >-
+      Students must complete an additional 6 UOC elective, chosen from any Level 3 (or hybrid)
+      Mathematics course not already taken (excluding MATH3599 and MATH3699).
+    note: >-
+      priority puts the narrower non-statistics pool first so a non-statistics course is not
+      consumed here when it is needed there. Priority only reorders pools of this document (§7.4).
+
+notes:
+  - Students are also recommended to take MATH1081 Discrete Mathematics (6UOC) as a Level 1 elective.

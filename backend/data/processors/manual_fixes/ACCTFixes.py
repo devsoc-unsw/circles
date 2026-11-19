@@ -38,6 +38,9 @@ def fix_conditions():
     for code in codes:
         CONDITIONS[code][PROCESSED] = ACCT_4797_4809_4851_4852_4897()
 
+    for course in ("ACCT4796", "ACCT4798"):
+        CONDITIONS[course][PROCESSED] = ACCT_4796_4798()
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -81,6 +84,13 @@ def ACCT_4797_4809_4851_4852_4897():
     "processed": "4501"
     """
     return "4501"
+
+def ACCT_4796_4798():
+    """
+    "original": "Prerequisite: Must be enrolled in specialisation ACCTAH (Accounting) of Program 4501 <br/><br/>",
+    "processed": "Must be specialisation ACCTAH (Accounting) of Program 4501"
+    """
+    return "4501 && ACCTAH"
 
 
 if __name__ == "__main__":

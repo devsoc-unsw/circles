@@ -1,0 +1,109 @@
+# Conformance fixture (SCHEMA.md §15). Review M6 (and minor 3): one WIL/FYS course inside the major, as
+# the handbook endorses, plus the additional elective the handbook asks for.
+fixture_version: "1.0"
+id: m6-3502-wil-fys-in-major
+findings: [M6, m3]
+title: 3502 BCom, FINSA1 with COMM3030 counted as major elective, WIL and FYS
+description: >-
+  COMM3030 is primary in FINSA1's prescribed electives and is shared (secondary) into the WIL and FYS
+  pools. The Disciplinary Component then holds IFY 48 + FINSA1 42 (non-IFY) = 90 UOC, and the extra
+  elective the handbook requires is counted by overlap-replacement-elective, giving 96. The extra
+  course chosen by exact top-up is the earliest eligible one (ARTS2090); the Business-UOC rule is met
+  at program scope by ACCT2511 in free electives. COMM1180 is shared between IFY and FINSA1 within the
+  6 UOC budget.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3502.yaml
+    - examples/2026/specialisations/FINSA1.yaml
+  catalogue:
+    note: Fixture inputs; GENL2020/GENL2030 and ARTS2091 are placeholders. myBCom elements are 0 UOC.
+    courses:
+      COMM0999: { uoc: 0, faculty: BUS }
+      COMM1999: { uoc: 0, faculty: BUS }
+      COMM3999: { uoc: 0, faculty: BUS }
+      COMM1100: { uoc: 6, faculty: BUS }
+      COMM1110: { uoc: 6, faculty: BUS }
+      COMM1120: { uoc: 6, faculty: BUS }
+      COMM1140: { uoc: 6, faculty: BUS }
+      COMM1150: { uoc: 6, faculty: BUS }
+      COMM1170: { uoc: 6, faculty: BUS }
+      COMM1180: { uoc: 6, faculty: BUS }
+      COMM1190: { uoc: 6, faculty: BUS }
+      COMM3030: { uoc: 6, faculty: BUS }
+      FINS2615: { uoc: 6, faculty: BUS }
+      FINS2618: { uoc: 6, faculty: BUS }
+      FINS2624: { uoc: 6, faculty: BUS }
+      FINS3616: { uoc: 6, faculty: BUS }
+      FINS3630: { uoc: 6, faculty: BUS }
+      FINS3631: { uoc: 6, faculty: BUS }
+      ACCT2511: { uoc: 6, faculty: BUS }
+      ARTS2090: { uoc: 6, faculty: ADA }
+      ARTS2091: { uoc: 6, faculty: ADA }
+      ARTS3090: { uoc: 6, faculty: ADA }
+      PSYC2001: { uoc: 6, faculty: SCI }
+      PSYC2061: { uoc: 6, faculty: SCI }
+      MATH2801: { uoc: 6, faculty: SCI }
+      GENL2020: { uoc: 6, faculty: LAW, gened: true }
+      GENL2030: { uoc: 6, faculty: LAW, gened: true }
+student:
+  program: "3502"
+  year: 2026
+  horizon: planned
+  selections:
+    major: [FINSA1]
+  plan:
+    - { iid: comm0999, code: COMM0999, term: 1, status: completed, outcome: pass_no_mark, grade: SY }
+    - { iid: comm1100, code: COMM1100, term: 1, status: completed, outcome: pass, mark: 74, grade: CR }
+    - { iid: comm1110, code: COMM1110, term: 1, status: completed, outcome: pass, mark: 81, grade: DN }
+    - { iid: comm1120, code: COMM1120, term: 1, status: completed, outcome: pass, mark: 69, grade: CR }
+    - { iid: comm1140, code: COMM1140, term: 2, status: planned }
+    - { iid: comm1150, code: COMM1150, term: 2, status: planned }
+    - { iid: comm1170, code: COMM1170, term: 2, status: planned }
+    - { iid: comm1180, code: COMM1180, term: 3, status: planned }
+    - { iid: comm1190, code: COMM1190, term: 3, status: planned }
+    - { iid: fins2615, code: FINS2615, term: 3, status: planned }
+    - { iid: comm1999, code: COMM1999, term: 4, status: planned }
+    - { iid: fins2618, code: FINS2618, term: 4, status: planned }
+    - { iid: fins2624, code: FINS2624, term: 4, status: planned }
+    - { iid: arts2090, code: ARTS2090, term: 4, status: planned }
+    - { iid: fins3616, code: FINS3616, term: 5, status: planned }
+    - { iid: acct2511, code: ACCT2511, term: 5, status: planned }
+    - { iid: psyc2001, code: PSYC2001, term: 5, status: planned }
+    - { iid: fins3630, code: FINS3630, term: 6, status: planned }
+    - { iid: genl2020, code: GENL2020, term: 6, status: planned }
+    - { iid: psyc2061, code: PSYC2061, term: 6, status: planned }
+    - { iid: fins3631, code: FINS3631, term: 7, status: planned }
+    - { iid: genl2030, code: GENL2030, term: 7, status: planned }
+    - { iid: math2801, code: MATH2801, term: 7, status: planned }
+    - { iid: comm3030, code: COMM3030, term: 8, status: planned }
+    - { iid: arts3090, code: ARTS3090, term: 8, status: planned }
+    - { iid: arts2091, code: ARTS2091, term: 8, status: planned }
+    - { iid: comm3999, code: COMM3999, term: 8, status: planned }
+expect:
+  nodes:
+    root: { status: met, counted_uoc: 144 }
+    disciplinary: { status: met, counted_uoc: 96 }
+    ify: { status: met, counted_uoc: 48 }
+    mybcom: { status: met, counted_uoc: 0 }
+    major: { status: met, counted_uoc: 48 }
+    major/FINSA1/core: { status: met, counted_uoc: 30 }
+    major/FINSA1/electives: { status: met, counted_uoc: 18 }
+    major-level-3: { status: met, counted_uoc: 24 }
+    wil: { status: met, counted_uoc: 6 }
+    fys: { status: met, counted_uoc: 6 }
+    fys-final-year: { status: met }
+    overlap-replacement-elective: { status: met, counted_uoc: 6 }
+    business-minimum: { status: met, counted_uoc: 96 }
+    free-electives: { status: met, counted_uoc: 36 }
+    gen-ed: { status: met, counted_uoc: 12 }
+    max-level-1: { status: met, counted_uoc: 60 }
+  allocations:
+    comm1180: { primary: ify, shares: [major/FINSA1/core] }
+    comm3030: { primary: major/FINSA1/electives, shares: [wil, fys] }
+    arts2090: { primary: overlap-replacement-elective, shares: [] }
+    acct2511: { primary: free-electives, shares: [] }
+  not_counted: []
+notes:
+  - max-level-1 counts the 48 UOC of IFY plus both GEN# courses (GEN# count irrespective of level) = 60.
+  - "COMM0999 is SY-graded (outcome pass_no_mark): done, but not WAM-bearing (§5.1 Results)."

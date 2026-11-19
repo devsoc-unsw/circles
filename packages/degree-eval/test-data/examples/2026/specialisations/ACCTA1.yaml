@@ -1,0 +1,84 @@
+# ACCTA1 Accounting (Commerce major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ACCTA1
+#   (curriculum structure 2026.01.044, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: ACCTA1
+year: 2026
+title: Accounting
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ACCTA1
+  structure_version: "2026.01.044"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  acct_electives: >-
+    ACCT3625 or ACCT3601 or ACCT3708 or ACCT3583 or ACCT2562 or ACCT3610 or ACCT3672 or ACCT3861 or
+    ACCT3995 or ACTL2111 or TABL2741 or FINS3626
+  acct_wil_fys: >-
+    COMM3202 or COMM3020 or COMM2244 or COMM3060 or COMM3030 or TABL3033 or COMM3900 or COMM2222 or
+    TABL3333 or COMM2233 or COMM3101
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 30
+    courses: [COMM1140, ACCT2522, ACCT3563, ACCT2542, ACCT2511]
+    original: Students must take 30 UOC of the following courses.
+
+  - id: electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: 18
+    from: "@acct_electives or @acct_wil_fys"
+    quotas:
+      - from: ACCT3***
+        uoc: { min: 12 }
+        original: with at least 12 UOC being at Level 3 (i.e. ACCT3XXX).
+      - from: "@acct_wil_fys"
+        uoc: { max: 6 }
+        original: >-
+          Students may count ONE (6 UOC) of the Work Integrated Learning or any Final Year Synthesis course
+          towards their Accounting major. Students can take a maximum of 6 UOC from the following courses.
+    original: >-
+      Students must take 18 UOC of the following courses with at least 12 UOC being at Level 3 (i.e.
+      ACCT3XXX). Please Note: - Students with a major in Accounting and Finance may count FINS3626 towards
+      the Accounting major AND the Finance major. - Students completing a Bachelor of Actuarial Studies can
+      count ACTL2111 in both the Actuarial Studies program and accounting major. - Students enrolled in 4733
+      Commerce/Law cannot take TABL2741 from the below elective list. - Students may count ONE (6 UOC) of
+      the Work Integrated Learning or any Final Year Synthesis course towards their Accounting major.
+
+  - id: tabl2741-not-4733
+    kind: check
+    title: TABL2741 not available to 4733 Commerce/Law
+    require: not uoc(1, in:electives and TABL2741) or not program(4733)
+    original: Students enrolled in 4733 Commerce / Law cannot take TABL2741 from the below elective list.
+
+  - id: accreditation
+    kind: info
+    title: CAANZ/CPA Accreditation Requirements
+    text: >-
+      Students enrolled in the Bachelor of Commerce as a stand-alone program, or as part of a related double
+      degree (excluding 4733 Commerce / Law), should complete the following courses if they wish to seek
+      accreditation after graduation: COMM1100*, COMM1150*, COMM1110 (or one of ECON1203, MATH1041,
+      MATH1151, MATH2081, MATH2901, PSYC2001), COMM1140, COMM1170, COMM1180, COMM1190, ACCT2511, ACCT2522,
+      ACCT2542, ACCT3563, ACCT3583, ACCT3708, TABL2741, TABL2751. * for students in an Actuarial Studies
+      single or double degree, or in a Commerce / Economics double degree, ECON1101, ECON1102 and COMM1900
+      taken in combination are acceptable substitutes for COMM1100 and COMM1150. Students enrolled in 4733
+      Commerce / Law should complete: COMM1100, COMM1110, COMM1140, COMM1150, COMM1170, COMM1180, COMM1190,
+      ACCT2511, ACCT2522, ACCT2542, ACCT3563, ACCT3583, ACCT3708, LAWS1052, LAWS1075, LAWS1091, LAWS3751
+      (or TABL2751).
+
+shares:
+  - between: [electives, spec:FINSA1]
+    courses: FINS3626
+    original: >-
+      Students with a major in Accounting and Finance may count FINS3626 towards the Accounting major AND
+      the Finance major.
+  # ACCT3563 with FINSA1/MARKA1/INFSA1 is declared on those majors; ACTL2111 with the 3586 program core is
+  # declared in 3586 (a spec cannot name a program node).

@@ -53,8 +53,8 @@ jobs:
         uses: ./.github/actions/setup-ci-env
       - name: Run the backend container
         run: docker compose up --wait --wait-timeout 90 ci-backend
-      - name: Log the backend container output
-        run: docker compose logs ci-backend
+      - name: Log the backend and database container output
+        run: docker compose logs mongodb sessionsdb ci-backend
         if: always()
       - name: Test algorithm with pytest
         run: |
@@ -107,10 +107,73 @@ jobs:
           name: fe-test-results
           path: frontend/junit/fe-test-results.xml
 
+  degree_eval:
+    name: degree-eval Lint, Types, Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/degree-eval
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Set up node LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - name: Install deps
+        run: npm ci
+      - name: Run eslint on degree-eval
+        run: npm run lint
+      - name: Typecheck degree-eval
+        run: npm run types
+      - name: Run degree-eval unit tests
+        run: npm test
+      - name: Build the degree-eval CLI and run the conformance fixtures with it
+        run: |
+          npm run build:cli
+          node dist/degree-eval.mjs validate test-data/examples --fixtures test-data/fixtures --root test-data
+          node dist/degree-eval.mjs fixtures test-data/fixtures test/golden --root test-data
+      - name: Validate the degree documents the backend serves
+        run: node dist/degree-eval.mjs validate ../../backend/data/degree_documents
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: degree-eval-test-results
+          path: packages/degree-eval/junit/degree-eval-test-results.xml
+
+  frontend_e2e:
+    name: Frontend E2E (degree evaluator)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v4
+      - name: Install deps
+        uses: ./.github/actions/setup-ci-frontend
+      - name: Setup environment
+        uses: ./.github/actions/setup-ci-env
+      - name: Run the backend container
+        run: docker compose up --wait --wait-timeout 90 ci-backend
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: ./frontend
+      - name: Run the e2e tests (builds the frontend with VITE_DEGREE_EVAL=true and serves it on :3000)
+        run: npm run e2e
+        working-directory: ./frontend
+      - name: Log the backend container output
+        run: docker compose logs ci-backend
+        if: failure()
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fe-e2e-results
+          path: |
+            frontend/junit/e2e-test-results.xml
+            frontend/test-results/
+
   docker_build:
     name: Build docker containers
     runs-on: ubuntu-latest
-    needs: [backend_lint, backend_typecheck, backend_tests, frontend_lint, frontend_typecheck] # TODO: add test jobs when they get unskipped
+    needs: [backend_lint, backend_typecheck, backend_tests, frontend_lint, frontend_typecheck, frontend_e2e, degree_eval] # TODO: add test jobs when they get unskipped
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4

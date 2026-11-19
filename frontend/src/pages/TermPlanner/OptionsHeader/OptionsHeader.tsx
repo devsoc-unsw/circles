@@ -119,7 +119,7 @@ const OptionsHeader = () => {
               style={{ width: '200px' }}
               okText="Yes"
               cancelText="No"
-              overlayClassName="popconfirm-unplan"
+              classNames={{ root: 'popconfirm-unplan' }}
             >
               <S.OptionButton>
                 <FaRegCalendarTimes style={iconStyles} />

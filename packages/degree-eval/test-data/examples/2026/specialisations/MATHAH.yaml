@@ -1,0 +1,44 @@
+# MATHAH Applied Mathematics (honours specialisation), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHAH
+#   (curriculum structure 2026.02.001, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: MATHAH
+year: 2026
+title: Applied Mathematics
+spec_kind: honours
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHAH
+  structure_version: "2026.02.001"
+  retrieved: 2026-10-10
+  status: complete
+  warnings:
+    - >-
+      "Core Courses" is a CC container with a dynamic rule ("any level 5 Mathematics course"); written as
+      a pool because core items must be exact codes.
+
+requirements:
+  - id: coursework
+    kind: pool
+    title: Core Courses
+    uoc: 30
+    from: MATH5***
+    original: >-
+      Students must complete 30 UOC of the following courses. Note: Courses must be approved by the Head
+      of School or nominee and taken with the advice of the Honours thesis supervisor. (any level 5
+      Mathematics course)
+  - id: coursework-approval
+    kind: info
+    confirm: true
+    text: Courses must be approved by the Head of School or nominee and taken with the advice of the Honours thesis supervisor.
+
+  # Exposed as node `thesis` (§4.1 convention). A pool, not a core, because the same course is taken
+  # three times: three MATH4001 instances fill 18 UOC.
+  - id: thesis
+    kind: pool
+    title: Thesis Courses
+    uoc: 18
+    from: MATH4001
+    original: Student must take MATH4001 (6 UOC) three times per year for a total of 18 UOC.

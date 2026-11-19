@@ -1,0 +1,101 @@
+# Conformance fixture (SCHEMA.md §15). Review M1: a course shared by two spec slots with no declared
+# overlap policy must make the blocked item unknown, never unmet.
+fixture_version: "1.0"
+id: m1-3778-mathc2
+findings: [M1, B1, N1]
+title: 3778 BCompSc, COMPA1 + optional MATHC2 minor sharing MATH1131/MATH1231
+description: >-
+  COMPA1's core and MATHC2's level-1 core both need MATH1131|MATH1141 and MATH1231|MATH1241. Core
+  matching gives the student's MATH1131/MATH1231 to COMPA1 (earlier in pre-order). 3778 declares no
+  share or replacement for this overlap, so MATHC2's level-1 core is unknown (overlap_undeclared), and
+  the minor and the program are unknown instead of permanently unmet. The minor's uoc check (36) is
+  unknown, not unmet: it counts 24 UOC plus the 12 UOC blocked as overlap_undeclared (SCHEMA.md §7.6,
+  REVIEW-2 N1). The minor's other 24 UOC is credited to free-electives (B1 semantics: credit fills
+  headroom after primary allocation). Variant with a real shortfall: n1-3778-mathc2-shortfall.
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3778.yaml
+    - examples/2026/specialisations/COMPA1.yaml
+    - examples/2026/specialisations/MATHC2.yaml
+  catalogue:
+    note: Fixture inputs; GENL codes are placeholders.
+    courses:
+      COMP1511: { uoc: 6, faculty: ENG, school: CSE }
+      COMP1521: { uoc: 6, faculty: ENG, school: CSE }
+      COMP1531: { uoc: 6, faculty: ENG, school: CSE }
+      COMP2511: { uoc: 6, faculty: ENG, school: CSE }
+      COMP2521: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3121: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3311: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3331: { uoc: 6, faculty: ENG, school: CSE }
+      COMP3900: { uoc: 6, faculty: ENG, school: CSE }
+      COMP4920: { uoc: 6, faculty: ENG, school: CSE }
+      COMP6080: { uoc: 6, faculty: ENG, school: CSE }
+      COMP6441: { uoc: 6, faculty: ENG, school: CSE }
+      COMP9417: { uoc: 6, faculty: ENG, school: CSE }
+      MATH1081: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH1131: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH1231: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2011: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2501: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH2121: { uoc: 6, faculty: SCI, school: MATHS }
+      MATH3411: { uoc: 6, faculty: SCI, school: MATHS }
+      ECON1101: { uoc: 6, faculty: BUS }
+      ARTS1090: { uoc: 6, faculty: ADA }
+      GENL1062: { uoc: 6, faculty: LAW, gened: true }
+      GENL2020: { uoc: 6, faculty: LAW, gened: true }
+student:
+  program: "3778"
+  year: 2026
+  horizon: planned
+  selections:
+    major: [COMPA1]
+    minor: [MATHC2]
+  plan:
+    - { iid: comp1511, code: COMP1511, term: 1, status: completed, outcome: pass, mark: 78, grade: DN }
+    - { iid: math1131, code: MATH1131, term: 1, status: completed, outcome: pass, mark: 71, grade: CR }
+    - { iid: math1081, code: MATH1081, term: 1, status: completed, outcome: pass, mark: 66, grade: CR }
+    - { iid: comp1521, code: COMP1521, term: 2, status: planned }
+    - { iid: math1231, code: MATH1231, term: 2, status: planned }
+    - { iid: econ1101, code: ECON1101, term: 2, status: planned }
+    - { iid: comp1531, code: COMP1531, term: 3, status: planned }
+    - { iid: comp2521, code: COMP2521, term: 3, status: planned }
+    - { iid: math2011, code: MATH2011, term: 3, status: planned }
+    - { iid: comp2511, code: COMP2511, term: 4, status: planned }
+    - { iid: math2501, code: MATH2501, term: 4, status: planned }
+    - { iid: arts1090, code: ARTS1090, term: 4, status: planned }
+    - { iid: comp3121, code: COMP3121, term: 5, status: planned }
+    - { iid: comp3311, code: COMP3311, term: 5, status: planned }
+    - { iid: math2121, code: MATH2121, term: 5, status: planned }
+    - { iid: comp3331, code: COMP3331, term: 6, status: planned }
+    - { iid: math3411, code: MATH3411, term: 6, status: planned }
+    - { iid: genl1062, code: GENL1062, term: 6, status: planned }
+    - { iid: comp3900, code: COMP3900, term: 7, status: planned }
+    - { iid: comp6080, code: COMP6080, term: 7, status: planned }
+    - { iid: genl2020, code: GENL2020, term: 7, status: planned }
+    - { iid: comp4920, code: COMP4920, term: 8, status: planned }
+    - { iid: comp6441, code: COMP6441, term: 8, status: planned }
+    - { iid: comp9417, code: COMP9417, term: 8, status: planned }
+expect:
+  nodes:
+    root: { status: unknown, counted_uoc: 144 }
+    disciplinary: { status: met, counted_uoc: 96 }
+    major/COMPA1/core: { status: met, counted_uoc: 66 }
+    major/COMPA1/computing-electives: { status: met, counted_uoc: 30 }
+    minor: { status: unknown, counted_uoc: 24, reasons: [overlap_undeclared] }
+    minor/MATHC2/level-1-core: { status: unknown, reasons: [overlap_undeclared] }
+    minor/MATHC2/electives: { status: met, counted_uoc: 24 }
+    free-electives: { status: met, counted_uoc: 12, credited_uoc: 24 }
+    gen-ed: { status: met, counted_uoc: 12 }
+  allocations:
+    math1131: { primary: major/COMPA1/core, shares: [] }
+    math2011: { primary: minor/MATHC2/electives, shares: [], credits: [free-electives] }
+    econ1101: { primary: free-electives, shares: [] }
+  not_counted: []
+notes:
+  - >-
+    If CSE confirms that MATH1131/1231 may count toward both COMPA1 and MATHC2, 3778 gains
+    `shares: [{between: [major, minor], courses: MATH1131 or MATH1141 or MATH1231 or MATH1241}]` and this
+    fixture's expectations change to met. If it confirms they may not, the share becomes `mode: replace`
+    and the expectation becomes unmet with replacement_missing until a replacement elective is planned.

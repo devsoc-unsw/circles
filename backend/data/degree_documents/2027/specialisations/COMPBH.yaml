@@ -1,0 +1,101 @@
+# COMPBH Computer Engineering (honours specialisation in 3707), handbook year 2027
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2027/COMPBH
+#   (curriculum structure 2027.01.054, accessed 2026-10-08)
+schema_version: "1.0"
+kind: specialisation
+code: COMPBH
+year: 2027
+title: Computer Engineering
+spec_kind: honours
+uoc: 168
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2027/COMPBH
+  structure_version: "2027.01.054"
+  retrieved: 2026-10-08
+  status: complete
+
+sets:
+  # One list for both the elective quota and the Level 4 minimum (review minor 6): the elective
+  # quota says "See Level 4 UOC Minimum section below", whose list leaves out ENGG4600 (VIP).
+  level4_list: >-
+    COMP4601 or COMP4920 or COMP4951 or COMP4952 or COMP4953 or ELEC4602 or TELE4642
+    or COMP4*** or COMP6*** or COMP9***
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 60
+    courses:
+      - COMP1511
+      - COMP1521
+      - COMP1531
+      - DESN1000
+      - ELEC1111
+      - MATH1081
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+      - PHYS1121 or PHYS1131
+      - PHYS1221 or PHYS1231
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 36
+    courses: [COMP2511, COMP2521, DESN2000, ELEC2133, ELEC2134, MATH2099]
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 24
+    courses: [COMP3211, COMP3222, COMP3231, COMP3601]
+
+  # Handbook container "Level 4 Core Courses" (24 UOC) is split in two so that the thesis courses can be
+  # referenced as `thesis` (3707 honours classes, §4.1 convention). Declared UOC is left to the catalogue.
+  - id: level-4-core
+    kind: core
+    title: Level 4 Core Courses
+    courses: [COMP4601, COMP4920]
+  - id: thesis
+    kind: core
+    title: Level 4 Core Courses (thesis)
+    courses: [COMP4951, COMP4952, COMP4953]
+
+  - id: thesis-sequence
+    kind: timing
+    title: Research thesis sequence
+    severity: warning
+    courses: COMP4951 or COMP4952 or COMP4953
+    order: [COMP4951, COMP4952, COMP4953]
+    consecutive: true
+    note: Multi-term course group; a final grade is withheld until COMP4953 is completed.
+
+  - id: discipline-electives
+    kind: pool
+    title: Discipline Electives
+    uoc: 24
+    from: [COMP6420, ENGG2600, ENGG3060, ENGG3600, ENGG4600, ELEC3106, ELEC3114, ELEC4602, TELE4642,
+           COMP3***, COMP4***, COMP6***, COMP9***]
+    quotas:
+      - from: "@level4_list"
+        uoc: { min: 12 }
+    original: >-
+      Students must take 24 UOC of the following courses, with a minimum of 12 UOC of Level 4 (or
+      above) courses. See Level 4 UOC Minimum section below. 2 UOC and 3 UOC courses are run over
+      consecutive terms for a final total of 6 UOC.
+
+  - id: level-4-minimum
+    kind: limit
+    title: Level 4 UOC Minimum
+    from: "@level4_list"
+    uoc: { min: 36 }
+    original: >-
+      Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at
+      least 12 UOC of Level 4 (or above) Discipline Electives, including: COMP4601, COMP4920,
+      COMP4951, COMP4952, COMP4953, ELEC4602, TELE4642, any COMP4***, COMP6***, or COMP9*** course
+      open to undergraduate students
+    note: >-
+      Scope defaults to this specialisation's subtree, so only courses counted toward COMPBH are
+      summed. "Open to undergraduate students" is left to each course's own conditions; career:pgrd
+      cannot express it because COMP9*** courses are postgraduate-career courses.

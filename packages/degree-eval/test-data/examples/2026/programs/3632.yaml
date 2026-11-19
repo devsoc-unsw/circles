@@ -1,0 +1,197 @@
+# 3632 Bachelor of Psychology (Honours), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3632
+#   (curriculum structure 2026.01.035, accessed 2026-10-10)
+# Lane C transcription, written in place of "3871 Psychological Science" from the brief: 3871 has no
+# 2026 handbook page, and the handbook names Bachelor of Psychological Science as 3435 (the pass-degree
+# transfer target of this program). Shows: two overlapping prescribed-elective lists with separate
+# minimums, an embedded honours stage gated by a first-attempt "Psychology Average", term-specific
+# enrolment in the honours year, and a full-time load rule.
+schema_version: "1.0"
+kind: program
+code: "3632"
+year: 2026
+title: Psychology (Honours)
+career: ugrd
+uoc: 192
+duration_years: 4
+awards: [Bachelor of Psychology (Honours)]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3632
+  structure_version: "2026.01.035"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - Honours entry depends on a first-attempt, best-3-electives "Psychology Average" that is student-reported.
+    - Term-of-year enrolment (T1/T2/T3) in Stage 4 and the 48 UOC-per-year load rule are info only.
+
+sets:
+  psyc_l3_list_a: PSYC3051 or PSYC3202 or PSYC3211 or PSYC3221 or PSYC3241 or PSYC3311 or PSYC3361 or PSYC3371
+  psyc_l3_list_b: PSYC3121 or PSYC3301 or PSYC3331 or PSYC3341 or PSYC3361 or PSYC3371
+  # "any course offered by School of Medical Sciences": no library school code yet; approximated by the
+  # subject areas that school offers (proposed library addition: schools.SOMS).
+  medical_sciences_subjects: ANAT**** or PATH**** or PHAR**** or PHSL**** or SOMS****
+  psyc_level_4_core: PSYC4072 or PSYC4073 or PSYC4093 or PSYC4103
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 144 }
+    original: Students must complete 144 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: level-1-core
+        kind: core
+        title: Level 1 Core Courses
+        uoc: 24
+        courses: [PSYC1001, PSYC1011, PSYC1021, PSYC1111]
+      - id: level-2-core
+        kind: core
+        title: Level 2 Core Courses
+        uoc: 30
+        courses: [PSYC2001, PSYC2061, PSYC2071, PSYC2081, PSYC2101]
+      - id: level-3-core
+        kind: core
+        title: Level 3 Core Courses
+        uoc: 12
+        courses: [PSYC3001, PSYC3011]
+
+      - id: level-3-prescribed
+        kind: group
+        title: Level 3 Prescribed Electives
+        uoc: { min: 30 }
+        original: >-
+          Students must take 30 UOC of level 3 prescribed electives with at least 12 UOC from list A and
+          12 UOC from list B.
+        note: >-
+          Written as two exclusive pools rather than one pool with two quotas: PSYC3361 and PSYC3371 are
+          on both lists, and the handbook says PSYC3371 counts "as a Stream A or Stream B elective"
+          (one, not both). Quotas would count a shared course toward both minimums.
+        children:
+          - id: list-a
+            kind: pool
+            title: Level 3 Prescribed Electives - List A
+            uoc: { min: 12, max: 18 }
+            from: "@psyc_l3_list_a"
+            original: Take at least 12 UOC from the following list.
+          - id: list-b
+            kind: pool
+            title: Level 3 Prescribed Electives - List B
+            uoc: { min: 12, max: 18 }
+            from: "@psyc_l3_list_b"
+            original: Take at least 12 UOC from the following list
+
+      - id: level-4-core
+        kind: core
+        title: Level 4 Core Courses
+        uoc: 48
+        courses: [PSYC4093, PSYC4103, PSYC4072, PSYC4073]
+        original: >-
+          Students must take 48 UOC of the following courses. For the coursework component, students must
+          enrol in PSYC4093 in T1 and PSYC4103 in T2. For the thesis component, students must enrol in
+          PSYC4072 in T1 and PSYC4073 in T2 and T3.
+      - id: coursework-order
+        kind: timing
+        courses: PSYC4093 or PSYC4103
+        order: [PSYC4093, PSYC4103]
+        consecutive: true
+      - id: thesis-order
+        kind: timing
+        courses: PSYC4072 or PSYC4073
+        order: [PSYC4072, PSYC4073]
+      - id: level-4-terms
+        kind: info
+        text: >-
+          For the coursework component, students must enrol in PSYC4093 in T1 and PSYC4103 in T2. For the
+          thesis component, students must enrol in PSYC4072 in T1 and PSYC4073 in T2 and T3.
+        note: >-
+          SCHEMA GAP: timing has no "in term T1/T2/T3 of the year" form, and PSYC4073 spans two terms
+          (multi-term course). `order`/`consecutive` above capture the sequence only.
+
+      - id: max-level-1
+        kind: limit
+        title: Level 1 UOC
+        from: level:1 or GEN*****
+        uoc: { max: 72 }
+        scope: root
+        original: >-
+          Students can take a maximum of 72 UOC of Level 1 courses, including any GEN# course, or
+          mainstream Level I course taken to fulfill the 12 UOC General Education requirement.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: { max: 36 }
+    overflow: true
+    original: >-
+      Students must complete 36 UOC of courses from any Faculty within the University, not including
+      GEN# coded courses. GEN# courses cannot count towards the free elective component in the program.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    uoc: 12
+    from: gened and not (faculty:SCI or GENS**** or FOOD**** or COMP**** or @medical_sciences_subjects)
+    original: >-
+      Students must complete 12 UOC of General Education courses. Any course defined as a Science course
+      (see Table 1) cannot be taken as General Education (GE). All other courses can be used to fulfil the
+      GE requirement of this program, including GEN# coded courses. Excluded: any course offered by
+      Faculty of Science, any GENS course, any FOOD course, any COMP course, any course offered by School
+      of Medical Sciences.
+  - id: exceptions-approval
+    kind: info
+    text: Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.
+
+  - id: maturity-level-2
+    kind: maturity
+    applies_to: level:2
+    require: uoc(24, level:1)
+    original: Students may not commence level 2 courses until 24 UOC of Level I courses have been successfully completed.
+  - id: maturity-level-3
+    kind: maturity
+    applies_to: level:3
+    require: uoc(72)
+    original: Students may commence Level 3 courses upon successful completion of 72 UOC.
+
+  - id: honours-entry
+    kind: maturity
+    applies_to: "@psyc_level_4_core"
+    require: reported_wam(75, psychology_average) and manual("Offered a place in the competitive fourth (Honours) year, subject to School resources")
+    original: >-
+      Entry into the fourth (Honours) year of this program is competitive, depends upon the availability
+      of School resources and is subject to academic performance, based on your Psychology Average
+      (Distinction minimum). The Psychology Average is calculated based on first attempt marks for
+      psychology core courses common to all psychology programs / specialisations (PSYC1001, PSYC1011,
+      PSYC1111; PSYC2001, PSYC2061, PSYC2071, PSYC2081, PSYC2101; PSYC3001, PSYC3011); and the three
+      highest first attempt marks of any completed Level 3 psychology electives. Neither Level 1 PSYC
+      electives nor psychology courses taken at another institution count towards the Psychology Average.
+    note: >-
+      SCHEMA GAP: first-attempt-only marks plus a "best three of a set" term cannot be computed with
+      `wam`; written as reported_wam (as §5.1 suggests for 3131). Students who do not meet it "will
+      normally ... transfer the Bachelor of Psychological Science (3435)" — a program-transfer outcome
+      the schema cannot represent.
+
+  - id: academic-standing
+    kind: info
+    text: >-
+      Students are required to achieve an average mark of 75 or higher in Psychology courses taken in any
+      Stage (based on the first attempt result for each course). Students not maintaining this level of
+      performance in Stage 1 will be counselled. Students who fail to achieve an average mark of 75 or
+      higher in all Psychology courses taken in Stages 2 and 3 will normally be required to transfer to
+      the Bachelor of Psychological Science (3435, Pass Degree).
+    note: SCHEMA GAP — first-attempt WAM over a selector (`wam(75, PSYC****, first_attempt)`) would make this checkable.
+  - id: full-time-load
+    kind: info
+    text: >-
+      This is a four-stage, full-time program. Students must enrol in a full study load of 48 UOC across
+      each year of the degree. Only in exceptional or unavoidable circumstances will students be allowed
+      to enrol in a reduced study load across any given year.
+    note: SCHEMA GAP — no per-year load constraint (min UOC per plan year).
+  - id: psyc3371-advice
+    kind: info
+    text: >-
+      Completion of PSYC3371 Multivariate Data Analysis for Psychology, in conjunction with PSYC3001, is
+      important as preparation for the Honours year.

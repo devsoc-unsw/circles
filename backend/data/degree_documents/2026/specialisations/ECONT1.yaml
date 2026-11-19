@@ -1,0 +1,31 @@
+# ECONT1 Data Analytics and Econometrics (Economics major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ECONT1
+#   (curriculum structure 2026.01.026, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: ECONT1
+year: 2026
+title: Data Analytics and Econometrics
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ECONT1
+  structure_version: "2026.01.026"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 36
+    courses: [ECON3209, ECON1102, ECON3203, ECON2206, ECON2101, ECON1101]
+    original: Student must take 36 UOC of the following courses
+
+  - id: electives
+    kind: pool
+    title: Prescribed Elective Courses
+    uoc: 12
+    from: [ECON2209, ECON3208, ECON3210, ECON3206, COMM3000]
+    original: Student must take 12 UOC of the following courses.

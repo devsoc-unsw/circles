@@ -1,0 +1,130 @@
+# 4825 Bachelor of Design, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4825
+#   (curriculum structure 2026.02.047, accessed 2026-10-10)
+# Lane C transcription. Shows: a 96 UOC "specialisation" filling the whole disciplinary component;
+# "GE is met if you complete an external major or minor" as a choice between the GE pool and a
+# completion check; an optional minor in free-elective space that may not double count.
+schema_version: "1.0"
+kind: program
+code: "4825"
+year: 2026
+title: Design
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Design]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4825
+  structure_version: "2026.02.047"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  # "General Education courses for this program are any that do not contain the subject area:
+  # ADAD, BENV, CODE, DART, DDES, FADA, or IDES."
+  design_ge_excluded_subjects: ADAD**** or BENV**** or CODE**** or DART**** or DDES**** or FADA**** or IDES****
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree.
+    children:
+      - id: specialisation
+        kind: spec
+        slot: specialisation
+        title: Specialisation Component
+        options: [CODEB1, DDESB1, IDESF1]
+        uoc: 96
+        original: You must complete one of the specialisations below.
+        note: >-
+          The handbook groups these under undergrad_major but each is the full 96 UOC disciplinary
+          component; slot type `specialisation` is used for display. The spec documents should declare
+          spec_kind themselves (not inferred).
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any
+    uoc: { max: 48 }
+    overflow: true
+    original: "You must complete 36 UOC of the following courses. (Rule: any course.)"
+    note: >-
+      Container is 36 UOC. The cap is 48 so that, when GE is met by an external minor (gen-ed-or-minor
+      below), the 12 UOC no longer needed for GE can be taken as electives to reach 144. Interpretation:
+      the handbook does not say what fills the freed 12 UOC.
+
+  - id: gen-ed-or-minor
+    kind: group
+    title: General Education
+    choose: 1
+    original: >-
+      You must complete 12 UOC of General Education courses. General Education courses for this program
+      are any that do not contain the subject area: ADAD, BENV, CODE, DART, DDES, FADA, or IDES. This
+      requirement is met if you complete an external major or minor.
+    children:
+      - id: gen-ed
+        kind: pool
+        role: gen_ed
+        title: General Education courses
+        uoc: 12
+        from: gened and not @design_ge_excluded_subjects
+      - id: external-minor-complete
+        kind: check
+        title: External minor completed instead of General Education
+        require: complete(external-minor)
+        note: >-
+          "External" is read as a minor whose subject area is not one of the GE-excluded subjects; the
+          handbook does not define it. "External major" has no optional-major slot in 4825, so only
+          minors are modelled.
+
+  # "If you are enrolled in the standalone program you may use your Free Elective courses to complete
+  # one of the optional minors listed below."
+  - id: optional-minor
+    kind: group
+    title: Optional Minor
+    choose: { min: 0, max: 1 }
+    original: >-
+      If you are enrolled in the standalone program you may use your Free Elective courses to complete
+      one of the optional minors listed below. If you intend to take an optional minor you are encouraged
+      to declare the minor as soon as possible. Please note: courses completed as part of your
+      disciplinary component cannot be double counted towards your minor.
+    children:
+      - id: internal-minor
+        kind: spec
+        slot: minor
+        title: Design Minors (and other minors in GE-excluded subject areas)
+        options: [BENVC2, BENVD2, CODEA2, DDESB2, DDESC2, DDESD2, IDESA2,
+                  # From "Other Minors": DART subject area, so not "external" for GE purposes.
+                  DARTC2, DARTE2, DARTG2, DARTH2]
+        counts_toward: [free-electives]
+        note: Handbook containers "Design Minors" plus the DART minors of "Other Minors" (regrouped for the GE rule).
+      - id: external-minor
+        kind: spec
+        slot: minor
+        title: Other Minors (external)
+        options: [ARTHB2, ASIAB2, ATSIC2, AUSTB2, CHINE2, CHINF2, COMDF2, COMMI2, CRWTA2, ENGLC2, ENVPE2,
+                  EUROC2, FILMB2, FRENF2, FRENG2, GEOGK2, GERSF2, GREKC2, HISTD2, INDOC2, ITALB2, JAPNF2,
+                  JAPNG2, KOREF2, KOREG2, LINGC2, MDIAO2, MDIAQ2, MDIAR2, MDIAT2, MUSCJ2, PHILE2, POLSG2,
+                  PSYCM2, SOCAE2, SOSSB2, SOSSC2, SOSSD2, SOSSH2, SPANI2, THSTC2, WOMSC2]
+        counts_toward: [free-electives]
+        original: The below optional minors are also available.
+
+  - id: no-double-count-minor
+    kind: info
+    text: >-
+      Please note: courses completed as part of your disciplinary component cannot be double counted
+      towards your minor.
+    note: >-
+      SCHEMA GAP: with no share declared, an overlap between the specialisation and the minor is reported
+      `unknown` (overlap_undeclared, §7.4 step 9), not `unmet`. The handbook states the answer
+      explicitly; a "forbid" share mode (overlap → unmet) would let it be enforced.
+  - id: declare-minor
+    kind: info
+    text: If you intend to take an optional minor you are encouraged to declare the minor as soon as possible.
+  - id: progression
+    kind: info
+    text: Progression rules are in accordance with university policy.

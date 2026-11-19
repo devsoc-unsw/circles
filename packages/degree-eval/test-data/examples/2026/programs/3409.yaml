@@ -1,0 +1,229 @@
+# 3409 Bachelor of Arts, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3409
+#   (curriculum structure 2026.05.106, accessed 2026-10-10)
+# Lane C transcription. Shows: "major + minor + 12 UOC PE, OR two majors" as a choice group; a
+# GE requirement that may be met inside the disciplinary component (share + enlarged FE cap); an
+# optional third specialisation in FE/GE space; maturity measured inside the major/minor.
+schema_version: "1.0"
+kind: program
+code: "3409"
+year: 2026
+title: Arts
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Arts]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3409
+  structure_version: "2026.05.106"
+  retrieved: 2026-10-10
+  status: partial
+  warnings:
+    - >-
+      Prescribed Electives may be "additional courses from the above Major or Minor specialisations";
+      the schema has no selector for "courses listed in any of these specs", so the pool approximates
+      them by the owning faculty (ADA) plus PSYC (PSYCD1/PSYCM2), and is warning-severity (see the node
+      note). Over-permissive: any ADA or PSYC course counts.
+
+sets:
+  # GE exclusion: "any that do not contain the subject area: ARTS, FADA, HUMS, INST, LING, MDIA, MUSC, SOSS".
+  arts_ge_excluded_subjects: >-
+    ARTS**** or FADA**** or HUMS**** or INST**** or LING**** or MDIA**** or MUSC**** or SOSS****
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    original: You must complete 96 UOC of the following including two specialisations.
+    children:
+      - id: major
+        kind: spec
+        slot: major
+        title: Majors
+        options: &arts_majors [ASIAB1, ATSIC1, CHINE1, CHINF1, COMDF1, CRIMC1, CRWTA1, ENGLC1, ENVPE1,
+                               EUROC1, FILMB1, FRENF1, FRENG1, GEOGK1, GERSF1, HISTD1, JAPNF1, JAPNG1,
+                               KOREF1, KOREG1, LINGC1, MECTC1, MUSCJ1, MUSCK1, PHILE1, POLSG1, PSYCD1,
+                               SOCAE1, SPANI1, THSTC1]
+        original: You must complete at least one of the following Major specialisations (48 UOC).
+
+      # "Either: Major + Minor + Prescribed Electives (12 UOC) OR Major + second Major" (program summary).
+      - id: second-specialisation
+        kind: group
+        title: Minor and Prescribed Electives, or a second Major
+        choose: 1
+        original: >-
+          You must complete at least one of the following Minor specialisations (36 UOC) or a second
+          Major specialisation listed above (48 UOC).
+        children:
+          - id: minor-route
+            kind: group
+            title: Minor (36 UOC) plus Prescribed Electives (12 UOC)
+            children:
+              - id: minor
+                kind: spec
+                slot: minor
+                title: Minors
+                options: [ARTHB2, ASIAB2, ATSIC2, AUSTB2, CHINE2, CHINF2, COMDF2, CRIMC2, CRWTA2, ENGLC2,
+                          ENVPE2, EUROC2, FILMB2, FRENF2, FRENG2, GEOGK2, GERSF2, GREKC2, HISTD2, INDOC2,
+                          ITALB2, JAPNF2, JAPNG2, KOREF2, KOREG2, LEGLC2, LINGC2, MATHB2, MECTC2, MUSCJ2,
+                          PHILE2, POLSG2, PSYCM2, SOCAE2, SOSSB2, SOSSC2, SOSSD2, SOSSG2, SPANI2, THSTC2,
+                          WOMSC2]
+                distinct_from: [{ node: major, by: subject }]
+                original: >-
+                  PLEASE NOTE: 1. Your minor must be in a different specialisation area from your major,
+                  e.g. you cannot complete a minor in Chinese Studies and a major in Advanced Chinese
+                  Studies. 2. The following two minors are not available in the single degree 3409
+                  Bachelor of Arts, but only in the specified double degrees as follows. The Mathematics
+                  for Engineers minor is only available in 3961 Engineering (Honours)/Arts and 3732
+                  Engineering Science/Arts. The Legal Studies minor is only available in 4053
+                  Arts/Education (Secondary).
+                note: >-
+                  "Different specialisation area" is approximated by `by: subject` (first 4 letters of the
+                  spec code), which matches the handbook example (CHINE vs CHINF). MATHB2 and LEGLC2 stay in
+                  the options because 3409's disciplinary component is imported by the named double degrees;
+                  their own documents must carry allowed_if: program(3961, 3732) / program(4053). Not written
+                  in this lane.
+              - id: prescribed-electives
+                kind: pool
+                title: Prescribed Electives
+                uoc: 12
+                from: "@arts_prescribed_electives or faculty:ADA or PSYC****"
+                severity: warning
+                original: >-
+                  If you do not complete a second Major specialisation, you must complete 12 UOC of
+                  additional courses from the above Major or Minor specialisations, or from the following
+                  courses. HUMS1005, HUMS1006, HUMS2006, HUMS2007, ARTS2050, FADA3900, FADA6700
+                note: >-
+                  SCHEMA GAP: "additional courses from the above Major or Minor specialisations" needs a
+                  selector over the course lists of a spec group (e.g. courses_of(@arts_specs)). Until then
+                  the pool takes the named courses plus any course owned by the Faculty of Arts, Design &
+                  Architecture, plus PSYC (PSYCD1/PSYCM2 are Arts-listed specs owned by Science). This is
+                  needed, not cosmetic: every Arts major/minor pool is capped at its exact UOC, so extra
+                  major/minor courses cannot stay in the spec subtree; with only the named courses here they
+                  overflowed to free-electives and `disciplinary` fell to 84 < 96 (unmet). The selector is
+                  over-permissive (any ADA or PSYC course counts, not only courses on a listed spec), and
+                  extra courses of a spec owned elsewhere (MATHB2, LEGLC2: double degrees only; any other
+                  non-ADA subject, unverified) still do not count. Severity stays warning.
+          - id: second-major
+            kind: spec
+            slot: major
+            title: Second Major
+            options: *arts_majors
+            distinct_from: [{ node: major }]
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any
+    uoc: { max: 48 }
+    overflow: true
+    original: >-
+      You must complete 36 UOC of Free Electives. You may use your Free Electives to complete a third
+      specialisation. See the Optional Specialisations section for details.
+    note: >-
+      The container is 36 UOC, but the GE description allows Free Electives to replace GE when GE is met
+      inside the disciplinary component (share below), so the cap is 36 + 12 = 48. With GE taken
+      normally, the 144 UOC total keeps FE at 36. Handbook rule: "any course" (GEN# not excluded).
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: gened and not @arts_ge_excluded_subjects
+    uoc: 12
+    original: >-
+      You must complete 12 UOC of General Education courses. General Education courses for this program
+      are any that do not contain the subject area: ARTS, FADA, HUMS, INST, LING, MDIA, MUSC, SOSS. It may
+      be possible to meet the General Education requirements through the disciplinary component of the
+      degree by taking courses outside the excluded codes above, in which case Free Electives may be
+      substituted for the General Education requirement.
+
+  # "If you are enrolled in the standalone program, you may complete a third specialisation":
+  # one optional slot, either an ADA minor (FE only) or an outside specialisation (FE and/or GE).
+  - id: optional-specialisations
+    kind: group
+    title: Optional Specialisations
+    choose: { min: 0, max: 1 }
+    original: >-
+      If you are enrolled in the standalone program, you may complete a third specialisation as
+      specified below.
+    children:
+      - id: optional-ada-minor
+        kind: spec
+        slot: minor
+        title: Optional Minors offered by Arts, Design & Architecture
+        options: [CODEA2, DARTC2, DARTE2, DARTG2, DARTH2, DDESB2, DDESC2, DDESD2, IDESA2, MDIAO2, MDIAR2,
+                  MDIAT2, SOSSE2, SOSSH2,
+                  # "...from those listed in the Disciplinary Component" (the Minors list above)
+                  ARTHB2, ASIAB2, ATSIC2, AUSTB2, CHINE2, CHINF2, COMDF2, CRIMC2, CRWTA2, ENGLC2,
+                  ENVPE2, EUROC2, FILMB2, FRENF2, FRENG2, GEOGK2, GERSF2, GREKC2, HISTD2, INDOC2,
+                  ITALB2, JAPNF2, JAPNG2, KOREF2, KOREG2, LEGLC2, LINGC2, MATHB2, MECTC2, MUSCJ2,
+                  PHILE2, POLSG2, PSYCM2, SOCAE2, SOSSB2, SOSSC2, SOSSD2, SOSSG2, SPANI2, THSTC2,
+                  WOMSC2]
+        counts_toward: [free-electives]
+        distinct_from: [{ node: major, by: subject }, { node: second-major, by: subject }, { node: minor }]
+        original: >-
+          You may use your Free Elective courses to complete an additional minor from those listed in
+          the Disciplinary Component or from the list below.
+        note: >-
+          Distinctness from the major/second major by subject is an assumption carried over from the
+          minor rule; the handbook states it only for the disciplinary minor.
+      - id: optional-outside-spec
+        kind: spec
+        slot: any
+        title: Optional Specialisations offered outside Arts, Design & Architecture
+        options: [ATSIC1, COMMI1, COMMI2, CRIMC1, ECONA1, ECONA2, IBUSA1, IBUSA2, INFSA1, INFSA2, MARKA1,
+                  MARKA2, MGMTH1, MGMTH2, MGMTJ1, PSYCD1, PSYCM2]
+        counts_toward: [free-electives, gen-ed]
+        distinct_from: [{ node: major }, { node: second-major }, { node: minor }]
+        original: >-
+          You may use your Free Elective and/or General Education courses to complete an additional
+          specialisation from the below.
+        note: >-
+          Handbook discrepancy: ATSIC1, CRIMC1, PSYCD1 and PSYCM2 are Arts majors/minors yet listed here
+          as "outside Arts, Design & Architecture"; transcribed as listed. A 48 UOC major here exceeds the
+          36 FE + 12 GE allowance only if GE is not met elsewhere; not checked.
+
+  - id: maturity-level-2
+    kind: maturity
+    applies_to: level:2
+    require: uoc(24)
+    original: You must have completed 24 UOC before taking any Level 2 courses.
+  - id: maturity-level-3
+    kind: maturity
+    applies_to: level:3
+    require: >-
+      uoc(48) and uoc(6, level:1 and (in:major or in:second-major or in:minor))
+      and uoc(6, level:2 and (in:major or in:second-major or in:minor))
+    original: >-
+      You must have completed 48 UOC, including 6 UOC at Level 1 and 6 UOC at Level 2 in your
+      major/minor before taking any Level 3 courses.
+    note: >-
+      Read as 6 UOC at each level across the student's major(s)/minor combined. The handbook may mean
+      "in the specialisation the Level 3 course belongs to"; that per-course reading needs a selector
+      relative to the matching instance's own allocation (SCHEMA GAP, see report).
+
+  - id: declare-specialisations
+    kind: info
+    text: You must specify your specialisations at the time of enrolment in Level 2 courses.
+
+  - id: double-degree-rule
+    kind: info
+    text: >-
+      If you are enrolled in a double degree program, you must complete the Bachelor of Arts
+      disciplinary component (96 UOC) and follow the rules for your double degree.
+    note: Double degrees import `disciplinary` as a component (§8).
+
+shares:
+  - between: [gen-ed, disciplinary]
+    courses: gened and not @arts_ge_excluded_subjects
+    original: >-
+      It may be possible to meet the General Education requirements through the disciplinary component
+      of the degree by taking courses outside the excluded codes above, in which case Free Electives may
+      be substituted for the General Education requirement.
+    note: >-
+      Shares fill gen-ed only after real GE courses (step 5 runs after step 2). Because a share counts
+      once in the root total, the 12 UOC freed is filled by free electives (cap 48).

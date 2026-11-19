@@ -1,0 +1,109 @@
+# 8543 Master of Information Technology, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/postgraduate/programs/2026/8543
+#   (curriculum structure 2026.01.006; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+# Code verified: 8543 = "Information Technology", award Master of Information Technology (MIT), 96 UOC.
+schema_version: "1.0"
+kind: program
+code: "8543"
+year: 2026
+title: Information Technology
+career: pgrd
+uoc: 96
+duration_years: 2
+awards: [Master of Information Technology]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/postgraduate/programs/2026/8543
+  structure_version: "2026.01.006"
+  retrieved: 2026-10-09
+  status: partial
+  warnings:
+    - >-
+      The permitted specialisation combinations come from the program overview text, not the
+      curriculum structure (which has a single "Specialisation Options" container). They are modelled
+      as an optional second slot plus a check; meeting "the requirements of both specialisations"
+      inside 96 UOC relies on an undocumented-in-data both-ways share between the two slots.
+    - >-
+      The COMPLS/COMPXS Specialisation Core Course double-count as a Disciplinary Knowledge Elective
+      is left as info.
+
+requirements:
+  - id: specialisation
+    kind: spec
+    slot: specialisation
+    title: Specialisation Options
+    options: [COMPLS, COMPMS, COMPNS, COMPOS, COMPXS]
+    default: COMPMS
+    original: >-
+      Students must complete one of the following specialisations. Information Technology (COMPMS) is
+      the default specialisation for this program and will be selected if no other specialisation is
+      nominated. Students have the option to take the specialisation combinations listed in the
+      Handbook Overview.
+
+  - id: second-specialisation
+    kind: spec
+    slot: specialisation
+    title: Optional second specialisation
+    options: [COMPNS, COMPOS]
+    count: { min: 0, max: 1 }
+    distinct_from: [{ node: specialisation }]
+    original: >-
+      The following specialisation combinations are available to students wishing to take a second
+      specialisation. Students must meet the requirements of both specialisations. COMPLS Artificial
+      Intelligence – COMPNS Database Systems; COMPLS Artificial Intelligence – COMPOS Internetworking;
+      COMPXS Cyber Security Engineering – COMPNS Database Systems; COMPXS Cyber Security Engineering –
+      COMPOS Internetworking; COMPNS Database Systems – COMPOS Internetworking
+    note: >-
+      Every permitted pair contains COMPNS or COMPOS, so the second slot offers only those two. The
+      check below rejects COMPMS with a second specialisation.
+
+  - id: specialisation-combination
+    kind: check
+    title: Permitted specialisation combinations
+    require: not (spec(COMPMS) and (spec(COMPNS) or spec(COMPOS)))
+    note: >-
+      Together with the slot options and distinct_from, this admits exactly the five listed pairs (in
+      either slot order for COMPNS–COMPOS).
+
+  - id: spec-core-double-count
+    kind: info
+    title: COMPLS/COMPXS core course as a Disciplinary Knowledge Elective
+    text: >-
+      Students taking a combination with COMPLS or COMPXS can double count the Specialisation Core
+      Course (6 UOC) in COMPLS or COMPXS as a Disciplinary Knowledge Elective (6 UOC) when taking a
+      Research/Capstone/Project Option that requires a Disciplinary Knowledge Elective.
+
+  - id: progression
+    kind: info
+    title: Progression and articulation
+    text: >-
+      The courses in each specialisation form an articulated sequence. Students who complete the
+      Graduate Diploma program may upgrade to the Masters program with full credit for the courses
+      undertaken, provided they have completed the previous program at UNSW. A pass average (50) and
+      successful completion of 18 UOC is required to articulate to the next level in the sequence.
+      Students who have enrolled in the Masters will be permitted to exit with a Graduate Diploma or
+      Graduate Certificate in the specialisation sequence providing they have completed the
+      requirements of that program. Subject to the approval of the program authority and available
+      places, students will be permitted to transfer to another specialisation with credit transfer
+      being subject to the requirements of the specialisation into which the student is transferring.
+
+  - id: advanced-standing
+    kind: info
+    title: Advanced standing
+    text: Advanced standing of up to 1 year is possible for students with an appropriate qualification.
+
+shares:
+  - between: [specialisation, second-specialisation]
+    note: >-
+      "Students must meet the requirements of both specialisations" within the 96 UOC program total,
+      so a course may count in both specialisations (the five specs share Foundational and Advanced
+      cores and each lists the other's Disciplinary Knowledge Electives among its Electives).
+
+classes:
+  - name: Award with Excellence
+    require: >-
+      wam(80, in:root) and manual("At least 50% of the requirements of the award completed at UNSW")
+    note: >-
+      "The Award with Excellence is awarded in coursework masters programs ... when a Weighted Average
+      Mean (WAM) of at least 80% has been achieved and at least 50% of the requirements of the award
+      are completed at UNSW."

@@ -28,6 +28,10 @@ export type Course = {
   is_accurate: boolean;
   is_multiterm: boolean;
   handbook_note: string;
+  groupwork?: boolean;
+  faculty?: string;
+  gen_ed?: boolean;
+  equivalents?: Record<string, number>;
 };
 
 export type SearchCourse = Record<string, string>;

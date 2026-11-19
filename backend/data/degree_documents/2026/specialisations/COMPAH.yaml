@@ -1,0 +1,61 @@
+# COMPAH Computer Science (honours specialisation in 4515), handbook year 2026
+# Sources:
+#   https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/COMPAH (structure 2026.01.002)
+#   https://www.handbook.unsw.edu.au/undergraduate/programs/2026/4515 (entry WAM, honours classes)
+#   accessed 2026-10-08
+schema_version: "1.0"
+kind: specialisation
+code: COMPAH
+year: 2026
+title: Computer Science
+spec_kind: honours
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/COMPAH
+  structure_version: "2026.01.002"
+  retrieved: 2026-10-08
+  status: partial
+  warnings:
+    - >-
+      Handbook has a 0-UOC "One of the following: COMP3891 | COMP3821" container inside Coursework;
+      interpreted as "at most one of these two may count", which is unverified.
+    - Handbook rule JSON uses "code = COMP9" (equality); the description "any level 9 Computer Science course" is used.
+
+# Entry is evaluated against the student's record at the point of admission (advisory in the planner).
+entry:
+  and:
+    - reported_wam(65, prior_program)
+    - manual("Completed a 3-year BSc in Computer Science or Bioinformatics at UNSW (or equivalent), or a Bachelor of Data Science and Decisions with a Computational Data Science major")
+    - manual("Nominated a thesis topic with an available supervisor")
+
+requirements:
+  - id: thesis
+    kind: core
+    title: Thesis
+    uoc: 18
+    courses: [COMP4961, COMP4962, COMP4963]
+  - id: thesis-sequence
+    kind: timing
+    severity: warning
+    courses: COMP4961 or COMP4962 or COMP4963
+    order: [COMP4961, COMP4962, COMP4963]
+    consecutive: true
+
+  - id: coursework
+    kind: pool
+    title: Coursework
+    uoc: { min: 30 }
+    from: COMP4*** or COMP6*** or COMP9*** or COMP3891 or COMP3821
+    quotas:
+      - from: COMP3891 or COMP3821
+        count: { max: 1 }
+
+  - id: thesis-mark
+    kind: check
+    severity: warning
+    title: Thesis result for Class 1 consideration
+    require: grade(65, COMP4963)
+    note: Not a completion requirement; shown so students can see their thesis result.
+
+# Honours classes are program-level (see ../programs/4515.yaml `classes`).

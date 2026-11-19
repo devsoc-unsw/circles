@@ -1,0 +1,38 @@
+# ACTLE1 Actuarial Risk Management and Analytics (optional major in 3586), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ACTLE1
+#   (curriculum structure 2026.02.007, accessed 2026-10-10; transcribed 2026-10-10 by Lane B)
+schema_version: "1.0"
+kind: specialisation
+code: ACTLE1
+year: 2026
+title: Actuarial Risk Management and Analytics
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ACTLE1
+  structure_version: "2026.02.007"
+  retrieved: 2026-10-10
+  status: complete
+
+requirements:
+  - id: core
+    kind: core
+    title: Core Courses
+    uoc: 12
+    courses: [RISK2001, ACTL3142]
+    original: Students must take 12 UOC of the following courses.
+
+  - id: electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: 36
+    from: >-
+      ACTL3192 or ACTL3301 or ACTL3141 or ACTL4305 or ACTL3162 or ACTL4001 or ACTL4002 or ACTL3182 or
+      RISK3003 or ACTL3191 or RISK3005 or RISK2002 or ACTL4306 or ACTL4307 or ACTL3143
+    original: >-
+      Students must complete 36 UOC from the following courses. Note that enrolment in the optional
+      electives ACTL4001 and ACTL4002 requires satisfactory performance in courses associated with the
+      professional "Part 1" courses from the Actuaries Institute - detailed information can be found from
+      the School of Risk and Actuarial Studies.
+    note: The ACTL4001/ACTL4002 enrolment condition belongs in those courses' course_conditions.

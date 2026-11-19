@@ -22,7 +22,7 @@ def scrape_course_data(year = None):
     write_data to dump the json to an OUTPUT_FILE
     """
 
-    data = do_requests("subject", items_per_req=100, max_items=TOTAL_COURSES)
+    data = do_requests("subject", items_per_req=100, max_items=TOTAL_COURSES, year=year)
 
     # for now, filter courses to get only undergrad (remove later)
     data = [obj for obj in data if obj["studyLevelValue"] == "ugrd"]

@@ -1,0 +1,94 @@
+# Conformance fixture (SCHEMA.md §15). REVIEW-2 N5: exact pool fill when the minimum cannot be hit
+# exactly, or when a count minimum forces overshoot. The DP must keep the exact UOC above the minimum.
+fixture_version: "1.0"
+id: n5-overshoot
+findings: [N5, M5]
+title: Overshoot in exact pool fill (synthetic program)
+description: >-
+  Pool A needs at least 30 UOC; its candidates in canonical order are 6, 6, 6, 4, 4, 6, 6. A greedy
+  fill takes 6+6+6+4+4 = 26 and then 6, for 32 UOC in six courses. The step 2 order prefers the five
+  6 UOC courses (30 UOC; criterion 4, smallest total UOC), so both 4 UOC courses go to free electives.
+  Pool B needs at least 30 UOC and at least 6 courses; its candidates are 6, 6, 6, 6, 6, 4, 4. Every
+  admissible set overshoots. Four 6s + both 4s give 32 UOC; five 6s + one 4 give 34. Criterion 4 picks
+  32. A DP whose UOC dimension is capped at the minimum (30) sees both as 30 and, with equal counts,
+  falls through to criterion 7, picking the lexicographically smaller indices [0,1,2,3,4,5] = 34 UOC.
+  Greedy also gives 34 (five 6s, then a 4 for the count).
+bundle:
+  documents:
+    - examples/2026/library.yaml
+  inline:
+    - schema_version: "1.0"
+      kind: program
+      code: "9901"
+      year: 2026
+      title: Overshoot test program (synthetic)
+      career: ugrd
+      uoc: 76
+      provenance: { source: local, note: "Synthetic fixture program; not handbook data. SYNA/SYNB codes are placeholders." }
+      requirements:
+        - { id: pool-a, kind: pool, from: SYNA****, uoc: { min: 30 } }
+        - { id: pool-b, kind: pool, from: SYNB****, uoc: { min: 30 }, count: { min: 6 } }
+        - { id: free-electives, kind: pool, role: free_elective, from: any, uoc: { min: 0 }, overflow: true }
+  catalogue:
+    note: Fixture inputs; all codes are placeholders.
+    courses:
+      SYNA1001: { uoc: 6 }
+      SYNA1002: { uoc: 6 }
+      SYNA1003: { uoc: 6 }
+      SYNA1004: { uoc: 4 }
+      SYNA1005: { uoc: 4 }
+      SYNA1006: { uoc: 6 }
+      SYNA1007: { uoc: 6 }
+      SYNB1001: { uoc: 6 }
+      SYNB1002: { uoc: 6 }
+      SYNB1003: { uoc: 6 }
+      SYNB1004: { uoc: 6 }
+      SYNB1005: { uoc: 6 }
+      SYNB1006: { uoc: 4 }
+      SYNB1007: { uoc: 4 }
+student:
+  program: "9901"
+  year: 2026
+  horizon: planned
+  plan:
+    - { iid: a1, code: SYNA1001, term: 1, status: planned }
+    - { iid: a2, code: SYNA1002, term: 1, status: planned }
+    - { iid: a3, code: SYNA1003, term: 1, status: planned }
+    - { iid: a4, code: SYNA1004, term: 1, status: planned }
+    - { iid: a5, code: SYNA1005, term: 1, status: planned }
+    - { iid: a6, code: SYNA1006, term: 1, status: planned }
+    - { iid: a7, code: SYNA1007, term: 1, status: planned }
+    - { iid: b1, code: SYNB1001, term: 2, status: planned }
+    - { iid: b2, code: SYNB1002, term: 2, status: planned }
+    - { iid: b3, code: SYNB1003, term: 2, status: planned }
+    - { iid: b4, code: SYNB1004, term: 2, status: planned }
+    - { iid: b5, code: SYNB1005, term: 2, status: planned }
+    - { iid: b6, code: SYNB1006, term: 2, status: planned }
+    - { iid: b7, code: SYNB1007, term: 2, status: planned }
+expect:
+  nodes:
+    root: { status: met, counted_uoc: 76 }
+    pool-a: { status: met, counted_uoc: 30 }
+    pool-b: { status: met, counted_uoc: 32 }
+    free-electives: { status: met, counted_uoc: 14 }
+  allocations:
+    a1: { primary: pool-a }
+    a2: { primary: pool-a }
+    a3: { primary: pool-a }
+    a4: { primary: free-electives }
+    a5: { primary: free-electives }
+    a6: { primary: pool-a }
+    a7: { primary: pool-a }
+    b1: { primary: pool-b }
+    b2: { primary: pool-b }
+    b3: { primary: pool-b }
+    b4: { primary: pool-b }
+    b5: { primary: free-electives }
+    b6: { primary: pool-b }
+    b7: { primary: pool-b }
+  not_counted: []
+notes:
+  - >-
+    Pool B's chosen set is the lexicographically smallest of the 32 UOC sets: b1-b4 plus b6 and b7
+    (indices 0, 1, 2, 3, 5, 6), so b5 is left for free electives.
+  - Scarcity (criterion 6) is 0 for every candidate; the free-elective pool is an overflow pool.

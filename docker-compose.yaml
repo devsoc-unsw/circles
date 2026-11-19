@@ -1,6 +1,6 @@
 services:
   mongodb:
-    image: mongo:6.0.14
+    image: mongo:9.0.4
     container_name: circles-mongodb
     volumes:
       # Named volume to persist database
@@ -70,6 +70,8 @@ services:
     build:
       context: ./frontend
       dockerfile: dev.dockerfile
+      additional_contexts:
+        degree-eval: ./packages/degree-eval
     container_name: circles-frontend
     ports:
       - '3000:3000'
@@ -78,6 +80,7 @@ services:
     volumes:
       # Bind mount volume for live frontend updates while developing
       - ./frontend/src:/client/src
+      - ./packages/degree-eval/src:/packages/degree-eval/src
     stdin_open: true
     tty: true
     depends_on:
@@ -89,6 +92,11 @@ services:
     build:
       context: ./frontend
       dockerfile: production.dockerfile
+      additional_contexts:
+        degree-eval: ./packages/degree-eval
+      args:
+        # build the progression checker on the degree evaluator: DEGREE_EVAL=true docker compose build
+        DEGREE_EVAL: ${DEGREE_EVAL:-false}
     container_name: circles-frontend-prod
     ports:
       - '3000:80'

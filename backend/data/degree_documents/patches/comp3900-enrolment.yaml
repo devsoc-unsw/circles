@@ -1,0 +1,29 @@
+# Hand-written override replacing the partially parsed COMP3900 prerequisite for 2024-2027.
+# Replaces backend/data/processors/manual_fixes/COMPFixes.py:COMP_3900 (which emitted
+# "... && COMP# && 102UOC" while its docstring claimed "102UOC in (COMP?1 || COMPBH)").
+# Source text: https://www.handbook.unsw.edu.au/undergraduate/courses/2026/COMP3900 (accessed 2026-10-08)
+schema_version: "1.0"
+kind: patch
+id: comp3900-enrolment
+target:
+  kind: course_conditions
+  years: { from: 2024, to: 2027 }
+# If the handbook wording changes, the patch is reported stale instead of silently applied.
+expect:
+  COMP3900.original: >-
+    Prerequisite: COMP1531, and COMP2521 or COMP1927, and enrolled in a BSc Computer Science major
+    or Advanced Computer Science Honours major with completion of 102 UOC.
+provenance:
+  source: patch
+  authors: [circles-schema-draft]
+  reviewed: 2026-10-08
+reason: >-
+  "BSc Computer Science major" = any 3778 major (COMP?1). "Advanced Computer Science Honours major"
+  is mapped to COMPAH/COMPBH following the existing Circles fix; needs confirmation from CSE.
+ops:
+  - op: set
+    target: COMP3900
+    fields:
+      requires: COMP1531 and (COMP2521 or COMP1927) and spec(COMP*1, COMPAH, COMPBH) and uoc(102)
+      status: parsed
+      warnings: []

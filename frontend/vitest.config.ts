@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { searchForWorkspaceRoot } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 const projectRootDir = resolve(__dirname);
@@ -20,9 +21,23 @@ export default defineConfig({
     },
     fileParallelism: false
   },
+  server: {
+    fs: {
+      // same as vite.config.ts: the degree documents are read from the package
+      allow: [
+        searchForWorkspaceRoot(process.cwd()),
+        resolve(projectRootDir, '../packages/degree-eval')
+      ]
+    }
+  },
   resolve: {
     alias: [
       // TODO: alias should be sync with vite.config.ts
+      // @circles/degree-eval is source-only: alias to src/ so edits hot-reload without reinstalling
+      {
+        find: /^@circles\/degree-eval$/,
+        replacement: resolve(projectRootDir, '../packages/degree-eval/src/index.ts')
+      },
       { find: 'assets', replacement: resolve(projectRootDir, 'src/assets') },
       { find: 'components', replacement: resolve(projectRootDir, './src/components') },
       { find: 'config', replacement: resolve(projectRootDir, './src/config') },

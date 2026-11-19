@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Typography } from 'antd';
+import { TeamOutlined } from '@ant-design/icons';
+import { Tag, Typography } from 'antd';
 import { Course } from 'types/api';
 import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import TermTag from 'components/TermTag';
@@ -24,7 +25,7 @@ const CourseAttributes = ({ course }: CourseAttributesProps) => {
   const { pathname } = useLocation();
   const sidebar = pathname === '/course-selector';
 
-  const { study_level: studyLevel, terms, campus, code, school, UOC } = course;
+  const { study_level: studyLevel, terms, campus, code, school, UOC, groupwork } = course;
 
   const currentTerm = getMostRecentPastTerm(CURR_YEAR).T;
 
@@ -80,6 +81,16 @@ const CourseAttributes = ({ course }: CourseAttributesProps) => {
         {
           title: 'Offering Terms',
           content: termTags
+        },
+        {
+          title: 'Group Work',
+          // Only surface the indicator when the course has group work, mirroring the
+          // Term Planner where the indicator only appears for group work courses.
+          content: groupwork ? (
+            <Tag icon={<TeamOutlined />} color="purple">
+              Includes group work
+            </Tag>
+          ) : null
         },
         {
           title: 'UNSW Handbook',

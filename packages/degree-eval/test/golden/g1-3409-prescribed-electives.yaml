@@ -1,0 +1,88 @@
+# Golden trace (EVALUATOR.md §6): catalogue-reports/FIXES.md fix 1, "after" expectations.
+fixture_version: "1.0"
+id: g1-3409-prescribed-electives
+title: 3409 extra English courses fill Prescribed Electives
+description: >-
+  Major ENGLC1 (ARTS1030, ARTS1031 = 12; six L2/L3 English courses = 36), a 36 UOC minor, two extra
+  English-list courses ARTS2033 and ARTS3015 (12), 36 UOC of non-ADA free electives and 12 UOC of
+  gen-ed. ENGLC1 level-2-3 is capped at exactly 36, so the two extra courses cannot enter the major;
+  with the widened selector they are ADA courses and fill prescribed-electives. disciplinary is
+  48 + 36 + 12 = 96 and the root is 144 (met).
+bundle:
+  documents:
+    - examples/2026/library.yaml
+    - examples/2026/programs/3409.yaml
+    - examples/2026/specialisations/ENGLC1.yaml
+  inline:
+    # HISTD2 is not in the example corpus. This stand-in keeps the trace's only use of it: a 36 UOC
+    # minor, in a different subject area from the major.
+    - schema_version: "1.0"
+      kind: specialisation
+      code: HISTD2
+      year: 2026
+      title: History (stand-in)
+      spec_kind: minor
+      uoc: 36
+      provenance: { source: local, note: "Golden-trace stand-in; not handbook data." }
+      requirements:
+        - { id: history, kind: pool, from: HIST****, uoc: 36 }
+  catalogue:
+    default: { uoc: 6, faculty: ADA }
+    courses:
+      COMP1511: { uoc: 6, faculty: ENG }
+      COMP1521: { uoc: 6, faculty: ENG }
+      COMP1531: { uoc: 6, faculty: ENG }
+      COMP2521: { uoc: 6, faculty: ENG }
+      COMP2511: { uoc: 6, faculty: ENG }
+      COMP3311: { uoc: 6, faculty: ENG }
+      PHYS1160: { uoc: 6, faculty: SCI, gened: true }
+      GEOS1111: { uoc: 6, faculty: SCI, gened: true }
+student:
+  program: "3409"
+  year: 2026
+  horizon: planned
+  selections:
+    major: [ENGLC1]
+    second-specialisation: [minor-route]
+    minor: [HISTD2]
+  plan:
+    - { iid: arts1030, code: ARTS1030, term: 1, status: planned }
+    - { iid: arts1031, code: ARTS1031, term: 1, status: planned }
+    - { iid: hist1001, code: HIST1001, term: 1, status: planned }
+    - { iid: hist1002, code: HIST1002, term: 2, status: planned }
+    - { iid: comp1511, code: COMP1511, term: 2, status: planned }
+    - { iid: phys1160, code: PHYS1160, term: 2, status: planned }
+    - { iid: arts2031, code: ARTS2031, term: 3, status: planned }
+    - { iid: arts2034, code: ARTS2034, term: 3, status: planned }
+    - { iid: comp1521, code: COMP1521, term: 3, status: planned }
+    - { iid: hist2001, code: HIST2001, term: 4, status: planned }
+    - { iid: hist2002, code: HIST2002, term: 4, status: planned }
+    - { iid: geos1111, code: GEOS1111, term: 4, status: planned }
+    - { iid: arts3022, code: ARTS3022, term: 5, status: planned }
+    - { iid: arts3023, code: ARTS3023, term: 5, status: planned }
+    - { iid: comp1531, code: COMP1531, term: 5, status: planned }
+    - { iid: arts3025, code: ARTS3025, term: 6, status: planned }
+    - { iid: arts3037, code: ARTS3037, term: 6, status: planned }
+    - { iid: comp2521, code: COMP2521, term: 6, status: planned }
+    - { iid: hist3001, code: HIST3001, term: 7, status: planned }
+    - { iid: hist3002, code: HIST3002, term: 7, status: planned }
+    - { iid: comp2511, code: COMP2511, term: 7, status: planned }
+    - { iid: arts2033, code: ARTS2033, term: 8, status: planned }
+    - { iid: arts3015, code: ARTS3015, term: 8, status: planned }
+    - { iid: comp3311, code: COMP3311, term: 8, status: planned }
+expect:
+  nodes:
+    root: { status: met, counted_uoc: 144 }
+    disciplinary: { status: met, counted_uoc: 96 }
+    prescribed-electives: { status: met, counted_uoc: 12 }
+    free-electives: { status: met, counted_uoc: 36 }
+    gen-ed: { status: met, counted_uoc: 12 }
+    spec:ENGLC1/level-1: { status: met, counted_uoc: 12 }
+    spec:ENGLC1/level-2-3: { status: met, counted_uoc: 36 }
+    spec:HISTD2/history: { status: met, counted_uoc: 36 }
+  allocations:
+    arts2033: { primary: prescribed-electives }
+    arts3015: { primary: prescribed-electives }
+    comp3311: { primary: free-electives }
+    phys1160: { primary: gen-ed }
+  not_counted: []

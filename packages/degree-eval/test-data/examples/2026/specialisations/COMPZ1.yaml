@@ -1,0 +1,54 @@
+# COMPZ1 Computational Data Science (major in 3959), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/COMPZ1
+#   (curriculum structure 2026.02.056; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: COMPZ1
+year: 2026
+title: Computational Data Science
+spec_kind: major
+uoc: 66
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/COMPZ1
+  structure_version: "2026.02.056"
+  retrieved: 2026-10-09
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 18
+    courses: [COMP1511, MATH1081, MATH1131]
+    original: Students must take 18 UOC of the following courses.
+    note: >-
+      The handbook lists MATH1131 only (no MATH1141 alternative), although 3959's program core accepts
+      MATH1131 or MATH1141. Transcribed as published; MATH1141 counts only if the catalogue lists it as
+      an equivalent.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 12
+    courses: [COMP2041, COMP2521]
+    original: Students must take 12 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 18
+    courses: [COMP3121, COMP9313, COMP9417]
+    original: Students must take 18 UOC of the following courses.
+
+  - id: prescribed-electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: { min: 18 }
+    from: [ACTL3141, ACTL3142, ACTL3143, ACTL4305, ACTL4306, ACTL4307,
+           COMP3411, COMP4121, COMP4418, COMP6441, COMP6714, COMP6771, COMP6841, COMP9315, COMP9319, COMP9418,
+           ECON1102, ECON2101, ECON2103, ECON2107, ECON2111, ECON2206, ECON2209, ECON3107, ECON3123, ECON3206, ECON3208,
+           INFS1602, INFS3603, MARK2012, MARK3054, MARK3085,
+           MATH2011, MATH2111, MATH2831, MATH2871, MATH2931, MATH3041, MATH3161, MATH3411, MATH3821, MATH3871, MATH5836]
+    original: Students must take at least 18 UOC of the following courses.
+    note: Structured data gives 18 UOC (min = max); the wording "at least" is followed.

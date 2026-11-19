@@ -5,12 +5,18 @@ initialisation.
 NOTE: The helper functions must be run from the backend directory due to their paths
 """
 
+import hashlib
 import json
+import os
+import re
+from typing import Any, Optional
 
-from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
+import yaml
+
+from server.config import ARCHIVED_DATA_PATH, DEGREE_DOCUMENTS_PATH, FINAL_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
-from .constants import COURSES_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SID_INDEX_NAME, SPECS_COL_NAME, TOKEN_INDEX_NAME, UID_INDEX_NAME, USERS_COL_NAME
+from .constants import COURSES_COL_NAME, DEGREE_DOCS_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SID_INDEX_NAME, SPECS_COL_NAME, TOKEN_INDEX_NAME, UID_INDEX_NAME, USERS_COL_NAME
 from .conn import db, archivesDB, usersDB
 
 
@@ -370,6 +376,99 @@ def _overwrite_archives():
                 print(f"Failed to load and overwrite {year} archive")
 
 
+# What a document is, from where it sits under DEGREE_DOCUMENTS_PATH (see AUTHORING.md there):
+#   <year>/programs/<code>.yaml, <year>/specialisations/<code>.yaml, <year>/conditions/<name>.yaml,
+#   <year>/library.yaml, patches/<name>.yaml
+_DEGREE_DOCUMENT_PATHS = [
+    (re.compile(r"^(\d{4})/programs/([0-9]{4})\.ya?ml$"), "program"),
+    (re.compile(r"^(\d{4})/specialisations/([A-Z]{5}[0-9A-Z])\.ya?ml$"), "specialisation"),
+    (re.compile(r"^(\d{4})/conditions/([^/]+)\.ya?ml$"), "course_conditions"),
+    (re.compile(r"^(\d{4})/(library)\.ya?ml$"), "library"),
+    (re.compile(r"^()patches/([^/]+)\.ya?ml$"), "patch"),
+]
+
+
+def _spec_defaults(node: Any) -> list[str]:
+    """The `default` of every spec slot in a requirement tree"""
+    if isinstance(node, list):
+        return [code for child in node for code in _spec_defaults(child)]
+    if not isinstance(node, dict):
+        return []
+    own = [node["default"]] if node.get("kind") == "spec" and isinstance(node.get("default"), str) else []
+    return own + _spec_defaults(node.get("children", []))
+
+
+def _references(kind: str, text: str) -> dict:
+    """What a document points at, for GET /degrees/documents?programCode=...: the year it extends,
+    a program's component programs and spec defaults, and a patch's target. Not validation: a
+    document that does not parse here has no references (CI's validator reports it)."""
+    try:
+        data = yaml.safe_load(text)
+    except yaml.YAMLError:
+        return {}
+    if not isinstance(data, dict):
+        return {}
+
+    refs: dict[str, Any] = {}
+    extends = data.get("extends")
+    if isinstance(extends, dict) and isinstance(extends.get("year"), int):
+        refs["extends_year"] = extends["year"]
+    if kind == "program":
+        refs["components"] = [
+            {"program": str(c["program"]), "year": c.get("year") if isinstance(c.get("year"), int) else None}
+            for c in data.get("components") or []
+            if isinstance(c, dict) and "program" in c
+        ]
+        refs["spec_defaults"] = _spec_defaults(data.get("requirements") or [])
+    if kind == "patch" and isinstance(data.get("target"), dict):
+        refs["target_kind"] = data["target"].get("kind")
+        refs["target_code"] = str(data["target"]["code"]) if "code" in data["target"] else None
+    return refs
+
+
+def _degree_document(path: str, text: str) -> Optional[dict]:
+    """The stored form of one degree document: its text as written, plus what its path says.
+    None for a file at no known path."""
+    for pattern, kind in _DEGREE_DOCUMENT_PATHS:
+        match = pattern.match(path)
+        if match:
+            year, code = match.groups()
+            return {
+                "path": path,
+                "text": text,
+                "kind": kind,
+                "year": int(year) if year else None,
+                "code": code,
+                "sha256": hashlib.sha256(text.encode("utf8")).hexdigest(),
+                "refs": _references(kind, text),
+            }
+    return None
+
+
+def _overwrite_degree_documents():
+    """Overwrites the degree documents from the YAML files under DEGREE_DOCUMENTS_PATH"""
+    documents = []
+    for root, _, files in os.walk(DEGREE_DOCUMENTS_PATH):
+        for name in files:
+            if not name.endswith((".yaml", ".yml")):
+                continue
+            full = os.path.join(root, name)
+            path = os.path.relpath(full, DEGREE_DOCUMENTS_PATH).replace(os.sep, "/")
+            with open(full, encoding="utf8") as f:
+                document = _degree_document(path, f.read())
+            if document is None:
+                # server/tests/degrees fails on this, so it cannot reach a deploy unnoticed
+                print(f"WARNING: skipping degree document {path}: not at a known path (see AUTHORING.md)")
+            else:
+                documents.append(document)
+
+    db[DEGREE_DOCS_COL_NAME].drop()
+    if documents:
+        db[DEGREE_DOCS_COL_NAME].insert_many(sorted(documents, key=lambda d: d["path"]))
+    db[DEGREE_DOCS_COL_NAME].create_index("path", unique=True)
+    print(f"Finished overwriting {DEGREE_DOCS_COL_NAME} ({len(documents)} documents)")
+
+
 def setup_user_related_collections(drop: bool):
     """Sets up all the user related collections to store users, refresh tokens and sessions"""
     # tear down if needed
@@ -413,6 +512,7 @@ def overwrite_all_static_data():
     _overwrite_main_collection(SPECS_COL_NAME)
     _overwrite_main_collection(PROGRAMS_COL_NAME)
     _overwrite_archives()
+    _overwrite_degree_documents()
 
 
 def setup_mongo_collections(clear_users=False):

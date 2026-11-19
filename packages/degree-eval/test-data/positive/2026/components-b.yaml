@@ -1,0 +1,10 @@
+# Component program for paths.yaml (synthetic, not handbook data).
+schema_version: "1.0"
+kind: program
+code: "9996"
+year: 2026
+title: Component probe B
+uoc: 144
+provenance: { source: local, note: synthetic validator probe }
+requirements:
+  - { id: core, kind: core, courses: [COMP1511] }

@@ -1,0 +1,59 @@
+# MATHE1 Quantitative Data Science (major in 3959), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHE1
+#   (curriculum structure 2026.02.157; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: MATHE1
+year: 2026
+title: Quantitative Data Science
+spec_kind: major
+uoc: 66
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/MATHE1
+  structure_version: "2026.02.157"
+  retrieved: 2026-10-09
+  status: complete
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 12
+    courses: [MATH1131, MATH1231]
+    original: Students must take 12 UOC of the following courses.
+    note: >-
+      The handbook lists MATH1131 and MATH1231 only (no MATH1141/MATH1241 alternatives), although
+      3959's program core accepts either. Transcribed as published.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 18
+    courses:
+      - MATH2831
+      - MATH2871
+      - MATH2801 or MATH2901
+    original: Students must take 18 UOC of the following courses.
+
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 12
+    courses: [MATH3821, MATH3871]
+    original: Students must take 12 UOC of the following courses.
+
+  - id: prescribed-electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: { min: 24 }
+    from: [ACTL3141, ACTL3142,
+           COMP2041, COMP2511, COMP3121, COMP3411, COMP4121, COMP4418, COMP6441, COMP6771, COMP9313, COMP9315,
+           COMP9319, COMP9417, COMP9418,
+           ECON1102, ECON2101, ECON2102, ECON2103, ECON2107, ECON2111, ECON2112, ECON2206, ECON2209,
+           ECON3107, ECON3121, ECON3123, ECON3202, ECON3206, ECON3208,
+           INFS1602, INFS3603, MARK2012, MARK3054, MARK3085,
+           MATH1081, MATH2011, MATH2111, MATH3041, MATH3161, MATH3191, MATH3411, MATH3801, MATH3811, MATH3831,
+           MATH3841, MATH3852, MATH3856, MATH3881, MATH3901, MATH3911, MATH3945, MATH5836, MATH6781]
+    original: Students must take at least 24 UOC of the following courses.
+    note: Structured data gives 24 UOC (min = max); the wording "at least" is followed.

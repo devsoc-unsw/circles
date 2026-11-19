@@ -1,0 +1,189 @@
+# 3970 Bachelor of Science, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3970
+#   (curriculum structure 2026.03.065, accessed 2026-10-08)
+# Shows spec selection: at least one major, then EITHER a second major OR up to two minors.
+schema_version: "1.0"
+kind: program
+code: "3970"
+year: 2026
+title: Science
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Science]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3970
+  structure_version: "2026.03.065"
+  retrieved: 2026-10-08
+  status: complete
+
+sets:
+  # "Science course" for the 96 UOC rule: the Science Electives list plus SCIF professional elements.
+  # Interpretation (unverified): the handbook defines Science courses only through these lists.
+  science: "@science_electives or SCIF****"
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    note: >-
+      No group `uoc` here: the 96 UOC is a Science-only total (limit science-96), so non-science
+      courses of a minor must not count toward it (review B1).
+    children:
+      - id: core
+        kind: core
+        title: Core Courses
+        uoc: 6
+        courses: [SCIF0000, SCIF1000, SCIF3010]
+        original: >-
+          Students must take 6 UOC of the following courses, including two 0 UOC professional
+          development elements SCIF0000 and SCIF3010. SCIF0000 should be enrolled in during the first
+          term of study and SCIF3010 should be enrolled in the final term of study.
+      - id: scif0000-first
+        kind: timing
+        severity: warning
+        courses: SCIF0000
+        term: first
+      - id: scif3010-last
+        kind: timing
+        severity: warning
+        courses: SCIF3010
+        term: last
+
+      - id: employability
+        kind: pool
+        title: Employability Experiences
+        uoc: 12
+        from: [AVIA3012, AVIA3013, AVIA3199, AVIA3299, BABS3199, BABS3299, BABS3301, BEES3199, BEES3223,
+               BEES3299, BIOS2123, BIOS6671, CHEM3199, CHEM3299, GEOS2131, GEOS2291, GEOS2821, GEOS3911,
+               MATH2991, MATH3041, MATH3599, MATH3699, MATH3856, MATS3007, MATS3199, MATS3299, PHYS2116,
+               PHYS3117, PHYS3199, PHYS3299, PHYS4200, PHYS4210, PSYC3011, PSYC3199, PSYC3299, PSYC3361,
+               SCIF2041, SCIF3000, SCIF3041, SCIF3199, SOMS3001, SOMS3050, SOMS3199, SOMS3299]
+        note: WIL/RIL options are subject to application; enrolment not guaranteed.
+
+      - id: major
+        kind: spec
+        slot: major
+        title: Majors
+        options: &science_majors [ANATA1, BINFE1, BIOCC1, BIOCM1, BIOPA1, BIOSM1, BIOSO1, BIOTA1, CHEMA1,
+                                  CLIME1, FOODH1, GEOGG1, GEOLS1, MATHM1, MATHN1, MATHT1, MATHV1, MATSB1,
+                                  MICRB1, MICRJ1, MSCIM1, NEURS1, PATHA1, PHARA1, PHSLA1, PHYSL1, PSYCA1, VISNA1]
+        original: >-
+          Students must complete at least one of the following majors. Students should declare their
+          major prior to commencing Stage 2 courses. Students may also opt to complete either a second
+          major OR up to 2 minors.
+
+      # "either a second major OR up to 2 minors": a choice group with at most one engaged branch.
+      - id: additional-specs
+        kind: group
+        title: Optional second major or minors
+        choose: { min: 0, max: 1 }
+        children:
+          - id: second-major
+            kind: spec
+            slot: major
+            options: *science_majors
+            count: 1
+            distinct_from: [{ node: major }]
+          - id: minors
+            kind: spec
+            slot: minor
+            title: Minors
+            options: [ANATB2, AVIAF2, BIOCD2, BIOPA2, BIOSI2, BIOSM2, CHEMD2, CHINE2, CHINF2, CLIMB2,
+                      COMDF2, COMMJ2, ECONO2, ENVPE2, FRENF2, FRENG2, GEOGH2, GEOLF2, GERSF2, INFSA2,
+                      JAPNF2, JAPNG2, KOREF2, KOREG2, MATHC2, MATHD2, MATHG2, MDIAO2, MGMTJ2, MICRJ2,
+                      MSCIK2, PATHB2, PHARB2, PHSLB2, PHYSC2, PHYSI2, POLSG2, PSYCM2, SCIFC2, SOSSC2,
+                      SPANI2, VISNB2]
+            count: { min: 1, max: 2 }
+            distinct_from: [{ node: major, by: title }]
+            # Only non-science minor courses may use FE/GE; science courses count toward the 96 instead.
+            counts_toward:
+              - { node: free-electives, courses: not @science }
+              - { node: gen-ed, courses: not @science }
+            original: >-
+              Students may complete up to two of the following optional minors where there is capacity
+              in their program to do so. Free electives and General Education courses may be used to
+              satisfy any non-science courses required by the minor.
+
+      - id: science-electives
+        kind: pool
+        title: Science Electives
+        from: "@science_electives and not GEN*****"
+        uoc: { max: 36 }
+        original: >-
+          If the core courses plus your choice of specialisation(s) requires less than 96 UOC, you are
+          required to complete additional Science elective courses from the following list to meet the
+          96 UOC requirement.
+        note: >-
+          No minimum of its own. Exact top-up (§7.4 step 4) fills it toward 36 UOC; the science-96 limit
+          is what fails when the student has too little science.
+
+      - id: science-96
+        kind: limit
+        title: 96 UOC of Science courses
+        from: "@science"
+        uoc: { min: 96 }
+        scope: disciplinary
+        original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+
+      - id: level-1-science
+        kind: limit
+        title: Level 1 Science UOC
+        from: level:1 and faculty:SCI
+        uoc: { min: 24 }
+        scope: root
+
+      - id: max-level-1
+        kind: limit
+        title: Maximum Level 1 UOC
+        from: level:1
+        uoc: { max: 72 }
+        scope: root
+        original: >-
+          Students may take up to a maximum of 72 UOC of Level 1 courses, including any General
+          Education or mainstream Level 1 course taken to fulfil either the General Education or the
+          Free Elective requirement.
+
+      - id: declare-minors
+        kind: info
+        text: Students must declare their minor(s) before their final term.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: { max: 36 }
+    overflow: true
+    original: GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    uoc: 12
+    from: gened and not (faculty:SCI or GENS**** or BIOP**** or COMP**** or FOOD**** or SOMS****)
+    original: >-
+      Any course defined as a Science course cannot be taken as General Education. Therefore, the
+      following courses cannot count towards this requirement: any course offered by the Faculty of
+      Science, including GENS courses; any BIOP, COMP, FOOD or SOMS course.
+
+  - id: maturity-level-2
+    kind: maturity
+    applies_to: level:2
+    require: uoc(24)
+  - id: maturity-level-3
+    kind: maturity
+    applies_to: level:3 or level:6
+    require: uoc(72)
+
+  - id: bioinformatics-3767
+    kind: info
+    text: >-
+      Students are not permitted to take the Science Bioinformatics Major (BINFB1) when taking double
+      degree 3767 if they plan to take the Engineering Bioinformatics Major (BINFAH).
+    note: >-
+      Belongs on the 3767 double-degree document as distinct/allowed_if rules; BINFB1 is not in the
+      2026 3970 option list, so there is nothing to enforce here.

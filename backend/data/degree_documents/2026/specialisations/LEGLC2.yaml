@@ -1,0 +1,43 @@
+# LEGLC2 Legal Studies (Arts minor), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/LEGLC2
+#   (curriculum structure 2026.01.005, accessed 2026-10-10)
+# Lane C transcription. Required by 3409/4053: listed among 3409's minors but "only available in 4053
+# Arts/Education (Secondary)" (3409 Minors container note).
+schema_version: "1.0"
+kind: specialisation
+code: LEGLC2
+year: 2026
+title: Legal Studies
+spec_kind: minor
+uoc: 36
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/LEGLC2
+  structure_version: "2026.01.005"
+  retrieved: 2026-10-10
+  status: complete
+
+allowed_if: program(4053)
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 12
+    courses: [CRIM1010, CRIM1011]
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 12
+    courses: [ARTS2820, LAWS3321]
+    note: Handbook discrepancy — LAWS3321 is a Level 3 course code in the "Level 2 Core Courses" container.
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Prescribed Elective Courses
+    uoc: 12
+    from: LAWS3362 or LAWS3523 or LAWS3533
+
+notes:
+  - >-
+    allowed_if comes from 3409 ("The Legal Studies minor is only available in 4053 Arts/Education
+    (Secondary)"); the LEGLC2 page itself states no restriction.

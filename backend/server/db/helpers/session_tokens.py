@@ -24,6 +24,7 @@ def get_token_info(token: SessionToken) -> Optional[SessionTokenInfoModel]:
     sid, uid, exp = res[0], res[1], res[2]
     if sid is None or uid is None or exp is None:
         return None
+    assert isinstance(sid, str) and isinstance(uid, str)  # sdb uses decode_responses=True
     if int(exp) <= int(time()):
         return None
 

@@ -1,0 +1,197 @@
+# 3764 Engineering (Honours) / Commerce double degree, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3764
+#   (curriculum structure 2026.08.002, accessed 2026-10-09; transcribed 2026-10-10 by Lane B)
+# Built by composition (§8): the Disciplinary Component of 3707 (2026, written by Lane A as
+# examples/2026/programs/3707.yaml) and of 3502 (2026), then narrowed and linked.
+schema_version: "1.0"
+kind: program
+code: "3764"
+year: 2026
+title: Engineering (Honours) / Commerce
+career: ugrd
+uoc: 264
+awards: [Bachelor of Engineering (Honours), Bachelor of Commerce]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3764
+  structure_version: "2026.08.002"
+  retrieved: 2026-10-09
+  status: partial
+  warnings:
+    - >-
+      The 3502 document-level shares (IFY/major, WIL/major, FYS/major) are redeclared here with component
+      paths, because §8 does not say whether a component's own `shares` are imported.
+    - >-
+      "Business electives to make up to 96 UOC Business School disciplinary requirement" has no container
+      in the handbook structure; it is added to the Commerce component as a capped pool (bound derived,
+      see the node note).
+    - >-
+      COMP3311 / INFS1603 / COMM2822 and COMP9313 / COMP9315 / INFS2608 replacement notes are left as info
+      (they depend on which Engineering major and Commerce major are combined).
+
+components:
+  - id: eng
+    program: "3707"
+    title: Disciplinary Component - 3707 Engineering (Honours)
+    uoc: { min: 168 }
+    include: [disciplinary]
+    original: Students must complete 168 UOC of the following to satisfy the core requirements of this degree
+    note: >-
+      3707's major options (21 honours specialisations) match 3764's list exactly, so no list_remove.
+      Industrial Training (ENGG4999) is imported from 3707's disciplinary component.
+
+  - id: commerce
+    program: "3502"
+    title: Disciplinary Component - 3502 Commerce
+    uoc: { min: 96 }
+    include: [disciplinary]
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    patch:
+      # WIL: "this can be satisfied by completing an Engineering WIL course (e.g. compulsory Industrial
+      # Training) OR a Commerce WIL course". ENGG4999 is compulsory in the eng component, so the Commerce
+      # WIL course becomes optional here (it still counts as a Business course if taken).
+      - op: replace
+        target: wil
+        node:
+          id: wil
+          kind: pool
+          title: Prescribed Work Integrated Learning (WIL) Course (optional in 3764)
+          uoc: { max: 6 }
+          from: "@business_wil or @non_business_wil"
+          original: >-
+            Students must complete 6 UOC of the following courses to meet the minimum requirement of 150 hours
+            of professional work. Where students complete mandatory WIL in the non-Commerce component of the
+            Double Degree, the 150 hours minimum requirement does not apply to the Commerce component of the
+            program.
+      # FYS: "Requirement can be satisfied by taking DESN3000, however students will still need to complete
+      # 96 UOC of Business courses."
+      - op: replace
+        target: fys
+        node:
+          id: fys
+          kind: pool
+          title: Final Year Synthesis (FYS)
+          count: { min: 1 }
+          uoc: { max: 6 }
+          from: "@business_fys or @non_business_fys or DESN3000"
+          original: >-
+            Students must complete their Final Year Synthesis (FYS) course within their final year of their
+            Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program.
+            Students who participate and complete significant extra-curricular projects (eg. Peter Farrell
+            Cup), can apply for 0 UOC FYS (COMM3090).
+          note: DESN3000 added from the 3764 program summary.
+      - op: add
+        parent: disciplinary
+        node:
+          id: business-electives
+          kind: pool
+          title: Business electives to make up 96 UOC
+          from: faculty:BUS
+          uoc: { max: 24 }
+          original: Business electives to make up to 96 UOC Business School disciplinary requirement.
+          note: >-
+            From the program summary, not a handbook container. Max 24 = 96 - 42 (IFY without COMM1110)
+            - 42 (major outside IFY) + 6 (WIL met in Engineering) + 6 (FYS met by DESN3000): an upper bound
+            so exact top-up can fill it; the component's 96 UOC and business-minimum are what fail.
+      - op: add
+        parent: disciplinary
+        node:
+          id: commerce-minor
+          kind: spec
+          slot: minor
+          title: Optional Minor
+          options: [ACCTA2, COMMG2, COMMI2, COMMJ2, ECONF2, ECONO2, FINSA2, FINSR2, IBUSA2, INFSA2, INFSG2,
+                    MARKA2, MARKD2, MGMTA2, MGMTH2, MGMTJ2, TABLC2]
+          count: { min: 0, max: 1 }
+          distinct_from: [{ node: major, by: title }]
+          original: >-
+            Students may choose to use their electives to complete one of the following minors. Minor
+            Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.
+      - op: add
+        parent: disciplinary
+        node:
+          id: commerce-minor-level-2-3
+          kind: limit
+          title: Minor Level 2 and 3 minimum
+          from: level:2 or level:3
+          scope: commerce-minor
+          uoc: { min: 18 }
+
+requirements:
+  - id: commerce-max-level-1
+    kind: limit
+    title: Maximum Level 1 UOC (Commerce component)
+    from: level:1
+    uoc: { max: 60 }
+    scope: commerce
+    original: Students may complete up to a maximum of 60 UOC of any level 1 courses for the Commerce component of the double degree.
+
+  - id: course-combination-notes
+    kind: info
+    text: >-
+      Students taking a combination of majors and/or minors that require both INFS1603/COMM2822 and
+      COMP3311 as core courses - COMP3311, INFS1603 and COMM2822 have exclusions from each other. Students
+      should complete an additional Commerce major elective or minor elective instead of INFS1603 or
+      COMM2822 when COMP3311 is required. Students taking COMP9313 or COMP9315 in their Engineering
+      (Honours) major should replace INFS2608 with another Information Systems Level 2 or 3 elective.
+
+shares:
+  - between: [commerce/ify, commerce/major]
+    courses: "@commerce_ify"
+    max_uoc: 6
+    original: >-
+      Please note, this 48 UOC includes 6 UOC from the Integrated First Year (IFY) core. This means that
+      students will complete 42 UOC in specified disciplinary courses outside the IFY core.
+  - between: [commerce/wil, commerce/major]
+    courses: "@business_wil"
+    original: >-
+      Business WIL Course: This course can count as a Business free elective or where applicable, can count
+      as a Commerce major elective.
+  - between: [commerce/fys, commerce/major]
+    courses: "@business_fys"
+    original: >-
+      Students may meet more than one program requirement depending on their FYS course choice. For
+      example; students who complete a FYS course that is also a Work Integrated Learning course within a
+      major, will meet a major elective, WIL and FYS requirement.
+  - between: [commerce/wil, commerce/fys]
+  - between: [eng, commerce/fys]
+    courses: DESN3000
+    original: >-
+      Final Year Synthesis (0 - 6 UOC). Requirement can be satisfied by taking DESN3000, however students
+      will still need to complete 96 UOC of Business courses.
+  # ECON1202 substitution: the MATH course counts once (in eng); the Commerce major takes a replacement
+  # elective from its own pools (as in 3784).
+  - between: [commerce/major, eng]
+    courses: MATH1131 or MATH1141
+    mode: replace
+
+exemptions:
+  - courses: [COMM1110]
+    scope: commerce
+    reduce_uoc: false
+    original: >-
+      BEng/BCom students do not have to take COMM1110 as this requirement is satisfied in the Engineering
+      program.
+    note: reduce_uoc false — the Commerce component stays 96 UOC (IFY 42 UOC + Business electives).
+
+substitutions:
+  # ECON1202 written as in 3784 (substitution + replace-mode share), not as an exemption: an exemption
+  # with reduce_uoc: false left a major that cores ECON1202 at 48 UOC with exactly-capped pools that
+  # cannot take the replacement course, so the spec would read short.
+  - replace: ECON1202
+    with: MATH1131 or MATH1141
+    scope: commerce
+    original: >-
+      Students enrolled in the double BE (Hons)/BCom program are not required to undertake either
+      Evidence-Based Problem Solving (COMM1110) or Quantitative Analysis for Business and Economics
+      (ECON1202) as part of their Commerce component. Completion of the MATH courses in the Engineering
+      component of the double degree satisfies these requirements.
+    note: >-
+      "The MATH courses in the Engineering component" is read as the MATH1131/MATH1141 core item of
+      the Engineering honours specialisations (e.g. CVENAH, ELECAH, COMPBH), the pair 3784's summary and
+      3673 name for ECON1202. The handbook does not say whether a major
+      that cores ECON1202 then needs another elective; the replace share below follows 3784 ("complete
+      another Major elective to meet the 48 UOC requirement") and keeps the Commerce component at 96.
+
+notes:
+  - All students are required to complete ENGG4999 - 60 days of Industrial Training (imported from 3707).

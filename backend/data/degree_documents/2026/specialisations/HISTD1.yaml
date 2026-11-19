@@ -1,0 +1,103 @@
+# HISTD1 History (Arts major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/HISTD1
+#   (curriculum structure 2026.01.026, accessed 2026-10-10)
+# Lane C transcription. Chosen as one of four high-enrolment Arts majors (judgement call). Shows:
+# sub-list minimums via quotas, and a 4053-only NESA rule that depends on the student's choice of
+# teaching specialisation (a choice the schema does not model as a spec).
+schema_version: "1.0"
+kind: specialisation
+code: HISTD1
+year: 2026
+title: History
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/HISTD1
+  structure_version: "2026.01.026"
+  retrieved: 2026-10-10
+  status: complete
+
+sets:
+  history_l2: >-
+    ARTS2101 or ARTS2150 or ARTS2201 or ARTS2211 or ARTS2212 or ARTS2213 or ARTS2270 or ARTS2271
+    or ARTS2272 or ARTS2278 or ARTS2281 or ARTS2282 or ARTS2283 or ARTS2285 or ARTS2289 or ARTS2390
+    or ARTS2457 or ARTS2458 or ARTS2542 or ARTS2633 or ARTS2662 or ARTS2663 or ARTS2781 or ARTS2785
+    or ARTS2900 or ARTS2904 or ARTS2906 or ARTS2908 or ARTS2909
+  history_l3_main: ARTS3102 or ARTS3217 or ARTS3218 or ARTS3270 or ARTS3283 or ARTS3289 or ARTS3290 or ARTS3292 or ARTS3295
+  history_l3_other: ARTS3220 or ARTS3242 or ARTS3640 or ARTS3780 or ARTS3786 or ARTS3900 or ATSI3017
+  # "The following courses count as Ancient History ... All other courses in the History specialisation
+  # count as Modern History."
+  ancient_history: ARTS2101 or ARTS2281 or ARTS2282 or ARTS2283 or ARTS2458 or ARTS3102 or ARTS3283
+
+requirements:
+  - id: level-1
+    kind: pool
+    title: Level 1 Courses
+    uoc: 12
+    from: ARTS1190 or ARTS1270 or ARTS1271 or ARTS1900
+    quotas:
+      - { from: ARTS1270 or ARTS1271, uoc: { min: 6 }, original: "Main History Courses: You must take at least 6 UOC of the following courses." }
+      - { from: ARTS1190 or ARTS1900, uoc: { max: 6 } }
+    original: You must take 12 UOC at Level 1, including at least 6 UOC from the Main History Courses list.
+    note: The handbook types this container "CC" (core) but it is a choice; written as a pool.
+
+  - id: level-2
+    kind: pool
+    title: Level 2 Prescribed Electives
+    uoc: 18
+    from: "@history_l2"
+    original: You must take 18 UOC from the following courses.
+
+  - id: level-3
+    kind: pool
+    title: Level 3 Prescribed Electives
+    uoc: 18
+    from: "@history_l3_main or @history_l3_other"
+    quotas:
+      - { from: "@history_l3_main", uoc: { min: 6, max: 18 } }
+      - { from: "@history_l3_other", uoc: { max: 12 } }
+    original: >-
+      You must take 18 UOC at Level 3, including at least 6 UOC from the Level 3 Main History Courses list.
+      Note: If you are intending to take Honours in History, you are strongly recommended to take ARTS3270
+      Reflecting on Histories and Historians.
+
+  # 4053 only: one of three ancient/modern mixes, by the student's History teaching specialisation.
+  # The extra `not-4053` branch makes the group vacuous outside 4053.
+  - id: nesa-4053
+    kind: group
+    title: Arts/Education (Secondary) Students
+    choose: 1
+    original: >-
+      Depending on the type of History teaching specialisation you choose (main or additional), there is a
+      minimum requirement for both Ancient and Modern History courses. - Modern as main teaching
+      specialisation: minimum 6 History – 5 Modern, 1 Ancient - Modern as additional teaching
+      specialisation: minimum 4 History – 3 Modern, 1 Ancient - Ancient as additional specialisation:
+      minimum 4 History – 3 Ancient, 1 Modern The following courses count as Ancient History: ARTS2101,
+      ARTS2281, ARTS2282, ARTS2283, ARTS2458, ARTS3102, ARTS3283. All other courses in the History
+      specialisation count as Modern History. Note: Due to the limited Ancient History courses offered at
+      UNSW, Ancient History can only be taken as an additional teaching specialisation.
+    note: >-
+      Course counts are written as UOC (6 UOC per course; every listed course is 6 UOC). SCHEMA GAP: the
+      branch is really determined by the teaching specialisation chosen in 4056's methods, which is not a
+      selectable spec, and the requirement should only exist in 4053 (conditional node). The not-4053
+      branch is a workaround; auto-choice (§7.5) must prefer it for other programs.
+    children:
+      - id: not-4053
+        kind: check
+        require: not program(4053)
+      - id: modern-main
+        kind: check
+        title: Modern History as main teaching specialisation
+        require: uoc(30, in:root and not @ancient_history) and uoc(6, in:root and @ancient_history)
+      - id: modern-additional
+        kind: check
+        title: Modern History as additional teaching specialisation
+        require: uoc(18, in:root and not @ancient_history) and uoc(6, in:root and @ancient_history)
+      - id: ancient-additional
+        kind: check
+        title: Ancient History as additional teaching specialisation
+        require: uoc(18, in:root and @ancient_history) and uoc(6, in:root and not @ancient_history)
+
+notes:
+  - If you are intending to take Honours in History, you are strongly recommended to take ARTS3270 Reflecting on Histories and Historians.

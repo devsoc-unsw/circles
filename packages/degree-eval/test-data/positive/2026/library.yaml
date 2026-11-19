@@ -1,0 +1,5 @@
+# Minimal library for the positive self-test (synthetic).
+schema_version: "1.0"
+kind: library
+year: 2026
+provenance: { source: local, note: synthetic validator probe }

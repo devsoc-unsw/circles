@@ -1,0 +1,84 @@
+# ECONL1 Business Data Science (major in 3959), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ECONL1
+#   (curriculum structure 2026.03.060; fetched 2026-10-09 into .handbook-cache, transcribed 2026-10-10)
+schema_version: "1.0"
+kind: specialisation
+code: ECONL1
+year: 2026
+title: Business Data Science
+spec_kind: major
+uoc: 72
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/ECONL1
+  structure_version: "2026.03.060"
+  retrieved: 2026-10-09
+  status: complete
+
+sets:
+  econl1_business_subjects: ACTL**** or ECON**** or INFS**** or MARK**** or MGMT****
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 18
+    courses:
+      - ECON1101
+      - MATH1131 or MATH1141
+      - MATH1231 or MATH1241
+    original: >-
+      Students must take 18 UOC of the following courses. Students completing Data Science and
+      Decisions (3959) will complete these courses as part of their core program requirements.
+
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 18
+    courses:
+      - ECON2112
+      - ECON2209
+      - ECON2206 or MATH2831 or MATH2931
+    original: >-
+      Students must take 18 UOC of the following courses. Students completing Data Science and
+      Decisions (3959) will complete ECON2112 as part of their core program requirements.
+
+  - id: level-3-flexible-core
+    kind: pool
+    title: Level 3 Flexible Core Courses
+    from: [ECON3208, ECON3210]
+    uoc: { min: 6 }
+    original: >-
+      Students must take a minimum of 6 UOC from the following courses. If students would like to
+      complete both courses they will only be required to complete an additional 24 UOC of prescribed
+      electives from the list below to satisfy major requirements.
+    note: >-
+      Written as a pool (not a core) because either course satisfies it. The trade-off with the
+      prescribed electives (both flexible cores -> 24 UOC of electives) is enforced by the spec's 72
+      UOC total together with the electives' 24-30 UOC range.
+
+  - id: prescribed-electives
+    kind: pool
+    title: Prescribed Electives
+    uoc: { min: 24, max: 30 }
+    from: [ACTL3141, ACTL3142, COMP2041, COMP9313, COMP9417,
+           ECON1102, ECON2101, ECON2102, ECON2103, ECON2107, ECON2111, ECON3107, ECON3202, ECON3206,
+           INFS3603, MARK2012, MARK3054, MARK3085,
+           MATH1081, MATH2011, MATH2871, MATH3161, MATH3191, MATH3801, MATH3821, MATH3841, MATH3852,
+           MATH3871, MATH3901, MATH3911, MATH3945]
+    quotas:
+      - from: not (level:1 or level:2)
+        count: { min: 3 }
+        note: At least three of the elective courses must be at level 3 or above (3XXX).
+      - from: "@econl1_business_subjects"
+        count: { min: 3 }
+        note: At least 3 of the electives must be selected from Business School subject areas ACTL, ECON, INFS, MARK and MGMT.
+    original: >-
+      Students must take 24-30 UOC of the following courses subject to whether both ECON3208 and
+      ECON3210 are taken as Level 3 Flexible Core Courses. At least three of the elective courses must
+      be at level 3 or above (3XXX). Additionally, at least 3 of the electives must be selected from
+      Business School subject areas ACTL, ECON, INFS, MARK and MGMT. A Level 3 Business course will
+      fulfill both of these requirements.
+    note: >-
+      "Level 3 or above" is read as any course whose level digit is not 1 or 2, so COMP9313/COMP9417
+      (level 9) count toward it; unverified.

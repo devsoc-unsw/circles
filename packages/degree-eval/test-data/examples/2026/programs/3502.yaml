@@ -1,0 +1,270 @@
+# 3502 Bachelor of Commerce, handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3502
+#   (curriculum structure 2026.04.057, accessed 2026-10-08)
+schema_version: "1.0"
+kind: program
+code: "3502"
+year: 2026
+title: Commerce
+career: ugrd
+uoc: 144
+duration_years: 3
+awards: [Bachelor of Commerce]
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/programs/2026/3502
+  structure_version: "2026.04.057"
+  retrieved: 2026-10-08
+  status: complete
+
+sets:
+  commerce_majors_l1_relief: FINS1612 or MGMT1002 or COMM1822
+
+requirements:
+  - id: disciplinary
+    kind: group
+    title: Disciplinary Component
+    uoc: { min: 96 }
+    original: Students must complete 96 UOC of the following to satisfy the core requirements of this degree
+    children:
+      - id: ify
+        kind: core
+        title: Integrated First Year Courses
+        uoc: 48
+        courses: [COMM1100, COMM1110, COMM1120, COMM1140, COMM1150, COMM1170, COMM1180, COMM1190]
+
+      - id: mybcom
+        kind: core
+        title: myBCom
+        uoc: 0
+        courses: [COMM0999, COMM1999, COMM3999]
+        original: >-
+          Students must complete all of the following non-credit bearing myBCom professional
+          development elements. COMM0999 is recommended to be enrolled in the first term of study,
+          COMM1999 upon completion of the integrated first year courses and COMM3999 in the final
+          term of study.
+
+      - id: mybcom-first
+        kind: timing
+        severity: warning
+        courses: COMM0999
+        term: first
+      - id: mybcom-after-ify
+        kind: maturity
+        severity: warning
+        applies_to: COMM1999
+        require: cores(@commerce_ify)
+      - id: mybcom-last
+        kind: timing
+        severity: warning
+        courses: COMM3999
+        term: last
+
+      - id: major
+        kind: spec
+        slot: major
+        title: Commerce Majors
+        options: &commerce_majors [ACCTA1, COMMG1, COMMJ1, ECONF1, ECONO1, FINSA1, FINSR1, IBUSA1,
+                                   INFSA1, INFSG1, MARKA1, MARKD1, MGMTH1, MGMTJ1, TABLC1]
+        original: >-
+          Students must complete one of the following majors, including at least 18 UOC of Level 3
+          courses. Please note, this 48 UOC includes 6 UOC from the Integrated First Year (IFY) core.
+
+      - id: major-level-3
+        kind: limit
+        title: Major Level 3 minimum
+        from: level:3
+        scope: major
+        uoc: { min: 18 }
+
+      # "Double Majors" is encoded in `shares` below: IFY overlap shared up to 6 UOC; any other overlap
+      # counts once and the other major takes a replacement elective of the same level or higher.
+
+      - id: wil
+        kind: pool
+        title: Prescribed Work Integrated Learning (WIL) Course
+        uoc: 6
+        from: "@business_wil or @non_business_wil"
+        original: >-
+          Students must complete 6 UOC of the following courses to meet the minimum requirement of
+          150 hours of professional work. Where students complete mandatory WIL in the non-Commerce
+          component of the Double Degree, the 150 hours minimum requirement does not apply.
+
+      - id: fys
+        kind: pool
+        title: Final Year Synthesis (FYS)
+        count: { min: 1 }
+        uoc: { max: 6 }
+        from: "@business_fys or @non_business_fys"
+        note: COMM3090 is a 0 UOC FYS by application (see its course conditions).
+
+      - id: overlap-replacement-elective
+        kind: pool
+        title: Additional elective when WIL/FYS overlap the major
+        from: any and not GEN*****
+        uoc: { max: 6 }
+        original: >-
+          Where there is an overlap, a single course may fulfil multiple of these requirements and
+          students must complete an additional Business School elective (any course offered by the UNSW
+          Business School) to ensure that they will meet the minimum 96 UOC of Business courses. Where an
+          overlap occurs and a student will already have met the 96 UOC Business course requirement,
+          students must take any Free Elective course instead.
+        note: >-
+          From the program summary, not a handbook container (review M6). Without it, a WIL/FYS course
+          counted inside the major leaves the Disciplinary Component at 90 UOC with nowhere to count the
+          extra course (free electives are capped at 36). It has no minimum; exact top-up (§7.4 step 4)
+          fills it, and the Business-ness of the course is enforced by business-minimum.
+
+      - id: fys-final-year
+        kind: timing
+        courses: in:fys
+        within_final_uoc: 48
+        original: >-
+          Students must complete their Final Year Synthesis (FYS) course within their final year of
+          their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom
+          program.
+
+      - id: maturity-level-2
+        kind: maturity
+        applies_to: level:2
+        require: uoc(24)
+      - id: maturity-level-3
+        kind: maturity
+        applies_to: level:3
+        require: uoc(48)
+
+      - id: business-minimum
+        kind: limit
+        title: Minimum Faculty UOC
+        from: faculty:BUS
+        uoc: { min: 96 }
+        scope: root
+        original: >-
+          Students must complete a minimum of 96 UOC of the following courses. any course offered by
+          UNSW Business School
+
+  - id: second-major
+    kind: spec
+    slot: major
+    title: Optional second Commerce major
+    options: *commerce_majors
+    count: { min: 0, max: 1 }
+    counts_toward: [free-electives]
+    distinct_from: [{ node: major }]
+    note: '"Students may choose to complete an optional second major/minor using their free electives."'
+
+  - id: minor
+    kind: spec
+    slot: minor
+    title: Optional Minor
+    options: [ACCTA2, CHINE2, CHINF2, COMMG2, COMMI2, COMMJ2, ECONF2, ECONO2, FINSA2, FINSR2, FRENF2,
+              FRENG2, GERSF2, IBUSA2, INFSA2, INFSG2, JAPNF2, JAPNG2, KOREF2, KOREG2, MARKA2, MARKD2,
+              MGMTA2, MGMTH2, MGMTJ2, SPANI2, TABLC2]
+    count: { min: 0, max: 1 }
+    counts_toward: [free-electives]
+    distinct_from: [{ node: major, by: title }, { node: second-major, by: title }]
+    note: >-
+      Deliberately placed at the root. The handbook puts the Optional Minor container under the
+      Disciplinary Component (programs-2026-3502 parent_record), but the minor is completed in
+      free-elective space ("use their electives"). Inside disciplinary, the minor's courses would add
+      to that group's counted UOC, so a minor could stand in for the 96 UOC of IFY, major and
+      overlap-replacement elective. At the root they count only toward the 144 total, as free
+      electives do, and the free-elective allowance is shown through counts_toward credit, which
+      never adds to any total (§7.4 step 8). minor-level-2-3 is scoped to this slot, so it behaves the
+      same in either place.
+    original: >-
+      Students may choose to use their electives to complete one of the following minors. Minor
+      Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.
+
+  - id: minor-level-2-3
+    kind: limit
+    title: Minor Level 2 and 3 minimum
+    from: level:2 or level:3
+    scope: minor
+    uoc: { min: 18 }
+    note: >-
+      Read as 18 UOC combined across Levels 2 and 3. Inactive when no minor is selected (§4.2 limit).
+
+  - id: interdisciplinary-major
+    kind: spec
+    slot: major
+    title: Optional Interdisciplinary Major
+    options: [COMMI1]
+    count: { min: 0, max: 1 }
+    uoc: 48
+    counts_toward: [gen-ed, free-electives]
+    original: Students may choose to use General Education and Free Elective courses to complete a second major.
+
+  - id: free-electives
+    kind: pool
+    role: free_elective
+    title: Free Electives
+    from: any and not GEN*****
+    uoc: { max: 36 }
+    overflow: true
+    original: >-
+      Students can take up to a maximum of 36 UOC of the following courses. ... Please note: Courses
+      starting with GEN# cannot count towards this requirement.
+
+  - id: gen-ed
+    kind: pool
+    role: gen_ed
+    title: General Education
+    from: "@business_gen_ed"
+    uoc: 12
+    original: >-
+      Students must complete 12 UOC of any course not offered by UNSW Business School. The following
+      courses cannot count towards this requirement: GENL2021, GENL2032. (Rule: any General Education course.)
+    note: >-
+      Interpretation: the description says "any course not offered by UNSW Business School" while the
+      handbook rule says "any General Education course"; the stricter intersection is used. Confirm with
+      the Business School.
+
+  - id: gen-ed-maturity
+    kind: maturity
+    applies_to: in:gen-ed
+    require: uoc(48)
+    original: Students must complete at least 48 UOC before enrolling in General Education courses.
+
+  - id: max-level-1
+    kind: limit
+    title: Maximum Level 1 UOC
+    from: >-
+      (level:1 or GEN*****) and not
+      (@commerce_majors_l1_relief and (in:major or in:second-major or in:minor))
+    uoc: { max: 72 }
+    scope: root
+    original: >-
+      Students may take a maximum of 72 UOC of Level 1 courses, including any GEN# courses
+      (irrespective of their level). FINS1612, MGMT1002 and COMM1822 completed within a major/minor
+      may count as Level 2 courses for the purpose of not exceeding the level 1 limit.
+
+shares:
+  # The major's 48 UOC includes 6 UOC of IFY core (e.g. COMM1180 in FINSA1).
+  - between: [ify, major]
+    courses: "@commerce_ify"
+    max_uoc: 6
+    original: >-
+      Please note, this 48 UOC includes 6 UOC from the Integrated First Year (IFY) core. This means that
+      students will complete 42 UOC in specified disciplinary courses outside the IFY core.
+  - between: [ify, second-major]
+    courses: "@commerce_ify"
+    max_uoc: 6
+    original: >-
+      If a student chooses to complete 2 commerce majors and the majors have a Integrated First Year
+      (IFY) core course in common, they are permitted to double count a maximum of 6 UOC of this overlap
+  - between: [major, second-major]
+    courses: not @commerce_ify
+    mode: replace
+    replacement: { level: same_or_higher }
+    original: >-
+      Students completing a major sequence with courses in common which are not part of the IFY courses
+      may only count the overlap towards one major and must replace this course within the other major
+      with a major elective of the same level or higher (e.g. Level 3 core course for a Level 3 major
+      elective).
+  # One FYS/WIL course may meet major elective, WIL and FYS requirements at once.
+  - between: [wil, major]
+    courses: "@business_wil"
+  - between: [fys, major]
+    courses: "@business_fys"
+  - between: [wil, fys]

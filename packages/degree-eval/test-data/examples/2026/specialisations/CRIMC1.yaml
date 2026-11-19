@@ -1,0 +1,78 @@
+# CRIMC1 Criminology (Arts major), handbook year 2026
+# Source: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/CRIMC1
+#   (curriculum structure 2026.01.011, accessed 2026-10-10)
+# Lane C transcription. Chosen as one of four high-enrolment Arts majors (judgement call). Shows:
+# a program-conditional substitution of core courses by "substitute electives" (Arts/Law).
+schema_version: "1.0"
+kind: specialisation
+code: CRIMC1
+year: 2026
+title: Criminology
+spec_kind: major
+uoc: 48
+provenance:
+  source: hand
+  url: https://www.handbook.unsw.edu.au/undergraduate/specialisations/2026/CRIMC1
+  structure_version: "2026.01.011"
+  retrieved: 2026-10-10
+  status: complete
+
+allowed_if: not program(4053)
+
+requirements:
+  - id: level-1-core
+    kind: core
+    title: Level 1 Core Courses
+    uoc: 12
+    courses: [CRIM1010, CRIM1011]
+  - id: level-2-core
+    kind: core
+    title: Level 2 Core Courses
+    uoc: 18
+    courses: [CRIM2020, CRIM2021, CRIM2042]
+    original: >-
+      You must take 18 UOC of the following courses. Note: If you are enrolled in 4782 Arts/Law or 4783
+      Arts and Business/Law, you are excluded from enrolling in the two core courses CRIM2020 Criminal Law
+      and Justice 1 and CRIM2021 Criminal Law and Justice 2 as these are based on the compulsory core Law
+      courses LAWS1021 Crime and Criminal Process and LAWS1022 Criminal Laws. You should instead enrol in
+      substitute Criminology electives at Level 2.
+  - id: level-2-electives
+    kind: pool
+    title: Level 2 Prescribed Electives
+    uoc: 6
+    from: CRIM2014 or CRIM2031 or CRIM2032 or CRIM2034 or CRIM2037 or CRIM2038 or CRIM2041
+  - id: level-3-core
+    kind: core
+    title: Level 3 Core Courses
+    uoc: 6
+    courses: [CRIM3000]
+  - id: level-3-electives
+    kind: pool
+    title: Level 3 Prescribed Electives
+    uoc: 6
+    from: >-
+      CRIM3011 or CRIM3012 or CRIM3015 or CRIM3017 or CRIM3019 or CRIM3020 or CRIM3022 or CRIM3024
+      or CRIM3025 or CRIM3028 or CRIM3030 or CRIM3040
+
+  - id: not-4053
+    kind: info
+    title: Arts/Education (Secondary) Students
+    text: The major in Criminology must not be taken as it is not an approved teaching specialisation.
+    note: Enforced by allowed_if.
+
+substitutions:
+  - replace: CRIM2020
+    with: CRIM2***
+    scope: level-2-core
+    when: program(4782, 4783)
+    original: You should instead enrol in substitute Criminology electives at Level 2.
+    note: >-
+      "Substitute Criminology electives at Level 2" is read as any level 2 CRIM course. Imprecise: the
+      pattern also matches CRIM2042 (core) and the Level 2 elective-pool courses; whether a substitute may
+      also be the pool's elective is decided by allocation (one primary home), so a student needs two
+      extra Level 2 CRIM courses as the handbook intends. The exclusion of CRIM2020/2021 itself belongs in
+      their course_conditions (excludes: program(4782, 4783)).
+  - replace: CRIM2021
+    with: CRIM2***
+    scope: level-2-core
+    when: program(4782, 4783)

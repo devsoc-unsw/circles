@@ -71,7 +71,7 @@ export const exportUser = (user: UserResponse): UserJson => {
 export const importUser = (data: JSON): UserJson => {
   const parsed = exportOutputSchema.safeParse(data);
   if (!parsed.success || parsed.data === undefined) {
-    parsed.error.errors.forEach((err) => {
+    parsed.error.issues.forEach((err) => {
       // eslint-disable-next-line no-console
       console.error(err.message);
     });

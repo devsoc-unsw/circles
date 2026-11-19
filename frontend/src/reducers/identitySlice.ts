@@ -15,6 +15,8 @@ export const initialIdentityState: IdentitySliceState = null;
 
 const identitySlice = createSlice({
   name: 'identity',
+  // the cast widens the narrowed `null`, without it the slice state is inferred as null
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   initialState: initialIdentityState as IdentitySliceState, // make sure it infers the correct type
   selectors: {
     selectToken: (state) => state?.token,
