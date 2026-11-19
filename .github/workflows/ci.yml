@@ -53,8 +53,8 @@ jobs:
         uses: ./.github/actions/setup-ci-env
       - name: Run the backend container
         run: docker compose up --wait --wait-timeout 90 ci-backend
-      - name: Log the backend container output
-        run: docker compose logs ci-backend
+      - name: Log the backend and database container output
+        run: docker compose logs mongodb sessionsdb ci-backend
         if: always()
       - name: Test algorithm with pytest
         run: |
