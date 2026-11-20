@@ -44,7 +44,7 @@ describe('ResetModal', () => {
 
     await renderWithProviders(<ResetModal open onCancel={dummyOnCancel} />);
     await userEvent.click(screen.getByText('Go back'));
-    expect(dummyOnCancel).toBeCalled();
+    expect(dummyOnCancel).toHaveBeenCalled();
   });
 
   it('should call the OnOk callback when the Reset button is clicked', async () => {
@@ -52,6 +52,6 @@ describe('ResetModal', () => {
 
     await renderWithProviders(<ResetModal open onOk={dummyOnOk} />);
     await userEvent.click(screen.getByText('Reset'));
-    expect(dummyOnOk).toBeCalled();
+    expect(dummyOnOk).toHaveBeenCalled();
   });
 });
