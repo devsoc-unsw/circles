@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { DatePicker, Modal, Select, Switch } from 'antd';
+import { CheckOutlined, CloseOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { DatePicker, Modal, Select, Switch, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
 import {
@@ -18,7 +18,7 @@ type Props = {
 
 const SettingsMenu = ({ planner }: Props) => {
   const { Option } = Select;
-  const { theme } = useSettings();
+  const { theme, shareCourseData, toggleShareCourseData } = useSettings();
 
   function willUnplanCourses(numYears: number) {
     if (!planner) return false;
@@ -115,6 +115,19 @@ const SettingsMenu = ({ planner }: Props) => {
             </Option>
           ))}
         </Select>
+      </CS.PopupEntry>
+      <CS.MenuDivider />
+      <CS.PopupEntry>
+        <CS.MenuText>Share Course Data</CS.MenuText>
+        <Tooltip title="Count my planned courses, anonymously, when showing which electives are popular with students in my degree. No names or marks are shared.">
+          <InfoCircleOutlined aria-label="About sharing course data" />
+        </Tooltip>
+        <Switch
+          checked={shareCourseData}
+          onChange={() => toggleShareCourseData()}
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+        />
       </CS.PopupEntry>
     </CS.MenuPopup>
   );

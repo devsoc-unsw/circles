@@ -5,6 +5,7 @@ import {
   useHideYearMutation,
   useShowYearsMutation,
   useToggleMarksMutation,
+  useToggleShareCourseDataMutation,
   useUserSettings
 } from 'utils/apiHooks/user';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -25,6 +26,7 @@ export interface LocalSettings {
 export interface Settings extends LocalSettings, SettingsResponse {
   mutateTheme: (theme: Theme) => void;
   toggleShowMarks: () => void;
+  toggleShareCourseData: () => void;
   hideYear: (yearIndex: number) => void;
   showYears: () => void;
   toggleLockedCourses: () => void;
@@ -33,7 +35,8 @@ export interface Settings extends LocalSettings, SettingsResponse {
 
 const defaultUserSettings = {
   showMarks: false,
-  hiddenYears: []
+  hiddenYears: [],
+  shareCourseData: true
 };
 
 function useSettings(queryClient?: QueryClient): Settings {
@@ -54,6 +57,18 @@ function useSettings(queryClient?: QueryClient): Settings {
     queryClient: realQueryClient
   });
 
+  const shareCourseDataMutation = useToggleShareCourseDataMutation({
+    allowUnsetToken: true,
+    queryClient: realQueryClient,
+    mutationOptions: {
+      // The user's own plan just joined or left the counts
+      onSuccess: () =>
+        realQueryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[2] === 'popular-electives'
+        })
+    }
+  });
+
   const hideYearMutation = useHideYearMutation({
     allowUnsetToken: true,
     queryClient: realQueryClient
@@ -68,6 +83,7 @@ function useSettings(queryClient?: QueryClient): Settings {
   const toggleLockedCourses = useCallback(() => dispatch(toggleLocked()), [dispatch]);
   const toggleShowPastWarnings = useCallback(() => dispatch(togglePastWarnings()), [dispatch]);
   const toggleShowMarks = showMarksMutation.mutate;
+  const toggleShareCourseData = shareCourseDataMutation.mutate;
   const hideYear = hideYearMutation.mutate;
   const showYears = showYearsMutation.mutate;
 
@@ -78,8 +94,11 @@ function useSettings(queryClient?: QueryClient): Settings {
     showPastWarnings: localSettings.showPastWarnings,
     showMarks: userSettings.showMarks,
     hiddenYears: userSettings.hiddenYears,
+    // Older responses may omit the field; opt-out means missing = sharing
+    shareCourseData: userSettings.shareCourseData ?? true,
     mutateTheme,
     toggleShowMarks,
+    toggleShareCourseData,
     hideYear,
     showYears,
     toggleLockedCourses,
