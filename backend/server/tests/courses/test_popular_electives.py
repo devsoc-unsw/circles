@@ -211,3 +211,58 @@ def test_caps_at_popular_limit():
     assert len(body["popular"]) == POPULAR_LIMIT
     assert table[top[0]]["count"] == COHORT      # most-placed
     assert top[POPULAR_LIMIT] not in table       # least-placed, cut off
+
+
+# --- Opt-out: users who turned off data sharing are never counted ----------
+
+def test_opted_out_users_excluded_from_counts_and_sample():
+    clear()
+    insert_setup_users(
+        [make_setup_user(f"in{i}", PROGRAM, SPECS, [E1], share_course_data=True) for i in range(5)]
+        + [make_setup_user(f"out{i}", PROGRAM, SPECS, [E1, E2], share_course_data=False) for i in range(4)]
+    )
+
+    from server.routers.courses import count_program_course_frequencies
+    counts, sample_size = count_program_course_frequencies(PROGRAM, SPECS)
+
+    assert sample_size == 5
+    assert counts.get(E1) == 5
+    assert E2 not in counts
+
+
+def test_users_without_flag_are_counted():
+    """Older documents have no shareCourseData field; opt-out means they count."""
+    clear()
+    insert_setup_users([make_setup_user(f"legacy{i}", PROGRAM, SPECS, [E1]) for i in range(3)])
+
+    from server.routers.courses import count_program_course_frequencies
+    counts, sample_size = count_program_course_frequencies(PROGRAM, SPECS)
+
+    assert sample_size == 3
+    assert counts.get(E1) == 3
+
+
+def test_opt_outs_can_drop_cohort_below_floor():
+    clear()
+    sharing = COHORT - 1
+    insert_setup_users(
+        [make_setup_user(f"in{i}", PROGRAM, SPECS, [E1]) for i in range(sharing)]
+        + [make_setup_user(f"out{i}", PROGRAM, SPECS, [E1], share_course_data=False) for i in range(5)]
+    )
+
+    body = get_popular().json()
+    assert body["sampleSize"] == sharing
+    assert body["popular"] == []
+
+
+def test_opted_out_choices_do_not_affect_ranking():
+    clear()
+    # Sharing users prefer E1; a larger opted-out group all pick E2.
+    insert_setup_users(
+        [make_setup_user(f"in{i}", PROGRAM, SPECS, [E1]) for i in range(COHORT)]
+        + [make_setup_user(f"out{i}", PROGRAM, SPECS, [E2], share_course_data=False) for i in range(COHORT * 2)]
+    )
+
+    body = get_popular().json()
+    assert body["sampleSize"] == COHORT
+    assert [e["courseCode"] for e in body["popular"]] == [E1]

@@ -1,7 +1,7 @@
 from typing import Annotated, Dict
 from fastapi import APIRouter, HTTPException, Security
 
-from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport
+from server.db.helpers.models import PartialUserStorage, UserCourseStorage, UserCoursesStorage, UserImport, UserStorage
 from server.routers.utility.common import get_core_courses, get_course_details, sort_courses_by_code
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user, user_storage_to_planned_for_map
@@ -100,7 +100,14 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
         uoc = get_course_details(course)["UOC"]
         userCourses[course] = UserCourseStorage(code=course, mark=data.courses[course].mark, uoc=uoc, ignoreFromProgression=data.courses[course].ignoreFromProgression)
 
-    user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=data.settings)
+    # A plan file must not override the user's own data-sharing choice (it may be
+    # an older export without the field, or someone else's file).
+    settings = data.settings.model_copy()
+    existing = udb.get_user(uid)
+    if isinstance(existing, UserStorage):
+        settings.shareCourseData = existing.settings.shareCourseData
+
+    user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=settings)
     if not udb.reset_user(uid) or not udb.update_user(uid, user):
         raise HTTPException(status_code=500, detail="Failed to import user")
 
@@ -156,6 +163,13 @@ def get_user_settings(uid: Annotated[str, Security(require_uid)]) -> SettingsSto
 def toggle_show_marks(uid: Annotated[str, Security(require_uid)]):
     user = get_setup_user(uid)
     user['settings'].showMarks = not user['settings'].showMarks
+    set_user(uid, user, True)
+
+@router.post("/settings/toggleShareCourseData")
+def toggle_share_course_data(uid: Annotated[str, Security(require_uid)]):
+    """Opt in or out of having your planned courses counted in anonymous popularity stats."""
+    user = get_setup_user(uid)
+    user['settings'].shareCourseData = not user['settings'].shareCourseData
     set_user(uid, user, True)
 
 @router.post("/settings/hideYear")
@@ -303,7 +317,7 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         },
         'planner': planner,
         'courses': {},
-        'settings': SettingsStorage(showMarks=False, hiddenYears=set()),
+        'settings': SettingsStorage(showMarks=False, hiddenYears=set(), shareCourseData=wizard.shareCourseData),
     }
 
     if wizard.addCoreCourses != 'none':

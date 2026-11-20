@@ -46,6 +46,9 @@ class UserPlannerStorage(BaseModel):
 class UserSettingsStorage(BaseModel):
     showMarks: bool
     hiddenYears: Set[int]
+    # Whether this user's planned courses may be counted (anonymously) in
+    # popularity stats. Opt-out: missing on older documents means True.
+    shareCourseData: bool = True
 
     @field_serializer('hiddenYears', when_used='always')
     def serialize_hidden_years(self, hiddenYears: Set[int]):

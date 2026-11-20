@@ -7,12 +7,183 @@ NOTE: The helper functions must be run from the backend directory due to their p
 
 import json
 
+from pymongo.errors import OperationFailure
+
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
 from .constants import COURSES_COL_NAME, PROGRAMS_COL_NAME, REFRESH_TOKENS_COL_NAME, SESSIONS_COL_NAME, SID_INDEX_NAME, SPECS_COL_NAME, TOKEN_INDEX_NAME, UID_INDEX_NAME, USERS_COL_NAME
 from .conn import db, archivesDB, usersDB
 
+
+
+# Schema for the users collection. Shared between creating the collection and
+# refreshing the validator on an existing one (see setup_user_related_collections).
+_USERS_VALIDATOR = {
+    '$jsonSchema': {
+        'oneOf': [
+            {
+                'bsonType': 'object',
+                'required': ['uid', 'setup', 'guest'],
+                'additionalProperties': False,
+                'properties': {
+                    '_id': { 'bsonType': 'objectId' },
+                    'uid': {
+                        'bsonType': 'string',
+                        'description': 'unique user id of the user'
+                    },
+                    'setup': { 'enum': [False] },
+                    'guest': { 'bsonType': 'bool' },
+                }
+            },
+            {
+                'bsonType': 'object',
+                'required': ['uid', 'setup', 'guest', 'degree', 'planner', 'courses', 'settings'],
+                'additionalProperties': False,
+                'properties': {
+                    '_id': { 'bsonType': 'objectId' },
+                    'uid': {
+                        'bsonType': 'string',
+                        'description': 'unique user id of the user'
+                    },
+                    'setup': { 'enum': [True] },
+                    'guest': { 'bsonType': 'bool' },
+                    'degree': {
+                        'bsonType': 'object',
+                        'required': ['programCode', 'specs'],
+                        'additionalProperties': False,
+                        'properties': {
+                            'programCode': {
+                                'bsonType': 'string',
+                                'description': 'the code of program taken'
+                            },
+                            'specs': {
+                                'bsonType': 'array',
+                                'description': 'an array of all the specialisations taken',
+                                'items': {
+                                    'bsonType': 'string'
+                                }
+                            },
+                        }
+                    },
+                    'courses': {
+                        'bsonType': 'object',
+                        'description': 'an object of CourseCode -> CourseInformation mapping',
+                        'properties': {},
+                        'additionalProperties': {
+                            'bsonType': 'object',
+                            'required': ['code', 'mark', 'uoc', 'ignoreFromProgression'],
+                            'additionalProperties': False,
+                            'properties': {
+                                'code': {
+                                    'bsonType': 'string',
+                                    'description': 'Course code repeated',
+                                },
+                                'mark': {
+                                    'oneOf': [
+                                        { 'enum': ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'] },
+                                        { 'bsonType': ['int', 'null'] },
+                                    ],
+                                    'description': 'Mark entered for this course'
+                                },
+                                'uoc': {
+                                    'bsonType': 'int',
+                                    'description': 'UOC of this course',
+                                },
+                                'ignoreFromProgression': {
+                                    'bsonType': 'bool',
+                                    'description': 'Whether the course is ignored from progression checking',
+                                }
+                            }
+                        }
+                    },
+                    'planner': {
+                        'bsonType': 'object',
+                        'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years', 'lockedTerms'],
+                        'additionalProperties': False,
+                        'properties': {
+                            'lockedTerms': {
+                                'bsonType': 'object',
+                                'properties': {},
+                                'additionalProperties': { 'bsonType': 'bool' },
+                                'description': 'A map of <YEAR><TERM> -> boolean of which terms are locked. Example: 2024T1 -> True',
+                            },
+                            'unplanned': {
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'string'
+                                }
+                            },
+                            'startYear': {
+                                'bsonType': 'int'
+                            },
+                            'isSummerEnabled': {
+                                'bsonType': 'bool'
+                            },
+                            'years': {
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'object',
+                                    'required': ['T0', 'T1', 'T2', 'T3'],
+                                    'additionalProperties': False,
+                                    'properties': {
+                                        'T0': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+                                        'T1': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+                                        'T2': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+                                        'T3': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    },
+                    'settings': {
+                        'bsonType': 'object',
+                        'required': ['showMarks', 'hiddenYears'],
+                        'additionalProperties': False,
+                        'properties': {
+                            'showMarks': {
+                                'bsonType': 'bool',
+                                'description': 'Whether to show marks in the Term Planner'
+                            },
+                            'hiddenYears': {
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'int'
+                                },
+                                'description': 'Indexes of years hidden in the Term Planner, 0 is startYear',
+                                'uniqueItems': True
+                            },
+                            'shareCourseData': {
+                                'bsonType': 'bool',
+                                'description': 'Whether planned courses may be counted in anonymous popularity stats (missing = true)'
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
 
 
 def _create_users_collection():
@@ -23,167 +194,7 @@ def _create_users_collection():
     #     courses! { ... },
     #     planner! { ... },
     # }
-    usersDB.create_collection(USERS_COL_NAME, validator={
-        '$jsonSchema': {
-            'oneOf': [
-                {
-                    'bsonType': 'object',
-                    'required': ['uid', 'setup', 'guest'],
-                    'additionalProperties': False,
-                    'properties': {
-                        '_id': { 'bsonType': 'objectId' },
-                        'uid': {
-                            'bsonType': 'string',
-                            'description': 'unique user id of the user'
-                        },
-                        'setup': { 'enum': [False] },
-                        'guest': { 'bsonType': 'bool' },
-                    }
-                },
-                {
-                    'bsonType': 'object',
-                    'required': ['uid', 'setup', 'guest', 'degree', 'planner', 'courses', 'settings'],
-                    'additionalProperties': False,
-                    'properties': {
-                        '_id': { 'bsonType': 'objectId' },
-                        'uid': {
-                            'bsonType': 'string',
-                            'description': 'unique user id of the user'
-                        },
-                        'setup': { 'enum': [True] },
-                        'guest': { 'bsonType': 'bool' },
-                        'degree': {
-                            'bsonType': 'object',
-                            'required': ['programCode', 'specs'],
-                            'additionalProperties': False,
-                            'properties': {
-                                'programCode': {
-                                    'bsonType': 'string',
-                                    'description': 'the code of program taken'
-                                },
-                                'specs': {
-                                    'bsonType': 'array',
-                                    'description': 'an array of all the specialisations taken',
-                                    'items': {
-                                        'bsonType': 'string'
-                                    }
-                                },
-                            }
-                        },
-                        'courses': {
-                            'bsonType': 'object',
-                            'description': 'an object of CourseCode -> CourseInformation mapping',
-                            'properties': {},
-                            'additionalProperties': {
-                                'bsonType': 'object',
-                                'required': ['code', 'mark', 'uoc', 'ignoreFromProgression'],
-                                'additionalProperties': False,
-                                'properties': {
-                                    'code': {
-                                        'bsonType': 'string',
-                                        'description': 'Course code repeated',
-                                    },
-                                    'mark': {
-                                        'oneOf': [
-                                            { 'enum': ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'] },
-                                            { 'bsonType': ['int', 'null'] },
-                                        ],
-                                        'description': 'Mark entered for this course'
-                                    },
-                                    'uoc': {
-                                        'bsonType': 'int',
-                                        'description': 'UOC of this course',
-                                    },
-                                    'ignoreFromProgression': {
-                                        'bsonType': 'bool',
-                                        'description': 'Whether the course is ignored from progression checking',
-                                    }
-                                }
-                            }
-                        },
-                        'planner': {
-                            'bsonType': 'object',
-                            'required': ['unplanned', 'startYear', 'isSummerEnabled', 'years', 'lockedTerms'],
-                            'additionalProperties': False,
-                            'properties': {
-                                'lockedTerms': {
-                                    'bsonType': 'object',
-                                    'properties': {},
-                                    'additionalProperties': { 'bsonType': 'bool' },
-                                    'description': 'A map of <YEAR><TERM> -> boolean of which terms are locked. Example: 2024T1 -> True',
-                                },
-                                'unplanned': {
-                                    'bsonType': 'array',
-                                    'items': {
-                                        'bsonType': 'string'
-                                    }
-                                },
-                                'startYear': {
-                                    'bsonType': 'int'
-                                },
-                                'isSummerEnabled': {
-                                    'bsonType': 'bool'
-                                },
-                                'years': {
-                                    'bsonType': 'array',
-                                    'items': {
-                                        'bsonType': 'object',
-                                        'required': ['T0', 'T1', 'T2', 'T3'],
-                                        'additionalProperties': False,
-                                        'properties': {
-                                            'T0': {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            },
-                                            'T1': {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            },
-                                            'T2': {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            },
-                                            'T3': {
-                                                'bsonType': 'array',
-                                                'items': {
-                                                    'bsonType': 'string'
-                                                }
-                                            }
-                                        }
-                                    },
-                                }
-                            }
-                        },
-                        'settings': {
-                            'bsonType': 'object',
-                            'required': ['showMarks', 'hiddenYears'],
-                            'additionalProperties': False,
-                            'properties': {
-                                'showMarks': {
-                                    'bsonType': 'bool',
-                                    'description': 'Whether to show marks in the Term Planner'
-                                },
-                                'hiddenYears': {
-                                    'bsonType': 'array',
-                                    'items': {
-                                        'bsonType': 'int'
-                                    },
-                                    'description': 'Indexes of years hidden in the Term Planner, 0 is startYear',
-                                    'uniqueItems': True
-                                }
-                            }
-                        }
-                    }
-                }
-            ]
-        }
-    })
+    usersDB.create_collection(USERS_COL_NAME, validator=_USERS_VALIDATOR)
 
     usersDB[USERS_COL_NAME].create_index("uid", unique=True, name=UID_INDEX_NAME)
 
@@ -395,6 +406,13 @@ def setup_user_related_collections(drop: bool):
     # build up
     # TODO: setup data versioning so we migrate shapes if needed
     existing = usersDB.list_collection_names()
+    if USERS_COL_NAME in existing:
+        # Existing deployments keep whatever validator they were created with,
+        # so re-apply the current one to pick up new optional fields.
+        try:
+            usersDB.command("collMod", USERS_COL_NAME, validator=_USERS_VALIDATOR)
+        except OperationFailure as e:
+            print(f"WARNING: could not refresh users validator ({e}). New user fields may be rejected until it is updated.")
     if USERS_COL_NAME not in existing:
         _create_users_collection()
 

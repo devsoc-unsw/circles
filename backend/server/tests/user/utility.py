@@ -38,7 +38,8 @@ def get_token_headers(token: str):
 from server.db.mongo.conn import usersCOL  # imported here: env hostnames are set above
 
 
-def make_setup_user(uid: str, program_code: str, specs: list[str], taken_codes: list[str]) -> dict:
+def make_setup_user(uid: str, program_code: str, specs: list[str], taken_codes: list[str],
+                    share_course_data: bool | None = None) -> dict:
     """
     Return a minimal, schema-valid "setup" user document.
 
@@ -46,7 +47,13 @@ def make_setup_user(uid: str, program_code: str, specs: list[str], taken_codes: 
     `taken_codes` become entries in the `courses` map (mark left as None, i.e.
     "chosen but ungraded") - membership in `courses` is what the popularity
     aggregation counts.
+
+    `share_course_data` sets the opt-out flag; None leaves it off the document
+    entirely, like users created before the flag existed.
     """
+    settings: dict = {"showMarks": False, "hiddenYears": []}
+    if share_course_data is not None:
+        settings["shareCourseData"] = share_course_data
     return {
         "uid": uid,
         "setup": True,
@@ -63,7 +70,7 @@ def make_setup_user(uid: str, program_code: str, specs: list[str], taken_codes: 
             "years": [{"T0": [], "T1": [], "T2": [], "T3": []}],
             "lockedTerms": {},
         },
-        "settings": {"showMarks": False, "hiddenYears": []},
+        "settings": settings,
     }
 
 

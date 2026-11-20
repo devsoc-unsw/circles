@@ -20,6 +20,7 @@ class DegreeWizardInfo(BaseModel):
     endYear: int
     specs: list[str]
     addCoreCourses: Literal['none', 'lower', 'higher'] = 'lower'
+    shareCourseData: bool = True
 
 class Specialisations(BaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -150,6 +151,7 @@ class SettingsStorage(BaseModel):
 
     showMarks: bool
     hiddenYears: Set[int]
+    shareCourseData: bool = True
 
 class HiddenYear(BaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -285,8 +287,8 @@ class PopularElective(BaseModel):
 
 class PopularElectives(BaseModel):
     programCode: str
-    sampleSize: int       # setup users enrolled in this program
-    popular: list[PopularElective]   # electives only, top 10, sorted by count desc
+    sampleSize: int       # setup users enrolled in this program who share their data
+    popular: list[PopularElective]   # electives only, top 5, sorted by count desc
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

@@ -508,7 +508,8 @@ POPULAR_LIMIT = 5
 
 def count_program_course_frequencies(program_code: str, specialisations: Optional[List[str]] = None) -> Tuple[Dict[str, int], int]:
     """
-    Count, among setup users enrolled in the given program, how many have each
+    Count, among setup users enrolled in the given program who have not opted
+    out of data sharing, how many have each
     course in their plan (i.e. in their `courses` map). Returns the per-course
     counts and the sample size (number of such users).
 
@@ -516,7 +517,13 @@ def count_program_course_frequencies(program_code: str, specialisations: Optiona
     specialisations are counted, so a student sees the choices of peers on the
     same major rather than the whole program.
     """
-    query: Dict[str, Any] = {"setup": True, "degree.programCode": program_code}
+    # Opted-out users are excluded from both the counts and the sample size.
+    # `$ne: False` keeps users who never set the flag (opt-out default).
+    query: Dict[str, Any] = {
+        "setup": True,
+        "degree.programCode": program_code,
+        "settings.shareCourseData": {"$ne": False},
+    }
     if specialisations:
         query["degree.specs"] = {"$all": specialisations}
     sample_size = usersCOL.count_documents(query)
