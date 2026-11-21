@@ -1,4 +1,9 @@
-import { getCourseChildren, getCourseInfo, getCoursePrereqs } from 'utils/api/coursesApi';
+import {
+  getCourseChildren,
+  getCourseInfo,
+  getCoursePrereqs,
+  getPopularElectives
+} from 'utils/api/coursesApi';
 import { fetchAllDegrees, getProgramGraph, getProgramStructure } from 'utils/api/programsApi';
 import { getSpecialisationsForProgram, getSpecialisationTypes } from 'utils/api/specsApi';
 import { getCourseRating } from 'utils/api/unilectivesApi';
@@ -39,6 +44,11 @@ export const useSpecsForProgramQuery = createStaticQueryHook(
 export const useSpecTypesQuery = createStaticQueryHook(
   (programCode) => ['programs', programCode, 'specialisation-types'],
   getSpecialisationTypes
+);
+
+export const usePopularElectivesQuery = createStaticQueryHook(
+  (programCode, specs) => ['programs', programCode, 'popular-electives', specs],
+  getPopularElectives
 );
 
 export const useProgramGraphQuery = createStaticQueryHook(
