@@ -92,7 +92,6 @@ jobs:
   frontend_tests:
     name: Frontend Unit Tests
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Checking out repository
         uses: actions/checkout@v4
