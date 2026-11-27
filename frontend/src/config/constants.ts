@@ -3,7 +3,7 @@ export const FEEDBACK_LINK =
 export const GITHUB_LINK = 'https://github.com/devsoc-unsw/circles/tree/dev';
 
 // Don't forget to update live year in the backend too
-export const LIVE_YEAR = 2026;
+export const LIVE_YEAR = 2027;
 export const CURR_YEAR = new Date().getFullYear();
 
 // Global colors - currently only being used in LiquidProgressChart

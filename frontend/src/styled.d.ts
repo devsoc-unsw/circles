@@ -88,6 +88,9 @@ declare module 'styled-components' {
     infoOutlined: {
       color: string;
     };
+    groupworkOutlined: {
+      color: string;
+    };
     uocBadge: {
       backgroundColor: string;
     };

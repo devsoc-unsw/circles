@@ -119,7 +119,7 @@ const AutoplanModal = ({ open, onCancel }: Props) => {
       onOk={handleSubmit}
       okText="Generate Plan"
       confirmLoading={autoplanMutation.isPending}
-      destroyOnClose
+      destroyOnHidden
     >
       <Text>
         Autoplan will place all currently unplanned courses into your planner up to the term you

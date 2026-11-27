@@ -87,7 +87,8 @@ export const badCourseInfo: Course = {
   is_legacy: false,
   is_accurate: false,
   is_multiterm: false,
-  handbook_note: ''
+  handbook_note: '',
+  groupwork: false
 };
 
 export const badCourses: Record<string, CourseResponse> = {};

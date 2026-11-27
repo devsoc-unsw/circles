@@ -1,6 +1,38 @@
+import { Course } from 'types/api';
 import { Grade, Mark, PlannerCourse, Term } from 'types/planner';
 import { PlannerResponse } from 'types/userResponse';
 import getNumTerms from 'utils/getNumTerms';
+import { LIVE_YEAR } from 'config/constants';
+
+// Fills in a course's data for every year in the planner. Archive years inherit from the
+// most recent year that has real data, and future years inherit the live year's offered terms.
+const extrapolateCourseYears = (
+  data: Record<number, Course>,
+  validYears: number[]
+): Record<number, Course> => {
+  const newData = { ...data };
+  let bestYear = validYears.find((year) => !!data[year]) ?? LIVE_YEAR;
+
+  validYears.forEach((year) => {
+    if (newData[year]) bestYear = year;
+    else
+      newData[year] = {
+        ...newData[bestYear],
+        terms: year > LIVE_YEAR ? newData[LIVE_YEAR].terms : []
+      };
+  });
+
+  // groupwork is a current-offering property; archive years won't have it, so
+  // copy it from LIVE_YEAR into every year so the indicator is always correct.
+  const liveGroupwork = newData[LIVE_YEAR]?.groupwork;
+  if (liveGroupwork !== undefined) {
+    validYears.forEach((year) => {
+      if (newData[year]) newData[year] = { ...newData[year], groupwork: liveGroupwork };
+    });
+  }
+
+  return newData;
+};
 
 const parseMarkToInt = (mark: Mark): number | null => {
   if (typeof mark === 'undefined') return null;
@@ -108,4 +140,11 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
   return maxRowOffset < numYears - destRow && minRowOffset + destRow >= 0;
 };
 
-export { checkMultitermInBounds, getNumTerms, getTermsList, isPlannerEmpty, parseMarkToInt };
+export {
+  checkMultitermInBounds,
+  extrapolateCourseYears,
+  getNumTerms,
+  getTermsList,
+  isPlannerEmpty,
+  parseMarkToInt
+};
