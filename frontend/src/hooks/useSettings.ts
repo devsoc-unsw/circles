@@ -64,7 +64,7 @@ function useSettings(queryClient?: QueryClient): Settings {
       // The user's own plan just joined or left the counts
       onSuccess: () =>
         realQueryClient.invalidateQueries({
-          predicate: (query) => query.queryKey[2] === 'popular-electives'
+          predicate: (query) => query.queryKey.includes('popular-electives')
         })
     }
   });

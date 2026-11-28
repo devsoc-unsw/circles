@@ -70,7 +70,7 @@ export type PopularElective = {
 export type PopularElectives = {
   programCode: string;
   sampleSize: number;
-  popular: PopularElective[]; // electives only, top 10, sorted by count desc
+  popular: PopularElective[]; // electives only, top 5, sorted by count desc
 };
 
 /* Programs api */
