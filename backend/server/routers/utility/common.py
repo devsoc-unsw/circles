@@ -88,13 +88,19 @@ def get_elective_courses(program: str, specialisations: list[str]) -> set[str]:
     """
     structure = get_program_structure(program, specs=specialisations)[0]
     electives: set[str] = set()
+    cores: set[str] = set()
     for spec_name, spec in structure.items():
         if spec_name == "Rules":
             continue
         for sub_group, value in spec["content"].items():
-            if _is_elective_container(sub_group, value.get("type", "")):
+            if "core" in sub_group.lower():
+                cores.update(value["courses"].keys())
+            elif _is_elective_container(sub_group, value.get("type", "")):
                 electives.update(value["courses"].keys())
-    return electives
+    # A course can be core in one part of the degree (e.g. the major) and also
+    # sit in an elective list elsewhere (the minor, or a degree-wide list like
+    # "Science Electives"). Core anywhere means core for this student.
+    return electives - cores
 
 
 def _filter_exclusive_courses(course_codes: list[str], prefer_higher: bool = False) -> list[str]:

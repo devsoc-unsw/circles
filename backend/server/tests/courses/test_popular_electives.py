@@ -266,3 +266,35 @@ def test_opted_out_choices_do_not_affect_ranking():
     body = get_popular().json()
     assert body["sampleSize"] == COHORT
     assert [e["courseCode"] for e in body["popular"]] == [E1]
+
+
+# --- Core in one part of the degree, elective in another ---------------------
+# Real handbook overlaps: a course that is core anywhere in the student's degree
+# must never be ranked as an elective, even if another list also offers it.
+
+def test_major_core_in_degree_wide_elective_list_is_not_elective():
+    # 3154 Commerce/CS: COMP1511 is COMPZ1 core and also in "Science Electives"
+    electives = get_elective_courses("3154", ["COMPZ1"])
+    assert "COMP1511" not in electives
+    assert "COMP3121" not in electives
+
+
+def test_major_core_in_minor_elective_list_is_not_elective():
+    # 3134 Commerce: FINS3623 is FINSR1 core and a FINSA2 "Prescribed Elective"
+    electives = get_elective_courses("3134", ["FINSR1", "FINSA2"])
+    assert "FINS3623" not in electives
+    assert "FINS2624" not in electives
+
+
+def test_core_with_elective_listing_never_flagged_popular():
+    clear()
+    program, specs = "3154", ["COMPZ1"]
+    other = sorted(get_elective_courses(program, specs))[0]
+    insert_setup_users(
+        [make_setup_user(f"u{i}", program, specs, ["COMP1511", other]) for i in range(MIN_POPULAR_SAMPLE)]
+    )
+    res = requests.get(f"{BASE}/courses/popularElectives/{program}/{specs[0]}")
+    assert res.status_code == 200
+    codes = [p["courseCode"] for p in res.json()["popular"]]
+    assert "COMP1511" not in codes
+    assert other in codes

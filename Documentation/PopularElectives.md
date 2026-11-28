@@ -9,7 +9,7 @@ For a student on program `P` with specialisations `S`:
 1. **Pick the group.** Take every user who has finished degree setup, is enrolled in program `P`, is enrolled in all of the specialisations `S`, and has **not** opted out of data sharing. This group's size is the `sampleSize`.
 2. **Check the group is big enough.** If fewer than **20** students are in the group, show nothing. Small groups give noisy, misleading results, and could hint at what a specific person picked.
 3. **Count.** For each course, count how many students in the group have it anywhere in their plan (planned into a term or still unplanned).
-4. **Keep electives only.** Drop core courses, general education, and rule-based groups. Only courses in elective groups of `P`/`S` can be popular.
+4. **Keep electives only.** Drop core courses, general education, and rule-based groups. Only courses in elective groups of `P`/`S` can be popular. A course that is core anywhere in the degree is dropped, even if another list also offers it as an elective (for example COMP1511 in 3154 is COMPZ1 core and also in "Science Electives").
 5. **Rank.** Sort by count, highest first, and keep the top **5**.
 
 Constants live in `backend/server/routers/courses.py`: `MIN_POPULAR_SAMPLE = 20`, `POPULAR_LIMIT = 5`.
