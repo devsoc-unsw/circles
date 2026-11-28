@@ -17,7 +17,7 @@ type Props = {
 };
 
 const SettingsMenu = ({ planner }: Props) => {
-  const { theme, shareCourseData, toggleShareCourseData } = useSettings();
+  const { theme, shareCourseData, setShareCourseData } = useSettings();
 
   function willUnplanCourses(numYears: number) {
     if (!planner) return false;
@@ -120,13 +120,18 @@ const SettingsMenu = ({ planner }: Props) => {
       </CS.PopupEntry>
       <CS.MenuDivider />
       <CS.PopupEntry>
-        <CS.MenuText>Share Course Data</CS.MenuText>
-        <Tooltip title="Count my planned courses, anonymously, when showing which electives are popular with students in my degree. No names or marks are shared.">
-          <InfoCircleOutlined aria-label="About sharing course data" />
+        <CS.MenuText id="share-course-data-label">Share Course Data</CS.MenuText>
+        <Tooltip
+          trigger={['hover', 'focus', 'click']}
+          title="Count my planned courses, anonymously, when showing which electives are popular with students in my degree. No names or marks are shared."
+        >
+          {/* Focusable so keyboard and screen reader users can open the explanation */}
+          <InfoCircleOutlined tabIndex={0} role="button" aria-label="About sharing course data" />
         </Tooltip>
         <Switch
+          aria-labelledby="share-course-data-label"
           checked={shareCourseData}
-          onChange={() => toggleShareCourseData()}
+          onChange={(checked) => setShareCourseData(checked)}
           checkedChildren={<CheckOutlined />}
           unCheckedChildren={<CloseOutlined />}
         />

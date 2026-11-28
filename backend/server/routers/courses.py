@@ -542,33 +542,38 @@ def count_program_course_frequencies(program_code: str, specialisations: Optiona
     return counts, sample_size
 
 
-@router.get("/popularElectives/{programCode}/{spec}", response_model=PopularElectives)
-@router.get("/popularElectives/{programCode}", response_model=PopularElectives)
-def popular_electives(programCode: str, spec: Optional[str] = None) -> PopularElectives:
+@router.get("/popularElectives", response_model=PopularElectives)
+def popular_electives(uid: Annotated[str, Security(require_uid)]) -> PopularElectives:
     """
-    Returns the most commonly chosen elective courses for a program: the top
-    electives ranked by how many of the program's students have placed them in
-    their plan. Core and general-education courses are excluded. When a spec is
-    given, only students on that spec are counted.
-    """
-    specs = spec.split("+") if spec else []
-    electives = get_elective_courses(programCode, specs)  # raises 400 for an invalid program
+    Returns the most commonly chosen electives among students on the caller's
+    own program and specialisations: the top electives ranked by how many of
+    those students have placed them in their plan. Core and general-education
+    courses are excluded.
 
-    counts, sample_size = count_program_course_frequencies(programCode, specs)
+    The cohort comes from the caller's saved degree, never from the request, so
+    nobody can probe other (possibly tiny) cohorts, and below the floor we
+    reveal nothing at all, not even the cohort size.
+    """
+    degree = get_setup_user(uid)["degree"]
+    program_code, specs = degree["programCode"], list(degree["specs"])
+    electives = get_elective_courses(program_code, specs)
+
+    counts, sample_size = count_program_course_frequencies(program_code, specs)
     if sample_size < MIN_POPULAR_SAMPLE:
-        return PopularElectives(programCode=programCode, sampleSize=sample_size, popular=[])
+        return PopularElectives(programCode=program_code, sampleSize=0, popular=[])
 
+    # Highest count first; ties broken by course code so the list is stable
+    # between requests.
     ranked = sorted(
         ((code, n) for code, n in counts.items() if code in electives),
-        key=lambda item: item[1],
-        reverse=True,
+        key=lambda item: (-item[1], item[0]),
     )[:POPULAR_LIMIT]
 
     popular = [
         PopularElective(courseCode=code, count=n, percent=n / sample_size)
         for code, n in ranked
     ]
-    return PopularElectives(programCode=programCode, sampleSize=sample_size, popular=popular)
+    return PopularElectives(programCode=program_code, sampleSize=sample_size, popular=popular)
 
 
 ###############################################################################

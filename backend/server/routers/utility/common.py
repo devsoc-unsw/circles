@@ -72,7 +72,7 @@ def _is_elective_container(title: str, container_type: str) -> bool:
     title_lower = title.lower()
     if "gened" in type_lower or "rule" in type_lower or "general education" in title_lower:
         return False
-    if "core" in title_lower:
+    if "core" in title_lower or "core" in type_lower:
         return False
     if "electives" in type_lower:
         return True
@@ -93,7 +93,9 @@ def get_elective_courses(program: str, specialisations: list[str]) -> set[str]:
         if spec_name == "Rules":
             continue
         for sub_group, value in spec["content"].items():
-            if "core" in sub_group.lower():
+            # Program-level core groups often have no "core" in the title
+            # (e.g. "Final Year Synthesis (FYS)"), but are typed core_courses.
+            if "core" in sub_group.lower() or "core" in value.get("type", "").lower():
                 cores.update(value["courses"].keys())
             elif _is_elective_container(sub_group, value.get("type", "")):
                 electives.update(value["courses"].keys())

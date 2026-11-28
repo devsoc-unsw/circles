@@ -1,4 +1,8 @@
-import { getAllUnlockedCourses, getCoursesUnlockedWhenTaken } from 'utils/api/coursesApi';
+import {
+  getAllUnlockedCourses,
+  getCoursesUnlockedWhenTaken,
+  getPopularElectives
+} from 'utils/api/coursesApi';
 import { validateTermPlanner } from 'utils/api/plannerApi';
 import {
   getUserCourses,
@@ -26,6 +30,12 @@ export const useUserTermValidations = createUserQueryHook(
 );
 
 export const useUserSettings = createUserQueryHook(() => ['settings'], getUserSettings);
+
+// Popular electives for the user's own degree (the server reads it from their record)
+export const useUserPopularElectives = createUserQueryHook(
+  () => ['popular-electives'],
+  getPopularElectives
+);
 
 export const useUserAllUnlocked = createUserQueryHook(
   () => ['planner', 'courses', 'allUnlocked'],

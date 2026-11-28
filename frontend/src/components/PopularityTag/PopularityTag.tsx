@@ -16,19 +16,30 @@ type Props = {
 const PopularityTag = ({ count, withLabel }: Props) => {
   const tooltip =
     count === 1
-      ? '1 student has this course in their plan'
-      : `${count} students have this course in their plan`;
+      ? '1 student in your degree has this course in their plan'
+      : `${count} students in your degree have this course in their plan`;
 
+  // Focusable with a full text label, so keyboard and screen reader users get
+  // the same information as the hover tooltip.
   return (
-    <Tooltip placement="top" title={tooltip}>
+    <Tooltip placement="top" title={tooltip} trigger={['hover', 'focus']}>
       {withLabel ? (
-        <S.Badge data-testid="popularity-badge">
-          <FireFilled style={{ fontSize: '1em' }} />
+        <S.Badge
+          data-testid="popularity-badge"
+          tabIndex={0}
+          aria-label={`Popular course: ${tooltip}`}
+        >
+          <FireFilled aria-hidden style={{ fontSize: '1em' }} />
           Popular course
         </S.Badge>
       ) : (
-        <S.Flame data-testid="popularity-flame">
-          <FireFilled style={{ fontSize: '1em' }} />
+        <S.Flame
+          data-testid="popularity-flame"
+          tabIndex={0}
+          role="img"
+          aria-label={`Popular: ${tooltip}`}
+        >
+          <FireFilled aria-hidden style={{ fontSize: '1em' }} />
         </S.Flame>
       )}
     </Tooltip>

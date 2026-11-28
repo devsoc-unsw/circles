@@ -9,21 +9,27 @@ const NOTICE_KEY = 'share-course-data-notice';
 // stats. New users already saw this in the degree wizard (shareNoticeSeen = true).
 const ShareDataNotice = () => {
   const { notification } = App.useApp();
-  const { shareNoticeSeen, toggleShareCourseData } = useSettings();
+  const { shareNoticeSeen, setShareCourseData } = useSettings();
   const dismissMutation = useDismissShareNoticeMutation();
   const shown = useRef(false);
+
+  // If the user changes the setting somewhere else (Settings menu, another
+  // tab), the notice is no longer needed, so close it.
+  useEffect(() => {
+    if (shareNoticeSeen && shown.current) notification.destroy(NOTICE_KEY);
+  }, [shareNoticeSeen, notification]);
 
   useEffect(() => {
     if (shareNoticeSeen || shown.current) return;
     shown.current = true;
 
     let handled = false;
-    const close = (turnOff: boolean) => {
+    const close = (share: boolean) => {
       if (handled) return;
       handled = true;
-      // Turning sharing off also marks the notice as seen on the server
-      if (turnOff) toggleShareCourseData();
-      else dismissMutation.mutate();
+      // Setting the value also marks the notice as seen on the server
+      if (share) dismissMutation.mutate();
+      else setShareCourseData(false);
       notification.destroy(NOTICE_KEY);
     };
 
@@ -31,14 +37,15 @@ const ShareDataNotice = () => {
       key: NOTICE_KEY,
       placement: 'bottomRight',
       duration: false,
-      title: 'Your plan helps show popular electives',
+      title: 'Your plan is counted in popular electives',
       description: (
         <>
           <p>
-            Circles counts which electives students in your degree plan, anonymously. No names or
-            marks are shared, and nothing shows until at least 20 students are counted.
+            Circles already counts the electives in your plan, together with other students in your
+            degree, to show which electives are popular. It&apos;s anonymous: no names or marks are
+            shared.
           </p>
-          <p>To stop your plan being counted at any time:</p>
+          <p>You can change this at any time:</p>
           <ol style={{ paddingLeft: 20, margin: 0 }}>
             <li>Open the Term Planner.</li>
             <li>Click the gear (Settings) icon.</li>
@@ -46,17 +53,16 @@ const ShareDataNotice = () => {
           </ol>
         </>
       ),
+      // Equal weight: neither choice is pushed over the other
       actions: (
         <Space>
-          <Button onClick={() => close(true)}>Turn off sharing</Button>
-          <Button type="primary" onClick={() => close(false)}>
-            Got it
-          </Button>
+          <Button onClick={() => close(false)}>Turn off sharing</Button>
+          <Button onClick={() => close(true)}>Keep sharing</Button>
         </Space>
       ),
-      onClose: () => close(false)
+      onClose: () => close(true)
     });
-  }, [shareNoticeSeen, notification, toggleShareCourseData, dismissMutation]);
+  }, [shareNoticeSeen, notification, setShareCourseData, dismissMutation]);
 
   return null;
 };
