@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Radio } from 'antd';
+import { Button, Checkbox, Radio } from 'antd';
 import { CoreCoursesPreference, DegreeWizardPayload } from 'types/degreeWizard';
 import { useSetupDegreeWizardMutation } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
@@ -20,13 +20,14 @@ const CORE_COURSES_OPTIONS: { label: string; value: CoreCoursesPreference }[] = 
 const StartBrowsingStep = ({ degreeInfo }: Props) => {
   const navigate = useNavigate();
   const [addCoreCourses, setAddCoreCourses] = useState<CoreCoursesPreference>('lower');
+  const [shareCourseData, setShareCourseData] = useState(true);
 
   const setupDegreeMutation = useSetupDegreeWizardMutation({
     mutationOptions: { onSuccess: () => navigate('/course-selector') }
   });
 
   const handleSetupDegree = () => {
-    setupDegreeMutation.mutate({ ...degreeInfo, addCoreCourses });
+    setupDegreeMutation.mutate({ ...degreeInfo, addCoreCourses, shareCourseData });
   };
 
   const handleSaveUserSettings = async () => {
@@ -56,6 +57,18 @@ const StartBrowsingStep = ({ degreeInfo }: Props) => {
           onChange={(e) => setAddCoreCourses(e.target.value as CoreCoursesPreference)}
           value={addCoreCourses}
         />
+        <S.ShareDataWrapper>
+          <Checkbox
+            checked={shareCourseData}
+            onChange={(e) => setShareCourseData(e.target.checked)}
+          >
+            Anonymously include my course plan in &quot;popular electives&quot; stats
+          </Checkbox>
+          <S.ShareDataHint>
+            Helps other students in your degree. No names or marks are shared. You can change this
+            anytime in the Term Planner settings.
+          </S.ShareDataHint>
+        </S.ShareDataWrapper>
         <Button type="primary" onClick={handleSaveUserSettings}>
           Start browsing courses!
         </Button>

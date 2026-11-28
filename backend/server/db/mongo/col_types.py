@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Dict, List, Literal, TypedDict, Union
+from typing import Dict, List, Literal, NotRequired, TypedDict, Union
 from uuid import UUID
 
 class RefreshTokenInfoDict(TypedDict):
@@ -65,6 +65,7 @@ class UserPlannerInfoDict(TypedDict):
 class UserSettingsInfoDict(TypedDict):
     showMarks: bool
     hiddenYears: List[int]
+    shareCourseData: NotRequired[bool]  # missing on older documents, treated as True
 
 class UserInfoDict(TypedDict):
     uid: str
