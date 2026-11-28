@@ -106,6 +106,7 @@ def import_user(data: UserImport, uid: Annotated[str, Security(require_uid)]):
     existing = udb.get_user(uid)
     if isinstance(existing, UserStorage):
         settings.shareCourseData = existing.settings.shareCourseData
+        settings.shareNoticeSeen = existing.settings.shareNoticeSeen
 
     user = PartialUserStorage(degree=data.degree, courses=userCourses, planner=data.planner, settings=settings)
     if not udb.reset_user(uid) or not udb.update_user(uid, user):
@@ -170,6 +171,14 @@ def toggle_share_course_data(uid: Annotated[str, Security(require_uid)]):
     """Opt in or out of having your planned courses counted in anonymous popularity stats."""
     user = get_setup_user(uid)
     user['settings'].shareCourseData = not user['settings'].shareCourseData
+    user['settings'].shareNoticeSeen = True  # changing it means they know about it
+    set_user(uid, user, True)
+
+@router.post("/settings/dismissShareNotice")
+def dismiss_share_notice(uid: Annotated[str, Security(require_uid)]):
+    """Record that the user has seen the one-time popularity stats notice."""
+    user = get_setup_user(uid)
+    user['settings'].shareNoticeSeen = True
     set_user(uid, user, True)
 
 @router.post("/settings/hideYear")
@@ -317,7 +326,8 @@ def setup_degree_wizard(wizard: DegreeWizardInfo, uid: Annotated[str, Security(r
         },
         'planner': planner,
         'courses': {},
-        'settings': SettingsStorage(showMarks=False, hiddenYears=set(), shareCourseData=wizard.shareCourseData),
+        'settings': SettingsStorage(showMarks=False, hiddenYears=set(), shareCourseData=wizard.shareCourseData,
+                                  shareNoticeSeen=True),  # the setup step shows the notice
     }
 
     if wizard.addCoreCourses != 'none':

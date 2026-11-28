@@ -13,6 +13,7 @@ import {
   updateCourseMark
 } from 'utils/api/plannerApi';
 import {
+  dismissShareNotice,
   hideYear,
   importUser,
   resetUserDegree,
@@ -57,6 +58,11 @@ export const useToggleMarksMutation = createUserMutationHook([['settings']], tog
 export const useToggleShareCourseDataMutation = createUserMutationHook(
   [['settings']],
   toggleShareCourseData
+);
+
+export const useDismissShareNoticeMutation = createUserMutationHook(
+  [['settings']],
+  dismissShareNotice
 );
 
 export const useHideYearMutation = createUserMutationHook([['settings']], hideYear);

@@ -4,7 +4,7 @@ user's plan is counted in GET /courses/popularElectives.
 """
 import requests
 
-from server.tests.user.utility import clear, get_token, get_token_headers
+from server.tests.user.utility import clear, get_token, get_token_headers, usersCOL
 
 BASE = "http://127.0.0.1:8000"
 WIZARD = {
@@ -78,3 +78,47 @@ def test_import_keeps_existing_opt_out():
     res = requests.put(f"{BASE}/user/import", headers=headers, json=exported)
     assert res.status_code == 200, res.text
     assert get_settings(headers)["shareCourseData"] is False
+
+
+# --- one-time notice ("shareNoticeSeen") ---
+
+def make_pre_notice_account(headers):
+    """Strip the notice flag, like an account created before the notice existed."""
+    usersCOL.update_many({}, {"$unset": {"settings.shareNoticeSeen": ""}})
+    return headers
+
+
+def test_wizard_marks_notice_seen():
+    clear()
+    headers = setup_user()
+    assert get_settings(headers)["shareNoticeSeen"] is True
+
+
+def test_old_account_has_not_seen_notice_but_is_counted():
+    clear()
+    headers = make_pre_notice_account(setup_user())
+    settings = get_settings(headers)
+    assert settings["shareNoticeSeen"] is False
+    assert settings["shareCourseData"] is True
+
+
+def test_dismiss_marks_seen_and_keeps_sharing():
+    clear()
+    headers = make_pre_notice_account(setup_user())
+    assert requests.post(f"{BASE}/user/settings/dismissShareNotice", headers=headers).status_code == 200
+    settings = get_settings(headers)
+    assert settings["shareNoticeSeen"] is True
+    assert settings["shareCourseData"] is True
+
+
+def test_toggle_also_marks_notice_seen():
+    clear()
+    headers = make_pre_notice_account(setup_user())
+    requests.post(f"{BASE}/user/settings/toggleShareCourseData", headers=headers)
+    settings = get_settings(headers)
+    assert settings["shareNoticeSeen"] is True
+    assert settings["shareCourseData"] is False
+
+
+def test_dismiss_requires_auth():
+    assert requests.post(f"{BASE}/user/settings/dismissShareNotice").status_code in (401, 403)

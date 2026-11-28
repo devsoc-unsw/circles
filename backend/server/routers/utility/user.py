@@ -55,7 +55,8 @@ def _nto_degree(s: NEWUserDegreeStorage) -> DegreeLocalStorage:
     }
 
 def _nto_settings(s: NEWUserSettingsStorage) -> SettingsStorage:
-    return SettingsStorage(showMarks=s.showMarks, hiddenYears=s.hiddenYears, shareCourseData=s.shareCourseData)
+    return SettingsStorage(showMarks=s.showMarks, hiddenYears=s.hiddenYears, shareCourseData=s.shareCourseData,
+                           shareNoticeSeen=s.shareNoticeSeen)
 
 def _nto_storage(s: NEWUserStorage) -> Storage:
     return {

@@ -153,6 +153,7 @@ class SettingsStorage(BaseModel):
     showMarks: bool
     hiddenYears: Set[int]
     shareCourseData: bool = True
+    shareNoticeSeen: bool = False
 
 class HiddenYear(BaseModel):
     model_config = ConfigDict(extra='forbid')

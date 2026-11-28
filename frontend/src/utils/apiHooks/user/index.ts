@@ -1,6 +1,7 @@
 import {
   useAddToUnplannedMutation,
   useAutoplanCoursesMutation,
+  useDismissShareNoticeMutation,
   useHideYearMutation,
   useImportUserMutation,
   useRemoveAllCoursesMutation,
@@ -35,6 +36,7 @@ import {
 export {
   useAddToUnplannedMutation,
   useAutoplanCoursesMutation,
+  useDismissShareNoticeMutation,
   useHideYearMutation,
   useImportUserMutation,
   useRemoveAllCoursesMutation,

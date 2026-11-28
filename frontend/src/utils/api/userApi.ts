@@ -64,6 +64,10 @@ export const toggleShareCourseData = async (token: string): Promise<void> => {
   );
 };
 
+export const dismissShareNotice = async (token: string): Promise<void> => {
+  await axios.post(`user/settings/dismissShareNotice`, {}, { headers: withAuthorization(token) });
+};
+
 export const hideYear = async (token: string, yearIndex: number): Promise<void> => {
   await axios.post(`user/settings/hideYear`, { yearIndex }, { headers: withAuthorization(token) });
 };
