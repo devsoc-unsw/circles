@@ -245,6 +245,13 @@ export const lightTheme: DefaultTheme = {
     scrollbarColor: '#c2c2c2',
     scollbarBorderColor: '#fAfAfA'
   },
+  // Popular electives flame and pill. Checked for WCAG contrast on each body
+  // colour: icon 3:1, pill text 4.5:1.
+  popular: {
+    icon: '#d46b08',
+    text: '#ad4e00',
+    background: 'rgba(250, 140, 22, 0.12)'
+  },
   droppable: {
     backgroundColor: '#e8fef2'
   },
@@ -388,6 +395,11 @@ export const darkTheme: DefaultTheme = {
     trackingAreaColor: '#1d1f20',
     scrollbarColor: '#666c7a',
     scollbarBorderColor: '#1d1f20'
+  },
+  popular: {
+    icon: '#ffa940',
+    text: '#ffc069',
+    background: 'rgba(250, 140, 22, 0.16)'
   },
   droppable: {
     backgroundColor: '#373A36'

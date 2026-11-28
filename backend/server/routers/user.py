@@ -6,7 +6,7 @@ from server.routers.utility.common import get_core_courses, get_course_details, 
 from server.routers.utility.sessions.middleware import HTTPBearerToUserID
 from server.routers.utility.user import get_setup_user, set_user, user_storage_to_planned_for_map
 from server.routers.utility.wizard import validate_degree
-from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
+from server.routers.model import CourseMark, DegreeLength, DegreeWizardInfo, HiddenYear, SettingsStorage, ShareCourseData, StartYear, CourseStorageWithExtra, DegreeLocalStorage, PlannerLocalStorage, Storage
 import server.db.helpers.users as udb
 
 router = APIRouter(
@@ -166,11 +166,15 @@ def toggle_show_marks(uid: Annotated[str, Security(require_uid)]):
     user['settings'].showMarks = not user['settings'].showMarks
     set_user(uid, user, True)
 
-@router.post("/settings/toggleShareCourseData")
-def toggle_share_course_data(uid: Annotated[str, Security(require_uid)]):
-    """Opt in or out of having your planned courses counted in anonymous popularity stats."""
+@router.put("/settings/shareCourseData")
+def set_share_course_data(body: ShareCourseData, uid: Annotated[str, Security(require_uid)]):
+    """
+    Opt in or out of having your planned courses counted in anonymous popularity
+    stats. Sets the value rather than flipping it, so a repeated click or a
+    second tab can never turn sharing back on by accident.
+    """
     user = get_setup_user(uid)
-    user['settings'].shareCourseData = not user['settings'].shareCourseData
+    user['settings'].shareCourseData = body.shareCourseData
     user['settings'].shareNoticeSeen = True  # changing it means they know about it
     set_user(uid, user, True)
 

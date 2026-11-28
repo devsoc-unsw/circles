@@ -1,6 +1,8 @@
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 
-const ACCENT = '#fa8c16';
+// Colours come from the theme (light and dark), tuned for WCAG contrast.
+const icon = ({ theme }: { theme: DefaultTheme }) => theme.popular.icon;
+const text = ({ theme }: { theme: DefaultTheme }) => theme.popular.text;
 
 // `1em` keeps the flame the same size as whatever text it sits beside, so it
 // scales with both the sidebar menu rows and the badge label.
@@ -9,7 +11,13 @@ const Flame = styled.span`
   align-items: center;
   font-size: 1em;
   line-height: 1;
-  color: ${ACCENT};
+  color: ${icon};
+
+  &:focus-visible {
+    outline: 2px solid ${icon};
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 `;
 
 // Pill used in the course description, where there is room for a label. Its
@@ -21,13 +29,18 @@ const Badge = styled.span`
   gap: 6px;
   padding: 4px 12px;
   border-radius: 999px;
-  background-color: rgba(250, 140, 22, 0.12);
-  color: ${ACCENT};
+  background-color: ${({ theme }) => theme.popular.background};
+  color: ${text};
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
   white-space: nowrap;
   vertical-align: middle;
+
+  &:focus-visible {
+    outline: 2px solid ${text};
+    outline-offset: 2px;
+  }
 `;
 
 export default {

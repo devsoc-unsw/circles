@@ -17,8 +17,8 @@ import {
   hideYear,
   importUser,
   resetUserDegree,
+  setShareCourseData,
   showYears,
-  toggleShareCourseData,
   toggleShowMarks,
   toggleSummerTerm,
   updateDegreeLength,
@@ -55,9 +55,9 @@ export const useToggleSummerTermMutation = createUserMutationHook([['planner']],
 
 export const useToggleMarksMutation = createUserMutationHook([['settings']], toggleShowMarks);
 
-export const useToggleShareCourseDataMutation = createUserMutationHook(
-  [['settings']],
-  toggleShareCourseData
+export const useSetShareCourseDataMutation = createUserMutationHook(
+  [['settings'], ['popular-electives']],
+  setShareCourseData
 );
 
 export const useDismissShareNoticeMutation = createUserMutationHook(

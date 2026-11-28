@@ -155,6 +155,9 @@ class SettingsStorage(BaseModel):
     shareCourseData: bool = True
     shareNoticeSeen: bool = False
 
+class ShareCourseData(BaseModel):
+    shareCourseData: bool
+
 class HiddenYear(BaseModel):
     model_config = ConfigDict(extra='forbid')
 
@@ -289,7 +292,7 @@ class PopularElective(BaseModel):
 
 class PopularElectives(BaseModel):
     programCode: str
-    sampleSize: int       # setup users enrolled in this program who share their data
+    sampleSize: int       # sharing setup users in the caller's program/specs; 0 below the floor
     popular: list[PopularElective]   # electives only, top 5, sorted by count desc
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"

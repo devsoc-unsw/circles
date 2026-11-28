@@ -15,6 +15,11 @@ declare module 'styled-components' {
       scrollbarColor: string;
       scollbarBorderColor: string;
     };
+    popular: {
+      icon: string;
+      text: string;
+      background: string;
+    };
     droppable: {
       backgroundColor: string;
     };

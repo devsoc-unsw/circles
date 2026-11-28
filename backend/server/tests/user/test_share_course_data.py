@@ -39,30 +39,55 @@ def test_wizard_saves_opt_out():
     assert get_settings(headers)["shareCourseData"] is False
 
 
-def test_toggle_flips_and_persists():
+SHARE_URL = f"{BASE}/user/settings/shareCourseData"
+
+
+def set_share(headers, value):
+    return requests.put(SHARE_URL, headers=headers, json={"shareCourseData": value})
+
+
+def test_set_share_persists_both_ways():
     clear()
     headers = setup_user()
-    url = f"{BASE}/user/settings/toggleShareCourseData"
-
-    assert requests.post(url, headers=headers).status_code == 200
+    assert set_share(headers, False).status_code == 200
     assert get_settings(headers)["shareCourseData"] is False
-
-    assert requests.post(url, headers=headers).status_code == 200
+    assert set_share(headers, True).status_code == 200
     assert get_settings(headers)["shareCourseData"] is True
 
 
-def test_toggle_leaves_other_settings_alone():
+def test_turning_off_twice_stays_off():
+    # The old toggle would flip back on with a double click or a second tab.
+    clear()
+    headers = setup_user()
+    set_share(headers, False)
+    set_share(headers, False)
+    assert get_settings(headers)["shareCourseData"] is False
+
+
+def test_set_share_leaves_other_settings_alone():
     clear()
     headers = setup_user()
     requests.post(f"{BASE}/user/settings/toggleShowMarks", headers=headers)
-    requests.post(f"{BASE}/user/settings/toggleShareCourseData", headers=headers)
+    set_share(headers, False)
     settings = get_settings(headers)
     assert settings["showMarks"] is True
     assert settings["shareCourseData"] is False
 
 
-def test_toggle_requires_auth():
-    assert requests.post(f"{BASE}/user/settings/toggleShareCourseData").status_code in (401, 403)
+def test_set_share_requires_auth():
+    assert requests.put(SHARE_URL, json={"shareCourseData": False}).status_code in (401, 403)
+
+
+def test_set_share_rejects_bad_body():
+    clear()
+    headers = setup_user()
+    assert requests.put(SHARE_URL, headers=headers, json={}).status_code == 422
+
+
+def test_old_toggle_endpoint_is_gone():
+    clear()
+    headers = setup_user()
+    assert requests.post(f"{BASE}/user/settings/toggleShareCourseData", headers=headers).status_code == 404
 
 
 def test_import_keeps_existing_opt_out():
@@ -111,10 +136,10 @@ def test_dismiss_marks_seen_and_keeps_sharing():
     assert settings["shareCourseData"] is True
 
 
-def test_toggle_also_marks_notice_seen():
+def test_set_share_also_marks_notice_seen():
     clear()
     headers = make_pre_notice_account(setup_user())
-    requests.post(f"{BASE}/user/settings/toggleShareCourseData", headers=headers)
+    set_share(headers, False)
     settings = get_settings(headers)
     assert settings["shareNoticeSeen"] is True
     assert settings["shareCourseData"] is False

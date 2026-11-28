@@ -3,9 +3,9 @@ import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { SettingsResponse } from 'types/userResponse';
 import {
   useHideYearMutation,
+  useSetShareCourseDataMutation,
   useShowYearsMutation,
   useToggleMarksMutation,
-  useToggleShareCourseDataMutation,
   useUserSettings
 } from 'utils/apiHooks/user';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -26,7 +26,7 @@ export interface LocalSettings {
 export interface Settings extends LocalSettings, SettingsResponse {
   mutateTheme: (theme: Theme) => void;
   toggleShowMarks: () => void;
-  toggleShareCourseData: () => void;
+  setShareCourseData: (value: boolean) => void;
   hideYear: (yearIndex: number) => void;
   showYears: () => void;
   toggleLockedCourses: () => void;
@@ -59,16 +59,10 @@ function useSettings(queryClient?: QueryClient): Settings {
     queryClient: realQueryClient
   });
 
-  const shareCourseDataMutation = useToggleShareCourseDataMutation({
+  // Also refetches popular electives: the user's plan just joined or left the counts
+  const shareCourseDataMutation = useSetShareCourseDataMutation({
     allowUnsetToken: true,
-    queryClient: realQueryClient,
-    mutationOptions: {
-      // The user's own plan just joined or left the counts
-      onSuccess: () =>
-        realQueryClient.invalidateQueries({
-          predicate: (query) => query.queryKey.includes('popular-electives')
-        })
-    }
+    queryClient: realQueryClient
   });
 
   const hideYearMutation = useHideYearMutation({
@@ -85,7 +79,7 @@ function useSettings(queryClient?: QueryClient): Settings {
   const toggleLockedCourses = useCallback(() => dispatch(toggleLocked()), [dispatch]);
   const toggleShowPastWarnings = useCallback(() => dispatch(togglePastWarnings()), [dispatch]);
   const toggleShowMarks = showMarksMutation.mutate;
-  const toggleShareCourseData = shareCourseDataMutation.mutate;
+  const setShareCourseData = shareCourseDataMutation.mutate;
   const hideYear = hideYearMutation.mutate;
   const showYears = showYearsMutation.mutate;
 
@@ -101,7 +95,7 @@ function useSettings(queryClient?: QueryClient): Settings {
     shareNoticeSeen: userSettings.shareNoticeSeen ?? true,
     mutateTheme,
     toggleShowMarks,
-    toggleShareCourseData,
+    setShareCourseData,
     hideYear,
     showYears,
     toggleLockedCourses,

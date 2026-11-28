@@ -5,10 +5,13 @@ import { CoursesResponse } from 'types/userResponse';
 import {
   useCourseInfoQuery,
   useCoursePrereqsQuery,
-  useCourseRatingQuery,
-  usePopularElectivesQuery
+  useCourseRatingQuery
 } from 'utils/apiHooks/static';
-import { useUserCoursesUnlockedWhenTaken, useUserDegree } from 'utils/apiHooks/user';
+import {
+  useUserCoursesUnlockedWhenTaken,
+  useUserDegree,
+  useUserPopularElectives
+} from 'utils/apiHooks/user';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
@@ -45,13 +48,9 @@ const CourseDescriptionPanel = ({
 
   const degreeQuery = useUserDegree();
   const degree = degreeQuery.data;
-  const popularElectivesQuery = usePopularElectivesQuery(
-    {
-      queryOptions: { enabled: degree !== undefined }
-    },
-    degree?.programCode ?? '',
-    degree?.specs ?? []
-  );
+  const popularElectivesQuery = useUserPopularElectives({
+    queryOptions: { enabled: degree !== undefined }
+  });
   const popularityCount = popularElectivesQuery.data?.popular.find(
     (elective) => elective.courseCode === courseCode
   )?.count;

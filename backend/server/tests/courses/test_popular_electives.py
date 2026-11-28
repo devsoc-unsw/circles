@@ -19,7 +19,7 @@ localhost before any connection opens.
 import pytest
 import requests
 
-from server.tests.user.utility import clear, insert_setup_users, make_setup_user
+from server.tests.user.utility import clear, get_token, get_token_headers, insert_setup_users, make_setup_user
 from server.routers.courses import MIN_POPULAR_SAMPLE, POPULAR_LIMIT
 from server.routers.utility.common import get_core_courses, get_elective_courses, get_gen_eds
 
@@ -38,8 +38,21 @@ ELECTIVES = [e for e in _ELECTIVES if e not in _CORES]
 E1, E2, E3 = ELECTIVES[0], ELECTIVES[1], ELECTIVES[2]
 
 
-def get_popular(program=PROGRAM, spec=SPEC):
-    return requests.get(f"{BASE}/courses/popularElectives/{program}/{spec}")
+def viewer_headers(program=PROGRAM, specs=None):
+    """A logged-in viewer on the given degree. They opt out so they are not
+    counted themselves, which keeps the expected numbers exact."""
+    headers = get_token_headers(get_token())
+    res = requests.post(f"{BASE}/user/setupDegreeWizard", headers=headers, json={
+        "programCode": program, "startYear": 2024, "endYear": 2026,
+        "specs": specs if specs is not None else SPECS, "shareCourseData": False,
+    })
+    assert res.status_code == 200, res.text
+    return headers
+
+
+def get_popular(program=PROGRAM, specs=None):
+    """The endpoint always uses the caller's own saved degree."""
+    return requests.get(f"{BASE}/courses/popularElectives", headers=viewer_headers(program, specs))
 
 
 def by_code(body):
@@ -119,10 +132,27 @@ def test_query_empty_when_no_users():
 
 # --- Level B: endpoint - specific courses, exact counts, ordering ----------
 
-def test_invalid_program_returns_400():
+def test_requires_login():
     clear()
-    res = requests.get(f"{BASE}/courses/popularElectives/NOTAPROGRAM/{SPEC}")
-    assert res.status_code == 400
+    assert requests.get(f"{BASE}/courses/popularElectives").status_code in (401, 403)
+
+
+def test_old_probe_urls_are_gone():
+    # Anyone could once ask about any program/spec combination.
+    clear()
+    headers = viewer_headers()
+    assert requests.get(f"{BASE}/courses/popularElectives/{PROGRAM}/{SPEC}", headers=headers).status_code == 404
+
+
+def test_uses_callers_own_degree():
+    clear()
+    insert_setup_users(
+        [make_setup_user(f"a{i}", PROGRAM, SPECS, [E1]) for i in range(COHORT)]
+        + [make_setup_user(f"b{i}", PROGRAM, ["COMPD1"], [E2]) for i in range(COHORT)]
+    )
+    table = by_code(get_popular().json())
+    assert E1 in table
+    assert E2 not in table
 
 
 def test_empty_below_min_sample():
@@ -134,7 +164,7 @@ def test_empty_below_min_sample():
 
     assert res.status_code == 200
     body = res.json()
-    assert body["sampleSize"] == short
+    assert body["sampleSize"] == 0    # below the floor even the cohort size is hidden
     assert body["popular"] == []      # one short of the floor -> nothing reported
 
 
@@ -213,6 +243,18 @@ def test_caps_at_popular_limit():
     assert top[POPULAR_LIMIT] not in table       # least-placed, cut off
 
 
+def test_ties_break_by_course_code():
+    clear()
+    # Every user takes the same POPULAR_LIMIT + 1 electives: all tied.
+    tied = ELECTIVES[: POPULAR_LIMIT + 1]
+    insert_setup_users([make_setup_user(f"u{i}", PROGRAM, SPECS, tied) for i in range(COHORT)])
+
+    first = [e["courseCode"] for e in get_popular().json()["popular"]]
+    assert first == sorted(tied)[:POPULAR_LIMIT]
+    for _ in range(3):
+        assert [e["courseCode"] for e in get_popular().json()["popular"]] == first
+
+
 # --- Opt-out: users who turned off data sharing are never counted ----------
 
 def test_opted_out_users_excluded_from_counts_and_sample():
@@ -251,7 +293,7 @@ def test_opt_outs_can_drop_cohort_below_floor():
     )
 
     body = get_popular().json()
-    assert body["sampleSize"] == sharing
+    assert body["sampleSize"] == 0
     assert body["popular"] == []
 
 
@@ -288,13 +330,33 @@ def test_major_core_in_minor_elective_list_is_not_elective():
 
 def test_core_with_elective_listing_never_flagged_popular():
     clear()
-    program, specs = "3154", ["COMPZ1"]
+    # The viewer must be a valid wizard setup, so 3154 needs a Science major too
+    program, specs = "3154", ["COMPZ1", "PSYCA1"]
     other = sorted(get_elective_courses(program, specs))[0]
     insert_setup_users(
         [make_setup_user(f"u{i}", program, specs, ["COMP1511", other]) for i in range(MIN_POPULAR_SAMPLE)]
     )
-    res = requests.get(f"{BASE}/courses/popularElectives/{program}/{specs[0]}")
+    res = get_popular(program, specs)
     assert res.status_code == 200
     codes = [p["courseCode"] for p in res.json()["popular"]]
     assert "COMP1511" not in codes
+    assert other in codes
+
+
+def test_program_level_core_without_core_in_title_is_not_elective():
+    # 3502 Commerce: COMM3020 is in "Final Year Synthesis (FYS)" (typed
+    # core_courses, no "core" in the title) and in a prescribed elective list.
+    electives = get_elective_courses("3502", ["ACCTA1"])
+    assert "COMM3020" not in electives
+
+
+def test_program_level_core_never_flagged_popular():
+    clear()
+    program, specs = "3502", ["ACCTA1"]
+    other = sorted(get_elective_courses(program, specs))[0]
+    insert_setup_users(
+        [make_setup_user(f"u{i}", program, specs, ["COMM3020", other]) for i in range(MIN_POPULAR_SAMPLE)]
+    )
+    codes = [p["courseCode"] for p in get_popular(program, specs).json()["popular"]]
+    assert "COMM3020" not in codes
     assert other in codes

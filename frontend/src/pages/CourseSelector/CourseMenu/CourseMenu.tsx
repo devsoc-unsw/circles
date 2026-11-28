@@ -5,11 +5,12 @@ import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import { CoursesResponse, DegreeResponse } from 'types/userResponse';
-import { usePopularElectivesQuery, useStructureQuery } from 'utils/apiHooks/static';
+import { useStructureQuery } from 'utils/apiHooks/static';
 import {
   useAddToUnplannedMutation,
   useRemoveCourseMutation,
-  useUserAllUnlocked
+  useUserAllUnlocked,
+  useUserPopularElectives
 } from 'utils/apiHooks/user';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import { MAX_COURSES_OVERFLOW } from 'config/constants';
@@ -48,13 +49,9 @@ const CourseMenu = ({ courses, degree }: CourseMenuProps) => {
     degree?.specs ?? []
   );
 
-  const popularElectivesQuery = usePopularElectivesQuery(
-    {
-      queryOptions: { enabled: degree !== undefined }
-    },
-    degree?.programCode ?? '',
-    degree?.specs ?? []
-  );
+  const popularElectivesQuery = useUserPopularElectives({
+    queryOptions: { enabled: degree !== undefined }
+  });
 
   // courseCode -> how many students on this program/spec have it planned
   const popularityCounts = useMemo(() => {
