@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { DatePicker, Modal, Select, Switch } from 'antd';
+import { CheckOutlined, CloseOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { DatePicker, Modal, Select, Switch, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 import { PlannerResponse } from 'types/userResponse';
 import {
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const SettingsMenu = ({ planner }: Props) => {
-  const { theme } = useSettings();
+  const { theme, shareCourseData, setShareCourseData } = useSettings();
 
   function willUnplanCourses(numYears: number) {
     if (!planner) return false;
@@ -116,6 +116,24 @@ const SettingsMenu = ({ planner }: Props) => {
             label: num,
             className: 'settings-degree-length-popup'
           }))}
+        />
+      </CS.PopupEntry>
+      <CS.MenuDivider />
+      <CS.PopupEntry>
+        <CS.MenuText id="share-course-data-label">Share Course Data</CS.MenuText>
+        <Tooltip
+          trigger={['hover', 'focus', 'click']}
+          title="Count my planned courses, anonymously, when showing which electives are popular with students in my degree. No names or marks are shared."
+        >
+          {/* Focusable so keyboard and screen reader users can open the explanation */}
+          <InfoCircleOutlined tabIndex={0} role="button" aria-label="About sharing course data" />
+        </Tooltip>
+        <Switch
+          aria-labelledby="share-course-data-label"
+          checked={shareCourseData}
+          onChange={(checked) => setShareCourseData(checked)}
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
         />
       </CS.PopupEntry>
     </CS.MenuPopup>

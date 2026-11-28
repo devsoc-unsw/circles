@@ -19,7 +19,10 @@ export type UserJson = {
 
 const settingsSchema = z.strictObject({
   showMarks: z.boolean(),
-  hiddenYears: z.array(z.number().int().nonnegative())
+  hiddenYears: z.array(z.number().int().nonnegative()),
+  // Plans exported before this setting existed omit it; opt-out means default to sharing
+  shareCourseData: z.boolean().default(true),
+  shareNoticeSeen: z.boolean().default(false)
 });
 
 const degreeSchema = z.strictObject({

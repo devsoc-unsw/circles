@@ -7,12 +7,17 @@ import {
   useCoursePrereqsQuery,
   useCourseRatingQuery
 } from 'utils/apiHooks/static';
-import { useUserCoursesUnlockedWhenTaken } from 'utils/apiHooks/user';
+import {
+  useUserCoursesUnlockedWhenTaken,
+  useUserDegree,
+  useUserPopularElectives
+} from 'utils/apiHooks/user';
 import {
   LoadingCourseDescriptionPanel,
   LoadingCourseDescriptionPanelSidebar
 } from 'components/LoadingSkeleton';
 import PlannerButton from 'components/PlannerButton';
+import PopularityTag from 'components/PopularityTag';
 import CourseAttributes from './CourseAttributes';
 import CourseInfoDrawers from './CourseInfoDrawers';
 import S from './styles';
@@ -41,6 +46,15 @@ const CourseDescriptionPanel = ({
   const coursePrereqsQuery = useCoursePrereqsQuery({}, courseCode);
   const ratingQuery = useCourseRatingQuery({}, courseCode);
 
+  const degreeQuery = useUserDegree();
+  const degree = degreeQuery.data;
+  const popularElectivesQuery = useUserPopularElectives({
+    queryOptions: { enabled: degree !== undefined }
+  });
+  const popularityCount = popularElectivesQuery.data?.popular.find(
+    (elective) => elective.courseCode === courseCode
+  )?.count;
+
   const loadingWrapper = (
     <S.Wrapper $sidebar={sidebar}>
       {!sidebar ? <LoadingCourseDescriptionPanelSidebar /> : <LoadingCourseDescriptionPanel />}
@@ -63,6 +77,12 @@ const CourseDescriptionPanel = ({
             <div>
               <Title level={2} className="text">
                 {courseCode} - {course.title}
+                {popularityCount !== undefined && (
+                  <>
+                    {' '}
+                    <PopularityTag count={popularityCount} withLabel />
+                  </>
+                )}
               </Title>
             </div>
           </S.TitleWrapper>

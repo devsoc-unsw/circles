@@ -56,6 +56,22 @@ export const toggleShowMarks = async (token: string): Promise<void> => {
   await axios.post(`user/settings/toggleShowMarks`, {}, { headers: withAuthorization(token) });
 };
 
+// Sets the value (never flips it), so repeat clicks or a second tab can't turn sharing back on
+export const setShareCourseData = async (
+  token: string,
+  shareCourseData: boolean
+): Promise<void> => {
+  await axios.put(
+    `user/settings/shareCourseData`,
+    { shareCourseData },
+    { headers: withAuthorization(token) }
+  );
+};
+
+export const dismissShareNotice = async (token: string): Promise<void> => {
+  await axios.post(`user/settings/dismissShareNotice`, {}, { headers: withAuthorization(token) });
+};
+
 export const hideYear = async (token: string, yearIndex: number): Promise<void> => {
   await axios.post(`user/settings/hideYear`, { yearIndex }, { headers: withAuthorization(token) });
 };

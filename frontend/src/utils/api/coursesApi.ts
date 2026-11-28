@@ -5,6 +5,7 @@ import {
   CoursePathFrom,
   CoursesAllUnlocked,
   CoursesUnlockedWhenTaken,
+  PopularElectives,
   SearchCourse
 } from 'types/api';
 import { LIVE_YEAR } from 'config/constants';
@@ -55,6 +56,14 @@ export const getAllUnlockedCourses = async (token: string) => {
     }
   );
 
+  return res.data;
+};
+
+// Uses the caller's own saved degree on the server, so it needs the user's token.
+export const getPopularElectives = async (token: string) => {
+  const res = await axios.get<PopularElectives>('/courses/popularElectives', {
+    headers: withAuthorization(token)
+  });
   return res.data;
 };
 

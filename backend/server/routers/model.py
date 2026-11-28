@@ -20,6 +20,7 @@ class DegreeWizardInfo(BaseModel):
     endYear: int
     specs: list[str]
     addCoreCourses: Literal['none', 'lower', 'higher'] = 'lower'
+    shareCourseData: bool = True
 
 class Specialisations(BaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -151,6 +152,11 @@ class SettingsStorage(BaseModel):
 
     showMarks: bool
     hiddenYears: Set[int]
+    shareCourseData: bool = True
+    shareNoticeSeen: bool = False
+
+class ShareCourseData(BaseModel):
+    shareCourseData: bool
 
 class HiddenYear(BaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -278,6 +284,16 @@ class AutoplanResponse(BaseModel):
 class TermsOffered(TypedDict):
     terms: dict[str, list[str]]
     fails: list[tuple]
+
+class PopularElective(BaseModel):
+    courseCode: str
+    count: int            # number of program students who have this elective in their plan
+    percent: float        # count / sampleSize, in [0, 1]
+
+class PopularElectives(BaseModel):
+    programCode: str
+    sampleSize: int       # sharing setup users in the caller's program/specs; 0 below the floor
+    popular: list[PopularElective]   # electives only, top 5, sorted by count desc
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

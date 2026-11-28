@@ -6,4 +6,5 @@ export type DegreeWizardPayload = {
   endYear?: number;
   specs: string[];
   addCoreCourses: CoreCoursesPreference;
+  shareCourseData?: boolean;
 };
