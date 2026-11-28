@@ -58,4 +58,4 @@ Turning it off takes effect on the next popularity request. There is no stored c
 - `backend/server/tests/courses/test_popular_electives.py`: grouping, elective filter, sample floor, top 5 cap, and opt-out exclusion.
 - `backend/server/tests/user/test_share_course_data.py`: wizard default, wizard opt-out, toggle, and that the toggle needs a login.
 
-Both suites need the seeded backend running (see the root `CLAUDE.md`).
+Both suites need the seeded backend running. CI starts it with `docker compose up --wait ci-backend` (see `.github/workflows/ci.yml`).
