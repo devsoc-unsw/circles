@@ -36,7 +36,9 @@ export interface Settings extends LocalSettings, SettingsResponse {
 const defaultUserSettings = {
   showMarks: false,
   hiddenYears: [],
-  shareCourseData: true
+  shareCourseData: true,
+  // true while loading, so the one-time notice never flashes before real data arrives
+  shareNoticeSeen: true
 };
 
 function useSettings(queryClient?: QueryClient): Settings {
@@ -96,6 +98,7 @@ function useSettings(queryClient?: QueryClient): Settings {
     hiddenYears: userSettings.hiddenYears,
     // Older responses may omit the field; opt-out means missing = sharing
     shareCourseData: userSettings.shareCourseData ?? true,
+    shareNoticeSeen: userSettings.shareNoticeSeen ?? true,
     mutateTheme,
     toggleShowMarks,
     toggleShareCourseData,

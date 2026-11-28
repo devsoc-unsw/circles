@@ -181,6 +181,10 @@ _USERS_VALIDATOR = {
                             'shareCourseData': {
                                 'bsonType': 'bool',
                                 'description': 'Whether planned courses may be counted in anonymous popularity stats (missing = true)'
+                            },
+                            'shareNoticeSeen': {
+                                'bsonType': 'bool',
+                                'description': 'Whether the user has seen the popularity stats notice (missing = false)'
                             }
                         }
                     }

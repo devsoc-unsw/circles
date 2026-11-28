@@ -66,6 +66,7 @@ class UserSettingsInfoDict(TypedDict):
     showMarks: bool
     hiddenYears: List[int]
     shareCourseData: NotRequired[bool]  # missing on older documents, treated as True
+    shareNoticeSeen: NotRequired[bool]  # missing on older documents, treated as False
 
 class UserInfoDict(TypedDict):
     uid: str

@@ -45,6 +45,16 @@ Where users choose:
 - **During setup:** a checkbox on the last step of the degree wizard, ticked by default.
 - **Afterwards:** Term Planner, settings (gear icon), "Share Course Data" switch.
 
+### Telling users (one-time notice)
+
+Everyone is counted by default, so every user is told about it once:
+
+- **New users** read the explanation next to the checkbox on the last setup step. Finishing setup saves `settings.shareNoticeSeen = true`.
+- **Existing users** (accounts made before the notice, so `shareNoticeSeen` is missing) get a one-time popup on their first page after login. It explains the stats and how to turn sharing off (Term Planner, gear icon, "Share Course Data").
+  - "Got it" or closing the popup calls `POST /user/settings/dismissShareNotice`. Sharing stays on.
+  - "Turn off sharing" calls the toggle, which also marks the notice as seen.
+- Existing users are counted while the popup is still unseen.
+
 Turning it off takes effect on the next popularity request. There is no stored copy of the counts to clear.
 
 ### Implementation notes
@@ -56,6 +66,6 @@ Turning it off takes effect on the next popularity request. There is no stored c
 ## Tests
 
 - `backend/server/tests/courses/test_popular_electives.py`: grouping, elective filter, sample floor, top 5 cap, and opt-out exclusion.
-- `backend/server/tests/user/test_share_course_data.py`: wizard default, wizard opt-out, toggle, and that the toggle needs a login.
+- `backend/server/tests/user/test_share_course_data.py`: wizard default, wizard opt-out, toggle, import, the one-time notice flag, and that both endpoints need a login.
 
 Both suites need the seeded backend running. CI starts it with `docker compose up --wait ci-backend` (see `.github/workflows/ci.yml`).

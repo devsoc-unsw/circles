@@ -28,6 +28,7 @@ export type SettingsResponse = {
   showMarks: boolean;
   hiddenYears: number[];
   shareCourseData: boolean;
+  shareNoticeSeen: boolean;
 };
 
 export type ValidateResponse = {

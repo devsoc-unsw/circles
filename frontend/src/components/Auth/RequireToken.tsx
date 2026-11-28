@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components';
 import { useUserSetupState } from 'utils/apiHooks/user';
 import openNotification from 'utils/openNotification';
 import PageLoading from 'components/PageLoading';
+import ShareDataNotice from 'components/ShareDataNotice';
 import { useAppSelector } from 'hooks';
 import { selectIdentity } from 'reducers/identitySlice';
 
@@ -80,7 +81,13 @@ const RequireToken = ({ needSetup }: Props) => {
     return <Navigate to="/degree-wizard" />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      {/* Only on set-up pages: the wizard itself explains data sharing */}
+      {!!needSetup && <ShareDataNotice />}
+      <Outlet />
+    </>
+  );
 };
 
 export default RequireToken;
